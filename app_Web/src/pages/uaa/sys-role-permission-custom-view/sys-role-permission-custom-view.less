@@ -1,0 +1,116 @@
+
+.sys-permissionmpickup-view{
+    position: relative;
+    .tree-right-menu {
+        .ivu-divider-horizontal {
+            width: calc(100% - 32px);
+            min-width: calc(100% - 32px);
+            margin: 0 auto;
+        }
+        .ivu-dropdown-item {
+            position: relative;
+            padding-left: 32px;
+            > i {
+                position: absolute;
+                left: 16px;
+                top: 10px;
+            }
+            .ivu-icon-ios-arrow-forward {
+                left: initial;
+                right: 4px;
+            }
+        }
+        .ivu-dropdown {
+            .ivu-select-dropdown {
+                margin: 0;
+            }
+        }
+    }
+    .text{
+        font-weight: 700;color: #303133;font-size: 15px;margin-left:10px;margin-top:20px;
+    }
+    .col{
+        display: inline-block;
+        width: 400px;
+    }
+    .search{
+        width:200px;margin-left:20px;margin-top:30px;margin-bottom:20px;
+    }
+    .save{
+        margin-top:30px;margin-bottom:20px;margin-left:40px;
+    }
+    .roll{
+        height:calc(100vh - 305px) ;overflow:hidden;overflow-x: hidden;overflow-y: auto;
+    }
+    .tre{
+        margin-left:20px;
+    }
+
+}
+
+
+
+.pickup-view {
+    >.translate-contant {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        height: calc(100% - 64px);
+        .translate-buttons {
+            width: 80px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            button {
+                margin-bottom: 5px;
+            }
+        }
+        .left, .right {
+            width: 300px;
+        }
+        .right {
+            border: 1px solid #e9e9e9;
+            .mpicker-select {
+                font-family: helvetica, sans-serif;
+                font-size: 16px;
+                text-align: justify;
+                word-spacing: -3.8pt;
+                line-height: 1.6;
+                font-weight: bold;
+                word-spacing: 10px;
+                //height: 100%;
+                overflow: auto;
+            }
+            .mpicker-select > div {
+                padding: 3px 10px;
+                font-size: 14px;
+                color: rgba(0, 0, 0, 0.85);
+                font-weight: initial;
+                cursor: pointer;
+                min-height: 28px;
+                border: 1px solid #e9e9e9;
+                margin: 4px 4px;
+                transition: all .3s;
+            }
+            .mpicker-select > div:hover {
+                background: #ecf6fd;
+            }
+            .mpicker-select > .select{
+                color: #108ee9;
+                background: #ecf6fd;
+            }
+        }
+        .center{
+            width: calc(100% - 380px);
+            .pickupviewpanel {
+                width: 100%;
+                //height: 100%;
+            }
+        }
+    }
+
+}
+
+
+
+// this is less

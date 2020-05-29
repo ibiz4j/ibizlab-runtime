@@ -1,0 +1,110 @@
+/***    BRGIN:菜单样式    ***/
+.app-app-menu {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100% - 58px);
+    .ivu-divider{
+      background-color: #b3b3b3;
+      height: 2px;
+    }
+    > .el-menu {
+        border-right: 0;
+        .el-menu-item {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          word-break: break-all;
+            .ivu-badge {
+                .ivu-badge-count {
+                    box-shadow: 0 0 0 0px #fff;
+                }
+            }
+        }
+        .el-submenu__title i, .el-menu-item i {
+            font-size: 16px;
+            width: 16px;
+        }
+        .el-submenu__title .text {
+            font-size: 16px;
+        }
+        .el-menu-item, .el-submenu__title {
+            height: 36px;
+            font-size: 16px;
+            line-height: 32px;
+        }
+        .el-menu-item, .el-submenu, .el-menu {
+            border-top: 1px solid #fff;
+        }
+        > .el-menu-item, > .el-submenu > .el-submenu__title {
+            height: 40px;
+            line-height: 36px;
+            border-left: 4px solid transparent;
+            padding-left: 16px !important;
+        }
+        .app-menu-icon {
+            margin-right: 4px;
+        }
+        > .el-submenu {
+            > .el-menu {
+                > .el-menu-item, > .el-submenu > .el-submenu__title {
+                    padding-left: 44px !important;
+                }
+                > .el-submenu {
+                    > .el-menu {
+                        > .el-menu-item, > .el-submenu > .el-submenu__title {
+                            padding-left: 68px !important;
+                        }
+                    }
+                }
+            }
+        }
+        .active-icon {
+            font-size: 40px !important;
+            position: absolute;
+            right: 0;
+            line-height: 42px;
+            color: #fff !important;
+            display: none;
+            width: 24px !important;
+            overflow: hidden;
+        }
+    }
+    .ivu-divider-horizontal {
+        width: calc(100% - 32px);
+        min-width: calc(100% - 32px);
+        margin: 4px auto;
+        margin-bottom: 1px;
+    }
+}
+.app-popper-menu {
+    .el-menu-item, .el-submenu__title {
+        height: 36px;
+        font-size: 16px;
+        line-height: 36px;
+    }
+    > .el-menu-item, > .el-submenu > .el-submenu__title {
+        height: 40px;
+        line-height: 40px;
+    }
+    .el-menu-item {
+        .ivu-badge {
+            .ivu-badge-count {
+                box-shadow: 0 0 0 0px #fff;
+            }
+        }
+        > span{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+    .ivu-divider-horizontal {
+        width: calc(100% - 12px);
+        min-width: calc(100% - 12px);
+        margin: 4px auto;
+        margin-bottom: 1px;
+    }
+}
+
+
+// this is less

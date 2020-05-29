@@ -1,0 +1,54 @@
+package cn.ibizlab.core.uaa.filter;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.alibaba.fastjson.annotation.JSONField;
+
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
+
+
+import cn.ibizlab.util.filter.QueryWrapperContext;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import cn.ibizlab.core.uaa.domain.SysPSSystem;
+/**
+ * 关系型数据实体[SysPSSystem] 查询条件对象
+ */
+@Slf4j
+@Data
+public class SysPSSystemSearchContext extends QueryWrapperContext<SysPSSystem> {
+
+	private String n_pssystemname_like;//[系统名称]
+	public void setN_pssystemname_like(String n_pssystemname_like) {
+        this.n_pssystemname_like = n_pssystemname_like;
+        if(!ObjectUtils.isEmpty(this.n_pssystemname_like)){
+            this.getSelectCond().like("pssystemname", n_pssystemname_like);
+        }
+    }
+
+    /**
+	 * 启用快速搜索
+	 */
+	public void setQuery(String query)
+	{
+		 this.query=query;
+		 if(!StringUtils.isEmpty(query)){
+            this.getSelectCond().and( wrapper ->
+                     wrapper.like("pssystemname", query)   
+            );
+		 }
+	}
+}
+
+
+
+

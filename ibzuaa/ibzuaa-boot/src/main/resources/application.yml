@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    include: sys , web-dev,  api-dev,  dev
+  application:
+    name: ibzuaa
+  main:
+    allow-bean-definition-overriding: true
+zuul:
+  routes:
+    loginv7:
+      path: /v7/login
+      serviceId: ibzuaa-api
+      stripPrefix: false

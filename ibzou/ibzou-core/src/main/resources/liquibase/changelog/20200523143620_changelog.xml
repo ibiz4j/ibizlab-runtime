@@ -1,0 +1,111 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="steven (generated)" id="1590244604286-1">
+        <createTable tableName="IBZDEPT">
+            <column name="DEPTID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IBZDEPT_DEPTID"/>
+            </column>
+            <column name="DEPTCODE" type="VARCHAR(100)"/>
+            <column name="DEPTNAME" type="VARCHAR(100)"/>
+            <column name="ORGID" type="VARCHAR(100)"/>
+            <column name="PDEPTID" type="VARCHAR(100)"/>
+            <column name="SHORTNAME" type="VARCHAR(100)"/>
+            <column name="DEPTLEVEL" type="INT"/>
+            <column name="SHOWORDER" type="INT"/>
+            <column name="BCODE" type="VARCHAR(100)"/>
+            <column name="LEADERID" type="VARCHAR(100)"/>
+            <column name="LEADERNAME" type="VARCHAR(100)"/>
+            <column name="ENABLE" type="INT"/>
+            <column name="CREATEDATE" type="TIMESTAMP"/>
+            <column name="UPDATEDATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-2">
+        <createTable tableName="IBZDEPTMEMBER">
+            <column name="MEMBERID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IBZDEPTMEMBER_MEMBERID"/>
+            </column>
+            <column name="DEPTID" type="VARCHAR(100)"/>
+            <column name="USERID" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-3">
+        <createTable tableName="IBZEMP">
+            <column name="USERID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IBZEMP_USERID"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(100)"/>
+            <column name="PERSONNAME" type="VARCHAR(100)"/>
+            <column name="USERCODE" type="VARCHAR(100)"/>
+            <column name="LOGINNAME" type="VARCHAR(100)"/>
+            <column name="PASSWORD" type="VARCHAR(100)"/>
+            <column name="DOMAINS" type="VARCHAR(100)"/>
+            <column name="MDEPTID" type="VARCHAR(100)"/>
+            <column name="MDEPTCODE" type="VARCHAR(100)"/>
+            <column name="MDEPTNAME" type="VARCHAR(100)"/>
+            <column name="BCODE" type="VARCHAR(100)"/>
+            <column name="POSTID" type="VARCHAR(100)"/>
+            <column name="POSTCODE" type="VARCHAR(100)"/>
+            <column name="POSTNAME" type="VARCHAR(100)"/>
+            <column name="ORGID" type="VARCHAR(100)"/>
+            <column name="ORGCODE" type="VARCHAR(100)"/>
+            <column name="ORGNAME" type="VARCHAR(100)"/>
+            <column name="NICKNAME" type="VARCHAR(100)"/>
+            <column name="SEX" type="VARCHAR(20)"/>
+            <column name="CERTCODE" type="VARCHAR(100)"/>
+            <column name="PHONE" type="VARCHAR(100)"/>
+            <column name="BIRTHDAY" type="TIMESTAMP"/>
+            <column name="EMAIL" type="VARCHAR(100)"/>
+            <column name="AVATAR" type="VARCHAR(100)"/>
+            <column name="ADDR" type="VARCHAR(255)"/>
+            <column name="USERICON" type="VARCHAR(255)"/>
+            <column name="IPADDR" type="VARCHAR(100)"/>
+            <column name="THEME" type="VARCHAR(100)"/>
+            <column name="LANG" type="VARCHAR(100)"/>
+            <column name="FONTSIZE" type="VARCHAR(10)"/>
+            <column name="MEMO" type="VARCHAR(255)"/>
+            <column name="RESERVER" type="VARCHAR(255)"/>
+            <column name="SHOWORDER" type="INT"/>
+            <column name="ENABLE" type="INT"/>
+            <column name="CREATEDATE" type="TIMESTAMP"/>
+            <column name="UPDATEDATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-4">
+        <createTable tableName="IBZORG">
+            <column name="ORGID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IBZORG_ORGID"/>
+            </column>
+            <column name="ORGCODE" type="VARCHAR(100)"/>
+            <column name="ORGNAME" type="VARCHAR(100)"/>
+            <column name="PORGID" type="VARCHAR(100)"/>
+            <column name="SHORTNAME" type="VARCHAR(100)"/>
+            <column name="ORGLEVEL" type="INT"/>
+            <column name="SHOWORDER" type="INT"/>
+            <column name="ENABLE" type="INT"/>
+            <column name="CREATEDATE" type="TIMESTAMP"/>
+            <column name="UPDATEDATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-5">
+        <addForeignKeyConstraint baseColumnNames="DEPTID" baseTableName="IBZDEPTMEMBER" constraintName="DER1N_IBZDEPTMEMBER_IBZDEPT_DE" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-6">
+        <addForeignKeyConstraint baseColumnNames="USERID" baseTableName="IBZDEPTMEMBER" constraintName="DER1N_IBZDEPTMEMBER_IBZEMP_USE" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="USERID" referencedTableName="IBZEMP" validate="true"/>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-7">
+        <addForeignKeyConstraint baseColumnNames="PDEPTID" baseTableName="IBZDEPT" constraintName="DER1N_IBZDEPT_IBZDEPT_PDEPTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-8">
+        <addForeignKeyConstraint baseColumnNames="ORGID" baseTableName="IBZDEPT" constraintName="DER1N_IBZDEPT_IBZORG_ORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-9">
+        <addForeignKeyConstraint baseColumnNames="MDEPTID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZDEPT_MDEPTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-10">
+        <addForeignKeyConstraint baseColumnNames="ORGID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZORG_ORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590244604286-11">
+        <addForeignKeyConstraint baseColumnNames="PORGID" baseTableName="IBZORG" constraintName="DER1N_IBZORG_IBZORG_PORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

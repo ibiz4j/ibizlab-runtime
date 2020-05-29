@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+#zuul网关路由设置
+zuul:
+  routes:
+      loginv7:
+        path: /v7/login
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      oucore:
+        path: /ibzorganizations/**
+        serviceId: ibzou-api
+        stripPrefix: false
+  sensitive-headers:
+    - Cookie,Set-Cookie,Authorization

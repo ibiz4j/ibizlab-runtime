@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.uaa.mapper.SysUserRoleMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="SysUserRoleResultMap" type="cn.ibizlab.core.uaa.domain.SysUserRole" autoMapping="true">
+        <id property="userroleid" column="sys_user_roleid" /><!--主键字段映射-->
+		<result property="roleid" column="sys_roleid" />
+		<result property="rolename" column="sys_rolename" />
+		<result property="userid" column="sys_userid" />
+		<result property="personname" column="sys_username" />
+            
+		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="role" javaType="cn.ibizlab.core.uaa.domain.SysRole" column="sys_roleid" select="cn.ibizlab.core.uaa.mapper.SysRoleMapper.selectById" fetchType="lazy"></association>
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="user" javaType="cn.ibizlab.core.uaa.domain.SysUser" column="sys_userid" select="cn.ibizlab.core.uaa.mapper.SysUserMapper.selectById" fetchType="lazy"></association>
+    </resultMap>
+
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_USER_ROLE_SYS_ROLE_SYS_ROLEID] -->
+	 <select id="selectByRoleid" resultMap="SysUserRoleResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         ) t1
+         where  sys_roleid=#{roleid}
+     </select>
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_USER_ROLE_SYS_USER_SYS_USERID] -->
+	 <select id="selectByUserid" resultMap="SysUserRoleResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         ) t1
+         where  sys_userid=#{userid}
+     </select>
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.uaa.filter.SysUserRoleSearchContext"  resultMap="SysUserRoleResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+       <![CDATA[	SELECT t1.`CREATEDATE`, t1.`SYS_ROLEID`, t11.`SYS_ROLENAME`, t1.`SYS_USERID`, t21.`PERSONNAME` AS `SYS_USERNAME`, t1.`SYS_USER_ROLEID`, t1.`UPDATEDATE` FROM `IBZUSER_ROLE` t1  LEFT JOIN IBZROLE t11 ON t1.SYS_ROLEID = t11.SYS_ROLEID  LEFT JOIN IBZUSER t21 ON t1.SYS_USERID = t21.USERID  
+			]]>
+    </sql>
+
+</mapper>
+

@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    include: sys , api-prod
+  application:
+    name: ibzuaa-api

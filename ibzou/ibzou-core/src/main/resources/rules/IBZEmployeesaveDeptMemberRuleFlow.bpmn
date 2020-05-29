@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:g="http://www.jboss.org/drools/flow/gpd" xmlns:tns="http://www.jboss.org/drools" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.mvel.org/2.0" id="Definition" name="" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+    <process id="cn.ibizlab.core.ou.service.logic.ibzemployeesavedeptmember" isClosed="false" isExecutable="true" name="ScoreRule" processType="Private" tns:packageName="cn.ibizlab.core.ou.service.logic.ibzemployeesavedeptmember">
+        <extensionElements>
+            <tns:import name="java.util.Map" />
+            <tns:import name="org.springframework.util.StringUtils"/>
+            <tns:import name="cn.ibizlab.util.helper.RuleUtils"/>
+        <tns:global identifier="ibzemployeesavedeptmemberdefault" type="cn.ibizlab.core.ou.domain.IBZEmployee" />
+        <tns:global identifier="ibzemployeesavedeptmembermember" type="cn.ibizlab.core.ou.domain.IBZDeptMember" />
+        </extensionElements>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="ibzemployeesavedeptmemberdeaction1" id="F58FA774-B371-4481-8E9B-8483341ABB57" implementation="http://www.jboss.org/drools/rule" name="保存成员"/>
+     <endEvent id="F58FA774-B371-4481-8E9B-8483341ABB57_End" name="End"/>
+     <sequenceFlow id="F58FA774-B371-4481-8E9B-8483341ABB57_End_Line" sourceRef="F58FA774-B371-4481-8E9B-8483341ABB57" targetRef="F58FA774-B371-4481-8E9B-8483341ABB57_End"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="ibzemployeesavedeptmemberprepareparam1" id="EE4970ED-28DF-4578-9B6B-7E468DD9B866" implementation="http://www.jboss.org/drools/rule" name="准备成员"/>
+     <startEvent id="E3FF4728-CD18-4940-BAEF-8A71111A5D05" isInterrupting="true"/>
+     <sequenceFlow id="0DF4511B-818D-493E-9CC6-77B2E3EEFAE7" sourceRef="E3FF4728-CD18-4940-BAEF-8A71111A5D05" targetRef="EE4970ED-28DF-4578-9B6B-7E468DD9B866">
+     </sequenceFlow>
+     <sequenceFlow id="BDDA5BD4-EA82-4239-952F-B33AEC733ACB" sourceRef="EE4970ED-28DF-4578-9B6B-7E468DD9B866" targetRef="F58FA774-B371-4481-8E9B-8483341ABB57">
+     </sequenceFlow>
+    </process>
+</definitions>
+

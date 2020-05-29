@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.uaa.mapper.SysPermissionMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="SysPermissionResultMap" type="cn.ibizlab.core.uaa.domain.SysPermission" autoMapping="true">
+        <id property="permissionid" column="sys_permissionid" /><!--主键字段映射-->
+		<result property="permissionname" column="sys_permissionname" />
+            
+		
+    </resultMap>
+
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.uaa.filter.SysPermissionSearchContext"  resultMap="SysPermissionResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+       <![CDATA[	SELECT t1.*   FROM ( SELECT t1.CREATEDATE, t1.ENABLE, t1.SYSTEMID, t1.SYS_PERMISSIONID, t1.SYS_PERMISSIONNAME, t1.PERMISSIONTYPE, t1.UPDATEDATE, t2.PSSOURCETYPE, t2.PSSOURCENAME FROM IBZPERMISSION t1  LEFT JOIN ibzpsdeoppriv t2 on t1.SYS_PERMISSIONID=t2.SYS_PSDEOPPRIVID LEFT JOIN ibzpsappmenuitem t3 on t1.SYS_PERMISSIONID =t3.PSAPPMENUID WHERE T1.ENABLE=1 ) t1 
+			]]>
+    </sql>
+
+</mapper>
+

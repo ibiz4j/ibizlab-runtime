@@ -1,0 +1,77 @@
+.wfindex-view{
+    position: relative;
+}
+
+
+
+.index_view{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    .index_header{
+        height:50px;
+        padding:0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .page-logo{
+          display: flex;
+          align-items: center;
+        }
+        .header-left{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .el-menu.el-menu--horizontal{
+                border-bottom: none;
+                 .el-submenu{
+                    border-top: none;
+                }
+            }
+        }
+        > div {
+            line-height: 49px;
+        }
+    }
+    .index_content{
+        background-color:#fff;
+        height:calc(100vh - 50px);
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    >.ivu-layout {
+        >.ivu-layout {
+            height: calc(100vh - 50px);
+        }
+    }
+    .ivu-layout .ivu-layout-sider .ivu-layout-sider-children .sider-top{
+        line-height: 58px;
+        text-align: right;
+        padding-right: 18px;
+    }
+    .ivu-layout .ivu-layout-sider .ivu-layout-sider-children .sider-top .ivu-icon{
+        font-size: 20px;
+        padding: 4px;
+        margin-top: -2px;
+        cursor: pointer;
+    }
+}
+
+/***    BRGIN:滚动条样式    ***/
+::-webkit-scrollbar {
+    background: transparent;
+    width: 4px;
+    height: 4px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    background-color: #cecece;
+}
+::-webkit-scrollbar-track {
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+}

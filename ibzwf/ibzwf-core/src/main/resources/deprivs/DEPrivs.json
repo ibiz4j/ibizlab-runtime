@@ -1,0 +1,8 @@
+    {
+    "unires":[
+           ],
+    "predefineddatarange":[{"id":"ALL","name":"全部数据"},{"id":"CURORG","name":"当前单位"},{"id":"PORG","name":"上级单位"},{"id":"SORG","name":"下级单位"},{"id":"CURORGDEPT","name":"当前部门"},{"id":"PORGDEPT","name":"上级部门"},{"id":"SORGDEPT","name":"下级部门"}],
+    "entities":[
+    ]
+
+    }

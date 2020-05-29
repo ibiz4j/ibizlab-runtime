@@ -1,0 +1,284 @@
+@import '../../node_modules/font-awesome/less/font-awesome.less';
+@import '../theme/blue.theme.less';
+@import '../theme/dark-blue.theme.less';
+@import '../theme/default.theme.less';
+@import './var.css';
+
+.ibiz-page-tag .tags-body .tags-container .ivu-tag.tag-is-active .ivu-tag-text {
+  color: #1890ff;
+}
+.ibiz-page-tag .tags-body .tags-container .ivu-tag .ivu-icon-ios-close {
+  display: none;
+}
+.ibiz-page-tag .tags-body .tags-container .ivu-tag.tag-is-active .ivu-icon-ios-close,
+.ibiz-page-tag .tags-body .tags-container .ivu-tag:hover .ivu-icon-ios-close {
+  display: inline-block;
+}
+.ivu-card-head p {
+  font-size: 14px;
+  color: #333;
+  font-weight: 400;
+}
+.app-app-menu .app-menus .ivu-card .ivu-card-body{
+  line-height: 22px;
+  margin-left: 10px;
+  font-weight: 400;
+}
+.app-app-menu .app-menus .ivu-card:hover{
+  box-shadow:  none;
+}
+
+.ivu-card-body .grid>.el-table .el-table__header-wrapper thead>tr th {
+  background: rgb(245,245,245);
+  border-right: 1px solid rgb(250,250,250);
+}
+.el-table td, .el-table th.is-leaf {
+  border-bottom: 1px solid #ebeef5;
+}
+.el-table th {
+  padding: 5px 0;
+}
+.grid .el-table__body-wrapper .el-table__row td{
+    border-left: 1px solid rgb(245,245,245);
+    border-top: 1px solid rgb(245,245,245);
+}
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+  background-color: #badfffba !important;
+}
+.grid .el-table__body-wrapper .grid-selected-row{
+    background-color: #badfffba !important;
+}
+
+.el-table th .sort-caret.ascending{
+    border-bottom-color: #f0f2f5;
+}
+.el-table th.ascending .sort-caret.ascending {
+    border-bottom-color: #909399;
+}
+.el-table th .sort-caret.descending{
+    border-top-color: #f0f2f5;
+}
+.el-table th.descending .sort-caret.descending {
+    border-top-color: #909399;
+}
+
+.view-container {
+    height: calc(100% - 38px);
+    // height: 100%;
+    // display: flex;
+    padding: 0 15px;
+    // flex-direction: column;
+    > .view-card {
+        height: 100%;
+        // display: flex;
+        // flex-direction: column;
+        > .ivu-card-head{
+          height: 50px;
+          border-color: rgb(221, 221, 221);
+          border-style: solid;
+          border-width: 0px 0px 1px;
+          margin: 0px 0px 11px;
+          padding: 6px 0px;
+          > p{
+            height: 50px;
+            > .caption-info{
+              line-height: 50px;
+              font-size: 18px;
+              color: #1890ff;
+            }
+          }
+        }
+        > .ivu-card-body {
+            // height: 50%;
+            // flex-grow: 1;
+            height: calc(100% - 62px);
+            padding: 0px;
+            > .content-container {
+                height: 100%;
+                display: flex;
+                margin: 0;
+                flex-direction: column;
+            }
+        }
+    }
+    > .view-card.view-no-caption.view-no-toolbar {
+        > .ivu-card-body {
+            height: 100%;
+        }
+    }
+}
+.viewcontainer2 {
+    height: 100%;
+    width: 100%;
+}
+.viewcontainer3 {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+}
+
+
+/***    BRGIN:加载遮罩    ***/
+.el-loading-mask {
+    background-color: initial;
+    .el-loading-spinner {
+        .path {
+            stroke-width: 3px;
+        }
+    }
+}
+/***    END:加载遮罩    ***/
+
+.grid-row-select {
+    background-color: #ecf5ff !important;
+    td {
+        background-color: #ecf5ff !important;
+    }
+}
+
+/***    BRGIN:表单错误信息2    ***/
+.app-form-item-error-info {
+    display: flex;
+    .icon {
+        width: 30px;
+        flex-shrink: 0;
+    }
+    .contant{
+        flex-grow: 1;
+    }
+}
+/***    END:表单错误信息2    ***/
+
+/***    BRGIN:多数据视图属性布局    ***/
+.property-layout-left, .property-layout-right {
+    display: flex;
+    height: 100%;
+    > div {
+        height: 100%;
+    }
+    > div:nth-child(1) {
+        flex-grow: 1;
+        padding-left: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    > div:nth-child(2) {
+        flex-shrink: 0;
+    }
+}
+.property-layout-top, .property-layout-bottom {
+    display: flex;
+    height: 100%;
+    > div:nth-child(1) {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    > div:nth-child(2) {
+        flex-shrink: 0;
+    }
+}
+.property-layout-left {
+    flex-direction: row-reverse;
+    > div:nth-child(1) {
+        border-left: 1px solid #ddd;
+        padding-left: 16px;
+    }
+}
+.property-layout-right {
+    flex-direction: row;
+    > div:nth-child(1) {
+        border-right: 1px solid #ddd;
+        padding-right: 16px;
+    }
+}
+.property-layout-top {
+    flex-direction: column-reverse;
+    > div:nth-child(1) {
+        border-top: 1px solid #ddd;
+        padding-top: 16px;
+    }
+}
+.property-layout-bottom {
+    flex-direction: column;
+    > div:nth-child(1) {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 16px;
+    }
+}
+
+.view-container.degridview, .view-container.degridview9, .view-container.dewfgridview, .view-container.delistview, .view-container.delistview9, .view-container.dedataview, .view-container.dedataview9{
+  >.view-card.view-no-caption{
+    >.ivu-card-body{
+      height: 100%;
+    }
+  }
+  >.view-card{
+    >.ivu-card-body{
+        >.content-container{
+            .quick-group-container,.quick-search-input{
+                float: left;
+                margin-top: 6px;
+                margin-bottom: 6px;
+            }
+            .quick-search-container{
+                float: left;
+                margin-top: -2px;
+                margin-bottom: 6px;
+            }
+        }
+    }
+  }
+}
+
+/***    END:多数据视图属性布局    ***/
+
+// 看板视图，卡片模式
+// .view-container.appportalview,.view-container.deportalview,.view-container.deportalview9{
+//   >.view-card>.ivu-card-body>.content-container{
+//     background: #efefef;
+//   }
+//   .dashboard{
+//     padding: 8px;
+//   }
+//   .portlet-container{
+//     background: #efefef;
+//   }
+//   .portlet-container::after{
+//     content: "";
+//     clear: both;
+//   }
+//   .portlet{
+//     margin: 8px;
+//     height: calc(100% - 16px);
+//     width: calc(100% - 16px);
+//     background: #fff;
+//     border-radius: 4px;
+//     box-shadow: 0 1px 1px rgba(0,0,0,.05), 0 2px 6px 0 rgba(0,0,0,.045);
+//     border: 1px solid transparent;
+//     >.portlet-with-title{
+//       margin-bottom: 12px;
+//       height: calc(100% - 64px);
+//     }
+//     >.portlet-without-title{
+//       margin-top: 12px;
+//       margin-bottom: 12px;
+//       height: calc(100% - 24px);
+//     }
+//   }
+// }
+
+// // 看板视图，无缝模式
+// .view-container.appportalview.seamless-mode,.view-container.deportalview.seamless-mode,.view-container.deportalview9.seamless-mode{
+//   >.view-card>.ivu-card-body>.content-container{
+//     background: transparent;
+//   }
+//   .portlet-container{
+//     background: transparent;
+//   }
+//   .portlet{
+//     background: transparent;
+//   }
+// }
+
+@import './user.less';

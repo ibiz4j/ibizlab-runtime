@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.uaa.mapper.SysRolePermissionMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="SysRolePermissionResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`CREATEDATE`, t21.`ENABLE` AS `PERMISSIONENABLE`, t21.`PERMISSIONTYPE`, t1.`SYS_PERMISSIONID`, t21.`SYS_PERMISSIONNAME`, t1.`SYS_ROLEID`, t11.`SYS_ROLENAME`, t1.`SYS_ROLE_PERMISSIONID`, t1.`UPDATEDATE` FROM `IBZROLE_PERMISSION` t1  LEFT JOIN IBZROLE t11 ON t1.SYS_ROLEID = t11.SYS_ROLEID  LEFT JOIN IBZPERMISSION t21 ON t1.SYS_PERMISSIONID = t21.SYS_PERMISSIONID  ) t1 where sys_role_permissionid=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="SysRolePermissionResultMap" type="cn.ibizlab.core.uaa.domain.SysRolePermission" autoMapping="true">
+        <id property="rolepermissionid" column="sys_role_permissionid" /><!--主键字段映射-->
+		<result property="roleid" column="sys_roleid" />
+		<result property="rolename" column="sys_rolename" />
+		<result property="permissionid" column="sys_permissionid" />
+		<result property="permissionname" column="sys_permissionname" />
+            
+		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="permission" javaType="cn.ibizlab.core.uaa.domain.SysPermission" column="sys_permissionid" select="cn.ibizlab.core.uaa.mapper.SysPermissionMapper.selectById" fetchType="lazy"></association>
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="role" javaType="cn.ibizlab.core.uaa.domain.SysRole" column="sys_roleid" select="cn.ibizlab.core.uaa.mapper.SysRoleMapper.selectById" fetchType="lazy"></association>
+    </resultMap>
+
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_ROLE_PERMISSION_SYS_PERMISSION_SYS_PERMISSIONID] -->
+	 <select id="selectByPermissionid" resultMap="SysRolePermissionResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         ) t1
+         where  sys_permissionid=#{permissionid}
+     </select>
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_ROLE_PERMISSION_SYS_ROLE_SYS_ROLEID] -->
+	 <select id="selectByRoleid" resultMap="SysRolePermissionResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         ) t1
+         where  sys_roleid=#{roleid}
+     </select>
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext"  resultMap="SysRolePermissionResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+       <![CDATA[	SELECT t1.`CREATEDATE`, t21.`ENABLE` AS `PERMISSIONENABLE`, t21.`PERMISSIONTYPE`, t1.`SYS_PERMISSIONID`, t21.`SYS_PERMISSIONNAME`, t1.`SYS_ROLEID`, t11.`SYS_ROLENAME`, t1.`SYS_ROLE_PERMISSIONID`, t1.`UPDATEDATE` FROM `IBZROLE_PERMISSION` t1  LEFT JOIN IBZROLE t11 ON t1.SYS_ROLEID = t11.SYS_ROLEID  LEFT JOIN IBZPERMISSION t21 ON t1.SYS_PERMISSIONID = t21.SYS_PERMISSIONID  
+			]]>
+    </sql>
+
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+       <![CDATA[	SELECT t1.`CREATEDATE`, t21.`ENABLE` AS `PERMISSIONENABLE`, t21.`PERMISSIONTYPE`, t1.`SYS_PERMISSIONID`, t21.`SYS_PERMISSIONNAME`, t1.`SYS_ROLEID`, t11.`SYS_ROLENAME`, t1.`SYS_ROLE_PERMISSIONID`, t1.`UPDATEDATE` FROM `IBZROLE_PERMISSION` t1  LEFT JOIN IBZROLE t11 ON t1.SYS_ROLEID = t11.SYS_ROLEID  LEFT JOIN IBZPERMISSION t21 ON t1.SYS_PERMISSIONID = t21.SYS_PERMISSIONID  
+			]]>
+    </sql>
+
+</mapper>
+

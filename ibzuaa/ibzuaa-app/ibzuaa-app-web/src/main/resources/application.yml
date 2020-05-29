@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    include: sys , web-prod
+  application:
+    name: ibzuaa-web
+zuul:
+  routes:
+    loginv7:
+      path: /v7/login
+      serviceId: ibzuaa-api
+      stripPrefix: false

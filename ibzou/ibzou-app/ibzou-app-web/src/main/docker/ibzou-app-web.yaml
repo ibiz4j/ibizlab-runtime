@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  ibzou-app-web:
+    image: registry.cn-shanghai.aliyuncs.com/ibizsys/ibzou-app-web:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - agent_network
+    deploy:
+      mode: replicated
+      replicas: 1
+
+networks:
+  agent_network:
+    driver: overlay
+    attachable: true
+

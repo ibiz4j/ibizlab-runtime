@@ -1,0 +1,31 @@
+server:
+  port: 30002
+#zuul网关路由设置
+zuul:
+  routes:
+    sys_authlog:
+      path: /sysauthlogs/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    sys_role_permission:
+      path: /sysrolepermissions/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    sys_permission:
+      path: /syspermissions/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    sys_user_role:
+      path: /sysuserroles/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    sys_user:
+      path: /sysusers/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    sys_role:
+      path: /sysroles/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+  sensitive-headers:
+    - Cookie,Set-Cookie,Authorization

@@ -1,0 +1,39 @@
+server:
+  port: 30003
+#zuul网关路由设置
+zuul:
+  routes:
+    wf_model:
+      path: /wfremodels/**
+      serviceId: ibzwf-api
+      stripPrefix: false
+    wf_group_member:
+      path: /wfmembers/**
+      serviceId: ibzwf-api
+      stripPrefix: false
+    wf_group:
+      path: /wfgroups/**
+      serviceId: ibzwf-api
+      stripPrefix: false
+    wf_user:
+      path: /wfusers/**
+      serviceId: ibzwf-api
+      stripPrefix: false
+    wf_definition:
+      path: /wfprocessdefinitions/**
+      serviceId: ibzwf-api
+      stripPrefix: false
+    wf_pssystem:
+      path: /wfsystems/**
+      serviceId: ibzwf-api
+      stripPrefix: false
+    loginv7:
+      path: /v7/login
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    oucore:
+      path: /ibzorganizations/**
+      serviceId: ibzou-api
+      stripPrefix: false
+  sensitive-headers:
+    - Cookie,Set-Cookie,Authorization

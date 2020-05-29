@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>ibzuaa</artifactId>
+        <groupId>cn.ibizlab</groupId>
+        <version>1.0.0.0</version>
+    </parent>
+
+    <artifactId>ibzuaa-provider</artifactId>
+    <name>Ibzuaa Provider</name>
+    <packaging>pom</packaging>
+    <description>Ibzuaa Provider</description>
+
+    <modules>
+        <module>ibzuaa-provider-api</module>
+    </modules>
+
+    <dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>

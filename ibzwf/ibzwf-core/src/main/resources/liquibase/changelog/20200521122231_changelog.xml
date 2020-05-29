@@ -1,0 +1,40 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="sq3536 (generated)" id="1590063761849-1">
+        <createTable tableName="IBZWFDEFINITION">
+            <column name="DEFINITIONKEY" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_WF_DEFINITION_DEFINITIONKEY"/>
+            </column>
+            <column name="DEFINITIONNAME" type="VARCHAR(100)"/>
+            <column name="MODELVERSION" type="INT"/>
+            <column name="MODELENABLE" type="INT"/>
+            <column name="PSSYSTEMID" type="VARCHAR(100)"/>
+            <column name="TASKDEFINITIONKEY" type="VARCHAR(100)"/>
+            <column name="MD5CHECK" type="VARCHAR(100)"/>
+            <column name="BPMNFILE" type="VARCHAR(1000)"/>
+            <column name="DEPLOYKEY" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sq3536 (generated)" id="1590063761849-2">
+        <createTable tableName="IBZWFGROUP">
+            <column name="GROUPID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_WF_GROUP_GROUPID"/>
+            </column>
+            <column name="GROUPNAME" type="VARCHAR(100)"/>
+            <column name="GROUPSCOPE" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sq3536 (generated)" id="1590063761849-3">
+        <createTable tableName="IBZWFMEMBER">
+            <column name="MEMBERID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_WF_GROUP_MEMBER_MEMBERID"/>
+            </column>
+            <column name="MEMBERNAME" type="VARCHAR(100)"/>
+            <column name="GROUPID" type="VARCHAR(100)"/>
+            <column name="USERID" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sq3536 (generated)" id="1590063761849-4">
+        <addForeignKeyConstraint baseColumnNames="GROUPID" baseTableName="IBZWFMEMBER" constraintName="DER1N_WF_GROUP_MEMBER_WF_GROUP" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="GROUPID" referencedTableName="IBZWFGROUP" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

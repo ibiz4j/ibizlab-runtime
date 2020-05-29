@@ -1,0 +1,72 @@
+package cn.ibizlab.core.uaa.filter;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.alibaba.fastjson.annotation.JSONField;
+
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
+
+
+import cn.ibizlab.util.filter.QueryWrapperContext;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import cn.ibizlab.core.uaa.domain.SysRole;
+/**
+ * 关系型数据实体[SysRole] 查询条件对象
+ */
+@Slf4j
+@Data
+public class SysRoleSearchContext extends QueryWrapperContext<SysRole> {
+
+	private String n_sys_rolename_isnotnull;//[角色名称]
+	public void setN_sys_rolename_isnotnull(String n_sys_rolename_isnotnull) {
+        this.n_sys_rolename_isnotnull = n_sys_rolename_isnotnull;
+        if(!ObjectUtils.isEmpty(this.n_sys_rolename_isnotnull)){
+			if(this.n_sys_rolename_isnotnull.toString().equals("1")){
+				this.getSelectCond().isNotNull("sys_rolename");
+			}
+        }
+    }
+	private String n_sys_rolename_isnull;//[角色名称]
+	public void setN_sys_rolename_isnull(String n_sys_rolename_isnull) {
+        this.n_sys_rolename_isnull = n_sys_rolename_isnull;
+        if(!ObjectUtils.isEmpty(this.n_sys_rolename_isnull)){
+			if(this.n_sys_rolename_isnull.toString().equals("1")){
+				this.getSelectCond().isNull("sys_rolename");
+			}
+        }
+    }
+	private String n_sys_rolename_like;//[角色名称]
+	public void setN_sys_rolename_like(String n_sys_rolename_like) {
+        this.n_sys_rolename_like = n_sys_rolename_like;
+        if(!ObjectUtils.isEmpty(this.n_sys_rolename_like)){
+            this.getSelectCond().like("sys_rolename", n_sys_rolename_like);
+        }
+    }
+
+    /**
+	 * 启用快速搜索
+	 */
+	public void setQuery(String query)
+	{
+		 this.query=query;
+		 if(!StringUtils.isEmpty(query)){
+            this.getSelectCond().and( wrapper ->
+                     wrapper.like("sys_rolename", query)   
+            );
+		 }
+	}
+}
+
+
+
+
