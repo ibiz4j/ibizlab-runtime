@@ -43,7 +43,7 @@ spring:
     #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
     pool-prepared-statements: false
     max-pool-prepared-statement-per-connection-size: 20
-    isSyncDBSchema: false
+    isSyncDBSchema: true
     defaultSchema: a_A_5d9d78509
     conf: classpath:liquibase/master.xml
 
@@ -92,7 +92,7 @@ xxl:
     admin:
       addresses: #127.0.0.1
     executor:
-      appname: ibzwf
+      appname: ibzrt
       ip:
       port: 9999
       logpath: /app/joblog

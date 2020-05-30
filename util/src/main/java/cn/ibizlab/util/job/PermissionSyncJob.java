@@ -27,7 +27,7 @@ public class PermissionSyncJob implements ApplicationRunner {
     private IBZUAAFeignClient client;
 
 
-    @Value("${ibiz.systemid:ibzwf}")
+    @Value("${ibiz.systemid:ibzrt}")
     private String systemId;
 
     @Override

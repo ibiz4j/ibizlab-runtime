@@ -24,7 +24,7 @@ public class AppController {
 	@Value("${ibiz.enablePermissionValid:false}")
     boolean enablePermissionValid;  //是否开启权限校验
 
-    @Value("${ibiz.systemid:ibzwf}")
+    @Value("${ibiz.systemid:ibzrt}")
 	private String systemId;
 
 

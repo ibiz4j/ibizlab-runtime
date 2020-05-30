@@ -21,7 +21,7 @@ import org.springframework.util.StringUtils;
 public class IBZConfigService extends ServiceImpl<IBZConfigMapper, IBZConfig> implements IService<IBZConfig> {
 
 
-    @Value("${ibiz.systemid:ibzwf}")
+    @Value("${ibiz.systemid:ibzrt}")
 	private String systemId;
 
     @Cacheable( value="ibzou_configs",key = "'cfgid:'+#p0+'||'+#p1+'||'+#p2")

@@ -1,32 +1,24 @@
 
-package cn.ibizlab.api.rest.extensions;
+package cn.ibizlab.rest;
 
-import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
-import cn.ibizlab.util.client.IBZOUFeignClient;
 import cn.ibizlab.util.security.AuthTokenUtil;
 import cn.ibizlab.util.security.AuthenticationInfo;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.security.AuthorizationLogin;
 import cn.ibizlab.util.service.AuthenticationUserService;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import java.util.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- * 客户端登录认证
- */
 @RestController
 @RequestMapping("/")
-@ConditionalOnExpression("'${spring.application.name:ibzuaa-api}'.equals('ibzuaa-api')")
-public class ClientAuthenticationResource
+public class AuthenticationResource
 {
 
     @Value("${ibiz.jwt.header:Authorization}")
@@ -36,7 +28,7 @@ public class ClientAuthenticationResource
     private AuthTokenUtil jwtTokenUtil;
 
     @Autowired
-    @Qualifier("UAAUserService")
+    @Qualifier("userService")
     private AuthenticationUserService userDetailsService;
 
 
