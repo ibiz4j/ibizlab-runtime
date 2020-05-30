@@ -1,6 +1,7 @@
 *target
 .settings
 *node_modules
+*ibzrt_data
 *bin
 *.project
 *.classpath

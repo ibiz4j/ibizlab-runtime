@@ -7,8 +7,8 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 
 CMD echo "The application will start in ${IBIZ_SLEEP}s..." && \
     sleep ${IBIZ_SLEEP} && \
-    java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /ibzrt-app-web.jar
+    java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /ibizlab-runtime.jar
 
-EXPOSE 30000
+EXPOSE 10086
 
 ADD ibizlab-runtime.jar /ibizlab-runtime.jar
