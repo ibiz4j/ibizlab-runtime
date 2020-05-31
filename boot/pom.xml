@@ -125,7 +125,7 @@
 								<resource>
 									<targetPath>/</targetPath>
 									<directory>../</directory>
-									<include>${project.artifactId}.jar</include>
+									<include>ibizlab-runtime.jar</include>
 								</resource>
 							</resources>
 						</configuration>
