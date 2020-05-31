@@ -65,7 +65,7 @@ export default class Login extends Vue {
      * @type {*}
      * @memberof Login
      */
-    public form: any = { loginname: 'guest', password: 'guest' };
+    public form: any = { loginname: 'ibzadmin', password: '123456' };
 
     /**
      * 应用标题
@@ -73,7 +73,7 @@ export default class Login extends Vue {
      * @type {string}
      * @memberof Login
      */
-    public appTitle:string = Environment.AppTitle;
+    public appTitle:string = "";
 
     /**
      * 值规则
