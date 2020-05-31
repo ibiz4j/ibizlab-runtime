@@ -151,7 +151,7 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
     @Override
     public void createBatch(List<IBZTeamMember> list) {
         list.forEach(item->fillParentData(item));
-        this.saveBatch(list,batchSize);
+        this.saveOrUpdateBatch(list,batchSize);
     }
 
 

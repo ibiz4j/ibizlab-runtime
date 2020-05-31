@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="steven (generated)" id="1590912439911-1">
+        <createTable tableName="IBZPOST">
+            <column name="POSTID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IBZPOST_POSTID"/>
+            </column>
+            <column name="POSTCODE" type="VARCHAR(100)"/>
+            <column name="POSTNAME" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590912439911-2">
+        <createTable tableName="IBZTEAM">
+            <column name="TEAMID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IBZTEAM_TEAMID"/>
+            </column>
+            <column name="TEAMNAME" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590912439911-3">
+        <createTable tableName="IBZTEAMMEMBER">
+            <column name="TEAMMEMBERID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IBZTEAMMEMBER_TEAMMEMBERID"/>
+            </column>
+            <column name="TEAMID" type="VARCHAR(100)"/>
+            <column name="USERID" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590912439911-4">
+        <addForeignKeyConstraint baseColumnNames="POSTID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZPOST_POSTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="POSTID" referencedTableName="IBZPOST" validate="true"/>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590912439911-5">
+        <addForeignKeyConstraint baseColumnNames="USERID" baseTableName="IBZTEAMMEMBER" constraintName="DER1N_IBZTEAMMEMBER_IBZEMP_USE" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="USERID" referencedTableName="IBZEMP" validate="true"/>
+    </changeSet>
+    <changeSet author="steven (generated)" id="1590912439911-6">
+        <addForeignKeyConstraint baseColumnNames="TEAMID" baseTableName="IBZTEAMMEMBER" constraintName="DER1N_IBZTEAMMEMBER_IBZTEAM_TE" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="TEAMID" referencedTableName="IBZTEAM" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

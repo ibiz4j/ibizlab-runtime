@@ -71,4 +71,6 @@ public interface IBZEmployeeMapper extends BaseMapper<IBZEmployee>{
 
     List<IBZEmployee> selectByOrgid(@Param("orgid") Serializable orgid) ;
 
+    List<IBZEmployee> selectByPostid(@Param("postid") Serializable postid) ;
+
 }

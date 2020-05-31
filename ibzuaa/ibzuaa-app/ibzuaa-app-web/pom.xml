@@ -16,7 +16,7 @@
     <dependencies>
 		<dependency>
 			<groupId>cn.ibizlab</groupId>
-			<artifactId>util</artifactId>
+			<artifactId>ibzuaa-util</artifactId>
 			<version>${project.version}</version>
 		</dependency>
     </dependencies>

@@ -12,12 +12,16 @@
 
     <parent>
         <groupId>cn.ibizlab</groupId>
-        <artifactId>ibizlab-runtime</artifactId>
+        <artifactId>ibzou-dependencies</artifactId>
         <version>1.0.0.0</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>ibzou-dependencies/pom.xml</relativePath>
     </parent>
 
     <modules>
+        <!-- dependencies -->
+        <module>ibzou-dependencies</module>
+        <!-- utils -->
+        <module>ibzou-util</module>
         <!-- cores -->
         <module>ibzou-core</module>
         <!-- services -->

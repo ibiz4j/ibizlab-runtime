@@ -117,7 +117,7 @@ public class IBZEmployee extends EntityMP implements Serializable {
     @JsonProperty("bcode")
     private String bcode;
     /**
-     * 岗位
+     * 岗位标识
      */
     @TableField(value = "postid")
     @JSONField(name = "postid")
@@ -317,6 +317,14 @@ public class IBZEmployee extends EntityMP implements Serializable {
     @TableField(exist = false)
     private cn.ibizlab.core.ou.domain.IBZOrganization org;
 
+    /**
+     * 
+     */
+    @JsonIgnore
+    @JSONField(serialize = false)
+    @TableField(exist = false)
+    private cn.ibizlab.core.ou.domain.IBZPost post;
+
 
 
     /**
@@ -390,7 +398,7 @@ public class IBZEmployee extends EntityMP implements Serializable {
         this.modify("bcode",bcode);
     }
     /**
-     * 设置 [岗位]
+     * 设置 [岗位标识]
      */
     public void setPostid(String postid){
         this.postid = postid ;

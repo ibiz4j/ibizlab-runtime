@@ -56,6 +56,9 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     @Autowired
     @Lazy
     private cn.ibizlab.core.ou.service.IIBZOrganizationService ibzorganizationService;
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZPostService ibzpostService;
 
     @Autowired
     @Lazy
@@ -194,6 +197,16 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
         this.remove(new QueryWrapper<IBZEmployee>().eq("orgid",orgid));
     }
 
+	@Override
+    public List<IBZEmployee> selectByPostid(String postid) {
+        return baseMapper.selectByPostid(postid);
+    }
+
+    @Override
+    public void removeByPostid(String postid) {
+        this.remove(new QueryWrapper<IBZEmployee>().eq("postid",postid));
+    }
+
 
     /**
      * 查询集合 DEFAULT
@@ -232,6 +245,17 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
             }
             et.setOrgcode(org.getOrgcode());
             et.setOrgname(org.getOrgname());
+        }
+        //实体关系[DER1N_IBZEMP_IBZPOST_POSTID]
+        if(!ObjectUtils.isEmpty(et.getPostid())){
+            cn.ibizlab.core.ou.domain.IBZPost post=et.getPost();
+            if(ObjectUtils.isEmpty(post)){
+                cn.ibizlab.core.ou.domain.IBZPost majorEntity=ibzpostService.get(et.getPostid());
+                et.setPost(majorEntity);
+                post=majorEntity;
+            }
+            et.setPostcode(post.getPostcode());
+            et.setPostname(post.getPostname());
         }
     }
 

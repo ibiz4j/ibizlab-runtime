@@ -43,7 +43,7 @@ public class IBZPostSearchContext extends QueryWrapperContext<IBZPost> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSelectCond().and( wrapper ->
-                     wrapper.like("postcode", query)   
+                     wrapper.like("postname", query)   
             );
 		 }
 	}

@@ -25,7 +25,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/")
-@ConditionalOnExpression("'${spring.application.name:ibzuaa-api}'.equals('ibzuaa-api')")
+@ConditionalOnExpression("'${spring.application.name:ibzuaa-api}'.startsWith('ibzuaa')")
 public class ClientAuthenticationResource
 {
 

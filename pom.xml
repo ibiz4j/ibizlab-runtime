@@ -22,7 +22,7 @@
         <module>ibzwf</module>
         <module>ibzdisk</module>
         <module>boot</module>
-        <module>util</module>
+        <module>gateway</module>
     </modules>
 
     <properties>

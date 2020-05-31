@@ -1,6 +1,6 @@
 export default {
   fields: {
-    teamid: 'TEAMID',
+    teamid: '组标识',
     teamname: '组名称',
   },
 };

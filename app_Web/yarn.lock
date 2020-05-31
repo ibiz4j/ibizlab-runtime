@@ -5249,10 +5249,10 @@ ibiz-gantt-elastic@^1.0.15:
     vue-slider-component "^3.0.40"
     vue-switches "^2.0.1"
 
-ibiz-vue-lib@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/ibiz-vue-lib/-/ibiz-vue-lib-0.1.9.tgz#d7088deb5577af3095887ca897c1710bae174682"
-  integrity sha512-CotV3xIB04+QUUeMlfsVj5BseVPQ+IHyKdwU+MXGh+2e91Nt7N/z/LElakhAiGkSpaaKoMdlKCOdhD0qqJ3wNQ==
+ibiz-vue-lib@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.npm.taobao.org/ibiz-vue-lib/download/ibiz-vue-lib-0.1.10.tgz#660f6f7fb73b5c63e3daa0921faf13c0cdc96de5"
+  integrity sha1-Zg9vf7c7XGPj2qCSH68TwM3JbeU=
   dependencies:
     axios "^0.19.2"
     core-js "^3.6.4"

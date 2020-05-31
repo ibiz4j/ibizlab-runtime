@@ -29,6 +29,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 import java.util.*;
 
+@Primary
 @Service
 public class UserService extends ServiceImpl<IBZUSERMapper, IBZUSER> implements IBZUSERService, AuthenticationUserService {
 

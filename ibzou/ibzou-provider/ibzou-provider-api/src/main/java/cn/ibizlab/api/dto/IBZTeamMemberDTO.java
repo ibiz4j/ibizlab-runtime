@@ -40,20 +40,20 @@ public class IBZTeamMemberDTO extends DTOBase implements Serializable {
     private String teamid;
 
     /**
-     * 属性 [USERID]
-     *
-     */
-    @JSONField(name = "userid")
-    @JsonProperty("userid")
-    private String userid;
-
-    /**
      * 属性 [TEAMNAME]
      *
      */
     @JSONField(name = "teamname")
     @JsonProperty("teamname")
     private String teamname;
+
+    /**
+     * 属性 [USERID]
+     *
+     */
+    @JSONField(name = "userid")
+    @JsonProperty("userid")
+    private String userid;
 
     /**
      * 属性 [PERSONNAME]

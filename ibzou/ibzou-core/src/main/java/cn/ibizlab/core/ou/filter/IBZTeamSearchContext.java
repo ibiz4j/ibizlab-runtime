@@ -27,7 +27,7 @@ import cn.ibizlab.core.ou.domain.IBZTeam;
 @Data
 public class IBZTeamSearchContext extends QueryWrapperContext<IBZTeam> {
 
-	private String n_teamid_like;//[TEAMID]
+	private String n_teamid_like;//[组标识]
 	public void setN_teamid_like(String n_teamid_like) {
         this.n_teamid_like = n_teamid_like;
         if(!ObjectUtils.isEmpty(this.n_teamid_like)){

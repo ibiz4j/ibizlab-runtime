@@ -62,6 +62,27 @@ public class IBZEmployeeSearchContext extends QueryWrapperContext<IBZEmployee> {
             this.getSelectCond().like("bcode", n_bcode_like);
         }
     }
+	private String n_postid_eq;//[岗位标识]
+	public void setN_postid_eq(String n_postid_eq) {
+        this.n_postid_eq = n_postid_eq;
+        if(!ObjectUtils.isEmpty(this.n_postid_eq)){
+            this.getSelectCond().eq("postid", n_postid_eq);
+        }
+    }
+	private String n_postname_eq;//[岗位名称]
+	public void setN_postname_eq(String n_postname_eq) {
+        this.n_postname_eq = n_postname_eq;
+        if(!ObjectUtils.isEmpty(this.n_postname_eq)){
+            this.getSelectCond().eq("postname", n_postname_eq);
+        }
+    }
+	private String n_postname_like;//[岗位名称]
+	public void setN_postname_like(String n_postname_like) {
+        this.n_postname_like = n_postname_like;
+        if(!ObjectUtils.isEmpty(this.n_postname_like)){
+            this.getSelectCond().like("postname", n_postname_like);
+        }
+    }
 	private String n_orgid_eq;//[单位]
 	public void setN_orgid_eq(String n_orgid_eq) {
         this.n_orgid_eq = n_orgid_eq;

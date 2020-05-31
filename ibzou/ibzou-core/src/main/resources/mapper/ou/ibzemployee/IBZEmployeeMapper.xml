@@ -15,6 +15,7 @@
     <resultMap id="IBZEmployeeResultMap" type="cn.ibizlab.core.ou.domain.IBZEmployee" autoMapping="true">
         <id property="userid" column="userid" /><!--主键字段映射-->
 		<result property="mdeptid" column="mdeptid" />
+		<result property="postid" column="postid" />
 		<result property="orgid" column="orgid" />
             
 		
@@ -22,6 +23,8 @@
 		<association property="maindept" javaType="cn.ibizlab.core.ou.domain.IBZDepartment" column="mdeptid" select="cn.ibizlab.core.ou.mapper.IBZDepartmentMapper.selectById" fetchType="lazy"></association>
 		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
 		<association property="org" javaType="cn.ibizlab.core.ou.domain.IBZOrganization" column="orgid" select="cn.ibizlab.core.ou.mapper.IBZOrganizationMapper.selectById" fetchType="lazy"></association>
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="post" javaType="cn.ibizlab.core.ou.domain.IBZPost" column="postid" select="cn.ibizlab.core.ou.mapper.IBZPostMapper.selectById" fetchType="lazy"></association>
     </resultMap>
 
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZEMP_IBZDEPT_MDEPTID] -->
@@ -37,6 +40,13 @@
                 <include refid="Default" />
          ) t1
          where  orgid=#{orgid}
+     </select>
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZEMP_IBZPOST_POSTID] -->
+	 <select id="selectByPostid" resultMap="IBZEmployeeResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         ) t1
+         where  postid=#{postid}
      </select>
 
     <!--数据集合[Default]-->

@@ -39,7 +39,7 @@ public class IBZTeam extends EntityMP implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * TEAMID
+     * 组标识
      */
     @DEField(isKeyField=true)
     @TableId(value= "teamid",type=IdType.UUID)

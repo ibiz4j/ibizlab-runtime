@@ -12,12 +12,16 @@
 
     <parent>
         <groupId>cn.ibizlab</groupId>
-        <artifactId>ibizlab-runtime</artifactId>
+        <artifactId>ibzdisk-dependencies</artifactId>
         <version>1.0.0.0</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>ibzdisk-dependencies/pom.xml</relativePath>
     </parent>
 
     <modules>
+        <!-- dependencies -->
+        <module>ibzdisk-dependencies</module>
+        <!-- utils -->
+        <module>ibzdisk-util</module>
         <!-- cores -->
         <module>ibzdisk-core</module>
         <!-- services -->

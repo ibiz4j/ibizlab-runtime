@@ -4,6 +4,7 @@ import org.flowable.ui.common.service.idm.RemoteIdmService;
 import org.flowable.ui.modeler.properties.FlowableModelerAppProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
 @EnableConfigurationProperties(FlowableModelerAppProperties.class)
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.FilterType;
 				"org.flowable.ui.common.tenant" },
 		excludeFilters = { @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = RemoteIdmService.class), }
 )
+@Configuration
 public class flowableConfiguration
 {
 

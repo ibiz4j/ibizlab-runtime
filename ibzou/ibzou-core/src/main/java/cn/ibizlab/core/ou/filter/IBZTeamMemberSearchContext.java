@@ -27,25 +27,18 @@ import cn.ibizlab.core.ou.domain.IBZTeamMember;
 @Data
 public class IBZTeamMemberSearchContext extends QueryWrapperContext<IBZTeamMember> {
 
-	private String n_teammemberid_like;//[TEAMMEMBER]
+	private String n_teammemberid_like;//[组成员标识]
 	public void setN_teammemberid_like(String n_teammemberid_like) {
         this.n_teammemberid_like = n_teammemberid_like;
         if(!ObjectUtils.isEmpty(this.n_teammemberid_like)){
             this.getSelectCond().like("teammemberid", n_teammemberid_like);
         }
     }
-	private String n_teamid_eq;//[TEAMID]
+	private String n_teamid_eq;//[组标识]
 	public void setN_teamid_eq(String n_teamid_eq) {
         this.n_teamid_eq = n_teamid_eq;
         if(!ObjectUtils.isEmpty(this.n_teamid_eq)){
             this.getSelectCond().eq("teamid", n_teamid_eq);
-        }
-    }
-	private String n_userid_eq;//[用户标识]
-	public void setN_userid_eq(String n_userid_eq) {
-        this.n_userid_eq = n_userid_eq;
-        if(!ObjectUtils.isEmpty(this.n_userid_eq)){
-            this.getSelectCond().eq("userid", n_userid_eq);
         }
     }
 	private String n_teamname_eq;//[组名称]
@@ -60,6 +53,13 @@ public class IBZTeamMemberSearchContext extends QueryWrapperContext<IBZTeamMembe
         this.n_teamname_like = n_teamname_like;
         if(!ObjectUtils.isEmpty(this.n_teamname_like)){
             this.getSelectCond().like("teamname", n_teamname_like);
+        }
+    }
+	private String n_userid_eq;//[用户标识]
+	public void setN_userid_eq(String n_userid_eq) {
+        this.n_userid_eq = n_userid_eq;
+        if(!ObjectUtils.isEmpty(this.n_userid_eq)){
+            this.getSelectCond().eq("userid", n_userid_eq);
         }
     }
 	private String n_personname_eq;//[姓名]
@@ -85,7 +85,7 @@ public class IBZTeamMemberSearchContext extends QueryWrapperContext<IBZTeamMembe
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSelectCond().and( wrapper ->
-                     wrapper.like("teammemberid", query)   
+                     wrapper.like("personname", query)   
             );
 		 }
 	}

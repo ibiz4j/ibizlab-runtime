@@ -39,7 +39,7 @@ public class IBZPost extends EntityMP implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * POSTID
+     * 岗位标识
      */
     @DEField(isKeyField=true)
     @TableId(value= "postid",type=IdType.UUID)

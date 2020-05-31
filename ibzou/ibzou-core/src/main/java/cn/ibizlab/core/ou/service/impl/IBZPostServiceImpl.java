@@ -44,6 +44,9 @@ import org.springframework.util.StringUtils;
 @Service("IBZPostServiceImpl")
 public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> implements IIBZPostService {
 
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
     private int batchSize = 500;
 

@@ -48,6 +48,9 @@ public interface IIBZEmployeeService extends IService<IBZEmployee>{
     List<IBZEmployee> selectByOrgid(String orgid) ;
     @CacheEvict(value="ibzemployee",allEntries=true)
     void removeByOrgid(String orgid) ;
+    List<IBZEmployee> selectByPostid(String postid) ;
+    @CacheEvict(value="ibzemployee",allEntries=true)
+    void removeByPostid(String postid) ;
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

@@ -31,7 +31,6 @@ import java.util.Set;
 /**
  * 实体[IBZUSER] 服务对象接口实现
  */
-@Primary
 @Service("UAAUserService")
 public class UAAUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> implements IBZUSERService, AuthenticationUserService {
 

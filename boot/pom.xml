@@ -9,7 +9,7 @@
         <version>1.0.0.0</version>
     </parent>
 
-    <artifactId>boot</artifactId>
+    <artifactId>ibzrt-boot</artifactId>
     <name>Ibzrt Dev Monolithic Boot</name>
     <description>Ibzrt Boot</description>
 

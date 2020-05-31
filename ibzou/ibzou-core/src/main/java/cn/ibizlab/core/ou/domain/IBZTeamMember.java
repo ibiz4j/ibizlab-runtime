@@ -39,7 +39,7 @@ public class IBZTeamMember extends EntityMP implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * TEAMMEMBER
+     * 组成员标识
      */
     @DEField(isKeyField=true)
     @TableId(value= "teammemberid",type=IdType.UUID)
@@ -47,19 +47,12 @@ public class IBZTeamMember extends EntityMP implements Serializable {
     @JsonProperty("teammemberid")
     private String teammemberid;
     /**
-     * TEAMID
+     * 组标识
      */
     @TableField(value = "teamid")
     @JSONField(name = "teamid")
     @JsonProperty("teamid")
     private String teamid;
-    /**
-     * 用户标识
-     */
-    @TableField(value = "userid")
-    @JSONField(name = "userid")
-    @JsonProperty("userid")
-    private String userid;
     /**
      * 组名称
      */
@@ -67,6 +60,13 @@ public class IBZTeamMember extends EntityMP implements Serializable {
     @JSONField(name = "teamname")
     @JsonProperty("teamname")
     private String teamname;
+    /**
+     * 用户标识
+     */
+    @TableField(value = "userid")
+    @JSONField(name = "userid")
+    @JsonProperty("userid")
+    private String userid;
     /**
      * 姓名
      */
@@ -94,7 +94,7 @@ public class IBZTeamMember extends EntityMP implements Serializable {
 
 
     /**
-     * 设置 [TEAMID]
+     * 设置 [组标识]
      */
     public void setTeamid(String teamid){
         this.teamid = teamid ;
@@ -108,6 +108,22 @@ public class IBZTeamMember extends EntityMP implements Serializable {
         this.modify("userid",userid);
     }
 
+    /**
+     * 获取 [组成员标识]
+     */
+    public String getTeammemberid(){
+        if(ObjectUtils.isEmpty(teammemberid)){
+            teammemberid=(String)getDefaultKey(true);
+        }
+        return teammemberid;
+    }
+
+    @Override
+    public Serializable getDefaultKey(boolean gen) {
+        if((!ObjectUtils.isEmpty(this.getTeamid()))&&(!ObjectUtils.isEmpty(this.getUserid())))
+            return DigestUtils.md5DigestAsHex(String.format("%s||%s" ,this.getTeamid(),this.getUserid()).getBytes());
+        return null;
+    }
 }
 
 
