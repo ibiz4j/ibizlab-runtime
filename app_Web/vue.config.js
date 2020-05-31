@@ -9,7 +9,7 @@ module.exports = {
     publicPath: './',
     // 去除 map 文件 1
     productionSourceMap: false,
-    outputDir:"../boot/target/classes/META-INF/resources",
+    outputDir:"../gateway/target/classes/META-INF/resources",
     devServer: {
         host: '0.0.0.0',
         port: 8111,

@@ -1,5 +1,8 @@
 package cn.ibizlab.util.job;
 
+import cn.ibizlab.core.uaa.domain.SysPSSystem;
+import cn.ibizlab.core.uaa.extensions.domain.SysStructure;
+import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 import cn.ibizlab.util.client.IBZUAAFeignClient;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -13,6 +16,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * 权限：向uaa同步当前系统菜单、权限资源任务类
@@ -24,7 +28,7 @@ public class PermissionSyncJob implements ApplicationRunner {
 
     @Autowired
     @Lazy
-    private IBZUAAFeignClient client;
+    private ISysPSSystemService systemService;
 
 
 
@@ -33,16 +37,14 @@ public class PermissionSyncJob implements ApplicationRunner {
         try {
             Thread.sleep(30000);
             InputStream permission= this.getClass().getResourceAsStream("/permission/ibzuaaResource.json"); //获取当前系统所有实体资源能力
-            JSONObject permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"));
-            JSONObject system= new JSONObject();
-            permissionResult.remove("appmenus");
-            permissionResult.remove("unires");
-            permissionResult.put("appmenus",new JSONArray());
-            permissionResult.put("unires",new JSONArray());
-            system.put("sysstructure",permissionResult);
-            system.put("pssystemid","ibzuaa");
-            system.put("pssystemname","ibzuaa");
-            if(client.syncSysAuthority(system)){
+            SysStructure permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
+            SysPSSystem system= new SysPSSystem();
+            permissionResult.setApps(new ArrayList<>());
+            permissionResult.setUniResIds(new ArrayList<>());
+            system.setSysstructure(permissionResult);
+            system.setPssystemid("ibzuaa");
+            system.setPssystemname("ibzuaa");
+            if(systemService.save(system)){
                 log.info("向[UAA]同步系统资源成功");
             }else{
                 log.error("向[UAA]同步系统资源失败");
@@ -51,16 +53,14 @@ public class PermissionSyncJob implements ApplicationRunner {
 
 
             permission= this.getClass().getResourceAsStream("/permission/ibzouResource.json"); //获取当前系统所有实体资源能力
-            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"));
-            system= new JSONObject();
-            permissionResult.remove("appmenus");
-            permissionResult.remove("unires");
-            permissionResult.put("appmenus",new JSONArray());
-            permissionResult.put("unires",new JSONArray());
-            system.put("sysstructure",permissionResult);
-            system.put("pssystemid","ibzou");
-            system.put("pssystemname","ibzou");
-            if(client.syncSysAuthority(system)){
+            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
+            system= new SysPSSystem();
+            permissionResult.setApps(new ArrayList<>());
+            permissionResult.setUniResIds(new ArrayList<>());
+            system.setSysstructure(permissionResult);
+            system.setPssystemid("ibzou");
+            system.setPssystemname("ibzou");
+            if(systemService.save(system)){
                 log.info("向[UAA]同步系统资源成功");
             }else{
                 log.error("向[UAA]同步系统资源失败");
@@ -68,16 +68,14 @@ public class PermissionSyncJob implements ApplicationRunner {
             permission.close();
 
             permission= this.getClass().getResourceAsStream("/permission/ibzwfResource.json"); //获取当前系统所有实体资源能力
-            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"));
-            system= new JSONObject();
-            permissionResult.remove("appmenus");
-            permissionResult.remove("unires");
-            permissionResult.put("appmenus",new JSONArray());
-            permissionResult.put("unires",new JSONArray());
-            system.put("sysstructure",permissionResult);
-            system.put("pssystemid","ibzwf");
-            system.put("pssystemname","ibzwf");
-            if(client.syncSysAuthority(system)){
+            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
+            system= new SysPSSystem();
+            permissionResult.setApps(new ArrayList<>());
+            permissionResult.setUniResIds(new ArrayList<>());
+            system.setSysstructure(permissionResult);
+            system.setPssystemid("ibzwf");
+            system.setPssystemname("ibzwf");
+            if(systemService.save(system)){
                 log.info("向[UAA]同步系统资源成功");
             }else{
                 log.error("向[UAA]同步系统资源失败");
@@ -86,16 +84,14 @@ public class PermissionSyncJob implements ApplicationRunner {
 
 
             permission= this.getClass().getResourceAsStream("/permission/ibzrtResource.json"); //获取当前系统所有实体资源能力
-            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"));
-            system= new JSONObject();
-            permissionResult.remove("entities");
-            permissionResult.remove("unires");
-            permissionResult.put("entities",new JSONArray());
-            permissionResult.put("unires",new JSONArray());
-            system.put("sysstructure",permissionResult);
-            system.put("pssystemid","ibzrt");
-            system.put("pssystemname","ibzrt");
-            if(client.syncSysAuthority(system)){
+            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
+            system= new SysPSSystem();
+            permissionResult.setEntities(new ArrayList<>());
+            permissionResult.setUniResIds(new ArrayList<>());
+            system.setSysstructure(permissionResult);
+            system.setPssystemid("ibzrt");
+            system.setPssystemname("ibzrt");
+            if(systemService.save(system)){
                 log.info("向[UAA]同步系统资源成功");
             }else{
                 log.error("向[UAA]同步系统资源失败");

@@ -29,6 +29,11 @@
 			<artifactId>ibzwf-provider-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.ibizlab</groupId>
+			<artifactId>ibzrt-app-web</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
     </dependencies>
 
