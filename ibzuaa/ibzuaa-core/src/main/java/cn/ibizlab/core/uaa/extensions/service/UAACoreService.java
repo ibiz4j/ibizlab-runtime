@@ -56,9 +56,15 @@ public class UAACoreService {
         page.getContent().forEach(system->{
             if(system.getSysstructure()==null)
                 return;
-            apps.add(system.getSysstructure().getPermissionTree(PermissionType.APPMENU));
-            uniResIds.add(system.getSysstructure().getPermissionTree(PermissionType.UNIRES));
-            oppirvs.add(system.getSysstructure().getPermissionTree(PermissionType.OPPRIV));
+            PermissionNode appnode=system.getSysstructure().getPermissionTree(PermissionType.APPMENU);
+            if(appnode.getChildren().size()>0)
+                apps.add(appnode);
+            PermissionNode uniresnode=system.getSysstructure().getPermissionTree(PermissionType.UNIRES);
+            if(uniresnode.getChildren().size()>0)
+                uniResIds.add(uniresnode);
+            PermissionNode opprivnode=system.getSysstructure().getPermissionTree(PermissionType.OPPRIV);
+            if(opprivnode.getChildren().size()>0)
+                oppirvs.add(opprivnode);
         });
         Map<String,List<PermissionNode>> map = new HashMap<>();
         map.put(PermissionType.APPMENU.toString(),apps);

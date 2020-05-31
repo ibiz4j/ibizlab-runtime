@@ -144,16 +144,14 @@ public class SysStructure
 			if(this.getApps()!=null)
 			{
 				this.getApps().forEach(app->{
-					PermissionNode appNode = PermissionNode.builder()
-							.label("应用-"+app.getAppname()).build()
-							.setUniKey(systemid, app.getAppid());
+
 
 					if(app.getAppmenus()!=null)
 					{
 						app.getAppmenus().forEach(appmenu->{
 							PermissionNode appMenuNode = PermissionNode.builder()
-									.label("菜单-"+appmenu.getMenuname()).build()
-									.setUniKey(systemid, appmenu.getMenuid());
+									.label("应用-"+app.getAppname()+"菜单-"+appmenu.getMenuname()).build()
+									.setUniKey(systemid, app.getAppid()+"-"+appmenu.getMenuid());
 
 							if(appmenu.getMenuitems()!=null)
 							{
@@ -162,11 +160,10 @@ public class SysStructure
 								});
 							}
 
-							appNode.getChildren().add(appMenuNode);
+							root.getChildren().add(appMenuNode);
 						});
 					}
 
-					root.getChildren().add(appNode);
 				});
 			}
 			break;

@@ -31,12 +31,14 @@ public class PermissionSyncJob implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         try {
-            Thread.sleep(20000);
+            Thread.sleep(30000);
             InputStream permission= this.getClass().getResourceAsStream("/permission/ibzuaaResource.json"); //获取当前系统所有实体资源能力
             JSONObject permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"));
             JSONObject system= new JSONObject();
             permissionResult.remove("appmenus");
             permissionResult.remove("unires");
+            permissionResult.put("appmenus",new JSONArray());
+            permissionResult.put("unires",new JSONArray());
             system.put("sysstructure",permissionResult);
             system.put("pssystemid","ibzuaa");
             system.put("pssystemname","ibzuaa");
@@ -53,6 +55,8 @@ public class PermissionSyncJob implements ApplicationRunner {
             system= new JSONObject();
             permissionResult.remove("appmenus");
             permissionResult.remove("unires");
+            permissionResult.put("appmenus",new JSONArray());
+            permissionResult.put("unires",new JSONArray());
             system.put("sysstructure",permissionResult);
             system.put("pssystemid","ibzou");
             system.put("pssystemname","ibzou");
@@ -68,6 +72,8 @@ public class PermissionSyncJob implements ApplicationRunner {
             system= new JSONObject();
             permissionResult.remove("appmenus");
             permissionResult.remove("unires");
+            permissionResult.put("appmenus",new JSONArray());
+            permissionResult.put("unires",new JSONArray());
             system.put("sysstructure",permissionResult);
             system.put("pssystemid","ibzwf");
             system.put("pssystemname","ibzwf");
@@ -84,6 +90,8 @@ public class PermissionSyncJob implements ApplicationRunner {
             system= new JSONObject();
             permissionResult.remove("entities");
             permissionResult.remove("unires");
+            permissionResult.put("entities",new JSONArray());
+            permissionResult.put("unires",new JSONArray());
             system.put("sysstructure",permissionResult);
             system.put("pssystemid","ibzrt");
             system.put("pssystemname","ibzrt");
