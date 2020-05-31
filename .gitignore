@@ -1,7 +1,7 @@
 *target
 .settings
 *node_modules
-*ibzrt_data
+*ibzdb-data
 *bin
 *.project
 *.classpath

@@ -19,7 +19,7 @@ services:
       - IBIZ_CACHELEVEL=L2
       - IBZ_SLEEP=30
       - IBIZ_SLEEP=30
-      - JAVA_OPTS=-Xms128m -Xmx256m
+      - JAVA_OPTS=-Xms256m -Xmx1024m
     depends_on:
       - ibzrt-db
       - ibzrt-redis
@@ -32,7 +32,7 @@ services:
   ibzrt-db:
     image: mysql:5.7.20
     volumes:
-      - $PWD/ibzrt_data/:/var/lib/mysql/
+      - $PWD/../../../../ibzdb-data/:/var/lib/mysql/
     networks:
       - agent_network
     environment:
@@ -61,7 +61,12 @@ services:
     command: redis-server
     networks:
       - agent_network
-
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 256M
 
   nacos:
     image: nacos/nacos-server:latest
@@ -73,7 +78,12 @@ services:
       - "8848:8848"
     networks:
       - agent_network
-
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 512M
 
   xxl-job-admin:
     image: xuxueli/xxl-job-admin:2.1.0
@@ -88,10 +98,42 @@ services:
     networks:
       - agent_network
     ports:
-      - 30081:8080
+      - 10081:8080
     depends_on:
       - ibzrt-db
       - ibzrt-boot
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 256M
+
+#  flowable-all-in-one-app:
+#    image: flowable/all-in-one:6.4.2
+#    volumes:
+#      - $PWD/mysql-connector-java-8.0.18.jar:/opt/tomcat/lib/mysql-connector-java-8.0.18.jar
+#    environment:
+#      - SERVER_PORT=9977
+#      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.cj.jdbc.Driver
+#      - SPRING_DATASOURCE_URL=jdbc:mysql://ibzrt-db:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false
+#      - SPRING_DATASOURCE_USERNAME=root
+#      - SPRING_DATASOURCE_PASSWORD=root
+#      - FLOWABLE_COMMON_APP_IDM-REDIRECT-URL=http://127.0.0.1:8383/flowable-idm
+#      - FLOWABLE_REST_APP_AUTHENTICATION-MODE=any-user
+#    networks:
+#      - agent_network
+#    ports:
+#      - 10080:8080
+#    depends_on:
+#      - ibzrt-db
+#      - ibzrt-boot
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 256M
+#        reservations:
+#          memory: 512M
 
 networks:
   agent_network:
