@@ -37,9 +37,7 @@
 
     </dependencies>
 
-	<properties>
-		<docker.image.prefix>registry.cn-shanghai.aliyuncs.com/ibizsys</docker.image.prefix>
-	</properties>
+
 
 	<profiles>
 		<profile>
@@ -119,7 +117,7 @@
 						<version>0.4.13</version>
 						<configuration>
 							<serverId>ibiz-dev</serverId>
-							<imageName>${docker.image.prefix}/${project.artifactId}:latest</imageName>
+							<imageName>ibiz4j/ibizlab-runtime:1.0.0-RC1</imageName>
 							<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
 							<resources>
 								<resource>
