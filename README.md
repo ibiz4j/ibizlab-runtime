@@ -81,12 +81,12 @@ http://127.0.0.1:30000
 启动各个微服务  
 
 例：ibzuaa 统一认证授权微服务  
-`java -jar /ibzuaa/ibzuaa-provider-api.jar`  或者  `ibzuaa/ibzuaa-provider/ibzuaa-provider-api/src/main/java/cn/ibizlab/api/ibzuaaapiApplication.java`  
+`java -jar ibzuaa/ibzuaa-provider-api.jar`  或者  `ibzuaa/ibzuaa-provider/ibzuaa-provider-api/src/main/java/cn/ibizlab/api/ibzuaaapiApplication.java`  
 Boot on port：40002  
 http://127.0.0.1:40002  
 
 例：ibzou 组织机构人事微服务   
-`java -jar /ibzou/ibzou-provider-api.jar`  或者  `ibzuaa/ibzou-provider/ibzou-provider-api/src/main/java/cn/ibizlab/api/ibzouapiApplication.java`  
+`java -jar ibzou/ibzou-provider-api.jar`  或者  `ibzuaa/ibzou-provider/ibzou-provider-api/src/main/java/cn/ibizlab/api/ibzouapiApplication.java`  
 Boot on port：40001  
 http://127.0.0.1:40001  
 
