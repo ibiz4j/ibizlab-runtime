@@ -1,0 +1,31 @@
+version: "3.2"
+services:
+  ibzrt-boot:
+    image: ibiz4j/ibizlab-runtime:1.0.0-RC1
+    ports:
+      - "10086:10086"
+    networks:
+      - agent_network
+    volumes:
+      - $PWD:/app
+    environment:
+      - TZ=Asia/Shanghai
+      - SERVER_PORT=10086
+      - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=nacos:8848
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_URL=jdbc:mysql://ibzrt-db:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false
+      - SPRING_REDIS_HOST=ibzrt-redis
+      - IBIZ_CACHELEVEL=L2
+      - IBZ_SLEEP=30
+      - IBIZ_SLEEP=30
+      - JAVA_OPTS=-Xms256m -Xmx1024m
+    deploy:
+      mode: replicated
+      replicas: 1
+
+
+networks:
+  agent_network:
+    attachable: true
+
