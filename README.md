@@ -124,13 +124,15 @@ docker-compose -f boot/src/main/docker/ibzrt-ibzrt-extensions.yaml up -d
 mvn package -Pweb
 ```
 
-例:ibzwf 工作流代理微服务  
+例:只启动ibzwf 工作流代理微服务  
+
 启动工作流代理微服务后台:   
 `java -jar ibzwf/ibzwf-provider-api.jar`  
 或者  
 编译器运行 `ibzwf/ibzwf-provider/ibzwf-provider-api/src/main/java/cn/ibizlab/api/ibzwfapiApplication.java`  
 Boot on port:40003  
-启动工作流代理微服务前端网关:
+
+启动工作流代理微服务前端网关:  
 `java -jar ibzwf/ibzwf-app-web.jar`  
 或者  
 编译器运行 `ibzwf/ibzwf-app/ibzwf-app-web/src/main/java/cn/ibizlab/web/webApplication.java`  
