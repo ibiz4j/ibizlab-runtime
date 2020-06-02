@@ -32,7 +32,7 @@
 
 #### 微服务技术栈
 
-* 基于[Netflix Zuul](https://github.com/Netflix/zuul)的HTTP流量路由  
+* 基于[Netflix Zuul](https://github.com/Netflix/zuul)的HTTP流量路由
 * 基于[Nacos](https://nacos.io/zh-cn/index.html)或[Eureka](https://github.com/Netflix/eureka)的服务发现
 * 基于[Feign](https://github.com/OpenFeign/feign)的服务消费客户端
 * 使用[Caffeine](https://github.com/ben-manes/caffeine) + [Redis](https://redis.io/)提供两级缓存
