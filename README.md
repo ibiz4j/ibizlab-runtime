@@ -3,16 +3,16 @@
 ### 目标
 提供一个完整的微服务架构轻量级支撑运行时系统， 具体包括:
 
-* ibz-rt:基于vue的时尚现代前端UI+统一网关
-* ibz-uaa:统一认证授权微服务（支持第三方认证）  
-* ibz-ou:组织人事管理微服务  
-* ibz-wf:工作流代理微服务（集成flowable） 
-* ibz-disk:分布式存储微服务(集成kkfileview在线预览+collabora-code在线编辑)  
-* ~~ibz-task:任务调度微服务（集成xxl-job）~~  
-* ~~ibz-dict:数据字典管理微服务~~  
-* ~~ibz-pay:支付管理微服务~~  
-* ~~ibz-notify:通知微服务~~  
-* ~~ibz-dst:分布式统计分析微服务（基于Cassandra+drools）~~  
+- [x]  ibz-rt:基于vue的时尚现代前端UI+统一网关
+- [x]  ibz-uaa:统一认证授权微服务（支持第三方认证）  
+- [x]  ibz-ou:组织人事管理微服务  
+- [x]  ibz-wf:工作流代理微服务（集成flowable） 
+- [ ]  ibz-disk:分布式存储微服务(集成kkfileview在线预览+collabora-code在线编辑)  
+- [ ]  ~~ibz-task:任务调度微服务（集成xxl-job）~~  
+- [ ]  ~~ibz-dict:数据字典管理微服务~~  
+- [ ]  ~~ibz-pay:支付管理微服务~~  
+- [ ]  ~~ibz-notify:通知微服务~~  
+- [ ]  ~~ibz-dst:分布式统计分析微服务（基于Cassandra+drools）~~  
 
 ### 技术栈
 #### 完整的[Spring应用](https://spring.io/)
