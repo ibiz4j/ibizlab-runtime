@@ -4,7 +4,7 @@
             <div v-if="showTree" class="ibiz-group-tree">
                 <ibiz-select-tree :NodesData="treeItems" v-model="treeSelectVal" :treeOnly="true" :defaultChecked="true" @select="treeSelect"></ibiz-select-tree>
             </div>
-            <div class="ibiz-group-content" :style="{width:showTree?'calc(100% - 400px)':'100%'}">
+            <div class="ibiz-group-content">
                 <ibiz-group-card :data="cardItems" text="label" value="id" groupName="group" :multiple="multiple" :defaultSelect="cardSelctVal" @select="groupSelect"></ibiz-group-card>
             </div>
         </div>
@@ -276,28 +276,29 @@ export default class IBizGroupPicker extends Vue {
 
 <style lang="less">
 .ibiz-group-picker{
-    height:100%;
-    .ibiz-group-container {
-        display: flex;
-        height: calc(100% - 65px);
-        .ibiz-group-tree {
-            width: 400px;
-            border-right: 1px solid #ddd;
-            padding: 0 10px;
-            overflow: auto;
-            height: 100%;
-        }
-        .ibiz-group-content {
-            flex-grow: 1;
-            padding: 0 10px;
-            overflow: auto;
-            height: 100%;
-        }
-    }
-    .ibiz-group-footer {
-        padding: 16px;
-        text-align: right;
-        border-top: 1px solid #ddd;
-    }
+  width: 100%;
+  height: 100%;
+  .ibiz-group-container {
+      display: flex;
+      height: calc(100% - 65px);
+      .ibiz-group-tree {
+          min-width: 200px;
+          border-right: 1px solid #ddd;
+          padding: 0 34px 0 10px;
+          overflow: auto;
+          height: 100%;
+      }
+      .ibiz-group-content {
+          flex-grow: 1;
+          padding: 0 10px;
+          overflow: auto;
+          height: 100%;
+      }
+  }
+  .ibiz-group-footer {
+      padding: 16px;
+      text-align: right;
+      border-top: 1px solid #ddd;
+  }
 }
 </style>

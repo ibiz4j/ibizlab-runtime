@@ -1,4 +1,4 @@
-import sdfile_zh_CN from '@locale/lanres/sdfile/sdfile_zh_CN';
+import sdfile_zh_CN from '@locale/lanres/entities/sdfile/sdfile_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
 import userCustom_zh_CN from '@locale/lanres/userCustom/userCustom_zh_CN';

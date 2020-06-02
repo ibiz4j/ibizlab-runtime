@@ -52,7 +52,7 @@
 * 前端依赖nodejs + yarn，并建议更换国内源
 
 #### 开发编译
-```java
+```
 mvn package -Pallinone
 ```
 
@@ -68,12 +68,12 @@ liquibase 支持，启动自动发布数据库结构和示例数据
 `boot/src/main/resources/liquibase/*`  
 
 #### 生产编译
-```java
+```
 mvn package -Pgateway
 mvn package -Papi
 ```
 
-启动网关 
+启动网关  
 `java -jar ibzrt-app-web.jar`  
 或者  
 编译器运行 `gateway/src/main/java/cn/ibizlab/web/WebApplication.java`  
@@ -102,17 +102,17 @@ Boot on port:40001
 docker pull [ibiz4j/ibizlab-runtime:1.0.0-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
 
 启动基础配套服务，mysql/nacos/redis，数据库存储自动持久化到ibzrt-data目录中  
-```java
+```
 docker-compose -f boot/src/main/docker/ibzrt-dependencies.yaml up -d
 ```
 
 启动ibizlab-runtime boot服务（主程序 http://127.0.0.1:10086）  
-```java
+```
 docker-compose -f boot/src/main/docker/ibzrt-boot.yaml up -d
 ```
 
 启动附加可选配套组件服务（xxl-job和flowable等）
-```java
+```
 docker-compose -f boot/src/main/docker/ibzrt-ibzrt-extensions.yaml up -d
 ```
 
@@ -120,7 +120,7 @@ docker-compose -f boot/src/main/docker/ibzrt-ibzrt-extensions.yaml up -d
 
 如果您并不想使用完整的网关，只想引用部分微服务，我们为每个微服务都提供了单独一份前端代码，您可以使用以下命令编译各子项微服务的前端网页和独立网关
 
-```java
+```
 mvn package -Pweb
 ```
 

@@ -170,10 +170,12 @@ export default class SYS_ROLE_PERMISSIONPickupViewBase extends Vue {
     onViewData(newVal: any, oldVal: any) {
         const _this: any = this;
         if (!Object.is(newVal, oldVal) && _this.engine) {
-            _this.parseViewParam();
-            _this.engine.load();
+            this.$nextTick(()=>{
+              _this.parseViewParam();
+              _this.engine.load();
+              
+            });
         }
-        
     }
 
     /**

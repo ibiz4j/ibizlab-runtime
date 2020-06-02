@@ -1,4 +1,4 @@
-import sdfile_en_US from '@locale/lanres/sdfile/sdfile_en_US';
+import sdfile_en_US from '@locale/lanres/entities/sdfile/sdfile_en_US';
 import components_en_US from '@locale/lanres/components/components_en_US';
 import codelist_en_US from '@locale/lanres/codelist/codelist_en_US';
 import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';

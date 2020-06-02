@@ -32,13 +32,31 @@ export default class SaveDeptMemberLogicBase {
     private defaultParamName:string = "Default";
 
     /**
+     * 参数集合
+     * 
+     * @memberof  SaveDeptMemberLogicBase
+     */
+    private paramsMap:Map<string,any> = new Map();
+
+    /**
      * Creates an instance of  SaveDeptMemberLogicBase.
      * 
      * @param {*} [opts={}]
      * @memberof  SaveDeptMemberLogicBase
      */
     constructor(opts: any = {}) {
-        
+        this.initParams(opts);
+    }
+
+    /**
+     * 初始化参数集合
+     * 
+     * @param {*} [opts={}]
+     * @memberof  SaveDeptMemberLogicBase
+     */
+    public initParams(opts:any){
+        this.paramsMap.set('Default',opts);
+        this.paramsMap.set('member',{});
     }
 
 
@@ -98,10 +116,16 @@ export default class SaveDeptMemberLogicBase {
     */
     private async executePrepareparam1(context:any,params:any,isloading:boolean){
         // 准备参数节点
-        Object.assign(params,{deptid:params.mdeptid});
-        Object.assign(context,{ibzdeptmember:params.mdeptid ? params.mdeptid : null});
-        Object.assign(params,{userid:params.userid});
-        Object.assign(context,{ibzdeptmember:params.userid ? params.userid : null});
+    let tempDstParam0Context:any = this.paramsMap.get('member').context?this.paramsMap.get('member').context:{};
+    let tempDstParam0Data:any = this.paramsMap.get('member').data?this.paramsMap.get('member').data:{};
+    let tempSrcParam0Data:any = this.paramsMap.get('Default').data?this.paramsMap.get('Default').data:{};
+    Object.assign(tempDstParam0Data,{deptid:tempSrcParam0Data['mdeptid']});
+    this.paramsMap.set('member',{data:tempDstParam0Data,context:tempDstParam0Context});
+    let tempDstParam1Context:any = this.paramsMap.get('member').context?this.paramsMap.get('member').context:{};
+    let tempDstParam1Data:any = this.paramsMap.get('member').data?this.paramsMap.get('member').data:{};
+    let tempSrcParam1Data:any = this.paramsMap.get('Default').data?this.paramsMap.get('Default').data:{};
+    Object.assign(tempDstParam1Data,{userid:tempSrcParam1Data['userid']});
+    this.paramsMap.set('member',{data:tempDstParam1Data,context:tempDstParam1Context});
         if(this.compute1Cond(params)){
             return this.executeDeaction1(context,params,isloading);   
         }
