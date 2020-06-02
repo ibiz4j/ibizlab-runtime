@@ -77,7 +77,7 @@ mvn package -Papi
 `java -jar ibzrt-app-web.jar`  
 或者  
 编译器运行 `gateway/src/main/java/cn/ibizlab/web/WebApplication.java`  
-Boot on port:30000
+Boot on port:30000  
 http://127.0.0.1:30000
 
 启动各个微服务  
