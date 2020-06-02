@@ -2089,6 +2089,11 @@ async-validator@^1.10.0:
   resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.12.2.tgz#beae671e7174d2938b7b4b69d2fb7e722b7fd72c"
   integrity sha512-57EETfCPFiB7M4QscvQzWSGNsmtkjjzZv318SK1CBlstk+hycV72ocjriMOOM48HjvmoAoJGpJNjC7Z76RlnZA==
 
+async-validator@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.npm.taobao.org/async-validator/download/async-validator-3.3.0.tgz#1d92193bbe60d6d6c8b246692c7005e9ed14a8ee"
+  integrity sha1-HZIZO75g1tbIskZpLHAF6e0UqO4=
+
 async-validator@~1.8.1:
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-1.8.5.tgz#dc3e08ec1fd0dddb67e60842f02c0cd1cec6d7f0"
@@ -5233,10 +5238,10 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-ibiz-gantt-elastic@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/ibiz-gantt-elastic/-/ibiz-gantt-elastic-1.0.12.tgz#6865ef41e94b8b31f00f4cd1f0f60f132f7398d3"
-  integrity sha512-UHmnTG5q13xUuCKXSf73ZpwN/iOM9M73jFQ+C9wJWAsZcrDVc/36bPaSalMcfRWpfWREtU9wMnONXtFGVvS6pw==
+ibiz-gantt-elastic@^1.0.15:
+  version "1.0.15"
+  resolved "https://registry.npm.taobao.org/ibiz-gantt-elastic/download/ibiz-gantt-elastic-1.0.15.tgz#e57736254aaf5baea28225bce2d29d8bd8adcc2d"
+  integrity sha1-5Xc2JUqvW66igiW84tKdi9itzC0=
   dependencies:
     dayjs "^1.8.16"
     resize-observer-polyfill "^1.5.1"
@@ -5244,10 +5249,10 @@ ibiz-gantt-elastic@^1.0.12:
     vue-slider-component "^3.0.40"
     vue-switches "^2.0.1"
 
-ibiz-vue-lib@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.npm.taobao.org/ibiz-vue-lib/download/ibiz-vue-lib-0.1.6.tgz#d400dc37d8021079424d360635b598c4c8030da9"
-  integrity sha1-1ADcN9gCEHlCTTYGNbWYxMgDDak=
+ibiz-vue-lib@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.npm.taobao.org/ibiz-vue-lib/download/ibiz-vue-lib-0.1.10.tgz#660f6f7fb73b5c63e3daa0921faf13c0cdc96de5"
+  integrity sha1-Zg9vf7c7XGPj2qCSH68TwM3JbeU=
   dependencies:
     axios "^0.19.2"
     core-js "^3.6.4"
@@ -9103,6 +9108,11 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
+sortablejs@^1.10.1:
+  version "1.10.2"
+  resolved "https://registry.npm.taobao.org/sortablejs/download/sortablejs-1.10.2.tgz#6e40364d913f98b85a14f6678f92b5c1221f5290"
+  integrity sha1-bkA2TZE/mLhaFPZnj5K1wSIfUpA=
+
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
@@ -10224,6 +10234,13 @@ vue@^2.2.6, vue@^2.6.10, vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
+
+vuedraggable@^2.23.2:
+  version "2.23.2"
+  resolved "https://registry.npm.taobao.org/vuedraggable/download/vuedraggable-2.23.2.tgz#0d95d7fdf4f02f56755a26b3c9dca5c7ca9cfa72"
+  integrity sha1-DZXX/fTwL1Z1Wiazydylx8qc+nI=
+  dependencies:
+    sortablejs "^1.10.1"
 
 vuex@^3.1.2:
   version "3.1.2"

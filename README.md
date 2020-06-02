@@ -12,10 +12,10 @@
 * ~~ibz-dict:数据字典管理微服务~~  
 * ~~ibz-pay:支付管理微服务~~  
 * ~~ibz-notify:通知微服务~~  
-* ~~ibz-dst:统计分析/规则定义微服务（集成drools）~~  
+* ~~ibz-dst:分布式统计分析微服务（集成drools）~~  
 
 ### 技术栈
-#### 完整的[Spring应用](https://spring.io/):
+#### 完整的[Spring应用](https://spring.io/)
 * 基于[Spring Boot](https://projects.spring.io/spring-boot/)提供应用配置简化
 * [Maven](https://maven.apache.org/)构建，测试，运行应用
 * [Spring Security](https://docs.spring.io/spring-security/site/index.html)组件
@@ -23,11 +23,10 @@
 * [Spring MVC REST](https://spring.io/guides/gs/rest-service/) + [Jackson](https://github.com/FasterXML/jackson)
 * [Swagger](https://swagger.io/)来自动生成REST Controller API文档
 * [Zalando Problem Spring Web](https://github.com/zalando/problem-spring-web)处理异常
-* [Mybatis-plus](https://mp.baomidou.com/) 
+* [Mybatis-plus](https://mp.baomidou.com/)
 * 基于[Liquibase](http://www.liquibase.org/)数据库更新
 * [Elasticsearch](https://github.com/elastic/elasticsearch)支持，如果你需要基于你的数据库提供高级搜索能力
 * [MongoDB](https://www.mongodb.org/)支持, 如果你想使用面向文档的NOSQL数据库替代JPA
-
 * 构建标准可执行的JAR文件
 
 #### 微服务技术栈
@@ -74,19 +73,19 @@ mvn package -Papi
 ```
 
 启动网关 
-`java -jar ibzrt-app-web.jar`  或者  `gateway/src/main/java/cn/ibizlab/web/WebApplication.java`
+`java -jar ibzrt-app-web.jar`  或者编译器Run `gateway/src/main/java/cn/ibizlab/web/WebApplication.java`
 Boot on port：30000
 http://127.0.0.1:30000
 
 启动各个微服务  
 
 例：ibzuaa 统一认证授权微服务  
-`java -jar ibzuaa/ibzuaa-provider-api.jar`  或者  `ibzuaa/ibzuaa-provider/ibzuaa-provider-api/src/main/java/cn/ibizlab/api/ibzuaaapiApplication.java`  
+`java -jar ibzuaa/ibzuaa-provider-api.jar`  或者编译器Run `ibzuaa/ibzuaa-provider/ibzuaa-provider-api/src/main/java/cn/ibizlab/api/ibzuaaapiApplication.java`  
 Boot on port：40002  
 http://127.0.0.1:40002  
 
 例：ibzou 组织机构人事微服务   
-`java -jar ibzou/ibzou-provider-api.jar`  或者  `ibzuaa/ibzou-provider/ibzou-provider-api/src/main/java/cn/ibizlab/api/ibzouapiApplication.java`  
+`java -jar ibzou/ibzou-provider-api.jar`  或者编译器Run `ibzuaa/ibzou-provider/ibzou-provider-api/src/main/java/cn/ibizlab/api/ibzouapiApplication.java`  
 Boot on port：40001  
 http://127.0.0.1:40001  
 
@@ -111,3 +110,11 @@ docker-compose -f boot/src/main/docker/ibzrt-boot.yaml up -d
 ```java
 docker-compose -f boot/src/main/docker/ibzrt-ibzrt-extensions.yaml up -d
 ```
+
+### 开源计划
+* ibz-uaa 第三方接入  2020年6月底
+* ibz-disk 集成在线预览和编辑  2020年6月底
+* ibz-dict:数据字典管理微服务  2020年6月底
+* ibz-pay:支付管理微服务  2020年7月
+* ibz-notify:通知微服务  2020年7月
+* ibz-dst:分布式统计分析微服务（集成drools）  2020年8月
