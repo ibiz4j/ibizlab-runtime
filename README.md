@@ -56,7 +56,7 @@
 mvn package -Pallinone
 ```
 
-开发人员快速启动，使用DevBootApplication启动可以一次性以springboot启动所有服务，并模拟仿真注册所有微服务，笔者开发时一般都如此启动，很方便调试。
+开发人员快速启动，使用DevBootApplication启动可以一次性以springboot启动所有服务，并模拟仿真注册所有微服务，笔者开发时一般都如此启动，很方便调试
 
 `boot/src/main/java/cn/ibizlab/DevBootApplication.java`
 
@@ -65,6 +65,7 @@ http://127.0.0.1:10086
 
 #### 数据库配置
 liquibase 支持，启动自动发布数据库结构和示例数据   
+`boot/src/main/resources/liquibase/*`  
 
 #### 生产编译
 ```java
@@ -73,35 +74,39 @@ mvn package -Papi
 ```
 
 启动网关 
-`java -jar ibzrt-app-web.jar`  或者编译器运行 `gateway/src/main/java/cn/ibizlab/web/WebApplication.java`
+`java -jar ibzrt-app-web.jar`  
+或者  
+编译器运行 `gateway/src/main/java/cn/ibizlab/web/WebApplication.java`  
 Boot on port:30000
 http://127.0.0.1:30000
 
 启动各个微服务  
 
 例:ibzuaa 统一认证授权微服务  
-`java -jar ibzuaa/ibzuaa-provider-api.jar`  或者编译器运行 `ibzuaa/ibzuaa-provider/ibzuaa-provider-api/src/main/java/cn/ibizlab/api/ibzuaaapiApplication.java`  
+`java -jar ibzuaa/ibzuaa-provider-api.jar`  
+或者  
+编译器运行 `ibzuaa/ibzuaa-provider/ibzuaa-provider-api/src/main/java/cn/ibizlab/api/ibzuaaapiApplication.java`  
 Boot on port:40002  
-http://127.0.0.1:40002  
 
-例:ibzou 组织机构人事微服务   
-`java -jar ibzou/ibzou-provider-api.jar`  或者编译器运行 `ibzou/ibzou-provider/ibzou-provider-api/src/main/java/cn/ibizlab/api/ibzouapiApplication.java`  
+例:ibzou 组织人事管理微服务   
+`java -jar ibzou/ibzou-provider-api.jar`  
+或者  
+编译器运行 `ibzou/ibzou-provider/ibzou-provider-api/src/main/java/cn/ibizlab/api/ibzouapiApplication.java`  
 Boot on port:40001  
-http://127.0.0.1:40001  
 
 ......   
 
 #### Docker + Docker-compose
 
 本系统提供了docker镜像，方便快速部署  
-[`ibiz4j/ibizlab-runtime:1.0.0-RC1`](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
+docker pull [ibiz4j/ibizlab-runtime:1.0.0-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
 
-启动基础配套服务，mysql/nacos/redis   
+启动基础配套服务，mysql/nacos/redis，数据库存储自动持久化到ibzrt-data目录中  
 ```java
 docker-compose -f boot/src/main/docker/ibzrt-dependencies.yaml up -d
 ```
 
-启动ibizlab-runtime boot服务  
+启动ibizlab-runtime boot服务（主程序 http://127.0.0.1:10086）  
 ```java
 docker-compose -f boot/src/main/docker/ibzrt-boot.yaml up -d
 ```
@@ -119,12 +124,16 @@ docker-compose -f boot/src/main/docker/ibzrt-ibzrt-extensions.yaml up -d
 mvn package -Pweb
 ```
 
-例:ibzwf 工作流代理微服务
+例:ibzwf 工作流代理微服务  
 启动工作流代理微服务后台:   
-`java -jar ibzwf/ibzwf-provider-api.jar`  或者编译器运行 `ibzwf/ibzwf-provider/ibzwf-provider-api/src/main/java/cn/ibizlab/api/ibzwfapiApplication.java`  
+`java -jar ibzwf/ibzwf-provider-api.jar`  
+或者  
+编译器运行 `ibzwf/ibzwf-provider/ibzwf-provider-api/src/main/java/cn/ibizlab/api/ibzwfapiApplication.java`  
 Boot on port:40003  
 启动工作流代理微服务前端网关:
-`java -jar ibzwf/ibzwf-app-web.jar`  或者编译器运行 `ibzwf/ibzwf-app/ibzwf-app-web/src/main/java/cn/ibizlab/web/webApplication.java`  
+`java -jar ibzwf/ibzwf-app-web.jar`  
+或者  
+编译器运行 `ibzwf/ibzwf-app/ibzwf-app-web/src/main/java/cn/ibizlab/web/webApplication.java`  
 Boot on port:30003  
 http://127.0.0.1:30003 
 
