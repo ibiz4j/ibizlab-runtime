@@ -1,0 +1,110 @@
+.login{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100%;
+    background: #108cee;
+    > img{
+        width: 100vw;
+        height: 100vh;
+    }
+
+    &-con{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 150px;
+        margin: auto;
+        width: 400px;
+        .ivu-card-head {
+            padding: 14px 6px;
+            >p{
+                line-height: 20px;
+                font-size: 14px;
+                color: #17233d;
+                font-weight: 700;
+            }
+        }
+        &-header{
+            font-size: 16px;
+            font-weight: 300;
+            text-align: center;
+            padding: 30px 0;
+        }
+        .form-con{
+            padding: 10px 0 0;
+            >i-button{
+                width: 170px;
+                height: 40px;
+            }
+        }
+        .login-tip{
+            font-size: 10px;
+            text-align: center;
+            color: red;
+        }
+    }
+}
+
+.goLogin{
+    float: right;
+    font-size:12px;
+    margin-right: 14px;
+    text-decoration: underline;
+}
+
+.login_btn{
+    width: 175px;
+    height: 32px;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+}
+.login_register {
+    width: 175px;
+    height: 32px;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    float: right;
+}
+
+.disabled{
+    background-color: #ddd;
+    border-color: #ddd;
+    color:#57a3f3;
+    cursor: not-allowed; // 鼠标变化
+}
+
+.form_tipinfo {
+    font-family: MicrosoftYaHei-Bold;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #666666;
+}
+
+form_tipinfo_more {
+    font-family: MicrosoftYaHei;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0px;
+    color: #666666;
+}
+
+.log_footer {
+    display: block;
+    padding: 0 16px;
+    margin: 48px 0 24px;
+    text-align: center;
+    color: #212529;
+}
+
+.log_footer a {
+    color: white;
+    text-decoration: none;
+}
