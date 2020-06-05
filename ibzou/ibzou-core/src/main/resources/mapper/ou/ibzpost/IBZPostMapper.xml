@@ -5,7 +5,7 @@
 
     <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
 	<select id="selectById"  resultMap="IBZPostResultMap" databaseId="mysql">
-        <![CDATA[select t1.* from (SELECT t1.`POSTCODE`, t1.`POSTID`, t1.`POSTNAME` FROM `IBZPOST` t1  ) t1 where postid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.`DOMAINS`, t1.`MEMO`, t1.`POSTCODE`, t1.`POSTID`, t1.`POSTNAME` FROM `IBZPOST` t1  ) t1 where postid=#{id}]]>
     </select>
 	<select id="selectById"  resultMap="IBZPostResultMap" databaseId="oracle">
         <![CDATA[select t1.* from (SELECT t1.DOMAINS, t1.MEMO, t1.POSTCODE, t1.POSTID, t1.POSTNAME FROM IBZPOST t1  ) t1 where postid=#{id}]]>
@@ -33,7 +33,7 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-       <![CDATA[	SELECT t1.`POSTCODE`, t1.`POSTID`, t1.`POSTNAME` FROM `IBZPOST` t1  
+       <![CDATA[	SELECT t1.`DOMAINS`, t1.`MEMO`, t1.`POSTCODE`, t1.`POSTID`, t1.`POSTNAME` FROM `IBZPOST` t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->
@@ -48,7 +48,7 @@
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
-       <![CDATA[	SELECT t1.`POSTCODE`, t1.`POSTID`, t1.`POSTNAME` FROM `IBZPOST` t1  
+       <![CDATA[	SELECT t1.`DOMAINS`, t1.`MEMO`, t1.`POSTCODE`, t1.`POSTID`, t1.`POSTNAME` FROM `IBZPOST` t1  
 			]]>
     </sql>
     <!--数据查询[View]-->

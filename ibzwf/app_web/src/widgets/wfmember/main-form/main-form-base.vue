@@ -8,7 +8,8 @@
     <row>
         <i-col v-show="detailsModel.personname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='personname' :itemRules="this.rules.personname" class='' :caption="$t('entities.wfmember.main_form.details.personname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.personname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-picker 
+    
+<app-picker 
   :formState="formState"
   :data="data"
   :context="context"

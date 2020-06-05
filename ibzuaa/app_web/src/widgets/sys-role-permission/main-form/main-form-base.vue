@@ -8,7 +8,8 @@
     <row>
         <i-col v-show="detailsModel.sys_rolename.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_rolename' :itemRules="this.rules.sys_rolename" class='' :caption="$t('entities.sysrolepermission.main_form.details.sys_rolename')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_rolename.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-picker 
+    
+<app-picker 
   :formState="formState"
   :data="data"
   :context="context"
@@ -33,7 +34,8 @@
 </i-col>
 <i-col v-show="detailsModel.sys_permissionname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_permissionname' :itemRules="this.rules.sys_permissionname" class='' :caption="$t('entities.sysrolepermission.main_form.details.sys_permissionname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_permissionname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-picker 
+    
+<app-picker 
   :formState="formState"
   :data="data"
   :context="context"
