@@ -6,5 +6,8 @@ export default {
     teamname: '组名称',
     userid: '用户标识',
     personname: '姓名',
+    postid: '岗位标识',
+    postname: '岗位标识',
+    domains: '区属',
   },
 };

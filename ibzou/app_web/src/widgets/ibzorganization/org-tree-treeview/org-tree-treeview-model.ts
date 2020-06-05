@@ -40,6 +40,9 @@ export default class OrgTreeModel {
         name: 'parentorgname',
       },
       {
+        name: 'domains',
+      },
+      {
         name: 'enable',
       },
       {

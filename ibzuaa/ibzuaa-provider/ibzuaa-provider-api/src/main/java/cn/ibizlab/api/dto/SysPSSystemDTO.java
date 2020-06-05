@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import cn.ibizlab.core.uaa.extensions.domain.SysApp;
 import cn.ibizlab.core.uaa.extensions.domain.SysStructure;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -49,6 +50,30 @@ public class SysPSSystemDTO extends DTOBase implements Serializable {
     @JsonProperty("sysstructure")
     private SysStructure sysstructure;
 
+    /**
+     * 属性 [APPS]
+     *
+     */
+    @JSONField(name = "apps")
+    @JsonProperty("apps")
+    private List<SysApp> apps;
+
+    /**
+     * 属性 [MD5CHECK]
+     *
+     */
+    @JSONField(name = "md5check")
+    @JsonProperty("md5check")
+    private String md5check;
+
+    /**
+     * 属性 [SHOWORDER]
+     *
+     */
+    @JSONField(name = "showorder")
+    @JsonProperty("showorder")
+    private Integer showorder;
+
 
     /**
      * 设置 [PSSYSTEMNAME]
@@ -64,6 +89,30 @@ public class SysPSSystemDTO extends DTOBase implements Serializable {
     public void setSysstructure(SysStructure  sysstructure){
         this.sysstructure = sysstructure ;
         this.modify("sysstructure",sysstructure);
+    }
+
+    /**
+     * 设置 [APPS]
+     */
+    public void setApps(List<SysApp>  apps){
+        this.apps = apps ;
+        this.modify("apps",apps);
+    }
+
+    /**
+     * 设置 [MD5CHECK]
+     */
+    public void setMd5check(String  md5check){
+        this.md5check = md5check ;
+        this.modify("md5check",md5check);
+    }
+
+    /**
+     * 设置 [SHOWORDER]
+     */
+    public void setShoworder(Integer  showorder){
+        this.showorder = showorder ;
+        this.modify("showorder",showorder);
     }
 
 

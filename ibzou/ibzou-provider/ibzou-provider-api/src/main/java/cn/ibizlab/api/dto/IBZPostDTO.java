@@ -47,6 +47,22 @@ public class IBZPostDTO extends DTOBase implements Serializable {
     @JsonProperty("postname")
     private String postname;
 
+    /**
+     * 属性 [DOMAINS]
+     *
+     */
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+
+    /**
+     * 属性 [MEMO]
+     *
+     */
+    @JSONField(name = "memo")
+    @JsonProperty("memo")
+    private String memo;
+
 
     /**
      * 设置 [POSTCODE]
@@ -62,6 +78,22 @@ public class IBZPostDTO extends DTOBase implements Serializable {
     public void setPostname(String  postname){
         this.postname = postname ;
         this.modify("postname",postname);
+    }
+
+    /**
+     * 设置 [DOMAINS]
+     */
+    public void setDomains(String  domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
+    }
+
+    /**
+     * 设置 [MEMO]
+     */
+    public void setMemo(String  memo){
+        this.memo = memo ;
+        this.modify("memo",memo);
     }
 
 

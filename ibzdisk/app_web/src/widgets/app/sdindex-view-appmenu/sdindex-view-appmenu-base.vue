@@ -126,6 +126,7 @@ import { UIActionTool,Util } from '@/utils';
 import SDIndexViewService from './sdindex-view-appmenu-service';
 
 import SDIndexViewModel from './sdindex-view-appmenu-model';
+import { Environment } from '@/environments/environment';
 
 
 @Component({
@@ -603,11 +604,11 @@ export default class SDIndexViewBase extends Vue implements ControlInterface {
      * @memberof SDIndexView
      */
     public handleMenusResource(inputMenus:Array<any>){
-        if(this.$store.getters['unifiedresource/getEnablePermissionValid']){
+        if(Environment.enablePermissionValid){
             this.computedEffectiveMenus(inputMenus);
         }
-        this.dataProcess(this.menuMode.getAppMenuItems());
-        this.menus = this.menuMode.getAppMenuItems();
+        this.dataProcess(inputMenus);
+        this.menus = inputMenus;
         this.doMenuSelect();
     }
 
@@ -619,7 +620,7 @@ export default class SDIndexViewBase extends Vue implements ControlInterface {
      */
     public computedEffectiveMenus(inputMenus:Array<any>){
         inputMenus.forEach((_item:any) =>{
-            if(_item.resourcetag && !this.$store.getters['unifiedresource/getResourceData'](_item.resourcetag)){
+            if(!this.$store.getters['authresource/getAuthMenu'](_item)){
                 _item.hidden = true;
                 if (_item.items && _item.items.length > 0) {
                     this.computedEffectiveMenus(_item.items);

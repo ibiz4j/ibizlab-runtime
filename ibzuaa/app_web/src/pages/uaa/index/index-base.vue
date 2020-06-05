@@ -2,25 +2,13 @@
 <div class="index_view index">
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="index"></app-studioaction>
     <layout :class="themeClasses" :style="themeStyle">
-        <header class="index_header">
-            <div class="header-left" >
-                <div class="page-logo">
-                        <img src="../../../assets/img/logo.png" height="32" />
-                    <span style="display: inline-block;margin-left: 10px;font-size: 22px;">{{$t(model.srfCaption)}}</span>
-                </div>
-            </div>
-            <div class="header-right" style="display: flex;align-items: center;justify-content: space-between;">
-                <app-header-menus />
-                <app-lang style='font-size: 15px;padding: 0 10px;'></app-lang>
-                <app-orgsector></app-orgsector>
-                <app-user></app-user>
-                <app-theme style="width:45px;display: flex;justify-content: center;"></app-theme>
-            </div>
-        </header>
         <layout>
             <sider :width="collapseChange ? 64 : 200" hide-trigger v-model="collapseChange">
                 <div class="sider-top">
-                    <i class="ivu-icon ivu-icon-md-menu" @click="handleClick"></i>
+                    <div class="page-logo">
+                        <img v-show="collapseChange" src="../../../assets/img/logo.png" height="16" />
+                        <span v-show="!collapseChange" style="display: block;text-align: center;font-weight: 300;font-size: 20px;">{{$t(model.srfCaption)}}</span>
+                    </div>
                 </div>
                 <view_appmenu 
     :viewState="viewState"  
@@ -37,12 +25,30 @@
     @closeview="closeView($event)">
 </view_appmenu>
             </sider>
-            <content class="index_content" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }">
-                <tab-page-exp></tab-page-exp>
-                <app-keep-alive :routerList="getRouterList">
-                    <router-view :key="getRouterViewKey"></router-view>
-                </app-keep-alive>
-            </content>
+            <layout>
+                <header class="index_header">
+                    <div class="header-left" >
+                        <div class="page-logo">
+                            <i v-show="!collapseChange" class="ivu-icon el-icon-s-fold" @click="handleClick"></i>
+                            <i v-show="collapseChange" class="ivu-icon el-icon-s-unfold" @click="handleClick"></i>
+                            <app-breadcrumb :defPSAppView="defPSAppView"></app-breadcrumb>
+                        </div>
+                    </div>
+                    <div class="header-right" style="display: flex;align-items: center;justify-content: space-between;">
+                        <app-header-menus />
+                        <app-lang style='font-size: 15px;padding: 0 10px;'></app-lang>
+                        <app-orgsector></app-orgsector>
+                        <app-user></app-user>
+                        <app-theme style="width:45px;display: flex;justify-content: center;"></app-theme>
+                    </div>
+                </header>
+                <content class="index_content" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }">
+                    <tab-page-exp></tab-page-exp>
+                    <app-keep-alive :routerList="getRouterList">
+                        <router-view :key="getRouterViewKey"></router-view>
+                    </app-keep-alive>
+                </content>
+            </layout>
         </layout>
     </layout>
 </div>
@@ -264,6 +270,9 @@ export default class IndexBase extends Vue {
             }
             if(this.context && this.context.srfparentkey){
                 Object.assign(this.viewparams,{srfparentkey:this.context.srfparentkey});
+            }
+            if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
+                Object.assign(this.context,this.$store.getters.getAppData().context);
             }
             this.handleCustomViewData();
             return;

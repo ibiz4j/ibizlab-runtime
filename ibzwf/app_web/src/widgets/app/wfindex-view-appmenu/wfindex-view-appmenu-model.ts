@@ -31,6 +31,7 @@ export default class WFIndexViewModel {
 	textcls: '',
 	appfunctag: 'Auto1',
 	resourcetag: '',
+	authtag:'web-WFIndexView-menuitem1',
 },
         {
 	id: 'F6C65EF1-F523-466D-9C63-7FA2F87BA90B',
@@ -49,6 +50,7 @@ export default class WFIndexViewModel {
 	textcls: '',
 	appfunctag: 'Auto3',
 	resourcetag: '',
+	authtag:'web-WFIndexView-menuitem3',
 },
         {
 	id: 'A2004B9C-B0CE-4180-8C76-6FD90059F17B',
@@ -67,6 +69,7 @@ export default class WFIndexViewModel {
 	textcls: '',
 	appfunctag: 'Auto2',
 	resourcetag: '',
+	authtag:'web-WFIndexView-menuitem2',
 },
     ];
 

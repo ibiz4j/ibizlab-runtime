@@ -40,8 +40,6 @@ public interface IIBZOrganizationService extends IService<IBZOrganization>{
     void removeBatch(Collection<String> idList) ;
     IBZOrganization get(String key) ;
     IBZOrganization getDraft(IBZOrganization et) ;
-    Page<IBZOrganization> searchSelectSOrg(IBZOrganizationSearchContext context) ;
-    Page<IBZOrganization> searchSelectPOrg(IBZOrganizationSearchContext context) ;
     Page<IBZOrganization> searchDefault(IBZOrganizationSearchContext context) ;
     List<IBZOrganization> selectByParentorgid(String orgid) ;
     @CacheEvict(value="ibzorganization",allEntries=true)

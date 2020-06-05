@@ -37,6 +37,9 @@ export default class TreeExpViewtreeexpbarModel {
         name: 'deptlevel',
       },
       {
+        name: 'domains',
+      },
+      {
         name: 'showorder',
       },
       {

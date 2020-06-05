@@ -46,7 +46,13 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
 
     @Autowired
     @Lazy
+    private cn.ibizlab.core.ou.service.IIBZDeptMemberService ibzdeptmemberService;
+    @Autowired
+    @Lazy
     private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZTeamMemberService ibzteammemberService;
 
     private int batchSize = 500;
 
@@ -154,6 +160,7 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<IBZPost> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
         return new PageImpl<IBZPost>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
+
 
 
 

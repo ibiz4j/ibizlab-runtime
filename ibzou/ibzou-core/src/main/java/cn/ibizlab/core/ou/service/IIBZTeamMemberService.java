@@ -39,6 +39,8 @@ public interface IIBZTeamMemberService extends IService<IBZTeamMember>{
     Page<IBZTeamMember> searchDefault(IBZTeamMemberSearchContext context) ;
     List<IBZTeamMember> selectByUserid(String userid) ;
     void removeByUserid(String userid) ;
+    List<IBZTeamMember> selectByPostid(String postid) ;
+    void removeByPostid(String postid) ;
     List<IBZTeamMember> selectByTeamid(String teamid) ;
     void removeByTeamid(String teamid) ;
     /**

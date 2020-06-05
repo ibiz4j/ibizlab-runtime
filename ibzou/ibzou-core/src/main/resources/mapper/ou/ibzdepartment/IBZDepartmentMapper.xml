@@ -7,8 +7,11 @@
 	<select id="selectById"  resultMap="IBZDepartmentResultMap" databaseId="mysql">
         <![CDATA[select t1.* from (SELECT t1.`BCODE`, t1.`CREATEDATE`, t1.`DEPTCODE`, t1.`DEPTID`, t1.`DEPTLEVEL`, t1.`DEPTNAME`, t1.`ENABLE`, t1.`LEADERID`, t1.`LEADERNAME`, t1.`ORGID`, t11.`ORGNAME`, t1.`PDEPTID`, t21.`DEPTNAME` AS `PDEPTNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZDEPT` t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  ) t1 where deptid=#{id}]]>
     </select>
+	<select id="selectById"  resultMap="IBZDepartmentResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.DOMAINS, t1.ENABLE, t1.LEADERID, t1.LEADERNAME, t1.ORGID, t11.ORGNAME, t1.PDEPTID, t21.DEPTNAME AS PDEPTNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  ) t1 where deptid=#{id}]]>
+    </select>
 	<select id="selectById"  resultMap="IBZDepartmentResultMap" databaseId="postgresql">
-        <![CDATA[select t1.* from (SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.ENABLE, t1.ORGID, t1.PDEPTID, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  ) t1 where deptid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.ENABLE, t1.LEADERID, t1.LEADERNAME, t1.ORGID, t11.ORGNAME, t1.PDEPTID, t21.DEPTNAME AS PDEPTNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  ) t1 where deptid=#{id}]]>
     </select>
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
@@ -40,15 +43,6 @@
          where  orgid=#{orgid}
      </select>
 
-    <!--数据集合[CurDept]-->
-	 <select id="searchCurDept"  parameterType="cn.ibizlab.core.ou.filter.IBZDepartmentSearchContext"  resultMap="IBZDepartmentResultMap">
-         select t1.* from (
-                <include refid="CurDept" />
-         )t1
-         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
-         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
-     </select>
-
     <!--数据集合[Default]-->
 	 <select id="searchDefault"  parameterType="cn.ibizlab.core.ou.filter.IBZDepartmentSearchContext"  resultMap="IBZDepartmentResultMap">
          select t1.* from (
@@ -58,41 +52,41 @@
          <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
      </select>
 
-    <!--数据查询[CurDept]-->
-    <sql id="CurDept" databaseId="mysql">
-       <![CDATA[	SELECT t1.`BCODE`, t1.`CREATEDATE`, t1.`DEPTCODE`, t1.`DEPTID`, t1.`DEPTLEVEL`, t1.`DEPTNAME`, t1.`ENABLE`, t1.`LEADERID`, t1.`LEADERNAME`, t1.`ORGID`, t11.`ORGNAME`, t1.`PDEPTID`, t21.`DEPTNAME` AS `PDEPTNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZDEPT` t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  
-				 WHERE 	t1.ENABLE = 1
-					 AND ( t1.`ORGID` =  #{srf.datacontext.orgid} )
-			]]>
-    </sql>
-
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
        <![CDATA[	SELECT t1.`BCODE`, t1.`CREATEDATE`, t1.`DEPTCODE`, t1.`DEPTID`, t1.`DEPTLEVEL`, t1.`DEPTNAME`, t1.`ENABLE`, t1.`LEADERID`, t1.`LEADERNAME`, t1.`ORGID`, t11.`ORGNAME`, t1.`PDEPTID`, t21.`DEPTNAME` AS `PDEPTNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZDEPT` t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  
 				 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
-
     <!--数据查询[Default]-->
-    <sql id="Default" databaseId="postgresql">
-       <![CDATA[	SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.ENABLE, t1.ORGID, t1.PDEPTID, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  
+    <sql id="Default" databaseId="oracle">
+       <![CDATA[	SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.DOMAINS, t1.ENABLE, t1.LEADERID, t1.LEADERNAME, t1.ORGID, t11.ORGNAME, t1.PDEPTID, t21.DEPTNAME AS PDEPTNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  
 				 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
-
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+       <![CDATA[	SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.ENABLE, t1.LEADERID, t1.LEADERNAME, t1.ORGID, t11.ORGNAME, t1.PDEPTID, t21.DEPTNAME AS PDEPTNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  
+				 WHERE 	t1.ENABLE = 1
+			]]>
+    </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
        <![CDATA[	SELECT t1.`BCODE`, t1.`CREATEDATE`, t1.`DEPTCODE`, t1.`DEPTID`, t1.`DEPTLEVEL`, t1.`DEPTNAME`, t1.`ENABLE`, t1.`LEADERID`, t1.`LEADERNAME`, t1.`ORGID`, t11.`ORGNAME`, t1.`PDEPTID`, t21.`DEPTNAME` AS `PDEPTNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZDEPT` t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  
 				 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
-
     <!--数据查询[View]-->
-    <sql id="View" databaseId="postgresql">
-       <![CDATA[	SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.ENABLE, t1.ORGID, t1.PDEPTID, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  
+    <sql id="View" databaseId="oracle">
+       <![CDATA[	SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.DOMAINS, t1.ENABLE, t1.LEADERID, t1.LEADERNAME, t1.ORGID, t11.ORGNAME, t1.PDEPTID, t21.DEPTNAME AS PDEPTNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  
 				 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
-
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+       <![CDATA[	SELECT t1.BCODE, t1.CREATEDATE, t1.DEPTCODE, t1.DEPTID, t1.DEPTLEVEL, t1.DEPTNAME, t1.ENABLE, t1.LEADERID, t1.LEADERNAME, t1.ORGID, t11.ORGNAME, t1.PDEPTID, t21.DEPTNAME AS PDEPTNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZDEPT t1  LEFT JOIN IBZORG t11 ON t1.ORGID = t11.ORGID  LEFT JOIN IBZDEPT t21 ON t1.PDEPTID = t21.DEPTID  
+				 WHERE 	t1.ENABLE = 1
+			]]>
+    </sql>
 </mapper>
 

@@ -7,8 +7,11 @@
 	<select id="selectById"  resultMap="IBZOrganizationResultMap" databaseId="mysql">
         <![CDATA[select t1.* from (SELECT t1.`CREATEDATE`, t1.`ENABLE`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  ) t1 where orgid=#{id}]]>
     </select>
+	<select id="selectById"  resultMap="IBZOrganizationResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.CREATEDATE, t1.DOMAINS, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  ) t1 where orgid=#{id}]]>
+    </select>
 	<select id="selectById"  resultMap="IBZOrganizationResultMap" databaseId="postgresql">
-        <![CDATA[select t1.* from (SELECT t1.CREATEDATE, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  ) t1 where orgid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.CREATEDATE, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  ) t1 where orgid=#{id}]]>
     </select>
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
@@ -30,24 +33,6 @@
          where  porgid=#{orgid}
      </select>
 
-    <!--数据集合[SelectSOrg]-->
-	 <select id="searchSelectSOrg"  parameterType="cn.ibizlab.core.ou.filter.IBZOrganizationSearchContext"  resultMap="IBZOrganizationResultMap">
-         select t1.* from (
-                <include refid="SelectSOrg" />
-         )t1
-         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
-         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
-     </select>
-
-    <!--数据集合[SelectPOrg]-->
-	 <select id="searchSelectPOrg"  parameterType="cn.ibizlab.core.ou.filter.IBZOrganizationSearchContext"  resultMap="IBZOrganizationResultMap">
-         select t1.* from (
-                <include refid="SelectPOrg" />
-         )t1
-         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
-         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
-     </select>
-
     <!--数据集合[Default]-->
 	 <select id="searchDefault"  parameterType="cn.ibizlab.core.ou.filter.IBZOrganizationSearchContext"  resultMap="IBZOrganizationResultMap">
          select t1.* from (
@@ -63,43 +48,35 @@
 				 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
-
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+       <![CDATA[	SELECT t1.CREATEDATE, t1.DOMAINS, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
+				 WHERE 	t1.ENABLE = 1
+			]]>
+    </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
-       <![CDATA[	SELECT t1.CREATEDATE, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  
+       <![CDATA[	SELECT t1.CREATEDATE, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
 				 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
-
-    <!--数据查询[SelectPOrg]-->
-    <sql id="SelectPOrg" databaseId="mysql">
-       <![CDATA[	SELECT t1.`CREATEDATE`, t1.`ENABLE`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
-				 WHERE 	t1.ENABLE = 1
-					 AND ( INSTR(#{srf.datacontext.orglevel}, t1.ORGLEVEL)=1 )
-			]]>
-    </sql>
-
-    <!--数据查询[SelectSOrg]-->
-    <sql id="SelectSOrg" databaseId="mysql">
-       <![CDATA[	SELECT t1.`CREATEDATE`, t1.`ENABLE`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
-				 WHERE 	t1.ENABLE = 1
-					 AND ( INSTR(t1.ORGLEVEL,#{srf.datacontext.orglevel})=1 )
-			]]>
-    </sql>
-
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
        <![CDATA[	SELECT t1.`CREATEDATE`, t1.`ENABLE`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
 				 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
-
     <!--数据查询[View]-->
-    <sql id="View" databaseId="postgresql">
-       <![CDATA[	SELECT t1.CREATEDATE, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  
+    <sql id="View" databaseId="oracle">
+       <![CDATA[	SELECT t1.CREATEDATE, t1.DOMAINS, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
 				 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
-
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+       <![CDATA[	SELECT t1.CREATEDATE, t1.ENABLE, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
+				 WHERE 	t1.ENABLE = 1
+			]]>
+    </sql>
 </mapper>
 

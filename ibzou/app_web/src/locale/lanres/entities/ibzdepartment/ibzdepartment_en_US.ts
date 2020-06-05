@@ -8,6 +8,7 @@ export default {
     parentdeptid: '上级部门',
     shortname: '部门简称',
     deptlevel: '部门级别',
+    domains: '区属',
     showorder: '排序',
     bcode: '业务编码',
     leaderid: '分管领导标识',

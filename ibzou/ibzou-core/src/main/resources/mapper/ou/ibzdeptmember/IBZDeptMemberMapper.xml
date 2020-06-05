@@ -7,18 +7,27 @@
 	<select id="selectById"  resultMap="IBZDeptMemberResultMap" databaseId="mysql">
         <![CDATA[select t1.* from (SELECT t1.`DEPTID`, t11.`DEPTNAME`, t1.`MEMBERID`, t21.`PERSONNAME`, t1.`USERID` FROM `IBZDEPTMEMBER` t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  ) t1 where memberid=#{id}]]>
     </select>
+	<select id="selectById"  resultMap="IBZDeptMemberResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.DEPTID, t11.DEPTNAME, t1.DOMAINS, t1.MEMBERID, t21.PERSONNAME, t1.POSTID, t31.POSTNAME, t1.USERID FROM IBZDEPTMEMBER t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  LEFT JOIN IBZPOST t31 ON t1.POSTID = t31.POSTID  ) t1 where memberid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="IBZDeptMemberResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.DEPTID, t11.DEPTNAME, t1.MEMBERID, t21.PERSONNAME, t1.USERID FROM IBZDEPTMEMBER t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  ) t1 where memberid=#{id}]]>
+    </select>
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="IBZDeptMemberResultMap" type="cn.ibizlab.core.ou.domain.IBZDeptMember" autoMapping="true">
         <id property="memberid" column="memberid" /><!--主键字段映射-->
 		<result property="deptid" column="deptid" />
 		<result property="userid" column="userid" />
+		<result property="postid" column="postid" />
             
 		
 		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
 		<association property="dept" javaType="cn.ibizlab.core.ou.domain.IBZDepartment" column="deptid" select="cn.ibizlab.core.ou.mapper.IBZDepartmentMapper.selectById" fetchType="lazy"></association>
 		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
 		<association property="emp" javaType="cn.ibizlab.core.ou.domain.IBZEmployee" column="userid" select="cn.ibizlab.core.ou.mapper.IBZEmployeeMapper.selectById" fetchType="lazy"></association>
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="post" javaType="cn.ibizlab.core.ou.domain.IBZPost" column="postid" select="cn.ibizlab.core.ou.mapper.IBZPostMapper.selectById" fetchType="lazy"></association>
     </resultMap>
 
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZDEPTMEMBER_IBZDEPT_DEPTID] -->
@@ -35,6 +44,13 @@
          ) t1
          where  userid=#{userid}
      </select>
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZDEPTMEMBER_IBZPOST_POSTID] -->
+	 <select id="selectByPostid" resultMap="IBZDeptMemberResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         ) t1
+         where  postid=#{postid}
+     </select>
 
     <!--数据集合[Default]-->
 	 <select id="searchDefault"  parameterType="cn.ibizlab.core.ou.filter.IBZDeptMemberSearchContext"  resultMap="IBZDeptMemberResultMap">
@@ -50,12 +66,30 @@
        <![CDATA[	SELECT t1.`DEPTID`, t11.`DEPTNAME`, t1.`MEMBERID`, t21.`PERSONNAME`, t1.`USERID` FROM `IBZDEPTMEMBER` t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  
 			]]>
     </sql>
-
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+       <![CDATA[	SELECT t1.DEPTID, t11.DEPTNAME, t1.DOMAINS, t1.MEMBERID, t21.PERSONNAME, t1.POSTID, t31.POSTNAME, t1.USERID FROM IBZDEPTMEMBER t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  LEFT JOIN IBZPOST t31 ON t1.POSTID = t31.POSTID  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+       <![CDATA[	SELECT t1.DEPTID, t11.DEPTNAME, t1.MEMBERID, t21.PERSONNAME, t1.USERID FROM IBZDEPTMEMBER t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  
+			]]>
+    </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
        <![CDATA[	SELECT t1.`DEPTID`, t11.`DEPTNAME`, t1.`MEMBERID`, t21.`PERSONNAME`, t1.`USERID` FROM `IBZDEPTMEMBER` t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  
 			]]>
     </sql>
-
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+       <![CDATA[	SELECT t1.DEPTID, t11.DEPTNAME, t1.DOMAINS, t1.MEMBERID, t21.PERSONNAME, t1.POSTID, t31.POSTNAME, t1.USERID FROM IBZDEPTMEMBER t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  LEFT JOIN IBZPOST t31 ON t1.POSTID = t31.POSTID  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+       <![CDATA[	SELECT t1.DEPTID, t11.DEPTNAME, t1.MEMBERID, t21.PERSONNAME, t1.USERID FROM IBZDEPTMEMBER t1  LEFT JOIN IBZDEPT t11 ON t1.DEPTID = t11.DEPTID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  
+			]]>
+    </sql>
 </mapper>
 

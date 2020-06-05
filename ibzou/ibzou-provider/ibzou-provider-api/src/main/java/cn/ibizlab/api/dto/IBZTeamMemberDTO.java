@@ -63,6 +63,30 @@ public class IBZTeamMemberDTO extends DTOBase implements Serializable {
     @JsonProperty("personname")
     private String personname;
 
+    /**
+     * 属性 [POSTID]
+     *
+     */
+    @JSONField(name = "postid")
+    @JsonProperty("postid")
+    private String postid;
+
+    /**
+     * 属性 [POSTNAME]
+     *
+     */
+    @JSONField(name = "postname")
+    @JsonProperty("postname")
+    private String postname;
+
+    /**
+     * 属性 [DOMAINS]
+     *
+     */
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+
 
     /**
      * 设置 [TEAMID]
@@ -78,6 +102,22 @@ public class IBZTeamMemberDTO extends DTOBase implements Serializable {
     public void setUserid(String  userid){
         this.userid = userid ;
         this.modify("userid",userid);
+    }
+
+    /**
+     * 设置 [POSTID]
+     */
+    public void setPostid(String  postid){
+        this.postid = postid ;
+        this.modify("postid",postid);
+    }
+
+    /**
+     * 设置 [DOMAINS]
+     */
+    public void setDomains(String  domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
 

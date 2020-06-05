@@ -37,6 +37,9 @@ export default class DeptTreeModel {
         name: 'deptlevel',
       },
       {
+        name: 'domains',
+      },
+      {
         name: 'showorder',
       },
       {

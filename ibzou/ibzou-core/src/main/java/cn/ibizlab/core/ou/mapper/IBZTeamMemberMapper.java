@@ -64,6 +64,8 @@ public interface IBZTeamMemberMapper extends BaseMapper<IBZTeamMember>{
 
     List<IBZTeamMember> selectByUserid(@Param("userid") Serializable userid) ;
 
+    List<IBZTeamMember> selectByPostid(@Param("postid") Serializable postid) ;
+
     List<IBZTeamMember> selectByTeamid(@Param("teamid") Serializable teamid) ;
 
 }

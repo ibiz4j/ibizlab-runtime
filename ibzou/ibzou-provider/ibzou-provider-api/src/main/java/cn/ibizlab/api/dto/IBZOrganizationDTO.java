@@ -88,6 +88,14 @@ public class IBZOrganizationDTO extends DTOBase implements Serializable {
     private String parentorgname;
 
     /**
+     * 属性 [DOMAINS]
+     *
+     */
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+
+    /**
      * 属性 [ENABLE]
      *
      */
@@ -152,6 +160,14 @@ public class IBZOrganizationDTO extends DTOBase implements Serializable {
     public void setShoworder(Integer  showorder){
         this.showorder = showorder ;
         this.modify("showorder",showorder);
+    }
+
+    /**
+     * 设置 [DOMAINS]
+     */
+    public void setDomains(String  domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
 

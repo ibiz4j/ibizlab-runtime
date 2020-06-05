@@ -74,6 +74,27 @@ public class IBZDeptMember extends EntityMP implements Serializable {
     @JSONField(name = "personname")
     @JsonProperty("personname")
     private String personname;
+    /**
+     * 岗位标识
+     */
+    @TableField(value = "postid")
+    @JSONField(name = "postid")
+    @JsonProperty("postid")
+    private String postid;
+    /**
+     * 岗位名称
+     */
+    @TableField(exist = false)
+    @JSONField(name = "postname")
+    @JsonProperty("postname")
+    private String postname;
+    /**
+     * 区属
+     */
+    @TableField(value = "domains")
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
 
     /**
      * 部门
@@ -91,6 +112,14 @@ public class IBZDeptMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     private cn.ibizlab.core.ou.domain.IBZEmployee emp;
 
+    /**
+     * 岗位
+     */
+    @JsonIgnore
+    @JSONField(serialize = false)
+    @TableField(exist = false)
+    private cn.ibizlab.core.ou.domain.IBZPost post;
+
 
 
     /**
@@ -106,6 +135,20 @@ public class IBZDeptMember extends EntityMP implements Serializable {
     public void setUserid(String userid){
         this.userid = userid ;
         this.modify("userid",userid);
+    }
+    /**
+     * 设置 [岗位标识]
+     */
+    public void setPostid(String postid){
+        this.postid = postid ;
+        this.modify("postid",postid);
+    }
+    /**
+     * 设置 [区属]
+     */
+    public void setDomains(String domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
     /**

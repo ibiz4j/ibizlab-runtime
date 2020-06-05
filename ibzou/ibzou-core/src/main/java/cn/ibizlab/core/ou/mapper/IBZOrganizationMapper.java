@@ -19,8 +19,6 @@ import com.alibaba.fastjson.JSONObject;
 
 public interface IBZOrganizationMapper extends BaseMapper<IBZOrganization>{
 
-    Page<IBZOrganization> searchSelectSOrg(IPage page, @Param("srf") IBZOrganizationSearchContext context, @Param("ew") Wrapper<IBZOrganization> wrapper) ;
-    Page<IBZOrganization> searchSelectPOrg(IPage page, @Param("srf") IBZOrganizationSearchContext context, @Param("ew") Wrapper<IBZOrganization> wrapper) ;
     Page<IBZOrganization> searchDefault(IPage page, @Param("srf") IBZOrganizationSearchContext context, @Param("ew") Wrapper<IBZOrganization> wrapper) ;
     @Override
     @Cacheable( value="ibzorganization",key = "'row:'+#p0")

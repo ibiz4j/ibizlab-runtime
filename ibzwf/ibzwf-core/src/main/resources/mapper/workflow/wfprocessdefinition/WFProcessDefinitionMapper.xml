@@ -7,6 +7,12 @@
 	<select id="selectById"  resultMap="WFProcessDefinitionResultMap" databaseId="mysql">
         <![CDATA[select t1.* from (SELECT t1.`BPMNFILE`, t1.`DEFINITIONKEY`, t1.`DEFINITIONNAME`, t1.`DEPLOYKEY`, t1.`MD5CHECK`, t1.`MODELENABLE`, t1.`MODELVERSION`, t1.`PSSYSTEMID`, t1.`TASKDEFINITIONKEY` FROM `IBZWFDEFINITION` t1  ) t1 where definitionkey=#{id}]]>
     </select>
+	<select id="selectById"  resultMap="WFProcessDefinitionResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.BPMNFILE, t1.DEFINITIONKEY, t1.DEFINITIONNAME, t1.DEPLOYKEY, t1.MD5CHECK, t1.MODELENABLE, t1.MODELVERSION, t1.PSSYSTEMID, t1.TASKDEFINITIONKEY FROM IBZWFDEFINITION t1  ) t1 where definitionkey=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="WFProcessDefinitionResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.BPMNFILE, t1.DEFINITIONKEY, t1.DEFINITIONNAME, t1.DEPLOYKEY, t1.MD5CHECK, t1.MODELENABLE, t1.MODELVERSION, t1.PSSYSTEMID, t1.TASKDEFINITIONKEY FROM IBZWFDEFINITION t1  ) t1 where definitionkey=#{id}]]>
+    </select>
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="WFProcessDefinitionResultMap" type="cn.ibizlab.core.workflow.domain.WFProcessDefinition" autoMapping="true">
@@ -31,12 +37,30 @@
        <![CDATA[	SELECT t1.`BPMNFILE`, t1.`DEFINITIONKEY`, t1.`DEFINITIONNAME`, t1.`DEPLOYKEY`, t1.`MD5CHECK`, t1.`MODELENABLE`, t1.`MODELVERSION`, t1.`PSSYSTEMID`, t1.`TASKDEFINITIONKEY` FROM `IBZWFDEFINITION` t1  
 			]]>
     </sql>
-
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+       <![CDATA[	SELECT t1.BPMNFILE, t1.DEFINITIONKEY, t1.DEFINITIONNAME, t1.DEPLOYKEY, t1.MD5CHECK, t1.MODELENABLE, t1.MODELVERSION, t1.PSSYSTEMID, t1.TASKDEFINITIONKEY FROM IBZWFDEFINITION t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+       <![CDATA[	SELECT t1.BPMNFILE, t1.DEFINITIONKEY, t1.DEFINITIONNAME, t1.DEPLOYKEY, t1.MD5CHECK, t1.MODELENABLE, t1.MODELVERSION, t1.PSSYSTEMID, t1.TASKDEFINITIONKEY FROM IBZWFDEFINITION t1  
+			]]>
+    </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
        <![CDATA[	SELECT t1.`BPMNFILE`, t1.`DEFINITIONKEY`, t1.`DEFINITIONNAME`, t1.`DEPLOYKEY`, t1.`MD5CHECK`, t1.`MODELENABLE`, t1.`MODELVERSION`, t1.`PSSYSTEMID`, t1.`TASKDEFINITIONKEY` FROM `IBZWFDEFINITION` t1  
 			]]>
     </sql>
-
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+       <![CDATA[	SELECT t1.BPMNFILE, t1.DEFINITIONKEY, t1.DEFINITIONNAME, t1.DEPLOYKEY, t1.MD5CHECK, t1.MODELENABLE, t1.MODELVERSION, t1.PSSYSTEMID, t1.TASKDEFINITIONKEY FROM IBZWFDEFINITION t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+       <![CDATA[	SELECT t1.BPMNFILE, t1.DEFINITIONKEY, t1.DEFINITIONNAME, t1.DEPLOYKEY, t1.MD5CHECK, t1.MODELENABLE, t1.MODELVERSION, t1.PSSYSTEMID, t1.TASKDEFINITIONKEY FROM IBZWFDEFINITION t1  
+			]]>
+    </sql>
 </mapper>
 

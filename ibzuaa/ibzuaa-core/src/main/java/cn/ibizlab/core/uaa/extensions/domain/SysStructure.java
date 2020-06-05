@@ -1,13 +1,16 @@
 package cn.ibizlab.core.uaa.extensions.domain;
 
+import cn.ibizlab.core.uaa.domain.SysPSSystem;
 import cn.ibizlab.core.uaa.domain.SysPermission;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.AppNode;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.EntityNode;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.FuncItem;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.UniResNode;
+import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.springframework.data.domain.Page;
 
 import java.sql.Timestamp;
 import java.util.*;
@@ -215,6 +218,20 @@ public class SysStructure
 				loopPermissionNode(list,node);
 			});
 		}
+	}
+
+
+	public List<SysApp> getSysApps(boolean web) {
+		List<SysApp> apps=new ArrayList<>();
+
+			if (this.getApps() == null)
+				return apps;
+			this.getApps().forEach(app-> {
+				SysApp sysApp = SysApp.builder()
+						.label(app.getAppname()).systemid(systemid).id(systemid.toLowerCase()+"-app-"+app.getAppid().toLowerCase()).build();
+				apps.add(sysApp);
+			});
+		return apps;
 	}
 
 }

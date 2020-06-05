@@ -19,7 +19,6 @@ import com.alibaba.fastjson.JSONObject;
 
 public interface IBZDepartmentMapper extends BaseMapper<IBZDepartment>{
 
-    Page<IBZDepartment> searchCurDept(IPage page, @Param("srf") IBZDepartmentSearchContext context, @Param("ew") Wrapper<IBZDepartment> wrapper) ;
     Page<IBZDepartment> searchDefault(IPage page, @Param("srf") IBZDepartmentSearchContext context, @Param("ew") Wrapper<IBZDepartment> wrapper) ;
     @Override
     @Cacheable( value="ibzdepartment",key = "'row:'+#p0")

@@ -39,6 +39,22 @@ public class IBZTeamDTO extends DTOBase implements Serializable {
     @JsonProperty("teamname")
     private String teamname;
 
+    /**
+     * 属性 [MEMO]
+     *
+     */
+    @JSONField(name = "memo")
+    @JsonProperty("memo")
+    private String memo;
+
+    /**
+     * 属性 [DOMAINS]
+     *
+     */
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+
 
     /**
      * 设置 [TEAMNAME]
@@ -46,6 +62,22 @@ public class IBZTeamDTO extends DTOBase implements Serializable {
     public void setTeamname(String  teamname){
         this.teamname = teamname ;
         this.modify("teamname",teamname);
+    }
+
+    /**
+     * 设置 [MEMO]
+     */
+    public void setMemo(String  memo){
+        this.memo = memo ;
+        this.modify("memo",memo);
+    }
+
+    /**
+     * 设置 [DOMAINS]
+     */
+    public void setDomains(String  domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
 

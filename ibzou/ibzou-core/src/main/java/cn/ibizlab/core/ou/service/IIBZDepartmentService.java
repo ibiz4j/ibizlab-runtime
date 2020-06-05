@@ -40,7 +40,6 @@ public interface IIBZDepartmentService extends IService<IBZDepartment>{
     boolean update(IBZDepartment et) ;
     @CacheEvict(value="ibzdepartment",allEntries=true)
     void updateBatch(List<IBZDepartment> list) ;
-    Page<IBZDepartment> searchCurDept(IBZDepartmentSearchContext context) ;
     Page<IBZDepartment> searchDefault(IBZDepartmentSearchContext context) ;
     List<IBZDepartment> selectByParentdeptid(String deptid) ;
     @CacheEvict(value="ibzdepartment",allEntries=true)

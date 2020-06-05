@@ -3,6 +3,10 @@ package cn.ibizlab.core.uaa.extensions.aspect;
 import cn.ibizlab.core.uaa.domain.SysPSSystem;
 import cn.ibizlab.core.uaa.domain.SysPermission;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
+import cn.ibizlab.core.uaa.extensions.domain.SysApp;
+import cn.ibizlab.core.uaa.extensions.service.SysAppService;
+import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
+import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 import cn.ibizlab.core.uaa.service.ISysPermissionService;
 import cn.ibizlab.util.annotation.DEField;
 import cn.ibizlab.util.domain.EntityBase;
@@ -39,6 +43,64 @@ public class SysPSSystemAspect
     @Autowired
     @Lazy
     private ISysPermissionService sysPermissionService;
+
+    @Autowired
+    @Lazy
+    private ISysPSSystemService sysPSSystemService;
+
+    @Autowired
+    @Lazy
+    private UAACoreService uaaCoreService;
+
+    @Autowired
+    @Lazy
+    private SysAppService sysAppService;
+
+    @Before(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.create*(..))")
+    public void beforecreate(JoinPoint point) throws Exception {
+        saveApps(point);
+    }
+    @Before(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.update*(..))")
+    public void beforeupdate(JoinPoint point) throws Exception {
+        saveApps(point);
+    }
+    @Before(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.save*(..))")
+    public void beforesave(JoinPoint point) throws Exception {
+        saveApps(point);
+    }
+    private void saveApps(JoinPoint point)
+    {
+        uaaCoreService.resetApps();
+        sysAppService.resetAppNavigationBars();
+        Object[] args = point.getArgs();
+        if (args.length > 0) {
+            Object obj = args[0];
+            if (obj instanceof SysPSSystem)
+                prepairApps((SysPSSystem) obj);
+            else if (obj instanceof List)
+                ((List<SysPSSystem>) obj).forEach(system -> prepairApps(system));
+        }
+    }
+    private void prepairApps(SysPSSystem system) {
+        if (StringUtils.isEmpty(system.getPssystemid()) || system.getSysstructure() == null)
+            return;
+
+        Map<String,SysApp> oldApps = new HashMap<>();
+        SysPSSystem old = sysPSSystemService.getById(system.getPssystemid());
+        if(old!=null&&old.getApps()!=null)
+            old.getApps().forEach(app->oldApps.put(app.getId(),app));
+
+        List<SysApp> newList=new ArrayList<>();
+        system.getSysstructure().getSysApps(true).forEach(appNode -> {
+            if(oldApps.containsKey(appNode.getId()))
+                newList.add(oldApps.get(appNode.getId()));
+            else
+                newList.add(appNode);
+        });
+        system.setApps(newList);
+
+    }
+
 
     @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.create*(..))")
     public void create(JoinPoint point) throws Exception {

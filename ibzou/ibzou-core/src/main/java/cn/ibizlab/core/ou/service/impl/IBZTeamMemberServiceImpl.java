@@ -49,6 +49,9 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
     private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
     @Autowired
     @Lazy
+    private cn.ibizlab.core.ou.service.IIBZPostService ibzpostService;
+    @Autowired
+    @Lazy
     private cn.ibizlab.core.ou.service.IIBZTeamService ibzteamService;
 
     private int batchSize = 500;
@@ -166,6 +169,16 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
     }
 
 	@Override
+    public List<IBZTeamMember> selectByPostid(String postid) {
+        return baseMapper.selectByPostid(postid);
+    }
+
+    @Override
+    public void removeByPostid(String postid) {
+        this.remove(new QueryWrapper<IBZTeamMember>().eq("postid",postid));
+    }
+
+	@Override
     public List<IBZTeamMember> selectByTeamid(String teamid) {
         return baseMapper.selectByTeamid(teamid);
     }
@@ -202,6 +215,16 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
             }
             et.setPersonname(emp.getPersonname());
         }
+        //实体关系[DER1N_IBZTEAMMEMBER_IBZPOST_POSTID]
+        if(!ObjectUtils.isEmpty(et.getPostid())){
+            cn.ibizlab.core.ou.domain.IBZPost post=et.getPost();
+            if(ObjectUtils.isEmpty(post)){
+                cn.ibizlab.core.ou.domain.IBZPost majorEntity=ibzpostService.get(et.getPostid());
+                et.setPost(majorEntity);
+                post=majorEntity;
+            }
+            et.setPostname(post.getPostname());
+        }
         //实体关系[DER1N_IBZTEAMMEMBER_IBZTEAM_TEAMID]
         if(!ObjectUtils.isEmpty(et.getTeamid())){
             cn.ibizlab.core.ou.domain.IBZTeam team=et.getTeam();
@@ -213,6 +236,7 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
             et.setTeamname(team.getTeamname());
         }
     }
+
 
     @Override
     public List<JSONObject> select(String sql, Map param){

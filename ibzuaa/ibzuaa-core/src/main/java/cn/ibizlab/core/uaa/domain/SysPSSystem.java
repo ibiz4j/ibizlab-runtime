@@ -8,7 +8,9 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
 
+import cn.ibizlab.core.uaa.extensions.domain.SysApp;
 import cn.ibizlab.core.uaa.extensions.domain.SysStructure;
+import cn.ibizlab.core.uaa.extensions.domain.handlers.SysAppsTypeHandler;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -62,6 +64,32 @@ public class SysPSSystem extends EntityMP implements Serializable {
     private SysStructure sysstructure;
 
 
+    /**
+     * 结构
+     */
+    @TableField(value = "apps",typeHandler = SysAppsTypeHandler.class)
+    @JSONField(name = "apps")
+    @JsonProperty("apps")
+    private List<SysApp> apps;
+
+    /**
+     * 属性 [MD5CHECK]
+     *
+     */
+    @TableField(value = "md5check")
+    @JSONField(name = "md5check")
+    @JsonProperty("md5check")
+    private String md5check;
+
+    /**
+     * 属性 [SHOWORDER]
+     *
+     */
+    @TableField(value = "showorder")
+    @JSONField(name = "showorder")
+    @JsonProperty("showorder")
+    private Integer showorder;
+
 
     /**
      * 设置 [系统名称]
@@ -77,6 +105,31 @@ public class SysPSSystem extends EntityMP implements Serializable {
         this.sysstructure = sysstructure ;
         this.modify("sysstructure",sysstructure);
     }
+
+    /**
+     * 设置 [APPS]
+     */
+    public void setApps(List<SysApp>  apps){
+        this.apps = apps ;
+        this.modify("apps",apps);
+    }
+
+    /**
+     * 设置 [MD5CHECK]
+     */
+    public void setMd5check(String  md5check){
+        this.md5check = md5check ;
+        this.modify("md5check",md5check);
+    }
+
+    /**
+     * 设置 [SHOWORDER]
+     */
+    public void setShoworder(Integer  showorder){
+        this.showorder = showorder ;
+        this.modify("showorder",showorder);
+    }
+
 
     public SysStructure getSysstructure()
     {

@@ -98,13 +98,14 @@ export default class SaveDeptMemberLogicBase {
     private async executeDeaction1(context:any,params:any,isloading:boolean){
         // 行为处理节点
         let result: any;
+        let actionParam:any = this.paramsMap.get('member');
         const targetService:IBZDeptMemberService = new IBZDeptMemberService();
         if (targetService['Save'] && targetService['Save'] instanceof Function) {
-            result = await targetService['Save'](context,params, false);
+            result = await targetService['Save'](actionParam.context,actionParam.data, false);
         }
         if(result && result.status == 200){
-            Object.assign(params,result.data);
-        return params;
+            Object.assign(actionParam.data,result.data);
+        return this.paramsMap.get(this.defaultParamName).data;
         }
     }
 

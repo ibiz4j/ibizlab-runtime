@@ -31,6 +31,7 @@ export default class SDIndexViewModel {
 	textcls: '',
 	appfunctag: '_2',
 	resourcetag: '',
+	authtag:'web-SDIndexView-menuitem1',
 },
     ];
 

@@ -50,6 +50,9 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
     @Autowired
     @Lazy
     private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZPostService ibzpostService;
 
     private int batchSize = 500;
 
@@ -175,6 +178,16 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
         this.remove(new QueryWrapper<IBZDeptMember>().eq("userid",userid));
     }
 
+	@Override
+    public List<IBZDeptMember> selectByPostid(String postid) {
+        return baseMapper.selectByPostid(postid);
+    }
+
+    @Override
+    public void removeByPostid(String postid) {
+        this.remove(new QueryWrapper<IBZDeptMember>().eq("postid",postid));
+    }
+
 
     /**
      * 查询集合 DEFAULT
@@ -212,7 +225,18 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
             }
             et.setPersonname(emp.getPersonname());
         }
+        //实体关系[DER1N_IBZDEPTMEMBER_IBZPOST_POSTID]
+        if(!ObjectUtils.isEmpty(et.getPostid())){
+            cn.ibizlab.core.ou.domain.IBZPost post=et.getPost();
+            if(ObjectUtils.isEmpty(post)){
+                cn.ibizlab.core.ou.domain.IBZPost majorEntity=ibzpostService.get(et.getPostid());
+                et.setPost(majorEntity);
+                post=majorEntity;
+            }
+            et.setPostname(post.getPostname());
+        }
     }
+
 
     @Override
     public List<JSONObject> select(String sql, Map param){

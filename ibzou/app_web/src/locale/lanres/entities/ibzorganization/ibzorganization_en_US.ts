@@ -9,6 +9,7 @@ export default {
     orglevel: '单位级别',
     showorder: '排序',
     parentorgname: '上级单位',
+    domains: '区属',
     enable: '逻辑有效',
     createdate: '创建时间',
     updatedate: '最后修改时间',

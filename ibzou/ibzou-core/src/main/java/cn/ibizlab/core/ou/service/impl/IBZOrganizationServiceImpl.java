@@ -173,24 +173,6 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
 
 
     /**
-     * 查询集合 查询下级单位
-     */
-    @Override
-    public Page<IBZOrganization> searchSelectSOrg(IBZOrganizationSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<IBZOrganization> pages=baseMapper.searchSelectSOrg(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<IBZOrganization>(pages.getRecords(), context.getPageable(), pages.getTotal());
-    }
-
-    /**
-     * 查询集合 查询上级单位
-     */
-    @Override
-    public Page<IBZOrganization> searchSelectPOrg(IBZOrganizationSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<IBZOrganization> pages=baseMapper.searchSelectPOrg(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<IBZOrganization>(pages.getRecords(), context.getPageable(), pages.getTotal());
-    }
-
-    /**
      * 查询集合 DEFAULT
      */
     @Override
@@ -217,6 +199,7 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
             et.setParentorgname(parentorg.getOrgname());
         }
     }
+
 
     @Override
     public List<JSONObject> select(String sql, Map param){

@@ -6,6 +6,9 @@ export default {
     deptname: '部门名称',
     userid: '用户标识',
     personname: '成员',
+    postid: '岗位标识',
+    postname: '岗位名称',
+    domains: '区属',
   },
 	views: {
 		editview: {

@@ -285,6 +285,9 @@ export default class IBZDepartmentOptionViewBase extends Vue {
             if(this.context && this.context.srfparentkey){
                 Object.assign(this.viewparams,{srfparentkey:this.context.srfparentkey});
             }
+            if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
+                Object.assign(this.context,this.$store.getters.getAppData().context);
+            }
             this.handleCustomViewData();
             return;
         }

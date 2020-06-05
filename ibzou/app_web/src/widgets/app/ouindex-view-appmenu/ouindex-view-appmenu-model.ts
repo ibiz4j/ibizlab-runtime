@@ -31,6 +31,7 @@ export default class OUIndexViewModel {
 	textcls: '',
 	appfunctag: 'Auto3',
 	resourcetag: '',
+	authtag:'web-OUIndexView-menuitem1',
 },
         {
 	id: '26353959-9246-4DDF-8ADA-E8A229572BC7',
@@ -49,6 +50,7 @@ export default class OUIndexViewModel {
 	textcls: '',
 	appfunctag: 'Auto5',
 	resourcetag: '',
+	authtag:'web-OUIndexView-menuitem2',
 },
         {
 	id: '18F0AA9B-5281-46B7-AC6E-1A40E088AEE8',
@@ -67,6 +69,7 @@ export default class OUIndexViewModel {
 	textcls: '',
 	appfunctag: 'Auto4',
 	resourcetag: '',
+	authtag:'web-OUIndexView-menuitem3',
 },
     ];
 

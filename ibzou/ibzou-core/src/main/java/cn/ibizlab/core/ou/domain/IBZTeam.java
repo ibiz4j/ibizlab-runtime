@@ -53,6 +53,20 @@ public class IBZTeam extends EntityMP implements Serializable {
     @JSONField(name = "teamname")
     @JsonProperty("teamname")
     private String teamname;
+    /**
+     * 备注
+     */
+    @TableField(value = "memo")
+    @JSONField(name = "memo")
+    @JsonProperty("memo")
+    private String memo;
+    /**
+     * 区属
+     */
+    @TableField(value = "domains")
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
 
 
 
@@ -62,6 +76,20 @@ public class IBZTeam extends EntityMP implements Serializable {
     public void setTeamname(String teamname){
         this.teamname = teamname ;
         this.modify("teamname",teamname);
+    }
+    /**
+     * 设置 [备注]
+     */
+    public void setMemo(String memo){
+        this.memo = memo ;
+        this.modify("memo",memo);
+    }
+    /**
+     * 设置 [区属]
+     */
+    public void setDomains(String domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
 }

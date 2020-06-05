@@ -28,6 +28,15 @@
        <![CDATA[	SELECT t1.`GROUPID`, t1.`GROUPNAME`, t1.`GROUPSCOPE` FROM `IBZWFGROUP` t1  
 			]]>
     </sql>
-
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+       <![CDATA[	SELECT t1.GROUPID, t1.GROUPNAME, t1.GROUPSCOPE FROM IBZWFGROUP t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+       <![CDATA[	SELECT t1.GROUPID, t1.GROUPNAME, t1.GROUPSCOPE FROM IBZWFGROUP t1  
+			]]>
+    </sql>
 </mapper>
 

@@ -18,7 +18,17 @@
           </i-col>
           <i-col v-show="detailsModel.n_authcode_eq.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_authcode_eq' :itemRules="this.rules.n_authcode_eq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authcode_eq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authcode_eq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-               <dropdown-list v-model="data.n_authcode_eq" :data="data" :itemParam="{}" :disabled="detailsModel.n_authcode_eq.disabled"  tag='CLAuthCode' codelistType='STATIC' placeholder='请选择...' style="width:100px;"></dropdown-list>
+               <dropdown-list 
+              v-model="data.n_authcode_eq" 
+              :data="data" 
+              :context="context"
+              :viewparams="viewparams"
+              :itemParam="{}" 
+              :disabled="detailsModel.n_authcode_eq.disabled"  
+              tag='CLAuthCode' 
+              codelistType='STATIC'
+              placeholder='请选择...' style="width:100px;">
+           </dropdown-list>
           </app-form-item>
           
           </i-col>

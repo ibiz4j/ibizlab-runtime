@@ -40,6 +40,9 @@ export default class TreeExpViewtreeexpbarModel {
         name: 'parentorgname',
       },
       {
+        name: 'domains',
+      },
+      {
         name: 'enable',
       },
       {

@@ -137,27 +137,6 @@ public class IBZDepartmentResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-CurDept-all')")
-	@ApiOperation(value = "获取CurDept", tags = {"部门" } ,notes = "获取CurDept")
-    @RequestMapping(method= RequestMethod.GET , value="/ibzdepartments/fetchcurdept")
-	public ResponseEntity<List<IBZDepartmentDTO>> fetchCurDept(IBZDepartmentSearchContext context) {
-        Page<IBZDepartment> domains = ibzdepartmentService.searchCurDept(context) ;
-        List<IBZDepartmentDTO> list = ibzdepartmentMapping.toDto(domains.getContent());
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
-                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
-                .header("x-total", String.valueOf(domains.getTotalElements()))
-                .body(list);
-	}
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-CurDept-all')")
-	@ApiOperation(value = "查询CurDept", tags = {"部门" } ,notes = "查询CurDept")
-    @RequestMapping(method= RequestMethod.POST , value="/ibzdepartments/searchcurdept")
-	public ResponseEntity<Page<IBZDepartmentDTO>> searchCurDept(@RequestBody IBZDepartmentSearchContext context) {
-        Page<IBZDepartment> domains = ibzdepartmentService.searchCurDept(context) ;
-	    return ResponseEntity.status(HttpStatus.OK)
-                .body(new PageImpl(ibzdepartmentMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
-	}
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-Default-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"部门" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzdepartments/fetchdefault")
@@ -288,29 +267,6 @@ public class IBZDepartmentResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-CurDept-all')")
-	@ApiOperation(value = "根据单位机构获取CurDept", tags = {"部门" } ,notes = "根据单位机构获取CurDept")
-    @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/fetchcurdept")
-	public ResponseEntity<List<IBZDepartmentDTO>> fetchIBZDepartmentCurDeptByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id,IBZDepartmentSearchContext context) {
-        context.setN_orgid_eq(ibzorganization_id);
-        Page<IBZDepartment> domains = ibzdepartmentService.searchCurDept(context) ;
-        List<IBZDepartmentDTO> list = ibzdepartmentMapping.toDto(domains.getContent());
-	    return ResponseEntity.status(HttpStatus.OK)
-                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
-                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
-                .header("x-total", String.valueOf(domains.getTotalElements()))
-                .body(list);
-	}
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-CurDept-all')")
-	@ApiOperation(value = "根据单位机构查询CurDept", tags = {"部门" } ,notes = "根据单位机构查询CurDept")
-    @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/searchcurdept")
-	public ResponseEntity<Page<IBZDepartmentDTO>> searchIBZDepartmentCurDeptByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody IBZDepartmentSearchContext context) {
-        context.setN_orgid_eq(ibzorganization_id);
-        Page<IBZDepartment> domains = ibzdepartmentService.searchCurDept(context) ;
-	    return ResponseEntity.status(HttpStatus.OK)
-                .body(new PageImpl(ibzdepartmentMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
-	}
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-Default-all')")
 	@ApiOperation(value = "根据单位机构获取DEFAULT", tags = {"部门" } ,notes = "根据单位机构获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/fetchdefault")

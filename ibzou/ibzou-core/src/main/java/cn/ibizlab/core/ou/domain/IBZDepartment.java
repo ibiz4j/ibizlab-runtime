@@ -91,6 +91,13 @@ public class IBZDepartment extends EntityMP implements Serializable {
     @JsonProperty("deptlevel")
     private Integer deptlevel;
     /**
+     * 区属
+     */
+    @TableField(value = "domains")
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+    /**
      * 排序
      */
     @TableField(value = "showorder")
@@ -212,6 +219,13 @@ public class IBZDepartment extends EntityMP implements Serializable {
     public void setDeptlevel(Integer deptlevel){
         this.deptlevel = deptlevel ;
         this.modify("deptlevel",deptlevel);
+    }
+    /**
+     * 设置 [区属]
+     */
+    public void setDomains(String domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
     /**
      * 设置 [排序]

@@ -294,24 +294,6 @@ export default class IBZDepartmentServiceBase extends EntityService {
     }
 
     /**
-     * FetchCurDept接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZDepartmentServiceBase
-     */
-    public async FetchCurDept(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.ibzorganization && true){
-            let tempData:any = JSON.parse(JSON.stringify(data));
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/fetchcurdept`,tempData,isloading);
-        }
-        let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/ibzdepartments/fetchcurdept`,tempData,isloading);
-    }
-
-    /**
      * FetchDefault接口方法
      *
      * @param {*} [context={}]

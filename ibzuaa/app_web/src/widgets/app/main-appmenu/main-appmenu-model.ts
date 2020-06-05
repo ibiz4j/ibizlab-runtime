@@ -31,6 +31,7 @@ export default class MainModel {
 	textcls: '',
 	appfunctag: 'Auto5',
 	resourcetag: '',
+	authtag:'web-Main-menuitem3',
 },
         {
 	id: 'db3e0d48d6e76a66784adc84edd90cdc',
@@ -49,6 +50,7 @@ export default class MainModel {
 	textcls: '',
 	appfunctag: 'Auto10',
 	resourcetag: '',
+	authtag:'web-Main-menuitem6',
 },
         {
 	id: 'BCF452A9-F6C1-40C9-B107-1D3E9E8839D3',
@@ -67,6 +69,7 @@ export default class MainModel {
 	textcls: '',
 	appfunctag: 'Auto6',
 	resourcetag: '',
+	authtag:'web-Main-menuitem1',
 },
     ];
 

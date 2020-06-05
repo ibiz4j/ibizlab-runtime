@@ -60,6 +60,20 @@ public class IBZPost extends EntityMP implements Serializable {
     @JSONField(name = "postname")
     @JsonProperty("postname")
     private String postname;
+    /**
+     * 区属
+     */
+    @TableField(value = "domains")
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+    /**
+     * 备注
+     */
+    @TableField(value = "memo")
+    @JSONField(name = "memo")
+    @JsonProperty("memo")
+    private String memo;
 
 
 
@@ -76,6 +90,20 @@ public class IBZPost extends EntityMP implements Serializable {
     public void setPostname(String postname){
         this.postname = postname ;
         this.modify("postname",postname);
+    }
+    /**
+     * 设置 [区属]
+     */
+    public void setDomains(String domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
+    }
+    /**
+     * 设置 [备注]
+     */
+    public void setMemo(String memo){
+        this.memo = memo ;
+        this.modify("memo",memo);
     }
 
 }

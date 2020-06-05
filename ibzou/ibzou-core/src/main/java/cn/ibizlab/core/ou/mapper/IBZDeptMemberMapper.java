@@ -66,4 +66,6 @@ public interface IBZDeptMemberMapper extends BaseMapper<IBZDeptMember>{
 
     List<IBZDeptMember> selectByUserid(@Param("userid") Serializable userid) ;
 
+    List<IBZDeptMember> selectByPostid(@Param("postid") Serializable postid) ;
+
 }

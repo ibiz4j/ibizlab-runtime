@@ -28,6 +28,15 @@
        <![CDATA[	SELECT t1.*   FROM ( SELECT t1.CREATEDATE, t1.ENABLE, t1.SYSTEMID, t1.SYS_PERMISSIONID, t1.SYS_PERMISSIONNAME, t1.PERMISSIONTYPE, t1.UPDATEDATE, t2.PSSOURCETYPE, t2.PSSOURCENAME FROM IBZPERMISSION t1  LEFT JOIN ibzpsdeoppriv t2 on t1.SYS_PERMISSIONID=t2.SYS_PSDEOPPRIVID LEFT JOIN ibzpsappmenuitem t3 on t1.SYS_PERMISSIONID =t3.PSAPPMENUID WHERE T1.ENABLE=1 ) t1 
 			]]>
     </sql>
-
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+       <![CDATA[	
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+       <![CDATA[	
+			]]>
+    </sql>
 </mapper>
 

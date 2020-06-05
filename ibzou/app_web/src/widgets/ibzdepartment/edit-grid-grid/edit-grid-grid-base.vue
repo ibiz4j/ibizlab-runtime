@@ -96,7 +96,8 @@
                     <template v-slot="{row,column,$index}">
                         <template v-if="actualIsOpenEdit">
                             <app-form-item :error="gridItemsModel[$index][column.property].error">
-                                <app-picker 
+                                
+            <app-picker 
               :formState="viewState" 
               :data="row"
               :context="context"

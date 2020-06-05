@@ -211,15 +211,6 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
 
 
     /**
-     * 查询集合 CurDept
-     */
-    @Override
-    public Page<IBZDepartment> searchCurDept(IBZDepartmentSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<IBZDepartment> pages=baseMapper.searchCurDept(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<IBZDepartment>(pages.getRecords(), context.getPageable(), pages.getTotal());
-    }
-
-    /**
      * 查询集合 DEFAULT
      */
     @Override
@@ -256,6 +247,7 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
             et.setOrgname(org.getOrgname());
         }
     }
+
 
     @Override
     public List<JSONObject> select(String sql, Map param){

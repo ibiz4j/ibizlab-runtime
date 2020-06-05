@@ -7,6 +7,12 @@
 	<select id="selectById"  resultMap="SysAuthLogResultMap" databaseId="mysql">
         <![CDATA[select t1.* from (SELECT t1.`AUTHCODE`, t1.`AUTHTIME`, t1.`DOMAIN`, t1.`IPADDR`, t1.`LOGID`, t1.`MACADDR`, t1.`PERSONNAME`, t1.`USERAGENT`, t1.`USERNAME` FROM `IBZAUTHLOG` t1  ) t1 where logid=#{id}]]>
     </select>
+	<select id="selectById"  resultMap="SysAuthLogResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.AUTHCODE, t1.AUTHTIME, t1.DOMAIN, t1.IPADDR, t1.LOGID, t1.MACADDR, t1.PERSONNAME, t1.USERAGENT, t1.USERNAME FROM IBZAUTHLOG t1  ) t1 where logid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysAuthLogResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.AUTHCODE, t1.AUTHTIME, t1.DOMAIN, t1.IPADDR, t1.LOGID, t1.MACADDR, t1.PERSONNAME, t1.USERAGENT, t1.USERNAME FROM IBZAUTHLOG t1  ) t1 where logid=#{id}]]>
+    </select>
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="SysAuthLogResultMap" type="cn.ibizlab.core.uaa.domain.SysAuthLog" autoMapping="true">
@@ -30,12 +36,30 @@
        <![CDATA[	SELECT t1.`AUTHCODE`, t1.`AUTHTIME`, t1.`DOMAIN`, t1.`IPADDR`, t1.`LOGID`, t1.`MACADDR`, t1.`PERSONNAME`, t1.`USERAGENT`, t1.`USERNAME` FROM `IBZAUTHLOG` t1  
 			]]>
     </sql>
-
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+       <![CDATA[	SELECT t1.AUTHCODE, t1.AUTHTIME, t1.DOMAIN, t1.IPADDR, t1.LOGID, t1.MACADDR, t1.PERSONNAME, t1.USERAGENT, t1.USERNAME FROM IBZAUTHLOG t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+       <![CDATA[	SELECT t1.AUTHCODE, t1.AUTHTIME, t1.DOMAIN, t1.IPADDR, t1.LOGID, t1.MACADDR, t1.PERSONNAME, t1.USERAGENT, t1.USERNAME FROM IBZAUTHLOG t1  
+			]]>
+    </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
        <![CDATA[	SELECT t1.`AUTHCODE`, t1.`AUTHTIME`, t1.`DOMAIN`, t1.`IPADDR`, t1.`LOGID`, t1.`MACADDR`, t1.`PERSONNAME`, t1.`USERAGENT`, t1.`USERNAME` FROM `IBZAUTHLOG` t1  
 			]]>
     </sql>
-
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+       <![CDATA[	SELECT t1.AUTHCODE, t1.AUTHTIME, t1.DOMAIN, t1.IPADDR, t1.LOGID, t1.MACADDR, t1.PERSONNAME, t1.USERAGENT, t1.USERNAME FROM IBZAUTHLOG t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+       <![CDATA[	SELECT t1.AUTHCODE, t1.AUTHTIME, t1.DOMAIN, t1.IPADDR, t1.LOGID, t1.MACADDR, t1.PERSONNAME, t1.USERAGENT, t1.USERNAME FROM IBZAUTHLOG t1  
+			]]>
+    </sql>
 </mapper>
 
