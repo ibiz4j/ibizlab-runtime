@@ -32,13 +32,14 @@ export default {
 	},
 	default_searchform: {
 		details: {
+			rawitem1: '', 
 			formpage1: '常规条件', 
-			n_username_like: '用户全局名(文本包含(%))', 
-			n_personname_like: '用户名称(文本包含(%))', 
-			n_authcode_eq: '认证结果(等于(=))', 
-			n_authtime_gtandeq: '认证时间(大于等于(>=))', 
-			n_authtime_ltandeq: '认证时间(小于等于(<=))', 
-			n_domain_like: '域(文本包含(%))', 
+			n_username_like: '用户全局名', 
+			n_personname_like: '用户名称', 
+			n_authcode_eq: '认证结果', 
+			n_domain_like: '域', 
+			n_authtime_gtandeq: '认证时间', 
+			n_authtime_ltandeq: '', 
 		},
 		uiactions: {
 		},

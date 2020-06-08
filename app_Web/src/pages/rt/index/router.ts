@@ -25,7 +25,7 @@ const router = new Router({
                 });
             },
             meta: {  
-                caption: 'app.views.index.caption',
+                caption: 'app.views.index.title',
                 viewType: 'APPINDEX',
                 parameters: [
                     { pathName: 'index', parameterName: 'index' },
@@ -37,7 +37,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzorganization.views.gridview.caption',
+                        caption: 'entities.ibzorganization.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -50,7 +50,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.mpickupview.caption',
+                        caption: 'entities.ibzemployee.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -65,7 +65,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.mpickupview.caption',
+                        caption: 'entities.ibzemployee.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -79,7 +79,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.mpickupview.caption',
+                        caption: 'entities.ibzemployee.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -93,7 +93,7 @@ const router = new Router({
                 {
                     path: 'ibzemployees/:ibzemployee?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.mpickupview.caption',
+                        caption: 'entities.ibzemployee.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -106,7 +106,7 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.sysrole.views.mpickupview.caption',
+                        caption: 'entities.sysrole.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -119,7 +119,7 @@ const router = new Router({
                 {
                     path: 'wfremodels/:wfremodel?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfremodel.views.editview.caption',
+                        caption: 'entities.wfremodel.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfremodels', parameterName: 'wfremodel' },
@@ -132,7 +132,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.pickupview.caption',
+                        caption: 'entities.ibzemployee.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -147,7 +147,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.pickupview.caption',
+                        caption: 'entities.ibzemployee.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -161,7 +161,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.pickupview.caption',
+                        caption: 'entities.ibzemployee.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -175,7 +175,7 @@ const router = new Router({
                 {
                     path: 'ibzemployees/:ibzemployee?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.pickupview.caption',
+                        caption: 'entities.ibzemployee.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -188,7 +188,7 @@ const router = new Router({
                 {
                     path: 'sysauthlogs/:sysauthlog?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysauthlog.views.gridview.caption',
+                        caption: 'entities.sysauthlog.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
@@ -201,7 +201,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.pickupgridview.caption',
+                        caption: 'entities.ibzemployee.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -216,7 +216,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.pickupgridview.caption',
+                        caption: 'entities.ibzemployee.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -230,7 +230,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.pickupgridview.caption',
+                        caption: 'entities.ibzemployee.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -244,7 +244,7 @@ const router = new Router({
                 {
                     path: 'ibzemployees/:ibzemployee?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.pickupgridview.caption',
+                        caption: 'entities.ibzemployee.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -257,7 +257,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzorganization.views.editview.caption',
+                        caption: 'entities.ibzorganization.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -270,7 +270,7 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.wfuser.views.mpickupview.caption',
+                        caption: 'entities.wfuser.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -283,7 +283,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/optionview/:optionview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.optionview.caption',
+                        caption: 'entities.ibzemployee.views.optionview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -298,7 +298,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/optionview/:optionview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.optionview.caption',
+                        caption: 'entities.ibzemployee.views.optionview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -312,7 +312,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/optionview/:optionview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.optionview.caption',
+                        caption: 'entities.ibzemployee.views.optionview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -326,7 +326,7 @@ const router = new Router({
                 {
                     path: 'ibzemployees/:ibzemployee?/optionview/:optionview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.optionview.caption',
+                        caption: 'entities.ibzemployee.views.optionview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -339,7 +339,7 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.sysuser.views.pickupview.caption',
+                        caption: 'entities.sysuser.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -352,7 +352,7 @@ const router = new Router({
                 {
                     path: 'wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfprocessdefinition.views.gridview.caption',
+                        caption: 'entities.wfprocessdefinition.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
@@ -365,7 +365,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.gridview.caption',
+                        caption: 'entities.ibzemployee.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -380,7 +380,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.gridview.caption',
+                        caption: 'entities.ibzemployee.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -394,7 +394,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.gridview.caption',
+                        caption: 'entities.ibzemployee.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -408,7 +408,7 @@ const router = new Router({
                 {
                     path: 'ibzemployees/:ibzemployee?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.gridview.caption',
+                        caption: 'entities.ibzemployee.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -421,7 +421,7 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.sysuser.views.mpickupview.caption',
+                        caption: 'entities.sysuser.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -434,7 +434,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.gridview.caption',
+                        caption: 'entities.ibzdeptmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -450,7 +450,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.gridview.caption',
+                        caption: 'entities.ibzdeptmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -465,7 +465,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.gridview.caption',
+                        caption: 'entities.ibzdeptmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -480,7 +480,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.gridview.caption',
+                        caption: 'entities.ibzdeptmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -495,7 +495,7 @@ const router = new Router({
                 {
                     path: 'ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.gridview.caption',
+                        caption: 'entities.ibzdeptmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -509,7 +509,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.gridview.caption',
+                        caption: 'entities.ibzdeptmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -523,7 +523,7 @@ const router = new Router({
                 {
                     path: 'ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.gridview.caption',
+                        caption: 'entities.ibzdeptmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
@@ -536,7 +536,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.pickupgridview.caption',
+                        caption: 'entities.ibzdepartment.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -550,7 +550,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.pickupgridview.caption',
+                        caption: 'entities.ibzdepartment.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -563,7 +563,7 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.gridview.caption',
+                        caption: 'entities.sysuserrole.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -577,7 +577,7 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/sysuserroles/:sysuserrole?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.gridview.caption',
+                        caption: 'entities.sysuserrole.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -591,7 +591,7 @@ const router = new Router({
                 {
                     path: 'sysuserroles/:sysuserrole?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.gridview.caption',
+                        caption: 'entities.sysuserrole.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -604,7 +604,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/optionview/:optionview?',
                     meta: {
-                        caption: 'entities.ibzorganization.views.optionview.caption',
+                        caption: 'entities.ibzorganization.views.optionview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -617,7 +617,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.pickupview.caption',
+                        caption: 'entities.ibzdepartment.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -631,7 +631,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.pickupview.caption',
+                        caption: 'entities.ibzdepartment.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -644,7 +644,7 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/wfmembers/:wfmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfmember.views.editview.caption',
+                        caption: 'entities.wfmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -658,7 +658,7 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/wfmembers/:wfmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfmember.views.editview.caption',
+                        caption: 'entities.wfmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -672,7 +672,7 @@ const router = new Router({
                 {
                     path: 'wfmembers/:wfmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfmember.views.editview.caption',
+                        caption: 'entities.wfmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -685,7 +685,7 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.sysrole.views.pickupgridview.caption',
+                        caption: 'entities.sysrole.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -698,7 +698,7 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/wfmembers/:wfmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
+                        caption: 'entities.wfmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -712,7 +712,7 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/wfmembers/:wfmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
+                        caption: 'entities.wfmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -726,7 +726,7 @@ const router = new Router({
                 {
                     path: 'wfmembers/:wfmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
+                        caption: 'entities.wfmember.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -739,7 +739,7 @@ const router = new Router({
                 {
                     path: 'wfprocessdefinitions/:wfprocessdefinition?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfprocessdefinition.views.editview.caption',
+                        caption: 'entities.wfprocessdefinition.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
@@ -752,7 +752,7 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.wfuser.views.pickupgridview.caption',
+                        caption: 'entities.wfuser.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -765,7 +765,7 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysrole.views.editview.caption',
+                        caption: 'entities.sysrole.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -778,7 +778,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.editview.caption',
+                        caption: 'entities.ibzemployee.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -793,7 +793,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.editview.caption',
+                        caption: 'entities.ibzemployee.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -807,7 +807,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.editview.caption',
+                        caption: 'entities.ibzemployee.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -821,7 +821,7 @@ const router = new Router({
                 {
                     path: 'ibzemployees/:ibzemployee?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzemployee.views.editview.caption',
+                        caption: 'entities.ibzemployee.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -834,7 +834,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/treeexpview/:treeexpview?',
                     meta: {
-                        caption: 'entities.ibzorganization.views.treeexpview.caption',
+                        caption: 'entities.ibzorganization.views.treeexpview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -847,7 +847,7 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.pickupgridview.caption',
+                        caption: 'entities.wfgroup.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -860,7 +860,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/optionview/:optionview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.optionview.caption',
+                        caption: 'entities.ibzdepartment.views.optionview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -874,7 +874,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/optionview/:optionview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.optionview.caption',
+                        caption: 'entities.ibzdepartment.views.optionview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -887,7 +887,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.editview.caption',
+                        caption: 'entities.ibzdepartment.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -901,7 +901,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.editview.caption',
+                        caption: 'entities.ibzdepartment.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -914,7 +914,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.mpickupview.caption',
+                        caption: 'entities.ibzdepartment.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -928,7 +928,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.mpickupview.caption',
+                        caption: 'entities.ibzdepartment.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -941,7 +941,7 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
+                        caption: 'entities.sysuserrole.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -955,7 +955,7 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/sysuserroles/:sysuserrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
+                        caption: 'entities.sysuserrole.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -969,7 +969,7 @@ const router = new Router({
                 {
                     path: 'sysuserroles/:sysuserrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
+                        caption: 'entities.sysuserrole.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -982,7 +982,7 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.editview.caption',
+                        caption: 'entities.wfgroup.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -995,7 +995,7 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
                     meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        caption: 'entities.sysrolepermission.views.customview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -1009,7 +1009,7 @@ const router = new Router({
                 {
                     path: 'syspermissions/:syspermission?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
                     meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        caption: 'entities.sysrolepermission.views.customview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'syspermissions', parameterName: 'syspermission' },
@@ -1023,7 +1023,7 @@ const router = new Router({
                 {
                     path: 'sysrolepermissions/:sysrolepermission?/customview/:customview?',
                     meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        caption: 'entities.sysrolepermission.views.customview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
@@ -1036,7 +1036,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/treeexpview/:treeexpview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.treeexpview.caption',
+                        caption: 'entities.ibzdepartment.views.treeexpview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -1050,7 +1050,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/treeexpview/:treeexpview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.treeexpview.caption',
+                        caption: 'entities.ibzdepartment.views.treeexpview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1063,7 +1063,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.editview.caption',
+                        caption: 'entities.ibzdeptmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -1079,7 +1079,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.editview.caption',
+                        caption: 'entities.ibzdeptmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -1094,7 +1094,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.editview.caption',
+                        caption: 'entities.ibzdeptmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -1109,7 +1109,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.editview.caption',
+                        caption: 'entities.ibzdeptmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1124,7 +1124,7 @@ const router = new Router({
                 {
                     path: 'ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.editview.caption',
+                        caption: 'entities.ibzdeptmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -1138,7 +1138,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.editview.caption',
+                        caption: 'entities.ibzdeptmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1152,7 +1152,7 @@ const router = new Router({
                 {
                     path: 'ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.ibzdeptmember.views.editview.caption',
+                        caption: 'entities.ibzdeptmember.views.editview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
@@ -1165,7 +1165,7 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.sysrole.views.pickupview.caption',
+                        caption: 'entities.sysrole.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -1178,7 +1178,7 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysrole.views.gridview.caption',
+                        caption: 'entities.sysrole.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -1186,12 +1186,12 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-rolegrid-view/sys-rolegrid-view.vue'),
+                    component: () => import('@pages/uaa/sys-role-grid-view/sys-role-grid-view.vue'),
                 },
                 {
                     path: 'wfgroups/:wfgroup?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.mpickupview.caption',
+                        caption: 'entities.wfgroup.views.mpickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -1204,7 +1204,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.ibzorganization.views.pickupview.caption',
+                        caption: 'entities.ibzorganization.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -1217,7 +1217,7 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.gridview.caption',
+                        caption: 'entities.wfgroup.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -1230,7 +1230,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.ibzorganization.views.pickupgridview.caption',
+                        caption: 'entities.ibzorganization.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -1243,7 +1243,7 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.wfuser.views.pickupview.caption',
+                        caption: 'entities.wfuser.views.pickupview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -1256,7 +1256,7 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.sysuser.views.pickupgridview.caption',
+                        caption: 'entities.sysuser.views.pickupgridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -1269,7 +1269,7 @@ const router = new Router({
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.gridview.caption',
+                        caption: 'entities.ibzdepartment.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
@@ -1283,7 +1283,7 @@ const router = new Router({
                 {
                     path: 'ibzdepartments/:ibzdepartment?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.ibzdepartment.views.gridview.caption',
+                        caption: 'entities.ibzdepartment.views.gridview.title',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1299,7 +1299,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.pickupview.caption',
+            caption: 'entities.ibzdepartment.views.pickupview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1312,7 +1312,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.pickupview.caption',
+            caption: 'entities.ibzdepartment.views.pickupview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -1324,7 +1324,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzemployee.views.editview.caption',
+            caption: 'entities.ibzemployee.views.editview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1338,7 +1338,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzemployee.views.editview.caption',
+            caption: 'entities.ibzemployee.views.editview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -1351,7 +1351,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzemployee.views.editview.caption',
+            caption: 'entities.ibzemployee.views.editview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -1364,7 +1364,7 @@ const router = new Router({
     {
         path: '/ibzemployees/:ibzemployee?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzemployee.views.editview.caption',
+            caption: 'entities.ibzemployee.views.editview.title',
             parameters: [
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -1376,7 +1376,7 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/wfmembers/:wfmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfmember.views.gridview.caption',
+            caption: 'entities.wfmember.views.gridview.title',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -1389,7 +1389,7 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/wfmembers/:wfmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfmember.views.gridview.caption',
+            caption: 'entities.wfmember.views.gridview.title',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -1402,7 +1402,7 @@ const router = new Router({
     {
         path: '/wfmembers/:wfmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfmember.views.gridview.caption',
+            caption: 'entities.wfmember.views.gridview.title',
             parameters: [
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -1414,19 +1414,19 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysrole.views.gridview.caption',
+            caption: 'entities.sysrole.views.gridview.title',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-rolegrid-view/sys-rolegrid-view.vue'),
+        component: () => import('@pages/uaa/sys-role-grid-view/sys-role-grid-view.vue'),
     },
     {
         path: '/wfgroups/:wfgroup?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.wfgroup.views.pickupgridview.caption',
+            caption: 'entities.wfgroup.views.pickupgridview.title',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -1438,7 +1438,7 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.sysuser.views.mpickupview.caption',
+            caption: 'entities.sysuser.views.mpickupview.title',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -1450,7 +1450,7 @@ const router = new Router({
     {
         path: '/sysauthlogs/:sysauthlog?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysauthlog.views.gridview.caption',
+            caption: 'entities.sysauthlog.views.gridview.title',
             parameters: [
                 { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -1462,7 +1462,7 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.sysrole.views.pickupview.caption',
+            caption: 'entities.sysrole.views.pickupview.title',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -1474,7 +1474,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/optionview/:optionview?',
         meta: {
-            caption: 'entities.ibzorganization.views.optionview.caption',
+            caption: 'entities.ibzorganization.views.optionview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'optionview', parameterName: 'optionview' },
@@ -1486,7 +1486,7 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.sysuser.views.pickupview.caption',
+            caption: 'entities.sysuser.views.pickupview.title',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -1498,7 +1498,7 @@ const router = new Router({
     {
         path: '/wfprocessdefinitions/:wfprocessdefinition?/editview/:editview?',
         meta: {
-            caption: 'entities.wfprocessdefinition.views.editview.caption',
+            caption: 'entities.wfprocessdefinition.views.editview.title',
             parameters: [
                 { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -1510,7 +1510,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzemployee.views.gridview.caption',
+            caption: 'entities.ibzemployee.views.gridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1524,7 +1524,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzemployee.views.gridview.caption',
+            caption: 'entities.ibzemployee.views.gridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -1537,7 +1537,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzemployee.views.gridview.caption',
+            caption: 'entities.ibzemployee.views.gridview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -1550,7 +1550,7 @@ const router = new Router({
     {
         path: '/ibzemployees/:ibzemployee?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzemployee.views.gridview.caption',
+            caption: 'entities.ibzemployee.views.gridview.title',
             parameters: [
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -1562,7 +1562,7 @@ const router = new Router({
     {
         path: '/wfremodels/:wfremodel?/editview/:editview?',
         meta: {
-            caption: 'entities.wfremodel.views.editview.caption',
+            caption: 'entities.wfremodel.views.editview.title',
             parameters: [
                 { pathName: 'wfremodels', parameterName: 'wfremodel' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -1574,7 +1574,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.gridview.caption',
+            caption: 'entities.ibzdeptmember.views.gridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1589,7 +1589,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.gridview.caption',
+            caption: 'entities.ibzdeptmember.views.gridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -1603,7 +1603,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.gridview.caption',
+            caption: 'entities.ibzdeptmember.views.gridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1617,7 +1617,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.gridview.caption',
+            caption: 'entities.ibzdeptmember.views.gridview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -1631,7 +1631,7 @@ const router = new Router({
     {
         path: '/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.gridview.caption',
+            caption: 'entities.ibzdeptmember.views.gridview.title',
             parameters: [
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
                 { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
@@ -1644,7 +1644,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.gridview.caption',
+            caption: 'entities.ibzdeptmember.views.gridview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
@@ -1657,7 +1657,7 @@ const router = new Router({
     {
         path: '/ibzdeptmembers/:ibzdeptmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.gridview.caption',
+            caption: 'entities.ibzdeptmember.views.gridview.title',
             parameters: [
                 { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -1669,7 +1669,7 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.wfuser.views.pickupview.caption',
+            caption: 'entities.wfuser.views.pickupview.title',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -1681,7 +1681,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/treeexpview/:treeexpview?',
         meta: {
-            caption: 'entities.ibzorganization.views.treeexpview.caption',
+            caption: 'entities.ibzorganization.views.treeexpview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'treeexpview', parameterName: 'treeexpview' },
@@ -1693,7 +1693,7 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/sysuserroles/:sysuserrole?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysuserrole.views.gridview.caption',
+            caption: 'entities.sysuserrole.views.gridview.title',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -1706,7 +1706,7 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/sysuserroles/:sysuserrole?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysuserrole.views.gridview.caption',
+            caption: 'entities.sysuserrole.views.gridview.title',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -1719,7 +1719,7 @@ const router = new Router({
     {
         path: '/sysuserroles/:sysuserrole?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysuserrole.views.gridview.caption',
+            caption: 'entities.sysuserrole.views.gridview.title',
             parameters: [
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -1731,7 +1731,7 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.sysuser.views.pickupgridview.caption',
+            caption: 'entities.sysuser.views.pickupgridview.title',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -1743,7 +1743,7 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/editview/:editview?',
         meta: {
-            caption: 'entities.sysrole.views.editview.caption',
+            caption: 'entities.sysrole.views.editview.title',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -1755,7 +1755,7 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/wfmembers/:wfmember?/editview/:editview?',
         meta: {
-            caption: 'entities.wfmember.views.editview.caption',
+            caption: 'entities.wfmember.views.editview.title',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -1768,7 +1768,7 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/wfmembers/:wfmember?/editview/:editview?',
         meta: {
-            caption: 'entities.wfmember.views.editview.caption',
+            caption: 'entities.wfmember.views.editview.title',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -1781,7 +1781,7 @@ const router = new Router({
     {
         path: '/wfmembers/:wfmember?/editview/:editview?',
         meta: {
-            caption: 'entities.wfmember.views.editview.caption',
+            caption: 'entities.wfmember.views.editview.title',
             parameters: [
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -1793,7 +1793,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.gridview.caption',
+            caption: 'entities.ibzdepartment.views.gridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1806,7 +1806,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.gridview.caption',
+            caption: 'entities.ibzdepartment.views.gridview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -1818,7 +1818,7 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.sysrole.views.pickupgridview.caption',
+            caption: 'entities.sysrole.views.pickupgridview.title',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -1830,7 +1830,7 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.wfuser.views.mpickupview.caption',
+            caption: 'entities.wfuser.views.mpickupview.title',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -1842,7 +1842,7 @@ const router = new Router({
     {
         path: '/syspermissions/:syspermission?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.syspermission.views.mpickupview.caption',
+            caption: 'entities.syspermission.views.mpickupview.title',
             parameters: [
                 { pathName: 'syspermissions', parameterName: 'syspermission' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -1854,7 +1854,7 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.wfgroup.views.mpickupview.caption',
+            caption: 'entities.wfgroup.views.mpickupview.title',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -1866,7 +1866,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.editview.caption',
+            caption: 'entities.ibzdepartment.views.editview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1879,7 +1879,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.editview.caption',
+            caption: 'entities.ibzdepartment.views.editview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -1891,7 +1891,7 @@ const router = new Router({
     {
         path: '/syspermissions/:syspermission?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.syspermission.views.pickupgridview.caption',
+            caption: 'entities.syspermission.views.pickupgridview.title',
             parameters: [
                 { pathName: 'syspermissions', parameterName: 'syspermission' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -1903,7 +1903,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzorganization.views.editview.caption',
+            caption: 'entities.ibzorganization.views.editview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -1915,7 +1915,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.mpickupview.caption',
+            caption: 'entities.ibzdepartment.views.mpickupview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1928,7 +1928,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.mpickupview.caption',
+            caption: 'entities.ibzdepartment.views.mpickupview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -1940,7 +1940,7 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
         meta: {
-            caption: 'entities.sysrolepermission.views.customview.caption',
+            caption: 'entities.sysrolepermission.views.customview.title',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
@@ -1953,7 +1953,7 @@ const router = new Router({
     {
         path: '/syspermissions/:syspermission?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
         meta: {
-            caption: 'entities.sysrolepermission.views.customview.caption',
+            caption: 'entities.sysrolepermission.views.customview.title',
             parameters: [
                 { pathName: 'syspermissions', parameterName: 'syspermission' },
                 { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
@@ -1966,7 +1966,7 @@ const router = new Router({
     {
         path: '/sysrolepermissions/:sysrolepermission?/customview/:customview?',
         meta: {
-            caption: 'entities.sysrolepermission.views.customview.caption',
+            caption: 'entities.sysrolepermission.views.customview.title',
             parameters: [
                 { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
                 { pathName: 'customview', parameterName: 'customview' },
@@ -1978,7 +1978,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/optionview/:optionview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.optionview.caption',
+            caption: 'entities.ibzdepartment.views.optionview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -1991,7 +1991,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/optionview/:optionview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.optionview.caption',
+            caption: 'entities.ibzdepartment.views.optionview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'optionview', parameterName: 'optionview' },
@@ -2003,7 +2003,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/optionview/:optionview?',
         meta: {
-            caption: 'entities.ibzemployee.views.optionview.caption',
+            caption: 'entities.ibzemployee.views.optionview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -2017,7 +2017,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/optionview/:optionview?',
         meta: {
-            caption: 'entities.ibzemployee.views.optionview.caption',
+            caption: 'entities.ibzemployee.views.optionview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2030,7 +2030,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/optionview/:optionview?',
         meta: {
-            caption: 'entities.ibzemployee.views.optionview.caption',
+            caption: 'entities.ibzemployee.views.optionview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2043,7 +2043,7 @@ const router = new Router({
     {
         path: '/ibzemployees/:ibzemployee?/optionview/:optionview?',
         meta: {
-            caption: 'entities.ibzemployee.views.optionview.caption',
+            caption: 'entities.ibzemployee.views.optionview.title',
             parameters: [
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
                 { pathName: 'optionview', parameterName: 'optionview' },
@@ -2055,7 +2055,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.ibzemployee.views.pickupview.caption',
+            caption: 'entities.ibzemployee.views.pickupview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -2069,7 +2069,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.ibzemployee.views.pickupview.caption',
+            caption: 'entities.ibzemployee.views.pickupview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2082,7 +2082,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.ibzemployee.views.pickupview.caption',
+            caption: 'entities.ibzemployee.views.pickupview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2095,7 +2095,7 @@ const router = new Router({
     {
         path: '/ibzemployees/:ibzemployee?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.ibzemployee.views.pickupview.caption',
+            caption: 'entities.ibzemployee.views.pickupview.title',
             parameters: [
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -2107,7 +2107,7 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.sysrole.views.mpickupview.caption',
+            caption: 'entities.sysrole.views.mpickupview.title',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -2119,7 +2119,7 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/editview/:editview?',
         meta: {
-            caption: 'entities.wfgroup.views.editview.caption',
+            caption: 'entities.wfgroup.views.editview.title',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -2131,7 +2131,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.editview.caption',
+            caption: 'entities.ibzdeptmember.views.editview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -2146,7 +2146,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.editview.caption',
+            caption: 'entities.ibzdeptmember.views.editview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2160,7 +2160,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.editview.caption',
+            caption: 'entities.ibzdeptmember.views.editview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -2174,7 +2174,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.editview.caption',
+            caption: 'entities.ibzdeptmember.views.editview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2188,7 +2188,7 @@ const router = new Router({
     {
         path: '/ibzemployees/:ibzemployee?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.editview.caption',
+            caption: 'entities.ibzdeptmember.views.editview.title',
             parameters: [
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
                 { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
@@ -2201,7 +2201,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.editview.caption',
+            caption: 'entities.ibzdeptmember.views.editview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
@@ -2214,7 +2214,7 @@ const router = new Router({
     {
         path: '/ibzdeptmembers/:ibzdeptmember?/editview/:editview?',
         meta: {
-            caption: 'entities.ibzdeptmember.views.editview.caption',
+            caption: 'entities.ibzdeptmember.views.editview.title',
             parameters: [
                 { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -2226,7 +2226,7 @@ const router = new Router({
     {
         path: '/wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfprocessdefinition.views.gridview.caption',
+            caption: 'entities.wfprocessdefinition.views.gridview.title',
             parameters: [
                 { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -2238,7 +2238,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/treeexpview/:treeexpview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.treeexpview.caption',
+            caption: 'entities.ibzdepartment.views.treeexpview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -2251,7 +2251,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/treeexpview/:treeexpview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.treeexpview.caption',
+            caption: 'entities.ibzdepartment.views.treeexpview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'treeexpview', parameterName: 'treeexpview' },
@@ -2263,7 +2263,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/gridview/:gridview?',
         meta: {
-            caption: 'entities.ibzorganization.views.gridview.caption',
+            caption: 'entities.ibzorganization.views.gridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -2275,7 +2275,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.ibzemployee.views.pickupgridview.caption',
+            caption: 'entities.ibzemployee.views.pickupgridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -2289,7 +2289,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.ibzemployee.views.pickupgridview.caption',
+            caption: 'entities.ibzemployee.views.pickupgridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2302,7 +2302,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.ibzemployee.views.pickupgridview.caption',
+            caption: 'entities.ibzemployee.views.pickupgridview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2315,7 +2315,7 @@ const router = new Router({
     {
         path: '/ibzemployees/:ibzemployee?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.ibzemployee.views.pickupgridview.caption',
+            caption: 'entities.ibzemployee.views.pickupgridview.title',
             parameters: [
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -2327,7 +2327,7 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.wfuser.views.pickupgridview.caption',
+            caption: 'entities.wfuser.views.pickupgridview.title',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -2339,7 +2339,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.ibzorganization.views.pickupview.caption',
+            caption: 'entities.ibzorganization.views.pickupview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -2351,7 +2351,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.ibzorganization.views.pickupgridview.caption',
+            caption: 'entities.ibzorganization.views.pickupgridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -2363,7 +2363,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.ibzemployee.views.mpickupview.caption',
+            caption: 'entities.ibzemployee.views.mpickupview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -2377,7 +2377,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.ibzemployee.views.mpickupview.caption',
+            caption: 'entities.ibzemployee.views.mpickupview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2390,7 +2390,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.ibzemployee.views.mpickupview.caption',
+            caption: 'entities.ibzemployee.views.mpickupview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
@@ -2403,7 +2403,7 @@ const router = new Router({
     {
         path: '/ibzemployees/:ibzemployee?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.ibzemployee.views.mpickupview.caption',
+            caption: 'entities.ibzemployee.views.mpickupview.title',
             parameters: [
                 { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -2415,7 +2415,7 @@ const router = new Router({
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.pickupgridview.caption',
+            caption: 'entities.ibzdepartment.views.pickupgridview.title',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
@@ -2428,7 +2428,7 @@ const router = new Router({
     {
         path: '/ibzdepartments/:ibzdepartment?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.ibzdepartment.views.pickupgridview.caption',
+            caption: 'entities.ibzdepartment.views.pickupgridview.title',
             parameters: [
                 { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -2440,7 +2440,7 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
         meta: {
-            caption: 'entities.sysuserrole.views.editview.caption',
+            caption: 'entities.sysuserrole.views.editview.title',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -2453,7 +2453,7 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/sysuserroles/:sysuserrole?/editview/:editview?',
         meta: {
-            caption: 'entities.sysuserrole.views.editview.caption',
+            caption: 'entities.sysuserrole.views.editview.title',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -2466,7 +2466,7 @@ const router = new Router({
     {
         path: '/sysuserroles/:sysuserrole?/editview/:editview?',
         meta: {
-            caption: 'entities.sysuserrole.views.editview.caption',
+            caption: 'entities.sysuserrole.views.editview.title',
             parameters: [
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -2478,7 +2478,7 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfgroup.views.gridview.caption',
+            caption: 'entities.wfgroup.views.gridview.title',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'gridview', parameterName: 'gridview' },

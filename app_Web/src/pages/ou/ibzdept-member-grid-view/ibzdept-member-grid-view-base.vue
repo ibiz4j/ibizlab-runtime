@@ -74,13 +74,6 @@
                                 </dropdown-item>
                             </dropdown-menu>
                         </dropdown>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem18.visabled" :disabled="toolBarModels.tbitem18.disabled" class='' @click="toolbar_click({ tag: 'tbitem18' }, $event)">
-                                    <i class='fa fa-question'></i>
-                                    <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem18.caption')}}</span>
-                                </i-button>
-                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem18.tip')}}</div>
-                        </tooltip>
                     </div>
                 </div>
             </div>
@@ -257,10 +250,12 @@ export default class IBZDeptMemberGridViewBase extends Vue {
     onViewData(newVal: any, oldVal: any) {
         const _this: any = this;
         if (!Object.is(newVal, oldVal) && _this.engine) {
-            _this.parseViewParam();
-            _this.engine.load();
+            this.$nextTick(()=>{
+              _this.parseViewParam();
+              _this.engine.load();
+              
+            });
         }
-        
     }
 
     /**
@@ -323,9 +318,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
 
  tbitem23: { name: 'tbitem23', caption: '数据导入', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Import', target: '' } },
 
-
-        tbitem17: {  name: 'tbitem17', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem18: { name: 'tbitem18', caption: '帮助', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Help', target: '' } },
 
     };
 
@@ -397,6 +389,9 @@ export default class IBZDeptMemberGridViewBase extends Vue {
             }
             if(this.context && this.context.srfparentkey){
                 Object.assign(this.viewparams,{srfparentkey:this.context.srfparentkey});
+            }
+            if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
+                Object.assign(this.context,this.$store.getters.getAppData().context);
             }
             this.handleCustomViewData();
             return;
@@ -608,9 +603,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         }
         if (Object.is($event.tag, 'tbitem19')) {
             this.toolbar_tbitem19_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem18')) {
-            this.toolbar_tbitem18_click(null, '', $event2);
         }
     }
 
@@ -1025,35 +1017,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
     }
 
     /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem18_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.Help(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
-
-    /**
      * 打开新建数据视图
      *
      * @param {any[]} args
@@ -1402,20 +1365,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         if (_this.hasOwnProperty('isExpandSearchForm')) {
             _this.isExpandSearchForm = !_this.isExpandSearchForm;
         }
-    }
-    /**
-     * 帮助
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public Help(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '帮助未支持' });
     }
 
     /**

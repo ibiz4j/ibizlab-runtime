@@ -108,10 +108,6 @@ export default {
 			caption: '过滤',
 			tip: '过滤',
 		},
-		tbitem18: {
-			caption: '帮助',
-			tip: '帮助',
-		},
 	},
 	editviewtoolbar_toolbar: {
 		tbitem3: {
@@ -122,33 +118,9 @@ export default {
 			caption: '-',
 			tip: '',
 		},
-		tbitem7: {
-			caption: '删除',
-			tip: '删除',
-		},
-		tbitem8: {
-			caption: '-',
-			tip: '',
-		},
-		tbitem12: {
-			caption: '新建',
-			tip: '新建',
-		},
-		tbitem13: {
-			caption: '-',
-			tip: '',
-		},
 		tbitem14: {
 			caption: '拷贝',
 			tip: '拷贝',
-		},
-		tbitem16: {
-			caption: '-',
-			tip: '',
-		},
-		tbitem22: {
-			caption: '帮助',
-			tip: '帮助',
 		},
 	},
 };

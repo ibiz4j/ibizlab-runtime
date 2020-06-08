@@ -122,33 +122,9 @@ export default {
 			caption: "-",
 			tip: "",
 		},
-		tbitem7: {
-			caption: "Remove And Close",
-			tip: "Remove And Close Window",
-		},
-		tbitem8: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem12: {
-			caption: "New",
-			tip: "New",
-		},
-		tbitem13: {
-			caption: "-",
-			tip: "",
-		},
 		tbitem14: {
 			caption: "Copy",
 			tip: "Copy {0}",
-		},
-		tbitem16: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem22: {
-			caption: "Help",
-			tip: "Help",
 		},
 	},
 	gridviewtoolbar_toolbar: {
@@ -159,10 +135,6 @@ export default {
 		tbitem2: {
 			caption: "-",
 			tip: "",
-		},
-		tbitem3: {
-			caption: "New",
-			tip: "New",
 		},
 		tbitem4: {
 			caption: "Edit",
@@ -211,10 +183,6 @@ export default {
 		tbitem19: {
 			caption: "Filter",
 			tip: "Filter",
-		},
-		tbitem18: {
-			caption: "Help",
-			tip: "Help",
 		},
 	},
 	orgtree_treeview: {

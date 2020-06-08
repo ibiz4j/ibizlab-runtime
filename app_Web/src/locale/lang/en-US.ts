@@ -1,18 +1,18 @@
-import sysrolepermission_en_US from '@locale/lanres/sys-role-permission/sys-role-permission_en_US';
-import sysuser_en_US from '@locale/lanres/sys-user/sys-user_en_US';
-import sysauthlog_en_US from '@locale/lanres/sys-auth-log/sys-auth-log_en_US';
-import wfmember_en_US from '@locale/lanres/wfmember/wfmember_en_US';
-import wfuser_en_US from '@locale/lanres/wfuser/wfuser_en_US';
-import ibzorganization_en_US from '@locale/lanres/ibzorganization/ibzorganization_en_US';
-import wfgroup_en_US from '@locale/lanres/wfgroup/wfgroup_en_US';
-import wfremodel_en_US from '@locale/lanres/wfremodel/wfremodel_en_US';
-import sysuserrole_en_US from '@locale/lanres/sys-user-role/sys-user-role_en_US';
-import wfprocessdefinition_en_US from '@locale/lanres/wfprocess-definition/wfprocess-definition_en_US';
-import sysrole_en_US from '@locale/lanres/sys-role/sys-role_en_US';
-import ibzdeptmember_en_US from '@locale/lanres/ibzdept-member/ibzdept-member_en_US';
-import ibzdepartment_en_US from '@locale/lanres/ibzdepartment/ibzdepartment_en_US';
-import syspermission_en_US from '@locale/lanres/sys-permission/sys-permission_en_US';
-import ibzemployee_en_US from '@locale/lanres/ibzemployee/ibzemployee_en_US';
+import sysrolepermission_en_US from '@locale/lanres/entities/sys-role-permission/sys-role-permission_en_US';
+import sysuser_en_US from '@locale/lanres/entities/sys-user/sys-user_en_US';
+import sysauthlog_en_US from '@locale/lanres/entities/sys-auth-log/sys-auth-log_en_US';
+import wfmember_en_US from '@locale/lanres/entities/wfmember/wfmember_en_US';
+import wfuser_en_US from '@locale/lanres/entities/wfuser/wfuser_en_US';
+import ibzorganization_en_US from '@locale/lanres/entities/ibzorganization/ibzorganization_en_US';
+import wfgroup_en_US from '@locale/lanres/entities/wfgroup/wfgroup_en_US';
+import wfremodel_en_US from '@locale/lanres/entities/wfremodel/wfremodel_en_US';
+import sysuserrole_en_US from '@locale/lanres/entities/sys-user-role/sys-user-role_en_US';
+import wfprocessdefinition_en_US from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_en_US';
+import sysrole_en_US from '@locale/lanres/entities/sys-role/sys-role_en_US';
+import ibzdeptmember_en_US from '@locale/lanres/entities/ibzdept-member/ibzdept-member_en_US';
+import ibzdepartment_en_US from '@locale/lanres/entities/ibzdepartment/ibzdepartment_en_US';
+import syspermission_en_US from '@locale/lanres/entities/sys-permission/sys-permission_en_US';
+import ibzemployee_en_US from '@locale/lanres/entities/ibzemployee/ibzemployee_en_US';
 import components_en_US from '@locale/lanres/components/components_en_US';
 import codelist_en_US from '@locale/lanres/codelist/codelist_en_US';
 import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';
@@ -24,6 +24,9 @@ export default {
             success: 'Success',
             ok: 'OK',
             cancel: 'Cancel',
+        },
+        local:{
+            new: 'New'
         },
         gridpage: {
             choicecolumns: 'Choice columns',

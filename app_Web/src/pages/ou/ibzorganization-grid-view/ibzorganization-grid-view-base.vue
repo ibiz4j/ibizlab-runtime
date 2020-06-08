@@ -20,13 +20,6 @@
                             <div slot='content'>{{$t('entities.ibzorganization.gridviewtoolbar_toolbar.tbitem1_opennewcreateview.tip')}}</div>
                         </tooltip>
                         <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
-                                    <i class='fa fa-file-text-o'></i>
-                                    <span class='caption'>{{$t('entities.ibzorganization.gridviewtoolbar_toolbar.tbitem3.caption')}}</span>
-                                </i-button>
-                            <div slot='content'>{{$t('entities.ibzorganization.gridviewtoolbar_toolbar.tbitem3.tip')}}</div>
-                        </tooltip>
-                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' @click="toolbar_click({ tag: 'tbitem4' }, $event)">
                                     <i class='fa fa-edit'></i>
                                     <span class='caption'>{{$t('entities.ibzorganization.gridviewtoolbar_toolbar.tbitem4.caption')}}</span>
@@ -91,13 +84,6 @@
                                     <span class='caption'>{{$t('entities.ibzorganization.gridviewtoolbar_toolbar.tbitem19.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.ibzorganization.gridviewtoolbar_toolbar.tbitem19.tip')}}</div>
-                        </tooltip>
-                        <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem18.visabled" :disabled="toolBarModels.tbitem18.disabled" class='' @click="toolbar_click({ tag: 'tbitem18' }, $event)">
-                                    <i class='fa fa-question'></i>
-                                    <span class='caption'>{{$t('entities.ibzorganization.gridviewtoolbar_toolbar.tbitem18.caption')}}</span>
-                                </i-button>
-                            <div slot='content'>{{$t('entities.ibzorganization.gridviewtoolbar_toolbar.tbitem18.tip')}}</div>
                         </tooltip>
                     </div>
                 </div>
@@ -292,10 +278,12 @@ export default class IBZOrganizationGridViewBase extends Vue {
     onViewData(newVal: any, oldVal: any) {
         const _this: any = this;
         if (!Object.is(newVal, oldVal) && _this.engine) {
-            _this.parseViewParam();
-            _this.engine.load();
+            this.$nextTick(()=>{
+              _this.parseViewParam();
+              _this.engine.load();
+              
+            });
         }
-        
     }
 
     /**
@@ -344,8 +332,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         tbitem1_opennewcreateview: { name: 'tbitem1_opennewcreateview', caption: '快速新建', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'OpenNewCreateView', target: 'NONE' } },
 
         tbitem2: {  name: 'tbitem2', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem3: { name: 'tbitem3', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'New', target: '' } },
-
         tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
         tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
@@ -365,8 +351,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
 
         tbitem17: {  name: 'tbitem17', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
         tbitem19: { name: 'tbitem19', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
-
-        tbitem18: { name: 'tbitem18', caption: '帮助', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Help', target: '' } },
 
     };
 
@@ -439,6 +423,9 @@ export default class IBZOrganizationGridViewBase extends Vue {
             }
             if(this.context && this.context.srfparentkey){
                 Object.assign(this.viewparams,{srfparentkey:this.context.srfparentkey});
+            }
+            if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
+                Object.assign(this.context,this.$store.getters.getAppData().context);
             }
             this.handleCustomViewData();
             return;
@@ -618,9 +605,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         if (Object.is($event.tag, 'tbitem1_opennewcreateview')) {
             this.toolbar_tbitem1_opennewcreateview_click(null, '', $event2);
         }
-        if (Object.is($event.tag, 'tbitem3')) {
-            this.toolbar_tbitem3_click(null, '', $event2);
-        }
         if (Object.is($event.tag, 'tbitem4')) {
             this.toolbar_tbitem4_click(null, '', $event2);
         }
@@ -653,9 +637,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         }
         if (Object.is($event.tag, 'tbitem19')) {
             this.toolbar_tbitem19_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem18')) {
-            this.toolbar_tbitem18_click(null, '', $event2);
         }
     }
 
@@ -785,35 +766,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // 界面行为
         const curUIService:IBZOrganizationUIService  = new IBZOrganizationUIService();
         curUIService.IBZOrganization_OpenNewCreateView(datas,contextJO, paramJO,  $event, xData,this,"IBZOrganization");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem3_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.New(datas, contextJO,paramJO,  $event, xData,this,"IBZOrganization");
     }
 
     /**
@@ -1136,35 +1088,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
     }
 
     /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem18_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.Help(datas, contextJO,paramJO,  $event, xData,this,"IBZOrganization");
-    }
-
-    /**
      * 打开新建数据视图
      *
      * @param {any[]} args
@@ -1180,6 +1103,7 @@ export default class IBZOrganizationGridViewBase extends Vue {
             data.srfsourcekey = args[0].srfsourcekey;
         }
         let curViewParam = JSON.parse(JSON.stringify(this.context));
+        delete curViewParam.ibzorganization;
         if(args.length >0){
             Object.assign(curViewParam,args[0]);
         }
@@ -1255,26 +1179,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
     }
 
 
-    /**
-     * 新建
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZOrganizationGridViewBase
-     */
-    public New(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-         const _this: any = this;
-        if (_this.newdata && _this.newdata instanceof Function) {
-            const data: any = {};
-            _this.newdata([{ ...data }],[{ ...data }], params, $event, xData);
-        } else {
-            _this.$Notice.error({ title: '错误', desc: 'newdata 视图处理逻辑不存在，请添加!' });
-        }
-    }
     /**
      * 编辑
      *
@@ -1498,20 +1402,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         if (_this.hasOwnProperty('isExpandSearchForm')) {
             _this.isExpandSearchForm = !_this.isExpandSearchForm;
         }
-    }
-    /**
-     * 帮助
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZOrganizationGridViewBase
-     */
-    public Help(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '帮助未支持' });
     }
 
     /**

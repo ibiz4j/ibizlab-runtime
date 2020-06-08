@@ -32,7 +32,18 @@
 </i-col>
 <i-col v-show="detailsModel.modelenable.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='modelenable' :itemRules="this.rules.modelenable" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.modelenable')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.modelenable.error" :isEmptyCaption="false" labelPos="LEFT">
-     <dropdown-list v-model="data.modelenable" :data="data" :itemParam="{}" :disabled="detailsModel.modelenable.disabled" style="width:100px;width: 100px;" tag='YesNo' codelistType='STATIC'  placeholder='请选择...'></dropdown-list>
+     <dropdown-list 
+  v-model="data.modelenable" 
+  :data="data" 
+  :context="context"
+  :viewparams="viewparams"
+  :itemParam="{}" 
+  :disabled="detailsModel.modelenable.disabled" 
+  style="width:100px;width: 100px;" 
+  tag='YesNo' 
+  codelistType='STATIC'
+  placeholder='请选择...'>
+ </dropdown-list>
 </app-form-item>
 
 </i-col>

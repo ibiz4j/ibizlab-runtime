@@ -1,18 +1,18 @@
-import sysrolepermission_zh_CN from '@locale/lanres/sys-role-permission/sys-role-permission_zh_CN';
-import sysuser_zh_CN from '@locale/lanres/sys-user/sys-user_zh_CN';
-import sysauthlog_zh_CN from '@locale/lanres/sys-auth-log/sys-auth-log_zh_CN';
-import wfmember_zh_CN from '@locale/lanres/wfmember/wfmember_zh_CN';
-import wfuser_zh_CN from '@locale/lanres/wfuser/wfuser_zh_CN';
-import ibzorganization_zh_CN from '@locale/lanres/ibzorganization/ibzorganization_zh_CN';
-import wfgroup_zh_CN from '@locale/lanres/wfgroup/wfgroup_zh_CN';
-import wfremodel_zh_CN from '@locale/lanres/wfremodel/wfremodel_zh_CN';
-import sysuserrole_zh_CN from '@locale/lanres/sys-user-role/sys-user-role_zh_CN';
-import wfprocessdefinition_zh_CN from '@locale/lanres/wfprocess-definition/wfprocess-definition_zh_CN';
-import sysrole_zh_CN from '@locale/lanres/sys-role/sys-role_zh_CN';
-import ibzdeptmember_zh_CN from '@locale/lanres/ibzdept-member/ibzdept-member_zh_CN';
-import ibzdepartment_zh_CN from '@locale/lanres/ibzdepartment/ibzdepartment_zh_CN';
-import syspermission_zh_CN from '@locale/lanres/sys-permission/sys-permission_zh_CN';
-import ibzemployee_zh_CN from '@locale/lanres/ibzemployee/ibzemployee_zh_CN';
+import sysrolepermission_zh_CN from '@locale/lanres/entities/sys-role-permission/sys-role-permission_zh_CN';
+import sysuser_zh_CN from '@locale/lanres/entities/sys-user/sys-user_zh_CN';
+import sysauthlog_zh_CN from '@locale/lanres/entities/sys-auth-log/sys-auth-log_zh_CN';
+import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
+import wfuser_zh_CN from '@locale/lanres/entities/wfuser/wfuser_zh_CN';
+import ibzorganization_zh_CN from '@locale/lanres/entities/ibzorganization/ibzorganization_zh_CN';
+import wfgroup_zh_CN from '@locale/lanres/entities/wfgroup/wfgroup_zh_CN';
+import wfremodel_zh_CN from '@locale/lanres/entities/wfremodel/wfremodel_zh_CN';
+import sysuserrole_zh_CN from '@locale/lanres/entities/sys-user-role/sys-user-role_zh_CN';
+import wfprocessdefinition_zh_CN from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_zh_CN';
+import sysrole_zh_CN from '@locale/lanres/entities/sys-role/sys-role_zh_CN';
+import ibzdeptmember_zh_CN from '@locale/lanres/entities/ibzdept-member/ibzdept-member_zh_CN';
+import ibzdepartment_zh_CN from '@locale/lanres/entities/ibzdepartment/ibzdepartment_zh_CN';
+import syspermission_zh_CN from '@locale/lanres/entities/sys-permission/sys-permission_zh_CN';
+import ibzemployee_zh_CN from '@locale/lanres/entities/ibzemployee/ibzemployee_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
 import userCustom_zh_CN from '@locale/lanres/userCustom/userCustom_zh_CN';
@@ -24,6 +24,9 @@ export default {
             success: '成功',
             ok: '确认',
             cancel: '取消',
+        },
+        local:{
+            new: '新建'
         },
         gridpage: {
             choicecolumns: '选择列',

@@ -40,7 +40,7 @@ export const viewstate: any = {
         {
             viewtag: '13c174556f45e9b10b66dc51834a6ab5',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLEGridView',
+            viewname: 'SysRoleGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [

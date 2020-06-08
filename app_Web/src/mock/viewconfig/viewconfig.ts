@@ -31,12 +31,12 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "WFMemberGridView",
             "viewtag": "135872676ba63d430b2f20bd20364286"
         },
-        "sys_rolegridview": {
+        "sysrolegridview": {
             "title": "角色表格视图",
             "caption": "系统角色",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "uaa",
-            "viewname": "SYS_ROLEGridView",
+            "viewname": "SysRoleGridView",
             "viewtag": "13c174556f45e9b10b66dc51834a6ab5"
         },
         "wfgrouppickupgridview": {

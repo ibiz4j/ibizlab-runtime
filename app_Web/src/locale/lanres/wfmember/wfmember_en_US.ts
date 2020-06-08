@@ -106,10 +106,6 @@ export default {
 			caption: "Filter",
 			tip: "Filter",
 		},
-		tbitem18: {
-			caption: "Help",
-			tip: "Help",
-		},
 	},
 	editviewtoolbar_toolbar: {
 		tbitem3: {
@@ -120,33 +116,9 @@ export default {
 			caption: "-",
 			tip: "",
 		},
-		tbitem7: {
-			caption: "Remove And Close",
-			tip: "Remove And Close Window",
-		},
-		tbitem8: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem12: {
-			caption: "New",
-			tip: "New",
-		},
-		tbitem13: {
-			caption: "-",
-			tip: "",
-		},
 		tbitem14: {
 			caption: "Copy",
 			tip: "Copy {0}",
-		},
-		tbitem16: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem22: {
-			caption: "Help",
-			tip: "Help",
 		},
 	},
 };

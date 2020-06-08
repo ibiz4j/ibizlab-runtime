@@ -47,7 +47,8 @@
 </i-col>
 <i-col v-show="detailsModel.leadername.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='leadername' :itemRules="this.rules.leadername" class='' :caption="$t('entities.ibzdepartment.main_form.details.leadername')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.leadername.error" :isEmptyCaption="false" labelPos="LEFT">
-    <ibiz-group-select
+    
+<ibiz-group-select
   name="leadername"
   :value='data.leadername'
   valueitem="leaderid"
@@ -74,14 +75,22 @@
 <i-col v-show="detailsModel.createdate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='createdate' :itemRules="this.rules.createdate" class='' :caption="$t('entities.ibzdepartment.main_form.details.createdate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.createdate.error" :isEmptyCaption="false" labelPos="LEFT">
     <app-span   name='createdate'
-:value="data.createdate" style=""></app-span>
+:value="data.createdate"   :data="data"
+  :context="context"
+  :viewparams="viewparams"
+  :itemParam="{}" 
+style=""></app-span>
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.updatedate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='updatedate' :itemRules="this.rules.updatedate" class='' :caption="$t('entities.ibzdepartment.main_form.details.updatedate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.updatedate.error" :isEmptyCaption="false" labelPos="LEFT">
     <app-span   name='updatedate'
-:value="data.updatedate" style=""></app-span>
+:value="data.updatedate"   :data="data"
+  :context="context"
+  :viewparams="viewparams"
+  :itemParam="{}" 
+style=""></app-span>
 </app-form-item>
 
 </i-col>

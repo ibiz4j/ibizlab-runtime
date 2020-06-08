@@ -37,11 +37,6 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'sys_roleid',
-          prop: 'roleid',
-          dataType: 'GUID',
-        },
-        {
           name: 'updatedate',
           prop: 'updatedate',
           dataType: 'DATETIME',

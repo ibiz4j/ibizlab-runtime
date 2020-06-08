@@ -31,6 +31,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: '',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem7',
 	items: [
 		{
 	id: '4ea6829eb5066555b9f0a91145dc7502',
@@ -49,6 +50,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: 'Auto3',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem1',
 },
 		{
 	id: 'f73183a5dfe125c3461116b4d82c2468',
@@ -67,6 +69,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: 'Auto2',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem2',
 },
 		{
 	id: '341bd3aa939665d5c039462456dfce93',
@@ -85,6 +88,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: 'Auto4',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem3',
 },
 	],
 },
@@ -105,6 +109,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: '',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem8',
 	items: [
 		{
 	id: '1e02015a09f1d812fe4640fac320158e',
@@ -123,6 +128,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: 'Auto5',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem4',
 },
 		{
 	id: '4999F409-9C7B-4C41-BD3A-B29611EA7E6E',
@@ -141,6 +147,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: 'Auto6',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem9',
 },
 	],
 },
@@ -161,6 +168,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: '',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem10',
 	items: [
 		{
 	id: '6DFB635D-1B8E-47E7-9869-1B7BC2B844C0',
@@ -179,6 +187,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: 'Auto8',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem6',
 },
 		{
 	id: '69b794a51f56bc20947749c2d7629117',
@@ -197,6 +206,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: 'Auto1',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem5',
 },
 		{
 	id: '8E6D5AC1-9AA9-4F29-83A2-0A9E7EFACE09',
@@ -215,6 +225,7 @@ export default class IndexModel {
 	textcls: '',
 	appfunctag: 'Auto7',
 	resourcetag: '',
+	authtag:'Web-Index-menuitem11',
 },
 	],
 },

@@ -15,13 +15,18 @@
 <i-col v-show="detailsModel.sys_user_roleid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_user_roleid' :itemRules="this.rules.sys_user_roleid" class='' :caption="$t('entities.sysuserrole.main_form.details.sys_user_roleid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_user_roleid.error" :isEmptyCaption="false" labelPos="LEFT">
     <app-span   name='sys_user_roleid'
-:value="data.sys_user_roleid" style=""></app-span>
+:value="data.sys_user_roleid"   :data="data"
+  :context="context"
+  :viewparams="viewparams"
+  :itemParam="{}" 
+style=""></app-span>
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.sys_rolename.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_rolename' :itemRules="this.rules.sys_rolename" class='' :caption="$t('entities.sysuserrole.main_form.details.sys_rolename')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_rolename.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-picker 
+    
+<app-picker 
   :formState="formState"
   :data="data"
   :context="context"
@@ -46,7 +51,8 @@
 </i-col>
 <i-col v-show="detailsModel.sys_username.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_username' :itemRules="this.rules.sys_username" class='' :caption="$t('entities.sysuserrole.main_form.details.sys_username')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_username.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-picker 
+    
+<app-picker 
   :formState="formState"
   :data="data"
   :context="context"

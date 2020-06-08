@@ -18,25 +18,41 @@
           </i-col>
           <i-col v-show="detailsModel.n_authcode_eq.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_authcode_eq' :itemRules="this.rules.n_authcode_eq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authcode_eq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authcode_eq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-               <dropdown-list v-model="data.n_authcode_eq" :data="data" :itemParam="{}" :disabled="detailsModel.n_authcode_eq.disabled"  tag='CLAuthCode' codelistType='STATIC' placeholder='请选择...' style=""></dropdown-list>
-          </app-form-item>
-          
-          </i-col>
-          <i-col v-show="detailsModel.n_authtime_gtandeq.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
-              <app-form-item name='n_authtime_gtandeq' :itemRules="this.rules.n_authtime_gtandeq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authtime_gtandeq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authtime_gtandeq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_gtandeq" :disabled="detailsModel.n_authtime_gtandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_gtandeq = val1 }"></date-picker>
-          </app-form-item>
-          
-          </i-col>
-          <i-col v-show="detailsModel.n_authtime_ltandeq.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
-              <app-form-item name='n_authtime_ltandeq' :itemRules="this.rules.n_authtime_ltandeq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authtime_ltandeq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authtime_ltandeq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_ltandeq" :disabled="detailsModel.n_authtime_ltandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_ltandeq = val1 }"></date-picker>
+               <dropdown-list 
+              v-model="data.n_authcode_eq" 
+              :data="data" 
+              :context="context"
+              :viewparams="viewparams"
+              :itemParam="{}" 
+              :disabled="detailsModel.n_authcode_eq.disabled"  
+              tag='CLAuthCode' 
+              codelistType='STATIC'
+              placeholder='请选择...' style="">
+           </dropdown-list>
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_domain_like.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_domain_like' :itemRules="this.rules.n_domain_like" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_domain_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_domain_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_domain_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_domain_like.disabled" type='text'  style=""></input-box>
+          </app-form-item>
+          
+          </i-col>
+          <i-col v-show="detailsModel.n_authtime_gtandeq.visible" :style="{}"  :md="{ span: 11, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+              <app-form-item name='n_authtime_gtandeq' :itemRules="this.rules.n_authtime_gtandeq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authtime_gtandeq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authtime_gtandeq.error" :isEmptyCaption="false" labelPos="LEFT"> 
+              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_gtandeq" :disabled="detailsModel.n_authtime_gtandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_gtandeq = val1 }"></date-picker>
+          </app-form-item>
+          
+          </i-col>
+          <i-col v-show="detailsModel.rawitem1.visible" :style="{}"  :md="{ span: 2, offset: 0 }" :lg="{ span: 2, offset: 0 }" :xl="{ span: 2, offset: 0 }">
+              <div class="" :style="{}">
+              至
+          </div>
+          
+          </i-col>
+          <i-col v-show="detailsModel.n_authtime_ltandeq.visible" :style="{}"  :md="{ span: 11, offset: 0 }" :lg="{ span: 6, offset: 0 }" :xl="{ span: 6, offset: 0 }">
+              <app-form-item name='n_authtime_ltandeq' :itemRules="this.rules.n_authtime_ltandeq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authtime_ltandeq')" uiStyle="DEFAULT" :labelWidth="0" :isShowCaption="false" :error="detailsModel.n_authtime_ltandeq.error" :isEmptyCaption="true" labelPos="NONE"> 
+              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_ltandeq" :disabled="detailsModel.n_authtime_ltandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_ltandeq = val1 }"></date-picker>
           </app-form-item>
           
           </i-col>
@@ -283,9 +299,9 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_username_like: null,
         n_personname_like: null,
         n_authcode_eq: null,
+        n_domain_like: null,
         n_authtime_gtandeq: null,
         n_authtime_ltandeq: null,
-        n_domain_like: null,
     };
 
     /**
@@ -296,40 +312,40 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public rules: any = {
         n_username_like: [
-            { type: 'string', message: '用户全局名(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '用户全局名(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '用户全局名(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '用户全局名(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { type: 'string', message: '用户全局名 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '用户全局名 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '用户全局名 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '用户全局名 值不能为空', trigger: 'blur' },
         ],
         n_personname_like: [
-            { type: 'string', message: '用户名称(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '用户名称(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '用户名称(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '用户名称(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { type: 'string', message: '用户名称 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '用户名称 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '用户名称 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '用户名称 值不能为空', trigger: 'blur' },
         ],
         n_authcode_eq: [
-            { type: 'string', message: '认证结果(等于(=)) 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '认证结果(等于(=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '认证结果(等于(=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '认证结果(等于(=)) 值不能为空', trigger: 'blur' },
-        ],
-        n_authtime_gtandeq: [
-            { type: 'string', message: '认证时间(大于等于(>=)) 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '认证时间(大于等于(>=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '认证时间(大于等于(>=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '认证时间(大于等于(>=)) 值不能为空', trigger: 'blur' },
-        ],
-        n_authtime_ltandeq: [
-            { type: 'string', message: '认证时间(小于等于(<=)) 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '认证时间(小于等于(<=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '认证时间(小于等于(<=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '认证时间(小于等于(<=)) 值不能为空', trigger: 'blur' },
+            { type: 'string', message: '认证结果 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '认证结果 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '认证结果 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '认证结果 值不能为空', trigger: 'blur' },
         ],
         n_domain_like: [
-            { type: 'string', message: '域(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '域(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '域(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '域(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { type: 'string', message: '域 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '域 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '域 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '域 值不能为空', trigger: 'blur' },
+        ],
+        n_authtime_gtandeq: [
+            { type: 'string', message: '认证时间 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '认证时间 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '认证时间 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '认证时间 值不能为空', trigger: 'blur' },
+        ],
+        n_authtime_ltandeq: [
+            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
     }
 
@@ -340,19 +356,21 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @memberof DefaultBase
      */
     public detailsModel: any = {
+        rawitem1: new FormRowItemModel({ caption: '', detailType: 'RAWITEM', name: 'rawitem1', visible: true, isShowCaption: true, form: this })
+, 
         formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
 , 
-        n_username_like: new FormItemModel({ caption: '用户全局名(文本包含(%))', detailType: 'FORMITEM', name: 'n_username_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        n_username_like: new FormItemModel({ caption: '用户全局名', detailType: 'FORMITEM', name: 'n_username_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
-        n_personname_like: new FormItemModel({ caption: '用户名称(文本包含(%))', detailType: 'FORMITEM', name: 'n_personname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        n_personname_like: new FormItemModel({ caption: '用户名称', detailType: 'FORMITEM', name: 'n_personname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
-        n_authcode_eq: new FormItemModel({ caption: '认证结果(等于(=))', detailType: 'FORMITEM', name: 'n_authcode_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        n_authcode_eq: new FormItemModel({ caption: '认证结果', detailType: 'FORMITEM', name: 'n_authcode_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
-        n_authtime_gtandeq: new FormItemModel({ caption: '认证时间(大于等于(>=))', detailType: 'FORMITEM', name: 'n_authtime_gtandeq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        n_domain_like: new FormItemModel({ caption: '域', detailType: 'FORMITEM', name: 'n_domain_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
-        n_authtime_ltandeq: new FormItemModel({ caption: '认证时间(小于等于(<=))', detailType: 'FORMITEM', name: 'n_authtime_ltandeq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        n_authtime_gtandeq: new FormItemModel({ caption: '认证时间', detailType: 'FORMITEM', name: 'n_authtime_gtandeq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
-        n_domain_like: new FormItemModel({ caption: '域(文本包含(%))', detailType: 'FORMITEM', name: 'n_domain_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        n_authtime_ltandeq: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'n_authtime_ltandeq', visible: true, isShowCaption: false, form: this, disabled: false, enableCond: 3 })
 , 
     };
 
@@ -393,6 +411,18 @@ export default class DefaultBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 n_domain_like 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof DefaultBase
+     */
+    @Watch('data.n_domain_like')
+    onN_domain_likeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_domain_like', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 n_authtime_gtandeq 值
      *
      * @param {*} newVal
@@ -416,18 +446,6 @@ export default class DefaultBase extends Vue implements ControlInterface {
         this.formDataChange({ name: 'n_authtime_ltandeq', newVal: newVal, oldVal: oldVal });
     }
 
-    /**
-     * 监控表单属性 n_domain_like 值
-     *
-     * @param {*} newVal
-     * @param {*} oldVal
-     * @memberof DefaultBase
-     */
-    @Watch('data.n_domain_like')
-    onN_domain_likeChange(newVal: any, oldVal: any) {
-        this.formDataChange({ name: 'n_domain_like', newVal: newVal, oldVal: oldVal });
-    }
-
 
     /**
      * 重置表单项值
@@ -448,6 +466,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
                 
+
 
 
 
