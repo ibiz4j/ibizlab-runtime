@@ -1,0 +1,21 @@
+<script lang='tsx'>
+import { Component } from 'vue-property-decorator';
+import SysAppGridViewBase from './sys-app-grid-view-base.vue';
+
+import view_grid from '@widgets/sys-app/main-grid/main-grid.vue';
+import view_searchform from '@widgets/sys-app/default-searchform/default-searchform.vue';
+@Component({
+    components: {
+        view_grid, 
+        view_searchform, 
+    },
+    beforeRouteEnter: (to: any, from: any, next: any) => {
+        next((vm: any) => {
+            vm.$store.commit('addCurPageViewtag', { fullPath: to.fullPath, viewtag: vm.viewtag });
+        });
+    },
+})
+export default class SysAppGridView extends SysAppGridViewBase {
+
+}
+</script>
