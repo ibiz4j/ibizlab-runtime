@@ -35,7 +35,7 @@
             version,
             model_editor_json,
             model_type,
-            thumbnail,
+<!--            thumbnail,-->
             tenant_id) 
          values (
             #{id, jdbcType=VARCHAR},
@@ -50,7 +50,7 @@
             #{version, jdbcType=INTEGER},
             #{modelEditorJson, jdbcType=VARCHAR},
             #{modelType, jdbcType=INTEGER},
-            #{thumbnail, jdbcType=BLOB},
+<!--            #{thumbnail, jdbcType=BLOB},-->
             #{tenantId, jdbcType=VARCHAR}
           )
     </insert>
@@ -69,7 +69,7 @@
             version = #{version, jdbcType=INTEGER},
             model_editor_json = #{modelEditorJson, jdbcType=VARCHAR},
             model_type = #{modelType, jdbcType=INTEGER},
-            thumbnail = #{thumbnail, jdbcType=BLOB},
+<!--            thumbnail = #{thumbnail, jdbcType=BLOB},-->
             tenant_id = #{tenantId, jdbcType=VARCHAR}
         </set>
         where id = #{id, jdbcType=VARCHAR}

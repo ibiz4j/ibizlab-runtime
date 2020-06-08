@@ -102,7 +102,8 @@
               :data="row"
               :context="context"
               :viewparams="viewparams"
-              :itemParam='{ }' 
+              :localContext ='{ }' 
+              :localParam ='{ }' 
               :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
               name='pdeptname'
               deMajorField='deptname'

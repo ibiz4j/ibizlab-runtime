@@ -7,7 +7,6 @@
         v-model="editableTabsValue"
         closable 
         @tab-remove="onClose"
-        @contextmenu.prevent.native="openMenu($event)"
       >
         <el-tab-pane
           v-for="(meta, index) of $store.state.pageMetas"
@@ -19,22 +18,13 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-    <ul
-      v-show="visible"
-      :style="{left: left+'px', top: top+'px'}"
-      class="contextmenu"
-    >
-      <li v-for="(item,index) in actions" @click="handlerClose(item)">
-        {{ $t(item.text) }}
-      </li>
-    </ul>
     <div v-show="$store.state.pageMetas.length > 0" class="right">
       <el-dropdown @command="handlerClose">
         <el-button size="mini" type="primary">
           更多<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item :command="item" v-for="(item,index) in actions">{{ $t(item.text) }}</el-dropdown-item>
+          <el-dropdown-item :command="item" v-for="(item,index) in actions" :key="index">{{ $t(item.text) }}</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -51,12 +41,6 @@ export default class TabPageExp extends Vue {
   @Provide()
   public styleLeft: number = 0;
 
-  private visible = false;  //右键菜单显示状态
-
-  private top = 0;  //菜单距离顶部位置
-
-  private left = 0; //菜单距离左侧位置
-
   @Provide()
   public actions: any[] = [
     { text: "app.tabpage.closeall", value: "closeAll" },
@@ -67,26 +51,7 @@ export default class TabPageExp extends Vue {
    * 关闭tab页方法
    */
   public handlerClose(item: any){
-    this.visible = false;
     this.doTagAction(item.value);
-  }
-
-  /**
-   * 打开右键菜单
-   */
-  private openMenu(e: MouseEvent) {
-    const menuMinWidth = 105;
-    const offsetLeft = this.$el.getBoundingClientRect().left;
-    const offsetWidth = (this.$el as HTMLElement).offsetWidth;
-    const maxLeft = offsetWidth - menuMinWidth;
-    const left = e.clientX - offsetLeft - 15;
-    if (left > maxLeft) {
-      this.left = maxLeft;
-    } else {
-      this.left = left;
-    }
-    this.top = e.clientY - 45;
-    this.visible = true;
   }
 
   public editableTabsValue: any = ""; //tabs页绑定值

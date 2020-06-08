@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  ibzrt-orcl:
+    image: liumiaocn/oracle:11.2.0
+    ports:
+      - "38080:8080"
+      - "1521:1521"
+    environment:
+      - DEFAULT_SYS_PASS=sys
+      - processes=500
+      - sessions=555
+      - transactions=611
+    volumes:
+      - $PWD/../../../../ibzdb-orcl/:/u01/app/oracle/
+    networks:
+      - agent_network
+
+networks:
+  agent_network:
+    attachable: true
+

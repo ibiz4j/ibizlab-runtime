@@ -1,4 +1,5 @@
 import sysauthlog_zh_CN from '@locale/lanres/entities/sys-auth-log/sys-auth-log_zh_CN';
+import sysapp_zh_CN from '@locale/lanres/entities/sys-app/sys-app_zh_CN';
 import sysrolepermission_zh_CN from '@locale/lanres/entities/sys-role-permission/sys-role-permission_zh_CN';
 import syspermission_zh_CN from '@locale/lanres/entities/sys-permission/sys-permission_zh_CN';
 import sysuserrole_zh_CN from '@locale/lanres/entities/sys-user-role/sys-user-role_zh_CN';
@@ -15,6 +16,9 @@ export default {
             success: '成功',
             ok: '确认',
             cancel: '取消',
+        },
+        local:{
+            new: '新建'
         },
         gridpage: {
             choicecolumns: '选择列',
@@ -64,11 +68,13 @@ export default {
                 menuitem3: '用户',
                 menuitem6: '角色',
                 menuitem1: '认证日志',
+                menuitem2: '接入应用',
             },
         },
     },
     entities: {
         sysauthlog: sysauthlog_zh_CN,
+        sysapp: sysapp_zh_CN,
         sysrolepermission: sysrolepermission_zh_CN,
         syspermission: syspermission_zh_CN,
         sysuserrole: sysuserrole_zh_CN,

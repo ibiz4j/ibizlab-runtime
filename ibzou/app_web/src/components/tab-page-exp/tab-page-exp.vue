@@ -1,19 +1,33 @@
 <template>
   <div class="ibiz-page-tag">
-    <el-tabs
-      type="card"
-      @tab-click="changePage"
-      v-model="editableTabsValue"
-      closable
-      @tab-remove="onClose"
-    >
-      <el-tab-pane
-        v-for="(meta, index) of $store.state.pageMetas"
-        :label="getCaption(meta.caption, meta.info)"
-        :name="index+''"
-        :key="index+''"
-      ></el-tab-pane>
-    </el-tabs>
+    <div class="tag-tabs left">
+      <el-tabs
+        type="card"
+        @tab-click="changePage"
+        v-model="editableTabsValue"
+        closable 
+        @tab-remove="onClose"
+      >
+        <el-tab-pane
+          v-for="(meta, index) of $store.state.pageMetas"
+          :name="index+''"
+          :key="index+''"
+         
+        >
+        <span slot="label"><span class="ivu-tag-dot-inner"></span>{{ getCaption(meta.caption, meta.info) }}</span>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+    <div v-show="$store.state.pageMetas.length > 0" class="right">
+      <el-dropdown @command="handlerClose">
+        <el-button size="mini" type="primary">
+          更多<i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item :command="item" v-for="(item,index) in actions" :key="index">{{ $t(item.text) }}</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
@@ -23,6 +37,7 @@ import { Environment } from "../../environments/environment";
 
 @Component({})
 export default class TabPageExp extends Vue {
+
   @Provide()
   public styleLeft: number = 0;
 
@@ -32,7 +47,14 @@ export default class TabPageExp extends Vue {
     { text: "app.tabpage.closeother", value: "closeOther" }
   ];
 
-  public editableTabsValue: any = "";
+  /**
+   * 关闭tab页方法
+   */
+  public handlerClose(item: any){
+    this.doTagAction(item.value);
+  }
+
+  public editableTabsValue: any = ""; //tabs页绑定值
 
   @Watch("$route")
   public onRouteChange(newVal: any) {

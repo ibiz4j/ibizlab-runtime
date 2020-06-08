@@ -14,7 +14,8 @@
   :data="data"
   :context="context"
   :viewparams="viewparams"
-  :itemParam='{ }' 
+  :localContext ='{ }' 
+  :localParam ='{ }' 
   :disabled="detailsModel.sys_rolename.disabled"
   name='sys_rolename'
   deMajorField='rolename'
@@ -40,7 +41,8 @@
   :data="data"
   :context="context"
   :viewparams="viewparams"
-  :itemParam='{ }' 
+  :localContext ='{ }' 
+  :localParam ='{ }' 
   :disabled="detailsModel.sys_permissionname.disabled"
   name='sys_permissionname'
   deMajorField='permissionname'

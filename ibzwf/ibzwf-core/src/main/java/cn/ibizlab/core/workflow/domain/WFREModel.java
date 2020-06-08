@@ -21,13 +21,16 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 
-import cn.ibizlab.util.domain.EntityClient;
 
 /**
- * ServiceApi [流程模型] 对象
+ * [流程模型] 对象
  */
-@Data
-public class WFREModel extends EntityClient implements Serializable {
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class WFREModel extends EntityBase implements Serializable {
 
     /**
      * ID
@@ -55,21 +58,6 @@ public class WFREModel extends EntityClient implements Serializable {
 
 
 
-
-    /**
-     * 设置 [名称]
-     */
-    public void setName(String name){
-        this.name = name ;
-        this.modify("modelname",name);
-    }
-    /**
-     * 设置 [BPMN]
-     */
-    public void setBpmnfile(String bpmnfile){
-        this.bpmnfile = bpmnfile ;
-        this.modify("bpmnfile",bpmnfile);
-    }
 
 }
 

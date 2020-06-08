@@ -21,13 +21,16 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 
-import cn.ibizlab.util.domain.EntityClient;
 
 /**
- * ServiceApi [工作流任务] 对象
+ * [工作流任务] 对象
  */
-@Data
-public class WFTask extends EntityClient implements Serializable {
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class WFTask extends EntityBase implements Serializable {
 
     /**
      * 任务标识
@@ -80,42 +83,6 @@ public class WFTask extends EntityClient implements Serializable {
 
 
 
-
-    /**
-     * 设置 [任务名称]
-     */
-    public void setName(String name){
-        this.name = name ;
-        this.modify("taskname",name);
-    }
-    /**
-     * 设置 [DefinitionKey]
-     */
-    public void setProcessdefinitionkey(String processdefinitionkey){
-        this.processdefinitionkey = processdefinitionkey ;
-        this.modify("definitionkey",processdefinitionkey);
-    }
-    /**
-     * 设置 [实例标识]
-     */
-    public void setProcessinstanceid(String processinstanceid){
-        this.processinstanceid = processinstanceid ;
-        this.modify("instanceid",processinstanceid);
-    }
-    /**
-     * 设置 [业务键值]
-     */
-    public void setProcessinstancebusinesskey(String processinstancebusinesskey){
-        this.processinstancebusinesskey = processinstancebusinesskey ;
-        this.modify("businesskey",processinstancebusinesskey);
-    }
-    /**
-     * 设置 [TaskDefinitionKey]
-     */
-    public void setTaskprocessdefinitionkey(String taskprocessdefinitionkey){
-        this.taskprocessdefinitionkey = taskprocessdefinitionkey ;
-        this.modify("taskdefinitionkey",taskprocessdefinitionkey);
-    }
 
 }
 

@@ -9,7 +9,7 @@
     <resultMap id="SysPSSystemResultMap" type="cn.ibizlab.core.uaa.domain.SysPSSystem" autoMapping="true">
         <id property="pssystemid" column="pssystemid" /><!--主键字段映射-->
         <result column="sysstructure" jdbcType="VARCHAR" property="sysstructure" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler" />
-        <result property="apps" column="apps" typeHandler="cn.ibizlab.core.uaa.extensions.domain.handlers.SysAppsTypeHandler" />
+        <result property="apps" column="apps" typeHandler="cn.ibizlab.core.uaa.domain.handlers.SysAppTypeHandler" />
 
 
     </resultMap>

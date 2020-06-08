@@ -20,6 +20,7 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '9e9a67908b3c85516085fe19e3dd4113',
+                'bb58e4db8024f089e1d808f0ede81302',
                 '0134ebf9391cb5f988839332c1352cd9',
                 'cb64b5009e70f225a91046314f40977a',
             ],
@@ -32,6 +33,15 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '1ee68b6d5d4c5c9413f6874e0ccabc43',
+            ],
+        },
+        {
+            viewtag: '137b8f036994965b8926455611848134',
+            viewmodule: 'uaa',
+            viewname: 'SysAppEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
         {
@@ -293,6 +303,16 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '9c0b351150648f7661be53c10eaabd67',
+            ],
+        },
+        {
+            viewtag: 'bb58e4db8024f089e1d808f0ede81302',
+            viewmodule: 'uaa',
+            viewname: 'SysAppGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '137b8f036994965b8926455611848134',
             ],
         },
         {

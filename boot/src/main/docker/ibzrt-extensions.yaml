@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   xxl-job-admin:
-    image: xuxueli/xxl-job-admin:2.1.0
+    image: xuxueli/xxl-job-admin:2.2.0
     environment:
       - TZ=Asia/Shanghai
       - SPRING_DATASOURCE_URL=jdbc:mysql://ibzrt-db:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false

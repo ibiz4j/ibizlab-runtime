@@ -14,12 +14,8 @@
 </i-col>
 <i-col v-show="detailsModel.sys_user_roleid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_user_roleid' :itemRules="this.rules.sys_user_roleid" class='' :caption="$t('entities.sysuserrole.main_form.details.sys_user_roleid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_user_roleid.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-span   name='sys_user_roleid'
-:value="data.sys_user_roleid"   :data="data"
-  :context="context"
-  :viewparams="viewparams"
-  :itemParam="{}" 
-style=""></app-span>
+    
+<app-span name='sys_user_roleid' :value="data.sys_user_roleid" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
 </app-form-item>
 
 </i-col>
@@ -31,7 +27,8 @@ style=""></app-span>
   :data="data"
   :context="context"
   :viewparams="viewparams"
-  :itemParam='{ }' 
+  :localContext ='{ }' 
+  :localParam ='{ }' 
   :disabled="detailsModel.sys_rolename.disabled"
   name='sys_rolename'
   deMajorField='rolename'
@@ -57,7 +54,8 @@ style=""></app-span>
   :data="data"
   :context="context"
   :viewparams="viewparams"
-  :itemParam='{ }' 
+  :localContext ='{ }' 
+  :localParam ='{ }' 
   :disabled="detailsModel.sys_username.disabled"
   name='sys_username'
   deMajorField='personname'

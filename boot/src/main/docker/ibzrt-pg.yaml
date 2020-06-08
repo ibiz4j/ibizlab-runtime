@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  ibzrt-pg:
+    container_name: postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ibzrt
+      POSTGRES_USER: ibzrt
+      POSTGRES_PASSWORD: ibzrt
+    ports:
+      - 5432:5432
+    volumes:
+      - $PWD/../../../../ibzdb-pg/:/var/lib/postgresql/data
+    networks:
+      - agent_network
+
+networks:
+  agent_network:
+    attachable: true
+

@@ -129,7 +129,8 @@
               :data="row"
               :context="context"
               :viewparams="viewparams"
-              :itemParam='{ }' 
+              :localContext ='{ }' 
+              :localParam ='{ }' 
               :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
               name='orgname'
               deMajorField='orgname'
@@ -180,7 +181,8 @@
               :data="row"
               :context="context"
               :viewparams="viewparams"
-              :itemParam='{ }' 
+              :localContext ='{ }' 
+              :localParam ='{ }' 
               :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
               name='mdeptname'
               deMajorField='deptname'
@@ -213,7 +215,21 @@
                     <template v-slot="{row,column,$index}">
                         <template v-if="actualIsOpenEdit">
                             <app-form-item :error="gridItemsModel[$index][column.property].error">
-                                 <dropdown-list v-model="row[column.property]" :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" tag='CLIBZSex' codelistType='STATIC' placeholder='请选择...' style="" @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}"></dropdown-list>
+                                
+             <dropdown-list 
+              v-model="row[column.property]" 
+              :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
+              :data="row" 
+              :context="context"
+              :viewparams="viewparams" 
+              :localContext ='{ }' 
+              :localParam ='{ }' 
+              tag='CLIBZSex' 
+              codelistType='STATIC'
+              placeholder='请选择...' 
+              style="" 
+              @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
+             </dropdown-list>
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">

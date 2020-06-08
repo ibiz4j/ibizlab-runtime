@@ -77,6 +77,7 @@ import IBizGroupSelect from './components/ibiz-group-select/ibiz-group-select.vu
 import IBizGroupPicker from './components/ibiz-group-picker/ibiz-group-picker.vue'
 import AppWFApproval from './components/app-wf-approval/app-wf-approval.vue'
 import Breadcrumb from './components/app-breadcrumb/app-breadcrumb.vue';
+import AppTransfer from './components/app-transfer/app-transfer.vue'
 
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
@@ -163,5 +164,6 @@ export const AppComponents = {
         v.component('ibiz-group-picker',IBizGroupPicker);
         v.component('app-wf-approval',AppWFApproval);
         v.component('app-breadcrumb',Breadcrumb);
+        v.component('app-transfer',AppTransfer);
     },
 };

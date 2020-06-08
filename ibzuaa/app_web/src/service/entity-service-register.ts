@@ -40,6 +40,7 @@ export class EntityServiceRegister {
      */
     protected init(): void {
                 this.allEntityService.set('sysauthlog', () => import('@/service/sys-auth-log/sys-auth-log-service'));
+        this.allEntityService.set('sysapp', () => import('@/service/sys-app/sys-app-service'));
         this.allEntityService.set('sysrolepermission', () => import('@/service/sys-role-permission/sys-role-permission-service'));
         this.allEntityService.set('syspermission', () => import('@/service/sys-permission/sys-permission-service'));
         this.allEntityService.set('sysuserrole', () => import('@/service/sys-user-role/sys-user-role-service'));

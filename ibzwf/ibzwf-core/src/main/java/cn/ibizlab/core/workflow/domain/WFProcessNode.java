@@ -21,13 +21,16 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 
-import cn.ibizlab.util.domain.EntityClient;
 
 /**
- * ServiceApi [流程定义节点] 对象
+ * [流程定义节点] 对象
  */
-@Data
-public class WFProcessNode extends EntityClient implements Serializable {
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class WFProcessNode extends EntityBase implements Serializable {
 
     /**
      * 节点标识
@@ -64,28 +67,6 @@ public class WFProcessNode extends EntityClient implements Serializable {
 
 
 
-
-    /**
-     * 设置 [节点名称]
-     */
-    public void setUsertaskname(String usertaskname){
-        this.usertaskname = usertaskname ;
-        this.modify("nodename",usertaskname);
-    }
-    /**
-     * 设置 [DefinitionKey]
-     */
-    public void setProcessdefinitionkey(String processdefinitionkey){
-        this.processdefinitionkey = processdefinitionkey ;
-        this.modify("definitionkey",processdefinitionkey);
-    }
-    /**
-     * 设置 [流程定义名称]
-     */
-    public void setProcessdefinitionname(String processdefinitionname){
-        this.processdefinitionname = processdefinitionname ;
-        this.modify("definitionname",processdefinitionname);
-    }
 
 }
 

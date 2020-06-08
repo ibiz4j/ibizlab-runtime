@@ -1,9 +1,14 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
 import cn.ibizlab.core.uaa.domain.SysPSSystem;
-import cn.ibizlab.core.uaa.extensions.domain.SysApp;
+import cn.ibizlab.core.uaa.domain.SysApp;
+import cn.ibizlab.core.uaa.filter.SysAppSearchContext;
 import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
+import cn.ibizlab.core.uaa.service.ISysAppService;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;
+import cn.ibizlab.core.uaa.service.impl.SysAppServiceImpl;
+import cn.ibizlab.util.errors.BadRequestAlertException;
+import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.IBZConfigService;
 import com.alibaba.fastjson.JSONArray;
@@ -11,16 +16,21 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Primary
 @Service
-public class SysAppService {
+public class SysAppService extends SysAppServiceImpl
+{
 
     @Autowired
     private ISysPSSystemService sysPSSystemService;
@@ -44,6 +54,15 @@ public class SysAppService {
             SysApp def=defApps.get(sysApp.getId());
             if(def==null)return;
             sysApp.setAddr(def.getAddr());
+            sysApp.setIcon(def.getIcon());
+            sysApp.setFullname(def.getFullname());
+            sysApp.setType(def.getType());
+            sysApp.setVisabled(1);
+            list.add(sysApp);
+            defApps.remove(def.getId());
+        });
+        defApps.values().forEach(sysApp -> {
+            sysApp.setVisabled(0);
             list.add(sysApp);
         });
         jo.remove("model");
@@ -57,4 +76,76 @@ public class SysAppService {
 
     }
 
+    @Override
+    public SysApp get(String key)
+    {
+        String systemId=key.split("-")[0];
+        SysPSSystem sysPSSystem=sysPSSystemService.getById(systemId);
+        if(sysPSSystem!=null&&sysPSSystem.getApps()!=null)
+        {
+            for(SysApp app:sysPSSystem.getApps())
+            {
+                if(app.getId().equals(key))
+                    return app;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean save(SysApp et)
+    {
+        if(StringUtils.isEmpty(et.getSystemid())||StringUtils.isEmpty(et.getId()))
+            throw new BadRequestAlertException("应用参数缺失","SysApp",et.getId());
+        SysPSSystem sysPSSystem=sysPSSystemService.getById(et.getSystemid());
+        if(sysPSSystem!=null&&sysPSSystem.getApps()!=null)
+        {
+            boolean bchange=false;
+            for(SysApp app:sysPSSystem.getApps())
+            {
+                if(app.getId().equals(et.getId()))
+                {
+                    CachedBeanCopier.copy(et,app);
+                    bchange=true;
+                    break;
+                }
+            }
+            if(bchange)
+                sysPSSystemService.update(sysPSSystem);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean update(SysApp et)
+    {
+        return this.save(et);
+    }
+
+    @Override
+    public boolean create(SysApp et)
+    {
+        return this.save(et);
+    }
+
+    @Override
+    public Page<SysApp> searchDefault(SysAppSearchContext context)
+    {
+        context.setSize(Integer.MAX_VALUE);
+        List<SysApp> content = new ArrayList<>();
+        LinkedHashMap<String,SysApp> map = uaaCoreService.getApps();
+        map.values().forEach(sysApp -> {
+            if(!StringUtils.isEmpty(context.getN_pssystemid_eq())) {
+                if(!sysApp.getSystemid().equals(context.getN_pssystemid_eq()))
+                    return;
+            }
+            if(!StringUtils.isEmpty(context.getN_appname_like())) {
+                if(sysApp.getLabel().indexOf(context.getN_appname_like())<0 &&
+                        sysApp.getFullname().indexOf(context.getN_appname_like())<0)
+                    return;
+            }
+            content.add(sysApp);
+        });
+        return new PageImpl<SysApp>(content,context.getPageable(),content.size());
+    }
 }

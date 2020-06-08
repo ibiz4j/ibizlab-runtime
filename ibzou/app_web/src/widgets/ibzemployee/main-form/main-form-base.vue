@@ -58,12 +58,14 @@
 </i-col>
 <i-col v-show="detailsModel.sex.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sex' :itemRules="this.rules.sex" class='' :caption="$t('entities.ibzemployee.main_form.details.sex')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sex.error" :isEmptyCaption="false" labelPos="LEFT">
-     <dropdown-list 
+    
+ <dropdown-list 
     v-model="data.sex" 
     :data="data" 
     :context="context"
     :viewparams="viewparams"
-    :itemParam="{}" 
+    :localContext ='{ }' 
+    :localParam ='{ }' 
     :disabled="detailsModel.sex.disabled"  
     tag='CLIBZSex' 
     codelistType='STATIC'

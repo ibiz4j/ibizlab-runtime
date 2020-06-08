@@ -71,6 +71,25 @@ export default class MainModel {
 	resourcetag: '',
 	authtag:'web-Main-menuitem1',
 },
+        {
+	id: '1CDA0214-F2CF-44CD-ACD1-2DE168FF5C0F',
+	name: 'menuitem2',
+	text: '接入应用',
+	type: 'MENUITEM',
+	counterid: '',
+	tooltip: '接入应用',
+	expanded: false,
+	separator: false,
+	hidden: false,
+	hidesidebar: false,
+	opendefault: false,
+	iconcls: 'fa fa-buysellads',
+	icon: '',
+	textcls: '',
+	appfunctag: '_2',
+	resourcetag: '',
+	authtag:'web-Main-menuitem2',
+},
     ];
 
 	/**
@@ -102,6 +121,18 @@ export default class MainModel {
             routepath: '/index/:index?/sysusers/:sysuser?/gridview/:gridview?',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
+        {
+            appfunctag: '_2',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'sysappgridview',
+            deResParameters: [],
+            routepath: '/index/:index?/sysapps/:sysapp?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'sysapps', parameterName: 'sysapp' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },

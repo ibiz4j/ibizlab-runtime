@@ -49,6 +49,8 @@
     </changeSet>
 
 
+
+
     <!--输出实体[SYS_USER_ROLE]数据结构 -->
     <changeSet author="a_A_5d9d78509" id="tab-sys_user_role-62-3">
         <createTable tableName="IBZUSER_ROLE">
@@ -86,7 +88,7 @@
 
 
     <!--输出实体[SYS_PSSYSTEM]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_pssystem-23-5">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_pssystem-29-5">
         <createTable tableName="IBZPSSYSTEM">
                 <column name="PSSYSTEMID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_PSSYSTEM_PSSYSTEMID"/>

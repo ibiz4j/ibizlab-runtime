@@ -77,6 +77,9 @@
         <!--xxl-job定时服务 -->
         <xxl-job.version>2.1.0</xxl-job.version>
 
+        <oracle.version>11.2.0.3</oracle.version>
+        <postgresql.version>42.2.6</postgresql.version>
+
     </properties>
 
     <dependencyManagement>
@@ -299,12 +302,6 @@
             <artifactId>httpclient</artifactId>
         </dependency>
 
-        <!--  MySQL驱动包 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
         <!--  阿里Druid数据源 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -317,9 +314,23 @@
             <artifactId>h2</artifactId>
         </dependency>
 
-        <!--  Error -->
-
-        <!--  Security  -->
+        <!--  Oracle驱动包 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        <!--  PostgreSQL驱动包 -->
+         <dependency>
+             <groupId>org.postgresql</groupId>
+             <artifactId>postgresql</artifactId>
+             <version>${postgresql.version}</version>
+         </dependency>
+        <!--  MySQL驱动包 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
 
     </dependencies>
 

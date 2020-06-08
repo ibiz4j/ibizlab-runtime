@@ -565,6 +565,9 @@ export default class MainBase extends Vue implements ControlInterface {
                 case 'Auto5': 
                     this.clickAuto5(item);
                     return;
+                case '_2': 
+                    this.click_2(item);
+                    return;
                 case 'Auto6': 
                     this.clickAuto6(item);
                     return;
@@ -605,6 +608,24 @@ export default class MainBase extends Vue implements ControlInterface {
         const deResParameters: any[] = [];
         const parameters: any[] = [
             { pathName: 'sysusers', parameterName: 'sysuser' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        this.$router.push(path);
+    }
+    
+    /**
+     * 接入应用
+     *
+     * @param {*} [item={}]
+     * @memberof Main
+     */
+    public click_2(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysapps', parameterName: 'sysapp' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);

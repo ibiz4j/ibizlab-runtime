@@ -1,16 +1,14 @@
 package cn.ibizlab.core.uaa.extensions.domain;
 
-import cn.ibizlab.core.uaa.domain.SysPSSystem;
+import cn.ibizlab.core.uaa.domain.SysApp;
 import cn.ibizlab.core.uaa.domain.SysPermission;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.AppNode;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.EntityNode;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.FuncItem;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.UniResNode;
-import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.springframework.data.domain.Page;
 
 import java.sql.Timestamp;
 import java.util.*;

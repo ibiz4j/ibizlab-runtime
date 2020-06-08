@@ -1,6 +1,7 @@
 
 package cn.ibizlab.api.rest.extensions;
 
+import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
 import cn.ibizlab.util.client.IBZOUFeignClient;
 import cn.ibizlab.util.security.AuthTokenUtil;
@@ -47,6 +48,8 @@ public class ClientAuthenticationResource
         AuthenticationUser user = userDetailsService.loadUserByLogin(authorizationLogin.getUsername(),authorizationLogin.getPassword());
 
         final String token = jwtTokenUtil.generateToken(user);
+
+        user.setPermissionList(null);
         // 返回 token
         return ResponseEntity.ok().body(new AuthenticationInfo(token,user));
     }
@@ -63,6 +66,15 @@ public class ClientAuthenticationResource
     public ResponseEntity<AuthenticationUser> loginByUsername(@Validated @RequestBody String username){
         AuthenticationUser user = userDetailsService.loadUserByUsername(username);
         return ResponseEntity.ok().body(user);
+    }
+
+    @Autowired
+    private SysAppService sysAppService;
+
+    @GetMapping(value = "uaa/access-center/nav/{id}")
+    public ResponseEntity<JSONObject> appnavbar(@PathVariable("id") String id)
+    {
+        return ResponseEntity.ok(sysAppService.getAppNavigationBar(id,AuthenticationUser.getAuthenticationUser().getUserid()));
     }
 
 }

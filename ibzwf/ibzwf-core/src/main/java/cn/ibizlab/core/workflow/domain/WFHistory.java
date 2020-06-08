@@ -21,13 +21,16 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 
-import cn.ibizlab.util.domain.EntityClient;
 
 /**
- * ServiceApi [历史] 对象
+ * [历史] 对象
  */
-@Data
-public class WFHistory extends EntityClient implements Serializable {
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class WFHistory extends EntityBase implements Serializable {
 
     /**
      * 标识
@@ -102,63 +105,6 @@ public class WFHistory extends EntityClient implements Serializable {
 
 
 
-
-    /**
-     * 设置 [操作者标识]
-     */
-    public void setAuthor(String author){
-        this.author = author ;
-        this.modify("author",author);
-    }
-    /**
-     * 设置 [操作者]
-     */
-    public void setAuthorname(String authorname){
-        this.authorname = authorname ;
-        this.modify("authorname",authorname);
-    }
-    /**
-     * 设置 [意见]
-     */
-    public void setFullmessage(String fullmessage){
-        this.fullmessage = fullmessage ;
-        this.modify("message",fullmessage);
-    }
-    /**
-     * 设置 [时间]
-     */
-    public void setTime(Timestamp time){
-        this.time = time ;
-        this.modify("actiontime",time);
-    }
-    /**
-     * 设置 [意见类型]
-     */
-    public void setType(String type){
-        this.type = type ;
-        this.modify("actiontype",type);
-    }
-    /**
-     * 设置 [任务标识]
-     */
-    public void setTaskid(String taskid){
-        this.taskid = taskid ;
-        this.modify("taskid",taskid);
-    }
-    /**
-     * 设置 [实例标识]
-     */
-    public void setProcessinstanceid(String processinstanceid){
-        this.processinstanceid = processinstanceid ;
-        this.modify("instanceid",processinstanceid);
-    }
-    /**
-     * 设置 [业务键值]
-     */
-    public void setProcessinstancebusinesskey(String processinstancebusinesskey){
-        this.processinstancebusinesskey = processinstancebusinesskey ;
-        this.modify("businesskey",processinstancebusinesskey);
-    }
 
 }
 

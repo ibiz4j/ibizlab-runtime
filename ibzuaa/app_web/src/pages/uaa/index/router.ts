@@ -25,7 +25,8 @@ const router = new Router({
                 });
             },
             meta: {  
-                caption: 'app.views.index.caption',
+                caption: 'app.views.index.title',
+                info:'',
                 viewType: 'APPINDEX',
                 parameters: [
                     { pathName: 'index', parameterName: 'index' },
@@ -35,9 +36,24 @@ const router = new Router({
             component: () => import('@pages/uaa/index/index.vue'),
             children: [
                 {
+                    path: 'sysapps/:sysapp?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.sysapp.views.gridview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysapps', parameterName: 'sysapp' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-app-grid-view/sys-app-grid-view.vue'),
+                },
+                {
                     path: 'sysroles/:sysrole?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.sysrole.views.pickupview.caption',
+                        caption: 'entities.sysrole.views.pickupview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -48,9 +64,38 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-rolepickup-view/sys-rolepickup-view.vue'),
                 },
                 {
+                    path: 'sysapps/:sysapp?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysapp.views.editview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysapps', parameterName: 'sysapp' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-app-edit-view/sys-app-edit-view.vue'),
+                },
+                {
+                    path: 'sysusers/:sysuser?/mpickupview/:mpickupview?',
+                    meta: {
+                        caption: 'entities.sysuser.views.mpickupview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysusers', parameterName: 'sysuser' },
+                            { pathName: 'mpickupview', parameterName: 'mpickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-usermpickup-view/sys-usermpickup-view.vue'),
+                },
+                {
                     path: 'sysroles/:sysrole?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
                     meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        caption: 'entities.sysrolepermission.views.customview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -64,7 +109,8 @@ const router = new Router({
                 {
                     path: 'syspermissions/:syspermission?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
                     meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        caption: 'entities.sysrolepermission.views.customview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'syspermissions', parameterName: 'syspermission' },
@@ -78,7 +124,8 @@ const router = new Router({
                 {
                     path: 'sysrolepermissions/:sysrolepermission?/customview/:customview?',
                     meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        caption: 'entities.sysrolepermission.views.customview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
@@ -89,22 +136,10 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-role-permissioncustom-view/sys-role-permissioncustom-view.vue'),
                 },
                 {
-                    path: 'sysusers/:sysuser?/mpickupview/:mpickupview?',
-                    meta: {
-                        caption: 'entities.sysuser.views.mpickupview.caption',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysusers', parameterName: 'sysuser' },
-                            { pathName: 'mpickupview', parameterName: 'mpickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-usermpickup-view/sys-usermpickup-view.vue'),
-                },
-                {
                     path: 'sysusers/:sysuser?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.sysuser.views.pickupgridview.caption',
+                        caption: 'entities.sysuser.views.pickupgridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -117,7 +152,8 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysrole.views.editview.caption',
+                        caption: 'entities.sysrole.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -130,7 +166,8 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
+                        caption: 'entities.sysuserrole.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -144,7 +181,8 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/sysuserroles/:sysuserrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
+                        caption: 'entities.sysuserrole.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -158,7 +196,8 @@ const router = new Router({
                 {
                     path: 'sysuserroles/:sysuserrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
+                        caption: 'entities.sysuserrole.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -171,7 +210,8 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.sysrole.views.mpickupview.caption',
+                        caption: 'entities.sysrole.views.mpickupview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -184,7 +224,8 @@ const router = new Router({
                 {
                     path: 'sysauthlogs/:sysauthlog?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysauthlog.views.gridview.caption',
+                        caption: 'entities.sysauthlog.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
@@ -197,7 +238,8 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.sysuser.views.pickupview.caption',
+                        caption: 'entities.sysuser.views.pickupview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -210,7 +252,8 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysrole.views.gridview.caption',
+                        caption: 'entities.sysrole.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -223,7 +266,8 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuser.views.editview.caption',
+                        caption: 'entities.sysuser.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -236,7 +280,8 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.gridview.caption',
+                        caption: 'entities.sysuserrole.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -250,7 +295,8 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/sysuserroles/:sysuserrole?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.gridview.caption',
+                        caption: 'entities.sysuserrole.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -264,7 +310,8 @@ const router = new Router({
                 {
                     path: 'sysuserroles/:sysuserrole?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.gridview.caption',
+                        caption: 'entities.sysuserrole.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -277,7 +324,8 @@ const router = new Router({
                 {
                     path: 'sysroles/:sysrole?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.sysrole.views.pickupgridview.caption',
+                        caption: 'entities.sysrole.views.pickupgridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
@@ -290,7 +338,8 @@ const router = new Router({
                 {
                     path: 'sysusers/:sysuser?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysuser.views.gridview.caption',
+                        caption: 'entities.sysuser.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
@@ -303,7 +352,8 @@ const router = new Router({
             {
                 path: 'sys_user_roleredirectview/:sys_user_roleredirectview?',
                 meta: {
-                    caption: 'entities.sysuserrole.views.redirectview.caption',
+                    caption: 'entities.sysuserrole.views.redirectview.title',
+                    info:'',
                     parameters: [
                         { pathName: 'sys_user_roleredirectview', parameterName: 'sys_user_roleredirectview' },
                     ],
@@ -314,7 +364,8 @@ const router = new Router({
             {
                 path: 'sys_role_permissionredirectview/:sys_role_permissionredirectview?',
                 meta: {
-                    caption: 'entities.sysrolepermission.views.redirectview.caption',
+                    caption: 'entities.sysrolepermission.views.redirectview.title',
+                    info:'',
                     parameters: [
                         { pathName: 'sys_role_permissionredirectview', parameterName: 'sys_role_permissionredirectview' },
                     ],
@@ -325,7 +376,8 @@ const router = new Router({
             {
                 path: 'sys_userredirectview/:sys_userredirectview?',
                 meta: {
-                    caption: 'entities.sysuser.views.redirectview.caption',
+                    caption: 'entities.sysuser.views.redirectview.title',
+                    info:'',
                     parameters: [
                         { pathName: 'sys_userredirectview', parameterName: 'sys_userredirectview' },
                     ],
@@ -336,7 +388,8 @@ const router = new Router({
             {
                 path: 'sys_roleredirectview/:sys_roleredirectview?',
                 meta: {
-                    caption: 'entities.sysrole.views.redirectview.caption',
+                    caption: 'entities.sysrole.views.redirectview.title',
+                    info:'',
                     parameters: [
                         { pathName: 'sys_roleredirectview', parameterName: 'sys_roleredirectview' },
                     ],
@@ -347,7 +400,8 @@ const router = new Router({
             {
                 path: 'sys_permissionredirectview/:sys_permissionredirectview?',
                 meta: {
-                    caption: 'entities.syspermission.views.redirectview.caption',
+                    caption: 'entities.syspermission.views.redirectview.title',
+                    info:'',
                     parameters: [
                         { pathName: 'sys_permissionredirectview', parameterName: 'sys_permissionredirectview' },
                     ],
@@ -361,7 +415,8 @@ const router = new Router({
     {
         path: '/sysauthlogs/:sysauthlog?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysauthlog.views.gridview.caption',
+            caption: 'entities.sysauthlog.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -371,9 +426,23 @@ const router = new Router({
         component: () => import('@pages/uaa/sys-authloggrid-view/sys-authloggrid-view.vue'),
     },
     {
+        path: '/sysapps/:sysapp?/editview/:editview?',
+        meta: {
+            caption: 'entities.sysapp.views.editview.title',
+            info:'',
+            parameters: [
+                { pathName: 'sysapps', parameterName: 'sysapp' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-app-edit-view/sys-app-edit-view.vue'),
+    },
+    {
         path: '/sysroles/:sysrole?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.sysrole.views.pickupgridview.caption',
+            caption: 'entities.sysrole.views.pickupgridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -385,7 +454,8 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
         meta: {
-            caption: 'entities.sysuserrole.views.editview.caption',
+            caption: 'entities.sysuserrole.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -398,7 +468,8 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/sysuserroles/:sysuserrole?/editview/:editview?',
         meta: {
-            caption: 'entities.sysuserrole.views.editview.caption',
+            caption: 'entities.sysuserrole.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -411,7 +482,8 @@ const router = new Router({
     {
         path: '/sysuserroles/:sysuserrole?/editview/:editview?',
         meta: {
-            caption: 'entities.sysuserrole.views.editview.caption',
+            caption: 'entities.sysuserrole.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -423,7 +495,8 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.sysuser.views.mpickupview.caption',
+            caption: 'entities.sysuser.views.mpickupview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -435,7 +508,8 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/editview/:editview?',
         meta: {
-            caption: 'entities.sysrole.views.editview.caption',
+            caption: 'entities.sysrole.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -447,7 +521,8 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.sysrole.views.pickupview.caption',
+            caption: 'entities.sysrole.views.pickupview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -459,7 +534,8 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.sysuser.views.pickupgridview.caption',
+            caption: 'entities.sysuser.views.pickupgridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -471,7 +547,8 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/editview/:editview?',
         meta: {
-            caption: 'entities.sysuser.views.editview.caption',
+            caption: 'entities.sysuser.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -483,7 +560,8 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysrole.views.gridview.caption',
+            caption: 'entities.sysrole.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -493,9 +571,23 @@ const router = new Router({
         component: () => import('@pages/uaa/sys-rolegrid-view/sys-rolegrid-view.vue'),
     },
     {
+        path: '/sysapps/:sysapp?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.sysapp.views.gridview.title',
+            info:'',
+            parameters: [
+                { pathName: 'sysapps', parameterName: 'sysapp' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-app-grid-view/sys-app-grid-view.vue'),
+    },
+    {
         path: '/sysusers/:sysuser?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysuser.views.gridview.caption',
+            caption: 'entities.sysuser.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -507,7 +599,8 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.sysrole.views.mpickupview.caption',
+            caption: 'entities.sysrole.views.mpickupview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -519,7 +612,8 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.sysuser.views.pickupview.caption',
+            caption: 'entities.sysuser.views.pickupview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -531,7 +625,8 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
         meta: {
-            caption: 'entities.sysrolepermission.views.customview.caption',
+            caption: 'entities.sysrolepermission.views.customview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
@@ -544,7 +639,8 @@ const router = new Router({
     {
         path: '/syspermissions/:syspermission?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
         meta: {
-            caption: 'entities.sysrolepermission.views.customview.caption',
+            caption: 'entities.sysrolepermission.views.customview.title',
+            info:'',
             parameters: [
                 { pathName: 'syspermissions', parameterName: 'syspermission' },
                 { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
@@ -557,7 +653,8 @@ const router = new Router({
     {
         path: '/sysrolepermissions/:sysrolepermission?/customview/:customview?',
         meta: {
-            caption: 'entities.sysrolepermission.views.customview.caption',
+            caption: 'entities.sysrolepermission.views.customview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
                 { pathName: 'customview', parameterName: 'customview' },
@@ -569,7 +666,8 @@ const router = new Router({
     {
         path: '/sysusers/:sysuser?/sysuserroles/:sysuserrole?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysuserrole.views.gridview.caption',
+            caption: 'entities.sysuserrole.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -582,7 +680,8 @@ const router = new Router({
     {
         path: '/sysroles/:sysrole?/sysuserroles/:sysuserrole?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysuserrole.views.gridview.caption',
+            caption: 'entities.sysuserrole.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
@@ -595,7 +694,8 @@ const router = new Router({
     {
         path: '/sysuserroles/:sysuserrole?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sysuserrole.views.gridview.caption',
+            caption: 'entities.sysuserrole.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
                 { pathName: 'gridview', parameterName: 'gridview' },

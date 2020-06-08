@@ -1,0 +1,26 @@
+version: "3.2"
+services:
+  ibzrt-db:
+    image: mysql:5.7.20
+    volumes:
+      - $PWD/../../../../ibzdb-data/:/var/lib/mysql/
+    networks:
+      - agent_network
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=a_A_5d9d78509
+    ports:
+      - 3306:3306
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8 --explicit_defaults_for_timestamp
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 256M
+networks:
+  agent_network:
+    attachable: true
+

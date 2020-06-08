@@ -72,12 +72,20 @@ export default class AppSpan extends Vue {
     @Prop() public data?: any;
 
     /**
-     * 传入额外参数
-     *
-     * @type {*}
+     * 局部上下文导航参数
+     * 
+     * @type {any}
      * @memberof AppSpan
      */
-    @Prop() public itemParam?: any;
+    @Prop() public localContext!:any;
+
+    /**
+     * 局部导航参数
+     * 
+     * @type {any}
+     * @memberof AppSpan
+     */
+    @Prop() public localParam!:any;
 
     /**
      * 视图上下文

@@ -16,6 +16,9 @@ export default {
             ok: 'OK',
             cancel: 'Cancel',
         },
+        local:{
+            new: 'New'
+        },
         gridpage: {
             choicecolumns: 'Choice columns',
             refresh: 'refresh',

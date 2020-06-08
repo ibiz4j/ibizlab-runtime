@@ -14,7 +14,8 @@
   :data="data"
   :context="context"
   :viewparams="viewparams"
-  :itemParam='{ }' 
+  :localContext ='{ }' 
+  :localParam ='{ }' 
   :disabled="detailsModel.deptname.disabled"
   name='deptname'
   deMajorField='deptname'
@@ -40,7 +41,8 @@
   :data="data"
   :context="context"
   :viewparams="viewparams"
-  :itemParam='{ }' 
+  :localContext ='{ }' 
+  :localParam ='{ }' 
   :disabled="detailsModel.personname.disabled"
   name='personname'
   deMajorField='personname'

@@ -11,6 +11,7 @@
                     <i-form ref='loginForm' :rules="rules" :model="form">
                         <form-item prop='loginname'>
                             <i-input
+                                    size='large'
                                     prefix='ios-contact'
                                     v-model.trim="form.loginname"
                                     placeholder="用户名"
@@ -19,6 +20,7 @@
                         </form-item>
                         <form-item prop='password'>
                             <i-input
+                                    size='large'
                                     prefix='ios-key'
                                     v-model.trim="form.password"
                                     type='password'
@@ -61,9 +63,8 @@
                 </div>
             </card>
             <div class="log_footer">
-                <div class="copyright">Copyright © 2018
-                    <a href="http://www.ibizsys.net/ibizsys/channelview?channelId=ibizsys.about" target="_blank">埃毕致（上海）云计算科技</a>
-                    版权所有
+                <div class="copyright">
+                    <a href="https://www.ibizlab.cn/" target="_blank">{{appTitle}} is based on ibizlab .</a>
                 </div>
             </div>
         </div>
@@ -73,10 +74,10 @@
 <script lang="ts">
     import {Vue, Component, Watch} from 'vue-property-decorator';
     import {Environment} from '@/environments/environment';
-    import Divider from "ibiz-vue-lib/lib/ibiz-vue-lib.common";
+    //import Divider from "ibiz-vue-lib/lib/ibiz-vue-lib.common";
 
     @Component({
-        components: {Divider}
+        components: {}
     })
     export default class Login extends Vue {
 
@@ -86,7 +87,7 @@
          * @type {*}
          * @memberof Login
          */
-        public form: any = {loginname: '', password: ''};
+        public form: any = {loginname: 'ibzadmin', password: '123456'};
 
         /**
          *　登录提示语
@@ -181,7 +182,7 @@
                         localStorage.setItem('user', JSON.stringify(data.user));
                     }
                     // 设置cookie,保存账号密码7天
-                    this.setCookie(loginname, password, 7);
+                    this.setCookie(loginname, 7);
                     // 跳转首页
                     const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
                     this.$router.push({path: url});
@@ -190,11 +191,12 @@
                 // const loginfailed: any = this.$t('components.login.loginfailed');
                 // this.$Notice.error({ title: (this.$t('components.login.error') as any), desc: loginfailed });
                 // 登录提示
-                // this.loginTip = loginfailed;
+
                 const data = error.data;
                 if (data && data.message) {
+                    this.loginTip = data.message;
                     this.$Message.error({
-                        content: "登录失败，" + data.detail,
+                        content: "登录失败，" + data.message,
                         duration: 5,
                         closable: true
                     });
@@ -223,14 +225,13 @@
          * @param loginname
          * @param password
          */
-        public setCookie(loginname: any, password: any, exdays: any) {
+        public setCookie(loginname: any, exdays: any) {
             // 获取时间
             let exdate = new Date();
             // 保存的天数
             exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
             // 字符串拼接cookie
             window.document.cookie = "loginname" + "=" + loginname + ";path=/;expires=" + exdate.toUTCString();
-            window.document.cookie = "password" + "=" + password + ";path=/;expires=" + exdate.toUTCString();
         }
 
         /**
@@ -244,8 +245,6 @@
                     //判断查找相对应的值
                     if (arr2[0] == 'loginname') {
                         this.form.loginname = arr2[1];
-                    } else if (arr2[0] == 'password') {
-                        this.form.password = arr2[1];
                     }
                 }
             }

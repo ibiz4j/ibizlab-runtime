@@ -249,6 +249,7 @@ export default class EditViewEngine extends ViewEngine {
         let viewdata: any = this.view.model;
         if (viewdata  && info && !Object.is(info, '') && this.view.$tabPageExp && (viewdata.srfTitle.indexOf(" - ") === -1)) {
             this.view.$tabPageExp.setCurPageCaption(viewdata.srfTitle, viewdata.srfTitle, info);
+            this.view.$route.meta.info = info;
             this.view.model.srfTitle = `${this.view.$t(viewdata.srfTitle)} - ${viewdata.dataInfo}`;
         }
     }

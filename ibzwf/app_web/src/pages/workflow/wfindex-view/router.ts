@@ -25,7 +25,8 @@ const router = new Router({
                 });
             },
             meta: {  
-                caption: 'app.views.wfindexview.caption',
+                caption: 'app.views.wfindexview.title',
+                info:'',
                 viewType: 'APPINDEX',
                 parameters: [
                     { pathName: 'wfindexview', parameterName: 'wfindexview' },
@@ -37,7 +38,8 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.pickupgridview.caption',
+                        caption: 'entities.wfgroup.views.pickupgridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -50,7 +52,8 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.wfuser.views.pickupgridview.caption',
+                        caption: 'entities.wfuser.views.pickupgridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -63,7 +66,8 @@ const router = new Router({
                 {
                     path: 'wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfprocessdefinition.views.gridview.caption',
+                        caption: 'entities.wfprocessdefinition.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
@@ -76,7 +80,8 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.wfuser.views.pickupview.caption',
+                        caption: 'entities.wfuser.views.pickupview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -89,7 +94,8 @@ const router = new Router({
                 {
                     path: 'wfremodels/:wfremodel?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfremodel.views.editview.caption',
+                        caption: 'entities.wfremodel.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfremodels', parameterName: 'wfremodel' },
@@ -102,7 +108,8 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/wfmembers/:wfmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfmember.views.editview.caption',
+                        caption: 'entities.wfmember.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -116,7 +123,8 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/wfmembers/:wfmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfmember.views.editview.caption',
+                        caption: 'entities.wfmember.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -130,7 +138,8 @@ const router = new Router({
                 {
                     path: 'wfmembers/:wfmember?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfmember.views.editview.caption',
+                        caption: 'entities.wfmember.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -143,7 +152,8 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.gridview.caption',
+                        caption: 'entities.wfgroup.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -156,7 +166,8 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.wfuser.views.mpickupview.caption',
+                        caption: 'entities.wfuser.views.mpickupview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -169,7 +180,8 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/mpickupview/:mpickupview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.mpickupview.caption',
+                        caption: 'entities.wfgroup.views.mpickupview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -182,7 +194,8 @@ const router = new Router({
                 {
                     path: 'wfusers/:wfuser?/wfmembers/:wfmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
+                        caption: 'entities.wfmember.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfusers', parameterName: 'wfuser' },
@@ -196,7 +209,8 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/wfmembers/:wfmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
+                        caption: 'entities.wfmember.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -210,7 +224,8 @@ const router = new Router({
                 {
                     path: 'wfmembers/:wfmember?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
+                        caption: 'entities.wfmember.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -223,7 +238,8 @@ const router = new Router({
                 {
                     path: 'wfgroups/:wfgroup?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.editview.caption',
+                        caption: 'entities.wfgroup.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
@@ -236,7 +252,8 @@ const router = new Router({
                 {
                     path: 'wfprocessdefinitions/:wfprocessdefinition?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfprocessdefinition.views.editview.caption',
+                        caption: 'entities.wfprocessdefinition.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
@@ -252,7 +269,8 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/wfmembers/:wfmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfmember.views.gridview.caption',
+            caption: 'entities.wfmember.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -265,7 +283,8 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/wfmembers/:wfmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfmember.views.gridview.caption',
+            caption: 'entities.wfmember.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -278,7 +297,8 @@ const router = new Router({
     {
         path: '/wfmembers/:wfmember?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfmember.views.gridview.caption',
+            caption: 'entities.wfmember.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -290,7 +310,8 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.wfuser.views.mpickupview.caption',
+            caption: 'entities.wfuser.views.mpickupview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -302,7 +323,8 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.wfuser.views.pickupview.caption',
+            caption: 'entities.wfuser.views.pickupview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'pickupview', parameterName: 'pickupview' },
@@ -314,7 +336,8 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/mpickupview/:mpickupview?',
         meta: {
-            caption: 'entities.wfgroup.views.mpickupview.caption',
+            caption: 'entities.wfgroup.views.mpickupview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'mpickupview', parameterName: 'mpickupview' },
@@ -326,7 +349,8 @@ const router = new Router({
     {
         path: '/wfprocessdefinitions/:wfprocessdefinition?/editview/:editview?',
         meta: {
-            caption: 'entities.wfprocessdefinition.views.editview.caption',
+            caption: 'entities.wfprocessdefinition.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -338,7 +362,8 @@ const router = new Router({
     {
         path: '/wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfprocessdefinition.views.gridview.caption',
+            caption: 'entities.wfprocessdefinition.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -350,7 +375,8 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.wfuser.views.pickupgridview.caption',
+            caption: 'entities.wfuser.views.pickupgridview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -362,7 +388,8 @@ const router = new Router({
     {
         path: '/wfusers/:wfuser?/wfmembers/:wfmember?/editview/:editview?',
         meta: {
-            caption: 'entities.wfmember.views.editview.caption',
+            caption: 'entities.wfmember.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfusers', parameterName: 'wfuser' },
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -375,7 +402,8 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/wfmembers/:wfmember?/editview/:editview?',
         meta: {
-            caption: 'entities.wfmember.views.editview.caption',
+            caption: 'entities.wfmember.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
@@ -388,7 +416,8 @@ const router = new Router({
     {
         path: '/wfmembers/:wfmember?/editview/:editview?',
         meta: {
-            caption: 'entities.wfmember.views.editview.caption',
+            caption: 'entities.wfmember.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfmembers', parameterName: 'wfmember' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -400,7 +429,8 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/editview/:editview?',
         meta: {
-            caption: 'entities.wfgroup.views.editview.caption',
+            caption: 'entities.wfgroup.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -412,7 +442,8 @@ const router = new Router({
     {
         path: '/wfremodels/:wfremodel?/editview/:editview?',
         meta: {
-            caption: 'entities.wfremodel.views.editview.caption',
+            caption: 'entities.wfremodel.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfremodels', parameterName: 'wfremodel' },
                 { pathName: 'editview', parameterName: 'editview' },
@@ -424,7 +455,8 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.wfgroup.views.pickupgridview.caption',
+            caption: 'entities.wfgroup.views.pickupgridview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
@@ -436,7 +468,8 @@ const router = new Router({
     {
         path: '/wfgroups/:wfgroup?/gridview/:gridview?',
         meta: {
-            caption: 'entities.wfgroup.views.gridview.caption',
+            caption: 'entities.wfgroup.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'wfgroups', parameterName: 'wfgroup' },
                 { pathName: 'gridview', parameterName: 'gridview' },

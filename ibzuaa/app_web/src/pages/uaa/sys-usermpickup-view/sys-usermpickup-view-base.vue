@@ -667,6 +667,7 @@ export default class SYS_USERMPickupViewBase extends Vue {
             });
             this.viewSelections = newSelections;
         });
+        this.selectedData = JSON.stringify(this.viewSelections);
     }
 
     /**
@@ -677,6 +678,7 @@ export default class SYS_USERMPickupViewBase extends Vue {
     public onCLickAllLeft():void {
         this.viewSelections = [];
         this.containerModel.view_leftbtn.disabled = true;
+        this.engine.onCtrlEvent('pickupviewpanel', 'selectionchange', []);
         this.selectedData = JSON.stringify(this.viewSelections);
     }
 
@@ -704,6 +706,7 @@ export default class SYS_USERMPickupViewBase extends Vue {
                 }
             });
         });
+        this.selectedData = JSON.stringify(this.viewSelections);
     }
 
     /**

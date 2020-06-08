@@ -21,13 +21,16 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 
-import cn.ibizlab.util.domain.EntityClient;
 
 /**
- * ServiceApi [流程实例] 对象
+ * [流程实例] 对象
  */
-@Data
-public class WFProcessInstance extends EntityClient implements Serializable {
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class WFProcessInstance extends EntityBase implements Serializable {
 
     /**
      * 实例标识
@@ -101,63 +104,6 @@ public class WFProcessInstance extends EntityClient implements Serializable {
 
 
 
-
-    /**
-     * 设置 [实例名称]
-     */
-    public void setName(String name){
-        this.name = name ;
-        this.modify("instancename",name);
-    }
-    /**
-     * 设置 [DefinitionKey]
-     */
-    public void setProcessdefinitionkey(String processdefinitionkey){
-        this.processdefinitionkey = processdefinitionkey ;
-        this.modify("definitionkey",processdefinitionkey);
-    }
-    /**
-     * 设置 [流程定义名称]
-     */
-    public void setProcessdefinitionname(String processdefinitionname){
-        this.processdefinitionname = processdefinitionname ;
-        this.modify("definitionname",processdefinitionname);
-    }
-    /**
-     * 设置 [业务键值]
-     */
-    public void setBusinesskey(String businesskey){
-        this.businesskey = businesskey ;
-        this.modify("businesskey",businesskey);
-    }
-    /**
-     * 设置 [启动时间]
-     */
-    public void setStarttime(Timestamp starttime){
-        this.starttime = starttime ;
-        this.modify("starttime",starttime);
-    }
-    /**
-     * 设置 [结束时间]
-     */
-    public void setEndtime(Timestamp endtime){
-        this.endtime = endtime ;
-        this.modify("endtime",endtime);
-    }
-    /**
-     * 设置 [发起人标识]
-     */
-    public void setStartuserid(String startuserid){
-        this.startuserid = startuserid ;
-        this.modify("startuserid",startuserid);
-    }
-    /**
-     * 设置 [发起人]
-     */
-    public void setStartusername(String startusername){
-        this.startusername = startusername ;
-        this.modify("startusername",startusername);
-    }
 
 }
 

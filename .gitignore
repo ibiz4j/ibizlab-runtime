@@ -2,6 +2,8 @@
 .settings
 *node_modules
 *ibzdb-data
+*ibzdb-orcl
+*ibzdb-pg
 *bin
 *.project
 *.classpath
@@ -12,3 +14,4 @@
 **.iml
 *.jar
 *.log
+*yarn.lock

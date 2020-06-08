@@ -1,6 +1,11 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
-    <changeSet author="Think (generated)" id="1590734259445-1">
+    <changeSet author="Think (generated)" id="1590734259446-1" dbms="mysql,h2,postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="XXL_JOB_GROUP"/>
+            </not>
+        </preConditions>
         <createTable tableName="xxl_job_group">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -11,16 +16,11 @@
             <column name="title" remarks="执行器名称" type="VARCHAR(12)">
                 <constraints nullable="false"/>
             </column>
-            <column defaultValueNumeric="0" name="order" remarks="排序" type="TINYINT(3)">
-                <constraints nullable="false"/>
-            </column>
             <column defaultValueNumeric="0" name="address_type" remarks="执行器地址类型：0=自动注册、1=手动录入" type="TINYINT(3)">
                 <constraints nullable="false"/>
             </column>
             <column name="address_list" remarks="执行器地址列表，多地址逗号分隔" type="VARCHAR(512)"/>
         </createTable>
-    </changeSet>
-    <changeSet author="Think (generated)" id="1590734259445-2">
         <createTable tableName="xxl_job_info">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -65,15 +65,11 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet author="Think (generated)" id="1590734259445-3">
         <createTable tableName="xxl_job_lock">
             <column name="lock_name" remarks="锁名称" type="VARCHAR(50)">
                 <constraints primaryKey="true"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet author="Think (generated)" id="1590734259445-4">
         <createTable tableName="xxl_job_log">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -105,8 +101,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet author="Think (generated)" id="1590734259445-5">
         <createTable tableName="xxl_job_logglue">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -122,8 +116,6 @@
             <column name="add_time" type="timestamp"/>
             <column name="update_time" type="timestamp"/>
         </createTable>
-    </changeSet>
-    <changeSet author="Think (generated)" id="1590734259445-6">
         <createTable tableName="xxl_job_registry">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -141,8 +133,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-    </changeSet>
-    <changeSet author="Think (generated)" id="1590734259445-7">
         <createTable tableName="xxl_job_user">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -158,20 +148,13 @@
             </column>
             <column name="permission" remarks="权限：执行器ID列表，多个逗号分割" type="VARCHAR(255)"/>
         </createTable>
-    </changeSet>
-
-	<changeSet author="Think (generated)" id="1590734920859-1">
         <insert tableName="xxl_job_group">
             <column name="id" valueNumeric="1"/>
             <column name="app_name" value="xxl-job-executor-sample"/>
             <column name="title" value="示例执行器"/>
-            <column name="order" valueNumeric="100"/>
             <column name="address_type" valueNumeric="0"/>
             <column name="address_list"/>
         </insert>
-	</changeSet>
-	
-	<changeSet author="Think (generated)" id="1590734920859-2">
         <insert tableName="xxl_job_info">
             <column name="id" valueNumeric="1"/>
             <column name="job_group" valueNumeric="1"/>
@@ -196,9 +179,6 @@
             <column name="trigger_last_time" valueNumeric="0"/>
             <column name="trigger_next_time" valueNumeric="0"/>
         </insert>
-	</changeSet>
-	
-	<changeSet author="Think (generated)" id="1590734920859-6">
         <insert tableName="xxl_job_user">
             <column name="id" valueNumeric="2"/>
             <column name="username" value="ibzadmin"/>
@@ -206,12 +186,33 @@
             <column name="role" valueNumeric="1"/>
             <column name="permission" value=""/>
         </insert>
-	</changeSet>
-	
-	<changeSet author="Think (generated)" id="1590734920859-3">
         <insert tableName="xxl_job_lock">
             <column name="lock_name" value="schedule_lock"/>
         </insert>
     </changeSet>
-	
+
+    <changeSet author="Think (generated)" id="1590734259446-4" dbms="mysql,h2,postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="XXL_JOB_LOG_REPORT"/>
+            </not>
+        </preConditions>
+        <createTable tableName="xxl_job_log_report">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="trigger_day" remarks="调度-时间" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="running_count" remarks="运行中-日志数量" type="INT" defaultValueNumeric="0" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="suc_count" remarks="执行成功-日志数量" type="INT" defaultValueNumeric="0" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="fail_count" remarks="执行失败-日志数量" type="INT" defaultValueNumeric="0" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

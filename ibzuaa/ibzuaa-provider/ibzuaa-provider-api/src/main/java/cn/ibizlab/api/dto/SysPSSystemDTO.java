@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import cn.ibizlab.core.uaa.extensions.domain.SysApp;
+import cn.ibizlab.core.uaa.domain.SysApp;
 import cn.ibizlab.core.uaa.extensions.domain.SysStructure;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

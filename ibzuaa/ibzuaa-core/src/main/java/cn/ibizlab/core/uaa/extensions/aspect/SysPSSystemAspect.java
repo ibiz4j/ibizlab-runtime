@@ -3,7 +3,7 @@ package cn.ibizlab.core.uaa.extensions.aspect;
 import cn.ibizlab.core.uaa.domain.SysPSSystem;
 import cn.ibizlab.core.uaa.domain.SysPermission;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
-import cn.ibizlab.core.uaa.extensions.domain.SysApp;
+import cn.ibizlab.core.uaa.domain.SysApp;
 import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;

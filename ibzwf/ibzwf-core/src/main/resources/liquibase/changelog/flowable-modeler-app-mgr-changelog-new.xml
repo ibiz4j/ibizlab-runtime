@@ -4,8 +4,16 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<changeSet id="1561433044783-1" author="flowable">
-    
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+	<changeSet id="1561433044785-1" author="flowable">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ACT_DE_DATABASECHANGELOG"/>
+            </not>
+        </preConditions>
         <!-- model -->
 		<createTable tableName="ACT_DE_DATABASECHANGELOG">
 			<column name="id" type="varchar(255)">
@@ -17,7 +25,7 @@
 			<column name="filename" type="varchar(255)">
 				<constraints nullable="false" />
 			</column>
-			<column name="dateexecuted" type="datetime(6)">
+			<column name="dateexecuted" type="datetime(6)" defaultValueDate="${now}">
 				<constraints nullable="false" />
 			</column>
 			<column name="orderexecuted" type="int">
@@ -70,16 +78,11 @@
         </createTable>
 
 			
-	</changeSet>
-    
 
-
-    <changeSet id="1561433044783-3" author="flowable">
         <insert tableName="ACT_DE_DATABASECHANGELOG">
             <column name="ID" value="1"/>
             <column name="AUTHOR" value="flowable"/>
             <column name="FILENAME" value="META-INF/liquibase/flowable-modeler-app-db-changelog.xml"/>
-            <column name="DATEEXECUTED" value="2019-09-23 06:18:15"/>
             <column name="ORDEREXECUTED" value="1"/>
             <column name="EXECTYPE" value="EXECUTED"/>
             <column name="MD5SUM" value="8:e70d1d9d3899a734296b2514ccc71501"/>
@@ -95,7 +98,6 @@
             <column name="ID" value="3"/>
             <column name="AUTHOR" value="flowable"/>
             <column name="FILENAME" value="META-INF/liquibase/flowable-modeler-app-db-changelog.xml"/>
-            <column name="DATEEXECUTED" value="2019-09-23 06:18:15"/>
             <column name="ORDEREXECUTED" value="2"/>
             <column name="EXECTYPE" value="EXECUTED"/>
             <column name="MD5SUM" value="8:3a9143bef2e45f2316231cc1369138b6"/>

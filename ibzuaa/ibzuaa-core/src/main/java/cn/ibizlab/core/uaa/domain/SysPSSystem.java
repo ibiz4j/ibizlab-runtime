@@ -8,9 +8,9 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
 
-import cn.ibizlab.core.uaa.extensions.domain.SysApp;
+import cn.ibizlab.core.uaa.domain.SysApp;
 import cn.ibizlab.core.uaa.extensions.domain.SysStructure;
-import cn.ibizlab.core.uaa.extensions.domain.handlers.SysAppsTypeHandler;
+import cn.ibizlab.core.uaa.domain.handlers.SysAppTypeHandler;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -67,7 +67,7 @@ public class SysPSSystem extends EntityMP implements Serializable {
     /**
      * 结构
      */
-    @TableField(value = "apps",typeHandler = SysAppsTypeHandler.class)
+    @TableField(value = "apps",typeHandler = SysAppTypeHandler.class)
     @JSONField(name = "apps")
     @JsonProperty("apps")
     private List<SysApp> apps;

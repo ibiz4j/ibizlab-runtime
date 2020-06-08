@@ -1,4 +1,5 @@
 import sysauthlog_en_US from '@locale/lanres/entities/sys-auth-log/sys-auth-log_en_US';
+import sysapp_en_US from '@locale/lanres/entities/sys-app/sys-app_en_US';
 import sysrolepermission_en_US from '@locale/lanres/entities/sys-role-permission/sys-role-permission_en_US';
 import syspermission_en_US from '@locale/lanres/entities/sys-permission/sys-permission_en_US';
 import sysuserrole_en_US from '@locale/lanres/entities/sys-user-role/sys-user-role_en_US';
@@ -15,6 +16,9 @@ export default {
             success: 'Success',
             ok: 'OK',
             cancel: 'Cancel',
+        },
+        local:{
+            new: 'New'
         },
         gridpage: {
             choicecolumns: 'Choice columns',
@@ -64,11 +68,13 @@ export default {
                 menuitem3: '用户',
                 menuitem6: '角色',
                 menuitem1: '认证日志',
+                menuitem2: '接入应用',
             },
         },
     },
     entities: {
         sysauthlog: sysauthlog_en_US,
+        sysapp: sysapp_en_US,
         sysrolepermission: sysrolepermission_en_US,
         syspermission: syspermission_en_US,
         sysuserrole: sysuserrole_en_US,

@@ -7,7 +7,7 @@ import cn.ibizlab.core.uaa.domain.SysRole;
 import cn.ibizlab.core.uaa.domain.SysRolePermission;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionNode;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
-import cn.ibizlab.core.uaa.extensions.domain.SysApp;
+import cn.ibizlab.core.uaa.domain.SysApp;
 import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
 import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;
@@ -62,8 +62,7 @@ public class UAACoreService {
         List<PermissionNode> apps = new ArrayList<>();
         List<PermissionNode> uniResIds = new ArrayList<>();
         List<PermissionNode> oppirvs = new ArrayList<>();
-        Page<SysPSSystem> page = sysPSSystemService.searchDefault(new SysPSSystemSearchContext());
-        page.getContent().forEach(system->{
+        sysPSSystemService.list().forEach(system->{
             if(system.getSysstructure()==null)
                 return;
             PermissionNode appnode=system.getSysstructure().getPermissionTree(PermissionType.APPMENU);
@@ -168,8 +167,7 @@ public class UAACoreService {
     @Cacheable( value="syspssystem",key = "'row:all-apps'")
     public LinkedHashMap<String,SysApp> getApps() {
         LinkedHashMap<String,SysApp> appNode=new LinkedHashMap<>();
-        Page<SysPSSystem> page = sysPSSystemService.searchDefault(new SysPSSystemSearchContext());
-        page.getContent().forEach(system -> {
+        sysPSSystemService.list().forEach(system -> {
             if (system.getSysstructure() == null)
             {
                 return;

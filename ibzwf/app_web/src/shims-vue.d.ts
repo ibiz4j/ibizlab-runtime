@@ -9,3 +9,4 @@ declare module '@fullcalendar/list';
 declare module '@fullcalendar/interaction';
 declare module 'vue-grid-layout';
 declare module 'vue-print-nb';
+declare module 'vuedraggable';

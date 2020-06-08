@@ -8,6 +8,7 @@ import './upload/upload';
 
 // 实体级接口对象
 import './entity/sys-auth-logs/sys-auth-logs';
+import './entity/sys-apps/sys-apps';
 import './entity/sys-role-permissions/sys-role-permissions';
 import './entity/sys-permissions/sys-permissions';
 import './entity/sys-user-roles/sys-user-roles';

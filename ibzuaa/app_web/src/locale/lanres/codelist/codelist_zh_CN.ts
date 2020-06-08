@@ -1,4 +1,9 @@
 export default {
+    YesNo: {
+        '1': '是',
+        '0': '否',
+        empty: '',
+    },
     CLAuthCode: {
         '200': '成功',
         '400': '用户不存在',

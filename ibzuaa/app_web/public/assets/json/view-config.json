@@ -23,6 +23,14 @@
         "viewname": "SYS_USER_ROLERedirectView",
         "viewtag": "12f53853382743f095a6af867669d8c1"
     },
+    "sysappeditview": {
+        "title": "应用编辑视图",
+        "caption": "应用",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "uaa",
+        "viewname": "SysAppEditView",
+        "viewtag": "137b8f036994965b8926455611848134"
+    },
     "sys_rolepickupgridview": {
         "title": "角色选择表格视图",
         "caption": "系统角色",
@@ -230,6 +238,14 @@
         "viewmodule": "uaa",
         "viewname": "SYS_PERMISSIONMPickupView",
         "viewtag": "b8a97c1797a1b91fbb37f8c2d14b1fb6"
+    },
+    "sysappgridview": {
+        "title": "应用表格视图",
+        "caption": "应用",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "uaa",
+        "viewname": "SysAppGridView",
+        "viewtag": "bb58e4db8024f089e1d808f0ede81302"
     },
     "sys_permissionredirectview": {
         "title": "权限表数据重定向视图",
