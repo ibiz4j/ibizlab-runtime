@@ -101,7 +101,7 @@ Boot on port:40001
 本系统提供了docker镜像，方便快速部署  
 docker pull [ibiz4j/ibizlab-runtime:1.0.1-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
 
-启动基础配套服务，nacos+redis，数据库存储自动持久化到ibzrt-data目录中  
+启动基础配套服务，nacos+redis    
 ```
 docker-compose -f boot/src/main/docker/ibzrt-dependencies.yaml up -d
 ```
