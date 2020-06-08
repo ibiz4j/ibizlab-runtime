@@ -99,11 +99,24 @@ Boot on port:40001
 #### Docker + Docker-compose
 
 本系统提供了docker镜像，方便快速部署  
-docker pull [ibiz4j/ibizlab-runtime:1.0.0-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
+docker pull [ibiz4j/ibizlab-runtime:1.0.1-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
 
-启动基础配套服务，mysql/nacos/redis，数据库存储自动持久化到ibzrt-data目录中  
+启动基础配套服务，nacos+redis，数据库存储自动持久化到ibzrt-data目录中  
 ```
 docker-compose -f boot/src/main/docker/ibzrt-dependencies.yaml up -d
+```
+
+启动数据库服务，mysql/postgresql/oracle，数据库存储自动持久化到ibzrt-data目录中  
+```
+docker-compose -f boot/src/main/docker/ibzrt-mysql.yaml up -d
+```
+或者，postgresql，数据库存储自动持久化到ibzrt-pg目录中  
+```
+docker-compose -f boot/src/main/docker/ibzrt-pg.yaml up -d
+```
+或者，oracle，数据库存储自动持久化到ibzrt-orcl目录中  
+```
+docker-compose -f boot/src/main/docker/ibzrt-oracle.yaml up -d
 ```
 
 启动ibizlab-runtime boot服务（主程序 http://127.0.0.1:10086）  
