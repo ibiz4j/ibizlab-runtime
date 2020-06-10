@@ -25,11 +25,11 @@ export default {
 		},
 		gridview: {
 			caption: "Help",
-      title: '部门',
+      title: '部门表格视图',
 		},
 		editview: {
 			caption: "Help",
-      title: '部门',
+      title: '部门编辑视图',
 		},
 		mpickupview: {
 			caption: "Help",
@@ -37,11 +37,11 @@ export default {
 		},
 		optionview: {
 			caption: "Help",
-      title: '部门',
+      title: '部门选项操作视图',
 		},
 		treeexpview: {
 			caption: "Help",
-      title: '人员管理',
+      title: '部门树导航视图',
 		},
 		pickupgridview: {
 			caption: "Help",

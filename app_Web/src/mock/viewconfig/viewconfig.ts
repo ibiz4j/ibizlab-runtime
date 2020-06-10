@@ -312,7 +312,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "b23a721ca159ac2490b768d795e85d17"
         },
         "index": {
-            "title": "ibizlab-runtime",
+            "title": "ibizlab",
             "caption": "ibizlab-runtime",
             "viewtype": "APPINDEXVIEW",
             "viewmodule": "rt",

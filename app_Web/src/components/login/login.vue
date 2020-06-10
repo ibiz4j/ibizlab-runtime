@@ -72,201 +72,201 @@
 </template>
 
 <script lang="ts">
-    import {Vue, Component, Watch} from 'vue-property-decorator';
-    import {Environment} from '@/environments/environment';
-    //import Divider from "ibiz-vue-lib/lib/ibiz-vue-lib.common";
+import {Vue, Component, Watch} from 'vue-property-decorator';
+import {Environment} from '@/environments/environment';
+//import Divider from "ibiz-vue-lib/lib/ibiz-vue-lib.common";
 
-    @Component({
-        components: {}
-    })
-    export default class Login extends Vue {
+@Component({
+    components: {}
+})
+export default class Login extends Vue {
 
-        /**
-         * 表单对象
-         *
-         * @type {*}
-         * @memberof Login
-         */
-        public form: any = {loginname: 'ibzadmin', password: '123456'};
+    /**
+     * 表单对象
+     *
+     * @type {*}
+     * @memberof Login
+     */
+    public form: any = {loginname: 'ibzadmin', password: '123456'};
 
-        /**
-         *　登录提示语
-         */
-        public loginTip: any = "";
+    /**
+     *　登录提示语
+        */
+    public loginTip: any = "";
 
-        /**
-         *　按钮可点击
-         */
-        public canClick: any = true;
+    /**
+     *　按钮可点击
+        */
+    public canClick: any = true;
 
-        /**
-         * 应用名称
-         *
-         * @type {string}
-         * @memberof Login
-         */
-        public appTitle: string = Environment.AppTitle;
+    /**
+     * 应用名称
+     *
+     * @type {string}
+     * @memberof Login
+     */
+    public appTitle: string = Environment.AppTitle;
 
-        /**
-         * 值规则
-         *
-         * @type {*}
-         * @memberof Login
-         */
-        public rules = {};
+    /**
+     * 值规则
+     *
+     * @type {*}
+     * @memberof Login
+     */
+    public rules = {};
 
-        /**
-         * 设置值规则
-         *
-         * @memberof Login
-         */
-        public setRules() {
-            this.rules = {
-                loginname: [
-                    {required: true, message: this.$t('components.login.loginname.message'), trigger: 'change'},
-                ],
-                password: [
-                    {required: true, message: this.$t('components.login.password.message'), trigger: 'change'},
-                ],
-            }
-        };
+    /**
+     * 设置值规则
+     *
+     * @memberof Login
+     */
+    public setRules() {
+        this.rules = {
+            loginname: [
+                {required: true, message: this.$t('components.login.loginname.message'), trigger: 'change'},
+            ],
+            password: [
+                {required: true, message: this.$t('components.login.password.message'), trigger: 'change'},
+            ],
+        }
+    };
 
-        /**
-         * 生命周期Create
-         *
-         * @memberof Login
-         */
-        public created() {
-            this.setRules();
+    /**
+     * 生命周期Create
+     *
+     * @memberof Login
+     */
+    public created() {
+        this.setRules();
+    }
+
+    public mounted() {
+        this.getCookie("loginname");
+    }
+
+    /**
+     * 监听语言变化
+     *
+     * @memberof Login
+     */
+    @Watch('$i18n.locale')
+    onLocaleChange(newval: any, val: any) {
+        this.setRules();
+    }
+
+    /**
+     * 登陆处理
+     *
+     * @memberof Login
+     */
+    public handleSubmit(): void {
+        const form: any = this.$refs.loginForm;
+        let validatestate: boolean = true;
+        form.validate((valid: boolean) => {
+            validatestate = valid ? true : false;
+        });
+        if (!validatestate) {
+            return;
         }
 
-        public mounted() {
-            this.getCookie();
-        }
-
-        /**
-         * 监听语言变化
-         *
-         * @memberof Login
-         */
-        @Watch('$i18n.locale')
-        onLocaleChange(newval: any, val: any) {
-            this.setRules();
-        }
-
-        /**
-         * 登陆处理
-         *
-         * @memberof Login
-         */
-        public handleSubmit(): void {
-            const form: any = this.$refs.loginForm;
-            let validatestate: boolean = true;
-            form.validate((valid: boolean) => {
-                validatestate = valid ? true : false;
-            });
-            if (!validatestate) {
-                return;
-            }
-
-            const loginname: any = this.form.loginname;
-            const password: any = this.form.password;
-            const post: Promise<any> = this.$http.post('v7/login', this.form, true);
-            post.then((response: any) => {
-                if (response && response.status === 200) {
-                    const data = response.data;
-                    if (data && data.token) {
-                        localStorage.setItem('token', data.token);
-                    }
-                    if (data && data.user) {
-                        localStorage.setItem('user', JSON.stringify(data.user));
-                    }
-                    // 设置cookie,保存账号密码7天
-                    this.setCookie(loginname, 7);
-                    // 跳转首页
-                    const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
-                    this.$router.push({path: url});
+        const loginname: any = this.form.loginname;
+        const password: any = this.form.password;
+        const post: Promise<any> = this.$http.post('v7/login', this.form, true);
+        post.then((response: any) => {
+            if (response && response.status === 200) {
+                const data = response.data;
+                if (data && data.token) {
+                    localStorage.setItem('token', data.token);
+                    this.setCookie('ibzuaa-token',data.token,0);
                 }
-            }).catch((error: any) => {
-                // const loginfailed: any = this.$t('components.login.loginfailed');
-                // this.$Notice.error({ title: (this.$t('components.login.error') as any), desc: loginfailed });
-                // 登录提示
-
-                const data = error.data;
-                if (data && data.message) {
-                    this.loginTip = data.message;
-                    this.$Message.error({
-                        content: "登录失败，" + data.message,
-                        duration: 5,
-                        closable: true
-                    });
-                } else {
-                    this.$Message.error({
-                        content: "登录失败",
-                        duration: 5,
-                        closable: true
-                    });
-                }
-            });
-
-        }
-
-        /**
-         * 重置页面
-         */
-        public goReset(): void {
-            const _this = this;
-            _this.form={loginname: 'ibzadmin', password: '123456'}
-        }
-
-
-        /**
-         * 设置cookie,保存账号密码
-         * @param loginname
-         * @param password
-         */
-        public setCookie(loginname: any, exdays: any) {
-            // 获取时间
-            let exdate = new Date();
-            // 保存的天数
-            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
-            // 字符串拼接cookie
-            window.document.cookie = "loginname" + "=" + loginname + ";path=/;expires=" + exdate.toUTCString();
-        }
-
-        /**
-         * 获取cookie
-         */
-        public getCookie() {
-            if (document.cookie.length > 0) {
-                var arr = document.cookie.split('; ');
-                for (var i = 0; i < arr.length; i++) {
-                    var arr2 = arr[i].split('=');
-                    //判断查找相对应的值
-                    if (arr2[0] == 'loginname') {
-                        this.form.loginname = arr2[1];
-                    }
-                }
+                // 设置cookie,保存账号密码7天
+                this.setCookie("loginname",loginname, 7);
+                // 跳转首页
+                const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
+                this.$router.push({path: url});
             }
-        }
-
-        /**
-         * qq授权登录
-         * @param thirdpart
-         */
-        public tencentHandleClick(thirdpart: any) {
-            this.$Message.warning("qq授权登录暂未支持")
-        }
-
-        /**
-         * 微信授权登录
-         * @param thirddpart
-         */
-        public wechatHandleClick(thirddpart: any) {
-            this.$Message.warning("微信授权登录暂未支持")
-        }
+        }).catch((error: any) => {
+            // 登录提示
+            const data = error.data;
+            if (data && data.message) {
+                this.loginTip = data.message;
+                this.$Message.error({
+                    content: "登录失败，" + data.message,
+                    duration: 5,
+                    closable: true
+                });
+            } else {
+                this.$Message.error({
+                    content: "登录失败",
+                    duration: 5,
+                    closable: true
+                });
+            }
+        });
 
     }
+
+    /**
+     * 重置页面
+     * 
+     * @memberof Login
+     */
+    public goReset(): void {
+        const _this = this;
+        _this.form={loginname: 'ibzadmin', password: '123456'}
+    }
+
+    /**
+     * 设置cookie
+     * 
+     * @memberof Login
+     */
+    public setCookie(name: any, value: any, day: any) {
+            if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+                let curDate = new Date();
+                let curTamp = curDate.getTime();
+                let curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
+                let passedTamp = curTamp - curWeeHours;
+                let leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
+                let leftTime = new Date();
+                leftTime.setTime(leftTamp + curTamp);
+                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+            } else {
+                document.cookie = name + "=" + escape(value);
+            }
+    }
+
+    /**
+     * 获取cookie
+     * 
+     * @memberof Login
+     */
+    public getCookie(name: any): any {
+            let arr;
+            let reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+    }
+
+    /**
+     * qq授权登录
+     * @param thirdpart
+     */
+    public tencentHandleClick(thirdpart: any) {
+        this.$Message.warning("qq授权登录暂未支持")
+    }
+
+    /**
+     * 微信授权登录
+     * @param thirddpart
+     */
+    public wechatHandleClick(thirddpart: any) {
+        this.$Message.warning("微信授权登录暂未支持")
+    }
+
+}
 </script>
 
 <style lang='less'>

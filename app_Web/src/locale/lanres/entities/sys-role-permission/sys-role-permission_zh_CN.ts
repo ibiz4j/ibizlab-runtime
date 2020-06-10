@@ -13,7 +13,7 @@ export default {
 	views: {
 		customview: {
 			caption: '角色权限关系',
-      title: '角色权限关系',
+      title: '角色权限关系自定义视图',
 		},
 	},
 };

@@ -141,7 +141,7 @@
         }
 
         public mounted() {
-            this.getCookie();
+            this.getCookie("loginname");
         }
 
         /**
@@ -177,12 +177,13 @@
                     const data = response.data;
                     if (data && data.token) {
                         localStorage.setItem('token', data.token);
+                        this.setCookie('ibzuaa-token',data.token,0);
                     }
                     if (data && data.user) {
                         localStorage.setItem('user', JSON.stringify(data.user));
                     }
                     // 设置cookie,保存账号密码7天
-                    this.setCookie(loginname, 7);
+                    this.setCookie("loginname",loginname, 7);
                     // 跳转首页
                     const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
                     this.$router.push({path: url});
@@ -220,34 +221,29 @@
         }
 
 
-        /**
-         * 设置cookie,保存账号密码
-         * @param loginname
-         * @param password
-         */
-        public setCookie(loginname: any, exdays: any) {
-            // 获取时间
-            let exdate = new Date();
-            // 保存的天数
-            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
-            // 字符串拼接cookie
-            window.document.cookie = "loginname" + "=" + loginname + ";path=/;expires=" + exdate.toUTCString();
+
+        public setCookie(name: any, value: any, day: any) {
+                if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+                    var curDate = new Date();
+                    var curTamp = curDate.getTime();
+                    var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
+                    var passedTamp = curTamp - curWeeHours;
+                    var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
+                    var leftTime = new Date();
+                    leftTime.setTime(leftTamp + curTamp);
+                    document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+                } else {
+                    document.cookie = name + "=" + escape(value);
+                }
         }
 
-        /**
-         * 获取cookie
-         */
-        public getCookie() {
-            if (document.cookie.length > 0) {
-                var arr = document.cookie.split('; ');
-                for (var i = 0; i < arr.length; i++) {
-                    var arr2 = arr[i].split('=');
-                    //判断查找相对应的值
-                    if (arr2[0] == 'loginname') {
-                        this.form.loginname = arr2[1];
-                    }
-                }
-            }
+        public getCookie(name: any): any {
+                var arr;
+                var reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+                if (arr = document.cookie.match(reg))
+                    return unescape(arr[2]);
+                else
+                    return null;
         }
 
         /**

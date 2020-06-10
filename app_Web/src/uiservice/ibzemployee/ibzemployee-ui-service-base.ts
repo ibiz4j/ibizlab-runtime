@@ -108,13 +108,22 @@ export default class IBZEmployeeUIServiceBase extends UIService {
      * @param {*} [srfParentDeName] 父实体名称
      * @returns {Promise<any>}
      */
-    public async IBZEmployee_OpenNewCreateView(args: any[], context:any = {} ,params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+    public async IBZEmployee_OpenNewCreateView(args: any[], context:any = {} ,params: any={}, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+    
         let data: any = {};
-        const _args: any[] = Util.deepCopy(args);
+        let parentContext:any = {};
+        let parentViewParam:any = {};
         const _this: any = actionContext;
+        const _args: any[] = Util.deepCopy(args);
         const actionTarget: string | null = 'NONE';
-        context = UIActionTool.handleContextParam(actionTarget,_args,context);
-        data = UIActionTool.handleActionParam(actionTarget,_args,params);
+        if(_this.context){
+            parentContext = _this.context;
+        }
+        if(_this.viewparams){
+            parentViewParam = _this.viewparams;
+        }
+        context = UIActionTool.handleContextParam(actionTarget,_args,parentContext,parentViewParam,context);
+        data = UIActionTool.handleActionParam(actionTarget,_args,parentContext,parentViewParam,params);
         context = Object.assign({},actionContext.context,context);
         let parentObj:any = {srfparentdename:srfParentDeName?srfParentDeName:null,srfparentkey:srfParentDeName?context[srfParentDeName.toLowerCase()]:null};
         Object.assign(data,parentObj);
@@ -169,16 +178,25 @@ export default class IBZEmployeeUIServiceBase extends UIService {
      * @param {*} [srfParentDeName] 父实体名称
      * @returns {Promise<any>}
      */
-    public async IBZEmployee_OpenMainView(args: any[], context:any = {} ,params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+    public async IBZEmployee_OpenMainView(args: any[], context:any = {} ,params: any={}, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+    
         let data: any = {};
-        const _args: any[] = Util.deepCopy(args);
+        let parentContext:any = {};
+        let parentViewParam:any = {};
         const _this: any = actionContext;
+        const _args: any[] = Util.deepCopy(args);
         const actionTarget: string | null = 'SINGLEKEY';
         Object.assign(context, { ibzemployee: '%ibzemployee%' });
         Object.assign(params, { userid: '%ibzemployee%' });
         Object.assign(params, { personname: '%personname%' });
-        context = UIActionTool.handleContextParam(actionTarget,_args,context);
-        data = UIActionTool.handleActionParam(actionTarget,_args,params);
+        if(_this.context){
+            parentContext = _this.context;
+        }
+        if(_this.viewparams){
+            parentViewParam = _this.viewparams;
+        }
+        context = UIActionTool.handleContextParam(actionTarget,_args,parentContext,parentViewParam,context);
+        data = UIActionTool.handleActionParam(actionTarget,_args,parentContext,parentViewParam,params);
         context = Object.assign({},actionContext.context,context);
         let parentObj:any = {srfparentdename:srfParentDeName?srfParentDeName:null,srfparentkey:srfParentDeName?context[srfParentDeName.toLowerCase()]:null};
         Object.assign(data,parentObj);
@@ -228,16 +246,24 @@ export default class IBZEmployeeUIServiceBase extends UIService {
      * @param {*} [srfParentDeName] 父实体名称
      * @returns {Promise<any>}
      */
-    public async IBZEmployee_InitPwd(args: any[],context:any = {}, params?: any, $event?: any, xData?: any,actionContext?: any,srfParentDeName?:string){
+    public async IBZEmployee_InitPwd(args: any[],context:any = {}, params:any = {}, $event?: any, xData?: any,actionContext?: any,srfParentDeName?:string){
         let data: any = {};
-        const _args: any[] = Util.deepCopy(args);
+        let parentContext:any = {};
+        let parentViewParam:any = {};
         const _this: any = actionContext;
+        const _args: any[] = Util.deepCopy(args);
         const actionTarget: string | null = 'MULTIKEY';
         Object.assign(context, { ibzemployee: '%ibzemployee%' });
         Object.assign(params, { userid: '%ibzemployee%' });
         Object.assign(params, { personname: '%personname%' });
-        context = UIActionTool.handleContextParam(actionTarget,_args,context);
-        data = UIActionTool.handleActionParam(actionTarget,_args,params);
+        if(_this.context){
+            parentContext = _this.context;
+        }
+        if(_this.viewparams){
+            parentViewParam = _this.viewparams;
+        }
+        context = UIActionTool.handleContextParam(actionTarget,_args,parentContext,parentViewParam,context);
+        data = UIActionTool.handleActionParam(actionTarget,_args,parentContext,parentViewParam,params);
         context = Object.assign({},actionContext.context,context);
         let parentObj:any = {srfparentdename:srfParentDeName?srfParentDeName:null,srfparentkey:srfParentDeName?context[srfParentDeName.toLowerCase()]:null};
         Object.assign(data,parentObj);

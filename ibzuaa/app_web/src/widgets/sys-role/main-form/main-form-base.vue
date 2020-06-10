@@ -47,6 +47,8 @@
     ]"
     :context="context"
     :viewparams="viewparams"
+    :localContext ='{}'
+    :localParam ='{}'
     parameterName='sysrole'
     parentName="SysRole"  
     refviewtype='DECUSTOMVIEW' 
@@ -83,6 +85,8 @@
     ]"
     :context="context"
     :viewparams="viewparams"
+    :localContext ='{}'
+    :localParam ='{}'
     parameterName='sysrole'
     parentName="SysRole"  
     refviewtype='DEGRIDVIEW' 

@@ -110,7 +110,7 @@ public class UAACoreService {
                 if(PermissionType.APPMENU.toString().equals(sysRolePermission.getPermissiontype()))
                 {
                     //补充应用访问权
-                    String appid = sysRolePermission.getPermissionid().split("-")[0].toLowerCase()+"-app-"+sysRolePermission.getPermissionid().split("-")[1].toLowerCase();
+                    String appid = sysRolePermission.getPermissionid().split("-")[0].toLowerCase()+"-"+sysRolePermission.getPermissionid().split("-")[1].toLowerCase();
                     if(!apps.contains(appid)){
                         apps.add(appid);
                         authorities.add(new SimpleGrantedAuthority(sysRolePermission.getPermissiontype()+"_"+appid));

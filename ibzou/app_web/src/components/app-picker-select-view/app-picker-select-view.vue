@@ -1,7 +1,7 @@
 <template>
     <div class="app-picker-select-view">
         <Dropdown :visible="visible" trigger="custom" style="left:0px;width: 100%" @on-clickoutside="() => {triggerMenu(false);}" >
-          <Input v-if="isSingleSelect" v-model="queryValue" class="tree-input" type="text" :placeholder="placeholder ? placeholder : $t('components.AppPickerSelectViewSelectView.placeholder')" :disabled="disabled" @on-change="OnInputChange" @on-focus="()=>{triggerMenu(true);}" >
+          <Input v-if="isSingleSelect" v-model="queryValue" class="tree-input" type="text" :placeholder="placeholder ? placeholder : $t('components.appPickerSelectView.placeholder')" :disabled="disabled" @on-change="OnInputChange" @on-focus="()=>{triggerMenu(true);}" >
               <template v-slot:suffix>
                   <i v-if="queryValue && !disabled" class='el-icon-circle-close' @click="onClear"></i>
                   <Icon :type="visible ? 'ios-arrow-up' : 'ios-arrow-down'" class="icon-arrow" @click="() => {triggerMenu();}"></Icon>
@@ -34,7 +34,7 @@ import { ViewTool } from '@/utils/view-tool/view-tool';
 
 @Component({
 })
-export default class AppPickerSelectViewSelectView extends Vue {
+export default class AppPickerSelectView extends Vue {
     /**
      * 视图上下文
      *
@@ -256,7 +256,7 @@ export default class AppPickerSelectViewSelectView extends Vue {
      */
     public handlePublicParams(arg: any): boolean {
         if (!this.data) {
-            this.$Notice.error({ title: (this.$t('components.AppPickerSelectViewSelectView.error') as any), desc: (this.$t('components.AppPickerSelectViewSelectView.formdataException') as any) });
+            this.$Notice.error({ title: (this.$t('components.appPickerSelectView.error') as any), desc: (this.$t('components.appPickerSelectView.formdataException') as any) });
             return false;
         }
         // 合并表单参数
@@ -306,7 +306,7 @@ export default class AppPickerSelectViewSelectView extends Vue {
         if(this.isSingleSelect){
             this.queryValue = newVal;
             if (!this.data || !this.valueitem || !this.data[this.valueitem]) {
-                this.$Notice.error({ title: (this.$t('components.AppPickerSelectViewSelectView.error') as any), desc: (this.$t('components.AppPickerSelectViewSelectView.editor') as any)+this.name+(this.$t('components.AppPickerSelectViewSelectView.valueitemException') as any) });
+                this.$Notice.error({ title: (this.$t('components.appPickerSelectView.error') as any), desc: (this.$t('components.appPickerSelectView.editor') as any)+this.name+(this.$t('components.appPickerSelectView.valueitemException') as any) });
             }else{
                 let _viewparam = JSON.parse(this.viewparam);
                 _viewparam.selectedData = [{srfkey: this.data[this.valueitem], srfmajortext: this.value }];
@@ -418,7 +418,7 @@ export default class AppPickerSelectViewSelectView extends Vue {
      */
     public openLinkView($event: any): void {
         if (!this.data || !this.valueitem || !this.data[this.valueitem]) {
-            console.error({ title: (this.$t('components.AppPickerSelectViewSelectView.error') as any), desc: (this.$t('components.AppPickerSelectViewSelectView.editor') as any)+this.name+(this.$t('components.AppPickerSelectViewSelectView.valueitemException') as any) });
+            console.error({ title: (this.$t('components.appPickerSelectView.error') as any), desc: (this.$t('components.appPickerSelectView.editor') as any)+this.name+(this.$t('components.appPickerSelectView.valueitemException') as any) });
             return;
         }
         // 公共参数处理

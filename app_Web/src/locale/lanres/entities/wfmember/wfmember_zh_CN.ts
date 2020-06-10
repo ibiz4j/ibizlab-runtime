@@ -10,11 +10,11 @@ export default {
 	views: {
 		gridview: {
 			caption: '成员',
-      title: '成员',
+      title: '成员表格视图',
 		},
 		editview: {
 			caption: '成员',
-      title: '成员',
+      title: '成员编辑视图',
 		},
 	},
 	main_form: {

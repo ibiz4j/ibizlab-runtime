@@ -33,6 +33,8 @@
     ]"
     :context="context"
     :viewparams="viewparams"
+    :localContext ='{}'
+    :localParam ='{}'
     parameterName='sysuser'
     parentName="SysUser"  
     refviewtype='DEGRIDVIEW' 

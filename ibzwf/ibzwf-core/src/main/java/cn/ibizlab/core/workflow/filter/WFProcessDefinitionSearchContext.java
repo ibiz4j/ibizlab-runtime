@@ -31,14 +31,14 @@ public class WFProcessDefinitionSearchContext extends QueryWrapperContext<WFProc
 	public void setN_definitionname_like(String n_definitionname_like) {
         this.n_definitionname_like = n_definitionname_like;
         if(!ObjectUtils.isEmpty(this.n_definitionname_like)){
-            this.getSelectCond().like("definitionname", n_definitionname_like);
+            this.getSearchCond().like("definitionname", n_definitionname_like);
         }
     }
 	private String n_deploykey_like;//[DeployKey]
 	public void setN_deploykey_like(String n_deploykey_like) {
         this.n_deploykey_like = n_deploykey_like;
         if(!ObjectUtils.isEmpty(this.n_deploykey_like)){
-            this.getSelectCond().like("deploykey", n_deploykey_like);
+            this.getSearchCond().like("deploykey", n_deploykey_like);
         }
     }
 
@@ -49,7 +49,7 @@ public class WFProcessDefinitionSearchContext extends QueryWrapperContext<WFProc
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("definitionname", query)   
             );
 		 }

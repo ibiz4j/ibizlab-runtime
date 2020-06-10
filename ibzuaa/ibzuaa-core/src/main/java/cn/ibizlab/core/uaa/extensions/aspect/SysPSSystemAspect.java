@@ -86,17 +86,25 @@ public class SysPSSystemAspect
             return;
 
         Map<String,SysApp> oldApps = new HashMap<>();
+        List<SysApp> newList=new ArrayList<>();
         SysPSSystem old = sysPSSystemService.getById(system.getPssystemid());
         if(old!=null&&old.getApps()!=null)
             old.getApps().forEach(app->oldApps.put(app.getId(),app));
 
-        List<SysApp> newList=new ArrayList<>();
+
         system.getSysstructure().getSysApps(true).forEach(appNode -> {
             if(oldApps.containsKey(appNode.getId()))
                 newList.add(oldApps.get(appNode.getId()));
-            else
+            else {
+                appNode.setVisabled(1);
                 newList.add(appNode);
+            }
         });
+        if(old!=null&&old.getApps()!=null)
+            old.getApps().forEach(app->{
+                if("THIRD-PARTY".equalsIgnoreCase(app.getGroup()))
+                    newList.add(app);
+            });
         system.setApps(newList);
 
     }

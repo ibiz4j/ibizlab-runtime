@@ -31,14 +31,14 @@ public class SysUserSearchContext extends QueryWrapperContext<SysUser> {
 	public void setN_username_like(String n_username_like) {
         this.n_username_like = n_username_like;
         if(!ObjectUtils.isEmpty(this.n_username_like)){
-            this.getSelectCond().like("username", n_username_like);
+            this.getSearchCond().like("username", n_username_like);
         }
     }
 	private String n_personname_like;//[用户姓名]
 	public void setN_personname_like(String n_personname_like) {
         this.n_personname_like = n_personname_like;
         if(!ObjectUtils.isEmpty(this.n_personname_like)){
-            this.getSelectCond().like("personname", n_personname_like);
+            this.getSearchCond().like("personname", n_personname_like);
         }
     }
 
@@ -49,7 +49,7 @@ public class SysUserSearchContext extends QueryWrapperContext<SysUser> {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("personname", query)   
             );
 		 }

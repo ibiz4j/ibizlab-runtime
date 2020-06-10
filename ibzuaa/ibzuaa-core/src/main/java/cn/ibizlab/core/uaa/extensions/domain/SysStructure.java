@@ -226,7 +226,7 @@ public class SysStructure
 				return apps;
 			this.getApps().forEach(app-> {
 				SysApp sysApp = SysApp.builder()
-						.label(app.getAppname()).systemid(systemid).id(systemid.toLowerCase()+"-app-"+app.getAppid().toLowerCase()).build();
+						.label(app.getAppname()).systemid(systemid).id(systemid.toLowerCase()+"-"+app.getAppid().toLowerCase()).build();
 				apps.add(sysApp);
 			});
 		return apps;

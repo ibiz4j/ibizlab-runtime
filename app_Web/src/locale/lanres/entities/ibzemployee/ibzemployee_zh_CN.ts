@@ -40,31 +40,31 @@ export default {
 	views: {
 		editview: {
 			caption: '人员',
-      title: '人员',
+      title: '人员编辑视图',
 		},
 		gridview: {
 			caption: '人员',
-      title: '人员',
+      title: '人员表格视图',
 		},
 		changepwdview: {
 			caption: '人员',
-      title: '人员',
+      title: '人员编辑视图',
 		},
 		optionview: {
 			caption: '人员',
-      title: '人员',
+      title: '人员选项操作视图',
 		},
 		pickupview: {
 			caption: '人员',
-      title: '人员',
+      title: '人员数据选择视图',
 		},
 		pickupgridview: {
 			caption: '人员',
-      title: '人员',
+      title: '人员选择表格视图',
 		},
 		mpickupview: {
 			caption: '人员',
-      title: '人员',
+      title: '人员数据多项选择视图',
 		},
 	},
 	main_form: {

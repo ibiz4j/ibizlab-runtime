@@ -752,7 +752,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -781,7 +780,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -810,7 +808,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -839,7 +836,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -868,7 +864,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -897,7 +892,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -926,7 +920,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -955,7 +948,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -984,7 +976,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -1013,7 +1004,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -1042,7 +1032,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -1071,7 +1060,6 @@ export default class WFMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -1095,6 +1083,8 @@ export default class WFMemberGridViewBase extends Vue {
      * @memberof WFMemberGridView
      */
     public newdata(args: any[],fullargs?:any[], params?: any, $event?: any, xData?: any) {
+        let localContext:any = null;
+        let localViewParam:any =null;
         const batchAddPSAppViews=[
             {view:{viewname:'wfgroup-mpickup-view',height: 0,width: 0,title: '角色/用户组数据多项选择视图'},
             res:['WFGroup'],
@@ -1153,13 +1143,15 @@ export default class WFMemberGridViewBase extends Vue {
      * @memberof WFMemberGridView
      */
     public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+        let localContext:any = null;
+        let localViewParam:any =null;
         const data: any = {};
-        let curViewParam = JSON.parse(JSON.stringify(this.context));
+        let tempContext = JSON.parse(JSON.stringify(this.context));
         if(args.length >0){
-            Object.assign(curViewParam,args[0]);
+            Object.assign(tempContext,args[0]);
         }
         let deResParameters: any[] = [];
-        if(curViewParam.wfgroup && true){
+        if(tempContext.wfgroup && true){
             deResParameters = [
             { pathName: 'wfgroups', parameterName: 'wfgroup' },
             ]
@@ -1170,7 +1162,7 @@ export default class WFMemberGridViewBase extends Vue {
         ];
         const _this: any = this;
         const openIndexViewTab = (data: any) => {
-            const routePath = this.$viewTool.buildUpRoutePath(this.$route, curViewParam, deResParameters, parameters, args, data);
+            const routePath = this.$viewTool.buildUpRoutePath(this.$route, tempContext, deResParameters, parameters, args, data);
             this.$router.push(routePath);
         }
         openIndexViewTab(data);

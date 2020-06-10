@@ -178,6 +178,8 @@
     ]"
     :context="context"
     :viewparams="viewparams"
+    :localContext ='{}'
+    :localParam ='{}'
     parameterName='ibzemployee'
     parentName="IBZEmployee"  
     refviewtype='DEGRIDVIEW' 

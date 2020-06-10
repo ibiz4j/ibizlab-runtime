@@ -4,7 +4,7 @@ export const Environment = {
     // 应用名称
     AppName: 'Web',
     // 应用 title
-    AppTitle: 'iBizRT',
+    AppTitle: 'ibizlab-runtime',
     // 应用基础路径
     BaseUrl: '../',
     // 系统名称

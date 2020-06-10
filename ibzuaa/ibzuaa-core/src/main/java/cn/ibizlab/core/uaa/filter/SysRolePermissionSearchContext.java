@@ -31,42 +31,42 @@ public class SysRolePermissionSearchContext extends QueryWrapperContext<SysRoleP
 	public void setN_sys_roleid_eq(String n_sys_roleid_eq) {
         this.n_sys_roleid_eq = n_sys_roleid_eq;
         if(!ObjectUtils.isEmpty(this.n_sys_roleid_eq)){
-            this.getSelectCond().eq("sys_roleid", n_sys_roleid_eq);
+            this.getSearchCond().eq("sys_roleid", n_sys_roleid_eq);
         }
     }
 	private String n_sys_rolename_eq;//[角色名称]
 	public void setN_sys_rolename_eq(String n_sys_rolename_eq) {
         this.n_sys_rolename_eq = n_sys_rolename_eq;
         if(!ObjectUtils.isEmpty(this.n_sys_rolename_eq)){
-            this.getSelectCond().eq("sys_rolename", n_sys_rolename_eq);
+            this.getSearchCond().eq("sys_rolename", n_sys_rolename_eq);
         }
     }
 	private String n_sys_rolename_like;//[角色名称]
 	public void setN_sys_rolename_like(String n_sys_rolename_like) {
         this.n_sys_rolename_like = n_sys_rolename_like;
         if(!ObjectUtils.isEmpty(this.n_sys_rolename_like)){
-            this.getSelectCond().like("sys_rolename", n_sys_rolename_like);
+            this.getSearchCond().like("sys_rolename", n_sys_rolename_like);
         }
     }
 	private String n_sys_permissionid_eq;//[权限表标识]
 	public void setN_sys_permissionid_eq(String n_sys_permissionid_eq) {
         this.n_sys_permissionid_eq = n_sys_permissionid_eq;
         if(!ObjectUtils.isEmpty(this.n_sys_permissionid_eq)){
-            this.getSelectCond().eq("sys_permissionid", n_sys_permissionid_eq);
+            this.getSearchCond().eq("sys_permissionid", n_sys_permissionid_eq);
         }
     }
 	private String n_sys_permissionname_eq;//[权限名称]
 	public void setN_sys_permissionname_eq(String n_sys_permissionname_eq) {
         this.n_sys_permissionname_eq = n_sys_permissionname_eq;
         if(!ObjectUtils.isEmpty(this.n_sys_permissionname_eq)){
-            this.getSelectCond().eq("sys_permissionname", n_sys_permissionname_eq);
+            this.getSearchCond().eq("sys_permissionname", n_sys_permissionname_eq);
         }
     }
 	private String n_sys_permissionname_like;//[权限名称]
 	public void setN_sys_permissionname_like(String n_sys_permissionname_like) {
         this.n_sys_permissionname_like = n_sys_permissionname_like;
         if(!ObjectUtils.isEmpty(this.n_sys_permissionname_like)){
-            this.getSelectCond().like("sys_permissionname", n_sys_permissionname_like);
+            this.getSearchCond().like("sys_permissionname", n_sys_permissionname_like);
         }
     }
 
@@ -77,7 +77,7 @@ public class SysRolePermissionSearchContext extends QueryWrapperContext<SysRoleP
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("sys_permissionid", query)   
             );
 		 }

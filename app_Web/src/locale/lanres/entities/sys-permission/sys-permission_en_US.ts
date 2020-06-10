@@ -12,11 +12,11 @@ export default {
 	views: {
 		pickupview: {
 			caption: "<>",
-      title: '权限/资源',
+      title: '权限表数据选择视图',
 		},
 		mpickupview: {
 			caption: "<>",
-      title: '权限/资源',
+      title: '权限表数据多项选择视图',
 		},
 		pickupgridview: {
 			caption: "<>",

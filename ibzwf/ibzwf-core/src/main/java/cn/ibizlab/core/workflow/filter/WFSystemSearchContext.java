@@ -31,7 +31,7 @@ public class WFSystemSearchContext extends QueryWrapperContext<WFSystem> {
 	public void setN_pssystemname_like(String n_pssystemname_like) {
         this.n_pssystemname_like = n_pssystemname_like;
         if(!ObjectUtils.isEmpty(this.n_pssystemname_like)){
-            this.getSelectCond().like("pssystemname", n_pssystemname_like);
+            this.getSearchCond().like("pssystemname", n_pssystemname_like);
         }
     }
 
@@ -42,7 +42,7 @@ public class WFSystemSearchContext extends QueryWrapperContext<WFSystem> {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("pssystemname", query)   
             );
 		 }

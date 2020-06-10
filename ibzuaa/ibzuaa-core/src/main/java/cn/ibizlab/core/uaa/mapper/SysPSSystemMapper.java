@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public interface SysPSSystemMapper extends BaseMapper<SysPSSystem>{
 
+    Page<SysPSSystem> searchPick(IPage page, @Param("srf") SysPSSystemSearchContext context, @Param("ew") Wrapper<SysPSSystem> wrapper) ;
     Page<SysPSSystem> searchDefault(IPage page, @Param("srf") SysPSSystemSearchContext context, @Param("ew") Wrapper<SysPSSystem> wrapper) ;
     @Override
     SysPSSystem selectById(Serializable id);

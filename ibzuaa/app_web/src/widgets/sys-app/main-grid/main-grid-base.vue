@@ -28,7 +28,28 @@
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
-                        <span>{{row.pssystemid}}</span>
+                        <template v-if="actualIsOpenEdit">
+                            <app-form-item :error="gridItemsModel[$index][column.property].error">
+                                
+             <dropdown-list 
+              v-model="row[column.property]" 
+              :disabled="row.srfuf === 1 ? (1 & 2) !== 2 : (1 & 1) !== 1" 
+              :data="row" 
+              :context="context"
+              :viewparams="viewparams" 
+              :localContext ='{ }' 
+              :localParam ='{ }' 
+              tag='SystemPick' 
+              codelistType='DYNAMIC'
+              placeholder='请选择...' 
+              style="" 
+              @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
+             </dropdown-list>
+                            </app-form-item>
+                        </template>
+                        <template v-if="!actualIsOpenEdit">
+            <codelist :value="row.pssystemid" tag='SystemPick' codelistType='DYNAMIC' ></codelist>
+                        </template>
                     </template>
                 </el-table-column>
             </template>
@@ -40,7 +61,22 @@
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
-                        <span>{{row.appid}}</span>
+                        <template v-if="actualIsOpenEdit">
+                            <app-form-item :error="gridItemsModel[$index][column.property].error">
+                                <input-box 
+              :disabled="row.srfuf === 1 ? (1 & 2) !== 2 : (1 & 1) !== 1" 
+              v-model="row[column.property]" 
+              style=""
+              type="text"
+              
+              
+              @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
+            </input-box>
+                            </app-form-item>
+                        </template>
+                        <template v-if="!actualIsOpenEdit">
+                                <app-span name='appid' editorType="TEXTBOX" :value="row.appid"></app-span>
+                        </template>
                     </template>
                 </el-table-column>
             </template>
@@ -49,18 +85,6 @@
                     <template v-slot:header="{column}">
                       <span class="column-header ">
                         {{$t('entities.sysapp.main_grid.columns.appname')}}
-                      </span>
-                    </template>
-                    <template v-slot="{row,column,$index}">
-                        <span>{{row.appname}}</span>
-                    </template>
-                </el-table-column>
-            </template>
-            <template v-if="getColumnState('apptype')">
-                <el-table-column show-overflow-tooltip :prop="'apptype'" :label="$t('entities.sysapp.main_grid.columns.apptype')" :width="150"  :align="'left'">
-                    <template v-slot:header="{column}">
-                      <span class="column-header ">
-                        {{$t('entities.sysapp.main_grid.columns.apptype')}}
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
@@ -78,7 +102,67 @@
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='apptype' editorType="TEXTBOX" :value="row.apptype"></app-span>
+                                <app-span name='appname' editorType="TEXTBOX" :value="row.appname"></app-span>
+                        </template>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('appgroup')">
+                <el-table-column show-overflow-tooltip :prop="'appgroup'" :label="$t('entities.sysapp.main_grid.columns.appgroup')" :width="100"  :align="'left'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysapp.main_grid.columns.appgroup')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <template v-if="actualIsOpenEdit">
+                            <app-form-item :error="gridItemsModel[$index][column.property].error">
+                                <input-box 
+              :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
+              v-model="row[column.property]" 
+              style=""
+              type="text"
+              
+              
+              @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
+            </input-box>
+                            </app-form-item>
+                        </template>
+                        <template v-if="!actualIsOpenEdit">
+                                <app-span name='appgroup' editorType="TEXTBOX" :value="row.appgroup"></app-span>
+                        </template>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('apptype')">
+                <el-table-column show-overflow-tooltip :prop="'apptype'" :label="$t('entities.sysapp.main_grid.columns.apptype')" :width="150"  :align="'left'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysapp.main_grid.columns.apptype')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <template v-if="actualIsOpenEdit">
+                            <app-form-item :error="gridItemsModel[$index][column.property].error">
+                                
+             <dropdown-list 
+              v-model="row[column.property]" 
+              :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
+              :data="row" 
+              :context="context"
+              :viewparams="viewparams" 
+              :localContext ='{ }' 
+              :localParam ='{ }' 
+              tag='AppType' 
+              codelistType='STATIC'
+              placeholder='请选择...' 
+              style="" 
+              @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
+             </dropdown-list>
+                            </app-form-item>
+                        </template>
+                        <template v-if="!actualIsOpenEdit">
+            <codelist :value="row.apptype" tag='AppType' codelistType='STATIC' ></codelist>
                         </template>
                     </template>
                 </el-table-column>
@@ -648,6 +732,13 @@ export default class MainBase extends Vue implements ControlInterface {
             util: 'PX'
         },
         {
+            name: 'appgroup',
+            label: '分组',
+            langtag: 'entities.sysapp.main_grid.columns.appgroup',
+            show: true,
+            util: 'PX'
+        },
+        {
             name: 'apptype',
             label: '类型',
             langtag: 'entities.sysapp.main_grid.columns.apptype',
@@ -702,10 +793,14 @@ export default class MainBase extends Vue implements ControlInterface {
         return {
           icon: new FormItemModel(),
           visabled: new FormItemModel(),
+          appname: new FormItemModel(),
+          appid: new FormItemModel(),
+          pssystemid: new FormItemModel(),
           addr: new FormItemModel(),
           apptype: new FormItemModel(),
           srfkey: new FormItemModel(),
           fullname: new FormItemModel(),
+          appgroup: new FormItemModel(),
         }
     }
 
@@ -724,6 +819,18 @@ export default class MainBase extends Vue implements ControlInterface {
              { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '可见 值不能为空', trigger: 'change' },
             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '可见 值不能为空', trigger: 'blur' },
         ],
+        appname: [
+             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用名 值不能为空', trigger: 'change' },
+            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用名 值不能为空', trigger: 'blur' },
+        ],
+        appid: [
+             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用标识 值不能为空', trigger: 'change' },
+            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用标识 值不能为空', trigger: 'blur' },
+        ],
+        pssystemid: [
+             { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '系统标识 值不能为空', trigger: 'change' },
+            { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '系统标识 值不能为空', trigger: 'blur' },
+        ],
         addr: [
              { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '地址 值不能为空', trigger: 'change' },
             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '地址 值不能为空', trigger: 'blur' },
@@ -739,6 +846,10 @@ export default class MainBase extends Vue implements ControlInterface {
         fullname: [
              { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '全称 值不能为空', trigger: 'change' },
             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '全称 值不能为空', trigger: 'blur' },
+        ],
+        appgroup: [
+             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '分组 值不能为空', trigger: 'change' },
+            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '分组 值不能为空', trigger: 'blur' },
         ],
     }
 
@@ -1094,6 +1205,22 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formatExcelData(filterVal:any, jsonData:any) {
         let codelistColumns:Array<any> = [
+          {
+            name: 'pssystemid',
+            srfkey: 'SystemPick',
+            codelistType : 'DYNAMIC',
+            renderMode: 'other',
+            textSeparator: '、',
+            valueSeparator: ',',
+          },
+          {
+            name: 'apptype',
+            srfkey: 'AppType',
+            codelistType : 'STATIC',
+            renderMode: 'other',
+            textSeparator: '、',
+            valueSeparator: ',',
+          },
           {
             name: 'visabled',
             srfkey: 'YesNo',
@@ -1579,6 +1706,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 return;
             }
             const data = response.data;
+            this.createDefault(data);
             data.rowDataState = "create";
             _this.items.push(data);
             _this.gridItemsModel.push(_this.getGridRowModel());
@@ -1682,6 +1810,14 @@ export default class MainBase extends Vue implements ControlInterface {
             return Object.is(item.sysapp,args.row.sysapp);
         });
         return isSelected ? "grid-selected-row" : "";
+    }
+
+    /**
+     * 新建默认值
+     * @param {*}  row 行数据
+     * @memberof Main
+     */
+    public createDefault(row: any){                    
     }
 }
 </script>

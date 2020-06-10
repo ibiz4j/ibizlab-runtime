@@ -35,6 +35,41 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
         ]
     },
     {
+        "srfkey": "SystemPick",
+        "emptytext": "未定义",
+        "codelisttype":"dynamic",
+        "appdataentity":"",
+        "appdedataset":"",
+        "items": []
+    },
+    {
+        srfkey: 'AppType',
+        emptytext: '未定义',
+        "codelisttype":"static",
+        items: [
+            {
+                id: 'INNER',
+                label: '内置应用',
+                text: '内置应用',
+                "data":"",
+                "codename":"Inner",
+                value: 'INNER',
+                
+                disabled: false,
+            },
+            {
+                id: 'THIRD-PARTY',
+                label: '第三方应用',
+                text: '第三方应用',
+                "data":"",
+                "codename":"Third_SUB_party",
+                value: 'THIRD-PARTY',
+                
+                disabled: false,
+            },
+        ]
+    },
+    {
         srfkey: 'CLAuthCode',
         emptytext: '未定义',
         "codelisttype":"static",

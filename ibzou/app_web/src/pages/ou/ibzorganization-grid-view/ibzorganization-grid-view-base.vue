@@ -707,7 +707,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -737,7 +736,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -766,7 +764,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -795,7 +792,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -824,7 +820,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -853,7 +848,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -882,7 +876,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -911,7 +904,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -940,7 +932,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -969,7 +960,6 @@ export default class IBZOrganizationGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -993,14 +983,16 @@ export default class IBZOrganizationGridViewBase extends Vue {
      * @memberof IBZOrganizationGridView
      */
     public newdata(args: any[],fullargs?:any[], params?: any, $event?: any, xData?: any) {
+        let localContext:any = null;
+        let localViewParam:any =null;
         const data: any = {};
         if(args[0].srfsourcekey){
             data.srfsourcekey = args[0].srfsourcekey;
         }
-        let curViewParam = JSON.parse(JSON.stringify(this.context));
-        delete curViewParam.ibzorganization;
+        let tempContext = JSON.parse(JSON.stringify(this.context));
+        delete tempContext.ibzorganization;
         if(args.length >0){
-            Object.assign(curViewParam,args[0]);
+            Object.assign(tempContext,args[0]);
         }
         const deResParameters: any[] = [];
         const parameters: any[] = [
@@ -1008,7 +1000,7 @@ export default class IBZOrganizationGridViewBase extends Vue {
         ];
         const _this: any = this;
         const openDrawer = (view: any, data: any) => {
-            let container: Subject<any> = this.$appdrawer.openDrawer(view, curViewParam, data);
+            let container: Subject<any> = this.$appdrawer.openDrawer(view, tempContext, data);
             container.subscribe((result: any) => {
                 if (!result || !Object.is(result.ret, 'OK')) {
                     return;
@@ -1041,10 +1033,12 @@ export default class IBZOrganizationGridViewBase extends Vue {
      * @memberof IBZOrganizationGridView
      */
     public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+        let localContext:any = null;
+        let localViewParam:any =null;
         const data: any = {};
-        let curViewParam = JSON.parse(JSON.stringify(this.context));
+        let tempContext = JSON.parse(JSON.stringify(this.context));
         if(args.length >0){
-            Object.assign(curViewParam,args[0]);
+            Object.assign(tempContext,args[0]);
         }
         const deResParameters: any[] = [];
         const parameters: any[] = [
@@ -1052,7 +1046,7 @@ export default class IBZOrganizationGridViewBase extends Vue {
         ];
         const _this: any = this;
         const openDrawer = (view: any, data: any) => {
-            let container: Subject<any> = this.$appdrawer.openDrawer(view, curViewParam, data);
+            let container: Subject<any> = this.$appdrawer.openDrawer(view, tempContext, data);
             container.subscribe((result: any) => {
                 if (!result || !Object.is(result.ret, 'OK')) {
                     return;

@@ -13,11 +13,11 @@ export default {
 	views: {
 		editview: {
 			caption: "流程定义",
-      title: '流程定义',
+      title: '实体编辑视图',
 		},
 		gridview: {
 			caption: "流程定义",
-      title: '流程定义',
+      title: '实体表格视图',
 		},
 	},
 	main_form: {

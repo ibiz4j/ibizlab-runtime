@@ -30,6 +30,8 @@
     ]"
     :context="context"
     :viewparams="viewparams"
+    :localContext ='{}'
+    :localParam ='{}'
     parameterName='wfgroup'
     parentName="WFGroup"  
     refviewtype='DEGRIDVIEW' 

@@ -36,6 +36,7 @@ public interface ISysPSSystemService extends IService<SysPSSystem>{
     void saveBatch(List<SysPSSystem> list) ;
     boolean update(SysPSSystem et) ;
     void updateBatch(List<SysPSSystem> list) ;
+    Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) ;
     Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) ;
     /**
      *自定义查询SQL

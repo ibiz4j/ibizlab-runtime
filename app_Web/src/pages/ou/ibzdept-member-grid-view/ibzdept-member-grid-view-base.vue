@@ -684,7 +684,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -713,7 +712,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -742,7 +740,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -771,7 +768,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -800,7 +796,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -829,7 +824,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -858,7 +852,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -887,7 +880,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -916,7 +908,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -945,7 +936,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -974,7 +964,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -1003,7 +992,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         // _this 指向容器对象
         const _this: any = this;
         let paramJO:any = {};
-        
         let contextJO:any = {};
         xData = this.$refs.grid;
         if (xData.getDatas && xData.getDatas instanceof Function) {
@@ -1027,6 +1015,8 @@ export default class IBZDeptMemberGridViewBase extends Vue {
      * @memberof IBZDeptMemberGridView
      */
     public newdata(args: any[],fullargs?:any[], params?: any, $event?: any, xData?: any) {
+        let localContext:any = null;
+        let localViewParam:any =null;
         const batchAddPSAppViews=[
             {view:{viewname:'ibzemployee-mpickup-view',height: 0,width: 0,title: '人员数据多项选择视图'},
             res:['IBZEmployee'],
@@ -1085,13 +1075,15 @@ export default class IBZDeptMemberGridViewBase extends Vue {
      * @memberof IBZDeptMemberGridView
      */
     public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+        let localContext:any = null;
+        let localViewParam:any =null;
         const data: any = {};
-        let curViewParam = JSON.parse(JSON.stringify(this.context));
+        let tempContext = JSON.parse(JSON.stringify(this.context));
         if(args.length >0){
-            Object.assign(curViewParam,args[0]);
+            Object.assign(tempContext,args[0]);
         }
         let deResParameters: any[] = [];
-        if(curViewParam.ibzdepartment && true){
+        if(tempContext.ibzdepartment && true){
             deResParameters = [
             { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
             ]
@@ -1101,7 +1093,7 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         ];
         const _this: any = this;
         const openPopupModal = (view: any, data: any) => {
-            let container: Subject<any> = this.$appmodal.openModal(view, curViewParam, data);
+            let container: Subject<any> = this.$appmodal.openModal(view, tempContext, data);
             container.subscribe((result: any) => {
                 if (!result || !Object.is(result.ret, 'OK')) {
                     return;

@@ -5,18 +5,19 @@ export default {
     systemid: '系统标识',
     fullname: '全称',
     type: '类型',
-    addr: '地址',
+    group: '分组',
     icon: '图标',
     visabled: '可见',
+    addr: '地址',
   },
 	views: {
 		editview: {
 			caption: '应用',
-      title: '应用',
+      title: '应用编辑视图',
 		},
 		gridview: {
 			caption: '应用',
-      title: '应用',
+      title: '应用表格视图',
 		},
 	},
 	main_form: {
@@ -34,6 +35,7 @@ export default {
 			appid: '应用标识', 
 			appname: '应用名', 
 			apptype: '类型', 
+			appgroup: '分组', 
 			fullname: '全称', 
 			icon: '图标', 
 			visabled: '可见', 
@@ -47,6 +49,7 @@ export default {
 			pssystemid: '系统标识',
 			appid: '应用标识',
 			appname: '应用名',
+			appgroup: '分组',
 			apptype: '类型',
 			fullname: '全称',
 			icon: '图标',

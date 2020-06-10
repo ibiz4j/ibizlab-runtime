@@ -1556,6 +1556,14 @@ export default class MainBase extends Vue implements ControlInterface {
         });
         return isSelected ? "grid-selected-row" : "";
     }
+
+    /**
+     * 新建默认值
+     * @param {*}  row 行数据
+     * @memberof Main
+     */
+    public createDefault(row: any){                    
+    }
 }
 </script>
 

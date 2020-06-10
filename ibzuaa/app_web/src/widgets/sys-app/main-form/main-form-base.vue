@@ -8,7 +8,19 @@
     <row>
         <i-col v-show="detailsModel.pssystemid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='pssystemid' :itemRules="this.rules.pssystemid" class='' :caption="$t('entities.sysapp.main_form.details.pssystemid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pssystemid.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.pssystemid"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.pssystemid.disabled" type='text'  style=""></input-box>
+    
+ <dropdown-list 
+    v-model="data.pssystemid" 
+    :data="data" 
+    :context="context"
+    :viewparams="viewparams"
+    :localContext ='{ }' 
+    :localParam ='{ }' 
+    :disabled="detailsModel.pssystemid.disabled"  
+    tag='SystemPick' 
+    codelistType='DYNAMIC'
+    placeholder='请选择...' style="">
+ </dropdown-list>
 </app-form-item>
 
 </i-col>
@@ -26,7 +38,25 @@
 </i-col>
 <i-col v-show="detailsModel.apptype.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='apptype' :itemRules="this.rules.apptype" class='' :caption="$t('entities.sysapp.main_form.details.apptype')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.apptype.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.apptype"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.apptype.disabled" type='text'  style=""></input-box>
+    
+ <dropdown-list 
+    v-model="data.apptype" 
+    :data="data" 
+    :context="context"
+    :viewparams="viewparams"
+    :localContext ='{ }' 
+    :localParam ='{ }' 
+    :disabled="detailsModel.apptype.disabled"  
+    tag='AppType' 
+    codelistType='STATIC'
+    placeholder='请选择...' style="">
+ </dropdown-list>
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.appgroup.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='appgroup' :itemRules="this.rules.appgroup" class='' :caption="$t('entities.sysapp.main_form.details.appgroup')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appgroup.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box v-model="data.appgroup"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.appgroup.disabled" type='text'  style=""></input-box>
 </app-form-item>
 
 </i-col>
@@ -368,6 +398,7 @@ export default class MainBase extends Vue implements ControlInterface {
         appid: null,
         appname: null,
         apptype: null,
+        appgroup: null,
         fullname: null,
         icon: null,
         visabled: null,
@@ -480,6 +511,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '类型 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '类型 值不能为空', trigger: 'blur' },
         ],
+        appgroup: [
+            { type: 'string', message: '分组 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '分组 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '分组 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '分组 值不能为空', trigger: 'blur' },
+        ],
         fullname: [
             { type: 'string', message: '全称 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '全称 值必须为字符串类型', trigger: 'blur' },
@@ -538,6 +575,8 @@ export default class MainBase extends Vue implements ControlInterface {
         appname: new FormItemModel({ caption: '应用名', detailType: 'FORMITEM', name: 'appname', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 1 })
 , 
         apptype: new FormItemModel({ caption: '类型', detailType: 'FORMITEM', name: 'apptype', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+, 
+        appgroup: new FormItemModel({ caption: '分组', detailType: 'FORMITEM', name: 'appgroup', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
         fullname: new FormItemModel({ caption: '全称', detailType: 'FORMITEM', name: 'fullname', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
@@ -682,6 +721,18 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 appgroup 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof Main
+     */
+    @Watch('data.appgroup')
+    onAppgroupChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'appgroup', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 fullname 值
      *
      * @param {*} newVal
@@ -765,6 +816,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
                 
+
 
 
 

@@ -34,7 +34,7 @@ public class SDFileSearchContext extends QueryBuildContext {
         this.n_filename_like = n_filename_like;
         if(!ObjectUtils.isEmpty(this.n_filename_like)){
             Pattern pattern = Pattern.compile("^.*" + n_filename_like + ".*$", Pattern.CASE_INSENSITIVE);
-            this.getSelectCond().and("filename").regex(pattern);
+            this.getSearchCond().and("filename").regex(pattern);
         }
     }
 
@@ -46,7 +46,7 @@ public class SDFileSearchContext extends QueryBuildContext {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             Pattern pattern = Pattern.compile("^.*" + query + ".*$", Pattern.CASE_INSENSITIVE);
-            this.getSelectCond().or(new BasicDBObject("filename",pattern));
+            this.getSearchCond().or(new BasicDBObject("filename",pattern));
 		 }
 	}
 }

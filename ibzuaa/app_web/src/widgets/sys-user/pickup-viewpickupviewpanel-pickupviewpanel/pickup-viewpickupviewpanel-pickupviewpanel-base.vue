@@ -134,6 +134,8 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
         }
     }
 
+
+
     /**
      * 选中数据字符串
      *
@@ -172,6 +174,22 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
         viewname: 'sys-userpickup-grid-view',
         data: {},
     }
+
+    /**
+     * 局部上下文
+     *
+     * @type {*}
+     * @memberof PickupViewpickupviewpanel
+     */
+    public localContext: any = null;
+
+    /**
+     * 局部视图参数
+     *
+     * @type {*}
+     * @memberof PickupViewpickupviewpanel
+     */
+    public localViewParam: any = null;
 
     /**
      * 视图数据
@@ -266,6 +284,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      *  @memberof PickupViewpickupviewpanel
      */    
     public afterCreated(){
+        this.initNavParam();
         if (this.viewState) {
             this.viewStateEvent = this.viewState.subscribe(({ tag, action, data }) => {
                 if (!Object.is(tag, this.name)) {
@@ -279,6 +298,25 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
             });
         }
     }
+
+    /**
+     * 初始化导航参数
+     *
+     *  @memberof PickupViewpickupviewpanel
+     */  
+    public initNavParam(){
+        if(this.localContext && Object.keys(this.localContext).length >0){
+            let _context:any = this.$util.computedNavData({},this.context,this.viewparams,this.localContext);
+            Object.assign(this.context,_context);
+        }
+        if(this.localViewParam && Object.keys(this.localViewParam).length >0){
+            let _param:any = this.$util.computedNavData({},this.context,this.viewparams,this.localViewParam);
+            Object.assign(this.viewparams,_param);
+        }
+        this.viewdata = JSON.stringify(this.context);
+        this.viewparam = JSON.stringify(this.viewparams);
+    }
+
 
     /**
      * vue 生命周期

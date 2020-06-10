@@ -16,19 +16,19 @@ export default {
 	views: {
 		optionview: {
 			caption: "Input data check failed.",
-      title: '单位机构',
+      title: '单位机构选项操作视图',
 		},
 		treeexpview: {
 			caption: "Input data check failed.",
-      title: '部门管理',
+      title: '单位机构树导航视图',
 		},
 		editview: {
 			caption: "Input data check failed.",
-      title: '单位机构',
+      title: '单位机构编辑视图',
 		},
 		gridview: {
 			caption: "Input data check failed.",
-      title: '单位机构',
+      title: '单位机构表格视图',
 		},
 		pickupview: {
 			caption: "Input data check failed.",

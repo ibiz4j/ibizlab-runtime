@@ -63,7 +63,7 @@ export default {
         views: {
             index: {
                 caption: 'ibizlab-runtime',
-                title: 'ibizlab-runtime',
+                title: 'ibizlab',
             },
         },
         utilview:{

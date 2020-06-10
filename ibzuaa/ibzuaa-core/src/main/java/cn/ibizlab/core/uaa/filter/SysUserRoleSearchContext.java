@@ -31,28 +31,28 @@ public class SysUserRoleSearchContext extends QueryWrapperContext<SysUserRole> {
 	public void setN_sys_roleid_eq(String n_sys_roleid_eq) {
         this.n_sys_roleid_eq = n_sys_roleid_eq;
         if(!ObjectUtils.isEmpty(this.n_sys_roleid_eq)){
-            this.getSelectCond().eq("sys_roleid", n_sys_roleid_eq);
+            this.getSearchCond().eq("sys_roleid", n_sys_roleid_eq);
         }
     }
 	private String n_sys_userid_eq;//[用户标识]
 	public void setN_sys_userid_eq(String n_sys_userid_eq) {
         this.n_sys_userid_eq = n_sys_userid_eq;
         if(!ObjectUtils.isEmpty(this.n_sys_userid_eq)){
-            this.getSelectCond().eq("sys_userid", n_sys_userid_eq);
+            this.getSearchCond().eq("sys_userid", n_sys_userid_eq);
         }
     }
 	private String n_sys_username_eq;//[用户名称]
 	public void setN_sys_username_eq(String n_sys_username_eq) {
         this.n_sys_username_eq = n_sys_username_eq;
         if(!ObjectUtils.isEmpty(this.n_sys_username_eq)){
-            this.getSelectCond().eq("sys_username", n_sys_username_eq);
+            this.getSearchCond().eq("sys_username", n_sys_username_eq);
         }
     }
 	private String n_sys_username_like;//[用户名称]
 	public void setN_sys_username_like(String n_sys_username_like) {
         this.n_sys_username_like = n_sys_username_like;
         if(!ObjectUtils.isEmpty(this.n_sys_username_like)){
-            this.getSelectCond().like("sys_username", n_sys_username_like);
+            this.getSearchCond().like("sys_username", n_sys_username_like);
         }
     }
 
@@ -63,7 +63,7 @@ public class SysUserRoleSearchContext extends QueryWrapperContext<SysUserRole> {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("sys_userid", query)   
             );
 		 }

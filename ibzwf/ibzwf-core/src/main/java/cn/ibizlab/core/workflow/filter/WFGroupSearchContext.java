@@ -31,7 +31,7 @@ public class WFGroupSearchContext extends QueryWrapperContext<WFGroup> {
 	public void setN_groupname_like(String n_groupname_like) {
         this.n_groupname_like = n_groupname_like;
         if(!ObjectUtils.isEmpty(this.n_groupname_like)){
-            this.getSelectCond().like("groupname", n_groupname_like);
+            this.getSearchCond().like("groupname", n_groupname_like);
         }
     }
 
@@ -42,7 +42,7 @@ public class WFGroupSearchContext extends QueryWrapperContext<WFGroup> {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("groupname", query)   
             );
 		 }

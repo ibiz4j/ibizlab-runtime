@@ -1799,6 +1799,7 @@ export default class EditGridBase extends Vue implements ControlInterface {
                 return;
             }
             const data = response.data;
+            this.createDefault(data);
             data.rowDataState = "create";
             _this.items.push(data);
             _this.gridItemsModel.push(_this.getGridRowModel());
@@ -1902,6 +1903,14 @@ export default class EditGridBase extends Vue implements ControlInterface {
             return Object.is(item.ibzemployee,args.row.ibzemployee);
         });
         return isSelected ? "grid-selected-row" : "";
+    }
+
+    /**
+     * 新建默认值
+     * @param {*}  row 行数据
+     * @memberof EditGrid
+     */
+    public createDefault(row: any){                    
     }
 }
 </script>

@@ -14,6 +14,11 @@
 
     </resultMap>
 
+    <select id="searchPick"  parameterType="cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext"  >
+        SELECT t1.PSSYSTEMID,t1.SHOWORDER FROM IBZPSSYSTEM t1
+        <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+        <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+    </select>
 
     <!--数据集合[Default]-->
 	 <select id="searchDefault"  parameterType="cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext"  resultMap="SysPSSystemResultMap">

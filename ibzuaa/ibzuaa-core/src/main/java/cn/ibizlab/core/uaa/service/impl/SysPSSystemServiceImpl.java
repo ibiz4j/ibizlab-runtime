@@ -144,6 +144,15 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
 
 
     /**
+     * 查询集合 Pick
+     */
+    @Override
+    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPSSystem> pages=baseMapper.searchPick(context.getPages(),context,context.getSelectCond());
+        return new PageImpl<SysPSSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
+    }
+
+    /**
      * 查询集合 DEFAULT
      */
     @Override

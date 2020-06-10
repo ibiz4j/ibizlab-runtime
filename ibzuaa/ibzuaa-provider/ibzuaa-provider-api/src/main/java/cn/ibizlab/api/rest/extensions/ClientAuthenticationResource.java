@@ -4,6 +4,7 @@ package cn.ibizlab.api.rest.extensions;
 import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
 import cn.ibizlab.util.client.IBZOUFeignClient;
+import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.security.AuthTokenUtil;
 import cn.ibizlab.util.security.AuthenticationInfo;
 import cn.ibizlab.util.security.AuthenticationUser;
@@ -17,8 +18,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -32,6 +37,12 @@ public class ClientAuthenticationResource
 
     @Value("${ibiz.jwt.header:Authorization}")
     private String tokenHeader;
+
+    @Value("${ibiz.auth.cookie.domain:}")
+    private String cookiedomain;
+
+    @Value("${ibiz.jwt.expiration:7200000}")
+    private Long expiration;
 
     @Autowired
     private AuthTokenUtil jwtTokenUtil;
@@ -49,9 +60,12 @@ public class ClientAuthenticationResource
 
         final String token = jwtTokenUtil.generateToken(user);
 
-        user.setPermissionList(null);
+        AuthenticationUser user2=new AuthenticationUser();
+        CachedBeanCopier.copy(user,user2);
+        user2.setAuthorities(null);
+        user2.setPermissionList(null);
         // 返回 token
-        return ResponseEntity.ok().body(new AuthenticationInfo(token,user));
+        return ResponseEntity.ok().body(new AuthenticationInfo(token,user2));
     }
 
     @PostMapping(value = "uaa/login")
@@ -71,10 +85,10 @@ public class ClientAuthenticationResource
     @Autowired
     private SysAppService sysAppService;
 
-    @GetMapping(value = "uaa/access-center/nav/{id}")
-    public ResponseEntity<JSONObject> appnavbar(@PathVariable("id") String id)
+    @GetMapping(value = "uaa/access-center/app-switcher/{id}")
+    public ResponseEntity<JSONObject> appswitcher(@PathVariable("id") String id)
     {
-        return ResponseEntity.ok(sysAppService.getAppNavigationBar(id,AuthenticationUser.getAuthenticationUser().getUserid()));
+        return ResponseEntity.ok(sysAppService.getAppSwitcher(id,AuthenticationUser.getAuthenticationUser().getUserid()));
     }
 
 }

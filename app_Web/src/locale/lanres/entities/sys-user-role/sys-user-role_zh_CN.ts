@@ -11,11 +11,11 @@ export default {
 	views: {
 		gridview: {
 			caption: '用户角色关系',
-      title: '用户角色关系',
+      title: '用户角色关系表表格视图',
 		},
 		editview: {
 			caption: '用户角色关系',
-      title: '用户角色关系',
+      title: '用户角色关系表编辑视图',
 		},
 	},
 	main_form: {

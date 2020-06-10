@@ -1,3 +1,4 @@
+import SystemPick from '@/codelist/system-pick';   
 import { Store } from 'vuex';
 
 /**
@@ -48,6 +49,14 @@ export default class CodeListService {
      */
     public static codelistCached:Map<string,any> = new Map();
 
+
+    /**
+     * 代码表--SystemPick
+     *
+     * @type {SystemPick}
+     * @memberof CodeListService
+     */
+    public SystemPick: SystemPick = new SystemPick();
 
     /**
      * 获取动态代码表

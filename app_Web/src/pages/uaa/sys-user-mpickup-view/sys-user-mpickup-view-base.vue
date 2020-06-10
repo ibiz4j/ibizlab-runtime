@@ -7,8 +7,8 @@
                 <div class="center" :style="{width : !isShowButton ? '100%' : ''}">
     <view_pickupviewpanel 
         :viewState="viewState"  
-        :viewparams="viewparams" 
-        :context="context" 
+        :viewparams="JSON.parse(JSON.stringify(viewparams))" 
+        :context="JSON.parse(JSON.stringify(context))" 
         :isSingleSelect="isSingleSelect"
         :selectedData="selectedData"
         :isShowButton="isShowButton"

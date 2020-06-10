@@ -31,7 +31,7 @@ public class IBZPostSearchContext extends QueryWrapperContext<IBZPost> {
 	public void setN_postcode_like(String n_postcode_like) {
         this.n_postcode_like = n_postcode_like;
         if(!ObjectUtils.isEmpty(this.n_postcode_like)){
-            this.getSelectCond().like("postcode", n_postcode_like);
+            this.getSearchCond().like("postcode", n_postcode_like);
         }
     }
 
@@ -42,7 +42,7 @@ public class IBZPostSearchContext extends QueryWrapperContext<IBZPost> {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("postname", query)   
             );
 		 }

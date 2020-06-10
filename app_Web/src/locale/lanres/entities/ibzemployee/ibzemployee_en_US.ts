@@ -49,11 +49,11 @@ export default {
 		},
 		changepwdview: {
 			caption: "Save Row",
-      title: '人员',
+      title: '人员编辑视图',
 		},
 		optionview: {
 			caption: "Save Row",
-      title: '人员',
+      title: '人员选项操作视图',
 		},
 		pickupview: {
 			caption: "Save Row",

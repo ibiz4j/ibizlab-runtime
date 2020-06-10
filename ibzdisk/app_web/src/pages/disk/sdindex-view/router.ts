@@ -25,7 +25,8 @@ const router = new Router({
                 });
             },
             meta: {  
-                caption: 'app.views.sdindexview.caption',
+                caption: 'app.views.sdindexview.title',
+                info:'',
                 viewType: 'APPINDEX',
                 parameters: [
                     { pathName: 'sdindexview', parameterName: 'sdindexview' },
@@ -37,7 +38,8 @@ const router = new Router({
                 {
                     path: 'sdfiles/:sdfile?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sdfile.views.gridview.caption',
+                        caption: 'entities.sdfile.views.gridview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'sdindexview', parameterName: 'sdindexview' },
                             { pathName: 'sdfiles', parameterName: 'sdfile' },
@@ -50,7 +52,8 @@ const router = new Router({
                 {
                     path: 'sdfiles/:sdfile?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sdfile.views.editview.caption',
+                        caption: 'entities.sdfile.views.editview.title',
+                        info:'',
                         parameters: [
                             { pathName: 'sdindexview', parameterName: 'sdindexview' },
                             { pathName: 'sdfiles', parameterName: 'sdfile' },
@@ -66,7 +69,8 @@ const router = new Router({
     {
         path: '/sdfiles/:sdfile?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sdfile.views.gridview.caption',
+            caption: 'entities.sdfile.views.gridview.title',
+            info:'',
             parameters: [
                 { pathName: 'sdfiles', parameterName: 'sdfile' },
                 { pathName: 'gridview', parameterName: 'gridview' },
@@ -78,7 +82,8 @@ const router = new Router({
     {
         path: '/sdfiles/:sdfile?/editview/:editview?',
         meta: {
-            caption: 'entities.sdfile.views.editview.caption',
+            caption: 'entities.sdfile.views.editview.title',
+            info:'',
             parameters: [
                 { pathName: 'sdfiles', parameterName: 'sdfile' },
                 { pathName: 'editview', parameterName: 'editview' },

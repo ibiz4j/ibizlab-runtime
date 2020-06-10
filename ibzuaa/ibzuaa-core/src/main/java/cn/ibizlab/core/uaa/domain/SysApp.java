@@ -72,11 +72,12 @@ public class SysApp extends EntityBase implements Serializable {
     private String type;
 
     /**
-     * 地址
+     * 分组
      */
-    @JSONField(name = "addr")
-    @JsonProperty("addr")
-    private String addr;
+    @DEField(name = "appgroup")
+    @JSONField(name = "group")
+    @JsonProperty("group")
+    private String group;
 
     /**
      * 图标
@@ -91,6 +92,13 @@ public class SysApp extends EntityBase implements Serializable {
     @JSONField(name = "visabled")
     @JsonProperty("visabled")
     private Integer visabled;
+
+    /**
+     * 地址
+     */
+    @JSONField(name = "addr")
+    @JsonProperty("addr")
+    private String addr;
 
 
     /**

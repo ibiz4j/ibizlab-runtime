@@ -64,12 +64,12 @@ public class SysAppDTO extends DTOBase implements Serializable {
     private String type;
 
     /**
-     * 属性 [ADDR]
+     * 属性 [APPGROUP]
      *
      */
-    @JSONField(name = "addr")
-    @JsonProperty("addr")
-    private String addr;
+    @JSONField(name = "group")
+    @JsonProperty("group")
+    private String group;
 
     /**
      * 属性 [ICON]
@@ -86,6 +86,14 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "visabled")
     @JsonProperty("visabled")
     private Integer visabled;
+
+    /**
+     * 属性 [ADDR]
+     *
+     */
+    @JSONField(name = "addr")
+    @JsonProperty("addr")
+    private String addr;
 
 
     /**
@@ -121,11 +129,11 @@ public class SysAppDTO extends DTOBase implements Serializable {
     }
 
     /**
-     * 设置 [ADDR]
+     * 设置 [APPGROUP]
      */
-    public void setAddr(String  addr){
-        this.addr = addr ;
-        this.modify("addr",addr);
+    public void setGroup(String  group){
+        this.group = group ;
+        this.modify("appgroup",group);
     }
 
     /**
@@ -142,6 +150,14 @@ public class SysAppDTO extends DTOBase implements Serializable {
     public void setVisabled(Integer  visabled){
         this.visabled = visabled ;
         this.modify("visabled",visabled);
+    }
+
+    /**
+     * 设置 [ADDR]
+     */
+    public void setAddr(String  addr){
+        this.addr = addr ;
+        this.modify("addr",addr);
     }
 
 

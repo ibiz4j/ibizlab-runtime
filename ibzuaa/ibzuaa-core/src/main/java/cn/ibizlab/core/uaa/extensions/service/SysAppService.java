@@ -42,27 +42,37 @@ public class SysAppService extends SysAppServiceImpl
     private UAACoreService uaaCoreService;
 
 
-    @Cacheable( value="ibzuaa_appnavbar",key = "'id:'+#p0+'||'+#p1")
-    public JSONObject getAppNavigationBar(String navId,String userId)
+    @Cacheable( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
+    public JSONObject getAppSwitcher(String id,String userId)
     {
-        JSONObject jo=ibzConfigService.getConfig("AppNavigationBar",navId, userId);
-        if(!jo.containsKey("model"))
-            jo.put("model",new JSONArray());
+        JSONObject jo=ibzConfigService.getConfig("AppSwitcher",id, userId);
+        boolean nullSwitcher=false;
+        if(!jo.containsKey("model")) {
+            jo.put("model", new JSONArray());
+            nullSwitcher=true;
+        }
         LinkedHashMap<String,SysApp> defApps=uaaCoreService.getApps();
         List<SysApp> list=new ArrayList<>();
         JSONArray.parseArray(jo.get("model").toString(),SysApp.class).forEach(sysApp -> {
             SysApp def=defApps.get(sysApp.getId());
             if(def==null)return;
+            if(1!=def.getVisabled())return;
+
             sysApp.setAddr(def.getAddr());
             sysApp.setIcon(def.getIcon());
             sysApp.setFullname(def.getFullname());
             sysApp.setType(def.getType());
-            sysApp.setVisabled(1);
+            sysApp.setGroup(def.getGroup());
             list.add(sysApp);
             defApps.remove(def.getId());
         });
+        final boolean flag=nullSwitcher;
         defApps.values().forEach(sysApp -> {
-            sysApp.setVisabled(0);
+            if(1!=sysApp.getVisabled())return;
+            if(flag&&id.equalsIgnoreCase("default"))
+                sysApp.setVisabled(1);
+            else
+                sysApp.setVisabled(0);
             list.add(sysApp);
         });
         jo.remove("model");
@@ -70,7 +80,7 @@ public class SysAppService extends SysAppServiceImpl
         return jo;
     }
 
-    @CacheEvict( value="ibzuaa_appnavbar",allEntries=true)
+    @CacheEvict( value="ibzuaa_switcher",allEntries=true)
     public void resetAppNavigationBars()
     {
 

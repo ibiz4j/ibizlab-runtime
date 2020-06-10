@@ -31,7 +31,7 @@ public class WFUserSearchContext extends QueryWrapperContext<WFUser> {
 	public void setN_personname_like(String n_personname_like) {
         this.n_personname_like = n_personname_like;
         if(!ObjectUtils.isEmpty(this.n_personname_like)){
-            this.getSelectCond().like("personname", n_personname_like);
+            this.getSearchCond().like("personname", n_personname_like);
         }
     }
 
@@ -42,7 +42,7 @@ public class WFUserSearchContext extends QueryWrapperContext<WFUser> {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("personname", query)   
             );
 		 }

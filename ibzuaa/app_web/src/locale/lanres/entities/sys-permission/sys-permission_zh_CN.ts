@@ -11,31 +11,31 @@ export default {
 	views: {
 		gridview: {
 			caption: '权限/资源',
-      title: '权限/资源',
+      title: '权限表表格视图',
 		},
 		editview2: {
 			caption: '权限/资源',
-      title: '权限/资源',
+      title: '权限表编辑视图',
 		},
 		pickupview: {
 			caption: '权限/资源',
-      title: '权限/资源',
+      title: '权限表数据选择视图',
 		},
 		pickupgridview: {
 			caption: '权限/资源',
-      title: '权限/资源',
+      title: '权限表选择表格视图',
 		},
 		mpickupview: {
 			caption: '权限/资源',
-      title: '权限/资源',
+      title: '权限表数据多项选择视图',
 		},
 		redirectview: {
 			caption: '权限/资源',
-      title: '权限/资源',
+      title: '权限表数据重定向视图',
 		},
 		editview: {
 			caption: '权限/资源',
-      title: '权限/资源',
+      title: '权限表编辑视图',
 		},
 	},
 	main_form: {

@@ -68,6 +68,11 @@ export default class MainModel {
       {
         name: 'apptype',
         prop: 'type',
+        dataType: 'SSCODELIST',
+      },
+      {
+        name: 'appgroup',
+        prop: 'group',
         dataType: 'TEXT',
       },
       {

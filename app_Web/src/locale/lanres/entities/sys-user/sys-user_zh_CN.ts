@@ -8,15 +8,15 @@ export default {
 	views: {
 		mpickupview: {
 			caption: '系统用户',
-      title: '系统用户',
+      title: '用户表数据多项选择视图',
 		},
 		pickupview: {
 			caption: '系统用户',
-      title: '系统用户',
+      title: '用户表数据选择视图',
 		},
 		pickupgridview: {
 			caption: '系统用户',
-      title: '系统用户',
+      title: '用户表选择表格视图',
 		},
 	},
 	main_grid: {

@@ -2,11 +2,11 @@ export default {
 	views: {
 		gridview: {
 			caption: '文件',
-      title: '文件',
+      title: '文件表格视图',
 		},
 		editview: {
 			caption: '文件',
-      title: '文件',
+      title: '文件编辑视图',
 		},
 	},
 	main_form: {

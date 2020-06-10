@@ -31,7 +31,7 @@ public class IBZTeamSearchContext extends QueryWrapperContext<IBZTeam> {
 	public void setN_teamid_like(String n_teamid_like) {
         this.n_teamid_like = n_teamid_like;
         if(!ObjectUtils.isEmpty(this.n_teamid_like)){
-            this.getSelectCond().like("teamid", n_teamid_like);
+            this.getSearchCond().like("teamid", n_teamid_like);
         }
     }
 
@@ -42,7 +42,7 @@ public class IBZTeamSearchContext extends QueryWrapperContext<IBZTeam> {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            this.getSelectCond().and( wrapper ->
+            this.getSearchCond().and( wrapper ->
                      wrapper.like("teamname", query)   
             );
 		 }

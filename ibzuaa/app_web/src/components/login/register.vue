@@ -13,15 +13,16 @@
                             <i-input
                                     prefix='ios-contact'
                                     v-model.trim="form.loginname"
-                                    @keyup="toTrim"
-                                    placeholder="用户名">
+                                    placeholder="用户名"
+                                    @keyup.enter.native="handleRegister">
                             </i-input>
                         </form-item>
                         <form-item prop='personname'>
                             <i-input
                                     prefix='ios-person'
                                     v-model.trim="form.personname"
-                                    placeholder="用户姓名">
+                                    placeholder="用户姓名"
+                                    @keyup.enter.native="handleRegister">
                             </i-input>
                         </form-item>
                         <form-item prop='password'>
@@ -29,7 +30,8 @@
                                     prefix='ios-key'
                                     v-model.trim="form.password"
                                     type='password'
-                                    placeholder="密码">
+                                    placeholder="密码"
+                                    @keyup.enter.native="handleRegister">
                             </i-input>
                         </form-item>
                         <form-item prop='confrimpassword'>
@@ -37,7 +39,8 @@
                                     prefix='ios-checkbox'
                                     v-model.trim="form.confrimpassword"
                                     type='password'
-                                    placeholder="确认密码">
+                                    placeholder="确认密码"
+                                    @keyup.enter.native="handleRegister">
                             </i-input>
                         </form-item>
                         <form-item>
@@ -123,12 +126,12 @@
                 confrimpassword: [
                     {
                         validator: (rule: any, value: any, callback: any) => {
-                            if (value === '' && this.form.password !== '') {
-                                callback(new Error('确认密码不能为空'))
+                            if (value === '') {
+                                callback(new Error('确认密码不能为空'));
                             } else if (value !== this.form.password) {
-                                callback(new Error('两次输入密码不一致'))
+                                callback(new Error('两次输入密码不一致'));
                             } else {
-                                callback()
+                                callback();
                             }
                         },
                         trigger: 'change'
@@ -166,16 +169,6 @@
             _this.$router.push('/login');
         }
 
-        /**
-         * 去掉输入框中的空格
-         *
-         * @memberof Login
-         */
-        public toTrim(): void {
-            let _this = this;
-            _this.form.loginname = _this.form.loginname.replace(/\s+/g, " ");
-        }
-
 
         /**
          * 注册处理
@@ -203,25 +196,25 @@
                     } else {
                         this.$Message.success({
                             content: "注册成功",
-                            duration: 5,
+                            duration: 3,
                             closable: true
                         });
                     }
-                    // 5s后跳转到登录页
-                    this.countDown(5);
+                    // 3s后跳转登录
+                    this.countDown(3);
                 }
             }).catch((e: any) => {
                 const data = e.data;
                 if (data && data.message) {
                     this.$Message.error({
                         content: "注册失败，" + data.message,
-                        duration: 5,
+                        duration: 3,
                         closable: true
                     });
                 } else {
                     this.$Message.error({
                         content: "注册失败",
-                        duration: 5,
+                        duration: 3,
                         closable: true
                     });
                 }
@@ -229,26 +222,78 @@
         }
 
         /**
-         * 跳转登录页倒计时
+         * 跳转登录倒计时
          */
         public countDown(totalTime: any): void {
             if (!this.canClick) return;
             this.canClick = false;
-            this.confirmRegBtnContent = totalTime + 's后跳转到登录页';
+            this.confirmRegBtnContent = totalTime + 's后自动登录';
             // 设置定时器
             let clock = window.setInterval(() => {
                 // 秒数-1
                 totalTime--;
-                this.confirmRegBtnContent = totalTime + 's后跳转到登录页';
+                this.confirmRegBtnContent = totalTime + 's后自动登录';
                 if (totalTime < 0) {
                     // 清除定时器
                     window.clearInterval(clock);
                     // 跳转到登录页
-                    this.$router.push("/login");
+                    // this.$router.push("/login");
+
+                    // 登录
+                    const loginname: any = this.form.loginname;
+                    const password: any = this.form.password;
+                    const post: Promise<any> = this.$http.post('v7/login', this.form, true);
+                    post.then((response: any) => {
+                        if (response && response.status === 200) {
+                            const data = response.data;
+                            if (data && data.token) {
+                                localStorage.setItem('token', data.token);
+                            }
+                            if (data && data.user) {
+                                localStorage.setItem('user', JSON.stringify(data.user));
+                            }
+                            // 设置cookie,保存账号密码7天
+                            this.setCookie(loginname, password, 7);
+                            // 跳转首页
+                            const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
+                            this.$router.push({path: url});
+                        }
+                    }).catch((error: any) => {
+                        const data = error.data;
+                        if (data && data.message) {
+                            this.$Message.error({
+                                content: "登录失败，" + data.detail,
+                                duration: 5,
+                                closable: true
+                            });
+                        } else {
+                            this.$Message.error({
+                                content: "登录失败",
+                                duration: 5,
+                                closable: true
+                            });
+                        }
+                    });
+
                 }
             }, 1000)
         }
 
+
+        /**
+         * 设置cookie,保存账号密码
+         * @param loginname
+         * @param password
+         */
+        public setCookie(loginname: any, password: any, exdays: any) {
+            // 获取时间
+            let exdate = new Date();
+            // 保存的天数
+            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
+            // 字符串拼接cookie
+            window.document.cookie = "loginname" + "=" + loginname + ";path=/;expires=" + exdate.toUTCString();
+            window.document.cookie = "password" + "=" + password + ";path=/;expires=" + exdate.toUTCString();
+        }
 
     }
 </script>

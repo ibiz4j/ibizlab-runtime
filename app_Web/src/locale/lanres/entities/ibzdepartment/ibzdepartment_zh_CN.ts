@@ -20,31 +20,31 @@ export default {
 	views: {
 		pickupview: {
 			caption: '部门',
-      title: '部门',
+      title: '部门选择视图',
 		},
 		gridview: {
 			caption: '部门',
-      title: '部门',
+      title: '部门表格视图',
 		},
 		editview: {
 			caption: '部门',
-      title: '部门',
+      title: '部门编辑视图',
 		},
 		mpickupview: {
 			caption: '部门',
-      title: '部门',
+      title: '部门数据多项选择视图',
 		},
 		optionview: {
 			caption: '部门',
-      title: '部门',
+      title: '部门选项操作视图',
 		},
 		treeexpview: {
 			caption: '人员管理',
-      title: '人员管理',
+      title: '部门树导航视图',
 		},
 		pickupgridview: {
 			caption: '部门',
-      title: '部门',
+      title: '部门选择表格视图',
 		},
 	},
 	newform_form: {
