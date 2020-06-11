@@ -824,6 +824,64 @@ public class WFCoreService
 		String[] groups=groupIds.split(",");
 		for(String groupId:groups)
 		{
+			String userData="";
+			String userData2="";
+			String orgid="";
+			String deptid="";
+			if(groupId.indexOf("|")>0)
+			{
+				String[] arg=groupId.split("[|]");
+				if(arg.length==3)
+				{
+					groupId=arg[0];
+					if(arg[1]!=null)
+						userData=arg[1].toLowerCase();
+					if(arg[2]!=null)
+						userData2=arg[2].toLowerCase();
+				}
+			}
+
+			if((!StringUtils.isEmpty(userData))&&(!StringUtils.isEmpty(userData2)))
+			{
+				if(userData2.indexOf("srf")==0)
+				{
+					FlowUser curUser=FlowUser.getCurUser();
+					if(curUser!=null&&curUser.getUser()!=null)
+					{
+						Object sessionValue=curUser.getUser().getSessionParams().get(userData2);
+						if(sessionValue!=null)
+							userData2=sessionValue.toString();
+						else
+							userData2="";
+					}
+					else
+						userData2="";
+				}
+				else
+				{
+					Object activedata=delegateExecution.getVariable("activedata");
+					if(activedata!=null&&activedata instanceof Map) {
+						Map entity = (Map) activedata;
+						if(entity.get(userData2)!=null)
+							userData2=entity.get(userData2).toString();
+						else
+							userData2="";
+					}
+					else
+						userData2="";
+				}
+				if(!StringUtils.isEmpty(userData2))
+				{
+					if(userData.indexOf("dept")>=0||userData.indexOf("orgsec")>=0)
+						deptid=userData2;
+					else if(userData.indexOf("org")>=0)
+						orgid=userData2;
+				}
+			}
+
+
+
+
 			WFGroup group=iwfGroupService.get(groupId);
 			List<WFMember> list=group.getWfmember();
 			if (list!=null)

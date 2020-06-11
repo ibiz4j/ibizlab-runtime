@@ -91,4 +91,10 @@ public class ClientAuthenticationResource
         return ResponseEntity.ok(sysAppService.getAppSwitcher(id,AuthenticationUser.getAuthenticationUser().getUserid()));
     }
 
+    @PutMapping(value = "uaa/access-center/app-switcher/{id}")
+    public ResponseEntity<Boolean> appswitcher(@PathVariable("id") String id, @RequestBody JSONObject config)
+    {
+        return ResponseEntity.ok(sysAppService.saveAppSwitcher(id,AuthenticationUser.getAuthenticationUser().getUserid(),config));
+    }
+
 }

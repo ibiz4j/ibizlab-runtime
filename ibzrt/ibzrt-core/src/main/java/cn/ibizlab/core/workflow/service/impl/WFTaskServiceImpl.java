@@ -1,0 +1,135 @@
+package cn.ibizlab.core.workflow.service.impl;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Optional;
+import java.math.BigInteger;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.beans.BeanCopier;
+import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.util.ObjectUtils;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.context.annotation.Lazy;
+import cn.ibizlab.core.workflow.domain.WFTask;
+import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
+import cn.ibizlab.core.workflow.service.IWFTaskService;
+
+import cn.ibizlab.util.helper.CachedBeanCopier;
+
+
+import cn.ibizlab.core.workflow.client.WFTaskFeignClient;
+
+/**
+ * 实体[工作流任务] 服务对象接口实现
+ */
+@Slf4j
+@Service
+public class WFTaskServiceImpl implements IWFTaskService {
+
+    @Autowired
+    WFTaskFeignClient wFTaskFeignClient;
+
+
+    @Override
+    public boolean checkKey(WFTask et) {
+        return wFTaskFeignClient.checkKey(et);
+    }
+    @Override
+    public WFTask getDraft(WFTask et) {
+        et=wFTaskFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean remove(String id) {
+        boolean result=wFTaskFeignClient.remove(id) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        wFTaskFeignClient.removeBatch(idList);
+    }
+
+    @Override
+    public WFTask get(String id) {
+		WFTask et=wFTaskFeignClient.get(id);
+        if(et==null){
+            et=new WFTask();
+            et.setId(id);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
+    public boolean create(WFTask et) {
+        WFTask rt = wFTaskFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<WFTask> list){
+        wFTaskFeignClient.createBatch(list) ;
+    }
+
+    @Override
+    public boolean update(WFTask et) {
+        WFTask rt = wFTaskFeignClient.update(et.getId(),et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+
+    }
+
+    public void updateBatch(List<WFTask> list){
+        wFTaskFeignClient.updateBatch(list) ;
+    }
+
+    @Override
+    @Transactional
+    public boolean save(WFTask et) {
+        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
+        if(!wFTaskFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<WFTask> list) {
+        wFTaskFeignClient.saveBatch(list) ;
+    }
+
+
+
+
+
+    /**
+     * 查询集合 DEFAULT
+     */
+    @Override
+    public Page<WFTask> searchDefault(WFTaskSearchContext context) {
+        Page<WFTask> wFTasks=wFTaskFeignClient.searchDefault(context);
+        return wFTasks;
+    }
+
+
+}
+
+

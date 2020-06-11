@@ -17,6 +17,7 @@
     </parent>
 
     <modules>
+        <module>ibzrt</module>
         <module>ibzuaa</module>
         <module>ibzou</module>
         <module>ibzwf</module>

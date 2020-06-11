@@ -9,14 +9,14 @@
         <version>1.0.0.0</version>
     </parent>
 
-    <artifactId>ibzrt-app-web</artifactId>
+    <artifactId>ibizlab-runtime-web</artifactId>
     <name>Ibzrt Gateway Web</name>
     <description>Ibzrt Web</description>
 
     <dependencies>
         <dependency>
             <groupId>cn.ibizlab</groupId>
-            <artifactId>ibzou-util</artifactId>
+            <artifactId>ibzrt-util</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

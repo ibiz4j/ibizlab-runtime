@@ -80,6 +80,12 @@ public class SysAppService extends SysAppServiceImpl
         return jo;
     }
 
+    @CacheEvict( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
+    public boolean saveAppSwitcher(String id,String userId,JSONObject config)
+    {
+        return ibzConfigService.saveConfig("AppSwitcher",id, userId,config);
+    }
+
     @CacheEvict( value="ibzuaa_switcher",allEntries=true)
     public void resetAppNavigationBars()
     {
