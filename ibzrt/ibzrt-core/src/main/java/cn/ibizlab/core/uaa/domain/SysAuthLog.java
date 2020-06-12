@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -106,6 +107,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
         this.username = username ;
         this.modify("username",username);
     }
+
     /**
      * 设置 [用户名称]
      */
@@ -113,6 +115,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
         this.personname = personname ;
         this.modify("personname",personname);
     }
+
     /**
      * 设置 [域]
      */
@@ -120,6 +123,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
         this.domain = domain ;
         this.modify("domain",domain);
     }
+
     /**
      * 设置 [IP地址]
      */
@@ -127,6 +131,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
         this.ipaddr = ipaddr ;
         this.modify("ipaddr",ipaddr);
     }
+
     /**
      * 设置 [MAC地址]
      */
@@ -134,6 +139,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
         this.macaddr = macaddr ;
         this.modify("macaddr",macaddr);
     }
+
     /**
      * 设置 [客户端]
      */
@@ -141,6 +147,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
         this.useragent = useragent ;
         this.modify("useragent",useragent);
     }
+
     /**
      * 设置 [认证结果]
      */
@@ -148,6 +155,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
         this.authcode = authcode ;
         this.modify("authcode",authcode);
     }
+
 
 }
 

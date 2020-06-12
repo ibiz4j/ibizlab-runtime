@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -69,6 +70,7 @@ public class SysUser extends EntityClient implements Serializable {
         this.username = username ;
         this.modify("username",username);
     }
+
     /**
      * 设置 [用户姓名]
      */
@@ -76,6 +78,7 @@ public class SysUser extends EntityClient implements Serializable {
         this.personname = personname ;
         this.modify("personname",personname);
     }
+
     /**
      * 设置 [密码]
      */
@@ -83,6 +86,7 @@ public class SysUser extends EntityClient implements Serializable {
         this.password = password ;
         this.modify("password",password);
     }
+
 
 }
 

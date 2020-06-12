@@ -3,12 +3,8 @@ package cn.ibizlab.api.rest.extensions;
 
 import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
-import cn.ibizlab.util.client.IBZOUFeignClient;
 import cn.ibizlab.util.helper.CachedBeanCopier;
-import cn.ibizlab.util.security.AuthTokenUtil;
-import cn.ibizlab.util.security.AuthenticationInfo;
-import cn.ibizlab.util.security.AuthenticationUser;
-import cn.ibizlab.util.security.AuthorizationLogin;
+import cn.ibizlab.util.security.*;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +12,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.util.*;
 
 /**
  * 客户端登录认证
@@ -51,7 +40,8 @@ public class ClientAuthenticationResource
     @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
 
-
+    @Autowired
+    UAACoreService uaaCoreService;
 
     @PostMapping(value = "v7/login")
     public ResponseEntity<AuthenticationInfo> login(@Validated @RequestBody AuthorizationLogin authorizationLogin){
@@ -82,19 +72,10 @@ public class ClientAuthenticationResource
         return ResponseEntity.ok().body(user);
     }
 
-    @Autowired
-    private SysAppService sysAppService;
 
-    @GetMapping(value = "uaa/access-center/app-switcher/{id}")
-    public ResponseEntity<JSONObject> appswitcher(@PathVariable("id") String id)
-    {
-        return ResponseEntity.ok(sysAppService.getAppSwitcher(id,AuthenticationUser.getAuthenticationUser().getUserid()));
-    }
-
-    @PutMapping(value = "uaa/access-center/app-switcher/{id}")
-    public ResponseEntity<Boolean> appswitcher(@PathVariable("id") String id, @RequestBody JSONObject config)
-    {
-        return ResponseEntity.ok(sysAppService.saveAppSwitcher(id,AuthenticationUser.getAuthenticationUser().getUserid(),config));
+    @GetMapping(value = "uaa/publickey")
+    public ResponseEntity<String> getPublicKey(){
+        return ResponseEntity.ok().body(uaaCoreService.getPublicKey());
     }
 
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,9 +23,9 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
-
 
 /**
  * 实体[流程定义]
@@ -32,7 +33,7 @@ import cn.ibizlab.util.domain.EntityMP;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZWFDEFINITION",resultMap = "WFProcessDefinitionResultMap")
 public class WFProcessDefinition extends EntityMP implements Serializable {
 
@@ -113,6 +114,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
         this.definitionname = definitionname ;
         this.modify("definitionname",definitionname);
     }
+
     /**
      * 设置 [模型版本]
      */
@@ -120,6 +122,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
         this.modelversion = modelversion ;
         this.modify("modelversion",modelversion);
     }
+
     /**
      * 设置 [模型是否启用]
      */
@@ -127,6 +130,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
         this.modelenable = modelenable ;
         this.modify("modelenable",modelenable);
     }
+
     /**
      * 设置 [系统标识]
      */
@@ -134,6 +138,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
         this.pssystemid = pssystemid ;
         this.modify("pssystemid",pssystemid);
     }
+
     /**
      * 设置 [TaskDefinitionKey]
      */
@@ -141,6 +146,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
         this.taskprocessdefinitionkey = taskprocessdefinitionkey ;
         this.modify("taskdefinitionkey",taskprocessdefinitionkey);
     }
+
     /**
      * 设置 [校验]
      */
@@ -148,6 +154,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
         this.md5check = md5check ;
         this.modify("md5check",md5check);
     }
+
     /**
      * 设置 [BPMN]
      */
@@ -155,6 +162,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
         this.bpmnfile = bpmnfile ;
         this.modify("bpmnfile",bpmnfile);
     }
+
     /**
      * 设置 [DeployKey]
      */
@@ -162,6 +170,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
         this.deploykey = deploykey ;
         this.modify("deploykey",deploykey);
     }
+
 
 }
 

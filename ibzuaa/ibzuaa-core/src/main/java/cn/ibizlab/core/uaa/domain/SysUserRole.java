@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,9 +23,9 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
-
 
 /**
  * 实体[用户角色关系]
@@ -32,7 +33,7 @@ import cn.ibizlab.util.domain.EntityMP;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZUSER_ROLE",resultMap = "SysUserRoleResultMap")
 public class SysUserRole extends EntityMP implements Serializable {
 
@@ -120,6 +121,7 @@ public class SysUserRole extends EntityMP implements Serializable {
         this.roleid = roleid ;
         this.modify("sys_roleid",roleid);
     }
+
     /**
      * 设置 [用户标识]
      */
@@ -127,6 +129,7 @@ public class SysUserRole extends EntityMP implements Serializable {
         this.userid = userid ;
         this.modify("sys_userid",userid);
     }
+
 
     /**
      * 获取 [用户角色关系标识]

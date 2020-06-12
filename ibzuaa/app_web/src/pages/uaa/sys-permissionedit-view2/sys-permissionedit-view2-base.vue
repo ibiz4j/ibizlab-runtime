@@ -48,6 +48,7 @@
             ref='drbar' 
             :viewparams="viewparams" 
             :context="context"
+            :formData="formData"
             @selectionchange="drbar_selectionchange($event)"
             @load="drbar_load($event)"
             @closeview="closeView($event)">
@@ -1031,6 +1032,14 @@ export default class SYS_PERMISSIONEditView2Base extends Vue {
      * @memberof SYS_PERMISSIONEditView2
      */
     public selection: any = {};
+
+    /**
+     * 表单数据
+     *
+     * @type {*}
+     * @memberof SYS_PERMISSIONEditView2Base
+     */
+    public formData:any = {};
     
 }
 </script>

@@ -8,9 +8,12 @@ import cn.ibizlab.core.uaa.domain.SysPSSystem;
 import cn.ibizlab.core.uaa.domain.SysRolePermission;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionNode;
 import cn.ibizlab.core.uaa.extensions.domain.SysStructure;
+import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
+import cn.ibizlab.util.security.AuthenticationUser;
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -74,4 +77,20 @@ public class UAACoreResource {
         uaaCoreService.saveByRoleid(sysrole_id,domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
+
+    @Autowired
+    private SysAppService sysAppService;
+
+    @GetMapping(value = "uaa/access-center/app-switcher/{id}")
+    public ResponseEntity<JSONObject> appswitcher(@PathVariable("id") String id)
+    {
+        return ResponseEntity.ok(sysAppService.getAppSwitcher(id, AuthenticationUser.getAuthenticationUser().getUserid()));
+    }
+
+    @PutMapping(value = "uaa/access-center/app-switcher/{id}")
+    public ResponseEntity<Boolean> appswitcher(@PathVariable("id") String id, @RequestBody JSONObject config)
+    {
+        return ResponseEntity.ok(sysAppService.saveAppSwitcher(id,AuthenticationUser.getAuthenticationUser().getUserid(),config));
+    }
+
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,9 +23,9 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
-
 
 /**
  * 实体[部门成员]
@@ -32,7 +33,7 @@ import cn.ibizlab.util.domain.EntityMP;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZDEPTMEMBER",resultMap = "IBZDeptMemberResultMap")
 public class IBZDeptMember extends EntityMP implements Serializable {
 
@@ -129,6 +130,7 @@ public class IBZDeptMember extends EntityMP implements Serializable {
         this.deptid = deptid ;
         this.modify("deptid",deptid);
     }
+
     /**
      * 设置 [用户标识]
      */
@@ -136,6 +138,7 @@ public class IBZDeptMember extends EntityMP implements Serializable {
         this.userid = userid ;
         this.modify("userid",userid);
     }
+
     /**
      * 设置 [岗位标识]
      */
@@ -143,6 +146,7 @@ public class IBZDeptMember extends EntityMP implements Serializable {
         this.postid = postid ;
         this.modify("postid",postid);
     }
+
     /**
      * 设置 [区属]
      */
@@ -150,6 +154,7 @@ public class IBZDeptMember extends EntityMP implements Serializable {
         this.domains = domains ;
         this.modify("domains",domains);
     }
+
 
     /**
      * 获取 [标识]

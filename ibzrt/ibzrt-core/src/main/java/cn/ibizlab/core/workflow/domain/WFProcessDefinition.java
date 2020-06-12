@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -97,6 +98,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
         this.definitionname = definitionname ;
         this.modify("definitionname",definitionname);
     }
+
     /**
      * 设置 [模型版本]
      */
@@ -104,6 +106,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
         this.modelversion = modelversion ;
         this.modify("modelversion",modelversion);
     }
+
     /**
      * 设置 [模型是否启用]
      */
@@ -111,6 +114,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
         this.modelenable = modelenable ;
         this.modify("modelenable",modelenable);
     }
+
     /**
      * 设置 [系统标识]
      */
@@ -118,6 +122,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
         this.pssystemid = pssystemid ;
         this.modify("pssystemid",pssystemid);
     }
+
     /**
      * 设置 [校验]
      */
@@ -125,6 +130,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
         this.md5check = md5check ;
         this.modify("md5check",md5check);
     }
+
     /**
      * 设置 [BPMN]
      */
@@ -132,6 +138,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
         this.bpmnfile = bpmnfile ;
         this.modify("bpmnfile",bpmnfile);
     }
+
     /**
      * 设置 [DeployKey]
      */
@@ -139,6 +146,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
         this.deploykey = deploykey ;
         this.modify("deploykey",deploykey);
     }
+
 
 }
 

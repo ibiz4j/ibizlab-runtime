@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,9 +23,9 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
-
 
 /**
  * 实体[岗位]
@@ -32,7 +33,7 @@ import cn.ibizlab.util.domain.EntityMP;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZPOST",resultMap = "IBZPostResultMap")
 public class IBZPost extends EntityMP implements Serializable {
 
@@ -84,6 +85,7 @@ public class IBZPost extends EntityMP implements Serializable {
         this.postcode = postcode ;
         this.modify("postcode",postcode);
     }
+
     /**
      * 设置 [岗位名称]
      */
@@ -91,6 +93,7 @@ public class IBZPost extends EntityMP implements Serializable {
         this.postname = postname ;
         this.modify("postname",postname);
     }
+
     /**
      * 设置 [区属]
      */
@@ -98,6 +101,7 @@ public class IBZPost extends EntityMP implements Serializable {
         this.domains = domains ;
         this.modify("domains",domains);
     }
+
     /**
      * 设置 [备注]
      */
@@ -105,6 +109,7 @@ public class IBZPost extends EntityMP implements Serializable {
         this.memo = memo ;
         this.modify("memo",memo);
     }
+
 
 }
 

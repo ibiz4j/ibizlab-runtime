@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -102,6 +103,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
         this.taskid = taskid ;
         this.modify("taskid",taskid);
     }
+
     /**
      * 设置 [TaskDefinitionKey]
      */
@@ -109,6 +111,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
         this.taskprocessdefinitionkey = taskprocessdefinitionkey ;
         this.modify("taskdefinitionkey",taskprocessdefinitionkey);
     }
+
     /**
      * 设置 [实例标识]
      */
@@ -116,6 +119,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
         this.processinstanceid = processinstanceid ;
         this.modify("instanceid",processinstanceid);
     }
+
     /**
      * 设置 [DefinitionKey]
      */
@@ -123,6 +127,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
         this.processdefinitionkey = processdefinitionkey ;
         this.modify("definitionkey",processdefinitionkey);
     }
+
     /**
      * 设置 [业务键值]
      */
@@ -130,6 +135,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
         this.processinstancebusinesskey = processinstancebusinesskey ;
         this.modify("businesskey",processinstancebusinesskey);
     }
+
     /**
      * 设置 [引用视图]
      */
@@ -137,6 +143,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
         this.refviewkey = refviewkey ;
         this.modify("refviewkey",refviewkey);
     }
+
     /**
      * 设置 [路径标识]
      */
@@ -144,6 +151,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
         this.sequenceflowname = sequenceflowname ;
         this.modify("wayname",sequenceflowname);
     }
+
 
 }
 

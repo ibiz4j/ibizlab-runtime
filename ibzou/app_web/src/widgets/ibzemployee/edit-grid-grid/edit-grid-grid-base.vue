@@ -230,6 +230,7 @@
               style="" 
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
              </dropdown-list>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
@@ -1666,6 +1667,7 @@ export default class EditGridBase extends Vue implements ControlInterface {
      */
 	public uiAction(row: any, tag: any, $event: any) {
         // this.rowClick(row, true);
+        $event.stopPropagation();
     }
 
     /**

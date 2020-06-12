@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -90,6 +91,7 @@ public class IBZDeptMember extends EntityClient implements Serializable {
         this.deptid = deptid ;
         this.modify("deptid",deptid);
     }
+
     /**
      * 设置 [用户标识]
      */
@@ -97,6 +99,7 @@ public class IBZDeptMember extends EntityClient implements Serializable {
         this.userid = userid ;
         this.modify("userid",userid);
     }
+
 
 }
 

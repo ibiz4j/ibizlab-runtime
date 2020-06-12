@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -72,6 +73,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
         this.usertaskname = usertaskname ;
         this.modify("nodename",usertaskname);
     }
+
     /**
      * 设置 [DefinitionKey]
      */
@@ -79,6 +81,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
         this.processdefinitionkey = processdefinitionkey ;
         this.modify("definitionkey",processdefinitionkey);
     }
+
     /**
      * 设置 [流程定义名称]
      */
@@ -86,6 +89,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
         this.processdefinitionname = processdefinitionname ;
         this.modify("definitionname",processdefinitionname);
     }
+
 
 }
 

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -124,6 +125,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
         this.roleid = roleid ;
         this.modify("sys_roleid",roleid);
     }
+
     /**
      * 设置 [权限表标识]
      */
@@ -131,6 +133,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
         this.permissionid = permissionid ;
         this.modify("sys_permissionid",permissionid);
     }
+
 
 }
 

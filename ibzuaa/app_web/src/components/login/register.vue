@@ -11,6 +11,7 @@
                     <i-form ref='loginForm' :rules="rules" :model="form">
                         <form-item prop='loginname'>
                             <i-input
+                                    size='large'
                                     prefix='ios-contact'
                                     v-model.trim="form.loginname"
                                     placeholder="用户名"
@@ -19,6 +20,7 @@
                         </form-item>
                         <form-item prop='personname'>
                             <i-input
+                                    size='large'
                                     prefix='ios-person'
                                     v-model.trim="form.personname"
                                     placeholder="用户姓名"
@@ -27,6 +29,7 @@
                         </form-item>
                         <form-item prop='password'>
                             <i-input
+                                    size='large'
                                     prefix='ios-key'
                                     v-model.trim="form.password"
                                     type='password'
@@ -36,6 +39,7 @@
                         </form-item>
                         <form-item prop='confrimpassword'>
                             <i-input
+                                    size='large'
                                     prefix='ios-checkbox'
                                     v-model.trim="form.confrimpassword"
                                     type='password'
@@ -47,6 +51,7 @@
                             <i-button
                                     @click="handleRegister"
                                     type='success'
+                                    class="confirm_register"
                                     :class="{disabled: !this.canClick}"
                                     long>{{this.confirmRegBtnContent}}
                             </i-button>
@@ -56,9 +61,8 @@
                 </div>
             </card>
             <div class="log_footer">
-                <div class="copyright">Copyright © 2018
-                    <a href="http://www.ibizsys.net/ibizsys/channelview?channelId=ibizsys.about" target="_blank">埃毕致（上海）云计算科技</a>
-                    版权所有
+                <div class="copyright">
+                    <a href="https://www.ibizlab.cn/" target="_blank">{{appTitle}} is based on ibizlab .</a>
                 </div>
             </div>
         </div>
@@ -140,6 +144,9 @@
             }
         };
 
+        // 注册方式
+        public registerType: any = "commom";
+
         /**
          * 生命周期Create
          *
@@ -174,6 +181,10 @@
          * 注册处理
          */
         public handleRegister(): void {
+            if (this.canClick!=true) {
+                return;
+            }
+
             const form: any = this.$refs.loginForm;
             let validatestate: boolean = true;
             form.validate((valid: boolean) => {
@@ -182,15 +193,17 @@
             if (!validatestate) {
                 return;
             }
-            this.form.registerType = "commom";
-            const post: Promise<any> = this.$http.post('/uaa/register', this.form, true);
+
+            var param: any = this.form;
+            param.registerType = this.registerType;
+            const post: Promise<any> = this.$http.post('/uaa/register', param, true);
             post.then((response: any) => {
                 if (response && response.status === 200) {
                     const data = response.data;
                     if (data && data.ibzuser) {
                         this.$Message.success({
                             content: "注册成功，用户名:" + data.ibzuser.loginname + "，密码:" + data.ibzuser.password,
-                            duration: 5,
+                            duration: 3,
                             closable: true
                         });
                     } else {
@@ -200,7 +213,7 @@
                             closable: true
                         });
                     }
-                    // 3s后跳转登录
+                    // 3s后自动登录
                     this.countDown(3);
                 }
             }).catch((e: any) => {
@@ -222,7 +235,7 @@
         }
 
         /**
-         * 跳转登录倒计时
+         * 自动登录倒计时
          */
         public countDown(totalTime: any): void {
             if (!this.canClick) return;
@@ -236,10 +249,7 @@
                 if (totalTime < 0) {
                     // 清除定时器
                     window.clearInterval(clock);
-                    // 跳转到登录页
-                    // this.$router.push("/login");
-
-                    // 登录
+                    // 登录请求
                     const loginname: any = this.form.loginname;
                     const password: any = this.form.password;
                     const post: Promise<any> = this.$http.post('v7/login', this.form, true);
@@ -260,16 +270,16 @@
                         }
                     }).catch((error: any) => {
                         const data = error.data;
-                        if (data && data.message) {
+                        if (data && data.detail) {
                             this.$Message.error({
                                 content: "登录失败，" + data.detail,
-                                duration: 5,
+                                duration: 3,
                                 closable: true
                             });
                         } else {
                             this.$Message.error({
                                 content: "登录失败",
-                                duration: 5,
+                                duration: 3,
                                 closable: true
                             });
                         }

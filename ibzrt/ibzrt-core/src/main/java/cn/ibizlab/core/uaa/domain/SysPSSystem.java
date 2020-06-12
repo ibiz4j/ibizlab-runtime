@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,6 +63,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
         this.pssystemname = pssystemname ;
         this.modify("pssystemname",pssystemname);
     }
+
     /**
      * 设置 [结构]
      */
@@ -69,6 +71,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
         this.sysstructure = sysstructure ;
         this.modify("sysstructure",sysstructure);
     }
+
 
 }
 

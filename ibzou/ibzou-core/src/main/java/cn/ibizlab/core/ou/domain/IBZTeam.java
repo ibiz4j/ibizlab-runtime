@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,9 +23,9 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
-
 
 /**
  * 实体[组]
@@ -32,7 +33,7 @@ import cn.ibizlab.util.domain.EntityMP;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZTEAM",resultMap = "IBZTeamResultMap")
 public class IBZTeam extends EntityMP implements Serializable {
 
@@ -77,6 +78,7 @@ public class IBZTeam extends EntityMP implements Serializable {
         this.teamname = teamname ;
         this.modify("teamname",teamname);
     }
+
     /**
      * 设置 [备注]
      */
@@ -84,6 +86,7 @@ public class IBZTeam extends EntityMP implements Serializable {
         this.memo = memo ;
         this.modify("memo",memo);
     }
+
     /**
      * 设置 [区属]
      */
@@ -91,6 +94,7 @@ public class IBZTeam extends EntityMP implements Serializable {
         this.domains = domains ;
         this.modify("domains",domains);
     }
+
 
 }
 

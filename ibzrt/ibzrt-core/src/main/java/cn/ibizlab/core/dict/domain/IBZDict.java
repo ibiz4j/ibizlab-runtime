@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -105,6 +106,7 @@ public class IBZDict extends EntityClient implements Serializable {
         this.dictname = dictname ;
         this.modify("ibzdictname",dictname);
     }
+
 
 }
 

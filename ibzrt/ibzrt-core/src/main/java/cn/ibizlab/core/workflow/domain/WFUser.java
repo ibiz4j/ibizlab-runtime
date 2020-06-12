@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -64,6 +65,7 @@ public class WFUser extends EntityClient implements Serializable {
         this.firstname = firstname ;
         this.modify("username",firstname);
     }
+
     /**
      * 设置 [用户名称]
      */
@@ -71,6 +73,7 @@ public class WFUser extends EntityClient implements Serializable {
         this.displayname = displayname ;
         this.modify("personname",displayname);
     }
+
 
 }
 

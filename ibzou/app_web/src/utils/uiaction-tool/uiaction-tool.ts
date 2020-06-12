@@ -44,7 +44,7 @@ export class UIActionTool {
      */
     private static formatData(actionTarget: any, args: any,parentContext:any,parentParams:any, _params: any): any {
         let _data: any = {};
-        if (Object.is(actionTarget, 'SINGLEKEY')) {
+        if (Object.is(actionTarget, 'SINGLEKEY') || Object.is(actionTarget, 'NONE')) {
             let [arg] = args;
             Object.keys(_params).forEach((name: string) => {
                 let hasProperty = true;

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,9 +23,9 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
-
 
 /**
  * 实体[单位机构]
@@ -32,7 +33,7 @@ import cn.ibizlab.util.domain.EntityMP;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZORG",resultMap = "IBZOrganizationResultMap")
 public class IBZOrganization extends EntityMP implements Serializable {
 
@@ -157,6 +158,7 @@ public class IBZOrganization extends EntityMP implements Serializable {
         this.orgcode = orgcode ;
         this.modify("orgcode",orgcode);
     }
+
     /**
      * 设置 [上级单位]
      */
@@ -164,6 +166,7 @@ public class IBZOrganization extends EntityMP implements Serializable {
         this.parentorgid = parentorgid ;
         this.modify("porgid",parentorgid);
     }
+
     /**
      * 设置 [单位简称]
      */
@@ -171,6 +174,7 @@ public class IBZOrganization extends EntityMP implements Serializable {
         this.shortname = shortname ;
         this.modify("shortname",shortname);
     }
+
     /**
      * 设置 [单位级别]
      */
@@ -178,6 +182,7 @@ public class IBZOrganization extends EntityMP implements Serializable {
         this.orglevel = orglevel ;
         this.modify("orglevel",orglevel);
     }
+
     /**
      * 设置 [排序]
      */
@@ -185,6 +190,7 @@ public class IBZOrganization extends EntityMP implements Serializable {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }
+
     /**
      * 设置 [区属]
      */
@@ -192,6 +198,7 @@ public class IBZOrganization extends EntityMP implements Serializable {
         this.domains = domains ;
         this.modify("domains",domains);
     }
+
 
 }
 

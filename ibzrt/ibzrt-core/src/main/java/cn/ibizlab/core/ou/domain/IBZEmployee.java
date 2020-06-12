@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -315,6 +316,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.username = username ;
         this.modify("username",username);
     }
+
     /**
      * 设置 [姓名]
      */
@@ -322,6 +324,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.personname = personname ;
         this.modify("personname",personname);
     }
+
     /**
      * 设置 [用户工号]
      */
@@ -329,6 +332,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.usercode = usercode ;
         this.modify("usercode",usercode);
     }
+
     /**
      * 设置 [登录名]
      */
@@ -336,6 +340,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.loginname = loginname ;
         this.modify("loginname",loginname);
     }
+
     /**
      * 设置 [密码]
      */
@@ -343,6 +348,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.password = password ;
         this.modify("password",password);
     }
+
     /**
      * 设置 [区属]
      */
@@ -350,6 +356,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.domains = domains ;
         this.modify("domains",domains);
     }
+
     /**
      * 设置 [主部门]
      */
@@ -357,6 +364,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.mdeptid = mdeptid ;
         this.modify("mdeptid",mdeptid);
     }
+
     /**
      * 设置 [主部门代码]
      */
@@ -364,6 +372,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.mdeptcode = mdeptcode ;
         this.modify("mdeptcode",mdeptcode);
     }
+
     /**
      * 设置 [主部门名称]
      */
@@ -371,6 +380,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.mdeptname = mdeptname ;
         this.modify("mdeptname",mdeptname);
     }
+
     /**
      * 设置 [业务编码]
      */
@@ -378,6 +388,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.bcode = bcode ;
         this.modify("bcode",bcode);
     }
+
     /**
      * 设置 [岗位]
      */
@@ -385,6 +396,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.postid = postid ;
         this.modify("postid",postid);
     }
+
     /**
      * 设置 [岗位代码]
      */
@@ -392,6 +404,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.postcode = postcode ;
         this.modify("postcode",postcode);
     }
+
     /**
      * 设置 [岗位名称]
      */
@@ -399,6 +412,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.postname = postname ;
         this.modify("postname",postname);
     }
+
     /**
      * 设置 [单位代码]
      */
@@ -406,6 +420,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.orgcode = orgcode ;
         this.modify("orgcode",orgcode);
     }
+
     /**
      * 设置 [昵称别名]
      */
@@ -413,6 +428,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.nickname = nickname ;
         this.modify("nickname",nickname);
     }
+
     /**
      * 设置 [性别]
      */
@@ -420,6 +436,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.sex = sex ;
         this.modify("sex",sex);
     }
+
     /**
      * 设置 [证件号码]
      */
@@ -427,6 +444,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.certcode = certcode ;
         this.modify("certcode",certcode);
     }
+
     /**
      * 设置 [联系方式]
      */
@@ -434,12 +452,24 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.phone = phone ;
         this.modify("phone",phone);
     }
+
     /**
      * 设置 [出生日期]
      */
     public void setBirthday(Timestamp birthday){
         this.birthday = birthday ;
         this.modify("birthday",birthday);
+    }
+
+    /**
+     * 格式化日期 [出生日期]
+     */
+    public String formatBirthday(){
+        if (this.birthday == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        return sdf.format(birthday);
     }
     /**
      * 设置 [邮件]
@@ -448,6 +478,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.email = email ;
         this.modify("email",email);
     }
+
     /**
      * 设置 [社交账号]
      */
@@ -455,6 +486,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.avatar = avatar ;
         this.modify("avatar",avatar);
     }
+
     /**
      * 设置 [地址]
      */
@@ -462,6 +494,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.addr = addr ;
         this.modify("addr",addr);
     }
+
     /**
      * 设置 [照片]
      */
@@ -469,6 +502,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.usericon = usericon ;
         this.modify("usericon",usericon);
     }
+
     /**
      * 设置 [ip地址]
      */
@@ -476,6 +510,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.ipaddr = ipaddr ;
         this.modify("ipaddr",ipaddr);
     }
+
     /**
      * 设置 [样式]
      */
@@ -483,6 +518,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.theme = theme ;
         this.modify("theme",theme);
     }
+
     /**
      * 设置 [语言]
      */
@@ -490,6 +526,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.lang = lang ;
         this.modify("lang",lang);
     }
+
     /**
      * 设置 [字号]
      */
@@ -497,6 +534,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.fontsize = fontsize ;
         this.modify("fontsize",fontsize);
     }
+
     /**
      * 设置 [备注]
      */
@@ -504,6 +542,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.memo = memo ;
         this.modify("memo",memo);
     }
+
     /**
      * 设置 [保留]
      */
@@ -511,6 +550,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.reserver = reserver ;
         this.modify("reserver",reserver);
     }
+
     /**
      * 设置 [排序]
      */
@@ -518,6 +558,7 @@ public class IBZEmployee extends EntityClient implements Serializable {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }
+
 
 }
 

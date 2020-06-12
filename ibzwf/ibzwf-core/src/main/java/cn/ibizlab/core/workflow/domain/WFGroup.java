@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,9 +23,9 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
-
 
 /**
  * 实体[角色/用户组]
@@ -32,7 +33,7 @@ import cn.ibizlab.util.domain.EntityMP;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZWFGROUP",resultMap = "WFGroupResultMap")
 public class WFGroup extends EntityMP implements Serializable {
 
@@ -79,6 +80,7 @@ public class WFGroup extends EntityMP implements Serializable {
         this.name = name ;
         this.modify("groupname",name);
     }
+
     /**
      * 设置 [范围]
      */
@@ -86,6 +88,7 @@ public class WFGroup extends EntityMP implements Serializable {
         this.groupscope = groupscope ;
         this.modify("groupscope",groupscope);
     }
+
 
 }
 

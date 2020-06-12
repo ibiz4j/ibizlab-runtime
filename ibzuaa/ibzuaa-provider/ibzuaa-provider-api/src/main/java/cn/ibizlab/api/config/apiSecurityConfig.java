@@ -121,6 +121,7 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/syspssystems/save").permitAll()
                 .antMatchers("/uaa/login").permitAll()
                 .antMatchers("/uaa/loginbyusername").permitAll()
+               .antMatchers("/uaa/publickey").permitAll()
                 // 所有请求都需要认证
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域

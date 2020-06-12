@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -70,6 +71,7 @@ public class WFGroup extends EntityClient implements Serializable {
         this.name = name ;
         this.modify("groupname",name);
     }
+
     /**
      * 设置 [范围]
      */
@@ -77,6 +79,7 @@ public class WFGroup extends EntityClient implements Serializable {
         this.groupscope = groupscope ;
         this.modify("groupscope",groupscope);
     }
+
 
 }
 

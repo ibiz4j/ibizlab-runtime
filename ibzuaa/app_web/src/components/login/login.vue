@@ -56,10 +56,6 @@
                         </form-item>
 
                     </i-form>
-                    <p class='login-tip'>
-                        {{this.loginTip}}
-                        <!--{{this.$t('components.login.tip')}}-->
-                    </p>
                 </div>
             </card>
             <div class="log_footer">
@@ -74,7 +70,6 @@
 <script lang="ts">
     import {Vue, Component, Watch} from 'vue-property-decorator';
     import {Environment} from '@/environments/environment';
-    //import Divider from "ibiz-vue-lib/lib/ibiz-vue-lib.common";
 
     @Component({
         components: {}
@@ -89,15 +84,6 @@
          */
         public form: any = {loginname: 'ibzadmin', password: '123456'};
 
-        /**
-         *　登录提示语
-         */
-        public loginTip: any = "";
-
-        /**
-         *　按钮可点击
-         */
-        public canClick: any = true;
 
         /**
          * 应用名称
@@ -177,27 +163,23 @@
                     const data = response.data;
                     if (data && data.token) {
                         localStorage.setItem('token', data.token);
-                        this.setCookie('ibzuaa-token',data.token,0);
+                        this.setCookie('ibzuaa-token', data.token, 0);
                     }
                     if (data && data.user) {
                         localStorage.setItem('user', JSON.stringify(data.user));
                     }
                     // 设置cookie,保存账号密码7天
-                    this.setCookie("loginname",loginname, 7);
+                    this.setCookie("loginname", loginname, 7);
                     // 跳转首页
                     const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
                     this.$router.push({path: url});
                 }
             }).catch((error: any) => {
-                // const loginfailed: any = this.$t('components.login.loginfailed');
-                // this.$Notice.error({ title: (this.$t('components.login.error') as any), desc: loginfailed });
                 // 登录提示
-
                 const data = error.data;
-                if (data && data.message) {
-                    this.loginTip = data.message;
+                if (data && data.detail) {
                     this.$Message.error({
-                        content: "登录失败，" + data.message,
+                        content: "登录失败，" + data.detail,
                         duration: 5,
                         closable: true
                     });
@@ -221,29 +203,28 @@
         }
 
 
-
         public setCookie(name: any, value: any, day: any) {
-                if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
-                    var curDate = new Date();
-                    var curTamp = curDate.getTime();
-                    var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
-                    var passedTamp = curTamp - curWeeHours;
-                    var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
-                    var leftTime = new Date();
-                    leftTime.setTime(leftTamp + curTamp);
-                    document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
-                } else {
-                    document.cookie = name + "=" + escape(value);
-                }
+            if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+                var curDate = new Date();
+                var curTamp = curDate.getTime();
+                var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
+                var passedTamp = curTamp - curWeeHours;
+                var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
+                var leftTime = new Date();
+                leftTime.setTime(leftTamp + curTamp);
+                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+            } else {
+                document.cookie = name + "=" + escape(value);
+            }
         }
 
         public getCookie(name: any): any {
-                var arr;
-                var reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-                if (arr = document.cookie.match(reg))
-                    return unescape(arr[2]);
-                else
-                    return null;
+            var arr;
+            var reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
         }
 
         /**
@@ -251,7 +232,22 @@
          * @param thirdpart
          */
         public tencentHandleClick(thirdpart: any) {
-            this.$Message.warning("qq授权登录暂未支持")
+            // window.QC.Login.showPopup({
+            //     appId:"101884990",
+            //     redirectURI:"http%3a%2f%2f127.0.0.1%3a8080%2f%23%2flogin"  //登录成功后会自动跳往该地址
+            // });
+            var _this = this;
+            // //　网站应用appid
+            const client_id = '101885024';
+            //　回调地址,即授权登录成功后跳转的地址(需要UrlEncode转码)
+            const redirect_uri = 'http%3a%2f%2f127.0.0.1%3a8080%2f%23%2flogin';
+            // 随机生成一段字符串，防止CSRF攻击的
+            const state =  Math.random().toString(36).substr(2);
+            // this.$store.dispatch(state);
+            // // qq授权登录地址
+            const url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirect_uri + "&scope=get_user_info" + "&state=" + state;
+            // // 打开qq授权登录窗口，授权登录成功后会重定向到回调地址
+            this.openWindow(url, thirdpart, 540, 540);
         }
 
         /**
@@ -259,8 +255,29 @@
          * @param thirddpart
          */
         public wechatHandleClick(thirddpart: any) {
-            this.$Message.warning("微信授权登录暂未支持")
+            this.$Message.warning("微信授权登录暂未支持");
         }
+
+        /**
+         * 打开一个新窗口
+         * @param url　链接地址
+         * @param title　窗口标题
+         * @param w　窗口宽度
+         * @param h　窗口高度
+         */
+        public openWindow(url: any, title: any, w: any, h: any): void {
+            const dualScreenLeft = window.screenLeft;
+            const dualScreenTop = window.screenTop;
+            const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+            const left = ((width / 2) - (w / 2)) + dualScreenLeft;
+            const top = ((height / 2) - (h / 2)) + dualScreenTop;
+            const newWindow = window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+            if (window.focus && newWindow) {
+                newWindow.focus();
+            }
+        }
+
 
     }
 </script>

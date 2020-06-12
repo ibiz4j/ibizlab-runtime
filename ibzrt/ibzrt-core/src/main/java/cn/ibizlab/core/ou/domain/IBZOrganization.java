@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -139,6 +140,7 @@ public class IBZOrganization extends EntityClient implements Serializable {
         this.orgcode = orgcode ;
         this.modify("orgcode",orgcode);
     }
+
     /**
      * 设置 [上级单位]
      */
@@ -146,6 +148,7 @@ public class IBZOrganization extends EntityClient implements Serializable {
         this.parentorgid = parentorgid ;
         this.modify("porgid",parentorgid);
     }
+
     /**
      * 设置 [单位简称]
      */
@@ -153,6 +156,7 @@ public class IBZOrganization extends EntityClient implements Serializable {
         this.shortname = shortname ;
         this.modify("shortname",shortname);
     }
+
     /**
      * 设置 [单位级别]
      */
@@ -160,6 +164,7 @@ public class IBZOrganization extends EntityClient implements Serializable {
         this.orglevel = orglevel ;
         this.modify("orglevel",orglevel);
     }
+
     /**
      * 设置 [排序]
      */
@@ -167,6 +172,7 @@ public class IBZOrganization extends EntityClient implements Serializable {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }
+
 
 }
 

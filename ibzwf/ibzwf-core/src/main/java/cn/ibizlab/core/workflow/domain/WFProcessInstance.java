@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,11 +26,9 @@ import org.springframework.data.annotation.Transient;
 /**
  * [流程实例] 对象
  */
-@Builder
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class WFProcessInstance extends EntityBase implements Serializable {
 
     /**
@@ -104,7 +103,26 @@ public class WFProcessInstance extends EntityBase implements Serializable {
 
 
 
-
+    /**
+     * 格式化日期 [启动时间]
+     */
+    public String formatStarttime(){
+        if (this.starttime == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        return sdf.format(starttime);
+    }
+    /**
+     * 格式化日期 [结束时间]
+     */
+    public String formatEndtime(){
+        if (this.endtime == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        return sdf.format(endtime);
+    }
 }
 
 

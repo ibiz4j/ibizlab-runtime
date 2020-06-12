@@ -8,6 +8,7 @@ declare global {
         uiServiceRegister: UIServiceRegister,
         utilServiceRegister:UtilServiceRegister,
         entityServiceRegister:EntityServiceRegister,
-        counterServiceRegister:CounterServiceRegister
+        counterServiceRegister:CounterServiceRegister,
+        QC: any
     }
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -110,6 +111,7 @@ public class SysUserRole extends EntityClient implements Serializable {
         this.roleid = roleid ;
         this.modify("sys_roleid",roleid);
     }
+
     /**
      * 设置 [用户标识]
      */
@@ -117,6 +119,7 @@ public class SysUserRole extends EntityClient implements Serializable {
         this.userid = userid ;
         this.modify("sys_userid",userid);
     }
+
 
 }
 

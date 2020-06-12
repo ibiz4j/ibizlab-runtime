@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,11 +26,9 @@ import org.springframework.data.annotation.Transient;
 /**
  * [应用] 对象
  */
-@Builder
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class SysApp extends EntityBase implements Serializable {
 
     /**
@@ -107,7 +106,6 @@ public class SysApp extends EntityBase implements Serializable {
     @JSONField(name = "system")
     @JsonProperty("system")
     private cn.ibizlab.core.uaa.domain.SysPSSystem system;
-
 
 
 

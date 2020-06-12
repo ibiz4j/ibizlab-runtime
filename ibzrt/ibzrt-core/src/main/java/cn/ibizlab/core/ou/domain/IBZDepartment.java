@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -174,6 +175,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.deptcode = deptcode ;
         this.modify("deptcode",deptcode);
     }
+
     /**
      * 设置 [部门名称]
      */
@@ -181,6 +183,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.deptname = deptname ;
         this.modify("deptname",deptname);
     }
+
     /**
      * 设置 [上级部门]
      */
@@ -188,6 +191,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.parentdeptid = parentdeptid ;
         this.modify("pdeptid",parentdeptid);
     }
+
     /**
      * 设置 [部门简称]
      */
@@ -195,6 +199,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.shortname = shortname ;
         this.modify("shortname",shortname);
     }
+
     /**
      * 设置 [部门级别]
      */
@@ -202,6 +207,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.deptlevel = deptlevel ;
         this.modify("deptlevel",deptlevel);
     }
+
     /**
      * 设置 [排序]
      */
@@ -209,6 +215,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }
+
     /**
      * 设置 [业务编码]
      */
@@ -216,6 +223,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.bcode = bcode ;
         this.modify("bcode",bcode);
     }
+
     /**
      * 设置 [分管领导标识]
      */
@@ -223,6 +231,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.leaderid = leaderid ;
         this.modify("leaderid",leaderid);
     }
+
     /**
      * 设置 [分管领导]
      */
@@ -230,6 +239,7 @@ public class IBZDepartment extends EntityClient implements Serializable {
         this.leadername = leadername ;
         this.modify("leadername",leadername);
     }
+
 
 }
 

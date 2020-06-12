@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -94,6 +95,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
         this.name = name ;
         this.modify("instancename",name);
     }
+
     /**
      * 设置 [DefinitionKey]
      */
@@ -101,6 +103,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
         this.processdefinitionkey = processdefinitionkey ;
         this.modify("definitionkey",processdefinitionkey);
     }
+
     /**
      * 设置 [流程定义名称]
      */
@@ -108,6 +111,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
         this.processdefinitionname = processdefinitionname ;
         this.modify("definitionname",processdefinitionname);
     }
+
     /**
      * 设置 [业务键值]
      */
@@ -115,12 +119,24 @@ public class WFProcessInstance extends EntityClient implements Serializable {
         this.businesskey = businesskey ;
         this.modify("businesskey",businesskey);
     }
+
     /**
      * 设置 [启动时间]
      */
     public void setStarttime(Timestamp starttime){
         this.starttime = starttime ;
         this.modify("starttime",starttime);
+    }
+
+    /**
+     * 格式化日期 [启动时间]
+     */
+    public String formatStarttime(){
+        if (this.starttime == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        return sdf.format(starttime);
     }
     /**
      * 设置 [属性]
@@ -129,6 +145,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
         this.startuserid = startuserid ;
         this.modify("startuserid",startuserid);
     }
+
 
 }
 

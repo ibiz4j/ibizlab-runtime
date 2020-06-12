@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -97,6 +98,7 @@ public class WFMember extends EntityClient implements Serializable {
         this.membername = membername ;
         this.modify("membername",membername);
     }
+
     /**
      * 设置 [组标识]
      */
@@ -104,6 +106,7 @@ public class WFMember extends EntityClient implements Serializable {
         this.groupid = groupid ;
         this.modify("groupid",groupid);
     }
+
     /**
      * 设置 [用户标识]
      */
@@ -111,6 +114,7 @@ public class WFMember extends EntityClient implements Serializable {
         this.userid = userid ;
         this.modify("userid",userid);
     }
+
 
 }
 

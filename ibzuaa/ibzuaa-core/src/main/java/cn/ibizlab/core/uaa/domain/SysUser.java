@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,9 +23,9 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
-
 
 /**
  * 实体[系统用户]
@@ -32,7 +33,7 @@ import cn.ibizlab.util.domain.EntityMP;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZUSER",resultMap = "SysUserResultMap")
 public class SysUser extends EntityMP implements Serializable {
 
@@ -77,6 +78,7 @@ public class SysUser extends EntityMP implements Serializable {
         this.username = username ;
         this.modify("username",username);
     }
+
     /**
      * 设置 [用户姓名]
      */
@@ -84,6 +86,7 @@ public class SysUser extends EntityMP implements Serializable {
         this.personname = personname ;
         this.modify("personname",personname);
     }
+
     /**
      * 设置 [密码]
      */
@@ -91,6 +94,7 @@ public class SysUser extends EntityMP implements Serializable {
         this.password = password ;
         this.modify("password",password);
     }
+
 
 }
 

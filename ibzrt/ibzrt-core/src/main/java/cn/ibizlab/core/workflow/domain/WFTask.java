@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -88,6 +89,7 @@ public class WFTask extends EntityClient implements Serializable {
         this.name = name ;
         this.modify("taskname",name);
     }
+
     /**
      * 设置 [DefinitionKey]
      */
@@ -95,6 +97,7 @@ public class WFTask extends EntityClient implements Serializable {
         this.processdefinitionkey = processdefinitionkey ;
         this.modify("definitionkey",processdefinitionkey);
     }
+
     /**
      * 设置 [实例标识]
      */
@@ -102,6 +105,7 @@ public class WFTask extends EntityClient implements Serializable {
         this.processinstanceid = processinstanceid ;
         this.modify("instanceid",processinstanceid);
     }
+
     /**
      * 设置 [业务键值]
      */
@@ -109,6 +113,7 @@ public class WFTask extends EntityClient implements Serializable {
         this.processinstancebusinesskey = processinstancebusinesskey ;
         this.modify("businesskey",processinstancebusinesskey);
     }
+
     /**
      * 设置 [TaskDefinitionKey]
      */
@@ -116,6 +121,7 @@ public class WFTask extends EntityClient implements Serializable {
         this.taskprocessdefinitionkey = taskprocessdefinitionkey ;
         this.modify("taskdefinitionkey",taskprocessdefinitionkey);
     }
+
 
 }
 

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -149,6 +150,7 @@ public class IBZDictItem extends EntityClient implements Serializable {
         this.itemname = itemname ;
         this.modify("ibzdictitemname",itemname);
     }
+
     /**
      * 设置 [栏目值]
      */
@@ -156,6 +158,7 @@ public class IBZDictItem extends EntityClient implements Serializable {
         this.itemval = itemval ;
         this.modify("dictitemval",itemval);
     }
+
     /**
      * 设置 [字典标识]
      */
@@ -163,6 +166,7 @@ public class IBZDictItem extends EntityClient implements Serializable {
         this.dictid = dictid ;
         this.modify("dictid",dictid);
     }
+
     /**
      * 设置 [父栏目值]
      */
@@ -170,6 +174,7 @@ public class IBZDictItem extends EntityClient implements Serializable {
         this.pitemval = pitemval ;
         this.modify("pitemval",pitemval);
     }
+
     /**
      * 设置 [过滤项]
      */
@@ -177,6 +182,7 @@ public class IBZDictItem extends EntityClient implements Serializable {
         this.itemfilter = itemfilter ;
         this.modify("itemfilter",itemfilter);
     }
+
     /**
      * 设置 [栏目样式]
      */
@@ -184,6 +190,7 @@ public class IBZDictItem extends EntityClient implements Serializable {
         this.itemcls = itemcls ;
         this.modify("itemcls",itemcls);
     }
+
     /**
      * 设置 [图标]
      */
@@ -191,6 +198,7 @@ public class IBZDictItem extends EntityClient implements Serializable {
         this.itemicon = itemicon ;
         this.modify("itemicon",itemicon);
     }
+
     /**
      * 设置 [排序]
      */
@@ -198,6 +206,7 @@ public class IBZDictItem extends EntityClient implements Serializable {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }
+
 
 }
 

@@ -42,7 +42,7 @@ public class SysAppService extends SysAppServiceImpl
     private UAACoreService uaaCoreService;
 
 
-    @Cacheable( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
+    //@Cacheable( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
     public JSONObject getAppSwitcher(String id,String userId)
     {
         JSONObject jo=ibzConfigService.getConfig("AppSwitcher",id, userId);
@@ -68,7 +68,7 @@ public class SysAppService extends SysAppServiceImpl
         });
         final boolean flag=nullSwitcher;
         defApps.values().forEach(sysApp -> {
-            if(1!=sysApp.getVisabled())return;
+            if(sysApp.getVisabled()==null||sysApp.getVisabled()==0)return;
             if(flag&&id.equalsIgnoreCase("default"))
                 sysApp.setVisabled(1);
             else
