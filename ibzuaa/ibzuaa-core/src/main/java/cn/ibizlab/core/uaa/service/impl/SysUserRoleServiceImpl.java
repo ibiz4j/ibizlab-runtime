@@ -57,7 +57,6 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     public boolean checkKey(SysUserRole et) {
         return (!ObjectUtils.isEmpty(et.getUserroleid()))&&(!Objects.isNull(this.getById(et.getUserroleid())));
     }
-
     @Override
     public SysUserRole getDraft(SysUserRole et) {
         fillParentData(et);
@@ -241,5 +240,6 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
 
 
 }
+
 
 

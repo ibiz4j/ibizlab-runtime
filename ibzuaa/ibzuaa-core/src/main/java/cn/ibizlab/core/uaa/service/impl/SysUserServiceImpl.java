@@ -80,7 +80,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public boolean checkKey(SysUser et) {
         return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
     }
-
     @Override
     @Transactional
     public SysUser get(String key) {
@@ -185,5 +184,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 
 }
+
 
 

@@ -148,7 +148,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
 
 
-
     /**
      * 查询集合 DEFAULT
      */
@@ -188,5 +187,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
 
 }
+
 
 

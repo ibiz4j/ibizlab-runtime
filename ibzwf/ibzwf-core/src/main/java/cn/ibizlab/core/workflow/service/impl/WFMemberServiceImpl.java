@@ -57,7 +57,6 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     public boolean checkKey(WFMember et) {
         return (!ObjectUtils.isEmpty(et.getMemberid()))&&(!Objects.isNull(this.getById(et.getMemberid())));
     }
-
     @Override
     public WFMember getDraft(WFMember et) {
         fillParentData(et);
@@ -270,5 +269,6 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
 
 
 }
+
 
 

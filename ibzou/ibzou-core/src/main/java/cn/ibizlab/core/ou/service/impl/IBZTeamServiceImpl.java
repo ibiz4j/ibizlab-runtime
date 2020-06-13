@@ -129,7 +129,6 @@ public class IBZTeamServiceImpl extends ServiceImpl<IBZTeamMapper, IBZTeam> impl
     public boolean checkKey(IBZTeam et) {
         return (!ObjectUtils.isEmpty(et.getTeamid()))&&(!Objects.isNull(this.getById(et.getTeamid())));
     }
-
     @Override
     @Transactional
     public boolean create(IBZTeam et) {
@@ -185,5 +184,6 @@ public class IBZTeamServiceImpl extends ServiceImpl<IBZTeamMapper, IBZTeam> impl
 
 
 }
+
 
 

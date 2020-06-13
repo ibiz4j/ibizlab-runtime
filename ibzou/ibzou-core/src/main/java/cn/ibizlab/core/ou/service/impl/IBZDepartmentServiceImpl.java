@@ -124,7 +124,6 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
     public boolean checkKey(IBZDepartment et) {
         return (!ObjectUtils.isEmpty(et.getDeptid()))&&(!Objects.isNull(this.getById(et.getDeptid())));
     }
-
     @Override
     public IBZDepartment getDraft(IBZDepartment et) {
         fillParentData(et);
@@ -294,5 +293,6 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
     }
 
 }
+
 
 

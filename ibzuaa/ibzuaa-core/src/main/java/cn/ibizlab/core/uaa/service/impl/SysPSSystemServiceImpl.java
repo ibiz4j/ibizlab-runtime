@@ -51,7 +51,6 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     public boolean checkKey(SysPSSystem et) {
         return (!ObjectUtils.isEmpty(et.getPssystemid()))&&(!Objects.isNull(this.getById(et.getPssystemid())));
     }
-
     @Override
     @Transactional
     public SysPSSystem get(String key) {
@@ -191,5 +190,6 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
 
 
 }
+
 
 

@@ -130,7 +130,6 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     public boolean checkKey(SysPermission et) {
         return (!ObjectUtils.isEmpty(et.getPermissionid()))&&(!Objects.isNull(this.getById(et.getPermissionid())));
     }
-
     @Override
     @Transactional
     public SysPermission get(String key) {
@@ -185,5 +184,6 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
 
 }
+
 
 

@@ -59,7 +59,6 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
     public boolean checkKey(IBZOrganization et) {
         return (!ObjectUtils.isEmpty(et.getOrgid()))&&(!Objects.isNull(this.getById(et.getOrgid())));
     }
-
     @Override
     @Transactional
     public boolean update(IBZOrganization et) {
@@ -246,5 +245,6 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
     }
 
 }
+
 
 

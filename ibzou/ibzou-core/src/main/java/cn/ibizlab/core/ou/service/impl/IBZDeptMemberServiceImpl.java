@@ -157,7 +157,6 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
         return (!ObjectUtils.isEmpty(et.getMemberid()))&&(!Objects.isNull(this.getById(et.getMemberid())));
     }
 
-
 	@Override
     public List<IBZDeptMember> selectByDeptid(String deptid) {
         return baseMapper.selectByDeptid(deptid);
@@ -264,5 +263,6 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
 
 
 }
+
 
 

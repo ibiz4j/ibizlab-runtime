@@ -106,7 +106,6 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     public boolean checkKey(IBZEmployee et) {
         return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
     }
-
     @Override
     @Transactional
     public boolean update(IBZEmployee et) {
@@ -305,5 +304,6 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     }
 
 }
+
 
 

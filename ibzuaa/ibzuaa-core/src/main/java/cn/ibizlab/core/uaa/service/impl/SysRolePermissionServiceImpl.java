@@ -104,7 +104,6 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     public boolean checkKey(SysRolePermission et) {
         return (!ObjectUtils.isEmpty(et.getRolepermissionid()))&&(!Objects.isNull(this.getById(et.getRolepermissionid())));
     }
-
     @Override
     @Transactional
     public boolean save(SysRolePermission et) {
@@ -243,5 +242,6 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
 
 
 }
+
 
 

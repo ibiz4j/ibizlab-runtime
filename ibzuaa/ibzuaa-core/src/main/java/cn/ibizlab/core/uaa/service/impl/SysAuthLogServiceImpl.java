@@ -96,7 +96,6 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
     public boolean checkKey(SysAuthLog et) {
         return (!ObjectUtils.isEmpty(et.getLogid()))&&(!Objects.isNull(this.getById(et.getLogid())));
     }
-
     @Override
     @Transactional
     public SysAuthLog get(String key) {
@@ -182,5 +181,6 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
 
 
 }
+
 
 

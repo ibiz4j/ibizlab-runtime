@@ -110,7 +110,6 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
     public boolean checkKey(IBZPost et) {
         return (!ObjectUtils.isEmpty(et.getPostid()))&&(!Objects.isNull(this.getById(et.getPostid())));
     }
-
     @Override
     @Transactional
     public boolean remove(String key) {
@@ -191,5 +190,6 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
 
 
 }
+
 
 
