@@ -116,7 +116,7 @@ export default class DropDownList extends Vue {
      * @memberof AppFormDRUIPart
      */
     @Prop() public viewparams!: any;
-
+    
     /**
      * 是否禁用
      * @type {any}

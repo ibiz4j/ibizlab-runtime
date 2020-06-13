@@ -93,4 +93,10 @@ public class UAACoreResource {
         return ResponseEntity.ok(sysAppService.saveAppSwitcher(id,AuthenticationUser.getAuthenticationUser().getUserid(),config));
     }
 
+
+	@GetMapping(value = "uaa/publickey")
+	public ResponseEntity<String> getPublicKey(){
+		return ResponseEntity.ok().body(uaaCoreService.getPublicKey());
+	}
+
 }

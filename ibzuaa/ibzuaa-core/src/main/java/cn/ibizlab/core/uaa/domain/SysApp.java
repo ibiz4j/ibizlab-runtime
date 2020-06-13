@@ -26,9 +26,11 @@ import org.springframework.data.annotation.Transient;
 /**
  * [应用] 对象
  */
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class SysApp extends EntityBase implements Serializable {
 
     /**

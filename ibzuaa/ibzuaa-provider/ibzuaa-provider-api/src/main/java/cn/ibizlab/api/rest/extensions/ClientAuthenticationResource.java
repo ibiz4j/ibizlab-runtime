@@ -73,9 +73,5 @@ public class ClientAuthenticationResource
     }
 
 
-    @GetMapping(value = "uaa/publickey")
-    public ResponseEntity<String> getPublicKey(){
-        return ResponseEntity.ok().body(uaaCoreService.getPublicKey());
-    }
 
 }

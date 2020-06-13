@@ -26,9 +26,11 @@ import org.springframework.data.annotation.Transient;
 /**
  * [流程实例] 对象
  */
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class WFProcessInstance extends EntityBase implements Serializable {
 
     /**
@@ -110,7 +112,7 @@ public class WFProcessInstance extends EntityBase implements Serializable {
         if (this.starttime == null) {
             return null;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(starttime);
     }
     /**
@@ -120,7 +122,7 @@ public class WFProcessInstance extends EntityBase implements Serializable {
         if (this.endtime == null) {
             return null;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(endtime);
     }
 }

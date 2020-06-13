@@ -119,6 +119,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/syspssystems/save").permitAll()
                        .antMatchers("/uaa/login").permitAll()
                        .antMatchers("/uaa/loginbyusername").permitAll()
+                       .antMatchers("/uaa/publickey").permitAll()
                        //开放组织机构关系查询
                        .antMatchers("/ibzemployees/**/oumaps").permitAll()
                        .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()

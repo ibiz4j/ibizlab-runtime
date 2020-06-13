@@ -26,9 +26,11 @@ import org.springframework.data.annotation.Transient;
 /**
  * [操作路径] 对象
  */
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class WFTaskWay extends EntityBase implements Serializable {
 
     /**

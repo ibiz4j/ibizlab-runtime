@@ -487,7 +487,7 @@ public class IBZEmployee extends EntityMP implements Serializable {
         if (this.birthday == null) {
             return null;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(birthday);
     }
     /**

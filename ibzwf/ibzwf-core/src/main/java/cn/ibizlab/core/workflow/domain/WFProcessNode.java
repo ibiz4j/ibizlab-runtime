@@ -26,9 +26,11 @@ import org.springframework.data.annotation.Transient;
 /**
  * [流程定义节点] 对象
  */
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class WFProcessNode extends EntityBase implements Serializable {
 
     /**

@@ -26,9 +26,11 @@ import org.springframework.data.annotation.Transient;
 /**
  * [工作流任务] 对象
  */
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class WFTask extends EntityBase implements Serializable {
 
     /**

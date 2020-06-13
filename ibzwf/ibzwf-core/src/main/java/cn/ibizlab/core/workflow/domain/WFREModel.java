@@ -26,9 +26,11 @@ import org.springframework.data.annotation.Transient;
 /**
  * [流程模型] 对象
  */
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class WFREModel extends EntityBase implements Serializable {
 
     /**

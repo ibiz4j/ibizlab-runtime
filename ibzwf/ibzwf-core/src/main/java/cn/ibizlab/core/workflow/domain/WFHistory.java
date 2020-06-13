@@ -26,9 +26,11 @@ import org.springframework.data.annotation.Transient;
 /**
  * [历史] 对象
  */
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class WFHistory extends EntityBase implements Serializable {
 
     /**
@@ -111,7 +113,7 @@ public class WFHistory extends EntityBase implements Serializable {
         if (this.time == null) {
             return null;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(time);
     }
 }

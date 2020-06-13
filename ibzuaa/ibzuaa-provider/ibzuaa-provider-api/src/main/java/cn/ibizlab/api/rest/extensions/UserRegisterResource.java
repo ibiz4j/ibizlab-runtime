@@ -27,7 +27,7 @@ public class UserRegisterResource {
     @Autowired
     private ISysPSSystemService iSysPSSystemService;
 
-    @Value("${qqconnection.redirect_URI}")
+    @Value("${ibiz.auth.qq.redirect_uri:}")
     private String redirect_URI;
 
     @PostMapping(value = "/uaa/register")

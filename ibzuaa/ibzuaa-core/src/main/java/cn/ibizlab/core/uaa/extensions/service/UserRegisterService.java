@@ -23,9 +23,9 @@ public class UserRegisterService{
     @Autowired
     private IBZUSERService ibzuserService;
 
-    @Value("${qqconnection.app_ID}")
+    @Value("${ibiz.auth.qq.app_id:}")
     private String app_ID;
-    @Value("${qqconnection.getUserInfoURL}")
+    @Value("${ibiz.auth.qq.userinfo_uri:}")
     private String getUserInfoURL;
 
     /**
