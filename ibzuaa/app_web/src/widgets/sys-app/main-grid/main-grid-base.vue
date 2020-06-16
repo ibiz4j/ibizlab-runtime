@@ -30,26 +30,19 @@
                     <template v-slot="{row,column,$index}">
                         <template v-if="actualIsOpenEdit">
                             <app-form-item :error="gridItemsModel[$index][column.property].error">
-                                
-             <dropdown-list 
-              v-model="row[column.property]" 
+                                <input-box 
               :disabled="row.srfuf === 1 ? (1 & 2) !== 2 : (1 & 1) !== 1" 
-              :data="row" 
-              :context="context"
-              :viewparams="viewparams" 
-              :localContext ='{ }' 
-              :localParam ='{ }' 
-              tag='SystemPick' 
-              codelistType='DYNAMIC'
-              placeholder='请选择...' 
-              style="" 
+              v-model="row[column.property]" 
+              style=""
+              type="text"
+              
+              
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
-             </dropdown-list>
-            
+            </input-box>
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-            <codelist :value="row.pssystemid" tag='SystemPick' codelistType='DYNAMIC' ></codelist>
+                                <app-span name='pssystemid' editorType="HIDDEN" :value="row.pssystemid"></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -989,7 +982,7 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         let _datas:any[] = [];
         datas.forEach((record: any, index: number) => {
-            if (!record.srfkey) {
+            if (Object.is(record.srfuf,"0")) {
                 this.items.some((val: any, num: number) =>{
                     if(JSON.stringify(val) == JSON.stringify(record)){
                         this.items.splice(num,1);
@@ -1207,14 +1200,6 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formatExcelData(filterVal:any, jsonData:any) {
         let codelistColumns:Array<any> = [
-          {
-            name: 'pssystemid',
-            srfkey: 'SystemPick',
-            codelistType : 'DYNAMIC',
-            renderMode: 'other',
-            textSeparator: '、',
-            valueSeparator: ',',
-          },
           {
             name: 'apptype',
             srfkey: 'AppType',

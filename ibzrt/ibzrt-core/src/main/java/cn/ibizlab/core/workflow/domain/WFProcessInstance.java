@@ -135,7 +135,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
         if (this.starttime == null) {
             return null;
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("defieldFormatStr");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(starttime);
     }
     /**

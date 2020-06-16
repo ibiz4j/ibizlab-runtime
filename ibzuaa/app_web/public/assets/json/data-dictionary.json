@@ -27,14 +27,6 @@
         ]
     }, 
     {
-        "srfkey": "SystemPick",
-        "emptytext": "未定义",
-        "codelisttype":"dynamic",
-        "appdataentity":"",
-        "appdedataset":"",
-        "items": []
-    }, 
-    {
         "srfkey": "AppType",
         "emptytext": "未定义",
         "codelisttype":"static",

@@ -232,7 +232,8 @@
                 param.registerType = "qq";
                 param.openId = this.openId;
                 param.accessToken = this.accessToken;
-            } else {
+            }
+            else {
                 this.$Message.error({
                     content: "注册并绑定QQ失败",
                     duration: 3,
@@ -262,7 +263,7 @@
                 }
             }).catch((e: any) => {
                 const data = e.data;
-                if (data && data.detail) {
+                if (data && data.message) {
                     this.$Message.error({
                         content: "注册失败，" + data.message,
                         duration: 3,

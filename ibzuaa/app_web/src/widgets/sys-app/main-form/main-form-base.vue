@@ -6,25 +6,7 @@
 <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-group layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysapp.main_form.details.group1')" :isShowCaption="true" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
-        <i-col v-show="detailsModel.pssystemid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='pssystemid' :itemRules="this.rules.pssystemid" class='' :caption="$t('entities.sysapp.main_form.details.pssystemid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pssystemid.error" :isEmptyCaption="false" labelPos="LEFT">
-    
- <dropdown-list 
-    v-model="data.pssystemid" 
-    :data="data" 
-    :context="context"
-    :viewparams="viewparams"
-    :localContext ='{ }' 
-    :localParam ='{ }' 
-    :disabled="detailsModel.pssystemid.disabled"  
-    tag='SystemPick' 
-    codelistType='DYNAMIC'
-    placeholder='请选择...' style="">
- </dropdown-list>
-</app-form-item>
-
-</i-col>
-<i-col v-show="detailsModel.appid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+        <i-col v-show="detailsModel.appid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='appid' :itemRules="this.rules.appid" class='' :caption="$t('entities.sysapp.main_form.details.appid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appid.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.appid"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.appid.disabled" type='text'  style=""></input-box>
 </app-form-item>

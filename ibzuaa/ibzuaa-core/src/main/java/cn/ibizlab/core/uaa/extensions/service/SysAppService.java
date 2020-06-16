@@ -47,16 +47,18 @@ public class SysAppService extends SysAppServiceImpl
     {
         JSONObject jo=ibzConfigService.getConfig("AppSwitcher",id, userId);
         boolean nullSwitcher=false;
-        if(!jo.containsKey("model")) {
+        if(!jo.containsKey("model"))
             jo.put("model", new JSONArray());
+        if(jo.getJSONArray("model").size()==0)
             nullSwitcher=true;
-        }
-        LinkedHashMap<String,SysApp> defApps=uaaCoreService.getApps();
+        LinkedHashMap<String,SysApp> apps=uaaCoreService.getApps();
+
+        LinkedHashMap<String,SysApp> defApps = new LinkedHashMap<>();
+        defApps.putAll(apps);
         List<SysApp> list=new ArrayList<>();
         JSONArray.parseArray(jo.get("model").toString(),SysApp.class).forEach(sysApp -> {
             SysApp def=defApps.get(sysApp.getId());
-            if(def==null)return;
-            if(1!=def.getVisabled())return;
+            if(def==null||def.getVisabled()==null||def.getVisabled()==0)return;
 
             sysApp.setAddr(def.getAddr());
             sysApp.setIcon(def.getIcon());
@@ -67,8 +69,10 @@ public class SysAppService extends SysAppServiceImpl
             defApps.remove(def.getId());
         });
         final boolean flag=nullSwitcher;
-        defApps.values().forEach(sysApp -> {
-            if(sysApp.getVisabled()==null||sysApp.getVisabled()==0)return;
+        defApps.values().forEach(def -> {
+            if(def.getVisabled()==null||def.getVisabled()==0)return;
+            SysApp sysApp=new SysApp();
+            CachedBeanCopier.copy(def,sysApp);
             if(flag&&id.equalsIgnoreCase("default"))
                 sysApp.setVisabled(1);
             else

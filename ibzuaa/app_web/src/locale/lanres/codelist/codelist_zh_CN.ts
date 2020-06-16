@@ -4,9 +4,6 @@ export default {
         '0': '否',
         empty: '',
     },
-    SystemPick: {
-        empty: '',
-    },
     AppType: {
         'INNER': '内置应用',
         'THIRD-PARTY': '第三方应用',

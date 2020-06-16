@@ -35,14 +35,6 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
         ]
     },
     {
-        "srfkey": "SystemPick",
-        "emptytext": "未定义",
-        "codelisttype":"dynamic",
-        "appdataentity":"",
-        "appdedataset":"",
-        "items": []
-    },
-    {
         srfkey: 'AppType',
         emptytext: '未定义',
         "codelisttype":"static",

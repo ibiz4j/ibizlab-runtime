@@ -107,6 +107,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/uaa/login").permitAll()
                        .antMatchers("/uaa/register").permitAll()
                        .antMatchers("/uaa/queryUserByOpenId").permitAll()
+                       .antMatchers("/uaa/responseTokenToWeiXin").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();

@@ -36,6 +36,11 @@ public class AuthorizationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
+        if(request.getRequestURI().equals("/uaa/publickey")||request.getRequestURI().indexOf("/uaa/lgoin")>=0){
+            chain.doFilter(request, response);
+            return;
+        }
+
         final String requestHeader = request.getHeader(this.tokenHeader);
 
         String username = null;

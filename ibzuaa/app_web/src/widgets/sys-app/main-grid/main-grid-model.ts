@@ -32,9 +32,14 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'pssystemid',
-          prop: 'systemid',
-          dataType: 'PICKUP',
+          name: 'visabled',
+          prop: 'visabled',
+          dataType: 'YESNO',
+        },
+        {
+          name: 'appname',
+          prop: 'label',
+          dataType: 'TEXT',
         },
         {
           name: 'appid',
@@ -42,18 +47,23 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
+          name: 'pssystemid',
+          prop: 'systemid',
+          dataType: 'PICKUP',
+        },
+        {
           name: 'addr',
           prop: 'addr',
           dataType: 'TEXT',
         },
         {
-          name: 'srfmajortext',
-          prop: 'label',
-          dataType: 'TEXT',
+          name: 'apptype',
+          prop: 'type',
+          dataType: 'SSCODELIST',
         },
         {
-          name: 'srfkey',
-          prop: 'id',
+          name: 'srfmajortext',
+          prop: 'label',
           dataType: 'TEXT',
         },
         {
@@ -62,33 +72,18 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'appname',
-          prop: 'label',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'visabled',
-          prop: 'visabled',
-          dataType: 'YESNO',
-        },
-        {
-          name: 'pssystemid_text',
-          prop: 'systemid',
-          dataType: 'PICKUP',
-        },
-        {
-          name: 'apptype',
-          prop: 'type',
-          dataType: 'SSCODELIST',
-        },
-        {
-          name: 'appgroup',
-          prop: 'group',
+          name: 'srfkey',
+          prop: 'id',
           dataType: 'TEXT',
         },
         {
           name: 'fullname',
           prop: 'fullname',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'appgroup',
+          prop: 'group',
           dataType: 'TEXT',
         },
         {

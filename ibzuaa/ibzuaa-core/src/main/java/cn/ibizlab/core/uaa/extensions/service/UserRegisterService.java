@@ -42,32 +42,6 @@ public class UserRegisterService{
         return ibzuser;
     }
 
-    /**
-     * qq授权注册并登录
-     * @param ibzuser 注册用户
-     * @param qqAuthorizationInfo　qq授权信息
-     */
-    public IBZUSER qqRegisterAndLogin(IBZUSER ibzuser, JSONObject qqAuthorizationInfo) {
-        // 1.根据qqAuthorizationInfo获取AccessToken
-        String code = qqAuthorizationInfo.getString("code");
-        String state = qqAuthorizationInfo.getString("state");
-        String redirect_uri = "";
-        String appid = "";
-        String appkey = "";
-        String url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=" + appid + "&client_secret=" + appkey + "&code=" + code + "&redirect_uri=" + redirect_uri;
-        // 2.根据AccessToken获取OpenID值
-
-
-        // 3.根据OpenID获取该QQ用户的相关信息
-
-
-        // 4.创建ibzuser，成功则登录
-        boolean flag = ibzuserService.save(ibzuser);
-        if (!flag) {
-            return null;
-        }
-        return ibzuser;
-    }
 
     /**
      * qq授权注册

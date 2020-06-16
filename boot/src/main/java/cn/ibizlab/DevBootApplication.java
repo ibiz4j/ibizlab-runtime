@@ -19,7 +19,7 @@ import java.util.List;
 @Configuration
 @EnableTransactionManagement
 @EnableFeignClients(basePackages = {"cn.ibizlab" })
-@SpringBootApplication(exclude = {
+@SpringBootApplication(exclude = 
         org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration.class,
 })
 @ComponentScan(basePackages = {"cn.ibizlab"})

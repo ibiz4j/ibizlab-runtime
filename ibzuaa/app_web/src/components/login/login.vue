@@ -232,30 +232,25 @@
          * @param thirdpart
          */
         public tencentHandleClick(thirdpart: any) {
-            // window.QC.Login.showPopup({
-            //     appId:"101884990",
-            //     redirectURI:"http%3a%2f%2f127.0.0.1%3a8080%2f%23%2flogin"  //登录成功后会自动跳往该地址
-            // });
-            var _this = this;
-            // //　网站应用appid
-            const client_id = '101885024';
-            //　回调地址,即授权登录成功后跳转的地址(需要UrlEncode转码)
-            const redirect_uri = 'http%3a%2f%2f127.0.0.1%3a8080%2f%23%2flogin';
-            // 随机生成一段字符串，防止CSRF攻击的
-            const state =  Math.random().toString(36).substr(2);
-            // this.$store.dispatch(state);
-            // // qq授权登录地址
-            const url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirect_uri + "&scope=get_user_info" + "&state=" + state;
-            // // 打开qq授权登录窗口，授权登录成功后会重定向到回调地址
-            this.openWindow(url, thirdpart, 540, 540);
+            this.$Message.warning("QQ授权登录暂未支持");
+            // var _this = this;
+            // const client_id = '101885024';//　网站应用appid
+            // const redirect_uri = 'http%3A%2F%2Fh6s33i.natappfree.cc%2F%23%2FqqLoginRedirect';//　回调地址,即授权登录成功后跳转的地址,需要UrlEncode转码
+            // const state =  Math.random().toString(36).substr(2);// 随机生成一段字符串，防止CSRF攻击的
+            // const url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirect_uri + "&scope=get_user_info" + "&state=" + state;// qq授权登录地址
+            // this.openWindow(url, thirdpart, 540, 540);
         }
 
         /**
          * 微信授权登录
-         * @param thirddpart
+         * @param thirdpart
          */
-        public wechatHandleClick(thirddpart: any) {
+        public wechatHandleClick(thirdpart: any) {
             this.$Message.warning("微信授权登录暂未支持");
+            // let appId = 'wxcfe83301b6e6615f';	//微信开放平台提供的appId
+            // let redirectURI = 'http%3A%2F%2Fh6s33i.natappfree.cc%2F%23%2FweixinLoginRedirect';	//微信扫码后回调地址,需要UrlEncode转码
+            // let url =　'https://open.weixin.qq.com/connect/qrconnect?appid=' + appId +　'&redirect_uri=' +　redirectURI +　'&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect';//微信扫码url
+            // this.openWindow(url, thirdpart, 540, 540);
         }
 
         /**

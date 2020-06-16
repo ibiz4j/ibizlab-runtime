@@ -9,14 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 
 @RestController
@@ -27,7 +26,7 @@ public class UserRegisterResource {
     @Autowired
     private ISysPSSystemService iSysPSSystemService;
 
-    @Value("${ibiz.auth.qq.redirect_uri:}")
+    @Value("${ibiz.auth.qq.redirect_uri:http://127.0.0.1:8111/#/qqLoginRedirect}")
     private String redirect_URI;
 
     @PostMapping(value = "/uaa/register")
@@ -40,7 +39,7 @@ public class UserRegisterResource {
         String registerType = param.getString("registerType");
         if (StringUtils.isEmpty(loginname))
             throw new BadRequestAlertException("用户名为空", "register", "");
-        if (StringUtils.isEmpty(personname))
+        if (StringUtils.isEmpty(personname) && (!"qq".equals(registerType) && !"weixin".equals(registerType)))
             throw new BadRequestAlertException("用户姓名为空", "register", "");
         if (StringUtils.isEmpty(password))
             throw new BadRequestAlertException("密码为空", "register", "");
@@ -67,12 +66,11 @@ public class UserRegisterResource {
                 userRegisterService.commomRegister(ibzuser);
                 break;
             case "qq":// qq授权注册
-                ibzuser.setUserid("qq-" + uuid);
-                String openId = param.getString("openId");
-                String accessToken = param.getString("accessToken");
-                userRegisterService.qqRegister(ibzuser, openId, accessToken);
-//                JSONObject qqAuthorizationInfo = (JSONObject) param.get("qqAuthorizationInfo");
-//                userRegisterService.qqRegisterAndLogin(ibzuser, qqAuthorizationInfo);
+                ibzuser = null;
+//                ibzuser.setUserid("qq-" + uuid);
+//                String openId = param.getString("openId");
+//                String accessToken = param.getString("accessToken");
+//                userRegisterService.qqRegister(ibzuser, openId, accessToken);
                 break;
             default:
                 ibzuser.setUserid("commom-" + uuid);
@@ -86,6 +84,7 @@ public class UserRegisterResource {
 
     /**
      * 根据openId查用户
+     *
      * @param param
      * @return
      */
@@ -109,6 +108,41 @@ public class UserRegisterResource {
         }
 
         return ResponseEntity.ok().body(object);
+    }
+
+    //这里的token要和微信测试号网页填写的token一样
+    public static final String TOKEN = "weixin";
+
+    /**
+     * 响应微信发送的Token验证
+     *
+     * @param signature 　微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数
+     * @param timestamp 　时间戳
+     * @param nonce     　随机数
+     * @param echostr   　随机字符串
+     * @param response  响应对象
+     * @throws IOException
+     * @throws NoSuchAlgorithmException
+     */
+    @GetMapping(value = "/uaa/responseTokenToWeiXin")
+    public void responseTokenToWeiXin(String signature, String timestamp, String nonce, String echostr, HttpServletResponse response) throws IOException, NoSuchAlgorithmException {
+        // 将token、timestamp、nonce三个参数进行字典序排序
+        System.out.println("signature:" + signature);
+        System.out.println("timestamp:" + timestamp);
+        System.out.println("nonce:" + nonce);
+        System.out.println("echostr:" + echostr);
+        System.out.println("TOKEN:" + TOKEN);
+        String[] params = new String[]{TOKEN, timestamp, nonce};
+        Arrays.sort(params);
+        // 将三个参数字符串拼接成一个字符串进行sha1加密
+        String clearText = params[0] + params[1] + params[2];
+        String algorithm = "SHA-1";
+        String sign = new String(org.apache.commons.codec.binary.Hex.encodeHex(MessageDigest.getInstance(algorithm).digest((clearText).getBytes()), true));
+        // 开发者获得加密后的字符串可与signature对比，标识该请求来源于微信
+        if (signature.equals(sign)) {
+            // 确认此次GET请求来自微信服务器，原样返回echostr参数内容，则接入生效，成为开发者成功
+            response.getWriter().print(echostr);
+        }
     }
 
 
