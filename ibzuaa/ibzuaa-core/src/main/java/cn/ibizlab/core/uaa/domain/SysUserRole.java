@@ -43,7 +43,7 @@ public class SysUserRole extends EntityMP implements Serializable {
      * 用户角色关系标识
      */
     @DEField(name = "sys_user_roleid" , isKeyField=true)
-    @TableId(value= "sys_user_roleid",type=IdType.UUID)
+    @TableId(value= "sys_user_roleid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "userroleid")
     @JsonProperty("userroleid")
     private String userroleid;

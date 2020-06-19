@@ -1,0 +1,61 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="sq3536 (generated)" id="1592547336291-1">
+        <createTable tableName="JOBS_INFO">
+            <column name="ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_JOBS_INFO_ID"/>
+            </column>
+            <column name="TENANT_ID" type="VARCHAR(100)"/>
+            <column name="APP" type="VARCHAR(100)"/>
+            <column name="CRON" type="VARCHAR(100)"/>
+            <column name="HANDLER" type="VARCHAR(255)"/>
+            <column name="PARAM" type="VARCHAR(512)"/>
+            <column name="TIMEOUT" type="INT"/>
+            <column name="FAIL_RETRY_COUNT" type="INT"/>
+            <column name="LAST_TIME" type="BIGINT"/>
+            <column name="NEXT_TIME" type="BIGINT"/>
+            <column name="AUTHOR" type="VARCHAR(30)"/>
+            <column name="REMARK" type="VARCHAR(30)"/>
+            <column name="STATUS" type="INT"/>
+            <column name="UPDATE_TIME" type="TIMESTAMP"/>
+            <column name="CREATE_TIME" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sq3536 (generated)" id="1592547336291-2">
+        <createTable tableName="JOBS_LOCK">
+            <column name="ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_JOBS_LOCK_ID"/>
+            </column>
+            <column name="NAME" type="VARCHAR(30)"/>
+            <column name="OWNER" type="VARCHAR(100)"/>
+            <column name="CREATE_TIME" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sq3536 (generated)" id="1592547336291-3">
+        <createTable tableName="JOBS_LOG">
+            <column name="ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_JOBS_LOG_ID"/>
+            </column>
+            <column name="JOB_ID" type="VARCHAR(100)"/>
+            <column name="ADDRESS" type="VARCHAR(255)"/>
+            <column name="HANDLER" type="VARCHAR(255)"/>
+            <column name="PARAM" type="VARCHAR(512)"/>
+            <column name="FAIL_RETRY_COUNT" type="INT"/>
+            <column name="TRIGGER_CODE" type="INT"/>
+            <column name="TRIGGER_TYPE" type="VARCHAR(30)"/>
+            <column name="TRIGGER_MSG" type="CLOB"/>
+            <column name="CREATE_TIME" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="sq3536 (generated)" id="1592547336291-4">
+        <createTable tableName="JOBS_REGISTRY">
+            <column name="ID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_JOBS_REGISTRY_ID"/>
+            </column>
+            <column name="APP" type="VARCHAR(100)"/>
+            <column name="ADDRESS" type="VARCHAR(255)"/>
+            <column name="STATUS" type="INT"/>
+            <column name="UPDATE_TIME" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

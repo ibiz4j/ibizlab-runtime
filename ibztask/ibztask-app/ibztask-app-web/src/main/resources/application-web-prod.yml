@@ -1,0 +1,43 @@
+server:
+  port: 30005
+#Log配置
+logging:
+  level:
+    cn.ibizlab: info
+#zuul网关路由设置
+zuul:
+  routes:
+    jobs_info:
+      path: /jobsinfos/**
+      serviceId: ibztask-api
+      stripPrefix: false
+    jobs_log:
+      path: /jobslogs/**
+      serviceId: ibztask-api
+      stripPrefix: false
+    jobs_lock:
+      path: /jobslocks/**
+      serviceId: ibztask-api
+      stripPrefix: false
+    jobs_registry:
+      path: /jobsregistries/**
+      serviceId: ibztask-api
+      stripPrefix: false
+    loginv7:
+      path: /v7/login
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    uaa:
+      path: /uaa/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    config:
+      path: /config/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    oucore:
+      path: /ibzorganizations/**
+      serviceId: ibzou-api
+      stripPrefix: false
+  sensitive-headers:
+    - Cookie,Set-Cookie,Authorization

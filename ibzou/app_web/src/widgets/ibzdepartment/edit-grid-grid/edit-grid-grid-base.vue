@@ -109,7 +109,7 @@
               deMajorField='deptname'
               deKeyField='ibzdepartment'
               :service="service"
-              :acParams="{ }"
+              :acParams="{ serviceName: 'IBZDepartmentService', interfaceName: 'FetchDefault'}"
               valueitem='pdeptid' 
               :value="row[column.property]" 
               editortype="" 
@@ -1104,7 +1104,7 @@ export default class EditGridBase extends Vue implements ControlInterface {
         }
         let _datas:any[] = [];
         datas.forEach((record: any, index: number) => {
-            if (!record.srfkey) {
+            if (Object.is(record.srfuf,"0")) {
                 this.items.some((val: any, num: number) =>{
                     if(JSON.stringify(val) == JSON.stringify(record)){
                         this.items.splice(num,1);

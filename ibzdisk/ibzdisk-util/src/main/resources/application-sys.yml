@@ -3,14 +3,14 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 172.16.102.211:8848
   cache:
     redis:
       time-to-live: 3600
     caffeine:
       spec: initialCapacity=5,maximumSize=500,expireAfterWrite=3600s
   redis:
-    host: 127.0.0.1
+    host: 172.16.100.243
     port: 6379
     password:
     database: 0

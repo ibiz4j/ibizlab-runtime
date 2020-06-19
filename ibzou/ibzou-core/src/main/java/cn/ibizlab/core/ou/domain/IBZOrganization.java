@@ -43,7 +43,7 @@ public class IBZOrganization extends EntityMP implements Serializable {
      * 单位标识
      */
     @DEField(defaultValue = "orgcode" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
-    @TableId(value= "orgid",type=IdType.UUID)
+    @TableId(value= "orgid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
     private String orgid;

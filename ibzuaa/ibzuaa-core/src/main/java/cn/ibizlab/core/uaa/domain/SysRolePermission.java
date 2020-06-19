@@ -43,7 +43,7 @@ public class SysRolePermission extends EntityMP implements Serializable {
      * 角色权限关系表标识
      */
     @DEField(name = "sys_role_permissionid" , isKeyField=true)
-    @TableId(value= "sys_role_permissionid",type=IdType.UUID)
+    @TableId(value= "sys_role_permissionid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "rolepermissionid")
     @JsonProperty("rolepermissionid")
     private String rolepermissionid;

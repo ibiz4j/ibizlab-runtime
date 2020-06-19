@@ -43,7 +43,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
      * 标识
      */
     @DEField(isKeyField=true)
-    @TableId(value= "logid",type=IdType.UUID)
+    @TableId(value= "logid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "logid")
     @JsonProperty("logid")
     private String logid;

@@ -43,7 +43,7 @@ public class WFMember extends EntityMP implements Serializable {
      * 组成员标识
      */
     @DEField(isKeyField=true)
-    @TableId(value= "memberid",type=IdType.UUID)
+    @TableId(value= "memberid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
     private String memberid;

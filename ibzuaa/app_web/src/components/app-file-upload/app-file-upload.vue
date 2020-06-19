@@ -313,15 +313,16 @@ export default class AppFileUpload extends Vue {
 
         let param:any = this.viewparams;
         let context:any = this.context;
+        let _data:any = JSON.parse(this.data);
 
         if (this.uploadparams && !Object.is(this.uploadparams, '')) {
             uploadparams = this.uploadparams;
-            upload_params = this.$util.computedNavData(this.data,param,context,uploadparams);    
+            upload_params = this.$util.computedNavData(_data,param,context,uploadparams);    
         }
 
         if (this.exportparams && !Object.is(this.exportparams, '')) {
             exportparams = this.exportparams;
-            export_params = this.$util.computedNavData(this.data,param,context,exportparams);
+            export_params = this.$util.computedNavData(_data,param,context,exportparams);
         }
 
         for (const item in upload_params) {

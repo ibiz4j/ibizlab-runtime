@@ -81,6 +81,9 @@ export default class EditGridService extends ControlService {
      */
     @Errorlog
     public getItems(serviceName: string, interfaceName: string, context: any = {}, data: any, isloading?: boolean): Promise<any[]> {
+        if (Object.is(serviceName, 'IBZDepartmentService') && Object.is(interfaceName, 'FetchDefault')) {
+            return this.doItems(this.appEntityService.FetchDefault(JSON.parse(JSON.stringify(context)), data, isloading), 'deptid', 'ibzdepartment');
+        }
 
         return Promise.reject([])
     }
@@ -267,22 +270,11 @@ export default class EditGridService extends ControlService {
                     response.data.deptid = Util.createUUID();
                 }
                 this.handleResponse(action, response, true);
-                this.mergeDefaults(response);
                 resolve(response);
             }).catch(response => {
                 reject(response);
             });
         });
-    }
-
-    /**
-     * 合并配置的默认值
-     * @param {*} 
-     * @memberof EditGridService
-     */
-    public mergeDefaults(response:any = {}){ 
-        if(response.data){                    
-        }
     }
 
 

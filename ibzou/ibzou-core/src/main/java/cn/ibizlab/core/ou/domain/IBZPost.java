@@ -43,7 +43,7 @@ public class IBZPost extends EntityMP implements Serializable {
      * 岗位标识
      */
     @DEField(isKeyField=true)
-    @TableId(value= "postid",type=IdType.UUID)
+    @TableId(value= "postid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "postid")
     @JsonProperty("postid")
     private String postid;

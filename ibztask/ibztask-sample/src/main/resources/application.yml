@@ -1,0 +1,11 @@
+# web port
+server:
+  port: 8081
+
+### jobs
+jobs:
+  admin-address: http://127.0.0.1:40005
+  app-name: jobs-executor-sample
+  app-port: 9999
+  #app-ip: 127.0.0.1
+

@@ -4,29 +4,6 @@
       .app-theme-icon {
           color: #6ba1d1;
       }
-      /* .el-menu.el-menu--horizontal {
-          > .el-menu-item, > .el-submenu > .el-submenu__title {
-              background: #2d5f8b;
-              color: #6ba1d1;
-              i {
-                  color: #6ba1d1;
-              }
-          }
-          > .el-menu-item.is-active, > .el-submenu.is-active > .el-submenu__title {
-              background-color: #4276a4;
-              color: #f1f1f1;
-              i {
-                  color: #f1f1f1;
-              }
-          }
-          > .el-menu-item:hover, > .el-submenu:hover > .el-submenu__title {
-              background-color: #3c6c95;
-              color: #f1f1f1 !important;
-              i {
-                  color: #f1f1f1;
-              }
-          }
-      } */
   }
   
   > .ivu-layout {
@@ -34,7 +11,12 @@
         background-color: #4276a4;
         .sider-top {
           color: hsla(0,0%,100%,.8);
-          background: #2d5f8b;
+          background-color: #4276a4;
+          >.page-logo{
+            >.menuicon:hover{
+                background-color: #2d5f8b;
+              }
+          }
       }
     }
   }

@@ -1,0 +1,6 @@
+server:
+  port: 40005
+#Log配置
+logging:
+  level:
+    cn.ibizlab: info

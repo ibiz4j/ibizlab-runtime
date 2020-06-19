@@ -136,7 +136,7 @@
               deMajorField='orgname'
               deKeyField='ibzorganization'
               :service="service"
-              :acParams="{ }"
+              :acParams="{ serviceName: 'IBZOrganizationService', interfaceName: 'FetchDefault'}"
               valueitem='orgid' 
               :value="row[column.property]" 
               editortype="" 
@@ -188,7 +188,7 @@
               deMajorField='deptname'
               deKeyField='ibzdepartment'
               :service="service"
-              :acParams="{ }"
+              :acParams="{ serviceName: 'IBZDepartmentService', interfaceName: 'FetchDefault'}"
               valueitem='mdeptid' 
               :value="row[column.property]" 
               editortype="" 
@@ -1097,7 +1097,7 @@ export default class EditGridBase extends Vue implements ControlInterface {
         }
         let _datas:any[] = [];
         datas.forEach((record: any, index: number) => {
-            if (!record.srfkey) {
+            if (Object.is(record.srfuf,"0")) {
                 this.items.some((val: any, num: number) =>{
                     if(JSON.stringify(val) == JSON.stringify(record)){
                         this.items.splice(num,1);

@@ -43,7 +43,7 @@ public class IBZTeamMember extends EntityMP implements Serializable {
      * 组成员标识
      */
     @DEField(isKeyField=true)
-    @TableId(value= "teammemberid",type=IdType.UUID)
+    @TableId(value= "teammemberid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "teammemberid")
     @JsonProperty("teammemberid")
     private String teammemberid;

@@ -3,43 +3,43 @@
     <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="sys_role_permissioneditview2"></app-studioaction>
     <card class='view-card  ' :dis-hover="true" :bordered="false">
 
-<p slot='title'>
+
+<div slot='title' class="header-container">
     <span class='caption-info'>{{$t(model.srfTitle)}}</span>
-</p>
+    <template v-if="Object.is(this.selection.id, 'form')">
+          <div class='toolbar-container'>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
+                    <i class='fa fa-save'></i>
+                    <span class='caption'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem3.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem3.tip')}}</div>
+        </tooltip>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem5.visabled" :disabled="toolBarModels.tbitem5.disabled" class='' @click="toolbar_click({ tag: 'tbitem5' }, $event)">
+                    <i class='sx-tb-saveandclose'></i>
+                    <span class='caption'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem5.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem5.tip')}}</div>
+        </tooltip>
+        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
+                    <i class='fa fa-file-text-o'></i>
+                    <span class='caption'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem12.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem12.tip')}}</div>
+        </tooltip>
+        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
+                    <i class='fa fa-copy'></i>
+                    <span class='caption'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem14.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem14.tip')}}</div>
+        </tooltip>
+    </div>
+      </template>
+</div>
     
-        <p slot="extra" v-show="Object.is(this.selection.id, 'form')">
-        <div class='toolbar-container'>
-            <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
-                        <i class='fa fa-save'></i>
-                        <span class='caption'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem3.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem3.tip')}}</div>
-            </tooltip>
-            <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem5.visabled" :disabled="toolBarModels.tbitem5.disabled" class='' @click="toolbar_click({ tag: 'tbitem5' }, $event)">
-                        <i class='sx-tb-saveandclose'></i>
-                        <span class='caption'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem5.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem5.tip')}}</div>
-            </tooltip>
-            <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
-                        <i class='fa fa-file-text-o'></i>
-                        <span class='caption'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem12.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem12.tip')}}</div>
-            </tooltip>
-            <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
-                        <i class='fa fa-copy'></i>
-                        <span class='caption'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem14.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sysrolepermission.editview2toolbar_toolbar.tbitem14.tip')}}</div>
-            </tooltip>
-        </div>
-        
-        </p>
         <div class="content-container edit-view2">
             <view_drbar 
             :viewState="viewState"
@@ -83,7 +83,8 @@
 <script lang='tsx'>
 import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
-import { Subject } from 'rxjs';
+import NavDataService from '@/service/app/navdata-service';
+import { Subject,Subscription } from 'rxjs';
 import SysRolePermissionService from '@/service/sys-role-permission/sys-role-permission-service';
 
 import EditView2Engine from '@engine/view/edit-view2-engine';
@@ -310,6 +311,23 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
     }
 
     /**
+     * 应用导航服务
+     *
+     * @type {*}
+     * @memberof SYS_ROLE_PERMISSIONEditView2Base
+     */
+    public  navDataService = NavDataService.getInstance(this.$store);
+
+    /**
+    * 导航服务事件
+    *
+    * @public
+    * @type {(Subscription | undefined)}
+    * @memberof SYS_ROLE_PERMISSIONEditView2Base
+    */
+    public serviceStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -331,7 +349,7 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
      * @public
      * @memberof SYS_ROLE_PERMISSIONEditView2Base
      */
-    public parseViewParam(): void {
+    public parseViewParam(inputvalue:any = null): void {
         for(let key in this.context){
             delete this.context[key];
         }
@@ -361,12 +379,17 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
             });
         });
         this.$viewTool.formatRouteParams(tempValue,this.$route,this.context,this.viewparams);
+        if(inputvalue){
+            Object.assign(this.context,{'sysrolepermission':inputvalue});
+        }
         if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         //初始化视图唯一标识
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
+        //初始化导航数据
+        this.initNavData();
     }
 
     /**
@@ -444,6 +467,17 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
 			}
 		}
 	}
+
+    /**
+     * 初始化导航数据
+     *
+     * @memberof SYS_ROLE_PERMISSIONEditView2Base
+     */
+    public initNavData(data:any = null){
+        if(this.viewDefaultUsage){
+            this.navDataService.addNavData({id:'sys-role-permissionedit-view2',srfkey:this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
 	
 
     /**
@@ -461,10 +495,24 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
      * @memberof SYS_ROLE_PERMISSIONEditView2Base
      */    
     public afterCreated(){
-        const secondtag = this.$util.createUUID();
-        this.$store.commit('viewaction/createdView', { viewtag: this.viewtag, secondtag: secondtag });
-        this.viewtag = secondtag;
-        this.parseViewParam();
+        let _this:any = this;
+        const secondtag = _this.$util.createUUID();
+        _this.$store.commit('viewaction/createdView', { viewtag: _this.viewtag, secondtag: secondtag });
+        _this.viewtag = secondtag;
+        _this.parseViewParam();
+        _this.serviceStateEvent = _this.navDataService.serviceState.subscribe(({ action,name, data }:{ action:string,name:any,data:any }) => {
+            if(!Object.is(name,'sys-role-permissionedit-view2')){
+                return;
+            }
+            if (Object.is(action, 'viewrefresh')) {
+                _this.$nextTick(()=>{
+                    _this.parseViewParam(data);
+                    if(_this.engine){
+                        _this.engine.load();
+                    }
+                }); 
+            }
+        });
         
     }
 
@@ -1021,6 +1069,9 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if (this.serviceStateEvent) {
+                this.serviceStateEvent.unsubscribe();
             }
         }
     }

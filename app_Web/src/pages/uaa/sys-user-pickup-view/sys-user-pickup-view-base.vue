@@ -33,7 +33,8 @@
 <script lang='tsx'>
 import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
-import { Subject } from 'rxjs';
+import NavDataService from '@/service/app/navdata-service';
+import { Subject,Subscription } from 'rxjs';
 import SysUserService from '@/service/sys-user/sys-user-service';
 
 import PickupViewEngine from '@engine/view/pickup-view-engine';
@@ -247,6 +248,23 @@ export default class SysUserPickupViewBase extends Vue {
     }
 
     /**
+     * 应用导航服务
+     *
+     * @type {*}
+     * @memberof SysUserPickupViewBase
+     */
+    public  navDataService = NavDataService.getInstance(this.$store);
+
+    /**
+    * 导航服务事件
+    *
+    * @public
+    * @type {(Subscription | undefined)}
+    * @memberof SysUserPickupViewBase
+    */
+    public serviceStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -268,7 +286,7 @@ export default class SysUserPickupViewBase extends Vue {
      * @public
      * @memberof SysUserPickupViewBase
      */
-    public parseViewParam(): void {
+    public parseViewParam(inputvalue:any = null): void {
         for(let key in this.context){
             delete this.context[key];
         }
@@ -298,12 +316,17 @@ export default class SysUserPickupViewBase extends Vue {
             });
         });
         this.$viewTool.formatRouteParams(tempValue,this.$route,this.context,this.viewparams);
+        if(inputvalue){
+            Object.assign(this.context,{'sysuser':inputvalue});
+        }
         if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         //初始化视图唯一标识
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
+        //初始化导航数据
+        this.initNavData();
     }
 
     /**
@@ -381,6 +404,17 @@ export default class SysUserPickupViewBase extends Vue {
 			}
 		}
 	}
+
+    /**
+     * 初始化导航数据
+     *
+     * @memberof SysUserPickupViewBase
+     */
+    public initNavData(data:any = null){
+        if(this.viewDefaultUsage){
+            this.navDataService.addNavData({id:'sys-user-pickup-view',srfkey:this.context.sysuser,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
 	
 
     /**
@@ -398,10 +432,24 @@ export default class SysUserPickupViewBase extends Vue {
      * @memberof SysUserPickupViewBase
      */    
     public afterCreated(){
-        const secondtag = this.$util.createUUID();
-        this.$store.commit('viewaction/createdView', { viewtag: this.viewtag, secondtag: secondtag });
-        this.viewtag = secondtag;
-        this.parseViewParam();
+        let _this:any = this;
+        const secondtag = _this.$util.createUUID();
+        _this.$store.commit('viewaction/createdView', { viewtag: _this.viewtag, secondtag: secondtag });
+        _this.viewtag = secondtag;
+        _this.parseViewParam();
+        _this.serviceStateEvent = _this.navDataService.serviceState.subscribe(({ action,name, data }:{ action:string,name:any,data:any }) => {
+            if(!Object.is(name,'sys-user-pickup-view')){
+                return;
+            }
+            if (Object.is(action, 'viewrefresh')) {
+                _this.$nextTick(()=>{
+                    _this.parseViewParam(data);
+                    if(_this.engine){
+                        _this.engine.load();
+                    }
+                }); 
+            }
+        });
         
     }
 
@@ -518,6 +566,9 @@ export default class SysUserPickupViewBase extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if (this.serviceStateEvent) {
+                this.serviceStateEvent.unsubscribe();
             }
         }
     }

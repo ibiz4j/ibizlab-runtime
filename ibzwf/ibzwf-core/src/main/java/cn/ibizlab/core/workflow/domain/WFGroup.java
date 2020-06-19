@@ -43,7 +43,7 @@ public class WFGroup extends EntityMP implements Serializable {
      * 组标识
      */
     @DEField(name = "groupid" , isKeyField=true)
-    @TableId(value= "groupid",type=IdType.UUID)
+    @TableId(value= "groupid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;

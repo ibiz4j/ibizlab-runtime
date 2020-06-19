@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ibztask</artifactId>
+    <groupId>cn.ibizlab</groupId>
+    <version>1.0.0.0</version>
+    <name>Ibztask</name>
+    <description></description>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>cn.ibizlab</groupId>
+        <artifactId>ibztask-dependencies</artifactId>
+        <version>1.0.0.0</version>
+        <relativePath>ibztask-dependencies/pom.xml</relativePath>
+    </parent>
+
+    <modules>
+        <!-- dependencies -->
+        <module>ibztask-dependencies</module>
+        <!-- utils -->
+        <module>ibztask-util</module>
+        <!-- cores -->
+        <module>ibztask-core</module>
+        <!-- services -->
+        <module>ibztask-provider</module>
+        <!-- apps -->
+        <module>ibztask-app</module>
+        <!-- boot -->
+        <module>ibztask-boot</module>
+    </modules>
+
+
+    <repositories>
+		<repository>
+			<id>aliyunmaven</id>
+			<name>阿里云公共仓库</name>
+			<url>https://maven.aliyun.com/repository/public/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+</project>

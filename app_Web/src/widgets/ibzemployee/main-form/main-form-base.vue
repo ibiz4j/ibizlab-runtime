@@ -162,7 +162,7 @@
 </i-col>
 <i-col v-show="detailsModel.usericon.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='usericon' :itemRules="this.rules.usericon" class='' :caption="$t('entities.ibzemployee.main_form.details.usericon')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.usericon.error" :isEmptyCaption="false" labelPos="LEFT">
-     <app-image-upload :multiple="false" :formState="formState" :ignorefieldvaluechange="ignorefieldvaluechange" @formitemvaluechange="onFormItemValueChange" :data="JSON.stringify(this.data)" name='usericon' :value="data.usericon" :disabled="detailsModel.usericon.disabled" uploadparams='' exportparams='' :customparams="{}"></app-image-upload>
+     <app-image-upload :multiple="false" :formState="formState" :ignorefieldvaluechange="ignorefieldvaluechange" @formitemvaluechange="onFormItemValueChange" :data="JSON.stringify(this.data)" name='usericon' :value="data.usericon" :disabled="detailsModel.usericon.disabled" :uploadparams='{}' :exportparams='{}' ></app-image-upload>
 </app-form-item>
 
 </i-col>
@@ -2249,21 +2249,20 @@ export default class MainBase extends Vue implements ControlInterface {
     public drdatasaved($event:any){
         let _this = this;
         this.drcounter--;
-        if(this.drcounter > 0){
-            return;
-        }
-        this.save(this.drsaveopt, undefined, false).then((res) =>{
-            this.saveState(res);
-            this.drsaveopt = {};
-            if(Object.is(_this.currentAction, "saveAndNew")){
-                _this.ResetData(res);
-                _this.loadDraft({});
-            }else if(Object.is(_this.currentAction, "saveAndExit")){
-                if(res){
-                    _this.closeView(res.data);
+        if(this.drcounter === 0){
+            this.save(this.drsaveopt, undefined, false).then((res) =>{
+                this.saveState(res);
+                this.drsaveopt = {};
+                if(Object.is(_this.currentAction, "saveAndNew")){
+                    _this.ResetData(res);
+                    _this.loadDraft({});
+                }else if(Object.is(_this.currentAction, "saveAndExit")){
+                    if(res){
+                        _this.closeView(res.data);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     /**

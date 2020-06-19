@@ -1,0 +1,112 @@
+server:
+  port: 8080
+
+#zuul网关路由设置
+zuul:
+  routes:
+      wf_pssystem:
+        path: /wf_pssystems/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      ibzorg:
+        path: /ibzorgs/**
+        serviceId: ibzou-api
+        stripPrefix: false
+      wf_instance:
+        path: /wf_instances/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      wf_model:
+        path: /wf_models/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      ibzdictitem:
+        path: /ibzdictitems/**
+        serviceId: ibzdict-api
+        stripPrefix: false
+      wf_task_way:
+        path: /wf_task_ways/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      wf_task:
+        path: /wf_tasks/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      wf_group_member:
+        path: /wf_group_members/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      sys_authlog:
+        path: /sys_authlogs/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      wf_definition_node:
+        path: /wf_definition_nodes/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      sys_role_permission:
+        path: /sys_role_permissions/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      sys_user:
+        path: /sys_users/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      wf_user:
+        path: /wf_users/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      wf_group:
+        path: /wf_groups/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      ibzdict:
+        path: /ibzdicts/**
+        serviceId: ibzdict-api
+        stripPrefix: false
+      ibzemp:
+        path: /ibzemps/**
+        serviceId: ibzou-api
+        stripPrefix: false
+      sys_user_role:
+        path: /sys_user_roles/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      wf_definition:
+        path: /wf_definitions/**
+        serviceId: ibzwf-api
+        stripPrefix: false
+      sys_role:
+        path: /sys_roles/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      ibzdeptmember:
+        path: /ibzdeptmembers/**
+        serviceId: ibzou-api
+        stripPrefix: false
+      sys_pssystem:
+        path: /sys_pssystems/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      sys_permission:
+        path: /sys_permissions/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      ibzdept:
+        path: /ibzdepts/**
+        serviceId: ibzou-api
+        stripPrefix: false
+      loginv7:
+        path: /v7/login
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      uaa:
+        path: /uaa/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+      config:
+        path: /config/**
+        serviceId: ibzuaa-api
+        stripPrefix: false
+  sensitive-headers:
+    - Cookie,Set-Cookie,Authorization

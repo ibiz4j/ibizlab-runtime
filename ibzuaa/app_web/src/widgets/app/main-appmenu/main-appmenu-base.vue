@@ -127,6 +127,7 @@ import MainService from './main-appmenu-service';
 
 import MainModel from './main-appmenu-model';
 import { Environment } from '@/environments/environment';
+import NavDataService from '@/service/app/navdata-service';
 
 
 @Component({
@@ -246,6 +247,22 @@ export default class MainBase extends Vue implements ControlInterface {
     public getData(): any {
         return null;
     }
+
+    /**
+     * 导航模式(route:面包屑模式、tab:分页导航模式)
+     *
+     * @type {string}
+     * @memberof Main
+     */
+    @Prop({default:'tab'}) public navModel?:string;
+
+    /**
+     * 视图标识
+     *
+     * @type {string}
+     * @memberof Main
+     */
+    @Prop() public viewtag!:string;
 
     /**
      * 菜单模型
@@ -558,6 +575,12 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public click(item: any) {
         if (item) {
+            let navDataService = NavDataService.getInstance(this.$store);
+            if(Object.is(this.navModel,"route")){
+                navDataService.removeNavData(this.viewtag);
+            }else{
+                navDataService.removeNavDataWithoutCache(this.viewtag);
+            }
             switch (item.appfunctag) {
                 case 'Auto10': 
                     this.clickAuto10(item);
@@ -593,7 +616,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        this.$router.push(path);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
     }
     
     /**
@@ -611,7 +639,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        this.$router.push(path);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
     }
     
     /**
@@ -629,7 +662,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        this.$router.push(path);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
     }
     
     /**
@@ -647,7 +685,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        this.$router.push(path);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
     }
 
     /**

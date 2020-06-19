@@ -3,7 +3,9 @@
 }
 
 
-
+.wfindex-view{
+    position: relative;
+}
 .index_view{
     margin-bottom: 1px;
     width: 100%;
@@ -19,6 +21,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: #fff;
         .page-logo{
           display: flex;
           align-items: center;
@@ -73,7 +76,6 @@
         }
     }
     .ivu-layout .ivu-layout-sider .ivu-layout-sider-children .sider-top{
-        padding: 4px;
         margin-top: -2px;
         line-height: 58px;
         text-align: center;
@@ -81,11 +83,22 @@
         cursor: pointer;
     }
     .sider-top{
+        padding: 0px;
         margin-bottom: 1px;
         height:65px;
         box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
         > .page-logo{
+          display: flex;
+          align-items: center;
+          height: 100%;
+          >.menuicon{
+            display: block;
             text-align: center;
+            font-weight: 300;
+            font-size: 28px;
+            width:64px;
+            height:100%;
+          }
         }
     }
 }

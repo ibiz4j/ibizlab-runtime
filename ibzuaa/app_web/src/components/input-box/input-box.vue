@@ -6,6 +6,7 @@
       :type="type"
       v-model="CurrentVal"
       :disabled="disabled ? true : false"
+      :autosize="autoSize"
       @on-enter="enter"
     ></i-input>
     <div class="unit-text">{{unit}}</div>
@@ -61,6 +62,14 @@ export default class InputBox extends Vue {
    * @memberof InputBox
    */
   @Prop() public type?: string;
+
+  /**
+   * 多行文本行数
+   *
+   * @type {string}
+   * @memberof InputBox
+   */
+  @Prop() public autoSize?: any;
 
   /**
    * 当前值

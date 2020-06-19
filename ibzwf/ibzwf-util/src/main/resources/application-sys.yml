@@ -3,14 +3,14 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: 172.16.102.211:8848
   cache:
     redis:
       time-to-live: 3600
     caffeine:
       spec: initialCapacity=5,maximumSize=500,expireAfterWrite=3600s
   redis:
-    host: 127.0.0.1
+    host: 172.16.100.243
     port: 6379
     password:
     database: 0
@@ -21,9 +21,9 @@ spring:
         max-idle: 16
         min-idle: 8
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://127.0.0.1:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: a_A_5d9d78509
+    password: '@6dEfb3@'
+    url: jdbc:mysql://172.16.180.232:3306/a_A_5d9d78509?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true
     driver-class-name: com.mysql.jdbc.Driver
     filters: stat,wall,log4j2
     #配置初始化大小/最小/最大

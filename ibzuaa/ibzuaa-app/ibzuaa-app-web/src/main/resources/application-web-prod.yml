@@ -1,10 +1,18 @@
 server:
   port: 30002
+#Log配置
+logging:
+  level:
+    cn.ibizlab: info
 #zuul网关路由设置
 zuul:
   routes:
     sys_authlog:
       path: /sysauthlogs/**
+      serviceId: ibzuaa-api
+      stripPrefix: false
+    sys_app:
+      path: /sysapps/**
       serviceId: ibzuaa-api
       stripPrefix: false
     sys_role_permission:

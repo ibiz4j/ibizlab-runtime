@@ -43,7 +43,7 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
      * DefinitionKey
      */
     @DEField(defaultValue = "deploykey" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
-    @TableId(value= "definitionkey",type=IdType.UUID)
+    @TableId(value= "definitionkey",type=IdType.ASSIGN_UUID)
     @JSONField(name = "definitionkey")
     @JsonProperty("definitionkey")
     private String definitionkey;

@@ -22,6 +22,8 @@ public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
 
+        if(requestTemplate.path().matches("/ibzemployees/.*/oumaps"))
+            return;
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if(requestAttributes!=null){
             HttpServletRequest request = requestAttributes.getRequest();

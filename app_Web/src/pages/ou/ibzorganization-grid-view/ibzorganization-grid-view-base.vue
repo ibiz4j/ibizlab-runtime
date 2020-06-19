@@ -2,9 +2,9 @@
 <div class='view-container degridview ibzorganization-grid-view'>
     <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="ibzorganizationgridview"></app-studioaction>
     <card class='view-card '  :dis-hover="true" :bordered="false">
-        <p slot='title'>
+        <div slot='title' class="header-container">
         <span class='caption-info'>{{$t(model.srfTitle)}}</span>
-        </p>
+        </div>
         <div class='content-container'>
             <div class='view-top-messages'>
             </div>
@@ -141,7 +141,8 @@
 <script lang='tsx'>
 import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
-import { Subject } from 'rxjs';
+import NavDataService from '@/service/app/navdata-service';
+import { Subject,Subscription } from 'rxjs';
 import IBZOrganizationService from '@/service/ibzorganization/ibzorganization-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
@@ -391,6 +392,23 @@ export default class IBZOrganizationGridViewBase extends Vue {
     }
 
     /**
+     * 应用导航服务
+     *
+     * @type {*}
+     * @memberof IBZOrganizationGridViewBase
+     */
+    public  navDataService = NavDataService.getInstance(this.$store);
+
+    /**
+    * 导航服务事件
+    *
+    * @public
+    * @type {(Subscription | undefined)}
+    * @memberof IBZOrganizationGridViewBase
+    */
+    public serviceStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -412,7 +430,7 @@ export default class IBZOrganizationGridViewBase extends Vue {
      * @public
      * @memberof IBZOrganizationGridViewBase
      */
-    public parseViewParam(): void {
+    public parseViewParam(inputvalue:any = null): void {
         for(let key in this.context){
             delete this.context[key];
         }
@@ -442,12 +460,17 @@ export default class IBZOrganizationGridViewBase extends Vue {
             });
         });
         this.$viewTool.formatRouteParams(tempValue,this.$route,this.context,this.viewparams);
+        if(inputvalue){
+            Object.assign(this.context,{'ibzorganization':inputvalue});
+        }
         if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         //初始化视图唯一标识
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
+        //初始化导航数据
+        this.initNavData();
     }
 
     /**
@@ -525,6 +548,17 @@ export default class IBZOrganizationGridViewBase extends Vue {
 			}
 		}
 	}
+
+    /**
+     * 初始化导航数据
+     *
+     * @memberof IBZOrganizationGridViewBase
+     */
+    public initNavData(data:any = null){
+        if(this.viewDefaultUsage){
+            this.navDataService.addNavData({id:'ibzorganization-grid-view',srfkey:this.context.ibzorganization,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
 	
 
     /**
@@ -542,10 +576,24 @@ export default class IBZOrganizationGridViewBase extends Vue {
      * @memberof IBZOrganizationGridViewBase
      */    
     public afterCreated(){
-        const secondtag = this.$util.createUUID();
-        this.$store.commit('viewaction/createdView', { viewtag: this.viewtag, secondtag: secondtag });
-        this.viewtag = secondtag;
-        this.parseViewParam();
+        let _this:any = this;
+        const secondtag = _this.$util.createUUID();
+        _this.$store.commit('viewaction/createdView', { viewtag: _this.viewtag, secondtag: secondtag });
+        _this.viewtag = secondtag;
+        _this.parseViewParam();
+        _this.serviceStateEvent = _this.navDataService.serviceState.subscribe(({ action,name, data }:{ action:string,name:any,data:any }) => {
+            if(!Object.is(name,'ibzorganization-grid-view')){
+                return;
+            }
+            if (Object.is(action, 'viewrefresh')) {
+                _this.$nextTick(()=>{
+                    _this.parseViewParam(data);
+                    if(_this.engine){
+                        _this.engine.load();
+                    }
+                }); 
+            }
+        });
         if(this.formDruipart){
             this.formDruipart.subscribe((res:any) =>{
                 if(Object.is(res.action,'save')){
@@ -1435,6 +1483,9 @@ export default class IBZOrganizationGridViewBase extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if (this.serviceStateEvent) {
+                this.serviceStateEvent.unsubscribe();
             }
         }
     }

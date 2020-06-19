@@ -43,7 +43,7 @@ public class SysUser extends EntityMP implements Serializable {
      * 用户标识
      */
     @DEField(isKeyField=true)
-    @TableId(value= "userid",type=IdType.UUID)
+    @TableId(value= "userid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "userid")
     @JsonProperty("userid")
     private String userid;

@@ -43,7 +43,7 @@ public class IBZDepartment extends EntityMP implements Serializable {
      * 部门标识
      */
     @DEField(isKeyField=true)
-    @TableId(value= "deptid",type=IdType.UUID)
+    @TableId(value= "deptid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "deptid")
     @JsonProperty("deptid")
     private String deptid;

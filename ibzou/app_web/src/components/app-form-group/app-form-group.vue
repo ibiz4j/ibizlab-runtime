@@ -1,6 +1,6 @@
 <template>
-    <div class="app-form-group">
-        <div v-if="uiStyle=='STYLE2'">
+    <div :class="classes">
+        <template v-if="uiStyle=='STYLE2'">
             <app-form-group2
                 :caption="caption"
                 :uiStyle="uiStyle"
@@ -10,8 +10,8 @@
                 :titleBarCloseMode="titleBarCloseMode">
                    <slot></slot>
                 </app-form-group2>
-        </div>
-        <div v-else>
+        </template>
+        <template v-else>
             <card v-if="isShowCaption === true" :bordered="false" :dis-hover="true" :class="classes">
                 <p class='' slot='title'>
                      <icon v-if="titleBarCloseMode !== 0" :type="collapseContant ? 'ios-arrow-dropright-circle' : 'ios-arrow-dropdown-circle'"
@@ -87,17 +87,17 @@
                         </template>
                     </a >
                 </template>
-                <div v-if="Object.is(layoutType, 'FLEX')">
+                <template v-if="Object.is(layoutType, 'FLEX')">
                     <slot></slot>
-                </div>
-                <div v-if="!Object.is(layoutType, 'FLEX')">
+                </template>
+                <template v-if="!Object.is(layoutType, 'FLEX')">
                     <row :gutter="10"><slot></slot></row>
-                </div>
+                </template>
             </card>
-            <row v-if="isShowCaption === false" :class="classes">
-               <slot></slot>
-            </row>
-        </div>
+            <template v-if="isShowCaption === false">
+                <slot></slot>
+            </template>
+        </template>
     </div>
 </template>
 

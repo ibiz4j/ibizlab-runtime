@@ -104,7 +104,8 @@
 <script lang='tsx'>
 import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
-import { Subject } from 'rxjs';
+import NavDataService from '@/service/app/navdata-service';
+import { Subject,Subscription } from 'rxjs';
 import SysUserRoleService from '@/service/sys-user-role/sys-user-role-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
@@ -345,6 +346,23 @@ export default class SYS_USER_ROLEGridViewBase extends Vue {
     }
 
     /**
+     * 应用导航服务
+     *
+     * @type {*}
+     * @memberof SYS_USER_ROLEGridViewBase
+     */
+    public  navDataService = NavDataService.getInstance(this.$store);
+
+    /**
+    * 导航服务事件
+    *
+    * @public
+    * @type {(Subscription | undefined)}
+    * @memberof SYS_USER_ROLEGridViewBase
+    */
+    public serviceStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -366,7 +384,7 @@ export default class SYS_USER_ROLEGridViewBase extends Vue {
      * @public
      * @memberof SYS_USER_ROLEGridViewBase
      */
-    public parseViewParam(): void {
+    public parseViewParam(inputvalue:any = null): void {
         for(let key in this.context){
             delete this.context[key];
         }
@@ -396,12 +414,17 @@ export default class SYS_USER_ROLEGridViewBase extends Vue {
             });
         });
         this.$viewTool.formatRouteParams(tempValue,this.$route,this.context,this.viewparams);
+        if(inputvalue){
+            Object.assign(this.context,{'sysuserrole':inputvalue});
+        }
         if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         //初始化视图唯一标识
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
+        //初始化导航数据
+        this.initNavData();
     }
 
     /**
@@ -479,6 +502,17 @@ export default class SYS_USER_ROLEGridViewBase extends Vue {
 			}
 		}
 	}
+
+    /**
+     * 初始化导航数据
+     *
+     * @memberof SYS_USER_ROLEGridViewBase
+     */
+    public initNavData(data:any = null){
+        if(this.viewDefaultUsage){
+            this.navDataService.addNavData({id:'sys-user-rolegrid-view',srfkey:this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
 	
 
     /**
@@ -496,10 +530,24 @@ export default class SYS_USER_ROLEGridViewBase extends Vue {
      * @memberof SYS_USER_ROLEGridViewBase
      */    
     public afterCreated(){
-        const secondtag = this.$util.createUUID();
-        this.$store.commit('viewaction/createdView', { viewtag: this.viewtag, secondtag: secondtag });
-        this.viewtag = secondtag;
-        this.parseViewParam();
+        let _this:any = this;
+        const secondtag = _this.$util.createUUID();
+        _this.$store.commit('viewaction/createdView', { viewtag: _this.viewtag, secondtag: secondtag });
+        _this.viewtag = secondtag;
+        _this.parseViewParam();
+        _this.serviceStateEvent = _this.navDataService.serviceState.subscribe(({ action,name, data }:{ action:string,name:any,data:any }) => {
+            if(!Object.is(name,'sys-user-rolegrid-view')){
+                return;
+            }
+            if (Object.is(action, 'viewrefresh')) {
+                _this.$nextTick(()=>{
+                    _this.parseViewParam(data);
+                    if(_this.engine){
+                        _this.engine.load();
+                    }
+                }); 
+            }
+        });
         if(this.formDruipart){
             this.formDruipart.subscribe((res:any) =>{
                 if(Object.is(res.action,'save')){
@@ -979,7 +1027,8 @@ export default class SYS_USER_ROLEGridViewBase extends Vue {
     public newdata(args: any[],fullargs?:any[], params?: any, $event?: any, xData?: any) {
         let localContext:any = null;
         let localViewParam:any =null;
-        const batchAddPSAppViews=[
+        let batchAddPSAppViews:Array<any>=[];
+        batchAddPSAppViews=[
             {view:{viewname:'sys-rolempickup-view',height: 0,width: 0,title: '角色数据多项选择视图'},
             res:['SysRole'],
             'resAppKey':'roleid'},
@@ -1315,6 +1364,9 @@ export default class SYS_USER_ROLEGridViewBase extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if (this.serviceStateEvent) {
+                this.serviceStateEvent.unsubscribe();
             }
         }
     }

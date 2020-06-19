@@ -43,7 +43,7 @@ public class WFSystem extends EntityMP implements Serializable {
      * 系统标识
      */
     @DEField(isKeyField=true)
-    @TableId(value= "pssystemid",type=IdType.UUID)
+    @TableId(value= "pssystemid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
     private String pssystemid;

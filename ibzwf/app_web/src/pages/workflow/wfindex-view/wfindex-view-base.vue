@@ -6,7 +6,7 @@
             <sider :width="collapseChange ? 64 : 200" hide-trigger v-model="collapseChange">
                 <div class="sider-top">
                     <div class="page-logo">
-                        <img v-show="collapseChange" src="../../../assets/img/logo.png" height="16" />
+                        <span class="menuicon" @click="contextMenuDragVisiable=!contextMenuDragVisiable"><Icon type="md-menu" /></span>
                         <span v-show="!collapseChange" style="display: block;text-align: center;font-weight: 300;font-size: 20px;">{{$t(model.srfCaption)}}</span>
                     </div>
                 </div>
@@ -16,7 +16,9 @@
     :context="context" 
     :showBusyIndicator="true"  
     v-model="collapseChange"  
-    :mode="mode"  
+    :mode="mode"
+    :navModel="navModel"
+    viewtag="wfindex-view"
     :selectTheme="selectTheme"  
     :isDefaultPage="isDefaultPage"  
     :defPSAppView="defPSAppView" 
@@ -24,6 +26,7 @@
     ref='appmenu' 
     @closeview="closeView($event)">
 </view_appmenu>
+                <context-menu-drag :contextMenuDragVisiable="contextMenuDragVisiable"></context-menu-drag>
             </sider>
             <layout>
                 <header class="index_header">
@@ -31,7 +34,7 @@
                         <div class="page-logo">
                             <i v-show="!collapseChange" class="ivu-icon el-icon-s-fold" @click="handleClick"></i>
                             <i v-show="collapseChange" class="ivu-icon el-icon-s-unfold" @click="handleClick"></i>
-                            <app-breadcrumb :defPSAppView="defPSAppView"></app-breadcrumb>
+                            <app-breadcrumb  :navModel="navModel" indexViewTag="wfindex-view"></app-breadcrumb>
                         </div>
                     </div>
                     <div class="header-right" style="display: flex;align-items: center;justify-content: space-between;">
@@ -42,8 +45,8 @@
                         <app-theme style="width:45px;display: flex;justify-content: center;"></app-theme>
                     </div>
                 </header>
-                <content class="index_content" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }">
-                    <tab-page-exp></tab-page-exp>
+                <content :class="{'index_content':true,'index_tab_content':Object.is(navModel,'tab')?true:false,'index_route_content':Object.is(navModel,'route')?true:false}" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }">
+                    <tab-page-exp v-if="Object.is(navModel,'tab')"></tab-page-exp>
                     <app-keep-alive :routerList="getRouterList">
                         <router-view :key="getRouterViewKey"></router-view>
                     </app-keep-alive>
@@ -58,7 +61,8 @@
 <script lang='tsx'>
 import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
-import { Subject } from 'rxjs';
+import NavDataService from '@/service/app/navdata-service';
+import { Subject,Subscription } from 'rxjs';
 
 
 
@@ -238,6 +242,23 @@ export default class WFIndexViewBase extends Vue {
     }
 
     /**
+     * 应用导航服务
+     *
+     * @type {*}
+     * @memberof WFIndexViewBase
+     */
+    public  navDataService = NavDataService.getInstance(this.$store);
+
+    /**
+    * 导航服务事件
+    *
+    * @public
+    * @type {(Subscription | undefined)}
+    * @memberof WFIndexViewBase
+    */
+    public serviceStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -259,7 +280,7 @@ export default class WFIndexViewBase extends Vue {
      * @public
      * @memberof WFIndexViewBase
      */
-    public parseViewParam(): void {
+    public parseViewParam(inputvalue:any = null): void {
         for(let key in this.context){
             delete this.context[key];
         }
@@ -293,6 +314,8 @@ export default class WFIndexViewBase extends Vue {
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         this.handleCustomViewData();
+        //初始化导航数据
+        this.initNavData();
     }
 
     /**
@@ -370,6 +393,17 @@ export default class WFIndexViewBase extends Vue {
 			}
 		}
 	}
+
+    /**
+     * 初始化导航数据
+     *
+     * @memberof WFIndexViewBase
+     */
+    public initNavData(data:any = null){
+        if(this.viewDefaultUsage){
+            this.navDataService.addNavData({id:'wfindex-view',srfkey:null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
 	
 
     /**
@@ -387,10 +421,24 @@ export default class WFIndexViewBase extends Vue {
      * @memberof WFIndexViewBase
      */    
     public afterCreated(){
-        const secondtag = this.$util.createUUID();
-        this.$store.commit('viewaction/createdView', { viewtag: this.viewtag, secondtag: secondtag });
-        this.viewtag = secondtag;
-        this.parseViewParam();
+        let _this:any = this;
+        const secondtag = _this.$util.createUUID();
+        _this.$store.commit('viewaction/createdView', { viewtag: _this.viewtag, secondtag: secondtag });
+        _this.viewtag = secondtag;
+        _this.parseViewParam();
+        _this.serviceStateEvent = _this.navDataService.serviceState.subscribe(({ action,name, data }:{ action:string,name:any,data:any }) => {
+            if(!Object.is(name,'wfindex-view')){
+                return;
+            }
+            if (Object.is(action, 'viewrefresh')) {
+                _this.$nextTick(()=>{
+                    _this.parseViewParam(data);
+                    if(_this.engine){
+                        _this.engine.load();
+                    }
+                }); 
+            }
+        });
         
     }
 
@@ -456,6 +504,22 @@ export default class WFIndexViewBase extends Vue {
      * @memberof WFIndexViewBase
      */
     public mode: string ='vertical';
+
+    /**
+     * 导航模式(route:面包屑模式、tab:分页导航模式)
+     *
+     * @type {string}
+     * @memberof WFIndexViewBase
+     */
+    public navModel:string = "tab";
+
+    /**
+     * 抽屉状态
+     *
+     * @type {boolean}
+     * @memberof WFIndexViewBase
+     */
+    public contextMenuDragVisiable: boolean = false;
 
     /**
      * 当前主题
