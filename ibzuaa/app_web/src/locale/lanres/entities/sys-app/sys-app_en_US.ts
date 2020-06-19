@@ -1,24 +1,24 @@
 
 export default {
   fields: {
-    id: '应用标识',
-    label: '应用名',
-    systemid: '系统标识',
-    fullname: '全称',
-    type: '类型',
-    group: '分组',
-    icon: '图标',
-    visabled: '可见',
-    addr: '地址',
+    id: "应用标识",
+    label: "应用名",
+    systemid: "系统标识",
+    fullname: "全称",
+    type: "类型",
+    group: "分组",
+    icon: "图标",
+    visabled: "可见",
+    addr: "地址",
   },
 	views: {
 		editview: {
 			caption: "应用",
-      title: '应用编辑视图',
+      		title: "应用编辑视图",
 		},
 		gridview: {
 			caption: "应用",
-      title: '应用表格视图',
+      		title: "应用表格视图",
 		},
 	},
 	main_form: {

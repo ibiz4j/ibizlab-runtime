@@ -576,7 +576,7 @@ export default class WFGroupPickupViewBase extends Vue {
      * 选中数据的字符串
      *
      * @type {string}
-     * @memberof WFGroupPickupView
+     * @memberof WFGroupPickupViewBase
      */
     public selectedData: string = "";
 

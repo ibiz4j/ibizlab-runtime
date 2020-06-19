@@ -22,6 +22,7 @@
         <module>ibzou</module>
         <module>ibzwf</module>
         <module>ibzdisk</module>
+        <module>ibztask</module>
         <module>boot</module>
         <module>gateway</module>
     </modules>

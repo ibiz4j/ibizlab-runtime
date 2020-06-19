@@ -1,25 +1,25 @@
 
 export default {
   fields: {
-    id: '主键ID',
-    job_id: '任务ID',
-    address: '执行地址',
-    handler: '执行器任务HANDLER',
-    param: '执行器任务参数',
-    fail_retry_count: '失败重试次数',
-    trigger_code: '触发器调度返回码',
-    trigger_type: '触发器调度类型',
-    trigger_msg: '触发器调度信息',
-    create_time: '创建时间',
+    id: "主键ID",
+    job_id: "任务ID",
+    address: "执行地址",
+    handler: "执行器任务HANDLER",
+    param: "执行器任务参数",
+    fail_retry_count: "失败重试次数",
+    trigger_code: "触发器调度返回码",
+    trigger_type: "触发器调度类型",
+    trigger_msg: "触发器调度信息",
+    create_time: "创建时间",
   },
 	views: {
 		editview: {
 			caption: "任务调度日志",
-      title: '任务调度日志编辑视图',
+      		title: "任务调度日志编辑视图",
 		},
 		gridview: {
 			caption: "任务调度日志",
-      title: '任务调度日志表格视图',
+      		title: "任务调度日志表格视图",
 		},
 	},
 	main_form: {

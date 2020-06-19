@@ -1,22 +1,22 @@
 
 export default {
   fields: {
-    userroleid: 'The major data entity cannot be found',
-    roleid: '角色标识',
-    rolename: '角色名称',
-    userid: '用户标识',
-    personname: '用户名称',
-    createdate: '>',
-    updatedate: 'Upload',
+    userroleid: "The major data entity cannot be found",
+    roleid: "角色标识",
+    rolename: "角色名称",
+    userid: "用户标识",
+    personname: "用户名称",
+    createdate: ">",
+    updatedate: "Upload",
   },
 	views: {
 		gridview: {
 			caption: "The workflow instance [{0}] is closed and cannot be submitted for processing",
-      title: 'datetime',
+      		title: "datetime",
 		},
 		editview: {
 			caption: "The workflow instance [{0}] is closed and cannot be submitted for processing",
-      title: 'No interaction was found',
+      		title: "No interaction was found",
 		},
 	},
 	main_form: {

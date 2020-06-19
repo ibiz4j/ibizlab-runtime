@@ -1,42 +1,42 @@
 
 export default {
   fields: {
-    orgid: 'The workflow start node was not found',
-    orgcode: 'Updated By',
-    orgname: '名称',
-    parentorgid: '上级单位',
-    shortname: 'Cancel',
-    orglevel: '单位级别',
-    showorder: 'Audit',
-    parentorgname: '上级单位',
-    enable: 'the workflow instance current processing step is invalid',
-    createdate: 'Print',
-    updatedate: 'Actor',
+    orgid: "The workflow start node was not found",
+    orgcode: "Updated By",
+    orgname: "名称",
+    parentorgid: "上级单位",
+    shortname: "Cancel",
+    orglevel: "单位级别",
+    showorder: "Audit",
+    parentorgname: "上级单位",
+    enable: "the workflow instance current processing step is invalid",
+    createdate: "Print",
+    updatedate: "Actor",
   },
 	views: {
 		optionview: {
 			caption: "Input data check failed.",
-      title: '单位机构选项操作视图',
+      		title: "单位机构选项操作视图",
 		},
 		treeexpview: {
 			caption: "Input data check failed.",
-      title: '单位机构树导航视图',
+      		title: "单位机构树导航视图",
 		},
 		editview: {
 			caption: "Input data check failed.",
-      title: '单位机构编辑视图',
+      		title: "单位机构编辑视图",
 		},
 		gridview: {
 			caption: "Input data check failed.",
-      title: '单位机构表格视图',
+      		title: "单位机构表格视图",
 		},
 		pickupview: {
 			caption: "Input data check failed.",
-      title: 'Upload file.',
+      		title: "Upload file.",
 		},
 		pickupgridview: {
 			caption: "Input data check failed.",
-      title: 'Restart workflow',
+      		title: "Restart workflow",
 		},
 	},
 	newform_form: {
@@ -187,7 +187,7 @@ export default {
 	},
 	orgtree_treeview: {
 		nodes: {
-			root: '默认根节点',
+			root: "默认根节点",
 		},
 		uiactions: {
 		},

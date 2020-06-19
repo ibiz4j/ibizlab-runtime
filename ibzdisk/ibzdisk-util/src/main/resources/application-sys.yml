@@ -3,14 +3,14 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.16.102.211:8848
+        server-addr: 127.0.0.1:8848
   cache:
     redis:
       time-to-live: 3600
     caffeine:
       spec: initialCapacity=5,maximumSize=500,expireAfterWrite=3600s
   redis:
-    host: 172.16.100.243
+    host: 127.0.0.1
     port: 6379
     password:
     database: 0
@@ -85,16 +85,13 @@ ibiz:
   enablePermissionValid: true
   cacheLevel: L1 #(L1)一级本地caffeine缓存;(L2)caffeine缓存+Redis缓存
 
-#xxl-job定时服务
-xxl:
-  job:
-    accessToken:
-    admin:
-      addresses: #127.0.0.1
-    executor:
-      appname: ibzdisk
-      ip:
-      port: 9999
-      logpath: /app/joblog
-      logretentiondays: -1
+### jobs
+jobs:
+  #admin-address: http://127.0.0.1:40005
+  app-name: ibzuaa
+  app-port: 9999
+  #app-ip: 127.0.0.1
+
+
+
 

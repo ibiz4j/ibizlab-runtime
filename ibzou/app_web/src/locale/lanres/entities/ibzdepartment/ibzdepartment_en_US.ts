@@ -1,56 +1,56 @@
 
 export default {
   fields: {
-    deptid: '部门标识',
-    deptcode: '部门代码',
-    deptname: '部门名称',
-    orgid: '单位',
-    parentdeptid: '上级部门',
-    shortname: '部门简称',
-    deptlevel: '部门级别',
-    domains: '区属',
-    showorder: '排序',
-    bcode: '业务编码',
-    leaderid: '分管领导标识',
-    leadername: '分管领导',
-    enable: '逻辑有效',
-    orgname: '单位',
-    parentdeptname: '上级部门',
-    createdate: '创建时间',
-    updatedate: '最后修改时间',
+    deptid: "部门标识",
+    deptcode: "部门代码",
+    deptname: "部门名称",
+    orgid: "单位",
+    parentdeptid: "上级部门",
+    shortname: "部门简称",
+    deptlevel: "部门级别",
+    domains: "区属",
+    showorder: "排序",
+    bcode: "业务编码",
+    leaderid: "分管领导标识",
+    leadername: "分管领导",
+    enable: "逻辑有效",
+    orgname: "单位",
+    parentdeptname: "上级部门",
+    createdate: "创建时间",
+    updatedate: "最后修改时间",
   },
 	views: {
 		optionview: {
 			caption: "部门",
-      title: '部门选项操作视图',
+      		title: "部门选项操作视图",
 		},
 		editview: {
 			caption: "部门",
-      title: '部门编辑视图',
+      		title: "部门编辑视图",
 		},
 		editgridview: {
 			caption: "部门",
-      title: '部门表格视图',
+      		title: "部门表格视图",
 		},
 		pickupgridview: {
 			caption: "部门",
-      title: '部门选择表格视图',
+      		title: "部门选择表格视图",
 		},
 		mpickupview: {
 			caption: "部门",
-      title: '部门数据多项选择视图',
+      		title: "部门数据多项选择视图",
 		},
 		pickupview: {
 			caption: "部门",
-      title: '部门选择视图',
+      		title: "部门选择视图",
 		},
 		treeexpview: {
 			caption: "人员管理",
-      title: '部门树导航视图',
+      		title: "部门树导航视图",
 		},
 		gridview: {
 			caption: "部门",
-      title: '部门表格视图',
+      		title: "部门表格视图",
 		},
 	},
 	newform_form: {
@@ -251,7 +251,7 @@ export default {
 	},
 	depttree_treeview: {
 		nodes: {
-			root: '默认根节点',
+			root: "默认根节点",
 		},
 		uiactions: {
 		},

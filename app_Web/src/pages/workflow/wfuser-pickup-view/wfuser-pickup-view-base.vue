@@ -576,7 +576,7 @@ export default class WFUserPickupViewBase extends Vue {
      * 选中数据的字符串
      *
      * @type {string}
-     * @memberof WFUserPickupView
+     * @memberof WFUserPickupViewBase
      */
     public selectedData: string = "";
 

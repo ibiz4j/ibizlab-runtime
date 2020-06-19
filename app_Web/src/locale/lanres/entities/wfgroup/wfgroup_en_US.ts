@@ -1,30 +1,30 @@
 
 export default {
   fields: {
-    id: '组标识',
-    name: '组名称',
-    groupscope: '范围',
+    id: "组标识",
+    name: "组名称",
+    groupscope: "范围",
   },
 	views: {
 		pickupgridview: {
 			caption: "角色/用户组",
-      title: '角色/用户组选择表格视图',
+      		title: "角色/用户组选择表格视图",
 		},
 		mpickupview: {
 			caption: "角色/用户组",
-      title: '角色/用户组数据多项选择视图',
+      		title: "角色/用户组数据多项选择视图",
 		},
 		pickupview: {
 			caption: "角色/用户组",
-      title: '角色/用户组数据选择视图',
+      		title: "角色/用户组数据选择视图",
 		},
 		editview: {
 			caption: "角色/用户组",
-      title: '角色/用户组编辑视图',
+      		title: "角色/用户组编辑视图",
 		},
 		gridview: {
 			caption: "角色/用户组",
-      title: '角色/用户组表格视图',
+      		title: "角色/用户组表格视图",
 		},
 	},
 	main_form: {

@@ -141,7 +141,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 名称
      *
      * @type {string}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop() public name?: string;
 
@@ -149,7 +149,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 视图通讯对象
      *
      * @type {Subject<ViewState>}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop() public viewState!: Subject<ViewState>;
 
@@ -157,7 +157,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 应用上下文
      *
      * @type {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop() public context: any;
 
@@ -165,7 +165,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 视图参数
      *
      * @type {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop() public viewparams: any;
 
@@ -174,7 +174,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      *
      * @public
      * @type {(Subscription | undefined)}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public viewStateEvent: Subscription | undefined;
 
@@ -182,7 +182,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 获取部件类型
      *
      * @returns {string}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public getControlType(): string {
         return 'APPMENU'
@@ -194,7 +194,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 建构部件服务对象
      *
      * @type {OUIndexViewService}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public service: OUIndexViewService = new OUIndexViewService({ $store: this.$store });
     
@@ -204,7 +204,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 关闭视图
      *
      * @param {any} args
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public closeView(args: any): void {
         let _this: any = this;
@@ -214,7 +214,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
     /**
      *  计数器刷新
      *
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public counterRefresh(){
         const _this:any =this;
@@ -232,7 +232,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 获取多项数据
      *
      * @returns {any[]}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public getDatas(): any[] {
         return [];
@@ -242,7 +242,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 获取单项树
      *
      * @returns {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public getData(): any {
         return null;
@@ -252,7 +252,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 导航模式(route:面包屑模式、tab:分页导航模式)
      *
      * @type {string}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop({default:'tab'}) public navModel?:string;
 
@@ -260,7 +260,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 视图标识
      *
      * @type {string}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop() public viewtag!:string;
 
@@ -269,7 +269,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      *
      * @public
      * @type {OUIndexViewModel}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public menuMode: OUIndexViewModel = new OUIndexViewModel();
 
@@ -277,7 +277,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 显示处理提示
      *
      * @type {boolean}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop({ default: true }) public showBusyIndicator?: boolean;
 
@@ -286,7 +286,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      *
      * @public
      * @type {any[]}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Provide()
     public menus: any[] = [];
@@ -295,7 +295,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 菜单收缩改变
      *
      * @type {boolean}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Model() public collapsechange?: boolean;
 
@@ -304,7 +304,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Watch('collapsechange')
     onCollapsechangeChange(newVal: any, oldVal: any) {
@@ -317,7 +317,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 当前模式，菜单在顶部还是在底部
      *
      * @type {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop() mode: any;
 
@@ -325,7 +325,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 当前菜单是否在默认视图上
      *
      * @type {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop({ default: false }) isDefaultPage?: boolean;
 
@@ -333,7 +333,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 默认打开视图
      *
      * @type {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop() defPSAppView: any;
 
@@ -341,7 +341,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 默认激活的index
      *
      * @type {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Provide() defaultActive: any = null;
 
@@ -349,7 +349,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 当前选中主题
      *
      * @type {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Prop() selectTheme: any;
 
@@ -357,7 +357,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 默认打开的index数组
      *
      * @type {any[]}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Provide() public defaultOpeneds: any[] = [];
 
@@ -365,7 +365,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 是否展开
      *
      * @type {boolean}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Provide() public isCollapse: boolean = false;
 
@@ -373,7 +373,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 触发方式，默认click
      *
      * @type {string}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     @Provide() trigger: string = 'click';
 
@@ -381,13 +381,13 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 计数器数据
      *
      * @type {*}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public counterdata: any = {};
     /**
      * vue  生命周期
      *
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public created() {
         this.afterCreated();
@@ -396,7 +396,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
     /**
      * 执行created后的逻辑
      *
-     *  @memberof OUIndexView
+     *  @memberof OUIndexViewBase
      */    
     public afterCreated(){
         if (Object.is(this.mode, 'horizontal')) {
@@ -415,7 +415,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
     /**
      * vue 生命周期
      *
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public destroyed() {
         this.afterDestroy();
@@ -424,7 +424,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
     /**
      * 执行destroyed后的逻辑
      *
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public afterDestroy() {
         if (this.viewStateEvent) {
@@ -437,7 +437,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 处理菜单默认选中项
      *
      * @public
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public doMenuSelect(): void {
         if (!this.isDefaultPage) {
@@ -479,7 +479,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * @param {any[]} items
      * @param {string} appfunctag
      * @returns {boolean}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public computeMenuSelect(items: any[], appfunctag: string): boolean {
         const appFuncs: any[] = this.menuMode.getAppFuncs();
@@ -515,7 +515,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * @param {any[]} items
      * @param {string} name
      * @returns
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public compute(items: any[], name: string) {
         const item: any = {};
@@ -542,7 +542,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {*} item
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public setHideSideBar(item: any): void {
         if (item.hidesidebar) {
@@ -556,7 +556,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * @param {*} index
      * @param {any[]} indexs
      * @returns
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public select(index: any, indexs: any[]) {
         let item = this.compute(this.menus, index);
@@ -571,7 +571,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {*} item 菜单数据
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public click(item: any) {
         if (item) {
@@ -671,7 +671,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 数据加载
      *
      * @param {*} data
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public load(data: any) {
         this.handleMenusResource(this.menuMode.getAppMenuItems());
@@ -681,7 +681,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 通过统一资源标识计算菜单
      *
      * @param {*} data
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public handleMenusResource(inputMenus:Array<any>){
         if(Environment.enablePermissionValid){
@@ -696,7 +696,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * 计算有效菜单项
      *
      * @param {*} data
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public computedEffectiveMenus(inputMenus:Array<any>){
         inputMenus.forEach((_item:any) =>{
@@ -714,7 +714,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {any[]} items
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     public dataProcess(items: any[]): void {
         items.forEach((_item: any) => {
@@ -732,7 +732,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      *
      * @readonly
      * @type {string}
-     * @memberof OUIndexView
+     * @memberof OUIndexViewBase
      */
     get popperClass(): string {
         return 'app-popper-menu ' + this.selectTheme;

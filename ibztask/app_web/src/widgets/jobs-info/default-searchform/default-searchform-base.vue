@@ -69,7 +69,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 名称
      *
      * @type {string}
-     * @memberof Default
+     * @memberof DefaultBase
      */
     @Prop() public name?: string;
 
@@ -77,7 +77,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 视图通讯对象
      *
      * @type {Subject<ViewState>}
-     * @memberof Default
+     * @memberof DefaultBase
      */
     @Prop() public viewState!: Subject<ViewState>;
 
@@ -85,7 +85,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 应用上下文
      *
      * @type {*}
-     * @memberof Default
+     * @memberof DefaultBase
      */
     @Prop() public context: any;
 
@@ -93,7 +93,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 视图参数
      *
      * @type {*}
-     * @memberof Default
+     * @memberof DefaultBase
      */
     @Prop() public viewparams: any;
 
@@ -102,7 +102,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      *
      * @public
      * @type {(Subscription | undefined)}
-     * @memberof Default
+     * @memberof DefaultBase
      */
     public viewStateEvent: Subscription | undefined;
 
@@ -110,7 +110,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 获取部件类型
      *
      * @returns {string}
-     * @memberof Default
+     * @memberof DefaultBase
      */
     public getControlType(): string {
         return 'SEARCHFORM'
@@ -122,7 +122,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 计数器服务对象集合
      *
      * @type {Array<*>}
-     * @memberof Default
+     * @memberof DefaultBase
      */    
     public counterServiceArray:Array<any> = [];
 
@@ -130,7 +130,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 建构部件服务对象
      *
      * @type {DefaultService}
-     * @memberof Default
+     * @memberof DefaultBase
      */
     public service: DefaultService = new DefaultService({ $store: this.$store });
 
@@ -138,7 +138,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 实体服务对象
      *
      * @type {JobsInfoService}
-     * @memberof Default
+     * @memberof DefaultBase
      */
     public appEntityService: JobsInfoService = new JobsInfoService({ $store: this.$store });
     
@@ -148,7 +148,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 关闭视图
      *
      * @param {any} args
-     * @memberof Default
+     * @memberof DefaultBase
      */
     public closeView(args: any): void {
         let _this: any = this;
@@ -158,7 +158,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
     /**
      *  计数器刷新
      *
-     * @memberof Default
+     * @memberof DefaultBase
      */
     public counterRefresh(){
         const _this:any =this;

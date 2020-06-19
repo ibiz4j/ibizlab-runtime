@@ -1,42 +1,42 @@
 
 export default {
   fields: {
-    userroleid: '用户角色关系标识',
-    roleid: '角色标识',
-    rolename: '角色名称',
-    userid: '用户标识',
-    personname: '用户名称',
-    createdate: '建立时间',
-    updatedate: '更新时间',
+    userroleid: "用户角色关系标识",
+    roleid: "角色标识",
+    rolename: "角色名称",
+    userid: "用户标识",
+    personname: "用户名称",
+    createdate: "建立时间",
+    updatedate: "更新时间",
   },
 	views: {
 		redirectview: {
 			caption: "用户角色关系",
-      title: '用户角色关系表数据重定向视图',
+      		title: "用户角色关系表数据重定向视图",
 		},
 		editview: {
 			caption: "用户角色关系",
-      title: '用户角色关系表编辑视图',
+      		title: "用户角色关系表编辑视图",
 		},
 		pickupgridview: {
 			caption: "用户角色关系",
-      title: '用户角色关系表选择表格视图',
+      		title: "用户角色关系表选择表格视图",
 		},
 		mpickupview: {
 			caption: "用户角色关系",
-      title: '用户角色关系表数据多项选择视图',
+      		title: "用户角色关系表数据多项选择视图",
 		},
 		editview2: {
 			caption: "用户角色关系",
-      title: '用户角色关系表编辑视图',
+      		title: "用户角色关系表编辑视图",
 		},
 		pickupview: {
 			caption: "用户角色关系",
-      title: '用户角色关系表数据选择视图',
+      		title: "用户角色关系表数据选择视图",
 		},
 		gridview: {
 			caption: "用户角色关系",
-      title: '用户角色关系表表格视图',
+      		title: "用户角色关系表表格视图",
 		},
 	},
 	main_form: {

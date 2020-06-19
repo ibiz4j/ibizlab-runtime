@@ -8,14 +8,14 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status, [
         {
-        srfkey: 'CodeListJobStatus',
-        emptytext: '未定义',
+        srfkey: "CodeListJobStatus",
+        emptytext: "未定义",
         "codelisttype":"static",
         items: [
             {
-                id: '0',
-                label: 'ENABLED',
-                text: 'ENABLED',
+                id: "0",
+                label: "ENABLED",
+                text: "ENABLED",
                 "data":"",
                 "codename":"Item_0",
                 "color": "rgba(58, 116, 7, 1)",
@@ -24,9 +24,9 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
                 disabled: false,
             },
             {
-                id: '1',
-                label: 'DISABLED',
-                text: 'DISABLED',
+                id: "1",
+                label: "DISABLED",
+                text: "DISABLED",
                 "data":"",
                 "codename":"Item_1",
                 "color": "rgba(67, 65, 65, 1)",

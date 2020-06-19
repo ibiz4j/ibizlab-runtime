@@ -11,50 +11,50 @@ import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';
 export default {
     app: {
         commonWords:{
-            error: 'Error',
-            success: 'Success',
-            ok: 'OK',
-            cancel: 'Cancel',
+            error: "Error",
+            success: "Success",
+            ok: "OK",
+            cancel: "Cancel",
         },
         local:{
-            new: 'New'
+            new: "New"
         },
         gridpage: {
-            choicecolumns: 'Choice columns',
-            refresh: 'refresh',
-            show: 'Show',
-            records: 'records',
-            totle: 'totle',
+            choicecolumns: "Choice columns",
+            refresh: "refresh",
+            show: "Show",
+            records: "records",
+            totle: "totle",
         },
         tabpage: {
             sureclosetip: {
-                title: 'Close warning',
-                content: 'Form data Changed, are sure close?',
+                title: "Close warning",
+                content: "Form data Changed, are sure close?",
             },
-            closeall: 'Close all',
-            closeother: 'Close other',
+            closeall: "Close all",
+            closeother: "Close other",
         },
         fileUpload: {
-            caption: 'Upload',
+            caption: "Upload",
         },
         searchButton: {
-            search: 'Search',
-            reset: 'Reset',
+            search: "Search",
+            reset: "Reset",
         },
         calendar:{
-          today: 'today',
-          month: 'month',
-          week: 'week',
-          day: 'day',
-          list: 'list',
-          dateSelectModalTitle: 'select the time you wanted',
-          gotoDate: 'goto',
+          today: "today",
+          month: "month",
+          week: "week",
+          day: "day",
+          list: "list",
+          dateSelectModalTitle: "select the time you wanted",
+          gotoDate: "goto",
         },
         // 非实体视图
         views: {
             wfindexview: {
-                caption: 'ibizlab-workflow',
-                title: 'ibizlab-workflow',
+                caption: "ibizlab-workflow",
+                title: "ibizlab-workflow",
             },
         },
         utilview:{
@@ -64,9 +64,9 @@ export default {
         },
         menus: {
             wfindexview: {
-                menuitem1: '流程定义',
-                menuitem3: '发布新流程',
-                menuitem2: '用户组',
+                menuitem1: "流程定义",
+                menuitem3: "发布新流程",
+                menuitem2: "用户组",
             },
         },
     },

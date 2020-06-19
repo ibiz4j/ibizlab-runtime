@@ -3,14 +3,14 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.16.102.211:8848
+        server-addr: 127.0.0.1:8848
   cache:
     redis:
       time-to-live: 3600
     caffeine:
       spec: initialCapacity=5,maximumSize=500,expireAfterWrite=3600s
   redis:
-    host: 172.16.100.243
+    host: 127.0.0.1
     port: 6379
     password:
     database: 0
@@ -21,9 +21,9 @@ spring:
         max-idle: 16
         min-idle: 8
   datasource:
-    username: a_A_5d9d78509
-    password: '@6dEfb3@'
-    url: jdbc:mysql://172.16.180.232:3306/a_A_5d9d78509?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
     filters: stat,wall,log4j2
     #配置初始化大小/最小/最大
@@ -85,27 +85,10 @@ ibiz:
   enablePermissionValid: false
   cacheLevel: L1 #(L1)一级本地caffeine缓存;(L2)caffeine缓存+Redis缓存
 
-#xxl-job定时服务
-xxl:
-  job:
-    accessToken:
-    admin:
-      addresses: #127.0.0.1
-    executor:
-      appname: ibzuaa
-      ip:
-      port: 9999
-      logpath: /app/joblog
-      logretentiondays: -1
+### jobs
+jobs:
+  #admin-address: http://127.0.0.1:40005
+  app-name: ibzuaa
+  app-port: 9999
+  #app-ip: 127.0.0.1
 
-#qq授权接入
-qqconnection:
-  app_ID: 101880571
-  app_KEY: d52af9b56e62d771ddde749a6ee0a4f9
-  redirect_URI: http://127.0.0.1:8111/#/qqLoginRedirect
-  scope: get_user_info,add_topic,add_one_blog,add_album,upload_pic,list_album,add_share,check_page_fans,add_t,add_pic_t,del_t,get_repost_list,get_info,get_other_info,get_fanslist,get_idollist,add_idol,del_ido,get_tenpay_addr
-  baseURL: https://graph.qq.com/
-  getUserInfoURL: https://graph.qq.com/user/get_user_info
-  accessTokenURL: https://graph.qq.com/oauth2.0/token
-  authorizeURL: https://graph.qq.com/oauth2.0/authorize
-  getOpenIDURL: https://graph.qq.com/oauth2.0/me

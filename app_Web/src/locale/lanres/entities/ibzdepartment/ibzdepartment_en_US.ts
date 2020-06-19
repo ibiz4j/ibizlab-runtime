@@ -1,51 +1,51 @@
 
 export default {
   fields: {
-    deptid: 'decimal',
-    deptcode: 'Cancel',
-    deptname: '{0}/P',
-    orgid: '单位',
-    parentdeptid: '上级部门',
-    shortname: 'Others',
-    deptlevel: '部门级别',
-    showorder: 'Audit',
-    bcode: 'Condition',
-    leaderid: '分管领导标识',
-    leadername: '分管领导',
-    enable: 'After the [{0}] is executed, no subsequent nodes are specified',
-    orgname: '单位',
-    parentdeptname: '上级部门',
-    createdate: '{0}[{1}] relational data [{2}] cannot be deleted!',
-    updatedate: 'The [{0}] value is not a character type',
+    deptid: "decimal",
+    deptcode: "Cancel",
+    deptname: "{0}/P",
+    orgid: "单位",
+    parentdeptid: "上级部门",
+    shortname: "Others",
+    deptlevel: "部门级别",
+    showorder: "Audit",
+    bcode: "Condition",
+    leaderid: "分管领导标识",
+    leadername: "分管领导",
+    enable: "After the [{0}] is executed, no subsequent nodes are specified",
+    orgname: "单位",
+    parentdeptname: "上级部门",
+    createdate: "{0}[{1}] relational data [{2}] cannot be deleted!",
+    updatedate: "The [{0}] value is not a character type",
   },
 	views: {
 		pickupview: {
 			caption: "Help",
-      title: 'Upload file.',
+      		title: "Upload file.",
 		},
 		gridview: {
 			caption: "Help",
-      title: '部门表格视图',
+      		title: "部门表格视图",
 		},
 		editview: {
 			caption: "Help",
-      title: '部门编辑视图',
+      		title: "部门编辑视图",
 		},
 		mpickupview: {
 			caption: "Help",
-      title: 'Data save failed,{0}',
+      		title: "Data save failed,{0}",
 		},
 		optionview: {
 			caption: "Help",
-      title: '部门选项操作视图',
+      		title: "部门选项操作视图",
 		},
 		treeexpview: {
 			caption: "Help",
-      title: '部门树导航视图',
+      		title: "部门树导航视图",
 		},
 		pickupgridview: {
 			caption: "Help",
-      title: 'Restart workflow',
+      		title: "Restart workflow",
 		},
 	},
 	newform_form: {
@@ -212,7 +212,7 @@ export default {
 	},
 	depttree_treeview: {
 		nodes: {
-			root: '默认根节点',
+			root: "默认根节点",
 		},
 		uiactions: {
 		},

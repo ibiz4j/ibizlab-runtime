@@ -1,32 +1,32 @@
 
 export default {
   fields: {
-    roleid: 'Normal',
-    rolename: 'Save',
-    memo: '备注',
-    createdate: '>',
-    updatedate: 'Upload',
+    roleid: "Normal",
+    rolename: "Save",
+    memo: "备注",
+    createdate: ">",
+    updatedate: "Upload",
   },
 	views: {
 		gridview: {
 			caption: "Start workflow",
-      title: '角色表格视图',
+      		title: "角色表格视图",
 		},
 		pickupview: {
 			caption: "Start workflow",
-      title: 'Logic error',
+      		title: "Logic error",
 		},
 		editview: {
 			caption: "Start workflow",
-      title: 'The workflow instance current processing is the end of processing, and there is no interactive operation',
+      		title: "The workflow instance current processing is the end of processing, and there is no interactive operation",
 		},
 		pickupgridview: {
 			caption: "Start workflow",
-      title: 'Tables Information',
+      		title: "Tables Information",
 		},
 		mpickupview: {
 			caption: "Start workflow",
-      title: 'Others',
+      		title: "Others",
 		},
 	},
 	main_form: {

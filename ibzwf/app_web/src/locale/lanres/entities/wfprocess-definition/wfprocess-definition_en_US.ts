@@ -1,24 +1,24 @@
 
 export default {
   fields: {
-    definitionkey: 'DefinitionKey',
-    definitionname: '流程定义名称',
-    modelversion: '模型版本',
-    modelenable: '模型是否启用',
-    pssystemid: '系统标识',
-    taskprocessdefinitionkey: 'TaskDefinitionKey',
-    md5check: '校验',
-    bpmnfile: 'BPMN',
-    deploykey: 'DeployKey',
+    definitionkey: "DefinitionKey",
+    definitionname: "流程定义名称",
+    modelversion: "模型版本",
+    modelenable: "模型是否启用",
+    pssystemid: "系统标识",
+    taskprocessdefinitionkey: "TaskDefinitionKey",
+    md5check: "校验",
+    bpmnfile: "BPMN",
+    deploykey: "DeployKey",
   },
 	views: {
 		editview: {
 			caption: "流程定义",
-      title: '实体编辑视图',
+      		title: "实体编辑视图",
 		},
 		gridview: {
 			caption: "流程定义",
-      title: '实体表格视图',
+      		title: "实体表格视图",
 		},
 	},
 	main_form: {

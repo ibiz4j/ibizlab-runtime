@@ -1,40 +1,40 @@
 
 export default {
   fields: {
-    roleid: '角色标识',
-    rolename: '角色名称',
-    memo: '备注',
-    createdate: '建立时间',
-    updatedate: '更新时间',
+    roleid: "角色标识",
+    rolename: "角色名称",
+    memo: "备注",
+    createdate: "建立时间",
+    updatedate: "更新时间",
   },
 	views: {
 		pickupgridview: {
 			caption: "系统角色",
-      title: '角色选择表格视图',
+      		title: "角色选择表格视图",
 		},
 		editview2: {
 			caption: "系统角色",
-      title: '角色编辑视图',
+      		title: "角色编辑视图",
 		},
 		editview: {
 			caption: "系统角色",
-      title: '角色编辑视图',
+      		title: "角色编辑视图",
 		},
 		pickupview: {
 			caption: "系统角色",
-      title: '角色数据选择视图',
+      		title: "角色数据选择视图",
 		},
 		redirectview: {
 			caption: "系统角色",
-      title: '角色数据重定向视图',
+      		title: "角色数据重定向视图",
 		},
 		gridview: {
 			caption: "系统角色",
-      title: '角色表格视图',
+      		title: "角色表格视图",
 		},
 		mpickupview: {
 			caption: "系统角色",
-      title: '角色数据多项选择视图',
+      		title: "角色数据多项选择视图",
 		},
 	},
 	main_form: {

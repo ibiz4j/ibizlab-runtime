@@ -576,7 +576,7 @@ export default class SYS_PERMISSIONPickupViewBase extends Vue {
      * 选中数据的字符串
      *
      * @type {string}
-     * @memberof SYS_PERMISSIONPickupView
+     * @memberof SYS_PERMISSIONPickupViewBase
      */
     public selectedData: string = "";
 

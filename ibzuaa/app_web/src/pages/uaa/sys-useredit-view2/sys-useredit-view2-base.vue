@@ -1080,7 +1080,7 @@ export default class SYS_USEREditView2Base extends Vue {
      * 选中数据
      *
      * @type {*}
-     * @memberof SYS_USEREditView2
+     * @memberof SYS_USEREditView2Base
      */
     public selection: any = {};
 

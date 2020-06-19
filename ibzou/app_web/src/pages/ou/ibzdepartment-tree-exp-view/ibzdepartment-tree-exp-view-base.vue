@@ -596,7 +596,7 @@ export default class IBZDepartmentTreeExpViewBase extends Vue {
      * 视图唯一标识
      *
      * @type {string}
-     * @memberof IBZDepartmentTreeExpView
+     * @memberof IBZDepartmentTreeExpViewBase
      */
     public viewUID: string = 'ou-ibzdepartment-tree-exp-view';
     

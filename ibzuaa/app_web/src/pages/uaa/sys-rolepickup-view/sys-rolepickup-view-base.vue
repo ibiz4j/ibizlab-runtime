@@ -576,7 +576,7 @@ export default class SYS_ROLEPickupViewBase extends Vue {
      * 选中数据的字符串
      *
      * @type {string}
-     * @memberof SYS_ROLEPickupView
+     * @memberof SYS_ROLEPickupViewBase
      */
     public selectedData: string = "";
 

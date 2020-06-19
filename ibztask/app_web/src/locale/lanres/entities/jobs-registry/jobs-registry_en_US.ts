@@ -1,20 +1,20 @@
 
 export default {
   fields: {
-    id: '主键ID',
-    app: '服务名',
-    address: '执行地址',
-    status: '状态',
-    update_time: '更新时间',
+    id: "主键ID",
+    app: "服务名",
+    address: "执行地址",
+    status: "状态",
+    update_time: "更新时间",
   },
 	views: {
 		editview: {
 			caption: "任务注册信息",
-      title: '任务注册信息编辑视图',
+      		title: "任务注册信息编辑视图",
 		},
 		gridview: {
 			caption: "任务注册信息",
-      title: '任务注册信息表格视图',
+      		title: "任务注册信息表格视图",
 		},
 	},
 	main_form: {

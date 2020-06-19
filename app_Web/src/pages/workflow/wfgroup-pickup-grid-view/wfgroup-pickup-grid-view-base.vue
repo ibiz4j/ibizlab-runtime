@@ -628,7 +628,7 @@ export default class WFGroupPickupGridViewBase extends Vue {
      * 选中数据字符串
      *
      * @type {string}
-     * @memberof WFGroupPickupGridView
+     * @memberof WFGroupPickupGridViewBase
      */
     @Prop() public selectedData?: string;
 
@@ -636,7 +636,7 @@ export default class WFGroupPickupGridViewBase extends Vue {
      * 是否单选
      *
      * @type {boolean}
-     * @memberof WFGroupPickupGridView
+     * @memberof WFGroupPickupGridViewBase
      */
     @Prop() public isSingleSelect?: boolean;
 
@@ -644,7 +644,7 @@ export default class WFGroupPickupGridViewBase extends Vue {
      * 搜索值
      *
      * @type {string}
-     * @memberof WFGroupPickupGridView
+     * @memberof WFGroupPickupGridViewBase
      */
     public query: string = '';
 
@@ -652,7 +652,7 @@ export default class WFGroupPickupGridViewBase extends Vue {
      * 是否展开搜索表单
      *
      * @type {boolean}
-     * @memberof WFGroupPickupGridView
+     * @memberof WFGroupPickupGridViewBase
      */
     public isExpandSearchForm: boolean = true;
 
@@ -663,7 +663,7 @@ export default class WFGroupPickupGridViewBase extends Vue {
      * 2 双击激活
      *
      * @type {(number | 0 | 1 | 2)}
-     * @memberof WFGroupPickupGridView
+     * @memberof WFGroupPickupGridViewBase
      */
     public gridRowActiveMode: number | 0 | 1 | 2 = 2;
 
@@ -671,7 +671,7 @@ export default class WFGroupPickupGridViewBase extends Vue {
      * 快速搜索
      *
      * @param {*} $event
-     * @memberof WFGroupPickupGridView
+     * @memberof WFGroupPickupGridViewBase
      */
     public onSearch($event: any): void {
         const refs: any = this.$refs;

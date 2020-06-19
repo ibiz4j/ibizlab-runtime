@@ -1,14 +1,14 @@
 
 export default {
   fields: {
-    id: 'ID',
-    name: '名称',
-    bpmnfile: 'BPMN',
+    id: "ID",
+    name: "名称",
+    bpmnfile: "BPMN",
   },
 	views: {
 		editview: {
 			caption: "流程模型",
-      title: '流程模型编辑视图',
+      		title: "流程模型编辑视图",
 		},
 	},
 	main_form: {

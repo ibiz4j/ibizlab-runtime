@@ -40,7 +40,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 名称
      *
      * @type {string}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     @Prop() public name?: string;
 
@@ -48,7 +48,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 视图通讯对象
      *
      * @type {Subject<ViewState>}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     @Prop() public viewState!: Subject<ViewState>;
 
@@ -56,7 +56,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 应用上下文
      *
      * @type {*}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     @Prop() public context: any;
 
@@ -64,7 +64,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 视图参数
      *
      * @type {*}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     @Prop() public viewparams: any;
 
@@ -73,7 +73,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      *
      * @public
      * @type {(Subscription | undefined)}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public viewStateEvent: Subscription | undefined;
 
@@ -81,7 +81,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 获取部件类型
      *
      * @returns {string}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public getControlType(): string {
         return 'PICKUPVIEWPANEL'
@@ -93,7 +93,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 建构部件服务对象
      *
      * @type {PickupViewpickupviewpanelService}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public service: PickupViewpickupviewpanelService = new PickupViewpickupviewpanelService({ $store: this.$store });
 
@@ -101,7 +101,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 实体服务对象
      *
      * @type {SysRoleService}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public appEntityService: SysRoleService = new SysRoleService({ $store: this.$store });
     
@@ -111,7 +111,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 关闭视图
      *
      * @param {any} args
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public closeView(args: any): void {
         let _this: any = this;
@@ -121,7 +121,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
     /**
      *  计数器刷新
      *
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public counterRefresh(){
         const _this:any =this;
@@ -140,7 +140,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 选中数据字符串
      *
      * @type {string}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     @Prop() public selectedData?: string;
 
@@ -148,7 +148,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 获取多项数据
      *
      * @returns {any[]}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public getDatas(): any[] {
         return [];
@@ -158,7 +158,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 获取单项树
      *
      * @returns {*}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public getData(): any {
         return {};
@@ -168,7 +168,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 视图名称
      *
      * @type {*}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public view: any = {
         viewname: 'sys-rolepickup-grid-view',
@@ -179,7 +179,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 局部上下文
      *
      * @type {*}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public localContext: any = null;
 
@@ -195,7 +195,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 视图数据
      *
      * @type {*}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public viewdata: string  = JSON.stringify(this.context);
 
@@ -211,7 +211,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 是否显示按钮
      *
      * @type {boolean}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     @Prop({default: true}) public isShowButton!: boolean;
 
@@ -219,7 +219,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 是否单选
      *
      * @type {boolean}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     @Prop() public isSingleSelect?: boolean;
 
@@ -227,7 +227,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 初始化完成
      *
      * @type {boolean}
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public inited: boolean = false;
 
@@ -235,7 +235,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 视图数据变化
      *
      * @param {*} $event
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public onViewDatasChange($event: any): void {
         if($event.length>0){
@@ -253,7 +253,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 视图数据被激活
      *
      * @param {*} $event
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public viewDatasActivated($event: any): void {
         this.$emit('activated', $event);
@@ -263,7 +263,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * 视图加载完成
      *
      * @param {*} $event
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public onViewLoad($event: any): void {
         this.$emit('load', $event);
@@ -272,7 +272,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
     /**
      * vue 生命周期
      *
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public created() {
         this.afterCreated();
@@ -281,7 +281,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
     /**
      * 执行created后的逻辑
      *
-     *  @memberof PickupViewpickupviewpanel
+     *  @memberof PickupViewpickupviewpanelBase
      */    
     public afterCreated(){
         this.initNavParam();
@@ -302,7 +302,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
     /**
      * 初始化导航参数
      *
-     *  @memberof PickupViewpickupviewpanel
+     *  @memberof PickupViewpickupviewpanelBase
      */  
     public initNavParam(){
         if(this.localContext && Object.keys(this.localContext).length >0){
@@ -321,7 +321,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
     /**
      * vue 生命周期
      *
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public destroyed() {
         this.afterDestroy();
@@ -330,7 +330,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
     /**
      * 执行destroyed后的逻辑
      *
-     * @memberof PickupViewpickupviewpanel
+     * @memberof PickupViewpickupviewpanelBase
      */
     public afterDestroy() {
         if (this.viewStateEvent) {

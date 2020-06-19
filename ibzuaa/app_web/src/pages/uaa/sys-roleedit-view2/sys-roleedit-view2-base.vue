@@ -1080,7 +1080,7 @@ export default class SYS_ROLEEditView2Base extends Vue {
      * 选中数据
      *
      * @type {*}
-     * @memberof SYS_ROLEEditView2
+     * @memberof SYS_ROLEEditView2Base
      */
     public selection: any = {};
 

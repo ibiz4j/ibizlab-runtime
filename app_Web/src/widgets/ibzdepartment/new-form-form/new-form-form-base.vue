@@ -65,7 +65,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 名称
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public name?: string;
 
@@ -73,7 +73,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 视图通讯对象
      *
      * @type {Subject<ViewState>}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public viewState!: Subject<ViewState>;
 
@@ -81,7 +81,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 应用上下文
      *
      * @type {*}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public context: any;
 
@@ -89,7 +89,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 视图参数
      *
      * @type {*}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public viewparams: any;
 
@@ -98,7 +98,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @public
      * @type {(Subscription | undefined)}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public viewStateEvent: Subscription | undefined;
 
@@ -106,7 +106,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 获取部件类型
      *
      * @returns {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public getControlType(): string {
         return 'FORM'
@@ -118,7 +118,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 计数器服务对象集合
      *
      * @type {Array<*>}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */    
     public counterServiceArray:Array<any> = [];
 
@@ -126,7 +126,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 建构部件服务对象
      *
      * @type {NewFormService}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public service: NewFormService = new NewFormService({ $store: this.$store });
 
@@ -134,7 +134,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 实体服务对象
      *
      * @type {IBZDepartmentService}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public appEntityService: IBZDepartmentService = new IBZDepartmentService({ $store: this.$store });
     
@@ -144,7 +144,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 关闭视图
      *
      * @param {any} args
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public closeView(args: any): void {
         let _this: any = this;
@@ -154,7 +154,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     /**
      *  计数器刷新
      *
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public counterRefresh(){
         const _this:any =this;
@@ -171,7 +171,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     /**
      * 工作流审批意见控件绑定值
      *
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public srfwfmemo:string = "";
     
@@ -179,7 +179,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 获取多项数据
      *
      * @returns {any[]}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public getDatas(): any[] {
         return [this.data];
@@ -189,7 +189,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 获取单项树
      *
      * @returns {*}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public getData(): any {
         return this.data;
@@ -199,7 +199,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 是否默认保存
      *
      * @type {boolean}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop({ default: false }) public autosave?: boolean;
 
@@ -207,7 +207,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 显示处理提示
      *
      * @type {boolean}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop({ default: true }) public showBusyIndicator?: boolean;
 
@@ -215,7 +215,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件行为--submit
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public WFSubmitAction!: string;
     
@@ -223,7 +223,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件行为--start
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public WFStartAction!: string;
     
@@ -231,7 +231,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件行为--update
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public updateAction!: string;
     
@@ -239,7 +239,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件行为--remove
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public removeAction!: string;
     
@@ -247,7 +247,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件行为--loaddraft
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public loaddraftAction!: string;
     
@@ -255,7 +255,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件行为--load
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public loadAction!: string;
     
@@ -263,7 +263,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件行为--create
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public createAction!: string;
 
@@ -271,7 +271,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件行为--create
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public searchAction!: string;
 
@@ -279,7 +279,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 视图标识
      *
      * @type {string}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Prop() public viewtag!: string;
 
@@ -287,7 +287,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 表单状态
      *
      * @type {Subject<any>}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public formState: Subject<any> = new Subject();
 
@@ -295,7 +295,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 忽略表单项值变化
      *
      * @type {boolean}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public ignorefieldvaluechange: boolean = false;
 
@@ -304,7 +304,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @public
      * @type {Subject<any>}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public dataChang: Subject<any> = new Subject();
 
@@ -313,7 +313,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @public
      * @type {(Subscription | undefined)}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public dataChangEvent: Subscription | undefined;
 
@@ -322,7 +322,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @public
      * @type {*}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public oldData: any = {};
 
@@ -330,7 +330,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 表单数据对象
      *
      * @type {*}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public data: any = {
         srfupdatedate: null,
@@ -356,7 +356,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
       * 当前执行的行为逻辑
       *
       * @type {string}
-      * @memberof NewForm
+      * @memberof NewFormBase
       */
     public currentAction: string = "";
 
@@ -364,7 +364,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
       * 关系界面计数器
       *
       * @type {number}
-      * @memberof NewForm
+      * @memberof NewFormBase
       */
     public drcounter: number = 0;
 
@@ -372,7 +372,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
       * 需要等待关系界面保存时，第一次调用save参数的备份
       *
       * @type {number}
-      * @memberof NewForm
+      * @memberof NewFormBase
       */
     public drsaveopt: any = {};
 
@@ -380,7 +380,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
       * 表单保存回调存储对象
       *
       * @type {any}
-      * @memberof NewForm
+      * @memberof NewFormBase
       */
     public saveState:any ;
 
@@ -388,7 +388,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 属性值规则
      *
      * @type {*}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public rules: any = {
         srfupdatedate: [
@@ -493,7 +493,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 详情模型集合
      *
      * @type {*}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public detailsModel: any = {
         group1: new FormGroupPanelModel({ caption: '部门基本信息', detailType: 'GROUPPANEL', name: 'group1', visible: true, isShowCaption: false, form: this, uiActionGroup: { caption: '', langbase: 'entities.ibzdepartment.newform_form', extractMode: 'ITEM', details: [] } })
@@ -539,7 +539,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.srfupdatedate')
     onSrfupdatedateChange(newVal: any, oldVal: any) {
@@ -551,7 +551,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.srforikey')
     onSrforikeyChange(newVal: any, oldVal: any) {
@@ -563,7 +563,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.srfkey')
     onSrfkeyChange(newVal: any, oldVal: any) {
@@ -575,7 +575,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.srfmajortext')
     onSrfmajortextChange(newVal: any, oldVal: any) {
@@ -587,7 +587,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.srftempmode')
     onSrftempmodeChange(newVal: any, oldVal: any) {
@@ -599,7 +599,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.srfuf')
     onSrfufChange(newVal: any, oldVal: any) {
@@ -611,7 +611,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.srfdeid')
     onSrfdeidChange(newVal: any, oldVal: any) {
@@ -623,7 +623,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.srfsourcekey')
     onSrfsourcekeyChange(newVal: any, oldVal: any) {
@@ -635,7 +635,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.deptcode')
     onDeptcodeChange(newVal: any, oldVal: any) {
@@ -647,7 +647,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.deptname')
     onDeptnameChange(newVal: any, oldVal: any) {
@@ -659,7 +659,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.orgid')
     onOrgidChange(newVal: any, oldVal: any) {
@@ -671,7 +671,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.orgname')
     onOrgnameChange(newVal: any, oldVal: any) {
@@ -683,7 +683,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.pdeptid')
     onPdeptidChange(newVal: any, oldVal: any) {
@@ -695,7 +695,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.pdeptname')
     onPdeptnameChange(newVal: any, oldVal: any) {
@@ -707,7 +707,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.enable')
     onEnableChange(newVal: any, oldVal: any) {
@@ -719,7 +719,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     @Watch('data.deptid')
     onDeptidChange(newVal: any, oldVal: any) {
@@ -732,7 +732,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public resetFormData({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
         if (Object.is(name, 'orgid')) {
@@ -748,7 +748,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
       * 置空对象
       *
       * @param {any[]} args
-      * @memberof EditForm
+     * @memberof NewFormBase
       */
     public ResetData(_datas:any){
         if(Object.keys(_datas).length >0){
@@ -765,7 +765,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
                 
@@ -795,7 +795,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @public
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
      * @returns {void}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public formDataChange({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
         if (this.ignorefieldvaluechange) {
@@ -812,7 +812,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @public
      * @param {*} [data={}]
      * @param {string} [action]
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public onFormLoad(data: any = {},action:string): void {
         if(Object.is(action,"save") || Object.is(action,"autoSave") || Object.is(action,"submit"))
@@ -833,7 +833,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} [_datas={}]
      * @param {string} [action]
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public fillForm(_datas: any = {},action:string): void {
         this.ignorefieldvaluechange = true;
@@ -858,7 +858,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {*} data
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public setFormEnableCond(data: any): void {
         Object.values(this.detailsModel).forEach((detail: any) => {
@@ -874,7 +874,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 重置草稿表单状态
      *
      * @public
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public resetDraftFormStates(): void {
         const form: any = this.$refs.form;
@@ -886,7 +886,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     /**
      * 重置校验结果
      *
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public resetValidates(): void {
         Object.values(this.detailsModel).forEach((detail: any) => {
@@ -902,7 +902,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 填充校验结果 （后台）
      *
      * @param {any[]} fieldErrors
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public fillValidates(fieldErrors: any[]): void {
         fieldErrors.forEach((error: any) => {
@@ -920,7 +920,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 表单校验状态
      *
      * @returns {boolean} 
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public formValidateStatus(): boolean {
         const form: any = this.$refs.form;
@@ -935,7 +935,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 获取全部值
      *
      * @returns {*}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public getValues(): any {
         return this.data;
@@ -946,7 +946,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {{ name: string, value: any }} $event
      * @returns {void}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public onFormItemValueChange($event: { name: string, value: any }): void {
         if (!$event) {
@@ -964,7 +964,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @param {string} name
      * @param {*} value
      * @returns {void}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public setDataItemValue(name: string, value: any): void {
         if (!name || Object.is(name, '') || !this.data.hasOwnProperty(name)) {
@@ -982,7 +982,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 分组界面行为事件
      *
      * @param {*} $event
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public groupUIActionClick($event: any): void {
         if (!$event) {
@@ -994,7 +994,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     /**
      * Vue声明周期(处理组件的输入属性)
      *
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public created(): void {
         this.afterCreated();
@@ -1003,7 +1003,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     /**
      * 执行created后的逻辑
      *
-     *  @memberof NewForm
+     *  @memberof NewFormBase
      */    
     public afterCreated(){
         if (this.viewState) {
@@ -1060,7 +1060,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     /**
      * vue 生命周期
      *
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public destroyed() {
         this.afterDestroy();
@@ -1069,7 +1069,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     /**
      * 执行destroyed后的逻辑
      *
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public afterDestroy() {
         if (this.viewStateEvent) {
@@ -1084,7 +1084,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 拷贝内容
      *
      * @param {*} [arg={}]
-     * @memberof @memberof NewForm
+     * @memberof @memberof NewFormBase
      */
     public copy(srfkey: string): void {
         let copyData = this.$store.getters.getCopyData(srfkey);
@@ -1102,7 +1102,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
 
     /**
      *打印
-     *@memberof @memberof NewForm
+     *@memberof @memberof NewFormBase
      */
     public print(){
         let _this:any = this;
@@ -1113,7 +1113,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 部件刷新
      *
      * @param {any[]} args
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public refresh(args: any[]): void {
         let arg: any = {};
@@ -1135,7 +1135,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @param {*} [arg={}]
      * @returns {void}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public autoLoad(arg: any = {}): void {
         if (arg.srfkey && !Object.is(arg.srfkey, '')) {
@@ -1156,7 +1156,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {*} [opt={}]
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public load(opt: any = {}): void {
         if(!this.loadAction){
@@ -1191,7 +1191,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 加载草稿
      *
      * @param {*} [opt={}]
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public loadDraft(opt: any = {}): void {
         if(!this.loaddraftAction){
@@ -1245,7 +1245,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 自动保存
      *
      * @param {*} [opt={}]
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public autoSave(opt: any = {}): void {
         if (!this.formValidateStatus()) {
@@ -1296,7 +1296,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @param {boolean} [showResultInfo] 
      * @param {boolean} [ifStateNext] formState是否下发通知
      * @returns {Promise<any>}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public async save(opt: any = {}, showResultInfo?: boolean, ifStateNext: boolean = true): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
@@ -1366,7 +1366,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     *
     * @public
     * @param {*} [opt={}]
-    * @memberof EditForm
+    * @memberof NewFormBase
     */
     public remove(opt:Array<any> = [],showResultInfo?: boolean): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
@@ -1400,7 +1400,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @param {*} [data={}]
      * @param {*} [localdata={}]
      * @returns {Promise<any>}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public async wfstart(data: any,localdata?:any): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
@@ -1456,7 +1456,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @param {*} [data={}]
      * @param {*} [localdata={}]
      * @returns {Promise<any>}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public async wfsubmit(data: any,localdata?:any): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
@@ -1532,7 +1532,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @param {string[]} updateDetails 更新项
      * @param {boolean} [showloading] 是否显示加载状态
      * @returns {void}
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public updateFormItems(mode: string, data: any = {}, updateDetails: string[], showloading?: boolean): void {
         if (!mode || (mode && Object.is(mode, ''))) {
@@ -1577,7 +1577,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 回车事件
      *
      * @param {*} $event
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public onEnter($event: any): void {
     }
@@ -1586,7 +1586,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 保存并退出
      *
      * @param {any[]} args
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public saveAndExit(data:any[]):Promise<any>{
         let _this = this;
@@ -1611,7 +1611,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 保存并新建
      *
      * @param {any[]} args
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public saveAndNew(data:any[]):Promise<any>{
         let _this = this;
@@ -1634,7 +1634,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 删除并退出
      *
      * @param {any[]} args
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public removeAndExit(data:any[]):Promise<any>{
         let _this = this;
@@ -1658,7 +1658,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
     * 关系界面数据保存完成
     *
     * @param {any} $event
-    * @memberof NewForm
+    * @memberof NewFormBase
     */
     public drdatasaved($event:any){
         let _this = this;
@@ -1681,7 +1681,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
 
     /**
      * 新建默认值
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public createDefault(){                    
         if (this.data.hasOwnProperty('enable')) {
@@ -1691,7 +1691,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
 
     /**
      * 更新默认值
-     * @memberof NewForm
+     * @memberof NewFormBase
      */
     public updateDefault(){                    
     }

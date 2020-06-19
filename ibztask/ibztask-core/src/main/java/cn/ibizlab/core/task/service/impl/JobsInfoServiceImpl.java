@@ -50,8 +50,8 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public JobsInfo start(JobsInfo et) {
-        et.set("Last_time","0");
         et.set("Status","0");
+        et.set("Last_time","0");
         update(et);
         return et;
     }

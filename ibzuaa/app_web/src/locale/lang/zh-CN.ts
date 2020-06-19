@@ -12,50 +12,50 @@ import userCustom_zh_CN from '@locale/lanres/userCustom/userCustom_zh_CN';
 export default {
     app: {
         commonWords:{
-            error: '失败',
-            success: '成功',
-            ok: '确认',
-            cancel: '取消',
+            error: "失败",
+            success: "成功",
+            ok: "确认",
+            cancel: "取消",
         },
         local:{
-            new: '新建'
+            new: "新建"
         },
         gridpage: {
-            choicecolumns: '选择列',
-            refresh: '刷新',
-            show: '显示',
-            records: '条',
-            totle: '共',
+            choicecolumns: "选择列",
+            refresh: "刷新",
+            show: "显示",
+            records: "条",
+            totle: "共",
         },
         tabpage: {
             sureclosetip: {
-                title: '关闭提醒',
-                content: '表单数据已经修改，确定要关闭？',
+                title: "关闭提醒",
+                content: "表单数据已经修改，确定要关闭？",
             },
-            closeall: '关闭所有',
-            closeother: '关闭其他',
+            closeall: "关闭所有",
+            closeother: "关闭其他",
         },
         fileUpload: {
-            caption: '上传',
+            caption: "上传",
         },
         searchButton: {
-            search: '搜索',
-            reset: '重置',
+            search: "搜索",
+            reset: "重置",
         },
         calendar:{
-          today: '今天',
-          month: '月',
-          week: '周',
-          day: '天',
-          list: '列',
-          dateSelectModalTitle: '选择要跳转的时间',
-          gotoDate: '跳转',
+          today: "今天",
+          month: "月",
+          week: "周",
+          day: "天",
+          list: "列",
+          dateSelectModalTitle: "选择要跳转的时间",
+          gotoDate: "跳转",
         },
         // 非实体视图
         views: {
             index: {
-                caption: 'ibizlab-uaa',
-                title: 'ibizlab-uaa',
+                caption: "ibizlab-uaa",
+                title: "ibizlab-uaa",
             },
         },
         utilview:{
@@ -65,10 +65,10 @@ export default {
         },
         menus: {
             main: {
-                menuitem3: '用户',
-                menuitem6: '角色',
-                menuitem1: '认证日志',
-                menuitem2: '接入应用',
+                menuitem3: "用户",
+                menuitem6: "角色",
+                menuitem1: "认证日志",
+                menuitem2: "接入应用",
             },
         },
     },

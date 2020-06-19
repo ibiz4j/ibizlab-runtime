@@ -576,7 +576,7 @@ export default class IBZEmployeePickupViewBase extends Vue {
      * 选中数据的字符串
      *
      * @type {string}
-     * @memberof IBZEmployeePickupView
+     * @memberof IBZEmployeePickupViewBase
      */
     public selectedData: string = "";
 

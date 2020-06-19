@@ -12,50 +12,50 @@ import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';
 export default {
     app: {
         commonWords:{
-            error: 'Error',
-            success: 'Success',
-            ok: 'OK',
-            cancel: 'Cancel',
+            error: "Error",
+            success: "Success",
+            ok: "OK",
+            cancel: "Cancel",
         },
         local:{
-            new: 'New'
+            new: "New"
         },
         gridpage: {
-            choicecolumns: 'Choice columns',
-            refresh: 'refresh',
-            show: 'Show',
-            records: 'records',
-            totle: 'totle',
+            choicecolumns: "Choice columns",
+            refresh: "refresh",
+            show: "Show",
+            records: "records",
+            totle: "totle",
         },
         tabpage: {
             sureclosetip: {
-                title: 'Close warning',
-                content: 'Form data Changed, are sure close?',
+                title: "Close warning",
+                content: "Form data Changed, are sure close?",
             },
-            closeall: 'Close all',
-            closeother: 'Close other',
+            closeall: "Close all",
+            closeother: "Close other",
         },
         fileUpload: {
-            caption: 'Upload',
+            caption: "Upload",
         },
         searchButton: {
-            search: 'Search',
-            reset: 'Reset',
+            search: "Search",
+            reset: "Reset",
         },
         calendar:{
-          today: 'today',
-          month: 'month',
-          week: 'week',
-          day: 'day',
-          list: 'list',
-          dateSelectModalTitle: 'select the time you wanted',
-          gotoDate: 'goto',
+          today: "today",
+          month: "month",
+          week: "week",
+          day: "day",
+          list: "list",
+          dateSelectModalTitle: "select the time you wanted",
+          gotoDate: "goto",
         },
         // 非实体视图
         views: {
             index: {
-                caption: 'ibizlab-uaa',
-                title: 'ibizlab-uaa',
+                caption: "ibizlab-uaa",
+                title: "ibizlab-uaa",
             },
         },
         utilview:{
@@ -65,10 +65,10 @@ export default {
         },
         menus: {
             main: {
-                menuitem3: '用户',
-                menuitem6: '角色',
-                menuitem1: '认证日志',
-                menuitem2: '接入应用',
+                menuitem3: "用户",
+                menuitem6: "角色",
+                menuitem1: "认证日志",
+                menuitem2: "接入应用",
             },
         },
     },

@@ -576,7 +576,7 @@ export default class SysUserPickupViewBase extends Vue {
      * 选中数据的字符串
      *
      * @type {string}
-     * @memberof SysUserPickupView
+     * @memberof SysUserPickupViewBase
      */
     public selectedData: string = "";
 

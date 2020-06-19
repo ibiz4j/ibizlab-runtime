@@ -1,43 +1,43 @@
 
 export default {
   fields: {
-    orgid: '单位标识',
-    orgcode: '单位代码',
-    orgname: '名称',
-    parentorgid: '上级单位',
-    shortname: '单位简称',
-    orglevel: '单位级别',
-    showorder: '排序',
-    parentorgname: '上级单位',
-    domains: '区属',
-    enable: '逻辑有效',
-    createdate: '创建时间',
-    updatedate: '最后修改时间',
+    orgid: "单位标识",
+    orgcode: "单位代码",
+    orgname: "名称",
+    parentorgid: "上级单位",
+    shortname: "单位简称",
+    orglevel: "单位级别",
+    showorder: "排序",
+    parentorgname: "上级单位",
+    domains: "区属",
+    enable: "逻辑有效",
+    createdate: "创建时间",
+    updatedate: "最后修改时间",
   },
 	views: {
 		editview: {
 			caption: "单位机构",
-      title: '单位机构编辑视图',
+      		title: "单位机构编辑视图",
 		},
 		treeexpview: {
 			caption: "部门管理",
-      title: '单位机构树导航视图',
+      		title: "单位机构树导航视图",
 		},
 		pickupgridview: {
 			caption: "单位机构",
-      title: '单位机构选择表格视图',
+      		title: "单位机构选择表格视图",
 		},
 		optionview: {
 			caption: "单位机构",
-      title: '单位机构选项操作视图',
+      		title: "单位机构选项操作视图",
 		},
 		pickupview: {
 			caption: "单位机构",
-      title: '单位机构数据选择视图',
+      		title: "单位机构数据选择视图",
 		},
 		gridview: {
 			caption: "单位机构",
-      title: '单位机构表格视图',
+      		title: "单位机构表格视图",
 		},
 	},
 	main_form: {
@@ -180,7 +180,7 @@ export default {
 	},
 	orgtree_treeview: {
 		nodes: {
-			root: '默认根节点',
+			root: "默认根节点",
 		},
 		uiactions: {
 		},

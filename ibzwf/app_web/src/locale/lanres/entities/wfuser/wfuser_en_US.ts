@@ -1,30 +1,30 @@
 
 export default {
   fields: {
-    id: '用户标识',
-    firstname: '用户全局名',
-    displayname: '用户名称',
+    id: "用户标识",
+    firstname: "用户全局名",
+    displayname: "用户名称",
   },
 	views: {
 		mpickupview: {
 			caption: "用户",
-      title: '用户数据多项选择视图',
+      		title: "用户数据多项选择视图",
 		},
 		pickupview: {
 			caption: "用户",
-      title: '用户数据选择视图',
+      		title: "用户数据选择视图",
 		},
 		editview: {
 			caption: "用户",
-      title: '用户编辑视图',
+      		title: "用户编辑视图",
 		},
 		pickupgridview: {
 			caption: "用户",
-      title: '用户选择表格视图',
+      		title: "用户选择表格视图",
 		},
 		gridview: {
 			caption: "用户",
-      title: '用户表格视图',
+      		title: "用户表格视图",
 		},
 	},
 	main_form: {

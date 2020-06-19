@@ -1,21 +1,21 @@
 
 export default {
   fields: {
-    memberid: '组成员标识',
-    membername: '组成员名称',
-    groupid: '组标识',
-    groupname: '用户组',
-    userid: '用户标识',
-    personname: '用户',
+    memberid: "组成员标识",
+    membername: "组成员名称",
+    groupid: "组标识",
+    groupname: "用户组",
+    userid: "用户标识",
+    personname: "用户",
   },
 	views: {
 		gridview: {
 			caption: "成员",
-      title: '成员表格视图',
+      		title: "成员表格视图",
 		},
 		editview: {
 			caption: "成员",
-      title: '成员编辑视图',
+      		title: "成员编辑视图",
 		},
 	},
 	main_form: {

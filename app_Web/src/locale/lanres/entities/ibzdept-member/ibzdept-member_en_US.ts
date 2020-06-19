@@ -1,20 +1,20 @@
 
 export default {
   fields: {
-    memberid: '标识',
-    deptid: '部门标识',
-    deptname: '部门名称',
-    userid: '用户标识',
-    personname: '成员',
+    memberid: "标识",
+    deptid: "部门标识",
+    deptname: "部门名称",
+    userid: "用户标识",
+    personname: "成员",
   },
 	views: {
 		gridview: {
 			caption: "部门成员",
-      title: '部门成员表格视图',
+      		title: "部门成员表格视图",
 		},
 		editview: {
 			caption: "部门成员",
-      title: '部门成员编辑视图',
+      		title: "部门成员编辑视图",
 		},
 	},
 	main_form: {

@@ -1,20 +1,20 @@
 
 export default {
   fields: {
-    logid: '标识',
-    username: '用户全局名',
-    personname: '用户名称',
-    domain: '域',
-    authtime: '认证时间',
-    ipaddr: 'IP地址',
-    macaddr: 'MAC地址',
-    useragent: '客户端',
-    authcode: '认证结果',
+    logid: "标识",
+    username: "用户全局名",
+    personname: "用户名称",
+    domain: "域",
+    authtime: "认证时间",
+    ipaddr: "IP地址",
+    macaddr: "MAC地址",
+    useragent: "客户端",
+    authcode: "认证结果",
   },
 	views: {
 		gridview: {
 			caption: "认证日志",
-      title: '认证日志表格视图',
+      		title: "认证日志表格视图",
 		},
 	},
 	main_grid: {
