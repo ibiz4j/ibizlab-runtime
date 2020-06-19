@@ -128,7 +128,7 @@
             
             {
                "appid":"Web",
-               "appname":"iBizRT",
+               "appname":"ibizlab-runtime",
                "appmenu":[{"menuid":"Index", "menuname":"Index", "menuitem":[{ "id":"menuitem7" , "name":"单位人事" , "items":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" }]},{ "id":"menuitem8" , "name":"系统权限" , "items":[{ "id":"menuitem4" , "name":"用户角色" },{ "id":"menuitem9" , "name":"认证日志" }]},{ "id":"menuitem10" , "name":"流程管理" , "items":[{ "id":"menuitem6" , "name":"流程定义" },{ "id":"menuitem5" , "name":"流程角色" },{ "id":"menuitem11" , "name":"发布新流程" }]}] }]
             }
             ]

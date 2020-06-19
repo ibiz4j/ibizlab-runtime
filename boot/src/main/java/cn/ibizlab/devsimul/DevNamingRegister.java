@@ -40,6 +40,7 @@ public class DevNamingRegister implements ApplicationRunner {
                 naming.registerInstance("ibzuaa-api", instance.getIp(), port);
                 naming.registerInstance("ibzou-api", instance.getIp(), port);
                 naming.registerInstance("ibzwf-api", instance.getIp(), port);
+                naming.registerInstance("ibztask-api", instance.getIp(), port);
                 naming.registerInstance("ibzdisk-api", instance.getIp(), port);
             }
         }

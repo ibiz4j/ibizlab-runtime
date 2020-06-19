@@ -36,7 +36,7 @@ public class PermissionSyncJob implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         try {
             Thread.sleep(30000);
-            InputStream permission= this.getClass().getResourceAsStream("/permission/ibzuaaResource.json"); //获取当前系统所有实体资源能力
+            InputStream permission= this.getClass().getResourceAsStream("/permission/systemResource.json"); //获取当前系统所有实体资源能力
             SysStructure permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
             SysPSSystem system= new SysPSSystem();
             permissionResult.setApps(new ArrayList<>());
@@ -52,7 +52,7 @@ public class PermissionSyncJob implements ApplicationRunner {
             permission.close();
 
 
-            permission= this.getClass().getResourceAsStream("/permission/ibzouResource.json"); //获取当前系统所有实体资源能力
+            permission= this.getClass().getResourceAsStream("/permission/ibzou/systemResource.json"); //获取当前系统所有实体资源能力
             permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
             system= new SysPSSystem();
             permissionResult.setApps(new ArrayList<>());
@@ -67,7 +67,7 @@ public class PermissionSyncJob implements ApplicationRunner {
             }
             permission.close();
 
-            permission= this.getClass().getResourceAsStream("/permission/ibzwfResource.json"); //获取当前系统所有实体资源能力
+            permission= this.getClass().getResourceAsStream("/permission/ibzwf/systemResource.json"); //获取当前系统所有实体资源能力
             permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
             system= new SysPSSystem();
             permissionResult.setApps(new ArrayList<>());
@@ -82,8 +82,22 @@ public class PermissionSyncJob implements ApplicationRunner {
             }
             permission.close();
 
+            permission= this.getClass().getResourceAsStream("/permission/ibztask/systemResource.json"); //获取当前系统所有实体资源能力
+            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
+            system= new SysPSSystem();
+            permissionResult.setApps(new ArrayList<>());
+            permissionResult.setUniResIds(new ArrayList<>());
+            system.setSysstructure(permissionResult);
+            system.setPssystemid("ibztask");
+            system.setPssystemname("ibztask");
+            if(systemService.save(system)){
+                log.info("向[UAA]同步系统资源成功");
+            }else{
+                log.error("向[UAA]同步系统资源失败");
+            }
+            permission.close();
 
-            permission= this.getClass().getResourceAsStream("/permission/ibzrtResource.json"); //获取当前系统所有实体资源能力
+            permission= this.getClass().getResourceAsStream("/permission/ibzrt/systemResource.json"); //获取当前系统所有实体资源能力
             permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
             system= new SysPSSystem();
             permissionResult.setEntities(new ArrayList<>());
