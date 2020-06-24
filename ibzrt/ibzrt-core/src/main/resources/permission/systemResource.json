@@ -4,11 +4,27 @@
     ],
     "entities":[
     {
+    "dename":"JobsLog",
+    "delogicname":"任务调度日志",
+    "sysmoudle":{"id":"TASK","name":"task"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
     "dename":"SysRolePermission",
     "delogicname":"角色权限关系",
     "sysmoudle":{"id":"UAA","name":"uaa"},
     "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
     "deaction":[{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
+    "dename":"IBZPost",
+    "delogicname":"岗位",
+    "sysmoudle":{"id":"OU","name":"ou"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" }],
     "datascope":[{"id":"all","name":"全部数据"}]
      }
     ,    {
@@ -47,9 +63,25 @@
     "dename":"IBZOrganization",
     "delogicname":"单位机构",
     "sysmoudle":{"id":"OU","name":"ou"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"},{"id":"SelectPOrg" , "name":"查询上级单位"},{"id":"SelectSOrg" , "name":"查询下级单位"}],
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
     "deaction":[{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" }],
     "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
+     }
+    ,    {
+    "dename":"JobsRegistry",
+    "delogicname":"任务注册信息",
+    "sysmoudle":{"id":"TASK","name":"task"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
+    "dename":"DictCatalog",
+    "delogicname":"字典",
+    "sysmoudle":{"id":"DICT","name":"dict"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
      }
     ,    {
     "dename":"WFGroup",
@@ -57,6 +89,22 @@
     "sysmoudle":{"id":"WORKFLOW","name":"workflow"},
     "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
     "deaction":[{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
+    "dename":"IBZTeam",
+    "delogicname":"组",
+    "sysmoudle":{"id":"OU","name":"ou"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
+    "dename":"JobsInfo",
+    "delogicname":"任务信息",
+    "sysmoudle":{"id":"TASK","name":"task"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Start" , "name":"开始" , "type":"USERUPDATE" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Execute" , "name":"执行" , "type":"USERCUSTOM" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Stop" , "name":"停止" , "type":"USERUPDATE" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" }],
     "datascope":[{"id":"all","name":"全部数据"}]
      }
     ,    {
@@ -103,9 +151,17 @@
     "dename":"IBZDepartment",
     "delogicname":"部门",
     "sysmoudle":{"id":"OU","name":"ou"},
-    "dedataset":[{"id":"CurDept" , "name":"CurDept"},{"id":"Default" , "name":"DEFAULT"}],
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
     "deaction":[{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" }],
     "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
+     }
+    ,    {
+    "dename":"IBZTeamMember",
+    "delogicname":"组成员",
+    "sysmoudle":{"id":"OU","name":"ou"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
      }
     ,    {
     "dename":"SysPermission",
@@ -113,6 +169,14 @@
     "sysmoudle":{"id":"UAA","name":"uaa"},
     "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
     "deaction":[{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
+    "dename":"DictOption",
+    "delogicname":"字典项",
+    "sysmoudle":{"id":"DICT","name":"dict"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" }],
     "datascope":[{"id":"all","name":"全部数据"}]
      }
     ,    {
@@ -129,7 +193,7 @@
             {
                "appid":"Web",
                "appname":"ibizlab-runtime",
-               "appmenu":[{"menuid":"Index", "menuname":"Index", "menuitem":[{ "id":"menuitem7" , "name":"单位人事" , "items":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" }]},{ "id":"menuitem8" , "name":"系统权限" , "items":[{ "id":"menuitem4" , "name":"用户角色" },{ "id":"menuitem9" , "name":"认证日志" }]},{ "id":"menuitem10" , "name":"流程管理" , "items":[{ "id":"menuitem6" , "name":"流程定义" },{ "id":"menuitem5" , "name":"流程角色" },{ "id":"menuitem11" , "name":"发布新流程" }]}] }]
+               "appmenu":[{"menuid":"Index", "menuname":"Index", "menuitem":[{ "id":"menuitem7" , "name":"单位人事" , "items":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" },{ "id":"menuitem12" , "name":"岗位管理" },{ "id":"menuitem13" , "name":"组管理" }]},{ "id":"menuitem8" , "name":"系统权限" , "items":[{ "id":"menuitem4" , "name":"用户角色" },{ "id":"menuitem9" , "name":"认证日志" }]},{ "id":"menuitem10" , "name":"流程管理" , "items":[{ "id":"menuitem6" , "name":"流程定义" },{ "id":"menuitem5" , "name":"流程角色" },{ "id":"menuitem11" , "name":"发布新流程" }]},{ "id":"menuitem14" , "name":"任务管理" , "items":[{ "id":"menuitem15" , "name":"注册" },{ "id":"menuitem16" , "name":"任务" },{ "id":"menuitem17" , "name":"日志" }]},{ "id":"menuitem18" , "name":"字典管理" , "items":[{ "id":"menuitem19" , "name":"目录" },{ "id":"menuitem20" , "name":"字典项" }]}] }]
             }
             ]
     }

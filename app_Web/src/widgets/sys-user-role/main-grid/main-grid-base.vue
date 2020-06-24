@@ -8,6 +8,7 @@
         :height="isEnablePagingBar && items.length > 0 ? 'calc(100% - 50px)' : '100%'"  
         :highlight-current-row ="isSingleSelect"
         :row-class-name="getRowClassName"
+        :cell-class-name="getCellClassName"
         @row-click="rowClick($event)"  
         @select-all="selectAll($event)"  
         @select="select($event)"  
@@ -41,18 +42,6 @@
                     </template>
                     <template v-slot="{row,column,$index}">
                         <span>{{row.sys_rolename}}</span>
-                    </template>
-                </el-table-column>
-            </template>
-            <template v-if="getColumnState('updatedate')">
-                <el-table-column show-overflow-tooltip :prop="'updatedate'" :label="$t('entities.sysuserrole.main_grid.columns.updatedate')" :width="250"  :align="'left'" :sortable="'custom'">
-                    <template v-slot:header="{column}">
-                      <span class="column-header ">
-                        {{$t('entities.sysuserrole.main_grid.columns.updatedate')}}
-                      </span>
-                    </template>
-                    <template v-slot="{row,column,$index}">
-                        <app-format-data format="YYYY-MM-DD hh:mm:ss" :data="row.updatedate"></app-format-data>
                     </template>
                 </el-table-column>
             </template>
@@ -98,11 +87,12 @@
 </div>
 </template>
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import SysUserRoleService from '@/service/sys-user-role/sys-user-role-service';
 import MainService from './main-grid-service';
 
@@ -543,13 +533,6 @@ export default class MainBase extends Vue implements ControlInterface {
             name: 'sys_rolename',
             label: '角色名称',
             langtag: 'entities.sysuserrole.main_grid.columns.sys_rolename',
-            show: true,
-            util: 'PX'
-        },
-        {
-            name: 'updatedate',
-            label: '更新时间',
-            langtag: 'entities.sysuserrole.main_grid.columns.updatedate',
             show: true,
             util: 'PX'
         },
@@ -1535,7 +1518,6 @@ export default class MainBase extends Vue implements ControlInterface {
         let hasRowEdit:any = {
           'sys_username':false,
           'sys_rolename':false,
-          'updatedate':false,
         }
         return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
     }

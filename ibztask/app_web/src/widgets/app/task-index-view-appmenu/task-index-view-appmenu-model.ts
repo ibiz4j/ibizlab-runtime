@@ -29,7 +29,7 @@ export default class TaskIndexViewModel {
 	iconcls: 'fa fa-gear',
 	icon: '',
 	textcls: '',
-	appfunctag: '_2',
+	appfunctag: 'Auto1',
 	resourcetag: '',
 	authtag:'web-TaskIndexView-menuitem3',
 },
@@ -48,7 +48,7 @@ export default class TaskIndexViewModel {
 	iconcls: 'fa fa-tasks',
 	icon: '',
 	textcls: '',
-	appfunctag: '_4',
+	appfunctag: 'Auto3',
 	resourcetag: '',
 	authtag:'web-TaskIndexView-menuitem1',
 },
@@ -67,7 +67,7 @@ export default class TaskIndexViewModel {
 	iconcls: 'fa fa-align-justify',
 	icon: '',
 	textcls: '',
-	appfunctag: '_3',
+	appfunctag: 'Auto2',
 	resourcetag: '',
 	authtag:'web-TaskIndexView-menuitem2',
 },
@@ -82,7 +82,7 @@ export default class TaskIndexViewModel {
 	 */
 	public funcs: any[] = [
         {
-            appfunctag: '_4',
+            appfunctag: 'Auto3',
             appfuncyype: 'APPVIEW',
             openmode: '',
             codename: 'jobsinfogridview',
@@ -94,7 +94,7 @@ export default class TaskIndexViewModel {
             ],
         },
         {
-            appfunctag: '_3',
+            appfunctag: 'Auto2',
             appfuncyype: 'APPVIEW',
             openmode: '',
             codename: 'jobsloggridview',
@@ -106,7 +106,7 @@ export default class TaskIndexViewModel {
             ],
         },
         {
-            appfunctag: '_2',
+            appfunctag: 'Auto1',
             appfuncyype: 'APPVIEW',
             openmode: '',
             codename: 'jobsregistrygridview',

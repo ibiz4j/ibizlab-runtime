@@ -112,7 +112,6 @@ export default class WFUserServiceBase extends EntityService {
             let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
             return res;
-
     }
 
     /**
@@ -210,7 +209,6 @@ export default class WFUserServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/wfusers/${context.wfuser}`,isloading);
-
     }
 
     /**

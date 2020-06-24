@@ -79,7 +79,7 @@ mock.onGet('v7/mainappmenu').reply((config: any) => {
 	iconcls: 'fa fa-buysellads',
 	icon: '',
 	textcls: '',
-	appfunctag: '_2',
+	appfunctag: 'Auto12',
 	resourcetag: '',
 },
         ],

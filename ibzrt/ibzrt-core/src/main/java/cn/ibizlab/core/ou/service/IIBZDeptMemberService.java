@@ -39,6 +39,8 @@ public interface IIBZDeptMemberService{
     void removeByDeptid(String deptid) ;
     List<IBZDeptMember> selectByUserid(String userid) ;
     void removeByUserid(String userid) ;
+    List<IBZDeptMember> selectByPostid(String postid) ;
+    void removeByPostid(String postid) ;
 
 }
 

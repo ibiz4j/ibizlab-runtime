@@ -106,8 +106,19 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/syspssystems/save").permitAll()
                        .antMatchers("/uaa/login").permitAll()
                        .antMatchers("/uaa/register").permitAll()
-                       .antMatchers("/uaa/queryUserByOpenId").permitAll()
+
                        .antMatchers("/uaa/responseTokenToWeiXin").permitAll()
+                       .antMatchers("/uaa/getWechatAppId").permitAll()
+                       .antMatchers("/uaa/queryWechatUserByCode").permitAll()
+                       .antMatchers("/uaa/bindWechatToRegister").permitAll()
+
+                       .antMatchers("/uaa/getDingtalkAppId").permitAll()
+                       .antMatchers("/uaa/queryDingtalkUserByCode").permitAll()
+                       .antMatchers("/uaa/bindDingtalkToRegister").permitAll()
+
+                       .antMatchers("/uaa/getQQAppId").permitAll()
+                       .antMatchers("/uaa/queryQQUserByCode").permitAll()
+                       .antMatchers("/uaa/bindQQtoRegister").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();

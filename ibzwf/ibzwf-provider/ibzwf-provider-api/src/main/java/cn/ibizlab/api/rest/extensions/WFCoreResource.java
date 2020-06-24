@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Api(tags = {"wfcore" })
@@ -109,6 +110,11 @@ public class WFCoreResource
 		if(StringUtils.isEmpty(taskDefinitionKey)||"null".equals(taskDefinitionKey)||"alls".equals(taskDefinitionKey))
 			taskDefinitionKey="";
 		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getBusinessKeys(system,"",entity,processDefinitionKey,taskDefinitionKey,userId));
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/deploybpmn")
+	public ResponseEntity<Boolean> deployBpmnFile(@RequestBody List<Map<String,Object>> bpmnfiles){
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.wfdeploybpmns(bpmnfiles));
 	}
 
 }

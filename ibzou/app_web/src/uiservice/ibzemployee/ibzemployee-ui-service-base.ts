@@ -230,7 +230,7 @@ export default class IBZEmployeeUIServiceBase extends UIService {
     }
 
     /**
-     * 新建
+     * 快速新建
      *
      * @param {any[]} args 当前数据
      * @param {any} context 行为附加上下文

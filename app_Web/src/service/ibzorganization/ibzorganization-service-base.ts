@@ -126,7 +126,6 @@ export default class IBZOrganizationServiceBase extends EntityService {
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             return res;
-
     }
 
     /**
@@ -195,7 +194,6 @@ export default class IBZOrganizationServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}`,isloading);
-
     }
 
     /**
@@ -275,33 +273,5 @@ export default class IBZOrganizationServiceBase extends EntityService {
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
         return Http.getInstance().get(`/ibzorganizations/fetchdefault`,tempData,isloading);
-    }
-
-    /**
-     * FetchSelectPOrg接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZOrganizationServiceBase
-     */
-    public async FetchSelectPOrg(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/ibzorganizations/fetchselectporg`,tempData,isloading);
-    }
-
-    /**
-     * FetchSelectSOrg接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZOrganizationServiceBase
-     */
-    public async FetchSelectSOrg(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/ibzorganizations/fetchselectsorg`,tempData,isloading);
     }
 }

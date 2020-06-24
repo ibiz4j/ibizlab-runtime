@@ -83,6 +83,13 @@ public class IBZDepartment extends EntityClient implements Serializable {
     private Integer deptlevel;
 
     /**
+     * 区属
+     */
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+
+    /**
      * 排序
      */
     @JSONField(name = "showorder")
@@ -206,6 +213,14 @@ public class IBZDepartment extends EntityClient implements Serializable {
     public void setDeptlevel(Integer deptlevel){
         this.deptlevel = deptlevel ;
         this.modify("deptlevel",deptlevel);
+    }
+
+    /**
+     * 设置 [区属]
+     */
+    public void setDomains(String domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
     /**

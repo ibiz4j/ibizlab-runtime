@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator';
-
 @Component({
 })
 export default class AppDepartmentSelect extends Vue {

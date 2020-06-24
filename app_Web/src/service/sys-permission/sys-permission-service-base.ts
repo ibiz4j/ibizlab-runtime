@@ -110,7 +110,6 @@ export default class SysPermissionServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/syspermissions/${context.syspermission}`,isloading);
-
     }
 
     /**
@@ -210,7 +209,6 @@ export default class SysPermissionServiceBase extends EntityService {
             let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
             return res;
-
     }
 
     /**

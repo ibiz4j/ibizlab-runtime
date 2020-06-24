@@ -68,11 +68,6 @@ public class IBZDepartmentFallback implements IBZDepartmentFeignClient{
 
 
 
-    public Page<IBZDepartment> searchCurDept(IBZDepartmentSearchContext context){
-            return null;
-     }
-
-
     public Page<IBZDepartment> searchDefault(IBZDepartmentSearchContext context){
             return null;
      }

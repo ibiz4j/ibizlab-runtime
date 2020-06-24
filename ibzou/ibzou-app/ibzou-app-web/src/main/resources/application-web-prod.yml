@@ -27,6 +27,10 @@ zuul:
       path: /ibzorganizations/**
       serviceId: ibzou-api
       stripPrefix: false
+    ibzpost:
+      path: /ibzposts/**
+      serviceId: ibzou-api
+      stripPrefix: false
     ibzteam:
       path: /ibzteams/**
       serviceId: ibzou-api

@@ -50,6 +50,10 @@ export default {
 		},
 	},
 	gridviewtoolbar_toolbar: {
+		deuiaction1: {
+			caption: "New",
+			tip: "New",
+		},
 		tbitem4: {
 			caption: "Edit",
 			tip: "Edit {0}",

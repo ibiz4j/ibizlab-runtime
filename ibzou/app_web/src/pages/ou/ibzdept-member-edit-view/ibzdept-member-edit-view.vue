@@ -9,6 +9,9 @@ import view_form from '@widgets/ibzdept-member/main-form/main-form.vue';
     },
     beforeRouteEnter: (to: any, from: any, next: any) => {
         next((vm: any) => {
+            if(!Object.is(vm.navModel,"route")){
+                vm.initNavDataWithTab(vm.viewCacheData);
+            }
             vm.$store.commit('addCurPageViewtag', { fullPath: to.fullPath, viewtag: vm.viewtag });
         });
     },

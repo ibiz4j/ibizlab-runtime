@@ -2,12 +2,12 @@
   <Drawer class-name="sider-drawer" placement="left" :closable="false" :mask="false" width="200" v-model="leftDrawerVisiable">
     <div class="context-menu-drag">
       <div class="menu-list">
-        <div class="menu-header" @mouseover="showMenuDrawer" @click="rightDrawerVisiable=!rightDrawerVisiable">
+        <div class="menu-header" @click="rightDrawerVisiable=!rightDrawerVisiable">
           <div class="menuicon">
             <Icon type="md-apps" />
           </div>
           <div class="content">
-            <span>服务</span>
+            <span>全部应用</span>
           </div>
           <div class="forward">
             <Icon type="ios-arrow-forward" />
@@ -16,7 +16,7 @@
         <div style="padding:8px 0px;" class="col-6">
           <draggable class="list-group" tag="ul" v-model="selectlist" v-bind="dragOptionsVal" @start="drag=true" @end="drag=false" :animation="250" handle=".handle" ghost-class="ghost">
             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-              <li class="list-group-item" v-for="(item,index) in selectlist" :key="item.id">
+              <li @click="skipTo(item)" class="list-group-item" v-for="(item,index) in selectlist" :key="item.id">
                 <el-row>
                   <el-col class="menuicon" :span="4">
                     <span>
@@ -30,7 +30,7 @@
                   <el-col :span="6">
                     <div class="bar">
                       <div>
-                        <Icon type="ios-close" @click="removeAt(index)" />
+                        <Icon type="ios-close" @click.stop="removeAt(index)" />
                       </div>
                       <div>
                         <Icon type="ios-move handle" />
@@ -45,12 +45,12 @@
       </div>
       <Drawer class-name="menu-drawer" width="60" :closable="true" :mask="false" placement="left" v-model="rightDrawerVisiable">
         <div class="menuItems">
-          <div class="item" v-for="(item) in list" :key="item.id">
+          <div @click="skipTo(item)" class="item" v-for="(item) in list" :key="item.id">
             <span class="title">{{item.label}}</span>
-            <span v-if="isStar(item.id)" class="star" @click="outStar(item)">
+            <span v-if="isStar(item.id)" class="star" @click.stop="outStar(item)">
               <Icon type="ios-star" />
             </span>
-            <span v-else class="star" @click="onStar(item)">
+            <span v-else class="star" @click.stop="onStar(item)">
               <Icon type="ios-star-outline" />
             </span>
           </div>
@@ -72,6 +72,8 @@ import { Vue,Component,Provide,Watch,Prop,Model } from "vue-property-decorator";
   }
 })
 export default class ContextMenuDrag extends Vue {
+
+  public panelShow: boolean = true;
 
   /**
    * 抽屉菜单状态
@@ -205,6 +207,23 @@ export default class ContextMenuDrag extends Vue {
     });
     return istar;
   }
+
+  /**
+   * 跳转到应用
+   * 
+   * @returns
+   * @memberof ContextMenuDrag
+   */
+   public skipTo(item: any){
+     if(item.addr){
+      let params: any = {};
+      params.model = this.selectlist;
+      const put: Promise<any> = this.entityService.updateChooseApp(null,params);
+      window.location.href = item.addr;
+     }else{
+       this.$message.info("未找到该应用");
+     }
+   }
 
   /**
    * 加入列表

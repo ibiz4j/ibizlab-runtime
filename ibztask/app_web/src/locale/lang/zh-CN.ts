@@ -51,8 +51,8 @@ export default {
         // 非实体视图
         views: {
             taskindexview: {
-                caption: "ibizlab-task",
-                title: "ibizlab-task",
+                caption: "ibizlab",
+                title: "task",
             },
         },
         utilview:{

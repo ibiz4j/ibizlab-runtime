@@ -8,6 +8,7 @@ export default {
     parentdeptid: "上级部门",
     shortname: "Others",
     deptlevel: "部门级别",
+    domains: "区属",
     showorder: "Audit",
     bcode: "Condition",
     leaderid: "分管领导标识",
@@ -150,8 +151,8 @@ export default {
 	},
 	gridviewtoolbar_toolbar: {
 		tbitem1_opennewcreateview: {
-			caption: "快速新建",
-			tip: "快速新建",
+			caption: "新建",
+			tip: "新建",
 		},
 		tbitem2: {
 			caption: "-",

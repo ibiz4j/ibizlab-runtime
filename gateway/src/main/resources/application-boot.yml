@@ -67,6 +67,13 @@ feign:
     enabled: true
   sentinel:
     enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+      min-response-size: 10240
+    response:
+      enabled: true
 
 #Log配置
 logging:
@@ -85,16 +92,17 @@ ibiz:
   enablePermissionValid: true
   cacheLevel: L1 #(L1)一级本地caffeine缓存;(L2)caffeine缓存+Redis缓存
 
-#xxl-job定时服务
-xxl:
-  job:
-    accessToken:
-    admin:
-      addresses: #127.0.0.1
-    executor:
-      appname: ibzrt
-      ip:
-      port: 9999
-      logpath: /app/joblog
-      logretentiondays: -1
+### jobs
+jobs:
+  #admin-address: http://127.0.0.1:40005
+  app-name: ibizlab-gateway
+  app-port: 9999
+  #app-ip: 127.0.0.1
+
+### 启用Gzip压缩
+server:
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 10240
 

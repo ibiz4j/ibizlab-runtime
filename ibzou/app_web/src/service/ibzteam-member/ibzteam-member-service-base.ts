@@ -77,19 +77,34 @@ export default class IBZTeamMemberServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            return res;
         }
         if(context.ibzteam && context.ibzteammember){
-            return Http.getInstance().post(`/ibzteams/${context.ibzteam}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzteams/${context.ibzteam}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            return res;
         }
         if(context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
+            return res;
         }
             return Http.getInstance().post(`/ibzteammembers/${context.ibzteammember}/checkkey`,data,isloading);
     }
@@ -105,19 +120,34 @@ export default class IBZTeamMemberServiceBase extends EntityService {
      */
     public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            return res;
         }
         if(context.ibzteam && context.ibzteammember){
-            return Http.getInstance().post(`/ibzteams/${context.ibzteam}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzteams/${context.ibzteam}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            return res;
         }
         if(context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}/save`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -136,19 +166,29 @@ export default class IBZTeamMemberServiceBase extends EntityService {
      */
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && true){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/getdraft`,isloading);
+            res.data.ibzteammember = data.ibzteammember;
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee && true){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/getdraft`,isloading);
+            res.data.ibzteammember = data.ibzteammember;
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee && true){
-            return Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/getdraft`,isloading);
+            res.data.ibzteammember = data.ibzteammember;
+            return res;
         }
         if(context.ibzteam && true){
-            return Http.getInstance().get(`/ibzteams/${context.ibzteam}/ibzteammembers/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzteams/${context.ibzteam}/ibzteammembers/getdraft`,isloading);
+            res.data.ibzteammember = data.ibzteammember;
+            return res;
         }
         if(context.ibzemployee && true){
-            return Http.getInstance().get(`/ibzemployees/${context.ibzemployee}/ibzteammembers/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzemployees/${context.ibzemployee}/ibzteammembers/getdraft`,isloading);
+            res.data.ibzteammember = data.ibzteammember;
+            return res;
         }
         let res:any = await  Http.getInstance().get(`/ibzteammembers/getdraft`,isloading);
         res.data.ibzteammember = data.ibzteammember;
@@ -166,19 +206,34 @@ export default class IBZTeamMemberServiceBase extends EntityService {
      */
     public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            return res;
         }
         if(context.ibzteam && context.ibzteammember){
-            return Http.getInstance().put(`/ibzteams/${context.ibzteam}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/ibzteams/${context.ibzteam}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            return res;
         }
         if(context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().put(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -197,23 +252,27 @@ export default class IBZTeamMemberServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
+            return res;
         }
         if(context.ibzteam && context.ibzteammember){
-            return Http.getInstance().get(`/ibzteams/${context.ibzteam}/ibzteammembers/${context.ibzteammember}`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzteams/${context.ibzteam}/ibzteammembers/${context.ibzteammember}`,isloading);
+            return res;
         }
         if(context.ibzemployee && context.ibzteammember){
-            return Http.getInstance().get(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
+            return res;
         }
             let res:any = await Http.getInstance().get(`/ibzteammembers/${context.ibzteammember}`,isloading);
             return res;
-
     }
 
     /**
@@ -242,7 +301,6 @@ export default class IBZTeamMemberServiceBase extends EntityService {
             return Http.getInstance().delete(`/ibzemployees/${context.ibzemployee}/ibzteammembers/${context.ibzteammember}`,isloading);
         }
             return Http.getInstance().delete(`/ibzteammembers/${context.ibzteammember}`,isloading);
-
     }
 
     /**
@@ -256,49 +314,69 @@ export default class IBZTeamMemberServiceBase extends EntityService {
      */
     public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers`,data,isloading);
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzteammembers`,data,isloading);
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzteammembers`,data,isloading);
+            return res;
         }
         if(context.ibzteam && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/ibzteams/${context.ibzteam}/ibzteammembers`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/ibzteams/${context.ibzteam}/ibzteammembers`,data,isloading);
+            return res;
         }
         if(context.ibzemployee && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/ibzteammembers`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/ibzteammembers`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);

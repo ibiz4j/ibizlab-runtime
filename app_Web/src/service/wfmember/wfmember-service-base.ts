@@ -74,7 +74,6 @@ export default class WFMemberServiceBase extends EntityService {
             return Http.getInstance().delete(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,isloading);
         }
             return Http.getInstance().delete(`/wfmembers/${context.wfmember}`,isloading);
-
     }
 
     /**
@@ -88,10 +87,14 @@ export default class WFMemberServiceBase extends EntityService {
      */
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && true){
-            return Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/getdraft`,isloading);
+            res.data.wfmember = data.wfmember;
+            return res;
         }
         if(context.wfgroup && true){
-            return Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/getdraft`,isloading);
+            res.data.wfmember = data.wfmember;
+            return res;
         }
         let res:any = await  Http.getInstance().get(`/wfmembers/getdraft`,isloading);
         res.data.wfmember = data.wfmember;
@@ -109,10 +112,16 @@ export default class WFMemberServiceBase extends EntityService {
      */
     public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
-            return Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/save`,data,isloading);
+            return res;
         }
         if(context.wfgroup && context.wfmember){
-            return Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/save`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -131,10 +140,16 @@ export default class WFMemberServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
-            return Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
+            return res;
         }
         if(context.wfgroup && context.wfmember){
-            return Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
+            return res;
         }
             return Http.getInstance().post(`/wfmembers/${context.wfmember}/checkkey`,data,isloading);
     }
@@ -150,10 +165,16 @@ export default class WFMemberServiceBase extends EntityService {
      */
     public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
-            return Http.getInstance().put(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,data,isloading);
+            return res;
         }
         if(context.wfgroup && context.wfmember){
-            return Http.getInstance().put(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -172,22 +193,30 @@ export default class WFMemberServiceBase extends EntityService {
      */
     public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers`,data,isloading);
+            return res;
         }
         if(context.wfgroup && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -213,14 +242,15 @@ export default class WFMemberServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
-            return Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,isloading);
+            let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,isloading);
+            return res;
         }
         if(context.wfgroup && context.wfmember){
-            return Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,isloading);
+            let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,isloading);
+            return res;
         }
             let res:any = await Http.getInstance().get(`/wfmembers/${context.wfmember}`,isloading);
             return res;
-
     }
 
     /**

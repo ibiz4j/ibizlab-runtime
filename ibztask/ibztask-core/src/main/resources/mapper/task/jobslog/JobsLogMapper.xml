@@ -39,32 +39,32 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-       <![CDATA[	SELECT t1.`ADDRESS`, t1.`CREATE_TIME`, t1.`FAIL_RETRY_COUNT`, t1.`HANDLER`, t1.`ID`, t1.`JOB_ID`, t1.`PARAM`, t1.`TRIGGER_CODE`, t1.`TRIGGER_TYPE` FROM `JOBS_LOG` t1  
+		<![CDATA[ SELECT t1.`ADDRESS`, t1.`CREATE_TIME`, t1.`FAIL_RETRY_COUNT`, t1.`HANDLER`, t1.`ID`, t1.`JOB_ID`, t1.`PARAM`, t1.`TRIGGER_CODE`, t1.`TRIGGER_TYPE` FROM `JOBS_LOG` t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="oracle">
-       <![CDATA[	SELECT t1.ADDRESS, t1.CREATE_TIME, t1.FAIL_RETRY_COUNT, t1.HANDLER, t1.ID, t1.JOB_ID, t1.PARAM, t1.TRIGGER_CODE, t1.TRIGGER_TYPE FROM JOBS_LOG t1  
+		<![CDATA[ SELECT t1.ADDRESS, t1.CREATE_TIME, t1.FAIL_RETRY_COUNT, t1.HANDLER, t1.ID, t1.JOB_ID, t1.PARAM, t1.TRIGGER_CODE, t1.TRIGGER_TYPE FROM JOBS_LOG t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
-       <![CDATA[	SELECT t1.ADDRESS, t1.CREATE_TIME, t1.FAIL_RETRY_COUNT, t1.HANDLER, t1.ID, t1.JOB_ID, t1.PARAM, t1.TRIGGER_CODE, t1.TRIGGER_TYPE FROM JOBS_LOG t1  
+		<![CDATA[ SELECT t1.ADDRESS, t1.CREATE_TIME, t1.FAIL_RETRY_COUNT, t1.HANDLER, t1.ID, t1.JOB_ID, t1.PARAM, t1.TRIGGER_CODE, t1.TRIGGER_TYPE FROM JOBS_LOG t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
-       <![CDATA[	SELECT t1.`ADDRESS`, t1.`CREATE_TIME`, t1.`FAIL_RETRY_COUNT`, t1.`HANDLER`, t1.`ID`, t1.`JOB_ID`, t1.`PARAM`, t1.`TRIGGER_CODE`, t1.`TRIGGER_MSG`, t1.`TRIGGER_TYPE` FROM `JOBS_LOG` t1  
+		<![CDATA[ SELECT t1.`ADDRESS`, t1.`CREATE_TIME`, t1.`FAIL_RETRY_COUNT`, t1.`HANDLER`, t1.`ID`, t1.`JOB_ID`, t1.`PARAM`, t1.`TRIGGER_CODE`, t1.`TRIGGER_MSG`, t1.`TRIGGER_TYPE` FROM `JOBS_LOG` t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="oracle">
-       <![CDATA[	SELECT t1.ADDRESS, t1.CREATE_TIME, t1.FAIL_RETRY_COUNT, t1.HANDLER, t1.ID, t1.JOB_ID, t1.PARAM, t1.TRIGGER_CODE, t1.TRIGGER_MSG, t1.TRIGGER_TYPE FROM JOBS_LOG t1  
+		<![CDATA[ SELECT t1.ADDRESS, t1.CREATE_TIME, t1.FAIL_RETRY_COUNT, t1.HANDLER, t1.ID, t1.JOB_ID, t1.PARAM, t1.TRIGGER_CODE, t1.TRIGGER_MSG, t1.TRIGGER_TYPE FROM JOBS_LOG t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="postgresql">
-       <![CDATA[	SELECT t1.ADDRESS, t1.CREATE_TIME, t1.FAIL_RETRY_COUNT, t1.HANDLER, t1.ID, t1.JOB_ID, t1.PARAM, t1.TRIGGER_CODE, t1.TRIGGER_MSG, t1.TRIGGER_TYPE FROM JOBS_LOG t1  
+		<![CDATA[ SELECT t1.ADDRESS, t1.CREATE_TIME, t1.FAIL_RETRY_COUNT, t1.HANDLER, t1.ID, t1.JOB_ID, t1.PARAM, t1.TRIGGER_CODE, t1.TRIGGER_MSG, t1.TRIGGER_TYPE FROM JOBS_LOG t1  
 			]]>
     </sql>
 </mapper>

@@ -1,4 +1,4 @@
-.login{
+.login {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -8,18 +8,22 @@
     flex-direction: column;
     min-height: 100%;
     background: #108cee;
-    > img{
+
+    > img {
         width: 100vw;
         height: 100vh;
+        min-width: 1280px;
+        min-height: 720px;
     }
 
-    &-con{
+    &-con {
         position: absolute;
         left: 0;
         right: 0;
         top: 20%;
         margin: auto;
         width: 450px;
+
         .ivu-card-head {
             padding: 30px 0px 20px 0px;
             border-bottom: 0px;
@@ -28,37 +32,35 @@
                 line-height: 30px;
                 font-size: 20px;
                 color: #666666;
-                font-weight: 600;
+                font-weight: 700;
             }
         }
-        &-header{
+
+        &-header {
             font-size: 16px;
             font-weight: 300;
             text-align: center;
             padding: 30px 0;
         }
-        .form-con{
+
+        .form-con {
             padding: 0px 20px 0px 20px;
-            >i-button{
+
+            > i-button {
                 width: 170px;
                 height: 40px;
             }
         }
-        .login-tip{
-            font-size: 10px;
-            text-align: center;
-            color: red;
-            height: 30px;
-        }
     }
 }
 
-.login_btn{
+.login_btn {
     width: 175px;
     height: 40px;
     font-size: 18px;
     font-family: MicrosoftYaHei;
 }
+
 .login_reset {
     width: 175px;
     height: 40px;
@@ -67,20 +69,18 @@
     float: right;
 }
 
+.goRegister {
+    float: right;
+    font-size: 14px;
+}
+
+
 .form_tipinfo {
     font-family: MicrosoftYaHei-Bold;
     font-size: 14px;
     font-weight: bold;
     font-stretch: normal;
     line-height: 24px;
-    letter-spacing: 0px;
-    color: #666666;
-}
-
-form_tipinfo_more {
-    font-family: MicrosoftYaHei;
-    font-size: 14px;
-    font-weight: normal;
     letter-spacing: 0px;
     color: #666666;
 }
@@ -101,11 +101,11 @@ form_tipinfo_more {
 .sign-btn {
     display: inline-block;
     cursor: pointer;
-    margin-left: 10px;
 }
 
 .wx-svg-container,
-.qq-svg-container {
+.qq-svg-container,
+.dd-svg-container{
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -113,6 +113,6 @@ form_tipinfo_more {
     text-align: center;
     padding-top: 1px;
     border-radius: 4px;
-    margin-bottom: -20px;
-    margin-top: 10px;
+    margin: 10px 5px -20px 15px;
 }
+

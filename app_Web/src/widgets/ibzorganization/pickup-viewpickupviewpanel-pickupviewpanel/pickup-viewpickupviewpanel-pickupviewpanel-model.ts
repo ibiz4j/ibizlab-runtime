@@ -40,6 +40,9 @@ export default class PickupViewpickupviewpanelModel {
         name: 'parentorgname',
       },
       {
+        name: 'domains',
+      },
+      {
         name: 'enable',
       },
       {

@@ -8,6 +8,7 @@ export default {
     orglevel: "单位级别",
     showorder: "访问审计",
     parentorgname: "上级单位",
+    domains: "区属",
     enable: "逻辑有效",
     createdate: "创建时间",
     updatedate: "最后修改时间",
@@ -128,12 +129,16 @@ export default {
 	},
 	gridviewtoolbar_toolbar: {
 		tbitem1_opennewcreateview: {
-			caption: "快速新建",
-			tip: "快速新建",
+			caption: "新建",
+			tip: "新建",
 		},
 		tbitem2: {
 			caption: "-",
 			tip: "",
+		},
+		tbitem3: {
+			caption: "新建",
+			tip: "新建",
 		},
 		tbitem4: {
 			caption: "编辑",

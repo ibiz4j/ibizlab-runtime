@@ -94,7 +94,6 @@ export default class IBZTeamServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/ibzteams/${context.ibzteam}`,isloading);
-
     }
 
     /**
@@ -110,7 +109,6 @@ export default class IBZTeamServiceBase extends EntityService {
             let res:any = await Http.getInstance().get(`/ibzteams/${context.ibzteam}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
             return res;
-
     }
 
     /**

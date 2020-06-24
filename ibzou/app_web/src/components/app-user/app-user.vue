@@ -1,13 +1,13 @@
 <template>
     <div class='app-header-user'>
-        <dropdown @on-click="userSelect" :transfer="true">
+        <dropdown transfer-class-name="user-dropdownMenu" @on-click="userSelect" :transfer="true">
             <div class='user'>
                 <span>{{user.name ? user.name : $t('components.appUser.name')}}</span>
                 &nbsp;&nbsp;<avatar :src="user.avatar" />
             </div>
             <dropdown-menu class='menu' slot='list' style='font-size: 15px !important;'>
                 <dropdown-item name='logout' style='font-size: 15px !important;'>
-                    <span><i aria-hidden='true' class='fa fa-cogs' style='margin-right: 8px;'></i></span>
+                    <span><i aria-hidden='true' class='ivu-icon ivu-icon-md-power' style='margin-right: 8px;'></i></span>
                     <span>{{$t('components.appUser.logout')}}</span>
                 </dropdown-item>
             </dropdown-menu>

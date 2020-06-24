@@ -42,6 +42,9 @@ public class IBZDepartmentServiceImpl implements IIBZDepartmentService {
     @Autowired
     IBZDepartmentFeignClient iBZDepartmentFeignClient;
 
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
     @Override
     @Transactional
@@ -184,15 +187,6 @@ public class IBZDepartmentServiceImpl implements IIBZDepartmentService {
 	}
 
 
-
-    /**
-     * 查询集合 CurDept
-     */
-    @Override
-    public Page<IBZDepartment> searchCurDept(IBZDepartmentSearchContext context) {
-        Page<IBZDepartment> iBZDepartments=iBZDepartmentFeignClient.searchCurDept(context);
-        return iBZDepartments;
-    }
 
     /**
      * 查询集合 DEFAULT

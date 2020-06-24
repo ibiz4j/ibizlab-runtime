@@ -28,11 +28,12 @@
 </i-form>
 </template>
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import WFProcessDefinitionService from '@/service/wfprocess-definition/wfprocess-definition-service';
 import DefaultService from './default-searchform-service';
 

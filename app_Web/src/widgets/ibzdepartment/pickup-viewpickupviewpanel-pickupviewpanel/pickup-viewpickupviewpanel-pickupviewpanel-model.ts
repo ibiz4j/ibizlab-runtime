@@ -37,6 +37,9 @@ export default class PickupViewpickupviewpanelModel {
         name: 'deptlevel',
       },
       {
+        name: 'domains',
+      },
+      {
         name: 'showorder',
       },
       {

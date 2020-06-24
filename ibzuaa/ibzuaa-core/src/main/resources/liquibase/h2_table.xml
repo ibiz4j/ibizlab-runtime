@@ -4,7 +4,7 @@
 
 
     <!--输出实体[SYS_AUTHLOG]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_authlog-36-1">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_authlog-37-1">
         <createTable tableName="IBZAUTHLOG">
                 <column name="LOGID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_AUTHLOG_LOGID"/>

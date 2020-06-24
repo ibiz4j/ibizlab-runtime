@@ -68,15 +68,14 @@ import AppUploadFileInfo from './components/app-upload-file-info/app-upload-file
 import ContextMenu from './components/context-menu/context-menu'
 import AppColumnFormat from './components/app-column-format/app-column-format.vue'
 import AppQuickGroup from './components/app-quick-group/app-quick-group.vue'
-import AppOrgSelect from './components/app-org-select/app-org-select.vue'
-import AppDepartmentSelect from './components/app-department-select/app-department-select.vue'
-import IBizGroupSelect from './components/ibiz-group-select/ibiz-group-select.vue'
-import IBizGroupPicker from './components/ibiz-group-picker/ibiz-group-picker.vue'
+import AppGroupPicker from './components/app-group-picker/app-group-picker.vue'
 import AppWFApproval from './components/app-wf-approval/app-wf-approval.vue'
 import Breadcrumb from './components/app-breadcrumb/app-breadcrumb.vue'
 import AppTransfer from './components/app-transfer/app-transfer.vue'
 import ContextMenuDrag from './components/context-menu-drag/context-menu-drag.vue'
-
+import AppOrgSelect from './components/app-org-select/app-org-select.vue'
+import AppDepartmentSelect from './components/app-department-select/app-department-select.vue'
+import AppGroupSelect from './components/app-group-select/app-group-select.vue'
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
 // 全局挂载功能服务注册中心
@@ -158,8 +157,8 @@ export const AppComponents = {
         v.component('app-quick-group',AppQuickGroup);
         v.component('app-org-select',AppOrgSelect);
         v.component('app-department-select',AppDepartmentSelect);
-        v.component('ibiz-group-select',IBizGroupSelect);
-        v.component('ibiz-group-picker',IBizGroupPicker);
+        v.component('app-group-select',AppGroupSelect);
+        v.component('app-group-picker',AppGroupPicker);
         v.component('app-wf-approval',AppWFApproval);
         v.component('app-breadcrumb',Breadcrumb);
         v.component('app-transfer',AppTransfer);

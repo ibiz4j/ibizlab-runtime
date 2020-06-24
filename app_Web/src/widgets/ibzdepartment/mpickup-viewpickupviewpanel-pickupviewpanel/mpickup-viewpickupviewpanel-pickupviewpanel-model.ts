@@ -37,6 +37,9 @@ export default class MPickupViewpickupviewpanelModel {
         name: 'deptlevel',
       },
       {
+        name: 'domains',
+      },
+      {
         name: 'showorder',
       },
       {

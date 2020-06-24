@@ -118,16 +118,16 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import MainService from './main-appmenu-service';
 
 import MainModel from './main-appmenu-model';
 import { Environment } from '@/environments/environment';
-import NavDataService from '@/service/app/navdata-service';
 
 
 @Component({
@@ -578,8 +578,6 @@ export default class MainBase extends Vue implements ControlInterface {
             let navDataService = NavDataService.getInstance(this.$store);
             if(Object.is(this.navModel,"route")){
                 navDataService.removeNavData(this.viewtag);
-            }else{
-                navDataService.removeNavDataWithoutCache(this.viewtag);
             }
             switch (item.appfunctag) {
                 case 'Auto10': 
@@ -588,8 +586,8 @@ export default class MainBase extends Vue implements ControlInterface {
                 case 'Auto5': 
                     this.clickAuto5(item);
                     return;
-                case '_2': 
-                    this.click_2(item);
+                case 'Auto12': 
+                    this.clickAuto12(item);
                     return;
                 case 'Auto6': 
                     this.clickAuto6(item);
@@ -653,7 +651,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {*} [item={}]
      * @memberof Main
      */
-    public click_2(item: any = {}) {
+    public clickAuto12(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];

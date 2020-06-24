@@ -233,7 +233,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-authloggrid-view/sys-authloggrid-view.vue'),
+                    component: () => import('@pages/uaa/sys-auth-log-grid-view/sys-auth-log-grid-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/pickupview/:pickupview?',
@@ -423,7 +423,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-authloggrid-view/sys-authloggrid-view.vue'),
+        component: () => import('@pages/uaa/sys-auth-log-grid-view/sys-auth-log-grid-view.vue'),
     },
     {
         path: '/sysapps/:sysapp?/editview/:editview?',

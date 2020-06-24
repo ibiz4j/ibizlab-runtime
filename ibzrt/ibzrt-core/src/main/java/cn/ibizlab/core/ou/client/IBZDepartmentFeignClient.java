@@ -64,11 +64,6 @@ public interface IBZDepartmentFeignClient {
 
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/searchcurdept")
-    Page<IBZDepartment> searchCurDept(@RequestBody IBZDepartmentSearchContext context);
-
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/searchdefault")
     Page<IBZDepartment> searchDefault(@RequestBody IBZDepartmentSearchContext context);
 

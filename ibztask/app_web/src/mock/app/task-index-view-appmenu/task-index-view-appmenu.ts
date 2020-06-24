@@ -25,7 +25,7 @@ mock.onGet('v7/task-index-viewappmenu').reply((config: any) => {
 	iconcls: 'fa fa-gear',
 	icon: '',
 	textcls: '',
-	appfunctag: '_2',
+	appfunctag: 'Auto1',
 	resourcetag: '',
 },
             {
@@ -43,7 +43,7 @@ mock.onGet('v7/task-index-viewappmenu').reply((config: any) => {
 	iconcls: 'fa fa-tasks',
 	icon: '',
 	textcls: '',
-	appfunctag: '_4',
+	appfunctag: 'Auto3',
 	resourcetag: '',
 },
             {
@@ -61,7 +61,7 @@ mock.onGet('v7/task-index-viewappmenu').reply((config: any) => {
 	iconcls: 'fa fa-align-justify',
 	icon: '',
 	textcls: '',
-	appfunctag: '_3',
+	appfunctag: 'Auto2',
 	resourcetag: '',
 },
         ],

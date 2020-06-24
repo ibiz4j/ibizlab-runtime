@@ -6,7 +6,7 @@ export const viewstate: any = {
         {
             viewtag: '0134ebf9391cb5f988839332c1352cd9',
             viewmodule: 'uaa',
-            viewname: 'SYS_AUTHLOGGridView',
+            viewname: 'SysAuthLogGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [

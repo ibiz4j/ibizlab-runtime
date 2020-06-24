@@ -93,7 +93,6 @@ export default class SysAuthLogServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/sysauthlogs/${context.sysauthlog}`,isloading);
-
     }
 
     /**
@@ -144,7 +143,6 @@ export default class SysAuthLogServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/sysauthlogs/${context.sysauthlog}`,isloading);
             return res;
-
     }
 
     /**

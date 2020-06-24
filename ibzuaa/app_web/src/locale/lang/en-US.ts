@@ -54,8 +54,8 @@ export default {
         // 非实体视图
         views: {
             index: {
-                caption: "ibizlab-uaa",
-                title: "ibizlab-uaa",
+                caption: "ibizlab",
+                title: "uaa",
             },
         },
         utilview:{

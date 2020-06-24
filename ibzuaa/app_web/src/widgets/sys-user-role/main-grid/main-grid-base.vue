@@ -8,6 +8,7 @@
         :height="isEnablePagingBar && items.length > 0 ? 'calc(100% - 50px)' : '100%'"  
         :highlight-current-row ="isSingleSelect"
         :row-class-name="getRowClassName"
+        :cell-class-name="getCellClassName"
         @row-click="rowClick($event)"  
         @select-all="selectAll($event)"  
         @select="select($event)"  
@@ -100,11 +101,12 @@
 </div>
 </template>
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import SysUserRoleService from '@/service/sys-user-role/sys-user-role-service';
 import MainService from './main-grid-service';
 

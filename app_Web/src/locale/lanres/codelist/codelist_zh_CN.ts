@@ -10,6 +10,11 @@ export default {
         "性别不详": "性别不详",
         "empty": "",
     },
+    CodeListJobStatus: {
+        "0": "ENABLED",
+        "1": "DISABLED",
+        "empty": "",
+    },
     CLAuthCode: {
         "200": "成功",
         "400": "用户不存在",

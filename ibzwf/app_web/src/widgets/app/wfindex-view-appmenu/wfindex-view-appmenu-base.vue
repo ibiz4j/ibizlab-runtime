@@ -118,16 +118,16 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import WFIndexViewService from './wfindex-view-appmenu-service';
 
 import WFIndexViewModel from './wfindex-view-appmenu-model';
 import { Environment } from '@/environments/environment';
-import NavDataService from '@/service/app/navdata-service';
 
 
 @Component({
@@ -578,8 +578,6 @@ export default class WFIndexViewBase extends Vue implements ControlInterface {
             let navDataService = NavDataService.getInstance(this.$store);
             if(Object.is(this.navModel,"route")){
                 navDataService.removeNavData(this.viewtag);
-            }else{
-                navDataService.removeNavDataWithoutCache(this.viewtag);
             }
             switch (item.appfunctag) {
                 case 'Auto3': 

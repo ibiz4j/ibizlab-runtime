@@ -25,7 +25,7 @@ import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.domain.EntityClient;
 
 /**
- * ServiceApi [实体] 对象
+ * ServiceApi [系统] 对象
  */
 @Data
 public class SysPSSystem extends EntityClient implements Serializable {
@@ -52,6 +52,20 @@ public class SysPSSystem extends EntityClient implements Serializable {
     @JsonProperty("sysstructure")
     private String sysstructure;
 
+    /**
+     * 校验
+     */
+    @JSONField(name = "md5check")
+    @JsonProperty("md5check")
+    private String md5check;
+
+    /**
+     * 排序
+     */
+    @JSONField(name = "showorder")
+    @JsonProperty("showorder")
+    private Integer showorder;
+
 
 
 
@@ -70,6 +84,22 @@ public class SysPSSystem extends EntityClient implements Serializable {
     public void setSysstructure(String sysstructure){
         this.sysstructure = sysstructure ;
         this.modify("sysstructure",sysstructure);
+    }
+
+    /**
+     * 设置 [校验]
+     */
+    public void setMd5check(String md5check){
+        this.md5check = md5check ;
+        this.modify("md5check",md5check);
+    }
+
+    /**
+     * 设置 [排序]
+     */
+    public void setShoworder(Integer showorder){
+        this.showorder = showorder ;
+        this.modify("showorder",showorder);
     }
 
 

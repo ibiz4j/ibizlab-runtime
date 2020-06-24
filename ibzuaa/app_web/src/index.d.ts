@@ -9,6 +9,5 @@ declare global {
         utilServiceRegister:UtilServiceRegister,
         entityServiceRegister:EntityServiceRegister,
         counterServiceRegister:CounterServiceRegister,
-        QC: any
     }
 }

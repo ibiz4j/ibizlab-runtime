@@ -80,6 +80,14 @@ public class IBZDepartmentDTO extends DTOBase implements Serializable {
     private Integer deptlevel;
 
     /**
+     * 属性 [DOMAINS]
+     *
+     */
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+
+    /**
      * 属性 [SHOWORDER]
      *
      */
@@ -192,6 +200,14 @@ public class IBZDepartmentDTO extends DTOBase implements Serializable {
     public void setDeptlevel(Integer  deptlevel){
         this.deptlevel = deptlevel ;
         this.modify("deptlevel",deptlevel);
+    }
+
+    /**
+     * 设置 [DOMAINS]
+     */
+    public void setDomains(String  domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
     /**

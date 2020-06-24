@@ -49,6 +49,10 @@ export default {
 		},
 	},
 	gridviewtoolbar_toolbar: {
+		deuiaction1: {
+			caption: "新建",
+			tip: "新建",
+		},
 		tbitem4: {
 			caption: "编辑",
 			tip: "编辑",

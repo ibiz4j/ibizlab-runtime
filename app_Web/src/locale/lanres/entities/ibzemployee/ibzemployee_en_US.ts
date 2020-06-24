@@ -12,7 +12,7 @@ export default {
     mdeptcode: "主部门代码",
     mdeptname: "主部门名称",
     bcode: "业务编码",
-    postid: "岗位",
+    postid: "岗位标识",
     postcode: "岗位代码",
     postname: "岗位名称",
     orgid: "单位",
@@ -205,8 +205,8 @@ export default {
 	},
 	gridviewtoolbar_toolbar: {
 		tbitem1_opennewcreateview: {
-			caption: "快速新建",
-			tip: "快速新建",
+			caption: "新建",
+			tip: "新建",
 		},
 		tbitem2: {
 			caption: "-",

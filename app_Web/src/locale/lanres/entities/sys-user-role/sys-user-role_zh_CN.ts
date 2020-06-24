@@ -43,7 +43,6 @@ export default {
 		columns: {
 			sys_username: "用户名称",
 			sys_rolename: "角色名称",
-			updatedate: "更新时间",
 		},
 		uiactions: {
 		},

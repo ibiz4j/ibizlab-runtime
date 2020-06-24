@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -46,13 +46,15 @@ public class IBZEmployeeResource {
     @Lazy
     public IBZEmployeeMapping ibzemployeeMapping;
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzrt-IBZEmployee-Remove')")
     @ApiOperation(value = "删除人员", tags = {"人员" },  notes = "删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzemployees/{ibzemployee_id}")
-
+    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("ibzemployee_id") String ibzemployee_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.remove(ibzemployee_id));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.getIbzemployeeByIds(#ids),'ibzrt-IBZEmployee-Remove')")
     @ApiOperation(value = "批量删除人员", tags = {"人员" },  notes = "批量删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzemployees/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -60,9 +62,10 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzrt-IBZEmployee-Update')")
     @ApiOperation(value = "更新人员", tags = {"人员" },  notes = "更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzemployees/{ibzemployee_id}")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> update(@PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
 		IBZEmployee domain  = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain .setUserid(ibzemployee_id);
@@ -71,6 +74,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.getIbzemployeeByEntities(this.ibzemployeeMapping.toDomain(#ibzemployeedtos)),'ibzrt-IBZEmployee-Update')")
     @ApiOperation(value = "批量更新人员", tags = {"人员" },  notes = "批量更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzemployees/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -84,6 +88,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.checkKey(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @PostAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(returnObject.body),'ibzrt-IBZEmployee-Get')")
     @ApiOperation(value = "获取人员", tags = {"人员" },  notes = "获取人员")
 	@RequestMapping(method = RequestMethod.GET, value = "/ibzemployees/{ibzemployee_id}")
     public ResponseEntity<IBZEmployeeDTO> get(@PathVariable("ibzemployee_id") String ibzemployee_id) {
@@ -92,12 +97,14 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedto),'ibzrt-IBZEmployee-Save')")
     @ApiOperation(value = "保存人员", tags = {"人员" },  notes = "保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/save")
     public ResponseEntity<Boolean> save(@RequestBody IBZEmployeeDTO ibzemployeedto) {
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.save(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedtos),'ibzrt-IBZEmployee-Save')")
     @ApiOperation(value = "批量保存人员", tags = {"人员" },  notes = "批量保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -105,9 +112,10 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-InitPwd-all')")
     @ApiOperation(value = "初始化密码", tags = {"人员" },  notes = "初始化密码")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/{ibzemployee_id}/initpwd")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> initPwd(@PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee ibzemployee = ibzemployeeMapping.toDomain(ibzemployeedto);
         ibzemployee.setUserid(ibzemployee_id);
@@ -122,9 +130,10 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeMapping.toDto(ibzemployeeService.getDraft(new IBZEmployee())));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedto),'ibzrt-IBZEmployee-Create')")
     @ApiOperation(value = "新建人员", tags = {"人员" },  notes = "新建人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzemployees")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> create(@RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
 		ibzemployeeService.create(domain);
@@ -132,6 +141,7 @@ public class IBZEmployeeResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedtos),'ibzrt-IBZEmployee-Create')")
     @ApiOperation(value = "批量新建人员", tags = {"人员" },  notes = "批量新建人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -139,6 +149,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-Default-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"人员" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzemployees/fetchdefault")
 	public ResponseEntity<List<IBZEmployeeDTO>> fetchDefault(IBZEmployeeSearchContext context) {
@@ -151,6 +162,7 @@ public class IBZEmployeeResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-Default-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"人员" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzemployees/searchdefault")
 	public ResponseEntity<Page<IBZEmployeeDTO>> searchDefault(@RequestBody IBZEmployeeSearchContext context) {
@@ -158,13 +170,15 @@ public class IBZEmployeeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(ibzemployeeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+    @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzrt-IBZEmployee-Remove')")
     @ApiOperation(value = "根据部门删除人员", tags = {"人员" },  notes = "根据部门删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}")
-
+    @Transactional
     public ResponseEntity<Boolean> removeByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.remove(ibzemployee_id));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.getIbzemployeeByIds(#ids),'ibzrt-IBZEmployee-Remove')")
     @ApiOperation(value = "根据部门批量删除人员", tags = {"人员" },  notes = "根据部门批量删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> removeBatchByIBZDepartment(@RequestBody List<String> ids) {
@@ -172,9 +186,10 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzrt-IBZEmployee-Update')")
     @ApiOperation(value = "根据部门更新人员", tags = {"人员" },  notes = "根据部门更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> updateByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setMdeptid(ibzdepartment_id);
@@ -184,6 +199,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.getIbzemployeeByEntities(this.ibzemployeeMapping.toDomain(#ibzemployeedtos)),'ibzrt-IBZEmployee-Update')")
     @ApiOperation(value = "根据部门批量更新人员", tags = {"人员" },  notes = "根据部门批量更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> updateBatchByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -201,6 +217,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.checkKey(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @PostAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(returnObject.body),'ibzrt-IBZEmployee-Get')")
     @ApiOperation(value = "根据部门获取人员", tags = {"人员" },  notes = "根据部门获取人员")
 	@RequestMapping(method = RequestMethod.GET, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}")
     public ResponseEntity<IBZEmployeeDTO> getByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id) {
@@ -209,6 +226,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedto),'ibzrt-IBZEmployee-Save')")
     @ApiOperation(value = "根据部门保存人员", tags = {"人员" },  notes = "根据部门保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/save")
     public ResponseEntity<Boolean> saveByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
@@ -217,6 +235,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.save(domain));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedtos),'ibzrt-IBZEmployee-Save')")
     @ApiOperation(value = "根据部门批量保存人员", tags = {"人员" },  notes = "根据部门批量保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/savebatch")
     public ResponseEntity<Boolean> saveBatchByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -228,9 +247,10 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-InitPwd-all')")
     @ApiOperation(value = "根据部门人员", tags = {"人员" },  notes = "根据部门人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/initpwd")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> initPwdByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setMdeptid(ibzdepartment_id);
@@ -247,9 +267,10 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeMapping.toDto(ibzemployeeService.getDraft(domain)));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedto),'ibzrt-IBZEmployee-Create')")
     @ApiOperation(value = "根据部门建立人员", tags = {"人员" },  notes = "根据部门建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> createByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setMdeptid(ibzdepartment_id);
@@ -258,6 +279,7 @@ public class IBZEmployeeResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedtos),'ibzrt-IBZEmployee-Create')")
     @ApiOperation(value = "根据部门批量建立人员", tags = {"人员" },  notes = "根据部门批量建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> createBatchByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -269,6 +291,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-Default-all')")
 	@ApiOperation(value = "根据部门获取DEFAULT", tags = {"人员" } ,notes = "根据部门获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzdepartments/{ibzdepartment_id}/ibzemployees/fetchdefault")
 	public ResponseEntity<List<IBZEmployeeDTO>> fetchIBZEmployeeDefaultByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id,IBZEmployeeSearchContext context) {
@@ -282,6 +305,7 @@ public class IBZEmployeeResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-Default-all')")
 	@ApiOperation(value = "根据部门查询DEFAULT", tags = {"人员" } ,notes = "根据部门查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzdepartments/{ibzdepartment_id}/ibzemployees/searchdefault")
 	public ResponseEntity<Page<IBZEmployeeDTO>> searchIBZEmployeeDefaultByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZEmployeeSearchContext context) {
@@ -290,13 +314,15 @@ public class IBZEmployeeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(ibzemployeeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+    @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzrt-IBZEmployee-Remove')")
     @ApiOperation(value = "根据单位机构删除人员", tags = {"人员" },  notes = "根据单位机构删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}")
-
+    @Transactional
     public ResponseEntity<Boolean> removeByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.remove(ibzemployee_id));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.getIbzemployeeByIds(#ids),'ibzrt-IBZEmployee-Remove')")
     @ApiOperation(value = "根据单位机构批量删除人员", tags = {"人员" },  notes = "根据单位机构批量删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> removeBatchByIBZOrganization(@RequestBody List<String> ids) {
@@ -304,9 +330,10 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzrt-IBZEmployee-Update')")
     @ApiOperation(value = "根据单位机构更新人员", tags = {"人员" },  notes = "根据单位机构更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> updateByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setOrgid(ibzorganization_id);
@@ -316,6 +343,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.getIbzemployeeByEntities(this.ibzemployeeMapping.toDomain(#ibzemployeedtos)),'ibzrt-IBZEmployee-Update')")
     @ApiOperation(value = "根据单位机构批量更新人员", tags = {"人员" },  notes = "根据单位机构批量更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> updateBatchByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -333,6 +361,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.checkKey(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @PostAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(returnObject.body),'ibzrt-IBZEmployee-Get')")
     @ApiOperation(value = "根据单位机构获取人员", tags = {"人员" },  notes = "根据单位机构获取人员")
 	@RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}")
     public ResponseEntity<IBZEmployeeDTO> getByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id) {
@@ -341,6 +370,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedto),'ibzrt-IBZEmployee-Save')")
     @ApiOperation(value = "根据单位机构保存人员", tags = {"人员" },  notes = "根据单位机构保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/save")
     public ResponseEntity<Boolean> saveByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
@@ -349,6 +379,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.save(domain));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedtos),'ibzrt-IBZEmployee-Save')")
     @ApiOperation(value = "根据单位机构批量保存人员", tags = {"人员" },  notes = "根据单位机构批量保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/savebatch")
     public ResponseEntity<Boolean> saveBatchByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -360,9 +391,10 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-InitPwd-all')")
     @ApiOperation(value = "根据单位机构人员", tags = {"人员" },  notes = "根据单位机构人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/initpwd")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> initPwdByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setOrgid(ibzorganization_id);
@@ -379,9 +411,10 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeMapping.toDto(ibzemployeeService.getDraft(domain)));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedto),'ibzrt-IBZEmployee-Create')")
     @ApiOperation(value = "根据单位机构建立人员", tags = {"人员" },  notes = "根据单位机构建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> createByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setOrgid(ibzorganization_id);
@@ -390,6 +423,7 @@ public class IBZEmployeeResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedtos),'ibzrt-IBZEmployee-Create')")
     @ApiOperation(value = "根据单位机构批量建立人员", tags = {"人员" },  notes = "根据单位机构批量建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> createBatchByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -401,6 +435,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-Default-all')")
 	@ApiOperation(value = "根据单位机构获取DEFAULT", tags = {"人员" } ,notes = "根据单位机构获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/{ibzorganization_id}/ibzemployees/fetchdefault")
 	public ResponseEntity<List<IBZEmployeeDTO>> fetchIBZEmployeeDefaultByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id,IBZEmployeeSearchContext context) {
@@ -414,6 +449,7 @@ public class IBZEmployeeResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-Default-all')")
 	@ApiOperation(value = "根据单位机构查询DEFAULT", tags = {"人员" } ,notes = "根据单位机构查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/{ibzorganization_id}/ibzemployees/searchdefault")
 	public ResponseEntity<Page<IBZEmployeeDTO>> searchIBZEmployeeDefaultByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody IBZEmployeeSearchContext context) {
@@ -422,13 +458,15 @@ public class IBZEmployeeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(ibzemployeeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+    @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzrt-IBZEmployee-Remove')")
     @ApiOperation(value = "根据单位机构部门删除人员", tags = {"人员" },  notes = "根据单位机构部门删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}")
-
+    @Transactional
     public ResponseEntity<Boolean> removeByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.remove(ibzemployee_id));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.getIbzemployeeByIds(#ids),'ibzrt-IBZEmployee-Remove')")
     @ApiOperation(value = "根据单位机构部门批量删除人员", tags = {"人员" },  notes = "根据单位机构部门批量删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> removeBatchByIBZOrganizationIBZDepartment(@RequestBody List<String> ids) {
@@ -436,9 +474,10 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzrt-IBZEmployee-Update')")
     @ApiOperation(value = "根据单位机构部门更新人员", tags = {"人员" },  notes = "根据单位机构部门更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> updateByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setMdeptid(ibzdepartment_id);
@@ -448,6 +487,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeService.getIbzemployeeByEntities(this.ibzemployeeMapping.toDomain(#ibzemployeedtos)),'ibzrt-IBZEmployee-Update')")
     @ApiOperation(value = "根据单位机构部门批量更新人员", tags = {"人员" },  notes = "根据单位机构部门批量更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> updateBatchByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -465,6 +505,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.checkKey(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @PostAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(returnObject.body),'ibzrt-IBZEmployee-Get')")
     @ApiOperation(value = "根据单位机构部门获取人员", tags = {"人员" },  notes = "根据单位机构部门获取人员")
 	@RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}")
     public ResponseEntity<IBZEmployeeDTO> getByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id) {
@@ -473,6 +514,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedto),'ibzrt-IBZEmployee-Save')")
     @ApiOperation(value = "根据单位机构部门保存人员", tags = {"人员" },  notes = "根据单位机构部门保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/save")
     public ResponseEntity<Boolean> saveByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
@@ -481,6 +523,7 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.save(domain));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedtos),'ibzrt-IBZEmployee-Save')")
     @ApiOperation(value = "根据单位机构部门批量保存人员", tags = {"人员" },  notes = "根据单位机构部门批量保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/savebatch")
     public ResponseEntity<Boolean> saveBatchByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -492,9 +535,10 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-InitPwd-all')")
     @ApiOperation(value = "根据单位机构部门人员", tags = {"人员" },  notes = "根据单位机构部门人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/initpwd")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> initPwdByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setMdeptid(ibzdepartment_id);
@@ -511,9 +555,10 @@ public class IBZEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeeMapping.toDto(ibzemployeeService.getDraft(domain)));
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedto),'ibzrt-IBZEmployee-Create')")
     @ApiOperation(value = "根据单位机构部门建立人员", tags = {"人员" },  notes = "根据单位机构部门建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees")
-
+    @Transactional
     public ResponseEntity<IBZEmployeeDTO> createByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
         domain.setMdeptid(ibzdepartment_id);
@@ -522,6 +567,7 @@ public class IBZEmployeeResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasPermission(this.ibzemployeeMapping.toDomain(#ibzemployeedtos),'ibzrt-IBZEmployee-Create')")
     @ApiOperation(value = "根据单位机构部门批量建立人员", tags = {"人员" },  notes = "根据单位机构部门批量建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/batch")
     public ResponseEntity<Boolean> createBatchByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody List<IBZEmployeeDTO> ibzemployeedtos) {
@@ -533,6 +579,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-Default-all')")
 	@ApiOperation(value = "根据单位机构部门获取DEFAULT", tags = {"人员" } ,notes = "根据单位机构部门获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/fetchdefault")
 	public ResponseEntity<List<IBZEmployeeDTO>> fetchIBZEmployeeDefaultByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id,IBZEmployeeSearchContext context) {
@@ -546,6 +593,7 @@ public class IBZEmployeeResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZEmployee-Default-all')")
 	@ApiOperation(value = "根据单位机构部门查询DEFAULT", tags = {"人员" } ,notes = "根据单位机构部门查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/searchdefault")
 	public ResponseEntity<Page<IBZEmployeeDTO>> searchIBZEmployeeDefaultByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZEmployeeSearchContext context) {

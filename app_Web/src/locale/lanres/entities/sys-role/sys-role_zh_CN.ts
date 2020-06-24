@@ -54,6 +54,7 @@ export default {
 	},
 	main_grid: {
 		columns: {
+			sys_roleid: "角色标识",
 			sys_rolename: "角色名称",
 			memo: "备注",
 			updatedate: "更新时间",

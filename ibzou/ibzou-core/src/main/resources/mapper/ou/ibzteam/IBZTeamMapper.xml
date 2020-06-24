@@ -33,32 +33,32 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-       <![CDATA[	SELECT t1.`DOMAINS`, t1.`MEMO`, t1.`TEAMID`, t1.`TEAMNAME` FROM `IBZTEAM` t1  
+		<![CDATA[ SELECT t1.`DOMAINS`, t1.`MEMO`, t1.`TEAMID`, t1.`TEAMNAME` FROM `IBZTEAM` t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="oracle">
-       <![CDATA[	SELECT t1.DOMAINS, t1.MEMO, t1.TEAMID, t1.TEAMNAME FROM IBZTEAM t1  
+		<![CDATA[ SELECT t1.DOMAINS, t1.MEMO, t1.TEAMID, t1.TEAMNAME FROM IBZTEAM t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
-       <![CDATA[	SELECT t1.TEAMID, t1.TEAMNAME FROM IBZTEAM t1  
+		<![CDATA[ SELECT t1.TEAMID, t1.TEAMNAME FROM IBZTEAM t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
-       <![CDATA[	SELECT t1.`DOMAINS`, t1.`MEMO`, t1.`TEAMID`, t1.`TEAMNAME` FROM `IBZTEAM` t1  
+		<![CDATA[ SELECT t1.`DOMAINS`, t1.`MEMO`, t1.`TEAMID`, t1.`TEAMNAME` FROM `IBZTEAM` t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="oracle">
-       <![CDATA[	SELECT t1.DOMAINS, t1.MEMO, t1.TEAMID, t1.TEAMNAME FROM IBZTEAM t1  
+		<![CDATA[ SELECT t1.DOMAINS, t1.MEMO, t1.TEAMID, t1.TEAMNAME FROM IBZTEAM t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="postgresql">
-       <![CDATA[	SELECT t1.TEAMID, t1.TEAMNAME FROM IBZTEAM t1  
+		<![CDATA[ SELECT t1.TEAMID, t1.TEAMNAME FROM IBZTEAM t1  
 			]]>
     </sql>
 </mapper>

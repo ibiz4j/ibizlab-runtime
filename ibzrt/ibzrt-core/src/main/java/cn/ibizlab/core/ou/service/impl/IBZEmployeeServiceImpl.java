@@ -30,71 +30,119 @@ import cn.ibizlab.core.ou.service.IIBZEmployeeService;
 import cn.ibizlab.util.helper.CachedBeanCopier;
 
 
-import cn.ibizlab.core.ou.client.IBZEmployeeFeignClient;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.ibizlab.core.ou.mapper.IBZEmployeeMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.StringUtils;
 
 /**
  * 实体[人员] 服务对象接口实现
  */
 @Slf4j
-@Service
-public class IBZEmployeeServiceImpl implements IIBZEmployeeService {
+@Service("IBZEmployeeServiceImpl")
+public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEmployee> implements IIBZEmployeeService {
 
     @Autowired
-    IBZEmployeeFeignClient iBZEmployeeFeignClient;
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZDeptMemberService ibzdeptmemberService;
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZTeamMemberService ibzteammemberService;
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZDepartmentService ibzdepartmentService;
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZOrganizationService ibzorganizationService;
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZPostService ibzpostService;
 
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.logic.IIBZEmployeesaveDeptMemberLogic savedeptmemberLogic;
+
+    private int batchSize = 500;
 
     @Override
-    public boolean remove(String userid) {
-        boolean result=iBZEmployeeFeignClient.remove(userid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        iBZEmployeeFeignClient.removeBatch(idList);
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
     }
 
     @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
     public boolean update(IBZEmployee et) {
-        IBZEmployee rt = iBZEmployeeFeignClient.update(et.getUserid(),et);
-        if(rt==null)
+        fillParentData(et);
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getUserid())))
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(get(et.getUserid()),et);
+        savedeptmemberLogic.execute(et);
         return true;
-
     }
 
-    public void updateBatch(List<IBZEmployee> list){
-        iBZEmployeeFeignClient.updateBatch(list) ;
+    @Override
+    public void updateBatch(List<IBZEmployee> list) {
+        list.forEach(item->fillParentData(item));
+        updateBatchById(list,batchSize);
     }
 
     @Override
     public boolean checkKey(IBZEmployee et) {
-        return iBZEmployeeFeignClient.checkKey(et);
+        return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
     }
     @Override
-    public IBZEmployee get(String userid) {
-		IBZEmployee et=iBZEmployeeFeignClient.get(userid);
+    @Transactional
+    public IBZEmployee get(String key) {
+        IBZEmployee et = getById(key);
         if(et==null){
             et=new IBZEmployee();
-            et.setUserid(userid);
+            et.setUserid(key);
         }
         else{
         }
-        return  et;
+        return et;
     }
 
     @Override
     @Transactional
     public boolean save(IBZEmployee et) {
-        if(et.getUserid()==null) et.setUserid((String)et.getDefaultKey(true));
-        if(!iBZEmployeeFeignClient.save(et))
+        if(!saveOrUpdate(et))
             return false;
         return true;
     }
 
     @Override
+    @Transactional(
+            rollbackFor = {Exception.class}
+    )
+    public boolean saveOrUpdate(IBZEmployee et) {
+        if (null == et) {
+            return false;
+        } else {
+            return checkKey(et) ? this.update(et) : this.create(et);
+        }
+    }
+
+    @Override
+    public boolean saveBatch(Collection<IBZEmployee> list) {
+        list.forEach(item->fillParentData(item));
+        saveOrUpdateBatch(list,batchSize);
+        return true;
+    }
+
+    @Override
     public void saveBatch(List<IBZEmployee> list) {
-        iBZEmployeeFeignClient.saveBatch(list) ;
+        list.forEach(item->fillParentData(item));
+        saveOrUpdateBatch(list,batchSize);
     }
 
     @Override
@@ -106,61 +154,57 @@ public class IBZEmployeeServiceImpl implements IIBZEmployeeService {
 
     @Override
     public IBZEmployee getDraft(IBZEmployee et) {
-        et=iBZEmployeeFeignClient.getDraft();
+        fillParentData(et);
         return et;
     }
 
     @Override
+    @Transactional
     public boolean create(IBZEmployee et) {
-        IBZEmployee rt = iBZEmployeeFeignClient.create(et);
-        if(rt==null)
+        fillParentData(et);
+        if(!this.retBool(this.baseMapper.insert(et)))
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(get(et.getUserid()),et);
+        savedeptmemberLogic.execute(et);
         return true;
     }
 
-    public void createBatch(List<IBZEmployee> list){
-        iBZEmployeeFeignClient.createBatch(list) ;
+    @Override
+    public void createBatch(List<IBZEmployee> list) {
+        list.forEach(item->fillParentData(item));
+        this.saveBatch(list,batchSize);
     }
-
 
 
 	@Override
     public List<IBZEmployee> selectByMdeptid(String deptid) {
-        IBZEmployeeSearchContext context=new IBZEmployeeSearchContext();
-        context.setSize(Integer.MAX_VALUE);
-        context.setN_mdeptid_eq(deptid);
-        return iBZEmployeeFeignClient.searchDefault(context).getContent();
+        return baseMapper.selectByMdeptid(deptid);
     }
 
     @Override
     public void removeByMdeptid(String deptid) {
-        Set<String> delIds=new HashSet<String>();
-        for(IBZEmployee before:selectByMdeptid(deptid)){
-            delIds.add(before.getUserid());
-        }
-        if(delIds.size()>0)
-            this.removeBatch(delIds);
+        this.remove(new QueryWrapper<IBZEmployee>().eq("mdeptid",deptid));
     }
 
 	@Override
     public List<IBZEmployee> selectByOrgid(String orgid) {
-        IBZEmployeeSearchContext context=new IBZEmployeeSearchContext();
-        context.setSize(Integer.MAX_VALUE);
-        context.setN_orgid_eq(orgid);
-        return iBZEmployeeFeignClient.searchDefault(context).getContent();
+        return baseMapper.selectByOrgid(orgid);
     }
 
     @Override
     public void removeByOrgid(String orgid) {
-        Set<String> delIds=new HashSet<String>();
-        for(IBZEmployee before:selectByOrgid(orgid)){
-            delIds.add(before.getUserid());
-        }
-        if(delIds.size()>0)
-            this.removeBatch(delIds);
+        this.remove(new QueryWrapper<IBZEmployee>().eq("orgid",orgid));
     }
 
+	@Override
+    public List<IBZEmployee> selectByPostid(String postid) {
+        return baseMapper.selectByPostid(postid);
+    }
+
+    @Override
+    public void removeByPostid(String postid) {
+        this.remove(new QueryWrapper<IBZEmployee>().eq("postid",postid));
+    }
 
 
     /**
@@ -168,10 +212,98 @@ public class IBZEmployeeServiceImpl implements IIBZEmployeeService {
      */
     @Override
     public Page<IBZEmployee> searchDefault(IBZEmployeeSearchContext context) {
-        Page<IBZEmployee> iBZEmployees=iBZEmployeeFeignClient.searchDefault(context);
-        return iBZEmployees;
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<IBZEmployee> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+        return new PageImpl<IBZEmployee>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
+
+
+    /**
+     * 为当前实体填充父数据（外键值文本、外键值附加数据）
+     * @param et
+     */
+    private void fillParentData(IBZEmployee et){
+        //实体关系[DER1N_IBZEMP_IBZDEPT_MDEPTID]
+        if(!ObjectUtils.isEmpty(et.getMdeptid())){
+            cn.ibizlab.core.ou.domain.IBZDepartment maindept=et.getMaindept();
+            if(ObjectUtils.isEmpty(maindept)){
+                cn.ibizlab.core.ou.domain.IBZDepartment majorEntity=ibzdepartmentService.get(et.getMdeptid());
+                et.setMaindept(majorEntity);
+                maindept=majorEntity;
+            }
+            et.setMdeptcode(maindept.getDeptcode());
+            et.setMdeptname(maindept.getDeptname());
+        }
+        //实体关系[DER1N_IBZEMP_IBZORG_ORGID]
+        if(!ObjectUtils.isEmpty(et.getOrgid())){
+            cn.ibizlab.core.ou.domain.IBZOrganization org=et.getOrg();
+            if(ObjectUtils.isEmpty(org)){
+                cn.ibizlab.core.ou.domain.IBZOrganization majorEntity=ibzorganizationService.get(et.getOrgid());
+                et.setOrg(majorEntity);
+                org=majorEntity;
+            }
+            et.setOrgcode(org.getOrgcode());
+            et.setOrgname(org.getOrgname());
+        }
+        //实体关系[DER1N_IBZEMP_IBZPOST_POSTID]
+        if(!ObjectUtils.isEmpty(et.getPostid())){
+            cn.ibizlab.core.ou.domain.IBZPost post=et.getPost();
+            if(ObjectUtils.isEmpty(post)){
+                cn.ibizlab.core.ou.domain.IBZPost majorEntity=ibzpostService.get(et.getPostid());
+                et.setPost(majorEntity);
+                post=majorEntity;
+            }
+            et.setPostcode(post.getPostcode());
+            et.setPostname(post.getPostname());
+        }
+    }
+
+
+
+
+    @Override
+    public List<JSONObject> select(String sql, Map param){
+        return this.baseMapper.selectBySQL(sql,param);
+    }
+
+    @Override
+    @Transactional
+    public boolean execute(String sql , Map param){
+        if (sql == null || sql.isEmpty()) {
+            return false;
+        }
+        if (sql.toLowerCase().trim().startsWith("insert")) {
+            return this.baseMapper.insertBySQL(sql,param);
+        }
+        if (sql.toLowerCase().trim().startsWith("update")) {
+            return this.baseMapper.updateBySQL(sql,param);
+        }
+        if (sql.toLowerCase().trim().startsWith("delete")) {
+            return this.baseMapper.deleteBySQL(sql,param);
+        }
+        log.warn("暂未支持的SQL语法");
+        return true;
+    }
+
+    @Override
+    public List<IBZEmployee> getIbzemployeeByIds(List<String> ids) {
+         return this.listByIds(ids);
+    }
+
+    @Override
+    public List<IBZEmployee> getIbzemployeeByEntities(List<IBZEmployee> entities) {
+        List ids =new ArrayList();
+        for(IBZEmployee entity : entities){
+            Serializable id=entity.getUserid();
+            if(!ObjectUtils.isEmpty(id)){
+                ids.add(id);
+            }
+        }
+        if(ids.size()>0)
+           return this.listByIds(ids);
+        else
+           return entities;
+    }
 
 }
 

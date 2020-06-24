@@ -147,43 +147,5 @@ public class IBZOrganizationResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(ibzorganizationMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-	@ApiOperation(value = "获取查询上级单位", tags = {"单位机构" } ,notes = "获取查询上级单位")
-    @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/fetchselectporg")
-	public ResponseEntity<List<IBZOrganizationDTO>> fetchSelectPOrg(IBZOrganizationSearchContext context) {
-        Page<IBZOrganization> domains = ibzorganizationService.searchSelectPOrg(context) ;
-        List<IBZOrganizationDTO> list = ibzorganizationMapping.toDto(domains.getContent());
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
-                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
-                .header("x-total", String.valueOf(domains.getTotalElements()))
-                .body(list);
-	}
-
-	@ApiOperation(value = "查询查询上级单位", tags = {"单位机构" } ,notes = "查询查询上级单位")
-    @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/searchselectporg")
-	public ResponseEntity<Page<IBZOrganizationDTO>> searchSelectPOrg(@RequestBody IBZOrganizationSearchContext context) {
-        Page<IBZOrganization> domains = ibzorganizationService.searchSelectPOrg(context) ;
-	    return ResponseEntity.status(HttpStatus.OK)
-                .body(new PageImpl(ibzorganizationMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
-	}
-	@ApiOperation(value = "获取查询下级单位", tags = {"单位机构" } ,notes = "获取查询下级单位")
-    @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/fetchselectsorg")
-	public ResponseEntity<List<IBZOrganizationDTO>> fetchSelectSOrg(IBZOrganizationSearchContext context) {
-        Page<IBZOrganization> domains = ibzorganizationService.searchSelectSOrg(context) ;
-        List<IBZOrganizationDTO> list = ibzorganizationMapping.toDto(domains.getContent());
-        return ResponseEntity.status(HttpStatus.OK)
-                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
-                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
-                .header("x-total", String.valueOf(domains.getTotalElements()))
-                .body(list);
-	}
-
-	@ApiOperation(value = "查询查询下级单位", tags = {"单位机构" } ,notes = "查询查询下级单位")
-    @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/searchselectsorg")
-	public ResponseEntity<Page<IBZOrganizationDTO>> searchSelectSOrg(@RequestBody IBZOrganizationSearchContext context) {
-        Page<IBZOrganization> domains = ibzorganizationService.searchSelectSOrg(context) ;
-	    return ResponseEntity.status(HttpStatus.OK)
-                .body(new PageImpl(ibzorganizationMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
-	}
 }
 

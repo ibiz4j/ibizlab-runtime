@@ -86,7 +86,7 @@ export default class MainModel {
 	iconcls: 'fa fa-buysellads',
 	icon: '',
 	textcls: '',
-	appfunctag: '_2',
+	appfunctag: 'Auto12',
 	resourcetag: '',
 	authtag:'web-Main-menuitem2',
 },
@@ -125,7 +125,7 @@ export default class MainModel {
             ],
         },
         {
-            appfunctag: '_2',
+            appfunctag: 'Auto12',
             appfuncyype: 'APPVIEW',
             openmode: '',
             codename: 'sysappgridview',
@@ -140,7 +140,7 @@ export default class MainModel {
             appfunctag: 'Auto6',
             appfuncyype: 'APPVIEW',
             openmode: '',
-            codename: 'sys_authloggridview',
+            codename: 'sysauthloggridview',
             deResParameters: [],
             routepath: '/index/:index?/sysauthlogs/:sysauthlog?/gridview/:gridview?',
             parameters: [

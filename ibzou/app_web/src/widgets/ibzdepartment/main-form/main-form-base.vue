@@ -48,7 +48,7 @@
 <i-col v-show="detailsModel.leadername.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='leadername' :itemRules="this.rules.leadername" class='' :caption="$t('entities.ibzdepartment.main_form.details.leadername')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.leadername.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<ibiz-group-select
+<app-group-select
   name="leadername"
   :value='data.leadername'
   valueitem="leaderid"
@@ -61,7 +61,7 @@
   :data="data"
   :context="context"
   @formitemvaluechange="onFormItemValueChange">
-</ibiz-group-select>
+</app-group-select>
 
 </app-form-item>
 
@@ -93,11 +93,12 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import IBZDepartmentService from '@/service/ibzdepartment/ibzdepartment-service';
 import MainService from './main-form-service';
 
@@ -218,6 +219,15 @@ export default class MainBase extends Vue implements ControlInterface {
         }
     }
 
+
+    /**
+     * 视图默认使用
+     *
+     * @type {string}
+     * @memberof MainBase
+     */
+    @Inject({from:'navModel',default: 'tab'})
+    public navModel!:string;
 
     /**
      * 工作流审批意见控件绑定值

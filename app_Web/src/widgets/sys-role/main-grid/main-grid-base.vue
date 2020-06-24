@@ -8,6 +8,7 @@
         :height="isEnablePagingBar && items.length > 0 ? 'calc(100% - 50px)' : '100%'"  
         :highlight-current-row ="isSingleSelect"
         :row-class-name="getRowClassName"
+        :cell-class-name="getCellClassName"
         @row-click="rowClick($event)"  
         @select-all="selectAll($event)"  
         @select="select($event)"  
@@ -19,6 +20,18 @@
             </template>
             <template v-if="!isSingleSelect">
                 <el-table-column align="center" type='selection' :width="checkboxColWidth"></el-table-column>
+            </template>
+            <template v-if="getColumnState('sys_roleid')">
+                <el-table-column show-overflow-tooltip :prop="'sys_roleid'" :label="$t('entities.sysrole.main_grid.columns.sys_roleid')" :width="250"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysrole.main_grid.columns.sys_roleid')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.sys_roleid}}</span>
+                    </template>
+                </el-table-column>
             </template>
             <template v-if="getColumnState('sys_rolename')">
                 <el-table-column show-overflow-tooltip :prop="'sys_rolename'" :label="$t('entities.sysrole.main_grid.columns.sys_rolename')" :width="350"  :align="'left'" :sortable="'custom'">
@@ -33,7 +46,7 @@
                 </el-table-column>
             </template>
             <template v-if="getColumnState('memo')">
-                <el-table-column show-overflow-tooltip :prop="'memo'" :label="$t('entities.sysrole.main_grid.columns.memo')" :min-width="100"  :align="'left'" :sortable="'custom'">
+                <el-table-column show-overflow-tooltip :prop="'memo'" :label="$t('entities.sysrole.main_grid.columns.memo')" :width="250"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
                       <span class="column-header ">
                         {{$t('entities.sysrole.main_grid.columns.memo')}}
@@ -98,11 +111,12 @@
 </div>
 </template>
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import SysRoleService from '@/service/sys-role/sys-role-service';
 import MainService from './main-grid-service';
 
@@ -519,6 +533,13 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public allColumns: any[] = [
         {
+            name: 'sys_roleid',
+            label: '角色标识',
+            langtag: 'entities.sysrole.main_grid.columns.sys_roleid',
+            show: false,
+            util: 'PX'
+        },
+        {
             name: 'sys_rolename',
             label: '角色名称',
             langtag: 'entities.sysrole.main_grid.columns.sys_rolename',
@@ -530,7 +551,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '备注',
             langtag: 'entities.sysrole.main_grid.columns.memo',
             show: true,
-            util: 'STAR'
+            util: 'PX'
         },
         {
             name: 'updatedate',
@@ -1519,6 +1540,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
         let hasRowEdit:any = {
+          'sys_roleid':false,
           'sys_rolename':false,
           'memo':false,
           'updatedate':false,

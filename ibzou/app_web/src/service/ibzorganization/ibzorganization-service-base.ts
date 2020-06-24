@@ -226,7 +226,6 @@ export default class IBZOrganizationServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}`,isloading);
-
     }
 
     /**
@@ -243,7 +242,6 @@ export default class IBZOrganizationServiceBase extends EntityService {
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments));
             return res;
-
     }
 
     /**

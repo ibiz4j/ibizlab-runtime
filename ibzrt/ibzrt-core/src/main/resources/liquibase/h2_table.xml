@@ -33,6 +33,84 @@
 
 
 
+    <!--输出实体[IBZEMP]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-ibzemp-3-1">
+        <createTable tableName="IBZEMP">
+                <column name="USERID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_IBZEMP_USERID"/>
+                </column>
+                <column name="USERNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="PERSONNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="USERCODE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="LOGINNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="PASSWORD" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="DOMAINS" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="MDEPTID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="MDEPTCODE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="MDEPTNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="BCODE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="POSTID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="POSTCODE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="POSTNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ORGID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ORGCODE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ORGNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="NICKNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="SEX" remarks="" type="VARCHAR(20)">
+                </column>
+                <column name="CERTCODE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="PHONE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="BIRTHDAY" remarks="" type="DATETIME">
+                </column>
+                <column name="EMAIL" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="AVATAR" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ADDR" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="USERICON" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="IPADDR" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="THEME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="LANG" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="FONTSIZE" remarks="" type="VARCHAR(10)">
+                </column>
+                <column name="MEMO" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="RESERVER" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="SHOWORDER" remarks="" type="INT">
+                </column>
+                <column name="ENABLE" remarks="" type="INT">
+                </column>
+                <column name="CREATEDATE" remarks="" type="DATETIME">
+                </column>
+                <column name="UPDATEDATE" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
 
 
 
@@ -48,5 +126,33 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--输出实体[IBZEMP]外键关系 -->
+    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-3-2">
+       <addForeignKeyConstraint baseColumnNames="MDEPTID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZDEPT_MDEPTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
+    </changeSet>
+    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-3-3">
+       <addForeignKeyConstraint baseColumnNames="ORGID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZORG_ORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
+    </changeSet>
+    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-3-4">
+       <addForeignKeyConstraint baseColumnNames="POSTID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZPOST_POSTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="POSTID" referencedTableName="IBZPOST" validate="true"/>
+    </changeSet>
 
 </databaseChangeLog>

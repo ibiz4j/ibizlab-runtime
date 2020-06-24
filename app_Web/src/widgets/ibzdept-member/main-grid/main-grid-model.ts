@@ -27,6 +27,11 @@ export default class MainModel {
     }else{
 		  return [
         {
+          name: 'postid',
+          prop: 'postid',
+          dataType: 'PICKUP',
+        },
+        {
           name: 'deptid',
           prop: 'deptid',
           dataType: 'PICKUP',

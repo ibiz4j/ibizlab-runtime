@@ -75,7 +75,6 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/wfprocessdefinitions/${context.wfprocessdefinition}`,isloading);
-
     }
 
     /**
@@ -160,7 +159,6 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/wfprocessdefinitions/${context.wfprocessdefinition}`,isloading);
             return res;
-
     }
 
     /**

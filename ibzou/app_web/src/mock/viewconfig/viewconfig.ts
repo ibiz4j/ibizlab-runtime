@@ -7,7 +7,15 @@ import Mock from 'mockjs'
 mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status,{
-                "ibzemployeeeditgridview": {
+                "ibzpostpickupview": {
+            "title": "岗位数据选择视图",
+            "caption": "岗位",
+            "viewtype": "DEPICKUPVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZPostPickupView",
+            "viewtag": "0581848a24a829f706252c15c641e154"
+        },
+        "ibzemployeeeditgridview": {
             "title": "人员表格视图",
             "caption": "人员",
             "viewtype": "DEGRIDVIEW",
@@ -47,6 +55,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "IBZDepartmentEditView",
             "viewtag": "21259e2d03645750f1d3d71839f1223b"
         },
+        "ibzteammembergridview": {
+            "title": "组成员表格视图",
+            "caption": "组成员",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZTeamMemberGridView",
+            "viewtag": "221800117f6cfa4296a3f7e5dc99ce44"
+        },
         "ibzemployeegridview": {
             "title": "人员表格视图",
             "caption": "人员",
@@ -70,6 +86,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "ou",
             "viewname": "IBZOrganizationTreeExpView",
             "viewtag": "25e23f456601163e730de6c1a825364b"
+        },
+        "ibzteamgridview": {
+            "title": "组表格视图",
+            "caption": "组",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZTeamGridView",
+            "viewtag": "364460c8f6afc2c459f8857a6d228b1a"
+        },
+        "ibzpostpickupgridview": {
+            "title": "岗位选择表格视图",
+            "caption": "岗位",
+            "viewtype": "DEPICKUPGRIDVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZPostPickupGridView",
+            "viewtag": "395d443de520bbaee17c18ea0747abce"
         },
         "ibzorganizationpickupgridview": {
             "title": "单位机构选择表格视图",
@@ -102,6 +134,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "ou",
             "viewname": "IBZDepartmentPickupGridView",
             "viewtag": "66fa282d24a21eec39d958e7fc6c23a8"
+        },
+        "ibzteameditview": {
+            "title": "组编辑视图",
+            "caption": "组",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZTeamEditView",
+            "viewtag": "7eef7d5d59785f49c66786ad4ba827b0"
+        },
+        "ibzteammembereditview": {
+            "title": "组成员编辑视图",
+            "caption": "组成员",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZTeamMemberEditView",
+            "viewtag": "89b1f5e74703dab0fca756ece369b57d"
         },
         "ibzdepartmentmpickupview": {
             "title": "部门数据多项选择视图",
@@ -136,8 +184,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "9ed83d4d91fedf510a43bbe8908a21ba"
         },
         "ouindexview": {
-            "title": "ibizlab-ou",
-            "caption": "ibizlab-ou",
+            "title": "organizational-unit",
+            "caption": "ibizlab",
             "viewtype": "APPINDEXVIEW",
             "viewmodule": "ou",
             "viewname": "OUIndexView",
@@ -198,6 +246,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "ou",
             "viewname": "IBZDepartmentGridView",
             "viewtag": "d2cc126cb4bcf523d72509bef0183ee0"
+        },
+        "ibzpostgridview": {
+            "title": "岗位表格视图",
+            "caption": "岗位",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZPostGridView",
+            "viewtag": "e87180c121ce75a22893d5e3ce0951fc"
+        },
+        "ibzposteditview": {
+            "title": "岗位编辑视图",
+            "caption": "岗位",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZPostEditView",
+            "viewtag": "f12a26ca0dafa7b439840dbc629c07cc"
         },
         "ibzemployeepickupgridview": {
             "title": "人员选择表格视图",

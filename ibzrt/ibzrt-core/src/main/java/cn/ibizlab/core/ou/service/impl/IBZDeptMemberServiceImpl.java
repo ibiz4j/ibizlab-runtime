@@ -154,6 +154,24 @@ public class IBZDeptMemberServiceImpl implements IIBZDeptMemberService {
             this.removeBatch(delIds);
     }
 
+	@Override
+    public List<IBZDeptMember> selectByPostid(String postid) {
+        IBZDeptMemberSearchContext context=new IBZDeptMemberSearchContext();
+        context.setSize(Integer.MAX_VALUE);
+        context.setN_postid_eq(postid);
+        return iBZDeptMemberFeignClient.searchDefault(context).getContent();
+    }
+
+    @Override
+    public void removeByPostid(String postid) {
+        Set<String> delIds=new HashSet<String>();
+        for(IBZDeptMember before:selectByPostid(postid)){
+            delIds.add(before.getMemberid());
+        }
+        if(delIds.size()>0)
+            this.removeBatch(delIds);
+    }
+
 
 
     /**

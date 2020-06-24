@@ -53,8 +53,8 @@ export default {
         // 非实体视图
         views: {
             wfindexview: {
-                caption: "ibizlab-workflow",
-                title: "ibizlab-workflow",
+                caption: "ibizlab",
+                title: "workflow",
             },
         },
         utilview:{

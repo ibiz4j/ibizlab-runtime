@@ -7,7 +7,15 @@ import Mock from 'mockjs'
 mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status,{
-                "ibzdepartmentpickupview": {
+                "dictoptioneditview": {
+            "title": "字典项编辑视图",
+            "caption": "字典项",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "dict",
+            "viewname": "DictOptionEditView",
+            "viewtag": "0986ae2314847b586b20edfbb40fc82b"
+        },
+        "ibzdepartmentpickupview": {
             "title": "部门选择视图",
             "caption": "部门",
             "viewtype": "DEPICKUPVIEW",
@@ -55,6 +63,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SysUserMPickupView",
             "viewtag": "1f8cf7e78d6d88588d1d568d1866cc77"
         },
+        "dictoptiongridview": {
+            "title": "字典项表格视图",
+            "caption": "字典项",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "dict",
+            "viewname": "DictOptionGridView",
+            "viewtag": "22e202992971f634c00e022b2cae335e"
+        },
         "sysauthloggridview": {
             "title": "认证日志表格视图",
             "caption": "认证日志",
@@ -71,6 +87,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SysRolePickupView",
             "viewtag": "26cc2d5c69f1525eaa415b7de1a0d4a6"
         },
+        "ibzteammembergridview": {
+            "title": "组成员表格视图",
+            "caption": "组成员",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZTeamMemberGridView",
+            "viewtag": "281f49b284494f9ba207e6bce8416b7d"
+        },
         "ibzorganizationoptionview": {
             "title": "单位机构选项操作视图",
             "caption": "单位机构",
@@ -79,6 +103,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "IBZOrganizationOptionView",
             "viewtag": "2ed85bebb69b8d23388420b95163228a"
         },
+        "ibzteameditview": {
+            "title": "组编辑视图",
+            "caption": "组",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZTeamEditView",
+            "viewtag": "323147bb0fc25046ab102674cb1abf21"
+        },
         "sysuserpickupview": {
             "title": "用户表数据选择视图",
             "caption": "系统用户",
@@ -86,6 +118,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "uaa",
             "viewname": "SysUserPickupView",
             "viewtag": "32fe9ab4a9e1b8d62b9ee802e4746965"
+        },
+        "jobsregistrygridview": {
+            "title": "任务注册信息表格视图",
+            "caption": "任务注册信息",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "task",
+            "viewname": "JobsRegistryGridView",
+            "viewtag": "3fc39744066bd5343be378ec5703f556"
         },
         "wfprocessdefinitioneditview": {
             "title": "实体编辑视图",
@@ -103,6 +143,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "IBZEmployeeGridView",
             "viewtag": "40fe6b28b9f7902341da46bb74a02d59"
         },
+        "dictoptiongrideditview": {
+            "title": "字典项表格视图",
+            "caption": "字典项",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "dict",
+            "viewname": "DictOptionGridEditView",
+            "viewtag": "44488f30cf90677019077ed9ad33628e"
+        },
+        "jobsinfoeditview": {
+            "title": "任务信息编辑视图",
+            "caption": "任务信息",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "task",
+            "viewname": "JobsInfoEditView",
+            "viewtag": "49b6b437f10c4e73e47d87d5d0f76cfd"
+        },
         "syspermissionpickupview": {
             "title": "权限表数据选择视图",
             "caption": "权限/资源",
@@ -119,6 +175,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "IBZEmployeeChangePwdView",
             "viewtag": "55cd5acdacb8aecec7d4574216e10625"
         },
+        "jobsregistryeditview": {
+            "title": "任务注册信息编辑视图",
+            "caption": "任务注册信息",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "task",
+            "viewname": "JobsRegistryEditView",
+            "viewtag": "56cc39a16e3269c082694b50f89338e3"
+        },
         "wfremodeleditview": {
             "title": "流程模型编辑视图",
             "caption": "流程模型",
@@ -126,6 +190,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "workflow",
             "viewname": "WFREModelEditView",
             "viewtag": "5856bfb8b576cc2ee743801b23e58299"
+        },
+        "ibzteamgridview": {
+            "title": "组表格视图",
+            "caption": "组",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZTeamGridView",
+            "viewtag": "5bd45246d1f387729c0d8658e07ddb9f"
+        },
+        "ibzteammembereditview": {
+            "title": "组成员编辑视图",
+            "caption": "组成员",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZTeamMemberEditView",
+            "viewtag": "5e88ef37a2da46d66c41c8838d31096b"
         },
         "ibzdeptmembergridview": {
             "title": "部门成员表格视图",
@@ -159,6 +239,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SysUserRoleGridView",
             "viewtag": "6736591aca71edc23df760e278378566"
         },
+        "jobsloggridview": {
+            "title": "任务调度日志表格视图",
+            "caption": "任务调度日志",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "task",
+            "viewname": "JobsLogGridView",
+            "viewtag": "67b4d1e928a08679ce63051ccc88da9c"
+        },
         "sysuserpickupgridview": {
             "title": "用户表选择表格视图",
             "caption": "系统用户",
@@ -191,6 +279,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "IBZDepartmentGridView",
             "viewtag": "7362390ee25dac238b23fa9ab05ea4ac"
         },
+        "dictcataloggridview": {
+            "title": "字典表格视图",
+            "caption": "字典",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "dict",
+            "viewname": "DictCatalogGridView",
+            "viewtag": "74a6ce3ddf610ce7fb201662c6d4b8da"
+        },
         "sysrolepickupgridview": {
             "title": "角色选择表格视图",
             "caption": "系统角色",
@@ -198,6 +294,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "uaa",
             "viewname": "SysRolePickupGridView",
             "viewtag": "7c25865f5864a734477c7cb987632f4f"
+        },
+        "ibzpostpickupview": {
+            "title": "岗位数据选择视图",
+            "caption": "岗位",
+            "viewtype": "DEPICKUPVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZPostPickupView",
+            "viewtag": "7e3fbce8277ad89674307e6a0d7ddd43"
+        },
+        "dictcatalogpickupgridview": {
+            "title": "字典选择表格视图",
+            "caption": "字典",
+            "viewtype": "DEPICKUPGRIDVIEW",
+            "viewmodule": "dict",
+            "viewname": "DictCatalogPickupGridView",
+            "viewtag": "842cfc03d5e93435fc52d317a55cdfd4"
         },
         "wfusermpickupview": {
             "title": "用户数据多项选择视图",
@@ -214,6 +326,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "uaa",
             "viewname": "SysPermissionMPickupView",
             "viewtag": "86bd4f6d4f771870e10b9717046a1b14"
+        },
+        "ibzposteditview": {
+            "title": "岗位编辑视图",
+            "caption": "岗位",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZPostEditView",
+            "viewtag": "88af20e0a8e819dff22f1a198e8989e3"
         },
         "wfgroupmpickupview": {
             "title": "角色/用户组数据多项选择视图",
@@ -295,6 +415,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SysRoleMPickupView",
             "viewtag": "a1f8d44a9d7be49687062c63434b0f3f"
         },
+        "dictcatalogpickupview": {
+            "title": "字典数据选择视图",
+            "caption": "字典",
+            "viewtype": "DEPICKUPVIEW",
+            "viewmodule": "dict",
+            "viewname": "DictCatalogPickupView",
+            "viewtag": "a9c82814d9bcd23dbf78c4c073759d7c"
+        },
+        "dictcatalogeditview": {
+            "title": "字典编辑视图",
+            "caption": "字典",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "dict",
+            "viewname": "DictCatalogEditView",
+            "viewtag": "aef11c4ae15f8255ee53623adf148f2a"
+        },
         "wfgrouppickupview": {
             "title": "角色/用户组数据选择视图",
             "caption": "角色/用户组",
@@ -310,6 +446,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "workflow",
             "viewname": "WFGroupEditView",
             "viewtag": "b23a721ca159ac2490b768d795e85d17"
+        },
+        "jobslogeditview": {
+            "title": "任务调度日志编辑视图",
+            "caption": "任务调度日志",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "task",
+            "viewname": "JobsLogEditView",
+            "viewtag": "b4b9140b8844a2d60cfc7944cd4f5b79"
         },
         "index": {
             "title": "Runtime",
@@ -367,6 +511,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "WFUserPickupGridView",
             "viewtag": "c9c73c8d2e61bd29a304622f3d39b522"
         },
+        "ibzpostpickupgridview": {
+            "title": "岗位选择表格视图",
+            "caption": "岗位",
+            "viewtype": "DEPICKUPGRIDVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZPostPickupGridView",
+            "viewtag": "cbaccf404d6c33b995df3ace323ccec0"
+        },
         "ibzorganizationpickupview": {
             "title": "单位机构数据选择视图",
             "caption": "单位机构",
@@ -383,6 +535,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "IBZOrganizationPickupGridView",
             "viewtag": "cf8e6d455f8e88e66bbbe1bdb4c84274"
         },
+        "ibzpostgridview": {
+            "title": "岗位表格视图",
+            "caption": "岗位",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "ou",
+            "viewname": "IBZPostGridView",
+            "viewtag": "d907ddd1845887ecabac4d8d199bf792"
+        },
         "ibzemployeempickupview": {
             "title": "人员数据多项选择视图",
             "caption": "人员",
@@ -398,6 +558,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "ou",
             "viewname": "IBZDepartmentPickupGridView",
             "viewtag": "e3284e895913f7d38d1bcbe898bda0b7"
+        },
+        "jobsinfogridview": {
+            "title": "任务信息表格视图",
+            "caption": "任务信息",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "task",
+            "viewname": "JobsInfoGridView",
+            "viewtag": "e4856779577562e9880855e6c66d63e5"
         },
         "sysuserroleeditview": {
             "title": "用户角色关系表编辑视图",

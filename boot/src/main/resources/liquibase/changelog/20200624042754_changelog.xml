@@ -1,0 +1,39 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="mac (generated)" id="1592972881574-1">
+        <createTable tableName="IBZDICTCATALOG">
+            <column name="CID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_DICT_CATALOG_CID"/>
+            </column>
+            <column name="CCODE" type="VARCHAR(100)"/>
+            <column name="CNAME" type="VARCHAR(100)"/>
+            <column name="CGROUP" type="VARCHAR(100)"/>
+            <column name="MEMO" type="VARCHAR(255)"/>
+            <column name="ENABLE" type="INT"/>
+            <column name="UPDATEDATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1592972881574-2">
+        <createTable tableName="IBZDICTOPTION">
+            <column name="VKEY" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_DICT_OPTION_VKEY"/>
+            </column>
+            <column name="CID" type="VARCHAR(100)"/>
+            <column name="CNAME" type="VARCHAR(100)"/>
+            <column name="VAL" type="VARCHAR(40)"/>
+            <column name="LABEL" type="VARCHAR(100)"/>
+            <column name="PVAL" type="VARCHAR(40)"/>
+            <column name="VFILTER" type="VARCHAR(500)"/>
+            <column name="CLS" type="VARCHAR(500)"/>
+            <column name="ICONCLS" type="VARCHAR(255)"/>
+            <column name="DISABLED" type="INT"/>
+            <column name="EXPIRED" type="INT"/>
+            <column name="SHOWORDER" type="INT"/>
+            <column name="EXTENSION" type="VARCHAR(1000)"/>
+            <column name="UPDATEDATE" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1592972881574-3">
+        <addForeignKeyConstraint baseColumnNames="CID" baseTableName="IBZDICTOPTION" constraintName="DER1N_DICT_OPTION_DICT_CATALOG" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="CID" referencedTableName="IBZDICTCATALOG" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

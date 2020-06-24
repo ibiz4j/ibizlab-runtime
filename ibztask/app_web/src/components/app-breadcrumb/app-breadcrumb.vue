@@ -4,7 +4,7 @@
       <template v-if="Object.is(this.navModel,'route')">
         <el-breadcrumb-item v-for="(item, index) in breadcrumbs"  :key="item.id">
           <span v-if="index === breadcrumbs.length-1" class="no-redirect">{{ item.title }}
-            <span v-if="item.isselected === true">
+             <span v-if="isShowSelected(item)">
               <dropdown trigger='click' @on-click="selectNavData($event,item)">
                 <span class="app-breadcrumb-selected">
                     <i class="el-icon-caret-bottom"></i>
@@ -193,6 +193,15 @@ export default class Breadcrumb extends Vue {
         if (this.serviceStateEvent) {
             this.serviceStateEvent.unsubscribe();
         }
+    }
+
+    /**
+     * 是否显示下拉列表
+     *
+     * @memberof Breadcrumb
+     */
+    public isShowSelected(item:any){
+      return item.isselected && !this.$util.isEmpty(item.srfkey);
     }
 
 }

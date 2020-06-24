@@ -44,6 +44,14 @@
     "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
      }
     ,    {
+    "dename":"IBZPost",
+    "delogicname":"岗位",
+    "sysmoudle":{"id":"OU","name":"ou"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
     "dename":"IBZTeam",
     "delogicname":"组",
     "sysmoudle":{"id":"OU","name":"ou"},
@@ -57,7 +65,7 @@
             {
                "appid":"web",
                "appname":"统一组织单位",
-               "appmenu":[{"menuid":"OUIndexView", "menuname":"OUIndexView", "menuitem":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" }] }]
+               "appmenu":[{"menuid":"OUIndexView", "menuname":"OUIndexView", "menuitem":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" },{ "id":"menuitem4" , "name":"岗位管理" },{ "id":"menuitem5" , "name":"组管理" }] }]
             }
             ]
     }

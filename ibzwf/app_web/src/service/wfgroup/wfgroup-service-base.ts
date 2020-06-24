@@ -194,7 +194,6 @@ export default class WFGroupServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/wfgroups/${context.wfgroup}`,isloading);
-
     }
 
     /**
@@ -210,7 +209,6 @@ export default class WFGroupServiceBase extends EntityService {
             let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
             return res;
-
     }
 
     /**

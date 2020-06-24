@@ -42,6 +42,9 @@ public class IBZOrganizationServiceImpl implements IIBZOrganizationService {
     @Autowired
     IBZOrganizationFeignClient iBZOrganizationFeignClient;
 
+    @Autowired
+    @Lazy
+    private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
     @Override
     @Transactional
@@ -144,24 +147,6 @@ public class IBZOrganizationServiceImpl implements IIBZOrganizationService {
     @Override
     public Page<IBZOrganization> searchDefault(IBZOrganizationSearchContext context) {
         Page<IBZOrganization> iBZOrganizations=iBZOrganizationFeignClient.searchDefault(context);
-        return iBZOrganizations;
-    }
-
-    /**
-     * 查询集合 查询上级单位
-     */
-    @Override
-    public Page<IBZOrganization> searchSelectPOrg(IBZOrganizationSearchContext context) {
-        Page<IBZOrganization> iBZOrganizations=iBZOrganizationFeignClient.searchSelectPOrg(context);
-        return iBZOrganizations;
-    }
-
-    /**
-     * 查询集合 查询下级单位
-     */
-    @Override
-    public Page<IBZOrganization> searchSelectSOrg(IBZOrganizationSearchContext context) {
-        Page<IBZOrganization> iBZOrganizations=iBZOrganizationFeignClient.searchSelectSOrg(context);
         return iBZOrganizations;
     }
 

@@ -90,6 +90,13 @@ public class IBZOrganization extends EntityClient implements Serializable {
     private String parentorgname;
 
     /**
+     * 区属
+     */
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+
+    /**
      * 逻辑有效
      */
     @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
@@ -171,6 +178,14 @@ public class IBZOrganization extends EntityClient implements Serializable {
     public void setShoworder(Integer showorder){
         this.showorder = showorder ;
         this.modify("showorder",showorder);
+    }
+
+    /**
+     * 设置 [区属]
+     */
+    public void setDomains(String domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
 

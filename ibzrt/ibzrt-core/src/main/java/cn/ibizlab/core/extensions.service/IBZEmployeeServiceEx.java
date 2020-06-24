@@ -15,6 +15,10 @@ import org.springframework.context.annotation.Primary;
 @Service("IBZEmployeeServiceEx")
 public class IBZEmployeeServiceEx extends IBZEmployeeServiceImpl {
 
+    @Override
+    protected Class currentModelClass() {
+        return com.baomidou.mybatisplus.core.toolkit.ReflectionKit.getSuperClassGenericType(this.getClass().getSuperclass(), 1);
+    }
 
     /**
      * 自定义行为[InitPwd]用户扩展

@@ -68,14 +68,4 @@ public interface IBZOrganizationFeignClient {
     Page<IBZOrganization> searchDefault(@RequestBody IBZOrganizationSearchContext context);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/searchselectporg")
-    Page<IBZOrganization> searchSelectPOrg(@RequestBody IBZOrganizationSearchContext context);
-
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/searchselectsorg")
-    Page<IBZOrganization> searchSelectSOrg(@RequestBody IBZOrganizationSearchContext context);
-
-
 }

@@ -39,8 +39,6 @@ public interface IIBZOrganizationService{
     @CacheEvict(value="ibzorganization",allEntries=true)
     void updateBatch(List<IBZOrganization> list) ;
     Page<IBZOrganization> searchDefault(IBZOrganizationSearchContext context) ;
-    Page<IBZOrganization> searchSelectPOrg(IBZOrganizationSearchContext context) ;
-    Page<IBZOrganization> searchSelectSOrg(IBZOrganizationSearchContext context) ;
     List<IBZOrganization> selectByParentorgid(String orgid) ;
     @CacheEvict(value="ibzorganization",allEntries=true)
     void removeByParentorgid(String orgid) ;

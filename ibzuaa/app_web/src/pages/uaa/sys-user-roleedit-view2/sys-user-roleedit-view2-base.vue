@@ -81,7 +81,7 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
@@ -149,6 +149,15 @@ export default class SYS_USER_ROLEEditView2Base extends Vue {
      * @memberof SYS_USER_ROLEEditView2Base
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
+
+    /**
+     * 视图默认使用
+     *
+     * @type {string}
+     * @memberof SYS_USER_ROLEEditView2Base
+     */
+    @Inject({from:'navModel',default: 'tab'})
+    public navModel!:string;
 
 	/**
 	 * 视图标识
@@ -344,6 +353,14 @@ export default class SYS_USER_ROLEEditView2Base extends Vue {
     public viewparams:any = {};
 
     /**
+     * 视图缓存数据
+     *
+     * @type {*}
+     * @memberof SYS_USER_ROLEEditView2Base
+     */
+    public viewCacheData:any;
+
+    /**
      * 解析视图参数
      *
      * @public
@@ -389,7 +406,7 @@ export default class SYS_USER_ROLEEditView2Base extends Vue {
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
         //初始化导航数据
-        this.initNavData();
+        this.initNavDataWithRoute();
     }
 
     /**
@@ -469,13 +486,24 @@ export default class SYS_USER_ROLEEditView2Base extends Vue {
 	}
 
     /**
-     * 初始化导航数据
+     * 初始化导航数据(路由模式)
      *
      * @memberof SYS_USER_ROLEEditView2Base
      */
-    public initNavData(data:any = null){
-        if(this.viewDefaultUsage){
-            this.navDataService.addNavData({id:'sys-user-roleedit-view2',srfkey:this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
+        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+            this.navDataService.addNavData({id:'sys-user-roleedit-view2',tag:this.viewtag,srfkey:isNew ? null : this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
+
+    /**
+     * 初始化导航数据(分页模式)
+     *
+     * @memberof SYS_USER_ROLEEditView2Base
+     */
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
+        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+            this.navDataService.addNavDataByOnly({id:'sys-user-roleedit-view2',tag:this.viewtag,srfkey:this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	
@@ -1069,6 +1097,9 @@ export default class SYS_USER_ROLEEditView2Base extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if(Object.is(this.navModel,"tab")){
+                this.navDataService.removeNavDataByTag(this.viewtag);
             }
             if (this.serviceStateEvent) {
                 this.serviceStateEvent.unsubscribe();

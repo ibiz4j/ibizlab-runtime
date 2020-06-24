@@ -16,8 +16,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "2543a3f227c806c6433bf9710717de93"
         },
         "wfindexview": {
-            "title": "ibizlab-workflow",
-            "caption": "ibizlab-workflow",
+            "title": "workflow",
+            "caption": "ibizlab",
             "viewtype": "APPINDEXVIEW",
             "viewmodule": "workflow",
             "viewname": "WFIndexView",

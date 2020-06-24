@@ -118,16 +118,16 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import TaskIndexViewService from './task-index-view-appmenu-service';
 
 import TaskIndexViewModel from './task-index-view-appmenu-model';
 import { Environment } from '@/environments/environment';
-import NavDataService from '@/service/app/navdata-service';
 
 
 @Component({
@@ -578,18 +578,16 @@ export default class TaskIndexViewBase extends Vue implements ControlInterface {
             let navDataService = NavDataService.getInstance(this.$store);
             if(Object.is(this.navModel,"route")){
                 navDataService.removeNavData(this.viewtag);
-            }else{
-                navDataService.removeNavDataWithoutCache(this.viewtag);
             }
             switch (item.appfunctag) {
-                case '_4': 
-                    this.click_4(item);
+                case 'Auto3': 
+                    this.clickAuto3(item);
                     return;
-                case '_3': 
-                    this.click_3(item);
+                case 'Auto2': 
+                    this.clickAuto2(item);
                     return;
-                case '_2': 
-                    this.click_2(item);
+                case 'Auto1': 
+                    this.clickAuto1(item);
                     return;
                 default:
                     console.warn('未指定应用功能');
@@ -604,7 +602,7 @@ export default class TaskIndexViewBase extends Vue implements ControlInterface {
      * @param {*} [item={}]
      * @memberof TaskIndexView
      */
-    public click_4(item: any = {}) {
+    public clickAuto3(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
@@ -627,7 +625,7 @@ export default class TaskIndexViewBase extends Vue implements ControlInterface {
      * @param {*} [item={}]
      * @memberof TaskIndexView
      */
-    public click_3(item: any = {}) {
+    public clickAuto2(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
@@ -650,7 +648,7 @@ export default class TaskIndexViewBase extends Vue implements ControlInterface {
      * @param {*} [item={}]
      * @memberof TaskIndexView
      */
-    public click_2(item: any = {}) {
+    public clickAuto1(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];

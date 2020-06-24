@@ -3,6 +3,7 @@ import ibzteammember_zh_CN from '@locale/lanres/entities/ibzteam-member/ibzteam-
 import ibzdepartment_zh_CN from '@locale/lanres/entities/ibzdepartment/ibzdepartment_zh_CN';
 import ibzemployee_zh_CN from '@locale/lanres/entities/ibzemployee/ibzemployee_zh_CN';
 import ibzorganization_zh_CN from '@locale/lanres/entities/ibzorganization/ibzorganization_zh_CN';
+import ibzpost_zh_CN from '@locale/lanres/entities/ibzpost/ibzpost_zh_CN';
 import ibzteam_zh_CN from '@locale/lanres/entities/ibzteam/ibzteam_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
@@ -53,8 +54,8 @@ export default {
         // 非实体视图
         views: {
             ouindexview: {
-                caption: "ibizlab-ou",
-                title: "ibizlab-ou",
+                caption: "ibizlab",
+                title: "organizational-unit",
             },
         },
         utilview:{
@@ -67,6 +68,8 @@ export default {
                 menuitem1: "单位管理",
                 menuitem2: "部门管理",
                 menuitem3: "人员管理",
+                menuitem4: "岗位管理",
+                menuitem5: "组管理",
             },
         },
     },
@@ -76,6 +79,7 @@ export default {
         ibzdepartment: ibzdepartment_zh_CN,
         ibzemployee: ibzemployee_zh_CN,
         ibzorganization: ibzorganization_zh_CN,
+        ibzpost: ibzpost_zh_CN,
         ibzteam: ibzteam_zh_CN,
     },
     components: components_zh_CN,

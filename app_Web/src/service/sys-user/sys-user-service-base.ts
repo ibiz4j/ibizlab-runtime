@@ -62,7 +62,6 @@ export default class SysUserServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/sysusers/${context.sysuser}`,isloading);
-
     }
 
     /**
@@ -123,7 +122,6 @@ export default class SysUserServiceBase extends EntityService {
             let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
             return res;
-
     }
 
     /**

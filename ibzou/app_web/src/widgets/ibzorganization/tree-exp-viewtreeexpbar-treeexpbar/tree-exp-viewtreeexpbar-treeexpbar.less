@@ -14,14 +14,27 @@
                 .tree-exp-bar-header {
                     line-height: 50px;
                     border-bottom: 1px solid #ddd;
-                    >div {
+                    display: flex;
+                    justify-content: space-between;
+                    .tree-exp-bar-title {
                         font-size: 18px;
                         padding-left: 8px;
+                        flex-shrink: 0;
                         i {
                             font-size: 20px;
                             margin-top: -2px;
                         }
                     } 
+                    .toolbar-container{
+                        margin-left: auto;
+                        margin-right: 10px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        .ivu-badge-count{
+                            top: 2px;
+                        }
+                    }
                 }
                 .search-content {
                     width: 100%;

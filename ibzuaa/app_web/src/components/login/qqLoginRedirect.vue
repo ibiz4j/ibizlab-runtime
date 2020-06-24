@@ -1,6 +1,6 @@
 <template>
     <div class='login'>
-        <img src="/assets/img/background.png"/>
+        <img src="/assets/img/background.png" draggable="false"/>
 
         <div class='login-con'>
             <card :bordered="false">
@@ -46,7 +46,7 @@
             </card>
             <div class="log_footer">
                 <div class="copyright">
-                    <a href="https://www.ibizlab.cn/" target="_blank">{{appTitle}} is based on ibizlab .</a>
+                    <a href="https://www.ibizlab.cn/" target="_blank" draggable="false">{{appTitle}} is based on ibizlab .</a>
                 </div>
             </div>
         </div>
@@ -82,6 +82,23 @@
 
 
         /**
+         * QQ授权成功返回的code和state
+         */
+        public code: any;
+        public state: any;
+
+        /**
+         *　QQ用户身份的唯一标识
+         */
+        public openid: any;
+
+        /**
+         * QQ用户名称
+         */
+        public nickname: any;
+
+
+        /**
          * 应用名称
          *
          * @type {string}
@@ -113,12 +130,6 @@
             }
         };
 
-        // 注册方式
-        public registerType: any = "commom";
-        // 用户身份的唯一标识。建议保存在本地，以便用户下次登录时可对应到其之前的身份信息，不需要重新授权。
-        public openId: any;
-        // 表示当前用户在此网站/应用的登录状态与授权信息，建议保存在本地。
-        public accessToken: any;
 
         /**
          * 生命周期Create
@@ -133,58 +144,30 @@
          * 挂载
          */
         public mounted() {
-            let _this = this;
-            // 获取qq授权登录的信息，用于后台请求
-            if (window.QC.Login.check()) {
-                console.log("qq已经登录");
-                window.QC.Login.getMe(function(openId:string, accessToken:string){
-                    _this.openId = openId;
-                    _this.accessToken = accessToken;
-                    _this.registerType = "qq";
-                    localStorage.setItem("openId",openId);
-                    localStorage.setItem("accessToken",accessToken);
-                });
-                // 根据openId查用户
-                this.queryUserByOpenId(this.openId);
-            }
-        }
 
-        /**
-         * 根据openId查用户
-         * 1.没系统账号的，进行注册并绑定QQ
-         * 2.有系统账号的，直接登录
-         * @param openId
-         */
-        private queryUserByOpenId(openId: any) {
-            var param: any = {};
-            param.openId = openId;
-            const post: Promise<any> = this.$http.post('uaa/queryUserByOpenId', param, true);
-            post.then((response: any) => {
-                if (response && response.status === 200) {
-                    const data = response.data;
-                    if (data.ibzuser) {
-                        this.form.loginname = data.ibzuser.loginname;
-                        this.form.password = data.ibzuser.password;
-                        // 直接登录
-                        this.countDown(0);
-                    }
+            // 从url获取授权code和state
+            this.code = this.$route.query.code;
+            if (!this.code) {
+                this.code = this.getUrlParam('code');
+            }
+            this.state = this.$route.query.state;
+            if (!this.state) {
+                this.state = this.getUrlParam('state');
+            }
+            // 获取失败，回到登录页
+            if (!this.code || !this.state) {
+                this.$message.error("QQ授权，获取code失败");
+                this.goLogin();
+            }
+            else {
+                // 从local中获取该用户的openid和nickname
+                if (localStorage.getItem("openid")) {
+                    this.openid = localStorage.getItem("openid");
                 }
-            }).catch((e: any) => {
-                const data = e.data;
-                if (data && data.message) {
-                    this.$Message.error({
-                        content: data.message,
-                        duration: 3,
-                        closable: true
-                    });
-                } else {
-                    this.$Message.error({
-                        content: "错误",
-                        duration: 3,
-                        closable: true
-                    });
+                if (localStorage.getItem("nickname")) {
+                    this.nickname = localStorage.getItem("nickname");
                 }
-            });
+            }
 
         }
 
@@ -211,6 +194,17 @@
 
 
         /**
+         * 获取url参数
+         */
+        public getUrlParam(name: any) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+
+        /**
          * 注册处理
          */
         public handleRegister(): void {
@@ -228,38 +222,40 @@
             }
 
             var param: any = this.form;
-            if (this.registerType === "qq") {
-                param.registerType = "qq";
-                param.openId = this.openId;
-                param.accessToken = this.accessToken;
+            if (this.code && this.state) {
+                param.code = this.code;
+                param.state = this.state;
+                param.openid = this.openid;
+                param.nickname = this.nickname;
             }
             else {
-                this.$Message.error({
-                    content: "注册并绑定QQ失败",
-                    duration: 3,
-                    closable: true
-                });
+                this.$message.error("QQ授权，获取code失败");
                 return;
             }
-            const post: Promise<any> = this.$http.post('/uaa/register', param, true);
+
+            const post: Promise<any> = this.$http.post('/uaa/bindQQtoRegister', param, true);
             post.then((response: any) => {
                 if (response && response.status === 200) {
                     const data = response.data;
-                    if (data && data.ibzuser) {
+                    if (data) {
                         this.$Message.success({
-                            content: "注册成功，用户名:" + data.ibzuser.loginname + "，密码:" + data.ibzuser.password,
-                            duration: 3,
-                            closable: true
+                            content: "注册成功,正在登录"
                         });
-                    } else {
-                        this.$Message.success({
-                            content: "注册成功",
-                            duration: 3,
-                            closable: true
-                        });
+                        if (data.token) {
+                            localStorage.setItem('token', data.token);
+                        }
+                        if (data.user) {
+                            localStorage.setItem('user', JSON.stringify(data.user));
+                        }
+                        if (data.ibzuser) {
+                            let ibzuser: any = JSON.stringify(data.ibzuser);
+                            // 设置cookie,保存账号密码7天
+                            this.setCookie(ibzuser.loginname, ibzuser.password, 7);
+                            // 跳转首页
+                            const url: any = '*';
+                            this.$router.push({path: url});
+                        }
                     }
-                    // 3s后自动登录
-                    this.countDown(3);
                 }
             }).catch((e: any) => {
                 const data = e.data;

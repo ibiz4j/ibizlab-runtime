@@ -7,17 +7,17 @@ import Mock from 'mockjs'
 mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status,{
-                "sys_authloggridview": {
+                "sysauthloggridview": {
             "title": "认证日志表格视图",
             "caption": "认证日志",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "uaa",
-            "viewname": "SYS_AUTHLOGGridView",
+            "viewname": "SysAuthLogGridView",
             "viewtag": "0134ebf9391cb5f988839332c1352cd9"
         },
         "index": {
-            "title": "ibizlab-uaa",
-            "caption": "ibizlab-uaa",
+            "title": "uaa",
+            "caption": "ibizlab",
             "viewtype": "APPINDEXVIEW",
             "viewmodule": "uaa",
             "viewname": "Index",

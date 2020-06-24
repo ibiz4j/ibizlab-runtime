@@ -68,14 +68,15 @@ export default class SysRolePermissionServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysrole && context.sysrolepermission){
-            return Http.getInstance().get(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,isloading);
+            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,isloading);
+            return res;
         }
         if(context.syspermission && context.sysrolepermission){
-            return Http.getInstance().get(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,isloading);
+            let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,isloading);
+            return res;
         }
             let res:any = await Http.getInstance().get(`/sysrolepermissions/${context.sysrolepermission}`,isloading);
             return res;
-
     }
 
     /**
@@ -95,7 +96,6 @@ export default class SysRolePermissionServiceBase extends EntityService {
             return Http.getInstance().delete(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,isloading);
         }
             return Http.getInstance().delete(`/sysrolepermissions/${context.sysrolepermission}`,isloading);
-
     }
 
     /**
@@ -109,10 +109,14 @@ export default class SysRolePermissionServiceBase extends EntityService {
      */
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysrole && true){
-            return Http.getInstance().get(`/sysroles/${context.sysrole}/sysrolepermissions/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysrolepermissions/getdraft`,isloading);
+            res.data.sysrolepermission = data.sysrolepermission;
+            return res;
         }
         if(context.syspermission && true){
-            return Http.getInstance().get(`/syspermissions/${context.syspermission}/sysrolepermissions/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}/sysrolepermissions/getdraft`,isloading);
+            res.data.sysrolepermission = data.sysrolepermission;
+            return res;
         }
         let res:any = await  Http.getInstance().get(`/sysrolepermissions/getdraft`,isloading);
         res.data.sysrolepermission = data.sysrolepermission;
@@ -130,22 +134,30 @@ export default class SysRolePermissionServiceBase extends EntityService {
      */
     public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysrole && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/sysroles/${context.sysrole}/sysrolepermissions`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysrolepermissions`,data,isloading);
+            return res;
         }
         if(context.syspermission && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/syspermissions/${context.syspermission}/sysrolepermissions`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/syspermissions/${context.syspermission}/sysrolepermissions`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -171,10 +183,16 @@ export default class SysRolePermissionServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysrole && context.sysrolepermission){
-            return Http.getInstance().post(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}/checkkey`,data,isloading);
+            return res;
         }
         if(context.syspermission && context.sysrolepermission){
-            return Http.getInstance().post(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}/checkkey`,data,isloading);
+            return res;
         }
             return Http.getInstance().post(`/sysrolepermissions/${context.sysrolepermission}/checkkey`,data,isloading);
     }
@@ -190,10 +208,16 @@ export default class SysRolePermissionServiceBase extends EntityService {
      */
     public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysrole && context.sysrolepermission){
-            return Http.getInstance().post(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}/save`,data,isloading);
+            return res;
         }
         if(context.syspermission && context.sysrolepermission){
-            return Http.getInstance().post(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}/save`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -212,10 +236,16 @@ export default class SysRolePermissionServiceBase extends EntityService {
      */
     public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysrole && context.sysrolepermission){
-            return Http.getInstance().put(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
+            return res;
         }
         if(context.syspermission && context.sysrolepermission){
-            return Http.getInstance().put(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);

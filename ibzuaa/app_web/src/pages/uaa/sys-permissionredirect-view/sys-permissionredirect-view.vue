@@ -7,6 +7,9 @@ import SYS_PERMISSIONRedirectViewBase from './sys-permissionredirect-view-base.v
     },
     beforeRouteEnter: (to: any, from: any, next: any) => {
         next((vm: any) => {
+            if(!Object.is(vm.navModel,"route")){
+                vm.initNavDataWithTab(vm.viewCacheData);
+            }
             vm.$store.commit('addCurPageViewtag', { fullPath: to.fullPath, viewtag: vm.viewtag });
         });
     },

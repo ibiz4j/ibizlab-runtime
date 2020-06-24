@@ -71,6 +71,44 @@ export default class OUIndexViewModel {
 	resourcetag: '',
 	authtag:'web-OUIndexView-menuitem3',
 },
+        {
+	id: 'BF61871D-B5F5-4633-B6BA-30A66DE710BB',
+	name: 'menuitem4',
+	text: '岗位管理',
+	type: 'MENUITEM',
+	counterid: '',
+	tooltip: '岗位管理',
+	expanded: false,
+	separator: false,
+	hidden: false,
+	hidesidebar: false,
+	opendefault: false,
+	iconcls: 'fa fa-simplybuilt',
+	icon: '',
+	textcls: '',
+	appfunctag: 'Auto6',
+	resourcetag: '',
+	authtag:'web-OUIndexView-menuitem4',
+},
+        {
+	id: '3EE7101C-7039-4836-8AB7-81C0CAD3C288',
+	name: 'menuitem5',
+	text: '组管理',
+	type: 'MENUITEM',
+	counterid: '',
+	tooltip: '组管理',
+	expanded: false,
+	separator: false,
+	hidden: false,
+	hidesidebar: false,
+	opendefault: false,
+	iconcls: 'fa fa-group',
+	icon: '',
+	textcls: '',
+	appfunctag: 'Auto7',
+	resourcetag: '',
+	authtag:'web-OUIndexView-menuitem5',
+},
     ];
 
 	/**
@@ -81,6 +119,18 @@ export default class OUIndexViewModel {
 	 * @memberof OUIndexViewModel
 	 */
 	public funcs: any[] = [
+        {
+            appfunctag: 'Auto6',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'ibzpostgridview',
+            deResParameters: [],
+            routepath: '/ouindexview/:ouindexview?/ibzposts/:ibzpost?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'ibzposts', parameterName: 'ibzpost' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
         {
             appfunctag: 'Auto5',
             appfuncyype: 'APPVIEW',
@@ -102,6 +152,18 @@ export default class OUIndexViewModel {
             routepath: '/ouindexview/:ouindexview?/ibzorganizations/:ibzorganization?/gridview/:gridview?',
             parameters: [
                 { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
+        {
+            appfunctag: 'Auto7',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'ibzteamgridview',
+            deResParameters: [],
+            routepath: '/ouindexview/:ouindexview?/ibzteams/:ibzteam?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'ibzteams', parameterName: 'ibzteam' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },

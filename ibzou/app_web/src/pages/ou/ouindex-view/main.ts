@@ -12,7 +12,6 @@ import i18n from '@/locale'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'view-design/dist/styles/iview.css';
 import 'ibiz-vue-lib/lib/ibiz-vue-lib.css';
-
 import '@/styles/default.less';
 
 // 模拟数据

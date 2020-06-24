@@ -11,6 +11,9 @@ import view_searchform from '@widgets/jobs-registry/default-searchform/default-s
     },
     beforeRouteEnter: (to: any, from: any, next: any) => {
         next((vm: any) => {
+            if(!Object.is(vm.navModel,"route")){
+                vm.initNavDataWithTab(vm.viewCacheData);
+            }
             vm.$store.commit('addCurPageViewtag', { fullPath: to.fullPath, viewtag: vm.viewtag });
         });
     },

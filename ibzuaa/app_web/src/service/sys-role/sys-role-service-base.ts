@@ -216,7 +216,6 @@ export default class SysRoleServiceBase extends EntityService {
             this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
             this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
             return res;
-
     }
 
     /**
@@ -230,7 +229,6 @@ export default class SysRoleServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/sysroles/${context.sysrole}`,isloading);
-
     }
 
     /**

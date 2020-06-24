@@ -73,14 +73,4 @@ public class IBZOrganizationFallback implements IBZOrganizationFeignClient{
      }
 
 
-    public Page<IBZOrganization> searchSelectPOrg(IBZOrganizationSearchContext context){
-            return null;
-     }
-
-
-    public Page<IBZOrganization> searchSelectSOrg(IBZOrganizationSearchContext context){
-            return null;
-     }
-
-
 }

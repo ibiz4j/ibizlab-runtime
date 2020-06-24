@@ -34,32 +34,32 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-       <![CDATA[	SELECT t1.`ADDRESS`, t1.`APP`, t1.`ID`, t1.`STATUS`, t1.`UPDATE_TIME` FROM `JOBS_REGISTRY` t1  
+		<![CDATA[ SELECT t1.`ADDRESS`, t1.`APP`, t1.`ID`, t1.`STATUS`, t1.`UPDATE_TIME` FROM `JOBS_REGISTRY` t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="oracle">
-       <![CDATA[	SELECT t1.ADDRESS, t1.APP, t1.ID, t1.STATUS, t1.UPDATE_TIME FROM JOBS_REGISTRY t1  
+		<![CDATA[ SELECT t1.ADDRESS, t1.APP, t1.ID, t1.STATUS, t1.UPDATE_TIME FROM JOBS_REGISTRY t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
-       <![CDATA[	SELECT t1.ADDRESS, t1.APP, t1.ID, t1.STATUS, t1.UPDATE_TIME FROM JOBS_REGISTRY t1  
+		<![CDATA[ SELECT t1.ADDRESS, t1.APP, t1.ID, t1.STATUS, t1.UPDATE_TIME FROM JOBS_REGISTRY t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
-       <![CDATA[	SELECT t1.`ADDRESS`, t1.`APP`, t1.`ID`, t1.`STATUS`, t1.`UPDATE_TIME` FROM `JOBS_REGISTRY` t1  
+		<![CDATA[ SELECT t1.`ADDRESS`, t1.`APP`, t1.`ID`, t1.`STATUS`, t1.`UPDATE_TIME` FROM `JOBS_REGISTRY` t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="oracle">
-       <![CDATA[	SELECT t1.ADDRESS, t1.APP, t1.ID, t1.STATUS, t1.UPDATE_TIME FROM JOBS_REGISTRY t1  
+		<![CDATA[ SELECT t1.ADDRESS, t1.APP, t1.ID, t1.STATUS, t1.UPDATE_TIME FROM JOBS_REGISTRY t1  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="postgresql">
-       <![CDATA[	SELECT t1.ADDRESS, t1.APP, t1.ID, t1.STATUS, t1.UPDATE_TIME FROM JOBS_REGISTRY t1  
+		<![CDATA[ SELECT t1.ADDRESS, t1.APP, t1.ID, t1.STATUS, t1.UPDATE_TIME FROM JOBS_REGISTRY t1  
 			]]>
     </sql>
 </mapper>

@@ -138,12 +138,16 @@ export default {
 	},
 	gridviewtoolbar_toolbar: {
 		tbitem1_opennewcreateview: {
-			caption: "新建",
-			tip: "新建",
+			caption: "快速新建",
+			tip: "快速新建",
 		},
 		tbitem2: {
 			caption: "-",
 			tip: "",
+		},
+		deuiaction1: {
+			caption: "New",
+			tip: "New",
 		},
 		tbitem4: {
 			caption: "Edit",

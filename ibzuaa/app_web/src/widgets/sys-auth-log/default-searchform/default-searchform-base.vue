@@ -64,11 +64,12 @@
 </i-form>
 </template>
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import SysAuthLogService from '@/service/sys-auth-log/sys-auth-log-service';
 import DefaultService from './default-searchform-service';
 
@@ -741,7 +742,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}): void {
         if(!this.loadAction){
-            this.$Notice.error({ title: '错误', desc: 'SYS_AUTHLOGGridView视图搜索表单loadAction参数未配置' });
+            this.$Notice.error({ title: '错误', desc: 'SysAuthLogGridView视图搜索表单loadAction参数未配置' });
             return;
         }
         const arg: any = { ...opt };
@@ -778,7 +779,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public loadDraft(opt: any = {},mode?:string): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: '错误', desc: 'SYS_AUTHLOGGridView视图搜索表单loaddraftAction参数未配置' });
+            this.$Notice.error({ title: '错误', desc: 'SysAuthLogGridView视图搜索表单loaddraftAction参数未配置' });
             return;
         }
         const arg: any = { ...opt } ;

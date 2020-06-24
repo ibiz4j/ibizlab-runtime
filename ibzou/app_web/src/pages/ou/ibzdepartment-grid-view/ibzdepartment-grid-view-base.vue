@@ -11,12 +11,19 @@
                     <div class='toolbar-container'>
                         <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem1_opennewcreateview.visabled" :disabled="toolBarModels.tbitem1_opennewcreateview.disabled" class='' @click="toolbar_click({ tag: 'tbitem1_opennewcreateview' }, $event)">
-                                    <i class=''></i>
+                                    <i class='fa fa-file-text-o'></i>
                                     <span class='caption'>{{$t('entities.ibzdepartment.gridviewtoolbar_toolbar.tbitem1_opennewcreateview.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.ibzdepartment.gridviewtoolbar_toolbar.tbitem1_opennewcreateview.tip')}}</div>
                         </tooltip>
                         <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
+                                    <i class='fa fa-file-text-o'></i>
+                                    <span class='caption'>{{$t('entities.ibzdepartment.gridviewtoolbar_toolbar.deuiaction1.caption')}}</span>
+                                </i-button>
+                            <div slot='content'>{{$t('entities.ibzdepartment.gridviewtoolbar_toolbar.deuiaction1.tip')}}</div>
+                        </tooltip>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' @click="toolbar_click({ tag: 'tbitem4' }, $event)">
                                     <i class='fa fa-edit'></i>
                                     <span class='caption'>{{$t('entities.ibzdepartment.gridviewtoolbar_toolbar.tbitem4.caption')}}</span>
@@ -102,7 +109,7 @@
 
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
@@ -173,6 +180,15 @@ export default class IBZDepartmentGridViewBase extends Vue {
      * @memberof IBZDepartmentGridViewBase
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
+
+    /**
+     * 视图默认使用
+     *
+     * @type {string}
+     * @memberof IBZDepartmentGridViewBase
+     */
+    @Inject({from:'navModel',default: 'tab'})
+    public navModel!:string;
 
 	/**
 	 * 视图标识
@@ -293,9 +309,11 @@ export default class IBZDepartmentGridViewBase extends Vue {
      * @memberof IBZDepartmentGridView
      */
     public toolBarModels: any = {
-        tbitem1_opennewcreateview: { name: 'tbitem1_opennewcreateview', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'OpenNewCreateView', target: 'NONE' } },
+        tbitem1_opennewcreateview: { name: 'tbitem1_opennewcreateview', caption: '快速新建', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'OpenNewCreateView', target: 'NONE' } },
 
         tbitem2: {  name: 'tbitem2', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
+        deuiaction1: { name: 'deuiaction1', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+
         tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
         tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
@@ -381,6 +399,14 @@ export default class IBZDepartmentGridViewBase extends Vue {
     public viewparams:any = {};
 
     /**
+     * 视图缓存数据
+     *
+     * @type {*}
+     * @memberof IBZDepartmentGridViewBase
+     */
+    public viewCacheData:any;
+
+    /**
      * 解析视图参数
      *
      * @public
@@ -426,7 +452,7 @@ export default class IBZDepartmentGridViewBase extends Vue {
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
         //初始化导航数据
-        this.initNavData();
+        this.initNavDataWithRoute();
     }
 
     /**
@@ -506,13 +532,24 @@ export default class IBZDepartmentGridViewBase extends Vue {
 	}
 
     /**
-     * 初始化导航数据
+     * 初始化导航数据(路由模式)
      *
      * @memberof IBZDepartmentGridViewBase
      */
-    public initNavData(data:any = null){
-        if(this.viewDefaultUsage){
-            this.navDataService.addNavData({id:'ibzdepartment-grid-view',srfkey:this.context.ibzdepartment,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
+        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+            this.navDataService.addNavData({id:'ibzdepartment-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.ibzdepartment,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
+
+    /**
+     * 初始化导航数据(分页模式)
+     *
+     * @memberof IBZDepartmentGridViewBase
+     */
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
+        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+            this.navDataService.addNavDataByOnly({id:'ibzdepartment-grid-view',tag:this.viewtag,srfkey:this.context.ibzdepartment,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	
@@ -608,6 +645,9 @@ export default class IBZDepartmentGridViewBase extends Vue {
     public toolbar_click($event: any, $event2?: any) {
         if (Object.is($event.tag, 'tbitem1_opennewcreateview')) {
             this.toolbar_tbitem1_opennewcreateview_click(null, '', $event2);
+        }
+        if (Object.is($event.tag, 'deuiaction1')) {
+            this.toolbar_deuiaction1_click(null, '', $event2);
         }
         if (Object.is($event.tag, 'tbitem4')) {
             this.toolbar_tbitem4_click(null, '', $event2);
@@ -763,6 +803,34 @@ export default class IBZDepartmentGridViewBase extends Vue {
         // 界面行为
         const curUIService:IBZDepartmentUIService  = new IBZDepartmentUIService();
         curUIService.IBZDepartment_OpenNewCreateView(datas,contextJO, paramJO,  $event, xData,this,"IBZDepartment");
+    }
+
+    /**
+     * 逻辑事件
+     *
+     * @param {*} [params={}]
+     * @param {*} [tag]
+     * @param {*} [$event]
+     * @memberof 
+     */
+    public toolbar_deuiaction1_click(params: any = {}, tag?: any, $event?: any) {
+        // 参数
+        // 取数
+        let datas: any[] = [];
+        let xData: any = null;
+        // _this 指向容器对象
+        const _this: any = this;
+        let paramJO:any = {};
+        let contextJO:any = {};
+        xData = this.$refs.grid;
+        if (xData.getDatas && xData.getDatas instanceof Function) {
+            datas = [...xData.getDatas()];
+        }
+        if(params){
+          datas = [params];
+        }
+        // 界面行为
+        this.New(datas, contextJO,paramJO,  $event, xData,this,"IBZDepartment");
     }
 
     /**
@@ -1124,6 +1192,26 @@ export default class IBZDepartmentGridViewBase extends Vue {
 
 
     /**
+     * 新建
+     *
+     * @param {any[]} args 当前数据
+     * @param {any} contextJO 行为附加上下文
+     * @param {*} [params] 附加参数
+     * @param {*} [$event] 事件源
+     * @param {*} [xData]  执行行为所需当前部件
+     * @param {*} [actionContext]  执行行为上下文
+     * @memberof IBZDepartmentGridViewBase
+     */
+    public New(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+         const _this: any = this;
+        if (_this.newdata && _this.newdata instanceof Function) {
+            const data: any = {};
+            _this.newdata([{ ...data }],[{ ...data }], params, $event, xData);
+        } else {
+            _this.$Notice.error({ title: '错误', desc: 'newdata 视图处理逻辑不存在，请添加!' });
+        }
+    }
+    /**
      * 编辑
      *
      * @param {any[]} args 当前数据
@@ -1355,6 +1443,9 @@ export default class IBZDepartmentGridViewBase extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if(Object.is(this.navModel,"tab")){
+                this.navDataService.removeNavDataByTag(this.viewtag);
             }
             if (this.serviceStateEvent) {
                 this.serviceStateEvent.unsubscribe();

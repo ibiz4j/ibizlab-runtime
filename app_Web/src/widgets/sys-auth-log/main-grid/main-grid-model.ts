@@ -101,11 +101,6 @@ export default class MainModel {
         dataType: 'SSCODELIST',
       },
       {
-        name: 'n_domain_like',
-        prop: 'n_domain_like',
-        dataType: 'TEXT',
-      },
-      {
         name: 'n_authtime_gtandeq',
         prop: 'n_authtime_gtandeq',
         dataType: 'DATETIME',
@@ -114,6 +109,11 @@ export default class MainModel {
         name: 'n_authtime_ltandeq',
         prop: 'n_authtime_ltandeq',
         dataType: 'DATETIME',
+      },
+      {
+        name: 'n_domain_like',
+        prop: 'n_domain_like',
+        dataType: 'TEXT',
       },
 
         {

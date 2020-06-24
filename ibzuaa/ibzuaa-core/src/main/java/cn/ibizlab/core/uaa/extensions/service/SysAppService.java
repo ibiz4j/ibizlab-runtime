@@ -13,7 +13,11 @@ import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.IBZConfigService;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.nacos.api.naming.NamingFactory;
+import com.alibaba.nacos.api.naming.NamingService;
+import com.alibaba.nacos.api.naming.pojo.Instance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
@@ -22,10 +26,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Primary
 @Service
@@ -41,6 +42,8 @@ public class SysAppService extends SysAppServiceImpl
     @Autowired
     private UAACoreService uaaCoreService;
 
+    @Value("${spring.cloud.nacos.discovery.server-addr:127.0.0.1:8848}")
+    private String serverAddr;
 
     //@Cacheable( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
     public JSONObject getAppSwitcher(String id,String userId)
@@ -79,6 +82,31 @@ public class SysAppService extends SysAppServiceImpl
                 sysApp.setVisabled(0);
             list.add(sysApp);
         });
+
+        try {
+            Properties properties = new Properties();
+            properties.setProperty("serverAddr", serverAddr);
+            NamingService naming = NamingFactory.createNamingService(properties);
+
+            list.forEach(sysApp -> {
+                if(StringUtils.isEmpty(sysApp.getAddr()))
+                {
+                    try {
+                        Instance instance = naming.selectOneHealthyInstance(sysApp.getId());
+                        if(instance!=null)
+                        {
+                            String domains="http://"+instance.getIp();
+                            if(instance.getPort()!=80)
+                                domains=domains+":"+instance.getPort();
+                            sysApp.setAddr(domains);
+                        }
+                    }
+                    catch (Exception ex){}
+                }
+            });
+        }
+        catch (Exception ex){}
+
         jo.remove("model");
         jo.put("model",JSONArray.toJSON(list));
         return jo;
@@ -87,6 +115,19 @@ public class SysAppService extends SysAppServiceImpl
     @CacheEvict( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
     public boolean saveAppSwitcher(String id,String userId,JSONObject config)
     {
+        if(!config.containsKey("model"))
+            config.put("model", new JSONArray());
+        List<SysApp> list=new ArrayList<>();
+        JSONArray.parseArray(config.get("model").toString(),SysApp.class).forEach(sysApp -> {
+            sysApp.setAddr(null);
+            sysApp.setIcon(null);
+            sysApp.setFullname(null);
+            sysApp.setType(null);
+            sysApp.setGroup(null);
+            list.add(sysApp);
+        });
+        config.remove("model");
+        config.put("model",JSONArray.toJSON(list));
         return ibzConfigService.saveConfig("AppSwitcher",id, userId,config);
     }
 

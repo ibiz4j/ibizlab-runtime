@@ -1,0 +1,69 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+
+
+    <!--输出实体[DICT_OPTION]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-dict_option-95-1">
+        <createTable tableName="IBZDICTOPTION">
+                <column name="VKEY" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_DICT_OPTION_VKEY"/>
+                </column>
+                <column name="CID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="VAL" remarks="" type="VARCHAR(40)">
+                </column>
+                <column name="LABEL" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="PVAL" remarks="" type="VARCHAR(40)">
+                </column>
+                <column name="VFILTER" remarks="" type="VARCHAR(500)">
+                </column>
+                <column name="CLS" remarks="" type="VARCHAR(500)">
+                </column>
+                <column name="ICONCLS" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="DISABLED" remarks="" type="INT">
+                </column>
+                <column name="EXPIRED" remarks="" type="INT">
+                </column>
+                <column name="SHOWORDER" remarks="" type="INT">
+                </column>
+                <column name="EXTENSION" remarks="" type="VARCHAR(1000)">
+                </column>
+                <column name="UPDATEDATE" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
+
+
+    <!--输出实体[DICT_CATALOG]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-dict_catalog-67-2">
+        <createTable tableName="IBZDICTCATALOG">
+                <column name="CID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_DICT_CATALOG_CID"/>
+                </column>
+                <column name="CCODE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CGROUP" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="MEMO" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="ENABLE" remarks="" type="INT">
+                </column>
+                <column name="UPDATEDATE" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
+
+        <!--输出实体[DICT_OPTION]外键关系 -->
+    <changeSet author="a_A_5d9d78509" id="fk-dict_option-95-3">
+       <addForeignKeyConstraint baseColumnNames="CID" baseTableName="IBZDICTOPTION" constraintName="DER1N_DICT_OPTION_DICT_CATALOG" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="CID" referencedTableName="IBZDICTCATALOG" validate="true"/>
+    </changeSet>
+        <!--输出实体[DICT_CATALOG]外键关系 -->
+
+</databaseChangeLog>

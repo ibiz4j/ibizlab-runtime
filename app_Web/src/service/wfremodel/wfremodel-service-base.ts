@@ -86,7 +86,6 @@ export default class WFREModelServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/wfremodels/${context.wfremodel}`,isloading);
             return res;
-
     }
 
     /**
@@ -147,7 +146,6 @@ export default class WFREModelServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/wfremodels/${context.wfremodel}`,isloading);
-
     }
 
     /**

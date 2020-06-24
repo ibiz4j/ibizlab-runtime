@@ -42,11 +42,12 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import IBZDepartmentService from '@/service/ibzdepartment/ibzdepartment-service';
 import NewFormService from './new-form-form-service';
 
@@ -167,6 +168,15 @@ export default class NewFormBase extends Vue implements ControlInterface {
         }
     }
 
+
+    /**
+     * 视图默认使用
+     *
+     * @type {string}
+     * @memberof NewFormBase
+     */
+    @Inject({from:'navModel',default: 'tab'})
+    public navModel!:string;
 
     /**
      * 工作流审批意见控件绑定值

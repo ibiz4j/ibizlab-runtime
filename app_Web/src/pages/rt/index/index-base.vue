@@ -7,7 +7,7 @@
                 <div class="sider-top">
                     <div class="page-logo">
                         <span class="menuicon" @click="contextMenuDragVisiable=!contextMenuDragVisiable"><Icon type="md-menu" /></span>
-                        <span v-show="!collapseChange" style="display: block;text-align: center;font-weight: 300;font-size: 20px;">{{$t(model.srfCaption)}}</span>
+                        <span v-show="!collapseChange" style="overflow-x: hidden;text-overflow: ellipsis;white-space: nowrap;display: block;text-align: center;font-weight: 300;font-size: 20px;">{{$t(model.srfCaption)}}</span>
                     </div>
                 </div>
                 <view_appmenu 
@@ -45,7 +45,7 @@
                         <app-theme style="width:45px;display: flex;justify-content: center;"></app-theme>
                     </div>
                 </header>
-                <content :class="{'index_content':true,'index_tab_content':Object.is(navModel,'tab')?true:false,'index_route_content':Object.is(navModel,'route')?true:false}" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }">
+                <content :class="{'index_content':true,'index_tab_content':Object.is(navModel,'tab')?true:false,'index_route_content':Object.is(navModel,'route')?true:false}" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }"  @click="contextMenuDragVisiable=false">
                     <tab-page-exp v-if="Object.is(navModel,'tab')"></tab-page-exp>
                     <app-keep-alive :routerList="getRouterList">
                         <router-view :key="getRouterViewKey"></router-view>
@@ -59,7 +59,7 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
@@ -117,6 +117,7 @@ export default class IndexBase extends Vue {
      * @memberof IndexBase
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
+
 
 	/**
 	 * 视图标识
@@ -275,6 +276,14 @@ export default class IndexBase extends Vue {
     public viewparams:any = {};
 
     /**
+     * 视图缓存数据
+     *
+     * @type {*}
+     * @memberof IndexBase
+     */
+    public viewCacheData:any;
+
+    /**
      * 解析视图参数
      *
      * @public
@@ -315,7 +324,7 @@ export default class IndexBase extends Vue {
         }
         this.handleCustomViewData();
         //初始化导航数据
-        this.initNavData();
+        this.initNavDataWithRoute();
     }
 
     /**
@@ -395,13 +404,24 @@ export default class IndexBase extends Vue {
 	}
 
     /**
-     * 初始化导航数据
+     * 初始化导航数据(路由模式)
      *
      * @memberof IndexBase
      */
-    public initNavData(data:any = null){
-        if(this.viewDefaultUsage){
-            this.navDataService.addNavData({id:'index',srfkey:null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
+        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+            this.navDataService.addNavData({id:'index',tag:this.viewtag,srfkey:isNew ? null : null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
+
+    /**
+     * 初始化导航数据(分页模式)
+     *
+     * @memberof IndexBase
+     */
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
+        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+            this.navDataService.addNavDataByOnly({id:'index',tag:this.viewtag,srfkey:null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	
@@ -511,6 +531,7 @@ export default class IndexBase extends Vue {
      * @type {string}
      * @memberof IndexBase
      */
+    @Provide()
     public navModel:string = "tab";
 
     /**
@@ -520,6 +541,16 @@ export default class IndexBase extends Vue {
      * @memberof IndexBase
      */
     public contextMenuDragVisiable: boolean = false;
+
+    /**
+     * 初始化之前
+     *
+     * @memberof IndexBase
+     */
+    public beforeCreate(){
+        let navDataService = NavDataService.getInstance(this.$store)
+        navDataService.removeAllNavData();
+    }
 
     /**
      * 当前主题

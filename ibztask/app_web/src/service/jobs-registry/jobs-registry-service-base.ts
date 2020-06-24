@@ -63,7 +63,6 @@ export default class JobsRegistryServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/jobsregistries/${context.jobsregistry}`,isloading);
             return res;
-
     }
 
     /**
@@ -77,7 +76,6 @@ export default class JobsRegistryServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/jobsregistries/${context.jobsregistry}`,isloading);
-
     }
 
     /**

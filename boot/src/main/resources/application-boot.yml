@@ -67,6 +67,13 @@ feign:
     enabled: true
   sentinel:
     enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+      min-response-size: 10240
+    response:
+      enabled: true
 
 #Log配置
 logging:
@@ -94,3 +101,9 @@ jobs:
   #app-ip: 127.0.0.1
 
 
+### 启用Gzip压缩
+server:
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 10240

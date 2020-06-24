@@ -81,7 +81,6 @@ export default class IBZEmployeeServiceBase extends EntityService {
             return Http.getInstance().delete(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,isloading);
         }
             return Http.getInstance().delete(`/ibzemployees/${context.ibzemployee}`,isloading);
-
     }
 
     /**
@@ -95,13 +94,118 @@ export default class IBZEmployeeServiceBase extends EntityService {
      */
     public async InitPwd(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/initpwd`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/initpwd`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/initpwd`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/initpwd`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/initpwd`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/initpwd`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
             return Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/initpwd`,data,isloading);
     }
@@ -117,31 +221,139 @@ export default class IBZEmployeeServiceBase extends EntityService {
      */
     public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && true){
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees`,data,isloading);
+            this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzorganization && true){
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees`,data,isloading);
+            this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzdepartment && true){
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees`,data,isloading);
+            this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         let masterData:any = {};
         let ibzteammembersData:any = [];
@@ -199,13 +411,118 @@ export default class IBZEmployeeServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/checkkey`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/checkkey`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/checkkey`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/checkkey`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/checkkey`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/checkkey`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
             return Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/checkkey`,data,isloading);
     }
@@ -221,13 +538,118 @@ export default class IBZEmployeeServiceBase extends EntityService {
      */
     public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee){
-            return Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         let masterData:any = {};
         let ibzteammembersData:any = [];
@@ -278,13 +700,118 @@ export default class IBZEmployeeServiceBase extends EntityService {
      */
     public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/save`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/save`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee){
-            return Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/save`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/save`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/save`,data,isloading);
+            let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        let ibzdeptmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers'),'undefined')){
+            ibzdeptmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdeptmembers') as any);
+            if(ibzdeptmembersData && ibzdeptmembersData.length && ibzdeptmembersData.length > 0){
+                ibzdeptmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdeptmembers = ibzdeptmembersData;
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/save`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         let masterData:any = {};
         let ibzteammembersData:any = [];
@@ -335,19 +862,27 @@ export default class IBZEmployeeServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzorganization && context.ibzemployee){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}`,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzdepartment && context.ibzemployee){
-            return Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}`,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
             let res:any = await Http.getInstance().get(`/ibzemployees/${context.ibzemployee}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
             return res;
-
     }
 
     /**
@@ -361,13 +896,25 @@ export default class IBZEmployeeServiceBase extends EntityService {
      */
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && true){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/getdraft`,isloading);
+            res.data.ibzemployee = data.ibzemployee;
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzorganization && true){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/getdraft`,isloading);
+            res.data.ibzemployee = data.ibzemployee;
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         if(context.ibzdepartment && true){
-            return Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/getdraft`,isloading);
+            res.data.ibzemployee = data.ibzemployee;
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
+            return res;
         }
         let res:any = await  Http.getInstance().get(`/ibzemployees/getdraft`,isloading);
         res.data.ibzemployee = data.ibzemployee;

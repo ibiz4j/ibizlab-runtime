@@ -32,8 +32,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "433753123a4269a61a7a13d22cf567de"
         },
         "taskindexview": {
-            "title": "ibizlab-task",
-            "caption": "ibizlab-task",
+            "title": "task",
+            "caption": "ibizlab",
             "viewtype": "APPINDEXVIEW",
             "viewmodule": "task",
             "viewname": "TaskIndexView",

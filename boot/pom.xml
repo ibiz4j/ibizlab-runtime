@@ -36,6 +36,11 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.ibizlab</groupId>
+			<artifactId>ibzdict-provider-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.ibizlab</groupId>
 			<artifactId>ibizlab-runtime-web</artifactId>
 			<version>${project.version}</version>
 		</dependency>

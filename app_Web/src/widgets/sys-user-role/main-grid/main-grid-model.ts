@@ -42,11 +42,6 @@ export default class MainModel {
           dataType: 'PICKUP',
         },
         {
-          name: 'updatedate',
-          prop: 'updatedate',
-          dataType: 'DATETIME',
-        },
-        {
           name: 'srfmajortext',
           prop: 'userid',
           dataType: 'PICKUP',

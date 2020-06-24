@@ -33,7 +33,7 @@ import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.core.uaa.client.SysPSSystemFeignClient;
 
 /**
- * 实体[实体] 服务对象接口实现
+ * 实体[系统] 服务对象接口实现
  */
 @Slf4j
 @Service
@@ -119,6 +119,15 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
 
 
 
+
+    /**
+     * 查询集合 Pick
+     */
+    @Override
+    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
+        Page<SysPSSystem> sysPSSystems=sysPSSystemFeignClient.searchPick(context);
+        return sysPSSystems;
+    }
 
     /**
      * 查询集合 DEFAULT

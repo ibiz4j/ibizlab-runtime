@@ -1,14 +1,15 @@
 <template>
     <div class='login'>
-        <img src="/assets/img/background.png"/>
+        <img src="/assets/img/background.png" draggable="false"/>
 
         <div class='login-con'>
             <card :bordered="false">
-                <p slot='title'>
-                    <a @click="goLogin" class="goLogin">返回登录</a>
-                </p>
+
                 <div class='form-con'>
                     <i-form ref='loginForm' :rules="rules" :model="form">
+                        <form-item>
+                            <a @click="goLogin" class="goLogin" draggable="false">返回登录</a>
+                        </form-item>
                         <form-item prop='loginname'>
                             <i-input
                                     size='large'
@@ -62,7 +63,7 @@
             </card>
             <div class="log_footer">
                 <div class="copyright">
-                    <a href="https://www.ibizlab.cn/" target="_blank">{{appTitle}} is based on ibizlab .</a>
+                    <a href="https://www.ibizlab.cn/" target="_blank" draggable="false">{{appTitle}} is based on ibizlab .</a>
                 </div>
             </div>
         </div>
@@ -202,19 +203,11 @@
                     const data = response.data;
                     if (data && data.ibzuser) {
                         this.$Message.success({
-                            content: "注册成功，用户名:" + data.ibzuser.loginname + "，密码:" + data.ibzuser.password,
-                            duration: 3,
-                            closable: true
-                        });
-                    } else {
-                        this.$Message.success({
-                            content: "注册成功",
-                            duration: 3,
-                            closable: true
+                            content: "注册成功,正在登录"
                         });
                     }
-                    // 3s后自动登录
-                    this.countDown(3);
+                    // 自动登录
+                    this.countDown();
                 }
             }).catch((e: any) => {
                 const data = e.data;
@@ -235,58 +228,51 @@
         }
 
         /**
-         * 自动登录倒计时
+         * 自动登录
          */
-        public countDown(totalTime: any): void {
+        public countDown(): void {
+            // 注册时不允许再点击‘确定注册按钮’
             if (!this.canClick) return;
             this.canClick = false;
-            this.confirmRegBtnContent = totalTime + 's后自动登录';
-            // 设置定时器
-            let clock = window.setInterval(() => {
-                // 秒数-1
-                totalTime--;
-                this.confirmRegBtnContent = totalTime + 's后自动登录';
-                if (totalTime < 0) {
-                    // 清除定时器
-                    window.clearInterval(clock);
-                    // 登录请求
-                    const loginname: any = this.form.loginname;
-                    const password: any = this.form.password;
-                    const post: Promise<any> = this.$http.post('v7/login', this.form, true);
-                    post.then((response: any) => {
-                        if (response && response.status === 200) {
-                            const data = response.data;
-                            if (data && data.token) {
-                                localStorage.setItem('token', data.token);
-                            }
-                            if (data && data.user) {
-                                localStorage.setItem('user', JSON.stringify(data.user));
-                            }
-                            // 设置cookie,保存账号密码7天
-                            this.setCookie(loginname, password, 7);
-                            // 跳转首页
-                            const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
-                            this.$router.push({path: url});
-                        }
-                    }).catch((error: any) => {
-                        const data = error.data;
-                        if (data && data.detail) {
-                            this.$Message.error({
-                                content: "登录失败，" + data.detail,
-                                duration: 3,
-                                closable: true
-                            });
-                        } else {
-                            this.$Message.error({
-                                content: "登录失败",
-                                duration: 3,
-                                closable: true
-                            });
-                        }
-                    });
-
+            this.confirmRegBtnContent = '登录中...';
+            // 登录请求
+            const loginname: any = this.form.loginname;
+            const password: any = this.form.password;
+            const post: Promise<any> = this.$http.post('v7/login', this.form, true);
+            post.then((response: any) => {
+                if (response && response.status === 200) {
+                    const data = response.data;
+                    if (data && data.token) {
+                        localStorage.setItem('token', data.token);
+                    }
+                    if (data && data.user) {
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                    }
+                    // 设置cookie,保存账号密码7天
+                    this.setCookie(loginname, password, 7);
+                    // 跳转首页
+                    const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
+                    this.$router.push({path: url});
                 }
-            }, 1000)
+            }).catch((error: any) => {
+                const data = error.data;
+                if (data && data.detail) {
+                    this.$Message.error({
+                        content: "登录失败，" + data.detail,
+                        duration: 3,
+                        closable: true
+                    });
+                } else {
+                    this.$Message.error({
+                        content: "登录失败",
+                        duration: 3,
+                        closable: true
+                    });
+                }
+                this.canClick = true;
+                this.confirmRegBtnContent = '确定注册';
+            });
+
         }
 
 

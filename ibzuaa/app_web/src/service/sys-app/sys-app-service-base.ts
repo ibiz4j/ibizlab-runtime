@@ -62,7 +62,6 @@ export default class SysAppServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/sysapps/${context.sysapp}`,isloading);
-
     }
 
     /**
@@ -77,7 +76,6 @@ export default class SysAppServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/sysapps/${context.sysapp}`,isloading);
             return res;
-
     }
 
     /**

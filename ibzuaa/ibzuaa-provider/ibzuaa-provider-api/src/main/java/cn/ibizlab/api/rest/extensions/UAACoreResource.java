@@ -17,11 +17,14 @@ import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Map;
@@ -82,8 +85,16 @@ public class UAACoreResource {
     private SysAppService sysAppService;
 
     @GetMapping(value = "uaa/access-center/app-switcher/{id}")
-    public ResponseEntity<JSONObject> appswitcher(@PathVariable("id") String id)
+    public ResponseEntity<JSONObject> appswitcher(@PathVariable("id") String id, HttpServletRequest request)
     {
+        String proto=request.getHeader("x-forwarded-proto");
+        String hosts=request.getHeader("x-forwarded-for");
+        String domains="";
+        if(StringUtils.isEmpty(proto))
+            proto="http";
+        if(!StringUtils.isEmpty(hosts))
+            domains=proto+"://"+hosts;
+
         return ResponseEntity.ok(sysAppService.getAppSwitcher(id, AuthenticationUser.getAuthenticationUser().getUserid()));
     }
 

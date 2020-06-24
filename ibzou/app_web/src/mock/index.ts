@@ -12,4 +12,5 @@ import './entity/ibzteam-members/ibzteam-members';
 import './entity/ibzdepartments/ibzdepartments';
 import './entity/ibzemployees/ibzemployees';
 import './entity/ibzorganizations/ibzorganizations';
+import './entity/ibzposts/ibzposts';
 import './entity/ibzteams/ibzteams';

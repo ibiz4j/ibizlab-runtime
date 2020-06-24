@@ -68,10 +68,16 @@ export default class SysUserRoleServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysuser && context.sysuserrole){
-            return Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
+            return res;
         }
         if(context.sysrole && context.sysuserrole){
-            return Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
+            return res;
         }
             return Http.getInstance().post(`/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
     }
@@ -87,10 +93,14 @@ export default class SysUserRoleServiceBase extends EntityService {
      */
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysuser && true){
-            return Http.getInstance().get(`/sysusers/${context.sysuser}/sysuserroles/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}/sysuserroles/getdraft`,isloading);
+            res.data.sysuserrole = data.sysuserrole;
+            return res;
         }
         if(context.sysrole && true){
-            return Http.getInstance().get(`/sysroles/${context.sysrole}/sysuserroles/getdraft`,isloading);
+            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysuserroles/getdraft`,isloading);
+            res.data.sysuserrole = data.sysuserrole;
+            return res;
         }
         let res:any = await  Http.getInstance().get(`/sysuserroles/getdraft`,isloading);
         res.data.sysuserrole = data.sysuserrole;
@@ -108,10 +118,16 @@ export default class SysUserRoleServiceBase extends EntityService {
      */
     public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysuser && context.sysuserrole){
-            return Http.getInstance().put(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}`,data,isloading);
+            return res;
         }
         if(context.sysrole && context.sysuserrole){
-            return Http.getInstance().put(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -136,7 +152,6 @@ export default class SysUserRoleServiceBase extends EntityService {
             return Http.getInstance().delete(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}`,isloading);
         }
             return Http.getInstance().delete(`/sysuserroles/${context.sysuserrole}`,isloading);
-
     }
 
     /**
@@ -150,22 +165,30 @@ export default class SysUserRoleServiceBase extends EntityService {
      */
     public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysuser && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles`,data,isloading);
+            return res;
         }
         if(context.sysrole && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
             if(!data.srffrontuf || data.srffrontuf !== "1"){
                 data[this.APPDEKEY] = null;
             }
             if(data.srffrontuf){
                 delete data.srffrontuf;
             }
-            return Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles`,data,isloading);
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -191,14 +214,15 @@ export default class SysUserRoleServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysuser && context.sysuserrole){
-            return Http.getInstance().get(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}`,isloading);
+            let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}`,isloading);
+            return res;
         }
         if(context.sysrole && context.sysuserrole){
-            return Http.getInstance().get(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}`,isloading);
+            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}`,isloading);
+            return res;
         }
             let res:any = await Http.getInstance().get(`/sysuserroles/${context.sysuserrole}`,isloading);
             return res;
-
     }
 
     /**
@@ -212,10 +236,16 @@ export default class SysUserRoleServiceBase extends EntityService {
      */
     public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysuser && context.sysuserrole){
-            return Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}/save`,data,isloading);
+            return res;
         }
         if(context.sysrole && context.sysuserrole){
-            return Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}/save`,data,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}/save`,data,isloading);
+            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);

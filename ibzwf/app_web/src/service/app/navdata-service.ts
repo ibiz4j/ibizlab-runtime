@@ -49,6 +49,13 @@ export interface NavDataElement {
      */ 
     srfkey:string|null;
 
+    /**
+     * 视图标识
+     *
+     * @memberof NavDataElement
+     */ 
+    tag:string|null;
+
 }
 
 export interface ServiceState {
@@ -303,6 +310,78 @@ export default class NavDataService {
             return this.navDataStack;
         }else{
             return [];
+        }
+    }
+
+    /**
+     * 从导航数据栈中直接添加数据
+     * 
+     * @memberof NavDataService
+     */    
+    public addNavDataByOnly(curNavData:NavDataElement,isOnlyAdd:boolean){
+        if(isOnlyAdd){
+            this.navDataStack.push(curNavData);
+        }else{
+            if(this.navDataStack.length >0){
+                let tempIndex:number = this.navDataStack.findIndex((element:NavDataElement) =>{
+                    return Object.is(element.tag,curNavData.tag);
+                })
+                if(tempIndex === -1){
+                    this.navDataStack.push(curNavData);
+                }else{
+                    this.navDataStack[tempIndex] = curNavData;
+                }
+            }else{
+                this.navDataStack.push(curNavData);
+            }
+        }
+        this.sessionStore.setItem('srfnavdata',JSON.stringify(this.navDataStack));
+        return curNavData;
+    }
+
+    /**
+     * 从导航数据栈中直接删除数据
+     * 
+     * @memberof NavDataService
+     */    
+    public removeNavDataByTag(viewtag:string){
+        if(this.navDataStack.length >0){
+            let tempIndex:number = this.navDataStack.findIndex((element:NavDataElement) =>{
+                return Object.is(element.tag,viewtag);
+            })
+            let removeNavData = this.navDataStack.splice(tempIndex,1);
+            this.sessionStore.setItem('srfnavdata',JSON.stringify(this.navDataStack));
+            return removeNavData;
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * 从导航数据栈中获取指定元素前一个元素
+     * 
+     * @memberof NavDataService
+     */    
+    public getPreNavDataByTag(viewtag:string){
+        if(this.navDataStack.length >0){
+            let tempIndex:number = this.navDataStack.findIndex((element:NavDataElement) =>{
+                return Object.is(element.tag,viewtag);
+            })
+            return this.navDataStack[tempIndex - 1]?this.navDataStack[tempIndex - 1]:null;
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * 从导航数据栈中删除所有数据
+     * 
+     * @memberof NavDataService
+     */    
+    public removeAllNavData(){
+        if(this.navDataStack.length >0){
+            this.navDataStack = [];
+            this.sessionStore.setItem('srfnavdata',JSON.stringify(this.navDataStack));
         }
     }
 }

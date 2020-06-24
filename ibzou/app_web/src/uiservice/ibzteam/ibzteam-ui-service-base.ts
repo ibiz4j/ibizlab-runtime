@@ -79,6 +79,8 @@ export default class IBZTeamUIServiceBase extends UIService {
      * @memberof  IBZTeamUIServiceBase
      */  
     public initViewMap(){
+        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'ibzteams'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'ibzteams'});
     }
 
     /**

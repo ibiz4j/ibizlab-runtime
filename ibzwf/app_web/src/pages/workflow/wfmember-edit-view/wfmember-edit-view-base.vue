@@ -119,7 +119,7 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
@@ -187,6 +187,15 @@ export default class WFMemberEditViewBase extends Vue {
      * @memberof WFMemberEditViewBase
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
+
+    /**
+     * 视图默认使用
+     *
+     * @type {string}
+     * @memberof WFMemberEditViewBase
+     */
+    @Inject('navModel')
+    public navModel!:string;
 
 	/**
 	 * 视图标识
@@ -398,6 +407,14 @@ export default class WFMemberEditViewBase extends Vue {
     public viewparams:any = {};
 
     /**
+     * 视图缓存数据
+     *
+     * @type {*}
+     * @memberof WFMemberEditViewBase
+     */
+    public viewCacheData:any;
+
+    /**
      * 解析视图参数
      *
      * @public
@@ -443,7 +460,7 @@ export default class WFMemberEditViewBase extends Vue {
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
         //初始化导航数据
-        this.initNavData();
+        this.initNavDataWithRoute();
     }
 
     /**
@@ -523,13 +540,24 @@ export default class WFMemberEditViewBase extends Vue {
 	}
 
     /**
-     * 初始化导航数据
+     * 初始化导航数据(路由模式)
      *
      * @memberof WFMemberEditViewBase
      */
-    public initNavData(data:any = null){
-        if(this.viewDefaultUsage){
-            this.navDataService.addNavData({id:'wfmember-edit-view',srfkey:this.context.wfmember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
+        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+            this.navDataService.addNavData({id:'wfmember-edit-view',tag:this.viewtag,srfkey:isNew ? null : this.context.wfmember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
+
+    /**
+     * 初始化导航数据(分页模式)
+     *
+     * @memberof WFMemberEditViewBase
+     */
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
+        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+            this.navDataService.addNavDataByOnly({id:'wfmember-edit-view',tag:this.viewtag,srfkey:this.context.wfmember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	
@@ -1348,7 +1376,17 @@ export default class WFMemberEditViewBase extends Vue {
      * @memberof WFMemberEditViewBase
      */
     public FirstRecord(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '暂不支持此项操作' });
+        let _this:any = this;
+        let navDataService:any = new NavDataService(this.$store);
+        let allNavData:any = Object.is(this.navModel,"route")?navDataService.getPreNavDataById('wfmember-edit-view'):navDataService.getPreNavDataByTag(_this.viewtag);
+        if(allNavData && allNavData.data && allNavData.data.length >0){
+            if(_this.parseViewParam && _this.engine){
+                _this.parseViewParam(allNavData.data[0].srfkey);
+                _this.engine.load();
+            }  
+        }else{
+            this.$Notice.warning({ title: '警告', desc: '请确认操作路径是否正确' });
+        }
     }
     /**
      * 上一个记录
@@ -1362,7 +1400,31 @@ export default class WFMemberEditViewBase extends Vue {
      * @memberof WFMemberEditViewBase
      */
     public PrevRecord(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '暂不支持此项操作' });
+        if(args.length === 0 || !args[0].srfkey){
+            return;
+        }
+        let _this:any = this;
+        let navDataService:any = new NavDataService(this.$store);
+        let allNavData:any = Object.is(this.navModel,"route")?navDataService.getPreNavDataById('wfmember-edit-view'):navDataService.getPreNavDataByTag(_this.viewtag);
+        if(allNavData && allNavData.data && allNavData.data.length >0){
+            let computedIndex:any;
+            for(let i=0;i<allNavData.data.length;i++){
+                if(allNavData.data[i].srfkey === args[0].srfkey){
+                    computedIndex = i-1;
+                    break;
+                }
+            }
+            if(computedIndex >= 0){
+                if(_this.parseViewParam && _this.engine){
+                    _this.parseViewParam(allNavData.data[computedIndex].srfkey);
+                    _this.engine.load();
+                } 
+            }else{
+                this.$Notice.warning({ title: '警告', desc: '当前数据已经是第一条数据' });
+            }
+        }else{
+            this.$Notice.warning({ title: '警告', desc: '请确认操作路径是否正确' });
+        }
     }
 
     /**
@@ -1377,7 +1439,31 @@ export default class WFMemberEditViewBase extends Vue {
      * @memberof WFMemberEditViewBase
      */
     public NextRecord(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '暂不支持此项操作' });
+        if(args.length === 0 || !args[0].srfkey){
+            return;
+        }
+        let _this:any = this;
+        let navDataService:any = new NavDataService(this.$store);
+        let allNavData:any = Object.is(this.navModel,"route")?navDataService.getPreNavDataById('wfmember-edit-view'):navDataService.getPreNavDataByTag(_this.viewtag);
+        if(allNavData && allNavData.data && allNavData.data.length >0){
+            let computedIndex:any;
+            for(let i=0;i<allNavData.data.length;i++){
+                if(allNavData.data[i].srfkey === args[0].srfkey){
+                    computedIndex = i+1;
+                    break;
+                }
+            }
+            if(computedIndex < allNavData.data.length){
+                if(_this.parseViewParam && _this.engine){
+                    _this.parseViewParam(allNavData.data[computedIndex].srfkey);
+                    _this.engine.load();
+                } 
+            }else{
+                this.$Notice.warning({ title: '警告', desc: '当前数据已经是最后一条数据' });
+            }
+        }else{
+            this.$Notice.warning({ title: '警告', desc: '请确认操作路径是否正确' });
+        }
     }
 
     /**
@@ -1392,7 +1478,17 @@ export default class WFMemberEditViewBase extends Vue {
      * @memberof WFMemberEditViewBase
      */
     public LastRecord(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '暂不支持此项操作' });
+        let _this:any = this;
+        let navDataService:any = new NavDataService(this.$store);
+        let allNavData:any = Object.is(this.navModel,"route")?navDataService.getPreNavDataById('wfmember-edit-view'):navDataService.getPreNavDataByTag(_this.viewtag);
+        if(allNavData && allNavData.data && allNavData.data.length >0){
+            if(_this.parseViewParam && _this.engine){
+                _this.parseViewParam(allNavData.data[allNavData.data.length - 1].srfkey);
+                _this.engine.load();
+            }   
+        }else{
+            this.$Notice.warning({ title: '警告', desc: '请确认操作路径是否正确' });
+        }
     }
     /**
      * 帮助
@@ -1448,6 +1544,9 @@ export default class WFMemberEditViewBase extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if(Object.is(this.navModel,"tab")){
+                this.navDataService.removeNavDataByTag(this.viewtag);
             }
             if (this.serviceStateEvent) {
                 this.serviceStateEvent.unsubscribe();

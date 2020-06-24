@@ -12,6 +12,7 @@ import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.RemoteService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.flowable.bpmn.BpmnAutoLayout;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.*;
@@ -505,23 +506,68 @@ public class WFCoreService
 	protected BpmnXMLConverter bpmnXMLConverter = new BpmnXMLConverter();
 	protected BpmnJsonConverter bpmnJsonConverter = new BpmnJsonConverter();
 
+	public synchronized boolean wfdeploybpmns(List bpmnfiles){
+		if(bpmnfiles.size()>0){
+			bpmnfiles.forEach(item->{
+					Map<String,Object> bpmnfile= (Map) item;
+					for (Map.Entry<String,Object> entry : bpmnfile.entrySet()) {
+						InputStream in = null;
+						try {
+							in = IOUtils.toInputStream(String.valueOf(entry.getValue()),"utf8");
+							wfdeploy(entry.getKey(), getBpmnFile(in),new WFREModel());
+						} catch (IOException e) {}
+						finally {
+							if(in!=null) {
+								try {
+									in.close();
+								} catch (IOException e) {}
+							}
+						}
+					}
+				}
+			);
+		}
+		return true;
+	}
 
-	public synchronized boolean wfdeploy(File bpmnFile,WFREModel wfreModel)
+	public synchronized boolean wfdeploy(File bpmnFile,WFREModel wfreModel)  {
+		InputStream in =null;
+		try {
+			in=new FileInputStream(bpmnFile);
+			return wfdeploy(bpmnFile.getName(),getBpmnFile(in),wfreModel);
+		} catch (IOException e) {}
+		finally {
+			if(in!=null) {
+				try {
+					in.close();
+				} catch (IOException e) {}
+			}
+		}
+		return false;
+	}
+
+	public synchronized boolean wfdeploy(String bpmnFileName , ByteArrayOutputStream bpmnFile , WFREModel wfreModel)
 	{
 		String deployInfo="";
+		if(bpmnFile==null){
+			log.error(String.format("解析失败，无法获取流程文件[%s]",bpmnFileName));
+			deployInfo+=String.format("解析失败，无法获取流程文件[%s] \r\n",bpmnFileName);
+			wfreModel.setName(deployInfo);
+			return false;
+		}
 		if(!StringUtils.isEmpty(wfreModel.getName()))
 			deployInfo=wfreModel.getName();
 		XMLStreamReader reader = null;
 		InputStream inputStream = null;
 		try {
 			XMLInputFactory factory = XMLInputFactory.newInstance();
-			inputStream=new FileInputStream(bpmnFile);
+			inputStream=new ByteArrayInputStream(bpmnFile.toByteArray());
 			reader = factory.createXMLStreamReader(inputStream);
 			BpmnModel model = bpmnXMLConverter.convertToBpmnModel(reader);
 			List<Process> processes = model.getProcesses();
 			Process curProcess = null;
 			if (CollectionUtils.isEmpty(processes)) {
-				deployInfo+=bpmnFile.getName()+"解析失败，没有找到流程配置信息"+"\r\n";
+				deployInfo+=bpmnFileName+"解析失败，没有找到流程配置信息"+"\r\n";
 				wfreModel.setName(deployInfo);
 				return false;
 			}
@@ -530,8 +576,8 @@ public class WFCoreService
 			String refgroups="";
 			if(!curProcess.getExtensionElements().containsKey("field"))
 			{
-				log.error(bpmnFile.getName()+"没有实体订阅");
-				deployInfo+=bpmnFile.getName()+"解析失败，没有实体订阅配置"+"\r\n";
+				log.error(bpmnFileName+"没有实体订阅");
+				deployInfo+=bpmnFileName+"解析失败，没有实体订阅配置"+"\r\n";
 				wfreModel.setName(deployInfo);
 				return false;
 			}
@@ -544,8 +590,8 @@ public class WFCoreService
 			}
 			if(StringUtils.isEmpty(bookings))
 			{
-				log.error(bpmnFile.getName()+"没有实体订阅");
-				deployInfo+=bpmnFile.getName()+"解析失败，没有实体订阅配置"+"\r\n";
+				log.error(bpmnFileName+"没有实体订阅");
+				deployInfo+=bpmnFileName+"解析失败，没有实体订阅配置"+"\r\n";
 				wfreModel.setName(deployInfo);
 				return false;
 			}
@@ -573,8 +619,8 @@ public class WFCoreService
 			String[] params=curProcess.getId().split("-");
 			if(params.length!=2)
 			{
-				log.error(bpmnFile.getName()+"没有系统名称");
-				deployInfo+=bpmnFile.getName()+"解析失败，没有发布系统配置"+"\r\n";
+				log.error(bpmnFileName+"没有系统名称");
+				deployInfo+=bpmnFileName+"解析失败，没有发布系统配置"+"\r\n";
 				wfreModel.setName(deployInfo);
 				return false;
 			}
@@ -595,7 +641,7 @@ public class WFCoreService
 			AppDefinitionRepresentation appModel=appDefinitionService.getAppDefinition(appKeyInfo.getId());
 
 
-			inputStream=new FileInputStream(bpmnFile);
+			inputStream=new ByteArrayInputStream(bpmnFile.toByteArray());
 			boolean bchange=false;
 			for(String booking:bookings.split(","))
 			{
@@ -617,7 +663,7 @@ public class WFCoreService
 				String fileFullPath ="";
 				BpmnModel entitymodel=null;
 				try {
-					inputStream2=new FileInputStream(bpmnFile);
+					inputStream2=new ByteArrayInputStream(bpmnFile.toByteArray());
 					reader2 = factory.createXMLStreamReader(inputStream2);
 					entitymodel=bpmnXMLConverter.convertToBpmnModel(reader2);
 					entitymodel.getMainProcess().setId(processDefinitionKey);
@@ -737,8 +783,8 @@ public class WFCoreService
 			return true;
 		}
 		catch (Exception e){
-			log.error(bpmnFile.getName()+"BPMN模型创建流程异常",e);
-			deployInfo+=bpmnFile.getName()+"BPMN模型创建流程异常"+"\r\n";
+			log.error(bpmnFileName+"BPMN模型创建流程异常",e);
+			deployInfo+=bpmnFileName+"BPMN模型创建流程异常"+"\r\n";
 			wfreModel.setName(deployInfo);
 			return false;
 		}
@@ -896,5 +942,21 @@ public class WFCoreService
 		}
 
 		return strUsers;
+	}
+
+	private  ByteArrayOutputStream getBpmnFile(InputStream input) {
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			byte[] buffer = new byte[1024];
+			int len;
+			while ((len = input.read(buffer)) > -1) {
+				baos.write(buffer, 0, len);
+			}
+			baos.flush();
+			return baos;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

@@ -64,6 +64,11 @@ public interface SysPSSystemFeignClient {
 
 
 
+    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/searchpick")
+    Page<SysPSSystem> searchPick(@RequestBody SysPSSystemSearchContext context);
+
+
+
     @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/searchdefault")
     Page<SysPSSystem> searchDefault(@RequestBody SysPSSystemSearchContext context);
 

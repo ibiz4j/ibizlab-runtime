@@ -118,16 +118,16 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch, Model } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
+import NavDataService from '@/service/app/navdata-service';
 import OUIndexViewService from './ouindex-view-appmenu-service';
 
 import OUIndexViewModel from './ouindex-view-appmenu-model';
 import { Environment } from '@/environments/environment';
-import NavDataService from '@/service/app/navdata-service';
 
 
 @Component({
@@ -578,15 +578,19 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
             let navDataService = NavDataService.getInstance(this.$store);
             if(Object.is(this.navModel,"route")){
                 navDataService.removeNavData(this.viewtag);
-            }else{
-                navDataService.removeNavDataWithoutCache(this.viewtag);
             }
             switch (item.appfunctag) {
+                case 'Auto6': 
+                    this.clickAuto6(item);
+                    return;
                 case 'Auto5': 
                     this.clickAuto5(item);
                     return;
                 case 'Auto3': 
                     this.clickAuto3(item);
+                    return;
+                case 'Auto7': 
+                    this.clickAuto7(item);
                     return;
                 case 'Auto4': 
                     this.clickAuto4(item);
@@ -597,6 +601,29 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
         }
     }
 
+    
+    /**
+     * 岗位管理
+     *
+     * @param {*} [item={}]
+     * @memberof OUIndexView
+     */
+    public clickAuto6(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'ibzposts', parameterName: 'ibzpost' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
     
     /**
      * 组织树
@@ -633,6 +660,29 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
         const deResParameters: any[] = [];
         const parameters: any[] = [
             { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 组管理
+     *
+     * @param {*} [item={}]
+     * @memberof OUIndexView
+     */
+    public clickAuto7(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'ibzteams', parameterName: 'ibzteam' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);

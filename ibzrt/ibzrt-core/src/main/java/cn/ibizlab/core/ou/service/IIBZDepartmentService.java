@@ -38,7 +38,6 @@ public interface IIBZDepartmentService{
     @CacheEvict(value="ibzdepartment",allEntries=true)
     void createBatch(List<IBZDepartment> list) ;
     IBZDepartment getDraft(IBZDepartment et) ;
-    Page<IBZDepartment> searchCurDept(IBZDepartmentSearchContext context) ;
     Page<IBZDepartment> searchDefault(IBZDepartmentSearchContext context) ;
     List<IBZDepartment> selectByParentdeptid(String deptid) ;
     @CacheEvict(value="ibzdepartment",allEntries=true)

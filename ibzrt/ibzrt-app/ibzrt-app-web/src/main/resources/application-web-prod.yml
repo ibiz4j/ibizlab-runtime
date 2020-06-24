@@ -7,9 +7,17 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
+    jobs_log:
+      path: /jobslogs/**
+      serviceId: ibztask-api
+      stripPrefix: false
     sys_role_permission:
       path: /sysrolepermissions/**
       serviceId: ibzuaa-api
+      stripPrefix: false
+    ibzpost:
+      path: /ibzposts/**
+      serviceId: ibzou-api
       stripPrefix: false
     sys_user:
       path: /sysusers/**
@@ -31,9 +39,25 @@ zuul:
       path: /ibzorganizations/**
       serviceId: ibzou-api
       stripPrefix: false
+    jobs_registry:
+      path: /jobsregistries/**
+      serviceId: ibztask-api
+      stripPrefix: false
+    dict_catalog:
+      path: /dictcatalogs/**
+      serviceId: ibzdict-api
+      stripPrefix: false
     wf_group:
       path: /wfgroups/**
       serviceId: ibzwf-api
+      stripPrefix: false
+    ibzteam:
+      path: /ibzteams/**
+      serviceId: ibzou-api
+      stripPrefix: false
+    jobs_info:
+      path: /jobsinfos/**
+      serviceId: ibztask-api
       stripPrefix: false
     wf_model:
       path: /wfremodels/**
@@ -59,13 +83,21 @@ zuul:
       path: /ibzdepartments/**
       serviceId: ibzou-api
       stripPrefix: false
+    ibzteammember:
+      path: /ibzteammembers/**
+      serviceId: ibzou-api
+      stripPrefix: false
     sys_permission:
       path: /syspermissions/**
       serviceId: ibzuaa-api
       stripPrefix: false
+    dict_option:
+      path: /dictoptions/**
+      serviceId: ibzdict-api
+      stripPrefix: false
     ibzemp:
       path: /ibzemployees/**
-      serviceId: ibzou-api
+      serviceId: ibzrt-api
       stripPrefix: false
     loginv7:
       path: /v7/login

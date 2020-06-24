@@ -55,6 +55,7 @@ export default {
 	},
 	main_grid: {
 		columns: {
+			sys_roleid: "Normal",
 			sys_rolename: "Save",
 			memo: "备注",
 			updatedate: "Upload",

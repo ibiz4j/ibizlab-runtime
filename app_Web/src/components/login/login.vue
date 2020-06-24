@@ -42,6 +42,10 @@
                         </form-item>
 
                         <form-item>
+                            <a @click="goRegister" class="goRegister" draggable="false">没有账号,现在注册一个</a>
+                        </form-item>
+
+                        <form-item>
                             <div style="text-align: center">
                                 <span class="form_tipinfo">其他登录方式</span>
                             </div>
@@ -51,6 +55,9 @@
                                 </div>
                                 <div class="sign-btn" @click="wechatHandleClick('wechat')">
                                     <img src="/assets/img/weixin.svg" class="wx-svg-container" draggable="false">
+                                </div>
+                                <div class="sign-btn" @click="dingtalkHandleClick('dingtalk')">
+                                    <img src="/assets/img/dingding.svg" class="dd-svg-container" draggable="false">
                                 </div>
                             </div>
                         </form-item>
@@ -141,7 +148,12 @@ export default class Login extends Vue {
     }
 
     public mounted() {
-        this.getCookie("loginname");
+        if (this.getCookie("loginname") && this.getCookie("loginname") !== 'undefined') {
+            this.form.loginname = this.getCookie("loginname");
+        }
+        if (this.getCookie("password") && this.getCookie("password") !== 'undefined') {
+            this.form.password = this.getCookie("password");
+        }
     }
 
     /**
@@ -221,6 +233,15 @@ export default class Login extends Vue {
     }
 
     /**
+     * 跳转注册页面
+     */
+    public goRegister(): void {
+        const _this = this;
+        _this.$router.push('/register');
+    }
+
+
+    /**
      * 设置cookie
      * 
      * @memberof Login
@@ -259,7 +280,54 @@ export default class Login extends Vue {
      * @param thirdpart
      */
     public tencentHandleClick(thirdpart: any) {
-        this.$Message.warning("qq授权登录暂未支持")
+        // 截取地址，拼接需要部分组成新地址
+        const baseUrl = this.getNeedLocation();
+
+        // 从后台获取qq互联创建的网站应用appid
+        const get: Promise<any> = this.$http.get('/uaa/getQQAppId');
+        get.then((response: any) => {
+            if (response && response.status === 200) {
+                const data = response.data;
+                if (data && data.appid) {
+                    // 1.qq互联创建的网站应用appid
+                    const client_id = data.appid;
+                    // 2.回调地址,即授权登录成功后跳转的地址,需要UrlEncode转码
+                    const redirect_uri = baseUrl + 'assets/qqRedirect.html';
+                    const redirect_uri_encode = decodeURIComponent(redirect_uri);
+                    // 3.随机生成一段字符串，防止CSRF攻击的
+                    const state = Math.random().toString(36).substr(2);
+                    // 4.qq授权登录地址
+                    const url = 'https://graph.qq.com/oauth2.0/authorize?response_type=code'
+                        + '&client_id=' + client_id
+                        + '&redirect_uri=' + redirect_uri_encode
+                        + "&scope=get_user_info"
+                        + "&state=" + state;
+                    // 5.跳转qq授权
+                    window.location.href = url;
+                }else {
+                    this.$Message.error({
+                        content: "获取网站应用appid失败，" + data.detail,
+                        duration: 5,
+                        closable: true
+                    });
+                }
+            }
+        }).catch((error: any) => {
+            const data = error.data;
+            if (data && data.detail) {
+                this.$Message.error({
+                    content: "获取网站应用appid失败，" + data.detail,
+                    duration: 5,
+                    closable: true
+                });
+            } else {
+                this.$Message.error({
+                    content: "获取网站应用appid失败",
+                    duration: 5,
+                    closable: true
+                });
+            }
+        });
     }
 
     /**
@@ -267,7 +335,132 @@ export default class Login extends Vue {
      * @param thirddpart
      */
     public wechatHandleClick(thirddpart: any) {
-        this.$Message.warning("微信授权登录暂未支持")
+        // 从后台获取微信开放平台提供的appid
+        const get: Promise<any> = this.$http.get('/uaa/getWechatAppId');
+        get.then((response: any) => {
+            if (response && response.status === 200) {
+                const data = response.data;
+                if (data && data.appid) {
+                    // 截取地址，拼接需要部分组成新地址
+                    const baseUrl = this.getNeedLocation();
+
+                    // 1.微信开放平台提供的appId
+                    const appId = data.appid;
+                    // 2.微信扫码后回调地址,需要UrlEncode转码
+                    const redirect_uri = baseUrl + 'assets/weixinRedirect.html';
+                    const redirect_uri_encode = encodeURIComponent(redirect_uri);
+                    // 3.微信扫码url
+                    const url = 'https://open.weixin.qq.com/connect/qrconnect?response_type=code'
+                        + '&appid=' + appId
+                        + '&redirect_uri=' + redirect_uri_encode
+                        + '&scope=snsapi_login'
+                        + '&state=STATE';
+                    // 4.跳转微信扫码
+                    window.location.href = url;
+                }else {
+                    this.$Message.error({
+                        content: "获取网站应用appid失败，" + data.detail,
+                        duration: 5,
+                        closable: true
+                    });
+                }
+            }
+        }).catch((error: any) => {
+            const data = error.data;
+            if (data && data.detail) {
+                this.$Message.error({
+                    content: "获取网站应用appid失败，" + data.detail,
+                    duration: 5,
+                    closable: true
+                });
+            } else {
+                this.$Message.error({
+                    content: "获取网站应用appid失败",
+                    duration: 5,
+                    closable: true
+                });
+            }
+        });
+    }
+
+    /**
+     * 钉钉授权登录
+     * @param thirdpart
+     */
+    public dingtalkHandleClick(thirdpart: any) {
+        // 从后台获取钉钉开放平台提供的appid
+        const get: Promise<any> = this.$http.get('/uaa/getDingtalkAppId');
+        get.then((response: any) => {
+            if (response && response.status === 200) {
+                const data = response.data;
+                if (data && data.appid) {
+                    // 截取地址，拼接需要部分组成新地址
+                    const baseUrl = this.getNeedLocation();
+
+                    // 1.钉钉开放平台提供的appId
+                    const appId = data.appid;
+                    // 2.钉钉扫码后回调地址,需要UrlEncode转码
+                    const redirect_uri = baseUrl + 'assets/dingdingRedirect.html';
+                    const redirect_uri_encode = encodeURIComponent(redirect_uri);
+                    // 3.钉钉扫码url
+                    const url = 'https://oapi.dingtalk.com/connect/qrconnect?response_type=code'
+                        + '&appid=' + appId
+                        + '&redirect_uri=' + redirect_uri_encode
+                        + '&scope=snsapi_login'
+                        + '&state=STATE';
+
+                    // 4.跳转钉钉扫码
+                    window.location.href = url;
+                }else {
+                    this.$Message.error({
+                        content: "获取网站应用appid失败，" + data.detail,
+                        duration: 5,
+                        closable: true
+                    });
+                }
+            }
+        }).catch((error: any) => {
+            const data = error.data;
+            if (data && data.detail) {
+                this.$Message.error({
+                    content: "获取网站应用appid失败，" + data.detail,
+                    duration: 5,
+                    closable: true
+                });
+            } else {
+                this.$Message.error({
+                    content: "获取网站应用appid失败",
+                    duration: 5,
+                    closable: true
+                });
+            }
+        });
+
+    }
+
+
+    /**
+     * 获取需要的location部分
+     */
+    public getNeedLocation() {
+        // 截取地址，拼接需要部分组成新地址
+        const scheme = window.location.protocol;
+        const host = window.location.host;
+        let baseUrl: any;
+        baseUrl = scheme + "//" + host;
+        const port = window.location.port;
+        if (port) {
+            if (port == '80' || port == '443') {
+                baseUrl += "/";
+            } else {
+                baseUrl += ":" + port + "/";
+            }
+        } else {
+            baseUrl += "/";
+        }
+        // console.log(baseUrl);
+
+        return baseUrl;
     }
 
 }

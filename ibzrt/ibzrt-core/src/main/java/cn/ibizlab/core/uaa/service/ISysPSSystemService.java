@@ -34,6 +34,7 @@ public interface ISysPSSystemService{
     SysPSSystem getDraft(SysPSSystem et) ;
     boolean save(SysPSSystem et) ;
     void saveBatch(List<SysPSSystem> list) ;
+    Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) ;
     Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) ;
 
 }

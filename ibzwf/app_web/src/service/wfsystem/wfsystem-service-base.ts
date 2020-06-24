@@ -62,7 +62,6 @@ export default class WFSystemServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/wfsystems/${context.wfsystem}`,isloading);
-
     }
 
     /**
@@ -160,7 +159,6 @@ export default class WFSystemServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/wfsystems/${context.wfsystem}`,isloading);
             return res;
-
     }
 
     /**

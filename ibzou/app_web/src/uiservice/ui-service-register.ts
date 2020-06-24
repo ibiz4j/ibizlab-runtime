@@ -44,6 +44,7 @@ export class UIServiceRegister {
         this.allUIService.set('ibzdepartment', () => import('@/uiservice/ibzdepartment/ibzdepartment-ui-service'));
         this.allUIService.set('ibzemployee', () => import('@/uiservice/ibzemployee/ibzemployee-ui-service'));
         this.allUIService.set('ibzorganization', () => import('@/uiservice/ibzorganization/ibzorganization-ui-service'));
+        this.allUIService.set('ibzpost', () => import('@/uiservice/ibzpost/ibzpost-ui-service'));
         this.allUIService.set('ibzteam', () => import('@/uiservice/ibzteam/ibzteam-ui-service'));
     }
 

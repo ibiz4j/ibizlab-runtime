@@ -148,7 +148,6 @@ export default class JobsInfoServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/jobsinfos/${context.jobsinfo}`,isloading);
-
     }
 
     /**
@@ -163,7 +162,6 @@ export default class JobsInfoServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/jobsinfos/${context.jobsinfo}`,isloading);
             return res;
-
     }
 
     /**

@@ -66,6 +66,27 @@ public class IBZDeptMember extends EntityClient implements Serializable {
     @JsonProperty("personname")
     private String personname;
 
+    /**
+     * 岗位标识
+     */
+    @JSONField(name = "postid")
+    @JsonProperty("postid")
+    private String postid;
+
+    /**
+     * 岗位名称
+     */
+    @JSONField(name = "postname")
+    @JsonProperty("postname")
+    private String postname;
+
+    /**
+     * 区属
+     */
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+
 
     /**
      * 部门
@@ -80,6 +101,13 @@ public class IBZDeptMember extends EntityClient implements Serializable {
     @JSONField(name = "emp")
     @JsonProperty("emp")
     private cn.ibizlab.core.ou.domain.IBZEmployee emp;
+
+    /**
+     * 岗位
+     */
+    @JSONField(name = "post")
+    @JsonProperty("post")
+    private cn.ibizlab.core.ou.domain.IBZPost post;
 
 
 
@@ -98,6 +126,22 @@ public class IBZDeptMember extends EntityClient implements Serializable {
     public void setUserid(String userid){
         this.userid = userid ;
         this.modify("userid",userid);
+    }
+
+    /**
+     * 设置 [岗位标识]
+     */
+    public void setPostid(String postid){
+        this.postid = postid ;
+        this.modify("postid",postid);
+    }
+
+    /**
+     * 设置 [区属]
+     */
+    public void setDomains(String domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
     }
 
 

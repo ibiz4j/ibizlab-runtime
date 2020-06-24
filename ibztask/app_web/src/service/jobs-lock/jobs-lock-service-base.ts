@@ -102,7 +102,6 @@ export default class JobsLockServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/jobslocks/${context.jobslock}`,isloading);
             return res;
-
     }
 
     /**
@@ -145,7 +144,6 @@ export default class JobsLockServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             return Http.getInstance().delete(`/jobslocks/${context.jobslock}`,isloading);
-
     }
 
     /**

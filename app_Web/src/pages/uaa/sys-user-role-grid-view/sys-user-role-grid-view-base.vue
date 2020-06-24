@@ -136,7 +136,7 @@
 
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
@@ -206,6 +206,15 @@ export default class SysUserRoleGridViewBase extends Vue {
      * @memberof SysUserRoleGridViewBase
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
+
+    /**
+     * 视图默认使用
+     *
+     * @type {string}
+     * @memberof SysUserRoleGridViewBase
+     */
+    @Inject({from:'navModel',default: 'tab'})
+    public navModel!:string;
 
 	/**
 	 * 视图标识
@@ -420,6 +429,14 @@ export default class SysUserRoleGridViewBase extends Vue {
     public viewparams:any = {};
 
     /**
+     * 视图缓存数据
+     *
+     * @type {*}
+     * @memberof SysUserRoleGridViewBase
+     */
+    public viewCacheData:any;
+
+    /**
      * 解析视图参数
      *
      * @public
@@ -465,7 +482,7 @@ export default class SysUserRoleGridViewBase extends Vue {
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
         //初始化导航数据
-        this.initNavData();
+        this.initNavDataWithRoute();
     }
 
     /**
@@ -545,13 +562,24 @@ export default class SysUserRoleGridViewBase extends Vue {
 	}
 
     /**
-     * 初始化导航数据
+     * 初始化导航数据(路由模式)
      *
      * @memberof SysUserRoleGridViewBase
      */
-    public initNavData(data:any = null){
-        if(this.viewDefaultUsage){
-            this.navDataService.addNavData({id:'sys-user-role-grid-view',srfkey:this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
+        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+            this.navDataService.addNavData({id:'sys-user-role-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
+
+    /**
+     * 初始化导航数据(分页模式)
+     *
+     * @memberof SysUserRoleGridViewBase
+     */
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
+        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+            this.navDataService.addNavDataByOnly({id:'sys-user-role-grid-view',tag:this.viewtag,srfkey:this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	
@@ -1204,27 +1232,14 @@ export default class SysUserRoleGridViewBase extends Vue {
         }
         const parameters: any[] = [
             { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
+            { pathName: 'editview', parameterName: 'editview' },
         ];
         const _this: any = this;
-        const openPopupModal = (view: any, data: any) => {
-            let container: Subject<any> = this.$appmodal.openModal(view, tempContext, data);
-            container.subscribe((result: any) => {
-                if (!result || !Object.is(result.ret, 'OK')) {
-                    return;
-                }
-                if (!xData || !(xData.refresh instanceof Function)) {
-                    return;
-                }
-                xData.refresh(result.datas);
-            });
+        const openIndexViewTab = (data: any) => {
+            const routePath = this.$viewTool.buildUpRoutePath(this.$route, tempContext, deResParameters, parameters, args, data);
+            this.$router.push(routePath);
         }
-        const view: any = {
-            viewname: 'sys-user-role-edit-view', 
-            height: 0, 
-            width: 0,  
-            title: this.$t('entities.sysuserrole.views.editview.title'),
-        };
-        openPopupModal(view, data);
+        openIndexViewTab(data);
     }
 
 
@@ -1512,6 +1527,9 @@ export default class SysUserRoleGridViewBase extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if(Object.is(this.navModel,"tab")){
+                this.navDataService.removeNavDataByTag(this.viewtag);
             }
             if (this.serviceStateEvent) {
                 this.serviceStateEvent.unsubscribe();

@@ -39,20 +39,28 @@ export class UIServiceRegister {
      * @memberof UIServiceRegister
      */
     protected init(): void {
-                this.allUIService.set('sysrolepermission', () => import('@/uiservice/sys-role-permission/sys-role-permission-ui-service'));
+                this.allUIService.set('jobslog', () => import('@/uiservice/jobs-log/jobs-log-ui-service'));
+        this.allUIService.set('sysrolepermission', () => import('@/uiservice/sys-role-permission/sys-role-permission-ui-service'));
+        this.allUIService.set('ibzpost', () => import('@/uiservice/ibzpost/ibzpost-ui-service'));
         this.allUIService.set('sysuser', () => import('@/uiservice/sys-user/sys-user-ui-service'));
         this.allUIService.set('sysauthlog', () => import('@/uiservice/sys-auth-log/sys-auth-log-ui-service'));
         this.allUIService.set('wfmember', () => import('@/uiservice/wfmember/wfmember-ui-service'));
         this.allUIService.set('wfuser', () => import('@/uiservice/wfuser/wfuser-ui-service'));
         this.allUIService.set('ibzorganization', () => import('@/uiservice/ibzorganization/ibzorganization-ui-service'));
+        this.allUIService.set('jobsregistry', () => import('@/uiservice/jobs-registry/jobs-registry-ui-service'));
+        this.allUIService.set('dictcatalog', () => import('@/uiservice/dict-catalog/dict-catalog-ui-service'));
         this.allUIService.set('wfgroup', () => import('@/uiservice/wfgroup/wfgroup-ui-service'));
+        this.allUIService.set('ibzteam', () => import('@/uiservice/ibzteam/ibzteam-ui-service'));
+        this.allUIService.set('jobsinfo', () => import('@/uiservice/jobs-info/jobs-info-ui-service'));
         this.allUIService.set('wfremodel', () => import('@/uiservice/wfremodel/wfremodel-ui-service'));
         this.allUIService.set('sysuserrole', () => import('@/uiservice/sys-user-role/sys-user-role-ui-service'));
         this.allUIService.set('wfprocessdefinition', () => import('@/uiservice/wfprocess-definition/wfprocess-definition-ui-service'));
         this.allUIService.set('sysrole', () => import('@/uiservice/sys-role/sys-role-ui-service'));
         this.allUIService.set('ibzdeptmember', () => import('@/uiservice/ibzdept-member/ibzdept-member-ui-service'));
         this.allUIService.set('ibzdepartment', () => import('@/uiservice/ibzdepartment/ibzdepartment-ui-service'));
+        this.allUIService.set('ibzteammember', () => import('@/uiservice/ibzteam-member/ibzteam-member-ui-service'));
         this.allUIService.set('syspermission', () => import('@/uiservice/sys-permission/sys-permission-ui-service'));
+        this.allUIService.set('dictoption', () => import('@/uiservice/dict-option/dict-option-ui-service'));
         this.allUIService.set('ibzemployee', () => import('@/uiservice/ibzemployee/ibzemployee-ui-service'));
     }
 

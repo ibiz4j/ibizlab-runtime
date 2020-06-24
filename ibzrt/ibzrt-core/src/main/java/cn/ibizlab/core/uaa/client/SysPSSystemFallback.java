@@ -68,6 +68,11 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient{
             return false;
      }
 
+    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context){
+            return null;
+     }
+
+
     public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context){
             return null;
      }

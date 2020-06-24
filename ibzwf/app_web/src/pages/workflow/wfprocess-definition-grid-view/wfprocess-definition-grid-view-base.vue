@@ -146,7 +146,7 @@
 
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
@@ -216,6 +216,15 @@ export default class WFProcessDefinitionGridViewBase extends Vue {
      * @memberof WFProcessDefinitionGridViewBase
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
+
+    /**
+     * 视图默认使用
+     *
+     * @type {string}
+     * @memberof WFProcessDefinitionGridViewBase
+     */
+    @Inject('navModel')
+    public navModel!:string;
 
 	/**
 	 * 视图标识
@@ -432,6 +441,14 @@ export default class WFProcessDefinitionGridViewBase extends Vue {
     public viewparams:any = {};
 
     /**
+     * 视图缓存数据
+     *
+     * @type {*}
+     * @memberof WFProcessDefinitionGridViewBase
+     */
+    public viewCacheData:any;
+
+    /**
      * 解析视图参数
      *
      * @public
@@ -477,7 +494,7 @@ export default class WFProcessDefinitionGridViewBase extends Vue {
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
         //初始化导航数据
-        this.initNavData();
+        this.initNavDataWithRoute();
     }
 
     /**
@@ -557,13 +574,24 @@ export default class WFProcessDefinitionGridViewBase extends Vue {
 	}
 
     /**
-     * 初始化导航数据
+     * 初始化导航数据(路由模式)
      *
      * @memberof WFProcessDefinitionGridViewBase
      */
-    public initNavData(data:any = null){
-        if(this.viewDefaultUsage){
-            this.navDataService.addNavData({id:'wfprocess-definition-grid-view',srfkey:this.context.wfprocessdefinition,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
+        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+            this.navDataService.addNavData({id:'wfprocess-definition-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.wfprocessdefinition,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
+
+    /**
+     * 初始化导航数据(分页模式)
+     *
+     * @memberof WFProcessDefinitionGridViewBase
+     */
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
+        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+            this.navDataService.addNavDataByOnly({id:'wfprocess-definition-grid-view',tag:this.viewtag,srfkey:this.context.wfprocessdefinition,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	
@@ -1528,6 +1556,9 @@ export default class WFProcessDefinitionGridViewBase extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if(Object.is(this.navModel,"tab")){
+                this.navDataService.removeNavDataByTag(this.viewtag);
             }
             if (this.serviceStateEvent) {
                 this.serviceStateEvent.unsubscribe();

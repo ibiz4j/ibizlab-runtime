@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.dict.mapper.DictOptionMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="DictOptionResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`CID`, t1.`CLS`, t1.`CNAME`, t1.`DISABLED`, t1.`EXPIRED`, t1.`EXTENSION`, t1.`ICONCLS`, t1.`LABEL`, t1.`PVAL`, t1.`SHOWORDER`, t1.`UPDATEDATE`, t1.`VAL`, t1.`VFILTER`, t1.`VKEY` FROM `IBZDICTOPTION` t1  ) t1 where vkey=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="DictOptionResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.CID, t1.CLS, t1.CNAME, t1.DISABLED, t1.EXPIRED, t1.EXTENSION, t1.ICONCLS, t1.LABEL, t1.PVAL, t1.SHOWORDER, t1.UPDATEDATE, t1.VAL, t1.VFILTER, t1.VKEY FROM IBZDICTOPTION t1  ) t1 where vkey=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="DictOptionResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.CID, t1.CLS, t1.CNAME, t1.DISABLED, t1.EXPIRED, t1.EXTENSION, t1.ICONCLS, t1.LABEL, t1.PVAL, t1.SHOWORDER, t1.UPDATEDATE, t1.VAL, t1.VFILTER, t1.VKEY FROM IBZDICTOPTION t1  ) t1 where vkey=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="DictOptionResultMap" type="cn.ibizlab.core.dict.domain.DictOption" autoMapping="true">
+        <id property="valueKey" column="vkey" /><!--主键字段映射-->
+		<result property="catalogId" column="cid" />
+		<result property="catalogName" column="cname" />
+		<result property="value" column="val" />
+		<result property="parent" column="pval" />
+		<result property="filter" column="vfilter" />
+		<result property="iconClass" column="iconcls" />
+            
+		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="catalog" javaType="cn.ibizlab.core.dict.domain.DictCatalog" column="cid" select="cn.ibizlab.core.dict.mapper.DictCatalogMapper.selectById" fetchType="lazy"></association>
+    </resultMap>
+
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_DICT_OPTION_DICT_CATALOG_CID] -->
+	 <select id="selectByCatalogId" resultMap="DictOptionResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         ) t1
+         where  cid=#{id}
+     </select>
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.dict.filter.DictOptionSearchContext"  resultMap="DictOptionResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CID`, t1.`CLS`, t1.`CNAME`, t1.`DISABLED`, t1.`EXPIRED`, t1.`EXTENSION`, t1.`ICONCLS`, t1.`LABEL`, t1.`PVAL`, t1.`SHOWORDER`, t1.`UPDATEDATE`, t1.`VAL`, t1.`VFILTER`, t1.`VKEY` FROM `IBZDICTOPTION` t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+		<![CDATA[ SELECT t1.CID, t1.CLS, t1.CNAME, t1.DISABLED, t1.EXPIRED, t1.EXTENSION, t1.ICONCLS, t1.LABEL, t1.PVAL, t1.SHOWORDER, t1.UPDATEDATE, t1.VAL, t1.VFILTER, t1.VKEY FROM IBZDICTOPTION t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CID, t1.CLS, t1.CNAME, t1.DISABLED, t1.EXPIRED, t1.EXTENSION, t1.ICONCLS, t1.LABEL, t1.PVAL, t1.SHOWORDER, t1.UPDATEDATE, t1.VAL, t1.VFILTER, t1.VKEY FROM IBZDICTOPTION t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CID`, t1.`CLS`, t1.`CNAME`, t1.`DISABLED`, t1.`EXPIRED`, t1.`EXTENSION`, t1.`ICONCLS`, t1.`LABEL`, t1.`PVAL`, t1.`SHOWORDER`, t1.`UPDATEDATE`, t1.`VAL`, t1.`VFILTER`, t1.`VKEY` FROM `IBZDICTOPTION` t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.CID, t1.CLS, t1.CNAME, t1.DISABLED, t1.EXPIRED, t1.EXTENSION, t1.ICONCLS, t1.LABEL, t1.PVAL, t1.SHOWORDER, t1.UPDATEDATE, t1.VAL, t1.VFILTER, t1.VKEY FROM IBZDICTOPTION t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CID, t1.CLS, t1.CNAME, t1.DISABLED, t1.EXPIRED, t1.EXTENSION, t1.ICONCLS, t1.LABEL, t1.PVAL, t1.SHOWORDER, t1.UPDATEDATE, t1.VAL, t1.VFILTER, t1.VKEY FROM IBZDICTOPTION t1  
+			]]>
+    </sql>
+</mapper>
+
