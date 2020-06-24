@@ -37,11 +37,11 @@ public class UserQQRegisterResource {
     @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
 
-    @Value("${ibiz.auth.qq.appid:}")// qq互联appid
+    @Value("${ibiz.auth.qq.appid:}")// qq互联appid,在配置文件进行初始化
     private String qqAppId;
-    @Value("${ibiz.auth.qq.appkey:}")// qq互联appkey
+    @Value("${ibiz.auth.qq.appkey:}")// qq互联appkey,在配置文件进行初始化
     private String qqAppKey;
-    @Value("${ibiz.auth.qq.redirect_uri:}")// qq互联应用回调地址
+    @Value("${ibiz.auth.qq.redirect_uri:}")// qq互联应用回调地址,在配置文件进行初始化
     private String qqRedirectUri;
 
 
