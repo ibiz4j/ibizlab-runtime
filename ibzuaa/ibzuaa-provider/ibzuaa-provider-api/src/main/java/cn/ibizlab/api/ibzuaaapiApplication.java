@@ -20,9 +20,9 @@ import java.util.List;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"cn.ibizlab"}
-//        ,excludeFilters={
-//                @ComponentScan.Filter(type= org.springframework.context.annotation.FilterType.REGEX,pattern="cn.ibizlab.api.rest.xxx"),
-//        }
+        ,excludeFilters={
+                @ComponentScan.Filter(type= org.springframework.context.annotation.FilterType.REGEX,pattern="cn.ibizlab.api.rest.SysPSSystemResource"),
+        }
 )
 @EnableMongoRepositories(basePackages = {"cn.ibizlab"})
 @MapperScan("cn.ibizlab.*.mapper")

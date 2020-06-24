@@ -37,11 +37,11 @@ public class UserQQRegisterResource {
     @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
 
-    @Value("${ibiz.auth.qq.appid:101882103}")// qq互联appid
+    @Value("${ibiz.auth.qq.appid:}")// qq互联appid
     private String qqAppId;
-    @Value("${ibiz.auth.qq.appkey:64ebdde56c1aeeacf0c312b49ddc42e1}")// qq互联appkey
+    @Value("${ibiz.auth.qq.appkey:}")// qq互联appkey
     private String qqAppKey;
-    @Value("${ibiz.auth.qq.redirect_uri:http://passport.ibizlab.cn/assets/qqRedirect.html}")// qq互联应用回调地址
+    @Value("${ibiz.auth.qq.redirect_uri:}")// qq互联应用回调地址
     private String qqRedirectUri;
 
 

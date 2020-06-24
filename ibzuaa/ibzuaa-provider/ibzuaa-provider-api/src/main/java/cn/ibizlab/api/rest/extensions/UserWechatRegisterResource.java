@@ -37,9 +37,9 @@ public class UserWechatRegisterResource {
     @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
 
-    @Value("${ibiz.auth.wechat.appID:wx4a7473ac9c617f76}")// 微信开放平台appid,最好在配置文件进行初始化
+    @Value("${ibiz.auth.wechat.appID:}")// 微信开放平台appid,最好在配置文件进行初始化
     private String WechatAppid;
-    @Value("${ibiz.auth.wechat.appsecret:c2b308b9245dffa316b049840fd81a79}")// 微信开放平台appsecret,最好在配置文件进行初始化
+    @Value("${ibiz.auth.wechat.appsecret:}")// 微信开放平台appsecret,最好在配置文件进行初始化
     private String WechatAppsecret;
 
 

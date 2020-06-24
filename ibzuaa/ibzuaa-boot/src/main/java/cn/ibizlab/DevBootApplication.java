@@ -22,9 +22,9 @@ import java.util.List;
             org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration.class,
 })
 @ComponentScan(basePackages = {"cn.ibizlab"}
-//        ,excludeFilters={
-//                @ComponentScan.Filter(type= org.springframework.context.annotation.FilterType.REGEX,pattern="cn.ibizlab.xxx.rest.xxx"),
-//        }
+        ,excludeFilters={
+            @ComponentScan.Filter(type= org.springframework.context.annotation.FilterType.REGEX,pattern="cn.ibizlab.api.rest.SysPSSystemResource"),
+        }
 )
 @Import({
         org.springframework.cloud.openfeign.FeignClientsConfiguration.class

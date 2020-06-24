@@ -37,9 +37,9 @@ public class UserDingtalkRegisterResource {
     @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
 
-    @Value("${ibiz.auth.dingtalk.appid:dingoatysxi5rpbluqgzpk}")// 个人应用开发过程中的唯一性标识AppId,最好在配置文件进行初始化
+    @Value("${ibiz.auth.dingtalk.appid:}")// 个人应用开发过程中的唯一性标识AppId,最好在配置文件进行初始化
     private String DingtalkAppid;
-    @Value("${ibiz.auth.dingtalk.appsecret:z2SuCSciWQJ6VSFX8jvHzTF0G_rEmHpjHrZct0rGnWrLyl8cZiRny72244EvF4SO}")// 个人应用AppSecret,最好在配置文件进行初始化
+    @Value("${ibiz.auth.dingtalk.appsecret:}")// 个人应用AppSecret,最好在配置文件进行初始化
     private String DingtalkAppSecret;
 
     /**
