@@ -23,12 +23,12 @@ import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { Subject } from 'rxjs';
 
 @Component({})
-export default class IBizGroupSelect extends Vue {
+export default class AppGroupSelect extends Vue {
     /**
      * 名称标识
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() name!: string;
 
@@ -36,7 +36,7 @@ export default class IBizGroupSelect extends Vue {
      * 树加载地址
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() treeurl?:boolean;
 
@@ -44,7 +44,7 @@ export default class IBizGroupSelect extends Vue {
      * 数据接口地址
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() url!: string;
 
@@ -52,7 +52,7 @@ export default class IBizGroupSelect extends Vue {
      * 多选
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop({default: false}) multiple?: boolean;
 
@@ -60,7 +60,7 @@ export default class IBizGroupSelect extends Vue {
      * 数据对象
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() data: any;
 
@@ -68,7 +68,7 @@ export default class IBizGroupSelect extends Vue {
      * 过滤属性标识
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() filter?: string;
 
@@ -76,7 +76,7 @@ export default class IBizGroupSelect extends Vue {
      * 是否启用
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() disabled?: boolean;
 
@@ -84,7 +84,7 @@ export default class IBizGroupSelect extends Vue {
      * 值
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() value: any;
 
@@ -92,7 +92,7 @@ export default class IBizGroupSelect extends Vue {
      * 上下文参数
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() context: any;
 
@@ -100,7 +100,7 @@ export default class IBizGroupSelect extends Vue {
      * 关联属性
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() valueitem: any;
 
@@ -108,7 +108,7 @@ export default class IBizGroupSelect extends Vue {
      * 填充属性
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Prop() fillmap: any;
 
@@ -116,7 +116,7 @@ export default class IBizGroupSelect extends Vue {
      * 选中项集合
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     protected selects: any[] = [];
 
@@ -124,7 +124,7 @@ export default class IBizGroupSelect extends Vue {
      * 值变化
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     @Watch('value')
     onValueChange(newVal: any) {
@@ -154,7 +154,7 @@ export default class IBizGroupSelect extends Vue {
      * 单选时选中名称
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     get selectName() {
         if(this.selects.length > 0) {
@@ -166,11 +166,11 @@ export default class IBizGroupSelect extends Vue {
      * 打开选择视图
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     public openView() {
         const view: any = {
-            viewname: 'ibiz-group-picker',
+            viewname: 'app-group-picker',
             title: '分组选择'
         };
         const context: any = JSON.parse(JSON.stringify(this.context));
@@ -208,7 +208,7 @@ export default class IBizGroupSelect extends Vue {
      * 选择视图关闭
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     public openViewClose(result: any) {
         this.selects = [];
@@ -222,7 +222,7 @@ export default class IBizGroupSelect extends Vue {
      * 数据删除
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     public remove(item: any) {
         this.selects.splice(this.selects.indexOf(item), 1);
@@ -233,7 +233,7 @@ export default class IBizGroupSelect extends Vue {
      * 设置值
      *
      * @type {*}
-     * @memberof IBizGroupSelect
+     * @memberof AppGroupSelect
      */  
     public setValue() {
         let item: any = {};

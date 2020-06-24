@@ -194,7 +194,7 @@ export default class WFProcessDefinitionEditViewBase extends Vue {
      * @type {string}
      * @memberof WFProcessDefinitionEditViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

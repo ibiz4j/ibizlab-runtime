@@ -106,7 +106,7 @@ export default class WFUserPickupViewBase extends Vue {
      * @type {string}
      * @memberof WFUserPickupViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

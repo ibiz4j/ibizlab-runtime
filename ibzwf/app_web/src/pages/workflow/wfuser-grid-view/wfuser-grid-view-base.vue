@@ -223,7 +223,7 @@ export default class WFUserGridViewBase extends Vue {
      * @type {string}
      * @memberof WFUserGridViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

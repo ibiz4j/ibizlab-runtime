@@ -93,6 +93,10 @@ export default {
 			caption: "新建行",
 			tip: "新建行",
 		},
+		deuiaction1: {
+			caption: "保存行",
+			tip: "保存行",
+		},
 		tbitem26: {
 			caption: "-",
 			tip: "",

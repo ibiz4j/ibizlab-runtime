@@ -194,7 +194,7 @@ export default class WFMemberEditViewBase extends Vue {
      * @type {string}
      * @memberof WFMemberEditViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

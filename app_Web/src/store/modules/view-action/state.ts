@@ -67,6 +67,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '1ef170b14b7a70f4609a9f13692d1414',
+            viewmodule: 'uaa',
+            viewname: 'SysAppGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '3febdb3ae99351887f24b7c9db070de8',
+            ],
+        },
+        {
             viewtag: '1f8cf7e78d6d88588d1d568d1866cc77',
             viewmodule: 'uaa',
             viewname: 'SysUserMPickupView',
@@ -161,6 +171,15 @@ export const viewstate: any = {
             viewtag: '3fcd491c13d05ab7dcce8d2c920d0aec',
             viewmodule: 'workflow',
             viewname: 'WFProcessDefinitionEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: '3febdb3ae99351887f24b7c9db070de8',
+            viewmodule: 'uaa',
+            viewname: 'SysAppEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -553,6 +572,7 @@ export const viewstate: any = {
                 '5bd45246d1f387729c0d8658e07ddb9f',
                 'e4856779577562e9880855e6c66d63e5',
                 'bfa86be8c02420f87d5cf4ff9a768948',
+                '1ef170b14b7a70f4609a9f13692d1414',
                 'c0cdac5d5b5691ae8a326f5972aec67f',
                 '67b4d1e928a08679ce63051ccc88da9c',
                 'd907ddd1845887ecabac4d8d199bf792',

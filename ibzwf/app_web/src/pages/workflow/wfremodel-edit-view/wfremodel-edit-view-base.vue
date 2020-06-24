@@ -124,7 +124,7 @@ export default class WFREModelEditViewBase extends Vue {
      * @type {string}
      * @memberof WFREModelEditViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

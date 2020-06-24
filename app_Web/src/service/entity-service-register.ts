@@ -62,6 +62,7 @@ export class EntityServiceRegister {
         this.allEntityService.set('syspermission', () => import('@/service/sys-permission/sys-permission-service'));
         this.allEntityService.set('dictoption', () => import('@/service/dict-option/dict-option-service'));
         this.allEntityService.set('ibzemployee', () => import('@/service/ibzemployee/ibzemployee-service'));
+        this.allEntityService.set('sysapp', () => import('@/service/sys-app/sys-app-service'));
     }
 
     /**

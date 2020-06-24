@@ -6,8 +6,6 @@
 
 <script lang="ts">
 import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator';
-import 'ibiz-vue-lib/lib/ibiz-vue-lib.css';
-import {IBizSelectTree} from 'ibiz-vue-lib';
 @Component({
 })
 export default class AppDepartmentSelect extends Vue {

@@ -139,7 +139,7 @@ export default class WFGroupMPickupViewBase extends Vue {
      * @type {string}
      * @memberof WFGroupMPickupViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

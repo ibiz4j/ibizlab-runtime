@@ -62,6 +62,7 @@ export class UIServiceRegister {
         this.allUIService.set('syspermission', () => import('@/uiservice/sys-permission/sys-permission-ui-service'));
         this.allUIService.set('dictoption', () => import('@/uiservice/dict-option/dict-option-ui-service'));
         this.allUIService.set('ibzemployee', () => import('@/uiservice/ibzemployee/ibzemployee-ui-service'));
+        this.allUIService.set('sysapp', () => import('@/uiservice/sys-app/sys-app-ui-service'));
     }
 
     /**

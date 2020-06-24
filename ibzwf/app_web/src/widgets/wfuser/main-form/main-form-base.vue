@@ -163,7 +163,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {string}
      * @memberof MainBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
     /**

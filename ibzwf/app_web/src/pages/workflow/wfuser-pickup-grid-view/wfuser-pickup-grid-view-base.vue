@@ -121,7 +121,7 @@ export default class WFUserPickupGridViewBase extends Vue {
      * @type {string}
      * @memberof WFUserPickupGridViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

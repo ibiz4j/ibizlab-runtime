@@ -30,3 +30,4 @@ import './entity/ibzteam-members/ibzteam-members';
 import './entity/sys-permissions/sys-permissions';
 import './entity/dict-options/dict-options';
 import './entity/ibzemployees/ibzemployees';
+import './entity/sys-apps/sys-apps';

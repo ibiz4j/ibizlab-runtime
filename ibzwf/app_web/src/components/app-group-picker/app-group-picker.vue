@@ -19,17 +19,14 @@
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { Subject } from 'rxjs';
 import { Http } from '../../utils';
-import 'ibiz-vue-lib/lib/ibiz-vue-lib.css';
-import {IBizSelectTree} from 'ibiz-vue-lib';
-import {IBizGroupCard} from 'ibiz-vue-lib';
 @Component({})
-export default class IBizGroupPicker extends Vue {
+export default class AppGroupPicker extends Vue {
 
     /**
      * 视图上下文参数
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     @Prop() viewdata: any;
 
@@ -37,7 +34,7 @@ export default class IBizGroupPicker extends Vue {
      * 视图参数
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     @Prop() viewparam: any;
 
@@ -45,7 +42,7 @@ export default class IBizGroupPicker extends Vue {
      * 多选
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected multiple: boolean = false;
 
@@ -53,7 +50,7 @@ export default class IBizGroupPicker extends Vue {
      * 加载树url
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected treeurl:any;
 
@@ -61,7 +58,7 @@ export default class IBizGroupPicker extends Vue {
      * 加载人员url
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected url:any;
 
@@ -69,7 +66,7 @@ export default class IBizGroupPicker extends Vue {
      * 树数据集
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected treeItems: any[] = [];
 
@@ -77,7 +74,7 @@ export default class IBizGroupPicker extends Vue {
      * 分组表数据集
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected cardItems: any[] = [];
 
@@ -85,7 +82,7 @@ export default class IBizGroupPicker extends Vue {
      * 视图上下文参数对象
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected viewData: any;
 
@@ -93,7 +90,7 @@ export default class IBizGroupPicker extends Vue {
      * 视图参数对象
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected viewParam: any;
 
@@ -101,7 +98,7 @@ export default class IBizGroupPicker extends Vue {
      * 树选中值
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected treeSelectVal: string = '';
 
@@ -109,7 +106,7 @@ export default class IBizGroupPicker extends Vue {
      * 分组表选中集合
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected cardSelctVal: any = [];
 
@@ -117,7 +114,7 @@ export default class IBizGroupPicker extends Vue {
      * 数据选中集合
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     protected selects: any[] = [];
 
@@ -125,7 +122,7 @@ export default class IBizGroupPicker extends Vue {
      * 是否显示树
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     get showTree() {
         if(this.viewParam) {
@@ -137,7 +134,7 @@ export default class IBizGroupPicker extends Vue {
      * 生命周期
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     public created() {
         if(!this.viewdata || !this.viewparam) {
@@ -161,7 +158,7 @@ export default class IBizGroupPicker extends Vue {
      * 加载数据
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     public load() {
         if(this.showTree) {
@@ -175,7 +172,7 @@ export default class IBizGroupPicker extends Vue {
      * 加载树数据
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     public loadTree() {
         let orgid = this.viewParam.filtervalue;
@@ -194,7 +191,7 @@ export default class IBizGroupPicker extends Vue {
      * 加载分组表数据
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     public loadGroupData(key: string) {
         let tempUrl = this.url.replace('${selected-orgid}',key);
@@ -212,7 +209,7 @@ export default class IBizGroupPicker extends Vue {
      * 树选中
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     public treeSelect(event: any) {
         if(!event || JSON.parse(event).length == 0) {
@@ -226,7 +223,7 @@ export default class IBizGroupPicker extends Vue {
      * 分组表选中
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     public groupSelect(event: any) {
         if (!event || !event.select) {
@@ -258,7 +255,7 @@ export default class IBizGroupPicker extends Vue {
      * 确认
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     public onOK() {
         this.$emit('close', this.selects);
@@ -268,7 +265,7 @@ export default class IBizGroupPicker extends Vue {
      * 取消
      *
      * @type {*}
-     * @memberof IBizGroupPicker
+     * @memberof AppGroupPicker
      */  
     public onCancel() {
         this.$emit('close');

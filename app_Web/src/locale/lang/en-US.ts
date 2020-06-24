@@ -21,6 +21,7 @@ import ibzteammember_en_US from '@locale/lanres/entities/ibzteam-member/ibzteam-
 import syspermission_en_US from '@locale/lanres/entities/sys-permission/sys-permission_en_US';
 import dictoption_en_US from '@locale/lanres/entities/dict-option/dict-option_en_US';
 import ibzemployee_en_US from '@locale/lanres/entities/ibzemployee/ibzemployee_en_US';
+import sysapp_en_US from '@locale/lanres/entities/sys-app/sys-app_en_US';
 import components_en_US from '@locale/lanres/components/components_en_US';
 import codelist_en_US from '@locale/lanres/codelist/codelist_en_US';
 import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';
@@ -90,6 +91,7 @@ export default {
                 menuitem8: "系统权限",
                 menuitem4: "用户角色",
                 menuitem9: "认证日志",
+                menuitem21: "接入应用",
                 menuitem10: "流程管理",
                 menuitem6: "流程定义",
                 menuitem5: "流程角色",
@@ -128,6 +130,7 @@ export default {
         syspermission: syspermission_en_US,
         dictoption: dictoption_en_US,
         ibzemployee: ibzemployee_en_US,
+        sysapp: sysapp_en_US,
     },
     components: components_en_US,
     codelist: codelist_en_US,

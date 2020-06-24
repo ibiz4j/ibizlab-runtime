@@ -23,4 +23,9 @@ export default {
         "403.6": "地址被拒绝",
         "empty": "",
     },
+    AppType: {
+        "INNER": "内置应用",
+        "THIRD-PARTY": "第三方应用",
+        "empty": "",
+    },
 };

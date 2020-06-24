@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import java.io.InputStream;
+import java.util.*;
 
 /**
  * 权限：向uaa同步当前系统菜单、权限资源任务类
@@ -21,14 +22,13 @@ import java.io.InputStream;
 @ConditionalOnProperty( name = "ibiz.enablePermissionValid", havingValue = "true")
 public class PermissionSyncJob implements ApplicationRunner {
 
-
     @Autowired
     @Lazy
     private IBZUAAFeignClient client;
 
-
     @Value("${ibiz.systemid:ibzwf}")
     private String systemId;
+
 
     @Override
     public void run(ApplicationArguments args) {
@@ -49,5 +49,6 @@ public class PermissionSyncJob implements ApplicationRunner {
         catch (Exception ex) {
             log.error(String.format("向[UAA]同步系统资源失败，请检查[UAA]服务是否正常! [%s]",ex));
         }
+
     }
 }

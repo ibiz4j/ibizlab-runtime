@@ -223,7 +223,7 @@ export default class WFGroupGridViewBase extends Vue {
      * @type {string}
      * @memberof WFGroupGridViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

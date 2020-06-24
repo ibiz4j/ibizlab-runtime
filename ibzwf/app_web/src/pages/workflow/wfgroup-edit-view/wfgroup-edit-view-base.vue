@@ -194,7 +194,7 @@ export default class WFGroupEditViewBase extends Vue {
      * @type {string}
      * @memberof WFGroupEditViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

@@ -223,7 +223,7 @@ export default class WFProcessDefinitionGridViewBase extends Vue {
      * @type {string}
      * @memberof WFProcessDefinitionGridViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

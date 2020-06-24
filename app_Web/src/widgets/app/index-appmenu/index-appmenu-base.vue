@@ -532,6 +532,9 @@ export default class IndexBase extends Vue implements ControlInterface {
                 case '_2': 
                     this.click_2(item);
                     return;
+                case '_3': 
+                    this.click_3(item);
+                    return;
                 case 'Auto13': 
                     this.clickAuto13(item);
                     return;
@@ -762,12 +765,35 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 字典项
+     * 接入应用
      *
      * @param {*} [item={}]
      * @memberof Index
      */
     public click_2(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysapps', parameterName: 'sysapp' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 字典项
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public click_3(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];

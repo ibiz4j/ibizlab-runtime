@@ -6,8 +6,6 @@
 <script lang = 'ts'>
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import { Http } from '@/utils';
-import 'ibiz-vue-lib/lib/ibiz-vue-lib.css';
-import {IBizSelectTree} from 'ibiz-vue-lib';
 @Component({})
 export default class AppOrgSelect extends Vue {
 
