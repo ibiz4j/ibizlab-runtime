@@ -37,6 +37,7 @@ public class DevNamingRegister implements ApplicationRunner {
             Instance instance = naming.selectOneHealthyInstance(serviceName);
             if(instance!=null&&(!StringUtils.isEmpty(instance.getIp())))
             {
+                naming.registerInstance("ibzrt-web", instance.getIp(), port);
                 naming.registerInstance("ibzuaa-api", instance.getIp(), port);
                 naming.registerInstance("ibzou-api", instance.getIp(), port);
                 naming.registerInstance("ibzwf-api", instance.getIp(), port);

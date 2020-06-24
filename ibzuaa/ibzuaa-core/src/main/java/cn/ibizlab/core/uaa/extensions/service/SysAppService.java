@@ -59,7 +59,7 @@ public class SysAppService extends SysAppServiceImpl
         LinkedHashMap<String,SysApp> defApps = new LinkedHashMap<>();
         defApps.putAll(apps);
         List<SysApp> list=new ArrayList<>();
-        JSONArray.parseArray(jo.get("model").toString(),SysApp.class).forEach(sysApp -> {
+        JSONArray.parseArray(jo.getJSONArray("model").toJSONString(),SysApp.class).forEach(sysApp -> {
             SysApp def=defApps.get(sysApp.getId());
             if(def==null||def.getVisabled()==null||def.getVisabled()==0)return;
 
@@ -118,7 +118,7 @@ public class SysAppService extends SysAppServiceImpl
         if(!config.containsKey("model"))
             config.put("model", new JSONArray());
         List<SysApp> list=new ArrayList<>();
-        JSONArray.parseArray(config.get("model").toString(),SysApp.class).forEach(sysApp -> {
+        JSONArray.parseArray(config.getJSONArray("model").toJSONString(),SysApp.class).forEach(sysApp -> {
             sysApp.setAddr(null);
             sysApp.setIcon(null);
             sysApp.setFullname(null);
