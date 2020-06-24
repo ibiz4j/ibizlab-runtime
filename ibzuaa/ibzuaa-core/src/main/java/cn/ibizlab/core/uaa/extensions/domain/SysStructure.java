@@ -63,9 +63,10 @@ public class SysStructure
 						if(datasetname.toUpperCase().equals("DEFAULT"))
 							datasetname="";
 						datasetname="查询"+datasetname+"数据";
+						String fullname = systemid+"/操作能力/"+enode.getLabel()+"/"+datasetname;
 						PermissionNode dataSetNode = PermissionNode.builder()
-								.label(datasetname).type(PermissionType.OPPRIV).build()
-								.setUniKey(systemid,node.getDename()+"-"+dataset.getId()+"-all");
+								.label(datasetname).type(PermissionType.OPPRIV).fullName(fullname).build()
+								.setUniKey(systemid,node.getDename()+"-search"+dataset.getId()+"-all");
 						enode.getChildren().add(dataSetNode);
 					});
 				if(node.getActions()!=null) {
