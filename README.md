@@ -8,8 +8,8 @@
 - [x]  ibz-ou:组织人事管理微服务  
 - [x]  ibz-wf:工作流代理微服务（集成flowable） 
 - [ ]  ibz-disk:分布式存储微服务(集成kkfileview在线预览+collabora-code在线编辑)  
-- [ ]  ~~ibz-task:任务调度微服务（集成xxl-job）~~  
-- [ ]  ~~ibz-dict:数据字典管理微服务~~  
+- [x]  ibz-task:任务调度微服务（集成baomidou-jobs）  
+- [x]  ibz-dict:数据字典管理微服务  
 - [ ]  ~~ibz-pay:支付管理微服务~~  
 - [ ]  ~~ibz-notify:通知微服务~~  
 - [ ]  ~~ibz-dst:分布式统计分析微服务（基于Cassandra+drools）~~  
@@ -99,7 +99,7 @@ Boot on port:40001
 #### Docker + Docker-compose
 
 本系统提供了docker镜像，方便快速部署  
-docker pull [ibiz4j/ibizlab-runtime:1.0.1-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
+docker pull [ibiz4j/ibizlab-runtime:1.0.2-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
 
 启动基础配套服务，nacos+redis    
 ```
@@ -124,7 +124,7 @@ docker-compose -f boot/src/main/docker/ibzrt-oracle.yaml up -d
 docker-compose -f boot/src/main/docker/ibzrt-boot.yaml up -d
 ```
 
-启动附加可选配套组件服务（xxl-job和flowable等）
+启动附加可选配套组件服务（flowable等）
 ```
 docker-compose -f boot/src/main/docker/ibzrt-ibzrt-extensions.yaml up -d
 ```
@@ -153,9 +153,7 @@ Boot on port:30003
 http://127.0.0.1:30003 
 
 ### 开源计划
-* ibz-uaa 第三方接入  2020年6月底
 * ibz-disk 集成在线预览和编辑  2020年6月底
-* ibz-dict:数据字典管理微服务  2020年6月底
 * ibz-pay:支付管理微服务  2020年7月
 * ibz-notify:通知微服务  2020年7月
 * ibz-dst:分布式统计分析微服务（集成drools）  2020年8月
