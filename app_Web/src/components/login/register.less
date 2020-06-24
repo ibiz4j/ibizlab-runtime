@@ -1,0 +1,89 @@
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100%;
+  background: #108cee;
+
+  > img {
+    width: 100vw;
+    height: 100vh;
+    min-width: 1280px;
+    min-height: 720px;
+  }
+
+  &-con {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 150px;
+    margin: auto;
+    width: 450px;
+
+    .ivu-card-head {
+      padding: 30px 6px;
+      border-bottom: 0px;
+
+      > p {
+        line-height: 24px;
+        height: 24px;
+        margin-bottom: -2px;
+        font-size: 24px;
+        color: #666666;
+        font-weight: 700;
+      }
+    }
+
+    &-header {
+      font-size: 16px;
+      font-weight: 300;
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    .form-con {
+      padding: 0px 20px 0px 20px;
+
+      > i-button {
+        width: 170px;
+        height: 40px;
+      }
+    }
+
+  }
+}
+
+.log_footer {
+  display: block;
+  padding: 0 16px;
+  margin: 48px 0 24px;
+  text-align: center;
+  color: #212529;
+}
+
+.log_footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.goLogin {
+  float: right;
+  font-size: 14px;
+}
+
+.confirm_register {
+  height: 40px;
+  font-size: 18px;
+  font-family: MicrosoftYaHei;
+}
+
+.disabled {
+  background-color: #ddd;
+  border-color: #ddd;
+  color: #57a3f3;
+  cursor: not-allowed; // 鼠标变化
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:g="http://www.jboss.org/drools/flow/gpd" xmlns:tns="http://www.jboss.org/drools" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.mvel.org/2.0" id="Definition" name="" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+    <process id="cn.ibizlab.core.ou.service.logic.ibzemployeesavedeptmember" isClosed="false" isExecutable="true" name="ScoreRule" processType="Private" tns:packageName="cn.ibizlab.core.ou.service.logic.ibzemployeesavedeptmember">
+        <extensionElements>
+            <tns:import name="java.util.Map" />
+            <tns:import name="org.springframework.util.StringUtils"/>
+            <tns:import name="cn.ibizlab.util.helper.RuleUtils"/>
+        <tns:global identifier="ibzemployeesavedeptmembermember" type="cn.ibizlab.core.ou.domain.IBZDeptMember" />
+        <tns:global identifier="ibzemployeesavedeptmemberdefault" type="cn.ibizlab.core.ou.domain.IBZEmployee" />
+        </extensionElements>
+     <startEvent id="185d3d9e0375d4a0bc23e2b5e0c5d6b0" isInterrupting="true"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="ibzemployeesavedeptmemberprepareparam1" id="4ce2ddabe497161f1eafae705330da51" implementation="http://www.jboss.org/drools/rule" name="准备成员"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="ibzemployeesavedeptmemberdeaction1" id="9c1c19bacf602767e76375b11255b4ec" implementation="http://www.jboss.org/drools/rule" name="保存成员"/>
+     <endEvent id="9c1c19bacf602767e76375b11255b4ec_End" name="End"/>
+     <sequenceFlow id="9c1c19bacf602767e76375b11255b4ec_End_Line" sourceRef="9c1c19bacf602767e76375b11255b4ec" targetRef="9c1c19bacf602767e76375b11255b4ec_End"/>
+     <sequenceFlow id="343c7f3c943ba660d265739e8c3aafa0" sourceRef="185d3d9e0375d4a0bc23e2b5e0c5d6b0" targetRef="4ce2ddabe497161f1eafae705330da51">
+     </sequenceFlow>
+     <sequenceFlow id="bd6bbf97e4bc058dea8b7b013f381ac2" sourceRef="4ce2ddabe497161f1eafae705330da51" targetRef="9c1c19bacf602767e76375b11255b4ec">
+     </sequenceFlow>
+    </process>
+</definitions>
+

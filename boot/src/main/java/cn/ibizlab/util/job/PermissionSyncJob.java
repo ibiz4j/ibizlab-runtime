@@ -97,6 +97,21 @@ public class PermissionSyncJob implements ApplicationRunner {
             }
             permission.close();
 
+            permission= this.getClass().getResourceAsStream("/permission/ibzdict/systemResource.json"); //获取当前系统所有实体资源能力
+            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
+            system= new SysPSSystem();
+            permissionResult.setApps(new ArrayList<>());
+            permissionResult.setUniResIds(new ArrayList<>());
+            system.setSysstructure(permissionResult);
+            system.setPssystemid("ibzdict");
+            system.setPssystemname("ibzdict");
+            if(systemService.save(system)){
+                log.info("向[UAA]同步系统资源成功");
+            }else{
+                log.error("向[UAA]同步系统资源失败");
+            }
+            permission.close();
+
             permission= this.getClass().getResourceAsStream("/permission/ibzrt/systemResource.json"); //获取当前系统所有实体资源能力
             permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
             system= new SysPSSystem();

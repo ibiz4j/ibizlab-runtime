@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="../favicon.ico">
+    <title>ibzuaa</title>
+
+    <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+    <script>
+
+        $(function () {
+            var code = getUrlParam('code');
+            var state = getUrlParam('state');
+            // alert("code:" + code + "\n state:" + state);
+
+            if (code && state) {
+                // 通过授权code请求后台
+                var opt = {"code": code, "state": state};
+                $.ajax({
+                    type: "post",
+                    url: "../uaa/queryDingtalkUserByCode",
+                    dataType: "json",
+                    data: JSON.stringify(opt),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        // console.log(JSON.stringify(data));
+                        if (data) {
+                            if (data.openid) {
+                                localStorage.setItem('openid', data.openid);
+                            }
+                            if (data.nickname) {
+                                localStorage.setItem('nickname', data.nickname);
+                            }
+                            if (data.token) {
+                                localStorage.setItem('token', data.token);
+                            }
+                            if (data.user) {
+                                localStorage.setItem('user', JSON.stringify(data.user));
+                            }
+                            if (data.ibzuser) {
+                                var ibzuser = JSON.stringify(data.ibzuser);
+                                // 设置cookie,保存账号密码7天
+                                setCookie(ibzuser.loginname, ibzuser.password, 7);
+                                // 跳转首页
+                                window.location.href = "../index";
+                            } else {
+                                // 跳转钉钉绑定
+                                window.location.href = "../#/dingdingLoginRedirect?code=" + code + "&state=" + state;
+                            }
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(XMLHttpRequest.readyState + XMLHttpRequest.status + XMLHttpRequest.responseText);
+                        // 回到登录页
+                        window.location.href = "../";
+                    }
+                });
+            } else {
+                alert("钉钉授权登录失败！");
+                // 回到登录页
+                window.location.href = "../";
+            }
+
+        });
+
+        // 获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+        // 设置cookie
+        function setCookie(loginname, password, exdays) {
+            // 获取时间
+            let exdate = new Date();
+            // 保存的天数
+            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
+            // 字符串拼接cookie
+            window.document.cookie = "loginname" + "=" + loginname + ";path=/;expires=" + exdate.toUTCString();
+            window.document.cookie = "password" + "=" + password + ";path=/;expires=" + exdate.toUTCString();
+        }
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
