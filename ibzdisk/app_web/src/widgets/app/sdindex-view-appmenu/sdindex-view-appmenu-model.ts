@@ -29,7 +29,7 @@ export default class SDIndexViewModel {
 	iconcls: '',
 	icon: '',
 	textcls: '',
-	appfunctag: '_2',
+	appfunctag: 'Auto1',
 	resourcetag: '',
 	authtag:'web-SDIndexView-menuitem1',
 },
@@ -44,7 +44,7 @@ export default class SDIndexViewModel {
 	 */
 	public funcs: any[] = [
         {
-            appfunctag: '_2',
+            appfunctag: 'Auto1',
             appfuncyype: 'APPVIEW',
             openmode: '',
             codename: 'sdfilegridview',

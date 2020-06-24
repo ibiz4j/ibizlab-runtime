@@ -1,6 +1,5 @@
 const path = require('path');
 const os = require('os');
-
 function resolve(dir) {
     return path.join(__dirname, dir)
 }

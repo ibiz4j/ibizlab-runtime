@@ -128,6 +128,7 @@ public class JobsRegistryResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务注册信息" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobsregistries/fetchdefault")
 	public ResponseEntity<List<JobsRegistryDTO>> fetchDefault(JobsRegistrySearchContext context) {
@@ -140,6 +141,7 @@ public class JobsRegistryResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务注册信息" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobsregistries/searchdefault")
 	public ResponseEntity<Page<JobsRegistryDTO>> searchDefault(@RequestBody JobsRegistrySearchContext context) {

@@ -173,7 +173,7 @@ public class JobsInfoResource {
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务信息" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobsinfos/fetchdefault")
 	public ResponseEntity<List<JobsInfoDTO>> fetchDefault(JobsInfoSearchContext context) {
@@ -186,7 +186,7 @@ public class JobsInfoResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务信息" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobsinfos/searchdefault")
 	public ResponseEntity<Page<JobsInfoDTO>> searchDefault(@RequestBody JobsInfoSearchContext context) {

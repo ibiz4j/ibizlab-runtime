@@ -128,6 +128,7 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUser-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"系统用户" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysusers/fetchdefault")
 	public ResponseEntity<List<SysUserDTO>> fetchDefault(SysUserSearchContext context) {
@@ -140,6 +141,7 @@ public class SysUserResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUser-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"系统用户" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysusers/searchdefault")
 	public ResponseEntity<Page<SysUserDTO>> searchDefault(@RequestBody SysUserSearchContext context) {

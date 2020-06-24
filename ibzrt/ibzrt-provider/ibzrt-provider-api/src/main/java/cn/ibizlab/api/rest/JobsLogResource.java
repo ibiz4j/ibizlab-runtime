@@ -128,6 +128,7 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务调度日志" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobslogs/fetchdefault")
 	public ResponseEntity<List<JobsLogDTO>> fetchDefault(JobsLogSearchContext context) {
@@ -140,6 +141,7 @@ public class JobsLogResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务调度日志" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobslogs/searchdefault")
 	public ResponseEntity<Page<JobsLogDTO>> searchDefault(@RequestBody JobsLogSearchContext context) {

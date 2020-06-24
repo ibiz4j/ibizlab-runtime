@@ -137,7 +137,7 @@ public class IBZOrganizationResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationMapping.toDto(ibzorganizationService.getDraft(new IBZOrganization())));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZOrganization-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZOrganization-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"单位机构" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/fetchdefault")
 	public ResponseEntity<List<IBZOrganizationDTO>> fetchDefault(IBZOrganizationSearchContext context) {
@@ -150,7 +150,7 @@ public class IBZOrganizationResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZOrganization-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZOrganization-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"单位机构" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/searchdefault")
 	public ResponseEntity<Page<IBZOrganizationDTO>> searchDefault(@RequestBody IBZOrganizationSearchContext context) {

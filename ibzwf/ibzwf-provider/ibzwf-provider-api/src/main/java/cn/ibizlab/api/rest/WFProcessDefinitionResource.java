@@ -137,7 +137,7 @@ public class WFProcessDefinitionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"流程定义" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfprocessdefinitions/fetchdefault")
 	public ResponseEntity<List<WFProcessDefinitionDTO>> fetchDefault(WFProcessDefinitionSearchContext context) {
@@ -150,7 +150,7 @@ public class WFProcessDefinitionResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"流程定义" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfprocessdefinitions/searchdefault")
 	public ResponseEntity<Page<WFProcessDefinitionDTO>> searchDefault(@RequestBody WFProcessDefinitionSearchContext context) {

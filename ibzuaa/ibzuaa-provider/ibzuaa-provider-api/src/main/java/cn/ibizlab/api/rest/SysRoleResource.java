@@ -137,7 +137,7 @@ public class SysRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysroleService.checkKey(sysroleMapping.toDomain(sysroledto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"系统角色" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysroles/fetchdefault")
 	public ResponseEntity<List<SysRoleDTO>> fetchDefault(SysRoleSearchContext context) {
@@ -150,7 +150,7 @@ public class SysRoleResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"系统角色" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysroles/searchdefault")
 	public ResponseEntity<Page<SysRoleDTO>> searchDefault(@RequestBody SysRoleSearchContext context) {

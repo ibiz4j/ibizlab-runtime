@@ -137,7 +137,7 @@ public class WFGroupResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"角色/用户组" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfgroups/fetchdefault")
 	public ResponseEntity<List<WFGroupDTO>> fetchDefault(WFGroupSearchContext context) {
@@ -150,7 +150,7 @@ public class WFGroupResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"角色/用户组" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfgroups/searchdefault")
 	public ResponseEntity<Page<WFGroupDTO>> searchDefault(@RequestBody WFGroupSearchContext context) {

@@ -1,0 +1,13 @@
+version: "3.2"
+services:
+    ibzdisk-mongodb:
+    image: mongo:4.2.3
+    ports:
+      - 27017:27017
+    volumes:
+      - $PWD/../../../../volumes/mongodb/:/data/db/
+    networks:
+      - agent_network
+networks:
+  agent_network:
+    attachable: true

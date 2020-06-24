@@ -137,7 +137,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"用户角色关系" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchDefault(SysUserRoleSearchContext context) {
@@ -150,7 +150,7 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"用户角色关系" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchDefault(@RequestBody SysUserRoleSearchContext context) {
@@ -267,7 +267,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统角色获取DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统角色获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysroles/{sysrole_id}/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchSysUserRoleDefaultBySysRole(@PathVariable("sysrole_id") String sysrole_id,SysUserRoleSearchContext context) {
@@ -281,7 +281,7 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统角色查询DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统角色查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysroles/{sysrole_id}/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchSysUserRoleDefaultBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleSearchContext context) {
@@ -399,7 +399,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统用户获取DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统用户获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysusers/{sysuser_id}/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchSysUserRoleDefaultBySysUser(@PathVariable("sysuser_id") String sysuser_id,SysUserRoleSearchContext context) {
@@ -413,7 +413,7 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统用户查询DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统用户查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysusers/{sysuser_id}/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchSysUserRoleDefaultBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleSearchContext context) {

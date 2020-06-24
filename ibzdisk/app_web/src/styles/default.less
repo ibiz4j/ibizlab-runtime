@@ -62,10 +62,23 @@
     border-top-color: #909399;
 }
 
+// tab分页模式首页布局
+.index_tab_content{
+    >.view-container {
+        height: calc(100% - 65px);
+        margin: 0px 12px;
+    }
+}
+// 面包屑模式首页布局
+.index_route_content{
+    >.view-container {
+        height: calc(100% - 36px);
+        margin: 12px;
+    }
+}
+
 .view-container {
-    height: calc(100% - 65px);
     padding: 0 12px;
-    margin: 0px 12px;
     background: white;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
     // flex-direction: column;
@@ -74,18 +87,29 @@
         // display: flex;
         // flex-direction: column;
         > .ivu-card-head{
-          height: 50px;
+          min-height: 42px;
           border-color: rgb(221, 221, 221);
           border-style: solid;
           border-width: 0px 0px 1px;
           margin: 0px 0px 11px;
-          padding: 6px 0px;
-          > p{
-            height: 50px;
+          padding: 6px 0px 2px;
+          > .header-container{
+            min-height: 42px;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: flex-start;
+            justify-content: space-between;
             > .caption-info{
-              line-height: 50px;
+              line-height: 42px;
               font-size: 18px;
               color: #1890ff;
+              flex-shrink: 0;
+            }
+            > .toolbar-container{
+              margin-left: auto;
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
             }
           }
         }
@@ -235,12 +259,6 @@
         }
     }
   }
-}
-
-// 清除看板里视图的阴影
-.dashboard .portlet .view-container{
-  -webkit-box-shadow: none ;
-  box-shadow: none;
 }
 
 /***    END:多数据视图属性布局    ***/

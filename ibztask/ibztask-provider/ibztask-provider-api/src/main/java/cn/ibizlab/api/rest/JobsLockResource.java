@@ -137,7 +137,7 @@ public class JobsLockResource {
         return ResponseEntity.status(HttpStatus.OK).body(jobslockMapping.toDto(jobslockService.getDraft(new JobsLock())));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务锁" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobslocks/fetchdefault")
 	public ResponseEntity<List<JobsLockDTO>> fetchDefault(JobsLockSearchContext context) {
@@ -150,7 +150,7 @@ public class JobsLockResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务锁" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobslocks/searchdefault")
 	public ResponseEntity<Page<JobsLockDTO>> searchDefault(@RequestBody JobsLockSearchContext context) {

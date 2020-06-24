@@ -128,6 +128,7 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysappService.checkKey(sysappMapping.toDomain(sysappdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"应用" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysapps/fetchdefault")
 	public ResponseEntity<List<SysAppDTO>> fetchDefault(SysAppSearchContext context) {
@@ -140,6 +141,7 @@ public class SysAppResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"应用" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysapps/searchdefault")
 	public ResponseEntity<Page<SysAppDTO>> searchDefault(@RequestBody SysAppSearchContext context) {

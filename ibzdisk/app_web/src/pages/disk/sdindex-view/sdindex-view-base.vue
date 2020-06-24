@@ -6,8 +6,8 @@
             <sider :width="collapseChange ? 64 : 200" hide-trigger v-model="collapseChange">
                 <div class="sider-top">
                     <div class="page-logo">
-                        <img v-show="collapseChange" src="../../../assets/img/logo.png" height="16" />
-                        <span v-show="!collapseChange" style="display: block;text-align: center;font-weight: 300;font-size: 20px;">{{$t(model.srfCaption)}}</span>
+                        <span class="menuicon" @click="contextMenuDragVisiable=!contextMenuDragVisiable"><Icon type="md-menu" /></span>
+                        <span v-show="!collapseChange" style="overflow-x: hidden;text-overflow: ellipsis;white-space: nowrap;display: block;text-align: center;font-weight: 300;font-size: 20px;">{{$t(model.srfCaption)}}</span>
                     </div>
                 </div>
                 <view_appmenu 
@@ -16,7 +16,9 @@
     :context="context" 
     :showBusyIndicator="true"  
     v-model="collapseChange"  
-    :mode="mode"  
+    :mode="mode"
+    :navModel="navModel"
+    viewtag="sdindex-view"
     :selectTheme="selectTheme"  
     :isDefaultPage="isDefaultPage"  
     :defPSAppView="defPSAppView" 
@@ -24,6 +26,7 @@
     ref='appmenu' 
     @closeview="closeView($event)">
 </view_appmenu>
+                <context-menu-drag :contextMenuDragVisiable="contextMenuDragVisiable"></context-menu-drag>
             </sider>
             <layout>
                 <header class="index_header">
@@ -31,7 +34,7 @@
                         <div class="page-logo">
                             <i v-show="!collapseChange" class="ivu-icon el-icon-s-fold" @click="handleClick"></i>
                             <i v-show="collapseChange" class="ivu-icon el-icon-s-unfold" @click="handleClick"></i>
-                            <app-breadcrumb :defPSAppView="defPSAppView"></app-breadcrumb>
+                            <app-breadcrumb  :navModel="navModel" indexViewTag="sdindex-view"></app-breadcrumb>
                         </div>
                     </div>
                     <div class="header-right" style="display: flex;align-items: center;justify-content: space-between;">
@@ -42,8 +45,8 @@
                         <app-theme style="width:45px;display: flex;justify-content: center;"></app-theme>
                     </div>
                 </header>
-                <content class="index_content" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }">
-                    <tab-page-exp></tab-page-exp>
+                <content :class="{'index_content':true,'index_tab_content':Object.is(navModel,'tab')?true:false,'index_route_content':Object.is(navModel,'route')?true:false}" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }"  @click="contextMenuDragVisiable=false">
+                    <tab-page-exp v-if="Object.is(navModel,'tab')"></tab-page-exp>
                     <app-keep-alive :routerList="getRouterList">
                         <router-view :key="getRouterViewKey"></router-view>
                     </app-keep-alive>
@@ -56,9 +59,10 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
-import { Subject } from 'rxjs';
+import NavDataService from '@/service/app/navdata-service';
+import { Subject,Subscription } from 'rxjs';
 
 
 
@@ -113,6 +117,7 @@ export default class SDIndexViewBase extends Vue {
      * @memberof SDIndexViewBase
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
+
 
 	/**
 	 * 视图标识
@@ -238,6 +243,23 @@ export default class SDIndexViewBase extends Vue {
     }
 
     /**
+     * 应用导航服务
+     *
+     * @type {*}
+     * @memberof SDIndexViewBase
+     */
+    public  navDataService = NavDataService.getInstance(this.$store);
+
+    /**
+    * 导航服务事件
+    *
+    * @public
+    * @type {(Subscription | undefined)}
+    * @memberof SDIndexViewBase
+    */
+    public serviceStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -254,12 +276,20 @@ export default class SDIndexViewBase extends Vue {
     public viewparams:any = {};
 
     /**
+     * 视图缓存数据
+     *
+     * @type {*}
+     * @memberof SDIndexViewBase
+     */
+    public viewCacheData:any;
+
+    /**
      * 解析视图参数
      *
      * @public
      * @memberof SDIndexViewBase
      */
-    public parseViewParam(): void {
+    public parseViewParam(inputvalue:any = null): void {
         for(let key in this.context){
             delete this.context[key];
         }
@@ -293,6 +323,8 @@ export default class SDIndexViewBase extends Vue {
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         this.handleCustomViewData();
+        //初始化导航数据
+        this.initNavDataWithRoute();
     }
 
     /**
@@ -370,6 +402,28 @@ export default class SDIndexViewBase extends Vue {
 			}
 		}
 	}
+
+    /**
+     * 初始化导航数据(路由模式)
+     *
+     * @memberof SDIndexViewBase
+     */
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
+        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+            this.navDataService.addNavData({id:'sdindex-view',tag:this.viewtag,srfkey:isNew ? null : null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
+
+    /**
+     * 初始化导航数据(分页模式)
+     *
+     * @memberof SDIndexViewBase
+     */
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
+        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+            this.navDataService.addNavDataByOnly({id:'sdindex-view',tag:this.viewtag,srfkey:null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+        }
+    }
 	
 
     /**
@@ -387,10 +441,24 @@ export default class SDIndexViewBase extends Vue {
      * @memberof SDIndexViewBase
      */    
     public afterCreated(){
-        const secondtag = this.$util.createUUID();
-        this.$store.commit('viewaction/createdView', { viewtag: this.viewtag, secondtag: secondtag });
-        this.viewtag = secondtag;
-        this.parseViewParam();
+        let _this:any = this;
+        const secondtag = _this.$util.createUUID();
+        _this.$store.commit('viewaction/createdView', { viewtag: _this.viewtag, secondtag: secondtag });
+        _this.viewtag = secondtag;
+        _this.parseViewParam();
+        _this.serviceStateEvent = _this.navDataService.serviceState.subscribe(({ action,name, data }:{ action:string,name:any,data:any }) => {
+            if(!Object.is(name,'sdindex-view')){
+                return;
+            }
+            if (Object.is(action, 'viewrefresh')) {
+                _this.$nextTick(()=>{
+                    _this.parseViewParam(data);
+                    if(_this.engine){
+                        _this.engine.load();
+                    }
+                }); 
+            }
+        });
         
     }
 
@@ -456,6 +524,33 @@ export default class SDIndexViewBase extends Vue {
      * @memberof SDIndexViewBase
      */
     public mode: string ='vertical';
+
+    /**
+     * 导航模式(route:面包屑模式、tab:分页导航模式)
+     *
+     * @type {string}
+     * @memberof SDIndexViewBase
+     */
+    @Provide()
+    public navModel:string = "tab";
+
+    /**
+     * 抽屉状态
+     *
+     * @type {boolean}
+     * @memberof SDIndexViewBase
+     */
+    public contextMenuDragVisiable: boolean = false;
+
+    /**
+     * 初始化之前
+     *
+     * @memberof SDIndexViewBase
+     */
+    public beforeCreate(){
+        let navDataService = NavDataService.getInstance(this.$store)
+        navDataService.removeAllNavData();
+    }
 
     /**
      * 当前主题

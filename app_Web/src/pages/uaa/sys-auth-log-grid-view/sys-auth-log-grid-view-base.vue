@@ -781,7 +781,7 @@ export default class SysAuthLogGridViewBase extends Vue {
      * @type {boolean}
      * @memberof SysAuthLogGridViewBase
      */
-    public isExpandSearchForm: boolean = true;
+    public isExpandSearchForm: boolean = false;
 
     /**
      * 表格行数据默认激活模式

@@ -137,7 +137,7 @@ public class WFSystemResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFSystem-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFSystem-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"系统" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfsystems/fetchdefault")
 	public ResponseEntity<List<WFSystemDTO>> fetchDefault(WFSystemSearchContext context) {
@@ -150,7 +150,7 @@ public class WFSystemResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFSystem-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFSystem-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"系统" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfsystems/searchdefault")
 	public ResponseEntity<Page<WFSystemDTO>> searchDefault(@RequestBody WFSystemSearchContext context) {

@@ -25,7 +25,7 @@ mock.onGet('v7/sdindex-viewappmenu').reply((config: any) => {
 	iconcls: '',
 	icon: '',
 	textcls: '',
-	appfunctag: '_2',
+	appfunctag: 'Auto1',
 	resourcetag: '',
 },
         ],

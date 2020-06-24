@@ -137,7 +137,7 @@ public class SysPermissionResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"权限/资源" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/syspermissions/fetchdefault")
 	public ResponseEntity<List<SysPermissionDTO>> fetchDefault(SysPermissionSearchContext context) {
@@ -150,7 +150,7 @@ public class SysPermissionResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"权限/资源" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/syspermissions/searchdefault")
 	public ResponseEntity<Page<SysPermissionDTO>> searchDefault(@RequestBody SysPermissionSearchContext context) {

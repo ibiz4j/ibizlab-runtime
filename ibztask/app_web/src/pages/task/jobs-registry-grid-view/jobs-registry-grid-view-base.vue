@@ -171,7 +171,7 @@ export default class JobsRegistryGridViewBase extends Vue {
      * @type {string}
      * @memberof JobsRegistryGridViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

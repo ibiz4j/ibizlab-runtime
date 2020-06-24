@@ -128,6 +128,7 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(wfremodelService.checkKey(wfremodelMapping.toDomain(wfremodeldto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"流程模型" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfremodels/fetchdefault")
 	public ResponseEntity<List<WFREModelDTO>> fetchDefault(WFREModelSearchContext context) {
@@ -140,6 +141,7 @@ public class WFREModelResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"流程模型" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfremodels/searchdefault")
 	public ResponseEntity<Page<WFREModelDTO>> searchDefault(@RequestBody WFREModelSearchContext context) {

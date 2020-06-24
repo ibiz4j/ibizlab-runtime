@@ -103,7 +103,7 @@ export default class EditViewEngine extends ViewEngine {
     public onFormLoad(arg: any): void {
         this.view.model.dataInfo = Object.is(arg.srfuf, '1') ? (this.majorPSDEField?arg[this.majorPSDEField]:arg.srfmajortext) : this.view.$t('app.local.new');
 
-        this.setTabCaption(this.view.model.dataInfo);
+        this.setTabCaption(this.view.model.dataInfo,Object.is(arg.srfuf, '0'));
         const newdata: boolean = !Object.is(arg.srfuf, '1');
         this.calcToolbarItemState(newdata);
     }
@@ -117,7 +117,7 @@ export default class EditViewEngine extends ViewEngine {
     public onFormSave(arg: any): void {
         this.view.model.dataInfo = Object.is(arg.srfuf, '1') ? (this.majorPSDEField?arg[this.majorPSDEField]:arg.srfmajortext) : this.view.$t('app.local.new');
 
-        this.setTabCaption(this.view.model.dataInfo);
+        this.setTabCaption(this.view.model.dataInfo,Object.is(arg.srfuf, '0'));
         const newdata: boolean = !Object.is(arg.srfuf, '1');
         this.calcToolbarItemState(newdata);
         this.view.$emit('save',arg);
@@ -245,14 +245,21 @@ export default class EditViewEngine extends ViewEngine {
      *
      * @memberof EditViewEngine
      */
-    public setTabCaption(info: string): void {
+    public setTabCaption(info: string,isNew:boolean): void {
         let viewdata: any = this.view.model;
-        if (viewdata  && info && !Object.is(info, '') && this.view.$tabPageExp && (viewdata.srfTitle.indexOf(" - ") === -1)) {
-            this.view.$tabPageExp.setCurPageCaption(viewdata.srfTitle, viewdata.srfTitle, info);
+        let index:number = viewdata.srfTitle.indexOf("-");
+        if (viewdata  && info && !Object.is(info, '')) {
+            if(index !== -1){
+                viewdata.srfTitle = viewdata.srfTitle.substr(0,index);
+            }
+            if(this.view.$tabPageExp){
+                this.view.$tabPageExp.setCurPageCaption(this.view.$t(viewdata.srfTitle), this.view.$t(viewdata.srfTitle), info);
+            }
             if(this.view.$route){
                 this.view.$route.meta.info = info;
             }
-            this.view.model.srfTitle = `${this.view.$t(viewdata.srfTitle)} - ${viewdata.dataInfo}`;
+            this.view.model.srfTitle = `${this.view.$t(viewdata.srfTitle)}-${viewdata.dataInfo}`;
+            this.view.initNavDataWithRoute(null,isNew);
         }
     }
 

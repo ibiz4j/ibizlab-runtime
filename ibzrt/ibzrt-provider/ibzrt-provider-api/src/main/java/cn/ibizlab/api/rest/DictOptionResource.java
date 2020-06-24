@@ -128,6 +128,7 @@ public class DictOptionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"字典项" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/dictoptions/fetchdefault")
 	public ResponseEntity<List<DictOptionDTO>> fetchDefault(DictOptionSearchContext context) {
@@ -140,6 +141,7 @@ public class DictOptionResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"字典项" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/dictoptions/searchdefault")
 	public ResponseEntity<Page<DictOptionDTO>> searchDefault(@RequestBody DictOptionSearchContext context) {
@@ -247,6 +249,7 @@ public class DictOptionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-searchDefault-all')")
 	@ApiOperation(value = "根据字典获取DEFAULT", tags = {"字典项" } ,notes = "根据字典获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/dictcatalogs/{dictcatalog_id}/dictoptions/fetchdefault")
 	public ResponseEntity<List<DictOptionDTO>> fetchDictOptionDefaultByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id,DictOptionSearchContext context) {
@@ -260,6 +263,7 @@ public class DictOptionResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-searchDefault-all')")
 	@ApiOperation(value = "根据字典查询DEFAULT", tags = {"字典项" } ,notes = "根据字典查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/dictcatalogs/{dictcatalog_id}/dictoptions/searchdefault")
 	public ResponseEntity<Page<DictOptionDTO>> searchDictOptionDefaultByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionSearchContext context) {

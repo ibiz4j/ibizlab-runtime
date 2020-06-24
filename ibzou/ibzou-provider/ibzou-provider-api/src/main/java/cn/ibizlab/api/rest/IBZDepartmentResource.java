@@ -137,7 +137,7 @@ public class IBZDepartmentResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"部门" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzdepartments/fetchdefault")
 	public ResponseEntity<List<IBZDepartmentDTO>> fetchDefault(IBZDepartmentSearchContext context) {
@@ -150,7 +150,7 @@ public class IBZDepartmentResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"部门" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzdepartments/searchdefault")
 	public ResponseEntity<Page<IBZDepartmentDTO>> searchDefault(@RequestBody IBZDepartmentSearchContext context) {
@@ -267,7 +267,7 @@ public class IBZDepartmentResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构获取DEFAULT", tags = {"部门" } ,notes = "根据单位机构获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/fetchdefault")
 	public ResponseEntity<List<IBZDepartmentDTO>> fetchIBZDepartmentDefaultByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id,IBZDepartmentSearchContext context) {
@@ -281,7 +281,7 @@ public class IBZDepartmentResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDepartment-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构查询DEFAULT", tags = {"部门" } ,notes = "根据单位机构查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/searchdefault")
 	public ResponseEntity<Page<IBZDepartmentDTO>> searchIBZDepartmentDefaultByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody IBZDepartmentSearchContext context) {

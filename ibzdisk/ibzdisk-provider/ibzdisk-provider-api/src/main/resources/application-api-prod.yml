@@ -1,2 +1,6 @@
 server:
   port: 8081
+#Log配置
+logging:
+  level:
+    cn.ibizlab: info

@@ -131,7 +131,7 @@ export default class JobsInfoEditViewBase extends Vue {
      * @type {string}
      * @memberof JobsInfoEditViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

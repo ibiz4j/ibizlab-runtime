@@ -137,7 +137,7 @@ public class SysAuthLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"认证日志" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysauthlogs/fetchdefault")
 	public ResponseEntity<List<SysAuthLogDTO>> fetchDefault(SysAuthLogSearchContext context) {
@@ -150,7 +150,7 @@ public class SysAuthLogResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"认证日志" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysauthlogs/searchdefault")
 	public ResponseEntity<Page<SysAuthLogDTO>> searchDefault(@RequestBody SysAuthLogSearchContext context) {

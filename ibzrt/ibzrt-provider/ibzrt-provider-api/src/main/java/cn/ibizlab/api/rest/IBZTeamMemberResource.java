@@ -128,6 +128,7 @@ public class IBZTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"组成员" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzteammembers/fetchdefault")
 	public ResponseEntity<List<IBZTeamMemberDTO>> fetchDefault(IBZTeamMemberSearchContext context) {
@@ -140,6 +141,7 @@ public class IBZTeamMemberResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"组成员" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzteammembers/searchdefault")
 	public ResponseEntity<Page<IBZTeamMemberDTO>> searchDefault(@RequestBody IBZTeamMemberSearchContext context) {
@@ -247,6 +249,7 @@ public class IBZTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据人员获取DEFAULT", tags = {"组成员" } ,notes = "根据人员获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzemployees/{ibzemployee_id}/ibzteammembers/fetchdefault")
 	public ResponseEntity<List<IBZTeamMemberDTO>> fetchIBZTeamMemberDefaultByIBZEmployee(@PathVariable("ibzemployee_id") String ibzemployee_id,IBZTeamMemberSearchContext context) {
@@ -260,6 +263,7 @@ public class IBZTeamMemberResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据人员查询DEFAULT", tags = {"组成员" } ,notes = "根据人员查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzemployees/{ibzemployee_id}/ibzteammembers/searchdefault")
 	public ResponseEntity<Page<IBZTeamMemberDTO>> searchIBZTeamMemberDefaultByIBZEmployee(@PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZTeamMemberSearchContext context) {
@@ -368,6 +372,7 @@ public class IBZTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据组获取DEFAULT", tags = {"组成员" } ,notes = "根据组获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzteams/{ibzteam_id}/ibzteammembers/fetchdefault")
 	public ResponseEntity<List<IBZTeamMemberDTO>> fetchIBZTeamMemberDefaultByIBZTeam(@PathVariable("ibzteam_id") String ibzteam_id,IBZTeamMemberSearchContext context) {
@@ -381,6 +386,7 @@ public class IBZTeamMemberResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据组查询DEFAULT", tags = {"组成员" } ,notes = "根据组查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzteams/{ibzteam_id}/ibzteammembers/searchdefault")
 	public ResponseEntity<Page<IBZTeamMemberDTO>> searchIBZTeamMemberDefaultByIBZTeam(@PathVariable("ibzteam_id") String ibzteam_id, @RequestBody IBZTeamMemberSearchContext context) {
@@ -489,6 +495,7 @@ public class IBZTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据部门人员获取DEFAULT", tags = {"组成员" } ,notes = "根据部门人员获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/fetchdefault")
 	public ResponseEntity<List<IBZTeamMemberDTO>> fetchIBZTeamMemberDefaultByIBZDepartmentIBZEmployee(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id,IBZTeamMemberSearchContext context) {
@@ -502,6 +509,7 @@ public class IBZTeamMemberResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据部门人员查询DEFAULT", tags = {"组成员" } ,notes = "根据部门人员查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/searchdefault")
 	public ResponseEntity<Page<IBZTeamMemberDTO>> searchIBZTeamMemberDefaultByIBZDepartmentIBZEmployee(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZTeamMemberSearchContext context) {
@@ -610,6 +618,7 @@ public class IBZTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构人员获取DEFAULT", tags = {"组成员" } ,notes = "根据单位机构人员获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/fetchdefault")
 	public ResponseEntity<List<IBZTeamMemberDTO>> fetchIBZTeamMemberDefaultByIBZOrganizationIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id,IBZTeamMemberSearchContext context) {
@@ -623,6 +632,7 @@ public class IBZTeamMemberResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构人员查询DEFAULT", tags = {"组成员" } ,notes = "根据单位机构人员查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/searchdefault")
 	public ResponseEntity<Page<IBZTeamMemberDTO>> searchIBZTeamMemberDefaultByIBZOrganizationIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZTeamMemberSearchContext context) {
@@ -731,6 +741,7 @@ public class IBZTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构部门人员获取DEFAULT", tags = {"组成员" } ,notes = "根据单位机构部门人员获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/fetchdefault")
 	public ResponseEntity<List<IBZTeamMemberDTO>> fetchIBZTeamMemberDefaultByIBZOrganizationIBZDepartmentIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id,IBZTeamMemberSearchContext context) {
@@ -744,6 +755,7 @@ public class IBZTeamMemberResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeamMember-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构部门人员查询DEFAULT", tags = {"组成员" } ,notes = "根据单位机构部门人员查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/searchdefault")
 	public ResponseEntity<Page<IBZTeamMemberDTO>> searchIBZTeamMemberDefaultByIBZOrganizationIBZDepartmentIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZTeamMemberSearchContext context) {

@@ -137,7 +137,7 @@ public class DictCatalogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.checkKey(dictcatalogMapping.toDomain(dictcatalogdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"字典" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/dictcatalogs/fetchdefault")
 	public ResponseEntity<List<DictCatalogDTO>> fetchDefault(DictCatalogSearchContext context) {
@@ -150,7 +150,7 @@ public class DictCatalogResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"字典" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/dictcatalogs/searchdefault")
 	public ResponseEntity<Page<DictCatalogDTO>> searchDefault(@RequestBody DictCatalogSearchContext context) {

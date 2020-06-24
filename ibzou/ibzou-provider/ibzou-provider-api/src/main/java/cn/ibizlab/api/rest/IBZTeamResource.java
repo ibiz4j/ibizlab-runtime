@@ -137,7 +137,7 @@ public class IBZTeamResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"组" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzteams/fetchdefault")
 	public ResponseEntity<List<IBZTeamDTO>> fetchDefault(IBZTeamSearchContext context) {
@@ -150,7 +150,7 @@ public class IBZTeamResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"组" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzteams/searchdefault")
 	public ResponseEntity<Page<IBZTeamDTO>> searchDefault(@RequestBody IBZTeamSearchContext context) {

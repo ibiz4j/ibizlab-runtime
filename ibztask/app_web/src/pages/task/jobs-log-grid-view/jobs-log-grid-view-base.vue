@@ -141,7 +141,7 @@ export default class JobsLogGridViewBase extends Vue {
      * @type {string}
      * @memberof JobsLogGridViewBase
      */
-    @Inject('navModel')
+    @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
 
 	/**

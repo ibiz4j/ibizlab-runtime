@@ -128,6 +128,7 @@ public class IBZPostResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZPost-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"岗位" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzposts/fetchdefault")
 	public ResponseEntity<List<IBZPostDTO>> fetchDefault(IBZPostSearchContext context) {
@@ -140,6 +141,7 @@ public class IBZPostResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZPost-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"岗位" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzposts/searchdefault")
 	public ResponseEntity<Page<IBZPostDTO>> searchDefault(@RequestBody IBZPostSearchContext context) {

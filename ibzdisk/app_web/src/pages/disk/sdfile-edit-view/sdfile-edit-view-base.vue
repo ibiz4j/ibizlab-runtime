@@ -3,92 +3,89 @@
     <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="sdfileeditview"></app-studioaction>
     <card class='view-card ' :disHover="true" :bordered="false">
 
-<p slot='title'>
+<div slot='title' class="header-container">
     <span class='caption-info'>{{$t(model.srfTitle)}}</span>
-</p>
+    <div class='toolbar-container'>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
+                    <i class='fa fa-save'></i>
+                    <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem3.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem3.tip')}}</div>
+        </tooltip>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' @click="toolbar_click({ tag: 'tbitem4' }, $event)">
+                    <i class='sx-tb-saveandnew'></i>
+                    <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem4.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem4.tip')}}</div>
+        </tooltip>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem5.visabled" :disabled="toolBarModels.tbitem5.disabled" class='' @click="toolbar_click({ tag: 'tbitem5' }, $event)">
+                    <i class='sx-tb-saveandclose'></i>
+                    <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem5.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem5.tip')}}</div>
+        </tooltip>
+        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem7.visabled" :disabled="toolBarModels.tbitem7.disabled" class='' @click="toolbar_click({ tag: 'tbitem7' }, $event)">
+                    <i class='fa fa-remove'></i>
+                    <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem7.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem7.tip')}}</div>
+        </tooltip>
+        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
+                    <i class='fa fa-file-text-o'></i>
+                    <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem12.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem12.tip')}}</div>
+        </tooltip>
+        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
+                    <i class='fa fa-copy'></i>
+                    <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem14.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem14.tip')}}</div>
+        </tooltip>
+        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem23.visabled" :disabled="toolBarModels.tbitem23.disabled" class='' @click="toolbar_click({ tag: 'tbitem23' }, $event)">
+                    <i class='fa fa-fast-backward'></i>
+                    
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem23.tip')}}</div>
+        </tooltip>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem24.visabled" :disabled="toolBarModels.tbitem24.disabled" class='' @click="toolbar_click({ tag: 'tbitem24' }, $event)">
+                    <i class='fa fa-step-backward'></i>
+                    
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem24.tip')}}</div>
+        </tooltip>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem25.visabled" :disabled="toolBarModels.tbitem25.disabled" class='' @click="toolbar_click({ tag: 'tbitem25' }, $event)">
+                    <i class='fa fa-step-forward'></i>
+                    
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem25.tip')}}</div>
+        </tooltip>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem26.visabled" :disabled="toolBarModels.tbitem26.disabled" class='' @click="toolbar_click({ tag: 'tbitem26' }, $event)">
+                    <i class='fa fa-fast-forward'></i>
+                    
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem26.tip')}}</div>
+        </tooltip>
+        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem22.visabled" :disabled="toolBarModels.tbitem22.disabled" class='' @click="toolbar_click({ tag: 'tbitem22' }, $event)">
+                    <i class='fa fa-question'></i>
+                    <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem22.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem22.tip')}}</div>
+        </tooltip>
+    </div>
+</div>
 
-        <div slot="extra">
-        <div class='toolbar-container'>
-            <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
-                        <i class='fa fa-save'></i>
-                        <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem3.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem3.tip')}}</div>
-            </tooltip>
-            <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' @click="toolbar_click({ tag: 'tbitem4' }, $event)">
-                        <i class='sx-tb-saveandnew'></i>
-                        <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem4.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem4.tip')}}</div>
-            </tooltip>
-            <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem5.visabled" :disabled="toolBarModels.tbitem5.disabled" class='' @click="toolbar_click({ tag: 'tbitem5' }, $event)">
-                        <i class='sx-tb-saveandclose'></i>
-                        <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem5.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem5.tip')}}</div>
-            </tooltip>
-            <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem7.visabled" :disabled="toolBarModels.tbitem7.disabled" class='' @click="toolbar_click({ tag: 'tbitem7' }, $event)">
-                        <i class='fa fa-remove'></i>
-                        <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem7.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem7.tip')}}</div>
-            </tooltip>
-            <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
-                        <i class='fa fa-file-text-o'></i>
-                        <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem12.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem12.tip')}}</div>
-            </tooltip>
-            <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
-                        <i class='fa fa-copy'></i>
-                        <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem14.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem14.tip')}}</div>
-            </tooltip>
-            <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem23.visabled" :disabled="toolBarModels.tbitem23.disabled" class='' @click="toolbar_click({ tag: 'tbitem23' }, $event)">
-                        <i class='fa fa-fast-backward'></i>
-                        
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem23.tip')}}</div>
-            </tooltip>
-            <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem24.visabled" :disabled="toolBarModels.tbitem24.disabled" class='' @click="toolbar_click({ tag: 'tbitem24' }, $event)">
-                        <i class='fa fa-step-backward'></i>
-                        
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem24.tip')}}</div>
-            </tooltip>
-            <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem25.visabled" :disabled="toolBarModels.tbitem25.disabled" class='' @click="toolbar_click({ tag: 'tbitem25' }, $event)">
-                        <i class='fa fa-step-forward'></i>
-                        
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem25.tip')}}</div>
-            </tooltip>
-            <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem26.visabled" :disabled="toolBarModels.tbitem26.disabled" class='' @click="toolbar_click({ tag: 'tbitem26' }, $event)">
-                        <i class='fa fa-fast-forward'></i>
-                        
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem26.tip')}}</div>
-            </tooltip>
-            <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                    <i-button v-show="toolBarModels.tbitem22.visabled" :disabled="toolBarModels.tbitem22.disabled" class='' @click="toolbar_click({ tag: 'tbitem22' }, $event)">
-                        <i class='fa fa-question'></i>
-                        <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem22.caption')}}</span>
-                    </i-button>
-                <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem22.tip')}}</div>
-            </tooltip>
-        </div>
-        
-        </div>
         <div class="content-container">
         <div class='view-top-messages'>
         </div>
@@ -122,9 +119,10 @@
 </template>
 
 <script lang='tsx'>
-import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
-import { Subject } from 'rxjs';
+import NavDataService from '@/service/app/navdata-service';
+import { Subject,Subscription } from 'rxjs';
 import SDFileService from '@/service/sdfile/sdfile-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
@@ -189,6 +187,15 @@ export default class SDFileEditViewBase extends Vue {
      * @memberof SDFileEditViewBase
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
+
+    /**
+     * 视图默认使用
+     *
+     * @type {string}
+     * @memberof SDFileEditViewBase
+     */
+    @Inject({from:'navModel',default: 'tab'})
+    public navModel!:string;
 
 	/**
 	 * 视图标识
@@ -366,6 +373,23 @@ export default class SDFileEditViewBase extends Vue {
     }
 
     /**
+     * 应用导航服务
+     *
+     * @type {*}
+     * @memberof SDFileEditViewBase
+     */
+    public  navDataService = NavDataService.getInstance(this.$store);
+
+    /**
+    * 导航服务事件
+    *
+    * @public
+    * @type {(Subscription | undefined)}
+    * @memberof SDFileEditViewBase
+    */
+    public serviceStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -382,12 +406,20 @@ export default class SDFileEditViewBase extends Vue {
     public viewparams:any = {};
 
     /**
+     * 视图缓存数据
+     *
+     * @type {*}
+     * @memberof SDFileEditViewBase
+     */
+    public viewCacheData:any;
+
+    /**
      * 解析视图参数
      *
      * @public
      * @memberof SDFileEditViewBase
      */
-    public parseViewParam(): void {
+    public parseViewParam(inputvalue:any = null): void {
         for(let key in this.context){
             delete this.context[key];
         }
@@ -417,12 +449,17 @@ export default class SDFileEditViewBase extends Vue {
             });
         });
         this.$viewTool.formatRouteParams(tempValue,this.$route,this.context,this.viewparams);
+        if(inputvalue){
+            Object.assign(this.context,{'sdfile':inputvalue});
+        }
         if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         //初始化视图唯一标识
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
         this.handleCustomViewData();
+        //初始化导航数据
+        this.initNavDataWithRoute();
     }
 
     /**
@@ -500,6 +537,28 @@ export default class SDFileEditViewBase extends Vue {
 			}
 		}
 	}
+
+    /**
+     * 初始化导航数据(路由模式)
+     *
+     * @memberof SDFileEditViewBase
+     */
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
+        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+            this.navDataService.addNavData({id:'sdfile-edit-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sdfile,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+        }
+    }
+
+    /**
+     * 初始化导航数据(分页模式)
+     *
+     * @memberof SDFileEditViewBase
+     */
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
+        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+            this.navDataService.addNavDataByOnly({id:'sdfile-edit-view',tag:this.viewtag,srfkey:this.context.sdfile,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+        }
+    }
 	
 
     /**
@@ -517,10 +576,24 @@ export default class SDFileEditViewBase extends Vue {
      * @memberof SDFileEditViewBase
      */    
     public afterCreated(){
-        const secondtag = this.$util.createUUID();
-        this.$store.commit('viewaction/createdView', { viewtag: this.viewtag, secondtag: secondtag });
-        this.viewtag = secondtag;
-        this.parseViewParam();
+        let _this:any = this;
+        const secondtag = _this.$util.createUUID();
+        _this.$store.commit('viewaction/createdView', { viewtag: _this.viewtag, secondtag: secondtag });
+        _this.viewtag = secondtag;
+        _this.parseViewParam();
+        _this.serviceStateEvent = _this.navDataService.serviceState.subscribe(({ action,name, data }:{ action:string,name:any,data:any }) => {
+            if(!Object.is(name,'sdfile-edit-view')){
+                return;
+            }
+            if (Object.is(action, 'viewrefresh')) {
+                _this.$nextTick(()=>{
+                    _this.parseViewParam(data);
+                    if(_this.engine){
+                        _this.engine.load();
+                    }
+                }); 
+            }
+        });
         
     }
 
@@ -1302,7 +1375,17 @@ export default class SDFileEditViewBase extends Vue {
      * @memberof SDFileEditViewBase
      */
     public FirstRecord(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '暂不支持此项操作' });
+        let _this:any = this;
+        let navDataService:any = new NavDataService(this.$store);
+        let allNavData:any = Object.is(this.navModel,"route")?navDataService.getPreNavDataById('sdfile-edit-view'):navDataService.getPreNavDataByTag(_this.viewtag);
+        if(allNavData && allNavData.data && allNavData.data.length >0){
+            if(_this.parseViewParam && _this.engine){
+                _this.parseViewParam(allNavData.data[0].srfkey);
+                _this.engine.load();
+            }  
+        }else{
+            this.$Notice.warning({ title: '警告', desc: '请确认操作路径是否正确' });
+        }
     }
     /**
      * 上一个记录
@@ -1316,7 +1399,31 @@ export default class SDFileEditViewBase extends Vue {
      * @memberof SDFileEditViewBase
      */
     public PrevRecord(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '暂不支持此项操作' });
+        if(args.length === 0 || !args[0].srfkey){
+            return;
+        }
+        let _this:any = this;
+        let navDataService:any = new NavDataService(this.$store);
+        let allNavData:any = Object.is(this.navModel,"route")?navDataService.getPreNavDataById('sdfile-edit-view'):navDataService.getPreNavDataByTag(_this.viewtag);
+        if(allNavData && allNavData.data && allNavData.data.length >0){
+            let computedIndex:any;
+            for(let i=0;i<allNavData.data.length;i++){
+                if(allNavData.data[i].srfkey === args[0].srfkey){
+                    computedIndex = i-1;
+                    break;
+                }
+            }
+            if(computedIndex >= 0){
+                if(_this.parseViewParam && _this.engine){
+                    _this.parseViewParam(allNavData.data[computedIndex].srfkey);
+                    _this.engine.load();
+                } 
+            }else{
+                this.$Notice.warning({ title: '警告', desc: '当前数据已经是第一条数据' });
+            }
+        }else{
+            this.$Notice.warning({ title: '警告', desc: '请确认操作路径是否正确' });
+        }
     }
 
     /**
@@ -1331,7 +1438,31 @@ export default class SDFileEditViewBase extends Vue {
      * @memberof SDFileEditViewBase
      */
     public NextRecord(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '暂不支持此项操作' });
+        if(args.length === 0 || !args[0].srfkey){
+            return;
+        }
+        let _this:any = this;
+        let navDataService:any = new NavDataService(this.$store);
+        let allNavData:any = Object.is(this.navModel,"route")?navDataService.getPreNavDataById('sdfile-edit-view'):navDataService.getPreNavDataByTag(_this.viewtag);
+        if(allNavData && allNavData.data && allNavData.data.length >0){
+            let computedIndex:any;
+            for(let i=0;i<allNavData.data.length;i++){
+                if(allNavData.data[i].srfkey === args[0].srfkey){
+                    computedIndex = i+1;
+                    break;
+                }
+            }
+            if(computedIndex < allNavData.data.length){
+                if(_this.parseViewParam && _this.engine){
+                    _this.parseViewParam(allNavData.data[computedIndex].srfkey);
+                    _this.engine.load();
+                } 
+            }else{
+                this.$Notice.warning({ title: '警告', desc: '当前数据已经是最后一条数据' });
+            }
+        }else{
+            this.$Notice.warning({ title: '警告', desc: '请确认操作路径是否正确' });
+        }
     }
 
     /**
@@ -1346,7 +1477,17 @@ export default class SDFileEditViewBase extends Vue {
      * @memberof SDFileEditViewBase
      */
     public LastRecord(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '暂不支持此项操作' });
+        let _this:any = this;
+        let navDataService:any = new NavDataService(this.$store);
+        let allNavData:any = Object.is(this.navModel,"route")?navDataService.getPreNavDataById('sdfile-edit-view'):navDataService.getPreNavDataByTag(_this.viewtag);
+        if(allNavData && allNavData.data && allNavData.data.length >0){
+            if(_this.parseViewParam && _this.engine){
+                _this.parseViewParam(allNavData.data[allNavData.data.length - 1].srfkey);
+                _this.engine.load();
+            }   
+        }else{
+            this.$Notice.warning({ title: '警告', desc: '请确认操作路径是否正确' });
+        }
     }
     /**
      * 帮助
@@ -1402,6 +1543,12 @@ export default class SDFileEditViewBase extends Vue {
                     localStorage.removeItem(item);
                 }
                 })
+            }
+            if(Object.is(this.navModel,"tab")){
+                this.navDataService.removeNavDataByTag(this.viewtag);
+            }
+            if (this.serviceStateEvent) {
+                this.serviceStateEvent.unsubscribe();
             }
         }
     }

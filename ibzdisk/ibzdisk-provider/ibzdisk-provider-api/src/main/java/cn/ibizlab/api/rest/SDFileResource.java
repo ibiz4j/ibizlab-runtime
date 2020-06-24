@@ -137,7 +137,7 @@ public class SDFileResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-SDFile-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-SDFile-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"文件" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sdfiles/fetchdefault")
 	public ResponseEntity<List<SDFileDTO>> fetchDefault(SDFileSearchContext context) {
@@ -150,7 +150,7 @@ public class SDFileResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-SDFile-Default-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-SDFile-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"文件" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sdfiles/searchdefault")
 	public ResponseEntity<Page<SDFileDTO>> searchDefault(@RequestBody SDFileSearchContext context) {

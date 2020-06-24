@@ -73,7 +73,9 @@ import AppWFApproval from './components/app-wf-approval/app-wf-approval.vue'
 import Breadcrumb from './components/app-breadcrumb/app-breadcrumb.vue'
 import AppTransfer from './components/app-transfer/app-transfer.vue'
 import ContextMenuDrag from './components/context-menu-drag/context-menu-drag.vue'
-
+import AppOrgSelect from './components/app-org-select/app-org-select.vue'
+import AppDepartmentSelect from './components/app-department-select/app-department-select.vue'
+import AppGroupSelect from './components/app-group-select/app-group-select.vue'
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
 // 全局挂载功能服务注册中心
@@ -153,10 +155,10 @@ export const AppComponents = {
         v.component('context-menu',ContextMenu);
         v.component('app-column-format',AppColumnFormat);
         v.component('app-quick-group',AppQuickGroup);
-        v.component('app-org-select',() => import('./components/app-org-select/app-org-select.vue'));
-        v.component('app-department-select',() => import('./components/app-department-select/app-department-select.vue'));
-        v.component('app-group-select',() => import('./components/app-group-select/app-group-select.vue'));
-        v.component('app-group-picker',() => import('./components/app-group-picker/app-group-picker.vue'));
+        v.component('app-org-select',AppOrgSelect);
+        v.component('app-department-select',AppDepartmentSelect);
+        v.component('app-group-select',AppGroupSelect);
+        v.component('app-group-picker',AppGroupPicker);
         v.component('app-wf-approval',AppWFApproval);
         v.component('app-breadcrumb',Breadcrumb);
         v.component('app-transfer',AppTransfer);
