@@ -513,9 +513,9 @@ public class WFCoreService
 					for (Map.Entry<String,Object> entry : bpmnfile.entrySet()) {
 						InputStream in = null;
 						try {
-							in = IOUtils.toInputStream(String.valueOf(entry.getValue()),"utf8");
+							in = new ByteArrayInputStream(String.valueOf(entry.getValue()).getBytes());
 							wfdeploy(entry.getKey(), getBpmnFile(in),new WFREModel());
-						} catch (IOException e) {}
+						} catch (Exception e) {}
 						finally {
 							if(in!=null) {
 								try {

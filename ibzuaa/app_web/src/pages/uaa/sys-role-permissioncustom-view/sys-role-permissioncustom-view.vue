@@ -364,6 +364,13 @@
             if(this.formDruipart){
                 this.formDruipart.subscribe((res:any) =>{
                     if(Object.is(res.action,'load')){
+
+                        // 如果是新建角色保存，需要从res中获取父数据主键
+                        if (res.data) {
+                           let parentData =  res.data;
+                           this.srfparentkey = parentData.srfparentkey;
+                        }
+
                         // 父数据保存时调用当前视图的事件
                         if(this.selectData.length>0){
                             // 选中了数据

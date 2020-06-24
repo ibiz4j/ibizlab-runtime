@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 import java.io.InputStream;
 import java.util.*;
 
@@ -40,6 +41,7 @@ public class PermissionSyncJob implements ApplicationRunner {
             system.put("pssystemid",systemId);
             system.put("pssystemname",systemId);
             system.put("sysstructure",JSONObject.parseObject(permissionResult));
+            system.put("md5check",DigestUtils.md5DigestAsHex(permissionResult.getBytes()));
             if(client.syncSysAuthority(system)){
                 log.info("向[UAA]同步系统资源成功");
             }else{
