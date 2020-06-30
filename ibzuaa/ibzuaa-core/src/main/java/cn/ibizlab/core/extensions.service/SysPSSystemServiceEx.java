@@ -50,7 +50,7 @@ public class SysPSSystemServiceEx extends SysPSSystemServiceImpl {
         prepareApps(et);
         if(!super.update(et))
             return false;
-        if(ignoreSyncPermission!=null&&ignoreSyncPermission.equals(true))
+        if(ignoreSyncPermission==null||ignoreSyncPermission.equals(false))
             syncPermission(et);
         return true;
     }
