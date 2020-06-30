@@ -23,11 +23,6 @@ public class IBZTeamFallback implements IBZTeamFeignClient{
             return null;
      }
 
-    public Boolean checkKey(IBZTeam ibzteam){
-            return false;
-     }
-
-
     public IBZTeam create(IBZTeam ibzteam){
             return null;
      }
@@ -55,18 +50,23 @@ public class IBZTeamFallback implements IBZTeamFeignClient{
      }
 
 
+    public IBZTeam getDraft(){
+            return null;
+    }
+
+
+
+    public Boolean checkKey(IBZTeam ibzteam){
+            return false;
+     }
+
+
     public Boolean save(IBZTeam ibzteam){
             return false;
      }
     public Boolean saveBatch(List<IBZTeam> ibzteams){
             return false;
      }
-
-    public IBZTeam getDraft(){
-            return null;
-    }
-
-
 
     public Page<IBZTeam> searchDefault(IBZTeamSearchContext context){
             return null;

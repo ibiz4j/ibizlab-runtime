@@ -23,8 +23,11 @@ public interface SysPSSystemFeignClient {
     Page<SysPSSystem> select();
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/syspssystems/{pssystemid}")
-    SysPSSystem get(@PathVariable("pssystemid") String pssystemid);
+    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems")
+    SysPSSystem create(@RequestBody SysPSSystem syspssystem);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/batch")
+    Boolean createBatch(@RequestBody List<SysPSSystem> syspssystems);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/syspssystems/{pssystemid}")
@@ -34,10 +37,6 @@ public interface SysPSSystemFeignClient {
     Boolean updateBatch(@RequestBody List<SysPSSystem> syspssystems);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/checkkey")
-    Boolean checkKey(@RequestBody SysPSSystem syspssystem);
-
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/syspssystems/{pssystemid}")
     Boolean remove(@PathVariable("pssystemid") String pssystemid);
 
@@ -45,15 +44,16 @@ public interface SysPSSystemFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems")
-    SysPSSystem create(@RequestBody SysPSSystem syspssystem);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/batch")
-    Boolean createBatch(@RequestBody List<SysPSSystem> syspssystems);
+    @RequestMapping(method = RequestMethod.GET, value = "/syspssystems/{pssystemid}")
+    SysPSSystem get(@PathVariable("pssystemid") String pssystemid);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/syspssystems/getdraft")
     SysPSSystem getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/checkkey")
+    Boolean checkKey(@RequestBody SysPSSystem syspssystem);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/save")
@@ -64,13 +64,13 @@ public interface SysPSSystemFeignClient {
 
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/searchpick")
-    Page<SysPSSystem> searchPick(@RequestBody SysPSSystemSearchContext context);
-
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/searchdefault")
     Page<SysPSSystem> searchDefault(@RequestBody SysPSSystemSearchContext context);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/searchpick")
+    Page<SysPSSystem> searchPick(@RequestBody SysPSSystemSearchContext context);
 
 
 }

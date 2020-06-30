@@ -23,21 +23,12 @@ public class DictOptionFallback implements DictOptionFeignClient{
             return null;
      }
 
-    public Boolean checkKey(DictOption dictoption){
+    public DictOption create(DictOption dictoption){
+            return null;
+     }
+    public Boolean createBatch(List<DictOption> dictoptions){
             return false;
      }
-
-
-    public DictOption getDraft(){
-            return null;
-    }
-
-
-
-    public DictOption get(String value_key){
-            return null;
-     }
-
 
     public DictOption update(String value_key, DictOption dictoption){
             return null;
@@ -47,24 +38,33 @@ public class DictOptionFallback implements DictOptionFeignClient{
      }
 
 
-    public DictOption create(DictOption dictoption){
-            return null;
-     }
-    public Boolean createBatch(List<DictOption> dictoptions){
+    public Boolean remove(String value_key){
             return false;
      }
+    public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
+
+    public DictOption get(String value_key){
+            return null;
+     }
+
+
+    public DictOption getDraft(){
+            return null;
+    }
+
+
+
+    public Boolean checkKey(DictOption dictoption){
+            return false;
+     }
+
 
     public Boolean save(DictOption dictoption){
             return false;
      }
     public Boolean saveBatch(List<DictOption> dictoptions){
-            return false;
-     }
-
-    public Boolean remove(String value_key){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
             return false;
      }
 

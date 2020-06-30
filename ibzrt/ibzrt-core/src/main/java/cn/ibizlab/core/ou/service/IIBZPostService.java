@@ -23,17 +23,17 @@ import cn.ibizlab.core.ou.filter.IBZPostSearchContext;
  */
 public interface IIBZPostService{
 
-    IBZPost get(String key) ;
-    boolean save(IBZPost et) ;
-    void saveBatch(List<IBZPost> list) ;
-    boolean update(IBZPost et) ;
-    void updateBatch(List<IBZPost> list) ;
-    boolean checkKey(IBZPost et) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    IBZPost getDraft(IBZPost et) ;
     boolean create(IBZPost et) ;
     void createBatch(List<IBZPost> list) ;
+    boolean update(IBZPost et) ;
+    void updateBatch(List<IBZPost> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    IBZPost get(String key) ;
+    IBZPost getDraft(IBZPost et) ;
+    boolean checkKey(IBZPost et) ;
+    boolean save(IBZPost et) ;
+    void saveBatch(List<IBZPost> list) ;
     Page<IBZPost> searchDefault(IBZPostSearchContext context) ;
 
 }

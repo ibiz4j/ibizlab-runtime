@@ -47,40 +47,22 @@ public class WFUserResource {
     @Lazy
     public WFUserMapping wfuserMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Remove-all')")
-    @ApiOperation(value = "删除用户", tags = {"用户" },  notes = "删除用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Create-all')")
+    @ApiOperation(value = "新建用户", tags = {"用户" },  notes = "新建用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers")
     @Transactional
-    public ResponseEntity<Boolean> remove(@PathVariable("wfuser_id") String wfuser_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfuserService.remove(wfuser_id));
+    public ResponseEntity<WFUserDTO> create(@RequestBody WFUserDTO wfuserdto) {
+        WFUser domain = wfuserMapping.toDomain(wfuserdto);
+		wfuserService.create(domain);
+        WFUserDTO dto = wfuserMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Remove-all')")
-    @ApiOperation(value = "批量删除用户", tags = {"用户" },  notes = "批量删除用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfuserService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取用户草稿", tags = {"用户" },  notes = "获取用户草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
-    public ResponseEntity<WFUserDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfuserMapping.toDto(wfuserService.getDraft(new WFUser())));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Save-all')")
-    @ApiOperation(value = "保存用户", tags = {"用户" },  notes = "保存用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFUserDTO wfuserdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfuserService.save(wfuserMapping.toDomain(wfuserdto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Save-all')")
-    @ApiOperation(value = "批量保存用户", tags = {"用户" },  notes = "批量保存用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFUserDTO> wfuserdtos) {
-        wfuserService.saveBatch(wfuserMapping.toDomain(wfuserdtos));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Create-all')")
+    @ApiOperation(value = "批量新建用户", tags = {"用户" },  notes = "批量新建用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFUserDTO> wfuserdtos) {
+        wfuserService.createBatch(wfuserMapping.toDomain(wfuserdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -104,6 +86,22 @@ public class WFUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Remove-all')")
+    @ApiOperation(value = "删除用户", tags = {"用户" },  notes = "删除用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}")
+    @Transactional
+    public ResponseEntity<Boolean> remove(@PathVariable("wfuser_id") String wfuser_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfuserService.remove(wfuser_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Remove-all')")
+    @ApiOperation(value = "批量删除用户", tags = {"用户" },  notes = "批量删除用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfuserService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Get-all')")
     @ApiOperation(value = "获取用户", tags = {"用户" },  notes = "获取用户")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/{wfuser_id}")
@@ -113,29 +111,31 @@ public class WFUserResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Create-all')")
-    @ApiOperation(value = "新建用户", tags = {"用户" },  notes = "新建用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers")
-    @Transactional
-    public ResponseEntity<WFUserDTO> create(@RequestBody WFUserDTO wfuserdto) {
-        WFUser domain = wfuserMapping.toDomain(wfuserdto);
-		wfuserService.create(domain);
-        WFUserDTO dto = wfuserMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Create-all')")
-    @ApiOperation(value = "批量新建用户", tags = {"用户" },  notes = "批量新建用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFUserDTO> wfuserdtos) {
-        wfuserService.createBatch(wfuserMapping.toDomain(wfuserdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    @ApiOperation(value = "获取用户草稿", tags = {"用户" },  notes = "获取用户草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
+    public ResponseEntity<WFUserDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(wfuserMapping.toDto(wfuserService.getDraft(new WFUser())));
     }
 
     @ApiOperation(value = "检查用户", tags = {"用户" },  notes = "检查用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/checkkey")
     public ResponseEntity<Boolean> checkKey(@RequestBody WFUserDTO wfuserdto) {
         return  ResponseEntity.status(HttpStatus.OK).body(wfuserService.checkKey(wfuserMapping.toDomain(wfuserdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Save-all')")
+    @ApiOperation(value = "保存用户", tags = {"用户" },  notes = "保存用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/save")
+    public ResponseEntity<Boolean> save(@RequestBody WFUserDTO wfuserdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(wfuserService.save(wfuserMapping.toDomain(wfuserdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-Save-all')")
+    @ApiOperation(value = "批量保存用户", tags = {"用户" },  notes = "批量保存用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFUserDTO> wfuserdtos) {
+        wfuserService.saveBatch(wfuserMapping.toDomain(wfuserdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFUser-searchDefault-all')")

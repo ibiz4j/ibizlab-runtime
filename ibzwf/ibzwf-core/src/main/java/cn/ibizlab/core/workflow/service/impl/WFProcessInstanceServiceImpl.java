@@ -39,6 +39,16 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
 
 
     @Override
+    public boolean create(WFProcessInstance et) {
+        //代码实现
+        return true;
+    }
+
+    public void createBatch(List<WFProcessInstance> list){
+
+    }
+
+    @Override
     public boolean update(WFProcessInstance et) {
         //代码实现
         return true;
@@ -46,23 +56,6 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
 
     public void updateBatch(List<WFProcessInstance> list){
                     
-    }
-
-    @Override
-    @Transactional
-    public boolean save(WFProcessInstance et) {
-        //代码实现
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<WFProcessInstance> list) {
-                       
-    }
-
-    @Override
-    public WFProcessInstance getDraft(WFProcessInstance et) {
-        return et;
     }
 
     @Override
@@ -82,17 +75,24 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     }
 
     @Override
+    public WFProcessInstance getDraft(WFProcessInstance et) {
+        return et;
+    }
+
+    @Override
     public boolean checkKey(WFProcessInstance et) {
         return false;
     }
     @Override
-    public boolean create(WFProcessInstance et) {
+    @Transactional
+    public boolean save(WFProcessInstance et) {
         //代码实现
         return true;
     }
 
-    public void createBatch(List<WFProcessInstance> list){
-
+    @Override
+    public void saveBatch(List<WFProcessInstance> list) {
+                       
     }
 
 

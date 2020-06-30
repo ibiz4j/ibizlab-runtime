@@ -47,32 +47,6 @@ public class JobsLogResource {
     @Lazy
     public JobsLogMapping jobslogMapping;
 
-    @ApiOperation(value = "获取任务调度日志草稿", tags = {"任务调度日志" },  notes = "获取任务调度日志草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/getdraft")
-    public ResponseEntity<JobsLogDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(jobslogMapping.toDto(jobslogService.getDraft(new JobsLog())));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Update-all')")
-    @ApiOperation(value = "更新任务调度日志", tags = {"任务调度日志" },  notes = "更新任务调度日志")
-	@RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/{jobslog_id}")
-    @Transactional
-    public ResponseEntity<JobsLogDTO> update(@PathVariable("jobslog_id") String jobslog_id, @RequestBody JobsLogDTO jobslogdto) {
-		JobsLog domain  = jobslogMapping.toDomain(jobslogdto);
-        domain .setId(jobslog_id);
-		jobslogService.update(domain );
-		JobsLogDTO dto = jobslogMapping.toDto(domain );
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Update-all')")
-    @ApiOperation(value = "批量更新任务调度日志", tags = {"任务调度日志" },  notes = "批量更新任务调度日志")
-	@RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/batch")
-    public ResponseEntity<Boolean> updateBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
-        jobslogService.updateBatch(jobslogMapping.toDomain(jobslogdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Create-all')")
     @ApiOperation(value = "新建任务调度日志", tags = {"任务调度日志" },  notes = "新建任务调度日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs")
@@ -92,24 +66,23 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "检查任务调度日志", tags = {"任务调度日志" },  notes = "检查任务调度日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody JobsLogDTO jobslogdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(jobslogService.checkKey(jobslogMapping.toDomain(jobslogdto)));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Update-all')")
+    @ApiOperation(value = "更新任务调度日志", tags = {"任务调度日志" },  notes = "更新任务调度日志")
+	@RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/{jobslog_id}")
+    @Transactional
+    public ResponseEntity<JobsLogDTO> update(@PathVariable("jobslog_id") String jobslog_id, @RequestBody JobsLogDTO jobslogdto) {
+		JobsLog domain  = jobslogMapping.toDomain(jobslogdto);
+        domain .setId(jobslog_id);
+		jobslogService.update(domain );
+		JobsLogDTO dto = jobslogMapping.toDto(domain );
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Save-all')")
-    @ApiOperation(value = "保存任务调度日志", tags = {"任务调度日志" },  notes = "保存任务调度日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/save")
-    public ResponseEntity<Boolean> save(@RequestBody JobsLogDTO jobslogdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(jobslogService.save(jobslogMapping.toDomain(jobslogdto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Save-all')")
-    @ApiOperation(value = "批量保存任务调度日志", tags = {"任务调度日志" },  notes = "批量保存任务调度日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
-        jobslogService.saveBatch(jobslogMapping.toDomain(jobslogdtos));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Update-all')")
+    @ApiOperation(value = "批量更新任务调度日志", tags = {"任务调度日志" },  notes = "批量更新任务调度日志")
+	@RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/batch")
+    public ResponseEntity<Boolean> updateBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
+        jobslogService.updateBatch(jobslogMapping.toDomain(jobslogdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -136,6 +109,33 @@ public class JobsLogResource {
         JobsLog domain = jobslogService.get(jobslog_id);
         JobsLogDTO dto = jobslogMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取任务调度日志草稿", tags = {"任务调度日志" },  notes = "获取任务调度日志草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/getdraft")
+    public ResponseEntity<JobsLogDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(jobslogMapping.toDto(jobslogService.getDraft(new JobsLog())));
+    }
+
+    @ApiOperation(value = "检查任务调度日志", tags = {"任务调度日志" },  notes = "检查任务调度日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody JobsLogDTO jobslogdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(jobslogService.checkKey(jobslogMapping.toDomain(jobslogdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Save-all')")
+    @ApiOperation(value = "保存任务调度日志", tags = {"任务调度日志" },  notes = "保存任务调度日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/save")
+    public ResponseEntity<Boolean> save(@RequestBody JobsLogDTO jobslogdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(jobslogService.save(jobslogMapping.toDomain(jobslogdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-Save-all')")
+    @ApiOperation(value = "批量保存任务调度日志", tags = {"任务调度日志" },  notes = "批量保存任务调度日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
+        jobslogService.saveBatch(jobslogMapping.toDomain(jobslogdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLog-searchDefault-all')")

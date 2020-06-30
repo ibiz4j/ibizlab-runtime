@@ -44,38 +44,6 @@ public class WFTaskServiceImpl implements IWFTaskService {
 
 
     @Override
-    public boolean checkKey(WFTask et) {
-        return wFTaskFeignClient.checkKey(et);
-    }
-    @Override
-    public WFTask getDraft(WFTask et) {
-        et=wFTaskFeignClient.getDraft();
-        return et;
-    }
-
-    @Override
-    public boolean remove(String id) {
-        boolean result=wFTaskFeignClient.remove(id) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        wFTaskFeignClient.removeBatch(idList);
-    }
-
-    @Override
-    public WFTask get(String id) {
-		WFTask et=wFTaskFeignClient.get(id);
-        if(et==null){
-            et=new WFTask();
-            et.setId(id);
-        }
-        else{
-        }
-        return  et;
-    }
-
-    @Override
     public boolean create(WFTask et) {
         WFTask rt = wFTaskFeignClient.create(et);
         if(rt==null)
@@ -102,6 +70,38 @@ public class WFTaskServiceImpl implements IWFTaskService {
         wFTaskFeignClient.updateBatch(list) ;
     }
 
+    @Override
+    public boolean remove(String id) {
+        boolean result=wFTaskFeignClient.remove(id) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        wFTaskFeignClient.removeBatch(idList);
+    }
+
+    @Override
+    public WFTask get(String id) {
+		WFTask et=wFTaskFeignClient.get(id);
+        if(et==null){
+            et=new WFTask();
+            et.setId(id);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
+    public WFTask getDraft(WFTask et) {
+        et=wFTaskFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFTask et) {
+        return wFTaskFeignClient.checkKey(et);
+    }
     @Override
     @Transactional
     public boolean save(WFTask et) {

@@ -23,19 +23,19 @@ import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
  */
 public interface ISysPSSystemService{
 
-    SysPSSystem get(String key) ;
-    boolean update(SysPSSystem et) ;
-    void updateBatch(List<SysPSSystem> list) ;
-    boolean checkKey(SysPSSystem et) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
     boolean create(SysPSSystem et) ;
     void createBatch(List<SysPSSystem> list) ;
+    boolean update(SysPSSystem et) ;
+    void updateBatch(List<SysPSSystem> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    SysPSSystem get(String key) ;
     SysPSSystem getDraft(SysPSSystem et) ;
+    boolean checkKey(SysPSSystem et) ;
     boolean save(SysPSSystem et) ;
     void saveBatch(List<SysPSSystem> list) ;
-    Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) ;
     Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) ;
+    Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) ;
 
 }
 

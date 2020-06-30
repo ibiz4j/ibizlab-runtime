@@ -39,10 +39,6 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
 
 
     @Override
-    public boolean checkKey(WFTaskWay et) {
-        return false;
-    }
-    @Override
     public boolean create(WFTaskWay et) {
         //代码实现
         return true;
@@ -50,27 +46,6 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
 
     public void createBatch(List<WFTaskWay> list){
 
-    }
-
-    @Override
-    public WFTaskWay getDraft(WFTaskWay et) {
-        return et;
-    }
-
-    @Override
-    public WFTaskWay get(String key) {
-        WFTaskWay et = new WFTaskWay();
-        et.setSequenceflowid(key);
-        return et;
-    }
-
-    @Override
-    public boolean remove(String key) {
-        return true;
-    }
-
-    public void removeBatch(Collection<String> idList){
-                        
     }
 
     @Override
@@ -83,6 +58,31 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
                     
     }
 
+    @Override
+    public boolean remove(String key) {
+        return true;
+    }
+
+    public void removeBatch(Collection<String> idList){
+                        
+    }
+
+    @Override
+    public WFTaskWay get(String key) {
+        WFTaskWay et = new WFTaskWay();
+        et.setSequenceflowid(key);
+        return et;
+    }
+
+    @Override
+    public WFTaskWay getDraft(WFTaskWay et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFTaskWay et) {
+        return false;
+    }
     @Override
     @Transactional
     public boolean save(WFTaskWay et) {

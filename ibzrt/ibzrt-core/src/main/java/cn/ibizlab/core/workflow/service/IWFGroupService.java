@@ -23,17 +23,17 @@ import cn.ibizlab.core.workflow.filter.WFGroupSearchContext;
  */
 public interface IWFGroupService{
 
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean save(WFGroup et) ;
-    void saveBatch(List<WFGroup> list) ;
-    WFGroup get(String key) ;
     boolean create(WFGroup et) ;
     void createBatch(List<WFGroup> list) ;
-    WFGroup getDraft(WFGroup et) ;
-    boolean checkKey(WFGroup et) ;
     boolean update(WFGroup et) ;
     void updateBatch(List<WFGroup> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    WFGroup get(String key) ;
+    WFGroup getDraft(WFGroup et) ;
+    boolean checkKey(WFGroup et) ;
+    boolean save(WFGroup et) ;
+    void saveBatch(List<WFGroup> list) ;
     Page<WFGroup> searchDefault(WFGroupSearchContext context) ;
 
 }

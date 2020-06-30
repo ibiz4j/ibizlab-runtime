@@ -71,52 +71,6 @@ export default class IBZDeptMemberServiceBase extends EntityService {
     }
 
     /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZDeptMemberServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
-        }
-        if(context.ibzorganization && context.ibzemployee && context.ibzdeptmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
-        }
-        if(context.ibzorganization && context.ibzdepartment && context.ibzdeptmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
-        }
-        if(context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
-        }
-        if(context.ibzemployee && context.ibzdeptmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
-        }
-        if(context.ibzdepartment && context.ibzdeptmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
-        }
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
-        return res;
-    }
-
-    /**
      * Create接口方法
      *
      * @param {*} [context={}]
@@ -212,7 +166,7 @@ export default class IBZDeptMemberServiceBase extends EntityService {
     }
 
     /**
-     * Save接口方法
+     * Update接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -220,40 +174,104 @@ export default class IBZDeptMemberServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof IBZDeptMemberServiceBase
      */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
             let masterData:any = {};
             Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
         }
         if(context.ibzorganization && context.ibzemployee && context.ibzdeptmember){
             let masterData:any = {};
             Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
         }
         if(context.ibzorganization && context.ibzdepartment && context.ibzdeptmember){
             let masterData:any = {};
             Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+            let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
         }
         if(context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
             let masterData:any = {};
             Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+            let res:any = await Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
         }
         if(context.ibzemployee && context.ibzdeptmember){
             let masterData:any = {};
             Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+            let res:any = await Http.getInstance().put(`/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
         }
         if(context.ibzdepartment && context.ibzdeptmember){
             let masterData:any = {};
             Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+            let res:any = await Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
         }
         let masterData:any = {};
         Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+            let res:any = await  Http.getInstance().put(`/ibzdeptmembers/${context.ibzdeptmember}`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Remove接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof IBZDeptMemberServiceBase
+     */
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
+            let res:any = await Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzorganization && context.ibzemployee && context.ibzdeptmember){
+            let res:any = await Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzorganization && context.ibzdepartment && context.ibzdeptmember){
+            let res:any = await Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
+            let res:any = await Http.getInstance().delete(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzemployee && context.ibzdeptmember){
+            let res:any = await Http.getInstance().delete(`/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzdepartment && context.ibzdeptmember){
+            let res:any = await Http.getInstance().delete(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        let res:any = await Http.getInstance().delete(`/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        return res;
+    }
+
+    /**
+     * Get接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof IBZDeptMemberServiceBase
+     */
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzorganization && context.ibzemployee && context.ibzdeptmember){
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzorganization && context.ibzdepartment && context.ibzdeptmember){
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
+            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzemployee && context.ibzdeptmember){
+            let res:any = await Http.getInstance().get(`/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        if(context.ibzdepartment && context.ibzdeptmember){
+            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
+        }
+        let res:any = await Http.getInstance().get(`/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
         return res;
     }
 
@@ -293,70 +311,6 @@ export default class IBZDeptMemberServiceBase extends EntityService {
         }
         let res:any = await  Http.getInstance().get(`/ibzdeptmembers/getdraft`,isloading);
         res.data.ibzdeptmember = data.ibzdeptmember;
-        return res;
-    }
-
-    /**
-     * Get接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZDeptMemberServiceBase
-     */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
-            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzorganization && context.ibzemployee && context.ibzdeptmember){
-            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzorganization && context.ibzdepartment && context.ibzdeptmember){
-            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
-            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzemployee && context.ibzdeptmember){
-            let res:any = await Http.getInstance().get(`/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzdepartment && context.ibzdeptmember){
-            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        let res:any = await Http.getInstance().get(`/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        return res;
-    }
-
-    /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZDeptMemberServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
-            let res:any = await Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzorganization && context.ibzemployee && context.ibzdeptmember){
-            let res:any = await Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzorganization && context.ibzdepartment && context.ibzdeptmember){
-            let res:any = await Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
-            let res:any = await Http.getInstance().delete(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzemployee && context.ibzdeptmember){
-            let res:any = await Http.getInstance().delete(`/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        if(context.ibzdepartment && context.ibzdeptmember){
-            let res:any = await Http.getInstance().delete(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
-        }
-        let res:any = await Http.getInstance().delete(`/ibzdeptmembers/${context.ibzdeptmember}`,isloading);
         return res;
     }
 
@@ -401,6 +355,52 @@ export default class IBZDeptMemberServiceBase extends EntityService {
             let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}/checkkey`,data,isloading);
         }
         let res:any = await Http.getInstance().post(`/ibzdeptmembers/${context.ibzdeptmember}/checkkey`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Save接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof IBZDeptMemberServiceBase
+     */
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.ibzorganization && context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+        }
+        if(context.ibzorganization && context.ibzemployee && context.ibzdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+        }
+        if(context.ibzorganization && context.ibzdepartment && context.ibzdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+        }
+        if(context.ibzdepartment && context.ibzemployee && context.ibzdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+        }
+        if(context.ibzemployee && context.ibzdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzemployees/${context.ibzemployee}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+        }
+        if(context.ibzdepartment && context.ibzdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
+        }
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().post(`/ibzdeptmembers/${context.ibzdeptmember}/save`,data,isloading);
         return res;
     }
 

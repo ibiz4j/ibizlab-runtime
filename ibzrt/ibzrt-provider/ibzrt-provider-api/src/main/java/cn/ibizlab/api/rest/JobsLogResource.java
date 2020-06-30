@@ -47,17 +47,20 @@ public class JobsLogResource {
     @Lazy
     public JobsLogMapping jobslogMapping;
 
-    @ApiOperation(value = "删除任务调度日志", tags = {"任务调度日志" },  notes = "删除任务调度日志")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/{jobslog_id}")
+    @ApiOperation(value = "新建任务调度日志", tags = {"任务调度日志" },  notes = "新建任务调度日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs")
 
-    public ResponseEntity<Boolean> remove(@PathVariable("jobslog_id") String jobslog_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(jobslogService.remove(jobslog_id));
+    public ResponseEntity<JobsLogDTO> create(@RequestBody JobsLogDTO jobslogdto) {
+        JobsLog domain = jobslogMapping.toDomain(jobslogdto);
+		jobslogService.create(domain);
+        JobsLogDTO dto = jobslogMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "批量删除任务调度日志", tags = {"任务调度日志" },  notes = "批量删除任务调度日志")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        jobslogService.removeBatch(ids);
+    @ApiOperation(value = "批量新建任务调度日志", tags = {"任务调度日志" },  notes = "批量新建任务调度日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
+        jobslogService.createBatch(jobslogMapping.toDomain(jobslogdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -79,12 +82,38 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @ApiOperation(value = "删除任务调度日志", tags = {"任务调度日志" },  notes = "删除任务调度日志")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/{jobslog_id}")
+
+    public ResponseEntity<Boolean> remove(@PathVariable("jobslog_id") String jobslog_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(jobslogService.remove(jobslog_id));
+    }
+
+    @ApiOperation(value = "批量删除任务调度日志", tags = {"任务调度日志" },  notes = "批量删除任务调度日志")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        jobslogService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @ApiOperation(value = "获取任务调度日志", tags = {"任务调度日志" },  notes = "获取任务调度日志")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/{jobslog_id}")
     public ResponseEntity<JobsLogDTO> get(@PathVariable("jobslog_id") String jobslog_id) {
         JobsLog domain = jobslogService.get(jobslog_id);
         JobsLogDTO dto = jobslogMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取任务调度日志草稿", tags = {"任务调度日志" },  notes = "获取任务调度日志草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/getdraft")
+    public ResponseEntity<JobsLogDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(jobslogMapping.toDto(jobslogService.getDraft(new JobsLog())));
+    }
+
+    @ApiOperation(value = "检查任务调度日志", tags = {"任务调度日志" },  notes = "检查任务调度日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody JobsLogDTO jobslogdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(jobslogService.checkKey(jobslogMapping.toDomain(jobslogdto)));
     }
 
     @ApiOperation(value = "保存任务调度日志", tags = {"任务调度日志" },  notes = "保存任务调度日志")
@@ -100,36 +129,6 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "获取任务调度日志草稿", tags = {"任务调度日志" },  notes = "获取任务调度日志草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/getdraft")
-    public ResponseEntity<JobsLogDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(jobslogMapping.toDto(jobslogService.getDraft(new JobsLog())));
-    }
-
-    @ApiOperation(value = "检查任务调度日志", tags = {"任务调度日志" },  notes = "检查任务调度日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody JobsLogDTO jobslogdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(jobslogService.checkKey(jobslogMapping.toDomain(jobslogdto)));
-    }
-
-    @ApiOperation(value = "新建任务调度日志", tags = {"任务调度日志" },  notes = "新建任务调度日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs")
-
-    public ResponseEntity<JobsLogDTO> create(@RequestBody JobsLogDTO jobslogdto) {
-        JobsLog domain = jobslogMapping.toDomain(jobslogdto);
-		jobslogService.create(domain);
-        JobsLogDTO dto = jobslogMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "批量新建任务调度日志", tags = {"任务调度日志" },  notes = "批量新建任务调度日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
-        jobslogService.createBatch(jobslogMapping.toDomain(jobslogdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务调度日志" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobslogs/fetchdefault")
 	public ResponseEntity<List<JobsLogDTO>> fetchDefault(JobsLogSearchContext context) {
@@ -142,7 +141,6 @@ public class JobsLogResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务调度日志" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobslogs/searchdefault")
 	public ResponseEntity<Page<JobsLogDTO>> searchDefault(@RequestBody JobsLogSearchContext context) {

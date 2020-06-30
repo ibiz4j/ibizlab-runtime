@@ -47,6 +47,23 @@ public class SysAppResource {
     @Lazy
     public SysAppMapping sysappMapping;
 
+    @ApiOperation(value = "新建应用", tags = {"应用" },  notes = "新建应用")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysapps")
+
+    public ResponseEntity<SysAppDTO> create(@RequestBody SysAppDTO sysappdto) {
+        SysApp domain = sysappMapping.toDomain(sysappdto);
+		sysappService.create(domain);
+        SysAppDTO dto = sysappMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "批量新建应用", tags = {"应用" },  notes = "批量新建应用")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysAppDTO> sysappdtos) {
+        sysappService.createBatch(sysappMapping.toDomain(sysappdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @ApiOperation(value = "更新应用", tags = {"应用" },  notes = "更新应用")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysapps/{sysapp_id}")
 
@@ -63,12 +80,6 @@ public class SysAppResource {
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysAppDTO> sysappdtos) {
         sysappService.updateBatch(sysappMapping.toDomain(sysappdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取应用草稿", tags = {"应用" },  notes = "获取应用草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysapps/getdraft")
-    public ResponseEntity<SysAppDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysappMapping.toDto(sysappService.getDraft(new SysApp())));
     }
 
     @ApiOperation(value = "删除应用", tags = {"应用" },  notes = "删除应用")
@@ -93,21 +104,16 @@ public class SysAppResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "新建应用", tags = {"应用" },  notes = "新建应用")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysapps")
-
-    public ResponseEntity<SysAppDTO> create(@RequestBody SysAppDTO sysappdto) {
-        SysApp domain = sysappMapping.toDomain(sysappdto);
-		sysappService.create(domain);
-        SysAppDTO dto = sysappMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "获取应用草稿", tags = {"应用" },  notes = "获取应用草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysapps/getdraft")
+    public ResponseEntity<SysAppDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(sysappMapping.toDto(sysappService.getDraft(new SysApp())));
     }
 
-    @ApiOperation(value = "批量新建应用", tags = {"应用" },  notes = "批量新建应用")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysAppDTO> sysappdtos) {
-        sysappService.createBatch(sysappMapping.toDomain(sysappdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    @ApiOperation(value = "检查应用", tags = {"应用" },  notes = "检查应用")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysAppDTO sysappdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysappService.checkKey(sysappMapping.toDomain(sysappdto)));
     }
 
     @ApiOperation(value = "保存应用", tags = {"应用" },  notes = "保存应用")
@@ -123,13 +129,6 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "检查应用", tags = {"应用" },  notes = "检查应用")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysAppDTO sysappdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysappService.checkKey(sysappMapping.toDomain(sysappdto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"应用" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysapps/fetchdefault")
 	public ResponseEntity<List<SysAppDTO>> fetchDefault(SysAppSearchContext context) {
@@ -142,7 +141,6 @@ public class SysAppResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"应用" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysapps/searchdefault")
 	public ResponseEntity<Page<SysAppDTO>> searchDefault(@RequestBody SysAppSearchContext context) {

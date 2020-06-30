@@ -44,27 +44,18 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
 
 
     @Override
-    public WFProcessInstance getDraft(WFProcessInstance et) {
-        et=wFProcessInstanceFeignClient.getDraft();
-        return et;
+    public boolean create(WFProcessInstance et) {
+        WFProcessInstance rt = wFProcessInstanceFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
     }
 
-    @Override
-    public WFProcessInstance get(String id) {
-		WFProcessInstance et=wFProcessInstanceFeignClient.get(id);
-        if(et==null){
-            et=new WFProcessInstance();
-            et.setId(id);
-        }
-        else{
-        }
-        return  et;
+    public void createBatch(List<WFProcessInstance> list){
+        wFProcessInstanceFeignClient.createBatch(list) ;
     }
 
-    @Override
-    public boolean checkKey(WFProcessInstance et) {
-        return wFProcessInstanceFeignClient.checkKey(et);
-    }
     @Override
     public boolean update(WFProcessInstance et) {
         WFProcessInstance rt = wFProcessInstanceFeignClient.update(et.getId(),et);
@@ -80,6 +71,38 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     }
 
     @Override
+    public boolean remove(String id) {
+        boolean result=wFProcessInstanceFeignClient.remove(id) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        wFProcessInstanceFeignClient.removeBatch(idList);
+    }
+
+    @Override
+    public WFProcessInstance get(String id) {
+		WFProcessInstance et=wFProcessInstanceFeignClient.get(id);
+        if(et==null){
+            et=new WFProcessInstance();
+            et.setId(id);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
+    public WFProcessInstance getDraft(WFProcessInstance et) {
+        et=wFProcessInstanceFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFProcessInstance et) {
+        return wFProcessInstanceFeignClient.checkKey(et);
+    }
+    @Override
     @Transactional
     public boolean save(WFProcessInstance et) {
         if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
@@ -91,29 +114,6 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     @Override
     public void saveBatch(List<WFProcessInstance> list) {
         wFProcessInstanceFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean create(WFProcessInstance et) {
-        WFProcessInstance rt = wFProcessInstanceFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<WFProcessInstance> list){
-        wFProcessInstanceFeignClient.createBatch(list) ;
-    }
-
-    @Override
-    public boolean remove(String id) {
-        boolean result=wFProcessInstanceFeignClient.remove(id) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        wFProcessInstanceFeignClient.removeBatch(idList);
     }
 
 

@@ -53,6 +53,29 @@ export default class SysAppServiceBase extends EntityService {
     }
 
     /**
+     * Create接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysAppServiceBase
+     */
+    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        Object.assign(data,masterData);
+        if(!data.srffrontuf || data.srffrontuf !== "1"){
+            data[this.APPDEKEY] = null;
+        }
+        if(data.srffrontuf){
+            delete data.srffrontuf;
+        }
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        let res:any = await Http.getInstance().post(`/sysapps`,data,isloading);
+        return res;
+    }
+
+    /**
      * Update接口方法
      *
      * @param {*} [context={}]
@@ -65,21 +88,6 @@ export default class SysAppServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/sysapps/${context.sysapp}`,data,isloading);
-        return res;
-    }
-
-    /**
-     * GetDraft接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysAppServiceBase
-     */
-    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await  Http.getInstance().get(`/sysapps/getdraft`,isloading);
-        res.data.sysapp = data.sysapp;
         return res;
     }
 
@@ -112,7 +120,7 @@ export default class SysAppServiceBase extends EntityService {
     }
 
     /**
-     * Create接口方法
+     * GetDraft接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -120,17 +128,23 @@ export default class SysAppServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysAppServiceBase
      */
-    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        Object.assign(data,masterData);
-        if(!data.srffrontuf || data.srffrontuf !== "1"){
-            data[this.APPDEKEY] = null;
-        }
-        if(data.srffrontuf){
-            delete data.srffrontuf;
-        }
-        let tempContext:any = JSON.parse(JSON.stringify(context));
-        let res:any = await Http.getInstance().post(`/sysapps`,data,isloading);
+    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await  Http.getInstance().get(`/sysapps/getdraft`,isloading);
+        res.data.sysapp = data.sysapp;
+        return res;
+    }
+
+    /**
+     * CheckKey接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysAppServiceBase
+     */
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().post(`/sysapps/${context.sysapp}/checkkey`,data,isloading);
         return res;
     }
 
@@ -147,20 +161,6 @@ export default class SysAppServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysapps/${context.sysapp}/save`,data,isloading);
-        return res;
-    }
-
-    /**
-     * CheckKey接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysAppServiceBase
-     */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().post(`/sysapps/${context.sysapp}/checkkey`,data,isloading);
         return res;
     }
 

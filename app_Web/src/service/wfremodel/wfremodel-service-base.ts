@@ -76,36 +76,6 @@ export default class WFREModelServiceBase extends EntityService {
     }
 
     /**
-     * Get接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFREModelServiceBase
-     */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().get(`/wfremodels/${context.wfremodel}`,isloading);
-        return res;
-    }
-
-    /**
-     * Save接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFREModelServiceBase
-     */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/wfremodels/${context.wfremodel}/save`,data,isloading);
-        return res;
-    }
-
-    /**
      * Update接口方法
      *
      * @param {*} [context={}]
@@ -118,6 +88,34 @@ export default class WFREModelServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/wfremodels/${context.wfremodel}`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Remove接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFREModelServiceBase
+     */
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().delete(`/wfremodels/${context.wfremodel}`,isloading);
+        return res;
+    }
+
+    /**
+     * Get接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFREModelServiceBase
+     */
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().get(`/wfremodels/${context.wfremodel}`,isloading);
         return res;
     }
 
@@ -137,20 +135,6 @@ export default class WFREModelServiceBase extends EntityService {
     }
 
     /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFREModelServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().delete(`/wfremodels/${context.wfremodel}`,isloading);
-        return res;
-    }
-
-    /**
      * CheckKey接口方法
      *
      * @param {*} [context={}]
@@ -161,6 +145,22 @@ export default class WFREModelServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await Http.getInstance().post(`/wfremodels/${context.wfremodel}/checkkey`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Save接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFREModelServiceBase
+     */
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().post(`/wfremodels/${context.wfremodel}/save`,data,isloading);
         return res;
     }
 

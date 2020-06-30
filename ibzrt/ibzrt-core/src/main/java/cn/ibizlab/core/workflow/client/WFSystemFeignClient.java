@@ -23,11 +23,18 @@ public interface WFSystemFeignClient {
     Page<WFSystem> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
-    Boolean save(@RequestBody WFSystem wfsystem);
+    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems")
+    WFSystem create(@RequestBody WFSystem wfsystem);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
-    Boolean saveBatch(@RequestBody List<WFSystem> wfsystems);
+    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/batch")
+    Boolean createBatch(@RequestBody List<WFSystem> wfsystems);
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{pssystemid}")
+    WFSystem update(@PathVariable("pssystemid") String pssystemid,@RequestBody WFSystem wfsystem);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/batch")
+    Boolean updateBatch(@RequestBody List<WFSystem> wfsystems);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/{pssystemid}")
@@ -45,22 +52,15 @@ public interface WFSystemFeignClient {
     WFSystem getDraft();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems")
-    WFSystem create(@RequestBody WFSystem wfsystem);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/batch")
-    Boolean createBatch(@RequestBody List<WFSystem> wfsystems);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/checkkey")
     Boolean checkKey(@RequestBody WFSystem wfsystem);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{pssystemid}")
-    WFSystem update(@PathVariable("pssystemid") String pssystemid,@RequestBody WFSystem wfsystem);
+    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
+    Boolean save(@RequestBody WFSystem wfsystem);
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/batch")
-    Boolean updateBatch(@RequestBody List<WFSystem> wfsystems);
+    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
+    Boolean saveBatch(@RequestBody List<WFSystem> wfsystems);
 
 
 

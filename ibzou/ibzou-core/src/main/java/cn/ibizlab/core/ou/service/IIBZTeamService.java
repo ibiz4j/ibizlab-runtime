@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IIBZTeamService extends IService<IBZTeam>{
 
+    boolean create(IBZTeam et) ;
+    void createBatch(List<IBZTeam> list) ;
     boolean update(IBZTeam et) ;
     void updateBatch(List<IBZTeam> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
     IBZTeam get(String key) ;
-    boolean save(IBZTeam et) ;
-    void saveBatch(List<IBZTeam> list) ;
     IBZTeam getDraft(IBZTeam et) ;
     boolean checkKey(IBZTeam et) ;
-    boolean create(IBZTeam et) ;
-    void createBatch(List<IBZTeam> list) ;
+    boolean save(IBZTeam et) ;
+    void saveBatch(List<IBZTeam> list) ;
     Page<IBZTeam> searchDefault(IBZTeamSearchContext context) ;
     /**
      *自定义查询SQL

@@ -53,102 +53,6 @@ export default class SysRoleServiceBase extends EntityService {
     }
 
     /**
-     * Save接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysRoleServiceBase
-     */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        let sysrolepermissionsData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysrolepermissions'),'undefined')){
-            sysrolepermissionsData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysrolepermissions') as any);
-            if(sysrolepermissionsData && sysrolepermissionsData.length && sysrolepermissionsData.length > 0){
-                sysrolepermissionsData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.rolepermissionid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.sysrolepermissions = sysrolepermissionsData;
-        let sysuserrolesData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles'),'undefined')){
-            sysuserrolesData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles') as any);
-            if(sysuserrolesData && sysuserrolesData.length && sysuserrolesData.length > 0){
-                sysuserrolesData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.userroleid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.sysuserroles = sysuserrolesData;
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/sysroles/${context.sysrole}/save`,data,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
-            this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
-        return res;
-    }
-
-    /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysRoleServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        let sysrolepermissionsData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysrolepermissions'),'undefined')){
-            sysrolepermissionsData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysrolepermissions') as any);
-            if(sysrolepermissionsData && sysrolepermissionsData.length && sysrolepermissionsData.length > 0){
-                sysrolepermissionsData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.rolepermissionid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.sysrolepermissions = sysrolepermissionsData;
-        let sysuserrolesData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles'),'undefined')){
-            sysuserrolesData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles') as any);
-            if(sysuserrolesData && sysuserrolesData.length && sysuserrolesData.length > 0){
-                sysuserrolesData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.userroleid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.sysuserroles = sysuserrolesData;
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/sysroles/${context.sysrole}`,data,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
-            this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
-        return res;
-    }
-
-    /**
      * Create接口方法
      *
      * @param {*} [context={}]
@@ -204,7 +108,7 @@ export default class SysRoleServiceBase extends EntityService {
     }
 
     /**
-     * Get接口方法
+     * Update接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -212,8 +116,40 @@ export default class SysRoleServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysRoleServiceBase
      */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}`,isloading);
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        let sysrolepermissionsData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysrolepermissions'),'undefined')){
+            sysrolepermissionsData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysrolepermissions') as any);
+            if(sysrolepermissionsData && sysrolepermissionsData.length && sysrolepermissionsData.length > 0){
+                sysrolepermissionsData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.rolepermissionid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.sysrolepermissions = sysrolepermissionsData;
+        let sysuserrolesData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles'),'undefined')){
+            sysuserrolesData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles') as any);
+            if(sysuserrolesData && sysuserrolesData.length && sysuserrolesData.length > 0){
+                sysuserrolesData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.userroleid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.sysuserroles = sysuserrolesData;
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/sysroles/${context.sysrole}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
             this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
         return res;
@@ -230,6 +166,22 @@ export default class SysRoleServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await Http.getInstance().delete(`/sysroles/${context.sysrole}`,isloading);
+        return res;
+    }
+
+    /**
+     * Get接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRoleServiceBase
+     */
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}`,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
+            this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
         return res;
     }
 
@@ -261,6 +213,54 @@ export default class SysRoleServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/checkkey`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Save接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRoleServiceBase
+     */
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        let sysrolepermissionsData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysrolepermissions'),'undefined')){
+            sysrolepermissionsData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysrolepermissions') as any);
+            if(sysrolepermissionsData && sysrolepermissionsData.length && sysrolepermissionsData.length > 0){
+                sysrolepermissionsData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.rolepermissionid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.sysrolepermissions = sysrolepermissionsData;
+        let sysuserrolesData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles'),'undefined')){
+            sysuserrolesData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles') as any);
+            if(sysuserrolesData && sysuserrolesData.length && sysuserrolesData.length > 0){
+                sysuserrolesData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.userroleid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.sysuserroles = sysuserrolesData;
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().post(`/sysroles/${context.sysrole}/save`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
+            this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
         return res;
     }
 

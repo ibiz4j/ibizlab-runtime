@@ -52,6 +52,68 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
     @Override
     @Transactional
+    public boolean create(SysPermission et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getPermissionid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<SysPermission> list) {
+        this.saveBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean update(SysPermission et) {
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_permissionid",et.getPermissionid())))
+            return false;
+        CachedBeanCopier.copy(get(et.getPermissionid()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<SysPermission> list) {
+        updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public SysPermission get(String key) {
+        SysPermission et = getById(key);
+        if(et==null){
+            et=new SysPermission();
+            et.setPermissionid(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public SysPermission getDraft(SysPermission et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysPermission et) {
+        return (!ObjectUtils.isEmpty(et.getPermissionid()))&&(!Objects.isNull(this.getById(et.getPermissionid())));
+    }
+    @Override
+    @Transactional
     public boolean save(SysPermission et) {
         if(!saveOrUpdate(et))
             return false;
@@ -79,68 +141,6 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     @Override
     public void saveBatch(List<SysPermission> list) {
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    public SysPermission getDraft(SysPermission et) {
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    @Transactional
-    public boolean update(SysPermission et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_permissionid",et.getPermissionid())))
-            return false;
-        CachedBeanCopier.copy(get(et.getPermissionid()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<SysPermission> list) {
-        updateBatchById(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public boolean create(SysPermission et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getPermissionid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<SysPermission> list) {
-        this.saveBatch(list,batchSize);
-    }
-
-    @Override
-    public boolean checkKey(SysPermission et) {
-        return (!ObjectUtils.isEmpty(et.getPermissionid()))&&(!Objects.isNull(this.getById(et.getPermissionid())));
-    }
-    @Override
-    @Transactional
-    public SysPermission get(String key) {
-        SysPermission et = getById(key);
-        if(et==null){
-            et=new SysPermission();
-            et.setPermissionid(key);
-        }
-        else{
-        }
-        return et;
     }
 
 

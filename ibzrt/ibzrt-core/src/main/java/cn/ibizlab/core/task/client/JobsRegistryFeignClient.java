@@ -23,8 +23,11 @@ public interface JobsRegistryFeignClient {
     Page<JobsRegistry> select();
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/{id}")
-    JobsRegistry get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries")
+    JobsRegistry create(@RequestBody JobsRegistry jobsregistry);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/batch")
+    Boolean createBatch(@RequestBody List<JobsRegistry> jobsregistries);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/jobsregistries/{id}")
@@ -34,8 +37,23 @@ public interface JobsRegistryFeignClient {
     Boolean updateBatch(@RequestBody List<JobsRegistry> jobsregistries);
 
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/{id}")
+    Boolean remove(@PathVariable("id") String id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/{id}")
+    JobsRegistry get(@PathVariable("id") String id);
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/getdraft")
     JobsRegistry getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/checkkey")
+    Boolean checkKey(@RequestBody JobsRegistry jobsregistry);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/save")
@@ -43,24 +61,6 @@ public interface JobsRegistryFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/save")
     Boolean saveBatch(@RequestBody List<JobsRegistry> jobsregistries);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/checkkey")
-    Boolean checkKey(@RequestBody JobsRegistry jobsregistry);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries")
-    JobsRegistry create(@RequestBody JobsRegistry jobsregistry);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/batch")
-    Boolean createBatch(@RequestBody List<JobsRegistry> jobsregistries);
-
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/{id}")
-    Boolean remove(@PathVariable("id") String id);
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
 

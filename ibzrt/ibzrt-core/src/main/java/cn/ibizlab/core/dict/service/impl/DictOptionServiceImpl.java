@@ -44,25 +44,16 @@ public class DictOptionServiceImpl implements IDictOptionService {
 
 
     @Override
-    public boolean checkKey(DictOption et) {
-        return dictOptionFeignClient.checkKey(et);
-    }
-    @Override
-    public DictOption getDraft(DictOption et) {
-        et=dictOptionFeignClient.getDraft();
-        return et;
+    public boolean create(DictOption et) {
+        DictOption rt = dictOptionFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
     }
 
-    @Override
-    public DictOption get(String value_key) {
-		DictOption et=dictOptionFeignClient.get(value_key);
-        if(et==null){
-            et=new DictOption();
-            et.setValueKey(value_key);
-        }
-        else{
-        }
-        return  et;
+    public void createBatch(List<DictOption> list){
+        dictOptionFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -80,18 +71,37 @@ public class DictOptionServiceImpl implements IDictOptionService {
     }
 
     @Override
-    public boolean create(DictOption et) {
-        DictOption rt = dictOptionFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
+    public boolean remove(String value_key) {
+        boolean result=dictOptionFeignClient.remove(value_key) ;
+        return result;
     }
 
-    public void createBatch(List<DictOption> list){
-        dictOptionFeignClient.createBatch(list) ;
+    public void removeBatch(Collection<String> idList){
+        dictOptionFeignClient.removeBatch(idList);
     }
 
+    @Override
+    public DictOption get(String value_key) {
+		DictOption et=dictOptionFeignClient.get(value_key);
+        if(et==null){
+            et=new DictOption();
+            et.setValueKey(value_key);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
+    public DictOption getDraft(DictOption et) {
+        et=dictOptionFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(DictOption et) {
+        return dictOptionFeignClient.checkKey(et);
+    }
     @Override
     @Transactional
     public boolean save(DictOption et) {
@@ -104,16 +114,6 @@ public class DictOptionServiceImpl implements IDictOptionService {
     @Override
     public void saveBatch(List<DictOption> list) {
         dictOptionFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean remove(String value_key) {
-        boolean result=dictOptionFeignClient.remove(value_key) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        dictOptionFeignClient.removeBatch(idList);
     }
 
 

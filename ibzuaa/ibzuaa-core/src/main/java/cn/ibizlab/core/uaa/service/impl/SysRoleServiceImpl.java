@@ -55,6 +55,68 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Override
     @Transactional
+    public boolean create(SysRole et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getRoleid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<SysRole> list) {
+        this.saveBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean update(SysRole et) {
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_roleid",et.getRoleid())))
+            return false;
+        CachedBeanCopier.copy(get(et.getRoleid()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<SysRole> list) {
+        updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public SysRole get(String key) {
+        SysRole et = getById(key);
+        if(et==null){
+            et=new SysRole();
+            et.setRoleid(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public SysRole getDraft(SysRole et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysRole et) {
+        return (!ObjectUtils.isEmpty(et.getRoleid()))&&(!Objects.isNull(this.getById(et.getRoleid())));
+    }
+    @Override
+    @Transactional
     public boolean save(SysRole et) {
         if(!saveOrUpdate(et))
             return false;
@@ -84,68 +146,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         saveOrUpdateBatch(list,batchSize);
     }
 
-    @Override
-    @Transactional
-    public boolean update(SysRole et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_roleid",et.getRoleid())))
-            return false;
-        CachedBeanCopier.copy(get(et.getRoleid()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<SysRole> list) {
-        updateBatchById(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public boolean create(SysRole et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getRoleid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<SysRole> list) {
-        this.saveBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public SysRole get(String key) {
-        SysRole et = getById(key);
-        if(et==null){
-            et=new SysRole();
-            et.setRoleid(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    public SysRole getDraft(SysRole et) {
-        return et;
-    }
-
-    @Override
-    public boolean checkKey(SysRole et) {
-        return (!ObjectUtils.isEmpty(et.getRoleid()))&&(!Objects.isNull(this.getById(et.getRoleid())));
-    }
 
 
     /**

@@ -44,13 +44,16 @@ public class JobsLogServiceImpl implements IJobsLogService {
 
 
     @Override
-    public boolean remove(String id) {
-        boolean result=jobsLogFeignClient.remove(id) ;
-        return result;
+    public boolean create(JobsLog et) {
+        JobsLog rt = jobsLogFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
     }
 
-    public void removeBatch(Collection<String> idList){
-        jobsLogFeignClient.removeBatch(idList);
+    public void createBatch(List<JobsLog> list){
+        jobsLogFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -68,6 +71,16 @@ public class JobsLogServiceImpl implements IJobsLogService {
     }
 
     @Override
+    public boolean remove(String id) {
+        boolean result=jobsLogFeignClient.remove(id) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        jobsLogFeignClient.removeBatch(idList);
+    }
+
+    @Override
     public JobsLog get(String id) {
 		JobsLog et=jobsLogFeignClient.get(id);
         if(et==null){
@@ -77,20 +90,6 @@ public class JobsLogServiceImpl implements IJobsLogService {
         else{
         }
         return  et;
-    }
-
-    @Override
-    @Transactional
-    public boolean save(JobsLog et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!jobsLogFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<JobsLog> list) {
-        jobsLogFeignClient.saveBatch(list) ;
     }
 
     @Override
@@ -104,16 +103,17 @@ public class JobsLogServiceImpl implements IJobsLogService {
         return jobsLogFeignClient.checkKey(et);
     }
     @Override
-    public boolean create(JobsLog et) {
-        JobsLog rt = jobsLogFeignClient.create(et);
-        if(rt==null)
+    @Transactional
+    public boolean save(JobsLog et) {
+        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
+        if(!jobsLogFeignClient.save(et))
             return false;
-        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    public void createBatch(List<JobsLog> list){
-        jobsLogFeignClient.createBatch(list) ;
+    @Override
+    public void saveBatch(List<JobsLog> list) {
+        jobsLogFeignClient.saveBatch(list) ;
     }
 
 

@@ -47,6 +47,25 @@ public class SDFileResource {
     @Lazy
     public SDFileMapping sdfileMapping;
 
+    @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledto),'ibzdisk-SDFile-Create')")
+    @ApiOperation(value = "新建文件", tags = {"文件" },  notes = "新建文件")
+	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles")
+    @Transactional
+    public ResponseEntity<SDFileDTO> create(@RequestBody SDFileDTO sdfiledto) {
+        SDFile domain = sdfileMapping.toDomain(sdfiledto);
+		sdfileService.create(domain);
+        SDFileDTO dto = sdfileMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledtos),'ibzdisk-SDFile-Create')")
+    @ApiOperation(value = "批量新建文件", tags = {"文件" },  notes = "批量新建文件")
+	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<SDFileDTO> sdfiledtos) {
+        sdfileService.createBatch(sdfileMapping.toDomain(sdfiledtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @VersionCheck(entity = "sdfile" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.sdfileService.get(#sdfile_id),'ibzdisk-SDFile-Update')")
     @ApiOperation(value = "更新文件", tags = {"文件" },  notes = "更新文件")
@@ -68,46 +87,6 @@ public class SDFileResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledto),'ibzdisk-SDFile-Create')")
-    @ApiOperation(value = "新建文件", tags = {"文件" },  notes = "新建文件")
-	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles")
-    @Transactional
-    public ResponseEntity<SDFileDTO> create(@RequestBody SDFileDTO sdfiledto) {
-        SDFile domain = sdfileMapping.toDomain(sdfiledto);
-		sdfileService.create(domain);
-        SDFileDTO dto = sdfileMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledtos),'ibzdisk-SDFile-Create')")
-    @ApiOperation(value = "批量新建文件", tags = {"文件" },  notes = "批量新建文件")
-	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<SDFileDTO> sdfiledtos) {
-        sdfileService.createBatch(sdfileMapping.toDomain(sdfiledtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "检查文件", tags = {"文件" },  notes = "检查文件")
-	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SDFileDTO sdfiledto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sdfileService.checkKey(sdfileMapping.toDomain(sdfiledto)));
-    }
-
-    @ApiOperation(value = "获取文件草稿", tags = {"文件" },  notes = "获取文件草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/sdfiles/getdraft")
-    public ResponseEntity<SDFileDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sdfileMapping.toDto(sdfileService.getDraft(new SDFile())));
-    }
-
-    @PostAuthorize("hasPermission(this.sdfileMapping.toDomain(returnObject.body),'ibzdisk-SDFile-Get')")
-    @ApiOperation(value = "获取文件", tags = {"文件" },  notes = "获取文件")
-	@RequestMapping(method = RequestMethod.GET, value = "/sdfiles/{sdfile_id}")
-    public ResponseEntity<SDFileDTO> get(@PathVariable("sdfile_id") String sdfile_id) {
-        SDFile domain = sdfileService.get(sdfile_id);
-        SDFileDTO dto = sdfileMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
     @PreAuthorize("hasPermission(this.sdfileService.get(#sdfile_id),'ibzdisk-SDFile-Remove')")
     @ApiOperation(value = "删除文件", tags = {"文件" },  notes = "删除文件")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sdfiles/{sdfile_id}")
@@ -122,6 +101,27 @@ public class SDFileResource {
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
         sdfileService.removeBatch(ids);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @PostAuthorize("hasPermission(this.sdfileMapping.toDomain(returnObject.body),'ibzdisk-SDFile-Get')")
+    @ApiOperation(value = "获取文件", tags = {"文件" },  notes = "获取文件")
+	@RequestMapping(method = RequestMethod.GET, value = "/sdfiles/{sdfile_id}")
+    public ResponseEntity<SDFileDTO> get(@PathVariable("sdfile_id") String sdfile_id) {
+        SDFile domain = sdfileService.get(sdfile_id);
+        SDFileDTO dto = sdfileMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取文件草稿", tags = {"文件" },  notes = "获取文件草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/sdfiles/getdraft")
+    public ResponseEntity<SDFileDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(sdfileMapping.toDto(sdfileService.getDraft(new SDFile())));
+    }
+
+    @ApiOperation(value = "检查文件", tags = {"文件" },  notes = "检查文件")
+	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SDFileDTO sdfiledto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sdfileService.checkKey(sdfileMapping.toDomain(sdfiledto)));
     }
 
     @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledto),'ibzdisk-SDFile-Save')")
@@ -139,7 +139,7 @@ public class SDFileResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-SDFile-searchDefault-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-SDFile-searchDefault-all') and hasPermission(#context,'ibzdisk-SDFile-Get')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"文件" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sdfiles/fetchdefault")
 	public ResponseEntity<List<SDFileDTO>> fetchDefault(SDFileSearchContext context) {
@@ -152,7 +152,7 @@ public class SDFileResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-SDFile-searchDefault-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-SDFile-searchDefault-all') and hasPermission(#context,'ibzdisk-SDFile-Get')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"文件" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sdfiles/searchdefault")
 	public ResponseEntity<Page<SDFileDTO>> searchDefault(@RequestBody SDFileSearchContext context) {

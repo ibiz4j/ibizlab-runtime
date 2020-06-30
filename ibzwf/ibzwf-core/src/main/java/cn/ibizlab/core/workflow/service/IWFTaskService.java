@@ -25,13 +25,13 @@ public interface IWFTaskService{
 
     boolean create(WFTask et) ;
     void createBatch(List<WFTask> list) ;
-    WFTask getDraft(WFTask et) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean checkKey(WFTask et) ;
     boolean update(WFTask et) ;
     void updateBatch(List<WFTask> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
     WFTask get(String key) ;
+    WFTask getDraft(WFTask et) ;
+    boolean checkKey(WFTask et) ;
     boolean save(WFTask et) ;
     void saveBatch(List<WFTask> list) ;
     Page<WFTask> searchDefault(WFTaskSearchContext context) ;

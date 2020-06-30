@@ -25,15 +25,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysAuthLogService extends IService<SysAuthLog>{
 
-    SysAuthLog getDraft(SysAuthLog et) ;
+    boolean create(SysAuthLog et) ;
+    void createBatch(List<SysAuthLog> list) ;
     boolean update(SysAuthLog et) ;
     void updateBatch(List<SysAuthLog> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
-    boolean create(SysAuthLog et) ;
-    void createBatch(List<SysAuthLog> list) ;
-    boolean checkKey(SysAuthLog et) ;
     SysAuthLog get(String key) ;
+    SysAuthLog getDraft(SysAuthLog et) ;
+    boolean checkKey(SysAuthLog et) ;
     boolean save(SysAuthLog et) ;
     void saveBatch(List<SysAuthLog> list) ;
     Page<SysAuthLog> searchDefault(SysAuthLogSearchContext context) ;

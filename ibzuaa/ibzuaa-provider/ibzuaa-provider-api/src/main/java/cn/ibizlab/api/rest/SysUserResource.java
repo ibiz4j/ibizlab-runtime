@@ -47,19 +47,22 @@ public class SysUserResource {
     @Lazy
     public SysUserMapping sysuserMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Remove-all')")
-    @ApiOperation(value = "删除系统用户", tags = {"系统用户" },  notes = "删除系统用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Create-all')")
+    @ApiOperation(value = "新建系统用户", tags = {"系统用户" },  notes = "新建系统用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers")
     @Transactional
-    public ResponseEntity<Boolean> remove(@PathVariable("sysuser_id") String sysuser_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sysuserService.remove(sysuser_id));
+    public ResponseEntity<SysUserDTO> create(@RequestBody SysUserDTO sysuserdto) {
+        SysUser domain = sysuserMapping.toDomain(sysuserdto);
+		sysuserService.create(domain);
+        SysUserDTO dto = sysuserMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Remove-all')")
-    @ApiOperation(value = "批量删除系统用户", tags = {"系统用户" },  notes = "批量删除系统用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sysuserService.removeBatch(ids);
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Create-all')")
+    @ApiOperation(value = "批量新建系统用户", tags = {"系统用户" },  notes = "批量新建系统用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
+        sysuserService.createBatch(sysuserMapping.toDomain(sysuserdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -83,10 +86,20 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "检查系统用户", tags = {"系统用户" },  notes = "检查系统用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysUserDTO sysuserdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysuserService.checkKey(sysuserMapping.toDomain(sysuserdto)));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Remove-all')")
+    @ApiOperation(value = "删除系统用户", tags = {"系统用户" },  notes = "删除系统用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}")
+    @Transactional
+    public ResponseEntity<Boolean> remove(@PathVariable("sysuser_id") String sysuser_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sysuserService.remove(sysuser_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Remove-all')")
+    @ApiOperation(value = "批量删除系统用户", tags = {"系统用户" },  notes = "批量删除系统用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sysuserService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Get-all')")
@@ -96,6 +109,18 @@ public class SysUserResource {
         SysUser domain = sysuserService.get(sysuser_id);
         SysUserDTO dto = sysuserMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取系统用户草稿", tags = {"系统用户" },  notes = "获取系统用户草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/getdraft")
+    public ResponseEntity<SysUserDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserMapping.toDto(sysuserService.getDraft(new SysUser())));
+    }
+
+    @ApiOperation(value = "检查系统用户", tags = {"系统用户" },  notes = "检查系统用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysUserDTO sysuserdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysuserService.checkKey(sysuserMapping.toDomain(sysuserdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Save-all')")
@@ -110,31 +135,6 @@ public class SysUserResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
         sysuserService.saveBatch(sysuserMapping.toDomain(sysuserdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取系统用户草稿", tags = {"系统用户" },  notes = "获取系统用户草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/getdraft")
-    public ResponseEntity<SysUserDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserMapping.toDto(sysuserService.getDraft(new SysUser())));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Create-all')")
-    @ApiOperation(value = "新建系统用户", tags = {"系统用户" },  notes = "新建系统用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysusers")
-    @Transactional
-    public ResponseEntity<SysUserDTO> create(@RequestBody SysUserDTO sysuserdto) {
-        SysUser domain = sysuserMapping.toDomain(sysuserdto);
-		sysuserService.create(domain);
-        SysUserDTO dto = sysuserMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Create-all')")
-    @ApiOperation(value = "批量新建系统用户", tags = {"系统用户" },  notes = "批量新建系统用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
-        sysuserService.createBatch(sysuserMapping.toDomain(sysuserdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 

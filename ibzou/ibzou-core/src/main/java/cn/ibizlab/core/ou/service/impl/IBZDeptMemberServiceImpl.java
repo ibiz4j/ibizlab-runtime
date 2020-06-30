@@ -58,6 +58,22 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
 
     @Override
     @Transactional
+    public boolean create(IBZDeptMember et) {
+        fillParentData(et);
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getMemberid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<IBZDeptMember> list) {
+        list.forEach(item->fillParentData(item));
+        this.saveOrUpdateBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
     public boolean update(IBZDeptMember et) {
         fillParentData(et);
         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("memberid",et.getMemberid())))
@@ -74,20 +90,39 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
 
     @Override
     @Transactional
-    public boolean create(IBZDeptMember et) {
-        fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getMemberid()),et);
-        return true;
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
     }
 
     @Override
-    public void createBatch(List<IBZDeptMember> list) {
-        list.forEach(item->fillParentData(item));
-        this.saveOrUpdateBatch(list,batchSize);
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
     }
 
+    @Override
+    @Transactional
+    public IBZDeptMember get(String key) {
+        IBZDeptMember et = getById(key);
+        if(et==null){
+            et=new IBZDeptMember();
+            et.setMemberid(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public IBZDeptMember getDraft(IBZDeptMember et) {
+        fillParentData(et);
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZDeptMember et) {
+        return (!ObjectUtils.isEmpty(et.getMemberid()))&&(!Objects.isNull(this.getById(et.getMemberid())));
+    }
     @Override
     @Transactional
     public boolean save(IBZDeptMember et) {
@@ -121,41 +156,6 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
         saveOrUpdateBatch(list,batchSize);
     }
 
-    @Override
-    public IBZDeptMember getDraft(IBZDeptMember et) {
-        fillParentData(et);
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public IBZDeptMember get(String key) {
-        IBZDeptMember et = getById(key);
-        if(et==null){
-            et=new IBZDeptMember();
-            et.setMemberid(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    public boolean checkKey(IBZDeptMember et) {
-        return (!ObjectUtils.isEmpty(et.getMemberid()))&&(!Objects.isNull(this.getById(et.getMemberid())));
-    }
 
 	@Override
     public List<IBZDeptMember> selectByDeptid(String deptid) {

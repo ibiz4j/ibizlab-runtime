@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysPermissionService extends IService<SysPermission>{
 
-    boolean save(SysPermission et) ;
-    void saveBatch(List<SysPermission> list) ;
-    SysPermission getDraft(SysPermission et) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean update(SysPermission et) ;
-    void updateBatch(List<SysPermission> list) ;
     boolean create(SysPermission et) ;
     void createBatch(List<SysPermission> list) ;
-    boolean checkKey(SysPermission et) ;
+    boolean update(SysPermission et) ;
+    void updateBatch(List<SysPermission> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
     SysPermission get(String key) ;
+    SysPermission getDraft(SysPermission et) ;
+    boolean checkKey(SysPermission et) ;
+    boolean save(SysPermission et) ;
+    void saveBatch(List<SysPermission> list) ;
     Page<SysPermission> searchDefault(SysPermissionSearchContext context) ;
     /**
      *自定义查询SQL

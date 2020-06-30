@@ -57,32 +57,6 @@ public class WFREModelServiceImpl implements IWFREModelService {
     }
 
     @Override
-    public WFREModel get(String id) {
-		WFREModel et=wFREModelFeignClient.get(id);
-        if(et==null){
-            et=new WFREModel();
-            et.setId(id);
-        }
-        else{
-        }
-        return  et;
-    }
-
-    @Override
-    @Transactional
-    public boolean save(WFREModel et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!wFREModelFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<WFREModel> list) {
-        wFREModelFeignClient.saveBatch(list) ;
-    }
-
-    @Override
     public boolean update(WFREModel et) {
         WFREModel rt = wFREModelFeignClient.update(et.getId(),et);
         if(rt==null)
@@ -97,12 +71,6 @@ public class WFREModelServiceImpl implements IWFREModelService {
     }
 
     @Override
-    public WFREModel getDraft(WFREModel et) {
-        et=wFREModelFeignClient.getDraft();
-        return et;
-    }
-
-    @Override
     public boolean remove(String id) {
         boolean result=wFREModelFeignClient.remove(id) ;
         return result;
@@ -113,9 +81,41 @@ public class WFREModelServiceImpl implements IWFREModelService {
     }
 
     @Override
+    public WFREModel get(String id) {
+		WFREModel et=wFREModelFeignClient.get(id);
+        if(et==null){
+            et=new WFREModel();
+            et.setId(id);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
+    public WFREModel getDraft(WFREModel et) {
+        et=wFREModelFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
     public boolean checkKey(WFREModel et) {
         return wFREModelFeignClient.checkKey(et);
     }
+    @Override
+    @Transactional
+    public boolean save(WFREModel et) {
+        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
+        if(!wFREModelFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<WFREModel> list) {
+        wFREModelFeignClient.saveBatch(list) ;
+    }
+
 
 
 

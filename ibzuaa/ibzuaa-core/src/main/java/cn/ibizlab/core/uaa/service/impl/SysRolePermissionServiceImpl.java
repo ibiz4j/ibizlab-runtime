@@ -55,15 +55,34 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
 
     @Override
     @Transactional
-    public SysRolePermission get(String key) {
-        SysRolePermission et = getById(key);
-        if(et==null){
-            et=new SysRolePermission();
-            et.setRolepermissionid(key);
-        }
-        else{
-        }
-        return et;
+    public boolean create(SysRolePermission et) {
+        fillParentData(et);
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getRolepermissionid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<SysRolePermission> list) {
+        list.forEach(item->fillParentData(item));
+        this.saveOrUpdateBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean update(SysRolePermission et) {
+        fillParentData(et);
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_role_permissionid",et.getRolepermissionid())))
+            return false;
+        CachedBeanCopier.copy(get(et.getRolepermissionid()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<SysRolePermission> list) {
+        list.forEach(item->fillParentData(item));
+        updateBatchById(list,batchSize);
     }
 
     @Override
@@ -79,25 +98,22 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     }
 
     @Override
-    public SysRolePermission getDraft(SysRolePermission et) {
-        fillParentData(et);
+    @Transactional
+    public SysRolePermission get(String key) {
+        SysRolePermission et = getById(key);
+        if(et==null){
+            et=new SysRolePermission();
+            et.setRolepermissionid(key);
+        }
+        else{
+        }
         return et;
     }
 
     @Override
-    @Transactional
-    public boolean create(SysRolePermission et) {
+    public SysRolePermission getDraft(SysRolePermission et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getRolepermissionid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<SysRolePermission> list) {
-        list.forEach(item->fillParentData(item));
-        this.saveOrUpdateBatch(list,batchSize);
+        return et;
     }
 
     @Override
@@ -135,22 +151,6 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     public void saveBatch(List<SysRolePermission> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public boolean update(SysRolePermission et) {
-        fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_role_permissionid",et.getRolepermissionid())))
-            return false;
-        CachedBeanCopier.copy(get(et.getRolepermissionid()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<SysRolePermission> list) {
-        list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
     }
 
 

@@ -68,25 +68,6 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
 
     @Override
     @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    @Transactional
-    public IBZEmployee initPwd(IBZEmployee et) {
-        //自定义代码
-        return et;
-    }
-
-    @Override
-    @Transactional
     public boolean create(IBZEmployee et) {
         fillParentData(et);
         if(!this.retBool(this.baseMapper.insert(et)))
@@ -103,10 +84,6 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     }
 
     @Override
-    public boolean checkKey(IBZEmployee et) {
-        return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
-    }
-    @Override
     @Transactional
     public boolean update(IBZEmployee et) {
         fillParentData(et);
@@ -121,6 +98,48 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     public void updateBatch(List<IBZEmployee> list) {
         list.forEach(item->fillParentData(item));
         updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public IBZEmployee get(String key) {
+        IBZEmployee et = getById(key);
+        if(et==null){
+            et=new IBZEmployee();
+            et.setUserid(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public IBZEmployee getDraft(IBZEmployee et) {
+        fillParentData(et);
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZEmployee et) {
+        return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
+    }
+    @Override
+    @Transactional
+    public IBZEmployee initPwd(IBZEmployee et) {
+        //自定义代码
+        return et;
     }
 
     @Override
@@ -154,25 +173,6 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     public void saveBatch(List<IBZEmployee> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public IBZEmployee get(String key) {
-        IBZEmployee et = getById(key);
-        if(et==null){
-            et=new IBZEmployee();
-            et.setUserid(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    public IBZEmployee getDraft(IBZEmployee et) {
-        fillParentData(et);
-        return et;
     }
 
 

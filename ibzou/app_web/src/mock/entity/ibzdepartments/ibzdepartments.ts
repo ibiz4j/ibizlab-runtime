@@ -197,18 +197,17 @@ mock.onPost(new RegExp(/^\/ibzdepartments\/?([a-zA-Z0-9\-\;]{0,35})$/)).reply((c
     return [status, mockDatas[0]];
 });
 
-
     
-// Save
-mock.onPost(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})\/save$/)).reply((config: any) => {
-    console.groupCollapsed("实体:ibzdepartment 方法: Save");
+// Update
+mock.onPut(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
+    console.groupCollapsed("实体:ibzdepartment 方法: Update");
     console.table({url:config.url, method: config.method, data:config.data});
     let status = MockAdapter.mockStatus(config);
     if (status !== 200) {
         return [status, null];
     }
     const paramArray:Array<any> = ['orgid','deptid'];
-    const matchArray:any = new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})\/save$/).exec(config.url);
+    const matchArray:any = new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
     let tempValue: any = {};
     if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
         paramArray.forEach((item: any, index: number) => {
@@ -225,16 +224,16 @@ mock.onPost(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartm
     return [status, {}];
 });
         
-// Save
-mock.onPost(new RegExp(/^\/ibzdepartments\/?([a-zA-Z0-9\-\;]{0,35})\/save$/)).reply((config: any) => {
-    console.groupCollapsed("实体:ibzdepartment 方法: Save");
+// Update
+mock.onPut(new RegExp(/^\/ibzdepartments\/?([a-zA-Z0-9\-\;]{0,35})$/)).reply((config: any) => {
+    console.groupCollapsed("实体:ibzdepartment 方法: Update");
     console.table({url:config.url, method: config.method, data:config.data});
     let status = MockAdapter.mockStatus(config);
     if (status !== 200) {
         return [status, null];
     }    
     const paramArray:Array<any> = ['deptid'];
-    const matchArray:any = new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})\/save$/).exec(config.url);
+    const matchArray:any = new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
     let tempValue: any = {};
     if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
         paramArray.forEach((item: any, index: number) => {
@@ -261,6 +260,41 @@ mock.onPost(new RegExp(/^\/ibzdepartments\/?([a-zA-Z0-9\-\;]{0,35})\/save$/)).re
     console.groupEnd();
     console.groupEnd();
     return [status, data];
+});
+
+
+
+
+// GetDraft
+mock.onGet(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/getdraft$/)).reply((config: any) => {
+    console.groupCollapsed("实体:ibzdepartment 方法: GetDraft");
+    console.table({url:config.url, method: config.method, data:config.data});
+    // GetDraft
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table({});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, {}];
+});
+
+// GetDraft
+mock.onGet(new RegExp(/^\/ibzdepartments\/getdraft$/)).reply((config: any) => {
+    console.groupCollapsed("实体:ibzdepartment 方法: GetDraft");
+    console.table({url:config.url, method: config.method, data:config.data});
+    // GetDraft
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table({});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, {}];
 });
 
     
@@ -328,51 +362,17 @@ mock.onPost(new RegExp(/^\/ibzdepartments\/?([a-zA-Z0-9\-\;]{0,35})\/checkkey$/)
     return [status, data];
 });
 
-
-// GetDraft
-mock.onGet(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/getdraft$/)).reply((config: any) => {
-    console.groupCollapsed("实体:ibzdepartment 方法: GetDraft");
-    console.table({url:config.url, method: config.method, data:config.data});
-    // GetDraft
-    let status = MockAdapter.mockStatus(config);
-    if (status !== 200) {
-        return [status, null];
-    }
-    console.groupCollapsed("response数据  status: "+status+" data: ");
-    console.table({});
-    console.groupEnd();
-    console.groupEnd();
-    return [status, {}];
-});
-
-// GetDraft
-mock.onGet(new RegExp(/^\/ibzdepartments\/getdraft$/)).reply((config: any) => {
-    console.groupCollapsed("实体:ibzdepartment 方法: GetDraft");
-    console.table({url:config.url, method: config.method, data:config.data});
-    // GetDraft
-    let status = MockAdapter.mockStatus(config);
-    if (status !== 200) {
-        return [status, null];
-    }
-    console.groupCollapsed("response数据  status: "+status+" data: ");
-    console.table({});
-    console.groupEnd();
-    console.groupEnd();
-    return [status, {}];
-});
-
-
     
-// Update
-mock.onPut(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
-    console.groupCollapsed("实体:ibzdepartment 方法: Update");
+// Save
+mock.onPost(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})\/save$/)).reply((config: any) => {
+    console.groupCollapsed("实体:ibzdepartment 方法: Save");
     console.table({url:config.url, method: config.method, data:config.data});
     let status = MockAdapter.mockStatus(config);
     if (status !== 200) {
         return [status, null];
     }
     const paramArray:Array<any> = ['orgid','deptid'];
-    const matchArray:any = new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
+    const matchArray:any = new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})\/save$/).exec(config.url);
     let tempValue: any = {};
     if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
         paramArray.forEach((item: any, index: number) => {
@@ -389,16 +389,16 @@ mock.onPut(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartme
     return [status, {}];
 });
         
-// Update
-mock.onPut(new RegExp(/^\/ibzdepartments\/?([a-zA-Z0-9\-\;]{0,35})$/)).reply((config: any) => {
-    console.groupCollapsed("实体:ibzdepartment 方法: Update");
+// Save
+mock.onPost(new RegExp(/^\/ibzdepartments\/?([a-zA-Z0-9\-\;]{0,35})\/save$/)).reply((config: any) => {
+    console.groupCollapsed("实体:ibzdepartment 方法: Save");
     console.table({url:config.url, method: config.method, data:config.data});
     let status = MockAdapter.mockStatus(config);
     if (status !== 200) {
         return [status, null];
     }    
     const paramArray:Array<any> = ['deptid'];
-    const matchArray:any = new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
+    const matchArray:any = new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})\/save$/).exec(config.url);
     let tempValue: any = {};
     if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
         paramArray.forEach((item: any, index: number) => {
@@ -538,62 +538,6 @@ mock.onGet(new RegExp(/^\/ibzdepartments\/fetchdefault(\?[\w-./?%&=,]*)*$/)).rep
 // URI参数传递情况未实现
 
 
-// Get
-mock.onGet(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
-    console.groupCollapsed("实体:ibzdepartment 方法: Get");
-    console.table({url:config.url, method: config.method, data:config.data});
-    let status = MockAdapter.mockStatus(config);
-    if (status !== 200) {
-        return [status, null];
-    }    
-    const paramArray:Array<any> = ['orgid','deptid'];
-    const matchArray:any = new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
-    let tempValue: any = {};
-    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
-        paramArray.forEach((item: any, index: number) => {
-            Object.defineProperty(tempValue, item, {
-                enumerable: true,
-                value: matchArray[index + 1]
-            });
-        });
-    }
-    let items = mockDatas ? mockDatas : [];
-    let _items = items.find((item: any) => Object.is(item.deptid, tempValue.deptid));
-    console.groupCollapsed("response数据  status: "+status+" data: ");
-    console.table(_items?_items:{});
-    console.groupEnd();
-    console.groupEnd();
-    return [status, _items?_items:{}];
-});
-
-// Get
-mock.onGet(new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
-    console.groupCollapsed("实体:ibzdepartment 方法: Get");
-    console.table({url:config.url, method: config.method, data:config.data});
-    let status = MockAdapter.mockStatus(config);
-    if (status !== 200) {
-        return [status, null];
-    }    
-    const paramArray:Array<any> = ['deptid'];
-    const matchArray:any = new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
-    let tempValue: any = {};
-    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
-        paramArray.forEach((item: any, index: number) => {
-            Object.defineProperty(tempValue, item, {
-                enumerable: true,
-                value: matchArray[index + 1]
-            });
-        });
-    }
-    let items = mockDatas ? mockDatas : [];
-    let _items = items.find((item: any) => Object.is(item.deptid, tempValue.deptid));
-    console.groupCollapsed("response数据  status: "+status+" data: ");
-    console.table(_items?_items:{});
-    console.groupEnd();
-    console.groupEnd();
-    return [status, _items?_items:{}];
-});
-
 // Remove
 mock.onDelete(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
     console.groupCollapsed("实体:ibzdepartment 方法: Remove");
@@ -625,6 +569,62 @@ mock.onDelete(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepar
 // Remove
 mock.onDelete(new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
     console.groupCollapsed("实体:ibzdepartment 方法: Remove");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }    
+    const paramArray:Array<any> = ['deptid'];
+    const matchArray:any = new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    let items = mockDatas ? mockDatas : [];
+    let _items = items.find((item: any) => Object.is(item.deptid, tempValue.deptid));
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table(_items?_items:{});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, _items?_items:{}];
+});
+
+// Get
+mock.onGet(new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
+    console.groupCollapsed("实体:ibzdepartment 方法: Get");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }    
+    const paramArray:Array<any> = ['orgid','deptid'];
+    const matchArray:any = new RegExp(/^\/ibzorganizations\/([a-zA-Z0-9\-\;]{1,35})\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    let items = mockDatas ? mockDatas : [];
+    let _items = items.find((item: any) => Object.is(item.deptid, tempValue.deptid));
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table(_items?_items:{});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, _items?_items:{}];
+});
+
+// Get
+mock.onGet(new RegExp(/^\/ibzdepartments\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
+    console.groupCollapsed("实体:ibzdepartment 方法: Get");
     console.table({url:config.url, method: config.method, data:config.data});
     let status = MockAdapter.mockStatus(config);
     if (status !== 200) {

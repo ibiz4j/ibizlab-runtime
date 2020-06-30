@@ -25,15 +25,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysUserRoleService extends IService<SysUserRole>{
 
-    boolean checkKey(SysUserRole et) ;
-    SysUserRole getDraft(SysUserRole et) ;
+    boolean create(SysUserRole et) ;
+    void createBatch(List<SysUserRole> list) ;
     boolean update(SysUserRole et) ;
     void updateBatch(List<SysUserRole> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
-    boolean create(SysUserRole et) ;
-    void createBatch(List<SysUserRole> list) ;
     SysUserRole get(String key) ;
+    SysUserRole getDraft(SysUserRole et) ;
+    boolean checkKey(SysUserRole et) ;
     boolean save(SysUserRole et) ;
     void saveBatch(List<SysUserRole> list) ;
     Page<SysUserRole> searchDefault(SysUserRoleSearchContext context) ;

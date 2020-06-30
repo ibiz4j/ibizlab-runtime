@@ -23,7 +23,17 @@ public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClie
             return null;
      }
 
-    public Boolean checkKey(WFProcessDefinition wfprocessdefinition){
+    public WFProcessDefinition create(WFProcessDefinition wfprocessdefinition){
+            return null;
+     }
+    public Boolean createBatch(List<WFProcessDefinition> wfprocessdefinitions){
+            return false;
+     }
+
+    public WFProcessDefinition update(String definitionkey, WFProcessDefinition wfprocessdefinition){
+            return null;
+     }
+    public Boolean updateBatch(List<WFProcessDefinition> wfprocessdefinitions){
             return false;
      }
 
@@ -35,19 +45,10 @@ public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClie
             return false;
      }
 
-    public Boolean save(WFProcessDefinition wfprocessdefinition){
-            return false;
-     }
-    public Boolean saveBatch(List<WFProcessDefinition> wfprocessdefinitions){
-            return false;
-     }
-
-    public WFProcessDefinition create(WFProcessDefinition wfprocessdefinition){
+    public WFProcessDefinition get(String definitionkey){
             return null;
      }
-    public Boolean createBatch(List<WFProcessDefinition> wfprocessdefinitions){
-            return false;
-     }
+
 
     public WFProcessDefinition getDraft(){
             return null;
@@ -55,18 +56,17 @@ public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClie
 
 
 
-    public WFProcessDefinition update(String definitionkey, WFProcessDefinition wfprocessdefinition){
-            return null;
-     }
-    public Boolean updateBatch(List<WFProcessDefinition> wfprocessdefinitions){
+    public Boolean checkKey(WFProcessDefinition wfprocessdefinition){
             return false;
      }
 
 
-    public WFProcessDefinition get(String definitionkey){
-            return null;
+    public Boolean save(WFProcessDefinition wfprocessdefinition){
+            return false;
      }
-
+    public Boolean saveBatch(List<WFProcessDefinition> wfprocessdefinitions){
+            return false;
+     }
 
     public Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context){
             return null;

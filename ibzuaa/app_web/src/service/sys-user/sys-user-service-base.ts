@@ -53,7 +53,7 @@ export default class SysUserServiceBase extends EntityService {
     }
 
     /**
-     * Remove接口方法
+     * Create接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -61,8 +61,33 @@ export default class SysUserServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysUserServiceBase
      */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().delete(`/sysusers/${context.sysuser}`,isloading);
+    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        let sysuserrolesData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles'),'undefined')){
+            sysuserrolesData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles') as any);
+            if(sysuserrolesData && sysuserrolesData.length && sysuserrolesData.length > 0){
+                sysuserrolesData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.userroleid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.sysuserroles = sysuserrolesData;
+        Object.assign(data,masterData);
+        if(!data.srffrontuf || data.srffrontuf !== "1"){
+            data[this.APPDEKEY] = null;
+        }
+        if(data.srffrontuf){
+            delete data.srffrontuf;
+        }
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        let res:any = await Http.getInstance().post(`/sysusers`,data,isloading);
+        this.tempStorage.setItem(tempContext.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
         return res;
     }
 
@@ -99,7 +124,7 @@ export default class SysUserServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Remove接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -107,8 +132,8 @@ export default class SysUserServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysUserServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/checkkey`,data,isloading);
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().delete(`/sysusers/${context.sysuser}`,isloading);
         return res;
     }
 
@@ -124,6 +149,36 @@ export default class SysUserServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
+        return res;
+    }
+
+    /**
+     * GetDraft接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysUserServiceBase
+     */
+    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await  Http.getInstance().get(`/sysusers/getdraft`,isloading);
+        res.data.sysuser = data.sysuser;
+            this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
+        return res;
+    }
+
+    /**
+     * CheckKey接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysUserServiceBase
+     */
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/checkkey`,data,isloading);
         return res;
     }
 
@@ -156,61 +211,6 @@ export default class SysUserServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysusers/${context.sysuser}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
-        return res;
-    }
-
-    /**
-     * GetDraft接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysUserServiceBase
-     */
-    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await  Http.getInstance().get(`/sysusers/getdraft`,isloading);
-        res.data.sysuser = data.sysuser;
-            this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
-        return res;
-    }
-
-    /**
-     * Create接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysUserServiceBase
-     */
-    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        let sysuserrolesData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles'),'undefined')){
-            sysuserrolesData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_sysuserroles') as any);
-            if(sysuserrolesData && sysuserrolesData.length && sysuserrolesData.length > 0){
-                sysuserrolesData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.userroleid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.sysuserroles = sysuserrolesData;
-        Object.assign(data,masterData);
-        if(!data.srffrontuf || data.srffrontuf !== "1"){
-            data[this.APPDEKEY] = null;
-        }
-        if(data.srffrontuf){
-            delete data.srffrontuf;
-        }
-        let tempContext:any = JSON.parse(JSON.stringify(context));
-        let res:any = await Http.getInstance().post(`/sysusers`,data,isloading);
-        this.tempStorage.setItem(tempContext.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
         return res;
     }
 

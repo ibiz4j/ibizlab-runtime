@@ -47,6 +47,25 @@ public class IBZPostResource {
     @Lazy
     public IBZPostMapping ibzpostMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Create-all')")
+    @ApiOperation(value = "新建岗位", tags = {"岗位" },  notes = "新建岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts")
+    @Transactional
+    public ResponseEntity<IBZPostDTO> create(@RequestBody IBZPostDTO ibzpostdto) {
+        IBZPost domain = ibzpostMapping.toDomain(ibzpostdto);
+		ibzpostService.create(domain);
+        IBZPostDTO dto = ibzpostMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Create-all')")
+    @ApiOperation(value = "批量新建岗位", tags = {"岗位" },  notes = "批量新建岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
+        ibzpostService.createBatch(ibzpostMapping.toDomain(ibzpostdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Update-all')")
     @ApiOperation(value = "更新岗位", tags = {"岗位" },  notes = "更新岗位")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzposts/{ibzpost_id}")
@@ -65,33 +84,6 @@ public class IBZPostResource {
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
         ibzpostService.updateBatch(ibzpostMapping.toDomain(ibzpostdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取岗位草稿", tags = {"岗位" },  notes = "获取岗位草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/ibzposts/getdraft")
-    public ResponseEntity<IBZPostDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(ibzpostMapping.toDto(ibzpostService.getDraft(new IBZPost())));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Save-all')")
-    @ApiOperation(value = "保存岗位", tags = {"岗位" },  notes = "保存岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/save")
-    public ResponseEntity<Boolean> save(@RequestBody IBZPostDTO ibzpostdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(ibzpostService.save(ibzpostMapping.toDomain(ibzpostdto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Save-all')")
-    @ApiOperation(value = "批量保存岗位", tags = {"岗位" },  notes = "批量保存岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
-        ibzpostService.saveBatch(ibzpostMapping.toDomain(ibzpostdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "检查岗位", tags = {"岗位" },  notes = "检查岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody IBZPostDTO ibzpostdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(ibzpostService.checkKey(ibzpostMapping.toDomain(ibzpostdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Remove-all')")
@@ -119,22 +111,30 @@ public class IBZPostResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Create-all')")
-    @ApiOperation(value = "新建岗位", tags = {"岗位" },  notes = "新建岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts")
-    @Transactional
-    public ResponseEntity<IBZPostDTO> create(@RequestBody IBZPostDTO ibzpostdto) {
-        IBZPost domain = ibzpostMapping.toDomain(ibzpostdto);
-		ibzpostService.create(domain);
-        IBZPostDTO dto = ibzpostMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "获取岗位草稿", tags = {"岗位" },  notes = "获取岗位草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/ibzposts/getdraft")
+    public ResponseEntity<IBZPostDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(ibzpostMapping.toDto(ibzpostService.getDraft(new IBZPost())));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Create-all')")
-    @ApiOperation(value = "批量新建岗位", tags = {"岗位" },  notes = "批量新建岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
-        ibzpostService.createBatch(ibzpostMapping.toDomain(ibzpostdtos));
+    @ApiOperation(value = "检查岗位", tags = {"岗位" },  notes = "检查岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody IBZPostDTO ibzpostdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(ibzpostService.checkKey(ibzpostMapping.toDomain(ibzpostdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Save-all')")
+    @ApiOperation(value = "保存岗位", tags = {"岗位" },  notes = "保存岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/save")
+    public ResponseEntity<Boolean> save(@RequestBody IBZPostDTO ibzpostdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(ibzpostService.save(ibzpostMapping.toDomain(ibzpostdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Save-all')")
+    @ApiOperation(value = "批量保存岗位", tags = {"岗位" },  notes = "批量保存岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
+        ibzpostService.saveBatch(ibzpostMapping.toDomain(ibzpostdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 

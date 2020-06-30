@@ -49,8 +49,13 @@ public class WFTaskServiceImpl implements IWFTaskService {
     }
 
     @Override
-    public WFTask getDraft(WFTask et) {
-        return et;
+    public boolean update(WFTask et) {
+        //代码实现
+        return true;
+    }
+
+    public void updateBatch(List<WFTask> list){
+                    
     }
 
     @Override
@@ -63,26 +68,21 @@ public class WFTaskServiceImpl implements IWFTaskService {
     }
 
     @Override
-    public boolean checkKey(WFTask et) {
-        return false;
-    }
-    @Override
-    public boolean update(WFTask et) {
-        //代码实现
-        return true;
-    }
-
-    public void updateBatch(List<WFTask> list){
-                    
-    }
-
-    @Override
     public WFTask get(String key) {
         WFTask et = new WFTask();
         et.setId(key);
         return et;
     }
 
+    @Override
+    public WFTask getDraft(WFTask et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFTask et) {
+        return false;
+    }
     @Override
     @Transactional
     public boolean save(WFTask et) {

@@ -23,42 +23,12 @@ public class IBZOrganizationFallback implements IBZOrganizationFeignClient{
             return null;
      }
 
-    public Boolean save(IBZOrganization ibzorganization){
-            return false;
-     }
-    public Boolean saveBatch(List<IBZOrganization> ibzorganizations){
-            return false;
-     }
-
-    public Boolean checkKey(IBZOrganization ibzorganization){
-            return false;
-     }
-
-
-    public IBZOrganization get(String orgid){
-            return null;
-     }
-
-
     public IBZOrganization create(IBZOrganization ibzorganization){
             return null;
      }
     public Boolean createBatch(List<IBZOrganization> ibzorganizations){
             return false;
      }
-
-    public Boolean remove(String orgid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
-
-    public IBZOrganization getDraft(){
-            return null;
-    }
-
-
 
     public IBZOrganization update(String orgid, IBZOrganization ibzorganization){
             return null;
@@ -67,6 +37,36 @@ public class IBZOrganizationFallback implements IBZOrganizationFeignClient{
             return false;
      }
 
+
+    public Boolean remove(String orgid){
+            return false;
+     }
+    public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
+
+    public IBZOrganization get(String orgid){
+            return null;
+     }
+
+
+    public IBZOrganization getDraft(){
+            return null;
+    }
+
+
+
+    public Boolean checkKey(IBZOrganization ibzorganization){
+            return false;
+     }
+
+
+    public Boolean save(IBZOrganization ibzorganization){
+            return false;
+     }
+    public Boolean saveBatch(List<IBZOrganization> ibzorganizations){
+            return false;
+     }
 
     public Page<IBZOrganization> searchDefault(IBZOrganizationSearchContext context){
             return null;

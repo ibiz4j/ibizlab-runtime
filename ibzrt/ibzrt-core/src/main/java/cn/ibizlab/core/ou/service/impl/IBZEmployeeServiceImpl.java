@@ -68,14 +68,19 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
 
     @Override
     @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
+    public boolean create(IBZEmployee et) {
+        fillParentData(et);
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getUserid()),et);
+        savedeptmemberLogic.execute(et);
+        return true;
     }
 
     @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
+    public void createBatch(List<IBZEmployee> list) {
+        list.forEach(item->fillParentData(item));
+        this.saveBatch(list,batchSize);
     }
 
     @Override
@@ -96,9 +101,17 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     }
 
     @Override
-    public boolean checkKey(IBZEmployee et) {
-        return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
     }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
     @Override
     @Transactional
     public IBZEmployee get(String key) {
@@ -109,6 +122,23 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
         }
         else{
         }
+        return et;
+    }
+
+    @Override
+    public IBZEmployee getDraft(IBZEmployee et) {
+        fillParentData(et);
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZEmployee et) {
+        return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
+    }
+    @Override
+    @Transactional
+    public IBZEmployee initPwd(IBZEmployee et) {
+        //自定义代码
         return et;
     }
 
@@ -143,36 +173,6 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     public void saveBatch(List<IBZEmployee> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public IBZEmployee initPwd(IBZEmployee et) {
-        //自定义代码
-        return et;
-    }
-
-    @Override
-    public IBZEmployee getDraft(IBZEmployee et) {
-        fillParentData(et);
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean create(IBZEmployee et) {
-        fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getUserid()),et);
-        savedeptmemberLogic.execute(et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<IBZEmployee> list) {
-        list.forEach(item->fillParentData(item));
-        this.saveBatch(list,batchSize);
     }
 
 

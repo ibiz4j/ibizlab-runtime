@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWFSystemService extends IService<WFSystem>{
 
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean update(WFSystem et) ;
-    void updateBatch(List<WFSystem> list) ;
-    WFSystem getDraft(WFSystem et) ;
-    boolean save(WFSystem et) ;
-    void saveBatch(List<WFSystem> list) ;
     boolean create(WFSystem et) ;
     void createBatch(List<WFSystem> list) ;
-    boolean checkKey(WFSystem et) ;
+    boolean update(WFSystem et) ;
+    void updateBatch(List<WFSystem> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
     WFSystem get(String key) ;
+    WFSystem getDraft(WFSystem et) ;
+    boolean checkKey(WFSystem et) ;
+    boolean save(WFSystem et) ;
+    void saveBatch(List<WFSystem> list) ;
     Page<WFSystem> searchDefault(WFSystemSearchContext context) ;
     /**
      *自定义查询SQL

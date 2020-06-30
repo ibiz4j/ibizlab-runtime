@@ -23,8 +23,18 @@ public interface SysRolePermissionFeignClient {
     Page<SysRolePermission> select();
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/{rolepermissionid}")
-    SysRolePermission get(@PathVariable("rolepermissionid") String rolepermissionid);
+    @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions")
+    SysRolePermission create(@RequestBody SysRolePermission sysrolepermission);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/batch")
+    Boolean createBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/{rolepermissionid}")
+    SysRolePermission update(@PathVariable("rolepermissionid") String rolepermissionid,@RequestBody SysRolePermission sysrolepermission);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/batch")
+    Boolean updateBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysrolepermissions/{rolepermissionid}")
@@ -34,15 +44,12 @@ public interface SysRolePermissionFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/{rolepermissionid}")
+    SysRolePermission get(@PathVariable("rolepermissionid") String rolepermissionid);
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/getdraft")
     SysRolePermission getDraft();
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions")
-    SysRolePermission create(@RequestBody SysRolePermission sysrolepermission);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/batch")
-    Boolean createBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/checkkey")
@@ -54,13 +61,6 @@ public interface SysRolePermissionFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/save")
     Boolean saveBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
-
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/{rolepermissionid}")
-    SysRolePermission update(@PathVariable("rolepermissionid") String rolepermissionid,@RequestBody SysRolePermission sysrolepermission);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/batch")
-    Boolean updateBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
 
 
 

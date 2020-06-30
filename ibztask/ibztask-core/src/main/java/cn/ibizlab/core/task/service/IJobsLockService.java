@@ -27,15 +27,15 @@ public interface IJobsLockService extends IService<JobsLock>{
 
     boolean create(JobsLock et) ;
     void createBatch(List<JobsLock> list) ;
-    boolean save(JobsLock et) ;
-    void saveBatch(List<JobsLock> list) ;
-    JobsLock get(String key) ;
     boolean update(JobsLock et) ;
     void updateBatch(List<JobsLock> list) ;
-    boolean checkKey(JobsLock et) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
+    JobsLock get(String key) ;
     JobsLock getDraft(JobsLock et) ;
+    boolean checkKey(JobsLock et) ;
+    boolean save(JobsLock et) ;
+    void saveBatch(List<JobsLock> list) ;
     Page<JobsLock> searchDefault(JobsLockSearchContext context) ;
     /**
      *自定义查询SQL

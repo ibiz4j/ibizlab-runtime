@@ -23,20 +23,17 @@ public class IBZDeptMemberFallback implements IBZDeptMemberFeignClient{
             return null;
      }
 
+    public IBZDeptMember create(IBZDeptMember ibzdeptmember){
+            return null;
+     }
+    public Boolean createBatch(List<IBZDeptMember> ibzdeptmembers){
+            return false;
+     }
+
     public IBZDeptMember update(String memberid, IBZDeptMember ibzdeptmember){
             return null;
      }
     public Boolean updateBatch(List<IBZDeptMember> ibzdeptmembers){
-            return false;
-     }
-
-
-    public IBZDeptMember get(String memberid){
-            return null;
-     }
-
-
-    public Boolean checkKey(IBZDeptMember ibzdeptmember){
             return false;
      }
 
@@ -48,17 +45,20 @@ public class IBZDeptMemberFallback implements IBZDeptMemberFeignClient{
             return false;
      }
 
-    public IBZDeptMember create(IBZDeptMember ibzdeptmember){
+    public IBZDeptMember get(String memberid){
             return null;
      }
-    public Boolean createBatch(List<IBZDeptMember> ibzdeptmembers){
-            return false;
-     }
+
 
     public IBZDeptMember getDraft(){
             return null;
     }
 
+
+
+    public Boolean checkKey(IBZDeptMember ibzdeptmember){
+            return false;
+     }
 
 
     public Boolean save(IBZDeptMember ibzdeptmember){

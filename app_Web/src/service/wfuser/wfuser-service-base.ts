@@ -53,69 +53,6 @@ export default class WFUserServiceBase extends EntityService {
     }
 
     /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFUserServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        let wfmembersData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers'),'undefined')){
-            wfmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers') as any);
-            if(wfmembersData && wfmembersData.length && wfmembersData.length > 0){
-                wfmembersData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.memberid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.wfmembers = wfmembersData;
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/wfusers/${context.wfuser}`,data,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-        return res;
-    }
-
-    /**
-     * GetDraft接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFUserServiceBase
-     */
-    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await  Http.getInstance().get(`/wfusers/getdraft`,isloading);
-        res.data.wfuser = data.wfuser;
-            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-        return res;
-    }
-
-    /**
-     * Get接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFUserServiceBase
-     */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}`,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-        return res;
-    }
-
-    /**
      * Create接口方法
      *
      * @param {*} [context={}]
@@ -151,6 +88,83 @@ export default class WFUserServiceBase extends EntityService {
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/wfusers`,data,isloading);
         this.tempStorage.setItem(tempContext.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
+        return res;
+    }
+
+    /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFUserServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        let wfmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers'),'undefined')){
+            wfmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers') as any);
+            if(wfmembersData && wfmembersData.length && wfmembersData.length > 0){
+                wfmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.wfmembers = wfmembersData;
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/wfusers/${context.wfuser}`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
+        return res;
+    }
+
+    /**
+     * Remove接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFUserServiceBase
+     */
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().delete(`/wfusers/${context.wfuser}`,isloading);
+        return res;
+    }
+
+    /**
+     * Get接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFUserServiceBase
+     */
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}`,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
+        return res;
+    }
+
+    /**
+     * GetDraft接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFUserServiceBase
+     */
+    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await  Http.getInstance().get(`/wfusers/getdraft`,isloading);
+        res.data.wfuser = data.wfuser;
+            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
         return res;
     }
 
@@ -197,20 +211,6 @@ export default class WFUserServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/wfusers/${context.wfuser}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-        return res;
-    }
-
-    /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFUserServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().delete(`/wfusers/${context.wfuser}`,isloading);
         return res;
     }
 

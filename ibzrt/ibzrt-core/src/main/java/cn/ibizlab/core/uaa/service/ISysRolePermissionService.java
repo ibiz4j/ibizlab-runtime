@@ -23,17 +23,17 @@ import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
  */
 public interface ISysRolePermissionService{
 
-    SysRolePermission get(String key) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysRolePermission getDraft(SysRolePermission et) ;
     boolean create(SysRolePermission et) ;
     void createBatch(List<SysRolePermission> list) ;
+    boolean update(SysRolePermission et) ;
+    void updateBatch(List<SysRolePermission> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    SysRolePermission get(String key) ;
+    SysRolePermission getDraft(SysRolePermission et) ;
     boolean checkKey(SysRolePermission et) ;
     boolean save(SysRolePermission et) ;
     void saveBatch(List<SysRolePermission> list) ;
-    boolean update(SysRolePermission et) ;
-    void updateBatch(List<SysRolePermission> list) ;
     Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context) ;
     List<SysRolePermission> selectByPermissionid(String permissionid) ;
     void removeByPermissionid(String permissionid) ;

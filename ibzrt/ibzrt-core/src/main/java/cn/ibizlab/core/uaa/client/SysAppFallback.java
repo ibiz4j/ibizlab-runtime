@@ -23,18 +23,19 @@ public class SysAppFallback implements SysAppFeignClient{
             return null;
      }
 
+    public SysApp create(SysApp sysapp){
+            return null;
+     }
+    public Boolean createBatch(List<SysApp> sysapps){
+            return false;
+     }
+
     public SysApp update(String id, SysApp sysapp){
             return null;
      }
     public Boolean updateBatch(List<SysApp> sysapps){
             return false;
      }
-
-
-    public SysApp getDraft(){
-            return null;
-    }
-
 
 
     public Boolean remove(String id){
@@ -49,12 +50,16 @@ public class SysAppFallback implements SysAppFeignClient{
      }
 
 
-    public SysApp create(SysApp sysapp){
+    public SysApp getDraft(){
             return null;
-     }
-    public Boolean createBatch(List<SysApp> sysapps){
+    }
+
+
+
+    public Boolean checkKey(SysApp sysapp){
             return false;
      }
+
 
     public Boolean save(SysApp sysapp){
             return false;
@@ -62,11 +67,6 @@ public class SysAppFallback implements SysAppFeignClient{
     public Boolean saveBatch(List<SysApp> sysapps){
             return false;
      }
-
-    public Boolean checkKey(SysApp sysapp){
-            return false;
-     }
-
 
     public Page<SysApp> searchDefault(SysAppSearchContext context){
             return null;

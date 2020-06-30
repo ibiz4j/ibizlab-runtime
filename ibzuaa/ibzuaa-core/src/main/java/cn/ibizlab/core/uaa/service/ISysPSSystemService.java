@@ -25,19 +25,21 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysPSSystemService extends IService<SysPSSystem>{
 
-    boolean checkKey(SysPSSystem et) ;
-    SysPSSystem get(String key) ;
     boolean create(SysPSSystem et) ;
     void createBatch(List<SysPSSystem> list) ;
-    SysPSSystem getDraft(SysPSSystem et) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean save(SysPSSystem et) ;
-    void saveBatch(List<SysPSSystem> list) ;
     boolean update(SysPSSystem et) ;
     void updateBatch(List<SysPSSystem> list) ;
-    Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    SysPSSystem get(String key) ;
+    SysPSSystem getDraft(SysPSSystem et) ;
+    boolean checkKey(SysPSSystem et) ;
+    SysPSSystem prepareApps(SysPSSystem et) ;
+    boolean save(SysPSSystem et) ;
+    void saveBatch(List<SysPSSystem> list) ;
+    SysPSSystem syncPermission(SysPSSystem et) ;
     Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) ;
+    Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) ;
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

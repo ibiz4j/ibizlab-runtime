@@ -47,24 +47,21 @@ public class DictOptionResource {
     @Lazy
     public DictOptionMapping dictoptionMapping;
 
-    @ApiOperation(value = "检查字典项", tags = {"字典项" },  notes = "检查字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody DictOptionDTO dictoptiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(dictoptionService.checkKey(dictoptionMapping.toDomain(dictoptiondto)));
-    }
+    @ApiOperation(value = "新建字典项", tags = {"字典项" },  notes = "新建字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions")
 
-    @ApiOperation(value = "获取字典项草稿", tags = {"字典项" },  notes = "获取字典项草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
-    public ResponseEntity<DictOptionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(new DictOption())));
-    }
-
-    @ApiOperation(value = "获取字典项", tags = {"字典项" },  notes = "获取字典项")
-	@RequestMapping(method = RequestMethod.GET, value = "/dictoptions/{dictoption_id}")
-    public ResponseEntity<DictOptionDTO> get(@PathVariable("dictoption_id") String dictoption_id) {
-        DictOption domain = dictoptionService.get(dictoption_id);
+    public ResponseEntity<DictOptionDTO> create(@RequestBody DictOptionDTO dictoptiondto) {
+        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
+		dictoptionService.create(domain);
         DictOptionDTO dto = dictoptionMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "批量新建字典项", tags = {"字典项" },  notes = "批量新建字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<DictOptionDTO> dictoptiondtos) {
+        dictoptionService.createBatch(dictoptionMapping.toDomain(dictoptiondtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @VersionCheck(entity = "dictoption" , versionfield = "updatedate")
@@ -86,21 +83,38 @@ public class DictOptionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "新建字典项", tags = {"字典项" },  notes = "新建字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions")
+    @ApiOperation(value = "删除字典项", tags = {"字典项" },  notes = "删除字典项")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/{dictoption_id}")
 
-    public ResponseEntity<DictOptionDTO> create(@RequestBody DictOptionDTO dictoptiondto) {
-        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
-		dictoptionService.create(domain);
-        DictOptionDTO dto = dictoptionMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    public ResponseEntity<Boolean> remove(@PathVariable("dictoption_id") String dictoption_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(dictoptionService.remove(dictoption_id));
     }
 
-    @ApiOperation(value = "批量新建字典项", tags = {"字典项" },  notes = "批量新建字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<DictOptionDTO> dictoptiondtos) {
-        dictoptionService.createBatch(dictoptionMapping.toDomain(dictoptiondtos));
+    @ApiOperation(value = "批量删除字典项", tags = {"字典项" },  notes = "批量删除字典项")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        dictoptionService.removeBatch(ids);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @ApiOperation(value = "获取字典项", tags = {"字典项" },  notes = "获取字典项")
+	@RequestMapping(method = RequestMethod.GET, value = "/dictoptions/{dictoption_id}")
+    public ResponseEntity<DictOptionDTO> get(@PathVariable("dictoption_id") String dictoption_id) {
+        DictOption domain = dictoptionService.get(dictoption_id);
+        DictOptionDTO dto = dictoptionMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取字典项草稿", tags = {"字典项" },  notes = "获取字典项草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
+    public ResponseEntity<DictOptionDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(new DictOption())));
+    }
+
+    @ApiOperation(value = "检查字典项", tags = {"字典项" },  notes = "检查字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody DictOptionDTO dictoptiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(dictoptionService.checkKey(dictoptionMapping.toDomain(dictoptiondto)));
     }
 
     @ApiOperation(value = "保存字典项", tags = {"字典项" },  notes = "保存字典项")
@@ -116,21 +130,6 @@ public class DictOptionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "删除字典项", tags = {"字典项" },  notes = "删除字典项")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/{dictoption_id}")
-
-    public ResponseEntity<Boolean> remove(@PathVariable("dictoption_id") String dictoption_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(dictoptionService.remove(dictoption_id));
-    }
-
-    @ApiOperation(value = "批量删除字典项", tags = {"字典项" },  notes = "批量删除字典项")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        dictoptionService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"字典项" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/dictoptions/fetchdefault")
 	public ResponseEntity<List<DictOptionDTO>> fetchDefault(DictOptionSearchContext context) {
@@ -143,7 +142,6 @@ public class DictOptionResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"字典项" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/dictoptions/searchdefault")
 	public ResponseEntity<Page<DictOptionDTO>> searchDefault(@RequestBody DictOptionSearchContext context) {
@@ -151,26 +149,26 @@ public class DictOptionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(dictoptionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @ApiOperation(value = "根据字典检查字典项", tags = {"字典项" },  notes = "根据字典检查字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/checkkey")
-    public ResponseEntity<Boolean> checkKeyByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(dictoptionService.checkKey(dictoptionMapping.toDomain(dictoptiondto)));
-    }
+    @ApiOperation(value = "根据字典建立字典项", tags = {"字典项" },  notes = "根据字典建立字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions")
 
-    @ApiOperation(value = "根据字典获取字典项草稿", tags = {"字典项" },  notes = "根据字典获取字典项草稿")
-    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/getdraft")
-    public ResponseEntity<DictOptionDTO> getDraftByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id) {
-        DictOption domain = new DictOption();
+    public ResponseEntity<DictOptionDTO> createByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
+        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
         domain.setCatalogId(dictcatalog_id);
-        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(domain)));
+		dictoptionService.create(domain);
+        DictOptionDTO dto = dictoptionMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "根据字典获取字典项", tags = {"字典项" },  notes = "根据字典获取字典项")
-	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")
-    public ResponseEntity<DictOptionDTO> getByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @PathVariable("dictoption_id") String dictoption_id) {
-        DictOption domain = dictoptionService.get(dictoption_id);
-        DictOptionDTO dto = dictoptionMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "根据字典批量建立字典项", tags = {"字典项" },  notes = "根据字典批量建立字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/batch")
+    public ResponseEntity<Boolean> createBatchByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody List<DictOptionDTO> dictoptiondtos) {
+        List<DictOption> domainlist=dictoptionMapping.toDomain(dictoptiondtos);
+        for(DictOption domain:domainlist){
+            domain.setCatalogId(dictcatalog_id);
+        }
+        dictoptionService.createBatch(domainlist);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @VersionCheck(entity = "dictoption" , versionfield = "updatedate")
@@ -197,26 +195,40 @@ public class DictOptionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "根据字典建立字典项", tags = {"字典项" },  notes = "根据字典建立字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions")
+    @ApiOperation(value = "根据字典删除字典项", tags = {"字典项" },  notes = "根据字典删除字典项")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")
 
-    public ResponseEntity<DictOptionDTO> createByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
-        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
-        domain.setCatalogId(dictcatalog_id);
-		dictoptionService.create(domain);
-        DictOptionDTO dto = dictoptionMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    public ResponseEntity<Boolean> removeByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @PathVariable("dictoption_id") String dictoption_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(dictoptionService.remove(dictoption_id));
     }
 
-    @ApiOperation(value = "根据字典批量建立字典项", tags = {"字典项" },  notes = "根据字典批量建立字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/batch")
-    public ResponseEntity<Boolean> createBatchByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody List<DictOptionDTO> dictoptiondtos) {
-        List<DictOption> domainlist=dictoptionMapping.toDomain(dictoptiondtos);
-        for(DictOption domain:domainlist){
-            domain.setCatalogId(dictcatalog_id);
-        }
-        dictoptionService.createBatch(domainlist);
+    @ApiOperation(value = "根据字典批量删除字典项", tags = {"字典项" },  notes = "根据字典批量删除字典项")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/batch")
+    public ResponseEntity<Boolean> removeBatchByDictCatalog(@RequestBody List<String> ids) {
+        dictoptionService.removeBatch(ids);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @ApiOperation(value = "根据字典获取字典项", tags = {"字典项" },  notes = "根据字典获取字典项")
+	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")
+    public ResponseEntity<DictOptionDTO> getByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @PathVariable("dictoption_id") String dictoption_id) {
+        DictOption domain = dictoptionService.get(dictoption_id);
+        DictOptionDTO dto = dictoptionMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "根据字典获取字典项草稿", tags = {"字典项" },  notes = "根据字典获取字典项草稿")
+    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/getdraft")
+    public ResponseEntity<DictOptionDTO> getDraftByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id) {
+        DictOption domain = new DictOption();
+        domain.setCatalogId(dictcatalog_id);
+        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(domain)));
+    }
+
+    @ApiOperation(value = "根据字典检查字典项", tags = {"字典项" },  notes = "根据字典检查字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/checkkey")
+    public ResponseEntity<Boolean> checkKeyByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(dictoptionService.checkKey(dictoptionMapping.toDomain(dictoptiondto)));
     }
 
     @ApiOperation(value = "根据字典保存字典项", tags = {"字典项" },  notes = "根据字典保存字典项")
@@ -238,21 +250,6 @@ public class DictOptionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "根据字典删除字典项", tags = {"字典项" },  notes = "根据字典删除字典项")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")
-
-    public ResponseEntity<Boolean> removeByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @PathVariable("dictoption_id") String dictoption_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(dictoptionService.remove(dictoption_id));
-    }
-
-    @ApiOperation(value = "根据字典批量删除字典项", tags = {"字典项" },  notes = "根据字典批量删除字典项")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/batch")
-    public ResponseEntity<Boolean> removeBatchByDictCatalog(@RequestBody List<String> ids) {
-        dictoptionService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-searchDefault-all')")
 	@ApiOperation(value = "根据字典获取DEFAULT", tags = {"字典项" } ,notes = "根据字典获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/dictcatalogs/{dictcatalog_id}/dictoptions/fetchdefault")
 	public ResponseEntity<List<DictOptionDTO>> fetchDictOptionDefaultByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id,DictOptionSearchContext context) {
@@ -266,7 +263,6 @@ public class DictOptionResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-searchDefault-all')")
 	@ApiOperation(value = "根据字典查询DEFAULT", tags = {"字典项" } ,notes = "根据字典查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/dictcatalogs/{dictcatalog_id}/dictoptions/searchdefault")
 	public ResponseEntity<Page<DictOptionDTO>> searchDictOptionDefaultByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionSearchContext context) {

@@ -49,12 +49,18 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
 
     @Override
     @Transactional
-    public JobsInfo start(JobsInfo et) {
-        et.set("Status","0");
-        et.set("Last_time","0");
-        update(et);
-        return et;
+    public boolean create(JobsInfo et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getId()),et);
+        return true;
     }
+
+    @Override
+    public void createBatch(List<JobsInfo> list) {
+        this.saveBatch(list,batchSize);
+    }
+
     @Override
     @Transactional
     public boolean update(JobsInfo et) {
@@ -67,6 +73,36 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     public void updateBatch(List<JobsInfo> list) {
         updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public JobsInfo get(String key) {
+        JobsInfo et = getById(key);
+        if(et==null){
+            et=new JobsInfo();
+            et.setId(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public JobsInfo getDraft(JobsInfo et) {
+        return et;
     }
 
     @Override
@@ -112,49 +148,13 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     }
 
     @Override
-    public JobsInfo getDraft(JobsInfo et) {
+    @Transactional
+    public JobsInfo start(JobsInfo et) {
+        et.set("Status","0");
+        et.set("Last_time","0");
+        update(et);
         return et;
     }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    @Transactional
-    public JobsInfo get(String key) {
-        JobsInfo et = getById(key);
-        if(et==null){
-            et=new JobsInfo();
-            et.setId(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean create(JobsInfo et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<JobsInfo> list) {
-        this.saveBatch(list,batchSize);
-    }
-
     @Override
     @Transactional
     public JobsInfo stop(JobsInfo et) {

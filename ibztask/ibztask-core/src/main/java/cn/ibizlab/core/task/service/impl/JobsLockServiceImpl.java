@@ -63,6 +63,54 @@ public class JobsLockServiceImpl extends ServiceImpl<JobsLockMapper, JobsLock> i
 
     @Override
     @Transactional
+    public boolean update(JobsLock et) {
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("id",et.getId())))
+            return false;
+        CachedBeanCopier.copy(get(et.getId()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<JobsLock> list) {
+        updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public JobsLock get(String key) {
+        JobsLock et = getById(key);
+        if(et==null){
+            et=new JobsLock();
+            et.setId(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public JobsLock getDraft(JobsLock et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(JobsLock et) {
+        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+    }
+    @Override
+    @Transactional
     public boolean save(JobsLock et) {
         if(!saveOrUpdate(et))
             return false;
@@ -90,54 +138,6 @@ public class JobsLockServiceImpl extends ServiceImpl<JobsLockMapper, JobsLock> i
     @Override
     public void saveBatch(List<JobsLock> list) {
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public JobsLock get(String key) {
-        JobsLock et = getById(key);
-        if(et==null){
-            et=new JobsLock();
-            et.setId(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean update(JobsLock et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("id",et.getId())))
-            return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<JobsLock> list) {
-        updateBatchById(list,batchSize);
-    }
-
-    @Override
-    public boolean checkKey(JobsLock et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
-    }
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    public JobsLock getDraft(JobsLock et) {
-        return et;
     }
 
 

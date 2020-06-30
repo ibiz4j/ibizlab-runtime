@@ -47,33 +47,6 @@ public class IBZOrganizationResource {
     @Lazy
     public IBZOrganizationMapping ibzorganizationMapping;
 
-    @ApiOperation(value = "保存单位机构", tags = {"单位机构" },  notes = "保存单位机构")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/save")
-    public ResponseEntity<Boolean> save(@RequestBody IBZOrganizationDTO ibzorganizationdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationService.save(ibzorganizationMapping.toDomain(ibzorganizationdto)));
-    }
-
-    @ApiOperation(value = "批量保存单位机构", tags = {"单位机构" },  notes = "批量保存单位机构")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZOrganizationDTO> ibzorganizationdtos) {
-        ibzorganizationService.saveBatch(ibzorganizationMapping.toDomain(ibzorganizationdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "检查单位机构", tags = {"单位机构" },  notes = "检查单位机构")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody IBZOrganizationDTO ibzorganizationdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(ibzorganizationService.checkKey(ibzorganizationMapping.toDomain(ibzorganizationdto)));
-    }
-
-    @ApiOperation(value = "获取单位机构", tags = {"单位机构" },  notes = "获取单位机构")
-	@RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/{ibzorganization_id}")
-    public ResponseEntity<IBZOrganizationDTO> get(@PathVariable("ibzorganization_id") String ibzorganization_id) {
-        IBZOrganization domain = ibzorganizationService.get(ibzorganization_id);
-        IBZOrganizationDTO dto = ibzorganizationMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
     @ApiOperation(value = "新建单位机构", tags = {"单位机构" },  notes = "新建单位机构")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations")
 
@@ -89,26 +62,6 @@ public class IBZOrganizationResource {
     public ResponseEntity<Boolean> createBatch(@RequestBody List<IBZOrganizationDTO> ibzorganizationdtos) {
         ibzorganizationService.createBatch(ibzorganizationMapping.toDomain(ibzorganizationdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "删除单位机构", tags = {"单位机构" },  notes = "删除单位机构")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}")
-
-    public ResponseEntity<Boolean> remove(@PathVariable("ibzorganization_id") String ibzorganization_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationService.remove(ibzorganization_id));
-    }
-
-    @ApiOperation(value = "批量删除单位机构", tags = {"单位机构" },  notes = "批量删除单位机构")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        ibzorganizationService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取单位机构草稿", tags = {"单位机构" },  notes = "获取单位机构草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/getdraft")
-    public ResponseEntity<IBZOrganizationDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationMapping.toDto(ibzorganizationService.getDraft(new IBZOrganization())));
     }
 
     @VersionCheck(entity = "ibzorganization" , versionfield = "updatedate")
@@ -130,7 +83,53 @@ public class IBZOrganizationResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZOrganization-searchDefault-all')")
+    @ApiOperation(value = "删除单位机构", tags = {"单位机构" },  notes = "删除单位机构")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}")
+
+    public ResponseEntity<Boolean> remove(@PathVariable("ibzorganization_id") String ibzorganization_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationService.remove(ibzorganization_id));
+    }
+
+    @ApiOperation(value = "批量删除单位机构", tags = {"单位机构" },  notes = "批量删除单位机构")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        ibzorganizationService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @ApiOperation(value = "获取单位机构", tags = {"单位机构" },  notes = "获取单位机构")
+	@RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/{ibzorganization_id}")
+    public ResponseEntity<IBZOrganizationDTO> get(@PathVariable("ibzorganization_id") String ibzorganization_id) {
+        IBZOrganization domain = ibzorganizationService.get(ibzorganization_id);
+        IBZOrganizationDTO dto = ibzorganizationMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取单位机构草稿", tags = {"单位机构" },  notes = "获取单位机构草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/getdraft")
+    public ResponseEntity<IBZOrganizationDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationMapping.toDto(ibzorganizationService.getDraft(new IBZOrganization())));
+    }
+
+    @ApiOperation(value = "检查单位机构", tags = {"单位机构" },  notes = "检查单位机构")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody IBZOrganizationDTO ibzorganizationdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(ibzorganizationService.checkKey(ibzorganizationMapping.toDomain(ibzorganizationdto)));
+    }
+
+    @ApiOperation(value = "保存单位机构", tags = {"单位机构" },  notes = "保存单位机构")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/save")
+    public ResponseEntity<Boolean> save(@RequestBody IBZOrganizationDTO ibzorganizationdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationService.save(ibzorganizationMapping.toDomain(ibzorganizationdto)));
+    }
+
+    @ApiOperation(value = "批量保存单位机构", tags = {"单位机构" },  notes = "批量保存单位机构")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZOrganizationDTO> ibzorganizationdtos) {
+        ibzorganizationService.saveBatch(ibzorganizationMapping.toDomain(ibzorganizationdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
 	@ApiOperation(value = "获取DEFAULT", tags = {"单位机构" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzorganizations/fetchdefault")
 	public ResponseEntity<List<IBZOrganizationDTO>> fetchDefault(IBZOrganizationSearchContext context) {
@@ -143,7 +142,6 @@ public class IBZOrganizationResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZOrganization-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"单位机构" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzorganizations/searchdefault")
 	public ResponseEntity<Page<IBZOrganizationDTO>> searchDefault(@RequestBody IBZOrganizationSearchContext context) {

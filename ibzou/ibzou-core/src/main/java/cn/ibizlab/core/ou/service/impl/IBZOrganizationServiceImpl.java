@@ -56,27 +56,6 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
     protected int batchSize = 500;
 
     @Override
-    public boolean checkKey(IBZOrganization et) {
-        return (!ObjectUtils.isEmpty(et.getOrgid()))&&(!Objects.isNull(this.getById(et.getOrgid())));
-    }
-    @Override
-    @Transactional
-    public boolean update(IBZOrganization et) {
-        fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("orgid",et.getOrgid())))
-            return false;
-        ibzdepartmentService.saveByOrgid(et.getOrgid(),et.getDepts());
-        CachedBeanCopier.copy(get(et.getOrgid()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<IBZOrganization> list) {
-        list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
-    }
-
-    @Override
     @Transactional
     public boolean create(IBZOrganization et) {
         fillParentData(et);
@@ -95,35 +74,19 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
 
     @Override
     @Transactional
-    public boolean save(IBZOrganization et) {
-        if(!saveOrUpdate(et))
+    public boolean update(IBZOrganization et) {
+        fillParentData(et);
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("orgid",et.getOrgid())))
             return false;
+        ibzdepartmentService.saveByOrgid(et.getOrgid(),et.getDepts());
+        CachedBeanCopier.copy(get(et.getOrgid()),et);
         return true;
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
-    public boolean saveOrUpdate(IBZOrganization et) {
-        if (null == et) {
-            return false;
-        } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
-        }
-    }
-
-    @Override
-    public boolean saveBatch(Collection<IBZOrganization> list) {
+    public void updateBatch(List<IBZOrganization> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<IBZOrganization> list) {
-        list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        updateBatchById(list,batchSize);
     }
 
     @Override
@@ -157,6 +120,43 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
     public IBZOrganization getDraft(IBZOrganization et) {
         fillParentData(et);
         return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZOrganization et) {
+        return (!ObjectUtils.isEmpty(et.getOrgid()))&&(!Objects.isNull(this.getById(et.getOrgid())));
+    }
+    @Override
+    @Transactional
+    public boolean save(IBZOrganization et) {
+        if(!saveOrUpdate(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    @Transactional(
+            rollbackFor = {Exception.class}
+    )
+    public boolean saveOrUpdate(IBZOrganization et) {
+        if (null == et) {
+            return false;
+        } else {
+            return checkKey(et) ? this.update(et) : this.create(et);
+        }
+    }
+
+    @Override
+    public boolean saveBatch(Collection<IBZOrganization> list) {
+        list.forEach(item->fillParentData(item));
+        saveOrUpdateBatch(list,batchSize);
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<IBZOrganization> list) {
+        list.forEach(item->fillParentData(item));
+        saveOrUpdateBatch(list,batchSize);
     }
 
 

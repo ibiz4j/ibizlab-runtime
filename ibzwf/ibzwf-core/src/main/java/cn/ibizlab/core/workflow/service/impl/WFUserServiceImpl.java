@@ -52,6 +52,34 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
 
     @Override
     @Transactional
+    public boolean create(WFUser et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getId()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<WFUser> list) {
+        this.saveBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean update(WFUser et) {
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getId())))
+            return false;
+        CachedBeanCopier.copy(get(et.getId()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<WFUser> list) {
+        updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
     public boolean remove(String key) {
         boolean result=removeById(key);
         return result ;
@@ -63,10 +91,27 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
     }
 
     @Override
+    @Transactional
+    public WFUser get(String key) {
+        WFUser et = getById(key);
+        if(et==null){
+            et=new WFUser();
+            et.setId(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
     public WFUser getDraft(WFUser et) {
         return et;
     }
 
+    @Override
+    public boolean checkKey(WFUser et) {
+        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+    }
     @Override
     @Transactional
     public boolean save(WFUser et) {
@@ -98,51 +143,6 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
         saveOrUpdateBatch(list,batchSize);
     }
 
-    @Override
-    @Transactional
-    public boolean update(WFUser et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getId())))
-            return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<WFUser> list) {
-        updateBatchById(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public WFUser get(String key) {
-        WFUser et = getById(key);
-        if(et==null){
-            et=new WFUser();
-            et.setId(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean create(WFUser et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<WFUser> list) {
-        this.saveBatch(list,batchSize);
-    }
-
-    @Override
-    public boolean checkKey(WFUser et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
-    }
 
 
     /**

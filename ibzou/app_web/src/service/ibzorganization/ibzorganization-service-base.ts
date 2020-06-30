@@ -53,68 +53,6 @@ export default class IBZOrganizationServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZOrganizationServiceBase
-     */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/checkkey`,data,isloading);
-        return res;
-    }
-
-    /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZOrganizationServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        let ibzemployeesData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzemployees'),'undefined')){
-            ibzemployeesData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzemployees') as any);
-            if(ibzemployeesData && ibzemployeesData.length && ibzemployeesData.length > 0){
-                ibzemployeesData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.userid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.ibzemployees = ibzemployeesData;
-        let ibzdepartmentsData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdepartments'),'undefined')){
-            ibzdepartmentsData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdepartments') as any);
-            if(ibzdepartmentsData && ibzdepartmentsData.length && ibzdepartmentsData.length > 0){
-                ibzdepartmentsData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.deptid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.ibzdepartments = ibzdepartmentsData;
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}`,data,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
-            this.tempStorage.setItem(context.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments));
-        return res;
-    }
-
-    /**
      * Create接口方法
      *
      * @param {*} [context={}]
@@ -170,7 +108,7 @@ export default class IBZOrganizationServiceBase extends EntityService {
     }
 
     /**
-     * Save接口方法
+     * Update接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -178,7 +116,7 @@ export default class IBZOrganizationServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof IBZOrganizationServiceBase
      */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let masterData:any = {};
         let ibzemployeesData:any = [];
         if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzemployees'),'undefined')){
@@ -211,7 +149,7 @@ export default class IBZOrganizationServiceBase extends EntityService {
         }
         masterData.ibzdepartments = ibzdepartmentsData;
         Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/save`,data,isloading);
+            let res:any = await  Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments));
         return res;
@@ -259,6 +197,68 @@ export default class IBZOrganizationServiceBase extends EntityService {
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await  Http.getInstance().get(`/ibzorganizations/getdraft`,isloading);
         res.data.ibzorganization = data.ibzorganization;
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments));
+        return res;
+    }
+
+    /**
+     * CheckKey接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof IBZOrganizationServiceBase
+     */
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/checkkey`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Save接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof IBZOrganizationServiceBase
+     */
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        let ibzemployeesData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzemployees'),'undefined')){
+            ibzemployeesData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzemployees') as any);
+            if(ibzemployeesData && ibzemployeesData.length && ibzemployeesData.length > 0){
+                ibzemployeesData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.userid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzemployees = ibzemployeesData;
+        let ibzdepartmentsData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzdepartments'),'undefined')){
+            ibzdepartmentsData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzdepartments') as any);
+            if(ibzdepartmentsData && ibzdepartmentsData.length && ibzdepartmentsData.length > 0){
+                ibzdepartmentsData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.deptid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzdepartments = ibzdepartmentsData;
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments));
         return res;

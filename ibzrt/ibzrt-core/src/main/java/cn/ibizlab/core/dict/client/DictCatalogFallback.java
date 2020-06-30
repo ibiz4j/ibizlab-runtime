@@ -23,11 +23,12 @@ public class DictCatalogFallback implements DictCatalogFeignClient{
             return null;
      }
 
-    public DictCatalog getDraft(){
+    public DictCatalog create(DictCatalog dictcatalog){
             return null;
-    }
-
-
+     }
+    public Boolean createBatch(List<DictCatalog> dictcatalogs){
+            return false;
+     }
 
     public DictCatalog update(String id, DictCatalog dictcatalog){
             return null;
@@ -36,13 +37,6 @@ public class DictCatalogFallback implements DictCatalogFeignClient{
             return false;
      }
 
-
-    public DictCatalog create(DictCatalog dictcatalog){
-            return null;
-     }
-    public Boolean createBatch(List<DictCatalog> dictcatalogs){
-            return false;
-     }
 
     public Boolean remove(String id){
             return false;
@@ -56,17 +50,23 @@ public class DictCatalogFallback implements DictCatalogFeignClient{
      }
 
 
+    public DictCatalog getDraft(){
+            return null;
+    }
+
+
+
+    public Boolean checkKey(DictCatalog dictcatalog){
+            return false;
+     }
+
+
     public Boolean save(DictCatalog dictcatalog){
             return false;
      }
     public Boolean saveBatch(List<DictCatalog> dictcatalogs){
             return false;
      }
-
-    public Boolean checkKey(DictCatalog dictcatalog){
-            return false;
-     }
-
 
     public Page<DictCatalog> searchDefault(DictCatalogSearchContext context){
             return null;

@@ -57,6 +57,69 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
     protected int batchSize = 500;
 
     @Override
+    @Transactional
+    public boolean create(IBZTeamMember et) {
+        fillParentData(et);
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getTeammemberid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<IBZTeamMember> list) {
+        list.forEach(item->fillParentData(item));
+        this.saveOrUpdateBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean update(IBZTeamMember et) {
+        fillParentData(et);
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("teammemberid",et.getTeammemberid())))
+            return false;
+        CachedBeanCopier.copy(get(et.getTeammemberid()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<IBZTeamMember> list) {
+        list.forEach(item->fillParentData(item));
+        updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public IBZTeamMember get(String key) {
+        IBZTeamMember et = getById(key);
+        if(et==null){
+            et=new IBZTeamMember();
+            et.setTeammemberid(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public IBZTeamMember getDraft(IBZTeamMember et) {
+        fillParentData(et);
+        return et;
+    }
+
+    @Override
     public boolean checkKey(IBZTeamMember et) {
         return (!ObjectUtils.isEmpty(et.getTeammemberid()))&&(!Objects.isNull(this.getById(et.getTeammemberid())));
     }
@@ -91,69 +154,6 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
     public void saveBatch(List<IBZTeamMember> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    public IBZTeamMember getDraft(IBZTeamMember et) {
-        fillParentData(et);
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean update(IBZTeamMember et) {
-        fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("teammemberid",et.getTeammemberid())))
-            return false;
-        CachedBeanCopier.copy(get(et.getTeammemberid()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<IBZTeamMember> list) {
-        list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public IBZTeamMember get(String key) {
-        IBZTeamMember et = getById(key);
-        if(et==null){
-            et=new IBZTeamMember();
-            et.setTeammemberid(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    @Transactional
-    public boolean create(IBZTeamMember et) {
-        fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getTeammemberid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<IBZTeamMember> list) {
-        list.forEach(item->fillParentData(item));
-        this.saveOrUpdateBatch(list,batchSize);
     }
 
 

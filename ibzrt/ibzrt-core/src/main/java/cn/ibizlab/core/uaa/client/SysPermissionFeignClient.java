@@ -23,22 +23,11 @@ public interface SysPermissionFeignClient {
     Page<SysPermission> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
-    Boolean save(@RequestBody SysPermission syspermission);
+    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
+    SysPermission create(@RequestBody SysPermission syspermission);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
-    Boolean saveBatch(@RequestBody List<SysPermission> syspermissions);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/getdraft")
-    SysPermission getDraft();
-
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{permissionid}")
-    Boolean remove(@PathVariable("permissionid") String permissionid);
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
+    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/batch")
+    Boolean createBatch(@RequestBody List<SysPermission> syspermissions);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/{permissionid}")
@@ -48,19 +37,30 @@ public interface SysPermissionFeignClient {
     Boolean updateBatch(@RequestBody List<SysPermission> syspermissions);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
-    SysPermission create(@RequestBody SysPermission syspermission);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{permissionid}")
+    Boolean remove(@PathVariable("permissionid") String permissionid);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/batch")
-    Boolean createBatch(@RequestBody List<SysPermission> syspermissions);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{permissionid}")
+    SysPermission get(@PathVariable("permissionid") String permissionid);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/getdraft")
+    SysPermission getDraft();
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/checkkey")
     Boolean checkKey(@RequestBody SysPermission syspermission);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{permissionid}")
-    SysPermission get(@PathVariable("permissionid") String permissionid);
+    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
+    Boolean save(@RequestBody SysPermission syspermission);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
+    Boolean saveBatch(@RequestBody List<SysPermission> syspermissions);
 
 
 

@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IIBZPostService extends IService<IBZPost>{
 
+    boolean create(IBZPost et) ;
+    void createBatch(List<IBZPost> list) ;
     boolean update(IBZPost et) ;
     void updateBatch(List<IBZPost> list) ;
-    IBZPost getDraft(IBZPost et) ;
-    boolean save(IBZPost et) ;
-    void saveBatch(List<IBZPost> list) ;
-    boolean checkKey(IBZPost et) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
     IBZPost get(String key) ;
-    boolean create(IBZPost et) ;
-    void createBatch(List<IBZPost> list) ;
+    IBZPost getDraft(IBZPost et) ;
+    boolean checkKey(IBZPost et) ;
+    boolean save(IBZPost et) ;
+    void saveBatch(List<IBZPost> list) ;
     Page<IBZPost> searchDefault(IBZPostSearchContext context) ;
     /**
      *自定义查询SQL

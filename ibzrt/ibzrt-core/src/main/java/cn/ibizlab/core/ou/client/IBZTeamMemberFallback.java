@@ -23,17 +23,27 @@ public class IBZTeamMemberFallback implements IBZTeamMemberFeignClient{
             return null;
      }
 
+    public IBZTeamMember create(IBZTeamMember ibzteammember){
+            return null;
+     }
+    public Boolean createBatch(List<IBZTeamMember> ibzteammembers){
+            return false;
+     }
+
+    public IBZTeamMember update(String teammemberid, IBZTeamMember ibzteammember){
+            return null;
+     }
+    public Boolean updateBatch(List<IBZTeamMember> ibzteammembers){
+            return false;
+     }
+
+
     public Boolean remove(String teammemberid){
             return false;
      }
     public Boolean removeBatch(Collection<String> idList){
             return false;
      }
-
-    public Boolean checkKey(IBZTeamMember ibzteammember){
-            return false;
-     }
-
 
     public IBZTeamMember get(String teammemberid){
             return null;
@@ -46,12 +56,10 @@ public class IBZTeamMemberFallback implements IBZTeamMemberFeignClient{
 
 
 
-    public IBZTeamMember create(IBZTeamMember ibzteammember){
-            return null;
-     }
-    public Boolean createBatch(List<IBZTeamMember> ibzteammembers){
+    public Boolean checkKey(IBZTeamMember ibzteammember){
             return false;
      }
+
 
     public Boolean save(IBZTeamMember ibzteammember){
             return false;
@@ -59,14 +67,6 @@ public class IBZTeamMemberFallback implements IBZTeamMemberFeignClient{
     public Boolean saveBatch(List<IBZTeamMember> ibzteammembers){
             return false;
      }
-
-    public IBZTeamMember update(String teammemberid, IBZTeamMember ibzteammember){
-            return null;
-     }
-    public Boolean updateBatch(List<IBZTeamMember> ibzteammembers){
-            return false;
-     }
-
 
     public Page<IBZTeamMember> searchDefault(IBZTeamMemberSearchContext context){
             return null;

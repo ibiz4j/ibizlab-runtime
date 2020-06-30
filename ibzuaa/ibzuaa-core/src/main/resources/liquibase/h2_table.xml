@@ -88,7 +88,7 @@
 
 
     <!--输出实体[SYS_PSSYSTEM]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_pssystem-36-5">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_pssystem-39-5">
         <createTable tableName="IBZPSSYSTEM">
                 <column name="PSSYSTEMID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_PSSYSTEM_PSSYSTEMID"/>

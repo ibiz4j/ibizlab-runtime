@@ -44,6 +44,19 @@ public class WFUserServiceImpl implements IWFUserService {
 
 
     @Override
+    public boolean create(WFUser et) {
+        WFUser rt = wFUserFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<WFUser> list){
+        wFUserFeignClient.createBatch(list) ;
+    }
+
+    @Override
     public boolean update(WFUser et) {
         WFUser rt = wFUserFeignClient.update(et.getId(),et);
         if(rt==null)
@@ -58,9 +71,13 @@ public class WFUserServiceImpl implements IWFUserService {
     }
 
     @Override
-    public WFUser getDraft(WFUser et) {
-        et=wFUserFeignClient.getDraft();
-        return et;
+    public boolean remove(String id) {
+        boolean result=wFUserFeignClient.remove(id) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        wFUserFeignClient.removeBatch(idList);
     }
 
     @Override
@@ -76,16 +93,9 @@ public class WFUserServiceImpl implements IWFUserService {
     }
 
     @Override
-    public boolean create(WFUser et) {
-        WFUser rt = wFUserFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<WFUser> list){
-        wFUserFeignClient.createBatch(list) ;
+    public WFUser getDraft(WFUser et) {
+        et=wFUserFeignClient.getDraft();
+        return et;
     }
 
     @Override
@@ -104,16 +114,6 @@ public class WFUserServiceImpl implements IWFUserService {
     @Override
     public void saveBatch(List<WFUser> list) {
         wFUserFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean remove(String id) {
-        boolean result=wFUserFeignClient.remove(id) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        wFUserFeignClient.removeBatch(idList);
     }
 
 

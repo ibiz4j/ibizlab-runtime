@@ -44,6 +44,19 @@ public class IBZDeptMemberServiceImpl implements IIBZDeptMemberService {
 
 
     @Override
+    public boolean create(IBZDeptMember et) {
+        IBZDeptMember rt = iBZDeptMemberFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<IBZDeptMember> list){
+        iBZDeptMemberFeignClient.createBatch(list) ;
+    }
+
+    @Override
     public boolean update(IBZDeptMember et) {
         IBZDeptMember rt = iBZDeptMemberFeignClient.update(et.getMemberid(),et);
         if(rt==null)
@@ -55,6 +68,16 @@ public class IBZDeptMemberServiceImpl implements IIBZDeptMemberService {
 
     public void updateBatch(List<IBZDeptMember> list){
         iBZDeptMemberFeignClient.updateBatch(list) ;
+    }
+
+    @Override
+    public boolean remove(String memberid) {
+        boolean result=iBZDeptMemberFeignClient.remove(memberid) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        iBZDeptMemberFeignClient.removeBatch(idList);
     }
 
     @Override
@@ -70,38 +93,15 @@ public class IBZDeptMemberServiceImpl implements IIBZDeptMemberService {
     }
 
     @Override
-    public boolean checkKey(IBZDeptMember et) {
-        return iBZDeptMemberFeignClient.checkKey(et);
-    }
-    @Override
-    public boolean remove(String memberid) {
-        boolean result=iBZDeptMemberFeignClient.remove(memberid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        iBZDeptMemberFeignClient.removeBatch(idList);
-    }
-
-    @Override
-    public boolean create(IBZDeptMember et) {
-        IBZDeptMember rt = iBZDeptMemberFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<IBZDeptMember> list){
-        iBZDeptMemberFeignClient.createBatch(list) ;
-    }
-
-    @Override
     public IBZDeptMember getDraft(IBZDeptMember et) {
         et=iBZDeptMemberFeignClient.getDraft();
         return et;
     }
 
+    @Override
+    public boolean checkKey(IBZDeptMember et) {
+        return iBZDeptMemberFeignClient.checkKey(et);
+    }
     @Override
     @Transactional
     public boolean save(IBZDeptMember et) {

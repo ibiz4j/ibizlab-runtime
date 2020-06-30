@@ -23,17 +23,17 @@ import cn.ibizlab.core.task.filter.JobsLogSearchContext;
  */
 public interface IJobsLogService{
 
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean update(JobsLog et) ;
-    void updateBatch(List<JobsLog> list) ;
-    JobsLog get(String key) ;
-    boolean save(JobsLog et) ;
-    void saveBatch(List<JobsLog> list) ;
-    JobsLog getDraft(JobsLog et) ;
-    boolean checkKey(JobsLog et) ;
     boolean create(JobsLog et) ;
     void createBatch(List<JobsLog> list) ;
+    boolean update(JobsLog et) ;
+    void updateBatch(List<JobsLog> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    JobsLog get(String key) ;
+    JobsLog getDraft(JobsLog et) ;
+    boolean checkKey(JobsLog et) ;
+    boolean save(JobsLog et) ;
+    void saveBatch(List<JobsLog> list) ;
     Page<JobsLog> searchDefault(JobsLogSearchContext context) ;
 
 }

@@ -53,67 +53,6 @@ export default class WFGroupServiceBase extends EntityService {
     }
 
     /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFGroupServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().delete(`/wfgroups/${context.wfgroup}`,isloading);
-        return res;
-    }
-
-    /**
-     * Save接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFGroupServiceBase
-     */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        let wfmembersData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers'),'undefined')){
-            wfmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers') as any);
-            if(wfmembersData && wfmembersData.length && wfmembersData.length > 0){
-                wfmembersData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.memberid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.wfmembers = wfmembersData;
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/wfgroups/${context.wfgroup}/save`,data,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-        return res;
-    }
-
-    /**
-     * Get接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFGroupServiceBase
-     */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}`,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-        return res;
-    }
-
-    /**
      * Create接口方法
      *
      * @param {*} [context={}]
@@ -153,6 +92,67 @@ export default class WFGroupServiceBase extends EntityService {
     }
 
     /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFGroupServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        let wfmembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers'),'undefined')){
+            wfmembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers') as any);
+            if(wfmembersData && wfmembersData.length && wfmembersData.length > 0){
+                wfmembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.memberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.wfmembers = wfmembersData;
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/wfgroups/${context.wfgroup}`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
+        return res;
+    }
+
+    /**
+     * Remove接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFGroupServiceBase
+     */
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().delete(`/wfgroups/${context.wfgroup}`,isloading);
+        return res;
+    }
+
+    /**
+     * Get接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFGroupServiceBase
+     */
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}`,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
+        return res;
+    }
+
+    /**
      * GetDraft接口方法
      *
      * @param {*} [context={}]
@@ -183,7 +183,7 @@ export default class WFGroupServiceBase extends EntityService {
     }
 
     /**
-     * Update接口方法
+     * Save接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -191,7 +191,7 @@ export default class WFGroupServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof WFGroupServiceBase
      */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let masterData:any = {};
         let wfmembersData:any = [];
         if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_wfmembers'),'undefined')){
@@ -209,7 +209,7 @@ export default class WFGroupServiceBase extends EntityService {
         }
         masterData.wfmembers = wfmembersData;
         Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/wfgroups/${context.wfgroup}`,data,isloading);
+            let res:any = await  Http.getInstance().post(`/wfgroups/${context.wfgroup}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
         return res;
     }

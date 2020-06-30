@@ -23,21 +23,6 @@ public interface WFTaskWayFeignClient {
     Page<WFTaskWay> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/save")
-    Boolean save(@RequestBody WFTaskWay wftaskway);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/save")
-    Boolean saveBatch(@RequestBody List<WFTaskWay> wftaskways);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/checkkey")
-    Boolean checkKey(@RequestBody WFTaskWay wftaskway);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/{sequenceflowid}")
-    WFTaskWay get(@PathVariable("sequenceflowid") String sequenceflowid);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wftaskways")
     WFTaskWay create(@RequestBody WFTaskWay wftaskway);
 
@@ -59,8 +44,23 @@ public interface WFTaskWayFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/{sequenceflowid}")
+    WFTaskWay get(@PathVariable("sequenceflowid") String sequenceflowid);
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/getdraft")
     WFTaskWay getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/checkkey")
+    Boolean checkKey(@RequestBody WFTaskWay wftaskway);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/save")
+    Boolean save(@RequestBody WFTaskWay wftaskway);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/save")
+    Boolean saveBatch(@RequestBody List<WFTaskWay> wftaskways);
 
 
 

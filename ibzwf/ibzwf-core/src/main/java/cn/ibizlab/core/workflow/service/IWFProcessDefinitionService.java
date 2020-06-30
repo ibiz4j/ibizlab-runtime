@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWFProcessDefinitionService extends IService<WFProcessDefinition>{
 
-    boolean save(WFProcessDefinition et) ;
-    void saveBatch(List<WFProcessDefinition> list) ;
-    boolean update(WFProcessDefinition et) ;
-    void updateBatch(List<WFProcessDefinition> list) ;
-    WFProcessDefinition get(String key) ;
-    boolean checkKey(WFProcessDefinition et) ;
-    WFProcessDefinition getDraft(WFProcessDefinition et) ;
     boolean create(WFProcessDefinition et) ;
     void createBatch(List<WFProcessDefinition> list) ;
+    boolean update(WFProcessDefinition et) ;
+    void updateBatch(List<WFProcessDefinition> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
+    WFProcessDefinition get(String key) ;
+    WFProcessDefinition getDraft(WFProcessDefinition et) ;
+    boolean checkKey(WFProcessDefinition et) ;
+    boolean save(WFProcessDefinition et) ;
+    void saveBatch(List<WFProcessDefinition> list) ;
     Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context) ;
     /**
      *自定义查询SQL

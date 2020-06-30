@@ -44,36 +44,6 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
 
 
     @Override
-    @Transactional
-    public boolean save(WFTaskWay et) {
-        if(et.getSequenceflowid()==null) et.setSequenceflowid((String)et.getDefaultKey(true));
-        if(!wFTaskWayFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<WFTaskWay> list) {
-        wFTaskWayFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean checkKey(WFTaskWay et) {
-        return wFTaskWayFeignClient.checkKey(et);
-    }
-    @Override
-    public WFTaskWay get(String sequenceflowid) {
-		WFTaskWay et=wFTaskWayFeignClient.get(sequenceflowid);
-        if(et==null){
-            et=new WFTaskWay();
-            et.setSequenceflowid(sequenceflowid);
-        }
-        else{
-        }
-        return  et;
-    }
-
-    @Override
     public boolean create(WFTaskWay et) {
         WFTaskWay rt = wFTaskWayFeignClient.create(et);
         if(rt==null)
@@ -111,9 +81,39 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
     }
 
     @Override
+    public WFTaskWay get(String sequenceflowid) {
+		WFTaskWay et=wFTaskWayFeignClient.get(sequenceflowid);
+        if(et==null){
+            et=new WFTaskWay();
+            et.setSequenceflowid(sequenceflowid);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
     public WFTaskWay getDraft(WFTaskWay et) {
         et=wFTaskWayFeignClient.getDraft();
         return et;
+    }
+
+    @Override
+    public boolean checkKey(WFTaskWay et) {
+        return wFTaskWayFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(WFTaskWay et) {
+        if(et.getSequenceflowid()==null) et.setSequenceflowid((String)et.getDefaultKey(true));
+        if(!wFTaskWayFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<WFTaskWay> list) {
+        wFTaskWayFeignClient.saveBatch(list) ;
     }
 
 

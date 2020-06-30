@@ -23,30 +23,11 @@ public interface JobsInfoFeignClient {
     Page<JobsInfo> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/start")
-    JobsInfo start(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/save")
-    Boolean save(@RequestBody JobsInfo jobsinfo);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/save")
-    Boolean saveBatch(@RequestBody List<JobsInfo> jobsinfos);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos")
     JobsInfo create(@RequestBody JobsInfo jobsinfo);
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/batch")
     Boolean createBatch(@RequestBody List<JobsInfo> jobsinfos);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/checkkey")
-    Boolean checkKey(@RequestBody JobsInfo jobsinfo);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/getdraft")
-    JobsInfo getDraft();
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/{id}")
@@ -56,10 +37,6 @@ public interface JobsInfoFeignClient {
     Boolean updateBatch(@RequestBody List<JobsInfo> jobsinfos);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/execute")
-    JobsInfo execute(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
-
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/jobsinfos/{id}")
     Boolean remove(@PathVariable("id") String id);
 
@@ -67,12 +44,35 @@ public interface JobsInfoFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/stop")
-    JobsInfo stop(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
-
-
     @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/{id}")
     JobsInfo get(@PathVariable("id") String id);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/getdraft")
+    JobsInfo getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/checkkey")
+    Boolean checkKey(@RequestBody JobsInfo jobsinfo);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/execute")
+    JobsInfo execute(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/save")
+    Boolean save(@RequestBody JobsInfo jobsinfo);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/save")
+    Boolean saveBatch(@RequestBody List<JobsInfo> jobsinfos);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/start")
+    JobsInfo start(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/stop")
+    JobsInfo stop(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
 
 
 

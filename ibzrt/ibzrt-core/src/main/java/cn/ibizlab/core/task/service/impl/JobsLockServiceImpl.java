@@ -44,23 +44,16 @@ public class JobsLockServiceImpl implements IJobsLockService {
 
 
     @Override
-    public JobsLock getDraft(JobsLock et) {
-        et=jobsLockFeignClient.getDraft();
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean save(JobsLock et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!jobsLockFeignClient.save(et))
+    public boolean create(JobsLock et) {
+        JobsLock rt = jobsLockFeignClient.create(et);
+        if(rt==null)
             return false;
+        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    @Override
-    public void saveBatch(List<JobsLock> list) {
-        jobsLockFeignClient.saveBatch(list) ;
+    public void createBatch(List<JobsLock> list){
+        jobsLockFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -77,10 +70,6 @@ public class JobsLockServiceImpl implements IJobsLockService {
         jobsLockFeignClient.updateBatch(list) ;
     }
 
-    @Override
-    public boolean checkKey(JobsLock et) {
-        return jobsLockFeignClient.checkKey(et);
-    }
     @Override
     public boolean remove(String id) {
         boolean result=jobsLockFeignClient.remove(id) ;
@@ -104,16 +93,27 @@ public class JobsLockServiceImpl implements IJobsLockService {
     }
 
     @Override
-    public boolean create(JobsLock et) {
-        JobsLock rt = jobsLockFeignClient.create(et);
-        if(rt==null)
+    public JobsLock getDraft(JobsLock et) {
+        et=jobsLockFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(JobsLock et) {
+        return jobsLockFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(JobsLock et) {
+        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
+        if(!jobsLockFeignClient.save(et))
             return false;
-        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    public void createBatch(List<JobsLock> list){
-        jobsLockFeignClient.createBatch(list) ;
+    @Override
+    public void saveBatch(List<JobsLock> list) {
+        jobsLockFeignClient.saveBatch(list) ;
     }
 
 

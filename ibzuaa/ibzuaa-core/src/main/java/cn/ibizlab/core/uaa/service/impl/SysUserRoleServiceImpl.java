@@ -54,13 +54,19 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     protected int batchSize = 500;
 
     @Override
-    public boolean checkKey(SysUserRole et) {
-        return (!ObjectUtils.isEmpty(et.getUserroleid()))&&(!Objects.isNull(this.getById(et.getUserroleid())));
-    }
-    @Override
-    public SysUserRole getDraft(SysUserRole et) {
+    @Transactional
+    public boolean create(SysUserRole et) {
         fillParentData(et);
-        return et;
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getUserroleid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<SysUserRole> list) {
+        list.forEach(item->fillParentData(item));
+        this.saveOrUpdateBatch(list,batchSize);
     }
 
     @Override
@@ -93,22 +99,6 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
 
     @Override
     @Transactional
-    public boolean create(SysUserRole et) {
-        fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getUserroleid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<SysUserRole> list) {
-        list.forEach(item->fillParentData(item));
-        this.saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
     public SysUserRole get(String key) {
         SysUserRole et = getById(key);
         if(et==null){
@@ -120,6 +110,16 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         return et;
     }
 
+    @Override
+    public SysUserRole getDraft(SysUserRole et) {
+        fillParentData(et);
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysUserRole et) {
+        return (!ObjectUtils.isEmpty(et.getUserroleid()))&&(!Objects.isNull(this.getById(et.getUserroleid())));
+    }
     @Override
     @Transactional
     public boolean save(SysUserRole et) {

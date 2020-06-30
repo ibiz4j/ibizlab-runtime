@@ -115,6 +115,32 @@ mock.onGet(new RegExp(/^\/wfusers\/([a-zA-Z0-9\-\;]{1,35})\/select$/)).reply((co
     return [status, _items];
 });
         
+// Create
+mock.onPost(new RegExp(/^\/wfusers\/?([a-zA-Z0-9\-\;]{0,35})$/)).reply((config: any) => {
+    console.groupCollapsed("实体:wfuser 方法: Create");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }    
+    const paramArray:Array<any> = ['id'];
+    const matchArray:any = new RegExp(/^\/wfusers\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table(mockDatas[0]);
+    console.groupEnd();
+    console.groupEnd();
+    return [status, mockDatas[0]];
+});
+        
 // Update
 mock.onPut(new RegExp(/^\/wfusers\/?([a-zA-Z0-9\-\;]{0,35})$/)).reply((config: any) => {
     console.groupCollapsed("实体:wfuser 方法: Update");
@@ -167,32 +193,6 @@ mock.onGet(new RegExp(/^\/wfusers\/getdraft$/)).reply((config: any) => {
     console.groupEnd();
     console.groupEnd();
     return [status, {}];
-});
-        
-// Create
-mock.onPost(new RegExp(/^\/wfusers\/?([a-zA-Z0-9\-\;]{0,35})$/)).reply((config: any) => {
-    console.groupCollapsed("实体:wfuser 方法: Create");
-    console.table({url:config.url, method: config.method, data:config.data});
-    let status = MockAdapter.mockStatus(config);
-    if (status !== 200) {
-        return [status, null];
-    }    
-    const paramArray:Array<any> = ['id'];
-    const matchArray:any = new RegExp(/^\/wfusers\/([a-zA-Z0-9\-\;]{1,35})$/).exec(config.url);
-    let tempValue: any = {};
-    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
-        paramArray.forEach((item: any, index: number) => {
-            Object.defineProperty(tempValue, item, {
-                enumerable: true,
-                value: matchArray[index + 1]
-            });
-        });
-    }
-    console.groupCollapsed("response数据  status: "+status+" data: ");
-    console.table(mockDatas[0]);
-    console.groupEnd();
-    console.groupEnd();
-    return [status, mockDatas[0]];
 });
         
 // CheckKey
@@ -323,9 +323,9 @@ mock.onGet(new RegExp(/^\/wfusers\/fetchdefault(\?[\w-./?%&=,]*)*$/)).reply((con
 // URI参数传递情况未实现
 
 
-// Get
-mock.onGet(new RegExp(/^\/wfusers\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
-    console.groupCollapsed("实体:wfuser 方法: Get");
+// Remove
+mock.onDelete(new RegExp(/^\/wfusers\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
+    console.groupCollapsed("实体:wfuser 方法: Remove");
     console.table({url:config.url, method: config.method, data:config.data});
     let status = MockAdapter.mockStatus(config);
     if (status !== 200) {
@@ -351,9 +351,9 @@ mock.onGet(new RegExp(/^\/wfusers\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: an
     return [status, _items?_items:{}];
 });
 
-// Remove
-mock.onDelete(new RegExp(/^\/wfusers\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
-    console.groupCollapsed("实体:wfuser 方法: Remove");
+// Get
+mock.onGet(new RegExp(/^\/wfusers\/([a-zA-Z0-9\-\;]{1,35})$/)).reply((config: any) => {
+    console.groupCollapsed("实体:wfuser 方法: Get");
     console.table({url:config.url, method: config.method, data:config.data});
     let status = MockAdapter.mockStatus(config);
     if (status !== 200) {

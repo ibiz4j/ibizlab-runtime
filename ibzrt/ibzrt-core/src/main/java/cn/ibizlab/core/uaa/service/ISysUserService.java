@@ -23,21 +23,21 @@ import cn.ibizlab.core.uaa.filter.SysUserSearchContext;
  */
 public interface ISysUserService{
 
-    boolean remove(String key) ;
-    @CacheEvict(value="sysuser",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    boolean update(SysUser et) ;
-    @CacheEvict(value="sysuser",allEntries=true)
-    void updateBatch(List<SysUser> list) ;
-    boolean checkKey(SysUser et) ;
-    SysUser get(String key) ;
-    boolean save(SysUser et) ;
-    @CacheEvict(value="sysuser",allEntries=true)
-    void saveBatch(List<SysUser> list) ;
-    SysUser getDraft(SysUser et) ;
     boolean create(SysUser et) ;
     @CacheEvict(value="sysuser",allEntries=true)
     void createBatch(List<SysUser> list) ;
+    boolean update(SysUser et) ;
+    @CacheEvict(value="sysuser",allEntries=true)
+    void updateBatch(List<SysUser> list) ;
+    boolean remove(String key) ;
+    @CacheEvict(value="sysuser",allEntries=true)
+    void removeBatch(Collection<String> idList) ;
+    SysUser get(String key) ;
+    SysUser getDraft(SysUser et) ;
+    boolean checkKey(SysUser et) ;
+    boolean save(SysUser et) ;
+    @CacheEvict(value="sysuser",allEntries=true)
+    void saveBatch(List<SysUser> list) ;
     Page<SysUser> searchDefault(SysUserSearchContext context) ;
 
 }

@@ -47,18 +47,22 @@ public class SysRoleResource {
     @Lazy
     public SysRoleMapping sysroleMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Save-all')")
-    @ApiOperation(value = "保存系统角色", tags = {"系统角色" },  notes = "保存系统角色")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysRoleDTO sysroledto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysroleService.save(sysroleMapping.toDomain(sysroledto)));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Create-all')")
+    @ApiOperation(value = "新建系统角色", tags = {"系统角色" },  notes = "新建系统角色")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles")
+    @Transactional
+    public ResponseEntity<SysRoleDTO> create(@RequestBody SysRoleDTO sysroledto) {
+        SysRole domain = sysroleMapping.toDomain(sysroledto);
+		sysroleService.create(domain);
+        SysRoleDTO dto = sysroleMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Save-all')")
-    @ApiOperation(value = "批量保存系统角色", tags = {"系统角色" },  notes = "批量保存系统角色")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysRoleDTO> sysroledtos) {
-        sysroleService.saveBatch(sysroleMapping.toDomain(sysroledtos));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Create-all')")
+    @ApiOperation(value = "批量新建系统角色", tags = {"系统角色" },  notes = "批量新建系统角色")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysRoleDTO> sysroledtos) {
+        sysroleService.createBatch(sysroleMapping.toDomain(sysroledtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -83,34 +87,6 @@ public class SysRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Create-all')")
-    @ApiOperation(value = "新建系统角色", tags = {"系统角色" },  notes = "新建系统角色")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles")
-    @Transactional
-    public ResponseEntity<SysRoleDTO> create(@RequestBody SysRoleDTO sysroledto) {
-        SysRole domain = sysroleMapping.toDomain(sysroledto);
-		sysroleService.create(domain);
-        SysRoleDTO dto = sysroleMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Create-all')")
-    @ApiOperation(value = "批量新建系统角色", tags = {"系统角色" },  notes = "批量新建系统角色")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysRoleDTO> sysroledtos) {
-        sysroleService.createBatch(sysroleMapping.toDomain(sysroledtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Get-all')")
-    @ApiOperation(value = "获取系统角色", tags = {"系统角色" },  notes = "获取系统角色")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}")
-    public ResponseEntity<SysRoleDTO> get(@PathVariable("sysrole_id") String sysrole_id) {
-        SysRole domain = sysroleService.get(sysrole_id);
-        SysRoleDTO dto = sysroleMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Remove-all')")
     @ApiOperation(value = "删除系统角色", tags = {"系统角色" },  notes = "删除系统角色")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}")
@@ -127,6 +103,15 @@ public class SysRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Get-all')")
+    @ApiOperation(value = "获取系统角色", tags = {"系统角色" },  notes = "获取系统角色")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}")
+    public ResponseEntity<SysRoleDTO> get(@PathVariable("sysrole_id") String sysrole_id) {
+        SysRole domain = sysroleService.get(sysrole_id);
+        SysRoleDTO dto = sysroleMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
     @ApiOperation(value = "获取系统角色草稿", tags = {"系统角色" },  notes = "获取系统角色草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/getdraft")
     public ResponseEntity<SysRoleDTO> getDraft() {
@@ -137,6 +122,21 @@ public class SysRoleResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/checkkey")
     public ResponseEntity<Boolean> checkKey(@RequestBody SysRoleDTO sysroledto) {
         return  ResponseEntity.status(HttpStatus.OK).body(sysroleService.checkKey(sysroleMapping.toDomain(sysroledto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Save-all')")
+    @ApiOperation(value = "保存系统角色", tags = {"系统角色" },  notes = "保存系统角色")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
+    public ResponseEntity<Boolean> save(@RequestBody SysRoleDTO sysroledto) {
+        return ResponseEntity.status(HttpStatus.OK).body(sysroleService.save(sysroleMapping.toDomain(sysroledto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-Save-all')")
+    @ApiOperation(value = "批量保存系统角色", tags = {"系统角色" },  notes = "批量保存系统角色")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysRoleDTO> sysroledtos) {
+        sysroleService.saveBatch(sysroleMapping.toDomain(sysroledtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-searchDefault-all')")

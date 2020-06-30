@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IIBZDeptMemberService extends IService<IBZDeptMember>{
 
-    boolean update(IBZDeptMember et) ;
-    void updateBatch(List<IBZDeptMember> list) ;
     boolean create(IBZDeptMember et) ;
     void createBatch(List<IBZDeptMember> list) ;
-    boolean save(IBZDeptMember et) ;
-    void saveBatch(List<IBZDeptMember> list) ;
-    IBZDeptMember getDraft(IBZDeptMember et) ;
-    IBZDeptMember get(String key) ;
+    boolean update(IBZDeptMember et) ;
+    void updateBatch(List<IBZDeptMember> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
+    IBZDeptMember get(String key) ;
+    IBZDeptMember getDraft(IBZDeptMember et) ;
     boolean checkKey(IBZDeptMember et) ;
+    boolean save(IBZDeptMember et) ;
+    void saveBatch(List<IBZDeptMember> list) ;
     Page<IBZDeptMember> searchDefault(IBZDeptMemberSearchContext context) ;
     List<IBZDeptMember> selectByDeptid(String deptid) ;
     void removeByDeptid(String deptid) ;

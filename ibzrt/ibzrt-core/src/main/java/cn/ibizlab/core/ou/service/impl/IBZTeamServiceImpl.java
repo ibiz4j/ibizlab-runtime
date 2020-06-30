@@ -44,10 +44,6 @@ public class IBZTeamServiceImpl implements IIBZTeamService {
 
 
     @Override
-    public boolean checkKey(IBZTeam et) {
-        return iBZTeamFeignClient.checkKey(et);
-    }
-    @Override
     public boolean create(IBZTeam et) {
         IBZTeam rt = iBZTeamFeignClient.create(et);
         if(rt==null)
@@ -97,6 +93,16 @@ public class IBZTeamServiceImpl implements IIBZTeamService {
     }
 
     @Override
+    public IBZTeam getDraft(IBZTeam et) {
+        et=iBZTeamFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZTeam et) {
+        return iBZTeamFeignClient.checkKey(et);
+    }
+    @Override
     @Transactional
     public boolean save(IBZTeam et) {
         if(et.getTeamid()==null) et.setTeamid((String)et.getDefaultKey(true));
@@ -108,12 +114,6 @@ public class IBZTeamServiceImpl implements IIBZTeamService {
     @Override
     public void saveBatch(List<IBZTeam> list) {
         iBZTeamFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public IBZTeam getDraft(IBZTeam et) {
-        et=iBZTeamFeignClient.getDraft();
-        return et;
     }
 
 

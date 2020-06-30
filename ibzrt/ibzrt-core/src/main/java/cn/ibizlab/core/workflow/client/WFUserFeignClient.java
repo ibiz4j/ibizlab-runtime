@@ -23,6 +23,13 @@ public interface WFUserFeignClient {
     Page<WFUser> select();
 
 
+    @RequestMapping(method = RequestMethod.POST, value = "/wfusers")
+    WFUser create(@RequestBody WFUser wfuser);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfusers/batch")
+    Boolean createBatch(@RequestBody List<WFUser> wfusers);
+
+
     @RequestMapping(method = RequestMethod.PUT, value = "/wfusers/{id}")
     WFUser update(@PathVariable("id") String id,@RequestBody WFUser wfuser);
 
@@ -30,19 +37,19 @@ public interface WFUserFeignClient {
     Boolean updateBatch(@RequestBody List<WFUser> wfusers);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
-    WFUser getDraft();
+    @RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{id}")
+    Boolean remove(@PathVariable("id") String id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfusers/{id}")
     WFUser get(@PathVariable("id") String id);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfusers")
-    WFUser create(@RequestBody WFUser wfuser);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfusers/batch")
-    Boolean createBatch(@RequestBody List<WFUser> wfusers);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
+    WFUser getDraft();
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers/checkkey")
@@ -54,13 +61,6 @@ public interface WFUserFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers/save")
     Boolean saveBatch(@RequestBody List<WFUser> wfusers);
-
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{id}")
-    Boolean remove(@PathVariable("id") String id);
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
 

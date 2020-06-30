@@ -23,7 +23,17 @@ public class SysAuthLogFallback implements SysAuthLogFeignClient{
             return null;
      }
 
-    public Boolean checkKey(SysAuthLog sysauthlog){
+    public SysAuthLog create(SysAuthLog sysauthlog){
+            return null;
+     }
+    public Boolean createBatch(List<SysAuthLog> sysauthlogs){
+            return false;
+     }
+
+    public SysAuthLog update(String logid, SysAuthLog sysauthlog){
+            return null;
+     }
+    public Boolean updateBatch(List<SysAuthLog> sysauthlogs){
             return false;
      }
 
@@ -35,16 +45,18 @@ public class SysAuthLogFallback implements SysAuthLogFeignClient{
             return false;
      }
 
+    public SysAuthLog get(String logid){
+            return null;
+     }
+
+
     public SysAuthLog getDraft(){
             return null;
     }
 
 
 
-    public SysAuthLog update(String logid, SysAuthLog sysauthlog){
-            return null;
-     }
-    public Boolean updateBatch(List<SysAuthLog> sysauthlogs){
+    public Boolean checkKey(SysAuthLog sysauthlog){
             return false;
      }
 
@@ -55,18 +67,6 @@ public class SysAuthLogFallback implements SysAuthLogFeignClient{
     public Boolean saveBatch(List<SysAuthLog> sysauthlogs){
             return false;
      }
-
-    public SysAuthLog create(SysAuthLog sysauthlog){
-            return null;
-     }
-    public Boolean createBatch(List<SysAuthLog> sysauthlogs){
-            return false;
-     }
-
-    public SysAuthLog get(String logid){
-            return null;
-     }
-
 
     public Page<SysAuthLog> searchDefault(SysAuthLogSearchContext context){
             return null;

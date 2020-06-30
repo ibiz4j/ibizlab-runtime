@@ -47,10 +47,21 @@ public class DictCatalogResource {
     @Lazy
     public DictCatalogMapping dictcatalogMapping;
 
-    @ApiOperation(value = "获取字典草稿", tags = {"字典" },  notes = "获取字典草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/getdraft")
-    public ResponseEntity<DictCatalogDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(dictcatalogMapping.toDto(dictcatalogService.getDraft(new DictCatalog())));
+    @ApiOperation(value = "新建字典", tags = {"字典" },  notes = "新建字典")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs")
+
+    public ResponseEntity<DictCatalogDTO> create(@RequestBody DictCatalogDTO dictcatalogdto) {
+        DictCatalog domain = dictcatalogMapping.toDomain(dictcatalogdto);
+		dictcatalogService.create(domain);
+        DictCatalogDTO dto = dictcatalogMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "批量新建字典", tags = {"字典" },  notes = "批量新建字典")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<DictCatalogDTO> dictcatalogdtos) {
+        dictcatalogService.createBatch(dictcatalogMapping.toDomain(dictcatalogdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @VersionCheck(entity = "dictcatalog" , versionfield = "updatedate")
@@ -69,23 +80,6 @@ public class DictCatalogResource {
 	@RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<DictCatalogDTO> dictcatalogdtos) {
         dictcatalogService.updateBatch(dictcatalogMapping.toDomain(dictcatalogdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "新建字典", tags = {"字典" },  notes = "新建字典")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs")
-
-    public ResponseEntity<DictCatalogDTO> create(@RequestBody DictCatalogDTO dictcatalogdto) {
-        DictCatalog domain = dictcatalogMapping.toDomain(dictcatalogdto);
-		dictcatalogService.create(domain);
-        DictCatalogDTO dto = dictcatalogMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "批量新建字典", tags = {"字典" },  notes = "批量新建字典")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<DictCatalogDTO> dictcatalogdtos) {
-        dictcatalogService.createBatch(dictcatalogMapping.toDomain(dictcatalogdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -111,6 +105,18 @@ public class DictCatalogResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @ApiOperation(value = "获取字典草稿", tags = {"字典" },  notes = "获取字典草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/getdraft")
+    public ResponseEntity<DictCatalogDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(dictcatalogMapping.toDto(dictcatalogService.getDraft(new DictCatalog())));
+    }
+
+    @ApiOperation(value = "检查字典", tags = {"字典" },  notes = "检查字典")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody DictCatalogDTO dictcatalogdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.checkKey(dictcatalogMapping.toDomain(dictcatalogdto)));
+    }
+
     @ApiOperation(value = "保存字典", tags = {"字典" },  notes = "保存字典")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/save")
     public ResponseEntity<Boolean> save(@RequestBody DictCatalogDTO dictcatalogdto) {
@@ -124,13 +130,6 @@ public class DictCatalogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "检查字典", tags = {"字典" },  notes = "检查字典")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody DictCatalogDTO dictcatalogdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.checkKey(dictcatalogMapping.toDomain(dictcatalogdto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"字典" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/dictcatalogs/fetchdefault")
 	public ResponseEntity<List<DictCatalogDTO>> fetchDefault(DictCatalogSearchContext context) {
@@ -143,7 +142,6 @@ public class DictCatalogResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"字典" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/dictcatalogs/searchdefault")
 	public ResponseEntity<Page<DictCatalogDTO>> searchDefault(@RequestBody DictCatalogSearchContext context) {

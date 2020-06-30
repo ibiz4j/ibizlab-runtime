@@ -30,11 +30,11 @@ public interface WFProcessNodeFeignClient {
     Boolean createBatch(@RequestBody List<WFProcessNode> wfprocessnodes);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessnodes/save")
-    Boolean save(@RequestBody WFProcessNode wfprocessnode);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessnodes/{usertaskid}")
+    WFProcessNode update(@PathVariable("usertaskid") String usertaskid,@RequestBody WFProcessNode wfprocessnode);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessnodes/save")
-    Boolean saveBatch(@RequestBody List<WFProcessNode> wfprocessnodes);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessnodes/batch")
+    Boolean updateBatch(@RequestBody List<WFProcessNode> wfprocessnodes);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessnodes/{usertaskid}")
@@ -44,23 +44,23 @@ public interface WFProcessNodeFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessnodes/{usertaskid}")
-    WFProcessNode update(@PathVariable("usertaskid") String usertaskid,@RequestBody WFProcessNode wfprocessnode);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessnodes/batch")
-    Boolean updateBatch(@RequestBody List<WFProcessNode> wfprocessnodes);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessnodes/{usertaskid}")
+    WFProcessNode get(@PathVariable("usertaskid") String usertaskid);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfprocessnodes/getdraft")
     WFProcessNode getDraft();
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessnodes/{usertaskid}")
-    WFProcessNode get(@PathVariable("usertaskid") String usertaskid);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfprocessnodes/checkkey")
     Boolean checkKey(@RequestBody WFProcessNode wfprocessnode);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessnodes/save")
+    Boolean save(@RequestBody WFProcessNode wfprocessnode);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessnodes/save")
+    Boolean saveBatch(@RequestBody List<WFProcessNode> wfprocessnodes);
 
 
 

@@ -47,12 +47,6 @@ public class IBZTeamResource {
     @Lazy
     public IBZTeamMapping ibzteamMapping;
 
-    @ApiOperation(value = "检查组", tags = {"组" },  notes = "检查组")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody IBZTeamDTO ibzteamdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(ibzteamService.checkKey(ibzteamMapping.toDomain(ibzteamdto)));
-    }
-
     @ApiOperation(value = "新建组", tags = {"组" },  notes = "新建组")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams")
 
@@ -110,6 +104,18 @@ public class IBZTeamResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @ApiOperation(value = "获取组草稿", tags = {"组" },  notes = "获取组草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/ibzteams/getdraft")
+    public ResponseEntity<IBZTeamDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(ibzteamMapping.toDto(ibzteamService.getDraft(new IBZTeam())));
+    }
+
+    @ApiOperation(value = "检查组", tags = {"组" },  notes = "检查组")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody IBZTeamDTO ibzteamdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(ibzteamService.checkKey(ibzteamMapping.toDomain(ibzteamdto)));
+    }
+
     @ApiOperation(value = "保存组", tags = {"组" },  notes = "保存组")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/save")
     public ResponseEntity<Boolean> save(@RequestBody IBZTeamDTO ibzteamdto) {
@@ -123,13 +129,6 @@ public class IBZTeamResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "获取组草稿", tags = {"组" },  notes = "获取组草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/ibzteams/getdraft")
-    public ResponseEntity<IBZTeamDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(ibzteamMapping.toDto(ibzteamService.getDraft(new IBZTeam())));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeam-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"组" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzteams/fetchdefault")
 	public ResponseEntity<List<IBZTeamDTO>> fetchDefault(IBZTeamSearchContext context) {
@@ -142,7 +141,6 @@ public class IBZTeamResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZTeam-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"组" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzteams/searchdefault")
 	public ResponseEntity<Page<IBZTeamDTO>> searchDefault(@RequestBody IBZTeamSearchContext context) {

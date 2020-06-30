@@ -23,15 +23,18 @@ public class IBZDepartmentFallback implements IBZDepartmentFeignClient{
             return null;
      }
 
-    public Boolean save(IBZDepartment ibzdepartment){
-            return false;
+    public IBZDepartment create(IBZDepartment ibzdepartment){
+            return null;
      }
-    public Boolean saveBatch(List<IBZDepartment> ibzdepartments){
+    public Boolean createBatch(List<IBZDepartment> ibzdepartments){
             return false;
      }
 
-    public IBZDepartment get(String deptid){
+    public IBZDepartment update(String deptid, IBZDepartment ibzdepartment){
             return null;
+     }
+    public Boolean updateBatch(List<IBZDepartment> ibzdepartments){
+            return false;
      }
 
 
@@ -42,31 +45,28 @@ public class IBZDepartmentFallback implements IBZDepartmentFeignClient{
             return false;
      }
 
-    public Boolean checkKey(IBZDepartment ibzdepartment){
-            return false;
-     }
-
-
-    public IBZDepartment update(String deptid, IBZDepartment ibzdepartment){
+    public IBZDepartment get(String deptid){
             return null;
      }
-    public Boolean updateBatch(List<IBZDepartment> ibzdepartments){
-            return false;
-     }
 
-
-    public IBZDepartment create(IBZDepartment ibzdepartment){
-            return null;
-     }
-    public Boolean createBatch(List<IBZDepartment> ibzdepartments){
-            return false;
-     }
 
     public IBZDepartment getDraft(){
             return null;
     }
 
 
+
+    public Boolean checkKey(IBZDepartment ibzdepartment){
+            return false;
+     }
+
+
+    public Boolean save(IBZDepartment ibzdepartment){
+            return false;
+     }
+    public Boolean saveBatch(List<IBZDepartment> ibzdepartments){
+            return false;
+     }
 
     public Page<IBZDepartment> searchDefault(IBZDepartmentSearchContext context){
             return null;

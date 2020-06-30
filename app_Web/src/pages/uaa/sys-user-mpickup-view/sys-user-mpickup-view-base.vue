@@ -747,9 +747,18 @@ export default class SysUserMPickupViewBase extends Vue {
                     newSelections.push(this.viewSelections[index]);
                 }
             });
-            this.viewSelections = newSelections;
+            this.viewSelections = this.removeDuplicates([...newSelections,...this.viewSelections]);
         });
-        this.selectedData = JSON.stringify(this.viewSelections);
+    }
+
+    /**
+     * 去重
+     *
+     * @memberof SysUserMPickupViewBase
+     */
+    public removeDuplicates(data:any):Array<any> {
+        const uniqueSet = new Set(data);
+        return [...uniqueSet];
     }
 
     /**

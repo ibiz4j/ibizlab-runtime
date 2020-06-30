@@ -44,9 +44,16 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
 
 
     @Override
-    public DictCatalog getDraft(DictCatalog et) {
-        et=dictCatalogFeignClient.getDraft();
-        return et;
+    public boolean create(DictCatalog et) {
+        DictCatalog rt = dictCatalogFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<DictCatalog> list){
+        dictCatalogFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -61,19 +68,6 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
 
     public void updateBatch(List<DictCatalog> list){
         dictCatalogFeignClient.updateBatch(list) ;
-    }
-
-    @Override
-    public boolean create(DictCatalog et) {
-        DictCatalog rt = dictCatalogFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<DictCatalog> list){
-        dictCatalogFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -99,6 +93,16 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
     }
 
     @Override
+    public DictCatalog getDraft(DictCatalog et) {
+        et=dictCatalogFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(DictCatalog et) {
+        return dictCatalogFeignClient.checkKey(et);
+    }
+    @Override
     @Transactional
     public boolean save(DictCatalog et) {
         if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
@@ -112,10 +116,6 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
         dictCatalogFeignClient.saveBatch(list) ;
     }
 
-    @Override
-    public boolean checkKey(DictCatalog et) {
-        return dictCatalogFeignClient.checkKey(et);
-    }
 
 
 

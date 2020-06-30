@@ -44,6 +44,19 @@ public class SysAppServiceImpl implements ISysAppService {
 
 
     @Override
+    public boolean create(SysApp et) {
+        SysApp rt = sysAppFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<SysApp> list){
+        sysAppFeignClient.createBatch(list) ;
+    }
+
+    @Override
     public boolean update(SysApp et) {
         SysApp rt = sysAppFeignClient.update(et.getId(),et);
         if(rt==null)
@@ -55,12 +68,6 @@ public class SysAppServiceImpl implements ISysAppService {
 
     public void updateBatch(List<SysApp> list){
         sysAppFeignClient.updateBatch(list) ;
-    }
-
-    @Override
-    public SysApp getDraft(SysApp et) {
-        et=sysAppFeignClient.getDraft();
-        return et;
     }
 
     @Override
@@ -86,18 +93,15 @@ public class SysAppServiceImpl implements ISysAppService {
     }
 
     @Override
-    public boolean create(SysApp et) {
-        SysApp rt = sysAppFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
+    public SysApp getDraft(SysApp et) {
+        et=sysAppFeignClient.getDraft();
+        return et;
     }
 
-    public void createBatch(List<SysApp> list){
-        sysAppFeignClient.createBatch(list) ;
+    @Override
+    public boolean checkKey(SysApp et) {
+        return sysAppFeignClient.checkKey(et);
     }
-
     @Override
     @Transactional
     public boolean save(SysApp et) {
@@ -112,10 +116,6 @@ public class SysAppServiceImpl implements ISysAppService {
         sysAppFeignClient.saveBatch(list) ;
     }
 
-    @Override
-    public boolean checkKey(SysApp et) {
-        return sysAppFeignClient.checkKey(et);
-    }
 
 
 	@Override

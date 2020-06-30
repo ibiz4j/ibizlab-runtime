@@ -39,38 +39,6 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
 
 
     @Override
-    public boolean remove(String key) {
-        return true;
-    }
-
-    public void removeBatch(Collection<String> idList){
-                        
-    }
-
-    @Override
-    public boolean checkKey(WFProcessNode et) {
-        return false;
-    }
-    @Override
-    @Transactional
-    public boolean save(WFProcessNode et) {
-        //代码实现
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<WFProcessNode> list) {
-                       
-    }
-
-    @Override
-    public WFProcessNode get(String key) {
-        WFProcessNode et = new WFProcessNode();
-        et.setUsertaskid(key);
-        return et;
-    }
-
-    @Override
     public boolean create(WFProcessNode et) {
         //代码实现
         return true;
@@ -91,8 +59,40 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     }
 
     @Override
+    public boolean remove(String key) {
+        return true;
+    }
+
+    public void removeBatch(Collection<String> idList){
+                        
+    }
+
+    @Override
+    public WFProcessNode get(String key) {
+        WFProcessNode et = new WFProcessNode();
+        et.setUsertaskid(key);
+        return et;
+    }
+
+    @Override
     public WFProcessNode getDraft(WFProcessNode et) {
         return et;
+    }
+
+    @Override
+    public boolean checkKey(WFProcessNode et) {
+        return false;
+    }
+    @Override
+    @Transactional
+    public boolean save(WFProcessNode et) {
+        //代码实现
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<WFProcessNode> list) {
+                       
     }
 
 

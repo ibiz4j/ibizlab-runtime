@@ -23,10 +23,6 @@ public interface IBZTeamFeignClient {
     Page<IBZTeam> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzteams/checkkey")
-    Boolean checkKey(@RequestBody IBZTeam ibzteam);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/ibzteams")
     IBZTeam create(@RequestBody IBZTeam ibzteam);
 
@@ -52,15 +48,19 @@ public interface IBZTeamFeignClient {
     IBZTeam get(@PathVariable("teamid") String teamid);
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/ibzteams/getdraft")
+    IBZTeam getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzteams/checkkey")
+    Boolean checkKey(@RequestBody IBZTeam ibzteam);
+
+
     @RequestMapping(method = RequestMethod.POST, value = "/ibzteams/save")
     Boolean save(@RequestBody IBZTeam ibzteam);
 
     @RequestMapping(method = RequestMethod.POST, value = "/ibzteams/save")
     Boolean saveBatch(@RequestBody List<IBZTeam> ibzteams);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/ibzteams/getdraft")
-    IBZTeam getDraft();
 
 
 

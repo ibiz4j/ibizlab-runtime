@@ -23,15 +23,19 @@ public class WFTaskFallback implements WFTaskFeignClient{
             return null;
      }
 
-    public Boolean checkKey(WFTask wftask){
+    public WFTask create(WFTask wftask){
+            return null;
+     }
+    public Boolean createBatch(List<WFTask> wftasks){
             return false;
      }
 
-
-    public WFTask getDraft(){
+    public WFTask update(String id, WFTask wftask){
             return null;
-    }
-
+     }
+    public Boolean updateBatch(List<WFTask> wftasks){
+            return false;
+     }
 
 
     public Boolean remove(String id){
@@ -46,17 +50,13 @@ public class WFTaskFallback implements WFTaskFeignClient{
      }
 
 
-    public WFTask create(WFTask wftask){
+    public WFTask getDraft(){
             return null;
-     }
-    public Boolean createBatch(List<WFTask> wftasks){
-            return false;
-     }
+    }
 
-    public WFTask update(String id, WFTask wftask){
-            return null;
-     }
-    public Boolean updateBatch(List<WFTask> wftasks){
+
+
+    public Boolean checkKey(WFTask wftask){
             return false;
      }
 

@@ -44,17 +44,16 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
 
     @Override
-    @Transactional
-    public boolean save(SysRole et) {
-        if(et.getRoleid()==null) et.setRoleid((String)et.getDefaultKey(true));
-        if(!sysRoleFeignClient.save(et))
+    public boolean create(SysRole et) {
+        SysRole rt = sysRoleFeignClient.create(et);
+        if(rt==null)
             return false;
+        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    @Override
-    public void saveBatch(List<SysRole> list) {
-        sysRoleFeignClient.saveBatch(list) ;
+    public void createBatch(List<SysRole> list){
+        sysRoleFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -72,16 +71,13 @@ public class SysRoleServiceImpl implements ISysRoleService {
     }
 
     @Override
-    public boolean create(SysRole et) {
-        SysRole rt = sysRoleFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
+    public boolean remove(String roleid) {
+        boolean result=sysRoleFeignClient.remove(roleid) ;
+        return result;
     }
 
-    public void createBatch(List<SysRole> list){
-        sysRoleFeignClient.createBatch(list) ;
+    public void removeBatch(Collection<String> idList){
+        sysRoleFeignClient.removeBatch(idList);
     }
 
     @Override
@@ -97,16 +93,6 @@ public class SysRoleServiceImpl implements ISysRoleService {
     }
 
     @Override
-    public boolean remove(String roleid) {
-        boolean result=sysRoleFeignClient.remove(roleid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        sysRoleFeignClient.removeBatch(idList);
-    }
-
-    @Override
     public SysRole getDraft(SysRole et) {
         et=sysRoleFeignClient.getDraft();
         return et;
@@ -116,6 +102,20 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public boolean checkKey(SysRole et) {
         return sysRoleFeignClient.checkKey(et);
     }
+    @Override
+    @Transactional
+    public boolean save(SysRole et) {
+        if(et.getRoleid()==null) et.setRoleid((String)et.getDefaultKey(true));
+        if(!sysRoleFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<SysRole> list) {
+        sysRoleFeignClient.saveBatch(list) ;
+    }
+
 
 
 

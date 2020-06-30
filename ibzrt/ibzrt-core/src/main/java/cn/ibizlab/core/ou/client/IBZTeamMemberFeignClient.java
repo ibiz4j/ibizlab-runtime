@@ -23,15 +23,25 @@ public interface IBZTeamMemberFeignClient {
     Page<IBZTeamMember> select();
 
 
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers")
+    IBZTeamMember create(@RequestBody IBZTeamMember ibzteammember);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers/batch")
+    Boolean createBatch(@RequestBody List<IBZTeamMember> ibzteammembers);
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/ibzteammembers/{teammemberid}")
+    IBZTeamMember update(@PathVariable("teammemberid") String teammemberid,@RequestBody IBZTeamMember ibzteammember);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/ibzteammembers/batch")
+    Boolean updateBatch(@RequestBody List<IBZTeamMember> ibzteammembers);
+
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/ibzteammembers/{teammemberid}")
     Boolean remove(@PathVariable("teammemberid") String teammemberid);
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/ibzteammembers/batch}")
     Boolean removeBatch(@RequestBody Collection<String> idList);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers/checkkey")
-    Boolean checkKey(@RequestBody IBZTeamMember ibzteammember);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/ibzteammembers/{teammemberid}")
@@ -42,11 +52,8 @@ public interface IBZTeamMemberFeignClient {
     IBZTeamMember getDraft();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers")
-    IBZTeamMember create(@RequestBody IBZTeamMember ibzteammember);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers/batch")
-    Boolean createBatch(@RequestBody List<IBZTeamMember> ibzteammembers);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers/checkkey")
+    Boolean checkKey(@RequestBody IBZTeamMember ibzteammember);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers/save")
@@ -54,13 +61,6 @@ public interface IBZTeamMemberFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers/save")
     Boolean saveBatch(@RequestBody List<IBZTeamMember> ibzteammembers);
-
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/ibzteammembers/{teammemberid}")
-    IBZTeamMember update(@PathVariable("teammemberid") String teammemberid,@RequestBody IBZTeamMember ibzteammember);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/ibzteammembers/batch")
-    Boolean updateBatch(@RequestBody List<IBZTeamMember> ibzteammembers);
 
 
 

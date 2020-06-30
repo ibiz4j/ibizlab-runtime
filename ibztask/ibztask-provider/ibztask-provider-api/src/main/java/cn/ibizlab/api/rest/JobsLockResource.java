@@ -66,30 +66,6 @@ public class JobsLockResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Save-all')")
-    @ApiOperation(value = "保存任务锁", tags = {"任务锁" },  notes = "保存任务锁")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
-    public ResponseEntity<Boolean> save(@RequestBody JobsLockDTO jobslockdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(jobslockService.save(jobslockMapping.toDomain(jobslockdto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Save-all')")
-    @ApiOperation(value = "批量保存任务锁", tags = {"任务锁" },  notes = "批量保存任务锁")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<JobsLockDTO> jobslockdtos) {
-        jobslockService.saveBatch(jobslockMapping.toDomain(jobslockdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Get-all')")
-    @ApiOperation(value = "获取任务锁", tags = {"任务锁" },  notes = "获取任务锁")
-	@RequestMapping(method = RequestMethod.GET, value = "/jobslocks/{jobslock_id}")
-    public ResponseEntity<JobsLockDTO> get(@PathVariable("jobslock_id") String jobslock_id) {
-        JobsLock domain = jobslockService.get(jobslock_id);
-        JobsLockDTO dto = jobslockMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Update-all')")
     @ApiOperation(value = "更新任务锁", tags = {"任务锁" },  notes = "更新任务锁")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/{jobslock_id}")
@@ -110,12 +86,6 @@ public class JobsLockResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "检查任务锁", tags = {"任务锁" },  notes = "检查任务锁")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody JobsLockDTO jobslockdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(jobslockService.checkKey(jobslockMapping.toDomain(jobslockdto)));
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Remove-all')")
     @ApiOperation(value = "删除任务锁", tags = {"任务锁" },  notes = "删除任务锁")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslocks/{jobslock_id}")
@@ -132,10 +102,40 @@ public class JobsLockResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Get-all')")
+    @ApiOperation(value = "获取任务锁", tags = {"任务锁" },  notes = "获取任务锁")
+	@RequestMapping(method = RequestMethod.GET, value = "/jobslocks/{jobslock_id}")
+    public ResponseEntity<JobsLockDTO> get(@PathVariable("jobslock_id") String jobslock_id) {
+        JobsLock domain = jobslockService.get(jobslock_id);
+        JobsLockDTO dto = jobslockMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
     @ApiOperation(value = "获取任务锁草稿", tags = {"任务锁" },  notes = "获取任务锁草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobslocks/getdraft")
     public ResponseEntity<JobsLockDTO> getDraft() {
         return ResponseEntity.status(HttpStatus.OK).body(jobslockMapping.toDto(jobslockService.getDraft(new JobsLock())));
+    }
+
+    @ApiOperation(value = "检查任务锁", tags = {"任务锁" },  notes = "检查任务锁")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody JobsLockDTO jobslockdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(jobslockService.checkKey(jobslockMapping.toDomain(jobslockdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Save-all')")
+    @ApiOperation(value = "保存任务锁", tags = {"任务锁" },  notes = "保存任务锁")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
+    public ResponseEntity<Boolean> save(@RequestBody JobsLockDTO jobslockdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(jobslockService.save(jobslockMapping.toDomain(jobslockdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Save-all')")
+    @ApiOperation(value = "批量保存任务锁", tags = {"任务锁" },  notes = "批量保存任务锁")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<JobsLockDTO> jobslockdtos) {
+        jobslockService.saveBatch(jobslockMapping.toDomain(jobslockdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-searchDefault-all')")

@@ -1038,14 +1038,62 @@ export default class IBZDeptMemberGridViewBase extends Vue {
     }
 
 
-!!!!模版产生代码错误:----
-Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
-----
+    /**
+     * 打开编辑数据视图
+     *
+     * @param {any[]} args
+     * @param {*} [params]
+     * @param {*} [fullargs]
+     * @param {*} [$event]
+     * @param {*} [xData]
+     * @memberof IBZDeptMemberGridView
+     */
+    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+        if(!this.viewDefaultUsage){
+            if(Object.is(this.navModel,"route")){
+                this.initNavDataWithRoute(this.viewCacheData, false, true);
+            }else{
+                this.initNavDataWithTab(this.viewCacheData, false, true);
+            }
+        }
+        let localContext:any = null;
+        let localViewParam:any =null;
+        const data: any = {};
+        let tempContext = JSON.parse(JSON.stringify(this.context));
+        if(args.length >0){
+            Object.assign(tempContext,args[0]);
+        }
+        let deResParameters: any[] = [];
+        if(tempContext.ibzdepartment && true){
+            deResParameters = [
+            { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
+            ]
+        }
+        const parameters: any[] = [
+            { pathName: 'ibzdeptmembers', parameterName: 'ibzdeptmember' },
+        ];
+        const _this: any = this;
+        const openPopupModal = (view: any, data: any) => {
+            let container: Subject<any> = this.$appmodal.openModal(view, tempContext, data);
+            container.subscribe((result: any) => {
+                if (!result || !Object.is(result.ret, 'OK')) {
+                    return;
+                }
+                if (!xData || !(xData.refresh instanceof Function)) {
+                    return;
+                }
+                xData.refresh(result.datas);
+            });
+        }
+        const view: any = {
+            viewname: 'ibzdept-member-edit-view', 
+            height: 0, 
+            width: 0,  
+            title: this.$t('entities.ibzdeptmember.views.editview.title'),
+        };
+        openPopupModal(view, data);
+    }
 
-----
-FTL stack trace ("~" means nesting-related):
-	- Failed at: #if ctrl.getPSControlContainer().getV...  [in template "TEMPLCODE_zh_CN" at line 43, column 5]
-----
 
     /**
      * 新建

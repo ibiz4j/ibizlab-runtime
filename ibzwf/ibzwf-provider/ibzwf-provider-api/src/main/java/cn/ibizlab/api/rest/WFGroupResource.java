@@ -47,18 +47,22 @@ public class WFGroupResource {
     @Lazy
     public WFGroupMapping wfgroupMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Save-all')")
-    @ApiOperation(value = "保存角色/用户组", tags = {"角色/用户组" },  notes = "保存角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFGroupDTO wfgroupdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.save(wfgroupMapping.toDomain(wfgroupdto)));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Create-all')")
+    @ApiOperation(value = "新建角色/用户组", tags = {"角色/用户组" },  notes = "新建角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups")
+    @Transactional
+    public ResponseEntity<WFGroupDTO> create(@RequestBody WFGroupDTO wfgroupdto) {
+        WFGroup domain = wfgroupMapping.toDomain(wfgroupdto);
+		wfgroupService.create(domain);
+        WFGroupDTO dto = wfgroupMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Save-all')")
-    @ApiOperation(value = "批量保存角色/用户组", tags = {"角色/用户组" },  notes = "批量保存角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFGroupDTO> wfgroupdtos) {
-        wfgroupService.saveBatch(wfgroupMapping.toDomain(wfgroupdtos));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Create-all')")
+    @ApiOperation(value = "批量新建角色/用户组", tags = {"角色/用户组" },  notes = "批量新建角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFGroupDTO> wfgroupdtos) {
+        wfgroupService.createBatch(wfgroupMapping.toDomain(wfgroupdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -79,37 +83,6 @@ public class WFGroupResource {
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<WFGroupDTO> wfgroupdtos) {
         wfgroupService.updateBatch(wfgroupMapping.toDomain(wfgroupdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取角色/用户组草稿", tags = {"角色/用户组" },  notes = "获取角色/用户组草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/getdraft")
-    public ResponseEntity<WFGroupDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfgroupMapping.toDto(wfgroupService.getDraft(new WFGroup())));
-    }
-
-    @ApiOperation(value = "检查角色/用户组", tags = {"角色/用户组" },  notes = "检查角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFGroupDTO wfgroupdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfgroupService.checkKey(wfgroupMapping.toDomain(wfgroupdto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Create-all')")
-    @ApiOperation(value = "新建角色/用户组", tags = {"角色/用户组" },  notes = "新建角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups")
-    @Transactional
-    public ResponseEntity<WFGroupDTO> create(@RequestBody WFGroupDTO wfgroupdto) {
-        WFGroup domain = wfgroupMapping.toDomain(wfgroupdto);
-		wfgroupService.create(domain);
-        WFGroupDTO dto = wfgroupMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Create-all')")
-    @ApiOperation(value = "批量新建角色/用户组", tags = {"角色/用户组" },  notes = "批量新建角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFGroupDTO> wfgroupdtos) {
-        wfgroupService.createBatch(wfgroupMapping.toDomain(wfgroupdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -136,6 +109,33 @@ public class WFGroupResource {
         WFGroup domain = wfgroupService.get(wfgroup_id);
         WFGroupDTO dto = wfgroupMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取角色/用户组草稿", tags = {"角色/用户组" },  notes = "获取角色/用户组草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/getdraft")
+    public ResponseEntity<WFGroupDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(wfgroupMapping.toDto(wfgroupService.getDraft(new WFGroup())));
+    }
+
+    @ApiOperation(value = "检查角色/用户组", tags = {"角色/用户组" },  notes = "检查角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFGroupDTO wfgroupdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfgroupService.checkKey(wfgroupMapping.toDomain(wfgroupdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Save-all')")
+    @ApiOperation(value = "保存角色/用户组", tags = {"角色/用户组" },  notes = "保存角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
+    public ResponseEntity<Boolean> save(@RequestBody WFGroupDTO wfgroupdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.save(wfgroupMapping.toDomain(wfgroupdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Save-all')")
+    @ApiOperation(value = "批量保存角色/用户组", tags = {"角色/用户组" },  notes = "批量保存角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFGroupDTO> wfgroupdtos) {
+        wfgroupService.saveBatch(wfgroupMapping.toDomain(wfgroupdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-searchDefault-all')")

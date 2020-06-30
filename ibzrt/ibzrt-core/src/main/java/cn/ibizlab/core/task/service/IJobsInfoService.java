@@ -23,20 +23,20 @@ import cn.ibizlab.core.task.filter.JobsInfoSearchContext;
  */
 public interface IJobsInfoService{
 
-    JobsInfo start(JobsInfo et) ;
-    boolean save(JobsInfo et) ;
-    void saveBatch(List<JobsInfo> list) ;
     boolean create(JobsInfo et) ;
     void createBatch(List<JobsInfo> list) ;
-    boolean checkKey(JobsInfo et) ;
-    JobsInfo getDraft(JobsInfo et) ;
     boolean update(JobsInfo et) ;
     void updateBatch(List<JobsInfo> list) ;
-    JobsInfo execute(JobsInfo et) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
-    JobsInfo stop(JobsInfo et) ;
     JobsInfo get(String key) ;
+    JobsInfo getDraft(JobsInfo et) ;
+    boolean checkKey(JobsInfo et) ;
+    JobsInfo execute(JobsInfo et) ;
+    boolean save(JobsInfo et) ;
+    void saveBatch(List<JobsInfo> list) ;
+    JobsInfo start(JobsInfo et) ;
+    JobsInfo stop(JobsInfo et) ;
     Page<JobsInfo> searchDefault(JobsInfoSearchContext context) ;
 
 }

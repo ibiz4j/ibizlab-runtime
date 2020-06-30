@@ -30,26 +30,11 @@ public interface WFREModelFeignClient {
     Boolean createBatch(@RequestBody List<WFREModel> wfremodels);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{id}")
-    WFREModel get(@PathVariable("id") String id);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
-    Boolean save(@RequestBody WFREModel wfremodel);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
-    Boolean saveBatch(@RequestBody List<WFREModel> wfremodels);
-
-
     @RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/{id}")
     WFREModel update(@PathVariable("id") String id,@RequestBody WFREModel wfremodel);
 
     @RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/batch")
     Boolean updateBatch(@RequestBody List<WFREModel> wfremodels);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/getdraft")
-    WFREModel getDraft();
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/{id}")
@@ -59,8 +44,23 @@ public interface WFREModelFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{id}")
+    WFREModel get(@PathVariable("id") String id);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/getdraft")
+    WFREModel getDraft();
+
+
     @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/checkkey")
     Boolean checkKey(@RequestBody WFREModel wfremodel);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
+    Boolean save(@RequestBody WFREModel wfremodel);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
+    Boolean saveBatch(@RequestBody List<WFREModel> wfremodels);
 
 
 

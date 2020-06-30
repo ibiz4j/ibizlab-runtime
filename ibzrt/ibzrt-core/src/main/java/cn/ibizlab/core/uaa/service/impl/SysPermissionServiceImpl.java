@@ -44,33 +44,16 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
 
 
     @Override
-    @Transactional
-    public boolean save(SysPermission et) {
-        if(et.getPermissionid()==null) et.setPermissionid((String)et.getDefaultKey(true));
-        if(!sysPermissionFeignClient.save(et))
+    public boolean create(SysPermission et) {
+        SysPermission rt = sysPermissionFeignClient.create(et);
+        if(rt==null)
             return false;
+        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    @Override
-    public void saveBatch(List<SysPermission> list) {
-        sysPermissionFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public SysPermission getDraft(SysPermission et) {
-        et=sysPermissionFeignClient.getDraft();
-        return et;
-    }
-
-    @Override
-    public boolean remove(String permissionid) {
-        boolean result=sysPermissionFeignClient.remove(permissionid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        sysPermissionFeignClient.removeBatch(idList);
+    public void createBatch(List<SysPermission> list){
+        sysPermissionFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -88,22 +71,15 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
     }
 
     @Override
-    public boolean create(SysPermission et) {
-        SysPermission rt = sysPermissionFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
+    public boolean remove(String permissionid) {
+        boolean result=sysPermissionFeignClient.remove(permissionid) ;
+        return result;
     }
 
-    public void createBatch(List<SysPermission> list){
-        sysPermissionFeignClient.createBatch(list) ;
+    public void removeBatch(Collection<String> idList){
+        sysPermissionFeignClient.removeBatch(idList);
     }
 
-    @Override
-    public boolean checkKey(SysPermission et) {
-        return sysPermissionFeignClient.checkKey(et);
-    }
     @Override
     public SysPermission get(String permissionid) {
 		SysPermission et=sysPermissionFeignClient.get(permissionid);
@@ -114,6 +90,30 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
         else{
         }
         return  et;
+    }
+
+    @Override
+    public SysPermission getDraft(SysPermission et) {
+        et=sysPermissionFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysPermission et) {
+        return sysPermissionFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(SysPermission et) {
+        if(et.getPermissionid()==null) et.setPermissionid((String)et.getDefaultKey(true));
+        if(!sysPermissionFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<SysPermission> list) {
+        sysPermissionFeignClient.saveBatch(list) ;
     }
 
 

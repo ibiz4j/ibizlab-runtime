@@ -23,15 +23,10 @@ public class IBZPostFallback implements IBZPostFeignClient{
             return null;
      }
 
-    public IBZPost get(String postid){
+    public IBZPost create(IBZPost ibzpost){
             return null;
      }
-
-
-    public Boolean save(IBZPost ibzpost){
-            return false;
-     }
-    public Boolean saveBatch(List<IBZPost> ibzposts){
+    public Boolean createBatch(List<IBZPost> ibzposts){
             return false;
      }
 
@@ -43,11 +38,6 @@ public class IBZPostFallback implements IBZPostFeignClient{
      }
 
 
-    public Boolean checkKey(IBZPost ibzpost){
-            return false;
-     }
-
-
     public Boolean remove(String postid){
             return false;
      }
@@ -55,16 +45,26 @@ public class IBZPostFallback implements IBZPostFeignClient{
             return false;
      }
 
+    public IBZPost get(String postid){
+            return null;
+     }
+
+
     public IBZPost getDraft(){
             return null;
     }
 
 
 
-    public IBZPost create(IBZPost ibzpost){
-            return null;
+    public Boolean checkKey(IBZPost ibzpost){
+            return false;
      }
-    public Boolean createBatch(List<IBZPost> ibzposts){
+
+
+    public Boolean save(IBZPost ibzpost){
+            return false;
+     }
+    public Boolean saveBatch(List<IBZPost> ibzposts){
             return false;
      }
 

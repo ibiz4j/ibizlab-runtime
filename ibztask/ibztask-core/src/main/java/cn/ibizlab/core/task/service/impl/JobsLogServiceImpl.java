@@ -48,8 +48,17 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
     protected int batchSize = 500;
 
     @Override
-    public JobsLog getDraft(JobsLog et) {
-        return et;
+    @Transactional
+    public boolean create(JobsLog et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getId()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<JobsLog> list) {
+        this.saveBatch(list,batchSize);
     }
 
     @Override
@@ -68,16 +77,32 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
 
     @Override
     @Transactional
-    public boolean create(JobsLog et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true;
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
     }
 
     @Override
-    public void createBatch(List<JobsLog> list) {
-        this.saveBatch(list,batchSize);
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public JobsLog get(String key) {
+        JobsLog et = getById(key);
+        if(et==null){
+            et=new JobsLog();
+            et.setId(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public JobsLog getDraft(JobsLog et) {
+        return et;
     }
 
     @Override
@@ -113,31 +138,6 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
     @Override
     public void saveBatch(List<JobsLog> list) {
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    @Transactional
-    public JobsLog get(String key) {
-        JobsLog et = getById(key);
-        if(et==null){
-            et=new JobsLog();
-            et.setId(key);
-        }
-        else{
-        }
-        return et;
     }
 
 

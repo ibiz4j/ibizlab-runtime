@@ -53,6 +53,45 @@ export default class IBZTeamServiceBase extends EntityService {
     }
 
     /**
+     * Create接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof IBZTeamServiceBase
+     */
+    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        let ibzteammembersData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
+            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
+            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
+                ibzteammembersData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.teammemberid = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.ibzteammembers = ibzteammembersData;
+        Object.assign(data,masterData);
+        if(!data.srffrontuf || data.srffrontuf !== "1"){
+            data[this.APPDEKEY] = null;
+        }
+        if(data.srffrontuf){
+            delete data.srffrontuf;
+        }
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        let res:any = await Http.getInstance().post(`/ibzteams`,data,isloading);
+        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+        return res;
+    }
+
+    /**
      * Update接口方法
      *
      * @param {*} [context={}]
@@ -114,38 +153,6 @@ export default class IBZTeamServiceBase extends EntityService {
     }
 
     /**
-     * Save接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZTeamServiceBase
-     */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        let ibzteammembersData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
-            ibzteammembersData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers') as any);
-            if(ibzteammembersData && ibzteammembersData.length && ibzteammembersData.length > 0){
-                ibzteammembersData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.teammemberid = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.ibzteammembers = ibzteammembersData;
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/ibzteams/${context.ibzteam}/save`,data,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
-        return res;
-    }
-
-    /**
      * GetDraft接口方法
      *
      * @param {*} [context={}]
@@ -176,7 +183,7 @@ export default class IBZTeamServiceBase extends EntityService {
     }
 
     /**
-     * Create接口方法
+     * Save接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -184,7 +191,7 @@ export default class IBZTeamServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof IBZTeamServiceBase
      */
-    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let masterData:any = {};
         let ibzteammembersData:any = [];
         if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_ibzteammembers'),'undefined')){
@@ -202,15 +209,8 @@ export default class IBZTeamServiceBase extends EntityService {
         }
         masterData.ibzteammembers = ibzteammembersData;
         Object.assign(data,masterData);
-        if(!data.srffrontuf || data.srffrontuf !== "1"){
-            data[this.APPDEKEY] = null;
-        }
-        if(data.srffrontuf){
-            delete data.srffrontuf;
-        }
-        let tempContext:any = JSON.parse(JSON.stringify(context));
-        let res:any = await Http.getInstance().post(`/ibzteams`,data,isloading);
-        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
+            let res:any = await  Http.getInstance().post(`/ibzteams/${context.ibzteam}/save`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_ibzteammembers',JSON.stringify(res.data.ibzteammembers));
         return res;
     }
 

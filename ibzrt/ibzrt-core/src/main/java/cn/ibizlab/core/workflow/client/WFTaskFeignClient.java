@@ -23,12 +23,18 @@ public interface WFTaskFeignClient {
     Page<WFTask> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wftasks/checkkey")
-    Boolean checkKey(@RequestBody WFTask wftask);
+    @RequestMapping(method = RequestMethod.POST, value = "/wftasks")
+    WFTask create(@RequestBody WFTask wftask);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wftasks/batch")
+    Boolean createBatch(@RequestBody List<WFTask> wftasks);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wftasks/getdraft")
-    WFTask getDraft();
+    @RequestMapping(method = RequestMethod.PUT, value = "/wftasks/{id}")
+    WFTask update(@PathVariable("id") String id,@RequestBody WFTask wftask);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/wftasks/batch")
+    Boolean updateBatch(@RequestBody List<WFTask> wftasks);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wftasks/{id}")
@@ -42,18 +48,12 @@ public interface WFTaskFeignClient {
     WFTask get(@PathVariable("id") String id);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wftasks")
-    WFTask create(@RequestBody WFTask wftask);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wftasks/batch")
-    Boolean createBatch(@RequestBody List<WFTask> wftasks);
+    @RequestMapping(method = RequestMethod.GET, value = "/wftasks/getdraft")
+    WFTask getDraft();
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wftasks/{id}")
-    WFTask update(@PathVariable("id") String id,@RequestBody WFTask wftask);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wftasks/batch")
-    Boolean updateBatch(@RequestBody List<WFTask> wftasks);
+    @RequestMapping(method = RequestMethod.POST, value = "/wftasks/checkkey")
+    Boolean checkKey(@RequestBody WFTask wftask);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wftasks/save")

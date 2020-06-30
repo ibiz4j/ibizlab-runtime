@@ -25,21 +25,21 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IIBZOrganizationService extends IService<IBZOrganization>{
 
-    boolean checkKey(IBZOrganization et) ;
-    boolean update(IBZOrganization et) ;
-    @CacheEvict(value="ibzorganization",allEntries=true)
-    void updateBatch(List<IBZOrganization> list) ;
     boolean create(IBZOrganization et) ;
     @CacheEvict(value="ibzorganization",allEntries=true)
     void createBatch(List<IBZOrganization> list) ;
-    boolean save(IBZOrganization et) ;
+    boolean update(IBZOrganization et) ;
     @CacheEvict(value="ibzorganization",allEntries=true)
-    void saveBatch(List<IBZOrganization> list) ;
+    void updateBatch(List<IBZOrganization> list) ;
     boolean remove(String key) ;
     @CacheEvict(value="ibzorganization",allEntries=true)
     void removeBatch(Collection<String> idList) ;
     IBZOrganization get(String key) ;
     IBZOrganization getDraft(IBZOrganization et) ;
+    boolean checkKey(IBZOrganization et) ;
+    boolean save(IBZOrganization et) ;
+    @CacheEvict(value="ibzorganization",allEntries=true)
+    void saveBatch(List<IBZOrganization> list) ;
     Page<IBZOrganization> searchDefault(IBZOrganizationSearchContext context) ;
     List<IBZOrganization> selectByParentorgid(String orgid) ;
     @CacheEvict(value="ibzorganization",allEntries=true)

@@ -23,15 +23,15 @@ import cn.ibizlab.core.ou.filter.IBZDeptMemberSearchContext;
  */
 public interface IIBZDeptMemberService{
 
-    boolean update(IBZDeptMember et) ;
-    void updateBatch(List<IBZDeptMember> list) ;
-    IBZDeptMember get(String key) ;
-    boolean checkKey(IBZDeptMember et) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
     boolean create(IBZDeptMember et) ;
     void createBatch(List<IBZDeptMember> list) ;
+    boolean update(IBZDeptMember et) ;
+    void updateBatch(List<IBZDeptMember> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    IBZDeptMember get(String key) ;
     IBZDeptMember getDraft(IBZDeptMember et) ;
+    boolean checkKey(IBZDeptMember et) ;
     boolean save(IBZDeptMember et) ;
     void saveBatch(List<IBZDeptMember> list) ;
     Page<IBZDeptMember> searchDefault(IBZDeptMemberSearchContext context) ;

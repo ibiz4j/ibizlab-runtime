@@ -23,15 +23,15 @@ import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
  */
 public interface IWFTaskService{
 
-    boolean checkKey(WFTask et) ;
-    WFTask getDraft(WFTask et) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFTask get(String key) ;
     boolean create(WFTask et) ;
     void createBatch(List<WFTask> list) ;
     boolean update(WFTask et) ;
     void updateBatch(List<WFTask> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    WFTask get(String key) ;
+    WFTask getDraft(WFTask et) ;
+    boolean checkKey(WFTask et) ;
     boolean save(WFTask et) ;
     void saveBatch(List<WFTask> list) ;
     Page<WFTask> searchDefault(WFTaskSearchContext context) ;

@@ -44,15 +44,16 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
 
 
     @Override
-    public SysPSSystem get(String pssystemid) {
-		SysPSSystem et=sysPSSystemFeignClient.get(pssystemid);
-        if(et==null){
-            et=new SysPSSystem();
-            et.setPssystemid(pssystemid);
-        }
-        else{
-        }
-        return  et;
+    public boolean create(SysPSSystem et) {
+        SysPSSystem rt = sysPSSystemFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<SysPSSystem> list){
+        sysPSSystemFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -70,10 +71,6 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
     }
 
     @Override
-    public boolean checkKey(SysPSSystem et) {
-        return sysPSSystemFeignClient.checkKey(et);
-    }
-    @Override
     public boolean remove(String pssystemid) {
         boolean result=sysPSSystemFeignClient.remove(pssystemid) ;
         return result;
@@ -84,16 +81,15 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
     }
 
     @Override
-    public boolean create(SysPSSystem et) {
-        SysPSSystem rt = sysPSSystemFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<SysPSSystem> list){
-        sysPSSystemFeignClient.createBatch(list) ;
+    public SysPSSystem get(String pssystemid) {
+		SysPSSystem et=sysPSSystemFeignClient.get(pssystemid);
+        if(et==null){
+            et=new SysPSSystem();
+            et.setPssystemid(pssystemid);
+        }
+        else{
+        }
+        return  et;
     }
 
     @Override
@@ -102,6 +98,10 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
         return et;
     }
 
+    @Override
+    public boolean checkKey(SysPSSystem et) {
+        return sysPSSystemFeignClient.checkKey(et);
+    }
     @Override
     @Transactional
     public boolean save(SysPSSystem et) {
@@ -121,20 +121,20 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
 
 
     /**
-     * 查询集合 Pick
-     */
-    @Override
-    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
-        Page<SysPSSystem> sysPSSystems=sysPSSystemFeignClient.searchPick(context);
-        return sysPSSystems;
-    }
-
-    /**
      * 查询集合 DEFAULT
      */
     @Override
     public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) {
         Page<SysPSSystem> sysPSSystems=sysPSSystemFeignClient.searchDefault(context);
+        return sysPSSystems;
+    }
+
+    /**
+     * 查询集合 Pick
+     */
+    @Override
+    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
+        Page<SysPSSystem> sysPSSystems=sysPSSystemFeignClient.searchPick(context);
         return sysPSSystems;
     }
 

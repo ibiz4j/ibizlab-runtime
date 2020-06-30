@@ -47,6 +47,25 @@ public class IBZTeamResource {
     @Lazy
     public IBZTeamMapping ibzteamMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Create-all')")
+    @ApiOperation(value = "新建组", tags = {"组" },  notes = "新建组")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams")
+    @Transactional
+    public ResponseEntity<IBZTeamDTO> create(@RequestBody IBZTeamDTO ibzteamdto) {
+        IBZTeam domain = ibzteamMapping.toDomain(ibzteamdto);
+		ibzteamService.create(domain);
+        IBZTeamDTO dto = ibzteamMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Create-all')")
+    @ApiOperation(value = "批量新建组", tags = {"组" },  notes = "批量新建组")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<IBZTeamDTO> ibzteamdtos) {
+        ibzteamService.createBatch(ibzteamMapping.toDomain(ibzteamdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Update-all')")
     @ApiOperation(value = "更新组", tags = {"组" },  notes = "更新组")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzteams/{ibzteam_id}")
@@ -92,21 +111,6 @@ public class IBZTeamResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Save-all')")
-    @ApiOperation(value = "保存组", tags = {"组" },  notes = "保存组")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/save")
-    public ResponseEntity<Boolean> save(@RequestBody IBZTeamDTO ibzteamdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(ibzteamService.save(ibzteamMapping.toDomain(ibzteamdto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Save-all')")
-    @ApiOperation(value = "批量保存组", tags = {"组" },  notes = "批量保存组")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZTeamDTO> ibzteamdtos) {
-        ibzteamService.saveBatch(ibzteamMapping.toDomain(ibzteamdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
     @ApiOperation(value = "获取组草稿", tags = {"组" },  notes = "获取组草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/ibzteams/getdraft")
     public ResponseEntity<IBZTeamDTO> getDraft() {
@@ -119,22 +123,18 @@ public class IBZTeamResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzteamService.checkKey(ibzteamMapping.toDomain(ibzteamdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Create-all')")
-    @ApiOperation(value = "新建组", tags = {"组" },  notes = "新建组")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams")
-    @Transactional
-    public ResponseEntity<IBZTeamDTO> create(@RequestBody IBZTeamDTO ibzteamdto) {
-        IBZTeam domain = ibzteamMapping.toDomain(ibzteamdto);
-		ibzteamService.create(domain);
-        IBZTeamDTO dto = ibzteamMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Save-all')")
+    @ApiOperation(value = "保存组", tags = {"组" },  notes = "保存组")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/save")
+    public ResponseEntity<Boolean> save(@RequestBody IBZTeamDTO ibzteamdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(ibzteamService.save(ibzteamMapping.toDomain(ibzteamdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Create-all')")
-    @ApiOperation(value = "批量新建组", tags = {"组" },  notes = "批量新建组")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<IBZTeamDTO> ibzteamdtos) {
-        ibzteamService.createBatch(ibzteamMapping.toDomain(ibzteamdtos));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZTeam-Save-all')")
+    @ApiOperation(value = "批量保存组", tags = {"组" },  notes = "批量保存组")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZTeamDTO> ibzteamdtos) {
+        ibzteamService.saveBatch(ibzteamMapping.toDomain(ibzteamdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 

@@ -25,15 +25,15 @@ public interface IWFProcessNodeService{
 
     boolean create(WFProcessNode et) ;
     void createBatch(List<WFProcessNode> list) ;
-    boolean save(WFProcessNode et) ;
-    void saveBatch(List<WFProcessNode> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
     boolean update(WFProcessNode et) ;
     void updateBatch(List<WFProcessNode> list) ;
-    WFProcessNode getDraft(WFProcessNode et) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
     WFProcessNode get(String key) ;
+    WFProcessNode getDraft(WFProcessNode et) ;
     boolean checkKey(WFProcessNode et) ;
+    boolean save(WFProcessNode et) ;
+    void saveBatch(List<WFProcessNode> list) ;
     Page<WFProcessNode> searchDefault(WFProcessNodeSearchContext context) ;
 
 }

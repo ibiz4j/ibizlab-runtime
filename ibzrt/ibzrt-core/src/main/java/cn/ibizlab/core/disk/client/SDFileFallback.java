@@ -23,19 +23,20 @@ public class SDFileFallback implements SDFileFeignClient{
             return null;
      }
 
-    public Boolean save(SDFile sdfile){
-            return false;
-     }
-    public Boolean saveBatch(List<SDFile> sdfiles){
-            return false;
-     }
-
     public SDFile create(SDFile sdfile){
             return null;
      }
     public Boolean createBatch(List<SDFile> sdfiles){
             return false;
      }
+
+    public SDFile update(String id, SDFile sdfile){
+            return null;
+     }
+    public Boolean updateBatch(List<SDFile> sdfiles){
+            return false;
+     }
+
 
     public Boolean remove(String id){
             return false;
@@ -55,18 +56,17 @@ public class SDFileFallback implements SDFileFeignClient{
 
 
 
-    public SDFile update(String id, SDFile sdfile){
-            return null;
-     }
-    public Boolean updateBatch(List<SDFile> sdfiles){
-            return false;
-     }
-
-
     public Boolean checkKey(SDFile sdfile){
             return false;
      }
 
+
+    public Boolean save(SDFile sdfile){
+            return false;
+     }
+    public Boolean saveBatch(List<SDFile> sdfiles){
+            return false;
+     }
 
     public Page<SDFile> searchDefault(SDFileSearchContext context){
             return null;

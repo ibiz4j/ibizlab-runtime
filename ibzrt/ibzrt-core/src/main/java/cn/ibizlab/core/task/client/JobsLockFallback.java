@@ -23,16 +23,10 @@ public class JobsLockFallback implements JobsLockFeignClient{
             return null;
      }
 
-    public JobsLock getDraft(){
+    public JobsLock create(JobsLock jobslock){
             return null;
-    }
-
-
-
-    public Boolean save(JobsLock jobslock){
-            return false;
      }
-    public Boolean saveBatch(List<JobsLock> jobslocks){
+    public Boolean createBatch(List<JobsLock> jobslocks){
             return false;
      }
 
@@ -40,11 +34,6 @@ public class JobsLockFallback implements JobsLockFeignClient{
             return null;
      }
     public Boolean updateBatch(List<JobsLock> jobslocks){
-            return false;
-     }
-
-
-    public Boolean checkKey(JobsLock jobslock){
             return false;
      }
 
@@ -61,10 +50,21 @@ public class JobsLockFallback implements JobsLockFeignClient{
      }
 
 
-    public JobsLock create(JobsLock jobslock){
+    public JobsLock getDraft(){
             return null;
+    }
+
+
+
+    public Boolean checkKey(JobsLock jobslock){
+            return false;
      }
-    public Boolean createBatch(List<JobsLock> jobslocks){
+
+
+    public Boolean save(JobsLock jobslock){
+            return false;
+     }
+    public Boolean saveBatch(List<JobsLock> jobslocks){
             return false;
      }
 

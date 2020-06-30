@@ -44,23 +44,16 @@ public class SysAuthLogServiceImpl implements ISysAuthLogService {
 
 
     @Override
-    public boolean checkKey(SysAuthLog et) {
-        return sysAuthLogFeignClient.checkKey(et);
-    }
-    @Override
-    public boolean remove(String logid) {
-        boolean result=sysAuthLogFeignClient.remove(logid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        sysAuthLogFeignClient.removeBatch(idList);
+    public boolean create(SysAuthLog et) {
+        SysAuthLog rt = sysAuthLogFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
     }
 
-    @Override
-    public SysAuthLog getDraft(SysAuthLog et) {
-        et=sysAuthLogFeignClient.getDraft();
-        return et;
+    public void createBatch(List<SysAuthLog> list){
+        sysAuthLogFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -78,30 +71,13 @@ public class SysAuthLogServiceImpl implements ISysAuthLogService {
     }
 
     @Override
-    @Transactional
-    public boolean save(SysAuthLog et) {
-        if(et.getLogid()==null) et.setLogid((String)et.getDefaultKey(true));
-        if(!sysAuthLogFeignClient.save(et))
-            return false;
-        return true;
+    public boolean remove(String logid) {
+        boolean result=sysAuthLogFeignClient.remove(logid) ;
+        return result;
     }
 
-    @Override
-    public void saveBatch(List<SysAuthLog> list) {
-        sysAuthLogFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean create(SysAuthLog et) {
-        SysAuthLog rt = sysAuthLogFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<SysAuthLog> list){
-        sysAuthLogFeignClient.createBatch(list) ;
+    public void removeBatch(Collection<String> idList){
+        sysAuthLogFeignClient.removeBatch(idList);
     }
 
     @Override
@@ -114,6 +90,30 @@ public class SysAuthLogServiceImpl implements ISysAuthLogService {
         else{
         }
         return  et;
+    }
+
+    @Override
+    public SysAuthLog getDraft(SysAuthLog et) {
+        et=sysAuthLogFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysAuthLog et) {
+        return sysAuthLogFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(SysAuthLog et) {
+        if(et.getLogid()==null) et.setLogid((String)et.getDefaultKey(true));
+        if(!sysAuthLogFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<SysAuthLog> list) {
+        sysAuthLogFeignClient.saveBatch(list) ;
     }
 
 

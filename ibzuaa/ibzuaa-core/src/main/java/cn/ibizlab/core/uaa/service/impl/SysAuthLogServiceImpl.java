@@ -48,8 +48,17 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
     protected int batchSize = 500;
 
     @Override
-    public SysAuthLog getDraft(SysAuthLog et) {
-        return et;
+    @Transactional
+    public boolean create(SysAuthLog et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getLogid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<SysAuthLog> list) {
+        this.saveBatch(list,batchSize);
     }
 
     @Override
@@ -80,24 +89,6 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
 
     @Override
     @Transactional
-    public boolean create(SysAuthLog et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getLogid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<SysAuthLog> list) {
-        this.saveBatch(list,batchSize);
-    }
-
-    @Override
-    public boolean checkKey(SysAuthLog et) {
-        return (!ObjectUtils.isEmpty(et.getLogid()))&&(!Objects.isNull(this.getById(et.getLogid())));
-    }
-    @Override
-    @Transactional
     public SysAuthLog get(String key) {
         SysAuthLog et = getById(key);
         if(et==null){
@@ -109,6 +100,15 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
         return et;
     }
 
+    @Override
+    public SysAuthLog getDraft(SysAuthLog et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysAuthLog et) {
+        return (!ObjectUtils.isEmpty(et.getLogid()))&&(!Objects.isNull(this.getById(et.getLogid())));
+    }
     @Override
     @Transactional
     public boolean save(SysAuthLog et) {

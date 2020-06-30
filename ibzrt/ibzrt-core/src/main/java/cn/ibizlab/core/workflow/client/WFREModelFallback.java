@@ -30,30 +30,12 @@ public class WFREModelFallback implements WFREModelFeignClient{
             return false;
      }
 
-    public WFREModel get(String id){
-            return null;
-     }
-
-
-    public Boolean save(WFREModel wfremodel){
-            return false;
-     }
-    public Boolean saveBatch(List<WFREModel> wfremodels){
-            return false;
-     }
-
     public WFREModel update(String id, WFREModel wfremodel){
             return null;
      }
     public Boolean updateBatch(List<WFREModel> wfremodels){
             return false;
      }
-
-
-    public WFREModel getDraft(){
-            return null;
-    }
-
 
 
     public Boolean remove(String id){
@@ -63,10 +45,28 @@ public class WFREModelFallback implements WFREModelFeignClient{
             return false;
      }
 
+    public WFREModel get(String id){
+            return null;
+     }
+
+
+    public WFREModel getDraft(){
+            return null;
+    }
+
+
+
     public Boolean checkKey(WFREModel wfremodel){
             return false;
      }
 
+
+    public Boolean save(WFREModel wfremodel){
+            return false;
+     }
+    public Boolean saveBatch(List<WFREModel> wfremodels){
+            return false;
+     }
 
     public Page<WFREModel> searchDefault(WFREModelSearchContext context){
             return null;

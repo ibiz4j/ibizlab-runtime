@@ -25,19 +25,19 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IJobsInfoService extends IService<JobsInfo>{
 
-    JobsInfo start(JobsInfo et) ;
+    boolean create(JobsInfo et) ;
+    void createBatch(List<JobsInfo> list) ;
     boolean update(JobsInfo et) ;
     void updateBatch(List<JobsInfo> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    JobsInfo get(String key) ;
+    JobsInfo getDraft(JobsInfo et) ;
     boolean checkKey(JobsInfo et) ;
     JobsInfo execute(JobsInfo et) ;
     boolean save(JobsInfo et) ;
     void saveBatch(List<JobsInfo> list) ;
-    JobsInfo getDraft(JobsInfo et) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    JobsInfo get(String key) ;
-    boolean create(JobsInfo et) ;
-    void createBatch(List<JobsInfo> list) ;
+    JobsInfo start(JobsInfo et) ;
     JobsInfo stop(JobsInfo et) ;
     Page<JobsInfo> searchDefault(JobsInfoSearchContext context) ;
     /**

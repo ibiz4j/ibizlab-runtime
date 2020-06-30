@@ -75,50 +75,22 @@ public class SysPSSystemAspect
         Object[] args = point.getArgs();
         if (args.length > 0) {
             Object obj = args[0];
-            if (obj instanceof SysPSSystem)
-                prepairApps((SysPSSystem) obj);
-            else if (obj instanceof List)
-                ((List<SysPSSystem>) obj).forEach(system -> prepairApps(system));
+            if (obj instanceof List)
+                ((List<SysPSSystem>) obj).forEach(system -> sysPSSystemService.prepareApps(system));
         }
     }
-    private void prepairApps(SysPSSystem system) {
-        if (StringUtils.isEmpty(system.getPssystemid()) || system.getSysstructure() == null)
-            return;
-
-        Map<String,SysApp> oldApps = new HashMap<>();
-        List<SysApp> newList=new ArrayList<>();
-        SysPSSystem old = sysPSSystemService.getById(system.getPssystemid());
-        if(old!=null&&old.getApps()!=null)
-            old.getApps().forEach(app->oldApps.put(app.getId(),app));
 
 
-        system.getSysstructure().getSysApps(true).forEach(appNode -> {
-            if(oldApps.containsKey(appNode.getId()))
-                newList.add(oldApps.get(appNode.getId()));
-            else {
-                appNode.setVisabled(1);
-                newList.add(appNode);
-            }
-        });
-        if(old!=null&&old.getApps()!=null)
-            old.getApps().forEach(app->{
-                if("THIRD-PARTY".equalsIgnoreCase(app.getGroup()))
-                    newList.add(app);
-            });
-        system.setApps(newList);
 
-    }
-
-
-    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.create*(..))")
+    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.createBatch(..))")
     public void create(JoinPoint point) throws Exception {
         savePermission(point);
     }
-    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.update*(..))")
+    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.updateBatch(..))")
     public void update(JoinPoint point) throws Exception {
         savePermission(point);
     }
-    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.save*(..))")
+    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.saveBatch(..))")
     public void save(JoinPoint point) throws Exception {
         savePermission(point);
     }
@@ -127,45 +99,9 @@ public class SysPSSystemAspect
         Object[] args = point.getArgs();
         if (args.length > 0) {
             Object obj = args[0];
-            if (obj instanceof SysPSSystem)
-                syncPermission((SysPSSystem) obj);
-            else if (obj instanceof List)
-                ((List<SysPSSystem>) obj).forEach(system -> syncPermission(system));
+            if (obj instanceof List)
+                ((List<SysPSSystem>) obj).forEach(system -> sysPSSystemService.syncPermission(system));
         }
     }
 
-    private void syncPermission(SysPSSystem system)
-    {
-        if(StringUtils.isEmpty(system.getPssystemid())||system.getSysstructure()==null)
-            return;
-        Object ignoreSyncPermission=system.get("ignoreSyncPermission");
-        if(ignoreSyncPermission!=null&&ignoreSyncPermission.equals(true))
-            return;
-
-        Map<String,Integer> delPermission = new HashMap<>();
-        sysPermissionService.list(new QueryWrapper<SysPermission>().select("sys_permissionid").eq("pssystemid",system.getPssystemid())).forEach(sysPermission -> delPermission.put(sysPermission.getPermissionid(),1));
-        Set<SysPermission> list = system.getSysstructure().getSysPermissions(PermissionType.OPPRIV);
-        list.addAll(system.getSysstructure().getSysPermissions(PermissionType.APPMENU));
-        list.addAll(system.getSysstructure().getSysPermissions(PermissionType.UNIRES));
-        Set<String> newIds=new HashSet<>();
-        list.forEach(sysPermission -> {
-            delPermission.remove(sysPermission.getPermissionid());
-            newIds.add(sysPermission.getPermissionid());
-        });
-        //移除无效资源
-        if(delPermission.size()>0)
-            sysPermissionService.removeBatch(delPermission.keySet());
-        //将当前系统本次资源enable设为1以避免enable=0时，导致saveOrUpdate无法检测到主键存在，最终插入数据导致主键重复
-        if(newIds.size()>0)
-            sysPermissionService.execute(String.format("update ibzpermission set enable = 1 where sys_permissionid in (%s)",getIds(newIds)),null);
-        //存储或更新资源saveOrUpdate
-        if(list.size()>0)
-            sysPermissionService.saveBatch(list);
-    }
-
-
-    private String getIds(Set<String> newIds) {
-        String[] strIdArr = newIds.toArray(new String[newIds.size()]);
-        return "'" + String.join("','", strIdArr) + "'";
-    }
 }

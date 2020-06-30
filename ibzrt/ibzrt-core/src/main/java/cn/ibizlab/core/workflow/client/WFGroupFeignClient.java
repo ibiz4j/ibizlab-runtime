@@ -23,6 +23,20 @@ public interface WFGroupFeignClient {
     Page<WFGroup> select();
 
 
+    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups")
+    WFGroup create(@RequestBody WFGroup wfgroup);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/batch")
+    Boolean createBatch(@RequestBody List<WFGroup> wfgroups);
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/{id}")
+    WFGroup update(@PathVariable("id") String id,@RequestBody WFGroup wfgroup);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/batch")
+    Boolean updateBatch(@RequestBody List<WFGroup> wfgroups);
+
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{id}")
     Boolean remove(@PathVariable("id") String id);
 
@@ -30,22 +44,8 @@ public interface WFGroupFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
-    Boolean save(@RequestBody WFGroup wfgroup);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
-    Boolean saveBatch(@RequestBody List<WFGroup> wfgroups);
-
-
     @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{id}")
     WFGroup get(@PathVariable("id") String id);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups")
-    WFGroup create(@RequestBody WFGroup wfgroup);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/batch")
-    Boolean createBatch(@RequestBody List<WFGroup> wfgroups);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/getdraft")
@@ -56,11 +56,11 @@ public interface WFGroupFeignClient {
     Boolean checkKey(@RequestBody WFGroup wfgroup);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/{id}")
-    WFGroup update(@PathVariable("id") String id,@RequestBody WFGroup wfgroup);
+    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
+    Boolean save(@RequestBody WFGroup wfgroup);
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/batch")
-    Boolean updateBatch(@RequestBody List<WFGroup> wfgroups);
+    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
+    Boolean saveBatch(@RequestBody List<WFGroup> wfgroups);
 
 
 

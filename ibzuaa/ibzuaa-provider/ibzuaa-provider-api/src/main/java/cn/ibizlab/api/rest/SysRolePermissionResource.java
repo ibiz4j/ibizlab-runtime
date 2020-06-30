@@ -47,37 +47,6 @@ public class SysRolePermissionResource {
     @Lazy
     public SysRolePermissionMapping sysrolepermissionMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Get-all')")
-    @ApiOperation(value = "获取角色权限关系", tags = {"角色权限关系" },  notes = "获取角色权限关系")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/{sysrolepermission_id}")
-    public ResponseEntity<SysRolePermissionDTO> get(@PathVariable("sysrolepermission_id") String sysrolepermission_id) {
-        SysRolePermission domain = sysrolepermissionService.get(sysrolepermission_id);
-        SysRolePermissionDTO dto = sysrolepermissionMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
-    @ApiOperation(value = "删除角色权限关系", tags = {"角色权限关系" },  notes = "删除角色权限关系")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
-    public ResponseEntity<Boolean> remove(@PathVariable("sysrolepermission_id") String sysrolepermission_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
-    @ApiOperation(value = "批量删除角色权限关系", tags = {"角色权限关系" },  notes = "批量删除角色权限关系")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysrolepermissions/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sysrolepermissionService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "获取角色权限关系草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/getdraft")
-    public ResponseEntity<SysRolePermissionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(new SysRolePermission())));
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Create-all')")
     @ApiOperation(value = "新建角色权限关系", tags = {"角色权限关系" },  notes = "新建角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions")
@@ -94,27 +63,6 @@ public class SysRolePermissionResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysRolePermissionDTO> sysrolepermissiondtos) {
         sysrolepermissionService.createBatch(sysrolepermissionMapping.toDomain(sysrolepermissiondtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "检查角色权限关系", tags = {"角色权限关系" },  notes = "检查角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysRolePermissionDTO sysrolepermissiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.checkKey(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
-    @ApiOperation(value = "保存角色权限关系", tags = {"角色权限关系" },  notes = "保存角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysRolePermissionDTO sysrolepermissiondto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
-    @ApiOperation(value = "批量保存角色权限关系", tags = {"角色权限关系" },  notes = "批量保存角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysRolePermissionDTO> sysrolepermissiondtos) {
-        sysrolepermissionService.saveBatch(sysrolepermissionMapping.toDomain(sysrolepermissiondtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -139,6 +87,58 @@ public class SysRolePermissionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
+    @ApiOperation(value = "删除角色权限关系", tags = {"角色权限关系" },  notes = "删除角色权限关系")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysrolepermissions/{sysrolepermission_id}")
+    @Transactional
+    public ResponseEntity<Boolean> remove(@PathVariable("sysrolepermission_id") String sysrolepermission_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
+    @ApiOperation(value = "批量删除角色权限关系", tags = {"角色权限关系" },  notes = "批量删除角色权限关系")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysrolepermissions/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sysrolepermissionService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Get-all')")
+    @ApiOperation(value = "获取角色权限关系", tags = {"角色权限关系" },  notes = "获取角色权限关系")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/{sysrolepermission_id}")
+    public ResponseEntity<SysRolePermissionDTO> get(@PathVariable("sysrolepermission_id") String sysrolepermission_id) {
+        SysRolePermission domain = sysrolepermissionService.get(sysrolepermission_id);
+        SysRolePermissionDTO dto = sysrolepermissionMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "获取角色权限关系草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/getdraft")
+    public ResponseEntity<SysRolePermissionDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(new SysRolePermission())));
+    }
+
+    @ApiOperation(value = "检查角色权限关系", tags = {"角色权限关系" },  notes = "检查角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.checkKey(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
+    @ApiOperation(value = "保存角色权限关系", tags = {"角色权限关系" },  notes = "保存角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/save")
+    public ResponseEntity<Boolean> save(@RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
+    @ApiOperation(value = "批量保存角色权限关系", tags = {"角色权限关系" },  notes = "批量保存角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysRolePermissionDTO> sysrolepermissiondtos) {
+        sysrolepermissionService.saveBatch(sysrolepermissionMapping.toDomain(sysrolepermissiondtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"角色权限关系" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysrolepermissions/fetchdefault")
@@ -160,39 +160,6 @@ public class SysRolePermissionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysrolepermissionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Get-all')")
-    @ApiOperation(value = "根据权限/资源获取角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源获取角色权限关系")
-	@RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{syspermission_id}/sysrolepermissions/{sysrolepermission_id}")
-    public ResponseEntity<SysRolePermissionDTO> getBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
-        SysRolePermission domain = sysrolepermissionService.get(sysrolepermission_id);
-        SysRolePermissionDTO dto = sysrolepermissionMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
-    @ApiOperation(value = "根据权限/资源删除角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源删除角色权限关系")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
-    public ResponseEntity<Boolean> removeBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
-    @ApiOperation(value = "根据权限/资源批量删除角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源批量删除角色权限关系")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}/sysrolepermissions/batch")
-    public ResponseEntity<Boolean> removeBatchBySysPermission(@RequestBody List<String> ids) {
-        sysrolepermissionService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "根据权限/资源获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "根据权限/资源获取角色权限关系草稿")
-    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{syspermission_id}/sysrolepermissions/getdraft")
-    public ResponseEntity<SysRolePermissionDTO> getDraftBySysPermission(@PathVariable("syspermission_id") String syspermission_id) {
-        SysRolePermission domain = new SysRolePermission();
-        domain.setPermissionid(syspermission_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(domain)));
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Create-all')")
     @ApiOperation(value = "根据权限/资源建立角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源建立角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions")
@@ -214,33 +181,6 @@ public class SysRolePermissionResource {
             domain.setPermissionid(syspermission_id);
         }
         sysrolepermissionService.createBatch(domainlist);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "根据权限/资源检查角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源检查角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.checkKey(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
-    @ApiOperation(value = "根据权限/资源保存角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源保存角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions/save")
-    public ResponseEntity<Boolean> saveBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
-        SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
-        domain.setPermissionid(syspermission_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(domain));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
-    @ApiOperation(value = "根据权限/资源批量保存角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源批量保存角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions/savebatch")
-    public ResponseEntity<Boolean> saveBatchBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody List<SysRolePermissionDTO> sysrolepermissiondtos) {
-        List<SysRolePermission> domainlist=sysrolepermissionMapping.toDomain(sysrolepermissiondtos);
-        for(SysRolePermission domain:domainlist){
-             domain.setPermissionid(syspermission_id);
-        }
-        sysrolepermissionService.saveBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -270,6 +210,66 @@ public class SysRolePermissionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
+    @ApiOperation(value = "根据权限/资源删除角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源删除角色权限关系")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}/sysrolepermissions/{sysrolepermission_id}")
+    @Transactional
+    public ResponseEntity<Boolean> removeBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
+    @ApiOperation(value = "根据权限/资源批量删除角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源批量删除角色权限关系")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}/sysrolepermissions/batch")
+    public ResponseEntity<Boolean> removeBatchBySysPermission(@RequestBody List<String> ids) {
+        sysrolepermissionService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Get-all')")
+    @ApiOperation(value = "根据权限/资源获取角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源获取角色权限关系")
+	@RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{syspermission_id}/sysrolepermissions/{sysrolepermission_id}")
+    public ResponseEntity<SysRolePermissionDTO> getBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
+        SysRolePermission domain = sysrolepermissionService.get(sysrolepermission_id);
+        SysRolePermissionDTO dto = sysrolepermissionMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "根据权限/资源获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "根据权限/资源获取角色权限关系草稿")
+    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{syspermission_id}/sysrolepermissions/getdraft")
+    public ResponseEntity<SysRolePermissionDTO> getDraftBySysPermission(@PathVariable("syspermission_id") String syspermission_id) {
+        SysRolePermission domain = new SysRolePermission();
+        domain.setPermissionid(syspermission_id);
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(domain)));
+    }
+
+    @ApiOperation(value = "根据权限/资源检查角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源检查角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.checkKey(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
+    @ApiOperation(value = "根据权限/资源保存角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源保存角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions/save")
+    public ResponseEntity<Boolean> saveBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+        SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
+        domain.setPermissionid(syspermission_id);
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(domain));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
+    @ApiOperation(value = "根据权限/资源批量保存角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源批量保存角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions/savebatch")
+    public ResponseEntity<Boolean> saveBatchBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody List<SysRolePermissionDTO> sysrolepermissiondtos) {
+        List<SysRolePermission> domainlist=sysrolepermissionMapping.toDomain(sysrolepermissiondtos);
+        for(SysRolePermission domain:domainlist){
+             domain.setPermissionid(syspermission_id);
+        }
+        sysrolepermissionService.saveBatch(domainlist);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-searchDefault-all')")
 	@ApiOperation(value = "根据权限/资源获取DEFAULT", tags = {"角色权限关系" } ,notes = "根据权限/资源获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/syspermissions/{syspermission_id}/sysrolepermissions/fetchdefault")
@@ -293,39 +293,6 @@ public class SysRolePermissionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysrolepermissionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Get-all')")
-    @ApiOperation(value = "根据系统角色获取角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色获取角色权限关系")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysrolepermissions/{sysrolepermission_id}")
-    public ResponseEntity<SysRolePermissionDTO> getBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
-        SysRolePermission domain = sysrolepermissionService.get(sysrolepermission_id);
-        SysRolePermissionDTO dto = sysrolepermissionMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
-    @ApiOperation(value = "根据系统角色删除角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色删除角色权限关系")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
-    public ResponseEntity<Boolean> removeBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
-    @ApiOperation(value = "根据系统角色批量删除角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色批量删除角色权限关系")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}/sysrolepermissions/batch")
-    public ResponseEntity<Boolean> removeBatchBySysRole(@RequestBody List<String> ids) {
-        sysrolepermissionService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "根据系统角色获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "根据系统角色获取角色权限关系草稿")
-    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysrolepermissions/getdraft")
-    public ResponseEntity<SysRolePermissionDTO> getDraftBySysRole(@PathVariable("sysrole_id") String sysrole_id) {
-        SysRolePermission domain = new SysRolePermission();
-        domain.setRoleid(sysrole_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(domain)));
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Create-all')")
     @ApiOperation(value = "根据系统角色建立角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色建立角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions")
@@ -347,33 +314,6 @@ public class SysRolePermissionResource {
             domain.setRoleid(sysrole_id);
         }
         sysrolepermissionService.createBatch(domainlist);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "根据系统角色检查角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色检查角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.checkKey(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
-    @ApiOperation(value = "根据系统角色保存角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色保存角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions/save")
-    public ResponseEntity<Boolean> saveBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
-        SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
-        domain.setRoleid(sysrole_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(domain));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
-    @ApiOperation(value = "根据系统角色批量保存角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色批量保存角色权限关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions/savebatch")
-    public ResponseEntity<Boolean> saveBatchBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody List<SysRolePermissionDTO> sysrolepermissiondtos) {
-        List<SysRolePermission> domainlist=sysrolepermissionMapping.toDomain(sysrolepermissiondtos);
-        for(SysRolePermission domain:domainlist){
-             domain.setRoleid(sysrole_id);
-        }
-        sysrolepermissionService.saveBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -400,6 +340,66 @@ public class SysRolePermissionResource {
             domain.setRoleid(sysrole_id);
         }
         sysrolepermissionService.updateBatch(domainlist);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
+    @ApiOperation(value = "根据系统角色删除角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色删除角色权限关系")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}/sysrolepermissions/{sysrolepermission_id}")
+    @Transactional
+    public ResponseEntity<Boolean> removeBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
+    @ApiOperation(value = "根据系统角色批量删除角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色批量删除角色权限关系")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}/sysrolepermissions/batch")
+    public ResponseEntity<Boolean> removeBatchBySysRole(@RequestBody List<String> ids) {
+        sysrolepermissionService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Get-all')")
+    @ApiOperation(value = "根据系统角色获取角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色获取角色权限关系")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysrolepermissions/{sysrolepermission_id}")
+    public ResponseEntity<SysRolePermissionDTO> getBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
+        SysRolePermission domain = sysrolepermissionService.get(sysrolepermission_id);
+        SysRolePermissionDTO dto = sysrolepermissionMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "根据系统角色获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "根据系统角色获取角色权限关系草稿")
+    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysrolepermissions/getdraft")
+    public ResponseEntity<SysRolePermissionDTO> getDraftBySysRole(@PathVariable("sysrole_id") String sysrole_id) {
+        SysRolePermission domain = new SysRolePermission();
+        domain.setRoleid(sysrole_id);
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(domain)));
+    }
+
+    @ApiOperation(value = "根据系统角色检查角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色检查角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.checkKey(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
+    @ApiOperation(value = "根据系统角色保存角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色保存角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions/save")
+    public ResponseEntity<Boolean> saveBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+        SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
+        domain.setRoleid(sysrole_id);
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(domain));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
+    @ApiOperation(value = "根据系统角色批量保存角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色批量保存角色权限关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions/savebatch")
+    public ResponseEntity<Boolean> saveBatchBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody List<SysRolePermissionDTO> sysrolepermissiondtos) {
+        List<SysRolePermission> domainlist=sysrolepermissionMapping.toDomain(sysrolepermissiondtos);
+        for(SysRolePermission domain:domainlist){
+             domain.setRoleid(sysrole_id);
+        }
+        sysrolepermissionService.saveBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 

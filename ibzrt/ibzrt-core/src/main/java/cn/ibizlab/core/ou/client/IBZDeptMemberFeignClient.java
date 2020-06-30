@@ -23,19 +23,18 @@ public interface IBZDeptMemberFeignClient {
     Page<IBZDeptMember> select();
 
 
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzdeptmembers")
+    IBZDeptMember create(@RequestBody IBZDeptMember ibzdeptmember);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzdeptmembers/batch")
+    Boolean createBatch(@RequestBody List<IBZDeptMember> ibzdeptmembers);
+
+
     @RequestMapping(method = RequestMethod.PUT, value = "/ibzdeptmembers/{memberid}")
     IBZDeptMember update(@PathVariable("memberid") String memberid,@RequestBody IBZDeptMember ibzdeptmember);
 
     @RequestMapping(method = RequestMethod.PUT, value = "/ibzdeptmembers/batch")
     Boolean updateBatch(@RequestBody List<IBZDeptMember> ibzdeptmembers);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/ibzdeptmembers/{memberid}")
-    IBZDeptMember get(@PathVariable("memberid") String memberid);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdeptmembers/checkkey")
-    Boolean checkKey(@RequestBody IBZDeptMember ibzdeptmember);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/ibzdeptmembers/{memberid}")
@@ -45,15 +44,16 @@ public interface IBZDeptMemberFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdeptmembers")
-    IBZDeptMember create(@RequestBody IBZDeptMember ibzdeptmember);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdeptmembers/batch")
-    Boolean createBatch(@RequestBody List<IBZDeptMember> ibzdeptmembers);
+    @RequestMapping(method = RequestMethod.GET, value = "/ibzdeptmembers/{memberid}")
+    IBZDeptMember get(@PathVariable("memberid") String memberid);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/ibzdeptmembers/getdraft")
     IBZDeptMember getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzdeptmembers/checkkey")
+    Boolean checkKey(@RequestBody IBZDeptMember ibzdeptmember);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/ibzdeptmembers/save")

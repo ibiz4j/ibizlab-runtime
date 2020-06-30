@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWFUserService extends IService<WFUser>{
 
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFUser getDraft(WFUser et) ;
-    boolean save(WFUser et) ;
-    void saveBatch(List<WFUser> list) ;
-    boolean update(WFUser et) ;
-    void updateBatch(List<WFUser> list) ;
-    WFUser get(String key) ;
     boolean create(WFUser et) ;
     void createBatch(List<WFUser> list) ;
+    boolean update(WFUser et) ;
+    void updateBatch(List<WFUser> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    WFUser get(String key) ;
+    WFUser getDraft(WFUser et) ;
     boolean checkKey(WFUser et) ;
+    boolean save(WFUser et) ;
+    void saveBatch(List<WFUser> list) ;
     Page<WFUser> searchDefault(WFUserSearchContext context) ;
     /**
      *自定义查询SQL

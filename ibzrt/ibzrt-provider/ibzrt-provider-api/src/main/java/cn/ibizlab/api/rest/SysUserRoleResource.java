@@ -47,16 +47,21 @@ public class SysUserRoleResource {
     @Lazy
     public SysUserRoleMapping sysuserroleMapping;
 
-    @ApiOperation(value = "检查用户角色关系", tags = {"用户角色关系" },  notes = "检查用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysUserRoleDTO sysuserroledto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
+    @ApiOperation(value = "新建用户角色关系", tags = {"用户角色关系" },  notes = "新建用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles")
+
+    public ResponseEntity<SysUserRoleDTO> create(@RequestBody SysUserRoleDTO sysuserroledto) {
+        SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
+		sysuserroleService.create(domain);
+        SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "获取用户角色关系草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/getdraft")
-    public ResponseEntity<SysUserRoleDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(new SysUserRole())));
+    @ApiOperation(value = "批量新建用户角色关系", tags = {"用户角色关系" },  notes = "批量新建用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysUserRoleDTO> sysuserroledtos) {
+        sysuserroleService.createBatch(sysuserroleMapping.toDomain(sysuserroledtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
@@ -92,29 +97,24 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "新建用户角色关系", tags = {"用户角色关系" },  notes = "新建用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles")
-
-    public ResponseEntity<SysUserRoleDTO> create(@RequestBody SysUserRoleDTO sysuserroledto) {
-        SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
-		sysuserroleService.create(domain);
-        SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "批量新建用户角色关系", tags = {"用户角色关系" },  notes = "批量新建用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysUserRoleDTO> sysuserroledtos) {
-        sysuserroleService.createBatch(sysuserroleMapping.toDomain(sysuserroledtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
     @ApiOperation(value = "获取用户角色关系", tags = {"用户角色关系" },  notes = "获取用户角色关系")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> get(@PathVariable("sysuserrole_id") String sysuserrole_id) {
         SysUserRole domain = sysuserroleService.get(sysuserrole_id);
         SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "获取用户角色关系草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/getdraft")
+    public ResponseEntity<SysUserRoleDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(new SysUserRole())));
+    }
+
+    @ApiOperation(value = "检查用户角色关系", tags = {"用户角色关系" },  notes = "检查用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysUserRoleDTO sysuserroledto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
     }
 
     @ApiOperation(value = "保存用户角色关系", tags = {"用户角色关系" },  notes = "保存用户角色关系")
@@ -130,7 +130,6 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"用户角色关系" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchDefault(SysUserRoleSearchContext context) {
@@ -143,7 +142,6 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"用户角色关系" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchDefault(@RequestBody SysUserRoleSearchContext context) {
@@ -151,18 +149,26 @@ public class SysUserRoleResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @ApiOperation(value = "根据系统角色检查用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色检查用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
+    @ApiOperation(value = "根据系统角色建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色建立用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles")
+
+    public ResponseEntity<SysUserRoleDTO> createBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
+        SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
+        domain.setRoleid(sysrole_id);
+		sysuserroleService.create(domain);
+        SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "根据系统角色获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "根据系统角色获取用户角色关系草稿")
-    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysuserroles/getdraft")
-    public ResponseEntity<SysUserRoleDTO> getDraftBySysRole(@PathVariable("sysrole_id") String sysrole_id) {
-        SysUserRole domain = new SysUserRole();
-        domain.setRoleid(sysrole_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
+    @ApiOperation(value = "根据系统角色批量建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色批量建立用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles/batch")
+    public ResponseEntity<Boolean> createBatchBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
+        List<SysUserRole> domainlist=sysuserroleMapping.toDomain(sysuserroledtos);
+        for(SysUserRole domain:domainlist){
+            domain.setRoleid(sysrole_id);
+        }
+        sysuserroleService.createBatch(domainlist);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
@@ -203,34 +209,26 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "根据系统角色建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色建立用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles")
-
-    public ResponseEntity<SysUserRoleDTO> createBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
-        SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
-        domain.setRoleid(sysrole_id);
-		sysuserroleService.create(domain);
-        SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "根据系统角色批量建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色批量建立用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles/batch")
-    public ResponseEntity<Boolean> createBatchBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
-        List<SysUserRole> domainlist=sysuserroleMapping.toDomain(sysuserroledtos);
-        for(SysUserRole domain:domainlist){
-            domain.setRoleid(sysrole_id);
-        }
-        sysuserroleService.createBatch(domainlist);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
     @ApiOperation(value = "根据系统角色获取用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色获取用户角色关系")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> getBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysuserrole_id") String sysuserrole_id) {
         SysUserRole domain = sysuserroleService.get(sysuserrole_id);
         SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "根据系统角色获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "根据系统角色获取用户角色关系草稿")
+    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysuserroles/getdraft")
+    public ResponseEntity<SysUserRoleDTO> getDraftBySysRole(@PathVariable("sysrole_id") String sysrole_id) {
+        SysUserRole domain = new SysUserRole();
+        domain.setRoleid(sysrole_id);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
+    }
+
+    @ApiOperation(value = "根据系统角色检查用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色检查用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
     }
 
     @ApiOperation(value = "根据系统角色保存用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色保存用户角色关系")
@@ -252,7 +250,6 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统角色获取DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统角色获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysroles/{sysrole_id}/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchSysUserRoleDefaultBySysRole(@PathVariable("sysrole_id") String sysrole_id,SysUserRoleSearchContext context) {
@@ -266,7 +263,6 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统角色查询DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统角色查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysroles/{sysrole_id}/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchSysUserRoleDefaultBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleSearchContext context) {
@@ -275,18 +271,26 @@ public class SysUserRoleResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @ApiOperation(value = "根据系统用户检查用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户检查用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleDTO sysuserroledto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
+    @ApiOperation(value = "根据系统用户建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户建立用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles")
+
+    public ResponseEntity<SysUserRoleDTO> createBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleDTO sysuserroledto) {
+        SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
+        domain.setUserid(sysuser_id);
+		sysuserroleService.create(domain);
+        SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "根据系统用户获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "根据系统用户获取用户角色关系草稿")
-    @RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}/sysuserroles/getdraft")
-    public ResponseEntity<SysUserRoleDTO> getDraftBySysUser(@PathVariable("sysuser_id") String sysuser_id) {
-        SysUserRole domain = new SysUserRole();
-        domain.setUserid(sysuser_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
+    @ApiOperation(value = "根据系统用户批量建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户批量建立用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles/batch")
+    public ResponseEntity<Boolean> createBatchBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
+        List<SysUserRole> domainlist=sysuserroleMapping.toDomain(sysuserroledtos);
+        for(SysUserRole domain:domainlist){
+            domain.setUserid(sysuser_id);
+        }
+        sysuserroleService.createBatch(domainlist);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
@@ -327,34 +331,26 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "根据系统用户建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户建立用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles")
-
-    public ResponseEntity<SysUserRoleDTO> createBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleDTO sysuserroledto) {
-        SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
-        domain.setUserid(sysuser_id);
-		sysuserroleService.create(domain);
-        SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "根据系统用户批量建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户批量建立用户角色关系")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles/batch")
-    public ResponseEntity<Boolean> createBatchBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
-        List<SysUserRole> domainlist=sysuserroleMapping.toDomain(sysuserroledtos);
-        for(SysUserRole domain:domainlist){
-            domain.setUserid(sysuser_id);
-        }
-        sysuserroleService.createBatch(domainlist);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
     @ApiOperation(value = "根据系统用户获取用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户获取用户角色关系")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> getBySysUser(@PathVariable("sysuser_id") String sysuser_id, @PathVariable("sysuserrole_id") String sysuserrole_id) {
         SysUserRole domain = sysuserroleService.get(sysuserrole_id);
         SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "根据系统用户获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "根据系统用户获取用户角色关系草稿")
+    @RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}/sysuserroles/getdraft")
+    public ResponseEntity<SysUserRoleDTO> getDraftBySysUser(@PathVariable("sysuser_id") String sysuser_id) {
+        SysUserRole domain = new SysUserRole();
+        domain.setUserid(sysuser_id);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
+    }
+
+    @ApiOperation(value = "根据系统用户检查用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户检查用户角色关系")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleDTO sysuserroledto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
     }
 
     @ApiOperation(value = "根据系统用户保存用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户保存用户角色关系")
@@ -376,7 +372,6 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统用户获取DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统用户获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysusers/{sysuser_id}/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchSysUserRoleDefaultBySysUser(@PathVariable("sysuser_id") String sysuser_id,SysUserRoleSearchContext context) {
@@ -390,7 +385,6 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统用户查询DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统用户查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysusers/{sysuser_id}/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchSysUserRoleDefaultBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleSearchContext context) {

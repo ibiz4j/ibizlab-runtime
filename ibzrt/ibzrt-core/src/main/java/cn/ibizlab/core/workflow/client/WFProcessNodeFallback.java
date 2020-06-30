@@ -30,12 +30,13 @@ public class WFProcessNodeFallback implements WFProcessNodeFeignClient{
             return false;
      }
 
-    public Boolean save(WFProcessNode wfprocessnode){
+    public WFProcessNode update(String usertaskid, WFProcessNode wfprocessnode){
+            return null;
+     }
+    public Boolean updateBatch(List<WFProcessNode> wfprocessnodes){
             return false;
      }
-    public Boolean saveBatch(List<WFProcessNode> wfprocessnodes){
-            return false;
-     }
+
 
     public Boolean remove(String usertaskid){
             return false;
@@ -44,11 +45,8 @@ public class WFProcessNodeFallback implements WFProcessNodeFeignClient{
             return false;
      }
 
-    public WFProcessNode update(String usertaskid, WFProcessNode wfprocessnode){
+    public WFProcessNode get(String usertaskid){
             return null;
-     }
-    public Boolean updateBatch(List<WFProcessNode> wfprocessnodes){
-            return false;
      }
 
 
@@ -58,15 +56,17 @@ public class WFProcessNodeFallback implements WFProcessNodeFeignClient{
 
 
 
-    public WFProcessNode get(String usertaskid){
-            return null;
-     }
-
-
     public Boolean checkKey(WFProcessNode wfprocessnode){
             return false;
      }
 
+
+    public Boolean save(WFProcessNode wfprocessnode){
+            return false;
+     }
+    public Boolean saveBatch(List<WFProcessNode> wfprocessnodes){
+            return false;
+     }
 
     public Page<WFProcessNode> searchDefault(WFProcessNodeSearchContext context){
             return null;

@@ -47,6 +47,25 @@ public class DictOptionResource {
     @Lazy
     public DictOptionMapping dictoptionMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
+    @ApiOperation(value = "新建字典项", tags = {"字典项" },  notes = "新建字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions")
+    @Transactional
+    public ResponseEntity<DictOptionDTO> create(@RequestBody DictOptionDTO dictoptiondto) {
+        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
+		dictoptionService.create(domain);
+        DictOptionDTO dto = dictoptionMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
+    @ApiOperation(value = "批量新建字典项", tags = {"字典项" },  notes = "批量新建字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<DictOptionDTO> dictoptiondtos) {
+        dictoptionService.createBatch(dictoptionMapping.toDomain(dictoptiondtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @VersionCheck(entity = "dictoption" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Update-all')")
     @ApiOperation(value = "更新字典项", tags = {"字典项" },  notes = "更新字典项")
@@ -84,18 +103,6 @@ public class DictOptionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "检查字典项", tags = {"字典项" },  notes = "检查字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody DictOptionDTO dictoptiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(dictoptionService.checkKey(dictoptionMapping.toDomain(dictoptiondto)));
-    }
-
-    @ApiOperation(value = "获取字典项草稿", tags = {"字典项" },  notes = "获取字典项草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
-    public ResponseEntity<DictOptionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(new DictOption())));
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Get-all')")
     @ApiOperation(value = "获取字典项", tags = {"字典项" },  notes = "获取字典项")
 	@RequestMapping(method = RequestMethod.GET, value = "/dictoptions/{dictoption_id}")
@@ -105,23 +112,16 @@ public class DictOptionResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
-    @ApiOperation(value = "新建字典项", tags = {"字典项" },  notes = "新建字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions")
-    @Transactional
-    public ResponseEntity<DictOptionDTO> create(@RequestBody DictOptionDTO dictoptiondto) {
-        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
-		dictoptionService.create(domain);
-        DictOptionDTO dto = dictoptionMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "获取字典项草稿", tags = {"字典项" },  notes = "获取字典项草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
+    public ResponseEntity<DictOptionDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(new DictOption())));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
-    @ApiOperation(value = "批量新建字典项", tags = {"字典项" },  notes = "批量新建字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<DictOptionDTO> dictoptiondtos) {
-        dictoptionService.createBatch(dictoptionMapping.toDomain(dictoptiondtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    @ApiOperation(value = "检查字典项", tags = {"字典项" },  notes = "检查字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody DictOptionDTO dictoptiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(dictoptionService.checkKey(dictoptionMapping.toDomain(dictoptiondto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Save-all')")
@@ -160,6 +160,30 @@ public class DictOptionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(dictoptionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
+    @ApiOperation(value = "根据字典建立字典项", tags = {"字典项" },  notes = "根据字典建立字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions")
+    @Transactional
+    public ResponseEntity<DictOptionDTO> createByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
+        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
+        domain.setCatalogId(dictcatalog_id);
+		dictoptionService.create(domain);
+        DictOptionDTO dto = dictoptionMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
+    @ApiOperation(value = "根据字典批量建立字典项", tags = {"字典项" },  notes = "根据字典批量建立字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/batch")
+    public ResponseEntity<Boolean> createBatchByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody List<DictOptionDTO> dictoptiondtos) {
+        List<DictOption> domainlist=dictoptionMapping.toDomain(dictoptiondtos);
+        for(DictOption domain:domainlist){
+            domain.setCatalogId(dictcatalog_id);
+        }
+        dictoptionService.createBatch(domainlist);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @VersionCheck(entity = "dictoption" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Update-all')")
     @ApiOperation(value = "根据字典更新字典项", tags = {"字典项" },  notes = "根据字典更新字典项")
@@ -202,10 +226,13 @@ public class DictOptionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "根据字典检查字典项", tags = {"字典项" },  notes = "根据字典检查字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/checkkey")
-    public ResponseEntity<Boolean> checkKeyByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(dictoptionService.checkKey(dictoptionMapping.toDomain(dictoptiondto)));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Get-all')")
+    @ApiOperation(value = "根据字典获取字典项", tags = {"字典项" },  notes = "根据字典获取字典项")
+	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")
+    public ResponseEntity<DictOptionDTO> getByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @PathVariable("dictoption_id") String dictoption_id) {
+        DictOption domain = dictoptionService.get(dictoption_id);
+        DictOptionDTO dto = dictoptionMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
     @ApiOperation(value = "根据字典获取字典项草稿", tags = {"字典项" },  notes = "根据字典获取字典项草稿")
@@ -216,37 +243,10 @@ public class DictOptionResource {
         return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(domain)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Get-all')")
-    @ApiOperation(value = "根据字典获取字典项", tags = {"字典项" },  notes = "根据字典获取字典项")
-	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")
-    public ResponseEntity<DictOptionDTO> getByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @PathVariable("dictoption_id") String dictoption_id) {
-        DictOption domain = dictoptionService.get(dictoption_id);
-        DictOptionDTO dto = dictoptionMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
-    @ApiOperation(value = "根据字典建立字典项", tags = {"字典项" },  notes = "根据字典建立字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions")
-    @Transactional
-    public ResponseEntity<DictOptionDTO> createByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
-        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
-        domain.setCatalogId(dictcatalog_id);
-		dictoptionService.create(domain);
-        DictOptionDTO dto = dictoptionMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
-    @ApiOperation(value = "根据字典批量建立字典项", tags = {"字典项" },  notes = "根据字典批量建立字典项")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/batch")
-    public ResponseEntity<Boolean> createBatchByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody List<DictOptionDTO> dictoptiondtos) {
-        List<DictOption> domainlist=dictoptionMapping.toDomain(dictoptiondtos);
-        for(DictOption domain:domainlist){
-            domain.setCatalogId(dictcatalog_id);
-        }
-        dictoptionService.createBatch(domainlist);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    @ApiOperation(value = "根据字典检查字典项", tags = {"字典项" },  notes = "根据字典检查字典项")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/checkkey")
+    public ResponseEntity<Boolean> checkKeyByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(dictoptionService.checkKey(dictoptionMapping.toDomain(dictoptiondto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Save-all')")

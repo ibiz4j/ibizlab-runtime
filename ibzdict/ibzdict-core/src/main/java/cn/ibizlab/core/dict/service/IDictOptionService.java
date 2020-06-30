@@ -25,15 +25,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IDictOptionService extends IService<DictOption>{
 
+    boolean create(DictOption et) ;
+    void createBatch(List<DictOption> list) ;
     boolean update(DictOption et) ;
     void updateBatch(List<DictOption> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
-    boolean checkKey(DictOption et) ;
-    DictOption getDraft(DictOption et) ;
     DictOption get(String key) ;
-    boolean create(DictOption et) ;
-    void createBatch(List<DictOption> list) ;
+    DictOption getDraft(DictOption et) ;
+    boolean checkKey(DictOption et) ;
     boolean save(DictOption et) ;
     void saveBatch(List<DictOption> list) ;
     Page<DictOption> searchDefault(DictOptionSearchContext context) ;

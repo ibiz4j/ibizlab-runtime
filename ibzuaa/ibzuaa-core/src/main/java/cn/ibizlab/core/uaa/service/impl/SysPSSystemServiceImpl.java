@@ -48,23 +48,6 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     protected int batchSize = 500;
 
     @Override
-    public boolean checkKey(SysPSSystem et) {
-        return (!ObjectUtils.isEmpty(et.getPssystemid()))&&(!Objects.isNull(this.getById(et.getPssystemid())));
-    }
-    @Override
-    @Transactional
-    public SysPSSystem get(String key) {
-        SysPSSystem et = getById(key);
-        if(et==null){
-            et=new SysPSSystem();
-            et.setPssystemid(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
     @Transactional
     public boolean create(SysPSSystem et) {
         if(!this.retBool(this.baseMapper.insert(et)))
@@ -79,8 +62,17 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     }
 
     @Override
-    public SysPSSystem getDraft(SysPSSystem et) {
-        return et;
+    @Transactional
+    public boolean update(SysPSSystem et) {
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("pssystemid",et.getPssystemid())))
+            return false;
+        CachedBeanCopier.copy(get(et.getPssystemid()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<SysPSSystem> list) {
+        updateBatchById(list,batchSize);
     }
 
     @Override
@@ -93,6 +85,35 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     @Override
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public SysPSSystem get(String key) {
+        SysPSSystem et = getById(key);
+        if(et==null){
+            et=new SysPSSystem();
+            et.setPssystemid(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public SysPSSystem getDraft(SysPSSystem et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysPSSystem et) {
+        return (!ObjectUtils.isEmpty(et.getPssystemid()))&&(!Objects.isNull(this.getById(et.getPssystemid())));
+    }
+    @Override
+    @Transactional
+    public SysPSSystem prepareApps(SysPSSystem et) {
+        //自定义代码
+        return et;
     }
 
     @Override
@@ -128,28 +149,12 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
 
     @Override
     @Transactional
-    public boolean update(SysPSSystem et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("pssystemid",et.getPssystemid())))
-            return false;
-        CachedBeanCopier.copy(get(et.getPssystemid()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<SysPSSystem> list) {
-        updateBatchById(list,batchSize);
+    public SysPSSystem syncPermission(SysPSSystem et) {
+        //自定义代码
+        return et;
     }
 
 
-
-    /**
-     * 查询集合 Pick
-     */
-    @Override
-    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPSSystem> pages=baseMapper.searchPick(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysPSSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
-    }
 
     /**
      * 查询集合 DEFAULT
@@ -157,6 +162,15 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     @Override
     public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) {
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPSSystem> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+        return new PageImpl<SysPSSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
+    }
+
+    /**
+     * 查询集合 Pick
+     */
+    @Override
+    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPSSystem> pages=baseMapper.searchPick(context.getPages(),context,context.getSelectCond());
         return new PageImpl<SysPSSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 

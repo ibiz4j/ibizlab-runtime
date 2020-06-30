@@ -44,13 +44,16 @@ public class SysUserServiceImpl implements ISysUserService {
 
 
     @Override
-    public boolean remove(String userid) {
-        boolean result=sysUserFeignClient.remove(userid) ;
-        return result;
+    public boolean create(SysUser et) {
+        SysUser rt = sysUserFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
     }
 
-    public void removeBatch(Collection<String> idList){
-        sysUserFeignClient.removeBatch(idList);
+    public void createBatch(List<SysUser> list){
+        sysUserFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -68,9 +71,15 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public boolean checkKey(SysUser et) {
-        return sysUserFeignClient.checkKey(et);
+    public boolean remove(String userid) {
+        boolean result=sysUserFeignClient.remove(userid) ;
+        return result;
     }
+
+    public void removeBatch(Collection<String> idList){
+        sysUserFeignClient.removeBatch(idList);
+    }
+
     @Override
     public SysUser get(String userid) {
 		SysUser et=sysUserFeignClient.get(userid);
@@ -84,6 +93,16 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
+    public SysUser getDraft(SysUser et) {
+        et=sysUserFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysUser et) {
+        return sysUserFeignClient.checkKey(et);
+    }
+    @Override
     @Transactional
     public boolean save(SysUser et) {
         if(et.getUserid()==null) et.setUserid((String)et.getDefaultKey(true));
@@ -95,25 +114,6 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     public void saveBatch(List<SysUser> list) {
         sysUserFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public SysUser getDraft(SysUser et) {
-        et=sysUserFeignClient.getDraft();
-        return et;
-    }
-
-    @Override
-    public boolean create(SysUser et) {
-        SysUser rt = sysUserFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<SysUser> list){
-        sysUserFeignClient.createBatch(list) ;
     }
 
 

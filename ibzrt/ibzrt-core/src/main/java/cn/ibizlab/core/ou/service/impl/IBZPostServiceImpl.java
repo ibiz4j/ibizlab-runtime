@@ -47,29 +47,16 @@ public class IBZPostServiceImpl implements IIBZPostService {
     protected cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
     @Override
-    public IBZPost get(String postid) {
-		IBZPost et=iBZPostFeignClient.get(postid);
-        if(et==null){
-            et=new IBZPost();
-            et.setPostid(postid);
-        }
-        else{
-        }
-        return  et;
-    }
-
-    @Override
-    @Transactional
-    public boolean save(IBZPost et) {
-        if(et.getPostid()==null) et.setPostid((String)et.getDefaultKey(true));
-        if(!iBZPostFeignClient.save(et))
+    public boolean create(IBZPost et) {
+        IBZPost rt = iBZPostFeignClient.create(et);
+        if(rt==null)
             return false;
+        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    @Override
-    public void saveBatch(List<IBZPost> list) {
-        iBZPostFeignClient.saveBatch(list) ;
+    public void createBatch(List<IBZPost> list){
+        iBZPostFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -87,10 +74,6 @@ public class IBZPostServiceImpl implements IIBZPostService {
     }
 
     @Override
-    public boolean checkKey(IBZPost et) {
-        return iBZPostFeignClient.checkKey(et);
-    }
-    @Override
     public boolean remove(String postid) {
         boolean result=iBZPostFeignClient.remove(postid) ;
         return result;
@@ -101,22 +84,39 @@ public class IBZPostServiceImpl implements IIBZPostService {
     }
 
     @Override
+    public IBZPost get(String postid) {
+		IBZPost et=iBZPostFeignClient.get(postid);
+        if(et==null){
+            et=new IBZPost();
+            et.setPostid(postid);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
     public IBZPost getDraft(IBZPost et) {
         et=iBZPostFeignClient.getDraft();
         return et;
     }
 
     @Override
-    public boolean create(IBZPost et) {
-        IBZPost rt = iBZPostFeignClient.create(et);
-        if(rt==null)
+    public boolean checkKey(IBZPost et) {
+        return iBZPostFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(IBZPost et) {
+        if(et.getPostid()==null) et.setPostid((String)et.getDefaultKey(true));
+        if(!iBZPostFeignClient.save(et))
             return false;
-        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    public void createBatch(List<IBZPost> list){
-        iBZPostFeignClient.createBatch(list) ;
+    @Override
+    public void saveBatch(List<IBZPost> list) {
+        iBZPostFeignClient.saveBatch(list) ;
     }
 
 

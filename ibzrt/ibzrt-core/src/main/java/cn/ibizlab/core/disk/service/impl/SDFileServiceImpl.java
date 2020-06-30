@@ -44,20 +44,6 @@ public class SDFileServiceImpl implements ISDFileService {
 
 
     @Override
-    @Transactional
-    public boolean save(SDFile et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!sDFileFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<SDFile> list) {
-        sDFileFeignClient.saveBatch(list) ;
-    }
-
-    @Override
     public boolean create(SDFile et) {
         SDFile rt = sDFileFeignClient.create(et);
         if(rt==null)
@@ -68,6 +54,20 @@ public class SDFileServiceImpl implements ISDFileService {
 
     public void createBatch(List<SDFile> list){
         sDFileFeignClient.createBatch(list) ;
+    }
+
+    @Override
+    public boolean update(SDFile et) {
+        SDFile rt = sDFileFeignClient.update(et.getId(),et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+
+    }
+
+    public void updateBatch(List<SDFile> list){
+        sDFileFeignClient.updateBatch(list) ;
     }
 
     @Override
@@ -99,23 +99,23 @@ public class SDFileServiceImpl implements ISDFileService {
     }
 
     @Override
-    public boolean update(SDFile et) {
-        SDFile rt = sDFileFeignClient.update(et.getId(),et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-
-    }
-
-    public void updateBatch(List<SDFile> list){
-        sDFileFeignClient.updateBatch(list) ;
-    }
-
-    @Override
     public boolean checkKey(SDFile et) {
         return sDFileFeignClient.checkKey(et);
     }
+    @Override
+    @Transactional
+    public boolean save(SDFile et) {
+        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
+        if(!sDFileFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<SDFile> list) {
+        sDFileFeignClient.saveBatch(list) ;
+    }
+
 
 
 

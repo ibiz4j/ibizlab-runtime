@@ -23,17 +23,17 @@ import cn.ibizlab.core.task.filter.JobsLockSearchContext;
  */
 public interface IJobsLockService{
 
-    JobsLock getDraft(JobsLock et) ;
-    boolean save(JobsLock et) ;
-    void saveBatch(List<JobsLock> list) ;
+    boolean create(JobsLock et) ;
+    void createBatch(List<JobsLock> list) ;
     boolean update(JobsLock et) ;
     void updateBatch(List<JobsLock> list) ;
-    boolean checkKey(JobsLock et) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
     JobsLock get(String key) ;
-    boolean create(JobsLock et) ;
-    void createBatch(List<JobsLock> list) ;
+    JobsLock getDraft(JobsLock et) ;
+    boolean checkKey(JobsLock et) ;
+    boolean save(JobsLock et) ;
+    void saveBatch(List<JobsLock> list) ;
     Page<JobsLock> searchDefault(JobsLockSearchContext context) ;
 
 }

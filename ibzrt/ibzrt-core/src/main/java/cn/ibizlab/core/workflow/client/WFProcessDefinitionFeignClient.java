@@ -23,33 +23,11 @@ public interface WFProcessDefinitionFeignClient {
     Page<WFProcessDefinition> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/checkkey")
-    Boolean checkKey(@RequestBody WFProcessDefinition wfprocessdefinition);
-
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessdefinitions/{definitionkey}")
-    Boolean remove(@PathVariable("definitionkey") String definitionkey);
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessdefinitions/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/save")
-    Boolean save(@RequestBody WFProcessDefinition wfprocessdefinition);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/save")
-    Boolean saveBatch(@RequestBody List<WFProcessDefinition> wfprocessdefinitions);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions")
     WFProcessDefinition create(@RequestBody WFProcessDefinition wfprocessdefinition);
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/batch")
     Boolean createBatch(@RequestBody List<WFProcessDefinition> wfprocessdefinitions);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/getdraft")
-    WFProcessDefinition getDraft();
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessdefinitions/{definitionkey}")
@@ -59,8 +37,30 @@ public interface WFProcessDefinitionFeignClient {
     Boolean updateBatch(@RequestBody List<WFProcessDefinition> wfprocessdefinitions);
 
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessdefinitions/{definitionkey}")
+    Boolean remove(@PathVariable("definitionkey") String definitionkey);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessdefinitions/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/{definitionkey}")
     WFProcessDefinition get(@PathVariable("definitionkey") String definitionkey);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/getdraft")
+    WFProcessDefinition getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/checkkey")
+    Boolean checkKey(@RequestBody WFProcessDefinition wfprocessdefinition);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/save")
+    Boolean save(@RequestBody WFProcessDefinition wfprocessdefinition);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/save")
+    Boolean saveBatch(@RequestBody List<WFProcessDefinition> wfprocessdefinitions);
 
 
 

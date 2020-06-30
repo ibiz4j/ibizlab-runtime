@@ -23,17 +23,17 @@ import cn.ibizlab.core.workflow.filter.WFMemberSearchContext;
  */
 public interface IWFMemberService{
 
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFMember getDraft(WFMember et) ;
-    boolean save(WFMember et) ;
-    void saveBatch(List<WFMember> list) ;
-    boolean checkKey(WFMember et) ;
-    boolean update(WFMember et) ;
-    void updateBatch(List<WFMember> list) ;
     boolean create(WFMember et) ;
     void createBatch(List<WFMember> list) ;
+    boolean update(WFMember et) ;
+    void updateBatch(List<WFMember> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
     WFMember get(String key) ;
+    WFMember getDraft(WFMember et) ;
+    boolean checkKey(WFMember et) ;
+    boolean save(WFMember et) ;
+    void saveBatch(List<WFMember> list) ;
     Page<WFMember> searchDefault(WFMemberSearchContext context) ;
     List<WFMember> selectByGroupid(String id) ;
     void removeByGroupid(String id) ;

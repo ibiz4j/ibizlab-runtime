@@ -28,18 +28,18 @@ public interface IIBZDepartmentService extends IService<IBZDepartment>{
     boolean create(IBZDepartment et) ;
     @CacheEvict(value="ibzdepartment",allEntries=true)
     void createBatch(List<IBZDepartment> list) ;
-    IBZDepartment get(String key) ;
-    boolean save(IBZDepartment et) ;
-    @CacheEvict(value="ibzdepartment",allEntries=true)
-    void saveBatch(List<IBZDepartment> list) ;
-    boolean checkKey(IBZDepartment et) ;
-    IBZDepartment getDraft(IBZDepartment et) ;
-    boolean remove(String key) ;
-    @CacheEvict(value="ibzdepartment",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
     boolean update(IBZDepartment et) ;
     @CacheEvict(value="ibzdepartment",allEntries=true)
     void updateBatch(List<IBZDepartment> list) ;
+    boolean remove(String key) ;
+    @CacheEvict(value="ibzdepartment",allEntries=true)
+    void removeBatch(Collection<String> idList) ;
+    IBZDepartment get(String key) ;
+    IBZDepartment getDraft(IBZDepartment et) ;
+    boolean checkKey(IBZDepartment et) ;
+    boolean save(IBZDepartment et) ;
+    @CacheEvict(value="ibzdepartment",allEntries=true)
+    void saveBatch(List<IBZDepartment> list) ;
     Page<IBZDepartment> searchDefault(IBZDepartmentSearchContext context) ;
     List<IBZDepartment> selectByParentdeptid(String deptid) ;
     @CacheEvict(value="ibzdepartment",allEntries=true)

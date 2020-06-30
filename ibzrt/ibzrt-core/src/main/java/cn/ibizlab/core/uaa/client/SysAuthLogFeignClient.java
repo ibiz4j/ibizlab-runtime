@@ -23,19 +23,11 @@ public interface SysAuthLogFeignClient {
     Page<SysAuthLog> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/checkkey")
-    Boolean checkKey(@RequestBody SysAuthLog sysauthlog);
+    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
+    SysAuthLog create(@RequestBody SysAuthLog sysauthlog);
 
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/sysauthlogs/{logid}")
-    Boolean remove(@PathVariable("logid") String logid);
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/sysauthlogs/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/getdraft")
-    SysAuthLog getDraft();
+    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/batch")
+    Boolean createBatch(@RequestBody List<SysAuthLog> sysauthlogs);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/sysauthlogs/{logid}")
@@ -45,22 +37,30 @@ public interface SysAuthLogFeignClient {
     Boolean updateBatch(@RequestBody List<SysAuthLog> sysauthlogs);
 
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/sysauthlogs/{logid}")
+    Boolean remove(@PathVariable("logid") String logid);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/sysauthlogs/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/{logid}")
+    SysAuthLog get(@PathVariable("logid") String logid);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/getdraft")
+    SysAuthLog getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/checkkey")
+    Boolean checkKey(@RequestBody SysAuthLog sysauthlog);
+
+
     @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/save")
     Boolean save(@RequestBody SysAuthLog sysauthlog);
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/save")
     Boolean saveBatch(@RequestBody List<SysAuthLog> sysauthlogs);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
-    SysAuthLog create(@RequestBody SysAuthLog sysauthlog);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/batch")
-    Boolean createBatch(@RequestBody List<SysAuthLog> sysauthlogs);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/{logid}")
-    SysAuthLog get(@PathVariable("logid") String logid);
 
 
 

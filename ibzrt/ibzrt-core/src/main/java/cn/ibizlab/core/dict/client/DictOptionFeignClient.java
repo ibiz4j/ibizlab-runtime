@@ -23,16 +23,11 @@ public interface DictOptionFeignClient {
     Page<DictOption> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/checkkey")
-    Boolean checkKey(@RequestBody DictOption dictoption);
+    @RequestMapping(method = RequestMethod.POST, value = "/dictoptions")
+    DictOption create(@RequestBody DictOption dictoption);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
-    DictOption getDraft();
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/{value_key}")
-    DictOption get(@PathVariable("value_key") String value_key);
+    @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/batch")
+    Boolean createBatch(@RequestBody List<DictOption> dictoptions);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/dictoptions/{value_key}")
@@ -42,11 +37,23 @@ public interface DictOptionFeignClient {
     Boolean updateBatch(@RequestBody List<DictOption> dictoptions);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictoptions")
-    DictOption create(@RequestBody DictOption dictoption);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/{value_key}")
+    Boolean remove(@PathVariable("value_key") String value_key);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/batch")
-    Boolean createBatch(@RequestBody List<DictOption> dictoptions);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/{value_key}")
+    DictOption get(@PathVariable("value_key") String value_key);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
+    DictOption getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/checkkey")
+    Boolean checkKey(@RequestBody DictOption dictoption);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/save")
@@ -54,13 +61,6 @@ public interface DictOptionFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/save")
     Boolean saveBatch(@RequestBody List<DictOption> dictoptions);
-
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/{value_key}")
-    Boolean remove(@PathVariable("value_key") String value_key);
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
 

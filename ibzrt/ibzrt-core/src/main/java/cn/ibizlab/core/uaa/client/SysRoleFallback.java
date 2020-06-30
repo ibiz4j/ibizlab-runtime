@@ -23,10 +23,10 @@ public class SysRoleFallback implements SysRoleFeignClient{
             return null;
      }
 
-    public Boolean save(SysRole sysrole){
-            return false;
+    public SysRole create(SysRole sysrole){
+            return null;
      }
-    public Boolean saveBatch(List<SysRole> sysroles){
+    public Boolean createBatch(List<SysRole> sysroles){
             return false;
      }
 
@@ -38,10 +38,10 @@ public class SysRoleFallback implements SysRoleFeignClient{
      }
 
 
-    public SysRole create(SysRole sysrole){
-            return null;
+    public Boolean remove(String roleid){
+            return false;
      }
-    public Boolean createBatch(List<SysRole> sysroles){
+    public Boolean removeBatch(Collection<String> idList){
             return false;
      }
 
@@ -49,13 +49,6 @@ public class SysRoleFallback implements SysRoleFeignClient{
             return null;
      }
 
-
-    public Boolean remove(String roleid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
 
     public SysRole getDraft(){
             return null;
@@ -67,6 +60,13 @@ public class SysRoleFallback implements SysRoleFeignClient{
             return false;
      }
 
+
+    public Boolean save(SysRole sysrole){
+            return false;
+     }
+    public Boolean saveBatch(List<SysRole> sysroles){
+            return false;
+     }
 
     public Page<SysRole> searchDefault(SysRoleSearchContext context){
             return null;

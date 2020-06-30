@@ -53,7 +53,7 @@ export default class JobsLogServiceBase extends EntityService {
     }
 
     /**
-     * Remove接口方法
+     * Create接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -61,8 +61,17 @@ export default class JobsLogServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof JobsLogServiceBase
      */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().delete(`/jobslogs/${context.jobslog}`,isloading);
+    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        Object.assign(data,masterData);
+        if(!data.srffrontuf || data.srffrontuf !== "1"){
+            data[this.APPDEKEY] = null;
+        }
+        if(data.srffrontuf){
+            delete data.srffrontuf;
+        }
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        let res:any = await Http.getInstance().post(`/jobslogs`,data,isloading);
         return res;
     }
 
@@ -83,6 +92,20 @@ export default class JobsLogServiceBase extends EntityService {
     }
 
     /**
+     * Remove接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof JobsLogServiceBase
+     */
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().delete(`/jobslogs/${context.jobslog}`,isloading);
+        return res;
+    }
+
+    /**
      * Get接口方法
      *
      * @param {*} [context={}]
@@ -93,22 +116,6 @@ export default class JobsLogServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await Http.getInstance().get(`/jobslogs/${context.jobslog}`,isloading);
-        return res;
-    }
-
-    /**
-     * Save接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof JobsLogServiceBase
-     */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/jobslogs/${context.jobslog}/save`,data,isloading);
         return res;
     }
 
@@ -142,7 +149,7 @@ export default class JobsLogServiceBase extends EntityService {
     }
 
     /**
-     * Create接口方法
+     * Save接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -150,17 +157,10 @@ export default class JobsLogServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof JobsLogServiceBase
      */
-    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let masterData:any = {};
         Object.assign(data,masterData);
-        if(!data.srffrontuf || data.srffrontuf !== "1"){
-            data[this.APPDEKEY] = null;
-        }
-        if(data.srffrontuf){
-            delete data.srffrontuf;
-        }
-        let tempContext:any = JSON.parse(JSON.stringify(context));
-        let res:any = await Http.getInstance().post(`/jobslogs`,data,isloading);
+            let res:any = await  Http.getInstance().post(`/jobslogs/${context.jobslog}/save`,data,isloading);
         return res;
     }
 

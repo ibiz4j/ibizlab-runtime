@@ -47,41 +47,6 @@ public class WFGroupResource {
     @Lazy
     public WFGroupMapping wfgroupMapping;
 
-    @ApiOperation(value = "删除角色/用户组", tags = {"角色/用户组" },  notes = "删除角色/用户组")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}")
-
-    public ResponseEntity<Boolean> remove(@PathVariable("wfgroup_id") String wfgroup_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.remove(wfgroup_id));
-    }
-
-    @ApiOperation(value = "批量删除角色/用户组", tags = {"角色/用户组" },  notes = "批量删除角色/用户组")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfgroupService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "保存角色/用户组", tags = {"角色/用户组" },  notes = "保存角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFGroupDTO wfgroupdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.save(wfgroupMapping.toDomain(wfgroupdto)));
-    }
-
-    @ApiOperation(value = "批量保存角色/用户组", tags = {"角色/用户组" },  notes = "批量保存角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFGroupDTO> wfgroupdtos) {
-        wfgroupService.saveBatch(wfgroupMapping.toDomain(wfgroupdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取角色/用户组", tags = {"角色/用户组" },  notes = "获取角色/用户组")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}")
-    public ResponseEntity<WFGroupDTO> get(@PathVariable("wfgroup_id") String wfgroup_id) {
-        WFGroup domain = wfgroupService.get(wfgroup_id);
-        WFGroupDTO dto = wfgroupMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
     @ApiOperation(value = "新建角色/用户组", tags = {"角色/用户组" },  notes = "新建角色/用户组")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups")
 
@@ -97,18 +62,6 @@ public class WFGroupResource {
     public ResponseEntity<Boolean> createBatch(@RequestBody List<WFGroupDTO> wfgroupdtos) {
         wfgroupService.createBatch(wfgroupMapping.toDomain(wfgroupdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取角色/用户组草稿", tags = {"角色/用户组" },  notes = "获取角色/用户组草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/getdraft")
-    public ResponseEntity<WFGroupDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfgroupMapping.toDto(wfgroupService.getDraft(new WFGroup())));
-    }
-
-    @ApiOperation(value = "检查角色/用户组", tags = {"角色/用户组" },  notes = "检查角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFGroupDTO wfgroupdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfgroupService.checkKey(wfgroupMapping.toDomain(wfgroupdto)));
     }
 
     @ApiOperation(value = "更新角色/用户组", tags = {"角色/用户组" },  notes = "更新角色/用户组")
@@ -129,7 +82,53 @@ public class WFGroupResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFGroup-searchDefault-all')")
+    @ApiOperation(value = "删除角色/用户组", tags = {"角色/用户组" },  notes = "删除角色/用户组")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}")
+
+    public ResponseEntity<Boolean> remove(@PathVariable("wfgroup_id") String wfgroup_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.remove(wfgroup_id));
+    }
+
+    @ApiOperation(value = "批量删除角色/用户组", tags = {"角色/用户组" },  notes = "批量删除角色/用户组")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfgroupService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @ApiOperation(value = "获取角色/用户组", tags = {"角色/用户组" },  notes = "获取角色/用户组")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}")
+    public ResponseEntity<WFGroupDTO> get(@PathVariable("wfgroup_id") String wfgroup_id) {
+        WFGroup domain = wfgroupService.get(wfgroup_id);
+        WFGroupDTO dto = wfgroupMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取角色/用户组草稿", tags = {"角色/用户组" },  notes = "获取角色/用户组草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/getdraft")
+    public ResponseEntity<WFGroupDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(wfgroupMapping.toDto(wfgroupService.getDraft(new WFGroup())));
+    }
+
+    @ApiOperation(value = "检查角色/用户组", tags = {"角色/用户组" },  notes = "检查角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFGroupDTO wfgroupdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfgroupService.checkKey(wfgroupMapping.toDomain(wfgroupdto)));
+    }
+
+    @ApiOperation(value = "保存角色/用户组", tags = {"角色/用户组" },  notes = "保存角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
+    public ResponseEntity<Boolean> save(@RequestBody WFGroupDTO wfgroupdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.save(wfgroupMapping.toDomain(wfgroupdto)));
+    }
+
+    @ApiOperation(value = "批量保存角色/用户组", tags = {"角色/用户组" },  notes = "批量保存角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFGroupDTO> wfgroupdtos) {
+        wfgroupService.saveBatch(wfgroupMapping.toDomain(wfgroupdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
 	@ApiOperation(value = "获取DEFAULT", tags = {"角色/用户组" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfgroups/fetchdefault")
 	public ResponseEntity<List<WFGroupDTO>> fetchDefault(WFGroupSearchContext context) {
@@ -142,7 +141,6 @@ public class WFGroupResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFGroup-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"角色/用户组" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfgroups/searchdefault")
 	public ResponseEntity<Page<WFGroupDTO>> searchDefault(@RequestBody WFGroupSearchContext context) {

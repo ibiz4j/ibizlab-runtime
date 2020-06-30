@@ -23,26 +23,11 @@ public interface WFMemberFeignClient {
     Page<WFMember> select();
 
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/{memberid}")
-    Boolean remove(@PathVariable("memberid") String memberid);
+    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers")
+    WFMember create(@RequestBody WFMember wfmember);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/getdraft")
-    WFMember getDraft();
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
-    Boolean save(@RequestBody WFMember wfmember);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
-    Boolean saveBatch(@RequestBody List<WFMember> wfmembers);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/checkkey")
-    Boolean checkKey(@RequestBody WFMember wfmember);
+    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/batch")
+    Boolean createBatch(@RequestBody List<WFMember> wfmembers);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/wfmembers/{memberid}")
@@ -52,15 +37,30 @@ public interface WFMemberFeignClient {
     Boolean updateBatch(@RequestBody List<WFMember> wfmembers);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers")
-    WFMember create(@RequestBody WFMember wfmember);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/{memberid}")
+    Boolean remove(@PathVariable("memberid") String memberid);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/batch")
-    Boolean createBatch(@RequestBody List<WFMember> wfmembers);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/{memberid}")
     WFMember get(@PathVariable("memberid") String memberid);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/getdraft")
+    WFMember getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/checkkey")
+    Boolean checkKey(@RequestBody WFMember wfmember);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
+    Boolean save(@RequestBody WFMember wfmember);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
+    Boolean saveBatch(@RequestBody List<WFMember> wfmembers);
 
 
 

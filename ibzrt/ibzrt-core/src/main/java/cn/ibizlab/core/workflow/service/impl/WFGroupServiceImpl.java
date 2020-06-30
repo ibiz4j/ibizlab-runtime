@@ -44,6 +44,33 @@ public class WFGroupServiceImpl implements IWFGroupService {
 
 
     @Override
+    public boolean create(WFGroup et) {
+        WFGroup rt = wFGroupFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<WFGroup> list){
+        wFGroupFeignClient.createBatch(list) ;
+    }
+
+    @Override
+    public boolean update(WFGroup et) {
+        WFGroup rt = wFGroupFeignClient.update(et.getId(),et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+
+    }
+
+    public void updateBatch(List<WFGroup> list){
+        wFGroupFeignClient.updateBatch(list) ;
+    }
+
+    @Override
     public boolean remove(String id) {
         boolean result=wFGroupFeignClient.remove(id) ;
         return result;
@@ -51,20 +78,6 @@ public class WFGroupServiceImpl implements IWFGroupService {
 
     public void removeBatch(Collection<String> idList){
         wFGroupFeignClient.removeBatch(idList);
-    }
-
-    @Override
-    @Transactional
-    public boolean save(WFGroup et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!wFGroupFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<WFGroup> list) {
-        wFGroupFeignClient.saveBatch(list) ;
     }
 
     @Override
@@ -80,19 +93,6 @@ public class WFGroupServiceImpl implements IWFGroupService {
     }
 
     @Override
-    public boolean create(WFGroup et) {
-        WFGroup rt = wFGroupFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<WFGroup> list){
-        wFGroupFeignClient.createBatch(list) ;
-    }
-
-    @Override
     public WFGroup getDraft(WFGroup et) {
         et=wFGroupFeignClient.getDraft();
         return et;
@@ -103,17 +103,17 @@ public class WFGroupServiceImpl implements IWFGroupService {
         return wFGroupFeignClient.checkKey(et);
     }
     @Override
-    public boolean update(WFGroup et) {
-        WFGroup rt = wFGroupFeignClient.update(et.getId(),et);
-        if(rt==null)
+    @Transactional
+    public boolean save(WFGroup et) {
+        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
+        if(!wFGroupFeignClient.save(et))
             return false;
-        CachedBeanCopier.copy(rt,et);
         return true;
-
     }
 
-    public void updateBatch(List<WFGroup> list){
-        wFGroupFeignClient.updateBatch(list) ;
+    @Override
+    public void saveBatch(List<WFGroup> list) {
+        wFGroupFeignClient.saveBatch(list) ;
     }
 
 

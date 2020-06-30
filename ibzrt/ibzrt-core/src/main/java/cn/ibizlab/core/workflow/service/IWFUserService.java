@@ -23,17 +23,17 @@ import cn.ibizlab.core.workflow.filter.WFUserSearchContext;
  */
 public interface IWFUserService{
 
-    boolean update(WFUser et) ;
-    void updateBatch(List<WFUser> list) ;
-    WFUser getDraft(WFUser et) ;
-    WFUser get(String key) ;
     boolean create(WFUser et) ;
     void createBatch(List<WFUser> list) ;
+    boolean update(WFUser et) ;
+    void updateBatch(List<WFUser> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    WFUser get(String key) ;
+    WFUser getDraft(WFUser et) ;
     boolean checkKey(WFUser et) ;
     boolean save(WFUser et) ;
     void saveBatch(List<WFUser> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
     Page<WFUser> searchDefault(WFUserSearchContext context) ;
 
 }

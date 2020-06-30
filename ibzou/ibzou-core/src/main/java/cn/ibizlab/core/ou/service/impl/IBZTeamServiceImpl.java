@@ -52,6 +52,20 @@ public class IBZTeamServiceImpl extends ServiceImpl<IBZTeamMapper, IBZTeam> impl
 
     @Override
     @Transactional
+    public boolean create(IBZTeam et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getTeamid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<IBZTeam> list) {
+        this.saveBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
     public boolean update(IBZTeam et) {
         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("teamid",et.getTeamid())))
             return false;
@@ -90,6 +104,15 @@ public class IBZTeamServiceImpl extends ServiceImpl<IBZTeamMapper, IBZTeam> impl
     }
 
     @Override
+    public IBZTeam getDraft(IBZTeam et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZTeam et) {
+        return (!ObjectUtils.isEmpty(et.getTeamid()))&&(!Objects.isNull(this.getById(et.getTeamid())));
+    }
+    @Override
     @Transactional
     public boolean save(IBZTeam et) {
         if(!saveOrUpdate(et))
@@ -118,29 +141,6 @@ public class IBZTeamServiceImpl extends ServiceImpl<IBZTeamMapper, IBZTeam> impl
     @Override
     public void saveBatch(List<IBZTeam> list) {
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    public IBZTeam getDraft(IBZTeam et) {
-        return et;
-    }
-
-    @Override
-    public boolean checkKey(IBZTeam et) {
-        return (!ObjectUtils.isEmpty(et.getTeamid()))&&(!Objects.isNull(this.getById(et.getTeamid())));
-    }
-    @Override
-    @Transactional
-    public boolean create(IBZTeam et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getTeamid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<IBZTeam> list) {
-        this.saveBatch(list,batchSize);
     }
 
 

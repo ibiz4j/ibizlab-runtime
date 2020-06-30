@@ -23,12 +23,11 @@ public interface SysUserRoleFeignClient {
     Page<SysUserRole> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/checkkey")
-    Boolean checkKey(@RequestBody SysUserRole sysuserrole);
+    @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles")
+    SysUserRole create(@RequestBody SysUserRole sysuserrole);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/getdraft")
-    SysUserRole getDraft();
+    @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/batch")
+    Boolean createBatch(@RequestBody List<SysUserRole> sysuserroles);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/{userroleid}")
@@ -45,15 +44,16 @@ public interface SysUserRoleFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles")
-    SysUserRole create(@RequestBody SysUserRole sysuserrole);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/batch")
-    Boolean createBatch(@RequestBody List<SysUserRole> sysuserroles);
-
-
     @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/{userroleid}")
     SysUserRole get(@PathVariable("userroleid") String userroleid);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/getdraft")
+    SysUserRole getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/checkkey")
+    Boolean checkKey(@RequestBody SysUserRole sysuserrole);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/save")

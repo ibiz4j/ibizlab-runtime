@@ -52,33 +52,17 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
 
     @Override
     @Transactional
-    public boolean save(WFGroup et) {
-        if(!saveOrUpdate(et))
+    public boolean create(WFGroup et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
             return false;
+        wfmemberService.saveByGroupid(et.getId(),et.getWfmember());
+        CachedBeanCopier.copy(get(et.getId()),et);
         return true;
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
-    public boolean saveOrUpdate(WFGroup et) {
-        if (null == et) {
-            return false;
-        } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
-        }
-    }
-
-    @Override
-    public boolean saveBatch(Collection<WFGroup> list) {
-        saveOrUpdateBatch(list,batchSize);
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<WFGroup> list) {
-        saveOrUpdateBatch(list,batchSize);
+    public void createBatch(List<WFGroup> list) {
+        this.saveBatch(list,batchSize);
     }
 
     @Override
@@ -94,30 +78,6 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     @Override
     public void updateBatch(List<WFGroup> list) {
         updateBatchById(list,batchSize);
-    }
-
-    @Override
-    public WFGroup getDraft(WFGroup et) {
-        return et;
-    }
-
-    @Override
-    public boolean checkKey(WFGroup et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
-    }
-    @Override
-    @Transactional
-    public boolean create(WFGroup et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        wfmemberService.saveByGroupid(et.getId(),et.getWfmember());
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<WFGroup> list) {
-        this.saveBatch(list,batchSize);
     }
 
     @Override
@@ -145,6 +105,46 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
             et.setWfmember(wfmemberService.selectByGroupid(key));
         }
         return et;
+    }
+
+    @Override
+    public WFGroup getDraft(WFGroup et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFGroup et) {
+        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+    }
+    @Override
+    @Transactional
+    public boolean save(WFGroup et) {
+        if(!saveOrUpdate(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    @Transactional(
+            rollbackFor = {Exception.class}
+    )
+    public boolean saveOrUpdate(WFGroup et) {
+        if (null == et) {
+            return false;
+        } else {
+            return checkKey(et) ? this.update(et) : this.create(et);
+        }
+    }
+
+    @Override
+    public boolean saveBatch(Collection<WFGroup> list) {
+        saveOrUpdateBatch(list,batchSize);
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<WFGroup> list) {
+        saveOrUpdateBatch(list,batchSize);
     }
 
 

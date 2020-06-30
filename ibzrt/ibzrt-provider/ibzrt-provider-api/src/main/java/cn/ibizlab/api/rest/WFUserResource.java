@@ -47,6 +47,23 @@ public class WFUserResource {
     @Lazy
     public WFUserMapping wfuserMapping;
 
+    @ApiOperation(value = "新建用户", tags = {"用户" },  notes = "新建用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers")
+
+    public ResponseEntity<WFUserDTO> create(@RequestBody WFUserDTO wfuserdto) {
+        WFUser domain = wfuserMapping.toDomain(wfuserdto);
+		wfuserService.create(domain);
+        WFUserDTO dto = wfuserMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "批量新建用户", tags = {"用户" },  notes = "批量新建用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFUserDTO> wfuserdtos) {
+        wfuserService.createBatch(wfuserMapping.toDomain(wfuserdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @ApiOperation(value = "更新用户", tags = {"用户" },  notes = "更新用户")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfusers/{wfuser_id}")
 
@@ -65,10 +82,18 @@ public class WFUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "获取用户草稿", tags = {"用户" },  notes = "获取用户草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
-    public ResponseEntity<WFUserDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfuserMapping.toDto(wfuserService.getDraft(new WFUser())));
+    @ApiOperation(value = "删除用户", tags = {"用户" },  notes = "删除用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}")
+
+    public ResponseEntity<Boolean> remove(@PathVariable("wfuser_id") String wfuser_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfuserService.remove(wfuser_id));
+    }
+
+    @ApiOperation(value = "批量删除用户", tags = {"用户" },  notes = "批量删除用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfuserService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @ApiOperation(value = "获取用户", tags = {"用户" },  notes = "获取用户")
@@ -79,21 +104,10 @@ public class WFUserResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "新建用户", tags = {"用户" },  notes = "新建用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers")
-
-    public ResponseEntity<WFUserDTO> create(@RequestBody WFUserDTO wfuserdto) {
-        WFUser domain = wfuserMapping.toDomain(wfuserdto);
-		wfuserService.create(domain);
-        WFUserDTO dto = wfuserMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "批量新建用户", tags = {"用户" },  notes = "批量新建用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFUserDTO> wfuserdtos) {
-        wfuserService.createBatch(wfuserMapping.toDomain(wfuserdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    @ApiOperation(value = "获取用户草稿", tags = {"用户" },  notes = "获取用户草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
+    public ResponseEntity<WFUserDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(wfuserMapping.toDto(wfuserService.getDraft(new WFUser())));
     }
 
     @ApiOperation(value = "检查用户", tags = {"用户" },  notes = "检查用户")
@@ -115,21 +129,6 @@ public class WFUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "删除用户", tags = {"用户" },  notes = "删除用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}")
-
-    public ResponseEntity<Boolean> remove(@PathVariable("wfuser_id") String wfuser_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfuserService.remove(wfuser_id));
-    }
-
-    @ApiOperation(value = "批量删除用户", tags = {"用户" },  notes = "批量删除用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfuserService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFUser-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"用户" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfusers/fetchdefault")
 	public ResponseEntity<List<WFUserDTO>> fetchDefault(WFUserSearchContext context) {
@@ -142,7 +141,6 @@ public class WFUserResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFUser-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"用户" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfusers/searchdefault")
 	public ResponseEntity<Page<WFUserDTO>> searchDefault(@RequestBody WFUserSearchContext context) {

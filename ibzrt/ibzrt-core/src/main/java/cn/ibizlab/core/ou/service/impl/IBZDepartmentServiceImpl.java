@@ -47,45 +47,18 @@ public class IBZDepartmentServiceImpl implements IIBZDepartmentService {
     protected cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
     @Override
-    @Transactional
-    public boolean save(IBZDepartment et) {
-        if(et.getDeptid()==null) et.setDeptid((String)et.getDefaultKey(true));
-        if(!iBZDepartmentFeignClient.save(et))
+    public boolean create(IBZDepartment et) {
+        IBZDepartment rt = iBZDepartmentFeignClient.create(et);
+        if(rt==null)
             return false;
+        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    @Override
-    public void saveBatch(List<IBZDepartment> list) {
-        iBZDepartmentFeignClient.saveBatch(list) ;
+    public void createBatch(List<IBZDepartment> list){
+        iBZDepartmentFeignClient.createBatch(list) ;
     }
 
-    @Override
-    public IBZDepartment get(String deptid) {
-		IBZDepartment et=iBZDepartmentFeignClient.get(deptid);
-        if(et==null){
-            et=new IBZDepartment();
-            et.setDeptid(deptid);
-        }
-        else{
-        }
-        return  et;
-    }
-
-    @Override
-    public boolean remove(String deptid) {
-        boolean result=iBZDepartmentFeignClient.remove(deptid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        iBZDepartmentFeignClient.removeBatch(idList);
-    }
-
-    @Override
-    public boolean checkKey(IBZDepartment et) {
-        return iBZDepartmentFeignClient.checkKey(et);
-    }
     @Override
     public boolean update(IBZDepartment et) {
         IBZDepartment rt = iBZDepartmentFeignClient.update(et.getDeptid(),et);
@@ -101,22 +74,49 @@ public class IBZDepartmentServiceImpl implements IIBZDepartmentService {
     }
 
     @Override
-    public boolean create(IBZDepartment et) {
-        IBZDepartment rt = iBZDepartmentFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
+    public boolean remove(String deptid) {
+        boolean result=iBZDepartmentFeignClient.remove(deptid) ;
+        return result;
     }
 
-    public void createBatch(List<IBZDepartment> list){
-        iBZDepartmentFeignClient.createBatch(list) ;
+    public void removeBatch(Collection<String> idList){
+        iBZDepartmentFeignClient.removeBatch(idList);
+    }
+
+    @Override
+    public IBZDepartment get(String deptid) {
+		IBZDepartment et=iBZDepartmentFeignClient.get(deptid);
+        if(et==null){
+            et=new IBZDepartment();
+            et.setDeptid(deptid);
+        }
+        else{
+        }
+        return  et;
     }
 
     @Override
     public IBZDepartment getDraft(IBZDepartment et) {
         et=iBZDepartmentFeignClient.getDraft();
         return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZDepartment et) {
+        return iBZDepartmentFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(IBZDepartment et) {
+        if(et.getDeptid()==null) et.setDeptid((String)et.getDefaultKey(true));
+        if(!iBZDepartmentFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<IBZDepartment> list) {
+        iBZDepartmentFeignClient.saveBatch(list) ;
     }
 
 

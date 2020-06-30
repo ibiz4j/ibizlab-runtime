@@ -39,6 +39,26 @@ public class SysAppServiceImpl implements ISysAppService {
 
 
     @Override
+    public boolean create(SysApp et) {
+        //代码实现
+        return true;
+    }
+
+    public void createBatch(List<SysApp> list){
+
+    }
+
+    @Override
+    public boolean update(SysApp et) {
+        //代码实现
+        return true;
+    }
+
+    public void updateBatch(List<SysApp> list){
+                    
+    }
+
+    @Override
     public boolean remove(String key) {
         return true;
     }
@@ -55,18 +75,6 @@ public class SysAppServiceImpl implements ISysAppService {
     }
 
     @Override
-    @Transactional
-    public boolean save(SysApp et) {
-        //代码实现
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<SysApp> list) {
-                       
-    }
-
-    @Override
     public SysApp getDraft(SysApp et) {
         return et;
     }
@@ -76,23 +84,15 @@ public class SysAppServiceImpl implements ISysAppService {
         return false;
     }
     @Override
-    public boolean update(SysApp et) {
+    @Transactional
+    public boolean save(SysApp et) {
         //代码实现
         return true;
-    }
-
-    public void updateBatch(List<SysApp> list){
-                    
     }
 
     @Override
-    public boolean create(SysApp et) {
-        //代码实现
-        return true;
-    }
-
-    public void createBatch(List<SysApp> list){
-
+    public void saveBatch(List<SysApp> list) {
+                       
     }
 
 

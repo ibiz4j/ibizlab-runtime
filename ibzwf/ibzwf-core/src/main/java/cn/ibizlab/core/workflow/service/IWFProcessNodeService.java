@@ -23,17 +23,17 @@ import cn.ibizlab.core.workflow.filter.WFProcessNodeSearchContext;
  */
 public interface IWFProcessNodeService{
 
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean checkKey(WFProcessNode et) ;
-    boolean save(WFProcessNode et) ;
-    void saveBatch(List<WFProcessNode> list) ;
-    WFProcessNode get(String key) ;
     boolean create(WFProcessNode et) ;
     void createBatch(List<WFProcessNode> list) ;
     boolean update(WFProcessNode et) ;
     void updateBatch(List<WFProcessNode> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    WFProcessNode get(String key) ;
     WFProcessNode getDraft(WFProcessNode et) ;
+    boolean checkKey(WFProcessNode et) ;
+    boolean save(WFProcessNode et) ;
+    void saveBatch(List<WFProcessNode> list) ;
     Page<WFProcessNode> searchDefault(WFProcessNodeSearchContext context) ;
 
 }

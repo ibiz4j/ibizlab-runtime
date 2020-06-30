@@ -53,7 +53,7 @@ export default class SysAuthLogServiceBase extends EntityService {
     }
 
     /**
-     * GetDraft接口方法
+     * Create接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -61,9 +61,17 @@ export default class SysAuthLogServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysAuthLogServiceBase
      */
-    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await  Http.getInstance().get(`/sysauthlogs/getdraft`,isloading);
-        res.data.sysauthlog = data.sysauthlog;
+    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        Object.assign(data,masterData);
+        if(!data.srffrontuf || data.srffrontuf !== "1"){
+            data[this.APPDEKEY] = null;
+        }
+        if(data.srffrontuf){
+            delete data.srffrontuf;
+        }
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        let res:any = await Http.getInstance().post(`/sysauthlogs`,data,isloading);
         return res;
     }
 
@@ -98,7 +106,7 @@ export default class SysAuthLogServiceBase extends EntityService {
     }
 
     /**
-     * Create接口方法
+     * Get接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -106,17 +114,23 @@ export default class SysAuthLogServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysAuthLogServiceBase
      */
-    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        Object.assign(data,masterData);
-        if(!data.srffrontuf || data.srffrontuf !== "1"){
-            data[this.APPDEKEY] = null;
-        }
-        if(data.srffrontuf){
-            delete data.srffrontuf;
-        }
-        let tempContext:any = JSON.parse(JSON.stringify(context));
-        let res:any = await Http.getInstance().post(`/sysauthlogs`,data,isloading);
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().get(`/sysauthlogs/${context.sysauthlog}`,isloading);
+        return res;
+    }
+
+    /**
+     * GetDraft接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysAuthLogServiceBase
+     */
+    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await  Http.getInstance().get(`/sysauthlogs/getdraft`,isloading);
+        res.data.sysauthlog = data.sysauthlog;
         return res;
     }
 
@@ -131,20 +145,6 @@ export default class SysAuthLogServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await Http.getInstance().post(`/sysauthlogs/${context.sysauthlog}/checkkey`,data,isloading);
-        return res;
-    }
-
-    /**
-     * Get接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysAuthLogServiceBase
-     */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().get(`/sysauthlogs/${context.sysauthlog}`,isloading);
         return res;
     }
 

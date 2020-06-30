@@ -53,7 +53,7 @@ export default class IBZPostServiceBase extends EntityService {
     }
 
     /**
-     * Get接口方法
+     * Create接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -61,24 +61,17 @@ export default class IBZPostServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof IBZPostServiceBase
      */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().get(`/ibzposts/${context.ibzpost}`,isloading);
-        return res;
-    }
-
-    /**
-     * Save接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZPostServiceBase
-     */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let masterData:any = {};
         Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/ibzposts/${context.ibzpost}/save`,data,isloading);
+        if(!data.srffrontuf || data.srffrontuf !== "1"){
+            data[this.APPDEKEY] = null;
+        }
+        if(data.srffrontuf){
+            delete data.srffrontuf;
+        }
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        let res:any = await Http.getInstance().post(`/ibzposts`,data,isloading);
         return res;
     }
 
@@ -99,20 +92,6 @@ export default class IBZPostServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZPostServiceBase
-     */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().post(`/ibzposts/${context.ibzpost}/checkkey`,data,isloading);
-        return res;
-    }
-
-    /**
      * Remove接口方法
      *
      * @param {*} [context={}]
@@ -123,6 +102,20 @@ export default class IBZPostServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await Http.getInstance().delete(`/ibzposts/${context.ibzpost}`,isloading);
+        return res;
+    }
+
+    /**
+     * Get接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof IBZPostServiceBase
+     */
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().get(`/ibzposts/${context.ibzpost}`,isloading);
         return res;
     }
 
@@ -142,7 +135,7 @@ export default class IBZPostServiceBase extends EntityService {
     }
 
     /**
-     * Create接口方法
+     * CheckKey接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -150,17 +143,24 @@ export default class IBZPostServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof IBZPostServiceBase
      */
-    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().post(`/ibzposts/${context.ibzpost}/checkkey`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Save接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof IBZPostServiceBase
+     */
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let masterData:any = {};
         Object.assign(data,masterData);
-        if(!data.srffrontuf || data.srffrontuf !== "1"){
-            data[this.APPDEKEY] = null;
-        }
-        if(data.srffrontuf){
-            delete data.srffrontuf;
-        }
-        let tempContext:any = JSON.parse(JSON.stringify(context));
-        let res:any = await Http.getInstance().post(`/ibzposts`,data,isloading);
+            let res:any = await  Http.getInstance().post(`/ibzposts/${context.ibzpost}/save`,data,isloading);
         return res;
     }
 

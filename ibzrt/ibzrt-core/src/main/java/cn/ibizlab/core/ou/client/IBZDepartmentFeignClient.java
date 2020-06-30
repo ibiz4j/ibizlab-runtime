@@ -23,26 +23,11 @@ public interface IBZDepartmentFeignClient {
     Page<IBZDepartment> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/save")
-    Boolean save(@RequestBody IBZDepartment ibzdepartment);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments")
+    IBZDepartment create(@RequestBody IBZDepartment ibzdepartment);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/save")
-    Boolean saveBatch(@RequestBody List<IBZDepartment> ibzdepartments);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/ibzdepartments/{deptid}")
-    IBZDepartment get(@PathVariable("deptid") String deptid);
-
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{deptid}")
-    Boolean remove(@PathVariable("deptid") String deptid);
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/checkkey")
-    Boolean checkKey(@RequestBody IBZDepartment ibzdepartment);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/batch")
+    Boolean createBatch(@RequestBody List<IBZDepartment> ibzdepartments);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{deptid}")
@@ -52,15 +37,30 @@ public interface IBZDepartmentFeignClient {
     Boolean updateBatch(@RequestBody List<IBZDepartment> ibzdepartments);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments")
-    IBZDepartment create(@RequestBody IBZDepartment ibzdepartment);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{deptid}")
+    Boolean remove(@PathVariable("deptid") String deptid);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/batch")
-    Boolean createBatch(@RequestBody List<IBZDepartment> ibzdepartments);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/ibzdepartments/{deptid}")
+    IBZDepartment get(@PathVariable("deptid") String deptid);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/ibzdepartments/getdraft")
     IBZDepartment getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/checkkey")
+    Boolean checkKey(@RequestBody IBZDepartment ibzdepartment);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/save")
+    Boolean save(@RequestBody IBZDepartment ibzdepartment);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/save")
+    Boolean saveBatch(@RequestBody List<IBZDepartment> ibzdepartments);
 
 
 

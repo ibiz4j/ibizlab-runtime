@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IIBZTeamMemberService extends IService<IBZTeamMember>{
 
+    boolean create(IBZTeamMember et) ;
+    void createBatch(List<IBZTeamMember> list) ;
+    boolean update(IBZTeamMember et) ;
+    void updateBatch(List<IBZTeamMember> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    IBZTeamMember get(String key) ;
+    IBZTeamMember getDraft(IBZTeamMember et) ;
     boolean checkKey(IBZTeamMember et) ;
     boolean save(IBZTeamMember et) ;
     void saveBatch(List<IBZTeamMember> list) ;
-    IBZTeamMember getDraft(IBZTeamMember et) ;
-    boolean update(IBZTeamMember et) ;
-    void updateBatch(List<IBZTeamMember> list) ;
-    IBZTeamMember get(String key) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean create(IBZTeamMember et) ;
-    void createBatch(List<IBZTeamMember> list) ;
     Page<IBZTeamMember> searchDefault(IBZTeamMemberSearchContext context) ;
     List<IBZTeamMember> selectByUserid(String userid) ;
     void removeByUserid(String userid) ;

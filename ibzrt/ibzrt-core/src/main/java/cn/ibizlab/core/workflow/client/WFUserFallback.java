@@ -23,6 +23,13 @@ public class WFUserFallback implements WFUserFeignClient{
             return null;
      }
 
+    public WFUser create(WFUser wfuser){
+            return null;
+     }
+    public Boolean createBatch(List<WFUser> wfusers){
+            return false;
+     }
+
     public WFUser update(String id, WFUser wfuser){
             return null;
      }
@@ -31,23 +38,23 @@ public class WFUserFallback implements WFUserFeignClient{
      }
 
 
-    public WFUser getDraft(){
-            return null;
-    }
-
-
+    public Boolean remove(String id){
+            return false;
+     }
+    public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
 
     public WFUser get(String id){
             return null;
      }
 
 
-    public WFUser create(WFUser wfuser){
+    public WFUser getDraft(){
             return null;
-     }
-    public Boolean createBatch(List<WFUser> wfusers){
-            return false;
-     }
+    }
+
+
 
     public Boolean checkKey(WFUser wfuser){
             return false;
@@ -58,13 +65,6 @@ public class WFUserFallback implements WFUserFeignClient{
             return false;
      }
     public Boolean saveBatch(List<WFUser> wfusers){
-            return false;
-     }
-
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
             return false;
      }
 

@@ -23,8 +23,11 @@ public interface DictCatalogFeignClient {
     Page<DictCatalog> select();
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/getdraft")
-    DictCatalog getDraft();
+    @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs")
+    DictCatalog create(@RequestBody DictCatalog dictcatalog);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/batch")
+    Boolean createBatch(@RequestBody List<DictCatalog> dictcatalogs);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/{id}")
@@ -32,13 +35,6 @@ public interface DictCatalogFeignClient {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/batch")
     Boolean updateBatch(@RequestBody List<DictCatalog> dictcatalogs);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs")
-    DictCatalog create(@RequestBody DictCatalog dictcatalog);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/batch")
-    Boolean createBatch(@RequestBody List<DictCatalog> dictcatalogs);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{id}")
@@ -52,15 +48,19 @@ public interface DictCatalogFeignClient {
     DictCatalog get(@PathVariable("id") String id);
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/getdraft")
+    DictCatalog getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")
+    Boolean checkKey(@RequestBody DictCatalog dictcatalog);
+
+
     @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/save")
     Boolean save(@RequestBody DictCatalog dictcatalog);
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/save")
     Boolean saveBatch(@RequestBody List<DictCatalog> dictcatalogs);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")
-    Boolean checkKey(@RequestBody DictCatalog dictcatalog);
 
 
 

@@ -44,15 +44,30 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
 
 
     @Override
-    public SysRolePermission get(String rolepermissionid) {
-		SysRolePermission et=sysRolePermissionFeignClient.get(rolepermissionid);
-        if(et==null){
-            et=new SysRolePermission();
-            et.setRolepermissionid(rolepermissionid);
-        }
-        else{
-        }
-        return  et;
+    public boolean create(SysRolePermission et) {
+        SysRolePermission rt = sysRolePermissionFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<SysRolePermission> list){
+        sysRolePermissionFeignClient.createBatch(list) ;
+    }
+
+    @Override
+    public boolean update(SysRolePermission et) {
+        SysRolePermission rt = sysRolePermissionFeignClient.update(et.getRolepermissionid(),et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+
+    }
+
+    public void updateBatch(List<SysRolePermission> list){
+        sysRolePermissionFeignClient.updateBatch(list) ;
     }
 
     @Override
@@ -66,22 +81,21 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
     }
 
     @Override
-    public SysRolePermission getDraft(SysRolePermission et) {
-        et=sysRolePermissionFeignClient.getDraft();
-        return et;
+    public SysRolePermission get(String rolepermissionid) {
+		SysRolePermission et=sysRolePermissionFeignClient.get(rolepermissionid);
+        if(et==null){
+            et=new SysRolePermission();
+            et.setRolepermissionid(rolepermissionid);
+        }
+        else{
+        }
+        return  et;
     }
 
     @Override
-    public boolean create(SysRolePermission et) {
-        SysRolePermission rt = sysRolePermissionFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<SysRolePermission> list){
-        sysRolePermissionFeignClient.createBatch(list) ;
+    public SysRolePermission getDraft(SysRolePermission et) {
+        et=sysRolePermissionFeignClient.getDraft();
+        return et;
     }
 
     @Override
@@ -100,20 +114,6 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
     @Override
     public void saveBatch(List<SysRolePermission> list) {
         sysRolePermissionFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean update(SysRolePermission et) {
-        SysRolePermission rt = sysRolePermissionFeignClient.update(et.getRolepermissionid(),et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-
-    }
-
-    public void updateBatch(List<SysRolePermission> list){
-        sysRolePermissionFeignClient.updateBatch(list) ;
     }
 
 

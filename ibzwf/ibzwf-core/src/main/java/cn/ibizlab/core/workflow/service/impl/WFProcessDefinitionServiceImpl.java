@@ -49,6 +49,68 @@ public class WFProcessDefinitionServiceImpl extends ServiceImpl<WFProcessDefinit
 
     @Override
     @Transactional
+    public boolean create(WFProcessDefinition et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getDefinitionkey()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<WFProcessDefinition> list) {
+        this.saveBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean update(WFProcessDefinition et) {
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("definitionkey",et.getDefinitionkey())))
+            return false;
+        CachedBeanCopier.copy(get(et.getDefinitionkey()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<WFProcessDefinition> list) {
+        updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public WFProcessDefinition get(String key) {
+        WFProcessDefinition et = getById(key);
+        if(et==null){
+            et=new WFProcessDefinition();
+            et.setDefinitionkey(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public WFProcessDefinition getDraft(WFProcessDefinition et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFProcessDefinition et) {
+        return (!ObjectUtils.isEmpty(et.getDefinitionkey()))&&(!Objects.isNull(this.getById(et.getDefinitionkey())));
+    }
+    @Override
+    @Transactional
     public boolean save(WFProcessDefinition et) {
         if(!saveOrUpdate(et))
             return false;
@@ -76,68 +138,6 @@ public class WFProcessDefinitionServiceImpl extends ServiceImpl<WFProcessDefinit
     @Override
     public void saveBatch(List<WFProcessDefinition> list) {
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public boolean update(WFProcessDefinition et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("definitionkey",et.getDefinitionkey())))
-            return false;
-        CachedBeanCopier.copy(get(et.getDefinitionkey()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<WFProcessDefinition> list) {
-        updateBatchById(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public WFProcessDefinition get(String key) {
-        WFProcessDefinition et = getById(key);
-        if(et==null){
-            et=new WFProcessDefinition();
-            et.setDefinitionkey(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    public boolean checkKey(WFProcessDefinition et) {
-        return (!ObjectUtils.isEmpty(et.getDefinitionkey()))&&(!Objects.isNull(this.getById(et.getDefinitionkey())));
-    }
-    @Override
-    public WFProcessDefinition getDraft(WFProcessDefinition et) {
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean create(WFProcessDefinition et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getDefinitionkey()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<WFProcessDefinition> list) {
-        this.saveBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
     }
 
 

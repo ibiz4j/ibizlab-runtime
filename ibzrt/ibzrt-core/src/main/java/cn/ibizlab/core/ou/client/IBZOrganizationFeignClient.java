@@ -23,26 +23,18 @@ public interface IBZOrganizationFeignClient {
     Page<IBZOrganization> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/save")
-    Boolean save(@RequestBody IBZOrganization ibzorganization);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/save")
-    Boolean saveBatch(@RequestBody List<IBZOrganization> ibzorganizations);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/checkkey")
-    Boolean checkKey(@RequestBody IBZOrganization ibzorganization);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/{orgid}")
-    IBZOrganization get(@PathVariable("orgid") String orgid);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations")
     IBZOrganization create(@RequestBody IBZOrganization ibzorganization);
 
     @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/batch")
     Boolean createBatch(@RequestBody List<IBZOrganization> ibzorganizations);
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{orgid}")
+    IBZOrganization update(@PathVariable("orgid") String orgid,@RequestBody IBZOrganization ibzorganization);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/batch")
+    Boolean updateBatch(@RequestBody List<IBZOrganization> ibzorganizations);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{orgid}")
@@ -52,15 +44,23 @@ public interface IBZOrganizationFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/{orgid}")
+    IBZOrganization get(@PathVariable("orgid") String orgid);
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/ibzorganizations/getdraft")
     IBZOrganization getDraft();
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{orgid}")
-    IBZOrganization update(@PathVariable("orgid") String orgid,@RequestBody IBZOrganization ibzorganization);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/checkkey")
+    Boolean checkKey(@RequestBody IBZOrganization ibzorganization);
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/batch")
-    Boolean updateBatch(@RequestBody List<IBZOrganization> ibzorganizations);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/save")
+    Boolean save(@RequestBody IBZOrganization ibzorganization);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/save")
+    Boolean saveBatch(@RequestBody List<IBZOrganization> ibzorganizations);
 
 
 

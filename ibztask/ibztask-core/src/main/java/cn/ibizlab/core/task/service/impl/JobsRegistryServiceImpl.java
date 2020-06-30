@@ -49,27 +49,16 @@ public class JobsRegistryServiceImpl extends ServiceImpl<JobsRegistryMapper, Job
 
     @Override
     @Transactional
-    public JobsRegistry get(String key) {
-        JobsRegistry et = getById(key);
-        if(et==null){
-            et=new JobsRegistry();
-            et.setId(key);
-        }
-        else{
-        }
-        return et;
+    public boolean create(JobsRegistry et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getId()),et);
+        return true;
     }
 
     @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
+    public void createBatch(List<JobsRegistry> list) {
+        this.saveBatch(list,batchSize);
     }
 
     @Override
@@ -86,6 +75,40 @@ public class JobsRegistryServiceImpl extends ServiceImpl<JobsRegistryMapper, Job
         updateBatchById(list,batchSize);
     }
 
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public JobsRegistry get(String key) {
+        JobsRegistry et = getById(key);
+        if(et==null){
+            et=new JobsRegistry();
+            et.setId(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public JobsRegistry getDraft(JobsRegistry et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(JobsRegistry et) {
+        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+    }
     @Override
     @Transactional
     public boolean save(JobsRegistry et) {
@@ -115,29 +138,6 @@ public class JobsRegistryServiceImpl extends ServiceImpl<JobsRegistryMapper, Job
     @Override
     public void saveBatch(List<JobsRegistry> list) {
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public boolean create(JobsRegistry et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<JobsRegistry> list) {
-        this.saveBatch(list,batchSize);
-    }
-
-    @Override
-    public boolean checkKey(JobsRegistry et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
-    }
-    @Override
-    public JobsRegistry getDraft(JobsRegistry et) {
-        return et;
     }
 
 

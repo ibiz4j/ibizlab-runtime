@@ -44,39 +44,18 @@ public class WFMemberServiceImpl implements IWFMemberService {
 
 
     @Override
-    public boolean remove(String memberid) {
-        boolean result=wFMemberFeignClient.remove(memberid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        wFMemberFeignClient.removeBatch(idList);
-    }
-
-    @Override
-    public WFMember getDraft(WFMember et) {
-        et=wFMemberFeignClient.getDraft();
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean save(WFMember et) {
-        if(et.getMemberid()==null) et.setMemberid((String)et.getDefaultKey(true));
-        if(!wFMemberFeignClient.save(et))
+    public boolean create(WFMember et) {
+        WFMember rt = wFMemberFeignClient.create(et);
+        if(rt==null)
             return false;
+        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
-    @Override
-    public void saveBatch(List<WFMember> list) {
-        wFMemberFeignClient.saveBatch(list) ;
+    public void createBatch(List<WFMember> list){
+        wFMemberFeignClient.createBatch(list) ;
     }
 
-    @Override
-    public boolean checkKey(WFMember et) {
-        return wFMemberFeignClient.checkKey(et);
-    }
     @Override
     public boolean update(WFMember et) {
         WFMember rt = wFMemberFeignClient.update(et.getMemberid(),et);
@@ -92,16 +71,13 @@ public class WFMemberServiceImpl implements IWFMemberService {
     }
 
     @Override
-    public boolean create(WFMember et) {
-        WFMember rt = wFMemberFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
+    public boolean remove(String memberid) {
+        boolean result=wFMemberFeignClient.remove(memberid) ;
+        return result;
     }
 
-    public void createBatch(List<WFMember> list){
-        wFMemberFeignClient.createBatch(list) ;
+    public void removeBatch(Collection<String> idList){
+        wFMemberFeignClient.removeBatch(idList);
     }
 
     @Override
@@ -114,6 +90,30 @@ public class WFMemberServiceImpl implements IWFMemberService {
         else{
         }
         return  et;
+    }
+
+    @Override
+    public WFMember getDraft(WFMember et) {
+        et=wFMemberFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFMember et) {
+        return wFMemberFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(WFMember et) {
+        if(et.getMemberid()==null) et.setMemberid((String)et.getDefaultKey(true));
+        if(!wFMemberFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<WFMember> list) {
+        wFMemberFeignClient.saveBatch(list) ;
     }
 
 

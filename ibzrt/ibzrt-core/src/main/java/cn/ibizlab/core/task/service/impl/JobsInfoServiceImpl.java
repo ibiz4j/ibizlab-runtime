@@ -44,25 +44,6 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
 
 
     @Override
-    public JobsInfo start(JobsInfo et) {
-         et=jobsInfoFeignClient.start(et.getId(),et);
-         return et;
-    }
-    @Override
-    @Transactional
-    public boolean save(JobsInfo et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!jobsInfoFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<JobsInfo> list) {
-        jobsInfoFeignClient.saveBatch(list) ;
-    }
-
-    @Override
     public boolean create(JobsInfo et) {
         JobsInfo rt = jobsInfoFeignClient.create(et);
         if(rt==null)
@@ -73,16 +54,6 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
 
     public void createBatch(List<JobsInfo> list){
         jobsInfoFeignClient.createBatch(list) ;
-    }
-
-    @Override
-    public boolean checkKey(JobsInfo et) {
-        return jobsInfoFeignClient.checkKey(et);
-    }
-    @Override
-    public JobsInfo getDraft(JobsInfo et) {
-        et=jobsInfoFeignClient.getDraft();
-        return et;
     }
 
     @Override
@@ -100,13 +71,6 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
     }
 
     @Override
-    @Transactional
-    public JobsInfo execute(JobsInfo et) {
-        //自定义代码
-        return et;
-    }
-
-    @Override
     public boolean remove(String id) {
         boolean result=jobsInfoFeignClient.remove(id) ;
         return result;
@@ -116,11 +80,6 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
         jobsInfoFeignClient.removeBatch(idList);
     }
 
-    @Override
-    public JobsInfo stop(JobsInfo et) {
-         et=jobsInfoFeignClient.stop(et.getId(),et);
-         return et;
-    }
     @Override
     public JobsInfo get(String id) {
 		JobsInfo et=jobsInfoFeignClient.get(id);
@@ -133,6 +92,47 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
         return  et;
     }
 
+    @Override
+    public JobsInfo getDraft(JobsInfo et) {
+        et=jobsInfoFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(JobsInfo et) {
+        return jobsInfoFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public JobsInfo execute(JobsInfo et) {
+        //自定义代码
+        return et;
+    }
+
+    @Override
+    @Transactional
+    public boolean save(JobsInfo et) {
+        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
+        if(!jobsInfoFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<JobsInfo> list) {
+        jobsInfoFeignClient.saveBatch(list) ;
+    }
+
+    @Override
+    public JobsInfo start(JobsInfo et) {
+         et=jobsInfoFeignClient.start(et.getId(),et);
+         return et;
+    }
+    @Override
+    public JobsInfo stop(JobsInfo et) {
+         et=jobsInfoFeignClient.stop(et.getId(),et);
+         return et;
+    }
 
 
 

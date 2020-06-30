@@ -56,6 +56,41 @@ export default class DictOptionServiceBase extends EntityService {
     }
 
     /**
+     * Create接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof DictOptionServiceBase
+     */
+    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.dictcatalog && true){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            if(!data.srffrontuf || data.srffrontuf !== "1"){
+                data[this.APPDEKEY] = null;
+            }
+            if(data.srffrontuf){
+                delete data.srffrontuf;
+            }
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/dictoptions`,data,isloading);
+        }
+        let masterData:any = {};
+        Object.assign(data,masterData);
+        if(!data.srffrontuf || data.srffrontuf !== "1"){
+            data[this.APPDEKEY] = null;
+        }
+        if(data.srffrontuf){
+            delete data.srffrontuf;
+        }
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        let res:any = await Http.getInstance().post(`/dictoptions`,data,isloading);
+        return res;
+    }
+
+    /**
      * Update接口方法
      *
      * @param {*} [context={}]
@@ -94,7 +129,7 @@ export default class DictOptionServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Get接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -102,13 +137,11 @@ export default class DictOptionServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof DictOptionServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.dictcatalog && context.dictoption){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}/checkkey`,data,isloading);
+            let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}`,isloading);
         }
-        let res:any = await Http.getInstance().post(`/dictoptions/${context.dictoption}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().get(`/dictoptions/${context.dictoption}`,isloading);
         return res;
     }
 
@@ -132,7 +165,7 @@ export default class DictOptionServiceBase extends EntityService {
     }
 
     /**
-     * Get接口方法
+     * CheckKey接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -140,46 +173,13 @@ export default class DictOptionServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof DictOptionServiceBase
      */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.dictcatalog && context.dictoption){
-            let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}`,isloading);
-        }
-        let res:any = await Http.getInstance().get(`/dictoptions/${context.dictoption}`,isloading);
-        return res;
-    }
-
-    /**
-     * Create接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof DictOptionServiceBase
-     */
-    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.dictcatalog && true){
             let masterData:any = {};
             Object.assign(data,masterData);
-            if(!data.srffrontuf || data.srffrontuf !== "1"){
-                data[this.APPDEKEY] = null;
-            }
-            if(data.srffrontuf){
-                delete data.srffrontuf;
-            }
-            let tempContext:any = JSON.parse(JSON.stringify(context));
-            let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/dictoptions`,data,isloading);
+            let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}/checkkey`,data,isloading);
         }
-        let masterData:any = {};
-        Object.assign(data,masterData);
-        if(!data.srffrontuf || data.srffrontuf !== "1"){
-            data[this.APPDEKEY] = null;
-        }
-        if(data.srffrontuf){
-            delete data.srffrontuf;
-        }
-        let tempContext:any = JSON.parse(JSON.stringify(context));
-        let res:any = await Http.getInstance().post(`/dictoptions`,data,isloading);
+        let res:any = await Http.getInstance().post(`/dictoptions/${context.dictoption}/checkkey`,data,isloading);
         return res;
     }
 

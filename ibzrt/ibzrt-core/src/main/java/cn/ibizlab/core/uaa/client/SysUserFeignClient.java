@@ -23,11 +23,11 @@ public interface SysUserFeignClient {
     Page<SysUser> select();
 
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{userid}")
-    Boolean remove(@PathVariable("userid") String userid);
+    @RequestMapping(method = RequestMethod.POST, value = "/sysusers")
+    SysUser create(@RequestBody SysUser sysuser);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
+    @RequestMapping(method = RequestMethod.POST, value = "/sysusers/batch")
+    Boolean createBatch(@RequestBody List<SysUser> sysusers);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{userid}")
@@ -37,12 +37,23 @@ public interface SysUserFeignClient {
     Boolean updateBatch(@RequestBody List<SysUser> sysusers);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysusers/checkkey")
-    Boolean checkKey(@RequestBody SysUser sysuser);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{userid}")
+    Boolean remove(@PathVariable("userid") String userid);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysusers/{userid}")
     SysUser get(@PathVariable("userid") String userid);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysusers/getdraft")
+    SysUser getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysusers/checkkey")
+    Boolean checkKey(@RequestBody SysUser sysuser);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
@@ -50,17 +61,6 @@ public interface SysUserFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
     Boolean saveBatch(@RequestBody List<SysUser> sysusers);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysusers/getdraft")
-    SysUser getDraft();
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysusers")
-    SysUser create(@RequestBody SysUser sysuser);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysusers/batch")
-    Boolean createBatch(@RequestBody List<SysUser> sysusers);
 
 
 

@@ -47,10 +47,23 @@ public class SysAuthLogResource {
     @Lazy
     public SysAuthLogMapping sysauthlogMapping;
 
-    @ApiOperation(value = "获取认证日志草稿", tags = {"认证日志" },  notes = "获取认证日志草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/getdraft")
-    public ResponseEntity<SysAuthLogDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysauthlogMapping.toDto(sysauthlogService.getDraft(new SysAuthLog())));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Create-all')")
+    @ApiOperation(value = "新建认证日志", tags = {"认证日志" },  notes = "新建认证日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
+    @Transactional
+    public ResponseEntity<SysAuthLogDTO> create(@RequestBody SysAuthLogDTO sysauthlogdto) {
+        SysAuthLog domain = sysauthlogMapping.toDomain(sysauthlogdto);
+		sysauthlogService.create(domain);
+        SysAuthLogDTO dto = sysauthlogMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Create-all')")
+    @ApiOperation(value = "批量新建认证日志", tags = {"认证日志" },  notes = "批量新建认证日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysAuthLogDTO> sysauthlogdtos) {
+        sysauthlogService.createBatch(sysauthlogMapping.toDomain(sysauthlogdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Update-all')")
@@ -89,31 +102,6 @@ public class SysAuthLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Create-all')")
-    @ApiOperation(value = "新建认证日志", tags = {"认证日志" },  notes = "新建认证日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
-    @Transactional
-    public ResponseEntity<SysAuthLogDTO> create(@RequestBody SysAuthLogDTO sysauthlogdto) {
-        SysAuthLog domain = sysauthlogMapping.toDomain(sysauthlogdto);
-		sysauthlogService.create(domain);
-        SysAuthLogDTO dto = sysauthlogMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Create-all')")
-    @ApiOperation(value = "批量新建认证日志", tags = {"认证日志" },  notes = "批量新建认证日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysAuthLogDTO> sysauthlogdtos) {
-        sysauthlogService.createBatch(sysauthlogMapping.toDomain(sysauthlogdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "检查认证日志", tags = {"认证日志" },  notes = "检查认证日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysAuthLogDTO sysauthlogdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysauthlogService.checkKey(sysauthlogMapping.toDomain(sysauthlogdto)));
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Get-all')")
     @ApiOperation(value = "获取认证日志", tags = {"认证日志" },  notes = "获取认证日志")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/{sysauthlog_id}")
@@ -121,6 +109,18 @@ public class SysAuthLogResource {
         SysAuthLog domain = sysauthlogService.get(sysauthlog_id);
         SysAuthLogDTO dto = sysauthlogMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取认证日志草稿", tags = {"认证日志" },  notes = "获取认证日志草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/getdraft")
+    public ResponseEntity<SysAuthLogDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(sysauthlogMapping.toDto(sysauthlogService.getDraft(new SysAuthLog())));
+    }
+
+    @ApiOperation(value = "检查认证日志", tags = {"认证日志" },  notes = "检查认证日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysAuthLogDTO sysauthlogdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysauthlogService.checkKey(sysauthlogMapping.toDomain(sysauthlogdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Save-all')")

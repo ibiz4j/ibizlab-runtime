@@ -23,30 +23,12 @@ public class WFMemberFallback implements WFMemberFeignClient{
             return null;
      }
 
-    public Boolean remove(String memberid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
-
-    public WFMember getDraft(){
+    public WFMember create(WFMember wfmember){
             return null;
-    }
-
-
-
-    public Boolean save(WFMember wfmember){
+     }
+    public Boolean createBatch(List<WFMember> wfmembers){
             return false;
      }
-    public Boolean saveBatch(List<WFMember> wfmembers){
-            return false;
-     }
-
-    public Boolean checkKey(WFMember wfmember){
-            return false;
-     }
-
 
     public WFMember update(String memberid, WFMember wfmember){
             return null;
@@ -56,10 +38,10 @@ public class WFMemberFallback implements WFMemberFeignClient{
      }
 
 
-    public WFMember create(WFMember wfmember){
-            return null;
+    public Boolean remove(String memberid){
+            return false;
      }
-    public Boolean createBatch(List<WFMember> wfmembers){
+    public Boolean removeBatch(Collection<String> idList){
             return false;
      }
 
@@ -67,6 +49,24 @@ public class WFMemberFallback implements WFMemberFeignClient{
             return null;
      }
 
+
+    public WFMember getDraft(){
+            return null;
+    }
+
+
+
+    public Boolean checkKey(WFMember wfmember){
+            return false;
+     }
+
+
+    public Boolean save(WFMember wfmember){
+            return false;
+     }
+    public Boolean saveBatch(List<WFMember> wfmembers){
+            return false;
+     }
 
     public Page<WFMember> searchDefault(WFMemberSearchContext context){
             return null;

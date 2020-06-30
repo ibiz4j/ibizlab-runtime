@@ -80,6 +80,40 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
 
     @Override
     @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public DictCatalog get(String key) {
+        DictCatalog et = getById(key);
+        if(et==null){
+            et=new DictCatalog();
+            et.setId(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public DictCatalog getDraft(DictCatalog et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(DictCatalog et) {
+        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+    }
+    @Override
+    @Transactional
     public boolean save(DictCatalog et) {
         if(!saveOrUpdate(et))
             return false;
@@ -109,40 +143,6 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
         saveOrUpdateBatch(list,batchSize);
     }
 
-    @Override
-    @Transactional
-    public DictCatalog get(String key) {
-        DictCatalog et = getById(key);
-        if(et==null){
-            et=new DictCatalog();
-            et.setId(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    public DictCatalog getDraft(DictCatalog et) {
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    public boolean checkKey(DictCatalog et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
-    }
 
 
     /**

@@ -23,18 +23,18 @@ public interface SDFileFeignClient {
     Page<SDFile> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
-    Boolean save(@RequestBody SDFile sdfile);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
-    Boolean saveBatch(@RequestBody List<SDFile> sdfiles);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles")
     SDFile create(@RequestBody SDFile sdfile);
 
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/batch")
     Boolean createBatch(@RequestBody List<SDFile> sdfiles);
+
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/{id}")
+    SDFile update(@PathVariable("id") String id,@RequestBody SDFile sdfile);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/batch")
+    Boolean updateBatch(@RequestBody List<SDFile> sdfiles);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sdfiles/{id}")
@@ -52,15 +52,15 @@ public interface SDFileFeignClient {
     SDFile getDraft();
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/{id}")
-    SDFile update(@PathVariable("id") String id,@RequestBody SDFile sdfile);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/batch")
-    Boolean updateBatch(@RequestBody List<SDFile> sdfiles);
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/checkkey")
     Boolean checkKey(@RequestBody SDFile sdfile);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
+    Boolean save(@RequestBody SDFile sdfile);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
+    Boolean saveBatch(@RequestBody List<SDFile> sdfiles);
 
 
 

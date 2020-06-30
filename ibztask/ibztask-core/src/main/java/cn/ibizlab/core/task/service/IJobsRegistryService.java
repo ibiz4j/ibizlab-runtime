@@ -25,17 +25,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IJobsRegistryService extends IService<JobsRegistry>{
 
-    JobsRegistry get(String key) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean update(JobsRegistry et) ;
-    void updateBatch(List<JobsRegistry> list) ;
-    boolean save(JobsRegistry et) ;
-    void saveBatch(List<JobsRegistry> list) ;
     boolean create(JobsRegistry et) ;
     void createBatch(List<JobsRegistry> list) ;
-    boolean checkKey(JobsRegistry et) ;
+    boolean update(JobsRegistry et) ;
+    void updateBatch(List<JobsRegistry> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    JobsRegistry get(String key) ;
     JobsRegistry getDraft(JobsRegistry et) ;
+    boolean checkKey(JobsRegistry et) ;
+    boolean save(JobsRegistry et) ;
+    void saveBatch(List<JobsRegistry> list) ;
     Page<JobsRegistry> searchDefault(JobsRegistrySearchContext context) ;
     /**
      *自定义查询SQL

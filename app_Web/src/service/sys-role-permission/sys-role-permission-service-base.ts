@@ -59,69 +59,6 @@ export default class SysRolePermissionServiceBase extends EntityService {
     }
 
     /**
-     * Get接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysRolePermissionServiceBase
-     */
-    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysrole && context.sysrolepermission){
-            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,isloading);
-        }
-        if(context.syspermission && context.sysrolepermission){
-            let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,isloading);
-        }
-        let res:any = await Http.getInstance().get(`/sysrolepermissions/${context.sysrolepermission}`,isloading);
-        return res;
-    }
-
-    /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysRolePermissionServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysrole && context.sysrolepermission){
-            let res:any = await Http.getInstance().delete(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,isloading);
-        }
-        if(context.syspermission && context.sysrolepermission){
-            let res:any = await Http.getInstance().delete(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,isloading);
-        }
-        let res:any = await Http.getInstance().delete(`/sysrolepermissions/${context.sysrolepermission}`,isloading);
-        return res;
-    }
-
-    /**
-     * GetDraft接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysRolePermissionServiceBase
-     */
-    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysrole && true){
-            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysrolepermissions/getdraft`,isloading);
-            res.data.sysrolepermission = data.sysrolepermission;
-        }
-        if(context.syspermission && true){
-            let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}/sysrolepermissions/getdraft`,isloading);
-            res.data.sysrolepermission = data.sysrolepermission;
-        }
-        let res:any = await  Http.getInstance().get(`/sysrolepermissions/getdraft`,isloading);
-        res.data.sysrolepermission = data.sysrolepermission;
-        return res;
-    }
-
-    /**
      * Create接口方法
      *
      * @param {*} [context={}]
@@ -165,6 +102,95 @@ export default class SysRolePermissionServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/sysrolepermissions`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRolePermissionServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysrole && context.sysrolepermission){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
+        }
+        if(context.syspermission && context.sysrolepermission){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
+        }
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Remove接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRolePermissionServiceBase
+     */
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysrole && context.sysrolepermission){
+            let res:any = await Http.getInstance().delete(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,isloading);
+        }
+        if(context.syspermission && context.sysrolepermission){
+            let res:any = await Http.getInstance().delete(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,isloading);
+        }
+        let res:any = await Http.getInstance().delete(`/sysrolepermissions/${context.sysrolepermission}`,isloading);
+        return res;
+    }
+
+    /**
+     * Get接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRolePermissionServiceBase
+     */
+    public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysrole && context.sysrolepermission){
+            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,isloading);
+        }
+        if(context.syspermission && context.sysrolepermission){
+            let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,isloading);
+        }
+        let res:any = await Http.getInstance().get(`/sysrolepermissions/${context.sysrolepermission}`,isloading);
+        return res;
+    }
+
+    /**
+     * GetDraft接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRolePermissionServiceBase
+     */
+    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysrole && true){
+            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysrolepermissions/getdraft`,isloading);
+            res.data.sysrolepermission = data.sysrolepermission;
+        }
+        if(context.syspermission && true){
+            let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}/sysrolepermissions/getdraft`,isloading);
+            res.data.sysrolepermission = data.sysrolepermission;
+        }
+        let res:any = await  Http.getInstance().get(`/sysrolepermissions/getdraft`,isloading);
+        res.data.sysrolepermission = data.sysrolepermission;
         return res;
     }
 
@@ -215,32 +241,6 @@ export default class SysRolePermissionServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysrolepermissions/${context.sysrolepermission}/save`,data,isloading);
-        return res;
-    }
-
-    /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysRolePermissionServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysrole && context.sysrolepermission){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/sysroles/${context.sysrole}/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
-        }
-        if(context.syspermission && context.sysrolepermission){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/syspermissions/${context.syspermission}/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
-        }
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/sysrolepermissions/${context.sysrolepermission}`,data,isloading);
         return res;
     }
 

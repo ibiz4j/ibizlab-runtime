@@ -52,14 +52,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
+    public boolean create(SysUser et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getUserid()),et);
+        return true;
     }
 
     @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
+    public void createBatch(List<SysUser> list) {
+        this.saveBatch(list,batchSize);
     }
 
     @Override
@@ -77,9 +79,17 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public boolean checkKey(SysUser et) {
-        return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
     }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
     @Override
     @Transactional
     public SysUser get(String key) {
@@ -93,6 +103,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return et;
     }
 
+    @Override
+    public SysUser getDraft(SysUser et) {
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysUser et) {
+        return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
+    }
     @Override
     @Transactional
     public boolean save(SysUser et) {
@@ -122,25 +141,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public void saveBatch(List<SysUser> list) {
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    public SysUser getDraft(SysUser et) {
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean create(SysUser et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getUserid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<SysUser> list) {
-        this.saveBatch(list,batchSize);
     }
 
 

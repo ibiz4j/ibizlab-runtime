@@ -25,22 +25,22 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IIBZEmployeeService extends IService<IBZEmployee>{
 
-    boolean remove(String key) ;
-    @CacheEvict(value="ibzemployee",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    IBZEmployee initPwd(IBZEmployee et) ;
     boolean create(IBZEmployee et) ;
     @CacheEvict(value="ibzemployee",allEntries=true)
     void createBatch(List<IBZEmployee> list) ;
-    boolean checkKey(IBZEmployee et) ;
     boolean update(IBZEmployee et) ;
     @CacheEvict(value="ibzemployee",allEntries=true)
     void updateBatch(List<IBZEmployee> list) ;
+    boolean remove(String key) ;
+    @CacheEvict(value="ibzemployee",allEntries=true)
+    void removeBatch(Collection<String> idList) ;
+    IBZEmployee get(String key) ;
+    IBZEmployee getDraft(IBZEmployee et) ;
+    boolean checkKey(IBZEmployee et) ;
+    IBZEmployee initPwd(IBZEmployee et) ;
     boolean save(IBZEmployee et) ;
     @CacheEvict(value="ibzemployee",allEntries=true)
     void saveBatch(List<IBZEmployee> list) ;
-    IBZEmployee get(String key) ;
-    IBZEmployee getDraft(IBZEmployee et) ;
     Page<IBZEmployee> searchDefault(IBZEmployeeSearchContext context) ;
     List<IBZEmployee> selectByMdeptid(String deptid) ;
     @CacheEvict(value="ibzemployee",allEntries=true)

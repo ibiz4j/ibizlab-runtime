@@ -23,17 +23,17 @@ import cn.ibizlab.core.workflow.filter.WFREModelSearchContext;
  */
 public interface IWFREModelService{
 
-    boolean update(WFREModel et) ;
-    void updateBatch(List<WFREModel> list) ;
-    boolean save(WFREModel et) ;
-    void saveBatch(List<WFREModel> list) ;
-    WFREModel get(String key) ;
     boolean create(WFREModel et) ;
     void createBatch(List<WFREModel> list) ;
-    boolean checkKey(WFREModel et) ;
+    boolean update(WFREModel et) ;
+    void updateBatch(List<WFREModel> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
+    WFREModel get(String key) ;
     WFREModel getDraft(WFREModel et) ;
+    boolean checkKey(WFREModel et) ;
+    boolean save(WFREModel et) ;
+    void saveBatch(List<WFREModel> list) ;
     Page<WFREModel> searchDefault(WFREModelSearchContext context) ;
 
 }

@@ -44,13 +44,16 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
 
 
     @Override
-    public boolean checkKey(SysUserRole et) {
-        return sysUserRoleFeignClient.checkKey(et);
+    public boolean create(SysUserRole et) {
+        SysUserRole rt = sysUserRoleFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
     }
-    @Override
-    public SysUserRole getDraft(SysUserRole et) {
-        et=sysUserRoleFeignClient.getDraft();
-        return et;
+
+    public void createBatch(List<SysUserRole> list){
+        sysUserRoleFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -78,19 +81,6 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
     }
 
     @Override
-    public boolean create(SysUserRole et) {
-        SysUserRole rt = sysUserRoleFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<SysUserRole> list){
-        sysUserRoleFeignClient.createBatch(list) ;
-    }
-
-    @Override
     public SysUserRole get(String userroleid) {
 		SysUserRole et=sysUserRoleFeignClient.get(userroleid);
         if(et==null){
@@ -102,6 +92,16 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
         return  et;
     }
 
+    @Override
+    public SysUserRole getDraft(SysUserRole et) {
+        et=sysUserRoleFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(SysUserRole et) {
+        return sysUserRoleFeignClient.checkKey(et);
+    }
     @Override
     @Transactional
     public boolean save(SysUserRole et) {

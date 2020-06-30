@@ -124,7 +124,7 @@ export default class DictCatalogServiceBase extends EntityService {
     }
 
     /**
-     * Save接口方法
+     * Remove接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -132,26 +132,8 @@ export default class DictCatalogServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof DictCatalogServiceBase
      */
-    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        let dictoptionsData:any = [];
-        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_dictoptions'),'undefined')){
-            dictoptionsData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_dictoptions') as any);
-            if(dictoptionsData && dictoptionsData.length && dictoptionsData.length > 0){
-                dictoptionsData.forEach((item:any) => {
-                    if(item.srffrontuf){
-                        if(Object.is(item.srffrontuf,"0")){
-                            item.value_key = null;
-                        }
-                        delete item.srffrontuf;
-                    }
-                });
-            }
-        }
-        masterData.dictoptions = dictoptionsData;
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/save`,data,isloading);
-            this.tempStorage.setItem(context.srfsessionkey+'_dictoptions',JSON.stringify(res.data.dictoptions));
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let res:any = await Http.getInstance().delete(`/dictcatalogs/${context.dictcatalog}`,isloading);
         return res;
     }
 
@@ -187,20 +169,6 @@ export default class DictCatalogServiceBase extends EntityService {
     }
 
     /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof DictCatalogServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().delete(`/dictcatalogs/${context.dictcatalog}`,isloading);
-        return res;
-    }
-
-    /**
      * CheckKey接口方法
      *
      * @param {*} [context={}]
@@ -211,6 +179,38 @@ export default class DictCatalogServiceBase extends EntityService {
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/checkkey`,data,isloading);
+        return res;
+    }
+
+    /**
+     * Save接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof DictCatalogServiceBase
+     */
+    public async Save(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        let dictoptionsData:any = [];
+        if(!Object.is(this.tempStorage.getItem(context.srfsessionkey+'_dictoptions'),'undefined')){
+            dictoptionsData = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_dictoptions') as any);
+            if(dictoptionsData && dictoptionsData.length && dictoptionsData.length > 0){
+                dictoptionsData.forEach((item:any) => {
+                    if(item.srffrontuf){
+                        if(Object.is(item.srffrontuf,"0")){
+                            item.value_key = null;
+                        }
+                        delete item.srffrontuf;
+                    }
+                });
+            }
+        }
+        masterData.dictoptions = dictoptionsData;
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/save`,data,isloading);
+            this.tempStorage.setItem(context.srfsessionkey+'_dictoptions',JSON.stringify(res.data.dictoptions));
         return res;
     }
 

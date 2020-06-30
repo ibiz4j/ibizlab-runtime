@@ -23,11 +23,11 @@ public interface SysRoleFeignClient {
     Page<SysRole> select();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
-    Boolean save(@RequestBody SysRole sysrole);
+    @RequestMapping(method = RequestMethod.POST, value = "/sysroles")
+    SysRole create(@RequestBody SysRole sysrole);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
-    Boolean saveBatch(@RequestBody List<SysRole> sysroles);
+    @RequestMapping(method = RequestMethod.POST, value = "/sysroles/batch")
+    Boolean createBatch(@RequestBody List<SysRole> sysroles);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{roleid}")
@@ -37,22 +37,15 @@ public interface SysRoleFeignClient {
     Boolean updateBatch(@RequestBody List<SysRole> sysroles);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysroles")
-    SysRole create(@RequestBody SysRole sysrole);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysroles/batch")
-    Boolean createBatch(@RequestBody List<SysRole> sysroles);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{roleid}")
-    SysRole get(@PathVariable("roleid") String roleid);
-
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{roleid}")
     Boolean remove(@PathVariable("roleid") String roleid);
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/batch}")
     Boolean removeBatch(@RequestBody Collection<String> idList);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{roleid}")
+    SysRole get(@PathVariable("roleid") String roleid);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysroles/getdraft")
@@ -61,6 +54,13 @@ public interface SysRoleFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysroles/checkkey")
     Boolean checkKey(@RequestBody SysRole sysrole);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
+    Boolean save(@RequestBody SysRole sysrole);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
+    Boolean saveBatch(@RequestBody List<SysRole> sysroles);
 
 
 

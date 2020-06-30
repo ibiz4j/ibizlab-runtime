@@ -29,13 +29,13 @@ public interface IDictCatalogService extends IService<DictCatalog>{
     void createBatch(List<DictCatalog> list) ;
     boolean update(DictCatalog et) ;
     void updateBatch(List<DictCatalog> list) ;
-    boolean save(DictCatalog et) ;
-    void saveBatch(List<DictCatalog> list) ;
-    DictCatalog get(String key) ;
-    DictCatalog getDraft(DictCatalog et) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
+    DictCatalog get(String key) ;
+    DictCatalog getDraft(DictCatalog et) ;
     boolean checkKey(DictCatalog et) ;
+    boolean save(DictCatalog et) ;
+    void saveBatch(List<DictCatalog> list) ;
     Page<DictCatalog> searchDefault(DictCatalogSearchContext context) ;
     /**
      *自定义查询SQL

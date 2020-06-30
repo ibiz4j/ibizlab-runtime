@@ -52,6 +52,22 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
 
     @Override
     @Transactional
+    public boolean create(DictOption et) {
+        fillParentData(et);
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getValueKey()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<DictOption> list) {
+        list.forEach(item->fillParentData(item));
+        this.saveOrUpdateBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
     public boolean update(DictOption et) {
         fillParentData(et);
         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("vkey",et.getValueKey())))
@@ -79,16 +95,6 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     }
 
     @Override
-    public boolean checkKey(DictOption et) {
-        return (!ObjectUtils.isEmpty(et.getValueKey()))&&(!Objects.isNull(this.getById(et.getValueKey())));
-    }
-    @Override
-    public DictOption getDraft(DictOption et) {
-        fillParentData(et);
-        return et;
-    }
-
-    @Override
     @Transactional
     public DictOption get(String key) {
         DictOption et = getById(key);
@@ -102,21 +108,15 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     }
 
     @Override
-    @Transactional
-    public boolean create(DictOption et) {
+    public DictOption getDraft(DictOption et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getValueKey()),et);
-        return true;
+        return et;
     }
 
     @Override
-    public void createBatch(List<DictOption> list) {
-        list.forEach(item->fillParentData(item));
-        this.saveOrUpdateBatch(list,batchSize);
+    public boolean checkKey(DictOption et) {
+        return (!ObjectUtils.isEmpty(et.getValueKey()))&&(!Objects.isNull(this.getById(et.getValueKey())));
     }
-
     @Override
     @Transactional
     public boolean save(DictOption et) {

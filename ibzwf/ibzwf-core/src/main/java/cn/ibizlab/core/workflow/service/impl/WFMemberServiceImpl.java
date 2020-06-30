@@ -54,16 +54,6 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     protected int batchSize = 500;
 
     @Override
-    public boolean checkKey(WFMember et) {
-        return (!ObjectUtils.isEmpty(et.getMemberid()))&&(!Objects.isNull(this.getById(et.getMemberid())));
-    }
-    @Override
-    public WFMember getDraft(WFMember et) {
-        fillParentData(et);
-        return et;
-    }
-
-    @Override
     @Transactional
     public boolean create(WFMember et) {
         fillParentData(et);
@@ -81,6 +71,22 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
 
     @Override
     @Transactional
+    public boolean update(WFMember et) {
+        fillParentData(et);
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("memberid",et.getMemberid())))
+            return false;
+        CachedBeanCopier.copy(get(et.getMemberid()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<WFMember> list) {
+        list.forEach(item->fillParentData(item));
+        updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
     public boolean remove(String key) {
         boolean result=removeById(key);
         return result ;
@@ -91,6 +97,29 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         removeByIds(idList);
     }
 
+    @Override
+    @Transactional
+    public WFMember get(String key) {
+        WFMember et = getById(key);
+        if(et==null){
+            et=new WFMember();
+            et.setMemberid(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
+    public WFMember getDraft(WFMember et) {
+        fillParentData(et);
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFMember et) {
+        return (!ObjectUtils.isEmpty(et.getMemberid()))&&(!Objects.isNull(this.getById(et.getMemberid())));
+    }
     @Override
     @Transactional
     public boolean save(WFMember et) {
@@ -122,35 +151,6 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     public void saveBatch(List<WFMember> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public boolean update(WFMember et) {
-        fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("memberid",et.getMemberid())))
-            return false;
-        CachedBeanCopier.copy(get(et.getMemberid()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<WFMember> list) {
-        list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
-    }
-
-    @Override
-    @Transactional
-    public WFMember get(String key) {
-        WFMember et = getById(key);
-        if(et==null){
-            et=new WFMember();
-            et.setMemberid(key);
-        }
-        else{
-        }
-        return et;
     }
 
 

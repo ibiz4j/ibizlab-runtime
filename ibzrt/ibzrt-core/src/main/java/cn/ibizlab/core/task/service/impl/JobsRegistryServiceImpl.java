@@ -44,15 +44,16 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
 
 
     @Override
-    public JobsRegistry get(String id) {
-		JobsRegistry et=jobsRegistryFeignClient.get(id);
-        if(et==null){
-            et=new JobsRegistry();
-            et.setId(id);
-        }
-        else{
-        }
-        return  et;
+    public boolean create(JobsRegistry et) {
+        JobsRegistry rt = jobsRegistryFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<JobsRegistry> list){
+        jobsRegistryFeignClient.createBatch(list) ;
     }
 
     @Override
@@ -70,11 +71,37 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
     }
 
     @Override
+    public boolean remove(String id) {
+        boolean result=jobsRegistryFeignClient.remove(id) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        jobsRegistryFeignClient.removeBatch(idList);
+    }
+
+    @Override
+    public JobsRegistry get(String id) {
+		JobsRegistry et=jobsRegistryFeignClient.get(id);
+        if(et==null){
+            et=new JobsRegistry();
+            et.setId(id);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
     public JobsRegistry getDraft(JobsRegistry et) {
         et=jobsRegistryFeignClient.getDraft();
         return et;
     }
 
+    @Override
+    public boolean checkKey(JobsRegistry et) {
+        return jobsRegistryFeignClient.checkKey(et);
+    }
     @Override
     @Transactional
     public boolean save(JobsRegistry et) {
@@ -87,33 +114,6 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
     @Override
     public void saveBatch(List<JobsRegistry> list) {
         jobsRegistryFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean checkKey(JobsRegistry et) {
-        return jobsRegistryFeignClient.checkKey(et);
-    }
-    @Override
-    public boolean create(JobsRegistry et) {
-        JobsRegistry rt = jobsRegistryFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<JobsRegistry> list){
-        jobsRegistryFeignClient.createBatch(list) ;
-    }
-
-    @Override
-    public boolean remove(String id) {
-        boolean result=jobsRegistryFeignClient.remove(id) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        jobsRegistryFeignClient.removeBatch(idList);
     }
 
 

@@ -23,10 +23,10 @@ public class JobsLogFallback implements JobsLogFeignClient{
             return null;
      }
 
-    public Boolean remove(String id){
-            return false;
+    public JobsLog create(JobsLog jobslog){
+            return null;
      }
-    public Boolean removeBatch(Collection<String> idList){
+    public Boolean createBatch(List<JobsLog> jobslogs){
             return false;
      }
 
@@ -38,17 +38,17 @@ public class JobsLogFallback implements JobsLogFeignClient{
      }
 
 
+    public Boolean remove(String id){
+            return false;
+     }
+    public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
+
     public JobsLog get(String id){
             return null;
      }
 
-
-    public Boolean save(JobsLog jobslog){
-            return false;
-     }
-    public Boolean saveBatch(List<JobsLog> jobslogs){
-            return false;
-     }
 
     public JobsLog getDraft(){
             return null;
@@ -61,10 +61,10 @@ public class JobsLogFallback implements JobsLogFeignClient{
      }
 
 
-    public JobsLog create(JobsLog jobslog){
-            return null;
+    public Boolean save(JobsLog jobslog){
+            return false;
      }
-    public Boolean createBatch(List<JobsLog> jobslogs){
+    public Boolean saveBatch(List<JobsLog> jobslogs){
             return false;
      }
 

@@ -76,6 +76,34 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
 
     @Override
     @Transactional
+    public boolean update(IBZDepartment et) {
+        fillParentData(et);
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("deptid",et.getDeptid())))
+            return false;
+        CachedBeanCopier.copy(get(et.getDeptid()),et);
+        return true;
+    }
+
+    @Override
+    public void updateBatch(List<IBZDepartment> list) {
+        list.forEach(item->fillParentData(item));
+        updateBatchById(list,batchSize);
+    }
+
+    @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
     public IBZDepartment get(String key) {
         IBZDepartment et = getById(key);
         if(et==null){
@@ -87,6 +115,16 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
         return et;
     }
 
+    @Override
+    public IBZDepartment getDraft(IBZDepartment et) {
+        fillParentData(et);
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZDepartment et) {
+        return (!ObjectUtils.isEmpty(et.getDeptid()))&&(!Objects.isNull(this.getById(et.getDeptid())));
+    }
     @Override
     @Transactional
     public boolean save(IBZDepartment et) {
@@ -118,44 +156,6 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
     public void saveBatch(List<IBZDepartment> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    public boolean checkKey(IBZDepartment et) {
-        return (!ObjectUtils.isEmpty(et.getDeptid()))&&(!Objects.isNull(this.getById(et.getDeptid())));
-    }
-    @Override
-    public IBZDepartment getDraft(IBZDepartment et) {
-        fillParentData(et);
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    @Transactional
-    public boolean update(IBZDepartment et) {
-        fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("deptid",et.getDeptid())))
-            return false;
-        CachedBeanCopier.copy(get(et.getDeptid()),et);
-        return true;
-    }
-
-    @Override
-    public void updateBatch(List<IBZDepartment> list) {
-        list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
     }
 
 

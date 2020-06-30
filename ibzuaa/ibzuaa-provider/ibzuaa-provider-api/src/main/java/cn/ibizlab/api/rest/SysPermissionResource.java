@@ -47,40 +47,22 @@ public class SysPermissionResource {
     @Lazy
     public SysPermissionMapping syspermissionMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Save-all')")
-    @ApiOperation(value = "保存权限/资源", tags = {"权限/资源" },  notes = "保存权限/资源")
-	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysPermissionDTO syspermissiondto) {
-        return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.save(syspermissionMapping.toDomain(syspermissiondto)));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Save-all')")
-    @ApiOperation(value = "批量保存权限/资源", tags = {"权限/资源" },  notes = "批量保存权限/资源")
-	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysPermissionDTO> syspermissiondtos) {
-        syspermissionService.saveBatch(syspermissionMapping.toDomain(syspermissiondtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取权限/资源草稿", tags = {"权限/资源" },  notes = "获取权限/资源草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/syspermissions/getdraft")
-    public ResponseEntity<SysPermissionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(syspermissionMapping.toDto(syspermissionService.getDraft(new SysPermission())));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Remove-all')")
-    @ApiOperation(value = "删除权限/资源", tags = {"权限/资源" },  notes = "删除权限/资源")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Create-all')")
+    @ApiOperation(value = "新建权限/资源", tags = {"权限/资源" },  notes = "新建权限/资源")
+	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
     @Transactional
-    public ResponseEntity<Boolean> remove(@PathVariable("syspermission_id") String syspermission_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.remove(syspermission_id));
+    public ResponseEntity<SysPermissionDTO> create(@RequestBody SysPermissionDTO syspermissiondto) {
+        SysPermission domain = syspermissionMapping.toDomain(syspermissiondto);
+		syspermissionService.create(domain);
+        SysPermissionDTO dto = syspermissionMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Remove-all')")
-    @ApiOperation(value = "批量删除权限/资源", tags = {"权限/资源" },  notes = "批量删除权限/资源")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        syspermissionService.removeBatch(ids);
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Create-all')")
+    @ApiOperation(value = "批量新建权限/资源", tags = {"权限/资源" },  notes = "批量新建权限/资源")
+	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysPermissionDTO> syspermissiondtos) {
+        syspermissionService.createBatch(syspermissionMapping.toDomain(syspermissiondtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -105,29 +87,20 @@ public class SysPermissionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Create-all')")
-    @ApiOperation(value = "新建权限/资源", tags = {"权限/资源" },  notes = "新建权限/资源")
-	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Remove-all')")
+    @ApiOperation(value = "删除权限/资源", tags = {"权限/资源" },  notes = "删除权限/资源")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}")
     @Transactional
-    public ResponseEntity<SysPermissionDTO> create(@RequestBody SysPermissionDTO syspermissiondto) {
-        SysPermission domain = syspermissionMapping.toDomain(syspermissiondto);
-		syspermissionService.create(domain);
-        SysPermissionDTO dto = syspermissionMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    public ResponseEntity<Boolean> remove(@PathVariable("syspermission_id") String syspermission_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.remove(syspermission_id));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Create-all')")
-    @ApiOperation(value = "批量新建权限/资源", tags = {"权限/资源" },  notes = "批量新建权限/资源")
-	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<SysPermissionDTO> syspermissiondtos) {
-        syspermissionService.createBatch(syspermissionMapping.toDomain(syspermissiondtos));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Remove-all')")
+    @ApiOperation(value = "批量删除权限/资源", tags = {"权限/资源" },  notes = "批量删除权限/资源")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        syspermissionService.removeBatch(ids);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "检查权限/资源", tags = {"权限/资源" },  notes = "检查权限/资源")
-	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysPermissionDTO syspermissiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(syspermissionService.checkKey(syspermissionMapping.toDomain(syspermissiondto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Get-all')")
@@ -137,6 +110,33 @@ public class SysPermissionResource {
         SysPermission domain = syspermissionService.get(syspermission_id);
         SysPermissionDTO dto = syspermissionMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取权限/资源草稿", tags = {"权限/资源" },  notes = "获取权限/资源草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/syspermissions/getdraft")
+    public ResponseEntity<SysPermissionDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(syspermissionMapping.toDto(syspermissionService.getDraft(new SysPermission())));
+    }
+
+    @ApiOperation(value = "检查权限/资源", tags = {"权限/资源" },  notes = "检查权限/资源")
+	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysPermissionDTO syspermissiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(syspermissionService.checkKey(syspermissionMapping.toDomain(syspermissiondto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Save-all')")
+    @ApiOperation(value = "保存权限/资源", tags = {"权限/资源" },  notes = "保存权限/资源")
+	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
+    public ResponseEntity<Boolean> save(@RequestBody SysPermissionDTO syspermissiondto) {
+        return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.save(syspermissionMapping.toDomain(syspermissiondto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Save-all')")
+    @ApiOperation(value = "批量保存权限/资源", tags = {"权限/资源" },  notes = "批量保存权限/资源")
+	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysPermissionDTO> syspermissiondtos) {
+        syspermissionService.saveBatch(syspermissionMapping.toDomain(syspermissiondtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-searchDefault-all')")

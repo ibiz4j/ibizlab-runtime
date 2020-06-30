@@ -49,6 +49,20 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
 
     @Override
     @Transactional
+    public boolean create(SDFile et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getId()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<SDFile> list) {
+        this.saveBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
     public boolean update(SDFile et) {
         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("fileid",et.getId())))
             return false;
@@ -63,25 +77,14 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
 
     @Override
     @Transactional
-    public boolean create(SDFile et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true;
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
     }
 
     @Override
-    public void createBatch(List<SDFile> list) {
-        this.saveBatch(list,batchSize);
-    }
-
-    @Override
-    public boolean checkKey(SDFile et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
-    }
-    @Override
-    public SDFile getDraft(SDFile et) {
-        return et;
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
     }
 
     @Override
@@ -98,17 +101,14 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
     }
 
     @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
+    public SDFile getDraft(SDFile et) {
+        return et;
     }
 
     @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
+    public boolean checkKey(SDFile et) {
+        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
     }
-
     @Override
     @Transactional
     public boolean save(SDFile et) {

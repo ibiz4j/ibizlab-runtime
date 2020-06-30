@@ -47,16 +47,38 @@ public class WFSystemResource {
     @Lazy
     public WFSystemMapping wfsystemMapping;
 
-    @ApiOperation(value = "保存系统", tags = {"系统" },  notes = "保存系统")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFSystemDTO wfsystemdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfsystemService.save(wfsystemMapping.toDomain(wfsystemdto)));
+    @ApiOperation(value = "新建系统", tags = {"系统" },  notes = "新建系统")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems")
+
+    public ResponseEntity<WFSystemDTO> create(@RequestBody WFSystemDTO wfsystemdto) {
+        WFSystem domain = wfsystemMapping.toDomain(wfsystemdto);
+		wfsystemService.create(domain);
+        WFSystemDTO dto = wfsystemMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "批量保存系统", tags = {"系统" },  notes = "批量保存系统")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
-        wfsystemService.saveBatch(wfsystemMapping.toDomain(wfsystemdtos));
+    @ApiOperation(value = "批量新建系统", tags = {"系统" },  notes = "批量新建系统")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
+        wfsystemService.createBatch(wfsystemMapping.toDomain(wfsystemdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @ApiOperation(value = "更新系统", tags = {"系统" },  notes = "更新系统")
+	@RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{wfsystem_id}")
+
+    public ResponseEntity<WFSystemDTO> update(@PathVariable("wfsystem_id") String wfsystem_id, @RequestBody WFSystemDTO wfsystemdto) {
+		WFSystem domain  = wfsystemMapping.toDomain(wfsystemdto);
+        domain .setPssystemid(wfsystem_id);
+		wfsystemService.update(domain );
+		WFSystemDTO dto = wfsystemMapping.toDto(domain );
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "批量更新系统", tags = {"系统" },  notes = "批量更新系统")
+	@RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/batch")
+    public ResponseEntity<Boolean> updateBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
+        wfsystemService.updateBatch(wfsystemMapping.toDomain(wfsystemdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -88,48 +110,25 @@ public class WFSystemResource {
         return ResponseEntity.status(HttpStatus.OK).body(wfsystemMapping.toDto(wfsystemService.getDraft(new WFSystem())));
     }
 
-    @ApiOperation(value = "新建系统", tags = {"系统" },  notes = "新建系统")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems")
-
-    public ResponseEntity<WFSystemDTO> create(@RequestBody WFSystemDTO wfsystemdto) {
-        WFSystem domain = wfsystemMapping.toDomain(wfsystemdto);
-		wfsystemService.create(domain);
-        WFSystemDTO dto = wfsystemMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "批量新建系统", tags = {"系统" },  notes = "批量新建系统")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
-        wfsystemService.createBatch(wfsystemMapping.toDomain(wfsystemdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
     @ApiOperation(value = "检查系统", tags = {"系统" },  notes = "检查系统")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/checkkey")
     public ResponseEntity<Boolean> checkKey(@RequestBody WFSystemDTO wfsystemdto) {
         return  ResponseEntity.status(HttpStatus.OK).body(wfsystemService.checkKey(wfsystemMapping.toDomain(wfsystemdto)));
     }
 
-    @ApiOperation(value = "更新系统", tags = {"系统" },  notes = "更新系统")
-	@RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{wfsystem_id}")
-
-    public ResponseEntity<WFSystemDTO> update(@PathVariable("wfsystem_id") String wfsystem_id, @RequestBody WFSystemDTO wfsystemdto) {
-		WFSystem domain  = wfsystemMapping.toDomain(wfsystemdto);
-        domain .setPssystemid(wfsystem_id);
-		wfsystemService.update(domain );
-		WFSystemDTO dto = wfsystemMapping.toDto(domain );
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "保存系统", tags = {"系统" },  notes = "保存系统")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
+    public ResponseEntity<Boolean> save(@RequestBody WFSystemDTO wfsystemdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(wfsystemService.save(wfsystemMapping.toDomain(wfsystemdto)));
     }
 
-    @ApiOperation(value = "批量更新系统", tags = {"系统" },  notes = "批量更新系统")
-	@RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/batch")
-    public ResponseEntity<Boolean> updateBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
-        wfsystemService.updateBatch(wfsystemMapping.toDomain(wfsystemdtos));
+    @ApiOperation(value = "批量保存系统", tags = {"系统" },  notes = "批量保存系统")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
+        wfsystemService.saveBatch(wfsystemMapping.toDomain(wfsystemdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"系统" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfsystems/fetchdefault")
 	public ResponseEntity<List<WFSystemDTO>> fetchDefault(WFSystemSearchContext context) {
@@ -142,7 +141,6 @@ public class WFSystemResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"系统" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfsystems/searchdefault")
 	public ResponseEntity<Page<WFSystemDTO>> searchDefault(@RequestBody WFSystemSearchContext context) {

@@ -44,17 +44,30 @@ public class WFSystemServiceImpl implements IWFSystemService {
 
 
     @Override
-    @Transactional
-    public boolean save(WFSystem et) {
-        if(et.getPssystemid()==null) et.setPssystemid((String)et.getDefaultKey(true));
-        if(!wFSystemFeignClient.save(et))
+    public boolean create(WFSystem et) {
+        WFSystem rt = wFSystemFeignClient.create(et);
+        if(rt==null)
             return false;
+        CachedBeanCopier.copy(rt,et);
         return true;
     }
 
+    public void createBatch(List<WFSystem> list){
+        wFSystemFeignClient.createBatch(list) ;
+    }
+
     @Override
-    public void saveBatch(List<WFSystem> list) {
-        wFSystemFeignClient.saveBatch(list) ;
+    public boolean update(WFSystem et) {
+        WFSystem rt = wFSystemFeignClient.update(et.getPssystemid(),et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+
+    }
+
+    public void updateBatch(List<WFSystem> list){
+        wFSystemFeignClient.updateBatch(list) ;
     }
 
     @Override
@@ -86,34 +99,21 @@ public class WFSystemServiceImpl implements IWFSystemService {
     }
 
     @Override
-    public boolean create(WFSystem et) {
-        WFSystem rt = wFSystemFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-    }
-
-    public void createBatch(List<WFSystem> list){
-        wFSystemFeignClient.createBatch(list) ;
-    }
-
-    @Override
     public boolean checkKey(WFSystem et) {
         return wFSystemFeignClient.checkKey(et);
     }
     @Override
-    public boolean update(WFSystem et) {
-        WFSystem rt = wFSystemFeignClient.update(et.getPssystemid(),et);
-        if(rt==null)
+    @Transactional
+    public boolean save(WFSystem et) {
+        if(et.getPssystemid()==null) et.setPssystemid((String)et.getDefaultKey(true));
+        if(!wFSystemFeignClient.save(et))
             return false;
-        CachedBeanCopier.copy(rt,et);
         return true;
-
     }
 
-    public void updateBatch(List<WFSystem> list){
-        wFSystemFeignClient.updateBatch(list) ;
+    @Override
+    public void saveBatch(List<WFSystem> list) {
+        wFSystemFeignClient.saveBatch(list) ;
     }
 
 

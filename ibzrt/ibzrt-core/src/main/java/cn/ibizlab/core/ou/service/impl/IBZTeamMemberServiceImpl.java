@@ -44,6 +44,33 @@ public class IBZTeamMemberServiceImpl implements IIBZTeamMemberService {
 
 
     @Override
+    public boolean create(IBZTeamMember et) {
+        IBZTeamMember rt = iBZTeamMemberFeignClient.create(et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+    }
+
+    public void createBatch(List<IBZTeamMember> list){
+        iBZTeamMemberFeignClient.createBatch(list) ;
+    }
+
+    @Override
+    public boolean update(IBZTeamMember et) {
+        IBZTeamMember rt = iBZTeamMemberFeignClient.update(et.getTeammemberid(),et);
+        if(rt==null)
+            return false;
+        CachedBeanCopier.copy(rt,et);
+        return true;
+
+    }
+
+    public void updateBatch(List<IBZTeamMember> list){
+        iBZTeamMemberFeignClient.updateBatch(list) ;
+    }
+
+    @Override
     public boolean remove(String teammemberid) {
         boolean result=iBZTeamMemberFeignClient.remove(teammemberid) ;
         return result;
@@ -53,10 +80,6 @@ public class IBZTeamMemberServiceImpl implements IIBZTeamMemberService {
         iBZTeamMemberFeignClient.removeBatch(idList);
     }
 
-    @Override
-    public boolean checkKey(IBZTeamMember et) {
-        return iBZTeamMemberFeignClient.checkKey(et);
-    }
     @Override
     public IBZTeamMember get(String teammemberid) {
 		IBZTeamMember et=iBZTeamMemberFeignClient.get(teammemberid);
@@ -76,18 +99,9 @@ public class IBZTeamMemberServiceImpl implements IIBZTeamMemberService {
     }
 
     @Override
-    public boolean create(IBZTeamMember et) {
-        IBZTeamMember rt = iBZTeamMemberFeignClient.create(et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
+    public boolean checkKey(IBZTeamMember et) {
+        return iBZTeamMemberFeignClient.checkKey(et);
     }
-
-    public void createBatch(List<IBZTeamMember> list){
-        iBZTeamMemberFeignClient.createBatch(list) ;
-    }
-
     @Override
     @Transactional
     public boolean save(IBZTeamMember et) {
@@ -100,20 +114,6 @@ public class IBZTeamMemberServiceImpl implements IIBZTeamMemberService {
     @Override
     public void saveBatch(List<IBZTeamMember> list) {
         iBZTeamMemberFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean update(IBZTeamMember et) {
-        IBZTeamMember rt = iBZTeamMemberFeignClient.update(et.getTeammemberid(),et);
-        if(rt==null)
-            return false;
-        CachedBeanCopier.copy(rt,et);
-        return true;
-
-    }
-
-    public void updateBatch(List<IBZTeamMember> list){
-        iBZTeamMemberFeignClient.updateBatch(list) ;
     }
 
 

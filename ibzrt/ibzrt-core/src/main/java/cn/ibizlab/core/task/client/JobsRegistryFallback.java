@@ -23,10 +23,12 @@ public class JobsRegistryFallback implements JobsRegistryFeignClient{
             return null;
      }
 
-    public JobsRegistry get(String id){
+    public JobsRegistry create(JobsRegistry jobsregistry){
             return null;
      }
-
+    public Boolean createBatch(List<JobsRegistry> jobsregistries){
+            return false;
+     }
 
     public JobsRegistry update(String id, JobsRegistry jobsregistry){
             return null;
@@ -36,35 +38,33 @@ public class JobsRegistryFallback implements JobsRegistryFeignClient{
      }
 
 
+    public Boolean remove(String id){
+            return false;
+     }
+    public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
+
+    public JobsRegistry get(String id){
+            return null;
+     }
+
+
     public JobsRegistry getDraft(){
             return null;
     }
 
 
 
-    public Boolean save(JobsRegistry jobsregistry){
-            return false;
-     }
-    public Boolean saveBatch(List<JobsRegistry> jobsregistries){
-            return false;
-     }
-
     public Boolean checkKey(JobsRegistry jobsregistry){
             return false;
      }
 
 
-    public JobsRegistry create(JobsRegistry jobsregistry){
-            return null;
-     }
-    public Boolean createBatch(List<JobsRegistry> jobsregistries){
+    public Boolean save(JobsRegistry jobsregistry){
             return false;
      }
-
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
+    public Boolean saveBatch(List<JobsRegistry> jobsregistries){
             return false;
      }
 

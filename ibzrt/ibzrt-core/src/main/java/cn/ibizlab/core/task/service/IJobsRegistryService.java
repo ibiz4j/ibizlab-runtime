@@ -23,17 +23,17 @@ import cn.ibizlab.core.task.filter.JobsRegistrySearchContext;
  */
 public interface IJobsRegistryService{
 
-    JobsRegistry get(String key) ;
-    boolean update(JobsRegistry et) ;
-    void updateBatch(List<JobsRegistry> list) ;
-    JobsRegistry getDraft(JobsRegistry et) ;
-    boolean save(JobsRegistry et) ;
-    void saveBatch(List<JobsRegistry> list) ;
-    boolean checkKey(JobsRegistry et) ;
     boolean create(JobsRegistry et) ;
     void createBatch(List<JobsRegistry> list) ;
+    boolean update(JobsRegistry et) ;
+    void updateBatch(List<JobsRegistry> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
+    JobsRegistry get(String key) ;
+    JobsRegistry getDraft(JobsRegistry et) ;
+    boolean checkKey(JobsRegistry et) ;
+    boolean save(JobsRegistry et) ;
+    void saveBatch(List<JobsRegistry> list) ;
     Page<JobsRegistry> searchDefault(JobsRegistrySearchContext context) ;
 
 }

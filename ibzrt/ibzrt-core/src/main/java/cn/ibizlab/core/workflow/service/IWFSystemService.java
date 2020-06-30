@@ -23,17 +23,17 @@ import cn.ibizlab.core.workflow.filter.WFSystemSearchContext;
  */
 public interface IWFSystemService{
 
-    boolean save(WFSystem et) ;
-    void saveBatch(List<WFSystem> list) ;
+    boolean create(WFSystem et) ;
+    void createBatch(List<WFSystem> list) ;
+    boolean update(WFSystem et) ;
+    void updateBatch(List<WFSystem> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
     WFSystem get(String key) ;
     WFSystem getDraft(WFSystem et) ;
-    boolean create(WFSystem et) ;
-    void createBatch(List<WFSystem> list) ;
     boolean checkKey(WFSystem et) ;
-    boolean update(WFSystem et) ;
-    void updateBatch(List<WFSystem> list) ;
+    boolean save(WFSystem et) ;
+    void saveBatch(List<WFSystem> list) ;
     Page<WFSystem> searchDefault(WFSystemSearchContext context) ;
 
 }

@@ -23,20 +23,17 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient{
             return null;
      }
 
-    public SysPSSystem get(String pssystemid){
+    public SysPSSystem create(SysPSSystem syspssystem){
             return null;
      }
-
+    public Boolean createBatch(List<SysPSSystem> syspssystems){
+            return false;
+     }
 
     public SysPSSystem update(String pssystemid, SysPSSystem syspssystem){
             return null;
      }
     public Boolean updateBatch(List<SysPSSystem> syspssystems){
-            return false;
-     }
-
-
-    public Boolean checkKey(SysPSSystem syspssystem){
             return false;
      }
 
@@ -48,17 +45,20 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient{
             return false;
      }
 
-    public SysPSSystem create(SysPSSystem syspssystem){
+    public SysPSSystem get(String pssystemid){
             return null;
      }
-    public Boolean createBatch(List<SysPSSystem> syspssystems){
-            return false;
-     }
+
 
     public SysPSSystem getDraft(){
             return null;
     }
 
+
+
+    public Boolean checkKey(SysPSSystem syspssystem){
+            return false;
+     }
 
 
     public Boolean save(SysPSSystem syspssystem){
@@ -68,12 +68,12 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient{
             return false;
      }
 
-    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context){
+    public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context){
             return null;
      }
 
 
-    public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context){
+    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context){
             return null;
      }
 

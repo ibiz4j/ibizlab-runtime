@@ -23,17 +23,17 @@ import cn.ibizlab.core.workflow.filter.WFHistorySearchContext;
  */
 public interface IWFHistoryService{
 
-    boolean checkKey(WFHistory et) ;
-    boolean update(WFHistory et) ;
-    void updateBatch(List<WFHistory> list) ;
-    boolean save(WFHistory et) ;
-    void saveBatch(List<WFHistory> list) ;
     boolean create(WFHistory et) ;
     void createBatch(List<WFHistory> list) ;
-    WFHistory get(String key) ;
+    boolean update(WFHistory et) ;
+    void updateBatch(List<WFHistory> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
+    WFHistory get(String key) ;
     WFHistory getDraft(WFHistory et) ;
+    boolean checkKey(WFHistory et) ;
+    boolean save(WFHistory et) ;
+    void saveBatch(List<WFHistory> list) ;
     Page<WFHistory> searchDefault(WFHistorySearchContext context) ;
 
 }

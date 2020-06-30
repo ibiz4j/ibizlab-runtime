@@ -23,11 +23,11 @@ public interface IBZEmployeeFeignClient {
     Page<IBZEmployee> select();
 
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/ibzemployees/{userid}")
-    Boolean remove(@PathVariable("userid") String userid);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees")
+    IBZEmployee create(@RequestBody IBZEmployee ibzemployee);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/ibzemployees/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/batch")
+    Boolean createBatch(@RequestBody List<IBZEmployee> ibzemployees);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/ibzemployees/{userid}")
@@ -37,12 +37,27 @@ public interface IBZEmployeeFeignClient {
     Boolean updateBatch(@RequestBody List<IBZEmployee> ibzemployees);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/checkkey")
-    Boolean checkKey(@RequestBody IBZEmployee ibzemployee);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/ibzemployees/{userid}")
+    Boolean remove(@PathVariable("userid") String userid);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/ibzemployees/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/ibzemployees/{userid}")
     IBZEmployee get(@PathVariable("userid") String userid);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/ibzemployees/getdraft")
+    IBZEmployee getDraft();
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/checkkey")
+    Boolean checkKey(@RequestBody IBZEmployee ibzemployee);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/{userid}/initpwd")
+    IBZEmployee initPwd(@PathVariable("userid") String userid,@RequestBody IBZEmployee ibzemployee);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/save")
@@ -50,21 +65,6 @@ public interface IBZEmployeeFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/save")
     Boolean saveBatch(@RequestBody List<IBZEmployee> ibzemployees);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/{userid}/initpwd")
-    IBZEmployee initPwd(@PathVariable("userid") String userid,@RequestBody IBZEmployee ibzemployee);
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/ibzemployees/getdraft")
-    IBZEmployee getDraft();
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees")
-    IBZEmployee create(@RequestBody IBZEmployee ibzemployee);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/batch")
-    Boolean createBatch(@RequestBody List<IBZEmployee> ibzemployees);
 
 
 

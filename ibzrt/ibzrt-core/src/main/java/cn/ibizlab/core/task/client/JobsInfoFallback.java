@@ -23,7 +23,45 @@ public class JobsInfoFallback implements JobsInfoFeignClient{
             return null;
      }
 
-    public JobsInfo start( String id, JobsInfo jobsinfo){
+    public JobsInfo create(JobsInfo jobsinfo){
+            return null;
+     }
+    public Boolean createBatch(List<JobsInfo> jobsinfos){
+            return false;
+     }
+
+    public JobsInfo update(String id, JobsInfo jobsinfo){
+            return null;
+     }
+    public Boolean updateBatch(List<JobsInfo> jobsinfos){
+            return false;
+     }
+
+
+    public Boolean remove(String id){
+            return false;
+     }
+    public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
+
+    public JobsInfo get(String id){
+            return null;
+     }
+
+
+    public JobsInfo getDraft(){
+            return null;
+    }
+
+
+
+    public Boolean checkKey(JobsInfo jobsinfo){
+            return false;
+     }
+
+
+    public JobsInfo execute( String id, JobsInfo jobsinfo){
             return null;
      }
 
@@ -34,51 +72,13 @@ public class JobsInfoFallback implements JobsInfoFeignClient{
             return false;
      }
 
-    public JobsInfo create(JobsInfo jobsinfo){
+    public JobsInfo start( String id, JobsInfo jobsinfo){
             return null;
-     }
-    public Boolean createBatch(List<JobsInfo> jobsinfos){
-            return false;
-     }
-
-    public Boolean checkKey(JobsInfo jobsinfo){
-            return false;
-     }
-
-
-    public JobsInfo getDraft(){
-            return null;
-    }
-
-
-
-    public JobsInfo update(String id, JobsInfo jobsinfo){
-            return null;
-     }
-    public Boolean updateBatch(List<JobsInfo> jobsinfos){
-            return false;
-     }
-
-
-    public JobsInfo execute( String id, JobsInfo jobsinfo){
-            return null;
-     }
-
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
      }
 
     public JobsInfo stop( String id, JobsInfo jobsinfo){
             return null;
      }
-
-    public JobsInfo get(String id){
-            return null;
-     }
-
 
     public Page<JobsInfo> searchDefault(JobsInfoSearchContext context){
             return null;

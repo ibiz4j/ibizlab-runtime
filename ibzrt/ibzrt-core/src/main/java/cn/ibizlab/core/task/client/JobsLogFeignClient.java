@@ -23,11 +23,11 @@ public interface JobsLogFeignClient {
     Page<JobsLog> select();
 
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/{id}")
-    Boolean remove(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslogs")
+    JobsLog create(@RequestBody JobsLog jobslog);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/batch}")
-    Boolean removeBatch(@RequestBody Collection<String> idList);
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslogs/batch")
+    Boolean createBatch(@RequestBody List<JobsLog> jobslogs);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/{id}")
@@ -37,15 +37,15 @@ public interface JobsLogFeignClient {
     Boolean updateBatch(@RequestBody List<JobsLog> jobslogs);
 
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/{id}")
+    Boolean remove(@PathVariable("id") String id);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/batch}")
+    Boolean removeBatch(@RequestBody Collection<String> idList);
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/jobslogs/{id}")
     JobsLog get(@PathVariable("id") String id);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslogs/save")
-    Boolean save(@RequestBody JobsLog jobslog);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslogs/save")
-    Boolean saveBatch(@RequestBody List<JobsLog> jobslogs);
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/jobslogs/getdraft")
@@ -56,11 +56,11 @@ public interface JobsLogFeignClient {
     Boolean checkKey(@RequestBody JobsLog jobslog);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslogs")
-    JobsLog create(@RequestBody JobsLog jobslog);
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslogs/save")
+    Boolean save(@RequestBody JobsLog jobslog);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslogs/batch")
-    Boolean createBatch(@RequestBody List<JobsLog> jobslogs);
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslogs/save")
+    Boolean saveBatch(@RequestBody List<JobsLog> jobslogs);
 
 
 

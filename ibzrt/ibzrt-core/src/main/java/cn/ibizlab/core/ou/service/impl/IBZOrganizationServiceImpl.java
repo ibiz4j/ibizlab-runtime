@@ -47,36 +47,6 @@ public class IBZOrganizationServiceImpl implements IIBZOrganizationService {
     protected cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
     @Override
-    @Transactional
-    public boolean save(IBZOrganization et) {
-        if(et.getOrgid()==null) et.setOrgid((String)et.getDefaultKey(true));
-        if(!iBZOrganizationFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<IBZOrganization> list) {
-        iBZOrganizationFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean checkKey(IBZOrganization et) {
-        return iBZOrganizationFeignClient.checkKey(et);
-    }
-    @Override
-    public IBZOrganization get(String orgid) {
-		IBZOrganization et=iBZOrganizationFeignClient.get(orgid);
-        if(et==null){
-            et=new IBZOrganization();
-            et.setOrgid(orgid);
-        }
-        else{
-        }
-        return  et;
-    }
-
-    @Override
     public boolean create(IBZOrganization et) {
         IBZOrganization rt = iBZOrganizationFeignClient.create(et);
         if(rt==null)
@@ -87,22 +57,6 @@ public class IBZOrganizationServiceImpl implements IIBZOrganizationService {
 
     public void createBatch(List<IBZOrganization> list){
         iBZOrganizationFeignClient.createBatch(list) ;
-    }
-
-    @Override
-    public boolean remove(String orgid) {
-        boolean result=iBZOrganizationFeignClient.remove(orgid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        iBZOrganizationFeignClient.removeBatch(idList);
-    }
-
-    @Override
-    public IBZOrganization getDraft(IBZOrganization et) {
-        et=iBZOrganizationFeignClient.getDraft();
-        return et;
     }
 
     @Override
@@ -117,6 +71,52 @@ public class IBZOrganizationServiceImpl implements IIBZOrganizationService {
 
     public void updateBatch(List<IBZOrganization> list){
         iBZOrganizationFeignClient.updateBatch(list) ;
+    }
+
+    @Override
+    public boolean remove(String orgid) {
+        boolean result=iBZOrganizationFeignClient.remove(orgid) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        iBZOrganizationFeignClient.removeBatch(idList);
+    }
+
+    @Override
+    public IBZOrganization get(String orgid) {
+		IBZOrganization et=iBZOrganizationFeignClient.get(orgid);
+        if(et==null){
+            et=new IBZOrganization();
+            et.setOrgid(orgid);
+        }
+        else{
+        }
+        return  et;
+    }
+
+    @Override
+    public IBZOrganization getDraft(IBZOrganization et) {
+        et=iBZOrganizationFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(IBZOrganization et) {
+        return iBZOrganizationFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(IBZOrganization et) {
+        if(et.getOrgid()==null) et.setOrgid((String)et.getDefaultKey(true));
+        if(!iBZOrganizationFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<IBZOrganization> list) {
+        iBZOrganizationFeignClient.saveBatch(list) ;
     }
 
 

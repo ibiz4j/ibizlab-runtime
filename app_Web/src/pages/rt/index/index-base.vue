@@ -548,7 +548,7 @@ export default class IndexBase extends Vue {
      * @type {boolean}
      * @memberof IndexBase
      */
-    public isEnableAppSwitch: boolean = false;
+    public isEnableAppSwitch: boolean = true;
 
     /**
      * 初始化之前

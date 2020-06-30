@@ -23,7 +23,6 @@ import cn.ibizlab.core.ou.filter.IBZTeamSearchContext;
  */
 public interface IIBZTeamService{
 
-    boolean checkKey(IBZTeam et) ;
     boolean create(IBZTeam et) ;
     void createBatch(List<IBZTeam> list) ;
     boolean update(IBZTeam et) ;
@@ -31,9 +30,10 @@ public interface IIBZTeamService{
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
     IBZTeam get(String key) ;
+    IBZTeam getDraft(IBZTeam et) ;
+    boolean checkKey(IBZTeam et) ;
     boolean save(IBZTeam et) ;
     void saveBatch(List<IBZTeam> list) ;
-    IBZTeam getDraft(IBZTeam et) ;
     Page<IBZTeam> searchDefault(IBZTeamSearchContext context) ;
 
 }

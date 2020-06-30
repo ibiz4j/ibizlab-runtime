@@ -23,15 +23,11 @@ public interface JobsLockFeignClient {
     Page<JobsLock> select();
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/getdraft")
-    JobsLock getDraft();
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks")
+    JobsLock create(@RequestBody JobsLock jobslock);
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
-    Boolean save(@RequestBody JobsLock jobslock);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
-    Boolean saveBatch(@RequestBody List<JobsLock> jobslocks);
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/batch")
+    Boolean createBatch(@RequestBody List<JobsLock> jobslocks);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/{id}")
@@ -39,10 +35,6 @@ public interface JobsLockFeignClient {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/batch")
     Boolean updateBatch(@RequestBody List<JobsLock> jobslocks);
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/checkkey")
-    Boolean checkKey(@RequestBody JobsLock jobslock);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/jobslocks/{id}")
@@ -56,11 +48,19 @@ public interface JobsLockFeignClient {
     JobsLock get(@PathVariable("id") String id);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks")
-    JobsLock create(@RequestBody JobsLock jobslock);
+    @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/getdraft")
+    JobsLock getDraft();
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/batch")
-    Boolean createBatch(@RequestBody List<JobsLock> jobslocks);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/checkkey")
+    Boolean checkKey(@RequestBody JobsLock jobslock);
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
+    Boolean save(@RequestBody JobsLock jobslock);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
+    Boolean saveBatch(@RequestBody List<JobsLock> jobslocks);
 
 
 

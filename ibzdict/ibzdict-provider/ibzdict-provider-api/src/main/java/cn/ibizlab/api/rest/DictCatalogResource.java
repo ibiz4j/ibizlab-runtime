@@ -87,18 +87,19 @@ public class DictCatalogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Save-all')")
-    @ApiOperation(value = "保存字典", tags = {"字典" },  notes = "保存字典")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/save")
-    public ResponseEntity<Boolean> save(@RequestBody DictCatalogDTO dictcatalogdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.save(dictcatalogMapping.toDomain(dictcatalogdto)));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Remove-all')")
+    @ApiOperation(value = "删除字典", tags = {"字典" },  notes = "删除字典")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}")
+    @Transactional
+    public ResponseEntity<Boolean> remove(@PathVariable("dictcatalog_id") String dictcatalog_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.remove(dictcatalog_id));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Save-all')")
-    @ApiOperation(value = "批量保存字典", tags = {"字典" },  notes = "批量保存字典")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<DictCatalogDTO> dictcatalogdtos) {
-        dictcatalogService.saveBatch(dictcatalogMapping.toDomain(dictcatalogdtos));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Remove-all')")
+    @ApiOperation(value = "批量删除字典", tags = {"字典" },  notes = "批量删除字典")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        dictcatalogService.removeBatch(ids);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -117,26 +118,25 @@ public class DictCatalogResource {
         return ResponseEntity.status(HttpStatus.OK).body(dictcatalogMapping.toDto(dictcatalogService.getDraft(new DictCatalog())));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Remove-all')")
-    @ApiOperation(value = "删除字典", tags = {"字典" },  notes = "删除字典")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}")
-    @Transactional
-    public ResponseEntity<Boolean> remove(@PathVariable("dictcatalog_id") String dictcatalog_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.remove(dictcatalog_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Remove-all')")
-    @ApiOperation(value = "批量删除字典", tags = {"字典" },  notes = "批量删除字典")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        dictcatalogService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
     @ApiOperation(value = "检查字典", tags = {"字典" },  notes = "检查字典")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")
     public ResponseEntity<Boolean> checkKey(@RequestBody DictCatalogDTO dictcatalogdto) {
         return  ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.checkKey(dictcatalogMapping.toDomain(dictcatalogdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Save-all')")
+    @ApiOperation(value = "保存字典", tags = {"字典" },  notes = "保存字典")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/save")
+    public ResponseEntity<Boolean> save(@RequestBody DictCatalogDTO dictcatalogdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.save(dictcatalogMapping.toDomain(dictcatalogdto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Save-all')")
+    @ApiOperation(value = "批量保存字典", tags = {"字典" },  notes = "批量保存字典")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<DictCatalogDTO> dictcatalogdtos) {
+        dictcatalogService.saveBatch(dictcatalogMapping.toDomain(dictcatalogdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-searchDefault-all')")

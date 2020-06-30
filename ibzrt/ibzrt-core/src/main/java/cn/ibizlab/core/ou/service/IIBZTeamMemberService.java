@@ -23,17 +23,17 @@ import cn.ibizlab.core.ou.filter.IBZTeamMemberSearchContext;
  */
 public interface IIBZTeamMemberService{
 
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    boolean checkKey(IBZTeamMember et) ;
-    IBZTeamMember get(String key) ;
-    IBZTeamMember getDraft(IBZTeamMember et) ;
     boolean create(IBZTeamMember et) ;
     void createBatch(List<IBZTeamMember> list) ;
-    boolean save(IBZTeamMember et) ;
-    void saveBatch(List<IBZTeamMember> list) ;
     boolean update(IBZTeamMember et) ;
     void updateBatch(List<IBZTeamMember> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    IBZTeamMember get(String key) ;
+    IBZTeamMember getDraft(IBZTeamMember et) ;
+    boolean checkKey(IBZTeamMember et) ;
+    boolean save(IBZTeamMember et) ;
+    void saveBatch(List<IBZTeamMember> list) ;
     Page<IBZTeamMember> searchDefault(IBZTeamMemberSearchContext context) ;
     List<IBZTeamMember> selectByUserid(String userid) ;
     void removeByUserid(String userid) ;

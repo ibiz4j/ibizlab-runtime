@@ -44,34 +44,6 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
 
 
     @Override
-    public boolean checkKey(WFProcessDefinition et) {
-        return wFProcessDefinitionFeignClient.checkKey(et);
-    }
-    @Override
-    public boolean remove(String definitionkey) {
-        boolean result=wFProcessDefinitionFeignClient.remove(definitionkey) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        wFProcessDefinitionFeignClient.removeBatch(idList);
-    }
-
-    @Override
-    @Transactional
-    public boolean save(WFProcessDefinition et) {
-        if(et.getDefinitionkey()==null) et.setDefinitionkey((String)et.getDefaultKey(true));
-        if(!wFProcessDefinitionFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<WFProcessDefinition> list) {
-        wFProcessDefinitionFeignClient.saveBatch(list) ;
-    }
-
-    @Override
     public boolean create(WFProcessDefinition et) {
         WFProcessDefinition rt = wFProcessDefinitionFeignClient.create(et);
         if(rt==null)
@@ -82,12 +54,6 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
 
     public void createBatch(List<WFProcessDefinition> list){
         wFProcessDefinitionFeignClient.createBatch(list) ;
-    }
-
-    @Override
-    public WFProcessDefinition getDraft(WFProcessDefinition et) {
-        et=wFProcessDefinitionFeignClient.getDraft();
-        return et;
     }
 
     @Override
@@ -105,6 +71,16 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
     }
 
     @Override
+    public boolean remove(String definitionkey) {
+        boolean result=wFProcessDefinitionFeignClient.remove(definitionkey) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        wFProcessDefinitionFeignClient.removeBatch(idList);
+    }
+
+    @Override
     public WFProcessDefinition get(String definitionkey) {
 		WFProcessDefinition et=wFProcessDefinitionFeignClient.get(definitionkey);
         if(et==null){
@@ -114,6 +90,30 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
         else{
         }
         return  et;
+    }
+
+    @Override
+    public WFProcessDefinition getDraft(WFProcessDefinition et) {
+        et=wFProcessDefinitionFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
+    public boolean checkKey(WFProcessDefinition et) {
+        return wFProcessDefinitionFeignClient.checkKey(et);
+    }
+    @Override
+    @Transactional
+    public boolean save(WFProcessDefinition et) {
+        if(et.getDefinitionkey()==null) et.setDefinitionkey((String)et.getDefaultKey(true));
+        if(!wFProcessDefinitionFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<WFProcessDefinition> list) {
+        wFProcessDefinitionFeignClient.saveBatch(list) ;
     }
 
 

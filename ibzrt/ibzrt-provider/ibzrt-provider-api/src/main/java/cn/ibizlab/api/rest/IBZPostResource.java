@@ -47,24 +47,20 @@ public class IBZPostResource {
     @Lazy
     public IBZPostMapping ibzpostMapping;
 
-    @ApiOperation(value = "获取岗位", tags = {"岗位" },  notes = "获取岗位")
-	@RequestMapping(method = RequestMethod.GET, value = "/ibzposts/{ibzpost_id}")
-    public ResponseEntity<IBZPostDTO> get(@PathVariable("ibzpost_id") String ibzpost_id) {
-        IBZPost domain = ibzpostService.get(ibzpost_id);
+    @ApiOperation(value = "新建岗位", tags = {"岗位" },  notes = "新建岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts")
+
+    public ResponseEntity<IBZPostDTO> create(@RequestBody IBZPostDTO ibzpostdto) {
+        IBZPost domain = ibzpostMapping.toDomain(ibzpostdto);
+		ibzpostService.create(domain);
         IBZPostDTO dto = ibzpostMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "保存岗位", tags = {"岗位" },  notes = "保存岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/save")
-    public ResponseEntity<Boolean> save(@RequestBody IBZPostDTO ibzpostdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(ibzpostService.save(ibzpostMapping.toDomain(ibzpostdto)));
-    }
-
-    @ApiOperation(value = "批量保存岗位", tags = {"岗位" },  notes = "批量保存岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
-        ibzpostService.saveBatch(ibzpostMapping.toDomain(ibzpostdtos));
+    @ApiOperation(value = "批量新建岗位", tags = {"岗位" },  notes = "批量新建岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
+        ibzpostService.createBatch(ibzpostMapping.toDomain(ibzpostdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -86,12 +82,6 @@ public class IBZPostResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "检查岗位", tags = {"岗位" },  notes = "检查岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody IBZPostDTO ibzpostdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(ibzpostService.checkKey(ibzpostMapping.toDomain(ibzpostdto)));
-    }
-
     @ApiOperation(value = "删除岗位", tags = {"岗位" },  notes = "删除岗位")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzposts/{ibzpost_id}")
 
@@ -106,30 +96,39 @@ public class IBZPostResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @ApiOperation(value = "获取岗位", tags = {"岗位" },  notes = "获取岗位")
+	@RequestMapping(method = RequestMethod.GET, value = "/ibzposts/{ibzpost_id}")
+    public ResponseEntity<IBZPostDTO> get(@PathVariable("ibzpost_id") String ibzpost_id) {
+        IBZPost domain = ibzpostService.get(ibzpost_id);
+        IBZPostDTO dto = ibzpostMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
     @ApiOperation(value = "获取岗位草稿", tags = {"岗位" },  notes = "获取岗位草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/ibzposts/getdraft")
     public ResponseEntity<IBZPostDTO> getDraft() {
         return ResponseEntity.status(HttpStatus.OK).body(ibzpostMapping.toDto(ibzpostService.getDraft(new IBZPost())));
     }
 
-    @ApiOperation(value = "新建岗位", tags = {"岗位" },  notes = "新建岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts")
-
-    public ResponseEntity<IBZPostDTO> create(@RequestBody IBZPostDTO ibzpostdto) {
-        IBZPost domain = ibzpostMapping.toDomain(ibzpostdto);
-		ibzpostService.create(domain);
-        IBZPostDTO dto = ibzpostMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查岗位", tags = {"岗位" },  notes = "检查岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody IBZPostDTO ibzpostdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(ibzpostService.checkKey(ibzpostMapping.toDomain(ibzpostdto)));
     }
 
-    @ApiOperation(value = "批量新建岗位", tags = {"岗位" },  notes = "批量新建岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
-        ibzpostService.createBatch(ibzpostMapping.toDomain(ibzpostdtos));
+    @ApiOperation(value = "保存岗位", tags = {"岗位" },  notes = "保存岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/save")
+    public ResponseEntity<Boolean> save(@RequestBody IBZPostDTO ibzpostdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(ibzpostService.save(ibzpostMapping.toDomain(ibzpostdto)));
+    }
+
+    @ApiOperation(value = "批量保存岗位", tags = {"岗位" },  notes = "批量保存岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<IBZPostDTO> ibzpostdtos) {
+        ibzpostService.saveBatch(ibzpostMapping.toDomain(ibzpostdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZPost-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"岗位" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/ibzposts/fetchdefault")
 	public ResponseEntity<List<IBZPostDTO>> fetchDefault(IBZPostSearchContext context) {
@@ -142,7 +141,6 @@ public class IBZPostResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-IBZPost-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"岗位" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/ibzposts/searchdefault")
 	public ResponseEntity<Page<IBZPostDTO>> searchDefault(@RequestBody IBZPostSearchContext context) {

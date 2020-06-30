@@ -47,18 +47,22 @@ public class WFProcessDefinitionResource {
     @Lazy
     public WFProcessDefinitionMapping wfprocessdefinitionMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Save-all')")
-    @ApiOperation(value = "保存流程定义", tags = {"流程定义" },  notes = "保存流程定义")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionService.save(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto)));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Create-all')")
+    @ApiOperation(value = "新建流程定义", tags = {"流程定义" },  notes = "新建流程定义")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions")
+    @Transactional
+    public ResponseEntity<WFProcessDefinitionDTO> create(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
+        WFProcessDefinition domain = wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto);
+		wfprocessdefinitionService.create(domain);
+        WFProcessDefinitionDTO dto = wfprocessdefinitionMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Save-all')")
-    @ApiOperation(value = "批量保存流程定义", tags = {"流程定义" },  notes = "批量保存流程定义")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFProcessDefinitionDTO> wfprocessdefinitiondtos) {
-        wfprocessdefinitionService.saveBatch(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondtos));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Create-all')")
+    @ApiOperation(value = "批量新建流程定义", tags = {"流程定义" },  notes = "批量新建流程定义")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFProcessDefinitionDTO> wfprocessdefinitiondtos) {
+        wfprocessdefinitionService.createBatch(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -82,46 +86,6 @@ public class WFProcessDefinitionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Get-all')")
-    @ApiOperation(value = "获取流程定义", tags = {"流程定义" },  notes = "获取流程定义")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/{wfprocessdefinition_id}")
-    public ResponseEntity<WFProcessDefinitionDTO> get(@PathVariable("wfprocessdefinition_id") String wfprocessdefinition_id) {
-        WFProcessDefinition domain = wfprocessdefinitionService.get(wfprocessdefinition_id);
-        WFProcessDefinitionDTO dto = wfprocessdefinitionMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "检查流程定义", tags = {"流程定义" },  notes = "检查流程定义")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionService.checkKey(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto)));
-    }
-
-    @ApiOperation(value = "获取流程定义草稿", tags = {"流程定义" },  notes = "获取流程定义草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/getdraft")
-    public ResponseEntity<WFProcessDefinitionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionMapping.toDto(wfprocessdefinitionService.getDraft(new WFProcessDefinition())));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Create-all')")
-    @ApiOperation(value = "新建流程定义", tags = {"流程定义" },  notes = "新建流程定义")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions")
-    @Transactional
-    public ResponseEntity<WFProcessDefinitionDTO> create(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
-        WFProcessDefinition domain = wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto);
-		wfprocessdefinitionService.create(domain);
-        WFProcessDefinitionDTO dto = wfprocessdefinitionMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Create-all')")
-    @ApiOperation(value = "批量新建流程定义", tags = {"流程定义" },  notes = "批量新建流程定义")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFProcessDefinitionDTO> wfprocessdefinitiondtos) {
-        wfprocessdefinitionService.createBatch(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Remove-all')")
     @ApiOperation(value = "删除流程定义", tags = {"流程定义" },  notes = "删除流程定义")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessdefinitions/{wfprocessdefinition_id}")
@@ -135,6 +99,42 @@ public class WFProcessDefinitionResource {
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessdefinitions/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
         wfprocessdefinitionService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Get-all')")
+    @ApiOperation(value = "获取流程定义", tags = {"流程定义" },  notes = "获取流程定义")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/{wfprocessdefinition_id}")
+    public ResponseEntity<WFProcessDefinitionDTO> get(@PathVariable("wfprocessdefinition_id") String wfprocessdefinition_id) {
+        WFProcessDefinition domain = wfprocessdefinitionService.get(wfprocessdefinition_id);
+        WFProcessDefinitionDTO dto = wfprocessdefinitionMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "获取流程定义草稿", tags = {"流程定义" },  notes = "获取流程定义草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/getdraft")
+    public ResponseEntity<WFProcessDefinitionDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionMapping.toDto(wfprocessdefinitionService.getDraft(new WFProcessDefinition())));
+    }
+
+    @ApiOperation(value = "检查流程定义", tags = {"流程定义" },  notes = "检查流程定义")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionService.checkKey(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Save-all')")
+    @ApiOperation(value = "保存流程定义", tags = {"流程定义" },  notes = "保存流程定义")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/save")
+    public ResponseEntity<Boolean> save(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
+        return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionService.save(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto)));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFProcessDefinition-Save-all')")
+    @ApiOperation(value = "批量保存流程定义", tags = {"流程定义" },  notes = "批量保存流程定义")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFProcessDefinitionDTO> wfprocessdefinitiondtos) {
+        wfprocessdefinitionService.saveBatch(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 

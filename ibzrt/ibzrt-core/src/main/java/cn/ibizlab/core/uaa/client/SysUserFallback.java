@@ -23,10 +23,10 @@ public class SysUserFallback implements SysUserFeignClient{
             return null;
      }
 
-    public Boolean remove(String userid){
-            return false;
+    public SysUser create(SysUser sysuser){
+            return null;
      }
-    public Boolean removeBatch(Collection<String> idList){
+    public Boolean createBatch(List<SysUser> sysusers){
             return false;
      }
 
@@ -38,22 +38,17 @@ public class SysUserFallback implements SysUserFeignClient{
      }
 
 
-    public Boolean checkKey(SysUser sysuser){
+    public Boolean remove(String userid){
             return false;
      }
-
+    public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
 
     public SysUser get(String userid){
             return null;
      }
 
-
-    public Boolean save(SysUser sysuser){
-            return false;
-     }
-    public Boolean saveBatch(List<SysUser> sysusers){
-            return false;
-     }
 
     public SysUser getDraft(){
             return null;
@@ -61,10 +56,15 @@ public class SysUserFallback implements SysUserFeignClient{
 
 
 
-    public SysUser create(SysUser sysuser){
-            return null;
+    public Boolean checkKey(SysUser sysuser){
+            return false;
      }
-    public Boolean createBatch(List<SysUser> sysusers){
+
+
+    public Boolean save(SysUser sysuser){
+            return false;
+     }
+    public Boolean saveBatch(List<SysUser> sysusers){
             return false;
      }
 

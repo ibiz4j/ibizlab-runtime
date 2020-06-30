@@ -47,43 +47,21 @@ public class WFMemberResource {
     @Lazy
     public WFMemberMapping wfmemberMapping;
 
-    @ApiOperation(value = "删除成员", tags = {"成员" },  notes = "删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/{wfmember_id}")
+    @ApiOperation(value = "新建成员", tags = {"成员" },  notes = "新建成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers")
 
-    public ResponseEntity<Boolean> remove(@PathVariable("wfmember_id") String wfmember_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
+    public ResponseEntity<WFMemberDTO> create(@RequestBody WFMemberDTO wfmemberdto) {
+        WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
+		wfmemberService.create(domain);
+        WFMemberDTO dto = wfmemberMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "批量删除成员", tags = {"成员" },  notes = "批量删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfmemberService.removeBatch(ids);
+    @ApiOperation(value = "批量新建成员", tags = {"成员" },  notes = "批量新建成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFMemberDTO> wfmemberdtos) {
+        wfmemberService.createBatch(wfmemberMapping.toDomain(wfmemberdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取成员草稿", tags = {"成员" },  notes = "获取成员草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfmembers/getdraft")
-    public ResponseEntity<WFMemberDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(new WFMember())));
-    }
-
-    @ApiOperation(value = "保存成员", tags = {"成员" },  notes = "保存成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFMemberDTO wfmemberdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(wfmemberMapping.toDomain(wfmemberdto)));
-    }
-
-    @ApiOperation(value = "批量保存成员", tags = {"成员" },  notes = "批量保存成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFMemberDTO> wfmemberdtos) {
-        wfmemberService.saveBatch(wfmemberMapping.toDomain(wfmemberdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "检查成员", tags = {"成员" },  notes = "检查成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFMemberDTO wfmemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @ApiOperation(value = "更新成员", tags = {"成员" },  notes = "更新成员")
@@ -104,20 +82,17 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "新建成员", tags = {"成员" },  notes = "新建成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers")
+    @ApiOperation(value = "删除成员", tags = {"成员" },  notes = "删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/{wfmember_id}")
 
-    public ResponseEntity<WFMemberDTO> create(@RequestBody WFMemberDTO wfmemberdto) {
-        WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
-		wfmemberService.create(domain);
-        WFMemberDTO dto = wfmemberMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    public ResponseEntity<Boolean> remove(@PathVariable("wfmember_id") String wfmember_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
     }
 
-    @ApiOperation(value = "批量新建成员", tags = {"成员" },  notes = "批量新建成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFMemberDTO> wfmemberdtos) {
-        wfmemberService.createBatch(wfmemberMapping.toDomain(wfmemberdtos));
+    @ApiOperation(value = "批量删除成员", tags = {"成员" },  notes = "批量删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfmemberService.removeBatch(ids);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -129,7 +104,31 @@ public class WFMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFMember-searchDefault-all')")
+    @ApiOperation(value = "获取成员草稿", tags = {"成员" },  notes = "获取成员草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfmembers/getdraft")
+    public ResponseEntity<WFMemberDTO> getDraft() {
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(new WFMember())));
+    }
+
+    @ApiOperation(value = "检查成员", tags = {"成员" },  notes = "检查成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFMemberDTO wfmemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
+    }
+
+    @ApiOperation(value = "保存成员", tags = {"成员" },  notes = "保存成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
+    public ResponseEntity<Boolean> save(@RequestBody WFMemberDTO wfmemberdto) {
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(wfmemberMapping.toDomain(wfmemberdto)));
+    }
+
+    @ApiOperation(value = "批量保存成员", tags = {"成员" },  notes = "批量保存成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFMemberDTO> wfmemberdtos) {
+        wfmemberService.saveBatch(wfmemberMapping.toDomain(wfmemberdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
 	@ApiOperation(value = "获取DEFAULT", tags = {"成员" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfmembers/fetchdefault")
 	public ResponseEntity<List<WFMemberDTO>> fetchDefault(WFMemberSearchContext context) {
@@ -142,7 +141,6 @@ public class WFMemberResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFMember-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"成员" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfmembers/searchdefault")
 	public ResponseEntity<Page<WFMemberDTO>> searchDefault(@RequestBody WFMemberSearchContext context) {
@@ -150,51 +148,26 @@ public class WFMemberResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfmemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @ApiOperation(value = "根据角色/用户组删除成员", tags = {"成员" },  notes = "根据角色/用户组删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}/wfmembers/{wfmember_id}")
+    @ApiOperation(value = "根据角色/用户组建立成员", tags = {"成员" },  notes = "根据角色/用户组建立成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers")
 
-    public ResponseEntity<Boolean> removeByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @PathVariable("wfmember_id") String wfmember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
-    }
-
-    @ApiOperation(value = "根据角色/用户组批量删除成员", tags = {"成员" },  notes = "根据角色/用户组批量删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}/wfmembers/batch")
-    public ResponseEntity<Boolean> removeBatchByWFGroup(@RequestBody List<String> ids) {
-        wfmemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "根据角色/用户组获取成员草稿", tags = {"成员" },  notes = "根据角色/用户组获取成员草稿")
-    @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}/wfmembers/getdraft")
-    public ResponseEntity<WFMemberDTO> getDraftByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id) {
-        WFMember domain = new WFMember();
-        domain.setGroupid(wfgroup_id);
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据角色/用户组保存成员", tags = {"成员" },  notes = "根据角色/用户组保存成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/save")
-    public ResponseEntity<Boolean> saveByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
+    public ResponseEntity<WFMemberDTO> createByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
         WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
         domain.setGroupid(wfgroup_id);
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(domain));
+		wfmemberService.create(domain);
+        WFMemberDTO dto = wfmemberMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "根据角色/用户组批量保存成员", tags = {"成员" },  notes = "根据角色/用户组批量保存成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/savebatch")
-    public ResponseEntity<Boolean> saveBatchByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody List<WFMemberDTO> wfmemberdtos) {
+    @ApiOperation(value = "根据角色/用户组批量建立成员", tags = {"成员" },  notes = "根据角色/用户组批量建立成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/batch")
+    public ResponseEntity<Boolean> createBatchByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody List<WFMemberDTO> wfmemberdtos) {
         List<WFMember> domainlist=wfmemberMapping.toDomain(wfmemberdtos);
         for(WFMember domain:domainlist){
-             domain.setGroupid(wfgroup_id);
+            domain.setGroupid(wfgroup_id);
         }
-        wfmemberService.saveBatch(domainlist);
+        wfmemberService.createBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "根据角色/用户组检查成员", tags = {"成员" },  notes = "根据角色/用户组检查成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @ApiOperation(value = "根据角色/用户组更新成员", tags = {"成员" },  notes = "根据角色/用户组更新成员")
@@ -220,25 +193,17 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "根据角色/用户组建立成员", tags = {"成员" },  notes = "根据角色/用户组建立成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers")
+    @ApiOperation(value = "根据角色/用户组删除成员", tags = {"成员" },  notes = "根据角色/用户组删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}/wfmembers/{wfmember_id}")
 
-    public ResponseEntity<WFMemberDTO> createByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
-        WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
-        domain.setGroupid(wfgroup_id);
-		wfmemberService.create(domain);
-        WFMemberDTO dto = wfmemberMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    public ResponseEntity<Boolean> removeByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @PathVariable("wfmember_id") String wfmember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
     }
 
-    @ApiOperation(value = "根据角色/用户组批量建立成员", tags = {"成员" },  notes = "根据角色/用户组批量建立成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/batch")
-    public ResponseEntity<Boolean> createBatchByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody List<WFMemberDTO> wfmemberdtos) {
-        List<WFMember> domainlist=wfmemberMapping.toDomain(wfmemberdtos);
-        for(WFMember domain:domainlist){
-            domain.setGroupid(wfgroup_id);
-        }
-        wfmemberService.createBatch(domainlist);
+    @ApiOperation(value = "根据角色/用户组批量删除成员", tags = {"成员" },  notes = "根据角色/用户组批量删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}/wfmembers/batch")
+    public ResponseEntity<Boolean> removeBatchByWFGroup(@RequestBody List<String> ids) {
+        wfmemberService.removeBatch(ids);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -250,7 +215,39 @@ public class WFMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFMember-searchDefault-all')")
+    @ApiOperation(value = "根据角色/用户组获取成员草稿", tags = {"成员" },  notes = "根据角色/用户组获取成员草稿")
+    @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}/wfmembers/getdraft")
+    public ResponseEntity<WFMemberDTO> getDraftByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id) {
+        WFMember domain = new WFMember();
+        domain.setGroupid(wfgroup_id);
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
+    }
+
+    @ApiOperation(value = "根据角色/用户组检查成员", tags = {"成员" },  notes = "根据角色/用户组检查成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
+    }
+
+    @ApiOperation(value = "根据角色/用户组保存成员", tags = {"成员" },  notes = "根据角色/用户组保存成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/save")
+    public ResponseEntity<Boolean> saveByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
+        WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
+        domain.setGroupid(wfgroup_id);
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(domain));
+    }
+
+    @ApiOperation(value = "根据角色/用户组批量保存成员", tags = {"成员" },  notes = "根据角色/用户组批量保存成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/savebatch")
+    public ResponseEntity<Boolean> saveBatchByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody List<WFMemberDTO> wfmemberdtos) {
+        List<WFMember> domainlist=wfmemberMapping.toDomain(wfmemberdtos);
+        for(WFMember domain:domainlist){
+             domain.setGroupid(wfgroup_id);
+        }
+        wfmemberService.saveBatch(domainlist);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
 	@ApiOperation(value = "根据角色/用户组获取DEFAULT", tags = {"成员" } ,notes = "根据角色/用户组获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfgroups/{wfgroup_id}/wfmembers/fetchdefault")
 	public ResponseEntity<List<WFMemberDTO>> fetchWFMemberDefaultByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id,WFMemberSearchContext context) {
@@ -264,7 +261,6 @@ public class WFMemberResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFMember-searchDefault-all')")
 	@ApiOperation(value = "根据角色/用户组查询DEFAULT", tags = {"成员" } ,notes = "根据角色/用户组查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfgroups/{wfgroup_id}/wfmembers/searchdefault")
 	public ResponseEntity<Page<WFMemberDTO>> searchWFMemberDefaultByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberSearchContext context) {
@@ -273,51 +269,26 @@ public class WFMemberResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfmemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @ApiOperation(value = "根据用户删除成员", tags = {"成员" },  notes = "根据用户删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}/wfmembers/{wfmember_id}")
+    @ApiOperation(value = "根据用户建立成员", tags = {"成员" },  notes = "根据用户建立成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers")
 
-    public ResponseEntity<Boolean> removeByWFUser(@PathVariable("wfuser_id") String wfuser_id, @PathVariable("wfmember_id") String wfmember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
-    }
-
-    @ApiOperation(value = "根据用户批量删除成员", tags = {"成员" },  notes = "根据用户批量删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}/wfmembers/batch")
-    public ResponseEntity<Boolean> removeBatchByWFUser(@RequestBody List<String> ids) {
-        wfmemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "根据用户获取成员草稿", tags = {"成员" },  notes = "根据用户获取成员草稿")
-    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/{wfuser_id}/wfmembers/getdraft")
-    public ResponseEntity<WFMemberDTO> getDraftByWFUser(@PathVariable("wfuser_id") String wfuser_id) {
-        WFMember domain = new WFMember();
-        domain.setUserid(wfuser_id);
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据用户保存成员", tags = {"成员" },  notes = "根据用户保存成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/save")
-    public ResponseEntity<Boolean> saveByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
+    public ResponseEntity<WFMemberDTO> createByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
         WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
         domain.setUserid(wfuser_id);
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(domain));
+		wfmemberService.create(domain);
+        WFMemberDTO dto = wfmemberMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "根据用户批量保存成员", tags = {"成员" },  notes = "根据用户批量保存成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/savebatch")
-    public ResponseEntity<Boolean> saveBatchByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody List<WFMemberDTO> wfmemberdtos) {
+    @ApiOperation(value = "根据用户批量建立成员", tags = {"成员" },  notes = "根据用户批量建立成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/batch")
+    public ResponseEntity<Boolean> createBatchByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody List<WFMemberDTO> wfmemberdtos) {
         List<WFMember> domainlist=wfmemberMapping.toDomain(wfmemberdtos);
         for(WFMember domain:domainlist){
-             domain.setUserid(wfuser_id);
+            domain.setUserid(wfuser_id);
         }
-        wfmemberService.saveBatch(domainlist);
+        wfmemberService.createBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "根据用户检查成员", tags = {"成员" },  notes = "根据用户检查成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @ApiOperation(value = "根据用户更新成员", tags = {"成员" },  notes = "根据用户更新成员")
@@ -343,25 +314,17 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "根据用户建立成员", tags = {"成员" },  notes = "根据用户建立成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers")
+    @ApiOperation(value = "根据用户删除成员", tags = {"成员" },  notes = "根据用户删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}/wfmembers/{wfmember_id}")
 
-    public ResponseEntity<WFMemberDTO> createByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
-        WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
-        domain.setUserid(wfuser_id);
-		wfmemberService.create(domain);
-        WFMemberDTO dto = wfmemberMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    public ResponseEntity<Boolean> removeByWFUser(@PathVariable("wfuser_id") String wfuser_id, @PathVariable("wfmember_id") String wfmember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
     }
 
-    @ApiOperation(value = "根据用户批量建立成员", tags = {"成员" },  notes = "根据用户批量建立成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/batch")
-    public ResponseEntity<Boolean> createBatchByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody List<WFMemberDTO> wfmemberdtos) {
-        List<WFMember> domainlist=wfmemberMapping.toDomain(wfmemberdtos);
-        for(WFMember domain:domainlist){
-            domain.setUserid(wfuser_id);
-        }
-        wfmemberService.createBatch(domainlist);
+    @ApiOperation(value = "根据用户批量删除成员", tags = {"成员" },  notes = "根据用户批量删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}/wfmembers/batch")
+    public ResponseEntity<Boolean> removeBatchByWFUser(@RequestBody List<String> ids) {
+        wfmemberService.removeBatch(ids);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
@@ -373,7 +336,39 @@ public class WFMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFMember-searchDefault-all')")
+    @ApiOperation(value = "根据用户获取成员草稿", tags = {"成员" },  notes = "根据用户获取成员草稿")
+    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/{wfuser_id}/wfmembers/getdraft")
+    public ResponseEntity<WFMemberDTO> getDraftByWFUser(@PathVariable("wfuser_id") String wfuser_id) {
+        WFMember domain = new WFMember();
+        domain.setUserid(wfuser_id);
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
+    }
+
+    @ApiOperation(value = "根据用户检查成员", tags = {"成员" },  notes = "根据用户检查成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
+    }
+
+    @ApiOperation(value = "根据用户保存成员", tags = {"成员" },  notes = "根据用户保存成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/save")
+    public ResponseEntity<Boolean> saveByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
+        WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
+        domain.setUserid(wfuser_id);
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(domain));
+    }
+
+    @ApiOperation(value = "根据用户批量保存成员", tags = {"成员" },  notes = "根据用户批量保存成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/savebatch")
+    public ResponseEntity<Boolean> saveBatchByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody List<WFMemberDTO> wfmemberdtos) {
+        List<WFMember> domainlist=wfmemberMapping.toDomain(wfmemberdtos);
+        for(WFMember domain:domainlist){
+             domain.setUserid(wfuser_id);
+        }
+        wfmemberService.saveBatch(domainlist);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
 	@ApiOperation(value = "根据用户获取DEFAULT", tags = {"成员" } ,notes = "根据用户获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfusers/{wfuser_id}/wfmembers/fetchdefault")
 	public ResponseEntity<List<WFMemberDTO>> fetchWFMemberDefaultByWFUser(@PathVariable("wfuser_id") String wfuser_id,WFMemberSearchContext context) {
@@ -387,7 +382,6 @@ public class WFMemberResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFMember-searchDefault-all')")
 	@ApiOperation(value = "根据用户查询DEFAULT", tags = {"成员" } ,notes = "根据用户查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfusers/{wfuser_id}/wfmembers/searchdefault")
 	public ResponseEntity<Page<WFMemberDTO>> searchWFMemberDefaultByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberSearchContext context) {

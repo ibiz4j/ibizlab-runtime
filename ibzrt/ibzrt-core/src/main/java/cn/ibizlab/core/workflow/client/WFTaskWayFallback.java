@@ -23,23 +23,6 @@ public class WFTaskWayFallback implements WFTaskWayFeignClient{
             return null;
      }
 
-    public Boolean save(WFTaskWay wftaskway){
-            return false;
-     }
-    public Boolean saveBatch(List<WFTaskWay> wftaskways){
-            return false;
-     }
-
-    public Boolean checkKey(WFTaskWay wftaskway){
-            return false;
-     }
-
-
-    public WFTaskWay get(String sequenceflowid){
-            return null;
-     }
-
-
     public WFTaskWay create(WFTaskWay wftaskway){
             return null;
      }
@@ -62,11 +45,28 @@ public class WFTaskWayFallback implements WFTaskWayFeignClient{
             return false;
      }
 
+    public WFTaskWay get(String sequenceflowid){
+            return null;
+     }
+
+
     public WFTaskWay getDraft(){
             return null;
     }
 
 
+
+    public Boolean checkKey(WFTaskWay wftaskway){
+            return false;
+     }
+
+
+    public Boolean save(WFTaskWay wftaskway){
+            return false;
+     }
+    public Boolean saveBatch(List<WFTaskWay> wftaskways){
+            return false;
+     }
 
     public Page<WFTaskWay> searchDefault(WFTaskWaySearchContext context){
             return null;

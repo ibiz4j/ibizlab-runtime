@@ -25,21 +25,21 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysRoleService extends IService<SysRole>{
 
-    boolean save(SysRole et) ;
-    @CacheEvict(value="sysrole",allEntries=true)
-    void saveBatch(List<SysRole> list) ;
-    boolean update(SysRole et) ;
-    @CacheEvict(value="sysrole",allEntries=true)
-    void updateBatch(List<SysRole> list) ;
     boolean create(SysRole et) ;
     @CacheEvict(value="sysrole",allEntries=true)
     void createBatch(List<SysRole> list) ;
-    SysRole get(String key) ;
+    boolean update(SysRole et) ;
+    @CacheEvict(value="sysrole",allEntries=true)
+    void updateBatch(List<SysRole> list) ;
     boolean remove(String key) ;
     @CacheEvict(value="sysrole",allEntries=true)
     void removeBatch(Collection<String> idList) ;
+    SysRole get(String key) ;
     SysRole getDraft(SysRole et) ;
     boolean checkKey(SysRole et) ;
+    boolean save(SysRole et) ;
+    @CacheEvict(value="sysrole",allEntries=true)
+    void saveBatch(List<SysRole> list) ;
     Page<SysRole> searchDefault(SysRoleSearchContext context) ;
     /**
      *自定义查询SQL

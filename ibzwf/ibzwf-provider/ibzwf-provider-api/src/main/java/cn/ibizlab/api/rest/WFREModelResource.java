@@ -47,6 +47,23 @@ public class WFREModelResource {
     @Lazy
     public WFREModelMapping wfremodelMapping;
 
+    @ApiOperation(value = "新建流程模型", tags = {"流程模型" },  notes = "新建流程模型")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels")
+    @Transactional
+    public ResponseEntity<WFREModelDTO> create(@RequestBody WFREModelDTO wfremodeldto) {
+        WFREModel domain = wfremodelMapping.toDomain(wfremodeldto);
+		wfremodelService.create(domain);
+        WFREModelDTO dto = wfremodelMapping.toDto(domain);
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "批量新建流程模型", tags = {"流程模型" },  notes = "批量新建流程模型")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/batch")
+    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFREModelDTO> wfremodeldtos) {
+        wfremodelService.createBatch(wfremodelMapping.toDomain(wfremodeldtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @ApiOperation(value = "更新流程模型", tags = {"流程模型" },  notes = "更新流程模型")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/{wfremodel_id}")
     @Transactional
@@ -65,50 +82,6 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "保存流程模型", tags = {"流程模型" },  notes = "保存流程模型")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFREModelDTO wfremodeldto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfremodelService.save(wfremodelMapping.toDomain(wfremodeldto)));
-    }
-
-    @ApiOperation(value = "批量保存流程模型", tags = {"流程模型" },  notes = "批量保存流程模型")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/savebatch")
-    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFREModelDTO> wfremodeldtos) {
-        wfremodelService.saveBatch(wfremodelMapping.toDomain(wfremodeldtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取流程模型", tags = {"流程模型" },  notes = "获取流程模型")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{wfremodel_id}")
-    public ResponseEntity<WFREModelDTO> get(@PathVariable("wfremodel_id") String wfremodel_id) {
-        WFREModel domain = wfremodelService.get(wfremodel_id);
-        WFREModelDTO dto = wfremodelMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "新建流程模型", tags = {"流程模型" },  notes = "新建流程模型")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels")
-    @Transactional
-    public ResponseEntity<WFREModelDTO> create(@RequestBody WFREModelDTO wfremodeldto) {
-        WFREModel domain = wfremodelMapping.toDomain(wfremodeldto);
-		wfremodelService.create(domain);
-        WFREModelDTO dto = wfremodelMapping.toDto(domain);
-		return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @ApiOperation(value = "批量新建流程模型", tags = {"流程模型" },  notes = "批量新建流程模型")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/batch")
-    public ResponseEntity<Boolean> createBatch(@RequestBody List<WFREModelDTO> wfremodeldtos) {
-        wfremodelService.createBatch(wfremodelMapping.toDomain(wfremodeldtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "检查流程模型", tags = {"流程模型" },  notes = "检查流程模型")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFREModelDTO wfremodeldto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfremodelService.checkKey(wfremodelMapping.toDomain(wfremodeldto)));
-    }
-
     @ApiOperation(value = "删除流程模型", tags = {"流程模型" },  notes = "删除流程模型")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/{wfremodel_id}")
     @Transactional
@@ -123,13 +96,39 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @ApiOperation(value = "获取流程模型", tags = {"流程模型" },  notes = "获取流程模型")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{wfremodel_id}")
+    public ResponseEntity<WFREModelDTO> get(@PathVariable("wfremodel_id") String wfremodel_id) {
+        WFREModel domain = wfremodelService.get(wfremodel_id);
+        WFREModelDTO dto = wfremodelMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
     @ApiOperation(value = "获取流程模型草稿", tags = {"流程模型" },  notes = "获取流程模型草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfremodels/getdraft")
     public ResponseEntity<WFREModelDTO> getDraft() {
         return ResponseEntity.status(HttpStatus.OK).body(wfremodelMapping.toDto(wfremodelService.getDraft(new WFREModel())));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFREModel-searchDefault-all')")
+    @ApiOperation(value = "检查流程模型", tags = {"流程模型" },  notes = "检查流程模型")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFREModelDTO wfremodeldto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfremodelService.checkKey(wfremodelMapping.toDomain(wfremodeldto)));
+    }
+
+    @ApiOperation(value = "保存流程模型", tags = {"流程模型" },  notes = "保存流程模型")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
+    public ResponseEntity<Boolean> save(@RequestBody WFREModelDTO wfremodeldto) {
+        return ResponseEntity.status(HttpStatus.OK).body(wfremodelService.save(wfremodelMapping.toDomain(wfremodeldto)));
+    }
+
+    @ApiOperation(value = "批量保存流程模型", tags = {"流程模型" },  notes = "批量保存流程模型")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/savebatch")
+    public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFREModelDTO> wfremodeldtos) {
+        wfremodelService.saveBatch(wfremodelMapping.toDomain(wfremodeldtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
 	@ApiOperation(value = "获取DEFAULT", tags = {"流程模型" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfremodels/fetchdefault")
 	public ResponseEntity<List<WFREModelDTO>> fetchDefault(WFREModelSearchContext context) {
@@ -142,7 +141,6 @@ public class WFREModelResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFREModel-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"流程模型" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfremodels/searchdefault")
 	public ResponseEntity<Page<WFREModelDTO>> searchDefault(@RequestBody WFREModelSearchContext context) {

@@ -23,16 +23,12 @@ public class SysUserRoleFallback implements SysUserRoleFeignClient{
             return null;
      }
 
-    public Boolean checkKey(SysUserRole sysuserrole){
+    public SysUserRole create(SysUserRole sysuserrole){
+            return null;
+     }
+    public Boolean createBatch(List<SysUserRole> sysuserroles){
             return false;
      }
-
-
-    public SysUserRole getDraft(){
-            return null;
-    }
-
-
 
     public SysUserRole update(String userroleid, SysUserRole sysuserrole){
             return null;
@@ -49,15 +45,19 @@ public class SysUserRoleFallback implements SysUserRoleFeignClient{
             return false;
      }
 
-    public SysUserRole create(SysUserRole sysuserrole){
-            return null;
-     }
-    public Boolean createBatch(List<SysUserRole> sysuserroles){
-            return false;
-     }
-
     public SysUserRole get(String userroleid){
             return null;
+     }
+
+
+    public SysUserRole getDraft(){
+            return null;
+    }
+
+
+
+    public Boolean checkKey(SysUserRole sysuserrole){
+            return false;
      }
 
 

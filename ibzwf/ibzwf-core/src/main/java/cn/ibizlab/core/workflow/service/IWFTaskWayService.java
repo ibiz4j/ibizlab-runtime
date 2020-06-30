@@ -23,15 +23,15 @@ import cn.ibizlab.core.workflow.filter.WFTaskWaySearchContext;
  */
 public interface IWFTaskWayService{
 
-    boolean checkKey(WFTaskWay et) ;
     boolean create(WFTaskWay et) ;
     void createBatch(List<WFTaskWay> list) ;
-    WFTaskWay getDraft(WFTaskWay et) ;
-    WFTaskWay get(String key) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
     boolean update(WFTaskWay et) ;
     void updateBatch(List<WFTaskWay> list) ;
+    boolean remove(String key) ;
+    void removeBatch(Collection<String> idList) ;
+    WFTaskWay get(String key) ;
+    WFTaskWay getDraft(WFTaskWay et) ;
+    boolean checkKey(WFTaskWay et) ;
     boolean save(WFTaskWay et) ;
     void saveBatch(List<WFTaskWay> list) ;
     Page<WFTaskWay> searchDefault(WFTaskWaySearchContext context) ;

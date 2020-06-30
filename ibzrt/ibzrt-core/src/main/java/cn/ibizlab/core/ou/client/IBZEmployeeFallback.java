@@ -23,10 +23,10 @@ public class IBZEmployeeFallback implements IBZEmployeeFeignClient{
             return null;
      }
 
-    public Boolean remove(String userid){
-            return false;
+    public IBZEmployee create(IBZEmployee ibzemployee){
+            return null;
      }
-    public Boolean removeBatch(Collection<String> idList){
+    public Boolean createBatch(List<IBZEmployee> ibzemployees){
             return false;
      }
 
@@ -38,26 +38,17 @@ public class IBZEmployeeFallback implements IBZEmployeeFeignClient{
      }
 
 
-    public Boolean checkKey(IBZEmployee ibzemployee){
+    public Boolean remove(String userid){
             return false;
      }
-
+    public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
 
     public IBZEmployee get(String userid){
             return null;
      }
 
-
-    public Boolean save(IBZEmployee ibzemployee){
-            return false;
-     }
-    public Boolean saveBatch(List<IBZEmployee> ibzemployees){
-            return false;
-     }
-
-    public IBZEmployee initPwd( String userid, IBZEmployee ibzemployee){
-            return null;
-     }
 
     public IBZEmployee getDraft(){
             return null;
@@ -65,10 +56,19 @@ public class IBZEmployeeFallback implements IBZEmployeeFeignClient{
 
 
 
-    public IBZEmployee create(IBZEmployee ibzemployee){
+    public Boolean checkKey(IBZEmployee ibzemployee){
+            return false;
+     }
+
+
+    public IBZEmployee initPwd( String userid, IBZEmployee ibzemployee){
             return null;
      }
-    public Boolean createBatch(List<IBZEmployee> ibzemployees){
+
+    public Boolean save(IBZEmployee ibzemployee){
+            return false;
+     }
+    public Boolean saveBatch(List<IBZEmployee> ibzemployees){
             return false;
      }
 

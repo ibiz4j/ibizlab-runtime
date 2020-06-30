@@ -23,21 +23,12 @@ public class WFProcessInstanceFallback implements WFProcessInstanceFeignClient{
             return null;
      }
 
-    public WFProcessInstance getDraft(){
-            return null;
-    }
-
-
-
-    public WFProcessInstance get(String id){
+    public WFProcessInstance create(WFProcessInstance wfprocessinstance){
             return null;
      }
-
-
-    public Boolean checkKey(WFProcessInstance wfprocessinstance){
+    public Boolean createBatch(List<WFProcessInstance> wfprocessinstances){
             return false;
      }
-
 
     public WFProcessInstance update(String id, WFProcessInstance wfprocessinstance){
             return null;
@@ -47,24 +38,33 @@ public class WFProcessInstanceFallback implements WFProcessInstanceFeignClient{
      }
 
 
-    public Boolean save(WFProcessInstance wfprocessinstance){
-            return false;
-     }
-    public Boolean saveBatch(List<WFProcessInstance> wfprocessinstances){
-            return false;
-     }
-
-    public WFProcessInstance create(WFProcessInstance wfprocessinstance){
-            return null;
-     }
-    public Boolean createBatch(List<WFProcessInstance> wfprocessinstances){
-            return false;
-     }
-
     public Boolean remove(String id){
             return false;
      }
     public Boolean removeBatch(Collection<String> idList){
+            return false;
+     }
+
+    public WFProcessInstance get(String id){
+            return null;
+     }
+
+
+    public WFProcessInstance getDraft(){
+            return null;
+    }
+
+
+
+    public Boolean checkKey(WFProcessInstance wfprocessinstance){
+            return false;
+     }
+
+
+    public Boolean save(WFProcessInstance wfprocessinstance){
+            return false;
+     }
+    public Boolean saveBatch(List<WFProcessInstance> wfprocessinstances){
             return false;
      }
 

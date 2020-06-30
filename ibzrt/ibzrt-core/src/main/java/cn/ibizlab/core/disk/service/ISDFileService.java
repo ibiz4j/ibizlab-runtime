@@ -23,17 +23,17 @@ import cn.ibizlab.core.disk.filter.SDFileSearchContext;
  */
 public interface ISDFileService{
 
-    boolean save(SDFile et) ;
-    void saveBatch(List<SDFile> list) ;
     boolean create(SDFile et) ;
     void createBatch(List<SDFile> list) ;
+    boolean update(SDFile et) ;
+    void updateBatch(List<SDFile> list) ;
     boolean remove(String key) ;
     void removeBatch(Collection<String> idList) ;
     SDFile get(String key) ;
     SDFile getDraft(SDFile et) ;
-    boolean update(SDFile et) ;
-    void updateBatch(List<SDFile> list) ;
     boolean checkKey(SDFile et) ;
+    boolean save(SDFile et) ;
+    void saveBatch(List<SDFile> list) ;
     Page<SDFile> searchDefault(SDFileSearchContext context) ;
 
 }

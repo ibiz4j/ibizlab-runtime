@@ -59,7 +59,7 @@ export default class SysUserRoleServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Create接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -67,41 +67,41 @@ export default class SysUserRoleServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysUserRoleServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysuser && context.sysuserrole){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
-        }
-        if(context.sysrole && context.sysuserrole){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
-        }
-        let res:any = await Http.getInstance().post(`/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
-        return res;
-    }
-
-    /**
-     * GetDraft接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysUserRoleServiceBase
-     */
-    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysuser && true){
-            let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}/sysuserroles/getdraft`,isloading);
-            res.data.sysuserrole = data.sysuserrole;
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            if(!data.srffrontuf || data.srffrontuf !== "1"){
+                data[this.APPDEKEY] = null;
+            }
+            if(data.srffrontuf){
+                delete data.srffrontuf;
+            }
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles`,data,isloading);
         }
         if(context.sysrole && true){
-            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysuserroles/getdraft`,isloading);
-            res.data.sysuserrole = data.sysuserrole;
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            if(!data.srffrontuf || data.srffrontuf !== "1"){
+                data[this.APPDEKEY] = null;
+            }
+            if(data.srffrontuf){
+                delete data.srffrontuf;
+            }
+            let tempContext:any = JSON.parse(JSON.stringify(context));
+            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles`,data,isloading);
         }
-        let res:any = await  Http.getInstance().get(`/sysuserroles/getdraft`,isloading);
-        res.data.sysuserrole = data.sysuserrole;
+        let masterData:any = {};
+        Object.assign(data,masterData);
+        if(!data.srffrontuf || data.srffrontuf !== "1"){
+            data[this.APPDEKEY] = null;
+        }
+        if(data.srffrontuf){
+            delete data.srffrontuf;
+        }
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        let res:any = await Http.getInstance().post(`/sysuserroles`,data,isloading);
         return res;
     }
 
@@ -152,53 +152,6 @@ export default class SysUserRoleServiceBase extends EntityService {
     }
 
     /**
-     * Create接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysUserRoleServiceBase
-     */
-    public async Create(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysuser && true){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            if(!data.srffrontuf || data.srffrontuf !== "1"){
-                data[this.APPDEKEY] = null;
-            }
-            if(data.srffrontuf){
-                delete data.srffrontuf;
-            }
-            let tempContext:any = JSON.parse(JSON.stringify(context));
-            let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles`,data,isloading);
-        }
-        if(context.sysrole && true){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            if(!data.srffrontuf || data.srffrontuf !== "1"){
-                data[this.APPDEKEY] = null;
-            }
-            if(data.srffrontuf){
-                delete data.srffrontuf;
-            }
-            let tempContext:any = JSON.parse(JSON.stringify(context));
-            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles`,data,isloading);
-        }
-        let masterData:any = {};
-        Object.assign(data,masterData);
-        if(!data.srffrontuf || data.srffrontuf !== "1"){
-            data[this.APPDEKEY] = null;
-        }
-        if(data.srffrontuf){
-            delete data.srffrontuf;
-        }
-        let tempContext:any = JSON.parse(JSON.stringify(context));
-        let res:any = await Http.getInstance().post(`/sysuserroles`,data,isloading);
-        return res;
-    }
-
-    /**
      * Get接口方法
      *
      * @param {*} [context={}]
@@ -215,6 +168,53 @@ export default class SysUserRoleServiceBase extends EntityService {
             let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}`,isloading);
         }
         let res:any = await Http.getInstance().get(`/sysuserroles/${context.sysuserrole}`,isloading);
+        return res;
+    }
+
+    /**
+     * GetDraft接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysUserRoleServiceBase
+     */
+    public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysuser && true){
+            let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}/sysuserroles/getdraft`,isloading);
+            res.data.sysuserrole = data.sysuserrole;
+        }
+        if(context.sysrole && true){
+            let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}/sysuserroles/getdraft`,isloading);
+            res.data.sysuserrole = data.sysuserrole;
+        }
+        let res:any = await  Http.getInstance().get(`/sysuserroles/getdraft`,isloading);
+        res.data.sysuserrole = data.sysuserrole;
+        return res;
+    }
+
+    /**
+     * CheckKey接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysUserRoleServiceBase
+     */
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysuser && context.sysuserrole){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
+        }
+        if(context.sysrole && context.sysuserrole){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
+        }
+        let res:any = await Http.getInstance().post(`/sysuserroles/${context.sysuserrole}/checkkey`,data,isloading);
         return res;
     }
 

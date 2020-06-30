@@ -23,15 +23,11 @@ public interface IBZPostFeignClient {
     Page<IBZPost> select();
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/ibzposts/{postid}")
-    IBZPost get(@PathVariable("postid") String postid);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts")
+    IBZPost create(@RequestBody IBZPost ibzpost);
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts/save")
-    Boolean save(@RequestBody IBZPost ibzpost);
-
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts/save")
-    Boolean saveBatch(@RequestBody List<IBZPost> ibzposts);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts/batch")
+    Boolean createBatch(@RequestBody List<IBZPost> ibzposts);
 
 
     @RequestMapping(method = RequestMethod.PUT, value = "/ibzposts/{postid}")
@@ -41,10 +37,6 @@ public interface IBZPostFeignClient {
     Boolean updateBatch(@RequestBody List<IBZPost> ibzposts);
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts/checkkey")
-    Boolean checkKey(@RequestBody IBZPost ibzpost);
-
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/ibzposts/{postid}")
     Boolean remove(@PathVariable("postid") String postid);
 
@@ -52,15 +44,23 @@ public interface IBZPostFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/ibzposts/{postid}")
+    IBZPost get(@PathVariable("postid") String postid);
+
+
     @RequestMapping(method = RequestMethod.GET, value = "/ibzposts/getdraft")
     IBZPost getDraft();
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts")
-    IBZPost create(@RequestBody IBZPost ibzpost);
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts/checkkey")
+    Boolean checkKey(@RequestBody IBZPost ibzpost);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts/batch")
-    Boolean createBatch(@RequestBody List<IBZPost> ibzposts);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts/save")
+    Boolean save(@RequestBody IBZPost ibzpost);
+
+    @RequestMapping(method = RequestMethod.POST, value = "/ibzposts/save")
+    Boolean saveBatch(@RequestBody List<IBZPost> ibzposts);
 
 
 

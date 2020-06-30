@@ -23,8 +23,18 @@ public class SysRolePermissionFallback implements SysRolePermissionFeignClient{
             return null;
      }
 
-    public SysRolePermission get(String rolepermissionid){
+    public SysRolePermission create(SysRolePermission sysrolepermission){
             return null;
+     }
+    public Boolean createBatch(List<SysRolePermission> sysrolepermissions){
+            return false;
+     }
+
+    public SysRolePermission update(String rolepermissionid, SysRolePermission sysrolepermission){
+            return null;
+     }
+    public Boolean updateBatch(List<SysRolePermission> sysrolepermissions){
+            return false;
      }
 
 
@@ -35,18 +45,16 @@ public class SysRolePermissionFallback implements SysRolePermissionFeignClient{
             return false;
      }
 
+    public SysRolePermission get(String rolepermissionid){
+            return null;
+     }
+
+
     public SysRolePermission getDraft(){
             return null;
     }
 
 
-
-    public SysRolePermission create(SysRolePermission sysrolepermission){
-            return null;
-     }
-    public Boolean createBatch(List<SysRolePermission> sysrolepermissions){
-            return false;
-     }
 
     public Boolean checkKey(SysRolePermission sysrolepermission){
             return false;
@@ -59,14 +67,6 @@ public class SysRolePermissionFallback implements SysRolePermissionFeignClient{
     public Boolean saveBatch(List<SysRolePermission> sysrolepermissions){
             return false;
      }
-
-    public SysRolePermission update(String rolepermissionid, SysRolePermission sysrolepermission){
-            return null;
-     }
-    public Boolean updateBatch(List<SysRolePermission> sysrolepermissions){
-            return false;
-     }
-
 
     public Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context){
             return null;

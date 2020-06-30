@@ -58,6 +58,20 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
 
     @Override
     @Transactional
+    public boolean create(IBZPost et) {
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
+        CachedBeanCopier.copy(get(et.getPostid()),et);
+        return true;
+    }
+
+    @Override
+    public void createBatch(List<IBZPost> list) {
+        this.saveBatch(list,batchSize);
+    }
+
+    @Override
+    @Transactional
     public boolean update(IBZPost et) {
         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("postid",et.getPostid())))
             return false;
@@ -71,10 +85,39 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
     }
 
     @Override
+    @Transactional
+    public boolean remove(String key) {
+        boolean result=removeById(key);
+        return result ;
+    }
+
+    @Override
+    public void removeBatch(Collection<String> idList) {
+        removeByIds(idList);
+    }
+
+    @Override
+    @Transactional
+    public IBZPost get(String key) {
+        IBZPost et = getById(key);
+        if(et==null){
+            et=new IBZPost();
+            et.setPostid(key);
+        }
+        else{
+        }
+        return et;
+    }
+
+    @Override
     public IBZPost getDraft(IBZPost et) {
         return et;
     }
 
+    @Override
+    public boolean checkKey(IBZPost et) {
+        return (!ObjectUtils.isEmpty(et.getPostid()))&&(!Objects.isNull(this.getById(et.getPostid())));
+    }
     @Override
     @Transactional
     public boolean save(IBZPost et) {
@@ -104,49 +147,6 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
     @Override
     public void saveBatch(List<IBZPost> list) {
         saveOrUpdateBatch(list,batchSize);
-    }
-
-    @Override
-    public boolean checkKey(IBZPost et) {
-        return (!ObjectUtils.isEmpty(et.getPostid()))&&(!Objects.isNull(this.getById(et.getPostid())));
-    }
-    @Override
-    @Transactional
-    public boolean remove(String key) {
-        boolean result=removeById(key);
-        return result ;
-    }
-
-    @Override
-    public void removeBatch(Collection<String> idList) {
-        removeByIds(idList);
-    }
-
-    @Override
-    @Transactional
-    public IBZPost get(String key) {
-        IBZPost et = getById(key);
-        if(et==null){
-            et=new IBZPost();
-            et.setPostid(key);
-        }
-        else{
-        }
-        return et;
-    }
-
-    @Override
-    @Transactional
-    public boolean create(IBZPost et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
-            return false;
-        CachedBeanCopier.copy(get(et.getPostid()),et);
-        return true;
-    }
-
-    @Override
-    public void createBatch(List<IBZPost> list) {
-        this.saveBatch(list,batchSize);
     }
 
 

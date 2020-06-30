@@ -23,12 +23,20 @@ public class WFSystemFallback implements WFSystemFeignClient{
             return null;
      }
 
-    public Boolean save(WFSystem wfsystem){
+    public WFSystem create(WFSystem wfsystem){
+            return null;
+     }
+    public Boolean createBatch(List<WFSystem> wfsystems){
             return false;
      }
-    public Boolean saveBatch(List<WFSystem> wfsystems){
+
+    public WFSystem update(String pssystemid, WFSystem wfsystem){
+            return null;
+     }
+    public Boolean updateBatch(List<WFSystem> wfsystems){
             return false;
      }
+
 
     public Boolean remove(String pssystemid){
             return false;
@@ -48,25 +56,17 @@ public class WFSystemFallback implements WFSystemFeignClient{
 
 
 
-    public WFSystem create(WFSystem wfsystem){
-            return null;
-     }
-    public Boolean createBatch(List<WFSystem> wfsystems){
-            return false;
-     }
-
     public Boolean checkKey(WFSystem wfsystem){
             return false;
      }
 
 
-    public WFSystem update(String pssystemid, WFSystem wfsystem){
-            return null;
-     }
-    public Boolean updateBatch(List<WFSystem> wfsystems){
+    public Boolean save(WFSystem wfsystem){
             return false;
      }
-
+    public Boolean saveBatch(List<WFSystem> wfsystems){
+            return false;
+     }
 
     public Page<WFSystem> searchDefault(WFSystemSearchContext context){
             return null;

@@ -57,30 +57,6 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     }
 
     @Override
-    @Transactional
-    public boolean save(WFProcessNode et) {
-        if(et.getUsertaskid()==null) et.setUsertaskid((String)et.getDefaultKey(true));
-        if(!wFProcessNodeFeignClient.save(et))
-            return false;
-        return true;
-    }
-
-    @Override
-    public void saveBatch(List<WFProcessNode> list) {
-        wFProcessNodeFeignClient.saveBatch(list) ;
-    }
-
-    @Override
-    public boolean remove(String usertaskid) {
-        boolean result=wFProcessNodeFeignClient.remove(usertaskid) ;
-        return result;
-    }
-
-    public void removeBatch(Collection<String> idList){
-        wFProcessNodeFeignClient.removeBatch(idList);
-    }
-
-    @Override
     public boolean update(WFProcessNode et) {
         WFProcessNode rt = wFProcessNodeFeignClient.update(et.getUsertaskid(),et);
         if(rt==null)
@@ -95,9 +71,13 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     }
 
     @Override
-    public WFProcessNode getDraft(WFProcessNode et) {
-        et=wFProcessNodeFeignClient.getDraft();
-        return et;
+    public boolean remove(String usertaskid) {
+        boolean result=wFProcessNodeFeignClient.remove(usertaskid) ;
+        return result;
+    }
+
+    public void removeBatch(Collection<String> idList){
+        wFProcessNodeFeignClient.removeBatch(idList);
     }
 
     @Override
@@ -113,9 +93,29 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     }
 
     @Override
+    public WFProcessNode getDraft(WFProcessNode et) {
+        et=wFProcessNodeFeignClient.getDraft();
+        return et;
+    }
+
+    @Override
     public boolean checkKey(WFProcessNode et) {
         return wFProcessNodeFeignClient.checkKey(et);
     }
+    @Override
+    @Transactional
+    public boolean save(WFProcessNode et) {
+        if(et.getUsertaskid()==null) et.setUsertaskid((String)et.getDefaultKey(true));
+        if(!wFProcessNodeFeignClient.save(et))
+            return false;
+        return true;
+    }
+
+    @Override
+    public void saveBatch(List<WFProcessNode> list) {
+        wFProcessNodeFeignClient.saveBatch(list) ;
+    }
+
 
 
 
