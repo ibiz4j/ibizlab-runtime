@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.ou.domain.IBZEmployee;
 import cn.ibizlab.core.ou.service.IIBZEmployeeService;
 import cn.ibizlab.core.ou.filter.IBZEmployeeSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"人员" })
@@ -67,10 +68,10 @@ public class IBZEmployeeResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/{ibzemployee_id}/initpwd")
     @Transactional
     public ResponseEntity<IBZEmployeeDTO> initPwd(@PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
-        IBZEmployee ibzemployee = ibzemployeeMapping.toDomain(ibzemployeedto);
-        ibzemployee.setUserid(ibzemployee_id);
-        ibzemployee = ibzemployeeService.initPwd(ibzemployee);
-        ibzemployeedto = ibzemployeeMapping.toDto(ibzemployee);
+        IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
+        domain.setUserid(ibzemployee_id);
+        domain = ibzemployeeService.initPwd(domain);
+        ibzemployeedto = ibzemployeeMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeedto);
     }
 
@@ -99,6 +100,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.checkKey(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @VersionCheck(entity = "ibzemployee" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzou-IBZEmployee-Update')")
     @ApiOperation(value = "更新人员", tags = {"人员" },  notes = "更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzemployees/{ibzemployee_id}")
@@ -228,6 +230,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.checkKey(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @VersionCheck(entity = "ibzemployee" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzou-IBZEmployee-Update')")
     @ApiOperation(value = "根据部门更新人员", tags = {"人员" },  notes = "根据部门更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}")
@@ -372,6 +375,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.checkKey(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @VersionCheck(entity = "ibzemployee" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzou-IBZEmployee-Update')")
     @ApiOperation(value = "根据单位机构更新人员", tags = {"人员" },  notes = "根据单位机构更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}")
@@ -516,6 +520,7 @@ public class IBZEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(ibzemployeeService.checkKey(ibzemployeeMapping.toDomain(ibzemployeedto)));
     }
 
+    @VersionCheck(entity = "ibzemployee" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.ibzemployeeService.get(#ibzemployee_id),'ibzou-IBZEmployee-Update')")
     @ApiOperation(value = "根据单位机构部门更新人员", tags = {"人员" },  notes = "根据单位机构部门更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}")

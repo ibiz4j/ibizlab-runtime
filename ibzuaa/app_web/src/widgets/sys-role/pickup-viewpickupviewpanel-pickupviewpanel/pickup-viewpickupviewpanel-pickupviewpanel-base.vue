@@ -24,6 +24,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import SysRoleService from '@/service/sys-role/sys-role-service';
 import PickupViewpickupviewpanelService from './pickup-viewpickupviewpanel-pickupviewpanel-service';
 

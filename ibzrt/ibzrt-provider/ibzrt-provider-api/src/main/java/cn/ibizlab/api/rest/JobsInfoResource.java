@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.task.domain.JobsInfo;
 import cn.ibizlab.core.task.service.IJobsInfoService;
 import cn.ibizlab.core.task.filter.JobsInfoSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"任务信息" })
@@ -50,10 +51,10 @@ public class JobsInfoResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/start")
 
     public ResponseEntity<JobsInfoDTO> start(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
-        JobsInfo jobsinfo = jobsinfoMapping.toDomain(jobsinfodto);
-        jobsinfo.setId(jobsinfo_id);
-        jobsinfo = jobsinfoService.start(jobsinfo);
-        jobsinfodto = jobsinfoMapping.toDto(jobsinfo);
+        JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
+        domain.setId(jobsinfo_id);
+        domain = jobsinfoService.start(domain);
+        jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
     }
 
@@ -121,10 +122,10 @@ public class JobsInfoResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/execute")
 
     public ResponseEntity<JobsInfoDTO> execute(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
-        JobsInfo jobsinfo = jobsinfoMapping.toDomain(jobsinfodto);
-        jobsinfo.setId(jobsinfo_id);
-        jobsinfo = jobsinfoService.execute(jobsinfo);
-        jobsinfodto = jobsinfoMapping.toDto(jobsinfo);
+        JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
+        domain.setId(jobsinfo_id);
+        domain = jobsinfoService.execute(domain);
+        jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
     }
 
@@ -146,10 +147,10 @@ public class JobsInfoResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/stop")
 
     public ResponseEntity<JobsInfoDTO> stop(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
-        JobsInfo jobsinfo = jobsinfoMapping.toDomain(jobsinfodto);
-        jobsinfo.setId(jobsinfo_id);
-        jobsinfo = jobsinfoService.stop(jobsinfo);
-        jobsinfodto = jobsinfoMapping.toDto(jobsinfo);
+        JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
+        domain.setId(jobsinfo_id);
+        domain = jobsinfoService.stop(domain);
+        jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
     }
 

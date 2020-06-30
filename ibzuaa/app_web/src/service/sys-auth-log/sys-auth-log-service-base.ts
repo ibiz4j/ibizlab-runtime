@@ -48,7 +48,8 @@ export default class SysAuthLogServiceBase extends EntityService {
      * @memberof SysAuthLogServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/sysauthlogs/${context.sysauthlog}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/sysauthlogs/${context.sysauthlog}/select`,isloading);
+        return res;
     }
 
     /**
@@ -79,7 +80,7 @@ export default class SysAuthLogServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/sysauthlogs/${context.sysauthlog}`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -92,7 +93,8 @@ export default class SysAuthLogServiceBase extends EntityService {
      * @memberof SysAuthLogServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/sysauthlogs/${context.sysauthlog}`,isloading);
+        let res:any = await Http.getInstance().delete(`/sysauthlogs/${context.sysauthlog}`,isloading);
+        return res;
     }
 
     /**
@@ -128,7 +130,8 @@ export default class SysAuthLogServiceBase extends EntityService {
      * @memberof SysAuthLogServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/sysauthlogs/${context.sysauthlog}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/sysauthlogs/${context.sysauthlog}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -141,8 +144,8 @@ export default class SysAuthLogServiceBase extends EntityService {
      * @memberof SysAuthLogServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/sysauthlogs/${context.sysauthlog}`,isloading);
-            return res;
+        let res:any = await Http.getInstance().get(`/sysauthlogs/${context.sysauthlog}`,isloading);
+        return res;
     }
 
     /**
@@ -158,7 +161,7 @@ export default class SysAuthLogServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysauthlogs/${context.sysauthlog}/save`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -172,6 +175,7 @@ export default class SysAuthLogServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/sysauthlogs/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/sysauthlogs/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

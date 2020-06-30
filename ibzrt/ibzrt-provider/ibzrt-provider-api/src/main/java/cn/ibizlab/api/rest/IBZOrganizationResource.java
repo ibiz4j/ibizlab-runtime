@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.ou.domain.IBZOrganization;
 import cn.ibizlab.core.ou.service.IIBZOrganizationService;
 import cn.ibizlab.core.ou.filter.IBZOrganizationSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"单位机构" })
@@ -110,6 +111,7 @@ public class IBZOrganizationResource {
         return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationMapping.toDto(ibzorganizationService.getDraft(new IBZOrganization())));
     }
 
+    @VersionCheck(entity = "ibzorganization" , versionfield = "updatedate")
     @ApiOperation(value = "更新单位机构", tags = {"单位机构" },  notes = "更新单位机构")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}")
 

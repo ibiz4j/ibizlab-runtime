@@ -46,15 +46,15 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
+    protected cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZPostService ibzpostService;
+    protected cn.ibizlab.core.ou.service.IIBZPostService ibzpostService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZTeamService ibzteamService;
+    protected cn.ibizlab.core.ou.service.IIBZTeamService ibzteamService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     public boolean checkKey(IBZTeamMember et) {
@@ -265,6 +265,5 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
 
 
 }
-
 
 

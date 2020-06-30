@@ -49,9 +49,10 @@ export default class IBZDepartmentServiceBase extends EntityService {
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment){
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/select`,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/select`,isloading);
         }
-            return Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}/select`,isloading);
+        return res;
     }
 
     /**
@@ -107,7 +108,6 @@ export default class IBZDepartmentServiceBase extends EntityService {
             let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments`,data,isloading);
             this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
         }
         let masterData:any = {};
         let ibzemployeesData:any = [];
@@ -168,12 +168,11 @@ export default class IBZDepartmentServiceBase extends EntityService {
             let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
         }
-            let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}`,isloading);
+        let res:any = await Http.getInstance().get(`/ibzdepartments/${context.ibzdepartment}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -222,7 +221,6 @@ export default class IBZDepartmentServiceBase extends EntityService {
             let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
         }
         let masterData:any = {};
         let ibzemployeesData:any = [];
@@ -259,7 +257,7 @@ export default class IBZDepartmentServiceBase extends EntityService {
             let res:any = await  Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -308,9 +306,9 @@ export default class IBZDepartmentServiceBase extends EntityService {
             let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}/checkkey`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
         }
-            return Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/ibzdepartments/${context.ibzdepartment}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -328,7 +326,6 @@ export default class IBZDepartmentServiceBase extends EntityService {
             res.data.ibzdepartment = data.ibzdepartment;
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
         }
         let res:any = await  Http.getInstance().get(`/ibzdepartments/getdraft`,isloading);
         res.data.ibzdepartment = data.ibzdepartment;
@@ -348,9 +345,10 @@ export default class IBZDepartmentServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && context.ibzdepartment){
-            return Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}`,isloading);
+            let res:any = await Http.getInstance().delete(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}`,isloading);
         }
-            return Http.getInstance().delete(`/ibzdepartments/${context.ibzdepartment}`,isloading);
+        let res:any = await Http.getInstance().delete(`/ibzdepartments/${context.ibzdepartment}`,isloading);
+        return res;
     }
 
     /**
@@ -399,7 +397,6 @@ export default class IBZDepartmentServiceBase extends EntityService {
             let res:any = await Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/${context.ibzdepartment}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
         }
         let masterData:any = {};
         let ibzemployeesData:any = [];
@@ -436,7 +433,7 @@ export default class IBZDepartmentServiceBase extends EntityService {
             let res:any = await  Http.getInstance().put(`/ibzdepartments/${context.ibzdepartment}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
             this.tempStorage.setItem(context.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -451,9 +448,10 @@ export default class IBZDepartmentServiceBase extends EntityService {
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.ibzorganization && true){
             let tempData:any = JSON.parse(JSON.stringify(data));
-            return Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/fetchdefault`,tempData,isloading);
+            let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/ibzdepartments/fetchdefault`,tempData,isloading);
         }
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/ibzdepartments/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/ibzdepartments/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

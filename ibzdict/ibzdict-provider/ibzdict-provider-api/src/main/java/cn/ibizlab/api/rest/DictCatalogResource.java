@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.dict.domain.DictCatalog;
 import cn.ibizlab.core.dict.service.IDictCatalogService;
 import cn.ibizlab.core.dict.filter.DictCatalogSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"字典" })
@@ -65,6 +66,7 @@ public class DictCatalogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @VersionCheck(entity = "dictcatalog" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Update-all')")
     @ApiOperation(value = "更新字典", tags = {"字典" },  notes = "更新字典")
 	@RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/{dictcatalog_id}")

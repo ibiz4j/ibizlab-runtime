@@ -131,6 +131,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import WFProcessDefinitionService from '@/service/wfprocess-definition/wfprocess-definition-service';
 import MainService from './main-grid-service';
 
@@ -259,6 +260,15 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 获取多项数据
@@ -565,35 +575,40 @@ export default class MainBase extends Vue implements ControlInterface {
             label: 'DefinitionKey',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.definitionkey',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'definitionname',
             label: '流程定义名称',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.definitionname',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'pssystemid',
             label: '系统标识',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.pssystemid',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'modelversion',
             label: '模型版本',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.modelversion',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'modelenable',
             label: '模型是否启用',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.modelenable',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
     ]
 
@@ -1117,6 +1132,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"WFProcessDefinition")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -1136,6 +1161,9 @@ export default class MainBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 
@@ -1582,14 +1610,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
-        let hasRowEdit:any = {
-          'definitionkey':false,
-          'definitionname':false,
-          'pssystemid':false,
-          'modelversion':false,
-          'modelenable':false,
+        if(args.column.property){
+          let col = this.allColumns.find((item:any)=>{
+              return Object.is(args.column.property,item.name);
+          })
+          if(col !== undefined){
+              if(col.isEnableRowEdit && this.actualIsOpenEdit ){
+                  return 'edit-cell';
+              }
+          }
         }
-        return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
+        return 'info-cell';
     }
 
     /**

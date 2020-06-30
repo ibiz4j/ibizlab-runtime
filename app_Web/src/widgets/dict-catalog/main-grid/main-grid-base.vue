@@ -129,6 +129,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import DictCatalogService from '@/service/dict-catalog/dict-catalog-service';
 import MainService from './main-grid-service';
 
@@ -257,6 +258,15 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 获取多项数据
@@ -549,35 +559,40 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '代码',
             langtag: 'entities.dictcatalog.main_grid.columns.ccode',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'cname',
             label: '名称',
             langtag: 'entities.dictcatalog.main_grid.columns.cname',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'cgroup',
             label: '分组',
             langtag: 'entities.dictcatalog.main_grid.columns.cgroup',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'memo',
             label: '备注',
             langtag: 'entities.dictcatalog.main_grid.columns.memo',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'updatedate',
             label: '最后修改时间',
             langtag: 'entities.dictcatalog.main_grid.columns.updatedate',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
     ]
 
@@ -1093,6 +1108,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"DictCatalog")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -1112,6 +1137,9 @@ export default class MainBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 
@@ -1558,14 +1586,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
-        let hasRowEdit:any = {
-          'ccode':false,
-          'cname':false,
-          'cgroup':false,
-          'memo':false,
-          'updatedate':false,
+        if(args.column.property){
+          let col = this.allColumns.find((item:any)=>{
+              return Object.is(args.column.property,item.name);
+          })
+          if(col !== undefined){
+              if(col.isEnableRowEdit && this.actualIsOpenEdit ){
+                  return 'edit-cell';
+              }
+          }
         }
-        return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
+        return 'info-cell';
     }
 
     /**

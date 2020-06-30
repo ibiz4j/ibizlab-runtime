@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.uaa.domain.SysRole;
 import cn.ibizlab.core.uaa.service.ISysRoleService;
 import cn.ibizlab.core.uaa.filter.SysRoleSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"系统角色" })
@@ -59,6 +60,7 @@ public class SysRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @VersionCheck(entity = "sysrole" , versionfield = "updatedate")
     @ApiOperation(value = "更新系统角色", tags = {"系统角色" },  notes = "更新系统角色")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{sysrole_id}")
 

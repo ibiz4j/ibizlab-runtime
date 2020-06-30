@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.workflow.domain.WFREModel;
 import cn.ibizlab.core.workflow.service.IWFREModelService;
 import cn.ibizlab.core.workflow.filter.WFREModelSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"流程模型" })

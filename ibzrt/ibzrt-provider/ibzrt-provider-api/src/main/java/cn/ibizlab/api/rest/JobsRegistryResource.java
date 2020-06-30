@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.task.domain.JobsRegistry;
 import cn.ibizlab.core.task.service.IJobsRegistryService;
 import cn.ibizlab.core.task.filter.JobsRegistrySearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"任务注册信息" })

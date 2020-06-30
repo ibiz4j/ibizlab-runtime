@@ -59,6 +59,7 @@ public interface IIBZDeptMemberService extends IService<IBZDeptMember>{
     boolean execute(String sql, Map param);
 
 
+
 }
 
 

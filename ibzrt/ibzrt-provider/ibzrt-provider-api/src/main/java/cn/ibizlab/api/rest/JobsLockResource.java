@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.task.domain.JobsLock;
 import cn.ibizlab.core.task.service.IJobsLockService;
 import cn.ibizlab.core.task.filter.JobsLockSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"任务锁" })

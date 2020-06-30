@@ -170,4 +170,8 @@ export default {
           YouYuan: '幼圆',
       },
     },
+    appFormGroup: {
+      hide: '隐藏字段',
+      showMore: '显示更多字段',
+    },
 };

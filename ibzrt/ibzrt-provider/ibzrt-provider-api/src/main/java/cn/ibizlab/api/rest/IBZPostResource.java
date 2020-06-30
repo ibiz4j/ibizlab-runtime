@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.ou.domain.IBZPost;
 import cn.ibizlab.core.ou.service.IIBZPostService;
 import cn.ibizlab.core.ou.filter.IBZPostSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"岗位" })

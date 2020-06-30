@@ -46,14 +46,14 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZDepartmentService ibzdepartmentService;
+    protected cn.ibizlab.core.ou.service.IIBZDepartmentService ibzdepartmentService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
+    protected cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
-    private cn.ibizlab.core.ou.service.IIBZOrganizationService ibzorganizationService = this;
+    protected cn.ibizlab.core.ou.service.IIBZOrganizationService ibzorganizationService = this;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     public boolean checkKey(IBZOrganization et) {
@@ -247,6 +247,5 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
     }
 
 }
-
 
 

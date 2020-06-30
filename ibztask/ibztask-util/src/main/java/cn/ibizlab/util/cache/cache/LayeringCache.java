@@ -94,8 +94,10 @@ public class LayeringCache extends AbstractValueAdaptingCache {
 
     @Override
     public void put(Object key, Object value) {
-        caffeineCache.put(key, value);
-        redisCache.put(key, value);
+        if(value!=null) {
+            caffeineCache.put(key, value);
+            redisCache.put(key, value);
+        }
     }
 
     @Override

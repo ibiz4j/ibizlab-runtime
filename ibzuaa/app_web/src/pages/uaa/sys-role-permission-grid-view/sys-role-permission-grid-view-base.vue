@@ -525,8 +525,8 @@ export default class SysRolePermissionGridViewBase extends Vue {
      *
      * @memberof SysRolePermissionGridViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'sys-role-permission-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -536,8 +536,8 @@ export default class SysRolePermissionGridViewBase extends Vue {
      *
      * @memberof SysRolePermissionGridViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'sys-role-permission-grid-view',tag:this.viewtag,srfkey:this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
@@ -1145,6 +1145,13 @@ export default class SysRolePermissionGridViewBase extends Vue {
      * @memberof SysRolePermissionGridView
      */
     public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+        if(!this.viewDefaultUsage){
+            if(Object.is(this.navModel,"route")){
+                this.initNavDataWithRoute(this.viewCacheData, false, true);
+            }else{
+                this.initNavDataWithTab(this.viewCacheData, false, true);
+            }
+        }
         let localContext:any = null;
         let localViewParam:any =null;
         const data: any = {};

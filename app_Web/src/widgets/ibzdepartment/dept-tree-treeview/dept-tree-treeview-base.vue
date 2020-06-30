@@ -54,6 +54,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import IBZDepartmentService from '@/service/ibzdepartment/ibzdepartment-service';
 import DeptTreeService from './dept-tree-treeview-service';
 
@@ -355,6 +356,15 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
     public expandedKeys: string[] = [];
 
     /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof DeptTreeBase
+     */
+    public appStateEvent: Subscription | undefined;
+
+    /**
      * 选中数据变更事件
      *
      * @public
@@ -433,6 +443,16 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"IBZDepartment")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -462,6 +482,9 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 

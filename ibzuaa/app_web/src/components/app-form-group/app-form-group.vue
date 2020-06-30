@@ -93,6 +93,11 @@
                 <template v-if="!Object.is(layoutType, 'FLEX')">
                     <row :gutter="10"><slot></slot></row>
                 </template>
+                <template v-if="isManageContainer">
+                    <i-button type="primary" :icon="manageContainerStatus?'ios-repeat':'ios-more'" @click="doManageContainer">
+                        {{manageContainerStatus?$t('components.appFormGroup.hide'):$t('components.appFormGroup.showMore')}}
+                    </i-button>
+                </template>
             </card>
             <template v-if="isShowCaption === false">
                 <slot></slot>
@@ -114,6 +119,22 @@ export default class AppFormGroup extends Vue {
      * @memberof AppFormGroup
      */
     @Prop() public caption?: string;
+
+    /**
+     * 是否为管理容器
+     *
+     * @type {string}
+     * @memberof AppFormGroup
+     */
+    @Prop({ default: false }) public isManageContainer?: boolean;
+    
+    /**
+     * 管理容器状态
+     *
+     * @type {string}
+     * @memberof AppFormGroup
+     */
+    @Prop({ default: false }) public manageContainerStatus?: boolean;
 
     /**
      * 内置界面样式
@@ -243,6 +264,16 @@ export default class AppFormGroup extends Vue {
      */
     public doUIAction($event: any, item: any): void {
         this.$emit('groupuiactionclick', { event: $event, item: item });
+    }
+
+    /**
+     * 操作管理容器
+     *
+     * @param {*} $event
+     * @memberof AppFormGroup
+     */
+    public doManageContainer(){
+        this.$emit('managecontainerclick');
     }
 }
 </script>

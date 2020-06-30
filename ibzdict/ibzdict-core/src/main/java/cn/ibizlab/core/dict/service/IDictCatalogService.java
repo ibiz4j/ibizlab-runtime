@@ -53,6 +53,7 @@ public interface IDictCatalogService extends IService<DictCatalog>{
     boolean execute(String sql, Map param);
 
 
+
 }
 
 

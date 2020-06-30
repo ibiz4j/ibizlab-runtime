@@ -46,25 +46,25 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZDeptMemberService ibzdeptmemberService;
+    protected cn.ibizlab.core.ou.service.IIBZDeptMemberService ibzdeptmemberService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZTeamMemberService ibzteammemberService;
+    protected cn.ibizlab.core.ou.service.IIBZTeamMemberService ibzteammemberService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZDepartmentService ibzdepartmentService;
+    protected cn.ibizlab.core.ou.service.IIBZDepartmentService ibzdepartmentService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZOrganizationService ibzorganizationService;
+    protected cn.ibizlab.core.ou.service.IIBZOrganizationService ibzorganizationService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZPostService ibzpostService;
+    protected cn.ibizlab.core.ou.service.IIBZPostService ibzpostService;
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.logic.IIBZEmployeesaveDeptMemberLogic savedeptmemberLogic;
+    protected cn.ibizlab.core.ou.service.logic.IIBZEmployeesaveDeptMemberLogic savedeptmemberLogic;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -306,6 +306,5 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     }
 
 }
-
 
 

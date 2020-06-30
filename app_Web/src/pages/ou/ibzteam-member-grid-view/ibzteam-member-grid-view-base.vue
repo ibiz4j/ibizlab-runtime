@@ -569,8 +569,8 @@ export default class IBZTeamMemberGridViewBase extends Vue {
      *
      * @memberof IBZTeamMemberGridViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'ibzteam-member-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.ibzteammember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -580,8 +580,8 @@ export default class IBZTeamMemberGridViewBase extends Vue {
      *
      * @memberof IBZTeamMemberGridViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'ibzteam-member-grid-view',tag:this.viewtag,srfkey:this.context.ibzteammember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
@@ -1248,6 +1248,13 @@ export default class IBZTeamMemberGridViewBase extends Vue {
      * @memberof IBZTeamMemberGridView
      */
     public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+        if(!this.viewDefaultUsage){
+            if(Object.is(this.navModel,"route")){
+                this.initNavDataWithRoute(this.viewCacheData, false, true);
+            }else{
+                this.initNavDataWithTab(this.viewCacheData, false, true);
+            }
+        }
         let localContext:any = null;
         let localViewParam:any =null;
         const data: any = {};

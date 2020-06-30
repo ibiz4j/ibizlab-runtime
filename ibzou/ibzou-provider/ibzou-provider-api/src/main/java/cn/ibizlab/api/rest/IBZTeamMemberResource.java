@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.ou.domain.IBZTeamMember;
 import cn.ibizlab.core.ou.service.IIBZTeamMemberService;
 import cn.ibizlab.core.ou.filter.IBZTeamMemberSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"组成员" })

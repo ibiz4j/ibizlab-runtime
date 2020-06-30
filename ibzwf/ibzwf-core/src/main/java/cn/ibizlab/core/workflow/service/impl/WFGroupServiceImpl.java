@@ -46,9 +46,9 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.workflow.service.IWFMemberService wfmemberService;
+    protected cn.ibizlab.core.workflow.service.IWFMemberService wfmemberService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -190,6 +190,5 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
 
 
 }
-
 
 

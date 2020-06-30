@@ -48,7 +48,8 @@ export default class SysAppServiceBase extends EntityService {
      * @memberof SysAppServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/sysapps/${context.sysapp}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/sysapps/${context.sysapp}/select`,isloading);
+        return res;
     }
 
     /**
@@ -64,7 +65,7 @@ export default class SysAppServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/sysapps/${context.sysapp}`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -92,7 +93,8 @@ export default class SysAppServiceBase extends EntityService {
      * @memberof SysAppServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/sysapps/${context.sysapp}`,isloading);
+        let res:any = await Http.getInstance().delete(`/sysapps/${context.sysapp}`,isloading);
+        return res;
     }
 
     /**
@@ -105,8 +107,8 @@ export default class SysAppServiceBase extends EntityService {
      * @memberof SysAppServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/sysapps/${context.sysapp}`,isloading);
-            return res;
+        let res:any = await Http.getInstance().get(`/sysapps/${context.sysapp}`,isloading);
+        return res;
     }
 
     /**
@@ -145,7 +147,7 @@ export default class SysAppServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysapps/${context.sysapp}/save`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -158,7 +160,8 @@ export default class SysAppServiceBase extends EntityService {
      * @memberof SysAppServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/sysapps/${context.sysapp}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/sysapps/${context.sysapp}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -172,6 +175,7 @@ export default class SysAppServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/sysapps/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/sysapps/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

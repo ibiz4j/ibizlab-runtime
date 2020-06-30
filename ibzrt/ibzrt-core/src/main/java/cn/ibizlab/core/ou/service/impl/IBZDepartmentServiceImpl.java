@@ -44,7 +44,7 @@ public class IBZDepartmentServiceImpl implements IIBZDepartmentService {
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
+    protected cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
     @Override
     @Transactional
@@ -199,6 +199,5 @@ public class IBZDepartmentServiceImpl implements IIBZDepartmentService {
 
 
 }
-
 
 

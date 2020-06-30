@@ -45,7 +45,7 @@ import org.springframework.util.StringUtils;
 public class JobsRegistryServiceImpl extends ServiceImpl<JobsRegistryMapper, JobsRegistry> implements IJobsRegistryService {
 
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -183,6 +183,5 @@ public class JobsRegistryServiceImpl extends ServiceImpl<JobsRegistryMapper, Job
 
 
 }
-
 
 

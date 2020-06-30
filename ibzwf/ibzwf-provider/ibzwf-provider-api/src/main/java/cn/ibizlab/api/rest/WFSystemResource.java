@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.workflow.domain.WFSystem;
 import cn.ibizlab.core.workflow.service.IWFSystemService;
 import cn.ibizlab.core.workflow.filter.WFSystemSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"系统" })

@@ -138,6 +138,10 @@ public class SysPSSystemAspect
     {
         if(StringUtils.isEmpty(system.getPssystemid())||system.getSysstructure()==null)
             return;
+        Object ignoreSyncPermission=system.get("ignoreSyncPermission");
+        if(ignoreSyncPermission!=null&&ignoreSyncPermission.equals(true))
+            return;
+
         Map<String,Integer> delPermission = new HashMap<>();
         sysPermissionService.list(new QueryWrapper<SysPermission>().select("sys_permissionid").eq("pssystemid",system.getPssystemid())).forEach(sysPermission -> delPermission.put(sysPermission.getPermissionid(),1));
         Set<SysPermission> list = system.getSysstructure().getSysPermissions(PermissionType.OPPRIV);

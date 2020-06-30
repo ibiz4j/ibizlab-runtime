@@ -30,53 +30,55 @@ import cn.ibizlab.core.disk.service.ISDFileService;
 import cn.ibizlab.util.helper.CachedBeanCopier;
 
 
-import cn.ibizlab.core.disk.repository.SDFileRepository;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.core.query.Query;
-import javax.annotation.Resource;
-import com.mongodb.QueryBuilder;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cn.ibizlab.core.disk.mapper.SDFileMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.StringUtils;
+
 /**
  * 实体[文件] 服务对象接口实现
  */
 @Slf4j
-@Service
-public class SDFileServiceImpl implements ISDFileService {
+@Service("SDFileServiceImpl")
+public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> implements ISDFileService {
 
-    @Autowired
-    private SDFileRepository repository;
+
+    protected int batchSize = 500;
 
     @Override
     @Transactional
     public boolean update(SDFile et) {
-        repository.save(et);
+        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("fileid",et.getId())))
+            return false;
         CachedBeanCopier.copy(get(et.getId()),et);
-        return true ;
+        return true;
     }
 
     @Override
     public void updateBatch(List<SDFile> list) {
-        repository.saveAll(list);
+        updateBatchById(list,batchSize);
     }
 
     @Override
     @Transactional
     public boolean create(SDFile et) {
-        repository.insert(et);
+        if(!this.retBool(this.baseMapper.insert(et)))
+            return false;
         CachedBeanCopier.copy(get(et.getId()),et);
-        return true ;
+        return true;
     }
 
     @Override
     public void createBatch(List<SDFile> list) {
-        repository.insert(list);
+        this.saveBatch(list,batchSize);
     }
 
     @Override
     public boolean checkKey(SDFile et) {
-        return repository.findById(et.getId()).isPresent();
+        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
     }
-
     @Override
     public SDFile getDraft(SDFile et) {
         return et;
@@ -85,74 +87,107 @@ public class SDFileServiceImpl implements ISDFileService {
     @Override
     @Transactional
     public SDFile get(String key) {
-        Optional<SDFile> result = repository.findById(key);
-        if(!result.isPresent()){
-            SDFile et=new SDFile();
+        SDFile et = getById(key);
+        if(et==null){
+            et=new SDFile();
             et.setId(key);
-            return et;
         }
         else{
-            SDFile et=result.get();
-            return et;
         }
+        return et;
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        repository.deleteById(key);
-        return true ;
+        boolean result=removeById(key);
+        return result ;
     }
 
     @Override
     public void removeBatch(Collection<String> idList) {
-        repository.deleteAll(repository.findAllById(idList));
+        removeByIds(idList);
     }
 
     @Override
     @Transactional
     public boolean save(SDFile et) {
-        repository.save(et);
-        CachedBeanCopier.copy(get(et.getId()),et);
-        return true ;
+        if(!saveOrUpdate(et))
+            return false;
+        return true;
     }
 
+    @Override
+    @Transactional(
+            rollbackFor = {Exception.class}
+    )
+    public boolean saveOrUpdate(SDFile et) {
+        if (null == et) {
+            return false;
+        } else {
+            return checkKey(et) ? this.update(et) : this.create(et);
+        }
+    }
+
+    @Override
+    public boolean saveBatch(Collection<SDFile> list) {
+        saveOrUpdateBatch(list,batchSize);
+        return true;
+    }
 
     @Override
     public void saveBatch(List<SDFile> list) {
-        repository.saveAll(list);
+        saveOrUpdateBatch(list,batchSize);
     }
 
 
-
-    
-
-    @Resource
-    private MongoTemplate mongoTemplate;
 
     /**
      * 查询集合 DEFAULT
      */
     @Override
     public Page<SDFile> searchDefault(SDFileSearchContext context) {
-        Query query = new BasicQuery(context.getSelectCond().get().toString());
-        long total = mongoTemplate.count(query, SDFile.class);
-        List<SDFile> list=mongoTemplate.find(query.with(context.getPageable()),SDFile.class);
-        return new PageImpl<SDFile>(list,context.getPageable(),total);
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SDFile> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+        return new PageImpl<SDFile>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 
+
+
+
+
+
+    @Override
+    public List<JSONObject> select(String sql, Map param){
+        return this.baseMapper.selectBySQL(sql,param);
+    }
+
+    @Override
+    @Transactional
+    public boolean execute(String sql , Map param){
+        if (sql == null || sql.isEmpty()) {
+            return false;
+        }
+        if (sql.toLowerCase().trim().startsWith("insert")) {
+            return this.baseMapper.insertBySQL(sql,param);
+        }
+        if (sql.toLowerCase().trim().startsWith("update")) {
+            return this.baseMapper.updateBySQL(sql,param);
+        }
+        if (sql.toLowerCase().trim().startsWith("delete")) {
+            return this.baseMapper.deleteBySQL(sql,param);
+        }
+        log.warn("暂未支持的SQL语法");
+        return true;
+    }
+
     @Override
     public List<SDFile> getSdfileByIds(List<String> ids) {
-        QueryBuilder permissionCond=new QueryBuilder();
-        permissionCond.and("id").in(ids);
-        Query query = new BasicQuery(permissionCond.get().toString());
-        return mongoTemplate.find(query,SDFile.class);
+         return this.listByIds(ids);
     }
 
     @Override
     public List<SDFile> getSdfileByEntities(List<SDFile> entities) {
-
         List ids =new ArrayList();
         for(SDFile entity : entities){
             Serializable id=entity.getId();
@@ -160,18 +195,12 @@ public class SDFileServiceImpl implements ISDFileService {
                 ids.add(id);
             }
         }
-        if(ids.size()>0){
-            QueryBuilder permissionCond=new QueryBuilder();
-            permissionCond.and("id").in(ids);
-            Query query = new BasicQuery(permissionCond.get().toString());
-            return mongoTemplate.find(query,SDFile.class);
-        }
+        if(ids.size()>0)
+           return this.listByIds(ids);
         else
-            return entities;
+           return entities;
     }
 
 }
-
-
 
 

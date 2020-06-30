@@ -538,8 +538,8 @@ export default class JobsInfoGridViewBase extends Vue {
      *
      * @memberof JobsInfoGridViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'jobs-info-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.jobsinfo,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -549,8 +549,8 @@ export default class JobsInfoGridViewBase extends Vue {
      *
      * @memberof JobsInfoGridViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'jobs-info-grid-view',tag:this.viewtag,srfkey:this.context.jobsinfo,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
@@ -1015,51 +1015,14 @@ export default class JobsInfoGridViewBase extends Vue {
     }
 
 
-    /**
-     * 打开编辑数据视图
-     *
-     * @param {any[]} args
-     * @param {*} [params]
-     * @param {*} [fullargs]
-     * @param {*} [$event]
-     * @param {*} [xData]
-     * @memberof JobsInfoGridView
-     */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
-        let localContext:any = null;
-        let localViewParam:any =null;
-        const data: any = {};
-        let tempContext = JSON.parse(JSON.stringify(this.context));
-        if(args.length >0){
-            Object.assign(tempContext,args[0]);
-        }
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
-        ];
-        const _this: any = this;
-        const openDrawer = (view: any, data: any) => {
-            let container: Subject<any> = this.$appdrawer.openDrawer(view, tempContext, data);
-            container.subscribe((result: any) => {
-                if (!result || !Object.is(result.ret, 'OK')) {
-                    return;
-                }
-                if (!xData || !(xData.refresh instanceof Function)) {
-                    return;
-                }
-                xData.refresh(result.datas);
-            });
-        }
-        const view: any = {
-            viewname: 'jobs-info-edit-view', 
-            height: 0, 
-            width: 0,  
-            title: this.$t('entities.jobsinfo.views.editview.title'),
-            placement: 'DRAWER_RIGHT',
-        };
-        openDrawer(view, data);
-    }
+!!!!模版产生代码错误:----
+Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+----
 
+----
+FTL stack trace ("~" means nesting-related):
+	- Failed at: #if ctrl.getPSControlContainer().getV...  [in template "TEMPLCODE_zh_CN" at line 43, column 5]
+----
 
     /**
      * 新建

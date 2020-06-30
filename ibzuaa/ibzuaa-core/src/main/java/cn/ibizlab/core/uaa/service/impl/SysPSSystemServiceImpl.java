@@ -45,7 +45,7 @@ import org.springframework.util.StringUtils;
 public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPSSystem> implements ISysPSSystemService {
 
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     public boolean checkKey(SysPSSystem et) {
@@ -192,6 +192,5 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
 
 
 }
-
 
 

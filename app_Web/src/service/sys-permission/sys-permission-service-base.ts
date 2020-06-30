@@ -48,7 +48,8 @@ export default class SysPermissionServiceBase extends EntityService {
      * @memberof SysPermissionServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/syspermissions/${context.syspermission}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}/select`,isloading);
+        return res;
     }
 
     /**
@@ -80,7 +81,7 @@ export default class SysPermissionServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/syspermissions/${context.syspermission}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
-            return res;
+        return res;
     }
 
     /**
@@ -109,7 +110,8 @@ export default class SysPermissionServiceBase extends EntityService {
      * @memberof SysPermissionServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/syspermissions/${context.syspermission}`,isloading);
+        let res:any = await Http.getInstance().delete(`/syspermissions/${context.syspermission}`,isloading);
+        return res;
     }
 
     /**
@@ -141,7 +143,7 @@ export default class SysPermissionServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/syspermissions/${context.syspermission}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
-            return res;
+        return res;
     }
 
     /**
@@ -193,7 +195,8 @@ export default class SysPermissionServiceBase extends EntityService {
      * @memberof SysPermissionServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/syspermissions/${context.syspermission}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/syspermissions/${context.syspermission}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -206,9 +209,9 @@ export default class SysPermissionServiceBase extends EntityService {
      * @memberof SysPermissionServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}`,isloading);
+        let res:any = await Http.getInstance().get(`/syspermissions/${context.syspermission}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
-            return res;
+        return res;
     }
 
     /**
@@ -222,6 +225,7 @@ export default class SysPermissionServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/syspermissions/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/syspermissions/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

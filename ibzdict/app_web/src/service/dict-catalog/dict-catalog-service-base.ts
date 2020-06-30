@@ -48,7 +48,8 @@ export default class DictCatalogServiceBase extends EntityService {
      * @memberof DictCatalogServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/select`,isloading);
+        return res;
     }
 
     /**
@@ -119,7 +120,7 @@ export default class DictCatalogServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/dictcatalogs/${context.dictcatalog}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_dictoptions',JSON.stringify(res.data.dictoptions));
-            return res;
+        return res;
     }
 
     /**
@@ -151,7 +152,7 @@ export default class DictCatalogServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_dictoptions',JSON.stringify(res.data.dictoptions));
-            return res;
+        return res;
     }
 
     /**
@@ -164,9 +165,9 @@ export default class DictCatalogServiceBase extends EntityService {
      * @memberof DictCatalogServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}`,isloading);
+        let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_dictoptions',JSON.stringify(res.data.dictoptions));
-            return res;
+        return res;
     }
 
     /**
@@ -195,7 +196,8 @@ export default class DictCatalogServiceBase extends EntityService {
      * @memberof DictCatalogServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/dictcatalogs/${context.dictcatalog}`,isloading);
+        let res:any = await Http.getInstance().delete(`/dictcatalogs/${context.dictcatalog}`,isloading);
+        return res;
     }
 
     /**
@@ -208,7 +210,8 @@ export default class DictCatalogServiceBase extends EntityService {
      * @memberof DictCatalogServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -222,6 +225,7 @@ export default class DictCatalogServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/dictcatalogs/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/dictcatalogs/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.uaa.domain.SysApp;
 import cn.ibizlab.core.uaa.service.ISysAppService;
 import cn.ibizlab.core.uaa.filter.SysAppSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"应用" })

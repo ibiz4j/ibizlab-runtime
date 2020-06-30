@@ -48,7 +48,8 @@ export default class WFGroupServiceBase extends EntityService {
      * @memberof WFGroupServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/wfgroups/${context.wfgroup}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}/select`,isloading);
+        return res;
     }
 
     /**
@@ -61,7 +62,8 @@ export default class WFGroupServiceBase extends EntityService {
      * @memberof WFGroupServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/wfgroups/${context.wfgroup}`,isloading);
+        let res:any = await Http.getInstance().delete(`/wfgroups/${context.wfgroup}`,isloading);
+        return res;
     }
 
     /**
@@ -93,7 +95,7 @@ export default class WFGroupServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/wfgroups/${context.wfgroup}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -106,9 +108,9 @@ export default class WFGroupServiceBase extends EntityService {
      * @memberof WFGroupServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}`,isloading);
+        let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -176,7 +178,8 @@ export default class WFGroupServiceBase extends EntityService {
      * @memberof WFGroupServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/wfgroups/${context.wfgroup}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -208,7 +211,7 @@ export default class WFGroupServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/wfgroups/${context.wfgroup}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -222,6 +225,7 @@ export default class WFGroupServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/wfgroups/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/wfgroups/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

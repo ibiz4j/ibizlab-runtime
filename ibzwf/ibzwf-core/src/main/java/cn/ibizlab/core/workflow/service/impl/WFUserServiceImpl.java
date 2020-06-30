@@ -46,9 +46,9 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.workflow.service.IWFMemberService wfmemberService;
+    protected cn.ibizlab.core.workflow.service.IWFMemberService wfmemberService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -186,6 +186,5 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
 
 
 }
-
 
 

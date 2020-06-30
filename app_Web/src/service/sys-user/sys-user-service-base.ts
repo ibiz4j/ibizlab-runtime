@@ -48,7 +48,8 @@ export default class SysUserServiceBase extends EntityService {
      * @memberof SysUserServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/sysusers/${context.sysuser}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}/select`,isloading);
+        return res;
     }
 
     /**
@@ -61,7 +62,8 @@ export default class SysUserServiceBase extends EntityService {
      * @memberof SysUserServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/sysusers/${context.sysuser}`,isloading);
+        let res:any = await Http.getInstance().delete(`/sysusers/${context.sysuser}`,isloading);
+        return res;
     }
 
     /**
@@ -93,7 +95,7 @@ export default class SysUserServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/sysusers/${context.sysuser}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
-            return res;
+        return res;
     }
 
     /**
@@ -106,7 +108,8 @@ export default class SysUserServiceBase extends EntityService {
      * @memberof SysUserServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/sysusers/${context.sysuser}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/sysusers/${context.sysuser}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -119,9 +122,9 @@ export default class SysUserServiceBase extends EntityService {
      * @memberof SysUserServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}`,isloading);
+        let res:any = await Http.getInstance().get(`/sysusers/${context.sysuser}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
-            return res;
+        return res;
     }
 
     /**
@@ -153,7 +156,7 @@ export default class SysUserServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysusers/${context.sysuser}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
-            return res;
+        return res;
     }
 
     /**
@@ -222,6 +225,7 @@ export default class SysUserServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/sysusers/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/sysusers/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

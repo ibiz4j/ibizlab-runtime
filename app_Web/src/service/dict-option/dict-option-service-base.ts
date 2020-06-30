@@ -49,9 +49,10 @@ export default class DictOptionServiceBase extends EntityService {
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.dictcatalog && context.dictoption){
-            return Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}/select`,isloading);
+            let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}/select`,isloading);
         }
-            return Http.getInstance().get(`/dictoptions/${context.dictoption}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/dictoptions/${context.dictoption}/select`,isloading);
+        return res;
     }
 
     /**
@@ -68,9 +69,9 @@ export default class DictOptionServiceBase extends EntityService {
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}/checkkey`,data,isloading);
-            return res;
         }
-            return Http.getInstance().post(`/dictoptions/${context.dictoption}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/dictoptions/${context.dictoption}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -86,7 +87,6 @@ export default class DictOptionServiceBase extends EntityService {
         if(context.dictcatalog && true){
             let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/dictoptions/getdraft`,isloading);
             res.data.dictoption = data.dictoption;
-            return res;
         }
         let res:any = await  Http.getInstance().get(`/dictoptions/getdraft`,isloading);
         res.data.dictoption = data.dictoption;
@@ -105,10 +105,9 @@ export default class DictOptionServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.dictcatalog && context.dictoption){
             let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}`,isloading);
-            return res;
         }
-            let res:any = await Http.getInstance().get(`/dictoptions/${context.dictoption}`,isloading);
-            return res;
+        let res:any = await Http.getInstance().get(`/dictoptions/${context.dictoption}`,isloading);
+        return res;
     }
 
     /**
@@ -125,12 +124,11 @@ export default class DictOptionServiceBase extends EntityService {
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().put(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}`,data,isloading);
-            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/dictoptions/${context.dictoption}`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -154,7 +152,6 @@ export default class DictOptionServiceBase extends EntityService {
             }
             let tempContext:any = JSON.parse(JSON.stringify(context));
             let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/dictoptions`,data,isloading);
-            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -183,12 +180,11 @@ export default class DictOptionServiceBase extends EntityService {
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().post(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}/save`,data,isloading);
-            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/dictoptions/${context.dictoption}/save`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -202,9 +198,10 @@ export default class DictOptionServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.dictcatalog && context.dictoption){
-            return Http.getInstance().delete(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}`,isloading);
+            let res:any = await Http.getInstance().delete(`/dictcatalogs/${context.dictcatalog}/dictoptions/${context.dictoption}`,isloading);
         }
-            return Http.getInstance().delete(`/dictoptions/${context.dictoption}`,isloading);
+        let res:any = await Http.getInstance().delete(`/dictoptions/${context.dictoption}`,isloading);
+        return res;
     }
 
     /**
@@ -219,9 +216,10 @@ export default class DictOptionServiceBase extends EntityService {
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.dictcatalog && true){
             let tempData:any = JSON.parse(JSON.stringify(data));
-            return Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/dictoptions/fetchdefault`,tempData,isloading);
+            let res:any = await Http.getInstance().get(`/dictcatalogs/${context.dictcatalog}/dictoptions/fetchdefault`,tempData,isloading);
         }
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/dictoptions/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/dictoptions/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

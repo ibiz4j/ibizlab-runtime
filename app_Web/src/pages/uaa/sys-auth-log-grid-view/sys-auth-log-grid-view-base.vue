@@ -462,8 +462,8 @@ export default class SysAuthLogGridViewBase extends Vue {
      *
      * @memberof SysAuthLogGridViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'sys-auth-log-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysauthlog,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -473,8 +473,8 @@ export default class SysAuthLogGridViewBase extends Vue {
      *
      * @memberof SysAuthLogGridViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'sys-auth-log-grid-view',tag:this.viewtag,srfkey:this.context.sysauthlog,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
@@ -686,6 +686,13 @@ export default class SysAuthLogGridViewBase extends Vue {
      * @memberof SysAuthLogGridView
      */
     public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+        if(!this.viewDefaultUsage){
+            if(Object.is(this.navModel,"route")){
+                this.initNavDataWithRoute(this.viewCacheData, false, true);
+            }else{
+                this.initNavDataWithTab(this.viewCacheData, false, true);
+            }
+        }
         let localContext:any = null;
         let localViewParam:any =null;
     this.$Notice.warning({ title: '错误', desc: '未指定关系视图' });

@@ -63,7 +63,7 @@ export class ViewTool {
     public static buildUpRoutePath(route: Route, viewParam: any = {}, deResParameters: any[], parameters: any[], args: any[], data: any): string {
         const indexRoutePath = this.getIndexRoutePath(route);
         const deResRoutePath = this.getDeResRoutePath(viewParam, deResParameters, args);
-        const deRoutePath = this.getActiveRoutePath(parameters, args, data);
+        const deRoutePath = this.getActiveRoutePath(parameters, args, data,viewParam);
         return `${indexRoutePath}${deResRoutePath}${deRoutePath}`;
     }
 
@@ -123,7 +123,7 @@ export class ViewTool {
      * @returns {string}
      * @memberof ViewTool
      */
-    public static getActiveRoutePath(parameters: any[], args: any[], data: any): string {
+    public static getActiveRoutePath(parameters: any[], args: any[], data: any,viewParam: any = {}): string {
         let routePath: string = '';
         // 不存在应用实体
         if(parameters && parameters.length >0){
@@ -137,8 +137,7 @@ export class ViewTool {
                 let [arg] = args;
                 arg = arg ? arg : {};
                 const [{ pathName: _pathName, parameterName: _parameterName }, { pathName: _pathName2, parameterName: _parameterName2 }] = parameters;
-                const _value: any = arg[_parameterName] && !Object.is(arg[_parameterName], '') ?
-                    arg[_parameterName] : null;
+                const _value: any = arg[_parameterName] || viewParam[_parameterName] || null;
                 routePath = `/${_pathName}/${_value}/${_pathName2}`;
                 if (Object.keys(data).length > 0) {
                     routePath = `${routePath}?${qs.stringify(data, { delimiter: ';' })}`;

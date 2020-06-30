@@ -278,6 +278,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import SysAppService from '@/service/sys-app/sys-app-service';
 import MainService from './main-grid-service';
 
@@ -406,6 +407,15 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 获取多项数据
@@ -712,63 +722,72 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '系统标识',
             langtag: 'entities.sysapp.main_grid.columns.pssystemid',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'appid',
             label: '应用标识',
             langtag: 'entities.sysapp.main_grid.columns.appid',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'appname',
             label: '应用名',
             langtag: 'entities.sysapp.main_grid.columns.appname',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'appgroup',
             label: '分组',
             langtag: 'entities.sysapp.main_grid.columns.appgroup',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'apptype',
             label: '类型',
             langtag: 'entities.sysapp.main_grid.columns.apptype',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'fullname',
             label: '全称',
             langtag: 'entities.sysapp.main_grid.columns.fullname',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'icon',
             label: '图标',
             langtag: 'entities.sysapp.main_grid.columns.icon',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'addr',
             label: '地址',
             langtag: 'entities.sysapp.main_grid.columns.addr',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'visabled',
             label: '可见',
             langtag: 'entities.sysapp.main_grid.columns.visabled',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
     ]
 
@@ -1345,6 +1364,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"SysApp")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -1364,6 +1393,9 @@ export default class MainBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 
@@ -1810,18 +1842,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
-        let hasRowEdit:any = {
-          'pssystemid':true,
-          'appid':true,
-          'appname':true,
-          'appgroup':true,
-          'apptype':true,
-          'fullname':true,
-          'icon':true,
-          'addr':true,
-          'visabled':true,
+        if(args.column.property){
+          let col = this.allColumns.find((item:any)=>{
+              return Object.is(args.column.property,item.name);
+          })
+          if(col !== undefined){
+              if(col.isEnableRowEdit && this.actualIsOpenEdit ){
+                  return 'edit-cell';
+              }
+          }
         }
-        return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
+        return 'info-cell';
     }
 
     /**

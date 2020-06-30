@@ -460,8 +460,8 @@ export default class SysUserMPickupViewBase extends Vue {
      *
      * @memberof SysUserMPickupViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'sys-user-mpickup-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysuser,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -471,8 +471,8 @@ export default class SysUserMPickupViewBase extends Vue {
      *
      * @memberof SysUserMPickupViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'sys-user-mpickup-view',tag:this.viewtag,srfkey:this.context.sysuser,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }

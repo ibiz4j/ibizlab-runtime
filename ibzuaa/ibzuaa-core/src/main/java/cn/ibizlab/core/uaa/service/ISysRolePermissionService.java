@@ -57,6 +57,7 @@ public interface ISysRolePermissionService extends IService<SysRolePermission>{
     boolean execute(String sql, Map param);
 
 
+
 }
 
 

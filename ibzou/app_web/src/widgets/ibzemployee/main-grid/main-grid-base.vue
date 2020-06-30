@@ -203,6 +203,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import IBZEmployeeService from '@/service/ibzemployee/ibzemployee-service';
 import MainService from './main-grid-service';
 
@@ -331,6 +332,15 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 获取多项数据
@@ -623,77 +633,88 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '用户工号',
             langtag: 'entities.ibzemployee.main_grid.columns.usercode',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'personname',
             label: '姓名',
             langtag: 'entities.ibzemployee.main_grid.columns.personname',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'loginname',
             label: '登录名',
             langtag: 'entities.ibzemployee.main_grid.columns.loginname',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'orgcode',
             label: '单位代码',
             langtag: 'entities.ibzemployee.main_grid.columns.orgcode',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'orgname',
             label: '单位名称',
             langtag: 'entities.ibzemployee.main_grid.columns.orgname',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'mdeptcode',
             label: '主部门代码',
             langtag: 'entities.ibzemployee.main_grid.columns.mdeptcode',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'mdeptname',
             label: '主部门名称',
             langtag: 'entities.ibzemployee.main_grid.columns.mdeptname',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'sex',
             label: '性别',
             langtag: 'entities.ibzemployee.main_grid.columns.sex',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'phone',
             label: '联系方式',
             langtag: 'entities.ibzemployee.main_grid.columns.phone',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'ipaddr',
             label: 'ip地址',
             langtag: 'entities.ibzemployee.main_grid.columns.ipaddr',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'showorder',
             label: '排序',
             langtag: 'entities.ibzemployee.main_grid.columns.showorder',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
     ]
 
@@ -1217,6 +1238,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"IBZEmployee")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -1236,6 +1267,9 @@ export default class MainBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 
@@ -1682,20 +1716,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
-        let hasRowEdit:any = {
-          'usercode':false,
-          'personname':false,
-          'loginname':false,
-          'orgcode':false,
-          'orgname':false,
-          'mdeptcode':false,
-          'mdeptname':false,
-          'sex':false,
-          'phone':false,
-          'ipaddr':false,
-          'showorder':false,
+        if(args.column.property){
+          let col = this.allColumns.find((item:any)=>{
+              return Object.is(args.column.property,item.name);
+          })
+          if(col !== undefined){
+              if(col.isEnableRowEdit && this.actualIsOpenEdit ){
+                  return 'edit-cell';
+              }
+          }
         }
-        return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
+        return 'info-cell';
     }
 
     /**

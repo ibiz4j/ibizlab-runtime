@@ -46,9 +46,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.uaa.service.ISysUserRoleService sysuserroleService;
+    protected cn.ibizlab.core.uaa.service.ISysUserRoleService sysuserroleService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -186,6 +186,5 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 
 }
-
 
 

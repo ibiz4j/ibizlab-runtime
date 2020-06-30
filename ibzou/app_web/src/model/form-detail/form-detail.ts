@@ -47,12 +47,29 @@ export class FormDetailModel {
     public visible: boolean = true;
 
     /**
+     * 成员是否显示(旧)
+     *
+     * @type {boolean}
+     * @memberof FormDetailModel
+     */
+    public oldVisible: boolean = true;
+
+   /**
+     * 成员是否为受控内容
+     *
+     * @type {boolean}
+     * @memberof FormDetailModel
+     */
+    public isControlledContent: boolean = false;
+
+    /**
      * 成员是否显示标题
      *
      * @type {boolean}
      * @memberof FormDetailModel
      */
     public isShowCaption: boolean = true;
+    
 
     /**
      * Creates an instance of FormDetailModel.
@@ -67,7 +84,9 @@ export class FormDetailModel {
         this.form = opts.form ? opts.form : {};
         this.name = !Object.is(opts.name, '') ? opts.name : '';
         this.visible = opts.visible ? true : false;
+        this.oldVisible = opts.visible ? true : false;
         this.isShowCaption = opts.isShowCaption ? true : false;
+        this.isControlledContent = opts.isControlledContent ? true : false;
     }
 
     /**

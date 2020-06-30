@@ -18,10 +18,12 @@ import cn.ibizlab.core.disk.domain.SDFile;
 import cn.ibizlab.core.disk.filter.SDFileSearchContext;
 
 
+import com.baomidou.mybatisplus.extension.service.IService;
+
 /**
  * 实体[SDFile] 服务对象接口
  */
-public interface ISDFileService{
+public interface ISDFileService extends IService<SDFile>{
 
     boolean update(SDFile et) ;
     void updateBatch(List<SDFile> list) ;
@@ -35,10 +37,25 @@ public interface ISDFileService{
     boolean save(SDFile et) ;
     void saveBatch(List<SDFile> list) ;
     Page<SDFile> searchDefault(SDFileSearchContext context) ;
+    /**
+     *自定义查询SQL
+     * @param sql  select * from table where id =#{et.param}
+     * @param param 参数列表  param.put("param","1");
+     * @return select * from table where id = '1'
+     */
+    List<JSONObject> select(String sql, Map param);
+    /**
+     *自定义SQL
+     * @param sql  update table  set name ='test' where id =#{et.param}
+     * @param param 参数列表  param.put("param","1");
+     * @return     update table  set name ='test' where id = '1'
+     */
+    boolean execute(String sql, Map param);
 
     List<SDFile> getSdfileByIds(List<String> ids) ;
     List<SDFile> getSdfileByEntities(List<SDFile> entities) ;
-}
 
+
+}
 
 

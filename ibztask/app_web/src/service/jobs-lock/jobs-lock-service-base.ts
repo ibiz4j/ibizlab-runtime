@@ -48,7 +48,8 @@ export default class JobsLockServiceBase extends EntityService {
      * @memberof JobsLockServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/jobslocks/${context.jobslock}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/jobslocks/${context.jobslock}/select`,isloading);
+        return res;
     }
 
     /**
@@ -87,7 +88,7 @@ export default class JobsLockServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/jobslocks/${context.jobslock}/save`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -100,8 +101,8 @@ export default class JobsLockServiceBase extends EntityService {
      * @memberof JobsLockServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/jobslocks/${context.jobslock}`,isloading);
-            return res;
+        let res:any = await Http.getInstance().get(`/jobslocks/${context.jobslock}`,isloading);
+        return res;
     }
 
     /**
@@ -117,7 +118,7 @@ export default class JobsLockServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/jobslocks/${context.jobslock}`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -130,7 +131,8 @@ export default class JobsLockServiceBase extends EntityService {
      * @memberof JobsLockServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/jobslocks/${context.jobslock}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/jobslocks/${context.jobslock}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -143,7 +145,8 @@ export default class JobsLockServiceBase extends EntityService {
      * @memberof JobsLockServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/jobslocks/${context.jobslock}`,isloading);
+        let res:any = await Http.getInstance().delete(`/jobslocks/${context.jobslock}`,isloading);
+        return res;
     }
 
     /**
@@ -172,6 +175,7 @@ export default class JobsLockServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/jobslocks/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/jobslocks/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

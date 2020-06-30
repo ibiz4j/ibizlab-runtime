@@ -28,6 +28,7 @@ import java.util.List;
 @MapperScan("cn.ibizlab.*.mapper")
 @SpringBootApplication(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+            org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration.class,
 })
 @Import({
         org.springframework.cloud.openfeign.FeignClientsConfiguration.class

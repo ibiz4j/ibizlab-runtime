@@ -46,9 +46,9 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.dict.service.IDictCatalogService dictcatalogService;
+    protected cn.ibizlab.core.dict.service.IDictCatalogService dictcatalogService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -219,6 +219,5 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
 
 
 }
-
 
 

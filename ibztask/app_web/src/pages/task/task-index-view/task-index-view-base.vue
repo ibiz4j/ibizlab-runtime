@@ -6,7 +6,7 @@
             <sider :width="collapseChange ? 64 : 200" hide-trigger v-model="collapseChange">
                 <div class="sider-top">
                     <div class="page-logo">
-                        <span class="menuicon" @click="contextMenuDragVisiable=!contextMenuDragVisiable"><Icon type="md-menu" /></span>
+                        <span class="menuicon" v-if="isEnableAppSwitch" @click="contextMenuDragVisiable=!contextMenuDragVisiable"><Icon type="md-menu" /></span>
                         <span v-show="!collapseChange" style="overflow-x: hidden;text-overflow: ellipsis;white-space: nowrap;display: block;text-align: center;font-weight: 300;font-size: 20px;">{{$t(model.srfCaption)}}</span>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
     ref='appmenu' 
     @closeview="closeView($event)">
 </view_appmenu>
-                <context-menu-drag :contextMenuDragVisiable="contextMenuDragVisiable"></context-menu-drag>
+                <context-menu-drag v-if="isEnableAppSwitch" :contextMenuDragVisiable="contextMenuDragVisiable"></context-menu-drag>
             </sider>
             <layout>
                 <header class="index_header">
@@ -408,8 +408,8 @@ export default class TaskIndexViewBase extends Vue {
      *
      * @memberof TaskIndexViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'task-index-view',tag:this.viewtag,srfkey:isNew ? null : null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -419,8 +419,8 @@ export default class TaskIndexViewBase extends Vue {
      *
      * @memberof TaskIndexViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'task-index-view',tag:this.viewtag,srfkey:null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
@@ -541,6 +541,14 @@ export default class TaskIndexViewBase extends Vue {
      * @memberof TaskIndexViewBase
      */
     public contextMenuDragVisiable: boolean = false;
+
+    /**
+     * 是否支持应用切换
+     *
+     * @type {boolean}
+     * @memberof TaskIndexViewBase
+     */
+    public isEnableAppSwitch: boolean = false;
 
     /**
      * 初始化之前

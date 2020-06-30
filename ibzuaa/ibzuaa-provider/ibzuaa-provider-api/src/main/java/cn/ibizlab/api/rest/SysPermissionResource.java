@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.uaa.domain.SysPermission;
 import cn.ibizlab.core.uaa.service.ISysPermissionService;
 import cn.ibizlab.core.uaa.filter.SysPermissionSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"权限/资源" })
@@ -83,6 +84,7 @@ public class SysPermissionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @VersionCheck(entity = "syspermission" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Update-all')")
     @ApiOperation(value = "更新权限/资源", tags = {"权限/资源" },  notes = "更新权限/资源")
 	@RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/{syspermission_id}")

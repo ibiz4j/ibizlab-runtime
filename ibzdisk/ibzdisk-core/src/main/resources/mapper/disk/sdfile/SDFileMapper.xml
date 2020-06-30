@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.disk.mapper.SDFileMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="SDFileResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`CREATEDATE`, t1.`CREATEMAN`, t1.`DIGESTCODE`, t1.`FILEEXT`, t1.`FILEID`, t1.`FILENAME`, t1.`FILEPATH`, t1.`FILESIZE`, t1.`FOLDER`, t1.`MEMO`, t1.`OWNERID`, t1.`OWNERTYPE`, t1.`UPDATEDATE`, t1.`UPDATEMAN` FROM `IBZFILE` t1  ) t1 where fileid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SDFileResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.CREATEDATE, t1.CREATEMAN, t1.DIGESTCODE, t1.FILEEXT, t1.FILEID, t1.FILENAME, t1.FILEPATH, t1.FILESIZE, t1.FOLDER, t1.MEMO, t1.OWNERID, t1.OWNERTYPE, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZFILE t1  ) t1 where fileid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SDFileResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.CREATEDATE, t1.CREATEMAN, t1.DIGESTCODE, t1.FILEEXT, t1.FILEID, t1.FILENAME, t1.FILEPATH, t1.FILESIZE, t1.FOLDER, t1.MEMO, t1.OWNERID, t1.OWNERTYPE, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZFILE t1  ) t1 where fileid=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="SDFileResultMap" type="cn.ibizlab.core.disk.domain.SDFile" autoMapping="true">
+        <id property="id" column="fileid" /><!--主键字段映射-->
+		<result property="name" column="filename" />
+		<result property="extension" column="fileext" />
+            
+		
+    </resultMap>
+
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.disk.filter.SDFileSearchContext"  resultMap="SDFileResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`CREATEMAN`, t1.`DIGESTCODE`, t1.`FILEEXT`, t1.`FILEID`, t1.`FILENAME`, t1.`FILEPATH`, t1.`FILESIZE`, t1.`FOLDER`, t1.`MEMO`, t1.`OWNERID`, t1.`OWNERTYPE`, t1.`UPDATEDATE`, t1.`UPDATEMAN` FROM `IBZFILE` t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.DIGESTCODE, t1.FILEEXT, t1.FILEID, t1.FILENAME, t1.FILEPATH, t1.FILESIZE, t1.FOLDER, t1.MEMO, t1.OWNERID, t1.OWNERTYPE, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZFILE t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.DIGESTCODE, t1.FILEEXT, t1.FILEID, t1.FILENAME, t1.FILEPATH, t1.FILESIZE, t1.FOLDER, t1.MEMO, t1.OWNERID, t1.OWNERTYPE, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZFILE t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`CREATEMAN`, t1.`DIGESTCODE`, t1.`FILEEXT`, t1.`FILEID`, t1.`FILENAME`, t1.`FILEPATH`, t1.`FILESIZE`, t1.`FOLDER`, t1.`MEMO`, t1.`OWNERID`, t1.`OWNERTYPE`, t1.`UPDATEDATE`, t1.`UPDATEMAN` FROM `IBZFILE` t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.DIGESTCODE, t1.FILEEXT, t1.FILEID, t1.FILENAME, t1.FILEPATH, t1.FILESIZE, t1.FOLDER, t1.MEMO, t1.OWNERID, t1.OWNERTYPE, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZFILE t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.DIGESTCODE, t1.FILEEXT, t1.FILEID, t1.FILENAME, t1.FILEPATH, t1.FILESIZE, t1.FOLDER, t1.MEMO, t1.OWNERID, t1.OWNERTYPE, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZFILE t1  
+			]]>
+    </sql>
+</mapper>
+

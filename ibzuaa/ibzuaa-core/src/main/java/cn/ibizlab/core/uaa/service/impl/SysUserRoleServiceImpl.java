@@ -46,12 +46,12 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.uaa.service.ISysRoleService sysroleService;
+    protected cn.ibizlab.core.uaa.service.ISysRoleService sysroleService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.uaa.service.ISysUserService sysuserService;
+    protected cn.ibizlab.core.uaa.service.ISysUserService sysuserService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     public boolean checkKey(SysUserRole et) {
@@ -242,6 +242,5 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
 
 
 }
-
 
 

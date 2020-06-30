@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.uaa.domain.SysUserRole;
 import cn.ibizlab.core.uaa.service.ISysUserRoleService;
 import cn.ibizlab.core.uaa.filter.SysUserRoleSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"用户角色关系" })
@@ -58,6 +59,7 @@ public class SysUserRoleResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(new SysUserRole())));
     }
 
+    @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Update-all')")
     @ApiOperation(value = "更新用户角色关系", tags = {"用户角色关系" },  notes = "更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/{sysuserrole_id}")
@@ -172,6 +174,7 @@ public class SysUserRoleResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
     }
 
+    @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Update-all')")
     @ApiOperation(value = "根据系统角色更新用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{sysrole_id}/sysuserroles/{sysuserrole_id}")
@@ -304,6 +307,7 @@ public class SysUserRoleResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
     }
 
+    @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Update-all')")
     @ApiOperation(value = "根据系统用户更新用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}/sysuserroles/{sysuserrole_id}")

@@ -53,6 +53,7 @@ public interface ISysAuthLogService extends IService<SysAuthLog>{
     boolean execute(String sql, Map param);
 
 
+
 }
 
 

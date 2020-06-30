@@ -377,8 +377,8 @@ export default class SYS_ROLE_PERMISSIONRedirectViewBase extends Vue {
      *
      * @memberof SYS_ROLE_PERMISSIONRedirectViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'sys-role-permissionredirect-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -388,8 +388,8 @@ export default class SYS_ROLE_PERMISSIONRedirectViewBase extends Vue {
      *
      * @memberof SYS_ROLE_PERMISSIONRedirectViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'sys-role-permissionredirect-view',tag:this.viewtag,srfkey:this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }

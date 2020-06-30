@@ -81,6 +81,8 @@ export default class MainService extends ControlService {
      */
     @Errorlog
     public getItems(serviceName: string, interfaceName: string, context: any = {}, data: any, isloading?: boolean): Promise<any[]> {
+        data.page = data.page ? data.page : 0;
+        data.size = data.size ? data.size : 1000;
 
         return Promise.reject([])
     }

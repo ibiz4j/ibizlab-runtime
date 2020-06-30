@@ -237,6 +237,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import IBZDepartmentService from '@/service/ibzdepartment/ibzdepartment-service';
 import MainService from './main-grid-service';
 
@@ -365,6 +366,15 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 获取多项数据
@@ -671,98 +681,112 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '部门代码',
             langtag: 'entities.ibzdepartment.main_grid.columns.deptcode',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'deptname',
             label: '部门名称',
             langtag: 'entities.ibzdepartment.main_grid.columns.deptname',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'orgname',
             label: '单位',
             langtag: 'entities.ibzdepartment.main_grid.columns.orgname',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'pdeptname',
             label: '上级部门',
             langtag: 'entities.ibzdepartment.main_grid.columns.pdeptname',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'deptlevel',
             label: '部门级别',
             langtag: 'entities.ibzdepartment.main_grid.columns.deptlevel',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'shortname',
             label: '部门简称',
             langtag: 'entities.ibzdepartment.main_grid.columns.shortname',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'bcode',
             label: '业务编码',
             langtag: 'entities.ibzdepartment.main_grid.columns.bcode',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'leadername',
             label: '分管领导',
             langtag: 'entities.ibzdepartment.main_grid.columns.leadername',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'showorder',
             label: '排序',
             langtag: 'entities.ibzdepartment.main_grid.columns.showorder',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'createdate',
             label: '创建时间',
             langtag: 'entities.ibzdepartment.main_grid.columns.createdate',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'updatedate',
             label: '最后修改时间',
             langtag: 'entities.ibzdepartment.main_grid.columns.updatedate',
             show: true,
-            util: 'px'
+            util: 'px',
+            isEnableRowEdit: false,
         },
         {
             name: 'orgid',
             label: '单位',
             langtag: 'entities.ibzdepartment.main_grid.columns.orgid',
             show: false,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'pdeptid',
             label: '上级部门',
             langtag: 'entities.ibzdepartment.main_grid.columns.pdeptid',
             show: false,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'leaderid',
             label: '分管领导标识',
             langtag: 'entities.ibzdepartment.main_grid.columns.leaderid',
             show: false,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
     ]
 
@@ -1278,6 +1302,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"IBZDepartment")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -1297,6 +1331,9 @@ export default class MainBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 
@@ -1743,23 +1780,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
-        let hasRowEdit:any = {
-          'deptcode':false,
-          'deptname':false,
-          'orgname':false,
-          'pdeptname':false,
-          'deptlevel':false,
-          'shortname':false,
-          'bcode':false,
-          'leadername':false,
-          'showorder':false,
-          'createdate':false,
-          'updatedate':false,
-          'orgid':false,
-          'pdeptid':false,
-          'leaderid':false,
+        if(args.column.property){
+          let col = this.allColumns.find((item:any)=>{
+              return Object.is(args.column.property,item.name);
+          })
+          if(col !== undefined){
+              if(col.isEnableRowEdit && this.actualIsOpenEdit ){
+                  return 'edit-cell';
+              }
+          }
         }
-        return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
+        return 'info-cell';
     }
 
     /**

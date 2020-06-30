@@ -48,7 +48,8 @@ export default class WFUserServiceBase extends EntityService {
      * @memberof WFUserServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/wfusers/${context.wfuser}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}/select`,isloading);
+        return res;
     }
 
     /**
@@ -61,7 +62,8 @@ export default class WFUserServiceBase extends EntityService {
      * @memberof WFUserServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/wfusers/${context.wfuser}`,isloading);
+        let res:any = await Http.getInstance().delete(`/wfusers/${context.wfuser}`,isloading);
+        return res;
     }
 
     /**
@@ -109,7 +111,7 @@ export default class WFUserServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/wfusers/${context.wfuser}/save`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -141,7 +143,7 @@ export default class WFUserServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/wfusers/${context.wfuser}`,data,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -154,9 +156,9 @@ export default class WFUserServiceBase extends EntityService {
      * @memberof WFUserServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}`,isloading);
+        let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}`,isloading);
             this.tempStorage.setItem(context.srfsessionkey+'_wfmembers',JSON.stringify(res.data.wfmembers));
-            return res;
+        return res;
     }
 
     /**
@@ -208,7 +210,8 @@ export default class WFUserServiceBase extends EntityService {
      * @memberof WFUserServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/wfusers/${context.wfuser}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -222,6 +225,7 @@ export default class WFUserServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/wfusers/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/wfusers/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

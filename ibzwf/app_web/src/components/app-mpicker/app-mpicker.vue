@@ -45,6 +45,11 @@ export default class AppMpicker extends Vue {
     @Prop() curvalue?: any;
 
     /**
+     * 值项
+     */
+    @Prop() valueitem?: any;
+
+    /**
      * 局部上下文导航参数
      * 
      * @type {any}
@@ -144,14 +149,34 @@ export default class AppMpicker extends Vue {
         this.value = [];
         this.selectItems = [];
         if (newVal) {
-            this.selectItems = this.parseValue(JSON.parse(newVal));
-            this.selectItems.forEach((item: any) => {
-                this.value.push(item[this.deKeyField]);
-                let index = this.items.findIndex((i) => Object.is(i[this.deKeyField], item[this.deKeyField]));
-                if (index < 0) {
-                    this.items.push({ [this.deMajorField]: item[this.deMajorField], [this.deKeyField]: item[this.deKeyField] });
+            try {
+              this.selectItems = this.parseValue(JSON.parse(newVal));
+              this.selectItems.forEach((item: any) => {
+                  this.value.push(item[this.deKeyField]);
+                  let index = this.items.findIndex((i) => Object.is(i[this.deKeyField], item[this.deKeyField]));
+                  if (index < 0) {
+                      this.items.push({ [this.deMajorField]: item[this.deMajorField], [this.deKeyField]: item[this.deKeyField] });
+                  }
+              });
+            } catch (error) {
+              if(error.name === 'SyntaxError'){
+                let srfkeys:any = newVal.split(',');
+                let srfmajortexts:any = null;
+                if(this.valueitem && this.activeData[this.valueitem]){
+                    srfmajortexts = this.activeData[this.valueitem].split(',');
                 }
-            });
+                if(srfkeys.length && srfkeys.length > 0 && srfmajortexts.length && srfmajortexts.length > 0 && srfkeys.length == srfmajortexts.length){
+                    srfkeys.forEach((id: any, index: number) => {
+                        this.value.push(id);
+                        this.selectItems.push({[this.deKeyField]: id, [this.deMajorField]: srfmajortexts[index]});
+                        let _index = this.items.findIndex((i) => Object.is(i[this.deKeyField],id));
+                        if (_index < 0) {
+                            this.items.push({[this.deKeyField]: id, [this.deMajorField]: srfmajortexts[index]});
+                        }
+                    });
+                }
+              }
+            }
         }
         this.$forceUpdate();
     }

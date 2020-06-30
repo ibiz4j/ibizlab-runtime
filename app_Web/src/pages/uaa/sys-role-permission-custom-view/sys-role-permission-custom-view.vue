@@ -1,10 +1,10 @@
 <template>
-    <div class="view-container dempickupview sys-permissionmpickup-view">
+    <div class="view-container dempickupview sys-permissionmpickup-view view-permissionmp-center">
         <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :padding="0" :bordered="false">
             <div class="content-container pickup-view">
                 <div class="translate-contant">
                     <!--应用菜单-->
-                    <div class="center" :style="{width : '33%',border:'1px solid #dcdee2', margin: '0 10px 0 0'}">
+                    <div class="center" :style="{width : '33%',border:'1px solid #dcdee2', margin: '0 16px 0 0'}">
                         <context-menu-container class='design-tree-container'>
                             <div>
                                 <div class="text">应用菜单</div>
@@ -27,7 +27,7 @@
                         </context-menu-container>
                     </div>
                     <!--数据能力-->
-                    <div class="center" :style="{width : '33%',border:'1px solid #dcdee2', margin: '0 10px 0 0' }">
+                    <div class="center" :style="{width : '33%',border:'1px solid #dcdee2', margin: '0 16px 0 0' }">
                         <context-menu-container class='design-tree-container'>
                             <div>
                                 <div class="text">数据能力</div>

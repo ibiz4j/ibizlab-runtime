@@ -46,12 +46,12 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.workflow.service.IWFGroupService wfgroupService;
+    protected cn.ibizlab.core.workflow.service.IWFGroupService wfgroupService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.workflow.service.IWFUserService wfuserService;
+    protected cn.ibizlab.core.workflow.service.IWFUserService wfuserService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     public boolean checkKey(WFMember et) {
@@ -271,6 +271,5 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
 
 
 }
-
 
 

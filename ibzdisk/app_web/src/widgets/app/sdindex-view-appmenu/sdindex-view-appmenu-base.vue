@@ -124,6 +124,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import SDIndexViewService from './sdindex-view-appmenu-service';
 
 import SDIndexViewModel from './sdindex-view-appmenu-model';

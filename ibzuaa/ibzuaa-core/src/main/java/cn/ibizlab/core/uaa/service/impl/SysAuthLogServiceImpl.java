@@ -45,7 +45,7 @@ import org.springframework.util.StringUtils;
 public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuthLog> implements ISysAuthLogService {
 
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     public SysAuthLog getDraft(SysAuthLog et) {
@@ -183,6 +183,5 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
 
 
 }
-
 
 

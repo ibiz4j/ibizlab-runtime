@@ -417,8 +417,8 @@ export default class IBZDepartmentTreeExpViewBase extends Vue {
      *
      * @memberof IBZDepartmentTreeExpViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'ibzdepartment-tree-exp-view',tag:this.viewtag,srfkey:isNew ? null : this.context.ibzdepartment,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -428,8 +428,8 @@ export default class IBZDepartmentTreeExpViewBase extends Vue {
      *
      * @memberof IBZDepartmentTreeExpViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'ibzdepartment-tree-exp-view',tag:this.viewtag,srfkey:this.context.ibzdepartment,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
@@ -558,22 +558,14 @@ export default class IBZDepartmentTreeExpViewBase extends Vue {
     }
 
 
-    /**
-     * 打开编辑数据视图
-     *
-     * @param {any[]} args
-     * @param {*} [params]
-     * @param {*} [fullargs]
-     * @param {*} [$event]
-     * @param {*} [xData]
-     * @memberof IBZDepartmentTreeExpView
-     */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
-        let localContext:any = null;
-        let localViewParam:any =null;
-    this.$Notice.warning({ title: '错误', desc: '未指定关系视图' });
-    }
+!!!!模版产生代码错误:----
+Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+----
 
+----
+FTL stack trace ("~" means nesting-related):
+	- Failed at: #if ctrl.getPSControlContainer().getV...  [in template "TEMPLCODE_zh_CN" at line 43, column 5]
+----
 
 
     /**

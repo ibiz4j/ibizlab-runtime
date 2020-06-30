@@ -528,8 +528,8 @@ export default class IBZTeamMemberGridViewBase extends Vue {
      *
      * @memberof IBZTeamMemberGridViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'ibzteam-member-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.ibzteammember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -539,8 +539,8 @@ export default class IBZTeamMemberGridViewBase extends Vue {
      *
      * @memberof IBZTeamMemberGridViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'ibzteam-member-grid-view',tag:this.viewtag,srfkey:this.context.ibzteammember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
@@ -1103,42 +1103,14 @@ export default class IBZTeamMemberGridViewBase extends Vue {
     }
 
 
-    /**
-     * 打开编辑数据视图
-     *
-     * @param {any[]} args
-     * @param {*} [params]
-     * @param {*} [fullargs]
-     * @param {*} [$event]
-     * @param {*} [xData]
-     * @memberof IBZTeamMemberGridView
-     */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
-        let localContext:any = null;
-        let localViewParam:any =null;
-        const data: any = {};
-        let tempContext = JSON.parse(JSON.stringify(this.context));
-        if(args.length >0){
-            Object.assign(tempContext,args[0]);
-        }
-        let deResParameters: any[] = [];
-        if(tempContext.ibzemployee && true){
-            deResParameters = [
-            { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-            ]
-        }
-        const parameters: any[] = [
-            { pathName: 'ibzteammembers', parameterName: 'ibzteammember' },
-            { pathName: 'editview', parameterName: 'editview' },
-        ];
-        const _this: any = this;
-        const openIndexViewTab = (data: any) => {
-            const routePath = this.$viewTool.buildUpRoutePath(this.$route, tempContext, deResParameters, parameters, args, data);
-            this.$router.push(routePath);
-        }
-        openIndexViewTab(data);
-    }
+!!!!模版产生代码错误:----
+Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
+----
 
+----
+FTL stack trace ("~" means nesting-related):
+	- Failed at: #if ctrl.getPSControlContainer().getV...  [in template "TEMPLCODE_zh_CN" at line 43, column 5]
+----
 
     /**
      * 新建

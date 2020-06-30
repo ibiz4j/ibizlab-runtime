@@ -62,17 +62,17 @@ export default class MainModel {
       },
       {
         name: 'filepath',
-        prop: 'filepath',
+        prop: 'file_path',
         dataType: 'TEXT',
       },
       {
         name: 'filesize',
-        prop: 'filesize',
+        prop: 'file_size',
         dataType: 'INT',
       },
       {
         name: 'fileext',
-        prop: 'fileext',
+        prop: 'extension',
         dataType: 'TEXT',
       },
       {
@@ -82,17 +82,17 @@ export default class MainModel {
       },
       {
         name: 'digestcode',
-        prop: 'digestcode',
+        prop: 'digest_code',
         dataType: 'TEXT',
       },
       {
         name: 'ownerid',
-        prop: 'ownerid',
+        prop: 'owner_id',
         dataType: 'TEXT',
       },
       {
         name: 'ownertype',
-        prop: 'ownertype',
+        prop: 'owner_type',
         dataType: 'TEXT',
       },
       {

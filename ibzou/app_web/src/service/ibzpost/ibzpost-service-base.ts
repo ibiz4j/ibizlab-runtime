@@ -48,7 +48,8 @@ export default class IBZPostServiceBase extends EntityService {
      * @memberof IBZPostServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/ibzposts/${context.ibzpost}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/ibzposts/${context.ibzpost}/select`,isloading);
+        return res;
     }
 
     /**
@@ -64,7 +65,7 @@ export default class IBZPostServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/ibzposts/${context.ibzpost}`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -95,7 +96,7 @@ export default class IBZPostServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/ibzposts/${context.ibzpost}/save`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -108,7 +109,8 @@ export default class IBZPostServiceBase extends EntityService {
      * @memberof IBZPostServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/ibzposts/${context.ibzpost}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/ibzposts/${context.ibzpost}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -121,7 +123,8 @@ export default class IBZPostServiceBase extends EntityService {
      * @memberof IBZPostServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/ibzposts/${context.ibzpost}`,isloading);
+        let res:any = await Http.getInstance().delete(`/ibzposts/${context.ibzpost}`,isloading);
+        return res;
     }
 
     /**
@@ -134,8 +137,8 @@ export default class IBZPostServiceBase extends EntityService {
      * @memberof IBZPostServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/ibzposts/${context.ibzpost}`,isloading);
-            return res;
+        let res:any = await Http.getInstance().get(`/ibzposts/${context.ibzpost}`,isloading);
+        return res;
     }
 
     /**
@@ -172,6 +175,7 @@ export default class IBZPostServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/ibzposts/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/ibzposts/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

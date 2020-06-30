@@ -55,6 +55,10 @@ public class AppController {
 		appData.put("unires",uniRes);
     	appData.put("appmenu",appMenu);
 		appData.put("enablepermissionvalid",enablePermissionValid);
+		if(curUser.getSuperuser()==1)
+			appData.put("enablepermissionvalid",false);
+		else
+			appData.put("enablepermissionvalid",enablePermissionValid);
 		return ResponseEntity.status(HttpStatus.OK).body(appData);
 	}
 

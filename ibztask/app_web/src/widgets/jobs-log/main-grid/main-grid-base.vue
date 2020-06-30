@@ -165,6 +165,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import JobsLogService from '@/service/jobs-log/jobs-log-service';
 import MainService from './main-grid-service';
 
@@ -293,6 +294,15 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 获取多项数据
@@ -599,56 +609,64 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '主键ID',
             langtag: 'entities.jobslog.main_grid.columns.id',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'job_id',
             label: '任务ID',
             langtag: 'entities.jobslog.main_grid.columns.job_id',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'handler',
             label: '执行器任务HANDLER',
             langtag: 'entities.jobslog.main_grid.columns.handler',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'address',
             label: '执行地址',
             langtag: 'entities.jobslog.main_grid.columns.address',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'trigger_code',
             label: '触发器调度返回码',
             langtag: 'entities.jobslog.main_grid.columns.trigger_code',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'trigger_type',
             label: '触发器调度类型',
             langtag: 'entities.jobslog.main_grid.columns.trigger_type',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'fail_retry_count',
             label: '失败重试次数',
             langtag: 'entities.jobslog.main_grid.columns.fail_retry_count',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'create_time',
             label: '创建时间',
             langtag: 'entities.jobslog.main_grid.columns.create_time',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
     ]
 
@@ -1164,6 +1182,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"JobsLog")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -1183,6 +1211,9 @@ export default class MainBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 
@@ -1629,17 +1660,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
-        let hasRowEdit:any = {
-          'id':false,
-          'job_id':false,
-          'handler':false,
-          'address':false,
-          'trigger_code':false,
-          'trigger_type':false,
-          'fail_retry_count':false,
-          'create_time':false,
+        if(args.column.property){
+          let col = this.allColumns.find((item:any)=>{
+              return Object.is(args.column.property,item.name);
+          })
+          if(col !== undefined){
+              if(col.isEnableRowEdit && this.actualIsOpenEdit ){
+                  return 'edit-cell';
+              }
+          }
         }
-        return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
+        return 'info-cell';
     }
 
     /**

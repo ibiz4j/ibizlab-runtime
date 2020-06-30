@@ -43,9 +43,9 @@ public class SDFileDTO extends DTOBase implements Serializable {
      * 属性 [FILEPATH]
      *
      */
-    @JSONField(name = "filepath")
-    @JsonProperty("filepath")
-    private String filepath;
+    @JSONField(name = "file_path")
+    @JsonProperty("file_path")
+    private String filePath;
 
     /**
      * 属性 [FOLDER]
@@ -59,33 +59,33 @@ public class SDFileDTO extends DTOBase implements Serializable {
      * 属性 [FILESIZE]
      *
      */
-    @JSONField(name = "filesize")
-    @JsonProperty("filesize")
-    private Integer filesize;
+    @JSONField(name = "file_size")
+    @JsonProperty("file_size")
+    private Integer fileSize;
 
     /**
      * 属性 [FILEEXT]
      *
      */
-    @JSONField(name = "fileext")
-    @JsonProperty("fileext")
-    private String fileext;
+    @JSONField(name = "extension")
+    @JsonProperty("extension")
+    private String extension;
 
     /**
      * 属性 [OWNERTYPE]
      *
      */
-    @JSONField(name = "ownertype")
-    @JsonProperty("ownertype")
-    private String ownertype;
+    @JSONField(name = "owner_type")
+    @JsonProperty("owner_type")
+    private String ownerType;
 
     /**
      * 属性 [OWNERID]
      *
      */
-    @JSONField(name = "ownerid")
-    @JsonProperty("ownerid")
-    private String ownerid;
+    @JSONField(name = "owner_id")
+    @JsonProperty("owner_id")
+    private String ownerId;
 
     /**
      * 属性 [MEMO]
@@ -99,9 +99,9 @@ public class SDFileDTO extends DTOBase implements Serializable {
      * 属性 [DIGESTCODE]
      *
      */
-    @JSONField(name = "digestcode")
-    @JsonProperty("digestcode")
-    private String digestcode;
+    @JSONField(name = "digest_code")
+    @JsonProperty("digest_code")
+    private String digestCode;
 
     /**
      * 属性 [CREATEMAN]
@@ -149,9 +149,9 @@ public class SDFileDTO extends DTOBase implements Serializable {
     /**
      * 设置 [FILEPATH]
      */
-    public void setFilepath(String  filepath){
-        this.filepath = filepath ;
-        this.modify("filepath",filepath);
+    public void setFilePath(String  filePath){
+        this.filePath = filePath ;
+        this.modify("filepath",filePath);
     }
 
     /**
@@ -165,33 +165,33 @@ public class SDFileDTO extends DTOBase implements Serializable {
     /**
      * 设置 [FILESIZE]
      */
-    public void setFilesize(Integer  filesize){
-        this.filesize = filesize ;
-        this.modify("filesize",filesize);
+    public void setFileSize(Integer  fileSize){
+        this.fileSize = fileSize ;
+        this.modify("filesize",fileSize);
     }
 
     /**
      * 设置 [FILEEXT]
      */
-    public void setFileext(String  fileext){
-        this.fileext = fileext ;
-        this.modify("fileext",fileext);
+    public void setExtension(String  extension){
+        this.extension = extension ;
+        this.modify("fileext",extension);
     }
 
     /**
      * 设置 [OWNERTYPE]
      */
-    public void setOwnertype(String  ownertype){
-        this.ownertype = ownertype ;
-        this.modify("ownertype",ownertype);
+    public void setOwnerType(String  ownerType){
+        this.ownerType = ownerType ;
+        this.modify("ownertype",ownerType);
     }
 
     /**
      * 设置 [OWNERID]
      */
-    public void setOwnerid(String  ownerid){
-        this.ownerid = ownerid ;
-        this.modify("ownerid",ownerid);
+    public void setOwnerId(String  ownerId){
+        this.ownerId = ownerId ;
+        this.modify("ownerid",ownerId);
     }
 
     /**
@@ -205,9 +205,9 @@ public class SDFileDTO extends DTOBase implements Serializable {
     /**
      * 设置 [DIGESTCODE]
      */
-    public void setDigestcode(String  digestcode){
-        this.digestcode = digestcode ;
-        this.modify("digestcode",digestcode);
+    public void setDigestCode(String  digestCode){
+        this.digestCode = digestCode ;
+        this.modify("digestcode",digestCode);
     }
 
 

@@ -179,6 +179,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import JobsInfoService from '@/service/jobs-info/jobs-info-service';
 import MainService from './main-grid-service';
 
@@ -307,6 +308,15 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 获取多项数据
@@ -613,63 +623,72 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '主键ID',
             langtag: 'entities.jobsinfo.main_grid.columns.id',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'app',
             label: '服务名',
             langtag: 'entities.jobsinfo.main_grid.columns.app',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'handler',
             label: '执行器任务HANDLER',
             langtag: 'entities.jobsinfo.main_grid.columns.handler',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'cron',
             label: '任务执行CRON',
             langtag: 'entities.jobsinfo.main_grid.columns.cron',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'last_time',
             label: '上次调度时间',
             langtag: 'entities.jobsinfo.main_grid.columns.last_time',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'next_time',
             label: '下次调度时间',
             langtag: 'entities.jobsinfo.main_grid.columns.next_time',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'status',
             label: '状态',
             langtag: 'entities.jobsinfo.main_grid.columns.status',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'timeout',
             label: '任务执行超时时间（秒）',
             langtag: 'entities.jobsinfo.main_grid.columns.timeout',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
         {
             name: 'update_time',
             label: '更新时间',
             langtag: 'entities.jobsinfo.main_grid.columns.update_time',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
     ]
 
@@ -1193,6 +1212,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"JobsInfo")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -1212,6 +1241,9 @@ export default class MainBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 
@@ -1658,18 +1690,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
-        let hasRowEdit:any = {
-          'id':false,
-          'app':false,
-          'handler':false,
-          'cron':false,
-          'last_time':false,
-          'next_time':false,
-          'status':false,
-          'timeout':false,
-          'update_time':false,
+        if(args.column.property){
+          let col = this.allColumns.find((item:any)=>{
+              return Object.is(args.column.property,item.name);
+          })
+          if(col !== undefined){
+              if(col.isEnableRowEdit && this.actualIsOpenEdit ){
+                  return 'edit-cell';
+              }
+          }
         }
-        return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
+        return 'info-cell';
     }
 
     /**

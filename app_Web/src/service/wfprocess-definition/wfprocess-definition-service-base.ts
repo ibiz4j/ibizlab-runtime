@@ -48,7 +48,8 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
      * @memberof WFProcessDefinitionServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/wfprocessdefinitions/${context.wfprocessdefinition}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/wfprocessdefinitions/${context.wfprocessdefinition}/select`,isloading);
+        return res;
     }
 
     /**
@@ -61,7 +62,8 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
      * @memberof WFProcessDefinitionServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/wfprocessdefinitions/${context.wfprocessdefinition}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/wfprocessdefinitions/${context.wfprocessdefinition}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -74,7 +76,8 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
      * @memberof WFProcessDefinitionServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/wfprocessdefinitions/${context.wfprocessdefinition}`,isloading);
+        let res:any = await Http.getInstance().delete(`/wfprocessdefinitions/${context.wfprocessdefinition}`,isloading);
+        return res;
     }
 
     /**
@@ -90,7 +93,7 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/wfprocessdefinitions/${context.wfprocessdefinition}/save`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -144,7 +147,7 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/wfprocessdefinitions/${context.wfprocessdefinition}`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -157,8 +160,8 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
      * @memberof WFProcessDefinitionServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = await Http.getInstance().get(`/wfprocessdefinitions/${context.wfprocessdefinition}`,isloading);
-            return res;
+        let res:any = await Http.getInstance().get(`/wfprocessdefinitions/${context.wfprocessdefinition}`,isloading);
+        return res;
     }
 
     /**
@@ -172,6 +175,7 @@ export default class WFProcessDefinitionServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/wfprocessdefinitions/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/wfprocessdefinitions/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

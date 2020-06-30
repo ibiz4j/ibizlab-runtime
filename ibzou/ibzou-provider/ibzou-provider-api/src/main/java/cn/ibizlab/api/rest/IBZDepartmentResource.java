@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.ou.domain.IBZDepartment;
 import cn.ibizlab.core.ou.service.IIBZDepartmentService;
 import cn.ibizlab.core.ou.filter.IBZDepartmentSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"部门" })
@@ -117,6 +118,7 @@ public class IBZDepartmentResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @VersionCheck(entity = "ibzdepartment" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.ibzdepartmentService.get(#ibzdepartment_id),'ibzou-IBZDepartment-Update')")
     @ApiOperation(value = "更新部门", tags = {"部门" },  notes = "更新部门")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}")
@@ -242,6 +244,7 @@ public class IBZDepartmentResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @VersionCheck(entity = "ibzdepartment" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.ibzdepartmentService.get(#ibzdepartment_id),'ibzou-IBZDepartment-Update')")
     @ApiOperation(value = "根据单位机构更新部门", tags = {"部门" },  notes = "根据单位机构更新部门")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}")

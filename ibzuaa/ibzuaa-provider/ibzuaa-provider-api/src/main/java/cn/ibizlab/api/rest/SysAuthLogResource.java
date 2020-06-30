@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.uaa.domain.SysAuthLog;
 import cn.ibizlab.core.uaa.service.ISysAuthLogService;
 import cn.ibizlab.core.uaa.filter.SysAuthLogSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"认证日志" })

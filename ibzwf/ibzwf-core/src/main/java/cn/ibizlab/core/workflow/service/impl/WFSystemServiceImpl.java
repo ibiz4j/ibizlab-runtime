@@ -45,7 +45,7 @@ import org.springframework.util.StringUtils;
 public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> implements IWFSystemService {
 
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -183,6 +183,5 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
 
 
 }
-
 
 

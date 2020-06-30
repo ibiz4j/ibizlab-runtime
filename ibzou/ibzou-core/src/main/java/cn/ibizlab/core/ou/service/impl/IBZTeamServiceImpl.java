@@ -46,9 +46,9 @@ public class IBZTeamServiceImpl extends ServiceImpl<IBZTeamMapper, IBZTeam> impl
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZTeamMemberService ibzteammemberService;
+    protected cn.ibizlab.core.ou.service.IIBZTeamMemberService ibzteammemberService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -186,6 +186,5 @@ public class IBZTeamServiceImpl extends ServiceImpl<IBZTeamMapper, IBZTeam> impl
 
 
 }
-
 
 

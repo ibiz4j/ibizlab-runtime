@@ -45,7 +45,7 @@ import org.springframework.util.StringUtils;
 public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> implements IJobsLogService {
 
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     public JobsLog getDraft(JobsLog et) {
@@ -183,6 +183,5 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
 
 
 }
-
 
 

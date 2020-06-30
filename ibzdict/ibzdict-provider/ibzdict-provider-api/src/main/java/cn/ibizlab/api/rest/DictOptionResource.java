@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.dict.domain.DictOption;
 import cn.ibizlab.core.dict.service.IDictOptionService;
 import cn.ibizlab.core.dict.filter.DictOptionSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"字典项" })
@@ -46,6 +47,7 @@ public class DictOptionResource {
     @Lazy
     public DictOptionMapping dictoptionMapping;
 
+    @VersionCheck(entity = "dictoption" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Update-all')")
     @ApiOperation(value = "更新字典项", tags = {"字典项" },  notes = "更新字典项")
 	@RequestMapping(method = RequestMethod.PUT, value = "/dictoptions/{dictoption_id}")
@@ -158,6 +160,7 @@ public class DictOptionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(dictoptionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+    @VersionCheck(entity = "dictoption" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Update-all')")
     @ApiOperation(value = "根据字典更新字典项", tags = {"字典项" },  notes = "根据字典更新字典项")
 	@RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")

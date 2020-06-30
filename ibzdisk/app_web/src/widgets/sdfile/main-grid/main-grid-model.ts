@@ -28,12 +28,12 @@ export default class MainModel {
 		  return [
         {
           name: 'fileext',
-          prop: 'fileext',
+          prop: 'extension',
           dataType: 'TEXT',
         },
         {
           name: 'filepath',
-          prop: 'filepath',
+          prop: 'file_path',
           dataType: 'TEXT',
         },
         {
@@ -48,7 +48,7 @@ export default class MainModel {
         },
         {
           name: 'ownerid',
-          prop: 'ownerid',
+          prop: 'owner_id',
           dataType: 'TEXT',
         },
         {
@@ -73,7 +73,7 @@ export default class MainModel {
         },
         {
           name: 'filesize',
-          prop: 'filesize',
+          prop: 'file_size',
           dataType: 'INT',
         },
         {
@@ -83,7 +83,7 @@ export default class MainModel {
         },
         {
           name: 'ownertype',
-          prop: 'ownertype',
+          prop: 'owner_type',
           dataType: 'TEXT',
         },
         {

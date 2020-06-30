@@ -46,17 +46,17 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZDeptMemberService ibzdeptmemberService;
+    protected cn.ibizlab.core.ou.service.IIBZDeptMemberService ibzdeptmemberService;
 
-    private cn.ibizlab.core.ou.service.IIBZDepartmentService ibzdepartmentService = this;
+    protected cn.ibizlab.core.ou.service.IIBZDepartmentService ibzdepartmentService = this;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
+    protected cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZOrganizationService ibzorganizationService;
+    protected cn.ibizlab.core.ou.service.IIBZOrganizationService ibzorganizationService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -295,6 +295,5 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
     }
 
 }
-
 
 

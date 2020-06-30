@@ -53,6 +53,7 @@ public interface IWFGroupService extends IService<WFGroup>{
     boolean execute(String sql, Map param);
 
 
+
 }
 
 

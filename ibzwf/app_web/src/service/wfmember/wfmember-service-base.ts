@@ -49,12 +49,13 @@ export default class WFMemberServiceBase extends EntityService {
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
-            return Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/select`,isloading);
+            let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/select`,isloading);
         }
         if(context.wfgroup && context.wfmember){
-            return Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/select`,isloading);
+            let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/select`,isloading);
         }
-            return Http.getInstance().get(`/wfmembers/${context.wfmember}/select`,isloading);
+        let res:any = await Http.getInstance().get(`/wfmembers/${context.wfmember}/select`,isloading);
+        return res;
     }
 
     /**
@@ -71,15 +72,14 @@ export default class WFMemberServiceBase extends EntityService {
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
-            return res;
         }
         if(context.wfgroup && context.wfmember){
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
-            return res;
         }
-            return Http.getInstance().post(`/wfmembers/${context.wfmember}/checkkey`,data,isloading);
+        let res:any = await Http.getInstance().post(`/wfmembers/${context.wfmember}/checkkey`,data,isloading);
+        return res;
     }
 
     /**
@@ -95,12 +95,10 @@ export default class WFMemberServiceBase extends EntityService {
         if(context.wfuser && true){
             let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/getdraft`,isloading);
             res.data.wfmember = data.wfmember;
-            return res;
         }
         if(context.wfgroup && true){
             let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/getdraft`,isloading);
             res.data.wfmember = data.wfmember;
-            return res;
         }
         let res:any = await  Http.getInstance().get(`/wfmembers/getdraft`,isloading);
         res.data.wfmember = data.wfmember;
@@ -128,7 +126,6 @@ export default class WFMemberServiceBase extends EntityService {
             }
             let tempContext:any = JSON.parse(JSON.stringify(context));
             let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers`,data,isloading);
-            return res;
         }
         if(context.wfgroup && true){
             let masterData:any = {};
@@ -141,7 +138,6 @@ export default class WFMemberServiceBase extends EntityService {
             }
             let tempContext:any = JSON.parse(JSON.stringify(context));
             let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers`,data,isloading);
-            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
@@ -167,12 +163,13 @@ export default class WFMemberServiceBase extends EntityService {
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
-            return Http.getInstance().delete(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,isloading);
+            let res:any = await Http.getInstance().delete(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,isloading);
         }
         if(context.wfgroup && context.wfmember){
-            return Http.getInstance().delete(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,isloading);
+            let res:any = await Http.getInstance().delete(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,isloading);
         }
-            return Http.getInstance().delete(`/wfmembers/${context.wfmember}`,isloading);
+        let res:any = await Http.getInstance().delete(`/wfmembers/${context.wfmember}`,isloading);
+        return res;
     }
 
     /**
@@ -189,18 +186,16 @@ export default class WFMemberServiceBase extends EntityService {
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/save`,data,isloading);
-            return res;
         }
         if(context.wfgroup && context.wfmember){
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/save`,data,isloading);
-            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/wfmembers/${context.wfmember}/save`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -217,18 +212,16 @@ export default class WFMemberServiceBase extends EntityService {
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().put(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,data,isloading);
-            return res;
         }
         if(context.wfgroup && context.wfmember){
             let masterData:any = {};
             Object.assign(data,masterData);
             let res:any = await Http.getInstance().put(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,data,isloading);
-            return res;
         }
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/wfmembers/${context.wfmember}`,data,isloading);
-            return res;
+        return res;
     }
 
     /**
@@ -243,14 +236,12 @@ export default class WFMemberServiceBase extends EntityService {
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
             let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,isloading);
-            return res;
         }
         if(context.wfgroup && context.wfmember){
             let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,isloading);
-            return res;
         }
-            let res:any = await Http.getInstance().get(`/wfmembers/${context.wfmember}`,isloading);
-            return res;
+        let res:any = await Http.getInstance().get(`/wfmembers/${context.wfmember}`,isloading);
+        return res;
     }
 
     /**
@@ -265,13 +256,14 @@ export default class WFMemberServiceBase extends EntityService {
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && true){
             let tempData:any = JSON.parse(JSON.stringify(data));
-            return Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/fetchdefault`,tempData,isloading);
+            let res:any = await Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/fetchdefault`,tempData,isloading);
         }
         if(context.wfgroup && true){
             let tempData:any = JSON.parse(JSON.stringify(data));
-            return Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/fetchdefault`,tempData,isloading);
+            let res:any = await Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/fetchdefault`,tempData,isloading);
         }
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/wfmembers/fetchdefault`,tempData,isloading);
+        let res:any = await Http.getInstance().get(`/wfmembers/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

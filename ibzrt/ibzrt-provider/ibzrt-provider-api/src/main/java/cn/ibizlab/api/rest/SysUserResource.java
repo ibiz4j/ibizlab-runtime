@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.core.uaa.filter.SysUserSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"系统用户" })

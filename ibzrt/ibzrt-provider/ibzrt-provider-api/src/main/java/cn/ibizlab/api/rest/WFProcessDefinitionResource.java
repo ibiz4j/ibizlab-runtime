@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.workflow.domain.WFProcessDefinition;
 import cn.ibizlab.core.workflow.service.IWFProcessDefinitionService;
 import cn.ibizlab.core.workflow.filter.WFProcessDefinitionSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"流程定义" })

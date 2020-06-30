@@ -52,6 +52,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import JobsInfoService from '@/service/jobs-info/jobs-info-service';
 import DefaultService from './default-searchform-service';
 

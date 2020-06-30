@@ -460,8 +460,8 @@ export default class SYS_USER_ROLEMPickupViewBase extends Vue {
      *
      * @memberof SYS_USER_ROLEMPickupViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'sys-user-rolempickup-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -471,8 +471,8 @@ export default class SYS_USER_ROLEMPickupViewBase extends Vue {
      *
      * @memberof SYS_USER_ROLEMPickupViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'sys-user-rolempickup-view',tag:this.viewtag,srfkey:this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }

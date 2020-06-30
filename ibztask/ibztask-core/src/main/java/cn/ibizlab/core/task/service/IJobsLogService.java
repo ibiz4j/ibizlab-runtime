@@ -53,6 +53,7 @@ public interface IJobsLogService extends IService<JobsLog>{
     boolean execute(String sql, Map param);
 
 
+
 }
 
 

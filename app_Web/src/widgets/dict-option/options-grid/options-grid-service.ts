@@ -90,6 +90,8 @@ export default class OptionsService extends ControlService {
      */
     @Errorlog
     public getItems(serviceName: string, interfaceName: string, context: any = {}, data: any, isloading?: boolean): Promise<any[]> {
+        data.page = data.page ? data.page : 0;
+        data.size = data.size ? data.size : 1000;
         if (Object.is(serviceName, 'DictCatalogService') && Object.is(interfaceName, 'FetchDefault')) {
             return this.doItems(this.dictcatalogService.FetchDefault(JSON.parse(JSON.stringify(context)),data, isloading), 'id', 'dictcatalog');
         }

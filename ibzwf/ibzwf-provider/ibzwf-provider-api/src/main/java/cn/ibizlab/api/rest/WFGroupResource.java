@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.workflow.domain.WFGroup;
 import cn.ibizlab.core.workflow.service.IWFGroupService;
 import cn.ibizlab.core.workflow.filter.WFGroupSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"角色/用户组" })

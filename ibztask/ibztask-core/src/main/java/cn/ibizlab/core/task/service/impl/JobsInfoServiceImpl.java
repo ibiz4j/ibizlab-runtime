@@ -45,7 +45,7 @@ import org.springframework.util.StringUtils;
 public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> implements IJobsInfoService {
 
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -158,9 +158,9 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public JobsInfo stop(JobsInfo et) {
-        et.set("Next_time","0");
         et.set("Last_time","0");
         et.set("Status","1");
+        et.set("Next_time","0");
         update(et);
         return et;
     }
@@ -207,6 +207,5 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
 
 
 }
-
 
 

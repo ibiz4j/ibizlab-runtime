@@ -17,24 +17,21 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 
-import cn.ibizlab.util.filter.QueryBuildContext;
+import cn.ibizlab.util.filter.QueryWrapperContext;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import cn.ibizlab.core.disk.domain.SDFile;
-import java.util.regex.Pattern;
-import com.mongodb.BasicDBObject;
-
 /**
- * NoSQL数据实体[SDFile] 查询条件对象
+ * 关系型数据实体[SDFile] 查询条件对象
  */
 @Slf4j
 @Data
-public class SDFileSearchContext extends QueryBuildContext {
+public class SDFileSearchContext extends QueryWrapperContext<SDFile> {
 
 	private String n_filename_like;//[名称]
 	public void setN_filename_like(String n_filename_like) {
         this.n_filename_like = n_filename_like;
         if(!ObjectUtils.isEmpty(this.n_filename_like)){
-            Pattern pattern = Pattern.compile("^.*" + n_filename_like + ".*$", Pattern.CASE_INSENSITIVE);
-            this.getSearchCond().and("filename").regex(pattern);
+            this.getSearchCond().like("filename", n_filename_like);
         }
     }
 
@@ -45,11 +42,13 @@ public class SDFileSearchContext extends QueryBuildContext {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
-            Pattern pattern = Pattern.compile("^.*" + query + ".*$", Pattern.CASE_INSENSITIVE);
-            this.getSearchCond().or(new BasicDBObject("filename",pattern));
+            this.getSearchCond().and( wrapper ->
+                     wrapper.like("filename", query)   
+            );
 		 }
 	}
 }
+
 
 
 

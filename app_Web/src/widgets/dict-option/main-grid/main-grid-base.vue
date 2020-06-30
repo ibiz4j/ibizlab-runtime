@@ -432,6 +432,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import DictOptionService from '@/service/dict-option/dict-option-service';
 import MainService from './main-grid-service';
 
@@ -560,6 +561,15 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 获取多项数据
@@ -866,91 +876,104 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '目录代码',
             langtag: 'entities.dictoption.main_grid.columns.cid',
             show: false,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'val',
             label: '代码值',
             langtag: 'entities.dictoption.main_grid.columns.val',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'label',
             label: '名称',
             langtag: 'entities.dictoption.main_grid.columns.label',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'pval',
             label: '父代码值',
             langtag: 'entities.dictoption.main_grid.columns.pval',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'showorder',
             label: '排序',
             langtag: 'entities.dictoption.main_grid.columns.showorder',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'cname',
             label: '目录',
             langtag: 'entities.dictoption.main_grid.columns.cname',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'cls',
             label: '栏目样式',
             langtag: 'entities.dictoption.main_grid.columns.cls',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'iconcls',
             label: '图标',
             langtag: 'entities.dictoption.main_grid.columns.iconcls',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'vfilter',
             label: '过滤项',
             langtag: 'entities.dictoption.main_grid.columns.vfilter',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'disabled',
             label: '是否禁用',
             langtag: 'entities.dictoption.main_grid.columns.disabled',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'expired',
             label: '过期/失效',
             langtag: 'entities.dictoption.main_grid.columns.expired',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'extension',
             label: '扩展',
             langtag: 'entities.dictoption.main_grid.columns.extension',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: true,
         },
         {
             name: 'updatedate',
             label: '最后修改时间',
             langtag: 'entities.dictoption.main_grid.columns.updatedate',
             show: true,
-            util: 'PX'
+            util: 'PX',
+            isEnableRowEdit: false,
         },
     ]
 
@@ -1542,6 +1565,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             });
         }
+        if(AppCenterService && AppCenterService.getMessageCenter()){
+            this.appStateEvent = AppCenterService.getMessageCenter().subscribe(({ name, action, data }) =>{
+                if(!Object.is(name,"DictOption")){
+                    return;
+                }
+                if(Object.is(action,'appRefresh')){
+                    this.refresh([data]);
+                }
+            })
+        }
     }
 
     /**
@@ -1561,6 +1594,9 @@ export default class MainBase extends Vue implements ControlInterface {
     public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 
@@ -2007,22 +2043,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
-        let hasRowEdit:any = {
-          'cid':true,
-          'val':true,
-          'label':true,
-          'pval':true,
-          'showorder':true,
-          'cname':true,
-          'cls':true,
-          'iconcls':true,
-          'vfilter':true,
-          'disabled':true,
-          'expired':true,
-          'extension':true,
-          'updatedate':false,
+        if(args.column.property){
+          let col = this.allColumns.find((item:any)=>{
+              return Object.is(args.column.property,item.name);
+          })
+          if(col !== undefined){
+              if(col.isEnableRowEdit && this.actualIsOpenEdit ){
+                  return 'edit-cell';
+              }
+          }
         }
-        return ( hasRowEdit[args.column.property] && this.actualIsOpenEdit ) ? "edit-cell" : "info-cell";
+        return 'info-cell';
     }
 
     /**

@@ -44,7 +44,7 @@ public class IBZPostServiceImpl implements IIBZPostService {
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
+    protected cn.ibizlab.core.ou.service.IIBZEmployeeService ibzemployeeService;
 
     @Override
     public IBZPost get(String postid) {
@@ -134,6 +134,5 @@ public class IBZPostServiceImpl implements IIBZPostService {
 
 
 }
-
 
 

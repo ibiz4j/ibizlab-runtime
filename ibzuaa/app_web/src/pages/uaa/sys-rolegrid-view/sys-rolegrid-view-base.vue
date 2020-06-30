@@ -528,8 +528,8 @@ export default class SYS_ROLEGridViewBase extends Vue {
      *
      * @memberof SYS_ROLEGridViewBase
      */
-    public initNavDataWithRoute(data:any = null, isNew:boolean = false){
-        if(this.viewDefaultUsage && Object.is(this.navModel,"route")){
+    public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
             this.navDataService.addNavData({id:'sys-rolegrid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
@@ -539,8 +539,8 @@ export default class SYS_ROLEGridViewBase extends Vue {
      *
      * @memberof SYS_ROLEGridViewBase
      */
-    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true){
-        if(this.viewDefaultUsage && !Object.is(this.navModel,"route")){
+    public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
+        if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
             this.navDataService.addNavDataByOnly({id:'sys-rolegrid-view',tag:this.viewtag,srfkey:this.context.sysrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
@@ -1125,6 +1125,13 @@ export default class SYS_ROLEGridViewBase extends Vue {
      * @memberof SYS_ROLEGridView
      */
     public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+        if(!this.viewDefaultUsage){
+            if(Object.is(this.navModel,"route")){
+                this.initNavDataWithRoute(this.viewCacheData, false, true);
+            }else{
+                this.initNavDataWithTab(this.viewCacheData, false, true);
+            }
+        }
         let localContext:any = null;
         let localViewParam:any =null;
         const data: any = {};

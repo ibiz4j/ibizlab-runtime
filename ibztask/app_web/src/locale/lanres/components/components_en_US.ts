@@ -169,4 +169,8 @@ export default {
           YouYuan: 'YouYuan',
       },
     },
+    appFormGroup: {
+      hide: 'hide',
+      showMore: 'show more',
+    },
 };

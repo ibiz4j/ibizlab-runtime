@@ -44,9 +44,11 @@ export const getAuthMenu = (state: any) => (menu:any) =>{
         resourceIndex= state.resourceData.findIndex((resourcetag: any, objIndex: any, objs: any) => {
             return Object.is(menu.resourcetag, resourcetag);
         })
+        menuIndex= state.menuData.findIndex((menutag: any, objIndex: any, objs: any) => {
+            return Object.is(menu.authtag, menutag);
+        })
+        return (resourceIndex !== -1 || menuIndex !== -1)?true:false;
+    }else{
+        return true;
     }
-    menuIndex= state.menuData.findIndex((menutag: any, objIndex: any, objs: any) => {
-        return Object.is(menu.authtag, menutag);
-    })
-    return (resourceIndex !== -1 || menuIndex !== -1)?true:false;
 }

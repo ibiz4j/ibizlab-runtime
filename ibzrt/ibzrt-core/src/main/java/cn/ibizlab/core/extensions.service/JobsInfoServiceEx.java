@@ -6,6 +6,7 @@ import cn.ibizlab.core.task.domain.JobsInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Primary;
+import java.util.*;
 
 /**
  * 实体[任务信息] 自定义服务对象
@@ -27,5 +28,4 @@ public class JobsInfoServiceEx extends JobsInfoServiceImpl {
         return super.execute(et);
     }
 }
-
 

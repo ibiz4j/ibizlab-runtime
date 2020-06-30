@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.disk.domain.SDFile;
 import cn.ibizlab.core.disk.service.ISDFileService;
 import cn.ibizlab.core.disk.filter.SDFileSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"文件" })
@@ -46,6 +47,7 @@ public class SDFileResource {
     @Lazy
     public SDFileMapping sdfileMapping;
 
+    @VersionCheck(entity = "sdfile" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.sdfileService.get(#sdfile_id),'ibzdisk-SDFile-Update')")
     @ApiOperation(value = "更新文件", tags = {"文件" },  notes = "更新文件")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/{sdfile_id}")

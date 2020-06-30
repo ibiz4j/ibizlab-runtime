@@ -46,9 +46,9 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
     @Autowired
     @Lazy
-    private cn.ibizlab.core.uaa.service.ISysRolePermissionService sysrolepermissionService;
+    protected cn.ibizlab.core.uaa.service.ISysRolePermissionService sysrolepermissionService;
 
-    private int batchSize = 500;
+    protected int batchSize = 500;
 
     @Override
     @Transactional
@@ -186,6 +186,5 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
 
 }
-
 
 

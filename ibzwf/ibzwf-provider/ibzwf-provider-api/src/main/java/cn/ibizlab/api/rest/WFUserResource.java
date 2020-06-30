@@ -32,6 +32,7 @@ import cn.ibizlab.api.mapping.*;
 import cn.ibizlab.core.workflow.domain.WFUser;
 import cn.ibizlab.core.workflow.service.IWFUserService;
 import cn.ibizlab.core.workflow.filter.WFUserSearchContext;
+import cn.ibizlab.util.annotation.VersionCheck;
 
 @Slf4j
 @Api(tags = {"用户" })

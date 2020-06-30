@@ -4,7 +4,7 @@
     <row >
             
 <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-group layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysapp.main_form.details.group1')" :isShowCaption="true" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
+    <app-form-group :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysapp.main_form.details.group1')" :isShowCaption="true" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.appid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='appid' :itemRules="this.rules.appid" class='' :caption="$t('entities.sysapp.main_form.details.appid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appid.error" :isEmptyCaption="false" labelPos="LEFT">
@@ -84,6 +84,7 @@ import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
+import AppCenterService from "@service/app/app-center-service";
 import SysAppService from '@/service/sys-app/sys-app-service';
 import MainService from './main-form-service';
 
@@ -542,41 +543,41 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public detailsModel: any = {
-        group1: new FormGroupPanelModel({ caption: '应用基本信息', detailType: 'GROUPPANEL', name: 'group1', visible: true, isShowCaption: true, form: this, uiActionGroup: { caption: '', langbase: 'entities.sysapp.main_form', extractMode: 'ITEM', details: [] } })
+        group1: new FormGroupPanelModel({ caption: '应用基本信息', detailType: 'GROUPPANEL', name: 'group1', visible: true, isShowCaption: true, form: this, isControlledContent: false , uiActionGroup: { caption: '', langbase: 'entities.sysapp.main_form', extractMode: 'ITEM', details: [] }, isManageContainer: false, showMoreModeItems: []  })
 , 
-        formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+        formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
 , 
-        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        srfkey: new FormItemModel({ caption: '应用标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        srfkey: new FormItemModel({ caption: '应用标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        srfmajortext: new FormItemModel({ caption: '应用名', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        srfmajortext: new FormItemModel({ caption: '应用名', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        pssystemid: new FormItemModel({ caption: '系统标识', detailType: 'FORMITEM', name: 'pssystemid', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 1 })
+        pssystemid: new FormItemModel({ caption: '系统标识', detailType: 'FORMITEM', name: 'pssystemid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
 , 
-        appid: new FormItemModel({ caption: '应用标识', detailType: 'FORMITEM', name: 'appid', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 1 })
+        appid: new FormItemModel({ caption: '应用标识', detailType: 'FORMITEM', name: 'appid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
 , 
-        appname: new FormItemModel({ caption: '应用名', detailType: 'FORMITEM', name: 'appname', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 1 })
+        appname: new FormItemModel({ caption: '应用名', detailType: 'FORMITEM', name: 'appname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
 , 
-        apptype: new FormItemModel({ caption: '类型', detailType: 'FORMITEM', name: 'apptype', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        apptype: new FormItemModel({ caption: '类型', detailType: 'FORMITEM', name: 'apptype', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        appgroup: new FormItemModel({ caption: '分组', detailType: 'FORMITEM', name: 'appgroup', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        appgroup: new FormItemModel({ caption: '分组', detailType: 'FORMITEM', name: 'appgroup', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        fullname: new FormItemModel({ caption: '全称', detailType: 'FORMITEM', name: 'fullname', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        fullname: new FormItemModel({ caption: '全称', detailType: 'FORMITEM', name: 'fullname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        icon: new FormItemModel({ caption: '图标', detailType: 'FORMITEM', name: 'icon', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        icon: new FormItemModel({ caption: '图标', detailType: 'FORMITEM', name: 'icon', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        visabled: new FormItemModel({ caption: '可见', detailType: 'FORMITEM', name: 'visabled', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        visabled: new FormItemModel({ caption: '可见', detailType: 'FORMITEM', name: 'visabled', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        addr: new FormItemModel({ caption: '地址', detailType: 'FORMITEM', name: 'addr', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        addr: new FormItemModel({ caption: '地址', detailType: 'FORMITEM', name: 'addr', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
     };
 
@@ -772,6 +773,24 @@ export default class MainBase extends Vue implements ControlInterface {
         this.formDataChange({ name: 'addr', newVal: newVal, oldVal: oldVal });
     }
 
+
+    /**
+     * 显示更多模式切换操作
+     *
+     * @type {string}
+     * @memberof MainBase
+     */
+    public manageContainerClick(name: string){
+        let model = this.detailsModel[name];
+        if(model.isManageContainer){
+            model.setManageContainerStatus(!model.manageContainerStatus);
+            model.showMoreModeItems.forEach((item:any) => {
+                if(this.detailsModel[item].isControlledContent){
+                    this.detailsModel[item].setVisible(model.manageContainerStatus? this.detailsModel[item].oldVisible : false);
+                }
+            });
+        }
+    }
 
     /**
      * 重置表单项值
@@ -1312,13 +1331,24 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.onFormLoad(data,'autoSave');
             this.$emit('save', data);
-            this.$store.dispatch('viewaction/datasaved', { viewtag: this.viewtag });
+            AppCenterService.notifyMessage({name:"SysApp",action:'appRefresh',data:data});
             this.$nextTick(() => {
                 this.formState.next({ type: 'save', data: data });
             });
         }).catch((response: any) => {
             if (response && response.status && response.data) {
-                this.$Notice.error({ title: '错误', desc: response.data.message });
+                if(response.data.errorKey && Object.is(response.data.errorKey,"versionCheck")){
+                    this.$Modal.confirm({
+                        title: '保存数据发生错误',
+                        content: '数据不一致，可能后台数据已经被修改,是否要重新加载数据？',
+                        onOk: () => {
+                            this.refresh([]);
+                        },
+                        onCancel: () => { }
+                    });
+                }else{
+                    this.$Notice.error({ title: '错误', desc: response.data.message });
+                }
                 return;
             }
             if (!response || !response.status || !response.data) {
@@ -1376,7 +1406,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
-                this.$store.dispatch('viewaction/datasaved', { viewtag: this.viewtag });
+                AppCenterService.notifyMessage({name:"SysApp",action:'appRefresh',data:data});
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: data });
                 });
@@ -1386,8 +1416,19 @@ export default class MainBase extends Vue implements ControlInterface {
                 resolve(response);
             }).catch((response: any) => {
                 if (response && response.status  && response.data) {
-                    this.$Notice.error({ title: '错误', desc: response.data.message });
-                    reject(response);
+                    if(response.data.errorKey && Object.is(response.data.errorKey,"versionCheck")){
+                        this.$Modal.confirm({
+                            title: '保存数据发生错误',
+                            content: '数据不一致，可能后台数据已经被修改,是否要重新加载数据？',
+                            onOk: () => {
+                                this.refresh([]);
+                            },
+                            onCancel: () => { }
+                        });
+                    }else{
+                        this.$Notice.error({ title: '错误', desc: response.data.message });
+                        reject(response);
+                    }
                     return;
                 }
                 if (!response || !response.status || !response.data) {
@@ -1423,6 +1464,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.formState.next({ type: 'remove', data: data });
                     this.data.ismodify = false;
                     this.$Notice.success({ title: '', desc: (data.srfmajortext ? data.srfmajortext : '') + '&nbsp;删除成功！' });
+                    AppCenterService.notifyMessage({name:"SysApp",action:'appRefresh',data:data});
                     resolve(response);
                 }
             }).catch((error: any) => {
@@ -1511,6 +1553,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 // 保存完成UI处理
                 this.onFormLoad(arg,'save');
                 this.$emit('save', arg);
+                AppCenterService.notifyMessage({name:"SysApp",action:'appRefresh',data:data});
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: arg });
                 });
@@ -1597,6 +1640,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.fillForm(_data,'updateFormItem');
             this.formLogic({ name: '', newVal: null, oldVal: null });
             this.dataChang.next(JSON.stringify(this.data));
+            AppCenterService.notifyMessage({name:"SysApp",action:'appRefresh',data:data});
             this.$nextTick(() => {
                 this.formState.next({ type: 'updateformitem', ufimode: arg.srfufimode, data: _data });
             });
