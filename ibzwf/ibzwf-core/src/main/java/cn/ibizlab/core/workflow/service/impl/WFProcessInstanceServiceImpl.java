@@ -45,7 +45,6 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     }
 
     public void createBatch(List<WFProcessInstance> list){
-
     }
 
     @Override
@@ -55,7 +54,6 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     }
 
     public void updateBatch(List<WFProcessInstance> list){
-                    
     }
 
     @Override
@@ -64,7 +62,6 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     }
 
     public void removeBatch(Collection<String> idList){
-                        
     }
 
     @Override
@@ -92,7 +89,6 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
 
     @Override
     public void saveBatch(List<WFProcessInstance> list) {
-                       
     }
 
 

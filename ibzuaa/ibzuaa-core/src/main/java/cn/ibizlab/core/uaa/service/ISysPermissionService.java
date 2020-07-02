@@ -52,8 +52,6 @@ public interface ISysPermissionService extends IService<SysPermission>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

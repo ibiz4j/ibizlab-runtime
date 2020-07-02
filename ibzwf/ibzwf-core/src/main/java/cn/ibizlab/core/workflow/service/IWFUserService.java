@@ -52,8 +52,6 @@ public interface IWFUserService extends IService<WFUser>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

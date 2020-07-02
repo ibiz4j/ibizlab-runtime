@@ -26,7 +26,7 @@
 </i-col>
 <i-col v-show="detailsModel.memo.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='memo' :itemRules="this.rules.memo" class='' :caption="$t('entities.ibzpost.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.memo" :autoSize="{minRows: 10}"  :disabled="detailsModel.memo.disabled" type='textarea' style="height:200px;" ></input-box>
+    <input-box v-model="data.memo" :textareaId="this.$util.createUUID()"  :disabled="detailsModel.memo.disabled" type='textarea' textareaStyle="height:200px;" ></input-box>
 
 </app-form-item>
 

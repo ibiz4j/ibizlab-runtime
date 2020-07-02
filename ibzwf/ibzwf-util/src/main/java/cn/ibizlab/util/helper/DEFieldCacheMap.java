@@ -92,7 +92,7 @@ public class DEFieldCacheMap {
 		if(cacheDEField.containsKey(className))
 			return cacheDEField.get(className);
 		else{
-			DEFieldCacheMap.getFieldMap(clazz);
+			DEFieldCacheMap.getFieldMap(className);
 			return cacheDEField.get(className);
 		}
 	}
@@ -109,7 +109,7 @@ public class DEFieldCacheMap {
 		if(cacheDEKeyField.containsKey(className))
 			return cacheDEKeyField.get(className);
 		else{
-			DEFieldCacheMap.getFieldMap(clazz);
+			DEFieldCacheMap.getFieldMap(className);
 			return cacheDEKeyField.get(className);
 		}
 	}
@@ -127,7 +127,7 @@ public class DEFieldCacheMap {
 		if(cacheList.containsKey(className))
 			return cacheList.get(className);
 		else{
-			DEFieldCacheMap.getFieldMap(clazz);
+			DEFieldCacheMap.getFieldMap(className);
 			return cacheList.get(className);
 		}
 	}
@@ -155,7 +155,7 @@ public class DEFieldCacheMap {
 		if(cacheKey.containsKey(className))
 			return cacheKey.get(className);
 		else{
-			DEFieldCacheMap.getFieldMap(clazz);
+			DEFieldCacheMap.getFieldMap(className);
 			return cacheKey.get(className);
 		}
 	}

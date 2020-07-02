@@ -16,9 +16,9 @@
           </app-form-item>
           
           </i-col>
-          <i-col v-show="detailsModel.porgname.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
-              <app-form-item name='porgname' :itemRules="this.rules.porgname" class='' :caption="$t('entities.ibzorganization.default_searchform.details.porgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.porgname.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <app-org-select :data="data" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'n_porgid_eq','label':'porgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
+          <i-col v-show="detailsModel.n_porgname_eq.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+              <app-form-item name='n_porgname_eq' :itemRules="this.rules.n_porgname_eq" class='' :caption="$t('entities.ibzorganization.default_searchform.details.n_porgname_eq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_porgname_eq.error" :isEmptyCaption="false" labelPos="LEFT"> 
+              <app-org-select :data="data" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'n_porgid_eq','label':'n_porgname_eq'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
           </app-form-item>
           
           </i-col>
@@ -267,7 +267,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
         orgcode: null,
         n_orgname_like: null,
         n_porgid_eq: null,
-        porgname: null,
+        n_porgname_eq: null,
     };
 
     /**
@@ -295,7 +295,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '上级单位(=) 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '上级单位(=) 值不能为空', trigger: 'blur' },
         ],
-        porgname: [
+        n_porgname_eq: [
             { type: 'string', message: '上级单位(等于(=)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '上级单位(等于(=)) 值必须为字符串类型', trigger: 'blur' },
             { required: false, type: 'string', message: '上级单位(等于(=)) 值不能为空', trigger: 'change' },
@@ -318,7 +318,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
 , 
         n_porgid_eq: new FormItemModel({ caption: '上级单位(=)', detailType: 'FORMITEM', name: 'n_porgid_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
-        porgname: new FormItemModel({ caption: '上级单位(等于(=))', detailType: 'FORMITEM', name: 'porgname', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+        n_porgname_eq: new FormItemModel({ caption: '上级单位(等于(=))', detailType: 'FORMITEM', name: 'n_porgname_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
 , 
     };
 
@@ -359,15 +359,15 @@ export default class DefaultBase extends Vue implements ControlInterface {
     }
 
     /**
-     * 监控表单属性 porgname 值
+     * 监控表单属性 n_porgname_eq 值
      *
      * @param {*} newVal
      * @param {*} oldVal
      * @memberof DefaultBase
      */
-    @Watch('data.porgname')
-    onPorgnameChange(newVal: any, oldVal: any) {
-        this.formDataChange({ name: 'porgname', newVal: newVal, oldVal: oldVal });
+    @Watch('data.n_porgname_eq')
+    onN_porgname_eqChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_porgname_eq', newVal: newVal, oldVal: oldVal });
     }
 
 

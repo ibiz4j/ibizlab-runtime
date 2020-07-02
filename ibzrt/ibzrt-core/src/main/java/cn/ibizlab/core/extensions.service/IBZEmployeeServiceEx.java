@@ -1,35 +1,12 @@
 package cn.ibizlab.core.extensions.service;
 
-import cn.ibizlab.core.ou.service.impl.IBZEmployeeServiceImpl;
-import lombok.extern.slf4j.Slf4j;
-import cn.ibizlab.core.ou.domain.IBZEmployee;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.context.annotation.Primary;
-import java.util.*;
-
 /**
- * 实体[人员] 自定义服务对象
+ * 扩展目录已变更，请到[cn.ibizlab.core.extensions.service.xxExService]中来进行扩展
+ * 若您之前有在当前目录下扩展过其它的service对象，请将扩展的代码移到新的扩展类中，并注释掉老的扩展类，防止Bean重复
  */
-@Slf4j
-@Primary
-@Service("IBZEmployeeServiceEx")
-public class IBZEmployeeServiceEx extends IBZEmployeeServiceImpl {
+@Deprecated
+public class IBZEmployeeServiceEx{
 
-    @Override
-    protected Class currentModelClass() {
-        return com.baomidou.mybatisplus.core.toolkit.ReflectionKit.getSuperClassGenericType(this.getClass().getSuperclass(), 1);
-    }
-
-    /**
-     * 自定义行为[InitPwd]用户扩展
-     * @param et
-     * @return
-     */
-    @Override
-    @Transactional
-    public IBZEmployee initPwd(IBZEmployee et) {
-        return super.initPwd(et);
-    }
 }
+
 

@@ -41,7 +41,7 @@ export default class DefaultModel {
         dataType: 'PICKUP',
       },
       {
-        name: 'porgname',
+        name: 'n_porgname_eq',
         prop: 'parentorgname',
         dataType: 'PICKUPTEXT',
       },

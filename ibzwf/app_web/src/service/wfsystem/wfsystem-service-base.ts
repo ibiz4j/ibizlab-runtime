@@ -48,8 +48,7 @@ export default class WFSystemServiceBase extends EntityService {
      * @memberof WFSystemServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().get(`/wfsystems/${context.wfsystem}/select`,isloading);
-        return res;
+            return Http.getInstance().get(`/wfsystems/${context.wfsystem}/select`,isloading);
     }
 
     /**
@@ -88,7 +87,7 @@ export default class WFSystemServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/wfsystems/${context.wfsystem}`,data,isloading);
-        return res;
+            return res;
     }
 
     /**
@@ -101,8 +100,7 @@ export default class WFSystemServiceBase extends EntityService {
      * @memberof WFSystemServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().delete(`/wfsystems/${context.wfsystem}`,isloading);
-        return res;
+            return Http.getInstance().delete(`/wfsystems/${context.wfsystem}`,isloading);
     }
 
     /**
@@ -115,8 +113,8 @@ export default class WFSystemServiceBase extends EntityService {
      * @memberof WFSystemServiceBase
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().get(`/wfsystems/${context.wfsystem}`,isloading);
-        return res;
+            let res:any = await Http.getInstance().get(`/wfsystems/${context.wfsystem}`,isloading);
+            return res;
     }
 
     /**
@@ -144,8 +142,7 @@ export default class WFSystemServiceBase extends EntityService {
      * @memberof WFSystemServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let res:any = await Http.getInstance().post(`/wfsystems/${context.wfsystem}/checkkey`,data,isloading);
-        return res;
+            return Http.getInstance().post(`/wfsystems/${context.wfsystem}/checkkey`,data,isloading);
     }
 
     /**
@@ -161,7 +158,7 @@ export default class WFSystemServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/wfsystems/${context.wfsystem}/save`,data,isloading);
-        return res;
+            return res;
     }
 
     /**
@@ -175,7 +172,6 @@ export default class WFSystemServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        let res:any = await Http.getInstance().get(`/wfsystems/fetchdefault`,tempData,isloading);
-        return res;
+        return Http.getInstance().get(`/wfsystems/fetchdefault`,tempData,isloading);
     }
 }

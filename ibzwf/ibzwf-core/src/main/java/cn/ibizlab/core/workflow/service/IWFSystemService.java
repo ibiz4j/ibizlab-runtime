@@ -52,8 +52,6 @@ public interface IWFSystemService extends IService<WFSystem>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

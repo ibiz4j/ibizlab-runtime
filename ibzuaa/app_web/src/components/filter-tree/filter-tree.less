@@ -1,31 +1,9 @@
-.filter-item {
-    display: flex;
-    // margin-top: 10px;
-    .fa-trash-o {
-        color: red;
-    }
-    .filter-item-group {
-        width: 100px;
-        margin-left: 5px;
-    }
-    .filter-item-field {
-        width: 200px;
-        margin-left: 5px;
-    }
-    .filter-item-mode {
-        width: 200px;
-        margin-left: 5px;
-    }
-    .filter-item-value {
-        margin-left: 5px;
-        flex-grow: 1;
-    }
-}
 .filter-tree {
     .el-tree-node__content {
         height: 40px;
         .filter-tree-item {
             display: flex;
+            width: 100%;
             >div {
                 margin-right: 10px;
             }
@@ -33,10 +11,20 @@
                 margin-right: 0;
             }
             .filter-tree-action {
-                margin-left: 20px;
+                display: none;
+                align-items: center;
                 .ivu-btn {
                     margin-right: 5px;
                 }
+                .ivu-icon-md-close {
+                    color: red;
+                    font-size: 24px;
+                }
+            }
+        }
+        .filter-tree-item:hover {
+            .filter-tree-action {
+                display: flex;
             }
         }
     }

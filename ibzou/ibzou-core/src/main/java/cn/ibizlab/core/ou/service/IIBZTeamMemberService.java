@@ -58,8 +58,6 @@ public interface IIBZTeamMemberService extends IService<IBZTeamMember>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

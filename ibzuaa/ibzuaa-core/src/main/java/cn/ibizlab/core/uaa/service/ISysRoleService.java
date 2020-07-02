@@ -56,8 +56,6 @@ public interface ISysRoleService extends IService<SysRole>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

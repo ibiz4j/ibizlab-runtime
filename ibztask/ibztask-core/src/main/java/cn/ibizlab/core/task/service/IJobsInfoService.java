@@ -55,8 +55,6 @@ public interface IJobsInfoService extends IService<JobsInfo>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

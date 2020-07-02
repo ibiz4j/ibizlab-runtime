@@ -45,7 +45,6 @@ public class WFHistoryServiceImpl implements IWFHistoryService {
     }
 
     public void createBatch(List<WFHistory> list){
-
     }
 
     @Override
@@ -55,7 +54,6 @@ public class WFHistoryServiceImpl implements IWFHistoryService {
     }
 
     public void updateBatch(List<WFHistory> list){
-                    
     }
 
     @Override
@@ -64,7 +62,6 @@ public class WFHistoryServiceImpl implements IWFHistoryService {
     }
 
     public void removeBatch(Collection<String> idList){
-                        
     }
 
     @Override
@@ -92,7 +89,6 @@ public class WFHistoryServiceImpl implements IWFHistoryService {
 
     @Override
     public void saveBatch(List<WFHistory> list) {
-                       
     }
 
 

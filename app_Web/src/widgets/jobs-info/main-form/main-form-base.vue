@@ -26,7 +26,7 @@
 </i-col>
 <i-col v-show="detailsModel.param.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='param' :itemRules="this.rules.param" class='' :caption="$t('entities.jobsinfo.main_form.details.param')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.param.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.param" :autoSize="{minRows: 10}"  :disabled="detailsModel.param.disabled" type='textarea' style="height:200px;" ></input-box>
+    <input-box v-model="data.param" :textareaId="this.$util.createUUID()"  :disabled="detailsModel.param.disabled" type='textarea' textareaStyle="height:200px;" ></input-box>
 
 </app-form-item>
 

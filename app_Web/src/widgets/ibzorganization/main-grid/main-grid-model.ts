@@ -111,8 +111,8 @@ export default class MainModel {
         dataType: 'PICKUP',
       },
       {
-        name: 'porgname',
-        prop: 'porgname',
+        name: 'n_porgname_eq',
+        prop: 'n_porgname_eq',
         dataType: 'PICKUPTEXT',
       },
 

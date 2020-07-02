@@ -1,14 +1,15 @@
 <template>
-    <el-tree class="filter-tree" :data="treeItems" :props="defaultProps" :expand-on-click-node="false" default-expand-all>
+    <el-tree class="filter-tree" :data="treeItems" :expand-on-click-node="false" default-expand-all>
         <template slot-scope="{ node, data }">
-            <template v-if="Object.is(data.name, '$and') || Object.is(data.name, '$or')">
+            <template v-if="Object.is(data.label, '$and') || Object.is(data.label, '$or')">
                 <div class="filter-tree-item">
-                    <el-select size="small" v-model="data.name">
-                        <el-option v-for="mode in relationModes" :key="mode.value" :label="mode.zh" :value="mode.value"></el-option>
+                    <el-select size="small" v-model="data.label" :disabled="data.isroot">
+                        <el-option v-for="mode in relationModes" :key="mode.value" :label="getLabel(mode)" :value="mode.value"></el-option>
                     </el-select>
                     <div class="filter-tree-action">
                         <i-button title="添加条件" @click="onAddItem(data)"><i class="fa fa-plus" aria-hidden="true"></i> 添加条件</i-button>
                         <i-button title="添加组" @click="onAddGroup(data)"><i class="fa fa-plus" aria-hidden="true"></i> 添加组</i-button>
+                        <icon v-if="!data.isroot" type="md-close"  @click="onRemoveItem(node, data)"/>
                     </div>
                 </div>
             </template>
@@ -28,7 +29,7 @@
                         <slot v-else :data="data"></slot>
                     </div>
                     <div class="filter-tree-action">
-                        <i-button @click="onRemoveItem(node, data)" title="删除"><i class="fa fa-trash-o" aria-hidden="true"></i></i-button>
+                        <icon type="md-close"  @click="onRemoveItem(node, data)"/>
                     </div>
                 </div>
             </template>
@@ -47,24 +48,44 @@ import FilterMode from './filter-mode.vue';
 })
 export default class FilterTree extends Vue {
 
+    /**
+     * 数据集
+     *
+     * @type {*}
+     * @memberof FilterTree
+     */
     @Prop() datas: any;
 
+    /**
+     * 过滤项集合
+     *
+     * @type {*}
+     * @memberof FilterTree
+     */
     @Prop() fields: any;
 
-    protected defaultProps: any = {
-        children: 'items',
-        label: 'name'
-    };
-
+    /**
+     * 组条件集合
+     *
+     * @type {*}
+     * @memberof FilterTree
+     */
     protected relationModes: any[] = [
-        { zh: '并且', en: 'AND', value: '$and' },
-        { zh: '或', en: 'OR', value: '$or' }
+        { 'zh-CN': '并且', 'en-US': 'AND', value: '$and' },
+        { 'zh-CN': '或', 'en-US': 'OR', value: '$or' }
     ];
 
+    /**
+     * 树数据集合
+     *
+     * @type {*}
+     * @memberof FilterTree
+     */
     get treeItems() {
         let root: any = {
-            name: '$and',
-            items: this.datas
+            label: '$and',
+            isroot: true,
+            children: this.datas
         };
         if(this.datas.length == 0) {
             this.onAddItem(root);
@@ -73,35 +94,72 @@ export default class FilterTree extends Vue {
         return [root];
     }
 
+    /**
+     * 获取语言文本
+     *
+     * @return {string}
+     * @memberof FilterTree
+     */
+    getLabel(mode: any): string {
+        if(this.$i18n.locale) {
+            return mode[this.$i18n.locale];
+        }
+        return mode['zh-CN'];
+    }
+
+    /**
+     * 属性变化
+     *
+     * @return {*}
+     * @memberof FilterTree
+     */
     public onFieldChange(data: any) {
         if(!data.mode) {
             data.mode = '$eq';
         }
     }
 
+    /**
+     * 添加条件
+     *
+     * @return {*}
+     * @memberof FilterTree
+     */
     public onAddItem(data: any) {
-        if(data && data.items) {
-            data.items.push({
+        if(data && data.children) {
+            data.children.push({
                 field: null,
                 mode: null
             });
         }
     }
 
+    /**
+     * 添加组
+     *
+     * @return {*}
+     * @memberof FilterTree
+     */
     public onAddGroup(data: any) {
-        if(data && data.items) {
-            data.items.push({
-                name: '$and',
-                items: []
+        if(data && data.children) {
+            data.children.push({
+                label: '$and',
+                children: []
             })
         }
     }
 
+    /**
+     * 删除条件/组
+     *
+     * @return {*}
+     * @memberof FilterTree
+     */
     public onRemoveItem(node: any, data: any) {
         if(node && node.parent) {
             let pData: any = node.parent.data;
-            if(pData.items.indexOf(data) >= 0) {
-                pData.items.splice(pData.items.indexOf(data), 1)
+            if(pData.children.indexOf(data) >= 0) {
+                pData.children.splice(pData.children.indexOf(data), 1)
             }
         }
     }

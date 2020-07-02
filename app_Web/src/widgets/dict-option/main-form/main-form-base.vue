@@ -115,7 +115,7 @@
 </i-col>
 <i-col v-show="detailsModel.extension.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 24, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 24, offset: 0 }">
     <app-form-item name='extension' :itemRules="this.rules.extension" class='' :caption="$t('entities.dictoption.main_form.details.extension')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.extension.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.extension" :autoSize="{minRows: 10}"  :disabled="detailsModel.extension.disabled" type='textarea' style="height:200px;" ></input-box>
+    <input-box v-model="data.extension" :textareaId="this.$util.createUUID()"  :disabled="detailsModel.extension.disabled" type='textarea' textareaStyle="height:200px;" ></input-box>
 
 </app-form-item>
 

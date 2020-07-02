@@ -54,8 +54,6 @@ public interface IDictOptionService extends IService<DictOption>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

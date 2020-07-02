@@ -45,7 +45,6 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
     }
 
     public void createBatch(List<WFTaskWay> list){
-
     }
 
     @Override
@@ -55,7 +54,6 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
     }
 
     public void updateBatch(List<WFTaskWay> list){
-                    
     }
 
     @Override
@@ -64,7 +62,6 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
     }
 
     public void removeBatch(Collection<String> idList){
-                        
     }
 
     @Override
@@ -92,7 +89,6 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
 
     @Override
     public void saveBatch(List<WFTaskWay> list) {
-                       
     }
 
 

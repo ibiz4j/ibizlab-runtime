@@ -66,8 +66,6 @@ public interface IIBZDepartmentService extends IService<IBZDepartment>{
 
     List<IBZDepartment> getIbzdepartmentByIds(List<String> ids) ;
     List<IBZDepartment> getIbzdepartmentByEntities(List<IBZDepartment> entities) ;
-
-
 }
 
 

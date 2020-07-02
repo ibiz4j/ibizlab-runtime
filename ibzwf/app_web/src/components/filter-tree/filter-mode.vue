@@ -1,9 +1,9 @@
 <template>
-    <el-select size="small" class="filter-mode" placeholder="条件逻辑" clearable v-model="curVal" @change="onChange">
+    <el-select size="small" class="filter-mode" placeholder="条件逻辑" v-model="curVal" @change="onChange">
         <el-option
             v-for="mode in filterMode"
             :key="mode.value"
-            :label="mode.en"
+            :label="getLabel(mode)"
             :value="mode.value"
             >
         </el-option>
@@ -43,22 +43,35 @@ export default class FilterMode extends Vue {
     public filterMode: any[] = [
         // { name: 'AND', value: '$and' },
         // { name: 'OR', value: '$or' },
-        { zh: '等于(=)', en: 'EQ', value: '$eq' },
-        { zh: '', en: 'NE', value: '$ne' },
-        { zh: '', en: 'GT', value: '$gt' },
-        { zh: '', en: 'GE', value: '$gte' },
-        { zh: '', en: 'LT', value: '$lt' },
-        { zh: '', en: 'LE', value: '$lte' },
-        { zh: '', en: 'IS_NULL', value: '$null' },
-        { zh: '', en: 'IS_NOT_NULL', value: '$notNull' },
-        { zh: '', en: 'IN', value: '$in' },
-        { zh: '', en: 'NOTIN', value: '$notIn' },
-        { zh: '', en: 'LIKE', value: '$like' },
-        { zh: '', en: 'LIFTLIKE', value: '$startsWith' },
-        { zh: '', en: 'RIGHTLIKE', value: '$endsWith' },
-        { zh: '', en: 'EXISTS', value: '$exists' },
-        { zh: '', en: 'NOTEXISTS', value: '$notExists' }
+        { 'zh-CN': '等于(=)', 'en-US': 'EQ', value: '$eq' },
+        { 'zh-CN': '不等于(<>)', 'en-US': 'NE', value: '$ne' },
+        { 'zh-CN': '大于(>)', 'en-US': 'GT', value: '$gt' },
+        { 'zh-CN': '大于等于(>=)', 'en-US': 'GE', value: '$gte' },
+        { 'zh-CN': '小于(<)', 'en-US': 'LT', value: '$lt' },
+        { 'zh-CN': '小于(<=)', 'en-US': 'LE', value: '$lte' },
+        { 'zh-CN': '值为空(Nil)', 'en-US': 'IS_NULL', value: '$null' },
+        { 'zh-CN': '值不为空(NotNil)', 'en-US': 'IS_NOT_NULL', value: '$notNull' },
+        { 'zh-CN': '值在范围中(In)', 'en-US': 'IN', value: '$in' },
+        { 'zh-CN': '值不在范围中(NotIn)', 'en-US': 'NOTIN', value: '$notIn' },
+        { 'zh-CN': '文本包含(%)', 'en-US': 'LIKE', value: '$like' },
+        { 'zh-CN': '文本左包含(%#)', 'en-US': 'LIFTLIKE', value: '$startsWith' },
+        { 'zh-CN': '文本右包含(#%)', 'en-US': 'RIGHTLIKE', value: '$endsWith' },
+        // { 'zh-CN': '', en: 'EXISTS', value: '$exists' },
+        // { 'zh-CN': '', en: 'NOTEXISTS', value: '$notExists' }
     ];
+
+    /**
+     * 获取语言文本
+     *
+     * @return {string}
+     * @memberof FilterMode
+     */
+    getLabel(mode: any): string {
+        if(this.$i18n.locale) {
+            return mode[this.$i18n.locale];
+        }
+        return mode['zh-CN'];
+    }
 
     /**
      * 值改变

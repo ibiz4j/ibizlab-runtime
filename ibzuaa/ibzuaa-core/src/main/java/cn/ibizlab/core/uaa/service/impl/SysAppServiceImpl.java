@@ -45,7 +45,6 @@ public class SysAppServiceImpl implements ISysAppService {
     }
 
     public void createBatch(List<SysApp> list){
-
     }
 
     @Override
@@ -55,7 +54,6 @@ public class SysAppServiceImpl implements ISysAppService {
     }
 
     public void updateBatch(List<SysApp> list){
-                    
     }
 
     @Override
@@ -64,7 +62,6 @@ public class SysAppServiceImpl implements ISysAppService {
     }
 
     public void removeBatch(Collection<String> idList){
-                        
     }
 
     @Override
@@ -92,7 +89,6 @@ public class SysAppServiceImpl implements ISysAppService {
 
     @Override
     public void saveBatch(List<SysApp> list) {
-                       
     }
 
 

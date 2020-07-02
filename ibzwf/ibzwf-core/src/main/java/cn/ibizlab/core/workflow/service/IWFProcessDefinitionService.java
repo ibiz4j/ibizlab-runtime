@@ -52,8 +52,6 @@ public interface IWFProcessDefinitionService extends IService<WFProcessDefinitio
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

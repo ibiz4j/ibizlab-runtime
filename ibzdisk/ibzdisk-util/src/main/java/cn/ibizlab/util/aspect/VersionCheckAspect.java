@@ -1,7 +1,6 @@
 package cn.ibizlab.util.aspect;
 
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import cn.ibizlab.util.annotation.VersionCheck;
 import cn.ibizlab.util.domain.EntityBase;
 import cn.ibizlab.util.errors.BadRequestAlertException;
@@ -24,7 +23,7 @@ import java.lang.reflect.Field;
  * 数据库版本检查
  */
 @Aspect
-@Order(0)
+@Order(50)
 @Component
 public class VersionCheckAspect
 {
@@ -33,22 +32,40 @@ public class VersionCheckAspect
     @SneakyThrows
     @Before("execution(* cn.ibizlab.*.rest.*.update(..)) &&  @annotation(versionCheck)")
     public void BeforeUpdate(JoinPoint point, VersionCheck versionCheck){
-        EvaluationContext context = new StandardEvaluationContext();
         Object[] args = point.getArgs();
         Object id=args[0];
         Object dto=args[1];
         if(ObjectUtils.isEmpty(id) || ObjectUtils.isEmpty(dto))
             return;
         String versionField=versionCheck.versionfield();
-        if(StringUtils.isEmpty(versionCheck))
+        if(StringUtils.isEmpty(versionField))
             return;
+        versionCheck(versionCheck,point.getTarget(),dto,id);
+    }
+
+    @SneakyThrows
+    @Before("execution(* cn.ibizlab.*.rest.*.updateBy*(..)) &&  @annotation(versionCheck)")
+    public void BeforeUpdateBy(JoinPoint point, VersionCheck versionCheck){
+        Object[] args = point.getArgs();
+        Object id=args[1];
+        Object dto=args[2];
+        if(ObjectUtils.isEmpty(id) || ObjectUtils.isEmpty(dto))
+            return;
+        String versionField=versionCheck.versionfield();
+        if(StringUtils.isEmpty(versionField))
+            return;
+        versionCheck(versionCheck,point.getTarget(),dto,id);
+    }
+
+    private void versionCheck(VersionCheck versionCheck,Object resource,Object dto,Object id ){
+        EvaluationContext context = new StandardEvaluationContext();
         context.setVariable("dto",dto);
-        Expression newExp = parser.parseExpression(String.format("#dto.%s",versionField));
+        Expression newExp = parser.parseExpression(String.format("#dto.%s",versionCheck.versionfield()));
         Object newVersion=newExp.getValue(context);
         if(ObjectUtils.isEmpty(newVersion))
             return;
         //进行版本检查
-        Object oldVersion =getDBVersion(versionCheck,getService(point.getTarget(),versionCheck.entity()),id);
+        Object oldVersion =getDBVersion(versionCheck,getService(resource,versionCheck.entity()),id);
         if(!ObjectUtils.isEmpty(oldVersion)){
             if(RuleUtils.gt(newVersion,oldVersion))
                 throw new BadRequestAlertException("数据已变更，可能后台数据已被修改，请重新加载数据","VersionCheckAspect","versionCheck");

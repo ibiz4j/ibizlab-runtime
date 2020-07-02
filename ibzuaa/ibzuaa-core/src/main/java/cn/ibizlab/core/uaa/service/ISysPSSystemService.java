@@ -55,8 +55,6 @@ public interface ISysPSSystemService extends IService<SysPSSystem>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

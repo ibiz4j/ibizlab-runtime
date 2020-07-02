@@ -45,7 +45,6 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     }
 
     public void createBatch(List<WFProcessNode> list){
-
     }
 
     @Override
@@ -55,7 +54,6 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     }
 
     public void updateBatch(List<WFProcessNode> list){
-                    
     }
 
     @Override
@@ -64,7 +62,6 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     }
 
     public void removeBatch(Collection<String> idList){
-                        
     }
 
     @Override
@@ -92,7 +89,6 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
 
     @Override
     public void saveBatch(List<WFProcessNode> list) {
-                       
     }
 
 

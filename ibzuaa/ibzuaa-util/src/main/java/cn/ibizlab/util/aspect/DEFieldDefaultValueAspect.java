@@ -23,7 +23,7 @@ import java.util.Map;
  * 实体属性默认值切面，只有新建（Create）时才会填充默认值
  */
 @Aspect
-@Order(0)
+@Order(50)
 @Component
 public class DEFieldDefaultValueAspect
 {

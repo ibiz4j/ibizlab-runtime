@@ -56,8 +56,6 @@ public interface ISysUserService extends IService<SysUser>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

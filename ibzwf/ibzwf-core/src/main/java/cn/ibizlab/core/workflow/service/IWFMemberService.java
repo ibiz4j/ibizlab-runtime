@@ -57,8 +57,6 @@ public interface IWFMemberService extends IService<WFMember>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

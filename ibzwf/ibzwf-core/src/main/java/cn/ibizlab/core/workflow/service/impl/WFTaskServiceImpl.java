@@ -45,7 +45,6 @@ public class WFTaskServiceImpl implements IWFTaskService {
     }
 
     public void createBatch(List<WFTask> list){
-
     }
 
     @Override
@@ -55,7 +54,6 @@ public class WFTaskServiceImpl implements IWFTaskService {
     }
 
     public void updateBatch(List<WFTask> list){
-                    
     }
 
     @Override
@@ -64,7 +62,6 @@ public class WFTaskServiceImpl implements IWFTaskService {
     }
 
     public void removeBatch(Collection<String> idList){
-                        
     }
 
     @Override
@@ -92,7 +89,6 @@ public class WFTaskServiceImpl implements IWFTaskService {
 
     @Override
     public void saveBatch(List<WFTask> list) {
-                       
     }
 
 

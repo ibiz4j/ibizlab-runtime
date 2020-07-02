@@ -68,8 +68,6 @@ public interface IIBZEmployeeService extends IService<IBZEmployee>{
 
     List<IBZEmployee> getIbzemployeeByIds(List<String> ids) ;
     List<IBZEmployee> getIbzemployeeByEntities(List<IBZEmployee> entities) ;
-
-
 }
 
 

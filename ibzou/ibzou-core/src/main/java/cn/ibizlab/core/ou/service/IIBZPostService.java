@@ -52,8 +52,6 @@ public interface IIBZPostService extends IService<IBZPost>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

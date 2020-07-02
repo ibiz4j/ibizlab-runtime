@@ -61,8 +61,6 @@ public interface IIBZOrganizationService extends IService<IBZOrganization>{
 
     List<IBZOrganization> getIbzorganizationByIds(List<String> ids) ;
     List<IBZOrganization> getIbzorganizationByEntities(List<IBZOrganization> entities) ;
-
-
 }
 
 

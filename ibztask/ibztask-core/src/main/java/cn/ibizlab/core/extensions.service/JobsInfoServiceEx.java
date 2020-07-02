@@ -1,68 +1,12 @@
 package cn.ibizlab.core.extensions.service;
 
-import cn.ibizlab.core.task.service.impl.JobsInfoServiceImpl;
-import cn.ibizlab.util.errors.BadRequestAlertException;
-import com.baomidou.jobs.service.JobsHelper;
-import com.baomidou.jobs.trigger.JobsTrigger;
-import com.baomidou.jobs.trigger.TriggerTypeEnum;
-import com.baomidou.mybatisplus.extension.api.Assert;
-import lombok.extern.slf4j.Slf4j;
-import cn.ibizlab.core.task.domain.JobsInfo;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.context.annotation.Primary;
-
-import java.math.BigInteger;
-import java.sql.Timestamp;
-
 /**
- * 实体[任务信息] 自定义服务对象
+ * 扩展目录已变更，请到[cn.ibizlab.core.extensions.service.xxExService]中来进行扩展
+ * 若您之前有在当前目录下扩展过其它的service对象，请将扩展的代码移到新的扩展类中，并注释掉老的扩展类，防止Bean重复
  */
-@Slf4j
-@Primary
-@Service("JobsInfoServiceEx")
-public class JobsInfoServiceEx extends JobsInfoServiceImpl {
+@Deprecated
+public class JobsInfoServiceEx{
 
-    @Override
-    protected Class currentModelClass() {
-        return com.baomidou.mybatisplus.core.toolkit.ReflectionKit.getSuperClassGenericType(this.getClass().getSuperclass(), 1);
-    }
-
-    /**
-     * 自定义行为[Execute]用户扩展
-     * @param et
-     * @return
-     */
-    @Override
-    @Transactional
-    public JobsInfo execute(JobsInfo et) {
-        if(et.getId()==null)
-            throw new BadRequestAlertException("未找到任务","JobsInfo","");
-        JobsInfo dbJobInfo = getById(et.getId());
-        if (null == dbJobInfo) {
-            throw new BadRequestAlertException("未找到任务","JobsInfo","");
-        }
-        JobsTrigger.trigger(Long.parseLong(et.getId()), TriggerTypeEnum.MANUAL, -1, dbJobInfo.getParam());
-        return super.execute(et);
-    }
-
-    @Override
-    public JobsInfo start(JobsInfo et) {
-        JobsInfo dbJobInfo = getById(et.getId());
-        if (null == dbJobInfo) {
-            throw new BadRequestAlertException("未找到任务","JobsInfo","");
-        }
-
-        et.setStatus(0);
-        et.setLastTime(0L);
-        if(!JobsHelper.cronValidate(dbJobInfo.getCron()))
-            throw new BadRequestAlertException("CRON 表达式不可用","JobsInfo",dbJobInfo.getCron());
-
-        // next trigger time (10s后生效，避开预读周期)
-        et.setNextTime(JobsHelper.cronNextTime(dbJobInfo.getCron()) + 10000);
-        this.update(et);
-        return  et;
-    }
 }
 
 

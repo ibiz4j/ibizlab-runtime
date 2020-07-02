@@ -54,8 +54,6 @@ public interface ISDFileService extends IService<SDFile>{
 
     List<SDFile> getSdfileByIds(List<String> ids) ;
     List<SDFile> getSdfileByEntities(List<SDFile> entities) ;
-
-
 }
 
 

@@ -13,7 +13,7 @@
       :type="type"
       v-model="CurrentVal"
       :disabled="disabled ? true : false"
-      :autosize="autoSize"
+      :element-id="textareaId"
       @on-enter="enter"
     ></i-input>
     <div class="unit-text">{{unit}}</div>
@@ -35,12 +35,40 @@ export default class InputBox extends Vue {
   @Model("change") readonly itemValue?: any;
 
   /**
+   * 生命周期 （多行文本十行高度问题）
+   * @type {any}
+   * @memberof InputBox
+   */
+  public mounted(){
+    if(this.textareaId){
+        let textarea :any= document.getElementById(this.textareaId);
+        if(textarea){
+         textarea.style=this.textareaStyle;
+        }
+    }
+  }
+
+  /**
    * 单位
    * @type {String}
    * @memberof InputBoxUnit
    */
   @Prop() public unit?: string;
 
+
+  /**
+   * 多行文本十行 特殊参数样式（模型高度自带）
+   * @type {String}
+   * @memberof InputBoxUnit
+   */
+  @Prop() public textareaStyle?: string;
+
+  /**
+   * 多行文本十行 特殊参数id（模型高度自带）
+   * @type {String}
+   * @memberof InputBoxUnit
+   */
+  @Prop() public textareaId?: string;
   /**
    * 大小
    * @type {String}

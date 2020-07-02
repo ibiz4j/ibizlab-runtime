@@ -52,8 +52,6 @@ public interface IJobsLockService extends IService<JobsLock>{
      */
     boolean execute(String sql, Map param);
 
-
-
 }
 
 

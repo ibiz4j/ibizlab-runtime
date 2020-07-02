@@ -109,7 +109,7 @@ export default {
 			orgcode: "Actor", 
 			n_orgname_like: "Print", 
 			n_porgid_eq: "上级单位(=)", 
-			porgname: "上级单位(等于(=))", 
+			n_porgname_eq: "上级单位(等于(=))", 
 		},
 		uiactions: {
 		},

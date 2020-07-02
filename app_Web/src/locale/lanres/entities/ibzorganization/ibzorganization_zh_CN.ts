@@ -108,7 +108,7 @@ export default {
 			orgcode: "单位代码(文本左包含(%#))", 
 			n_orgname_like: "名称(%)", 
 			n_porgid_eq: "上级单位(=)", 
-			porgname: "上级单位(等于(=))", 
+			n_porgname_eq: "上级单位(等于(=))", 
 		},
 		uiactions: {
 		},
