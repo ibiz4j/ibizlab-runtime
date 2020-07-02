@@ -14,7 +14,7 @@ module.exports = {
         port: 8111,
         compress: true,
         disableHostCheck: true,
-        proxy: "http://127.0.0.1:30002/",
+        // proxy: "http://127.0.0.1:8080/",
         historyApiFallback: {
             rewrites: [
             ]
