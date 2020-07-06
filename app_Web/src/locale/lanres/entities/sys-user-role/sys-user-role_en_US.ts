@@ -6,6 +6,9 @@ export default {
     rolename: "角色名称",
     userid: "用户标识",
     personname: "用户名称",
+    loginname: "登录名",
+    orgname: "单位",
+    mdeptname: "主部门",
     createdate: ">",
     updatedate: "Upload",
   },
@@ -44,6 +47,9 @@ export default {
 		columns: {
 			sys_username: "用户名称",
 			sys_rolename: "角色名称",
+			loginname: "登录名",
+			orgname: "单位",
+			mdeptname: "主部门",
 		},
 		uiactions: {
 		},
@@ -51,6 +57,7 @@ export default {
 	default_searchform: {
 		details: {
 			formpage1: "In", 
+			n_sys_username_like: "用户名称(%)", 
 		},
 		uiactions: {
 		},

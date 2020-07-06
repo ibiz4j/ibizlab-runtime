@@ -47,7 +47,7 @@ public class SysUserResource {
     @Lazy
     public SysUserMapping sysuserMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Create-all')")
+    @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdto),'ibzuaa-SysUser-Create')")
     @ApiOperation(value = "新建系统用户", tags = {"系统用户" },  notes = "新建系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers")
     @Transactional
@@ -58,7 +58,7 @@ public class SysUserResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Create-all')")
+    @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdtos),'ibzuaa-SysUser-Create')")
     @ApiOperation(value = "批量新建系统用户", tags = {"系统用户" },  notes = "批量新建系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
@@ -66,7 +66,7 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Update-all')")
+    @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzuaa-SysUser-Update')")
     @ApiOperation(value = "更新系统用户", tags = {"系统用户" },  notes = "更新系统用户")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}")
     @Transactional
@@ -78,7 +78,7 @@ public class SysUserResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Update-all')")
+    @PreAuthorize("hasPermission(this.sysuserService.getSysuserByEntities(this.sysuserMapping.toDomain(#sysuserdtos)),'ibzuaa-SysUser-Update')")
     @ApiOperation(value = "批量更新系统用户", tags = {"系统用户" },  notes = "批量更新系统用户")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
@@ -86,7 +86,7 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Remove-all')")
+    @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzuaa-SysUser-Remove')")
     @ApiOperation(value = "删除系统用户", tags = {"系统用户" },  notes = "删除系统用户")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}")
     @Transactional
@@ -94,7 +94,7 @@ public class SysUserResource {
          return ResponseEntity.status(HttpStatus.OK).body(sysuserService.remove(sysuser_id));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Remove-all')")
+    @PreAuthorize("hasPermission(this.sysuserService.getSysuserByIds(#ids),'ibzuaa-SysUser-Remove')")
     @ApiOperation(value = "批量删除系统用户", tags = {"系统用户" },  notes = "批量删除系统用户")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -102,7 +102,7 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Get-all')")
+    @PostAuthorize("hasPermission(this.sysuserMapping.toDomain(returnObject.body),'ibzuaa-SysUser-Get')")
     @ApiOperation(value = "获取系统用户", tags = {"系统用户" },  notes = "获取系统用户")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}")
     public ResponseEntity<SysUserDTO> get(@PathVariable("sysuser_id") String sysuser_id) {
@@ -123,14 +123,14 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysuserService.checkKey(sysuserMapping.toDomain(sysuserdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Save-all')")
+    @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdto),'ibzuaa-SysUser-Save')")
     @ApiOperation(value = "保存系统用户", tags = {"系统用户" },  notes = "保存系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
     public ResponseEntity<Boolean> save(@RequestBody SysUserDTO sysuserdto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserService.save(sysuserMapping.toDomain(sysuserdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-Save-all')")
+    @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdtos),'ibzuaa-SysUser-Save')")
     @ApiOperation(value = "批量保存系统用户", tags = {"系统用户" },  notes = "批量保存系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
@@ -138,7 +138,7 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-searchDefault-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-searchDefault-all') and hasPermission(#context,'ibzuaa-SysUser-Get')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"系统用户" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysusers/fetchdefault")
 	public ResponseEntity<List<SysUserDTO>> fetchDefault(SysUserSearchContext context) {
@@ -151,7 +151,7 @@ public class SysUserResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-searchDefault-all')")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-searchDefault-all') and hasPermission(#context,'ibzuaa-SysUser-Get')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"系统用户" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysusers/searchdefault")
 	public ResponseEntity<Page<SysUserDTO>> searchDefault(@RequestBody SysUserSearchContext context) {

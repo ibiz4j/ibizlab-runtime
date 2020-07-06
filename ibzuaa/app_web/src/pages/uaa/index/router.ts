@@ -176,7 +176,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-user-roleedit-view/sys-user-roleedit-view.vue'),
+                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
                 },
                 {
                     path: 'sysroles/:sysrole?/sysuserroles/:sysuserrole?/editview/:editview?',
@@ -191,7 +191,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-user-roleedit-view/sys-user-roleedit-view.vue'),
+                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
                 },
                 {
                     path: 'sysuserroles/:sysuserrole?/editview/:editview?',
@@ -205,7 +205,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-user-roleedit-view/sys-user-roleedit-view.vue'),
+                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
                 },
                 {
                     path: 'sysroles/:sysrole?/mpickupview/:mpickupview?',
@@ -463,7 +463,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-user-roleedit-view/sys-user-roleedit-view.vue'),
+        component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
     },
     {
         path: '/sysroles/:sysrole?/sysuserroles/:sysuserrole?/editview/:editview?',
@@ -477,7 +477,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-user-roleedit-view/sys-user-roleedit-view.vue'),
+        component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
     },
     {
         path: '/sysuserroles/:sysuserrole?/editview/:editview?',
@@ -490,7 +490,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-user-roleedit-view/sys-user-roleedit-view.vue'),
+        component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
     },
     {
         path: '/sysusers/:sysuser?/mpickupview/:mpickupview?',

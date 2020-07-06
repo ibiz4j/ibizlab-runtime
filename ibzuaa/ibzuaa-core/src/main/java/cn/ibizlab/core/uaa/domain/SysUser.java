@@ -68,6 +68,206 @@ public class SysUser extends EntityMP implements Serializable {
     @JSONField(name = "password")
     @JsonProperty("password")
     private String password;
+    /**
+     * 用户工号
+     */
+    @TableField(value = "usercode")
+    @JSONField(name = "usercode")
+    @JsonProperty("usercode")
+    private String usercode;
+    /**
+     * 登录名
+     */
+    @TableField(value = "loginname")
+    @JSONField(name = "loginname")
+    @JsonProperty("loginname")
+    private String loginname;
+    /**
+     * 区属
+     */
+    @TableField(value = "domains")
+    @JSONField(name = "domains")
+    @JsonProperty("domains")
+    private String domains;
+    /**
+     * 主部门
+     */
+    @TableField(value = "mdeptid")
+    @JSONField(name = "mdeptid")
+    @JsonProperty("mdeptid")
+    private String mdeptid;
+    /**
+     * 主部门代码
+     */
+    @TableField(value = "mdeptcode")
+    @JSONField(name = "mdeptcode")
+    @JsonProperty("mdeptcode")
+    private String mdeptcode;
+    /**
+     * 主部门名称
+     */
+    @TableField(value = "mdeptname")
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
+    /**
+     * 业务编码
+     */
+    @TableField(value = "bcode")
+    @JSONField(name = "bcode")
+    @JsonProperty("bcode")
+    private String bcode;
+    /**
+     * 岗位标识
+     */
+    @TableField(value = "postid")
+    @JSONField(name = "postid")
+    @JsonProperty("postid")
+    private String postid;
+    /**
+     * 岗位代码
+     */
+    @TableField(value = "postcode")
+    @JSONField(name = "postcode")
+    @JsonProperty("postcode")
+    private String postcode;
+    /**
+     * 岗位名称
+     */
+    @TableField(value = "postname")
+    @JSONField(name = "postname")
+    @JsonProperty("postname")
+    private String postname;
+    /**
+     * 单位
+     */
+    @DEField(preType = DEPredefinedFieldType.ORGID)
+    @TableField(value = "orgid")
+    @JSONField(name = "orgid")
+    @JsonProperty("orgid")
+    private String orgid;
+    /**
+     * 单位代码
+     */
+    @TableField(value = "orgcode")
+    @JSONField(name = "orgcode")
+    @JsonProperty("orgcode")
+    private String orgcode;
+    /**
+     * 单位名称
+     */
+    @DEField(preType = DEPredefinedFieldType.ORGNAME)
+    @TableField(value = "orgname")
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
+    /**
+     * 昵称别名
+     */
+    @TableField(value = "nickname")
+    @JSONField(name = "nickname")
+    @JsonProperty("nickname")
+    private String nickname;
+    /**
+     * 性别
+     */
+    @TableField(value = "sex")
+    @JSONField(name = "sex")
+    @JsonProperty("sex")
+    private String sex;
+    /**
+     * 出生日期
+     */
+    @TableField(value = "birthday")
+    @JsonFormat(pattern="yyyy-MM-dd", locale = "zh" , timezone="GMT+8")
+    @JSONField(name = "birthday" , format="yyyy-MM-dd")
+    @JsonProperty("birthday")
+    private Timestamp birthday;
+    /**
+     * 证件号码
+     */
+    @TableField(value = "certcode")
+    @JSONField(name = "certcode")
+    @JsonProperty("certcode")
+    private String certcode;
+    /**
+     * 联系方式
+     */
+    @TableField(value = "phone")
+    @JSONField(name = "phone")
+    @JsonProperty("phone")
+    private String phone;
+    /**
+     * 邮件
+     */
+    @TableField(value = "email")
+    @JSONField(name = "email")
+    @JsonProperty("email")
+    private String email;
+    /**
+     * 社交账号
+     */
+    @TableField(value = "avatar")
+    @JSONField(name = "avatar")
+    @JsonProperty("avatar")
+    private String avatar;
+    /**
+     * 地址
+     */
+    @TableField(value = "addr")
+    @JSONField(name = "addr")
+    @JsonProperty("addr")
+    private String addr;
+    /**
+     * 照片
+     */
+    @TableField(value = "usericon")
+    @JSONField(name = "usericon")
+    @JsonProperty("usericon")
+    private String usericon;
+    /**
+     * 样式
+     */
+    @TableField(value = "theme")
+    @JSONField(name = "theme")
+    @JsonProperty("theme")
+    private String theme;
+    /**
+     * 语言
+     */
+    @TableField(value = "lang")
+    @JSONField(name = "lang")
+    @JsonProperty("lang")
+    private String lang;
+    /**
+     * 字号
+     */
+    @TableField(value = "fontsize")
+    @JSONField(name = "fontsize")
+    @JsonProperty("fontsize")
+    private String fontsize;
+    /**
+     * 备注
+     */
+    @TableField(value = "memo")
+    @JSONField(name = "memo")
+    @JsonProperty("memo")
+    private String memo;
+    /**
+     * 保留
+     */
+    @TableField(value = "reserver")
+    @JSONField(name = "reserver")
+    @JsonProperty("reserver")
+    private String reserver;
+    /**
+     * 超级管理员
+     */
+    @DEField(defaultValue = "0")
+    @TableField(value = "superuser")
+    @JSONField(name = "superuser")
+    @JsonProperty("superuser")
+    private Integer superuser;
 
 
 
@@ -93,6 +293,224 @@ public class SysUser extends EntityMP implements Serializable {
     public void setPassword(String password){
         this.password = password ;
         this.modify("password",password);
+    }
+
+    /**
+     * 设置 [用户工号]
+     */
+    public void setUsercode(String usercode){
+        this.usercode = usercode ;
+        this.modify("usercode",usercode);
+    }
+
+    /**
+     * 设置 [登录名]
+     */
+    public void setLoginname(String loginname){
+        this.loginname = loginname ;
+        this.modify("loginname",loginname);
+    }
+
+    /**
+     * 设置 [区属]
+     */
+    public void setDomains(String domains){
+        this.domains = domains ;
+        this.modify("domains",domains);
+    }
+
+    /**
+     * 设置 [主部门]
+     */
+    public void setMdeptid(String mdeptid){
+        this.mdeptid = mdeptid ;
+        this.modify("mdeptid",mdeptid);
+    }
+
+    /**
+     * 设置 [主部门代码]
+     */
+    public void setMdeptcode(String mdeptcode){
+        this.mdeptcode = mdeptcode ;
+        this.modify("mdeptcode",mdeptcode);
+    }
+
+    /**
+     * 设置 [主部门名称]
+     */
+    public void setMdeptname(String mdeptname){
+        this.mdeptname = mdeptname ;
+        this.modify("mdeptname",mdeptname);
+    }
+
+    /**
+     * 设置 [业务编码]
+     */
+    public void setBcode(String bcode){
+        this.bcode = bcode ;
+        this.modify("bcode",bcode);
+    }
+
+    /**
+     * 设置 [岗位标识]
+     */
+    public void setPostid(String postid){
+        this.postid = postid ;
+        this.modify("postid",postid);
+    }
+
+    /**
+     * 设置 [岗位代码]
+     */
+    public void setPostcode(String postcode){
+        this.postcode = postcode ;
+        this.modify("postcode",postcode);
+    }
+
+    /**
+     * 设置 [岗位名称]
+     */
+    public void setPostname(String postname){
+        this.postname = postname ;
+        this.modify("postname",postname);
+    }
+
+    /**
+     * 设置 [单位代码]
+     */
+    public void setOrgcode(String orgcode){
+        this.orgcode = orgcode ;
+        this.modify("orgcode",orgcode);
+    }
+
+    /**
+     * 设置 [昵称别名]
+     */
+    public void setNickname(String nickname){
+        this.nickname = nickname ;
+        this.modify("nickname",nickname);
+    }
+
+    /**
+     * 设置 [性别]
+     */
+    public void setSex(String sex){
+        this.sex = sex ;
+        this.modify("sex",sex);
+    }
+
+    /**
+     * 设置 [出生日期]
+     */
+    public void setBirthday(Timestamp birthday){
+        this.birthday = birthday ;
+        this.modify("birthday",birthday);
+    }
+
+    /**
+     * 格式化日期 [出生日期]
+     */
+    public String formatBirthday(){
+        if (this.birthday == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(birthday);
+    }
+    /**
+     * 设置 [证件号码]
+     */
+    public void setCertcode(String certcode){
+        this.certcode = certcode ;
+        this.modify("certcode",certcode);
+    }
+
+    /**
+     * 设置 [联系方式]
+     */
+    public void setPhone(String phone){
+        this.phone = phone ;
+        this.modify("phone",phone);
+    }
+
+    /**
+     * 设置 [邮件]
+     */
+    public void setEmail(String email){
+        this.email = email ;
+        this.modify("email",email);
+    }
+
+    /**
+     * 设置 [社交账号]
+     */
+    public void setAvatar(String avatar){
+        this.avatar = avatar ;
+        this.modify("avatar",avatar);
+    }
+
+    /**
+     * 设置 [地址]
+     */
+    public void setAddr(String addr){
+        this.addr = addr ;
+        this.modify("addr",addr);
+    }
+
+    /**
+     * 设置 [照片]
+     */
+    public void setUsericon(String usericon){
+        this.usericon = usericon ;
+        this.modify("usericon",usericon);
+    }
+
+    /**
+     * 设置 [样式]
+     */
+    public void setTheme(String theme){
+        this.theme = theme ;
+        this.modify("theme",theme);
+    }
+
+    /**
+     * 设置 [语言]
+     */
+    public void setLang(String lang){
+        this.lang = lang ;
+        this.modify("lang",lang);
+    }
+
+    /**
+     * 设置 [字号]
+     */
+    public void setFontsize(String fontsize){
+        this.fontsize = fontsize ;
+        this.modify("fontsize",fontsize);
+    }
+
+    /**
+     * 设置 [备注]
+     */
+    public void setMemo(String memo){
+        this.memo = memo ;
+        this.modify("memo",memo);
+    }
+
+    /**
+     * 设置 [保留]
+     */
+    public void setReserver(String reserver){
+        this.reserver = reserver ;
+        this.modify("reserver",reserver);
+    }
+
+    /**
+     * 设置 [超级管理员]
+     */
+    public void setSuperuser(Integer superuser){
+        this.superuser = superuser ;
+        this.modify("superuser",superuser);
     }
 
 

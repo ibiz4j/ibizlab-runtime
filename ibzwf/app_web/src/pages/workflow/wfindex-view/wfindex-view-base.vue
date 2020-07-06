@@ -21,6 +21,7 @@
     viewtag="wfindex-view"
     :selectTheme="selectTheme"  
     :isDefaultPage="isDefaultPage"  
+    :isBlankMode="isBlankMode"
     :defPSAppView="defPSAppView" 
     name="appmenu"  
     ref='appmenu' 
@@ -625,6 +626,14 @@ export default class WFIndexViewBase extends Vue {
      * @memberof WFIndexViewBase
      */
     public isDefaultPage: boolean = true;
+
+    /**
+     * 空白视图模式
+     *
+     * @type {boolean}
+     * @memberof WFIndexViewBase
+     */
+    public isBlankMode:boolean = false;
 
     /**
      * 获取样式

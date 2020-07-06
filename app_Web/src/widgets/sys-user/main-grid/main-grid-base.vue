@@ -57,6 +57,42 @@
                     </template>
                 </el-table-column>
             </template>
+            <template v-if="getColumnState('loginname')">
+                <el-table-column show-overflow-tooltip :prop="'loginname'" :label="$t('entities.sysuser.main_grid.columns.loginname')" :width="200"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysuser.main_grid.columns.loginname')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.loginname}}</span>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('orgname')">
+                <el-table-column show-overflow-tooltip :prop="'orgname'" :label="$t('entities.sysuser.main_grid.columns.orgname')" :width="250"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysuser.main_grid.columns.orgname')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.orgname}}</span>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('mdeptname')">
+                <el-table-column show-overflow-tooltip :prop="'mdeptname'" :label="$t('entities.sysuser.main_grid.columns.mdeptname')" :width="250"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysuser.main_grid.columns.mdeptname')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.mdeptname}}</span>
+                    </template>
+                </el-table-column>
+            </template>
             <template v-if="adaptiveState">
                 <el-table-column></el-table-column>
             </template>
@@ -550,6 +586,30 @@ export default class MainBase extends Vue implements ControlInterface {
             name: 'personname',
             label: '用户姓名',
             langtag: 'entities.sysuser.main_grid.columns.personname',
+            show: true,
+            util: 'PX',
+            isEnableRowEdit: false,
+        },
+        {
+            name: 'loginname',
+            label: '登录名',
+            langtag: 'entities.sysuser.main_grid.columns.loginname',
+            show: true,
+            util: 'PX',
+            isEnableRowEdit: false,
+        },
+        {
+            name: 'orgname',
+            label: '单位名称',
+            langtag: 'entities.sysuser.main_grid.columns.orgname',
+            show: true,
+            util: 'PX',
+            isEnableRowEdit: false,
+        },
+        {
+            name: 'mdeptname',
+            label: '主部门名称',
+            langtag: 'entities.sysuser.main_grid.columns.mdeptname',
             show: true,
             util: 'PX',
             isEnableRowEdit: false,

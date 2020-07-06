@@ -21,6 +21,7 @@
     viewtag="index"
     :selectTheme="selectTheme"  
     :isDefaultPage="isDefaultPage"  
+    :isBlankMode="isBlankMode"
     :defPSAppView="defPSAppView" 
     name="appmenu"  
     ref='appmenu' 
@@ -636,6 +637,14 @@ export default class IndexBase extends Vue {
      * @memberof IndexBase
      */
     public isDefaultPage: boolean = false;
+
+    /**
+     * 空白视图模式
+     *
+     * @type {boolean}
+     * @memberof IndexBase
+     */
+    public isBlankMode:boolean = false;
 
     /**
      * 获取样式

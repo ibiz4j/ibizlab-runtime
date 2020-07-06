@@ -27,13 +27,13 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'postname',
-          prop: 'postname',
-          dataType: 'TEXT',
+          name: 'memo',
+          prop: 'memo',
+          dataType: 'LONGTEXT_1000',
         },
         {
-          name: 'domains',
-          prop: 'domains',
+          name: 'postname',
+          prop: 'postname',
           dataType: 'TEXT',
         },
         {

@@ -49,7 +49,7 @@ export default {
 		columns: {
 			postcode: "岗位编码",
 			postname: "岗位名称",
-			domains: "区属",
+			memo: "备注",
 		},
 		uiactions: {
 		},

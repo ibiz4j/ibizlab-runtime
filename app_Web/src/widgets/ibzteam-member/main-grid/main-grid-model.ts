@@ -42,11 +42,6 @@ export default class MainModel {
           dataType: 'PICKUPTEXT',
         },
         {
-          name: 'domains',
-          prop: 'domains',
-          dataType: 'TEXT',
-        },
-        {
           name: 'userid',
           prop: 'userid',
           dataType: 'PICKUP',
@@ -75,7 +70,6 @@ export default class MainModel {
           name: 'ibzteammember',
           prop: 'teammemberid',
         },
-
         {
           name:'size',
           prop:'size'

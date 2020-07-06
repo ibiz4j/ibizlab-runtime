@@ -81,6 +81,9 @@ export default class MainModel {
         dataType: 'PICKUPTEXT',
       },
       {
+        name: 'pdeptcheck',
+      },
+      {
         name: 'mdeptid',
         prop: 'mdeptid',
         dataType: 'PICKUP',

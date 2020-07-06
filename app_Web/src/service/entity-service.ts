@@ -931,4 +931,15 @@ export default class EntityService {
         return Http.getInstance().put(`uaa/access-center/app-switcher/default`,data,isloading);
     }
 
+    /**
+     * 修改密码
+     * 
+     * @param context 
+     * @param data 
+     * @param isloading 
+     */
+    public async changPassword(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        return Http.getInstance().post(`v7/changepwd`,data,isloading);
+    }
+
 }

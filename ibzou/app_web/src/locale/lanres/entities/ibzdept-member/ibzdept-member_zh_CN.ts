@@ -42,40 +42,35 @@ export default {
 	main_grid: {
 		columns: {
 			deptname: "部门",
+			postname: "岗位名称",
 			personname: "成员",
 			deptid: "部门标识",
+			postid: "岗位标识",
+			userid: "用户标识",
 		},
 		uiactions: {
 		},
 	},
 	gridviewtoolbar_toolbar: {
+		tbitem24: {
+			caption: "行编辑",
+			tip: "行编辑",
+		},
+		tbitem25: {
+			caption: "新建行",
+			tip: "新建行",
+		},
 		deuiaction1: {
-			caption: "新建",
-			tip: "新建",
+			caption: "保存行",
+			tip: "保存行",
 		},
-		tbitem4: {
-			caption: "编辑",
-			tip: "编辑",
-		},
-		tbitem6: {
-			caption: "拷贝",
-			tip: "拷贝",
-		},
-		tbitem7: {
+		tbitem26: {
 			caption: "-",
 			tip: "",
 		},
 		tbitem8: {
 			caption: "删除",
 			tip: "删除",
-		},
-		tbitem9: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem13: {
-			caption: "导出",
-			tip: "导出",
 		},
 	},
 	editviewtoolbar_toolbar: {

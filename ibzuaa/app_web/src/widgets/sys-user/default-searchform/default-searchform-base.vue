@@ -4,7 +4,31 @@
   <row>
     <i-col span="20" class="form-content">
       <row>
-                </row>
+                    <i-col v-show="detailsModel.n_personname_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 6, offset: 0 }">
+              <app-form-item name='n_personname_like' :itemRules="this.rules.n_personname_like" class='' :caption="$t('entities.sysuser.default_searchform.details.n_personname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_personname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
+              <input-box v-model="data.n_personname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_personname_like.disabled" type='text'  style="width:100px;"></input-box>
+          </app-form-item>
+          
+          </i-col>
+          <i-col v-show="detailsModel.n_loginname_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 6, offset: 0 }">
+              <app-form-item name='n_loginname_like' :itemRules="this.rules.n_loginname_like" class='' :caption="$t('entities.sysuser.default_searchform.details.n_loginname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_loginname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
+              <input-box v-model="data.n_loginname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_loginname_like.disabled" type='text'  style="width:100px;"></input-box>
+          </app-form-item>
+          
+          </i-col>
+          <i-col v-show="detailsModel.n_mdeptname_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 6, offset: 0 }">
+              <app-form-item name='n_mdeptname_like' :itemRules="this.rules.n_mdeptname_like" class='' :caption="$t('entities.sysuser.default_searchform.details.n_mdeptname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_mdeptname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
+              <input-box v-model="data.n_mdeptname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_mdeptname_like.disabled" type='text'  style="width:100px;"></input-box>
+          </app-form-item>
+          
+          </i-col>
+          <i-col v-show="detailsModel.n_orgname_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 6, offset: 0 }">
+              <app-form-item name='n_orgname_like' :itemRules="this.rules.n_orgname_like" class='' :caption="$t('entities.sysuser.default_searchform.details.n_orgname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_orgname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
+              <input-box v-model="data.n_orgname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_orgname_like.disabled" type='text'  style="width:100px;"></input-box>
+          </app-form-item>
+          
+          </i-col>
+      </row>
     </i-col>
     <i-col span="4" class="search-button">
       <row v-show="Object.keys(data).length>0">
@@ -246,6 +270,10 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @memberof DefaultBase
      */
     public data: any = {
+        n_personname_like: null,
+        n_loginname_like: null,
+        n_mdeptname_like: null,
+        n_orgname_like: null,
     };
 
     /**
@@ -255,6 +283,30 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @memberof DefaultBase
      */
     public rules: any = {
+        n_personname_like: [
+            { type: 'string', message: '用户姓名(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '用户姓名(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '用户姓名(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '用户姓名(文本包含(%)) 值不能为空', trigger: 'blur' },
+        ],
+        n_loginname_like: [
+            { type: 'string', message: '登录名(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '登录名(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '登录名(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '登录名(文本包含(%)) 值不能为空', trigger: 'blur' },
+        ],
+        n_mdeptname_like: [
+            { type: 'string', message: '主部门名称(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '主部门名称(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '主部门名称(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '主部门名称(文本包含(%)) 值不能为空', trigger: 'blur' },
+        ],
+        n_orgname_like: [
+            { type: 'string', message: '单位名称(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '单位名称(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '单位名称(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '单位名称(文本包含(%)) 值不能为空', trigger: 'blur' },
+        ],
     }
 
     /**
@@ -266,7 +318,63 @@ export default class DefaultBase extends Vue implements ControlInterface {
     public detailsModel: any = {
         formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
 , 
+        n_personname_like: new FormItemModel({ caption: '用户姓名(文本包含(%))', detailType: 'FORMITEM', name: 'n_personname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+, 
+        n_loginname_like: new FormItemModel({ caption: '登录名(文本包含(%))', detailType: 'FORMITEM', name: 'n_loginname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+, 
+        n_mdeptname_like: new FormItemModel({ caption: '主部门名称(文本包含(%))', detailType: 'FORMITEM', name: 'n_mdeptname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+, 
+        n_orgname_like: new FormItemModel({ caption: '单位名称(文本包含(%))', detailType: 'FORMITEM', name: 'n_orgname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+, 
     };
+
+    /**
+     * 监控表单属性 n_personname_like 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof DefaultBase
+     */
+    @Watch('data.n_personname_like')
+    onN_personname_likeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_personname_like', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 n_loginname_like 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof DefaultBase
+     */
+    @Watch('data.n_loginname_like')
+    onN_loginname_likeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_loginname_like', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 n_mdeptname_like 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof DefaultBase
+     */
+    @Watch('data.n_mdeptname_like')
+    onN_mdeptname_likeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_mdeptname_like', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 n_orgname_like 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof DefaultBase
+     */
+    @Watch('data.n_orgname_like')
+    onN_orgname_likeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_orgname_like', newVal: newVal, oldVal: oldVal });
+    }
 
 
     /**
@@ -288,6 +396,10 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
                 
+
+
+
+
 
     }
 

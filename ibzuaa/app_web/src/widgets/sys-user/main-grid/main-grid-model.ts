@@ -27,13 +27,28 @@ export default class MainModel {
     }else{
 		  return [
         {
+          name: 'loginname',
+          prop: 'loginname',
+          dataType: 'TEXT',
+        },
+        {
           name: 'username',
           prop: 'username',
           dataType: 'TEXT',
         },
         {
+          name: 'orgname',
+          prop: 'orgname',
+          dataType: 'TEXT',
+        },
+        {
           name: 'userid',
           prop: 'userid',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'mdeptname',
+          prop: 'mdeptname',
           dataType: 'TEXT',
         },
         {
@@ -60,6 +75,26 @@ export default class MainModel {
           name: 'sysuser',
           prop: 'userid',
         },
+      {
+        name: 'n_personname_like',
+        prop: 'n_personname_like',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'n_loginname_like',
+        prop: 'n_loginname_like',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'n_mdeptname_like',
+        prop: 'n_mdeptname_like',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'n_orgname_like',
+        prop: 'n_orgname_like',
+        dataType: 'TEXT',
+      },
 
         {
           name:'size',

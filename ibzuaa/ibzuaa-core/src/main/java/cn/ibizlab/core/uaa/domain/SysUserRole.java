@@ -78,6 +78,27 @@ public class SysUserRole extends EntityMP implements Serializable {
     @JsonProperty("personname")
     private String personname;
     /**
+     * 登录名
+     */
+    @TableField(exist = false)
+    @JSONField(name = "loginname")
+    @JsonProperty("loginname")
+    private String loginname;
+    /**
+     * 单位
+     */
+    @TableField(exist = false)
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
+    /**
+     * 主部门
+     */
+    @TableField(exist = false)
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
+    /**
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)

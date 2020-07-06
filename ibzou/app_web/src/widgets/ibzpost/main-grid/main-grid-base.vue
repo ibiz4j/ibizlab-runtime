@@ -45,15 +45,15 @@
                     </template>
                 </el-table-column>
             </template>
-            <template v-if="getColumnState('domains')">
-                <el-table-column show-overflow-tooltip :prop="'domains'" :label="$t('entities.ibzpost.main_grid.columns.domains')" :width="200"  :align="'left'" :sortable="'custom'">
+            <template v-if="getColumnState('memo')">
+                <el-table-column show-overflow-tooltip :prop="'memo'" :label="$t('entities.ibzpost.main_grid.columns.memo')" :width="400"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
                       <span class="column-header ">
-                        {{$t('entities.ibzpost.main_grid.columns.domains')}}
+                        {{$t('entities.ibzpost.main_grid.columns.memo')}}
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
-                        <span>{{row.domains}}</span>
+                        <span>{{row.memo}}</span>
                     </template>
                 </el-table-column>
             </template>
@@ -561,9 +561,9 @@ export default class MainBase extends Vue implements ControlInterface {
             isEnableRowEdit: false,
         },
         {
-            name: 'domains',
-            label: '区属',
-            langtag: 'entities.ibzpost.main_grid.columns.domains',
+            name: 'memo',
+            label: '备注',
+            langtag: 'entities.ibzpost.main_grid.columns.memo',
             show: true,
             util: 'PX',
             isEnableRowEdit: false,

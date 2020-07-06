@@ -89,7 +89,6 @@ export default class FilterTree extends Vue {
         };
         if(this.datas.length == 0) {
             this.onAddItem(root);
-            this.onAddItem(root);
         }
         return [root];
     }

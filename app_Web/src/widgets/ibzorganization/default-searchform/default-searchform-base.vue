@@ -18,7 +18,7 @@
           </i-col>
           <i-col v-show="detailsModel.n_porgname_eq.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_porgname_eq' :itemRules="this.rules.n_porgname_eq" class='' :caption="$t('entities.ibzorganization.default_searchform.details.n_porgname_eq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_porgname_eq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <app-org-select :data="data" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'n_porgid_eq','label':'n_porgname_eq'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
+              <app-org-select :data="data" :disabled="detailsModel.n_porgname_eq.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'n_porgid_eq','label':'n_porgname_eq'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
           </app-form-item>
           
           </i-col>

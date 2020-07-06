@@ -56,6 +56,8 @@ public interface ISysUserService extends IService<SysUser>{
      */
     boolean execute(String sql, Map param);
 
+    List<SysUser> getSysuserByIds(List<String> ids) ;
+    List<SysUser> getSysuserByEntities(List<SysUser> entities) ;
 }
 
 

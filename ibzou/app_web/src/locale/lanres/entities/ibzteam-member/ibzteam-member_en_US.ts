@@ -7,7 +7,7 @@ export default {
     userid: "用户标识",
     personname: "姓名",
     postid: "岗位标识",
-    postname: "岗位标识",
+    postname: "岗位",
     domains: "区属",
   },
 	views: {
@@ -32,7 +32,7 @@ export default {
 			srfdeid: "", 
 			srfsourcekey: "", 
 			personname: "姓名", 
-			postname: "岗位标识", 
+			postname: "岗位", 
 			domains: "区属", 
 			teamid: "组标识", 
 			postid: "岗位标识", 
@@ -45,55 +45,33 @@ export default {
 	main_grid: {
 		columns: {
 			personname: "姓名",
-			postname: "岗位标识",
-			domains: "区属",
-		},
-		uiactions: {
-		},
-	},
-	default_searchform: {
-		details: {
-			formpage1: "常规条件", 
+			postname: "岗位",
+			postid: "岗位标识",
+			userid: "用户标识",
 		},
 		uiactions: {
 		},
 	},
 	gridviewtoolbar_toolbar: {
+		tbitem24: {
+			caption: "行编辑",
+			tip: "行编辑",
+		},
+		tbitem25: {
+			caption: "新建行",
+			tip: "新建行",
+		},
 		deuiaction1: {
-			caption: "New",
-			tip: "New",
+			caption: "保存行",
+			tip: "保存行",
 		},
-		tbitem4: {
-			caption: "Edit",
-			tip: "Edit {0}",
-		},
-		tbitem6: {
-			caption: "Copy",
-			tip: "Copy {0}",
-		},
-		tbitem7: {
+		tbitem26: {
 			caption: "-",
 			tip: "",
 		},
 		tbitem8: {
 			caption: "Remove",
 			tip: "Remove {0}",
-		},
-		tbitem9: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem13: {
-			caption: "Export",
-			tip: "Export {0} Data To Excel",
-		},
-		tbitem10: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem19: {
-			caption: "Filter",
-			tip: "Filter",
 		},
 	},
 	editviewtoolbar_toolbar: {

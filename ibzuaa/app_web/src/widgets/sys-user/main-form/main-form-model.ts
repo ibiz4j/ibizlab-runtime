@@ -66,6 +66,21 @@ export default class MainModel {
         dataType: 'TEXT',
       },
       {
+        name: 'loginname',
+        prop: 'loginname',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'orgname',
+        prop: 'orgname',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'mdeptname',
+        prop: 'mdeptname',
+        dataType: 'TEXT',
+      },
+      {
         name: 'sysuser',
         prop: 'userid',
         dataType: 'FONTKEY',

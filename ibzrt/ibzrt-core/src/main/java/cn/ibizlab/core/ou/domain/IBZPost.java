@@ -33,7 +33,7 @@ public class IBZPost extends EntityClient implements Serializable {
     /**
      * 岗位标识
      */
-    @DEField(isKeyField=true)
+    @DEField(defaultValue = "postcode" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
     @JSONField(name = "postid")
     @JsonProperty("postid")
     private String postid;

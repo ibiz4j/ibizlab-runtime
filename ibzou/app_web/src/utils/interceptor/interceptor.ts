@@ -114,6 +114,12 @@ export class Interceptors {
             if (res.status === 401) {
                 this.doNoLogin(_data.data);
             }
+            if(res.status === 403){
+                if(res.data && res.data.status && Object.is(res.data.status,"FORBIDDEN")){
+                    let alertMessage:string ="非常抱歉，您无权操作此数据，如需操作请联系管理员！";
+                    Object.assign(res.data,{localizedMessage:alertMessage,message:alertMessage});
+                }
+            }
             // if (res.status === 404) {
             //     this.router.push({ path: '/404' });
             // } else if (res.status === 500) {

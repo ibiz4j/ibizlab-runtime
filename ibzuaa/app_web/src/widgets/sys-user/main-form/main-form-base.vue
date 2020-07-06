@@ -21,6 +21,24 @@
 </app-form-item>
 
 </i-col>
+<i-col v-show="detailsModel.loginname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='loginname' :itemRules="this.rules.loginname" class='' :caption="$t('entities.sysuser.main_form.details.loginname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.loginname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box v-model="data.loginname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.loginname.disabled" type='text'  style=""></input-box>
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.sysuser.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box v-model="data.orgname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.orgname.disabled" type='text'  style=""></input-box>
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.mdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='mdeptname' :itemRules="this.rules.mdeptname" class='' :caption="$t('entities.sysuser.main_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box v-model="data.mdeptname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.mdeptname.disabled" type='text'  style=""></input-box>
+</app-form-item>
+
+</i-col>
 <i-col v-show="detailsModel.druipart1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-druipart
     
@@ -66,6 +84,7 @@ import MainService from './main-form-service';
 
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import schema from 'async-validator';
 
 
 @Component({
@@ -366,6 +385,9 @@ export default class MainBase extends Vue implements ControlInterface {
         userid: null,
         username: null,
         personname: null,
+        loginname: null,
+        orgname: null,
+        mdeptname: null,
         sysuser:null,
     };
 
@@ -468,6 +490,24 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '用户姓名 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '用户姓名 值不能为空', trigger: 'blur' },
         ],
+        loginname: [
+            { type: 'string', message: '登录名 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '登录名 值必须为字符串类型', trigger: 'blur' },
+            { required: true, type: 'string', message: '登录名 值不能为空', trigger: 'change' },
+            { required: true, type: 'string', message: '登录名 值不能为空', trigger: 'blur' },
+        ],
+        orgname: [
+            { type: 'string', message: '单位名称 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '单位名称 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '单位名称 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '单位名称 值不能为空', trigger: 'blur' },
+        ],
+        mdeptname: [
+            { type: 'string', message: '主部门名称 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '主部门名称 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '主部门名称 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '主部门名称 值不能为空', trigger: 'blur' },
+        ],
     }
 
     /**
@@ -500,6 +540,12 @@ export default class MainBase extends Vue implements ControlInterface {
         username: new FormItemModel({ caption: '用户全局名', detailType: 'FORMITEM', name: 'username', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         personname: new FormItemModel({ caption: '用户姓名', detailType: 'FORMITEM', name: 'personname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        loginname: new FormItemModel({ caption: '登录名', detailType: 'FORMITEM', name: 'loginname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
+, 
+        orgname: new FormItemModel({ caption: '单位名称', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        mdeptname: new FormItemModel({ caption: '主部门名称', detailType: 'FORMITEM', name: 'mdeptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
     };
 
@@ -623,6 +669,42 @@ export default class MainBase extends Vue implements ControlInterface {
         this.formDataChange({ name: 'personname', newVal: newVal, oldVal: oldVal });
     }
 
+    /**
+     * 监控表单属性 loginname 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.loginname')
+    onLoginnameChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'loginname', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 orgname 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.orgname')
+    onOrgnameChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'orgname', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 mdeptname 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.mdeptname')
+    onMdeptnameChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'mdeptname', newVal: newVal, oldVal: oldVal });
+    }
+
 
     /**
      * 显示更多模式切换操作
@@ -675,7 +757,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
      * @memberof MainBase
      */
-    public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
+    public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
 
 
@@ -689,6 +771,28 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
 
+
+
+
+    }
+
+    /**
+     * 表单项检查逻辑
+     *
+     * @public
+     * @param name 属性名
+     * @memberof MainBase
+     */
+    public checkItem(name:string):Promise<any> {
+        return new Promise((resolve, reject) => {
+                var validator = new schema({[name]:this.rules[name]});
+                validator.validate({[name]:this.data[name]}).then(()=>{
+                    resolve(true);
+                })
+                .catch(() => {
+                    resolve(false);
+                });;
+        })
     }
 
     /**

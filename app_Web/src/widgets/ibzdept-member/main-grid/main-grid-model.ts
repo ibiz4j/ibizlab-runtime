@@ -37,6 +37,11 @@ export default class MainModel {
           dataType: 'PICKUP',
         },
         {
+          name: 'postname',
+          prop: 'postname',
+          dataType: 'PICKUPTEXT',
+        },
+        {
           name: 'userid',
           prop: 'userid',
           dataType: 'PICKUP',

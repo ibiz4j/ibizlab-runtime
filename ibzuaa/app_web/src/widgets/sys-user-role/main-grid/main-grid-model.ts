@@ -27,6 +27,11 @@ export default class MainModel {
     }else{
 		  return [
         {
+          name: 'loginname',
+          prop: 'loginname',
+          dataType: 'PICKUPDATA',
+        },
+        {
           name: 'sys_rolename',
           prop: 'rolename',
           dataType: 'PICKUPTEXT',
@@ -40,6 +45,16 @@ export default class MainModel {
           name: 'sys_roleid',
           prop: 'roleid',
           dataType: 'PICKUP',
+        },
+        {
+          name: 'orgname',
+          prop: 'orgname',
+          dataType: 'PICKUPDATA',
+        },
+        {
+          name: 'mdeptname',
+          prop: 'mdeptname',
+          dataType: 'PICKUPDATA',
         },
         {
           name: 'srfmajortext',
@@ -65,6 +80,11 @@ export default class MainModel {
           name: 'sysuserrole',
           prop: 'userroleid',
         },
+      {
+        name: 'n_sys_username_like',
+        prop: 'n_sys_username_like',
+        dataType: 'PICKUPTEXT',
+      },
 
         {
           name:'size',

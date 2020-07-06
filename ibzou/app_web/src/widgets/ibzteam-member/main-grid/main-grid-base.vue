@@ -29,7 +29,35 @@
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
-                        <span>{{row.personname}}</span>
+                        <template v-if="actualIsOpenEdit">
+                            <app-form-item :error="gridItemsModel[$index][column.property].error">
+                                
+            <app-picker 
+              :formState="viewState" 
+              :data="row"
+              :context="context"
+              :viewparams="viewparams"
+              :localContext ='{ }' 
+              :localParam ='{ }' 
+              :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
+              name='personname'
+              deMajorField='personname'
+              deKeyField='ibzemployee'
+              :service="service"
+              :acParams="{ serviceName: 'IBZEmployeeService', interfaceName: 'FetchDefault'}"
+              valueitem='userid' 
+              :value="row[column.property]" 
+              editortype="" 
+              :pickupView="{ viewname: 'ibzemployee-pickup-view', title: $t('entities.ibzemployee.views.pickupview.title'), deResParameters: [{ pathName: 'ibzdepartments', parameterName: 'ibzdepartment' }, ], parameters: [{ pathName: 'ibzemployees', parameterName: 'ibzemployee' }, { pathName: 'pickupview', parameterName: 'pickupview' } ], placement:'' }"
+              style=""  
+              @formitemvaluechange="($event)=>{onGridItemValueChange(row,$event,$index)}">
+            </app-picker>
+            
+                            </app-form-item>
+                        </template>
+                        <template v-if="!actualIsOpenEdit">
+                                <app-span name='personname' editorType="PICKER" :value="row.personname"></app-span>
+                        </template>
                     </template>
                 </el-table-column>
             </template>
@@ -41,19 +69,89 @@
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
-                        <span>{{row.postname}}</span>
+                        <template v-if="actualIsOpenEdit">
+                            <app-form-item :error="gridItemsModel[$index][column.property].error">
+                                
+            <app-picker 
+              :formState="viewState" 
+              :data="row"
+              :context="context"
+              :viewparams="viewparams"
+              :localContext ='{ }' 
+              :localParam ='{ }' 
+              :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
+              name='postname'
+              deMajorField='postname'
+              deKeyField='ibzpost'
+              :service="service"
+              :acParams="{ serviceName: 'IBZPostService', interfaceName: 'FetchDefault'}"
+              valueitem='postid' 
+              :value="row[column.property]" 
+              editortype="" 
+              :pickupView="{ viewname: 'ibzpost-pickup-view', title: $t('entities.ibzpost.views.pickupview.title'), deResParameters: [], parameters: [{ pathName: 'ibzposts', parameterName: 'ibzpost' }, { pathName: 'pickupview', parameterName: 'pickupview' } ], placement:'' }"
+              style=""  
+              @formitemvaluechange="($event)=>{onGridItemValueChange(row,$event,$index)}">
+            </app-picker>
+            
+                            </app-form-item>
+                        </template>
+                        <template v-if="!actualIsOpenEdit">
+                                <app-span name='postname' editorType="PICKER" :value="row.postname"></app-span>
+                        </template>
                     </template>
                 </el-table-column>
             </template>
-            <template v-if="getColumnState('domains')">
-                <el-table-column show-overflow-tooltip :prop="'domains'" :label="$t('entities.ibzteammember.main_grid.columns.domains')" :width="200"  :align="'left'" :sortable="'custom'">
+            <template v-if="getColumnState('postid')">
+                <el-table-column show-overflow-tooltip :prop="'postid'" :label="$t('entities.ibzteammember.main_grid.columns.postid')" :width="100"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
                       <span class="column-header ">
-                        {{$t('entities.ibzteammember.main_grid.columns.domains')}}
+                        {{$t('entities.ibzteammember.main_grid.columns.postid')}}
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
-                        <span>{{row.domains}}</span>
+                        <template v-if="actualIsOpenEdit">
+                            <app-form-item :error="gridItemsModel[$index][column.property].error">
+                                <input-box 
+              :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
+              v-model="row[column.property]" 
+              style=""
+              type="text"
+              
+              
+              @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
+            </input-box>
+                            </app-form-item>
+                        </template>
+                        <template v-if="!actualIsOpenEdit">
+                                <app-span name='postid' editorType="HIDDEN" :value="row.postid"></app-span>
+                        </template>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('userid')">
+                <el-table-column show-overflow-tooltip :prop="'userid'" :label="$t('entities.ibzteammember.main_grid.columns.userid')" :width="100"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.ibzteammember.main_grid.columns.userid')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <template v-if="actualIsOpenEdit">
+                            <app-form-item :error="gridItemsModel[$index][column.property].error">
+                                <input-box 
+              :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" 
+              v-model="row[column.property]" 
+              style=""
+              type="text"
+              
+              
+              @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
+            </input-box>
+                            </app-form-item>
+                        </template>
+                        <template v-if="!actualIsOpenEdit">
+                                <app-span name='userid' editorType="HIDDEN" :value="row.userid"></app-span>
+                        </template>
                     </template>
                 </el-table-column>
             </template>
@@ -373,7 +471,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {string}
      * @memberof MainBase
      */
-    public minorSortDir: string = '';
+    public minorSortDir: string = 'ASC';
 
     /**
      * 排序字段
@@ -381,7 +479,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {string}
      * @memberof MainBase
      */
-    public minorSortPSDEF: string = '';
+    public minorSortPSDEF: string = 'personname';
 
     /**
      * 分页条数
@@ -389,7 +487,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {number}
      * @memberof MainBase
      */
-    public limit: number = 20;
+    public limit: number = 100;
 
     /**
      * 是否显示标题
@@ -550,23 +648,31 @@ export default class MainBase extends Vue implements ControlInterface {
             langtag: 'entities.ibzteammember.main_grid.columns.personname',
             show: true,
             util: 'PX',
-            isEnableRowEdit: false,
+            isEnableRowEdit: true,
         },
         {
             name: 'postname',
-            label: '岗位标识',
+            label: '岗位',
             langtag: 'entities.ibzteammember.main_grid.columns.postname',
             show: true,
             util: 'PX',
-            isEnableRowEdit: false,
+            isEnableRowEdit: true,
         },
         {
-            name: 'domains',
-            label: '区属',
-            langtag: 'entities.ibzteammember.main_grid.columns.domains',
-            show: true,
+            name: 'postid',
+            label: '岗位标识',
+            langtag: 'entities.ibzteammember.main_grid.columns.postid',
+            show: false,
             util: 'PX',
-            isEnableRowEdit: false,
+            isEnableRowEdit: true,
+        },
+        {
+            name: 'userid',
+            label: '用户标识',
+            langtag: 'entities.ibzteammember.main_grid.columns.userid',
+            show: false,
+            util: 'PX',
+            isEnableRowEdit: true,
         },
     ]
 
@@ -586,6 +692,10 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public getGridRowModel(){
         return {
+          postid: new FormItemModel(),
+          postname: new FormItemModel(),
+          userid: new FormItemModel(),
+          personname: new FormItemModel(),
           srfkey: new FormItemModel(),
         }
     }
@@ -597,6 +707,22 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public rules: any = {
+        postid: [
+             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '岗位标识 值不能为空', trigger: 'change' },
+            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '岗位标识 值不能为空', trigger: 'blur' },
+        ],
+        postname: [
+             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '岗位 值不能为空', trigger: 'change' },
+            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '岗位 值不能为空', trigger: 'blur' },
+        ],
+        userid: [
+             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '用户标识 值不能为空', trigger: 'change' },
+            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '用户标识 值不能为空', trigger: 'blur' },
+        ],
+        personname: [
+             { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '姓名 值不能为空', trigger: 'change' },
+            { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '姓名 值不能为空', trigger: 'blur' },
+        ],
         srfkey: [
              { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '组成员标识 值不能为空', trigger: 'change' },
             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '组成员标识 值不能为空', trigger: 'blur' },

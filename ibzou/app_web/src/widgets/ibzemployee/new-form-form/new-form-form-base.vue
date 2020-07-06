@@ -26,13 +26,13 @@
 </i-col>
 <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.ibzemployee.newform_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-org-select :data="data" :context="JSON.parse(JSON.stringify(context))" :fillMap="{id:'orgid','label':'orgname','code':'orgcode'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
+    <app-org-select :data="data" :disabled="detailsModel.orgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{id:'orgid','label':'orgname','code':'orgcode'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.mdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='mdeptname' :itemRules="this.rules.mdeptname" class='' :caption="$t('entities.ibzemployee.newform_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-department-select :data="data" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{id:'mdeptid','label':'mdeptname','code':'mdeptcode','bcode':'bcode'}" :multiple="false" style="" @select-change="onFormItemValueChange"></app-department-select>
+    <app-department-select :data="data" :disabled="detailsModel.mdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{id:'mdeptid','label':'mdeptname','code':'mdeptcode','bcode':'bcode'}" :multiple="false" style="" @select-change="onFormItemValueChange"></app-department-select>
 </app-form-item>
 
 </i-col>
@@ -60,6 +60,7 @@ import NewFormService from './new-form-form-service';
 
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import schema from 'async-validator';
 
 
 @Component({
@@ -883,7 +884,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
      * @memberof NewFormBase
      */
-    public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
+    public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
 
 
@@ -907,6 +908,25 @@ export default class NewFormBase extends Vue implements ControlInterface {
 
 
 
+    }
+
+    /**
+     * 表单项检查逻辑
+     *
+     * @public
+     * @param name 属性名
+     * @memberof NewFormBase
+     */
+    public checkItem(name:string):Promise<any> {
+        return new Promise((resolve, reject) => {
+                var validator = new schema({[name]:this.rules[name]});
+                validator.validate({[name]:this.data[name]}).then(()=>{
+                    resolve(true);
+                })
+                .catch(() => {
+                    resolve(false);
+                });;
+        })
     }
 
     /**

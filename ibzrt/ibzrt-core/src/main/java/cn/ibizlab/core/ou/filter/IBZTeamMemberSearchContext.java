@@ -41,9 +41,9 @@ public class IBZTeamMemberSearchContext extends SearchContextBase {
 
 	private String n_postid_eq;//[岗位标识]
 
-	private String n_postname_eq;//[岗位标识]
+	private String n_postname_eq;//[岗位]
 
-	private String n_postname_like;//[岗位标识]
+	private String n_postname_like;//[岗位]
 
 }
 

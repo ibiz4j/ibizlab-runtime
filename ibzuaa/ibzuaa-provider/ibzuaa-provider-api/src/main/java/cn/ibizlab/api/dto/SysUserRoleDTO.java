@@ -64,6 +64,30 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     private String personname;
 
     /**
+     * 属性 [LOGINNAME]
+     *
+     */
+    @JSONField(name = "loginname")
+    @JsonProperty("loginname")
+    private String loginname;
+
+    /**
+     * 属性 [ORGNAME]
+     *
+     */
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
+
+    /**
+     * 属性 [MDEPTNAME]
+     *
+     */
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
+
+    /**
      * 属性 [CREATEDATE]
      *
      */

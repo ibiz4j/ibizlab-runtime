@@ -157,6 +157,7 @@ export default {
       name: 'System',
       logout: 'Logout',
       surelogout: 'Are you sure logout?',
+      changepwd: "Change Password",
     },
     appTheme: {
       caption: {

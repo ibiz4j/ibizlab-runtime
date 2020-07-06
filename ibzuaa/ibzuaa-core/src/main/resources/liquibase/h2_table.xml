@@ -52,7 +52,7 @@
 
 
     <!--输出实体[SYS_USER_ROLE]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_user_role-62-3">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_user_role-70-3">
         <createTable tableName="IBZUSER_ROLE">
                 <column name="SYS_USER_ROLEID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_USER_ROLE_SYS_USER_ROLE"/>
@@ -134,7 +134,7 @@
        <addForeignKeyConstraint baseColumnNames="SYS_PERMISSIONID" baseTableName="IBZROLE_PERMISSION" constraintName="DER1N_SYS_ROLE_PERMISSION_SYS_" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SYS_PERMISSIONID" referencedTableName="IBZPERMISSION" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_USER_ROLE]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_user_role-62-9">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_user_role-70-9">
        <addForeignKeyConstraint baseColumnNames="SYS_ROLEID" baseTableName="IBZUSER_ROLE" constraintName="DER1N_SYS_USER_ROLE_SYS_ROLE_S" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SYS_ROLEID" referencedTableName="IBZROLE" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_ROLE]外键关系 -->

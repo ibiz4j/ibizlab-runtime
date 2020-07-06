@@ -323,12 +323,20 @@ export default class AppIndexViewBase extends Vue implements ControlInterface {
     @Prop() mode: any;
 
     /**
-     * 当前菜单是否在默认视图上
+     * 应用起始页面
      *
-     * @type {*}
+     * @type {boolean}
      * @memberof AppIndexViewBase
      */
     @Prop({ default: false }) isDefaultPage?: boolean;
+
+    /**
+     * 空白视图模式
+     *
+     * @type {boolean}
+     * @memberof AppIndexViewBase
+     */
+    @Prop({ default: false }) isBlankMode?:boolean;
 
     /**
      * 默认打开视图

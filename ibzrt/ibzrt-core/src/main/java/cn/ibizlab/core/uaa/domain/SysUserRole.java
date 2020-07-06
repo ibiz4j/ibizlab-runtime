@@ -69,6 +69,27 @@ public class SysUserRole extends EntityClient implements Serializable {
     private String personname;
 
     /**
+     * 登录名
+     */
+    @JSONField(name = "loginname")
+    @JsonProperty("loginname")
+    private String loginname;
+
+    /**
+     * 单位
+     */
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
+
+    /**
+     * 主部门
+     */
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
+
+    /**
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)

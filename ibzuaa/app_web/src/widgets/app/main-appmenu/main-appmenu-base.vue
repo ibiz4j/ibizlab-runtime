@@ -323,12 +323,20 @@ export default class MainBase extends Vue implements ControlInterface {
     @Prop() mode: any;
 
     /**
-     * 当前菜单是否在默认视图上
+     * 应用起始页面
      *
-     * @type {*}
+     * @type {boolean}
      * @memberof MainBase
      */
     @Prop({ default: false }) isDefaultPage?: boolean;
+
+    /**
+     * 空白视图模式
+     *
+     * @type {boolean}
+     * @memberof MainBase
+     */
+    @Prop({ default: false }) isBlankMode?:boolean;
 
     /**
      * 默认打开视图
@@ -441,7 +449,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public doMenuSelect(): void {
-        if (!this.isDefaultPage) {
+        if (!this.isDefaultPage || this.isBlankMode) {
             return;
         }
         const appFuncs: any[] = this.menuMode.getAppFuncs();
@@ -485,7 +493,7 @@ export default class MainBase extends Vue implements ControlInterface {
     public computeMenuSelect(items: any[], appfunctag: string): boolean {
         const appFuncs: any[] = this.menuMode.getAppFuncs();
         return items.some((item: any) => {
-            if (Object.is(appfunctag, '') && !Object.is(item.appfunctag, '')) {
+            if (Object.is(appfunctag, '') && !Object.is(item.appfunctag, '') && item.opendefault) {
                 const appfunc = appFuncs.find((_appfunc: any) => Object.is(_appfunc.appfunctag, item.appfunctag));
                 if (appfunc.routepath) {
                     this.defaultActive = item.name;
@@ -493,7 +501,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     return true;
                 }
             }
-            if (Object.is(item.appfunctag, appfunctag)) {
+            if (Object.is(item.appfunctag, appfunctag) && item.opendefault) {
                 this.setHideSideBar(item);
                 this.defaultActive = item.name;
                 return true;

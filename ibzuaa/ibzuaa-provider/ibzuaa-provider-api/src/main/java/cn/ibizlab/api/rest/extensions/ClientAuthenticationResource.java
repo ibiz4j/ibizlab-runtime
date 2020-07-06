@@ -1,8 +1,10 @@
 
 package cn.ibizlab.api.rest.extensions;
 
+import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
+import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
@@ -52,7 +54,7 @@ public class ClientAuthenticationResource
     UAACoreService uaaCoreService;
 
     @Autowired
-    private IBZUSERService ibzuserService;
+    private ISysUserService userService;;
 
     @Value("${ibiz.auth.pwencrymode:0}")
     private int pwencrymode;
@@ -74,8 +76,8 @@ public class ClientAuthenticationResource
 
     @PostMapping(value = "v7/changepwd")
     public ResponseEntity<Boolean> changepwd(@Validated @RequestBody JSONObject jsonObject){
-        String oldpwd = jsonObject.getString("oldpwd");// 旧密码
-        String newpwd = jsonObject.getString("newpwd");// 新密码
+        String oldpwd = jsonObject.getString("oldPwd");// 旧密码
+        String newpwd = jsonObject.getString("newPwd");// 新密码
         // 空校验
         if (StringUtils.isEmpty(oldpwd))
             throw new BadRequestAlertException("旧密码为空", "ClientAuthenticationResource", "");
@@ -83,11 +85,13 @@ public class ClientAuthenticationResource
             throw new BadRequestAlertException("新密码为空", "ClientAuthenticationResource", "");
         // 获取当前登录用户并加密旧密码
         AuthenticationUser authenticationUser = AuthenticationUser.getAuthenticationUser();
+
+        SysUser sysUser = userService.getById(authenticationUser.getUserid());
         if(pwencrymode==1)
             oldpwd = DigestUtils.md5DigestAsHex(oldpwd.getBytes());
         else if(pwencrymode==2)
             oldpwd = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", authenticationUser.getUsername(), oldpwd).getBytes());
-        if(!authenticationUser.getPassword().equals( oldpwd )){
+        if(!sysUser.getPassword().equals( oldpwd )){
             throw new BadRequestAlertException("用户名密码错误","IBZUSER",authenticationUser.getUsername());
         }
         // 加密新密码
@@ -96,10 +100,9 @@ public class ClientAuthenticationResource
         else if(pwencrymode==2)
             newpwd = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", authenticationUser.getUsername(), newpwd).getBytes());
         // 修改密码
-        IBZUSER ibzuser = new IBZUSER();
-        ibzuser.setUserid(authenticationUser.getUserid());
-        ibzuser.setPassword(newpwd);
-        ibzuserService.save(ibzuser);
+
+        sysUser.setPassword(newpwd);
+        userService.updateById(sysUser);
         return ResponseEntity.ok(true);
     }
 

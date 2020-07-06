@@ -6,22 +6,15 @@
 <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-group :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzteam.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
-        <i-col v-show="detailsModel.teamname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+        <i-col v-show="detailsModel.teamname.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
     <app-form-item name='teamname' :itemRules="this.rules.teamname" class='' :caption="$t('entities.ibzteam.main_form.details.teamname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.teamname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.teamname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.teamname.disabled" type='text'  style=""></input-box>
 </app-form-item>
 
 </i-col>
-<i-col v-show="detailsModel.domains.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='domains' :itemRules="this.rules.domains" class='' :caption="$t('entities.ibzteam.main_form.details.domains')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.domains.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.domains"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.domains.disabled" type='text'  style=""></input-box>
-</app-form-item>
-
-</i-col>
-<i-col v-show="detailsModel.memo.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+<i-col v-show="detailsModel.memo.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
     <app-form-item name='memo' :itemRules="this.rules.memo" class='' :caption="$t('entities.ibzteam.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.memo" :textareaId="this.$util.createUUID()"  :disabled="detailsModel.memo.disabled" type='textarea' textareaStyle="height:200px;" ></input-box>
-
+    <input-box v-model="data.memo"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.memo.disabled" type='text'  style=""></input-box>
 </app-form-item>
 
 </i-col>
@@ -83,6 +76,7 @@ import MainService from './main-form-service';
 
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import schema from 'async-validator';
 
 
 @Component({
@@ -381,8 +375,8 @@ export default class MainBase extends Vue implements ControlInterface {
         srfdeid: null,
         srfsourcekey: null,
         teamname: null,
-        domains: null,
         memo: null,
+        domains: null,
         teamid: null,
         ibzteam:null,
     };
@@ -471,20 +465,20 @@ export default class MainBase extends Vue implements ControlInterface {
         teamname: [
             { type: 'string', message: '组名称 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '组名称 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '组名称 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '组名称 值不能为空', trigger: 'blur' },
-        ],
-        domains: [
-            { type: 'string', message: '区属 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '区属 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '区属 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '区属 值不能为空', trigger: 'blur' },
+            { required: true, type: 'string', message: '组名称 值不能为空', trigger: 'change' },
+            { required: true, type: 'string', message: '组名称 值不能为空', trigger: 'blur' },
         ],
         memo: [
             { type: 'string', message: '备注 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '备注 值必须为字符串类型', trigger: 'blur' },
             { required: false, type: 'string', message: '备注 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '备注 值不能为空', trigger: 'blur' },
+        ],
+        domains: [
+            { type: 'string', message: '区属 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '区属 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '区属 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '区属 值不能为空', trigger: 'blur' },
         ],
         teamid: [
             { type: 'string', message: '组标识 值必须为字符串类型', trigger: 'change' },
@@ -525,9 +519,9 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         teamname: new FormItemModel({ caption: '组名称', detailType: 'FORMITEM', name: 'teamname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        domains: new FormItemModel({ caption: '区属', detailType: 'FORMITEM', name: 'domains', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
-, 
         memo: new FormItemModel({ caption: '备注', detailType: 'FORMITEM', name: 'memo', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        domains: new FormItemModel({ caption: '区属', detailType: 'FORMITEM', name: 'domains', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         teamid: new FormItemModel({ caption: '组标识', detailType: 'FORMITEM', name: 'teamid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
@@ -630,18 +624,6 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
-     * 监控表单属性 domains 值
-     *
-     * @param {*} newVal
-     * @param {*} oldVal
-     * @memberof MainBase
-     */
-    @Watch('data.domains')
-    onDomainsChange(newVal: any, oldVal: any) {
-        this.formDataChange({ name: 'domains', newVal: newVal, oldVal: oldVal });
-    }
-
-    /**
      * 监控表单属性 memo 值
      *
      * @param {*} newVal
@@ -651,6 +633,18 @@ export default class MainBase extends Vue implements ControlInterface {
     @Watch('data.memo')
     onMemoChange(newVal: any, oldVal: any) {
         this.formDataChange({ name: 'memo', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 domains 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.domains')
+    onDomainsChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'domains', newVal: newVal, oldVal: oldVal });
     }
 
     /**
@@ -717,7 +711,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
      * @memberof MainBase
      */
-    public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
+    public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
 
 
@@ -734,6 +728,25 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
 
+    }
+
+    /**
+     * 表单项检查逻辑
+     *
+     * @public
+     * @param name 属性名
+     * @memberof MainBase
+     */
+    public checkItem(name:string):Promise<any> {
+        return new Promise((resolve, reject) => {
+                var validator = new schema({[name]:this.rules[name]});
+                validator.validate({[name]:this.data[name]}).then(()=>{
+                    resolve(true);
+                })
+                .catch(() => {
+                    resolve(false);
+                });;
+        })
     }
 
     /**

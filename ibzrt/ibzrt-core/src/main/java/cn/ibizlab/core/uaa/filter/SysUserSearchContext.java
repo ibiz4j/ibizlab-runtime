@@ -29,6 +29,12 @@ public class SysUserSearchContext extends SearchContextBase {
 
 	private String n_personname_like;//[用户姓名]
 
+	private String n_loginname_like;//[登录名]
+
+	private String n_mdeptname_like;//[主部门名称]
+
+	private String n_orgname_like;//[单位名称]
+
 }
 
 

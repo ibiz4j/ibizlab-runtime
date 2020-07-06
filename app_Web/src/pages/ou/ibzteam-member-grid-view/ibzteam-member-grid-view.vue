@@ -3,11 +3,9 @@ import { Component } from 'vue-property-decorator';
 import IBZTeamMemberGridViewBase from './ibzteam-member-grid-view-base.vue';
 
 import view_grid from '@widgets/ibzteam-member/main-grid/main-grid.vue';
-import view_searchform from '@widgets/ibzteam-member/default-searchform/default-searchform.vue';
 @Component({
     components: {
         view_grid, 
-        view_searchform, 
     },
     beforeRouteEnter: (to: any, from: any, next: any) => {
         next((vm: any) => {

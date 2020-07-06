@@ -27,6 +27,90 @@ export default class PickupViewpickupviewpanelModel {
       {
         name: 'password',
       },
+      {
+        name: 'usercode',
+      },
+      {
+        name: 'loginname',
+      },
+      {
+        name: 'domains',
+      },
+      {
+        name: 'mdeptid',
+      },
+      {
+        name: 'mdeptcode',
+      },
+      {
+        name: 'mdeptname',
+      },
+      {
+        name: 'bcode',
+      },
+      {
+        name: 'postid',
+      },
+      {
+        name: 'postcode',
+      },
+      {
+        name: 'postname',
+      },
+      {
+        name: 'orgid',
+      },
+      {
+        name: 'orgcode',
+      },
+      {
+        name: 'orgname',
+      },
+      {
+        name: 'nickname',
+      },
+      {
+        name: 'sex',
+      },
+      {
+        name: 'birthday',
+      },
+      {
+        name: 'certcode',
+      },
+      {
+        name: 'phone',
+      },
+      {
+        name: 'email',
+      },
+      {
+        name: 'avatar',
+      },
+      {
+        name: 'addr',
+      },
+      {
+        name: 'usericon',
+      },
+      {
+        name: 'theme',
+      },
+      {
+        name: 'lang',
+      },
+      {
+        name: 'fontsize',
+      },
+      {
+        name: 'memo',
+      },
+      {
+        name: 'reserver',
+      },
+      {
+        name: 'superuser',
+      },
     ]
   }
 

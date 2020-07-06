@@ -1,6 +1,6 @@
 <template>
   <div class="app-department-select">
-    <ibiz-select-tree  :NodesData="Nodesdata" v-model="selectTreeValue" :multiple="multiple" @select="onSelect"></ibiz-select-tree>
+    <ibiz-select-tree  :NodesData="Nodesdata" v-model="selectTreeValue" :disabled="disabled" :multiple="multiple" @select="onSelect"></ibiz-select-tree>
   </div>
 </template>
 
@@ -41,6 +41,14 @@ export default class AppDepartmentSelect extends Vue {
      * @memberof AppDepartmentSelect
      */
     @Prop({default:false}) public multiple?: any;
+
+    /**
+     * 是否禁用
+     *
+     * @type {*}
+     * @memberof AppDepartmentSelect
+     */
+    @Prop({default:false}) public disabled?: boolean;
 
     /**
      * 表单数据

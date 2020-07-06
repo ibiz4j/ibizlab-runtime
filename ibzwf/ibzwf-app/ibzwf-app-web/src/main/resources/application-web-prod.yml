@@ -35,6 +35,10 @@ zuul:
       path: /v7/login
       serviceId: ibzuaa-api
       stripPrefix: false
+    changepwd:
+      path: /v7/changepwd
+      serviceId: ibzuaa-api
+      stripPrefix: false
     uaa:
       path: /uaa/**
       serviceId: ibzuaa-api

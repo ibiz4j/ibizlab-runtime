@@ -56,7 +56,7 @@ export const viewstate: any = {
         {
             viewtag: '1ee68b6d5d4c5c9413f6874e0ccabc43',
             viewmodule: 'uaa',
-            viewname: 'SYS_USER_ROLEEditView',
+            viewname: 'SysUserRoleEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [

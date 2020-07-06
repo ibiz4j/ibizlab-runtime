@@ -1,15 +1,23 @@
 
 package cn.ibizlab.rest;
 
+import cn.ibizlab.core.uaa.domain.SysUser;
+import cn.ibizlab.core.uaa.service.ISysUserService;
+import cn.ibizlab.util.domain.IBZUSER;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.security.AuthTokenUtil;
 import cn.ibizlab.util.security.AuthenticationInfo;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.security.AuthorizationLogin;
 import cn.ibizlab.util.service.AuthenticationUserService;
+import cn.ibizlab.util.service.IBZUSERService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +39,11 @@ public class AuthenticationResource
     @Qualifier("userService")
     private AuthenticationUserService userDetailsService;
 
+    @Autowired
+    private ISysUserService userService;
 
+    @Value("${ibiz.auth.pwencrymode:0}")
+    private int pwencrymode;
 
     @PostMapping(value = "v7/login")
     public ResponseEntity<AuthenticationInfo> login(@Validated @RequestBody AuthorizationLogin authorizationLogin){
@@ -41,6 +53,38 @@ public class AuthenticationResource
         final String token = jwtTokenUtil.generateToken(user);
         // 返回 token
         return ResponseEntity.ok().body(new AuthenticationInfo(token,user));
+    }
+
+    @PostMapping(value = "v7/changepwd")
+    public ResponseEntity<Boolean> changepwd(@Validated @RequestBody JSONObject jsonObject){
+        String oldpwd = jsonObject.getString("oldPwd");// 旧密码
+        String newpwd = jsonObject.getString("newPwd");// 新密码
+        // 空校验
+        if (StringUtils.isEmpty(oldpwd))
+            throw new BadRequestAlertException("旧密码为空", "ClientAuthenticationResource", "");
+        if (StringUtils.isEmpty(newpwd))
+            throw new BadRequestAlertException("新密码为空", "ClientAuthenticationResource", "");
+        // 获取当前登录用户并加密旧密码
+        AuthenticationUser authenticationUser = AuthenticationUser.getAuthenticationUser();
+
+        SysUser sysUser = userService.getById(authenticationUser.getUserid());
+        if(pwencrymode==1)
+            oldpwd = DigestUtils.md5DigestAsHex(oldpwd.getBytes());
+        else if(pwencrymode==2)
+            oldpwd = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", authenticationUser.getUsername(), oldpwd).getBytes());
+        if(!sysUser.getPassword().equals( oldpwd )){
+            throw new BadRequestAlertException("用户名密码错误","IBZUSER",authenticationUser.getUsername());
+        }
+        // 加密新密码
+        if(pwencrymode==1)
+            newpwd = DigestUtils.md5DigestAsHex(newpwd.getBytes());
+        else if(pwencrymode==2)
+            newpwd = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", authenticationUser.getUsername(), newpwd).getBytes());
+        // 修改密码
+
+        sysUser.setPassword(newpwd);
+        userService.updateById(sysUser);
+        return ResponseEntity.ok(true);
     }
 
     @PostMapping(value = "uaa/login")

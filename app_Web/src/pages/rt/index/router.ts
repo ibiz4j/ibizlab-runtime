@@ -1386,20 +1386,6 @@ const router = new Router({
                     component: () => import('@pages/task/jobs-registry-grid-view/jobs-registry-grid-view.vue'),
                 },
                 {
-                    path: 'ibzposts/:ibzpost?/pickupgridview/:pickupgridview?',
-                    meta: {
-                        caption: 'entities.ibzpost.views.pickupgridview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'ibzposts', parameterName: 'ibzpost' },
-                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/ibzpost-pickup-grid-view/ibzpost-pickup-grid-view.vue'),
-                },
-                {
                     path: 'wfusers/:wfuser?/pickupgridview/:pickupgridview?',
                     meta: {
                         caption: 'entities.wfuser.views.pickupgridview.title',
@@ -1412,6 +1398,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/workflow/wfuser-pickup-grid-view/wfuser-pickup-grid-view.vue'),
+                },
+                {
+                    path: 'ibzposts/:ibzpost?/pickupgridview/:pickupgridview?',
+                    meta: {
+                        caption: 'entities.ibzpost.views.pickupgridview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'ibzposts', parameterName: 'ibzpost' },
+                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/ou/ibzpost-pickup-grid-view/ibzpost-pickup-grid-view.vue'),
                 },
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/editview/:editview?',

@@ -184,6 +184,25 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return true;
     }
 
+    @Override
+    public List<SysUser> getSysuserByIds(List<String> ids) {
+         return this.listByIds(ids);
+    }
+
+    @Override
+    public List<SysUser> getSysuserByEntities(List<SysUser> entities) {
+        List ids =new ArrayList();
+        for(SysUser entity : entities){
+            Serializable id=entity.getUserid();
+            if(!ObjectUtils.isEmpty(id)){
+                ids.add(id);
+            }
+        }
+        if(ids.size()>0)
+           return this.listByIds(ids);
+        else
+           return entities;
+    }
 
 }
 

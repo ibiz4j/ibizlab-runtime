@@ -152,12 +152,13 @@ export default {
           placeholder: '请输入密码',
           message: '密码不能为空',
       },
-      loginfailed: '登陆失败',
+      loginfailed: '登录失败',
     },
     appUser: {
       name: '系统管理员',
-      logout: '退出登陆',
-      surelogout: '确认要退出登陆？',
+      logout: '退出登录',
+      surelogout: '确认要退出登录？',
+      changepwd: "修改密码",
     },
     appTheme: {
       caption: {

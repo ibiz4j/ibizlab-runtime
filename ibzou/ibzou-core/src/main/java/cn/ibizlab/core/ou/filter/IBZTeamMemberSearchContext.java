@@ -83,14 +83,14 @@ public class IBZTeamMemberSearchContext extends QueryWrapperContext<IBZTeamMembe
             this.getSearchCond().eq("postid", n_postid_eq);
         }
     }
-	private String n_postname_eq;//[岗位标识]
+	private String n_postname_eq;//[岗位]
 	public void setN_postname_eq(String n_postname_eq) {
         this.n_postname_eq = n_postname_eq;
         if(!ObjectUtils.isEmpty(this.n_postname_eq)){
             this.getSearchCond().eq("postname", n_postname_eq);
         }
     }
-	private String n_postname_like;//[岗位标识]
+	private String n_postname_like;//[岗位]
 	public void setN_postname_like(String n_postname_like) {
         this.n_postname_like = n_postname_like;
         if(!ObjectUtils.isEmpty(this.n_postname_like)){

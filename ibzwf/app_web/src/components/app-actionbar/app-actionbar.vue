@@ -2,7 +2,7 @@
   <div class="app-actionbar">
     <div class="app-actionbar-item" v-for="(item,index) in items" :key="index">
       <Badge v-if="item.counterService&&item.counterService.counterData" :count="item.counterService.counterData[item.counterId]" type="primary">
-         <i-button @click="handleClick(item.viewlogicname)">{{item.actionName}}</i-button>
+         <i-button @click="handleClick(item.viewlogicname)"><i v-if="item.icon" style="margin-right: 5px;" :class="item.icon"></i>{{item.actionName}}</i-button>
     </Badge>
     <i-button v-else @click="handleClick(item.viewlogicname)">{{item.actionName}}</i-button>
     </div>

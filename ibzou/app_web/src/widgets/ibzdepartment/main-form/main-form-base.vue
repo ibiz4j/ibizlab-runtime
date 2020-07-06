@@ -17,13 +17,13 @@
 </i-col>
 <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.ibzdepartment.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-org-select :data="data" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'orgid','label':'orgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
+    <app-org-select :data="data" :disabled="detailsModel.orgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'orgid','label':'orgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.pdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='pdeptname' :itemRules="this.rules.pdeptname" class='' :caption="$t('entities.ibzdepartment.main_form.details.pdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-department-select :data="data" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{'id':'pdeptid','label':'pdeptname'}" :multiple="false" style="" @select-change="onFormItemValueChange"></app-department-select>
+    <app-department-select :data="data" :disabled="detailsModel.pdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{'id':'pdeptid','label':'pdeptname'}" :multiple="false" style="" @select-change="onFormItemValueChange"></app-department-select>
 </app-form-item>
 
 </i-col>
@@ -105,6 +105,7 @@ import MainService from './main-form-service';
 
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import schema from 'async-validator';
 
 
 @Component({
@@ -631,7 +632,7 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         deptname: new FormItemModel({ caption: '部门名称', detailType: 'FORMITEM', name: 'deptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
-        orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
 , 
         pdeptname: new FormItemModel({ caption: '上级部门', detailType: 'FORMITEM', name: 'pdeptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
@@ -993,7 +994,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
      * @memberof MainBase
      */
-    public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
+    public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
 
 
@@ -1019,6 +1020,25 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
 
+    }
+
+    /**
+     * 表单项检查逻辑
+     *
+     * @public
+     * @param name 属性名
+     * @memberof MainBase
+     */
+    public checkItem(name:string):Promise<any> {
+        return new Promise((resolve, reject) => {
+                var validator = new schema({[name]:this.rules[name]});
+                validator.validate({[name]:this.data[name]}).then(()=>{
+                    resolve(true);
+                })
+                .catch(() => {
+                    resolve(false);
+                });;
+        })
     }
 
     /**

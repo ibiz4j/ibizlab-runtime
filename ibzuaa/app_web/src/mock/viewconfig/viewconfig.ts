@@ -47,12 +47,12 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SYS_ROLEPickupGridView",
             "viewtag": "1a3413067ee48ab30691eab9f345f517"
         },
-        "sys_user_roleeditview": {
+        "sysuserroleeditview": {
             "title": "用户角色关系表编辑视图",
             "caption": "用户角色关系",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "uaa",
-            "viewname": "SYS_USER_ROLEEditView",
+            "viewname": "SysUserRoleEditView",
             "viewtag": "1ee68b6d5d4c5c9413f6874e0ccabc43"
         },
         "sys_usermpickupview": {

@@ -4,7 +4,13 @@
   <row>
     <i-col span="20" class="form-content">
       <row>
-                </row>
+                    <i-col v-show="detailsModel.n_sys_username_like.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+              <app-form-item name='n_sys_username_like' :itemRules="this.rules.n_sys_username_like" class='' :caption="$t('entities.sysuserrole.default_searchform.details.n_sys_username_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_sys_username_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
+              <input-box v-model="data.n_sys_username_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_sys_username_like.disabled" type='text'  style="width:100px;"></input-box>
+          </app-form-item>
+          
+          </i-col>
+      </row>
     </i-col>
     <i-col span="4" class="search-button">
       <row v-show="Object.keys(data).length>0">
@@ -246,6 +252,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @memberof DefaultBase
      */
     public data: any = {
+        n_sys_username_like: null,
     };
 
     /**
@@ -255,6 +262,12 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @memberof DefaultBase
      */
     public rules: any = {
+        n_sys_username_like: [
+            { type: 'string', message: '用户名称(%) 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '用户名称(%) 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '用户名称(%) 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '用户名称(%) 值不能为空', trigger: 'blur' },
+        ],
     }
 
     /**
@@ -266,7 +279,21 @@ export default class DefaultBase extends Vue implements ControlInterface {
     public detailsModel: any = {
         formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
 , 
+        n_sys_username_like: new FormItemModel({ caption: '用户名称(%)', detailType: 'FORMITEM', name: 'n_sys_username_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
+, 
     };
+
+    /**
+     * 监控表单属性 n_sys_username_like 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof DefaultBase
+     */
+    @Watch('data.n_sys_username_like')
+    onN_sys_username_likeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_sys_username_like', newVal: newVal, oldVal: oldVal });
+    }
 
 
     /**
@@ -288,6 +315,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
                 
+
 
     }
 

@@ -25,6 +25,26 @@ export default class DefaultModel {
         prop: 'srffrontuf',
         dataType: 'TEXT',
       },
+      {
+        name: 'n_loginname_like',
+        prop: 'loginname',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'n_personname_like',
+        prop: 'personname',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'n_orgname_like',
+        prop: 'orgname',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'n_mdeptname_like',
+        prop: 'mdeptname',
+        dataType: 'TEXT',
+      },
     ]
   }
 

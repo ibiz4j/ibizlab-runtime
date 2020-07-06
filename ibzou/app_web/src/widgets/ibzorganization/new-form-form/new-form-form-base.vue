@@ -20,7 +20,7 @@
 </i-col>
 <i-col v-show="detailsModel.porgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='porgname' :itemRules="this.rules.porgname" class='' :caption="$t('entities.ibzorganization.newform_form.details.porgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.porgname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-org-select :data="data" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'porgid','label':'porgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
+    <app-org-select :data="data" :disabled="detailsModel.porgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'porgid','label':'porgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
 </app-form-item>
 
 </i-col>
@@ -48,6 +48,7 @@ import NewFormService from './new-form-form-service';
 
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import schema from 'async-validator';
 
 
 @Component({
@@ -741,7 +742,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
      * @memberof NewFormBase
      */
-    public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
+    public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
 
 
@@ -759,6 +760,25 @@ export default class NewFormBase extends Vue implements ControlInterface {
 
 
 
+    }
+
+    /**
+     * 表单项检查逻辑
+     *
+     * @public
+     * @param name 属性名
+     * @memberof NewFormBase
+     */
+    public checkItem(name:string):Promise<any> {
+        return new Promise((resolve, reject) => {
+                var validator = new schema({[name]:this.rules[name]});
+                validator.validate({[name]:this.data[name]}).then(()=>{
+                    resolve(true);
+                })
+                .catch(() => {
+                    resolve(false);
+                });;
+        })
     }
 
     /**

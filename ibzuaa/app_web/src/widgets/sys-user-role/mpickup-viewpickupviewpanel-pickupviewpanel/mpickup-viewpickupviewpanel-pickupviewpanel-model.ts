@@ -31,6 +31,15 @@ export default class MPickupViewpickupviewpanelModel {
         name: 'personname',
       },
       {
+        name: 'loginname',
+      },
+      {
+        name: 'orgname',
+      },
+      {
+        name: 'mdeptname',
+      },
+      {
         name: 'createdate',
       },
       {

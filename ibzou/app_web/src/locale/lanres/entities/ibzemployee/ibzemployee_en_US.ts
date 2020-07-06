@@ -93,6 +93,7 @@ export default {
 			orgid: "单位", 
 			orgname: "单位", 
 			mdeptid: "主部门", 
+			pdeptcheck: "", 
 			mdeptname: "部门", 
 			mdeptcode: "主部门代码", 
 			orgcode: "单位代码", 
@@ -218,6 +219,10 @@ export default {
 		tbitem25: {
 			caption: "新建行",
 			tip: "新建行",
+		},
+		deuiaction1: {
+			caption: "保存行",
+			tip: "保存行",
 		},
 		tbitem26: {
 			caption: "-",

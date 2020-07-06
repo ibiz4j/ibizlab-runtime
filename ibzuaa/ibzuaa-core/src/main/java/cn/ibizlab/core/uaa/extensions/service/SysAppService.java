@@ -58,6 +58,11 @@ public class SysAppService extends SysAppServiceImpl
 
         LinkedHashMap<String,SysApp> defApps = new LinkedHashMap<>();
         defApps.putAll(apps);
+        AuthenticationUser curUser = AuthenticationUser.getAuthenticationUser();
+
+        boolean superadmin=(curUser.getSuperuser()==1||curUser.getAuthorities().contains("ROLE_SUPERADMIN"));
+
+
         List<SysApp> list=new ArrayList<>();
         JSONArray.parseArray(jo.getJSONArray("model").toJSONString(),SysApp.class).forEach(sysApp -> {
             SysApp def=defApps.get(sysApp.getId());
@@ -68,7 +73,8 @@ public class SysAppService extends SysAppServiceImpl
             sysApp.setFullname(def.getFullname());
             sysApp.setType(def.getType());
             sysApp.setGroup(def.getGroup());
-            list.add(sysApp);
+            if(superadmin || curUser.getAuthorities().contains(sysApp.getId()))
+                list.add(sysApp);
             defApps.remove(def.getId());
         });
         final boolean flag=nullSwitcher;
@@ -80,7 +86,8 @@ public class SysAppService extends SysAppServiceImpl
                 sysApp.setVisabled(1);
             else
                 sysApp.setVisabled(0);
-            list.add(sysApp);
+            if(superadmin || curUser.getAuthorities().contains(sysApp.getId()))
+                list.add(sysApp);
         });
 
         try {

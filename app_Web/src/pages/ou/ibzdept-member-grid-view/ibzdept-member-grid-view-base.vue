@@ -9,25 +9,25 @@
                 <div class='pull-right'>
                     <div class='toolbar-container'>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
-                                    <i class='fa fa-file-text-o'></i>
-                                    <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem3.caption')}}</span>
+                                <i-button v-show="toolBarModels.tbitem24.visabled" :disabled="toolBarModels.tbitem24.disabled" class='' @click="toolbar_click({ tag: 'tbitem24' }, $event)">
+                                    <i class='fa fa-table'></i>
+                                    <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem24.caption')}}</span>
                                 </i-button>
-                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem3.tip')}}</div>
+                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem24.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' @click="toolbar_click({ tag: 'tbitem4' }, $event)">
-                                    <i class='fa fa-edit'></i>
-                                    <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem4.caption')}}</span>
+                                <i-button v-show="toolBarModels.tbitem25.visabled" :disabled="toolBarModels.tbitem25.disabled" class='' @click="toolbar_click({ tag: 'tbitem25' }, $event)">
+                                    <i class='fa fa-plus'></i>
+                                    
                                 </i-button>
-                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem4.tip')}}</div>
+                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem25.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem6.visabled" :disabled="toolBarModels.tbitem6.disabled" class='' @click="toolbar_click({ tag: 'tbitem6' }, $event)">
-                                    <i class='fa fa-copy'></i>
-                                    <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem6.caption')}}</span>
+                                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
+                                    <i class='fa fa-save'></i>
+                                    <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.deuiaction1.caption')}}</span>
                                 </i-button>
-                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem6.tip')}}</div>
+                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.deuiaction1.tip')}}</div>
                         </tooltip>
                         <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem8.visabled" :disabled="toolBarModels.tbitem8.disabled" class='' @click="toolbar_click({ tag: 'tbitem8' }, $event)">
@@ -36,44 +36,6 @@
                                 </i-button>
                             <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem8.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                            <app-export-excel :item="toolBarModels.tbitem13" :caption="$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem13.caption')" @exportexcel="toolbar_click({ tag: 'tbitem13' }, $event)"></app-export-excel>
-                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem13.tip')}}</div>
-                        </tooltip>
-                        <span class='seperator'>|</span>    <dropdown v-show="toolBarModels.tbitem16.visabled" trigger='click'>
-                            <tooltip :transfer="true" :max-width="600">
-                                    <i-button class=''>
-                                        <i class=''></i>
-                                        <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem16.caption')}}</span>
-                                        <icon type="ios-arrow-down"></icon>
-                                    </i-button>
-                                <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem16.tip')}}</div>
-                            </tooltip>
-                            <dropdown-menu slot='list'>
-                                <dropdown-item>
-                                    <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem21.visabled" :disabled="toolBarModels.tbitem21.disabled" class='' @click="toolbar_click({ tag: 'tbitem21' }, $event)">
-                                    <i class='fa fa-download'></i>
-                                    <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem21.caption')}}</span>
-                                </i-button>
-                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem21.tip')}}</div>
-                        </tooltip>
-                        
-                        
-                                </dropdown-item>
-                                <dropdown-item>
-                                    <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem23.visabled" :disabled="toolBarModels.tbitem23.disabled" class='' @click="toolbar_click({ tag: 'tbitem23' }, $event)">
-                                    <i class='fa fa-upload'></i>
-                                    <span class='caption'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem23.caption')}}</span>
-                                </i-button>
-                            <div slot='content'>{{$t('entities.ibzdeptmember.gridviewtoolbar_toolbar.tbitem23.tip')}}</div>
-                        </tooltip>
-                        
-                        
-                                </dropdown-item>
-                            </dropdown-menu>
-                        </dropdown>
                     </div>
                 </div>
             </div>
@@ -83,14 +45,14 @@
                 :context="context" 
                 :isSingleSelect="isSingleSelect"
                 :showBusyIndicator="true"
-                :isOpenEdit="false"
+                :isOpenEdit="true"
                 :gridRowActiveMode="gridRowActiveMode"
                 @save="onSave"
-                updateAction=""
+                updateAction="Update"
                 removeAction="Remove"
-                loaddraftAction=""
-                loadAction=""
-                createAction=""
+                loaddraftAction="GetDraft"
+                loadAction="Get"
+                createAction="Create"
                 fetchAction="FetchDefault"
                 :newdata="newdata"
                 :opendata="opendata"
@@ -310,24 +272,14 @@ export default class IBZDeptMemberGridViewBase extends Vue {
      * @memberof IBZDeptMemberGridView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        tbitem24: { name: 'tbitem24', caption: '行编辑', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'ToggleRowEdit', target: '' } },
 
-        tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        tbitem25: { name: 'tbitem25', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'NewRow', target: '' } },
 
-        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        deuiaction1: { name: 'deuiaction1', caption: '保存行', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'SaveRow', target: '' } },
 
-        tbitem7: {  name: 'tbitem7', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
+        tbitem26: {  name: 'tbitem26', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
         tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
-
-        tbitem9: {  name: 'tbitem9', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem13: { name: 'tbitem13', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
-
-        tbitem10: {  name: 'tbitem10', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem16: { name: 'tbitem16', caption: '其它', disabled: false, type: 'ITEMS', visabled: true, dataaccaction: '', uiaction: { } }, 
- tbitem21: { name: 'tbitem21', caption: '导出数据模型', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'ExportModel', target: '' } },
-
- tbitem23: { name: 'tbitem23', caption: '数据导入', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Import', target: '' } },
-
 
     };
 
@@ -644,18 +596,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
      * @memberof IBZDeptMemberGridViewBase
      */
     public toolbar_click($event: any, $event2?: any) {
-        if (Object.is($event.tag, 'tbitem3')) {
-            this.toolbar_tbitem3_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem4')) {
-            this.toolbar_tbitem4_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem5')) {
-            this.toolbar_tbitem5_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem6')) {
-            this.toolbar_tbitem6_click(null, '', $event2);
-        }
         if (Object.is($event.tag, 'tbitem24')) {
             this.toolbar_tbitem24_click(null, '', $event2);
         }
@@ -667,18 +607,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         }
         if (Object.is($event.tag, 'tbitem8')) {
             this.toolbar_tbitem8_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem13')) {
-            this.toolbar_tbitem13_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem11')) {
-            this.toolbar_tbitem11_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem21')) {
-            this.toolbar_tbitem21_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem23')) {
-            this.toolbar_tbitem23_click(null, '', $event2);
         }
         if (Object.is($event.tag, 'tbitem19')) {
             this.toolbar_tbitem19_click(null, '', $event2);
@@ -746,118 +674,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
     }
 
 
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem3_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.New(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem4_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.Edit(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem5_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.View(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem6_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.Copy(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
 
     /**
      * 逻辑事件
@@ -969,118 +785,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         }
         // 界面行为
         this.Remove(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem13_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.ExportExcel(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem11_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.Print(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem21_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.ExportModel(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem23_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.Import(datas, contextJO,paramJO,  $event, xData,this,"IBZDeptMember");
     }
 
     /**
@@ -1230,110 +934,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
 
 
     /**
-     * 新建
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public New(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-         const _this: any = this;
-        if (_this.newdata && _this.newdata instanceof Function) {
-            const data: any = {};
-            _this.newdata([{ ...data }],[{ ...data }], params, $event, xData);
-        } else {
-            _this.$Notice.error({ title: '错误', desc: 'newdata 视图处理逻辑不存在，请添加!' });
-        }
-    }
-    /**
-     * 编辑
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public Edit(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        if (args.length === 0) {
-            return;
-        }
-        const _this: any = this;
-        if (_this.opendata && _this.opendata instanceof Function) {
-            const data: any = { };
-            if (args.length > 0) {
-                Object.assign(data, { ibzdeptmember: args[0].ibzdeptmember })
-            }
-            _this.opendata([{ ...data }], params, $event, xData);
-        } else {
-            _this.$Notice.error({ title: '错误', desc: 'opendata 视图处理逻辑不存在，请添加!' });
-        }
-    }
-    /**
-     * 查看
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public View(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        if (args.length === 0) {
-            return;
-        }
-        const _this: any = this;
-        if (_this.opendata && _this.opendata instanceof Function) {
-            const data: any = { };
-            if (args.length > 0) {
-                Object.assign(data, { ibzdeptmember: args[0].ibzdeptmember })
-            }
-            _this.opendata([{ ...data }], params, $event, xData);
-        } else {
-            _this.$Notice.error({ title: '错误', desc: 'opendata 视图处理逻辑不存在，请添加!' });
-        }
-    }
-    /**
-     * 拷贝
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public Copy(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        if (args.length === 0) {
-            return;
-        }
-        const _this: any = this;
-        if (_this.newdata && _this.newdata instanceof Function) {
-            const data: any = {};
-            if (args.length > 0) {
-                Object.assign(data, { srfsourcekey: args[0].srfkey })
-                actionContext.$store.commit('addCopyData', { srfkey: args[0].srfkey, copyData: args[0] });
-            }
-            _this.newdata([{ ...data }],[{ ...data }],params, $event, xData);
-        } else if (xData && xData.copy instanceof Function) {
-            if (args.length > 0) {
-                actionContext.$store.commit('addCopyData', { srfkey: args[0].srfkey, copyData: args[0] });
-            }
-            xData.copy(args[0].srfkey);
-        } else {
-            _this.$Notice.error({ title: '错误', desc: 'opendata 视图处理逻辑不存在，请添加!' });
-        }
-    }
-    /**
      * 行编辑
      *
      * @param {any[]} args 当前数据
@@ -1408,74 +1008,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
         xData.remove(args);
     }
 
-    /**
-     * 导出
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public ExportExcel(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        const _this: any = this;
-        if (!xData || !(xData.exportExcel instanceof Function) || !$event) {
-            return ;
-        }
-        xData.exportExcel($event.exportparms);
-    }
-    /**
-     * 打印
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public Print(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        let _this:any = this;
-        if (!xData || !(xData.print instanceof Function) || !$event) {
-            return ;
-        }
-        xData.print();
-    }
-    /**
-     * 导出数据模型
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public ExportModel(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        this.$Notice.error({ title: '错误', desc: '导出数据模型未支持' });
-    }
-    /**
-     * 数据导入
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof IBZDeptMemberGridViewBase
-     */
-    public Import(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        const _this: any = this;
-        if (!xData || !(xData.importExcel instanceof Function) || !$event) {
-            return ;
-        }
-        xData.importExcel(params);
-    }
     /**
      * 过滤
      *

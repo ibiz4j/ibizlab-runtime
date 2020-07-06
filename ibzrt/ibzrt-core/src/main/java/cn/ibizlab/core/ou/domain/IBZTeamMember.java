@@ -74,7 +74,7 @@ public class IBZTeamMember extends EntityClient implements Serializable {
     private String postid;
 
     /**
-     * 岗位标识
+     * 岗位
      */
     @JSONField(name = "postname")
     @JsonProperty("postname")

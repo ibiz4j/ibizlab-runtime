@@ -6,7 +6,7 @@
 export const getAppView = (state: any) => (viewtag: string) => {
     const createdview = state.createdviews.find((appview: any) => Object.is(appview.secondtag, viewtag));
     if (!createdview) {
-        console.log(`----视图 ${viewtag} 不存在-----`)
+        console.warn(`获取应用视图实例，，视图「${viewtag}」不存在`)
         return null;
     }
     return createdview;
@@ -20,7 +20,7 @@ export const getAppView = (state: any) => (viewtag: string) => {
 export const getViewDataChangeState = (state:any) => (viewtag: string) => {
     const createdview = state.createdviews.find((appview: any) => Object.is(appview.secondtag, viewtag));
     if (!createdview) {
-        console.log(`----视图 ${viewtag} 不存在-----`)
+        console.warn(`获取视图数据状态，，视图「${viewtag}」不存在`)
         return false;
     }
     return createdview.viewdatachange;
@@ -34,7 +34,7 @@ export const getViewDataChangeState = (state:any) => (viewtag: string) => {
 export const getRefreshData = (state: any) => (viewtag: string) => {
     const createdview = state.createdviews.find((appview: any) => Object.is(appview.secondtag, viewtag));
     if (!createdview) {
-        console.log(`----视图 ${viewtag} 不存在-----`)
+        console.warn(`获取数据刷新状态，视图「${viewtag}」不存在`)
         return null;
     }
     return createdview.refreshdata;

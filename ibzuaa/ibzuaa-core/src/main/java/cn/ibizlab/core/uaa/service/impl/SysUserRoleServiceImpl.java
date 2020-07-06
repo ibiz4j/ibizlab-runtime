@@ -210,6 +210,9 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
                 user=majorEntity;
             }
             et.setPersonname(user.getPersonname());
+            et.setLoginname(user.getLoginname());
+            et.setOrgname(user.getOrgname());
+            et.setMdeptname(user.getMdeptname());
         }
     }
 

@@ -83,7 +83,7 @@ public class IBZTeamMember extends EntityMP implements Serializable {
     @JsonProperty("postid")
     private String postid;
     /**
-     * 岗位标识
+     * 岗位
      */
     @TableField(exist = false)
     @JSONField(name = "postname")

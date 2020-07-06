@@ -21,6 +21,7 @@
     viewtag="ouindex-view"
     :selectTheme="selectTheme"  
     :isDefaultPage="isDefaultPage"  
+    :isBlankMode="isBlankMode"
     :defPSAppView="defPSAppView" 
     name="appmenu"  
     ref='appmenu' 
@@ -625,6 +626,14 @@ export default class OUIndexViewBase extends Vue {
      * @memberof OUIndexViewBase
      */
     public isDefaultPage: boolean = true;
+
+    /**
+     * 空白视图模式
+     *
+     * @type {boolean}
+     * @memberof OUIndexViewBase
+     */
+    public isBlankMode:boolean = false;
 
     /**
      * 获取样式

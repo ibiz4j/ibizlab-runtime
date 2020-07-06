@@ -41,6 +41,27 @@ public class SysUserSearchContext extends QueryWrapperContext<SysUser> {
             this.getSearchCond().like("personname", n_personname_like);
         }
     }
+	private String n_loginname_like;//[登录名]
+	public void setN_loginname_like(String n_loginname_like) {
+        this.n_loginname_like = n_loginname_like;
+        if(!ObjectUtils.isEmpty(this.n_loginname_like)){
+            this.getSearchCond().like("loginname", n_loginname_like);
+        }
+    }
+	private String n_mdeptname_like;//[主部门名称]
+	public void setN_mdeptname_like(String n_mdeptname_like) {
+        this.n_mdeptname_like = n_mdeptname_like;
+        if(!ObjectUtils.isEmpty(this.n_mdeptname_like)){
+            this.getSearchCond().like("mdeptname", n_mdeptname_like);
+        }
+    }
+	private String n_orgname_like;//[单位名称]
+	public void setN_orgname_like(String n_orgname_like) {
+        this.n_orgname_like = n_orgname_like;
+        if(!ObjectUtils.isEmpty(this.n_orgname_like)){
+            this.getSearchCond().like("orgname", n_orgname_like);
+        }
+    }
 
     /**
 	 * 启用快速搜索

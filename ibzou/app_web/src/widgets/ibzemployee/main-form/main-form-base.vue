@@ -29,13 +29,13 @@
     <row>
         <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.ibzemployee.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-org-select :data="data" :context="JSON.parse(JSON.stringify(context))" :fillMap="{id:'orgid','label':'orgname','code':'orgcode'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
+    <app-org-select :data="data" :disabled="detailsModel.orgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{id:'orgid','label':'orgname','code':'orgcode'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.mdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='mdeptname' :itemRules="this.rules.mdeptname" class='' :caption="$t('entities.ibzemployee.main_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-department-select :data="data" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{id:'mdeptid','label':'mdeptname','code':'mdeptcode','bcode':'bcode'}" :multiple="false" style="" @select-change="onFormItemValueChange"></app-department-select>
+    <app-department-select :data="data" :disabled="detailsModel.mdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{id:'mdeptid','label':'mdeptname','code':'mdeptcode','bcode':'bcode'}" :multiple="false" style="" @select-change="onFormItemValueChange"></app-department-select>
 </app-form-item>
 
 </i-col>
@@ -216,6 +216,7 @@ import MainService from './main-form-service';
 
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import schema from 'async-validator';
 
 
 @Component({
@@ -520,6 +521,7 @@ export default class MainBase extends Vue implements ControlInterface {
         orgid: null,
         orgname: null,
         mdeptid: null,
+        pdeptcheck: null,
         mdeptname: null,
         mdeptcode: null,
         orgcode: null,
@@ -666,6 +668,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { type: 'string', message: '主部门 值必须为字符串类型', trigger: 'blur' },
             { required: false, type: 'string', message: '主部门 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '主部门 值不能为空', trigger: 'blur' },
+        ],
+        pdeptcheck: [
+            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         mdeptname: [
             { type: 'string', message: '部门 值必须为字符串类型', trigger: 'change' },
@@ -839,6 +847,8 @@ export default class MainBase extends Vue implements ControlInterface {
         orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
 , 
         mdeptid: new FormItemModel({ caption: '主部门', detailType: 'FORMITEM', name: 'mdeptid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        pdeptcheck: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'pdeptcheck', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         mdeptname: new FormItemModel({ caption: '部门', detailType: 'FORMITEM', name: 'mdeptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
@@ -1050,6 +1060,18 @@ export default class MainBase extends Vue implements ControlInterface {
     @Watch('data.mdeptid')
     onMdeptidChange(newVal: any, oldVal: any) {
         this.formDataChange({ name: 'mdeptid', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 pdeptcheck 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.pdeptcheck')
+    onPdeptcheckChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'pdeptcheck', newVal: newVal, oldVal: oldVal });
     }
 
     /**
@@ -1360,7 +1382,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string, newVal: any, oldVal: any }} { name, newVal, oldVal }
      * @memberof MainBase
      */
-    public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
+    public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
 
 
@@ -1382,6 +1404,14 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
 
+        if (Object.is(name, '') || Object.is(name, 'pdeptcheck')) {
+            let ret = false;
+            const _pdeptcheck = this.data.pdeptcheck;
+            if (this.$verify.testCond(_pdeptcheck, 'ISNULL', '')) {
+                ret = true;
+            }
+            this.detailsModel.mdeptname.setDisabled(!ret);
+        }
 
 
 
@@ -1402,6 +1432,26 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
 
+
+    }
+
+    /**
+     * 表单项检查逻辑
+     *
+     * @public
+     * @param name 属性名
+     * @memberof MainBase
+     */
+    public checkItem(name:string):Promise<any> {
+        return new Promise((resolve, reject) => {
+                var validator = new schema({[name]:this.rules[name]});
+                validator.validate({[name]:this.data[name]}).then(()=>{
+                    resolve(true);
+                })
+                .catch(() => {
+                    resolve(false);
+                });;
+        })
     }
 
     /**
@@ -2324,6 +2374,9 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public createDefault(){                    
+        if (this.data.hasOwnProperty('pdeptcheck')) {
+            this.data['pdeptcheck'] = this.context['ibzdepartment'];
+        }
         if (this.data.hasOwnProperty('showorder')) {
             this.data['showorder'] = 1;
         }
@@ -2334,6 +2387,9 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public updateDefault(){                    
+        if (this.data.hasOwnProperty('pdeptcheck') && !this.data.pdeptcheck) {
+            this.data['pdeptcheck'] = this.context['ibzdepartment'];
+        }
     }
 
     

@@ -6,6 +6,10 @@
                 &nbsp;&nbsp;<avatar :src="user.avatar" />
             </div>
             <dropdown-menu class='menu' slot='list' style='font-size: 15px !important;'>
+                <dropdown-item name='updatepwd' style='font-size: 15px !important;'>
+                    <span><Icon type="ios-create-outline" style='margin-right: 8px;'/></span>
+                    <span>{{$t('components.appUser.changepwd')}}</span>
+                </dropdown-item>
                 <dropdown-item name='logout' style='font-size: 15px !important;'>
                     <span><i aria-hidden='true' class='ivu-icon ivu-icon-md-power' style='margin-right: 8px;'></i></span>
                     <span>{{$t('components.appUser.logout')}}</span>
@@ -16,7 +20,7 @@
 </template>
 <script lang = 'ts'>
 import { Vue, Component } from 'vue-property-decorator';
-
+import { Subject } from 'rxjs';
 @Component({
 })
 export default class AppUser extends Vue {
@@ -45,6 +49,13 @@ export default class AppUser extends Vue {
                 onOk: () => {
                     this.logout();
                 }
+            });
+        }else if (Object.is(data, 'updatepwd')) {
+            let container: Subject<any> = this.$appmodal.openModal({ viewname: 'app-update-password', title: "修改密码",  width: 500, height: 400, }, {}, {});
+                    container.subscribe((result: any) => {
+                        if (!result || !Object.is(result.ret, 'OK')) {
+                            return;
+                        }
             });
         }
     }

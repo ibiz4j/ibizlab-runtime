@@ -30,8 +30,8 @@ export default {
 			srfdeid: "", 
 			srfsourcekey: "", 
 			teamname: "组名称", 
-			domains: "区属", 
 			memo: "备注", 
+			domains: "区属", 
 			teamid: "组标识", 
 		},
 		uiactions: {
@@ -40,7 +40,7 @@ export default {
 	main_grid: {
 		columns: {
 			teamname: "组名称",
-			domains: "区属",
+			memo: "备注",
 		},
 		uiactions: {
 		},

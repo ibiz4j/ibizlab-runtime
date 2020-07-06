@@ -25,6 +25,11 @@ export default class DefaultModel {
         prop: 'srffrontuf',
         dataType: 'TEXT',
       },
+      {
+        name: 'n_sys_username_like',
+        prop: 'personname',
+        dataType: 'PICKUPTEXT',
+      },
     ]
   }
 

@@ -6,15 +6,10 @@
  * @param param1 
  */
 export const createdView = (state: any, { viewtag, secondtag }: { viewtag: string, secondtag: string }) => {
-    // 该视图是否被创建
-    // const index = state.createdviews.findIndex((view: any) => Object.is(view.secondtag, viewtag));
-    // if (index !== -1) {
-    //     return;
-    // }
     // 原始数据中是否存在
     const appview = state.appviews.find((appview: any) => Object.is(appview.viewtag, viewtag));
     if (!appview) {
-        console.log(`----视图标识 ${viewtag} 不存在-----`)
+        console.warn(`视图「${viewtag}」原始数据不存在`);
         return;
     }
     const _appview: any = JSON.parse(JSON.stringify(appview));
@@ -48,7 +43,7 @@ export const removeView = (state: any, viewtag: string) => {
 export const setViewDataChange = (state: any, { viewtag, viewdatachange }: { viewtag: string, viewdatachange: boolean }) => {
     const createdview = state.createdviews.find((appview: any) => Object.is(appview.secondtag, viewtag));
     if (!createdview) {
-        console.log(`----视图标识 ${viewtag} 不存在-----`)
+        console.warn(`设置数据状态变更，视图「${viewtag}」不存在`)
         return;
     }
     createdview.viewdatachange = viewdatachange;
@@ -63,7 +58,7 @@ export const setViewDataChange = (state: any, { viewtag, viewdatachange }: { vie
 export const refreshViewData = (state: any, { viewtag }: { viewtag: string }) => {
     const createdview = state.createdviews.find((appview: any) => Object.is(appview.secondtag, viewtag));
     if (!createdview) {
-        console.log(`----视图标识 ${viewtag} 不存在-----`)
+        console.warn(`刷新视图数据，视图「${viewtag}」不存在`)
         return;
     }
     createdview.refreshdata += 1;

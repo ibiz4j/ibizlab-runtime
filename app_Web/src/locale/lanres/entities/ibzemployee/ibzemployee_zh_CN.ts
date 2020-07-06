@@ -87,6 +87,7 @@ export default {
 			loginname: "登录名", 
 			orgid: "单位", 
 			orgname: "单位", 
+			pdeptcheck: "", 
 			mdeptid: "主部门", 
 			mdeptname: "部门", 
 			mdeptcode: "主部门代码", 

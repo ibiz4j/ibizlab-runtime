@@ -2,6 +2,8 @@ import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
 import IBZTeamMemberService from '@/service/ibzteam-member/ibzteam-member-service';
 import MainModel from './main-grid-model';
+import IBZPostService from '@/service/ibzpost/ibzpost-service';
+import IBZEmployeeService from '@/service/ibzemployee/ibzemployee-service';
 
 
 /**
@@ -41,6 +43,22 @@ export default class MainService extends ControlService {
         this.model = new MainModel();
     }
 
+
+    /**
+     * 岗位服务对象
+     *
+     * @type {IBZPostService}
+     * @memberof MainService
+     */
+    public ibzpostService: IBZPostService = new IBZPostService();
+
+    /**
+     * 人员服务对象
+     *
+     * @type {IBZEmployeeService}
+     * @memberof MainService
+     */
+    public ibzemployeeService: IBZEmployeeService = new IBZEmployeeService();
 
     /**
      * 处理数据
@@ -83,6 +101,12 @@ export default class MainService extends ControlService {
     public getItems(serviceName: string, interfaceName: string, context: any = {}, data: any, isloading?: boolean): Promise<any[]> {
         data.page = data.page ? data.page : 0;
         data.size = data.size ? data.size : 1000;
+        if (Object.is(serviceName, 'IBZPostService') && Object.is(interfaceName, 'FetchDefault')) {
+            return this.doItems(this.ibzpostService.FetchDefault(JSON.parse(JSON.stringify(context)),data, isloading), 'postid', 'ibzpost');
+        }
+        if (Object.is(serviceName, 'IBZEmployeeService') && Object.is(interfaceName, 'FetchDefault')) {
+            return this.doItems(this.ibzemployeeService.FetchDefault(JSON.parse(JSON.stringify(context)),data, isloading), 'userid', 'ibzemployee');
+        }
 
         return Promise.reject([])
     }
