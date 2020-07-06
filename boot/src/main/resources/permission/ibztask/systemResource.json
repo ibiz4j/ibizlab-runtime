@@ -1,47 +1,47 @@
+{
+  "systemid":"ibztask",
+  "unires":[
+  ],
+  "entities":[
     {
-    "systemid":"ibztask",
-    "unires":[
-    ],
-    "entities":[
-    {
-    "dename":"JobsInfo",
-    "delogicname":"任务信息",
-    "sysmoudle":{"id":"TASK","name":"task"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"Start" , "name":"开始" , "type":"USERUPDATE" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Execute" , "name":"执行" , "type":"USERCUSTOM" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Stop" , "name":"停止" , "type":"USERUPDATE" }],
-    "datascope":[{"id":"all","name":"全部数据"}]
-     }
-    ,    {
-    "dename":"JobsLog",
-    "delogicname":"任务调度日志",
-    "sysmoudle":{"id":"TASK","name":"task"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}]
-     }
-    ,    {
-    "dename":"JobsLock",
-    "delogicname":"任务锁",
-    "sysmoudle":{"id":"TASK","name":"task"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}]
-     }
-    ,    {
-    "dename":"JobsRegistry",
-    "delogicname":"任务注册信息",
-    "sysmoudle":{"id":"TASK","name":"task"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}]
-     }
-    ],
-    "appmenus":[
-            
-            {
-               "appid":"web",
-               "appname":"任务调度",
-               "appmenu":[{"menuid":"TaskIndexView", "menuname":"TaskIndexView", "menuitem":[{ "id":"menuitem3" , "name":"注册" },{ "id":"menuitem1" , "name":"任务" },{ "id":"menuitem2" , "name":"日志" }] }]
-            }
-            ]
+      "dename":"JobsInfo",
+      "delogicname":"任务信息",
+      "sysmoudle":{"id":"TASK","name":"task"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Execute" , "name":"执行" , "type":"USERCUSTOM" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Start" , "name":"开始" , "type":"USERUPDATE" },{"id":"Stop" , "name":"停止" , "type":"USERUPDATE" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
     }
+  ,    {
+      "dename":"JobsLog",
+      "delogicname":"任务调度日志",
+      "sysmoudle":{"id":"TASK","name":"task"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ,    {
+      "dename":"JobsLock",
+      "delogicname":"任务锁",
+      "sysmoudle":{"id":"TASK","name":"task"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ,    {
+      "dename":"JobsRegistry",
+      "delogicname":"任务注册信息",
+      "sysmoudle":{"id":"TASK","name":"task"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ],
+  "appmenus":[
+
+    {
+      "appid":"web",
+      "appname":"任务调度",
+      "appmenu":[{"menuid":"TaskIndexView", "menuname":"TaskIndexView", "menuitem":[{ "id":"menuitem3" , "name":"注册" },{ "id":"menuitem1" , "name":"任务" },{ "id":"menuitem2" , "name":"日志" }] }]
+    }
+  ]
+}

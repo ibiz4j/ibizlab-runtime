@@ -2,6 +2,7 @@ package cn.ibizlab.core.uaa.extensions.service;
 
 import cn.ibizlab.core.uaa.domain.SysPSSystem;
 import cn.ibizlab.core.uaa.domain.SysApp;
+import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
 import cn.ibizlab.core.uaa.filter.SysAppSearchContext;
 import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
 import cn.ibizlab.core.uaa.service.ISysAppService;
@@ -23,6 +24,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -59,9 +61,9 @@ public class SysAppService extends SysAppServiceImpl
         LinkedHashMap<String,SysApp> defApps = new LinkedHashMap<>();
         defApps.putAll(apps);
         AuthenticationUser curUser = AuthenticationUser.getAuthenticationUser();
+        Set<String> authorities = AuthorityUtils.authorityListToSet(curUser.getAuthorities());
 
-        boolean superadmin=(curUser.getSuperuser()==1||curUser.getAuthorities().contains("ROLE_SUPERADMIN"));
-
+        boolean superadmin=(curUser.getSuperuser()==1||authorities.contains("ROLE_SUPERADMIN"));
 
         List<SysApp> list=new ArrayList<>();
         JSONArray.parseArray(jo.getJSONArray("model").toJSONString(),SysApp.class).forEach(sysApp -> {
@@ -73,7 +75,7 @@ public class SysAppService extends SysAppServiceImpl
             sysApp.setFullname(def.getFullname());
             sysApp.setType(def.getType());
             sysApp.setGroup(def.getGroup());
-            if(superadmin || curUser.getAuthorities().contains(sysApp.getId()))
+            if(superadmin || authorities.contains(PermissionType.APPMENU+"_"+sysApp.getId()))
                 list.add(sysApp);
             defApps.remove(def.getId());
         });
@@ -86,7 +88,7 @@ public class SysAppService extends SysAppServiceImpl
                 sysApp.setVisabled(1);
             else
                 sysApp.setVisabled(0);
-            if(superadmin || curUser.getAuthorities().contains(sysApp.getId()))
+            if(superadmin || authorities.contains(PermissionType.APPMENU+"_"+sysApp.getId()))
                 list.add(sysApp);
         });
 

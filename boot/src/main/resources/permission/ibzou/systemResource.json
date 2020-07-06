@@ -1,63 +1,71 @@
-    {
+{
     "systemid":"ibzou",
     "unires":[
     ],
     "entities":[
-    {
-    "dename":"IBZDeptMember",
-    "delogicname":"部门成员",
-    "sysmoudle":{"id":"OU","name":"ou"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}]
-     }
+        {
+            "dename":"IBZDeptMember",
+            "delogicname":"部门成员",
+            "sysmoudle":{"id":"OU","name":"ou"},
+            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+            "datascope":[{"id":"all","name":"全部数据"}]
+        }
     ,    {
-    "dename":"IBZTeamMember",
-    "delogicname":"组成员",
-    "sysmoudle":{"id":"OU","name":"ou"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}]
-     }
+            "dename":"IBZTeamMember",
+            "delogicname":"组成员",
+            "sysmoudle":{"id":"OU","name":"ou"},
+            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+            "datascope":[{"id":"all","name":"全部数据"}]
+        }
     ,    {
-    "dename":"IBZDepartment",
-    "delogicname":"部门",
-    "sysmoudle":{"id":"OU","name":"ou"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
-     }
+            "dename":"IBZDepartment",
+            "delogicname":"部门",
+            "sysmoudle":{"id":"OU","name":"ou"},
+            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+            "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
+        }
     ,    {
-    "dename":"IBZEmployee",
-    "delogicname":"人员",
-    "sysmoudle":{"id":"OU","name":"ou"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"InitPwd" , "name":"初始化密码" , "type":"USERCUSTOM" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
-     }
+            "dename":"IBZEmployee",
+            "delogicname":"人员",
+            "sysmoudle":{"id":"OU","name":"ou"},
+            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"InitPwd" , "name":"初始化密码" , "type":"USERCUSTOM" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+            "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
+        }
     ,    {
-    "dename":"IBZOrganization",
-    "delogicname":"单位机构",
-    "sysmoudle":{"id":"OU","name":"ou"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
-     }
+            "dename":"IBZOrganization",
+            "delogicname":"单位机构",
+            "sysmoudle":{"id":"OU","name":"ou"},
+            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+            "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
+        }
     ,    {
-    "dename":"IBZTeam",
-    "delogicname":"组",
-    "sysmoudle":{"id":"OU","name":"ou"},
-    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-    "deaction":[{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Create" , "name":"Create" , "type":"BUILTIN" }],
-    "datascope":[{"id":"all","name":"全部数据"}]
-     }
+            "dename":"IBZPost",
+            "delogicname":"岗位",
+            "sysmoudle":{"id":"OU","name":"ou"},
+            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+            "datascope":[{"id":"all","name":"全部数据"}]
+        }
+    ,    {
+            "dename":"IBZTeam",
+            "delogicname":"组",
+            "sysmoudle":{"id":"OU","name":"ou"},
+            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+            "datascope":[{"id":"all","name":"全部数据"}]
+        }
     ],
     "appmenus":[
-            
-            {
-               "appid":"web",
-               "appname":"统一组织单位",
-               "appmenu":[{"menuid":"OUIndexView", "menuname":"OUIndexView", "menuitem":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" }] }]
-            }
-            ]
-    }
+
+        {
+            "appid":"web",
+            "appname":"统一组织单位",
+            "appmenu":[{"menuid":"OUIndexView", "menuname":"OUIndexView", "menuitem":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" },{ "id":"menuitem4" , "name":"岗位管理" },{ "id":"menuitem5" , "name":"组管理" }] }]
+        }
+    ]
+}
