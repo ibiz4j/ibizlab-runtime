@@ -13,8 +13,8 @@ export default {
   },
 	views: {
 		gridview: {
-			caption: "应用",
-      		title: "应用表格视图",
+			caption: "接入应用",
+      		title: "接入应用",
 		},
 		editview: {
 			caption: "应用",

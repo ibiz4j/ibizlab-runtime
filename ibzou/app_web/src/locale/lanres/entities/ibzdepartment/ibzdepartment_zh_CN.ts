@@ -20,12 +20,12 @@ export default {
   },
 	views: {
 		optionview: {
-			caption: "部门",
-      		title: "部门选项操作视图",
+			caption: "部门快速新建",
+      		title: "部门快速新建",
 		},
 		editview: {
-			caption: "部门",
-      		title: "部门编辑视图",
+			caption: "部门管理",
+      		title: "部门管理",
 		},
 		editgridview: {
 			caption: "部门",
@@ -45,7 +45,7 @@ export default {
 		},
 		treeexpview: {
 			caption: "人员管理",
-      		title: "部门树导航视图",
+      		title: "人员管理",
 		},
 		gridview: {
 			caption: "部门",

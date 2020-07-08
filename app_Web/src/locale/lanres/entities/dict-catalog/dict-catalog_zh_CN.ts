@@ -10,8 +10,8 @@ export default {
   },
 	views: {
 		gridview: {
-			caption: "字典",
-      		title: "字典表格视图",
+			caption: "目录",
+      		title: "目录",
 		},
 		pickupgridview: {
 			caption: "字典",

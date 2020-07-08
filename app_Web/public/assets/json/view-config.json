@@ -32,8 +32,8 @@
         "viewtag": "135872676ba63d430b2f20bd20364286"
     },
     "sysrolegridview": {
-        "title": "角色表格视图",
-        "caption": "系统角色",
+        "title": "用户角色",
+        "caption": "用户角色",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "uaa",
         "viewname": "SysRoleGridView",
@@ -48,8 +48,8 @@
         "viewtag": "17ccd6d8d2bb7cf30158253da129ec1b"
     },
     "sysappgridview": {
-        "title": "应用表格视图",
-        "caption": "应用",
+        "title": "接入应用",
+        "caption": "接入应用",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "uaa",
         "viewname": "SysAppGridView",
@@ -64,7 +64,7 @@
         "viewtag": "1f8cf7e78d6d88588d1d568d1866cc77"
     },
     "dictoptiongridview": {
-        "title": "字典项表格视图",
+        "title": "字典项",
         "caption": "字典项",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "dict",
@@ -72,7 +72,7 @@
         "viewtag": "22e202992971f634c00e022b2cae335e"
     },
     "sysauthloggridview": {
-        "title": "认证日志表格视图",
+        "title": "认证日志",
         "caption": "认证日志",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "uaa",
@@ -120,16 +120,16 @@
         "viewtag": "32fe9ab4a9e1b8d62b9ee802e4746965"
     },
     "jobsregistrygridview": {
-        "title": "任务注册信息表格视图",
-        "caption": "任务注册信息",
+        "title": "注册",
+        "caption": "注册",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "task",
         "viewname": "JobsRegistryGridView",
         "viewtag": "3fc39744066bd5343be378ec5703f556"
     },
     "wfprocessdefinitioneditview": {
-        "title": "实体编辑视图",
-        "caption": "流程定义",
+        "title": "流程定义查看",
+        "caption": "流程定义查看",
         "viewtype": "DEEDITVIEW",
         "viewmodule": "workflow",
         "viewname": "WFProcessDefinitionEditView",
@@ -192,16 +192,16 @@
         "viewtag": "56cc39a16e3269c082694b50f89338e3"
     },
     "wfremodeleditview": {
-        "title": "流程模型编辑视图",
-        "caption": "流程模型",
+        "title": "发布新流程",
+        "caption": "发布新流程",
         "viewtype": "DEEDITVIEW",
         "viewmodule": "workflow",
         "viewname": "WFREModelEditView",
         "viewtag": "5856bfb8b576cc2ee743801b23e58299"
     },
     "ibzteamgridview": {
-        "title": "组表格视图",
-        "caption": "组",
+        "title": "组管理",
+        "caption": "组管理",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "ou",
         "viewname": "IBZTeamGridView",
@@ -232,7 +232,7 @@
         "viewtag": "61c5bff70bcf56e1dc0bb0900df9c98c"
     },
     "ibzorganizationtreeexpview": {
-        "title": "单位机构树导航视图",
+        "title": "部门管理",
         "caption": "部门管理",
         "viewtype": "DETREEEXPVIEW",
         "viewmodule": "ou",
@@ -248,8 +248,8 @@
         "viewtag": "6736591aca71edc23df760e278378566"
     },
     "jobsloggridview": {
-        "title": "任务调度日志表格视图",
-        "caption": "任务调度日志",
+        "title": "日志",
+        "caption": "日志",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "task",
         "viewname": "JobsLogGridView",
@@ -288,8 +288,8 @@
         "viewtag": "7362390ee25dac238b23fa9ab05ea4ac"
     },
     "dictcataloggridview": {
-        "title": "字典表格视图",
-        "caption": "字典",
+        "title": "目录",
+        "caption": "目录",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "dict",
         "viewname": "DictCatalogGridView",
@@ -480,7 +480,7 @@
         "viewtag": "bf5e850471bab461fbb6739578e510c5"
     },
     "wfprocessdefinitiongridview": {
-        "title": "实体表格视图",
+        "title": "流程定义",
         "caption": "流程定义",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "workflow",
@@ -488,7 +488,7 @@
         "viewtag": "bfa86be8c02420f87d5cf4ff9a768948"
     },
     "ibzdepartmenttreeexpview": {
-        "title": "部门树导航视图",
+        "title": "人员管理",
         "caption": "人员管理",
         "viewtype": "DETREEEXPVIEW",
         "viewmodule": "ou",
@@ -496,8 +496,8 @@
         "viewtag": "c0cdac5d5b5691ae8a326f5972aec67f"
     },
     "ibzorganizationgridview": {
-        "title": "单位机构表格视图",
-        "caption": "单位机构",
+        "title": "单位管理",
+        "caption": "单位管理",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "ou",
         "viewname": "IBZOrganizationGridView",
@@ -544,8 +544,8 @@
         "viewtag": "cf8e6d455f8e88e66bbbe1bdb4c84274"
     },
     "ibzpostgridview": {
-        "title": "岗位表格视图",
-        "caption": "岗位",
+        "title": "岗位管理",
+        "caption": "岗位管理",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "ou",
         "viewname": "IBZPostGridView",
@@ -568,8 +568,8 @@
         "viewtag": "e3284e895913f7d38d1bcbe898bda0b7"
     },
     "jobsinfogridview": {
-        "title": "任务信息表格视图",
-        "caption": "任务信息",
+        "title": "任务",
+        "caption": "任务",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "task",
         "viewname": "JobsInfoGridView",
@@ -584,8 +584,8 @@
         "viewtag": "edde313015e1db7c366028307d88d20c"
     },
     "wfgroupgridview": {
-        "title": "角色/用户组表格视图",
-        "caption": "角色/用户组",
+        "title": "流程角色",
+        "caption": "流程角色",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "workflow",
         "viewname": "WFGroupGridView",

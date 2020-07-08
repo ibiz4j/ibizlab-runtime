@@ -55,6 +55,8 @@ export default {
       max: 'At Most',
       row: 'Lines',
       currentPage: 'Current Page',
+      desc:'Please enter the start page',
+      desc1:'Please enter a valid start page',
     },
     appFileUpload: {
       preview: 'preview',
@@ -64,6 +66,11 @@ export default {
     },
     appFormDRUIPart: {
       blockUITipInfo: 'Please save the major data first',
+      viewLoadComp:'After the multi data view is loaded, the subsequent form item update will be triggered',
+      save:'Relationship data save complete',
+      change:'Relationship data value change',
+      change1:'View data changes',
+      loadComp:'View loading complete',
     },
     appHeaderMenus: {
       ibizlab:{
@@ -130,19 +137,25 @@ export default {
       endPlaceholder: 'End Dat4e',
     },
     dropDownList: {
-      placeholder: 'please select...'
+      placeholder: 'please select...',
     },
     dropDownListDynamic: {
-      placeholder: 'please select...'
+      placeholder: 'please select...',
     },
     dropDownListMpicker: {
-      placeholder: 'please select...'
+      placeholder: 'please select...',
     },
     login: {
       error: 'Error',
       caption: 'Welcome to login',
+      placeholder1:'User name',
+      placeholder2:'Password',
       name: 'Login',
+      reset:'Reset',
+      other:'Other login methods',
       tip: 'Enter username and password',
+      warning1:'QQ authorization login not supported',
+      warning2:'Wechat authorized login not supported',
       loginname: {
           placeholder: 'Username',
           message: 'The username cannot be empty',
@@ -174,4 +187,65 @@ export default {
       hide: 'hide',
       showMore: 'show more',
     },
+    appUpdatePassword: {
+      oldPwd: 'Original password',
+      newPwd: 'New password',
+      confirmPwd: 'Confirm password',
+      sure: 'Confirm modification',
+      oldPwdErr: 'The original password cannot be empty!',
+      newPwdErr: 'New password cannot be empty!',
+      confirmPwdErr: 'The two input passwords are inconsistent!',
+    },
+    appAddressSelection: {
+      loadDataFail: 'City data loading failed'
+    },
+    appGroupSelect:{
+      groupSelect:'Group selection', 
+    },
+    appImageUpload:{
+      uploadFail:'Upload failed'
+    },
+    appOrgSelect:{
+      loadFail:'Failed to load data'
+    },
+    appTransfer:{
+      title1:'Not selected',
+      title2:'Selected',
+    },
+    appWFApproval:{
+      commit:'Commit',
+      wait:'Waiting',
+      handle:'Handle',
+      placeholder:'Please enter the content',
+      end:'End'
+    },
+    contextMenuDrag:{
+      allApp:'All applications',
+      noFind:'The app was not found'
+    },
+    filterMode:{
+      placeholder:'Conditional logic',  
+    },
+    filterTree:{
+      title1:'Add condition',
+      title2:'Add group',
+      placeholder:'Attribute', 
+    },
+    iBizGroupPicker:{
+      ok:'Ok',
+      cancel:'Cancel',
+    },
+    iBizGroupSelect:{
+      groupSelect:'Group selection'
+    },
+    tabPageExp:{
+      more:'More',
+    },
+    uploadFile:{
+      imgMsg:'Drag the picture here to replace it',
+      localUpload:'Local upload',
+      or:'Or',
+      imgMsg1:'Select from stock'
+    }
+
 };

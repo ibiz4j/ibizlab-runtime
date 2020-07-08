@@ -16,28 +16,28 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "单位机构",
-      		title: "单位机构编辑视图",
+			caption: "单位管理",
+      		title: "单位管理",
 		},
 		treeexpview: {
 			caption: "部门管理",
-      		title: "单位机构树导航视图",
+      		title: "部门管理",
 		},
 		pickupgridview: {
 			caption: "单位机构",
       		title: "单位机构选择表格视图",
 		},
 		optionview: {
-			caption: "单位机构",
-      		title: "单位机构选项操作视图",
+			caption: "单位快速新建",
+      		title: "单位快速新建",
 		},
 		pickupview: {
 			caption: "单位机构",
       		title: "单位机构数据选择视图",
 		},
 		gridview: {
-			caption: "单位机构",
-      		title: "单位机构表格视图",
+			caption: "单位管理",
+      		title: "单位管理",
 		},
 	},
 	main_form: {

@@ -20,15 +20,15 @@ export default {
 		},
 		treeexpview: {
 			caption: "部门管理",
-      		title: "单位机构树导航视图",
+      		title: "部门管理",
 		},
 		editview: {
 			caption: "单位机构",
       		title: "单位机构编辑视图",
 		},
 		gridview: {
-			caption: "单位机构",
-      		title: "单位机构表格视图",
+			caption: "单位管理",
+      		title: "单位管理",
 		},
 		pickupview: {
 			caption: "单位机构",

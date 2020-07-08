@@ -131,7 +131,7 @@ export default class AppDepartmentSelect extends Vue {
           this.$store.commit('addDepData', { srfkey: this.filter, orgData: response.data });
       }).catch((response: any) => {
           if (!response || !response.status || !response.data) {
-              this.$Notice.error({ title: '错误', desc: '系统异常！' });
+              this.$Notice.error({ title: (this.$t('app.commonWords.error') as string), desc: (this.$t('app.commonWords.sysException') as string) });
               return;
           }
       });

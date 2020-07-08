@@ -8,8 +8,8 @@ export default {
   },
 	views: {
 		gridview: {
-			caption: "系统角色",
-      		title: "角色表格视图",
+			caption: "用户角色",
+      		title: "用户角色",
 		},
 		pickupview: {
 			caption: "系统角色",

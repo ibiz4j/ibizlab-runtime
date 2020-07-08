@@ -25,7 +25,7 @@ export default {
     appColumnLink: {
       error: '错误',
       valueItemException:"值项异常",
-      rowDataException:"表格行数据异常"
+      rowDataException:"表格行数据异常",
     },
     appColumnRender: {
       select: '请选择...',
@@ -55,6 +55,8 @@ export default {
       max: '最大',
       row: '行',
       currentPage: '当前页',
+      desc:'请输入起始页',
+      desc1:'请输入有效的起始页',
     },
     appFileUpload: {
       preview: '查看',
@@ -65,6 +67,11 @@ export default {
     },
     appFormDRUIPart: {
       blockUITipInfo: '请先保存主数据',
+      viewLoadComp:'多数据视图加载完成，触发后续表单项更新',
+      save:'关系数据保存完成',
+      change:'关系数据值变化',
+      change1:'视图数据变化',
+      loadComp:'视图加载完成',
     },
     appHeaderMenus: {
       ibizlab:{
@@ -131,19 +138,25 @@ export default {
       endPlaceholder: '结束日期',
     },
     dropDownList: {
-      placeholder: '请选择...'
+      placeholder: '请选择...',
     },
     dropDownListDynamic: {
-      placeholder: '请选择...'
+      placeholder: '请选择...',
     },
     dropDownListMpicker: {
-      placeholder: '请选择...'
+      placeholder: '请选择...',
     },
     login: {
       error: '错误',
       caption: '欢迎登录',
+      placeholder1:'用户名',
+      placeholder2:'密码',
       name: '登录',
+      reset:'重置',
+      other:'其他登录方式',
       tip: '输入用户名和密码',
+      warning1:'qq授权登录暂未支持',
+      warning2:'微信授权登录暂未支持',
       loginname: {
           placeholder: '请输入用户名',
           message: '用户名不能为空',
@@ -175,4 +188,64 @@ export default {
       hide: '隐藏字段',
       showMore: '显示更多字段',
     },
+    appUpdatePassword: {
+      oldPwd: '原密码',
+      newPwd: '新密码',
+      confirmPwd: '确认密码',
+      sure: '确认修改',
+      oldPwdErr: '原密码不能为空！',
+      newPwdErr: '新密码不能为空！',
+      confirmPwdErr: '两次输入密码不一致！',
+    },
+    appAddressSelection: {
+      loadDataFail: '城市数据加载失败'
+    },
+    appGroupSelect:{
+      groupSelect:'分组选择', 
+    },
+    appImageUpload:{
+      uploadFail:'上传失败'
+    },
+    appOrgSelect:{
+      loadFail:'加载数据失败'
+    },
+    appTransfer:{
+      title1:'未选择',
+      title2:'已选择',
+    },
+    appWFApproval:{
+      commit:'提交',
+      wait:'等待',
+      handle:'处理',
+      placeholder:'请输入内容',
+      end:'结束'
+    },
+    contextMenuDrag:{
+      allApp:'全部应用',
+      noFind:'未找到该应用'
+    },
+    filterMode:{
+      placeholder:'条件逻辑',  
+    },
+    filterTree:{
+      title1:'添加条件',
+      title2:'添加组',
+      placeholder:'属性', 
+    },
+    iBizGroupPicker:{
+      ok:'确认',
+      cancel:'取消',
+    },
+    iBizGroupSelect:{
+      groupSelect:'分组选择'
+    },
+    tabPageExp:{
+      more:'更多',
+    },
+    uploadFile:{
+      imgMsg:'将图片拖到这里替换',
+      localUpload:'本地上传',
+      or:'或',
+      imgMsg1:'从素材库选择'
+    }
 };

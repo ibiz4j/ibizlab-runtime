@@ -16,9 +16,22 @@ export default {
             success: "Success",
             ok: "OK",
             cancel: "Cancel",
+            codeNotExist: 'Code list does not exist',
+            reqException: "Request exception",
+            sysException: "System abnormality",
+            warning: "Warning",
+            wrong: "Error",
+            rulesException: "Abnormal value check rule",
+            saveSuccess: "Saved successfully",
+            saveFailed: "Save failed",
+            deleteSuccess: "Successfully deleted!",
+            deleteError: "Failed to delete",
+            delDataFail: "Failed to delete data",
+            noData: "No data",
         },
         local:{
-            new: "New"
+            new: "New",
+            add: "Add",
         },
         gridpage: {
             choicecolumns: "Choice columns",
@@ -26,6 +39,50 @@ export default {
             show: "Show",
             records: "records",
             totle: "totle",
+            noData: "No data",
+            valueVail: "Value cannot be empty",
+            notConfig: {
+                fetchAction: "The view table fetchaction parameter is not configured",
+                removeAction: "The view table removeaction parameter is not configured",
+                createAction: "The view table createaction parameter is not configured",
+                updateAction: "The view table updateaction parameter is not configured",
+                loaddraftAction: "The view table loadtrafaction parameter is not configured",
+            },
+            data: "Data",
+            delDataFail: "Failed to delete data",
+            delSuccess: "Delete successfully!",
+            confirmDel: "Are you sure you want to delete",
+            notRecoverable: "delete will not be recoverable?",
+            notBatch: "Batch addition not implemented",
+            grid: "Grid",
+            exportFail: "Data export failed",
+            sum: "Total",
+            formitemFailed: "Form item update failed",
+        },
+        list: {
+            notConfig: {
+                fetchAction: "View list fetchAction parameter is not configured",
+                removeAction: "View table removeAction parameter is not configured",
+                createAction: "View list createAction parameter is not configured",
+                updateAction: "View list updateAction parameter is not configured",
+            },
+            confirmDel: "Are you sure you want to delete",
+            notRecoverable: "delete will not be recoverable?",
+        },
+        listExpBar: {
+            title: "List navigation bar",
+        },
+        wfExpBar: {
+            title: "Process navigation bar",
+        },
+        calendarExpBar:{
+            title: "Calendar navigation bar",
+        },
+        treeExpBar: {
+            title: "Tree view navigation bar",
+        },
+        portlet: {
+            noExtensions: "No extensions",
         },
         tabpage: {
             sureclosetip: {
@@ -50,6 +107,8 @@ export default {
           list: "list",
           dateSelectModalTitle: "select the time you wanted",
           gotoDate: "goto",
+          from: "From",
+          to: "To",
         },
         // 非实体视图
         views: {
@@ -71,6 +130,63 @@ export default {
                 menuitem4: "岗位管理",
                 menuitem5: "组管理",
             },
+        },
+        formpage:{
+            error: "Error",
+            desc1: "Operation failed, failed to find current form item",
+            desc2: "Can't continue",
+            notconfig: {
+                loadaction: "View form loadAction parameter is not configured",
+                loaddraftaction: "View form loaddraftAction parameter is not configured",
+                actionname: "View form actionName parameter is not configured",
+                removeaction: "View form removeAction parameter is not configured",
+            },
+            saveerror: "Error saving data",
+            savecontent: "The data is inconsistent. The background data may have been modified. Do you want to reload the data?",
+            valuecheckex: "Value rule check exception",
+            savesuccess: "Saved successfully!",
+            deletesuccess: "Successfully deleted!",  
+            workflow: {
+                starterror: "Workflow started successfully",
+                startsuccess: "Workflow failed to start",
+                submiterror: "Workflow submission failed",
+                submitsuccess: "Workflow submitted successfully",
+            },
+            updateerror: "Form item update failed",       
+        },
+        gridBar: {
+            title: "Table navigation bar",
+        },
+        multiEditView: {
+            notConfig: {
+                fetchAction: "View multi-edit view panel fetchAction parameter is not configured",
+                loaddraftAction: "View multi-edit view panel loaddraftAction parameter is not configured",
+            },
+        },
+        dataViewExpBar: {
+            title: "Card view navigation bar",
+        },
+        kanban: {
+            notConfig: {
+                fetchAction: "View list fetchAction parameter is not configured",
+                removeAction: "View table removeAction parameter is not configured",
+            },
+            delete1: "Confirm to delete ",
+            delete2: "the delete operation will be unrecoverable!",
+        },
+        dashBoard: {
+            handleClick: {
+                title: "Panel design",
+            },
+        },
+        dataView: {
+            sum: "total",
+            data: "data",
+        },
+        chart: {
+            undefined: "Undefined",
+            quarter: "Quarter",   
+            year: "Year",
         },
     },
     entities: {

@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   ibzrt-boot:
-    image: ibiz4j/ibizlab-runtime:1.0.5-RC1
+    image: ibiz4j/ibizlab-runtime:1.0.6-RC1
     ports:
       - "10086:10086"
     networks:
@@ -85,29 +85,6 @@ services:
         reservations:
           memory: 512M
 
-  xxl-job-admin:
-    image: xuxueli/xxl-job-admin:2.1.0
-    environment:
-      - TZ=Asia/Shanghai
-      - SPRING_DATASOURCE_URL=jdbc:mysql://ibzrt-db:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver
-      - SPRING_DATASOURCE_DEFAULTSCHEMA=a_A_5d9d78509
-      - SPRING_DATASOURCE_ISSYNCDBSCHEMA=true
-    networks:
-      - agent_network
-    ports:
-      - 10081:8080
-    depends_on:
-      - ibzrt-db
-      - ibzrt-boot
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-        reservations:
-          memory: 256M
 
 #  flowable-all-in-one-app:
 #    image: flowable/all-in-one:6.4.2

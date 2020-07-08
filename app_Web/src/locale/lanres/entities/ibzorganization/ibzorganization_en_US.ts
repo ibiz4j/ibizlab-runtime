@@ -21,7 +21,7 @@ export default {
 		},
 		treeexpview: {
 			caption: "Input data check failed.",
-      		title: "单位机构树导航视图",
+      		title: "部门管理",
 		},
 		editview: {
 			caption: "Input data check failed.",
@@ -29,7 +29,7 @@ export default {
 		},
 		gridview: {
 			caption: "Input data check failed.",
-      		title: "单位机构表格视图",
+      		title: "单位管理",
 		},
 		pickupview: {
 			caption: "Input data check failed.",

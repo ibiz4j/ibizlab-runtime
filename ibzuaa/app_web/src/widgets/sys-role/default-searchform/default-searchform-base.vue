@@ -591,7 +591,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}): void {
         if(!this.loadAction){
-            this.$Notice.error({ title: '错误', desc: 'SYS_ROLEGridView视图搜索表单loadAction参数未配置' });
+            this.$Notice.error({ title: '错误', desc: 'SysRoleGridView视图搜索表单loadAction参数未配置' });
             return;
         }
         const arg: any = { ...opt };
@@ -628,7 +628,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public loadDraft(opt: any = {},mode?:string): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: '错误', desc: 'SYS_ROLEGridView视图搜索表单loaddraftAction参数未配置' });
+            this.$Notice.error({ title: '错误', desc: 'SysRoleGridView视图搜索表单loaddraftAction参数未配置' });
             return;
         }
         const arg: any = { ...opt } ;

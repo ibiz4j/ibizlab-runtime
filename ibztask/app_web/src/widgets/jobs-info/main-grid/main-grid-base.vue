@@ -16,7 +16,7 @@
         @row-dblclick="rowDBLClick($event)"  
         ref='multipleTable' :data="items" :show-header="!isHideHeader">
             <template slot="empty">
-                无数据 
+                {{$t('app.gridpage.noData')}} 
             </template>
             <template v-if="!isSingleSelect">
                 <el-table-column align="center" type='selection' :width="checkboxColWidth"></el-table-column>
@@ -609,8 +609,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {boolean}
      * @memberof AppEmbedPicker
      */
-    public isDragendCol: boolean = false;
-
+    public isDragendCol: boolean = true;
+    
     /**
      * 所有列成员
      *
@@ -777,7 +777,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}, pageReset: boolean = false): void {
         if(!this.fetchAction){
-            this.$Notice.error({ title: '错误', desc: 'JobsInfoGridView视图表格fetchAction参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'JobsInfoGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
             return;
         }
         if(pageReset){
@@ -804,7 +804,7 @@ export default class MainBase extends Vue implements ControlInterface {
         post.then((response: any) => {
             if (!response.status || response.status !== 200) {
                 if (response.errorMessage) {
-                    this.$Notice.error({ title: '错误', desc: response.errorMessage });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.errorMessage });
                 }
                 return;
             }
@@ -841,7 +841,7 @@ export default class MainBase extends Vue implements ControlInterface {
             if (response && response.status === 401) {
                 return;
             }
-            this.$Notice.error({ title: '错误', desc: response.errorMessage });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.errorMessage });
         });
     }
 
@@ -854,7 +854,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async remove(datas: any[]): Promise<any> {
         if(!this.removeAction){
-            this.$Notice.error({ title: '错误', desc: 'JobsInfoGridView视图表格removeAction参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'JobsInfoGridView'+(this.$t('app.gridpage.notConfig.removeAction') as string) });
             return;
         }
         let _datas:any[] = [];
@@ -888,9 +888,9 @@ export default class MainBase extends Vue implements ControlInterface {
         });
 
         if (_datas.length < 5) {
-            dataInfo = dataInfo + ' 共' + _datas.length + '条数据';
+            dataInfo = dataInfo + ' '+(this.$t('app.gridpage.totle') as string) + _datas.length + (this.$t('app.gridpage.records') as string)+(this.$t('app.gridpage.data') as string);
         } else {
-            dataInfo = dataInfo + '...' + ' 共' + _datas.length + '条数据';
+            dataInfo = dataInfo + '...' + ' '+(this.$t('app.gridpage.totle') as string) + _datas.length + (this.$t('app.gridpage.desc2') as string);
         }
 
         const removeData = () => {
@@ -905,10 +905,10 @@ export default class MainBase extends Vue implements ControlInterface {
             return new Promise((resolve: any, reject: any) => {
                 post.then((response: any) => {
                     if (!response || response.status !== 200) {
-                        this.$Notice.error({ title: '', desc: '删除数据失败,' + response.info });
+                        this.$Notice.error({ title: '', desc: (this.$t('app.gridpage.delDataFail') as string)+',' + response.info });
                         return;
                     } else {
-                        this.$Notice.success({ title: '', desc: '删除成功!' });
+                        this.$Notice.success({ title: '', desc: (this.$t('app.gridpage.delSuccess') as string) });
                     }
                     //删除items中已删除的项
                     console.log(this.items);
@@ -930,7 +930,7 @@ export default class MainBase extends Vue implements ControlInterface {
                         return;
                     }
                     if (!response || !response.status || !response.data) {
-                        this.$Notice.error({ title: '错误', desc: '系统异常' });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                         reject(response);
                         return;
                     }
@@ -941,8 +941,8 @@ export default class MainBase extends Vue implements ControlInterface {
 
         dataInfo = dataInfo.replace(/[null]/g, '').replace(/[undefined]/g, '');
         this.$Modal.confirm({
-            title: '警告',
-            content: '确认要删除 ' + dataInfo + '，删除操作将不可恢复？',
+            title: (this.$t('app.commonWords.warning') as string),
+            content: (this.$t('app.gridpage.confirmDel') as string)+' ' + dataInfo + '，'+(this.$t('app.gridpage.notRecoverable') as string),
             onOk: () => {
                 removeData();
             },
@@ -960,13 +960,13 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public addBatch(arg: any = {}): void {
         if(!this.fetchAction){
-            this.$Notice.error({ title: '错误', desc: 'JobsInfoGridView视图表格fetchAction参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'JobsInfoGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
             return;
         }
         if(!arg){
             arg = {};
         }
-        console.error("批量添加未实现");
+        console.error((this.$t('app.gridpage.notBatch') as string));
     }
 
     /**
@@ -1018,7 +1018,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 excel.export_json_to_excel({
                   header: tHeader, //表头 必填
                   data, //具体数据 必填
-                  filename: "任务信息表", //非必填
+                  filename: "任务信息"+(this.$t('app.gridpage.grid') as string), //非必填
                   autoWidth: true, //非必填
                   bookType: "xlsx" //非必填
                 });
@@ -1050,7 +1050,7 @@ export default class MainBase extends Vue implements ControlInterface {
         const post: Promise<any> = this.service.search(this.fetchAction,JSON.parse(JSON.stringify(this.context)), arg, this.showBusyIndicator);
         post.then((response: any) => {
             if (!response || response.status !== 200) {
-                this.$Notice.error({ title: '', desc: '数据导出失败,' + response.info });
+                this.$Notice.error({ title: '', desc: (this.$t('app.gridpage.exportFail') as string)+',' + response.info });
                 return;
             }
             try {
@@ -1062,7 +1062,7 @@ export default class MainBase extends Vue implements ControlInterface {
             if (response && response.status === 401) {
                 return;
             }
-            this.$Notice.error({ title: '', desc: '数据导出失败' });
+            this.$Notice.error({ title: '', desc: (this.$t('app.gridpage.exportFail') as string) });
         });
     }
 
@@ -1507,7 +1507,7 @@ export default class MainBase extends Vue implements ControlInterface {
     public async save(args: any[], params?: any, $event?: any, xData?: any){
         let _this = this;
         if(!await this.validateAll()){
-            this.$Notice.error({ title: '错误', desc: '值规则校验异常' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.rulesException') as string) });
             return [];
         }
         let successItems:any = [];
@@ -1517,7 +1517,7 @@ export default class MainBase extends Vue implements ControlInterface {
             try {
                 if(Object.is(item.rowDataState, 'create')){
                     if(!this.createAction){
-                        this.$Notice.error({ title: '错误', desc: 'JobsInfoGridView视图表格createAction参数未配置' });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'JobsInfoGridView'+(this.$t('app.gridpage.notConfig.createAction') as string) });
                     }else{
                       Object.assign(item,{viewparams:this.viewparams});
                       let response = await this.service.add(this.createAction, JSON.parse(JSON.stringify(this.context)),item, this.showBusyIndicator);
@@ -1525,7 +1525,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     }
                 }else if(Object.is(item.rowDataState, 'update')){
                     if(!this.updateAction){
-                        this.$Notice.error({ title: '错误', desc: 'JobsInfoGridView视图表格updateAction参数未配置' });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'JobsInfoGridView'+(this.$t('app.gridpage.notConfig.updateAction') as string) });
                     }else{
                         Object.assign(item,{viewparams:this.viewparams});
                         if(item.jobsinfo){
@@ -1543,10 +1543,10 @@ export default class MainBase extends Vue implements ControlInterface {
         this.$emit('save', successItems);
         this.refresh([]);
         if(errorItems.length === 0){
-            this.$Notice.success({ title: '', desc: '保存成功!' });
+            this.$Notice.success({ title: '', desc: (this.$t('app.commonWords.saveSuccess') as string) });
         }else{
           errorItems.forEach((item:any,index:number)=>{
-            this.$Notice.error({ title: '保存失败', desc: item.majorentityname+'保存失败！' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.saveFailed') as string), desc: item.majorentityname+(this.$t('app.commonWords.saveFailed') as string)+'!' });
             console.error(errorMessage[index]);
           });
         }
@@ -1562,7 +1562,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public newRow(args: any[], params?: any, $event?: any, xData?: any): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: '错误', desc: 'JobsInfoGridView视图表格loaddraftAction参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'JobsInfoGridView'+(this.$t('app.gridpage.notConfig.loaddraftAction') as string) });
             return;
         }
         let _this = this;
@@ -1571,7 +1571,7 @@ export default class MainBase extends Vue implements ControlInterface {
         post.then((response: any) => {
             if (!response.status || response.status !== 200) {
                 if (response.errorMessage) {
-                    this.$Notice.error({ title: '错误', desc: response.errorMessage });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.errorMessage });
                 }
                 return;
             }
@@ -1585,7 +1585,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 return;
             }
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 return;
             }
         });
@@ -1644,7 +1644,7 @@ export default class MainBase extends Vue implements ControlInterface {
         const post: Promise<any> = this.service.frontLogic(mode,JSON.parse(JSON.stringify(this.context)),arg, showloading);
         post.then((response: any) => {
             if (!response || response.status !== 200) {
-                this.$Notice.error({ title: '错误', desc: '表单项更新失败' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.gridpage.formitemFailed') as string) });
                 return;
             }
             const _data: any = response.data;
@@ -1662,7 +1662,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 return;
             }
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 return;
             }
         });

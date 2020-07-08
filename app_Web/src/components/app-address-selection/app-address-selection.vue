@@ -66,7 +66,7 @@ export default class AppAddressSelection extends Vue {
             axios.get("../../assets/json/city_code.json").then((response: any) => {
             this.format(response.data);
             }).catch((response: any) => {
-                console.log("城市数据加载失败");
+                console.log((this.$t('components.appAddressSelection.loadDataFail') as string));
             });
 
 

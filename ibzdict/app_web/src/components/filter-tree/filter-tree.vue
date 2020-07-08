@@ -7,15 +7,15 @@
                         <el-option v-for="mode in relationModes" :key="mode.value" :label="getLabel(mode)" :value="mode.value"></el-option>
                     </el-select>
                     <div class="filter-tree-action">
-                        <i-button title="添加条件" @click="onAddItem(data)"><i class="fa fa-plus" aria-hidden="true"></i> 添加条件</i-button>
-                        <i-button title="添加组" @click="onAddGroup(data)"><i class="fa fa-plus" aria-hidden="true"></i> 添加组</i-button>
+                        <i-button :title="$t('components.filterTree.title1')" @click="onAddItem(data)"><i class="fa fa-plus" aria-hidden="true"></i> {{$t('components.filterTree.title1')}}</i-button>
+                        <i-button :title="$t('components.filterTree.title2')" @click="onAddGroup(data)"><i class="fa fa-plus" aria-hidden="true"></i> {{$t('components.filterTree.title2')}}</i-button>
                         <icon v-if="!data.isroot" type="md-close"  @click="onRemoveItem(node, data)"/>
                     </div>
                 </div>
             </template>
             <template v-else>
                 <div class="filter-tree-item">
-                    <el-select size="small" class="filter-item-field" v-model="data.field" clearable placeholder="属性" @change="onFieldChange(data)">
+                    <el-select size="small" class="filter-item-field" v-model="data.field" clearable :placeholder="$t('components.filterTree.placeholder')" @change="onFieldChange(data)">
                         <el-option
                             v-for="item in fields"
                             :key="item.prop"

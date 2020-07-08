@@ -7,8 +7,8 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "流程模型",
-      		title: "流程模型编辑视图",
+			caption: "发布新流程",
+      		title: "发布新流程",
 		},
 	},
 	main_form: {

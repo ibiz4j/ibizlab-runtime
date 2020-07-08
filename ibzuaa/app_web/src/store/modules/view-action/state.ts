@@ -278,7 +278,7 @@ export const viewstate: any = {
         {
             viewtag: '9e9a67908b3c85516085fe19e3dd4113',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLEGridView',
+            viewname: 'SysRoleGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -328,7 +328,7 @@ export const viewstate: any = {
         {
             viewtag: 'cb64b5009e70f225a91046314f40977a',
             viewmodule: 'uaa',
-            viewname: 'SYS_USERGridView',
+            viewname: 'SysUserGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [

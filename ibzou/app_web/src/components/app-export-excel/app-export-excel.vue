@@ -107,18 +107,18 @@ export default class AppExportExcel extends Vue {
             this.visible = false;
         } else if (Object.is(type, 'custom')) {
             if (!this.startPage || !this.endPage) {
-                this.$Notice.warning({ title: '警告', desc: '请输入起始页' });
+                this.$Notice.warning({ title: (this.$t('app.commonWords.warning') as string), desc: (this.$t('components.appExportExcel.desc') as string) });
                 return;
             }
             const startPage: any = Number.parseInt(this.startPage, 10);
             const endPage: any = Number.parseInt(this.endPage, 10);
             if (Number.isNaN(startPage) || Number.isNaN(endPage)) {
-                this.$Notice.warning({ title: '警告', desc: '请输入有效的起始页' });
+                this.$Notice.warning({ title: (this.$t('app.commonWords.warning') as string), desc: (this.$t('components.appExportExcel.desc1') as string) });
                 return;
             }
 
             if (startPage < 1 || endPage < 1 || startPage > endPage) {
-                this.$Notice.warning({ title: '警告', desc: '请输入有效的起始页' });
+                this.$Notice.warning({ title: (this.$t('app.commonWords.warning') as string), desc: (this.$t('components.appExportExcel.desc1') as string) });
                 return;
             }
             this.startPage = null;

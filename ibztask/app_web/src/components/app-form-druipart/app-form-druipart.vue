@@ -386,7 +386,7 @@ export default class AppFormDRUIPart extends Vue {
      * @memberof AppFormDRUIPart
      */
     public mditemsload(){
-        console.log('多数据视图加载完成，触发后续表单项更新');
+        console.log((this.$t('components.appFormDRUIPart.viewLoadComp') as string));
     }
 
     /**
@@ -397,7 +397,7 @@ export default class AppFormDRUIPart extends Vue {
      */
     public drdatasaved($event:any){
         this.$emit('drdatasaved',$event);
-        console.log(this.viewname+'关系数据保存完成');
+        console.log(this.viewname+(this.$t('components.appFormDRUIPart.save') as string));
     }
 
     /**
@@ -407,7 +407,7 @@ export default class AppFormDRUIPart extends Vue {
      * @memberof AppFormDRUIPart
      */
     public drdatachange(){
-        console.log('DEMEDITVIEW9 关系数据值变化');
+        console.log('DEMEDITVIEW9 '+(this.$t('components.appFormDRUIPart.change') as string));
     }
 
      /**
@@ -417,7 +417,7 @@ export default class AppFormDRUIPart extends Vue {
      * @memberof AppFormDRUIPart
      */
     public viewdataschange(){
-        console.log('视图数据变化');
+        console.log((this.$t('components.appFormDRUIPart.change1') as string));
     }
 
     /**
@@ -427,7 +427,7 @@ export default class AppFormDRUIPart extends Vue {
      * @memberof AppFormDRUIPart
      */
     public viewload(){
-        console.log('视图加载完成');
+        console.log((this.$t('components.appFormDRUIPart.loadComp') as string));
     }
 }
 </script>

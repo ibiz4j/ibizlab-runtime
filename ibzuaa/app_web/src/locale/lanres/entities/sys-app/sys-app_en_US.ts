@@ -17,8 +17,8 @@ export default {
       		title: "应用编辑视图",
 		},
 		gridview: {
-			caption: "应用",
-      		title: "应用表格视图",
+			caption: "接入应用",
+      		title: "接入应用",
 		},
 	},
 	main_form: {

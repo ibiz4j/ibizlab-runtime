@@ -558,7 +558,7 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
         Object.assign(params,{viewparams:tempViewParams});
         this.service.getNodes(tempContext,params).then((response: any) => {
             if (!response || response.status !== 200) {
-                this.$Notice.error({ title: "错误", desc: response.info });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.info });
                 resolve([]);
                 return;
             }
@@ -574,7 +574,7 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
             if (response && response.status === 401) {
                 return;
             }
-            this.$Notice.error({ title: "错误", desc: response.info });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.info });
         });
     }
 
@@ -619,7 +619,7 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
         const get: Promise<any> = this.service.getNodes(JSON.parse(JSON.stringify(this.context)),arg);
         get.then((response: any) => {
             if (!response || response.status !== 200) {
-                this.$Notice.error({ title: '错误', desc: response.info });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.info });
                 return;
             }
             const _items = [...response.data];
@@ -634,7 +634,7 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
             if (response && response.status === 401) {
                 return;
             }
-            this.$Notice.error({ title: '错误', desc: response.info });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.info });
         });
     }
 

@@ -21,7 +21,7 @@
     <div v-show="$store.state.pageMetas.length > 0" class="right">
       <el-dropdown @command="handlerClose">
         <el-button size="mini" type="primary">
-          更多<i class="el-icon-arrow-down el-icon--right"></i>
+          {{$t('components.tabPageExp.more')}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item :command="item" v-for="(item,index) in actions" :key="index">{{ $t(item.text) }}</el-dropdown-item>

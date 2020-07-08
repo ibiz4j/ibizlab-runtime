@@ -24,32 +24,32 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "0c24f382fdfded375e4ef737707fdd80"
         },
         "ibzorganizationeditview": {
-            "title": "单位机构编辑视图",
-            "caption": "单位机构",
+            "title": "单位管理",
+            "caption": "单位管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZOrganizationEditView",
             "viewtag": "12cffa053a1d3e22ab397b1164338cfb"
         },
         "ibzemployeeeditview": {
-            "title": "人员编辑视图",
-            "caption": "人员",
+            "title": "人员管理",
+            "caption": "人员管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZEmployeeEditView",
             "viewtag": "16f9ed1179f9b3cf686cbcd796512299"
         },
         "ibzdepartmentoptionview": {
-            "title": "部门选项操作视图",
-            "caption": "部门",
+            "title": "部门快速新建",
+            "caption": "部门快速新建",
             "viewtype": "DEOPTVIEW",
             "viewmodule": "ou",
             "viewname": "IBZDepartmentOptionView",
             "viewtag": "17f1f78c7a23f7546dbfef7f8fa9fcd0"
         },
         "ibzdepartmenteditview": {
-            "title": "部门编辑视图",
-            "caption": "部门",
+            "title": "部门管理",
+            "caption": "部门管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZDepartmentEditView",
@@ -80,7 +80,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "230a2347ac7bca8734046b14777bc258"
         },
         "ibzorganizationtreeexpview": {
-            "title": "单位机构树导航视图",
+            "title": "部门管理",
             "caption": "部门管理",
             "viewtype": "DETREEEXPVIEW",
             "viewmodule": "ou",
@@ -88,8 +88,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "25e23f456601163e730de6c1a825364b"
         },
         "ibzteamgridview": {
-            "title": "组表格视图",
-            "caption": "组",
+            "title": "组管理",
+            "caption": "组管理",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "ou",
             "viewname": "IBZTeamGridView",
@@ -120,8 +120,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "5ef90c56e30ba698e1ba1fc05f426725"
         },
         "ibzemployeeoptionview": {
-            "title": "人员选项操作视图",
-            "caption": "人员",
+            "title": "人员快速新建",
+            "caption": "人员快速新建",
             "viewtype": "DEOPTVIEW",
             "viewmodule": "ou",
             "viewname": "IBZEmployeeOptionView",
@@ -136,8 +136,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "66fa282d24a21eec39d958e7fc6c23a8"
         },
         "ibzteameditview": {
-            "title": "组编辑视图",
-            "caption": "组",
+            "title": "组管理",
+            "caption": "组管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZTeamEditView",
@@ -160,8 +160,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "95a44e1851d28a16a90965f60d6ff4ae"
         },
         "ibzorganizationoptionview": {
-            "title": "单位机构选项操作视图",
-            "caption": "单位机构",
+            "title": "单位快速新建",
+            "caption": "单位快速新建",
             "viewtype": "DEOPTVIEW",
             "viewmodule": "ou",
             "viewname": "IBZOrganizationOptionView",
@@ -176,8 +176,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "9e25d15d43ff644fa008c9cf7d063ac3"
         },
         "ibzorganizationgridview": {
-            "title": "单位机构表格视图",
-            "caption": "单位机构",
+            "title": "单位管理",
+            "caption": "单位管理",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "ou",
             "viewname": "IBZOrganizationGridView",
@@ -224,7 +224,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "c9aa00ee38b42ea5ba1d2deb5959ac2b"
         },
         "ibzdepartmenttreeexpview": {
-            "title": "部门树导航视图",
+            "title": "人员管理",
             "caption": "人员管理",
             "viewtype": "DETREEEXPVIEW",
             "viewmodule": "ou",
@@ -248,16 +248,16 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "d2cc126cb4bcf523d72509bef0183ee0"
         },
         "ibzpostgridview": {
-            "title": "岗位表格视图",
-            "caption": "岗位",
+            "title": "岗位管理",
+            "caption": "岗位管理",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "ou",
             "viewname": "IBZPostGridView",
             "viewtag": "e87180c121ce75a22893d5e3ce0951fc"
         },
         "ibzposteditview": {
-            "title": "岗位编辑视图",
-            "caption": "岗位",
+            "title": "岗位管理",
+            "caption": "岗位管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZPostEditView",

@@ -13,8 +13,8 @@ export default {
   },
 	views: {
 		gridview: {
-			caption: "任务调度日志",
-      		title: "任务调度日志表格视图",
+			caption: "日志",
+      		title: "日志",
 		},
 		editview: {
 			caption: "任务调度日志",

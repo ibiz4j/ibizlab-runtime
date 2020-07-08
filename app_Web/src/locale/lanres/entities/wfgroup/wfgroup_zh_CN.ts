@@ -22,8 +22,8 @@ export default {
       		title: "角色/用户组编辑视图",
 		},
 		gridview: {
-			caption: "角色/用户组",
-      		title: "角色/用户组表格视图",
+			caption: "流程角色",
+      		title: "流程角色",
 		},
 	},
 	main_form: {

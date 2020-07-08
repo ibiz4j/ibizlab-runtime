@@ -41,26 +41,8 @@
     </changeSet>
 
 
-    <!--输出实体[JOBS_REGISTRY]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-jobs_registry-37-2">
-        <createTable tableName="JOBS_REGISTRY">
-                <column name="ID" remarks="" type="VARCHAR(100)">
-                    <constraints primaryKey="true" primaryKeyName="PK_JOBS_REGISTRY_ID"/>
-                </column>
-                <column name="APP" remarks="" type="VARCHAR(100)">
-                </column>
-                <column name="ADDRESS" remarks="" type="VARCHAR(255)">
-                </column>
-                <column name="STATUS" remarks="" type="INT">
-                </column>
-                <column name="UPDATE_TIME" remarks="" type="DATETIME">
-                </column>
-        </createTable>
-    </changeSet>
-
-
     <!--输出实体[JOBS_LOCK]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-jobs_lock-20-3">
+    <changeSet author="a_A_5d9d78509" id="tab-jobs_lock-20-2">
         <createTable tableName="JOBS_LOCK">
                 <column name="ID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_JOBS_LOCK_ID"/>
@@ -76,7 +58,7 @@
 
 
     <!--输出实体[JOBS_LOG]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-jobs_log-59-4">
+    <changeSet author="a_A_5d9d78509" id="tab-jobs_log-59-3">
         <createTable tableName="JOBS_LOG">
                 <column name="ID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_JOBS_LOG_ID"/>
@@ -102,9 +84,27 @@
         </createTable>
     </changeSet>
 
+
+    <!--输出实体[JOBS_REGISTRY]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-jobs_registry-37-4">
+        <createTable tableName="JOBS_REGISTRY">
+                <column name="ID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_JOBS_REGISTRY_ID"/>
+                </column>
+                <column name="APP" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ADDRESS" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="STATUS" remarks="" type="INT">
+                </column>
+                <column name="UPDATE_TIME" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
+
         <!--输出实体[JOBS_INFO]外键关系 -->
-        <!--输出实体[JOBS_REGISTRY]外键关系 -->
         <!--输出实体[JOBS_LOCK]外键关系 -->
         <!--输出实体[JOBS_LOG]外键关系 -->
+        <!--输出实体[JOBS_REGISTRY]外键关系 -->
 
 </databaseChangeLog>

@@ -8,6 +8,7 @@ import { AppPopover } from './utils/app-popover/app-popover';
 import { AppModal } from './utils/app-modal/app-modal';
 import { AppDrawer } from './utils/app-drawer/app-drawer';
 import { uiServiceRegister } from '@/uiservice/ui-service-register';
+import { authServiceRegister } from '@/authservice/auth-service-register';
 import { utilServiceRegister } from '@/utilservice/util-service-register';
 import { entityServiceRegister } from '@/service/entity-service-register';
 import { counterServiceRegister } from '@/counter/counter-service-register';
@@ -79,6 +80,8 @@ import AppGroupSelect from './components/app-group-select/app-group-select.vue'
 import UpdatePwd from './components/app-update-password/app-update-password.vue'
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
+// 全局挂载实体权限服务注册中心
+window['authServiceRegister'] = authServiceRegister;
 // 全局挂载功能服务注册中心
 window['utilServiceRegister'] = utilServiceRegister;
 // 全局挂载数据服务注册中心

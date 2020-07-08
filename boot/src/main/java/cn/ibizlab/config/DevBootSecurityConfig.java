@@ -120,6 +120,21 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/uaa/login").permitAll()
                        .antMatchers("/uaa/loginbyusername").permitAll()
                        .antMatchers("/uaa/publickey").permitAll()
+                       .antMatchers("/uaa/register").permitAll()
+
+                       .antMatchers("/uaa/responseTokenToWeiXin").permitAll()
+                       .antMatchers("/uaa/getWechatAppId").permitAll()
+                       .antMatchers("/uaa/queryWechatUserByCode").permitAll()
+                       .antMatchers("/uaa/bindWechatToRegister").permitAll()
+
+                       .antMatchers("/uaa/getDingtalkAppId").permitAll()
+                       .antMatchers("/uaa/queryDingtalkUserByCode").permitAll()
+                       .antMatchers("/uaa/bindDingtalkToRegister").permitAll()
+
+                       .antMatchers("/uaa/getQQAppId").permitAll()
+                       .antMatchers("/uaa/queryQQUserByCode").permitAll()
+                       .antMatchers("/uaa/bindQQtoRegister").permitAll()
+                       .antMatchers("/deploybpmn").permitAll()
                        //开放组织机构关系查询
                        .antMatchers("/ibzemployees/**/oumaps").permitAll()
                        .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()

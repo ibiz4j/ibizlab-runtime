@@ -14,7 +14,7 @@
                                     size='large'
                                     prefix='ios-contact'
                                     v-model.trim="form.loginname"
-                                    placeholder="用户名"
+                                    :placeholder="$t('components.login.placeholder1')"
                                     @keyup.enter.native="handleSubmit">
                             </i-input>
                         </form-item>
@@ -24,7 +24,7 @@
                                     prefix='ios-key'
                                     v-model.trim="form.password"
                                     type='password'
-                                    placeholder="密码"
+                                    :placeholder="$t('components.login.placeholder2')"
                                     @keyup.enter.native="handleSubmit">
                             </i-input>
                         </form-item>
@@ -32,18 +32,18 @@
                             <i-button
                                     @click="handleSubmit"
                                     type='primary'
-                                    class="login_btn">登录
+                                    class="login_btn">{{$t('components.login.name')}}
                             </i-button>
                             <i-button
                                     @click="goReset"
                                     type='success'
-                                    class="login_reset">重置
+                                    class="login_reset">{{$t('components.login.reset')}}
                             </i-button>
                         </form-item>
 
                         <form-item>
                             <div style="text-align: center">
-                                <span class="form_tipinfo">其他登录方式</span>
+                                <span class="form_tipinfo">{{$t('components.login.other')}}</span>
                             </div>
                             <div style="text-align: center">
                                 <div class="sign-btn" @click="tencentHandleClick('tencent')">
@@ -195,13 +195,13 @@ export default class Login extends Vue {
             if (data && data.message) {
                 this.loginTip = data.message;
                 this.$Message.error({
-                    content: "登录失败，" + data.message,
+                    content: (this.$t('components.login.loginfailed') as string)+' ' + data.message,
                     duration: 5,
                     closable: true
                 });
             } else {
                 this.$Message.error({
-                    content: "登录失败",
+                    content: (this.$t('components.login.loginfailed') as string),
                     duration: 5,
                     closable: true
                 });
@@ -259,7 +259,7 @@ export default class Login extends Vue {
      * @param thirdpart
      */
     public tencentHandleClick(thirdpart: any) {
-        this.$Message.warning("qq授权登录暂未支持")
+        this.$Message.warning((this.$t('components.login.warning1') as string))
     }
 
     /**
@@ -267,7 +267,7 @@ export default class Login extends Vue {
      * @param thirddpart
      */
     public wechatHandleClick(thirddpart: any) {
-        this.$Message.warning("微信授权登录暂未支持")
+        this.$Message.warning((this.$t('components.login.warning2') as string))
     }
 
 }

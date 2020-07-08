@@ -1,11 +1,14 @@
 <template>
   <div class="input-unit">
     <InputNumber v-if="type === 'number'"
+      :id="numberId"
       :placeholder="placeholder"
       :size="size"
       :precision="precision"
       v-model="CurrentVal"
       :disabled="disabled ? true : false"
+      :formatter="formatter"
+      :parser="parser"
     ></InputNumber>
     <i-input v-else
       :placeholder="placeholder"
@@ -27,6 +30,7 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 @Component({})
 export default class InputBox extends Vue {
+  
   /**
    * 双向绑定值
    * @type {any}
@@ -40,11 +44,12 @@ export default class InputBox extends Vue {
    * @memberof InputBox
    */
   public mounted(){
+    this.addEvent();
     if(this.textareaId){
-        let textarea :any= document.getElementById(this.textareaId);
-        if(textarea){
-         textarea.style=this.textareaStyle;
-        }
+      let textarea :any= document.getElementById(this.textareaId);
+      if(textarea){
+        textarea.style=this.textareaStyle;
+      }
     }
   }
 
@@ -115,6 +120,11 @@ export default class InputBox extends Vue {
   @Prop() public autoSize?: any;
 
   /**
+   * 数值框numberId
+   */
+  public numberId :string= this.$util.createUUID();
+
+  /**
    * 当前值
    *
    * @memberof InputBox
@@ -157,6 +167,49 @@ export default class InputBox extends Vue {
       return;
     }
     return $event;
+  }
+
+  /**
+   * 给数值框中的箭头按钮添加事件
+   * 
+   * @memberof InputBox
+   */
+  public addEvent(){
+    if(Object.is(this.type, "number")){
+      let inputNumber :any = document.getElementById(this.numberId);
+      let handlerWrap :any = inputNumber.firstElementChild;
+      handlerWrap.onmouseover=()=>{
+        inputNumber.style.paddingRight="15px";
+        inputNumber.style.transition="all 0.2s linear";
+      }
+      handlerWrap.onmouseout=()=>{
+        inputNumber.style.paddingRight="0px";
+      }
+    }
+  }
+
+  /**
+   * 指定输入框展示值的格式
+   */
+  public formatter(value:any){
+    if(this.precision===0) return this.CurrentVal;
+    if(value.indexOf('.')!==-1){
+      let arr:Array<any> = value.split('.');
+      if(arr[1]==='00'){
+        return arr[0];
+      }
+      if(parseInt(arr[1])%10===0){
+        return arr[0]+'.'+parseInt(arr[1])/10;
+      }
+    }
+    return value;
+  }
+
+  /**
+   * 指定从 formatter 里转换回数字的方式
+   */
+  public parser(value:any){
+    return value;
   }
 }
 </script>

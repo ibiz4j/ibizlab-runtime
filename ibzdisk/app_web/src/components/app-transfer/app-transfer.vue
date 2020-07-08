@@ -15,7 +15,7 @@
             v-model="dataRight"
             :data="dataLeft"
             @change="dataChange"
-            :titles="['未选择', '已选择']"/>
+            :titles="titles"/>
     </Select>
 </template>
 
@@ -124,6 +124,13 @@ export default class AppTransfer extends Vue {
     @Model("change") public itemValue!: any;
 
     /**
+     * 左右侧标题
+     * @type{Array<string>}
+     * @memberof AppTransfer
+     */
+    public titles?: Array<string>;
+
+    /**
      * 左侧框数据
      * 
      * @memberof AppTransfer
@@ -153,6 +160,7 @@ export default class AppTransfer extends Vue {
      */
     public created() {
         this.dataHandle();
+        this.titles= [(this.$t('components.appTransfer.title1') as string),(this.$t('components.appTransfer.title2') as string)];
     }
 
     /**
@@ -167,7 +175,7 @@ export default class AppTransfer extends Vue {
             this.dataLeft = [...JSON.parse(JSON.stringify(codelist.items))];
             this.initData()
         } else {
-            console.log(`----${this.tag}----代码表不存在`);
+            console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
         }
         } else if (this.tag && Object.is(this.codelistType, "DYNAMIC")) {
             // 处理公共参数
@@ -183,7 +191,7 @@ export default class AppTransfer extends Vue {
                     this.initData()
                 })
                 .catch((error: any) => {
-                    console.log(`----${this.tag}----代码表不存在`);
+                    console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
                 });
         }
     }

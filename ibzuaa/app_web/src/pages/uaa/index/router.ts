@@ -261,7 +261,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-rolegrid-view/sys-rolegrid-view.vue'),
+                    component: () => import('@pages/uaa/sys-role-grid-view/sys-role-grid-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/editview/:editview?',
@@ -347,7 +347,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-usergrid-view/sys-usergrid-view.vue'),
+                    component: () => import('@pages/uaa/sys-user-grid-view/sys-user-grid-view.vue'),
                 },
             {
                 path: 'sys_user_roleredirectview/:sys_user_roleredirectview?',
@@ -568,7 +568,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-rolegrid-view/sys-rolegrid-view.vue'),
+        component: () => import('@pages/uaa/sys-role-grid-view/sys-role-grid-view.vue'),
     },
     {
         path: '/sysapps/:sysapp?/gridview/:gridview?',
@@ -594,7 +594,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-usergrid-view/sys-usergrid-view.vue'),
+        component: () => import('@pages/uaa/sys-user-grid-view/sys-user-grid-view.vue'),
     },
     {
         path: '/sysroles/:sysrole?/mpickupview/:mpickupview?',

@@ -136,7 +136,8 @@ export default class AppFileUpload extends Vue {
         if (this.ignorefieldvaluechange) {
             return;
         }
-        this.setFiles(newval)
+        this.getParams();
+        this.setFiles(newval);
         this.dataProcess();
     }
 
@@ -288,6 +289,7 @@ export default class AppFileUpload extends Vue {
             this.formStateEvent = this.formState.subscribe(($event: any) => {
                 // 表单加载完成
                 if (Object.is($event.type, 'load')) {
+                    this.getParams();
                     this.setFiles(this.value);
                     this.dataProcess();
                 }
@@ -303,27 +305,36 @@ export default class AppFileUpload extends Vue {
      */
     public mounted() {
         this.appData = this.$store.getters.getAppData();
+        this.getParams();
+        this.setFiles(this.value);
+        this.dataProcess();
+    }
 
-        let uploadparams: any = {};
-        let exportparams: any = {};
+    /**
+     *获取上传，导出参数
+     *
+     *@memberof AppFileUpload
+     */
+    public getParams(){
+        let uploadparams: any = JSON.parse(JSON.stringify(this.uploadparams));
+        let exportparams: any = JSON.parse(JSON.stringify(this.exportparams));
 
         let upload_params: Array<string> = [];
         let export_params: Array<string> = [];
-        let custom_arr: Array<string> = [];
 
         let param:any = this.viewparams;
         let context:any = this.context;
         let _data:any = JSON.parse(this.data);
 
         if (this.uploadparams && !Object.is(this.uploadparams, '')) {
-            uploadparams = this.uploadparams;
             upload_params = this.$util.computedNavData(_data,param,context,uploadparams);    
         }
-
         if (this.exportparams && !Object.is(this.exportparams, '')) {
-            exportparams = this.exportparams;
             export_params = this.$util.computedNavData(_data,param,context,exportparams);
         }
+        
+        this.upload_params = [];
+        this.export_params = [];
 
         for (const item in upload_params) {
             this.upload_params.push({
@@ -335,9 +346,6 @@ export default class AppFileUpload extends Vue {
                 [item]:export_params[item]
             })
         }
-
-        this.setFiles(this.value);
-        this.dataProcess();
     }
 
     /**

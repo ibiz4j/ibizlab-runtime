@@ -1,5 +1,5 @@
 <template>
-    <el-select size="small" class="filter-mode" placeholder="条件逻辑" v-model="curVal" @change="onChange">
+    <el-select size="small" class="filter-mode" :placeholder="$t('components.filterMode.placeholder')" v-model="curVal" @change="onChange">
         <el-option
             v-for="mode in filterMode"
             :key="mode.value"

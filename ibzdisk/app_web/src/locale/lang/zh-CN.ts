@@ -10,9 +10,22 @@ export default {
             success: "成功",
             ok: "确认",
             cancel: "取消",
+            codeNotExist: "代码表不存在",
+            reqException: "请求异常",
+            sysException: "系统异常",
+            warning: "警告",
+            wrong: "错误",
+            rulesException: "值规则校验异常",
+            saveSuccess: "保存成功",
+            saveFailed: "保存失败",
+            deleteSuccess: "删除成功！",
+            deleteError: "删除失败！",
+            delDataFail: "删除数据失败",
+            noData: "暂无数据",
         },
         local:{
-            new: "新建"
+            new: "新建",
+            add: "增加",
         },
         gridpage: {
             choicecolumns: "选择列",
@@ -20,6 +33,50 @@ export default {
             show: "显示",
             records: "条",
             totle: "共",
+            noData: "无数据",
+            valueVail: "值不能为空",
+            notConfig: {
+                fetchAction: "视图表格fetchAction参数未配置",
+                removeAction: "视图表格removeAction参数未配置",
+                createAction: "视图表格createAction参数未配置",
+                updateAction: "视图表格updateAction参数未配置",
+                loaddraftAction: "视图表格loaddraftAction参数未配置",
+            },
+            data: "数据",
+            delDataFail: "删除数据失败",
+            delSuccess: "删除成功!",
+            confirmDel: "确认要删除",
+            notRecoverable: "删除操作将不可恢复？",
+            notBatch: "批量添加未实现",
+            grid: "表",
+            exportFail: "数据导出失败",
+            sum: "合计",
+            formitemFailed: "表单项更新失败",
+        },
+        list: {
+            notConfig: {
+                fetchAction: "视图列表fetchAction参数未配置",
+                removeAction: "视图表格removeAction参数未配置",
+                createAction: "视图列表createAction参数未配置",
+                updateAction: "视图列表updateAction参数未配置",
+            },
+            confirmDel: "确认要删除",
+            notRecoverable: "删除操作将不可恢复？",
+        },
+        listExpBar: {
+            title: "列表导航栏",
+        },
+        wfExpBar: {
+            title: "流程导航栏",
+        },
+        calendarExpBar:{
+            title: "日历导航栏",
+        },
+        treeExpBar: {
+            title: "树视图导航栏",
+        },
+        portlet: {
+            noExtensions: "无扩展插件",
         },
         tabpage: {
             sureclosetip: {
@@ -44,6 +101,8 @@ export default {
           list: "列",
           dateSelectModalTitle: "选择要跳转的时间",
           gotoDate: "跳转",
+          from: "从",
+          to: "至",
         },
         // 非实体视图
         views: {
@@ -61,6 +120,62 @@ export default {
             sdindexview: {
                 menuitem1: "文件",
             },
+        },
+        formpage:{
+            desc1: "操作失败,未能找到当前表单项",
+            desc2: "无法继续操作",
+            notconfig: {
+                loadaction: "视图表单loadAction参数未配置",
+                loaddraftaction: "视图表单loaddraftAction参数未配置",
+                actionname: "视图表单'+actionName+'参数未配置",
+                removeaction: "视图表单removeAction参数未配置",
+            },
+            saveerror: "保存数据发生错误",
+            savecontent: "数据不一致，可能后台数据已经被修改,是否要重新加载数据？",
+            valuecheckex: "值规则校验异常",
+            savesuccess: "保存成功！",
+            deletesuccess: "删除成功！",  
+            workflow: {
+                starterror: "工作流启动失败",
+                startsuccess: "工作流启动成功",
+                submiterror: "工作流提交失败",
+                submitsuccess: "工作流提交成功",
+            },
+            updateerror: "表单项更新失败",     
+        },
+        gridBar: {
+            title: "表格导航栏",
+        },
+        multiEditView: {
+            notConfig: {
+                fetchAction: "视图多编辑视图面板fetchAction参数未配置",
+                loaddraftAction: "视图多编辑视图面板loaddraftAction参数未配置",
+            },
+        },
+        dataViewExpBar: {
+            title: "卡片视图导航栏",
+        },
+        kanban: {
+            notConfig: {
+                fetchAction: "视图列表fetchAction参数未配置",
+                removeAction: "视图表格removeAction参数未配置",
+            },
+            delete1: "确认要删除 ",
+            delete2: "删除操作将不可恢复？",
+        },
+        dashBoard: {
+            handleClick: {
+                title: "面板设计",
+            },
+        },
+        dataView: {
+            sum: "共",
+            data: "条数据",
+        },
+        chart: {
+            undefined: "未定义",
+            quarter: "季度",   
+            year: "年",
         },
     },
     entities: {

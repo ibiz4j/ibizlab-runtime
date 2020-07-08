@@ -20,8 +20,8 @@
           :on-exceeded-size="exceededsize" 
           :on-progress="progress">
             <div class="upload-text">
-                <p>将图片拖到这里替换</p>
-                <p><span class="text-style">本地上传</span>或<span class="text-style">从素材库选择</span></p>
+                <p>{{$t('components.uploadFile.imgMsg')}}</p>
+                <p><span class="text-style">{{$t('components.uploadFile.localUpload')}}</span>{{$t('components.uploadFile.or')}}<span class="text-style">{{$t('components.uploadFile.imgMsg1')}}</span></p>
             </div>
         </upload>
     </div>

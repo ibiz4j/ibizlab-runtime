@@ -3,14 +3,15 @@
         class='dropdown-list-mpicker'
         multiple 
         :transfer="true"
+        transfer-class-name="dropdown-list-mpicker-transfer"
         v-model="currentVal"
         :disabled="disabled === true ? true : false"
         :clearable="true"
         :filterable="filterable === true ? true : false"
         @on-open-change="onClick"
         :placeholder="$t('components.dropDownListMpicker.placeholder')">
-        <i-option v-for="(item, index) in items" :key="index" :value="item.value" :label="item.text">
-          <Checkbox :value = "(currentVal.indexOf(item.value))==-1?false:true">
+        <i-option v-for="(item, index) in items" :key="index" :value="item.value.toString()" :label="item.text">
+          <Checkbox :value = "(currentVal.indexOf(item.value.toString()))==-1?false:true">
              {{Object.is(codelistType,'STATIC') ? $t('codelist.'+tag+'.'+item.value) : item.text}}
           </Checkbox>
         </i-option>
@@ -186,7 +187,7 @@ export default class DropDownListMpicker extends Vue {
           if (codelist) {
               this.items = [...JSON.parse(JSON.stringify(codelist.items))];
           } else {
-              console.log(`----${this.tag}----代码表不存在`);
+              console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           }
       }else if(this.tag && Object.is(this.codelistType,"DYNAMIC")){
           // 公共参数处理
@@ -198,7 +199,7 @@ export default class DropDownListMpicker extends Vue {
           this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
               this.items = res;
           }).catch((error:any) => {
-              console.log(`----${this.tag}----代码表不存在`);
+              console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           });
       }
     }
@@ -220,7 +221,7 @@ export default class DropDownListMpicker extends Vue {
             this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
                 this.items = res;
             }).catch((error:any) => {
-                console.log(`----${this.tag}----代码表不存在`);
+                console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
             });
         }
     }

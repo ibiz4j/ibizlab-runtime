@@ -245,7 +245,7 @@ export default class WFREModelEditViewBase extends Vue {
      * @memberof WFREModelEditView
      */
     public toolBarModels: any = {
-        tbitem1: { name: 'tbitem1', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem1: { name: 'tbitem1', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
     };
 

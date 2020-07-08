@@ -8,7 +8,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status,{
                 "sysauthloggridview": {
-            "title": "认证日志表格视图",
+            "title": "认证日志",
             "caption": "认证日志",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "uaa",
@@ -223,12 +223,12 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SYS_PERMISSIONPickupGridView",
             "viewtag": "9c0b351150648f7661be53c10eaabd67"
         },
-        "sys_rolegridview": {
-            "title": "角色表格视图",
-            "caption": "系统角色",
+        "sysrolegridview": {
+            "title": "角色",
+            "caption": "角色",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "uaa",
-            "viewname": "SYS_ROLEGridView",
+            "viewname": "SysRoleGridView",
             "viewtag": "9e9a67908b3c85516085fe19e3dd4113"
         },
         "sys_user_rolempickupview": {
@@ -248,8 +248,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "b8a97c1797a1b91fbb37f8c2d14b1fb6"
         },
         "sysappgridview": {
-            "title": "应用表格视图",
-            "caption": "应用",
+            "title": "接入应用",
+            "caption": "接入应用",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "uaa",
             "viewname": "SysAppGridView",
@@ -263,12 +263,12 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SYS_PERMISSIONRedirectView",
             "viewtag": "c1c2bc63580de24bac60af103a3fcc0f"
         },
-        "sys_usergridview": {
-            "title": "用户表格视图",
-            "caption": "系统用户",
+        "sysusergridview": {
+            "title": "用户",
+            "caption": "用户",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "uaa",
-            "viewname": "SYS_USERGridView",
+            "viewname": "SysUserGridView",
             "viewtag": "cb64b5009e70f225a91046314f40977a"
         },
         "sys_rolempickupview": {

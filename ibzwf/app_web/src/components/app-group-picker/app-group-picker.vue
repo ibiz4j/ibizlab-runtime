@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="ibiz-group-footer">
-            <el-button size="small" type="primary" @click="onOK">确认</el-button>
-            <el-button size="small" @click="onCancel">取消</el-button>
+            <el-button size="small" type="primary" @click="onOK">{{$t('app.commonWords.ok')}}</el-button>
+            <el-button size="small" @click="onCancel">{{$t('app.commonWords.cancel')}}</el-button>
         </div>
     </div>
 </template>

@@ -17,12 +17,12 @@ export default {
       		title: "岗位选择表格视图",
 		},
 		gridview: {
-			caption: "岗位",
-      		title: "岗位表格视图",
+			caption: "岗位管理",
+      		title: "岗位管理",
 		},
 		editview: {
-			caption: "岗位",
-      		title: "岗位编辑视图",
+			caption: "岗位管理",
+      		title: "岗位管理",
 		},
 	},
 	main_form: {

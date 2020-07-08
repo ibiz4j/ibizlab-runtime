@@ -192,7 +192,7 @@ export default class CodeList extends Vue {
               let items = res;
               _this.setItems(items, _this);
           }).catch((error: any) => {
-              console.log(`----${_this.tag}----代码表不存在`);
+              console.log(`----${_this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           });
       // 静态处理
       } else if(Object.is(this.codelistType, "STATIC")){

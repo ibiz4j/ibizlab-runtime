@@ -62,6 +62,13 @@ export default class DictOptionUIServiceBase extends UIService {
     public allDeMainStateMap:Map<string,string> = new Map();
 
     /**
+     * 主状态操作标识Map
+     * 
+     * @memberof  DictOptionUIServiceBase
+     */ 
+    public allDeMainStateOPPrivsMap:Map<string,any> = new Map();
+
+    /**
      * Creates an instance of  DictOptionUIServiceBase.
      * 
      * @param {*} [opts={}]
@@ -71,6 +78,7 @@ export default class DictOptionUIServiceBase extends UIService {
         super(opts);
         this.initViewMap();
         this.initDeMainStateMap();
+        this.initDeMainStateOPPrivsMap();
     }
 
     /**
@@ -90,6 +98,14 @@ export default class DictOptionUIServiceBase extends UIService {
      * @memberof  DictOptionUIServiceBase
      */  
     public initDeMainStateMap(){
+    }
+
+    /**
+     * 初始化主状态操作标识
+     * 
+     * @memberof  DictOptionUIServiceBase
+     */  
+    public initDeMainStateOPPrivsMap(){
     }
 
 
@@ -162,12 +178,12 @@ export default class DictOptionUIServiceBase extends UIService {
         }
 		if(!Environment.isAppMode){
             if(this.getDEMainStateTag(curData)){
-                return `MOBEDITVIEW:MSTAG:${ await this.getDEMainStateTag(curData)}`;
+                return `MOBEDITVIEW:MSTAG:${ this.getDEMainStateTag(curData)}`;
             }
 			return 'MOBEDITVIEW:';
         }
         if(this.getDEMainStateTag(curData)){
-            return `EDITVIEW:MSTAG:${ await this.getDEMainStateTag(curData)}`;
+            return `EDITVIEW:MSTAG:${ this.getDEMainStateTag(curData)}`;
         }
 		return 'EDITVIEW:';
     }
@@ -178,7 +194,7 @@ export default class DictOptionUIServiceBase extends UIService {
      * @param curData 当前数据
      * @memberof  DictOptionUIServiceBase
      */  
-    public async getDEMainStateTag(curData:any){
+    public getDEMainStateTag(curData:any){
         if(this.mainStateFields.length === 0) return null;
 
         this.mainStateFields.forEach((singleMainField:any) =>{
@@ -186,8 +202,6 @@ export default class DictOptionUIServiceBase extends UIService {
                 console.error(`当前数据对象不包含属性singleMainField，可能会发生错误`);
             }
         })
-
-        let strTag:String = "";
         for (let i = 0; i <= 1; i++) {
             let strTag:string = (curData[this.mainStateFields[0]])?(i == 0) ? curData[this.mainStateFields[0]] : "":"";
             if (this.mainStateFields.length >= 2) {
@@ -209,5 +223,19 @@ export default class DictOptionUIServiceBase extends UIService {
         }
         return null;
     }
+
+    /**
+    * 获取数据对象的操作标识
+    * 
+    * @param curData 当前数据
+    * @memberof  DictOptionUIServiceBase
+    */  
+   public getDEMainStateOPPrivs(curData:any){
+        if(this.getDEMainStateTag(curData)){
+            return this.allDeMainStateOPPrivsMap.get((this.getDEMainStateTag(curData) as string));
+        }else{
+            return null;
+        }
+   }
 
 }

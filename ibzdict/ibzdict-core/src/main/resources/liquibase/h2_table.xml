@@ -3,8 +3,30 @@
 
 
 
+    <!--输出实体[DICT_CATALOG]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-dict_catalog-67-1">
+        <createTable tableName="IBZDICTCATALOG">
+                <column name="CID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_DICT_CATALOG_CID"/>
+                </column>
+                <column name="CCODE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CGROUP" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="MEMO" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="ENABLE" remarks="" type="INT">
+                </column>
+                <column name="UPDATEDATE" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
+
+
     <!--输出实体[DICT_OPTION]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-dict_option-95-1">
+    <changeSet author="a_A_5d9d78509" id="tab-dict_option-95-2">
         <createTable tableName="IBZDICTOPTION">
                 <column name="VKEY" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_DICT_OPTION_VKEY"/>
@@ -38,32 +60,10 @@
         </createTable>
     </changeSet>
 
-
-    <!--输出实体[DICT_CATALOG]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-dict_catalog-67-2">
-        <createTable tableName="IBZDICTCATALOG">
-                <column name="CID" remarks="" type="VARCHAR(100)">
-                    <constraints primaryKey="true" primaryKeyName="PK_DICT_CATALOG_CID"/>
-                </column>
-                <column name="CCODE" remarks="" type="VARCHAR(100)">
-                </column>
-                <column name="CNAME" remarks="" type="VARCHAR(100)">
-                </column>
-                <column name="CGROUP" remarks="" type="VARCHAR(100)">
-                </column>
-                <column name="MEMO" remarks="" type="VARCHAR(255)">
-                </column>
-                <column name="ENABLE" remarks="" type="INT">
-                </column>
-                <column name="UPDATEDATE" remarks="" type="DATETIME">
-                </column>
-        </createTable>
-    </changeSet>
-
+        <!--输出实体[DICT_CATALOG]外键关系 -->
         <!--输出实体[DICT_OPTION]外键关系 -->
     <changeSet author="a_A_5d9d78509" id="fk-dict_option-95-3">
        <addForeignKeyConstraint baseColumnNames="CID" baseTableName="IBZDICTOPTION" constraintName="DER1N_DICT_OPTION_DICT_CATALOG" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="CID" referencedTableName="IBZDICTCATALOG" validate="true"/>
     </changeSet>
-        <!--输出实体[DICT_CATALOG]外键关系 -->
 
 </databaseChangeLog>

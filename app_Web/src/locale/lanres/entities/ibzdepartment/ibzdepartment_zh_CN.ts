@@ -41,7 +41,7 @@ export default {
 		},
 		treeexpview: {
 			caption: "人员管理",
-      		title: "部门树导航视图",
+      		title: "人员管理",
 		},
 		pickupgridview: {
 			caption: "部门",

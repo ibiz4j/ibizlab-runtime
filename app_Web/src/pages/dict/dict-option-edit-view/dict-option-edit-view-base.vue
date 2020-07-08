@@ -252,9 +252,9 @@ export default class DictOptionEditViewBase extends Vue {
      * @memberof DictOptionEditView
      */
     public toolBarModels: any = {
-        tbitem1: { name: 'tbitem1', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
+        tbitem1: { name: 'tbitem1', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
 
-        tbitem2: { name: 'tbitem2', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true, dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
+        tbitem2: { name: 'tbitem2', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
 
     };
 

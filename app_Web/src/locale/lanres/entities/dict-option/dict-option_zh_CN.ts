@@ -22,7 +22,7 @@ export default {
 		},
 		gridview: {
 			caption: "字典项",
-      		title: "字典项表格视图",
+      		title: "字典项",
 		},
 		grideditview: {
 			caption: "字典项",

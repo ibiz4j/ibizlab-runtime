@@ -443,13 +443,13 @@ export default class AppDataUploadView extends Vue {
                 if (codelist) {
                     resolve([...JSON.parse(JSON.stringify(codelist.items))]);
                 } else {
-                    console.log(`----${codeListObject.tag}----代码表不存在`);
+                    console.log(`----${codeListObject.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
                 }
             }else if(codeListObject.tag && Object.is(codeListObject.type,"DYNAMIC")){
                 this.codeListService.getItems(codeListObject.tag).then((res:any) => {
                     resolve(res);
                 }).catch((error:any) => {
-                    console.log(`----${codeListObject.tag}----代码表不存在`);
+                    console.log(`----${codeListObject.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
                 });
             }
         })

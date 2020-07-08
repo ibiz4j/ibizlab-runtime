@@ -104,7 +104,7 @@ export default class MainModel {
             appfunctag: 'Auto10',
             appfuncyype: 'APPVIEW',
             openmode: '',
-            codename: 'sys_rolegridview',
+            codename: 'sysrolegridview',
             deResParameters: [],
             routepath: '/index/:index?/sysroles/:sysrole?/gridview/:gridview?',
             parameters: [
@@ -116,7 +116,7 @@ export default class MainModel {
             appfunctag: 'Auto5',
             appfuncyype: 'APPVIEW',
             openmode: '',
-            codename: 'sys_usergridview',
+            codename: 'sysusergridview',
             deResParameters: [],
             routepath: '/index/:index?/sysusers/:sysuser?/gridview/:gridview?',
             parameters: [

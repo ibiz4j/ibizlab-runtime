@@ -8,7 +8,7 @@
         :filterable="filterable === true ? true : false"
         @on-open-change="onClick"
         :placeholder="$t('components.dropDownList.placeholder')">
-        <i-option v-for="(item, index) in items" :key="index" :value="item.value">{{($t('codelist.'+tag+'.'+item.value)!== ('codelist.'+tag+'.'+item.value))?$t('codelist.'+tag+'.'+item.value) : item.text}}</i-option>
+        <i-option v-for="(item, index) in items" :key="index" :value="item.value.toString()">{{($t('codelist.'+tag+'.'+item.value)!== ('codelist.'+tag+'.'+item.value))?$t('codelist.'+tag+'.'+item.value) : item.text}}</i-option>
     </i-select>
 </template>
 
@@ -157,7 +157,7 @@ export default class DropDownList extends Vue {
      * @memberof DropDownList
      */
     get currentVal() {
-        return this.itemValue;
+        return this.itemValue ? this.itemValue.toString() : undefined;
     }
 
     /**
@@ -201,7 +201,7 @@ export default class DropDownList extends Vue {
           if (codelist) {
               this.items = [...JSON.parse(JSON.stringify(codelist.items))];
           } else {
-              console.log(`----${this.tag}----代码表不存在`);
+              console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           }
       }else if(this.tag && Object.is(this.codelistType,"DYNAMIC")){
           // 公共参数处理
@@ -213,7 +213,7 @@ export default class DropDownList extends Vue {
           this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
               this.items = res;
           }).catch((error:any) => {
-              console.log(`----${this.tag}----代码表不存在`);
+              console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           });
       }
     }
@@ -236,7 +236,7 @@ export default class DropDownList extends Vue {
                 this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
                     this.items = res;
                 }).catch((error:any) => {
-                    console.log(`----${this.tag}----代码表不存在`);
+                    console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
                 });
             }
         }

@@ -745,6 +745,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
     public handleMenusResource(inputMenus:Array<any>){
         if(Environment.enablePermissionValid){
             this.computedEffectiveMenus(inputMenus);
+            this.computeParentMenus(inputMenus);
         }
         this.dataProcess(inputMenus);
         this.menus = inputMenus;
@@ -754,7 +755,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
     /**
      * 计算有效菜单项
      *
-     * @param {*} data
+     * @param {*} inputMenus
      * @memberof OUIndexViewBase
      */
     public computedEffectiveMenus(inputMenus:Array<any>){
@@ -766,6 +767,29 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
                 }
             }
         })
+    }
+
+    /**
+     * 计算父项菜单项是否隐藏
+     *
+     * @param {*} inputMenus
+     * @memberof OUIndexViewBase
+     */
+    public computeParentMenus(inputMenus:Array<any>){
+        if(inputMenus && inputMenus.length >0){
+            inputMenus.forEach((item:any) =>{
+                if(item.hidden && item.items && item.items.length >0){
+                    item.items.map((singleItem:any) =>{
+                        if(!singleItem.hidden){
+                            item.hidden = false;
+                        }
+                        if(singleItem.items && singleItem.items.length >0){
+                            this.computeParentMenus(singleItem.items);
+                        }
+                    })
+                }
+            })
+        }
     }
 
     /**

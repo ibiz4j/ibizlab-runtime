@@ -2,24 +2,24 @@
   <div class="update-password">
     <div class="password-item">
       <label for>
-        原密码：
+        {{$t('components.appUpdatePassword.oldPwd')}}
         <Input type="password" v-model="oldPwd" @on-blur="oldPwdVaild"/>
       </label>
     </div>
     <div class="password-item">
       <label for>
-        新密码：
+        {{$t('components.appUpdatePassword.newPwd')}}
         <Input type="password" v-model="newPwd"  @on-blur="newPwdVaild"/>
       </label>
     </div>
     <div class="password-item">
       <label for>
-        确认密码：
+        {{$t('components.appUpdatePassword.confirmPwd')}}
         <Input type="password" v-model="confirmPwd" :disabled="!this.newPwd" @on-blur="confirmVaild" />
       </label>
     </div>
     <div class="password-item password-btn">
-        <Button type="primary" long :disabled="!oldPwd || !newPwd || !confirmPwd || disUpdate" @click="updatePwd">确认修改</Button>
+        <Button type="primary" long :disabled="!oldPwd || !newPwd || !confirmPwd || disUpdate" @click="updatePwd">{{$t('components.appUpdatePassword.sure')}}</Button>
     </div>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default class AppUpdatePassword extends Vue {
     public oldPwdVaild(){
         if(!this.oldPwd){
             this.$Notice.error({
-                title:'原密码不能为空！',
+                title: (this.$t('components.appUpdatePassword.oldPwdErr') as string),
                 duration: 3
             });
         }
@@ -88,7 +88,7 @@ export default class AppUpdatePassword extends Vue {
     public newPwdVaild(){
         if(!this.newPwd){
             this.$Notice.error({
-                title:'新密码不能为空！',
+                title: (this.$t('components.appUpdatePassword.newPwdErr') as string),
                 duration: 3
             });
         }
@@ -104,7 +104,7 @@ export default class AppUpdatePassword extends Vue {
         if (this.newPwd && this.confirmPwd) {
             if (this.confirmPwd !== this.newPwd) {
                 this.$Notice.error({
-                    title:'两次输入密码不一致！',
+                    title: (this.$t('components.appUpdatePassword.confirmPwdErr') as string),
                     duration: 3
                 });
             }else{
@@ -136,7 +136,7 @@ export default class AppUpdatePassword extends Vue {
             }
         }).catch((error: any) =>{
             this.$Notice.error({
-                title:'系统异常',
+                title: (this.$t('app.codeNotExist.sysException') as string),
                 duration: 3
             });
             console.error(error);

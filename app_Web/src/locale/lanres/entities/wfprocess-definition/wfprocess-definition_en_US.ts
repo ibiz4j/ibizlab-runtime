@@ -12,12 +12,12 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "流程定义",
-      		title: "实体编辑视图",
+			caption: "流程定义查看",
+      		title: "流程定义查看",
 		},
 		gridview: {
 			caption: "流程定义",
-      		title: "实体表格视图",
+      		title: "流程定义",
 		},
 	},
 	main_form: {

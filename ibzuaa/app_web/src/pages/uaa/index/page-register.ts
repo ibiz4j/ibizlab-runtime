@@ -11,10 +11,10 @@ export const PageComponents = {
         Vue.component('sys-rolempickup-view', () => import('@pages/uaa/sys-rolempickup-view/sys-rolempickup-view.vue'));
         Vue.component('sys-auth-log-grid-view', () => import('@pages/uaa/sys-auth-log-grid-view/sys-auth-log-grid-view.vue'));
         Vue.component('sys-userpickup-view', () => import('@pages/uaa/sys-userpickup-view/sys-userpickup-view.vue'));
-        Vue.component('sys-rolegrid-view', () => import('@pages/uaa/sys-rolegrid-view/sys-rolegrid-view.vue'));
+        Vue.component('sys-role-grid-view', () => import('@pages/uaa/sys-role-grid-view/sys-role-grid-view.vue'));
         Vue.component('sys-useredit-view', () => import('@pages/uaa/sys-useredit-view/sys-useredit-view.vue'));
         Vue.component('sys-user-rolegrid-view', () => import('@pages/uaa/sys-user-rolegrid-view/sys-user-rolegrid-view.vue'));
         Vue.component('sys-rolepickup-grid-view', () => import('@pages/uaa/sys-rolepickup-grid-view/sys-rolepickup-grid-view.vue'));
-        Vue.component('sys-usergrid-view', () => import('@pages/uaa/sys-usergrid-view/sys-usergrid-view.vue'));
+        Vue.component('sys-user-grid-view', () => import('@pages/uaa/sys-user-grid-view/sys-user-grid-view.vue'));
     }
 };

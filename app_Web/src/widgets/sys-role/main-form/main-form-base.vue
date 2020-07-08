@@ -1176,7 +1176,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}): void {
         if(!this.loadAction){
-            this.$Notice.error({ title: '错误', desc: 'SysRoleEditView视图表单loadAction参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SysRoleEditView' + (this.$t('app.formpage.notconfig.loadaction') as string) });
             return;
         }
         const arg: any = { ...opt };
@@ -1193,11 +1193,11 @@ export default class MainBase extends Vue implements ControlInterface {
             }
         }).catch((response: any) => {
             if (response && response.status && response.data) {
-                this.$Notice.error({ title: '错误', desc: response.data.message });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                 return;
             }
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 return;
             }
         });
@@ -1211,7 +1211,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public loadDraft(opt: any = {}): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: '错误', desc: 'SysRoleEditView视图表单loaddraftAction参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SysRoleEditView' + (this.$t('app.formpage.notconfig.loaddraftaction') as string) });
             return;
         }
         const arg: any = { ...opt } ;
@@ -1220,7 +1220,7 @@ export default class MainBase extends Vue implements ControlInterface {
         post.then((response: any) => {
             if (!response.status || response.status !== 200) {
                 if (response.data) {
-                    this.$Notice.error({ title: '错误', desc: response.data.message });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                 }
                 return;
             }
@@ -1247,11 +1247,11 @@ export default class MainBase extends Vue implements ControlInterface {
             });
         }).catch((response: any) => {
             if (response && response.status  && response.data) {
-                this.$Notice.error({ title: '错误', desc: response.data.message });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                 return;
             }
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 return;
             }
         });
@@ -1273,7 +1273,7 @@ export default class MainBase extends Vue implements ControlInterface {
         const action: any = Object.is(data.srfuf, '1') ? this.updateAction : this.createAction;
         if(!action){
             let actionName:any = Object.is(data.srfuf, '1')?"updateAction":"createAction";
-            this.$Notice.error({ title: '错误', desc: 'SysRoleEditView视图表单'+actionName+'参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SysRoleEditView' + (this.$t('app.formpage.notconfig.actionname') as string) });
             return;
         }
         Object.assign(arg,{viewparams:this.viewparams});
@@ -1281,7 +1281,7 @@ export default class MainBase extends Vue implements ControlInterface {
         post.then((response: any) => {
             if (!response.status || response.status !== 200) {
                 if (response.data) {
-                    this.$Notice.error({ title: '错误', desc: response.data.message });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                 }
                 return;
             }
@@ -1297,20 +1297,20 @@ export default class MainBase extends Vue implements ControlInterface {
             if (response && response.status && response.data) {
                 if(response.data.errorKey && Object.is(response.data.errorKey,"versionCheck")){
                     this.$Modal.confirm({
-                        title: '保存数据发生错误',
-                        content: '数据不一致，可能后台数据已经被修改,是否要重新加载数据？',
+                        title: (this.$t('app.formpage.saveerror') as string),
+                        content: (this.$t('app.formpage.savecontent') as string),
                         onOk: () => {
                             this.refresh([]);
                         },
                         onCancel: () => { }
                     });
                 }else{
-                    this.$Notice.error({ title: '错误', desc: response.data.message });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                 }
                 return;
             }
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 return;
             }
         });
@@ -1329,7 +1329,7 @@ export default class MainBase extends Vue implements ControlInterface {
         return new Promise((resolve: any, reject: any) => {
             showResultInfo = showResultInfo === undefined ? true : false;
             if (!this.formValidateStatus()) {
-                this.$Notice.error({ title: '错误', desc: '值规则校验异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.formpage.valuecheckex') as string) });
                 return;
             }
             const arg: any = { ...opt };
@@ -1348,7 +1348,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const action: any = Object.is(data.srfuf, '1') ? this.updateAction : this.createAction;
             if(!action){
                 let actionName:any = Object.is(data.srfuf, '1')?"updateAction":"createAction";
-                this.$Notice.error({ title: '错误', desc: 'SysRoleEditView视图表单'+actionName+'参数未配置' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SysRoleEditView' + (this.$t('app.formpage.notconfig.actionname') as string) });
                 return;
             }
             Object.assign(arg,{viewparams:this.viewparams});
@@ -1356,7 +1356,7 @@ export default class MainBase extends Vue implements ControlInterface {
             post.then((response: any) => {
                 if (!response.status || response.status !== 200) {
                     if (response.data) {
-                        this.$Notice.error({ title: '错误', desc: response.data.message });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                     }
                     return;
                 }
@@ -1369,28 +1369,28 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.formState.next({ type: 'save', data: data });
                 });
                 if (showResultInfo) {
-                    this.$Notice.success({ title: '', desc: (data.srfmajortext ? data.srfmajortext : '') + '&nbsp;保存成功！' });
+                    this.$Notice.success({ title: '', desc: (data.srfmajortext ? data.srfmajortext : '') + '&nbsp;'+ (this.$t('app.formpage.savesuccess') as string) });
                 }
                 resolve(response);
             }).catch((response: any) => {
                 if (response && response.status  && response.data) {
                     if(response.data.errorKey && Object.is(response.data.errorKey,"versionCheck")){
                         this.$Modal.confirm({
-                            title: '保存数据发生错误',
-                            content: '数据不一致，可能后台数据已经被修改,是否要重新加载数据？',
+                            title: (this.$t('app.formpage.saveerror') as string),
+                            content: (this.$t('app.formpage.savecontent') as string),
                             onOk: () => {
                                 this.refresh([]);
                             },
                             onCancel: () => { }
                         });
                     }else{
-                        this.$Notice.error({ title: '错误', desc: response.data.message });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                         reject(response);
                     }
                     return;
                 }
                 if (!response || !response.status || !response.data) {
-                    this.$Notice.error({ title: '错误', desc: '系统异常' });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                     reject(response);
                     return;
                 }
@@ -1409,7 +1409,7 @@ export default class MainBase extends Vue implements ControlInterface {
     public remove(opt:Array<any> = [],showResultInfo?: boolean): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
             if(!this.removeAction){
-                this.$Notice.error({ title: '错误', desc: 'SysRoleEditView视图表单removeAction参数未配置' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SysRoleEditView' + (this.$t('app.formpage.notconfig.removeaction') as string) });
                 return;
             }
             const arg: any = opt[0];
@@ -1421,7 +1421,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.$emit('remove',data);
                     this.formState.next({ type: 'remove', data: data });
                     this.data.ismodify = false;
-                    this.$Notice.success({ title: '', desc: (data.srfmajortext ? data.srfmajortext : '') + '&nbsp;删除成功！' });
+                    this.$Notice.success({ title: '', desc: (data.srfmajortext ? data.srfmajortext : '') + '&nbsp;' + (this.$t('app.formpage.deletesuccess') as string) });
                     AppCenterService.notifyMessage({name:"SysRole",action:'appRefresh',data:data});
                     resolve(response);
                 }
@@ -1454,20 +1454,20 @@ export default class MainBase extends Vue implements ControlInterface {
                 result.then((response: any) => {
                     if (!response || response.status !== 200) {
                         if(response.data){
-                            this.$Notice.error({ title: '', desc: '工作流启动失败, ' + response.data.message });
+                            this.$Notice.error({ title: '', desc: (this.$t('app.formpage.workflow.starterror') as string) + ', ' + response.data.message });
                         }
                         return;
                     }
-                    this.$Notice.info({ title: '', desc: '工作流启动成功' });
+                    this.$Notice.info({ title: '', desc: (this.$t('app.formpage.workflow.startsuccess') as string) });
                     resolve(response);
             }).catch((response: any) => {
                 if (response && response.status && response.data) {
-                    this.$Notice.error({ title: '错误', desc: response.data.message });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                     reject(response);
                     return;
                 }
                 if (!response || !response.status || !response.data) {
-                    this.$Notice.error({ title: '错误', desc: '系统异常' });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                     reject(response);
                     return;
                 }
@@ -1475,12 +1475,12 @@ export default class MainBase extends Vue implements ControlInterface {
             });
             }).catch((response: any) => {
                     if (response && response.status && response.data) {
-                        this.$Notice.error({ title: '错误', desc: response.data.message });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                         reject(response);
                         return;
                     }
                     if (!response || !response.status || !response.data) {
-                        this.$Notice.error({ title: '错误', desc: '系统异常' });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                         reject(response);
                         return;
                     }
@@ -1527,22 +1527,22 @@ export default class MainBase extends Vue implements ControlInterface {
                 result.then((response: any) => {
                     if (!response || response.status !== 200) {
                         if(response.data){
-                            this.$Notice.error({ title: '', desc: '工作流提交失败, ' + response.data.message });
+                            this.$Notice.error({ title: '', desc: (this.$t('app.formpage.workflow.submiterror') as string) + ', ' + response.data.message });
                         }
                         return;
                     }
                     this.onFormLoad(arg,'submit');
                     this.$store.dispatch('viewaction/datasaved', { viewtag: this.viewtag });
-                    this.$Notice.info({ title: '', desc: '工作流提交成功' });
+                    this.$Notice.info({ title: '', desc: (this.$t('app.formpage.workflow.submitsuccess') as string) });
                     resolve(response);
             }).catch((response: any) => {
                 if (response && response.status && response.data) {
-                    this.$Notice.error({ title: '错误', desc: response.data.message });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                     reject(response);
                     return;
                 }
                 if (!response || !response.status || !response.data) {
-                    this.$Notice.error({ title: '错误', desc: '系统异常' });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                     reject(response);
                     return;
                 }
@@ -1550,12 +1550,12 @@ export default class MainBase extends Vue implements ControlInterface {
             });
             }).catch((response: any) => {
                     if (response && response.status && response.data) {
-                        this.$Notice.error({ title: '错误', desc: response.data.message });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                         reject(response);
                         return;
                     }
                     if (!response || !response.status || !response.data) {
-                        this.$Notice.error({ title: '错误', desc: '系统异常' });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                         reject(response);
                         return;
                     }
@@ -1583,7 +1583,7 @@ export default class MainBase extends Vue implements ControlInterface {
         const post: Promise<any> = this.service.frontLogic(mode,JSON.parse(JSON.stringify(this.context)),arg, showloading);
         post.then((response: any) => {
             if (!response || response.status !== 200) {
-                this.$Notice.error({ title: '错误', desc: '表单项更新失败' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.formpage.updateerror') as string) });
                 return;
             }
             const data = response.data;
@@ -1604,11 +1604,11 @@ export default class MainBase extends Vue implements ControlInterface {
             });
         }).catch((response: any) => {
             if (response && response.status && response.data) {
-                this.$Notice.error({ title: '错误', desc: response.data.message });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                 return;
             }
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 return;
             }
         });

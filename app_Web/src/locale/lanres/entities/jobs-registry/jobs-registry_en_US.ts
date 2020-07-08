@@ -9,8 +9,8 @@ export default {
   },
 	views: {
 		gridview: {
-			caption: "任务注册信息",
-      		title: "任务注册信息表格视图",
+			caption: "注册",
+      		title: "注册",
 		},
 		editview: {
 			caption: "任务注册信息",

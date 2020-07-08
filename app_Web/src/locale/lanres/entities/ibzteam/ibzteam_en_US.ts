@@ -12,8 +12,8 @@ export default {
       		title: "组编辑视图",
 		},
 		gridview: {
-			caption: "组",
-      		title: "组表格视图",
+			caption: "组管理",
+      		title: "组管理",
 		},
 	},
 	main_form: {

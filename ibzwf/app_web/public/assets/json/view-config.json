@@ -48,15 +48,15 @@
         "viewtag": "77dd35badedcc0f6b98e83ee1ff82bda"
     },
     "wfprocessdefinitioneditview": {
-        "title": "实体编辑视图",
-        "caption": "流程定义",
+        "title": "流程定义查看",
+        "caption": "流程定义查看",
         "viewtype": "DEEDITVIEW",
         "viewmodule": "workflow",
         "viewname": "WFProcessDefinitionEditView",
         "viewtag": "9aad4530afb58f5c348a5b21d9c7ae72"
     },
     "wfprocessdefinitiongridview": {
-        "title": "实体表格视图",
+        "title": "流程定义",
         "caption": "流程定义",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "workflow",

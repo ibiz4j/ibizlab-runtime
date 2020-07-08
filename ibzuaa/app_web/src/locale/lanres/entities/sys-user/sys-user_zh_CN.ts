@@ -55,8 +55,8 @@ export default {
       		title: "用户表编辑视图",
 		},
 		gridview: {
-			caption: "系统用户",
-      		title: "用户表格视图",
+			caption: "用户",
+      		title: "用户",
 		},
 		pickupview: {
 			caption: "系统用户",

@@ -7,7 +7,7 @@
             <Icon type="md-apps" />
           </div>
           <div class="content">
-            <span>全部应用</span>
+            <span>{{$t('components.contextMenuDrag.allApp')}}</span>
           </div>
           <div class="forward">
             <Icon type="ios-arrow-forward" />
@@ -221,7 +221,7 @@ export default class ContextMenuDrag extends Vue {
       const put: Promise<any> = this.entityService.updateChooseApp(null,params);
       window.location.href = item.addr;
      }else{
-       this.$message.info("未找到该应用");
+       this.$message.info((this.$t('components.contextMenuDrag.noFind') as string));
      }
    }
 

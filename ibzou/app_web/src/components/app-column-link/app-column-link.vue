@@ -191,7 +191,7 @@ export default class AppColumnLink extends Vue {
     private openRedirectView($event: any, view: any, data: any): void {
         this.$http.get(view.url, data).then((response: any) => {
             if (!response || response.status !== 200) {
-                this.$Notice.error({ title: '错误', desc: '请求异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.error') as string), desc: (this.$t('app.commonWords.reqException') as string) });
             }
             if (response.status === 401) {
                 return;
@@ -243,7 +243,7 @@ export default class AppColumnLink extends Vue {
             }
         }).catch((response: any) => {
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常！' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.error') as string), desc: (this.$t('app.commonWords.reqException') as string) });
                 return;
             }
             if (response.status === 401) {

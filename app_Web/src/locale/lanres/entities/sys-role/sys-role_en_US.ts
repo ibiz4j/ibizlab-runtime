@@ -10,7 +10,7 @@ export default {
 	views: {
 		gridview: {
 			caption: "Start workflow",
-      		title: "角色表格视图",
+      		title: "用户角色",
 		},
 		pickupview: {
 			caption: "Start workflow",

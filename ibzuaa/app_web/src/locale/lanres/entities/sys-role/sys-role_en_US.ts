@@ -29,8 +29,8 @@ export default {
       		title: "角色数据重定向视图",
 		},
 		gridview: {
-			caption: "系统角色",
-      		title: "角色表格视图",
+			caption: "角色",
+      		title: "角色",
 		},
 		mpickupview: {
 			caption: "系统角色",

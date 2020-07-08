@@ -51,7 +51,7 @@ export default class AppUser extends Vue {
                 }
             });
         }else if (Object.is(data, 'updatepwd')) {
-            let container: Subject<any> = this.$appmodal.openModal({ viewname: 'app-update-password', title: "修改密码",  width: 500, height: 400, }, {}, {});
+            let container: Subject<any> = this.$appmodal.openModal({ viewname: 'app-update-password', title: (this.$t('components.appUser.changepwd') as string),  width: 500, height: 400, }, {}, {});
                     container.subscribe((result: any) => {
                         if (!result || !Object.is(result.ret, 'OK')) {
                             return;

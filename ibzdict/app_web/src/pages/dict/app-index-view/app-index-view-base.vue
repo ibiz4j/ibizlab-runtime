@@ -2,8 +2,8 @@
 <div class="index_view app-index-view">
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="appindexview"></app-studioaction>
     <layout :class="themeClasses" :style="themeStyle">
-        <layout>
-            <sider :width="collapseChange ? 64 : 200" hide-trigger v-model="collapseChange">
+        <layout id="movebox">
+            <sider class="index_sider" :width="collapseChange ? 64 : 200" hide-trigger v-model="collapseChange" id= "left_move">
                 <div class="sider-top">
                     <div class="page-logo">
                         <span class="menuicon" v-if="isEnableAppSwitch" @click="contextMenuDragVisiable=!contextMenuDragVisiable"><Icon type="md-menu" /></span>
@@ -29,7 +29,8 @@
 </view_appmenu>
                 <context-menu-drag v-if="isEnableAppSwitch" :contextMenuDragVisiable="contextMenuDragVisiable"></context-menu-drag>
             </sider>
-            <layout>
+            <div v-show="!collapseChange"  id="move_axis"></div>
+            <layout id="right_move">
                 <header class="index_header">
                     <div class="header-left" >
                         <div class="page-logo">
@@ -46,7 +47,7 @@
                         <app-theme style="width:45px;display: flex;justify-content: center;"></app-theme>
                     </div>
                 </header>
-                <content :class="{'index_content':true,'index_tab_content':Object.is(navModel,'tab')?true:false,'index_route_content':Object.is(navModel,'route')?true:false}" :style="{'width':this.collapseChange ? 'calc(100vw - 64px)' : 'calc(100vw - 200px)' }"  @click="contextMenuDragVisiable=false">
+                <content :class="{'index_content':true,'index_tab_content':Object.is(navModel,'tab')?true:false,'index_route_content':Object.is(navModel,'route')?true:false}"   @click="contextMenuDragVisiable=false">
                     <tab-page-exp v-if="Object.is(navModel,'tab')"></tab-page-exp>
                     <app-keep-alive :routerList="getRouterList">
                         <router-view :key="getRouterViewKey"></router-view>
@@ -495,6 +496,7 @@ export default class AppIndexViewBase extends Vue {
                 this.viewState.next({ tag: 'appmenu', action: 'load', data: {} });
         this.$viewTool.setIndexParameters([{ pathName: 'appindexview', parameterName: 'appindexview' }]);
         this.$viewTool.setIndexViewParam(this.context);
+        this.mouse_move();
 
     }
 
@@ -684,6 +686,41 @@ export default class AppIndexViewBase extends Vue {
      */
     get getRouterViewKey(): string {
         return this.$route.fullPath;
+    }
+
+    /**
+     * 鼠标拖动事件
+     *
+     * @param {*} val
+     * @returns {*}
+     * @memberof AppIndexViewBase
+     */
+    public mouse_move(){
+        let move_axis:any = document.getElementById("move_axis");
+        let left_move :any= document.getElementById("left_move");
+        let right_move :any= document.getElementById("right_move");
+        let movebox :any= document.getElementById("movebox");
+        move_axis.onmousedown = (e:any) =>{
+            let startX = e.clientX;
+            move_axis.left = move_axis.offsetLeft;
+            document.onmousemove =  (e:any) =>{
+                let endX = e.clientX; 
+                let moveLen = move_axis.left + (endX - startX);
+                let maxT = movebox.clientWidth - move_axis.offsetWidth;
+                if (moveLen < 150) moveLen = 150;
+                if (moveLen > maxT - 150) moveLen = maxT - 150; 
+                move_axis.style.left = moveLen;
+                left_move.style.width = moveLen + "px";
+                right_move.style.width = (movebox.clientWidth - moveLen - 5) + "px";
+            }
+            document.onmouseup = (evt) =>{
+                document.onmousemove = null;
+                document.onmouseup = null;
+                move_axis.releaseCapture && move_axis.releaseCapture();
+            }
+            move_axis.setCapture && move_axis.setCapture();
+            return false;
+        }
     }
 
 }

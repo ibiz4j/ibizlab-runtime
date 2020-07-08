@@ -14,7 +14,7 @@ export default {
 	views: {
 		gridview: {
 			caption: "认证日志",
-      		title: "认证日志表格视图",
+      		title: "认证日志",
 		},
 	},
 	main_grid: {

@@ -43,8 +43,8 @@ export default {
       		title: "人员表格视图",
 		},
 		editview: {
-			caption: "人员",
-      		title: "人员编辑视图",
+			caption: "人员管理",
+      		title: "人员管理",
 		},
 		gridview: {
 			caption: "人员",
@@ -55,8 +55,8 @@ export default {
       		title: "人员数据多项选择视图",
 		},
 		optionview: {
-			caption: "人员",
-      		title: "人员选项操作视图",
+			caption: "人员快速新建",
+      		title: "人员快速新建",
 		},
 		changepwdview: {
 			caption: "人员",
