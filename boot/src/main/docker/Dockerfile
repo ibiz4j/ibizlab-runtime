@@ -1,6 +1,5 @@
 
-FROM openjdk:8-jre-alpine
-
+FROM ibiz4j/openjdk:8-jre-alpine-font
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     IBIZ_SLEEP=0 \
     JAVA_OPTS=""
