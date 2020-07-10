@@ -12,8 +12,8 @@ export default {
   },
 	views: {
 		gridview: {
-			caption: "组成员",
-      		title: "组成员表格视图",
+			caption: "组管理",
+      		title: "组管理",
 		},
 		editview: {
 			caption: "组成员",

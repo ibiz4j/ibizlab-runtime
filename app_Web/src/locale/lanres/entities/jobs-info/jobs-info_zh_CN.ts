@@ -18,8 +18,8 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "任务信息",
-      		title: "任务信息编辑视图",
+			caption: "任务",
+      		title: "任务",
 		},
 		gridview: {
 			caption: "任务",

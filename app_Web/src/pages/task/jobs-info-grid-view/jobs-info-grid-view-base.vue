@@ -120,6 +120,7 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import JobsInfoService from '@/service/jobs-info/jobs-info-service';
+import JobsInfoAuthService from '@/authservice/jobs-info/jobs-info-auth-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
 
@@ -141,6 +142,14 @@ export default class JobsInfoGridViewBase extends Vue {
      * @memberof JobsInfoGridViewBase
      */
     public appEntityService: JobsInfoService = new JobsInfoService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type JobsInfoUIService
+     * @memberof JobsInfoGridViewBase
+     */
+    public appUIService: JobsInfoUIService = new JobsInfoUIService(this.$store);
 
 
     /**
@@ -315,19 +324,19 @@ export default class JobsInfoGridViewBase extends Vue {
      * @memberof JobsInfoGridView
      */
     public toolBarModels: any = {
-        deuiaction1: { name: 'deuiaction1', caption: '启动', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Start', target: 'SINGLEKEY' } },
+        deuiaction1: { name: 'deuiaction1', caption: '启动', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Start', target: 'SINGLEKEY' } },
 
-        deuiaction2: { name: 'deuiaction2', caption: '停止', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Stop', target: 'SINGLEKEY' } },
+        deuiaction2: { name: 'deuiaction2', caption: '停止', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Stop', target: 'SINGLEKEY' } },
 
-        deuiaction3: { name: 'deuiaction3', caption: '执行', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Execute', target: 'SINGLEKEY' } },
+        deuiaction3: { name: 'deuiaction3', caption: '执行', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Execute', target: 'SINGLEKEY' } },
 
-        deuiaction4: { name: 'deuiaction4', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        deuiaction4: { name: 'deuiaction4', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
-        deuiaction5: { name: 'deuiaction5', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        deuiaction5: { name: 'deuiaction5', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
-        deuiaction6: { name: 'deuiaction6', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        deuiaction6: { name: 'deuiaction6', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
-        deuiaction7: { name: 'deuiaction7', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
+        deuiaction7: { name: 'deuiaction7', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
 
     };
 

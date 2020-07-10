@@ -37,13 +37,13 @@ public class DevNamingRegister implements ApplicationRunner {
             Instance instance = naming.selectOneHealthyInstance(serviceName);
             if(instance!=null&&(!StringUtils.isEmpty(instance.getIp())))
             {
-                naming.registerInstance("ibzrt-web", instance.getIp(), port);
-                naming.registerInstance("ibzuaa-api", instance.getIp(), port);
-                naming.registerInstance("ibzou-api", instance.getIp(), port);
-                naming.registerInstance("ibzwf-api", instance.getIp(), port);
-                naming.registerInstance("ibztask-api", instance.getIp(), port);
-                naming.registerInstance("ibzdict-api", instance.getIp(), port);
-                naming.registerInstance("ibzdisk-api", instance.getIp(), port);
+                naming.registerInstance("ibzrt-web", instance);
+                naming.registerInstance("ibzuaa-api", instance);
+                naming.registerInstance("ibzou-api", instance);
+                naming.registerInstance("ibzwf-api", instance);
+                naming.registerInstance("ibztask-api", instance);
+                naming.registerInstance("ibzdict-api", instance);
+                naming.registerInstance("ibzdisk-api", instance);
             }
         }
         catch (Exception ex) {

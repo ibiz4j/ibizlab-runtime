@@ -31,12 +31,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import SysPermissionService from '@/service/sys-permission/sys-permission-service';
 import DefaultService from './default-drbar-service';
-
+import SysPermissionUIService from '@/uiservice/sys-permission/sys-permission-ui-service';
 
 
 @Component({
@@ -124,6 +124,19 @@ export default class DefaultBase extends Vue implements ControlInterface {
     public appEntityService: SysPermissionService = new SysPermissionService({ $store: this.$store });
     
 
+
+    /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  DefaultBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
 
     /**
      * 关闭视图

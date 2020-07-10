@@ -43,6 +43,16 @@
 			<groupId>cn.ibizlab</groupId>
 			<artifactId>ibizlab-runtime-web</artifactId>
 			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+					<groupId>org.springframework.cloud</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jjwt</artifactId>
+					<groupId>io.jsonwebtoken</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
     </dependencies>
@@ -127,7 +137,7 @@
 						<version>0.4.13</version>
 						<configuration>
 							<serverId>ibiz-dev</serverId>
-							<imageName>ibiz4j/ibizlab-runtime:1.0.7-RC1</imageName>
+							<imageName>ibiz4j/ibizlab-runtime:1.0.8-RC1</imageName>
 							<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
 							<resources>
 								<resource>

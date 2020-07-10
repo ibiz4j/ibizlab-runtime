@@ -71,6 +71,38 @@ public class WFMemberDTO extends DTOBase implements Serializable {
     @JsonProperty("personname")
     private String personname;
 
+    /**
+     * 属性 [ORGID]
+     *
+     */
+    @JSONField(name = "orgid")
+    @JsonProperty("orgid")
+    private String orgid;
+
+    /**
+     * 属性 [ORGNAME]
+     *
+     */
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
+
+    /**
+     * 属性 [MDEPTID]
+     *
+     */
+    @JSONField(name = "mdeptid")
+    @JsonProperty("mdeptid")
+    private String mdeptid;
+
+    /**
+     * 属性 [MDEPTNAME]
+     *
+     */
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
+
 
     /**
      * 设置 [MEMBERNAME]

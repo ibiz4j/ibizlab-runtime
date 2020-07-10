@@ -52,12 +52,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import IBZOrganizationService from '@/service/ibzorganization/ibzorganization-service';
 import OrgTreeService from './org-tree-treeview-service';
-
+import IBZOrganizationUIService from '@/uiservice/ibzorganization/ibzorganization-ui-service';
 
 
 @Component({
@@ -145,6 +145,19 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
     public appEntityService: IBZOrganizationService = new IBZOrganizationService({ $store: this.$store });
     
 
+
+    /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  OrgTreeBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
 
     /**
      * 关闭视图

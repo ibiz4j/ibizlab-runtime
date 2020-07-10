@@ -19,7 +19,7 @@ export default {
 	views: {
 		editview: {
 			caption: "字典项",
-      		title: "字典项编辑视图",
+      		title: "字典项",
 		},
 		gridview: {
 			caption: "字典项",
@@ -27,7 +27,7 @@ export default {
 		},
 		grideditview: {
 			caption: "字典项",
-      		title: "字典项表格视图",
+      		title: "字典项",
 		},
 	},
 	main_form: {

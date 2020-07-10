@@ -68,10 +68,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import IBZDeptMemberService from '@/service/ibzdept-member/ibzdept-member-service';
+import IBZDeptMemberAuthService from '@/authservice/ibzdept-member/ibzdept-member-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import IBZDeptMemberUIService from '@/uiservice/ibzdept-member/ibzdept-member-ui-service';
 
 @Component({
     components: {
@@ -86,6 +88,14 @@ export default class IBZDeptMemberEditViewBase extends Vue {
      * @memberof IBZDeptMemberEditViewBase
      */
     public appEntityService: IBZDeptMemberService = new IBZDeptMemberService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type IBZDeptMemberUIService
+     * @memberof IBZDeptMemberEditViewBase
+     */
+    public appUIService: IBZDeptMemberUIService = new IBZDeptMemberUIService(this.$store);
 
 
     /**
@@ -259,13 +269,13 @@ export default class IBZDeptMemberEditViewBase extends Vue {
      * @memberof IBZDeptMemberEditView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
         tbitem6: {  name: 'tbitem6', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem7: { name: 'tbitem7', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'RemoveAndExit', target: 'SINGLEKEY' } },
+        tbitem7: { name: 'tbitem7', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'RemoveAndExit', target: 'SINGLEKEY' } },
 
         tbitem8: {  name: 'tbitem8', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
     };
 

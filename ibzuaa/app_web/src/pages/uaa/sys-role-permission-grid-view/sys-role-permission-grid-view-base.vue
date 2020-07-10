@@ -107,10 +107,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysRolePermissionService from '@/service/sys-role-permission/sys-role-permission-service';
+import SysRolePermissionAuthService from '@/authservice/sys-role-permission/sys-role-permission-auth-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
 
 
+import SysRolePermissionUIService from '@/uiservice/sys-role-permission/sys-role-permission-ui-service';
 import CodeListService from "@service/app/codelist-service";
 
 
@@ -127,6 +129,14 @@ export default class SysRolePermissionGridViewBase extends Vue {
      * @memberof SysRolePermissionGridViewBase
      */
     public appEntityService: SysRolePermissionService = new SysRolePermissionService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysRolePermissionUIService
+     * @memberof SysRolePermissionGridViewBase
+     */
+    public appUIService: SysRolePermissionUIService = new SysRolePermissionUIService(this.$store);
 
 
     /**
@@ -301,20 +311,20 @@ export default class SysRolePermissionGridViewBase extends Vue {
      * @memberof SysRolePermissionGridView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        tbitem3: { name: 'tbitem3', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
-        tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
-        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
         tbitem7: {  name: 'tbitem7', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
         tbitem9: {  name: 'tbitem9', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem13: { name: 'tbitem13', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
+        tbitem13: { name: 'tbitem13', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
 
         tbitem10: {  name: 'tbitem10', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem19: { name: 'tbitem19', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
+        tbitem19: { name: 'tbitem19', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
 
     };
 

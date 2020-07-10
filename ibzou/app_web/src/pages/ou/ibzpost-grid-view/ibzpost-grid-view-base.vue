@@ -110,10 +110,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import IBZPostService from '@/service/ibzpost/ibzpost-service';
+import IBZPostAuthService from '@/authservice/ibzpost/ibzpost-auth-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
 
 
+import IBZPostUIService from '@/uiservice/ibzpost/ibzpost-ui-service';
 import CodeListService from "@service/app/codelist-service";
 
 
@@ -130,6 +132,14 @@ export default class IBZPostGridViewBase extends Vue {
      * @memberof IBZPostGridViewBase
      */
     public appEntityService: IBZPostService = new IBZPostService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type IBZPostUIService
+     * @memberof IBZPostGridViewBase
+     */
+    public appUIService: IBZPostUIService = new IBZPostUIService(this.$store);
 
 
     /**
@@ -304,20 +314,20 @@ export default class IBZPostGridViewBase extends Vue {
      * @memberof IBZPostGridView
      */
     public toolBarModels: any = {
-        deuiaction1: { name: 'deuiaction1', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        deuiaction1: { name: 'deuiaction1', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
-        tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
-        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
         tbitem7: {  name: 'tbitem7', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
         tbitem9: {  name: 'tbitem9', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem13: { name: 'tbitem13', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
+        tbitem13: { name: 'tbitem13', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
 
         tbitem10: {  name: 'tbitem10', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem19: { name: 'tbitem19', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
+        tbitem19: { name: 'tbitem19', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
 
     };
 

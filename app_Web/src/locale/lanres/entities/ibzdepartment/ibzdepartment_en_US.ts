@@ -30,7 +30,7 @@ export default {
 		},
 		editview: {
 			caption: "Help",
-      		title: "部门编辑视图",
+      		title: "部门管理",
 		},
 		mpickupview: {
 			caption: "Help",

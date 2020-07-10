@@ -32,8 +32,18 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
+          name: 'orgname',
+          prop: 'orgname',
+          dataType: 'TEXT',
+        },
+        {
           name: 'userid',
           prop: 'id',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'mdeptname',
+          prop: 'mdeptname',
           dataType: 'TEXT',
         },
         {
@@ -73,6 +83,10 @@ export default class MainModel {
         {
           name:'query',
           prop:'query'
+        },
+        {
+          name:'filter',
+          prop:'filter'
         },
         {
           name:'page',

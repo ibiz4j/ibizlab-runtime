@@ -23,8 +23,8 @@ export default {
       		title: "部门管理",
 		},
 		editview: {
-			caption: "单位机构",
-      		title: "单位机构编辑视图",
+			caption: "单位管理",
+      		title: "单位管理",
 		},
 		gridview: {
 			caption: "单位管理",

@@ -61,10 +61,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import WFGroupService from '@/service/wfgroup/wfgroup-service';
+import WFGroupAuthService from '@/authservice/wfgroup/wfgroup-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import WFGroupUIService from '@/uiservice/wfgroup/wfgroup-ui-service';
 
 @Component({
     components: {
@@ -79,6 +81,14 @@ export default class WFGroupEditViewBase extends Vue {
      * @memberof WFGroupEditViewBase
      */
     public appEntityService: WFGroupService = new WFGroupService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type WFGroupUIService
+     * @memberof WFGroupEditViewBase
+     */
+    public appUIService: WFGroupUIService = new WFGroupUIService(this.$store);
 
 
     /**
@@ -252,10 +262,10 @@ export default class WFGroupEditViewBase extends Vue {
      * @memberof WFGroupEditView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
         tbitem6: {  name: 'tbitem6', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
     };
 

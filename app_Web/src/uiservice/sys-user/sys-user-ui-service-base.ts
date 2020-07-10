@@ -3,6 +3,7 @@ import { UIActionTool,Util } from '@/utils';
 import UIService from '../ui-service';
 import { Subject } from 'rxjs';
 import SysUserService from '@/service/sys-user/sys-user-service';
+import SysUserAuthService from '@/authservice/sys-user/sys-user-auth-service';
 
 /**
  * 系统用户UI服务对象基类
@@ -76,6 +77,7 @@ export default class SysUserUIServiceBase extends UIService {
      */
     constructor(opts: any = {}) {
         super(opts);
+        this.authService = new SysUserAuthService(opts);
         this.initViewMap();
         this.initDeMainStateMap();
         this.initDeMainStateOPPrivsMap();
@@ -225,17 +227,27 @@ export default class SysUserUIServiceBase extends UIService {
     }
 
     /**
-    * 获取数据对象的操作标识
+    * 获取数据对象当前操作标识
     * 
-    * @param curData 当前数据
+    * @param data 当前数据
     * @memberof  SysUserUIServiceBase
     */  
-   public getDEMainStateOPPrivs(curData:any){
-        if(this.getDEMainStateTag(curData)){
-            return this.allDeMainStateOPPrivsMap.get((this.getDEMainStateTag(curData) as string));
+   public getDEMainStateOPPrivs(data:any){
+        if(this.getDEMainStateTag(data)){
+            return this.allDeMainStateOPPrivsMap.get((this.getDEMainStateTag(data) as string));
         }else{
             return null;
         }
+   }
+
+    /**
+    * 获取数据对象所有的操作标识
+    * 
+    * @param data 当前数据
+    * @memberof  SysUserUIServiceBase
+    */ 
+   public getAllOPPrivs(data:any){
+       return this.authService.getOPPrivs(this.getDEMainStateOPPrivs(data));
    }
 
 }

@@ -11,8 +11,8 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "流程定义查看",
-      		title: "流程定义查看",
+			caption: "流程定义",
+      		title: "流程定义",
 		},
 		gridview: {
 			caption: "流程定义",

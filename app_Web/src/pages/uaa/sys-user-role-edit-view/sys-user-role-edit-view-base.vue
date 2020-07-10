@@ -61,10 +61,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysUserRoleService from '@/service/sys-user-role/sys-user-role-service';
+import SysUserRoleAuthService from '@/authservice/sys-user-role/sys-user-role-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import SysUserRoleUIService from '@/uiservice/sys-user-role/sys-user-role-ui-service';
 
 @Component({
     components: {
@@ -79,6 +81,14 @@ export default class SysUserRoleEditViewBase extends Vue {
      * @memberof SysUserRoleEditViewBase
      */
     public appEntityService: SysUserRoleService = new SysUserRoleService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysUserRoleUIService
+     * @memberof SysUserRoleEditViewBase
+     */
+    public appUIService: SysUserRoleUIService = new SysUserRoleUIService(this.$store);
 
 
     /**
@@ -252,10 +262,10 @@ export default class SysUserRoleEditViewBase extends Vue {
      * @memberof SysUserRoleEditView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
         tbitem6: {  name: 'tbitem6', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
     };
 

@@ -69,10 +69,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import JobsLogService from '@/service/jobs-log/jobs-log-service';
+import JobsLogAuthService from '@/authservice/jobs-log/jobs-log-auth-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
 
 
+import JobsLogUIService from '@/uiservice/jobs-log/jobs-log-ui-service';
 import CodeListService from "@service/app/codelist-service";
 
 
@@ -89,6 +91,14 @@ export default class JobsLogGridViewBase extends Vue {
      * @memberof JobsLogGridViewBase
      */
     public appEntityService: JobsLogService = new JobsLogService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type JobsLogUIService
+     * @memberof JobsLogGridViewBase
+     */
+    public appUIService: JobsLogUIService = new JobsLogUIService(this.$store);
 
 
     /**

@@ -24,7 +24,7 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class ProcessInstanceListener implements FlowableEventListener {
+public class ProcessInstanceListener extends AbstractFlowableEventListener {
 
 
     @Autowired
@@ -43,29 +43,8 @@ public class ProcessInstanceListener implements FlowableEventListener {
     @Override
     public void onEvent(FlowableEvent evt) {
 
-        if(evt instanceof FlowableEntityWithVariablesEventImpl)
-        {
-            FlowableEntityWithVariablesEventImpl event = (FlowableEntityWithVariablesEventImpl) evt;
-            if(event.getType() == FlowableEngineEventType.TASK_COMPLETED)
-            {
-                TaskEntity taskEntity = (TaskEntity)event.getEntity();
-                if(taskEntity.getTaskDefinitionKey().startsWith("tid-"))
-                {
-                    Object data=taskEntity.getVariable("activedata");
-                    Object link=taskEntity.getVariable("sequenceFlowName");
 
-                    if(data!=null&&(data instanceof Map)&&link!=null)
-                    {
-                        Map activedata=(Map)data;
-                        String srfwfmemo="";
-                        if(activedata.get("srfwfmemo")!=null)
-                            srfwfmemo=activedata.get("srfwfmemo").toString();
-                        taskService.addComment(taskEntity.getId(),taskEntity.getProcessInstanceId(),link.toString(),srfwfmemo);
-                    }
-                }
-            }
-        }
-        else if(evt instanceof FlowableProcessStartedEventImpl)
+        if(evt instanceof FlowableProcessStartedEventImpl)
         {
             FlowableProcessStartedEventImpl event=(FlowableProcessStartedEventImpl)evt;
             if(event.getEntity() instanceof ExecutionEntityImpl){
@@ -107,7 +86,7 @@ public class ProcessInstanceListener implements FlowableEventListener {
                 executionEntity.setVariable("wfstatefield",wfstatefield);
                 executionEntity.setVariable("wfverfield",wfverfield);
                 executionEntity.setVariable("majortextfield",majortext_field);
-
+                
                 Map callbackArg=new LinkedHashMap();
                 if(!StringUtils.isEmpty(wfinstfield))
                     callbackArg.put(wfinstfield,executionEntity.getProcessInstanceId());
@@ -126,7 +105,29 @@ public class ProcessInstanceListener implements FlowableEventListener {
                 }
             }
         }
-        else if(evt instanceof FlowableEntityEventImpl)
+        else if(evt instanceof FlowableEntityWithVariablesEventImpl  )
+        {
+            FlowableEntityWithVariablesEventImpl event = (FlowableEntityWithVariablesEventImpl) evt;
+            if(event.getType() == FlowableEngineEventType.TASK_COMPLETED)
+            {
+                TaskEntity taskEntity = (TaskEntity)event.getEntity();
+                if(taskEntity.getTaskDefinitionKey().startsWith("tid-"))
+                {
+                    Object data=taskEntity.getVariable("activedata");
+                    Object link=taskEntity.getVariable("sequenceFlowName");
+
+                    if(data!=null&&(data instanceof Map)&&link!=null)
+                    {
+                        Map activedata=(Map)data;
+                        String srfwfmemo="";
+                        if(activedata.get("srfwfmemo")!=null)
+                            srfwfmemo=activedata.get("srfwfmemo").toString();
+                        taskService.addComment(taskEntity.getId(),taskEntity.getProcessInstanceId(),link.toString(),srfwfmemo);
+                    }
+                }
+            }
+        }
+        else if(evt instanceof FlowableEntityEventImpl && evt.getType() != null &&  FlowableEngineEventType.PROCESS_COMPLETED == evt.getType() )
         {
             FlowableEntityEventImpl event=((FlowableEntityEventImpl) evt);
             FlowableEventType eventType = event.getType();
@@ -157,10 +158,7 @@ public class ProcessInstanceListener implements FlowableEventListener {
                 }
                 System.out.println("流程结束");
             }
-            if(eventType == FlowableEngineEventType.PROCESS_COMPLETED_WITH_ERROR_END_EVENT){
-                event.getEntity();
-                System.out.println("流程异常结束");
-            }
+
         }
         else if(evt instanceof FlowableActivityEventImpl)
         {
@@ -187,20 +185,13 @@ public class ProcessInstanceListener implements FlowableEventListener {
             }
         }
 
+
     }
 
     @Override
     public boolean isFailOnException() {
-        return false;
+        return true;
     }
 
-    @Override
-    public boolean isFireOnTransactionLifecycleEvent() {
-        return false;
-    }
 
-    @Override
-    public String getOnTransaction() {
-        return null;
-    }
 }

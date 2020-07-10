@@ -7,8 +7,8 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "组",
-      		title: "组编辑视图",
+			caption: "组管理",
+      		title: "组管理",
 		},
 		gridview: {
 			caption: "组管理",

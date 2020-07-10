@@ -268,6 +268,9 @@ export default class AppPicker extends Vue {
         if(Object.is(this.editortype, 'dropdown')){
             this.onSearch("", null, true);
         }
+        if(!Object.is(this.editortype, 'pickup-no-ac') && !Object.is(this.editortype, 'dropdown')){
+            this.curvalue = this.value;
+        }
     }
 
     /**

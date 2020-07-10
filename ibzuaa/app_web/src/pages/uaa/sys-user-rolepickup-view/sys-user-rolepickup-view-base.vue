@@ -36,10 +36,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysUserRoleService from '@/service/sys-user-role/sys-user-role-service';
+import SysUserRoleAuthService from '@/authservice/sys-user-role/sys-user-role-auth-service';
 
 import PickupViewEngine from '@engine/view/pickup-view-engine';
 
 
+import SysUserRoleUIService from '@/uiservice/sys-user-role/sys-user-role-ui-service';
 
 @Component({
     components: {
@@ -54,6 +56,14 @@ export default class SYS_USER_ROLEPickupViewBase extends Vue {
      * @memberof SYS_USER_ROLEPickupViewBase
      */
     public appEntityService: SysUserRoleService = new SysUserRoleService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysUserRoleUIService
+     * @memberof SYS_USER_ROLEPickupViewBase
+     */
+    public appUIService: SysUserRoleUIService = new SysUserRoleUIService(this.$store);
 
 
     /**

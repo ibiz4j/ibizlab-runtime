@@ -36,10 +36,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import WFGroupService from '@/service/wfgroup/wfgroup-service';
+import WFGroupAuthService from '@/authservice/wfgroup/wfgroup-auth-service';
 
 import PickupViewEngine from '@engine/view/pickup-view-engine';
 
 
+import WFGroupUIService from '@/uiservice/wfgroup/wfgroup-ui-service';
 
 @Component({
     components: {
@@ -54,6 +56,14 @@ export default class WFGroupPickupViewBase extends Vue {
      * @memberof WFGroupPickupViewBase
      */
     public appEntityService: WFGroupService = new WFGroupService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type WFGroupUIService
+     * @memberof WFGroupPickupViewBase
+     */
+    public appUIService: WFGroupUIService = new WFGroupUIService(this.$store);
 
 
     /**

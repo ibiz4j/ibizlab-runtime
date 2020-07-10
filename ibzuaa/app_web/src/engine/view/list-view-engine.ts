@@ -150,9 +150,9 @@ export default class ListViewEngine extends MDViewEngine {
             arg.srfkeys = keys;
         }
 
-        const grid: any = this.getMDCtrl();
-        if (grid) {
-            grid.remove(arg);
+        const list: any = this.getMDCtrl();
+        if (list) {
+            list.remove(arg);
         }
     }
 

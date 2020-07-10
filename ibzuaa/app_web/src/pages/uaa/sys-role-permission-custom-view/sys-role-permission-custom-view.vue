@@ -1,3 +1,4 @@
+
 <template>
     <div class="view-container dempickupview sys-permissionmpickup-view">
         <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :padding="0" :bordered="false">
@@ -7,9 +8,15 @@
                     <div class="center" :style="{width : '33%',border:'1px solid #dcdee2', margin: '0 10px 0 0'}">
                         <context-menu-container class='design-tree-container'>
                             <div>
-                                <div class="text">应用菜单</div>
+                                <!--<div class="text">应用菜单</div>-->
+                                <div style="margin: 20px 20px 0 20px;">
+                                    <el-input size="small" placeholder="搜索应用菜单..." v-model="CDtreefilterText" @input="filterChangeCDtree">
+                                        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                                    </el-input>
+                                </div>
                                 <div class="roll">
                                     <el-tree
+                                            :filter-node-method="fiterNode"
                                             class="tre"
                                             :data="this.CDdata"
                                             ref="CDtree"
@@ -30,9 +37,15 @@
                     <div class="center" :style="{width : '33%',border:'1px solid #dcdee2', margin: '0 10px 0 0' }">
                         <context-menu-container class='design-tree-container'>
                             <div>
-                                <div class="text">数据能力</div>
+                                <!--<div class="text">数据能力</div>-->
+                                <div style="margin: 20px 20px 0 20px;">
+                                    <el-input size="small" placeholder="搜索数据能力..." v-model="QXtreefilterText" @input="filterChangeQXtree">
+                                        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                                    </el-input>
+                                </div>
                                 <div class="roll">
                                     <el-tree
+                                            :filter-node-method="fiterNode"
                                             class="tre"
                                             :data="this.QXdata"
                                             ref="QXtree"
@@ -49,13 +62,19 @@
                             </div>
                         </context-menu-container>
                     </div>
-                    <!--统一资源-->
+                    <!--自定义资源-->
                     <div class="center" :style="{width : '33%',border:'1px solid #dcdee2' }">
                         <context-menu-container class='design-tree-container'>
                             <div>
-                                <div class="text">统一资源</div>
+                                <!--<div class="text">自定义资源</div>-->
+                                <div style="margin: 20px 20px 0 20px;">
+                                    <el-input size="small" placeholder="搜索自定义资源..." v-model="ZYtreefilterText" @input="filterChangeZYtree">
+                                        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                                    </el-input>
+                                </div>
                                 <div class="roll">
                                     <el-tree
+                                            :filter-node-method="fiterNode"
                                             class="tre"
                                             :data="this.ZYdata"
                                             ref="ZYtree"
@@ -99,12 +118,47 @@
     })
     export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
 
+        // 应用菜单树搜索文本
+        public CDtreefilterText:any = '';
+        // 数据能力树搜索文本
+        public QXtreefilterText:any = '';
+        // 自定义资源树搜索文本
+        public ZYtreefilterText:any = '';
+
+        /**
+         * 过滤节点
+         */
+        public fiterNode(value:any,data:any){
+            if (!value) return true;
+            return data.label.indexOf(value) !==-1;
+        }
+        /**
+         *　应用菜单树搜索触发
+         */
+        public filterChangeCDtree(){
+            const CDtree:any = this.$refs.CDtree;
+            CDtree.filter(this.CDtreefilterText);
+        }
+        /**
+         *　数据能力树搜索触发
+         */
+        public filterChangeQXtree(){
+            const QXtree:any = this.$refs.QXtree;
+            QXtree.filter(this.QXtreefilterText);
+        }
+        /**
+         *　自定义资源树搜索触发
+         */
+        public filterChangeZYtree(){
+            const ZYtree:any = this.$refs.ZYtree;
+            ZYtree.filter(this.ZYtreefilterText);
+        }
 
         /*应用菜单数据*/
         protected CDdata: any = [];
         /*数据能力数据*/
         protected QXdata: any = [];
-        /*统一资源数据*/
+        /*自定义资源数据*/
         protected ZYdata: any = [];
         /*默认选中节点*/
         protected defaultCheckedNodes: any = [];
@@ -112,7 +166,7 @@
         protected CDdataexpandedKeys: any = [];
         /*数据能力数据默认展开节点*/
         protected QXdataexpandedKeys: any = [];
-        /*统一资源数据默认展开节点*/
+        /*自定义资源数据默认展开节点*/
         protected ZYdataexpandedKeys: any = [];
 
         /**
@@ -367,8 +421,8 @@
 
                         // 如果是新建角色保存，需要从res中获取父数据主键
                         if (res.data) {
-                           let parentData =  res.data;
-                           this.srfparentkey = parentData.srfparentkey;
+                            let parentData =  res.data;
+                            this.srfparentkey = parentData.srfparentkey;
                         }
 
                         // 父数据保存时调用当前视图的事件
@@ -398,7 +452,7 @@
          */
         private initTree() {
             const _this = this;
-            // get全部菜单和数据能力和统一资源的请求路径
+            // get全部菜单和数据能力和自定义资源的请求路径
             const url = `sysroles/`+_this.srfparentkey+`/sysrolepermissions/tree`;
             this.$http.get(url).then((response: any) => {
                 if (!response || response.status !== 200) {
@@ -491,27 +545,27 @@
                     return;
                 }
                 this.selectData.forEach((item: any) => {
-                                            let _itemTemp: any = JSON.parse(JSON.stringify(item));
-                                            let _item: any = {};
-                                            if (_itemTemp.type) {
-                                                _item.permissionid = _itemTemp.id;
-                                                _item.permissiontype = _itemTemp.type;
-                                                _item.permissionname = _itemTemp.fullName;
-                                                Object.assign(_item, {_select: false})
-                                                this.viewSelections.push(_item);
-                                            }
-                                        });
+                    let _itemTemp: any = JSON.parse(JSON.stringify(item));
+                    let _item: any = {};
+                    if (_itemTemp.type) {
+                        _item.permissionid = _itemTemp.id;
+                        _item.permissiontype = _itemTemp.type;
+                        _item.permissionname = _itemTemp.fullName;
+                        Object.assign(_item, {_select: false})
+                        this.viewSelections.push(_item);
+                    }
+                });
 
-               // 保存选中的权限信息
-               let url = '/sysroles/'+this.srfparentkey+'/sysrolepermissions/refreshbatch';
-               this.$http.post(url,this.viewSelections).then((response: any) => {
+                // 保存选中的权限信息
+                let url = '/sysroles/'+this.srfparentkey+'/sysrolepermissions/refreshbatch';
+                this.$http.post(url,this.viewSelections).then((response: any) => {
                     if (!(!response || response.status !== 200)) {
                     } else {
-                           this.$Notice.error({title: '错误', desc: response.message});
-                           return;
+                        this.$Notice.error({title: '错误', desc: response.message});
+                        return;
                     }
-                  }).catch((e) => {
-               });
+                }).catch((e) => {
+                });
             }
             // 清空视图选中数据，避免重复添加
             this.viewSelections = [];
@@ -541,5 +595,5 @@
 
 
 <style lang='less'>
-    @import './sys-role-permissioncustom-view';
+    @import './sys-role-permission-custom-view';
 </style>

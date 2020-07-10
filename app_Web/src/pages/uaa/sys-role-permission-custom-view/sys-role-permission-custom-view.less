@@ -42,7 +42,12 @@
         margin-top:30px;margin-bottom:20px;margin-left:40px;
     }
     .roll{
-        height:calc(100vh - 355px) ;overflow:hidden;overflow-x: hidden;overflow-y: auto;
+        height:calc(100vh - 370px);
+        overflow:hidden;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding-right: 17px;
+        padding-left: 1px;
     }
     .tre{
         margin-left:20px;
@@ -50,6 +55,9 @@
 
 }
 
+selector::-webkit-scrollbar{
+    width:0;
+}
 
 
 .pickup-view {

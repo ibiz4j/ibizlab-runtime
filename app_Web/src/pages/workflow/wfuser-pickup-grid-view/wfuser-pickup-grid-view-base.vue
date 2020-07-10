@@ -51,10 +51,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import WFUserService from '@/service/wfuser/wfuser-service';
+import WFUserAuthService from '@/authservice/wfuser/wfuser-auth-service';
 
 import PickupGridViewEngine from '@engine/view/pickup-grid-view-engine';
 
 
+import WFUserUIService from '@/uiservice/wfuser/wfuser-ui-service';
 
 @Component({
     components: {
@@ -69,6 +71,14 @@ export default class WFUserPickupGridViewBase extends Vue {
      * @memberof WFUserPickupGridViewBase
      */
     public appEntityService: WFUserService = new WFUserService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type WFUserUIService
+     * @memberof WFUserPickupGridViewBase
+     */
+    public appUIService: WFUserUIService = new WFUserUIService(this.$store);
 
 
     /**

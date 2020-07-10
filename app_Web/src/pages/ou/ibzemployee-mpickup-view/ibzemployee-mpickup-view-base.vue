@@ -69,10 +69,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import IBZEmployeeService from '@/service/ibzemployee/ibzemployee-service';
+import IBZEmployeeAuthService from '@/authservice/ibzemployee/ibzemployee-auth-service';
 
 import MPickupViewEngine from '@engine/view/mpickup-view-engine';
 
 
+import IBZEmployeeUIService from '@/uiservice/ibzemployee/ibzemployee-ui-service';
 
 @Component({
     components: {
@@ -87,6 +89,14 @@ export default class IBZEmployeeMPickupViewBase extends Vue {
      * @memberof IBZEmployeeMPickupViewBase
      */
     public appEntityService: IBZEmployeeService = new IBZEmployeeService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type IBZEmployeeUIService
+     * @memberof IBZEmployeeMPickupViewBase
+     */
+    public appUIService: IBZEmployeeUIService = new IBZEmployeeUIService(this.$store);
 
 
     /**

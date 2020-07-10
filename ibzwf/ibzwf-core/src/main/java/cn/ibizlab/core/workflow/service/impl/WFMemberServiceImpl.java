@@ -239,6 +239,10 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
                 user=majorEntity;
             }
             et.setPersonname(user.getDisplayname());
+            et.setOrgid(user.getOrgid());
+            et.setOrgname(user.getOrgname());
+            et.setMdeptid(user.getMdeptid());
+            et.setMdeptname(user.getMdeptname());
         }
     }
 
@@ -269,6 +273,25 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         return true;
     }
 
+    @Override
+    public List<WFMember> getWfmemberByIds(List<String> ids) {
+         return this.listByIds(ids);
+    }
+
+    @Override
+    public List<WFMember> getWfmemberByEntities(List<WFMember> entities) {
+        List ids =new ArrayList();
+        for(WFMember entity : entities){
+            Serializable id=entity.getMemberid();
+            if(!ObjectUtils.isEmpty(id)){
+                ids.add(id);
+            }
+        }
+        if(ids.size()>0)
+           return this.listByIds(ids);
+        else
+           return entities;
+    }
 
 }
 

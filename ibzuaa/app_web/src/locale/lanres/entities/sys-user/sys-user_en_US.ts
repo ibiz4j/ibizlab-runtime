@@ -52,8 +52,8 @@ export default {
       		title: "用户表选择表格视图",
 		},
 		editview: {
-			caption: "系统用户",
-      		title: "用户表编辑视图",
+			caption: "用户",
+      		title: "用户",
 		},
 		gridview: {
 			caption: "用户",

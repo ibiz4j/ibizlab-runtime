@@ -51,10 +51,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import WFGroupService from '@/service/wfgroup/wfgroup-service';
+import WFGroupAuthService from '@/authservice/wfgroup/wfgroup-auth-service';
 
 import PickupGridViewEngine from '@engine/view/pickup-grid-view-engine';
 
 
+import WFGroupUIService from '@/uiservice/wfgroup/wfgroup-ui-service';
 
 @Component({
     components: {
@@ -69,6 +71,14 @@ export default class WFGroupPickupGridViewBase extends Vue {
      * @memberof WFGroupPickupGridViewBase
      */
     public appEntityService: WFGroupService = new WFGroupService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type WFGroupUIService
+     * @memberof WFGroupPickupGridViewBase
+     */
+    public appUIService: WFGroupUIService = new WFGroupUIService(this.$store);
 
 
     /**

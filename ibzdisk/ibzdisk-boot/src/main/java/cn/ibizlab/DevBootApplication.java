@@ -11,6 +11,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import java.util.List;
 
 @Slf4j
@@ -29,6 +31,8 @@ import java.util.List;
 @Import({
         org.springframework.cloud.openfeign.FeignClientsConfiguration.class
 })
+@EnableAsync
+@EnableScheduling
 public class DevBootApplication extends WebMvcConfigurerAdapter{
 
     public static void main(String[] args) {

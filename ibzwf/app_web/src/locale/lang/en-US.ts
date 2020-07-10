@@ -15,6 +15,7 @@ export default {
             success: "Success",
             ok: "OK",
             cancel: "Cancel",
+            save: "Save",
             codeNotExist: 'Code list does not exist',
             reqException: "Request exception",
             sysException: "System abnormality",
@@ -184,6 +185,37 @@ export default {
             undefined: "Undefined",
             quarter: "Quarter",   
             year: "Year",
+        },
+        searchForm: {
+            notConfig: {
+                loadAction: "View search form loadAction parameter is not configured",
+                loaddraftAction: "View search form loaddraftAction parameter is not configured",
+            },
+            custom: "Store custom queries",
+            title: "Name",
+        },
+        wizardPanel: {
+            back: "Back",
+            next: "Next",
+            complete: "Complete",
+        },
+        viewLayoutPanel: {
+            appLogoutView: {
+                prompt1: "Dear customer, you have successfully exited the system, after",
+                prompt2: "seconds, we will jump to the",
+                logingPage: "login page",
+            },
+            appWfstepTraceView: {
+                title: "Application process processing record view",
+            },
+            appWfstepDataView: {
+                title: "Application process tracking view",
+            },
+            appLoginView: {
+                username: "Username",
+                password: "Password",
+                login: "Login",
+            },
         },
     },
     entities: {

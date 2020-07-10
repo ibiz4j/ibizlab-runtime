@@ -340,6 +340,7 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
+                'b05c9353d499f973106e6ed4dde58074',
                 '61c5bff70bcf56e1dc0bb0900df9c98c',
             ],
         },
@@ -540,6 +541,16 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '44488f30cf90677019077ed9ad33628e',
+            ],
+        },
+        {
+            viewtag: 'b05c9353d499f973106e6ed4dde58074',
+            viewmodule: 'workflow',
+            viewname: 'WFGroupPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '17ccd6d8d2bb7cf30158253da129ec1b',
             ],
         },
         {

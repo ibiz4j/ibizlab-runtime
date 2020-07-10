@@ -104,7 +104,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-role-permissioncustom-view/sys-role-permissioncustom-view.vue'),
+                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
                 },
                 {
                     path: 'syspermissions/:syspermission?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
@@ -119,7 +119,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-role-permissioncustom-view/sys-role-permissioncustom-view.vue'),
+                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
                 },
                 {
                     path: 'sysrolepermissions/:sysrolepermission?/customview/:customview?',
@@ -133,7 +133,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-role-permissioncustom-view/sys-role-permissioncustom-view.vue'),
+                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/pickupgridview/:pickupgridview?',
@@ -161,7 +161,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-roleedit-view/sys-roleedit-view.vue'),
+                    component: () => import('@pages/uaa/sys-role-edit-view/sys-role-edit-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
@@ -275,7 +275,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-useredit-view/sys-useredit-view.vue'),
+                    component: () => import('@pages/uaa/sys-user-edit-view/sys-user-edit-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/gridview/:gridview?',
@@ -333,7 +333,7 @@ const router = new Router({
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-rolepickup-grid-view/sys-rolepickup-grid-view.vue'),
+                    component: () => import('@pages/uaa/sys-role-pickup-grid-view/sys-role-pickup-grid-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/gridview/:gridview?',
@@ -362,16 +362,16 @@ const router = new Router({
                 component: () => import('@pages/uaa/sys-user-roleredirect-view/sys-user-roleredirect-view.vue'),
             },
             {
-                path: 'sys_role_permissionredirectview/:sys_role_permissionredirectview?',
+                path: 'sysrolepermissionredirectview/:sysrolepermissionredirectview?',
                 meta: {
                     caption: 'entities.sysrolepermission.views.redirectview.title',
                     info:'',
                     parameters: [
-                        { pathName: 'sys_role_permissionredirectview', parameterName: 'sys_role_permissionredirectview' },
+                        { pathName: 'sysrolepermissionredirectview', parameterName: 'sysrolepermissionredirectview' },
                     ],
                     requireAuth: true,
                 },
-                component: () => import('@pages/uaa/sys-role-permissionredirect-view/sys-role-permissionredirect-view.vue'),
+                component: () => import('@pages/uaa/sys-role-permission-redirect-view/sys-role-permission-redirect-view.vue'),
             },
             {
                 path: 'sys_userredirectview/:sys_userredirectview?',
@@ -449,7 +449,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-rolepickup-grid-view/sys-rolepickup-grid-view.vue'),
+        component: () => import('@pages/uaa/sys-role-pickup-grid-view/sys-role-pickup-grid-view.vue'),
     },
     {
         path: '/sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
@@ -516,7 +516,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-roleedit-view/sys-roleedit-view.vue'),
+        component: () => import('@pages/uaa/sys-role-edit-view/sys-role-edit-view.vue'),
     },
     {
         path: '/sysroles/:sysrole?/pickupview/:pickupview?',
@@ -555,7 +555,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-useredit-view/sys-useredit-view.vue'),
+        component: () => import('@pages/uaa/sys-user-edit-view/sys-user-edit-view.vue'),
     },
     {
         path: '/sysroles/:sysrole?/gridview/:gridview?',
@@ -634,7 +634,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-role-permissioncustom-view/sys-role-permissioncustom-view.vue'),
+        component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
     },
     {
         path: '/syspermissions/:syspermission?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
@@ -648,7 +648,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-role-permissioncustom-view/sys-role-permissioncustom-view.vue'),
+        component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
     },
     {
         path: '/sysrolepermissions/:sysrolepermission?/customview/:customview?',
@@ -661,7 +661,7 @@ const router = new Router({
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/uaa/sys-role-permissioncustom-view/sys-role-permissioncustom-view.vue'),
+        component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
     },
     {
         path: '/sysusers/:sysuser?/sysuserroles/:sysuserrole?/gridview/:gridview?',

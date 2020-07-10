@@ -45,10 +45,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import JobsLogService from '@/service/jobs-log/jobs-log-service';
+import JobsLogAuthService from '@/authservice/jobs-log/jobs-log-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import JobsLogUIService from '@/uiservice/jobs-log/jobs-log-ui-service';
 
 @Component({
     components: {
@@ -63,6 +65,14 @@ export default class JobsLogEditViewBase extends Vue {
      * @memberof JobsLogEditViewBase
      */
     public appEntityService: JobsLogService = new JobsLogService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type JobsLogUIService
+     * @memberof JobsLogEditViewBase
+     */
+    public appUIService: JobsLogUIService = new JobsLogUIService(this.$store);
 
 
     /**

@@ -24,6 +24,27 @@ export default class MPickupViewpickupviewpanelModel {
       {
         name: 'displayname',
       },
+      {
+        name: 'mdeptid',
+      },
+      {
+        name: 'mdeptcode',
+      },
+      {
+        name: 'mdeptname',
+      },
+      {
+        name: 'bcode',
+      },
+      {
+        name: 'orgid',
+      },
+      {
+        name: 'orgcode',
+      },
+      {
+        name: 'orgname',
+      },
     ]
   }
 

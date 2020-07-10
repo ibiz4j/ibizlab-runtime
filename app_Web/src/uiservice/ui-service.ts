@@ -18,6 +18,13 @@ export default class UIService {
     private $store: Store<any> | null = null;
 
     /**
+     * 所依赖权限服务
+     *
+     * @memberof UIService
+     */
+    public authService:any;
+
+    /**
      * Creates an instance of UIService.
      * 
      * @param {*} [opts={}]

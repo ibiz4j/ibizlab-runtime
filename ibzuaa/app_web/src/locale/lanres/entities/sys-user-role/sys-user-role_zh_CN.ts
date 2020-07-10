@@ -17,8 +17,8 @@ export default {
       		title: "用户角色关系表数据重定向视图",
 		},
 		editview: {
-			caption: "用户角色关系",
-      		title: "用户角色关系表编辑视图",
+			caption: "用户",
+      		title: "用户",
 		},
 		pickupgridview: {
 			caption: "用户角色关系",
@@ -29,8 +29,8 @@ export default {
       		title: "用户角色关系表数据多项选择视图",
 		},
 		editview2: {
-			caption: "用户角色关系",
-      		title: "用户角色关系表编辑视图",
+			caption: "用户",
+      		title: "用户",
 		},
 		pickupview: {
 			caption: "用户角色关系",

@@ -21,6 +21,7 @@ import cn.ibizlab.util.enums.DEFieldDefaultValueType;
 import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
+import cn.ibizlab.util.annotation.Audit;
 
 
 /**

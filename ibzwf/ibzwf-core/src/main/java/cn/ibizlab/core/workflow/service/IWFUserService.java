@@ -52,6 +52,8 @@ public interface IWFUserService extends IService<WFUser>{
      */
     boolean execute(String sql, Map param);
 
+    List<WFUser> getWfuserByIds(List<String> ids) ;
+    List<WFUser> getWfuserByEntities(List<WFUser> entities) ;
 }
 
 

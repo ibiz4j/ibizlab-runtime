@@ -3,6 +3,7 @@ import ControlService from '@/widgets/control-service';
 import WFMemberService from '@/service/wfmember/wfmember-service';
 import MainModel from './main-form-model';
 import WFUserService from '@/service/wfuser/wfuser-service';
+import WFGroupService from '@/service/wfgroup/wfgroup-service';
 
 
 /**
@@ -51,6 +52,14 @@ export default class MainService extends ControlService {
     public wfuserService: WFUserService = new WFUserService();
 
     /**
+     * 角色/用户组服务对象
+     *
+     * @type {WFGroupService}
+     * @memberof MainService
+     */
+    public wfgroupService: WFGroupService = new WFGroupService();
+
+    /**
      * 处理数据
      *
      * @private
@@ -93,6 +102,9 @@ export default class MainService extends ControlService {
         data.size = data.size ? data.size : 1000;
         if (Object.is(serviceName, 'WFUserService') && Object.is(interfaceName, 'FetchDefault')) {
             return this.doItems(this.wfuserService.FetchDefault(JSON.parse(JSON.stringify(context)),data, isloading), 'id', 'wfuser');
+        }
+        if (Object.is(serviceName, 'WFGroupService') && Object.is(interfaceName, 'FetchDefault')) {
+            return this.doItems(this.wfgroupService.FetchDefault(JSON.parse(JSON.stringify(context)),data, isloading), 'id', 'wfgroup');
         }
 
         return Promise.reject([])

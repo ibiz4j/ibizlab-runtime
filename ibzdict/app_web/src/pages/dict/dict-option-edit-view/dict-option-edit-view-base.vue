@@ -61,10 +61,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import DictOptionService from '@/service/dict-option/dict-option-service';
+import DictOptionAuthService from '@/authservice/dict-option/dict-option-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import DictOptionUIService from '@/uiservice/dict-option/dict-option-ui-service';
 
 @Component({
     components: {
@@ -79,6 +81,14 @@ export default class DictOptionEditViewBase extends Vue {
      * @memberof DictOptionEditViewBase
      */
     public appEntityService: DictOptionService = new DictOptionService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type DictOptionUIService
+     * @memberof DictOptionEditViewBase
+     */
+    public appUIService: DictOptionUIService = new DictOptionUIService(this.$store);
 
 
     /**
@@ -252,9 +262,9 @@ export default class DictOptionEditViewBase extends Vue {
      * @memberof DictOptionEditView
      */
     public toolBarModels: any = {
-        tbitem1: { name: 'tbitem1', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
+        tbitem1: { name: 'tbitem1', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
 
-        tbitem2: { name: 'tbitem2', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
+        tbitem2: { name: 'tbitem2', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
 
     };
 

@@ -4,7 +4,7 @@
 
 
     <!--输出实体[WF_GROUP]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-wf_group-24-1">
+    <changeSet author="a_A_5d9d78509" id="tab-wf_group-26-1">
         <createTable tableName="IBZWFGROUP">
                 <column name="GROUPID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_WF_GROUP_GROUPID"/>
@@ -20,7 +20,7 @@
 
 
     <!--输出实体[WF_GROUP_MEMBER]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-wf_group_member-40-2">
+    <changeSet author="a_A_5d9d78509" id="tab-wf_group_member-50-2">
         <createTable tableName="IBZWFMEMBER">
                 <column name="MEMBERID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_WF_GROUP_MEMBER_MEMBERID"/>
@@ -36,7 +36,7 @@
 
 
     <!--输出实体[WF_DEFINITION]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-wf_definition-56-3">
+    <changeSet author="a_A_5d9d78509" id="tab-wf_definition-57-3">
         <createTable tableName="IBZWFDEFINITION">
                 <column name="DEFINITIONKEY" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_WF_DEFINITION_DEFINITIONKEY"/>
@@ -77,7 +77,7 @@
 
         <!--输出实体[WF_GROUP]外键关系 -->
         <!--输出实体[WF_GROUP_MEMBER]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-wf_group_member-40-5">
+    <changeSet author="a_A_5d9d78509" id="fk-wf_group_member-50-5">
        <addForeignKeyConstraint baseColumnNames="GROUPID" baseTableName="IBZWFMEMBER" constraintName="DER1N_WF_GROUP_MEMBER_WF_GROUP" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="GROUPID" referencedTableName="IBZWFGROUP" validate="true"/>
     </changeSet>
         <!--输出实体[WF_DEFINITION]外键关系 -->

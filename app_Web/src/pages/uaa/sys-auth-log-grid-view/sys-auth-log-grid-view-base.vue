@@ -69,10 +69,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysAuthLogService from '@/service/sys-auth-log/sys-auth-log-service';
+import SysAuthLogAuthService from '@/authservice/sys-auth-log/sys-auth-log-auth-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
 
 
+import SysAuthLogUIService from '@/uiservice/sys-auth-log/sys-auth-log-ui-service';
 import CodeListService from "@service/app/codelist-service";
 
 
@@ -89,6 +91,14 @@ export default class SysAuthLogGridViewBase extends Vue {
      * @memberof SysAuthLogGridViewBase
      */
     public appEntityService: SysAuthLogService = new SysAuthLogService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysAuthLogUIService
+     * @memberof SysAuthLogGridViewBase
+     */
+    public appUIService: SysAuthLogUIService = new SysAuthLogUIService(this.$store);
 
 
     /**

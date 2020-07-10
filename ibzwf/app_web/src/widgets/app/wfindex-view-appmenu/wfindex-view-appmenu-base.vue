@@ -122,11 +122,10 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import WFIndexViewService from './wfindex-view-appmenu-service';
-
 import WFIndexViewModel from './wfindex-view-appmenu-model';
 import { Environment } from '@/environments/environment';
 

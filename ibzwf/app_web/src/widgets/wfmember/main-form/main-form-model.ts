@@ -66,6 +66,21 @@ export default class MainModel {
         dataType: 'PICKUPTEXT',
       },
       {
+        name: 'orgname',
+        prop: 'orgname',
+        dataType: 'PICKUPDATA',
+      },
+      {
+        name: 'mdeptname',
+        prop: 'mdeptname',
+        dataType: 'PICKUPDATA',
+      },
+      {
+        name: 'groupname',
+        prop: 'groupname',
+        dataType: 'PICKUPTEXT',
+      },
+      {
         name: 'memberid',
         prop: 'memberid',
         dataType: 'TEXT',

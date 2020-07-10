@@ -47,6 +47,62 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JsonProperty("displayname")
     private String displayname;
 
+    /**
+     * 属性 [MDEPTID]
+     *
+     */
+    @JSONField(name = "mdeptid")
+    @JsonProperty("mdeptid")
+    private String mdeptid;
+
+    /**
+     * 属性 [MDEPTCODE]
+     *
+     */
+    @JSONField(name = "mdeptcode")
+    @JsonProperty("mdeptcode")
+    private String mdeptcode;
+
+    /**
+     * 属性 [MDEPTNAME]
+     *
+     */
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
+
+    /**
+     * 属性 [BCODE]
+     *
+     */
+    @JSONField(name = "bcode")
+    @JsonProperty("bcode")
+    private String bcode;
+
+    /**
+     * 属性 [ORGID]
+     *
+     */
+    @JSONField(name = "orgid")
+    @JsonProperty("orgid")
+    private String orgid;
+
+    /**
+     * 属性 [ORGCODE]
+     *
+     */
+    @JSONField(name = "orgcode")
+    @JsonProperty("orgcode")
+    private String orgcode;
+
+    /**
+     * 属性 [ORGNAME]
+     *
+     */
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
+
 
     /**
      * 设置 [USERNAME]
@@ -62,6 +118,46 @@ public class WFUserDTO extends DTOBase implements Serializable {
     public void setDisplayname(String  displayname){
         this.displayname = displayname ;
         this.modify("personname",displayname);
+    }
+
+    /**
+     * 设置 [MDEPTID]
+     */
+    public void setMdeptid(String  mdeptid){
+        this.mdeptid = mdeptid ;
+        this.modify("mdeptid",mdeptid);
+    }
+
+    /**
+     * 设置 [MDEPTCODE]
+     */
+    public void setMdeptcode(String  mdeptcode){
+        this.mdeptcode = mdeptcode ;
+        this.modify("mdeptcode",mdeptcode);
+    }
+
+    /**
+     * 设置 [MDEPTNAME]
+     */
+    public void setMdeptname(String  mdeptname){
+        this.mdeptname = mdeptname ;
+        this.modify("mdeptname",mdeptname);
+    }
+
+    /**
+     * 设置 [BCODE]
+     */
+    public void setBcode(String  bcode){
+        this.bcode = bcode ;
+        this.modify("bcode",bcode);
+    }
+
+    /**
+     * 设置 [ORGCODE]
+     */
+    public void setOrgcode(String  orgcode){
+        this.orgcode = orgcode ;
+        this.modify("orgcode",orgcode);
     }
 
 

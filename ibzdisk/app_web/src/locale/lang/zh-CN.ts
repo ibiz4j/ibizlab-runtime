@@ -10,6 +10,7 @@ export default {
             success: "成功",
             ok: "确认",
             cancel: "取消",
+            save: "保存",
             codeNotExist: "代码表不存在",
             reqException: "请求异常",
             sysException: "系统异常",
@@ -176,6 +177,37 @@ export default {
             undefined: "未定义",
             quarter: "季度",   
             year: "年",
+        },
+        searchForm: {
+            notConfig: {
+                loadAction: "视图搜索表单loadAction参数未配置",
+                loaddraftAction: "视图搜索表单loaddraftAction参数未配置",
+            },
+            custom: "存储自定义查询",
+            title: "名称",
+        },
+        wizardPanel: {
+            back: "上一步",
+            next: "下一步",
+            complete: "完成",
+        },
+        viewLayoutPanel: {
+            appLogoutView: {
+                prompt1: "尊敬的客户您好，您已成功退出系统，将在",
+                prompt2: "秒后跳转至",
+                logingPage: "登录页",
+            },
+            appWfstepTraceView: {
+                title: "应用流程处理记录视图",
+            },
+            appWfstepDataView: {
+                title: "应用流程跟踪视图",
+            },
+            appLoginView: {
+                username: "用户名",
+                password: "密码",
+                login: "登录",
+            },
         },
     },
     entities: {

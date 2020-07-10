@@ -11,9 +11,11 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysUserService from '@/service/sys-user/sys-user-service';
+import SysUserAuthService from '@/authservice/sys-user/sys-user-auth-service';
 
 
 
+import SysUserUIService from '@/uiservice/sys-user/sys-user-ui-service';
 import UIService from '@/uiservice/ui-service';
 
 
@@ -30,6 +32,14 @@ export default class SYS_USERRedirectViewBase extends Vue {
      * @memberof SYS_USERRedirectViewBase
      */
     public appEntityService: SysUserService = new SysUserService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysUserUIService
+     * @memberof SYS_USERRedirectViewBase
+     */
+    public appUIService: SysUserUIService = new SysUserUIService(this.$store);
 
 
     /**

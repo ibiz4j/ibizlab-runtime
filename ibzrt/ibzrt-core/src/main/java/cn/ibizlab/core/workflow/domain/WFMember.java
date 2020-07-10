@@ -21,6 +21,7 @@ import cn.ibizlab.util.enums.DEFieldDefaultValueType;
 import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
+import cn.ibizlab.util.annotation.Audit;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -72,6 +73,34 @@ public class WFMember extends EntityClient implements Serializable {
     @JSONField(name = "personname")
     @JsonProperty("personname")
     private String personname;
+
+    /**
+     * 单位
+     */
+    @JSONField(name = "orgid")
+    @JsonProperty("orgid")
+    private String orgid;
+
+    /**
+     * 单位
+     */
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
+
+    /**
+     * 主部门
+     */
+    @JSONField(name = "mdeptid")
+    @JsonProperty("mdeptid")
+    private String mdeptid;
+
+    /**
+     * 主部门
+     */
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
 
 
     /**

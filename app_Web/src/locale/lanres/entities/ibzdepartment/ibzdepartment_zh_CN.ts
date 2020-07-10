@@ -28,8 +28,8 @@ export default {
       		title: "部门表格视图",
 		},
 		editview: {
-			caption: "部门",
-      		title: "部门编辑视图",
+			caption: "部门管理",
+      		title: "部门管理",
 		},
 		mpickupview: {
 			caption: "部门",

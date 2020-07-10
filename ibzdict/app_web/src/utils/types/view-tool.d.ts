@@ -93,6 +93,17 @@ export declare interface ViewTool {
      * @memberof ViewTool
      */
     getIndexViewParam(): any;
+
+    /**
+     * 计算界面行为项权限状态
+     *
+     * @static
+     * @param {*} [data] 传入数据
+     * @param {*} [ActionModel] 界面行为模型
+     * @param {*} [UIService] 界面行为服务
+     * @memberof ViewTool
+     */
+    calcActionItemAuthState(data:any,ActionModel:any,UIService:any):any;
 }
 
 declare module "vue/types/vue" {

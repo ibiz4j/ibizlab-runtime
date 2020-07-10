@@ -21,6 +21,7 @@ import cn.ibizlab.util.enums.DEFieldDefaultValueType;
 import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
+import cn.ibizlab.util.annotation.Audit;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -63,6 +64,57 @@ public class WFUser extends EntityMP implements Serializable {
     @JSONField(name = "displayname")
     @JsonProperty("displayname")
     private String displayname;
+    /**
+     * 主部门
+     */
+    @TableField(value = "mdeptid")
+    @JSONField(name = "mdeptid")
+    @JsonProperty("mdeptid")
+    private String mdeptid;
+    /**
+     * 主部门代码
+     */
+    @TableField(value = "mdeptcode")
+    @JSONField(name = "mdeptcode")
+    @JsonProperty("mdeptcode")
+    private String mdeptcode;
+    /**
+     * 主部门名称
+     */
+    @TableField(value = "mdeptname")
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
+    /**
+     * 业务编码
+     */
+    @TableField(value = "bcode")
+    @JSONField(name = "bcode")
+    @JsonProperty("bcode")
+    private String bcode;
+    /**
+     * 单位
+     */
+    @DEField(preType = DEPredefinedFieldType.ORGID)
+    @TableField(value = "orgid")
+    @JSONField(name = "orgid")
+    @JsonProperty("orgid")
+    private String orgid;
+    /**
+     * 单位代码
+     */
+    @TableField(value = "orgcode")
+    @JSONField(name = "orgcode")
+    @JsonProperty("orgcode")
+    private String orgcode;
+    /**
+     * 单位名称
+     */
+    @DEField(preType = DEPredefinedFieldType.ORGNAME)
+    @TableField(value = "orgname")
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
 
 
 
@@ -80,6 +132,46 @@ public class WFUser extends EntityMP implements Serializable {
     public void setDisplayname(String displayname){
         this.displayname = displayname ;
         this.modify("personname",displayname);
+    }
+
+    /**
+     * 设置 [主部门]
+     */
+    public void setMdeptid(String mdeptid){
+        this.mdeptid = mdeptid ;
+        this.modify("mdeptid",mdeptid);
+    }
+
+    /**
+     * 设置 [主部门代码]
+     */
+    public void setMdeptcode(String mdeptcode){
+        this.mdeptcode = mdeptcode ;
+        this.modify("mdeptcode",mdeptcode);
+    }
+
+    /**
+     * 设置 [主部门名称]
+     */
+    public void setMdeptname(String mdeptname){
+        this.mdeptname = mdeptname ;
+        this.modify("mdeptname",mdeptname);
+    }
+
+    /**
+     * 设置 [业务编码]
+     */
+    public void setBcode(String bcode){
+        this.bcode = bcode ;
+        this.modify("bcode",bcode);
+    }
+
+    /**
+     * 设置 [单位代码]
+     */
+    public void setOrgcode(String orgcode){
+        this.orgcode = orgcode ;
+        this.modify("orgcode",orgcode);
     }
 
 

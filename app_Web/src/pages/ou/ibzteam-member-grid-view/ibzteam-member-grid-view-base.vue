@@ -82,10 +82,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import IBZTeamMemberService from '@/service/ibzteam-member/ibzteam-member-service';
+import IBZTeamMemberAuthService from '@/authservice/ibzteam-member/ibzteam-member-auth-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
 
 
+import IBZTeamMemberUIService from '@/uiservice/ibzteam-member/ibzteam-member-ui-service';
 import CodeListService from "@service/app/codelist-service";
 
 
@@ -102,6 +104,14 @@ export default class IBZTeamMemberGridViewBase extends Vue {
      * @memberof IBZTeamMemberGridViewBase
      */
     public appEntityService: IBZTeamMemberService = new IBZTeamMemberService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type IBZTeamMemberUIService
+     * @memberof IBZTeamMemberGridViewBase
+     */
+    public appUIService: IBZTeamMemberUIService = new IBZTeamMemberUIService(this.$store);
 
 
     /**
@@ -275,14 +285,14 @@ export default class IBZTeamMemberGridViewBase extends Vue {
      * @memberof IBZTeamMemberGridView
      */
     public toolBarModels: any = {
-        tbitem24: { name: 'tbitem24', caption: '行编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ToggleRowEdit', target: '' } },
+        tbitem24: { name: 'tbitem24', caption: '行编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleRowEdit', target: '' } },
 
-        tbitem25: { name: 'tbitem25', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'NewRow', target: '' } },
+        tbitem25: { name: 'tbitem25', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'NewRow', target: '' } },
 
-        deuiaction1: { name: 'deuiaction1', caption: '保存行', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'SaveRow', target: '' } },
+        deuiaction1: { name: 'deuiaction1', caption: '保存行', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveRow', target: '' } },
 
         tbitem26: {  name: 'tbitem26', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
     };
 

@@ -1,5 +1,4 @@
 import AuthService from '../auth-service';
-import SysRolePermissionUIService from '@/uiservice/sys-role-permission/sys-role-permission-ui-service';
 
 /**
  * 角色权限关系权限服务对象基类
@@ -11,13 +10,6 @@ import SysRolePermissionUIService from '@/uiservice/sys-role-permission/sys-role
 export default class SysRolePermissionAuthServiceBase extends AuthService {
 
     /**
-     * 所依赖UI服务
-     *
-     * @memberof SysRolePermissionAuthServiceBase
-     */
-    public sysrolepermissionUIService:any;
-
-    /**
      * Creates an instance of  SysRolePermissionAuthServiceBase.
      * 
      * @param {*} [opts={}]
@@ -25,18 +17,16 @@ export default class SysRolePermissionAuthServiceBase extends AuthService {
      */
     constructor(opts: any = {}) {
         super(opts);
-        this.sysrolepermissionUIService = new SysRolePermissionUIService(opts);
     }
 
     /**
      * 根据当前数据获取实体操作标识
      *
-     * @param {*} data 传入数据
+     * @param {*} mainSateOPPrivs 传入数据操作标识
      * @returns {any}
      * @memberof SysRolePermissionAuthServiceBase
      */
-    public getOPPrivs(data:any):any{
-        let mainSateOPPrivs:any = this.sysrolepermissionUIService.getDEMainStateOPPrivs(data);
+    public getOPPrivs(mainSateOPPrivs:any):any{
         let curDefaultOPPrivs:any = JSON.parse(JSON.stringify(this.defaultOPPrivs));
         if(mainSateOPPrivs){
             Object.assign(curDefaultOPPrivs,mainSateOPPrivs);

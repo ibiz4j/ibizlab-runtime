@@ -1,15 +1,7 @@
+
 <template>
-<div class="view-container decustomview sys-role-permissioncustom-view">
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="sys_role_permissioncustomview"></app-studioaction>
-    <card class='view-card  view-no-toolbar' :disHover="true" :padding="0" :bordered="false">
-
-<div slot='title' class="header-container">
-    <span class='caption-info'>{{$t(model.srfTitle)}}</span>
-</div>
-
-        <div class="content-container">
-        </div>
-    </card>
+<div class="view-container deredirectview sys-role-permission-redirect-view">
+    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="sysrolepermissionredirectview"></app-studioaction>
 </div>
 </template>
 
@@ -19,30 +11,42 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysRolePermissionService from '@/service/sys-role-permission/sys-role-permission-service';
+import SysRolePermissionAuthService from '@/authservice/sys-role-permission/sys-role-permission-auth-service';
 
 
+
+import SysRolePermissionUIService from '@/uiservice/sys-role-permission/sys-role-permission-ui-service';
+import UIService from '@/uiservice/ui-service';
 
 
 @Component({
     components: {
     },
 })
-export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
+export default class SysRolePermissionRedirectViewBase extends Vue {
 
     /**
      * 实体服务对象
      *
      * @type {SysRolePermissionService}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public appEntityService: SysRolePermissionService = new SysRolePermissionService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysRolePermissionUIService
+     * @memberof SysRolePermissionRedirectViewBase
+     */
+    public appUIService: SysRolePermissionUIService = new SysRolePermissionUIService(this.$store);
 
 
     /**
      * 计数器服务对象集合
      *
      * @type {Array<*>}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */    
     public counterServiceArray:Array<any> = [];
     
@@ -51,7 +55,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      *
      * @param {*} val
      * @returns {*}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     @Emit() 
     public viewDatasChange(val: any):any {
@@ -62,7 +66,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 传入视图上下文
      *
      * @type {string}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     @Prop() public viewdata!: string;
 
@@ -70,7 +74,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 传入视图参数
      *
      * @type {string}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     @Prop() public viewparam!: string;
 
@@ -78,7 +82,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 视图默认使用
      *
      * @type {boolean}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     @Prop({ default: true }) public viewDefaultUsage!: boolean;
 
@@ -86,7 +90,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 视图默认使用
      *
      * @type {string}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
@@ -95,15 +99,15 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
 	 * 视图标识
 	 *
 	 * @type {string}
-	 * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+	 * @memberof SysRolePermissionRedirectViewBase
 	 */
-	public viewtag: string = 'e791be173ed0f4bbe9cce942b6edde63';
+	public viewtag: string = '47fb02384b5797f4b095e247619515f4';
 
 	/**
 	 * 自定义视图导航上下文集合
 	 *
 	 * @type {*}
-	 * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+	 * @memberof SysRolePermissionRedirectViewBase
 	 */
     public customViewNavContexts:any ={
     };
@@ -112,7 +116,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
 	 * 自定义视图导航参数集合
 	 *
 	 * @type {*}
-	 * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+	 * @memberof SysRolePermissionRedirectViewBase
 	 */
     public customViewParams:any ={
     };
@@ -121,12 +125,12 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 视图模型数据
      *
      * @type {*}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public model: any = {
-        srfCaption: 'entities.sysrolepermission.views.customview.caption',
-        srfTitle: 'entities.sysrolepermission.views.customview.title',
-        srfSubTitle: 'entities.sysrolepermission.views.customview.subtitle',
+        srfCaption: 'entities.sysrolepermission.views.redirectview.caption',
+        srfTitle: 'entities.sysrolepermission.views.redirectview.title',
+        srfSubTitle: 'entities.sysrolepermission.views.redirectview.subtitle',
         dataInfo: ''
     }
 
@@ -135,7 +139,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     @Watch('viewparam',{immediate: true, deep: true})
     onParamData(newVal: any, oldVal: any) {
@@ -153,7 +157,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      *
      * @param {*} newVal
      * @param {*} oldVal
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     @Watch('viewdata')
     onViewData(newVal: any, oldVal: any) {
@@ -171,7 +175,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 容器模型
      *
      * @type {*}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public containerModel: any = {
     };
@@ -179,7 +183,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      *  计数器刷新
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public counterRefresh(){
         const _this:any =this;
@@ -197,7 +201,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      *
      * @public
      * @type {Subject<{action: string, data: any}>}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public viewState: Subject<ViewState> = new Subject();
 
@@ -207,7 +211,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 引擎初始化
      *
      * @public
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public engineInit(): void {
     }
@@ -216,7 +220,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 应用导航服务
      *
      * @type {*}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public  navDataService = NavDataService.getInstance(this.$store);
 
@@ -225,7 +229,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     *
     * @public
     * @type {(Subscription | undefined)}
-    * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+    * @memberof SysRolePermissionRedirectViewBase
     */
     public serviceStateEvent: Subscription | undefined;
 
@@ -233,7 +237,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 应用上下文
      *
      * @type {*}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public context:any = {};
 
@@ -241,7 +245,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 视图参数
      *
      * @type {*}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public viewparams:any = {};
 
@@ -249,7 +253,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 视图缓存数据
      *
      * @type {*}
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public viewCacheData:any;
 
@@ -257,7 +261,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 解析视图参数
      *
      * @public
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public parseViewParam(inputvalue:any = null): void {
         for(let key in this.context){
@@ -305,7 +309,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * 处理自定义视图数据
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
 	public handleCustomViewData(){
 		if(Object.keys(this.customViewNavContexts).length > 0){
@@ -329,7 +333,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * 处理自定义视图数据逻辑
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
 	public handleCustomDataLogic(curNavData:any,tempData:any,item:string){
 		// 直接值直接赋值
@@ -381,22 +385,22 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * 初始化导航数据(路由模式)
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'sys-role-permissioncustom-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'sys-role-permission-redirect-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
     /**
      * 初始化导航数据(分页模式)
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'sys-role-permissioncustom-view',tag:this.viewtag,srfkey:this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'sys-role-permission-redirect-view',tag:this.viewtag,srfkey:this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	
@@ -404,7 +408,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * Vue声明周期
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public created() {
         this.afterCreated();
@@ -413,7 +417,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * 执行created后的逻辑
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */    
     public afterCreated(){
         let _this:any = this;
@@ -422,7 +426,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
         _this.viewtag = secondtag;
         _this.parseViewParam();
         _this.serviceStateEvent = _this.navDataService.serviceState.subscribe(({ action,name, data }:{ action:string,name:any,data:any }) => {
-            if(!Object.is(name,'sys-role-permissioncustom-view')){
+            if(!Object.is(name,'sys-role-permission-redirect-view')){
                 return;
             }
             if (Object.is(action, 'viewrefresh')) {
@@ -434,13 +438,14 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
                 }); 
             }
         });
-        
+            this.viewInit();
+
     }
 
     /**
      * 销毁之前
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public beforeDestroy() {
         this.$store.commit('viewaction/removeView', this.viewtag);
@@ -449,7 +454,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * Vue声明周期(组件初始化完毕)
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public mounted() {
         this.afterMounted();
@@ -458,7 +463,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * 执行mounted后的逻辑
      * 
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public afterMounted(){
         const _this: any = this;
@@ -476,7 +481,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
      * 关闭视图
      *
      * @param {any[]} args
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public closeView(args: any[]): void {
         let _view: any = this;
@@ -491,7 +496,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * 销毁视图回调
      *
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public destroyed(){
         this.afterDestroyed();
@@ -500,7 +505,7 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
     /**
      * 执行destroyed后的逻辑
      * 
-     * @memberof SYS_ROLE_PERMISSIONCustomViewBase
+     * @memberof SysRolePermissionRedirectViewBase
      */
     public afterDestroyed(){
         if(this.viewDefaultUsage){
@@ -520,10 +525,29 @@ export default class SYS_ROLE_PERMISSIONCustomViewBase extends Vue {
             }
         }
     }
+        /**
+     * 初始化视图
+     *
+     * @memberof SysRolePermissionRedirectViewBase
+     */    
+    public async viewInit(){
+        const {srfkey:srfkey,srfappde:srfappde} = this.viewparams;
+        const uiService:UIService = new UIService();
+        const targetService:any = await uiService.getService(srfappde.toLowerCase());
+        targetService.getRDAppView(srfkey,true).then((res:any) =>{
+            if(res && res.viewname && res.srfappde){
+                const path:string =`/${res.srfappde}/${srfkey}/${res.viewname}`;
+                this.$router.push({path:path});
+            }else{
+                console.error("未查找到重定向视图")
+            }
+        })
+    }
+
 
 }
 </script>
 
 <style lang='less'>
-@import './sys-role-permissioncustom-view.less';
+@import './sys-role-permission-redirect-view.less';
 </style>

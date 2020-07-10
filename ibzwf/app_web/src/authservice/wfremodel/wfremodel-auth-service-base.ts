@@ -1,5 +1,4 @@
 import AuthService from '../auth-service';
-import WFREModelUIService from '@/uiservice/wfremodel/wfremodel-ui-service';
 
 /**
  * 流程模型权限服务对象基类
@@ -11,13 +10,6 @@ import WFREModelUIService from '@/uiservice/wfremodel/wfremodel-ui-service';
 export default class WFREModelAuthServiceBase extends AuthService {
 
     /**
-     * 所依赖UI服务
-     *
-     * @memberof WFREModelAuthServiceBase
-     */
-    public wfremodelUIService:any;
-
-    /**
      * Creates an instance of  WFREModelAuthServiceBase.
      * 
      * @param {*} [opts={}]
@@ -25,18 +17,16 @@ export default class WFREModelAuthServiceBase extends AuthService {
      */
     constructor(opts: any = {}) {
         super(opts);
-        this.wfremodelUIService = new WFREModelUIService(opts);
     }
 
     /**
      * 根据当前数据获取实体操作标识
      *
-     * @param {*} data 传入数据
+     * @param {*} mainSateOPPrivs 传入数据操作标识
      * @returns {any}
      * @memberof WFREModelAuthServiceBase
      */
-    public getOPPrivs(data:any):any{
-        let mainSateOPPrivs:any = this.wfremodelUIService.getDEMainStateOPPrivs(data);
+    public getOPPrivs(mainSateOPPrivs:any):any{
         let curDefaultOPPrivs:any = JSON.parse(JSON.stringify(this.defaultOPPrivs));
         if(mainSateOPPrivs){
             Object.assign(curDefaultOPPrivs,mainSateOPPrivs);

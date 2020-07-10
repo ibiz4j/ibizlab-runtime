@@ -169,7 +169,45 @@ export default class ViewEngine {
             if (_item.uiaction && (Object.is(_item.uiaction.target, 'SINGLEKEY') || Object.is(_item.uiaction.target, 'MULTIKEY'))) {
                 _item.disabled = state;
             }
+            _item.visabled = true;
+            if(_item.noprivdisplaymode && _item.noprivdisplaymode === 6){
+                _item.visabled = false;
+            }
         }
     }
+
+    /**
+     * 计算工具栏权限状态
+     *
+     * @param {boolean} state
+     * @param {*} [dataaccaction]
+     * @memberof ViewEngine
+     */
+    public calcToolbarItemAuthState(data:any){
+        const _this: any = this;
+        for (const key in _this.view.toolBarModels) {
+            if (!_this.view.toolBarModels.hasOwnProperty(key)) {
+                return;
+            }
+            const _item = _this.view.toolBarModels[key];
+            if(_item && _item['dataaccaction'] && _this.view.appUIService && data && Object.keys(data).length >0){
+                let dataActionResult:any = _this.view.appUIService.getAllOPPrivs(data)[_item['dataaccaction']];
+                // 无权限:0;有权限:1
+                if(!dataActionResult){
+                    // 禁用:1;隐藏:2;隐藏且默认隐藏:6
+                    if(_item.noprivdisplaymode === 1){
+                        _this.view.toolBarModels[key].disabled = true;
+                    }
+                    if((_item.noprivdisplaymode === 2) || (_item.noprivdisplaymode === 6)){
+                        _this.view.toolBarModels[key].visabled = false;
+                    }else{
+                        _this.view.toolBarModels[key].visabled = true;
+                    }
+                }else{
+                    _this.view.toolBarModels[key].visabled = true;
+                }
+            }
+        }
+    }   
 
 }

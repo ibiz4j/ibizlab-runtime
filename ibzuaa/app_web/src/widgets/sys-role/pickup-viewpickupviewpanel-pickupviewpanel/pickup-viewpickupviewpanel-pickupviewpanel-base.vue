@@ -22,12 +22,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import SysRoleService from '@/service/sys-role/sys-role-service';
 import PickupViewpickupviewpanelService from './pickup-viewpickupviewpanel-pickupviewpanel-service';
-
+import SysRoleUIService from '@/uiservice/sys-role/sys-role-ui-service';
 import PickupViewpickupviewpanelModel from './pickup-viewpickupviewpanel-pickupviewpanel-model';
 
 
@@ -110,6 +110,19 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
 
 
     /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  PickupViewpickupviewpanelBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
+
+    /**
      * 关闭视图
      *
      * @param {any} args
@@ -173,7 +186,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * @memberof PickupViewpickupviewpanelBase
      */
     public view: any = {
-        viewname: 'sys-rolepickup-grid-view',
+        viewname: 'sys-role-pickup-grid-view',
         data: {},
     }
 

@@ -61,10 +61,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import WFMemberService from '@/service/wfmember/wfmember-service';
+import WFMemberAuthService from '@/authservice/wfmember/wfmember-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import WFMemberUIService from '@/uiservice/wfmember/wfmember-ui-service';
 
 @Component({
     components: {
@@ -79,6 +81,14 @@ export default class WFMemberEditViewBase extends Vue {
      * @memberof WFMemberEditViewBase
      */
     public appEntityService: WFMemberService = new WFMemberService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type WFMemberUIService
+     * @memberof WFMemberEditViewBase
+     */
+    public appUIService: WFMemberUIService = new WFMemberUIService(this.$store);
 
 
     /**
@@ -252,10 +262,10 @@ export default class WFMemberEditViewBase extends Vue {
      * @memberof WFMemberEditView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
         tbitem6: {  name: 'tbitem6', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
     };
 

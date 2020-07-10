@@ -33,6 +33,30 @@
                     </template>
                 </el-table-column>
             </template>
+            <template v-if="getColumnState('orgname')">
+                <el-table-column show-overflow-tooltip :prop="'orgname'" :label="$t('entities.wfmember.main_grid.columns.orgname')" :width="250"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.wfmember.main_grid.columns.orgname')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.orgname}}</span>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('mdeptname')">
+                <el-table-column show-overflow-tooltip :prop="'mdeptname'" :label="$t('entities.wfmember.main_grid.columns.mdeptname')" :width="250"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.wfmember.main_grid.columns.mdeptname')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.mdeptname}}</span>
+                    </template>
+                </el-table-column>
+            </template>
             <template v-if="getColumnState('groupname')">
                 <el-table-column show-overflow-tooltip :prop="'groupname'" :label="$t('entities.wfmember.main_grid.columns.groupname')" :width="250"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
@@ -91,12 +115,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import WFMemberService from '@/service/wfmember/wfmember-service';
 import MainService from './main-grid-service';
-
+import WFMemberUIService from '@/uiservice/wfmember/wfmember-ui-service';
 import CodeListService from "@service/app/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 
@@ -188,6 +212,19 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
     /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  MainBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
+
+    /**
      * 关闭视图
      *
      * @param {any} args
@@ -222,6 +259,23 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 界面UI服务对象
+     *
+     * @type {WFMemberUIService}
+     * @memberof MainBase
+     */  
+    public appUIService:WFMemberUIService = new WFMemberUIService(this.$store);
+
+    /**
+     * 界面行为模型
+     *
+     * @type {*}
+     * @memberof MainBase
+     */  
+    public ActionModel:any ={
+    };
 
     /**
      * 应用状态事件
@@ -473,6 +527,13 @@ export default class MainBase extends Vue implements ControlInterface {
     public totalrow: number = 0;
 
     /**
+     * 表格更新默认值项
+     * 
+     * @memberof MainBase
+     */
+    public defaultUpdateItems:Array<any> =['srfkey'];
+
+    /**
      * 选中行数据
      *
      * @type {any[]}
@@ -541,6 +602,22 @@ export default class MainBase extends Vue implements ControlInterface {
             isEnableRowEdit: false,
         },
         {
+            name: 'orgname',
+            label: '单位',
+            langtag: 'entities.wfmember.main_grid.columns.orgname',
+            show: true,
+            util: 'PX',
+            isEnableRowEdit: false,
+        },
+        {
+            name: 'mdeptname',
+            label: '主部门',
+            langtag: 'entities.wfmember.main_grid.columns.mdeptname',
+            show: true,
+            util: 'PX',
+            isEnableRowEdit: false,
+        },
+        {
             name: 'groupname',
             label: '用户组',
             langtag: 'entities.wfmember.main_grid.columns.groupname',
@@ -557,6 +634,18 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public gridItemsModel: any[] = [];
+
+    /**
+     * 获取界面行为权限状态
+     *
+     * @memberof MainBase
+     */
+    public getActionState(data:any){
+        let targetData:any = this.transformData(data);
+        let tempActionModel:any = JSON.parse(JSON.stringify(this.ActionModel));
+        ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
+        return tempActionModel;
+    }
 
     /**
      * 获取表格行模型
@@ -673,6 +762,9 @@ export default class MainBase extends Vue implements ControlInterface {
             this.selections = [];
             this.gridItemsModel = [];
             this.items.forEach(()=>{this.gridItemsModel.push(this.getGridRowModel())});
+            this.items.forEach((item:any)=>{
+                Object.assign(item,this.getActionState(item));    
+            });
             this.$emit('load', this.items);
             // 设置默认选中
             let _this = this;
@@ -1356,6 +1448,13 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async save(args: any[], params?: any, $event?: any, xData?: any){
         let _this = this;
+        if(_this.items && _this.items.length >0){
+            for (const item of _this.items) {
+                if(Object.is(item.rowDataState, 'update')){
+                    _this.updateDefault(item);
+                }
+            }
+        }
         if(!await this.validateAll()){
             this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.rulesException') as string) });
             return [];
@@ -1381,7 +1480,7 @@ export default class MainBase extends Vue implements ControlInterface {
                         if(item.wfmember){
                             Object.assign(this.context,{wfmember:item.wfmember});
                         }
-                        let response = await this.service.add(this.updateAction,JSON.parse(JSON.stringify(this.context)),item, this.showBusyIndicator);
+                        let response = await this.service.update(this.updateAction,JSON.parse(JSON.stringify(this.context)),item, this.showBusyIndicator);
                         successItems.push(JSON.parse(JSON.stringify(response.data)));
                     }
                 }
@@ -1472,6 +1571,11 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public gridEditItemChange(row: any, property: string, value: any, rowIndex: number){
         row.rowDataState = row.rowDataState ? row.rowDataState : "update" ;
+        if(Object.is(row.rowDataState,"update")){
+            if(!value && this.defaultUpdateItems.includes(property)){
+                row.hasUpdated = true;
+            }
+        }
         this.validate(property,row,rowIndex);
     }
 
@@ -1559,6 +1663,14 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public createDefault(row: any){                    
+    }
+
+    /**
+     * 更新默认值
+     * @param {*}  row 行数据
+     * @memberof MainBase
+     */
+    public updateDefault(row: any){                    
     }
 }
 </script>

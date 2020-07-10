@@ -700,6 +700,7 @@ export default class SDIndexViewBase extends Vue {
         let left_move :any= document.getElementById("left_move");
         let right_move :any= document.getElementById("right_move");
         let movebox :any= document.getElementById("movebox");
+        let leftWidth :number = parseInt(left_move.style.width);
         move_axis.onmousedown = (e:any) =>{
             let startX = e.clientX;
             move_axis.left = move_axis.offsetLeft;
@@ -712,6 +713,15 @@ export default class SDIndexViewBase extends Vue {
                 move_axis.style.left = moveLen;
                 left_move.style.width = moveLen + "px";
                 right_move.style.width = (movebox.clientWidth - moveLen - 5) + "px";
+                if (moveLen>500) {
+                    left_move.style.width = 500 + 'px';
+                }
+
+                let left_width : number = parseInt(left_move.style.width);
+                move_axis.style.left = left_width - 5 + 'px';
+                if (left_width < leftWidth){
+                    move_axis.style.left = leftWidth - 5 + 'px';
+                }
             }
             document.onmouseup = (evt) =>{
                 document.onmousemove = null;
@@ -721,6 +731,7 @@ export default class SDIndexViewBase extends Vue {
             move_axis.setCapture && move_axis.setCapture();
             return false;
         }
+        
     }
 
 }

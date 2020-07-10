@@ -61,10 +61,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import JobsInfoService from '@/service/jobs-info/jobs-info-service';
+import JobsInfoAuthService from '@/authservice/jobs-info/jobs-info-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import JobsInfoUIService from '@/uiservice/jobs-info/jobs-info-ui-service';
 
 @Component({
     components: {
@@ -79,6 +81,14 @@ export default class JobsInfoEditViewBase extends Vue {
      * @memberof JobsInfoEditViewBase
      */
     public appEntityService: JobsInfoService = new JobsInfoService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type JobsInfoUIService
+     * @memberof JobsInfoEditViewBase
+     */
+    public appUIService: JobsInfoUIService = new JobsInfoUIService(this.$store);
 
 
     /**
@@ -252,9 +262,9 @@ export default class JobsInfoEditViewBase extends Vue {
      * @memberof JobsInfoEditView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
-        deuiaction1: { name: 'deuiaction1', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
+        deuiaction1: { name: 'deuiaction1', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
 
     };
 

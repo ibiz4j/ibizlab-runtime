@@ -4,7 +4,7 @@
     <row >
             
 <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-group :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysrole.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
+    <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysrole.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.sys_rolename.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
     <app-form-item name='sys_rolename' :itemRules="this.rules.sys_rolename" class='' :caption="$t('entities.sysrole.main_form.details.sys_rolename')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_rolename.error" :isEmptyCaption="false" labelPos="LEFT">
@@ -115,12 +115,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import SysRoleService from '@/service/sys-role/sys-role-service';
 import MainService from './main-form-service';
-
+import SysRoleUIService from '@/uiservice/sys-role/sys-role-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import schema from 'async-validator';
@@ -213,6 +213,19 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
     /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  MainBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
+
+    /**
      * 关闭视图
      *
      * @param {any} args
@@ -248,6 +261,14 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
+
+    /**
+     * 界面UI服务对象
+     *
+     * @type {SysRoleUIService}
+     * @memberof MainBase
+     */  
+    public appUIService:SysRoleUIService = new SysRoleUIService(this.$store);
 
     /**
      * 工作流审批意见控件绑定值

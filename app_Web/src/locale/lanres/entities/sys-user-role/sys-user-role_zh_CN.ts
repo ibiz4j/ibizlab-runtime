@@ -17,8 +17,8 @@ export default {
       		title: "用户角色关系表表格视图",
 		},
 		editview: {
-			caption: "用户角色关系",
-      		title: "用户角色关系表编辑视图",
+			caption: "用户角色",
+      		title: "用户角色",
 		},
 	},
 	main_form: {

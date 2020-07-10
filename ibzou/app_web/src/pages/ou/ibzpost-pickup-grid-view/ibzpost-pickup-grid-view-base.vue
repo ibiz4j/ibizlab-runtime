@@ -51,10 +51,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import IBZPostService from '@/service/ibzpost/ibzpost-service';
+import IBZPostAuthService from '@/authservice/ibzpost/ibzpost-auth-service';
 
 import PickupGridViewEngine from '@engine/view/pickup-grid-view-engine';
 
 
+import IBZPostUIService from '@/uiservice/ibzpost/ibzpost-ui-service';
 
 @Component({
     components: {
@@ -69,6 +71,14 @@ export default class IBZPostPickupGridViewBase extends Vue {
      * @memberof IBZPostPickupGridViewBase
      */
     public appEntityService: IBZPostService = new IBZPostService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type IBZPostUIService
+     * @memberof IBZPostPickupGridViewBase
+     */
+    public appUIService: IBZPostUIService = new IBZPostUIService(this.$store);
 
 
     /**

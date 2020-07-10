@@ -4,7 +4,7 @@
     <row >
             
 <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-group :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzemployee.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
+    <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzemployee.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.usercode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='usercode' :itemRules="this.rules.usercode" class='' :caption="$t('entities.ibzemployee.main_form.details.usercode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.usercode.error" :isEmptyCaption="false" labelPos="LEFT">
@@ -25,7 +25,7 @@
 
 </i-col>
 <i-col v-show="detailsModel.grouppanel1.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 24, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 24, offset: 0 }">
-    <app-form-group :manageContainerStatus="detailsModel.grouppanel1.manageContainerStatus"  :isManageContainer="detailsModel.grouppanel1.isManageContainer" @managecontainerclick="manageContainerClick('grouppanel1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.grouppanel1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzemployee.main_form.details.grouppanel1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
+    <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.grouppanel1.manageContainerStatus"  :isManageContainer="detailsModel.grouppanel1.isManageContainer" @managecontainerclick="manageContainerClick('grouppanel1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.grouppanel1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzemployee.main_form.details.grouppanel1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.ibzemployee.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
@@ -153,7 +153,7 @@
 
 </i-col>
 <i-col v-show="detailsModel.grouppanel2.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 24, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 24, offset: 0 }">
-    <app-form-group :manageContainerStatus="detailsModel.grouppanel2.manageContainerStatus"  :isManageContainer="detailsModel.grouppanel2.isManageContainer" @managecontainerclick="manageContainerClick('grouppanel2')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.grouppanel2.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzemployee.main_form.details.grouppanel2')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
+    <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.grouppanel2.manageContainerStatus"  :isManageContainer="detailsModel.grouppanel2.isManageContainer" @managecontainerclick="manageContainerClick('grouppanel2')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.grouppanel2.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzemployee.main_form.details.grouppanel2')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
             
     </row>
@@ -208,12 +208,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import IBZEmployeeService from '@/service/ibzemployee/ibzemployee-service';
 import MainService from './main-form-service';
-
+import IBZEmployeeUIService from '@/uiservice/ibzemployee/ibzemployee-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import schema from 'async-validator';
@@ -306,6 +306,19 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
     /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  MainBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
+
+    /**
      * 关闭视图
      *
      * @param {any} args
@@ -341,6 +354,14 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
+
+    /**
+     * 界面UI服务对象
+     *
+     * @type {IBZEmployeeUIService}
+     * @memberof MainBase
+     */  
+    public appUIService:IBZEmployeeUIService = new IBZEmployeeUIService(this.$store);
 
     /**
      * 工作流审批意见控件绑定值

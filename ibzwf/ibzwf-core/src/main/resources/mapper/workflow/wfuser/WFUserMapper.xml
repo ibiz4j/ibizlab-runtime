@@ -26,7 +26,7 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-		<![CDATA[ SELECT t1.`PERSONNAME`, t1.`USERID`, t1.`USERNAME` FROM `IBZUSER` t1  
+		<![CDATA[ SELECT t1.`BCODE`, t1.`MDEPTCODE`, t1.`MDEPTID`, t1.`MDEPTNAME`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGNAME`, t1.`PERSONNAME`, t1.`USERID`, t1.`USERNAME` FROM `IBZUSER` t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->

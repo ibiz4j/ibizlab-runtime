@@ -1,6 +1,7 @@
 export const PageComponents = {
     install(Vue: any, opt: any) {
                 Vue.component('ibzemployee-mpickup-view', () => import('@pages/ou/ibzemployee-mpickup-view/ibzemployee-mpickup-view.vue'));
+        Vue.component('wfgroup-pickup-view', () => import('@pages/workflow/wfgroup-pickup-view/wfgroup-pickup-view.vue'));
         Vue.component('sys-role-mpickup-view', () => import('@pages/uaa/sys-role-mpickup-view/sys-role-mpickup-view.vue'));
         Vue.component('ibzemployee-pickup-view', () => import('@pages/ou/ibzemployee-pickup-view/ibzemployee-pickup-view.vue'));
         Vue.component('ibzemployee-pickup-grid-view', () => import('@pages/ou/ibzemployee-pickup-grid-view/ibzemployee-pickup-grid-view.vue'));

@@ -184,6 +184,25 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
         return true;
     }
 
+    @Override
+    public List<WFUser> getWfuserByIds(List<String> ids) {
+         return this.listByIds(ids);
+    }
+
+    @Override
+    public List<WFUser> getWfuserByEntities(List<WFUser> entities) {
+        List ids =new ArrayList();
+        for(WFUser entity : entities){
+            Serializable id=entity.getId();
+            if(!ObjectUtils.isEmpty(id)){
+                ids.add(id);
+            }
+        }
+        if(ids.size()>0)
+           return this.listByIds(ids);
+        else
+           return entities;
+    }
 
 }
 

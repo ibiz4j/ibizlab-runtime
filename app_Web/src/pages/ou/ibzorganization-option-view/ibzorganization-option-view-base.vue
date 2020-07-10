@@ -43,10 +43,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import IBZOrganizationService from '@/service/ibzorganization/ibzorganization-service';
+import IBZOrganizationAuthService from '@/authservice/ibzorganization/ibzorganization-auth-service';
 
 import OptionViewEngine from '@engine/view/option-view-engine';
 
 
+import IBZOrganizationUIService from '@/uiservice/ibzorganization/ibzorganization-ui-service';
 
 @Component({
     components: {
@@ -61,6 +63,14 @@ export default class IBZOrganizationOptionViewBase extends Vue {
      * @memberof IBZOrganizationOptionViewBase
      */
     public appEntityService: IBZOrganizationService = new IBZOrganizationService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type IBZOrganizationUIService
+     * @memberof IBZOrganizationOptionViewBase
+     */
+    public appUIService: IBZOrganizationUIService = new IBZOrganizationUIService(this.$store);
 
 
     /**

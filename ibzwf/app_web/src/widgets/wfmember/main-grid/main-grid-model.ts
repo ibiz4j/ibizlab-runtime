@@ -27,6 +27,11 @@ export default class MainModel {
     }else{
 		  return [
         {
+          name: 'orgname',
+          prop: 'orgname',
+          dataType: 'PICKUPDATA',
+        },
+        {
           name: 'userid',
           prop: 'userid',
           dataType: 'PICKUP',
@@ -40,6 +45,11 @@ export default class MainModel {
           name: 'groupid',
           prop: 'groupid',
           dataType: 'PICKUP',
+        },
+        {
+          name: 'mdeptname',
+          prop: 'mdeptname',
+          dataType: 'PICKUPDATA',
         },
         {
           name: 'personname',
@@ -78,6 +88,10 @@ export default class MainModel {
         {
           name:'query',
           prop:'query'
+        },
+        {
+          name:'filter',
+          prop:'filter'
         },
         {
           name:'page',

@@ -96,6 +96,20 @@ const router = new Router({
                     component: () => import('@pages/ou/ibzemployee-mpickup-view/ibzemployee-mpickup-view.vue'),
                 },
                 {
+                    path: 'wfgroups/:wfgroup?/pickupview/:pickupview?',
+                    meta: {
+                        caption: 'entities.wfgroup.views.pickupview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'wfgroups', parameterName: 'wfgroup' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfgroup-pickup-view/wfgroup-pickup-view.vue'),
+                },
+                {
                     path: 'sysroles/:sysrole?/mpickupview/:mpickupview?',
                     meta: {
                         caption: 'entities.sysrole.views.mpickupview.title',
@@ -3235,6 +3249,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/dict/dict-catalog-edit-view/dict-catalog-edit-view.vue'),
+    },
+    {
+        path: '/wfgroups/:wfgroup?/pickupview/:pickupview?',
+        meta: {
+            caption: 'entities.wfgroup.views.pickupview.title',
+            info:'',
+            parameters: [
+                { pathName: 'wfgroups', parameterName: 'wfgroup' },
+                { pathName: 'pickupview', parameterName: 'pickupview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/workflow/wfgroup-pickup-view/wfgroup-pickup-view.vue'),
     },
     {
         path: '/wfgroups/:wfgroup?/editview/:editview?',

@@ -36,10 +36,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import IBZDepartmentService from '@/service/ibzdepartment/ibzdepartment-service';
+import IBZDepartmentAuthService from '@/authservice/ibzdepartment/ibzdepartment-auth-service';
 
 import PickupViewEngine from '@engine/view/pickup-view-engine';
 
 
+import IBZDepartmentUIService from '@/uiservice/ibzdepartment/ibzdepartment-ui-service';
 
 @Component({
     components: {
@@ -54,6 +56,14 @@ export default class IBZDepartmentPickupViewBase extends Vue {
      * @memberof IBZDepartmentPickupViewBase
      */
     public appEntityService: IBZDepartmentService = new IBZDepartmentService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type IBZDepartmentUIService
+     * @memberof IBZDepartmentPickupViewBase
+     */
+    public appUIService: IBZDepartmentUIService = new IBZDepartmentUIService(this.$store);
 
 
     /**

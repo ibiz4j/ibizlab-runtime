@@ -6,15 +6,19 @@ export default {
     groupname: "用户组",
     userid: "用户标识",
     personname: "用户",
+    orgid: "单位",
+    orgname: "单位",
+    mdeptid: "主部门",
+    mdeptname: "主部门",
   },
 	views: {
 		gridview: {
-			caption: "成员",
-      		title: "成员表格视图",
+			caption: "流程角色",
+      		title: "流程角色",
 		},
 		editview: {
-			caption: "成员",
-      		title: "成员编辑视图",
+			caption: "流程角色",
+      		title: "流程角色",
 		},
 	},
 	main_form: {
@@ -31,6 +35,9 @@ export default {
 			groupid: "组标识", 
 			userid: "用户标识", 
 			personname: "用户", 
+			orgname: "单位", 
+			mdeptname: "主部门", 
+			groupname: "用户组", 
 			memberid: "组成员标识", 
 		},
 		uiactions: {
@@ -39,6 +46,8 @@ export default {
 	main_grid: {
 		columns: {
 			personname: "用户",
+			orgname: "单位",
+			mdeptname: "主部门",
 			groupname: "用户组",
 		},
 		uiactions: {

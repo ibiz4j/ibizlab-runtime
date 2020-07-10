@@ -36,10 +36,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import DictCatalogService from '@/service/dict-catalog/dict-catalog-service';
+import DictCatalogAuthService from '@/authservice/dict-catalog/dict-catalog-auth-service';
 
 import PickupViewEngine from '@engine/view/pickup-view-engine';
 
 
+import DictCatalogUIService from '@/uiservice/dict-catalog/dict-catalog-ui-service';
 
 @Component({
     components: {
@@ -54,6 +56,14 @@ export default class DictCatalogPickupViewBase extends Vue {
      * @memberof DictCatalogPickupViewBase
      */
     public appEntityService: DictCatalogService = new DictCatalogService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type DictCatalogUIService
+     * @memberof DictCatalogPickupViewBase
+     */
+    public appUIService: DictCatalogUIService = new DictCatalogUIService(this.$store);
 
 
     /**

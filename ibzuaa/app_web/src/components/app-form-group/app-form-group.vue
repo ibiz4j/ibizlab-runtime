@@ -27,7 +27,7 @@
                             </a>
                             <dropdown-menu slot='list' v-if="uiActionGroup.details && Array.isArray(uiActionGroup.details)">
                                 <dropdown-item v-for="(detail,index) in (uiActionGroup.details)" :key="index" :name="detail.name">
-                                    <span class='item' @click="doUIAction($event, detail)">
+                                    <span class='item' v-show="detail.visabled" :style="{'pointer-events':detail.disabled?'none':'auto'}" @click="doUIAction($event, detail)">
                                         <template v-if="detail.isShowIcon">
                                             <template v-if="detail.icon && !Object.is(detail.icon, '')">
                                                 <i :class="detail.icon" ></i>
@@ -58,7 +58,7 @@
                              <span class='item-extract-mode'>
                                 <template v-if="uiActionGroup.details && Array.isArray(uiActionGroup.details)">
                                     <div v-for="(detail,index) in uiActionGroup.details" :key="index">
-                                        <span class='item' @click="doUIAction($event, detail)">
+                                        <span v-show="detail.visabled" :style="{'pointer-events':detail.disabled?'none':'auto'}" class='item' @click="doUIAction($event, detail)">
                                             <template v-if="detail.isShowIcon">
                                                 <template v-if="detail.icon && !Object.is(detail.icon, '')">
                                                     <i :class="detail.icon" ></i>
@@ -107,7 +107,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component({})
 export default class AppFormGroup extends Vue {
@@ -119,6 +119,69 @@ export default class AppFormGroup extends Vue {
      * @memberof AppFormGroup
      */
     @Prop() public caption?: string;
+
+    /**
+     * 注入的UI服务
+     *
+     * @type {*}
+     * @memberof AppFormGroup
+     */
+    @Prop() public uiService!: any;
+
+    /**
+     * 注入数据
+     *
+     * @type {*}
+     * @memberof AppFormGroup
+     */
+    @Prop() public data!: any;
+
+    /**
+     * 监听值变化
+     *
+     * @memberof AppFormGroup
+     */
+    @Watch('data')
+    onSrfupdatedateChange(newVal: any, oldVal: any) {
+        if((newVal !== oldVal) && this.uiActionGroup.details.length >0){
+            this.calcActionItemAuthState(newVal,this.uiActionGroup.details,this.uiService);
+        }
+    }
+
+    /**
+     * 计算界面行为项权限状态
+     *
+     * @param {*} [data] 传入数据
+     * @param {*} [ActionModel] 界面行为模型
+     * @param {*} [UIService] 界面行为服务
+     * @memberof AppFormGroup
+     */
+    public calcActionItemAuthState(data:any,ActionModel:any,UIService:any){
+        for (const key in ActionModel) {
+            if (!ActionModel.hasOwnProperty(key)) {
+                return;
+            }
+            const _item = ActionModel[key];
+            if(_item && _item['dataaccaction'] && UIService && data && Object.keys(data).length >0){
+                let dataActionResult:any = UIService.getAllOPPrivs(data)[_item['dataaccaction']];
+                // 无权限:0;有权限:1
+                if(!dataActionResult){
+                    // 禁用:1;隐藏:2;隐藏且默认隐藏:6
+                    if(_item.noprivdisplaymode === 1){
+                        _item.disabled = true;
+                    }
+                    if((_item.noprivdisplaymode === 2) || (_item.noprivdisplaymode === 6)){
+                        _item.visabled = false;
+                    }else{
+                        _item.visabled = true;
+                    }
+                }else{
+                    _item.visabled = true;
+                    _item.disabled = false;
+                }
+            }
+        }
+    } 
 
     /**
      * 是否为管理容器

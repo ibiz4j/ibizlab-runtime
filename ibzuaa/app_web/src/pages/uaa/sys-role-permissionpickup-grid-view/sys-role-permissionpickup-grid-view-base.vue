@@ -51,10 +51,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysRolePermissionService from '@/service/sys-role-permission/sys-role-permission-service';
+import SysRolePermissionAuthService from '@/authservice/sys-role-permission/sys-role-permission-auth-service';
 
 import PickupGridViewEngine from '@engine/view/pickup-grid-view-engine';
 
 
+import SysRolePermissionUIService from '@/uiservice/sys-role-permission/sys-role-permission-ui-service';
 
 @Component({
     components: {
@@ -69,6 +71,14 @@ export default class SYS_ROLE_PERMISSIONPickupGridViewBase extends Vue {
      * @memberof SYS_ROLE_PERMISSIONPickupGridViewBase
      */
     public appEntityService: SysRolePermissionService = new SysRolePermissionService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysRolePermissionUIService
+     * @memberof SYS_ROLE_PERMISSIONPickupGridViewBase
+     */
+    public appUIService: SysRolePermissionUIService = new SysRolePermissionUIService(this.$store);
 
 
     /**

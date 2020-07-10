@@ -150,6 +150,10 @@ export default class MainModel {
           prop:'query'
         },
         {
+          name:'filter',
+          prop:'filter'
+        },
+        {
           name:'page',
           prop:'page'
         },

@@ -32,12 +32,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import WFProcessDefinitionService from '@/service/wfprocess-definition/wfprocess-definition-service';
 import DefaultService from './default-searchform-service';
-
+import WFProcessDefinitionUIService from '@/uiservice/wfprocess-definition/wfprocess-definition-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -127,6 +127,19 @@ export default class DefaultBase extends Vue implements ControlInterface {
     public appEntityService: WFProcessDefinitionService = new WFProcessDefinitionService({ $store: this.$store });
     
 
+
+    /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  DefaultBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
 
     /**
      * 关闭视图
@@ -619,7 +632,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}): void {
         if(!this.loadAction){
-            this.$Notice.error({ title: '错误', desc: 'WFProcessDefinitionGridView视图搜索表单loadAction参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessDefinitionGridView' + (this.$t('app.searchForm.notConfig.loadAction') as string) });
             return;
         }
         const arg: any = { ...opt };
@@ -639,7 +652,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
                 return;
             }
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 return;
             }
 
@@ -656,7 +669,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public loadDraft(opt: any = {},mode?:string): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: '错误', desc: 'WFProcessDefinitionGridView视图搜索表单loaddraftAction参数未配置' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessDefinitionGridView' + (this.$t('app.searchForm.notConfig.loaddraftAction') as string) });
             return;
         }
         const arg: any = { ...opt } ;
@@ -665,7 +678,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
         post.then((response: any) => {
             if (!response.status || response.status !== 200) {
                 if (response.errorMessage) {
-                    this.$Notice.error({ title: '错误', desc: response.errorMessage });
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.errorMessage });
                 }
                 return;
             }
@@ -697,7 +710,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
                 return;
             }
             if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: '错误', desc: '系统异常' });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 return;
             }
 

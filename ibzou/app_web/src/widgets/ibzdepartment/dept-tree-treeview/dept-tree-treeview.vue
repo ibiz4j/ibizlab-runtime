@@ -1,7 +1,11 @@
 <template>
     <div class="design-tree-container">
         <context-menu-container>
+            <el-input size="small" placeholder="搜索..." v-model="filerText" @input="filterChange">
+                <i slot="prefix" class="el-input__icon el-icon-search"></i>
+            </el-input>
             <el-tree
+                    :filter-node-method="filterNode"
                     class="tre"
                     :data="this.TreeData"
                     ref="DeptTree"
@@ -27,6 +31,23 @@
         components: {}
     })
     export default class DeptTree extends Vue {
+
+        //　过滤文本
+        public filerText: any = '';
+        /**
+         * 过滤节点
+         */
+        public filterNode(value:any,data:any){
+            if (!value) return true;
+            return data.label.indexOf(value) !==-1;
+        }
+        /**
+         *　树搜索触发
+         */
+        public filterChange(){
+            const DeptTree:any = this.$refs.DeptTree;
+            DeptTree.filter(this.filerText);
+        }
 
         /*树数据*/
         public TreeData: any = [];

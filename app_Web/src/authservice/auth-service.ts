@@ -24,7 +24,7 @@ export default class AuthService {
      * @type {(any)}
      * @memberof AuthService
      */
-    public defaultOPPrivs: any = { UPDATE: 1, CREATE: 1, READ: 1, DELETE: 1 };
+    public defaultOPPrivs: any = { UPDATE: 1, CREATE: 1, READ: 1, DELETE: 1, WFSTART:1,DENY:1,NONE:1 };
 
     /**
      * Creates an instance of AuthService.

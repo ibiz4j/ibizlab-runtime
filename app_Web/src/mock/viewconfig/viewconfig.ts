@@ -8,7 +8,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status,{
                 "dictoptioneditview": {
-            "title": "字典项编辑视图",
+            "title": "字典项",
             "caption": "字典项",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "dict",
@@ -24,16 +24,16 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "10dd7f45f36233049c4af9ca417089f5"
         },
         "ibzemployeeeditview": {
-            "title": "人员编辑视图",
-            "caption": "人员",
+            "title": "人员管理",
+            "caption": "人员管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZEmployeeEditView",
             "viewtag": "119fe650e7efd26bd14bd413cae37ded"
         },
         "wfmembergridview": {
-            "title": "成员表格视图",
-            "caption": "成员",
+            "title": "流程角色",
+            "caption": "流程角色",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "workflow",
             "viewname": "WFMemberGridView",
@@ -96,8 +96,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "26cc2d5c69f1525eaa415b7de1a0d4a6"
         },
         "ibzteammembergridview": {
-            "title": "组成员表格视图",
-            "caption": "组成员",
+            "title": "组管理",
+            "caption": "组管理",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "ou",
             "viewname": "IBZTeamMemberGridView",
@@ -112,8 +112,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "2ed85bebb69b8d23388420b95163228a"
         },
         "ibzteameditview": {
-            "title": "组编辑视图",
-            "caption": "组",
+            "title": "组管理",
+            "caption": "组管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZTeamEditView",
@@ -136,16 +136,16 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "3fc39744066bd5343be378ec5703f556"
         },
         "wfprocessdefinitioneditview": {
-            "title": "流程定义查看",
-            "caption": "流程定义查看",
+            "title": "流程定义",
+            "caption": "流程定义",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "workflow",
             "viewname": "WFProcessDefinitionEditView",
             "viewtag": "3fcd491c13d05ab7dcce8d2c920d0aec"
         },
         "sysappeditview": {
-            "title": "应用编辑视图",
-            "caption": "应用",
+            "title": "接入应用",
+            "caption": "接入应用",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "uaa",
             "viewname": "SysAppEditView",
@@ -160,7 +160,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "40fe6b28b9f7902341da46bb74a02d59"
         },
         "dictoptiongrideditview": {
-            "title": "字典项表格视图",
+            "title": "字典项",
             "caption": "字典项",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "dict",
@@ -168,8 +168,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "44488f30cf90677019077ed9ad33628e"
         },
         "jobsinfoeditview": {
-            "title": "任务信息编辑视图",
-            "caption": "任务信息",
+            "title": "任务",
+            "caption": "任务",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "task",
             "viewname": "JobsInfoEditView",
@@ -192,8 +192,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "55cd5acdacb8aecec7d4574216e10625"
         },
         "jobsregistryeditview": {
-            "title": "任务注册信息编辑视图",
-            "caption": "任务注册信息",
+            "title": "注册",
+            "caption": "注册",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "task",
             "viewname": "JobsRegistryEditView",
@@ -272,16 +272,16 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "6869875c7409bd1dddd3d0fc62c502db"
         },
         "sysroleeditview": {
-            "title": "角色编辑视图",
-            "caption": "系统角色",
+            "title": "用户角色",
+            "caption": "用户角色",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "uaa",
             "viewname": "SysRoleEditView",
             "viewtag": "6bd0981f6dd67a59f211b5cf97ac8f30"
         },
         "wfmembereditview": {
-            "title": "成员编辑视图",
-            "caption": "成员",
+            "title": "流程角色",
+            "caption": "流程角色",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "workflow",
             "viewname": "WFMemberEditView",
@@ -344,8 +344,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "86bd4f6d4f771870e10b9717046a1b14"
         },
         "ibzposteditview": {
-            "title": "岗位编辑视图",
-            "caption": "岗位",
+            "title": "岗位管理",
+            "caption": "岗位管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZPostEditView",
@@ -360,8 +360,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "90a777962337daaf4cffd846eecb1f0f"
         },
         "ibzdepartmenteditview": {
-            "title": "部门编辑视图",
-            "caption": "部门",
+            "title": "部门管理",
+            "caption": "部门管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZDepartmentEditView",
@@ -376,8 +376,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "95d8c933cf4df47634a25d791b3d8564"
         },
         "ibzorganizationeditview": {
-            "title": "单位机构编辑视图",
-            "caption": "单位机构",
+            "title": "单位管理",
+            "caption": "单位管理",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "ou",
             "viewname": "IBZOrganizationEditView",
@@ -440,8 +440,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "a9c82814d9bcd23dbf78c4c073759d7c"
         },
         "dictcatalogeditview": {
-            "title": "字典编辑视图",
-            "caption": "字典",
+            "title": "目录",
+            "caption": "目录",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "dict",
             "viewname": "DictCatalogEditView",
@@ -456,16 +456,16 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "b05c9353d499f973106e6ed4dde58074"
         },
         "wfgroupeditview": {
-            "title": "角色/用户组编辑视图",
-            "caption": "角色/用户组",
+            "title": "流程角色",
+            "caption": "流程角色",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "workflow",
             "viewname": "WFGroupEditView",
             "viewtag": "b23a721ca159ac2490b768d795e85d17"
         },
         "jobslogeditview": {
-            "title": "任务调度日志编辑视图",
-            "caption": "任务调度日志",
+            "title": "日志",
+            "caption": "日志",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "task",
             "viewname": "JobsLogEditView",
@@ -584,8 +584,8 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtag": "e4856779577562e9880855e6c66d63e5"
         },
         "sysuserroleeditview": {
-            "title": "用户角色关系表编辑视图",
-            "caption": "用户角色关系",
+            "title": "用户角色",
+            "caption": "用户角色",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "uaa",
             "viewname": "SysUserRoleEditView",

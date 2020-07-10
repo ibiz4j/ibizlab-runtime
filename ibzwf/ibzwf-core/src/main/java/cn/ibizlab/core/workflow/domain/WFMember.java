@@ -21,6 +21,7 @@ import cn.ibizlab.util.enums.DEFieldDefaultValueType;
 import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
+import cn.ibizlab.util.annotation.Audit;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -82,6 +83,34 @@ public class WFMember extends EntityMP implements Serializable {
     @JSONField(name = "personname")
     @JsonProperty("personname")
     private String personname;
+    /**
+     * 单位
+     */
+    @TableField(exist = false)
+    @JSONField(name = "orgid")
+    @JsonProperty("orgid")
+    private String orgid;
+    /**
+     * 单位
+     */
+    @TableField(exist = false)
+    @JSONField(name = "orgname")
+    @JsonProperty("orgname")
+    private String orgname;
+    /**
+     * 主部门
+     */
+    @TableField(exist = false)
+    @JSONField(name = "mdeptid")
+    @JsonProperty("mdeptid")
+    private String mdeptid;
+    /**
+     * 主部门
+     */
+    @TableField(exist = false)
+    @JSONField(name = "mdeptname")
+    @JsonProperty("mdeptname")
+    private String mdeptname;
 
     /**
      * 用户组

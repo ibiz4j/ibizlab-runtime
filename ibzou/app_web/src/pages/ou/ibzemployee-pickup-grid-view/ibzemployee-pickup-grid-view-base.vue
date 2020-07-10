@@ -51,10 +51,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import IBZEmployeeService from '@/service/ibzemployee/ibzemployee-service';
+import IBZEmployeeAuthService from '@/authservice/ibzemployee/ibzemployee-auth-service';
 
 import PickupGridViewEngine from '@engine/view/pickup-grid-view-engine';
 
 
+import IBZEmployeeUIService from '@/uiservice/ibzemployee/ibzemployee-ui-service';
 
 @Component({
     components: {
@@ -69,6 +71,14 @@ export default class IBZEmployeePickupGridViewBase extends Vue {
      * @memberof IBZEmployeePickupGridViewBase
      */
     public appEntityService: IBZEmployeeService = new IBZEmployeeService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type IBZEmployeeUIService
+     * @memberof IBZEmployeePickupGridViewBase
+     */
+    public appUIService: IBZEmployeeUIService = new IBZEmployeeUIService(this.$store);
 
 
     /**

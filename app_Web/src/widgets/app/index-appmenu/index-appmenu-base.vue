@@ -122,11 +122,10 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import IndexService from './index-appmenu-service';
-
 import IndexModel from './index-appmenu-model';
 import { Environment } from '@/environments/environment';
 
@@ -538,11 +537,11 @@ export default class IndexBase extends Vue implements ControlInterface {
                 case 'Auto8': 
                     this.clickAuto8(item);
                     return;
-                case '_2': 
-                    this.click_2(item);
+                case 'Auto15': 
+                    this.clickAuto15(item);
                     return;
-                case '_3': 
-                    this.click_3(item);
+                case 'Auto16': 
+                    this.clickAuto16(item);
                     return;
                 case 'Auto13': 
                     this.clickAuto13(item);
@@ -779,7 +778,7 @@ export default class IndexBase extends Vue implements ControlInterface {
      * @param {*} [item={}]
      * @memberof Index
      */
-    public click_2(item: any = {}) {
+    public clickAuto15(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
@@ -802,7 +801,7 @@ export default class IndexBase extends Vue implements ControlInterface {
      * @param {*} [item={}]
      * @memberof Index
      */
-    public click_3(item: any = {}) {
+    public clickAuto16(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];

@@ -106,6 +106,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/fonts/**",
                         "/**/js/**",
                         "/**/img/**",
+                        "/**/svg/**",
                         "/"
                 ).permitAll()
                 //放行登录请求

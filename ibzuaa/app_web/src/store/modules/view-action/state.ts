@@ -47,7 +47,7 @@ export const viewstate: any = {
         {
             viewtag: '1a3413067ee48ab30691eab9f345f517',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLEPickupGridView',
+            viewname: 'SysRolePickupGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -96,7 +96,7 @@ export const viewstate: any = {
         {
             viewtag: '3e133a839b837d9e47f80e161d66a861',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLE_PERMISSIONMPickupView',
+            viewname: 'SysRolePermissionMPickupView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -116,7 +116,7 @@ export const viewstate: any = {
         {
             viewtag: '4470edcdb57a14007444c0d9867e571c',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLEEditView2',
+            viewname: 'SysRoleEditView2',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -127,7 +127,7 @@ export const viewstate: any = {
         {
             viewtag: '47fb02384b5797f4b095e247619515f4',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLE_PERMISSIONRedirectView',
+            viewname: 'SysRolePermissionRedirectView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -158,7 +158,7 @@ export const viewstate: any = {
         {
             viewtag: '6cd33d562ef19ad47dd26b312b9a020e',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLE_PERMISSIONPickupView',
+            viewname: 'SysRolePermissionPickupView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -168,7 +168,7 @@ export const viewstate: any = {
         {
             viewtag: '6f5a41631520da5e33294a1225101e66',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLEEditView',
+            viewname: 'SysRoleEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -259,7 +259,7 @@ export const viewstate: any = {
         {
             viewtag: '9a896aa77c214ed87ab9be4fd6c6bec5',
             viewmodule: 'uaa',
-            viewname: 'SYS_USEREditView',
+            viewname: 'SysUserEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -358,7 +358,7 @@ export const viewstate: any = {
         {
             viewtag: 'e791be173ed0f4bbe9cce942b6edde63',
             viewmodule: 'uaa',
-            viewname: 'SYS_ROLE_PERMISSIONCustomView',
+            viewname: 'SysRolePermissionCustomView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -376,7 +376,7 @@ export const viewstate: any = {
         {
             viewtag: 'ede089b4741590173bd21b9df99c1cf0',
             viewmodule: 'uaa',
-            viewname: 'SYS_USER_ROLEEditView2',
+            viewname: 'SysUserRoleEditView2',
             viewaction: '',
             viewdatachange: false,
             refviews: [

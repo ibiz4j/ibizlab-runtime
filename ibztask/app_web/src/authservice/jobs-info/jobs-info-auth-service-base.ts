@@ -1,5 +1,4 @@
 import AuthService from '../auth-service';
-import JobsInfoUIService from '@/uiservice/jobs-info/jobs-info-ui-service';
 
 /**
  * 任务信息权限服务对象基类
@@ -11,13 +10,6 @@ import JobsInfoUIService from '@/uiservice/jobs-info/jobs-info-ui-service';
 export default class JobsInfoAuthServiceBase extends AuthService {
 
     /**
-     * 所依赖UI服务
-     *
-     * @memberof JobsInfoAuthServiceBase
-     */
-    public jobsinfoUIService:any;
-
-    /**
      * Creates an instance of  JobsInfoAuthServiceBase.
      * 
      * @param {*} [opts={}]
@@ -25,18 +17,16 @@ export default class JobsInfoAuthServiceBase extends AuthService {
      */
     constructor(opts: any = {}) {
         super(opts);
-        this.jobsinfoUIService = new JobsInfoUIService(opts);
     }
 
     /**
      * 根据当前数据获取实体操作标识
      *
-     * @param {*} data 传入数据
+     * @param {*} mainSateOPPrivs 传入数据操作标识
      * @returns {any}
      * @memberof JobsInfoAuthServiceBase
      */
-    public getOPPrivs(data:any):any{
-        let mainSateOPPrivs:any = this.jobsinfoUIService.getDEMainStateOPPrivs(data);
+    public getOPPrivs(mainSateOPPrivs:any):any{
         let curDefaultOPPrivs:any = JSON.parse(JSON.stringify(this.defaultOPPrivs));
         if(mainSateOPPrivs){
             Object.assign(curDefaultOPPrivs,mainSateOPPrivs);

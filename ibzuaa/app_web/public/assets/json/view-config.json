@@ -24,24 +24,24 @@
         "viewtag": "12f53853382743f095a6af867669d8c1"
     },
     "sysappeditview": {
-        "title": "应用编辑视图",
-        "caption": "应用",
+        "title": "接入应用",
+        "caption": "接入应用",
         "viewtype": "DEEDITVIEW",
         "viewmodule": "uaa",
         "viewname": "SysAppEditView",
         "viewtag": "137b8f036994965b8926455611848134"
     },
-    "sys_rolepickupgridview": {
+    "sysrolepickupgridview": {
         "title": "角色选择表格视图",
         "caption": "系统角色",
         "viewtype": "DEPICKUPGRIDVIEW",
         "viewmodule": "uaa",
-        "viewname": "SYS_ROLEPickupGridView",
+        "viewname": "SysRolePickupGridView",
         "viewtag": "1a3413067ee48ab30691eab9f345f517"
     },
     "sysuserroleeditview": {
-        "title": "用户角色关系表编辑视图",
-        "caption": "用户角色关系",
+        "title": "用户",
+        "caption": "用户",
         "viewtype": "DEEDITVIEW",
         "viewmodule": "uaa",
         "viewname": "SysUserRoleEditView",
@@ -71,12 +71,12 @@
         "viewname": "SYS_USER_ROLEPickupGridView",
         "viewtag": "320dc0d5f5dc15c74cdfe3dbb820d2ac"
     },
-    "sys_role_permissionmpickupview": {
+    "sysrolepermissionmpickupview": {
         "title": "角色权限关系表数据多项选择视图",
         "caption": "角色权限关系",
         "viewtype": "DEMPICKUPVIEW",
         "viewmodule": "uaa",
-        "viewname": "SYS_ROLE_PERMISSIONMPickupView",
+        "viewname": "SysRolePermissionMPickupView",
         "viewtag": "3e133a839b837d9e47f80e161d66a861"
     },
     "sys_permissiongridview": {
@@ -87,20 +87,20 @@
         "viewname": "SYS_PERMISSIONGridView",
         "viewtag": "42f3fa04c9dc77f235207bcbe6ac3888"
     },
-    "sys_roleeditview2": {
-        "title": "角色编辑视图",
-        "caption": "系统角色",
+    "sysroleeditview2": {
+        "title": "角色",
+        "caption": "角色",
         "viewtype": "DEEDITVIEW2",
         "viewmodule": "uaa",
-        "viewname": "SYS_ROLEEditView2",
+        "viewname": "SysRoleEditView2",
         "viewtag": "4470edcdb57a14007444c0d9867e571c"
     },
-    "sys_role_permissionredirectview": {
+    "sysrolepermissionredirectview": {
         "title": "角色权限关系表数据重定向视图",
         "caption": "角色权限关系",
         "viewtype": "DEREDIRECTVIEW",
         "viewmodule": "uaa",
-        "viewname": "SYS_ROLE_PERMISSIONRedirectView",
+        "viewname": "SysRolePermissionRedirectView",
         "viewtag": "47fb02384b5797f4b095e247619515f4"
     },
     "sysrolepermissiongridview": {
@@ -119,20 +119,20 @@
         "viewname": "SYS_ROLE_PERMISSIONPickupGridView",
         "viewtag": "6baae51f242438b90446176f76405183"
     },
-    "sys_role_permissionpickupview": {
+    "sysrolepermissionpickupview": {
         "title": "角色权限关系表数据选择视图",
         "caption": "角色权限关系",
         "viewtype": "DEPICKUPVIEW",
         "viewmodule": "uaa",
-        "viewname": "SYS_ROLE_PERMISSIONPickupView",
+        "viewname": "SysRolePermissionPickupView",
         "viewtag": "6cd33d562ef19ad47dd26b312b9a020e"
     },
-    "sys_roleeditview": {
-        "title": "角色编辑视图",
-        "caption": "系统角色",
+    "sysroleeditview": {
+        "title": "角色",
+        "caption": "角色",
         "viewtype": "DEEDITVIEW",
         "viewmodule": "uaa",
-        "viewname": "SYS_ROLEEditView",
+        "viewname": "SysRoleEditView",
         "viewtag": "6f5a41631520da5e33294a1225101e66"
     },
     "sys_userredirectview": {
@@ -199,12 +199,12 @@
         "viewname": "SYS_USERPickupGridView",
         "viewtag": "936880f60b6ef17d39d5248b5fe390b4"
     },
-    "sys_usereditview": {
-        "title": "用户表编辑视图",
-        "caption": "系统用户",
+    "sysusereditview": {
+        "title": "用户",
+        "caption": "用户",
         "viewtype": "DEEDITVIEW",
         "viewmodule": "uaa",
-        "viewname": "SYS_USEREditView",
+        "viewname": "SysUserEditView",
         "viewtag": "9a896aa77c214ed87ab9be4fd6c6bec5"
     },
     "sys_permissionpickupgridview": {
@@ -279,12 +279,12 @@
         "viewname": "SYS_USERPickupView",
         "viewtag": "d53cb0ce933245fae5f0623bac4fbf48"
     },
-    "sys_role_permissioncustomview": {
+    "sysrolepermissioncustomview": {
         "title": "角色权限关系自定义视图",
         "caption": "角色权限关系",
         "viewtype": "DECUSTOMVIEW",
         "viewmodule": "uaa",
-        "viewname": "SYS_ROLE_PERMISSIONCustomView",
+        "viewname": "SysRolePermissionCustomView",
         "viewtag": "e791be173ed0f4bbe9cce942b6edde63"
     },
     "sys_permissioneditview": {
@@ -295,12 +295,12 @@
         "viewname": "SYS_PERMISSIONEditView",
         "viewtag": "eb6498ba353f58d0af17bbd39702ccf7"
     },
-    "sys_user_roleeditview2": {
-        "title": "用户角色关系表编辑视图",
-        "caption": "用户角色关系",
+    "sysuserroleeditview2": {
+        "title": "用户",
+        "caption": "用户",
         "viewtype": "DEEDITVIEW2",
         "viewmodule": "uaa",
-        "viewname": "SYS_USER_ROLEEditView2",
+        "viewname": "SysUserRoleEditView2",
         "viewtag": "ede089b4741590173bd21b9df99c1cf0"
     },
     "sys_user_rolepickupview": {

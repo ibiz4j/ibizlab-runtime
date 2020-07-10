@@ -39,8 +39,8 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "人员",
-      		title: "人员编辑视图",
+			caption: "人员管理",
+      		title: "人员管理",
 		},
 		gridview: {
 			caption: "人员",

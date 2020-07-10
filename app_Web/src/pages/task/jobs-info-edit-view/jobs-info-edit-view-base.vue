@@ -47,10 +47,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import JobsInfoService from '@/service/jobs-info/jobs-info-service';
+import JobsInfoAuthService from '@/authservice/jobs-info/jobs-info-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import JobsInfoUIService from '@/uiservice/jobs-info/jobs-info-ui-service';
 
 @Component({
     components: {
@@ -65,6 +67,14 @@ export default class JobsInfoEditViewBase extends Vue {
      * @memberof JobsInfoEditViewBase
      */
     public appEntityService: JobsInfoService = new JobsInfoService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type JobsInfoUIService
+     * @memberof JobsInfoEditViewBase
+     */
+    public appUIService: JobsInfoUIService = new JobsInfoUIService(this.$store);
 
 
     /**

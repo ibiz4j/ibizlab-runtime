@@ -430,12 +430,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import DictOptionService from '@/service/dict-option/dict-option-service';
 import MainService from './main-grid-service';
-
+import DictOptionUIService from '@/uiservice/dict-option/dict-option-ui-service';
 import CodeListService from "@service/app/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 
@@ -527,6 +527,19 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
     /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  MainBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
+
+    /**
      * 关闭视图
      *
      * @param {any} args
@@ -561,6 +574,23 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 界面UI服务对象
+     *
+     * @type {DictOptionUIService}
+     * @memberof MainBase
+     */  
+    public appUIService:DictOptionUIService = new DictOptionUIService(this.$store);
+
+    /**
+     * 界面行为模型
+     *
+     * @type {*}
+     * @memberof MainBase
+     */  
+    public ActionModel:any ={
+    };
 
     /**
      * 应用状态事件
@@ -812,6 +842,13 @@ export default class MainBase extends Vue implements ControlInterface {
     public totalrow: number = 0;
 
     /**
+     * 表格更新默认值项
+     * 
+     * @memberof MainBase
+     */
+    public defaultUpdateItems:Array<any> =['val','pval','cls','expired','label','cid','srfkey','iconcls','extension','vfilter','showorder','cname','disabled'];
+
+    /**
      * 选中行数据
      *
      * @type {any[]}
@@ -984,6 +1021,18 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public gridItemsModel: any[] = [];
+
+    /**
+     * 获取界面行为权限状态
+     *
+     * @memberof MainBase
+     */
+    public getActionState(data:any){
+        let targetData:any = this.transformData(data);
+        let tempActionModel:any = JSON.parse(JSON.stringify(this.ActionModel));
+        ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
+        return tempActionModel;
+    }
 
     /**
      * 获取表格行模型
@@ -1160,6 +1209,9 @@ export default class MainBase extends Vue implements ControlInterface {
             this.selections = [];
             this.gridItemsModel = [];
             this.items.forEach(()=>{this.gridItemsModel.push(this.getGridRowModel())});
+            this.items.forEach((item:any)=>{
+                Object.assign(item,this.getActionState(item));    
+            });
             this.$emit('load', this.items);
             // 设置默认选中
             let _this = this;
@@ -1859,6 +1911,13 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async save(args: any[], params?: any, $event?: any, xData?: any){
         let _this = this;
+        if(_this.items && _this.items.length >0){
+            for (const item of _this.items) {
+                if(Object.is(item.rowDataState, 'update')){
+                    _this.updateDefault(item);
+                }
+            }
+        }
         if(!await this.validateAll()){
             this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.rulesException') as string) });
             return [];
@@ -1884,7 +1943,7 @@ export default class MainBase extends Vue implements ControlInterface {
                         if(item.dictoption){
                             Object.assign(this.context,{dictoption:item.dictoption});
                         }
-                        let response = await this.service.add(this.updateAction,JSON.parse(JSON.stringify(this.context)),item, this.showBusyIndicator);
+                        let response = await this.service.update(this.updateAction,JSON.parse(JSON.stringify(this.context)),item, this.showBusyIndicator);
                         successItems.push(JSON.parse(JSON.stringify(response.data)));
                     }
                 }
@@ -1975,6 +2034,11 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public gridEditItemChange(row: any, property: string, value: any, rowIndex: number){
         row.rowDataState = row.rowDataState ? row.rowDataState : "update" ;
+        if(Object.is(row.rowDataState,"update")){
+            if(!value && this.defaultUpdateItems.includes(property)){
+                row.hasUpdated = true;
+            }
+        }
         this.validate(property,row,rowIndex);
     }
 
@@ -2062,6 +2126,14 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public createDefault(row: any){                    
+    }
+
+    /**
+     * 更新默认值
+     * @param {*}  row 行数据
+     * @memberof MainBase
+     */
+    public updateDefault(row: any){                    
     }
 }
 </script>

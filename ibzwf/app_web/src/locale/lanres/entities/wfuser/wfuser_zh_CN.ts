@@ -3,6 +3,13 @@ export default {
     id: "用户标识",
     firstname: "用户全局名",
     displayname: "用户名称",
+    mdeptid: "主部门",
+    mdeptcode: "主部门代码",
+    mdeptname: "主部门名称",
+    bcode: "业务编码",
+    orgid: "单位",
+    orgcode: "单位代码",
+    orgname: "单位名称",
   },
 	views: {
 		mpickupview: {
@@ -49,6 +56,8 @@ export default {
 			userid: "用户标识",
 			personname: "用户名称",
 			username: "用户全局名",
+			orgname: "单位名称",
+			mdeptname: "主部门名称",
 		},
 		uiactions: {
 		},

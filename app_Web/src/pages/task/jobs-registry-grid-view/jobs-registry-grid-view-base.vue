@@ -151,10 +151,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import JobsRegistryService from '@/service/jobs-registry/jobs-registry-service';
+import JobsRegistryAuthService from '@/authservice/jobs-registry/jobs-registry-auth-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
 
 
+import JobsRegistryUIService from '@/uiservice/jobs-registry/jobs-registry-ui-service';
 import CodeListService from "@service/app/codelist-service";
 
 
@@ -171,6 +173,14 @@ export default class JobsRegistryGridViewBase extends Vue {
      * @memberof JobsRegistryGridViewBase
      */
     public appEntityService: JobsRegistryService = new JobsRegistryService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type JobsRegistryUIService
+     * @memberof JobsRegistryGridViewBase
+     */
+    public appUIService: JobsRegistryUIService = new JobsRegistryUIService(this.$store);
 
 
     /**
@@ -345,31 +355,31 @@ export default class JobsRegistryGridViewBase extends Vue {
      * @memberof JobsRegistryGridView
      */
     public toolBarModels: any = {
-        tbitem26: { name: 'tbitem26', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        tbitem26: { name: 'tbitem26', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
-        tbitem19: { name: 'tbitem19', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        tbitem19: { name: 'tbitem19', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
         tbitem22: {  name: 'tbitem22', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
         tbitem7: {  name: 'tbitem7', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem9: { name: 'tbitem9', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        tbitem9: { name: 'tbitem9', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
         tbitem10: {  name: 'tbitem10', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem11: { name: 'tbitem11', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
+        tbitem11: { name: 'tbitem11', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
 
         tbitem12: {  name: 'tbitem12', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
         tbitem17: { name: 'tbitem17', caption: '其它', disabled: false, type: 'ITEMS', visabled: true, dataaccaction: '', uiaction: { } }, 
- tbitem29: { name: 'tbitem29', caption: '导出数据模型', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ExportModel', target: '' } },
+ tbitem29: { name: 'tbitem29', caption: '导出数据模型', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportModel', target: '' } },
 
- tbitem30: { name: 'tbitem30', caption: '数据导入', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Import', target: '' } },
+ tbitem30: { name: 'tbitem30', caption: '数据导入', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Import', target: '' } },
 
 
         tbitem2: {  name: 'tbitem2', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem3: { name: 'tbitem3', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
+        tbitem3: { name: 'tbitem3', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
 
         tbitem4: {  name: 'tbitem4', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem5: { name: 'tbitem5', caption: '帮助', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Help', target: '' } },
+        tbitem5: { name: 'tbitem5', caption: '帮助', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Help', target: '' } },
 
     };
 

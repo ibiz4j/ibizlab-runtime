@@ -36,10 +36,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysUserService from '@/service/sys-user/sys-user-service';
+import SysUserAuthService from '@/authservice/sys-user/sys-user-auth-service';
 
 import PickupViewEngine from '@engine/view/pickup-view-engine';
 
 
+import SysUserUIService from '@/uiservice/sys-user/sys-user-ui-service';
 
 @Component({
     components: {
@@ -54,6 +56,14 @@ export default class SysUserPickupViewBase extends Vue {
      * @memberof SysUserPickupViewBase
      */
     public appEntityService: SysUserService = new SysUserService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysUserUIService
+     * @memberof SysUserPickupViewBase
+     */
+    public appUIService: SysUserUIService = new SysUserUIService(this.$store);
 
 
     /**

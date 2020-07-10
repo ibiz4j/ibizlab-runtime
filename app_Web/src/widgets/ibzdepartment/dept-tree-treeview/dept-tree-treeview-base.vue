@@ -52,12 +52,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import IBZDepartmentService from '@/service/ibzdepartment/ibzdepartment-service';
 import DeptTreeService from './dept-tree-treeview-service';
-
+import IBZDepartmentUIService from '@/uiservice/ibzdepartment/ibzdepartment-ui-service';
 
 
 @Component({
@@ -145,6 +145,19 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
     public appEntityService: IBZDepartmentService = new IBZDepartmentService({ $store: this.$store });
     
 
+
+    /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  DeptTreeBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
 
     /**
      * 关闭视图

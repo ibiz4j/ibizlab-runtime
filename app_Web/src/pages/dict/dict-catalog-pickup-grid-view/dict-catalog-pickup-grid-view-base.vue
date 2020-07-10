@@ -51,10 +51,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import DictCatalogService from '@/service/dict-catalog/dict-catalog-service';
+import DictCatalogAuthService from '@/authservice/dict-catalog/dict-catalog-auth-service';
 
 import PickupGridViewEngine from '@engine/view/pickup-grid-view-engine';
 
 
+import DictCatalogUIService from '@/uiservice/dict-catalog/dict-catalog-ui-service';
 
 @Component({
     components: {
@@ -69,6 +71,14 @@ export default class DictCatalogPickupGridViewBase extends Vue {
      * @memberof DictCatalogPickupGridViewBase
      */
     public appEntityService: DictCatalogService = new DictCatalogService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type DictCatalogUIService
+     * @memberof DictCatalogPickupGridViewBase
+     */
+    public appUIService: DictCatalogUIService = new DictCatalogUIService(this.$store);
 
 
     /**

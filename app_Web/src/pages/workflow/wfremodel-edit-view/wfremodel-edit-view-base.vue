@@ -54,10 +54,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import WFREModelService from '@/service/wfremodel/wfremodel-service';
+import WFREModelAuthService from '@/authservice/wfremodel/wfremodel-auth-service';
 
 import EditViewEngine from '@engine/view/edit-view-engine';
 
 
+import WFREModelUIService from '@/uiservice/wfremodel/wfremodel-ui-service';
 
 @Component({
     components: {
@@ -72,6 +74,14 @@ export default class WFREModelEditViewBase extends Vue {
      * @memberof WFREModelEditViewBase
      */
     public appEntityService: WFREModelService = new WFREModelService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type WFREModelUIService
+     * @memberof WFREModelEditViewBase
+     */
+    public appUIService: WFREModelUIService = new WFREModelUIService(this.$store);
 
 
     /**
@@ -245,7 +255,7 @@ export default class WFREModelEditViewBase extends Vue {
      * @memberof WFREModelEditView
      */
     public toolBarModels: any = {
-        tbitem1: { name: 'tbitem1', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem1: { name: 'tbitem1', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
     };
 

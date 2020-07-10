@@ -99,10 +99,12 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import JobsRegistryService from '@/service/jobs-registry/jobs-registry-service';
+import JobsRegistryAuthService from '@/authservice/jobs-registry/jobs-registry-auth-service';
 
 import GridViewEngine from '@engine/view/grid-view-engine';
 
 
+import JobsRegistryUIService from '@/uiservice/jobs-registry/jobs-registry-ui-service';
 import CodeListService from "@service/app/codelist-service";
 
 
@@ -119,6 +121,14 @@ export default class JobsRegistryGridViewBase extends Vue {
      * @memberof JobsRegistryGridViewBase
      */
     public appEntityService: JobsRegistryService = new JobsRegistryService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type JobsRegistryUIService
+     * @memberof JobsRegistryGridViewBase
+     */
+    public appUIService: JobsRegistryUIService = new JobsRegistryUIService(this.$store);
 
 
     /**
@@ -293,13 +303,13 @@ export default class JobsRegistryGridViewBase extends Vue {
      * @memberof JobsRegistryGridView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        tbitem3: { name: 'tbitem3', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
-        tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
-        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
-        deuiaction1: { name: 'deuiaction1', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:'2',dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
+        deuiaction1: { name: 'deuiaction1', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
 
     };
 

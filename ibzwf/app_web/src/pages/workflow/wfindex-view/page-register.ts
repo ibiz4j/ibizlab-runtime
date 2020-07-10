@@ -10,6 +10,7 @@ export const PageComponents = {
         Vue.component('wfuser-mpickup-view', () => import('@pages/workflow/wfuser-mpickup-view/wfuser-mpickup-view.vue'));
         Vue.component('wfgroup-mpickup-view', () => import('@pages/workflow/wfgroup-mpickup-view/wfgroup-mpickup-view.vue'));
         Vue.component('wfmember-grid-view', () => import('@pages/workflow/wfmember-grid-view/wfmember-grid-view.vue'));
+        Vue.component('wfgroup-pickup-view', () => import('@pages/workflow/wfgroup-pickup-view/wfgroup-pickup-view.vue'));
         Vue.component('wfgroup-edit-view', () => import('@pages/workflow/wfgroup-edit-view/wfgroup-edit-view.vue'));
         Vue.component('wfprocess-definition-edit-view', () => import('@pages/workflow/wfprocess-definition-edit-view/wfprocess-definition-edit-view.vue'));
     }

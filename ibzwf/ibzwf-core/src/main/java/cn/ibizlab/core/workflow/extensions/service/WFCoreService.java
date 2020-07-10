@@ -54,7 +54,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import java.io.*;
@@ -104,7 +107,20 @@ public class WFCoreService
 		AuthenticationUser user=AuthenticationUser.getAuthenticationUser();
         FlowUser principal=new FlowUser();
         principal.setUser(user);
-        principal.setToken("Bearer "+jwtTokenUtil.generateToken(user));
+        String token="";
+		ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		if(requestAttributes!=null) {
+			HttpServletRequest request = requestAttributes.getRequest();
+			Object tk=request.getHeader("Authorization");
+			if(tk!=null)
+				token=tk.toString();
+		}
+		if(StringUtils.isEmpty(token))
+		{
+			token="Bearer "+jwtTokenUtil.generateToken(user);
+		}
+
+        principal.setToken(token);
         context.setPrincipal((Principal) principal);
 		return context;
 	}

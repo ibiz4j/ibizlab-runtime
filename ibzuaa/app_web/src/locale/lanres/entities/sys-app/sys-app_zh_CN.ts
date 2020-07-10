@@ -12,8 +12,8 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "应用",
-      		title: "应用编辑视图",
+			caption: "接入应用",
+      		title: "接入应用",
 		},
 		gridview: {
 			caption: "接入应用",

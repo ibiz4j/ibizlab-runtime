@@ -1,5 +1,4 @@
 import AuthService from '../auth-service';
-import DictCatalogUIService from '@/uiservice/dict-catalog/dict-catalog-ui-service';
 
 /**
  * 字典权限服务对象基类
@@ -11,13 +10,6 @@ import DictCatalogUIService from '@/uiservice/dict-catalog/dict-catalog-ui-servi
 export default class DictCatalogAuthServiceBase extends AuthService {
 
     /**
-     * 所依赖UI服务
-     *
-     * @memberof DictCatalogAuthServiceBase
-     */
-    public dictcatalogUIService:any;
-
-    /**
      * Creates an instance of  DictCatalogAuthServiceBase.
      * 
      * @param {*} [opts={}]
@@ -25,18 +17,16 @@ export default class DictCatalogAuthServiceBase extends AuthService {
      */
     constructor(opts: any = {}) {
         super(opts);
-        this.dictcatalogUIService = new DictCatalogUIService(opts);
     }
 
     /**
      * 根据当前数据获取实体操作标识
      *
-     * @param {*} data 传入数据
+     * @param {*} mainSateOPPrivs 传入数据操作标识
      * @returns {any}
      * @memberof DictCatalogAuthServiceBase
      */
-    public getOPPrivs(data:any):any{
-        let mainSateOPPrivs:any = this.dictcatalogUIService.getDEMainStateOPPrivs(data);
+    public getOPPrivs(mainSateOPPrivs:any):any{
         let curDefaultOPPrivs:any = JSON.parse(JSON.stringify(this.defaultOPPrivs));
         if(mainSateOPPrivs){
             Object.assign(curDefaultOPPrivs,mainSateOPPrivs);

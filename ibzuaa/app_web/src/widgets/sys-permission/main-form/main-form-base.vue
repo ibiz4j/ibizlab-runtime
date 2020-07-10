@@ -20,12 +20,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import SysPermissionService from '@/service/sys-permission/sys-permission-service';
 import MainService from './main-form-service';
-
+import SysPermissionUIService from '@/uiservice/sys-permission/sys-permission-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import schema from 'async-validator';
@@ -118,6 +118,19 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
     /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  MainBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
+
+    /**
      * 关闭视图
      *
      * @param {any} args
@@ -153,6 +166,14 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
+
+    /**
+     * 界面UI服务对象
+     *
+     * @type {SysPermissionUIService}
+     * @memberof MainBase
+     */  
+    public appUIService:SysPermissionUIService = new SysPermissionUIService(this.$store);
 
     /**
      * 工作流审批意见控件绑定值

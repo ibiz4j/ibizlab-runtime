@@ -4,7 +4,7 @@
     <row >
             
 <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-group :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.wfmember.main_form.details.group1')" :isShowCaption="true" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
+    <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.wfmember.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.personname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='personname' :itemRules="this.rules.personname" class='' :caption="$t('entities.wfmember.main_form.details.personname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.personname.error" :isEmptyCaption="false" labelPos="LEFT">
@@ -33,6 +33,47 @@
 </app-form-item>
 
 </i-col>
+<i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.wfmember.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
+    
+<app-span name='orgname' :value="data.orgname" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.mdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='mdeptname' :itemRules="this.rules.mdeptname" class='' :caption="$t('entities.wfmember.main_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
+    
+<app-span name='mdeptname' :value="data.mdeptname" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.groupname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='groupname' :itemRules="this.rules.groupname" class='' :caption="$t('entities.wfmember.main_form.details.groupname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.groupname.error" :isEmptyCaption="false" labelPos="LEFT">
+    
+<app-picker 
+  :formState="formState"
+  :data="data"
+  :context="context"
+  :viewparams="viewparams"
+  :localContext ='{ }' 
+  :localParam ='{ }' 
+  :disabled="detailsModel.groupname.disabled"
+  name='groupname'
+  deMajorField='name'
+  deKeyField='wfgroup'
+  :service="service"
+  :acParams="{ serviceName: 'WFGroupService', interfaceName: 'FetchDefault'}"
+  valueitem='groupid' 
+  :value="data.groupname" 
+  editortype="" 
+  :pickupView="{ viewname: 'wfgroup-pickup-view', title: $t('entities.wfgroup.views.pickupview.title'), deResParameters: [], parameters: [{ pathName: 'wfgroups', parameterName: 'wfgroup' }, { pathName: 'pickupview', parameterName: 'pickupview' } ], placement:'' }"
+  style=""  
+  @formitemvaluechange="onFormItemValueChange">
+</app-picker>
+
+</app-form-item>
+
+</i-col>
     
     </row>
 </app-form-group>
@@ -49,12 +90,12 @@ import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-pr
 import { CreateElement } from 'vue';
 import { Subject, Subscription } from 'rxjs';
 import { ControlInterface } from '@/interface/control';
-import { UIActionTool,Util } from '@/utils';
+import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
 import WFMemberService from '@/service/wfmember/wfmember-service';
 import MainService from './main-form-service';
-
+import WFMemberUIService from '@/uiservice/wfmember/wfmember-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import schema from 'async-validator';
@@ -147,6 +188,19 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
     /**
+     * 转化数据
+     *
+     * @param {any} args
+     * @memberof  MainBase
+     */
+    public transformData(args: any) {
+        let _this: any = this;
+        if(_this.service && _this.service.handleRequestData instanceof Function && _this.service.handleRequestData('transform',_this.context,args)){
+            return _this.service.handleRequestData('transform',_this.context,args)['data'];
+        }
+    }
+
+    /**
      * 关闭视图
      *
      * @param {any} args
@@ -182,6 +236,14 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     @Inject({from:'navModel',default: 'tab'})
     public navModel!:string;
+
+    /**
+     * 界面UI服务对象
+     *
+     * @type {WFMemberUIService}
+     * @memberof MainBase
+     */  
+    public appUIService:WFMemberUIService = new WFMemberUIService(this.$store);
 
     /**
      * 工作流审批意见控件绑定值
@@ -358,6 +420,9 @@ export default class MainBase extends Vue implements ControlInterface {
         groupid: null,
         userid: null,
         personname: null,
+        orgname: null,
+        mdeptname: null,
+        groupname: null,
         memberid: null,
         wfmember:null,
     };
@@ -461,6 +526,24 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '用户 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '用户 值不能为空', trigger: 'blur' },
         ],
+        orgname: [
+            { type: 'string', message: '单位 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '单位 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '单位 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
+        ],
+        mdeptname: [
+            { type: 'string', message: '主部门 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '主部门 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '主部门 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '主部门 值不能为空', trigger: 'blur' },
+        ],
+        groupname: [
+            { type: 'string', message: '用户组 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '用户组 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '用户组 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '用户组 值不能为空', trigger: 'blur' },
+        ],
         memberid: [
             { type: 'string', message: '组成员标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '组成员标识 值必须为字符串类型', trigger: 'blur' },
@@ -476,7 +559,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public detailsModel: any = {
-        group1: new FormGroupPanelModel({ caption: '成员基本信息', detailType: 'GROUPPANEL', name: 'group1', visible: true, isShowCaption: true, form: this, isControlledContent: false , uiActionGroup: { caption: '', langbase: 'entities.wfmember.main_form', extractMode: 'ITEM', details: [] }, isManageContainer: false, showMoreModeItems: []  })
+        group1: new FormGroupPanelModel({ caption: '成员基本信息', detailType: 'GROUPPANEL', name: 'group1', visible: true, isShowCaption: false, form: this, isControlledContent: false , uiActionGroup: { caption: '', langbase: 'entities.wfmember.main_form', extractMode: 'ITEM', details: [] }, isManageContainer: false, showMoreModeItems: []  })
 , 
         formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
 , 
@@ -499,6 +582,12 @@ export default class MainBase extends Vue implements ControlInterface {
         userid: new FormItemModel({ caption: '用户标识', detailType: 'FORMITEM', name: 'userid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         personname: new FormItemModel({ caption: '用户', detailType: 'FORMITEM', name: 'personname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        mdeptname: new FormItemModel({ caption: '主部门', detailType: 'FORMITEM', name: 'mdeptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        groupname: new FormItemModel({ caption: '用户组', detailType: 'FORMITEM', name: 'groupname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         memberid: new FormItemModel({ caption: '组成员标识', detailType: 'FORMITEM', name: 'memberid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
@@ -625,6 +714,42 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 orgname 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.orgname')
+    onOrgnameChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'orgname', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 mdeptname 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.mdeptname')
+    onMdeptnameChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'mdeptname', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 groupname 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.groupname')
+    onGroupnameChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'groupname', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 memberid 值
      *
      * @param {*} newVal
@@ -690,6 +815,9 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
+
+
+
 
 
 

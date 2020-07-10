@@ -12,12 +12,12 @@ export default {
       		title: "角色选择表格视图",
 		},
 		editview2: {
-			caption: "系统角色",
-      		title: "角色编辑视图",
+			caption: "角色",
+      		title: "角色",
 		},
 		editview: {
-			caption: "系统角色",
-      		title: "角色编辑视图",
+			caption: "角色",
+      		title: "角色",
 		},
 		pickupview: {
 			caption: "系统角色",

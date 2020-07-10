@@ -1,6 +1,7 @@
 package cn.ibizlab.util.helper;
 
 
+import cn.ibizlab.util.annotation.Audit;
 import cn.ibizlab.util.annotation.DEField;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -21,6 +22,8 @@ public class DEFieldCacheMap {
 	private static Hashtable<String, Hashtable<String,String>> cacheKey = new Hashtable<>();
 
 	private static Hashtable<String, Hashtable<String,DEField>> cacheDEField = new Hashtable<>();
+
+	private static Hashtable<String, Hashtable<String,Audit>> cacheAuditField = new Hashtable<>();
 
 	private static Hashtable<String, String> cacheDEKeyField = new Hashtable<>();
 
@@ -44,6 +47,7 @@ public class DEFieldCacheMap {
 			List<Field> list=new ArrayList<Field>();
 			Hashtable<String,String> keys=new Hashtable<String,String>();
 			Hashtable<String,DEField> defields=new Hashtable<>();
+			Hashtable<String, Audit> auditfields=new Hashtable<>();
 			Hashtable<String,String> dekeyfields=new Hashtable<>();
 			Field[] fields=clazz.getDeclaredFields();
 			for(Field field:fields){
@@ -51,16 +55,21 @@ public class DEFieldCacheMap {
 				list.add(field);
 				keys.put(field.getName().toLowerCase(),field.getName());
 				DEField deField=field.getAnnotation(DEField.class);
+				Audit auditField=field.getAnnotation(Audit.class);
 				if(!ObjectUtils.isEmpty(deField)) {
 					defields.put(field.getName(),deField);
 					if(deField.isKeyField())
 						cacheDEKeyField.put(className,field.getName());
+				}
+				if(!ObjectUtils.isEmpty(auditField)) {
+					auditfields.put(field.getName(),auditField);
 				}
 			}
 			cacheMap.put(className, result);
 			cacheList.put(className,list);
 			cacheKey.put(className,keys);
 			cacheDEField.put(className,defields);
+			cacheAuditField.put(className,auditfields);
 			return result;
 		}
 	}
@@ -94,6 +103,23 @@ public class DEFieldCacheMap {
 		else{
 			DEFieldCacheMap.getFieldMap(className);
 			return cacheDEField.get(className);
+		}
+	}
+
+	/**
+	 * 从缓存中查询审计属性集合
+	 * @param
+	 * @return
+	 */
+	public static <T> Hashtable<String,Audit> getAuditFields(Class<T> clazz) {
+		String className=clazz.getName();
+		if(className.indexOf("_$")>0)
+			className=className.substring(0, className.lastIndexOf("_$"));
+		if(cacheAuditField.containsKey(className))
+			return cacheAuditField.get(className);
+		else{
+			DEFieldCacheMap.getFieldMap(className);
+			return cacheAuditField.get(className);
 		}
 	}
 

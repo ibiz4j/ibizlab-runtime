@@ -23,8 +23,8 @@ export default {
       		title: "字典数据选择视图",
 		},
 		editview: {
-			caption: "字典",
-      		title: "字典编辑视图",
+			caption: "目录",
+      		title: "目录",
 		},
 	},
 	main_form: {

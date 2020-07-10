@@ -11,9 +11,11 @@ import { UIActionTool,Util } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import { Subject,Subscription } from 'rxjs';
 import SysPermissionService from '@/service/sys-permission/sys-permission-service';
+import SysPermissionAuthService from '@/authservice/sys-permission/sys-permission-auth-service';
 
 
 
+import SysPermissionUIService from '@/uiservice/sys-permission/sys-permission-ui-service';
 import UIService from '@/uiservice/ui-service';
 
 
@@ -30,6 +32,14 @@ export default class SYS_PERMISSIONRedirectViewBase extends Vue {
      * @memberof SYS_PERMISSIONRedirectViewBase
      */
     public appEntityService: SysPermissionService = new SysPermissionService;
+
+    /**
+     * 实体权限服务对象
+     *
+     * @type SysPermissionUIService
+     * @memberof SYS_PERMISSIONRedirectViewBase
+     */
+    public appUIService: SysPermissionUIService = new SysPermissionUIService(this.$store);
 
 
     /**

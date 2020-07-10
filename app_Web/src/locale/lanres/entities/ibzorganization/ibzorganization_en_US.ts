@@ -25,7 +25,7 @@ export default {
 		},
 		editview: {
 			caption: "Input data check failed.",
-      		title: "单位机构编辑视图",
+      		title: "单位管理",
 		},
 		gridview: {
 			caption: "Input data check failed.",

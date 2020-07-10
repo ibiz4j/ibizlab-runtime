@@ -12,8 +12,8 @@ export default {
       		title: "岗位数据选择视图",
 		},
 		editview: {
-			caption: "岗位",
-      		title: "岗位编辑视图",
+			caption: "岗位管理",
+      		title: "岗位管理",
 		},
 		pickupgridview: {
 			caption: "岗位",

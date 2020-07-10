@@ -16,8 +16,8 @@ export default {
       		title: "角色数据选择视图",
 		},
 		editview: {
-			caption: "系统角色",
-      		title: "角色编辑视图",
+			caption: "用户角色",
+      		title: "用户角色",
 		},
 		pickupgridview: {
 			caption: "系统角色",
