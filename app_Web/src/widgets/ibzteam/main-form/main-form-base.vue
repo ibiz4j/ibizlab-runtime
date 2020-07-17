@@ -9,12 +9,14 @@
         <i-col v-show="detailsModel.teamname.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
     <app-form-item name='teamname' :itemRules="this.rules.teamname" class='' :caption="$t('entities.ibzteam.main_form.details.teamname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.teamname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.teamname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.teamname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.memo.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
     <app-form-item name='memo' :itemRules="this.rules.memo" class='' :caption="$t('entities.ibzteam.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.memo"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.memo.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1191,9 +1193,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.ibzteam){
-                Object.assign(this.context,{ibzteam:data.ibzteam})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

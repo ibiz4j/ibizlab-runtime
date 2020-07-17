@@ -58,7 +58,7 @@ export default class IBZOrganizationPickupViewBase extends Vue {
     public appEntityService: IBZOrganizationService = new IBZOrganizationService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type IBZOrganizationUIService
      * @memberof IBZOrganizationPickupViewBase
@@ -661,6 +661,7 @@ export default class IBZOrganizationPickupViewBase extends Vue {
      * @memberof IBZOrganizationPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

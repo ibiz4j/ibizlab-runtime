@@ -7,6 +7,7 @@
                     <i-col v-show="detailsModel.n_sys_rolename_like.visible" :style="{}"  :lg="{ span: 8, offset: 0 }">
               <app-form-item name='n_sys_rolename_like' :itemRules="this.rules.n_sys_rolename_like" class='' :caption="$t('entities.sysrole.default_searchform.details.n_sys_rolename_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_sys_rolename_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_sys_rolename_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_sys_rolename_like.disabled" type='text'  style=""></input-box>
+          
           </app-form-item>
           
           </i-col>

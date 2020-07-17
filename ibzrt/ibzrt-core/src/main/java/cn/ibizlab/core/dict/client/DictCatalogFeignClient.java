@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[DictCatalog] 服务对象接口
  */
-@FeignClient(value = "ibzdict-api", contextId = "DictCatalog", fallback = DictCatalogFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzdict-api:ibzdict-api}", contextId = "DictCatalog", fallback = DictCatalogFallback.class)
 public interface DictCatalogFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/select")

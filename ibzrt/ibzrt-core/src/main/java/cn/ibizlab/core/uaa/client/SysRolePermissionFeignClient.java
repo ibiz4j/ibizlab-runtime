@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[SysRolePermission] 服务对象接口
  */
-@FeignClient(value = "ibzuaa-api", contextId = "SysRolePermission", fallback = SysRolePermissionFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysRolePermission", fallback = SysRolePermissionFallback.class)
 public interface SysRolePermissionFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/select")

@@ -7,12 +7,14 @@
                     <i-col v-show="detailsModel.orgcode.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='orgcode' :itemRules="this.rules.orgcode" class='' :caption="$t('entities.ibzorganization.default_searchform.details.orgcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgcode.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.orgcode"  @enter="onEnter($event)"    :disabled="detailsModel.orgcode.disabled" type='text'  style="width:100px;"></input-box>
+          
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_orgname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_orgname_like' :itemRules="this.rules.n_orgname_like" class='' :caption="$t('entities.ibzorganization.default_searchform.details.n_orgname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_orgname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_orgname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_orgname_like.disabled" type='text'  style="width:100px;"></input-box>
+          
           </app-form-item>
           
           </i-col>

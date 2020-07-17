@@ -58,7 +58,7 @@ export default class WFUserPickupViewBase extends Vue {
     public appEntityService: WFUserService = new WFUserService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type WFUserUIService
      * @memberof WFUserPickupViewBase
@@ -661,6 +661,7 @@ export default class WFUserPickupViewBase extends Vue {
      * @memberof WFUserPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

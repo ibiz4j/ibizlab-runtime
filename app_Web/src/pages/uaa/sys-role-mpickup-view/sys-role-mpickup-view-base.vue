@@ -826,6 +826,7 @@ export default class SysRoleMPickupViewBase extends Vue {
      * @memberof SysRoleMPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

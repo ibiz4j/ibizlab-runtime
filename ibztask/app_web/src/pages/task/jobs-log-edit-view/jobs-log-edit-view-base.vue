@@ -67,7 +67,7 @@ export default class JobsLogEditViewBase extends Vue {
     public appEntityService: JobsLogService = new JobsLogService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type JobsLogUIService
      * @memberof JobsLogEditViewBase

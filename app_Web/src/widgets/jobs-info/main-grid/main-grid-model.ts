@@ -75,6 +75,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'id',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'timeout',

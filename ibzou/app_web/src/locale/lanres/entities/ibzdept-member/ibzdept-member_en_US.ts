@@ -8,6 +8,7 @@ export default {
     personname: "成员",
     postid: "岗位标识",
     postname: "岗位名称",
+    bcode: "业务条线",
     domains: "区属",
   },
 	views: {

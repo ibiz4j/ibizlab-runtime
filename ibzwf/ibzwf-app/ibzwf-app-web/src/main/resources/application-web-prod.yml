@@ -9,47 +9,47 @@ zuul:
   routes:
     wf_model:
       path: /wfremodels/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     wf_group_member:
       path: /wfmembers/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     wf_group:
       path: /wfgroups/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     wf_user:
       path: /wfusers/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     wf_definition:
       path: /wfprocessdefinitions/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     wf_pssystem:
       path: /wfsystems/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     loginv7:
       path: /v7/login
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     changepwd:
       path: /v7/changepwd
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     uaa:
       path: /uaa/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     config:
       path: /config/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     oucore:
       path: /ibzorganizations/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
       stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

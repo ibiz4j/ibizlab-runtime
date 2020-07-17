@@ -529,7 +529,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * 
      * @memberof MainBase
      */
-    public defaultUpdateItems:Array<any> =['srfkey'];
+    public defaultUpdateItems:Array<any> =[];
 
     /**
      * 选中行数据
@@ -1501,7 +1501,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.$Notice.success({ title: '', desc: (this.$t('app.commonWords.saveSuccess') as string) });
         }else{
           errorItems.forEach((item:any,index:number)=>{
-            this.$Notice.error({ title: (this.$t('app.commonWords.saveFailed') as string), desc: item.majorentityname+(this.$t('app.commonWords.saveFailed') as string)+'!' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: errorMessage[index].data.message });
             console.error(errorMessage[index]);
           });
         }

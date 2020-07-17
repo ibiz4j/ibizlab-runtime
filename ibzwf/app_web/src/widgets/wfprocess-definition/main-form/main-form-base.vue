@@ -7,31 +7,35 @@
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.wfprocessdefinition.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.deploykey.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='deploykey' :itemRules="this.rules.deploykey" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.deploykey')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.deploykey.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='deploykey' :itemRules="this.rules().deploykey" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.deploykey')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.deploykey.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.deploykey"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.deploykey.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.definitionname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='definitionname' :itemRules="this.rules.definitionname" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.definitionname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.definitionname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='definitionname' :itemRules="this.rules().definitionname" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.definitionname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.definitionname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.definitionname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.definitionname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.pssystemid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='pssystemid' :itemRules="this.rules.pssystemid" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.pssystemid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pssystemid.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='pssystemid' :itemRules="this.rules().pssystemid" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.pssystemid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pssystemid.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.pssystemid"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.pssystemid.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.modelversion.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='modelversion' :itemRules="this.rules.modelversion" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.modelversion')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.modelversion.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='modelversion' :itemRules="this.rules().modelversion" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.modelversion')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.modelversion.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.modelversion"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.modelversion.disabled" type='number'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.modelenable.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='modelenable' :itemRules="this.rules.modelenable" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.modelenable')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.modelenable.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='modelenable' :itemRules="this.rules().modelenable" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.modelenable')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.modelenable.error" :isEmptyCaption="false" labelPos="LEFT">
     
  <dropdown-list 
   v-model="data.modelenable" 
@@ -46,18 +50,21 @@
   codelistType='STATIC'
   placeholder='请选择...'>
  </dropdown-list>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.bpmnfile.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='bpmnfile' :itemRules="this.rules.bpmnfile" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.bpmnfile')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.bpmnfile.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='bpmnfile' :itemRules="this.rules().bpmnfile" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.bpmnfile')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.bpmnfile.error" :isEmptyCaption="false" labelPos="LEFT">
     <app-file-upload :formState="formState" :ignorefieldvaluechange="ignorefieldvaluechange" @formitemvaluechange="onFormItemValueChange" :data="JSON.stringify(this.data)" name='bpmnfile' :value="data.bpmnfile" :disabled="detailsModel.bpmnfile.disabled" :uploadparams='{}' :exportparams='{}'  style="overflow: auto;"></app-file-upload>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.md5check.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='md5check' :itemRules="this.rules.md5check" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.md5check')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.md5check.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='md5check' :itemRules="this.rules().md5check" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.md5check')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.md5check.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.md5check"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.md5check.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -453,7 +460,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
@@ -544,6 +552,51 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '校验 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '校验 值不能为空', trigger: 'blur' },
         ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -851,7 +904,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1282,9 +1335,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.wfprocessdefinition){
-                Object.assign(this.context,{wfprocessdefinition:data.wfprocessdefinition})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

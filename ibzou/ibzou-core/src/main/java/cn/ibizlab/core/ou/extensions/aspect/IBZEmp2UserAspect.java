@@ -220,12 +220,15 @@ public class IBZEmp2UserAspect
         }
     }
 
+    @Value("${ibiz.emp.defaultidformat:%s-%s}")
+    private String empdefaultidformat;
+
     private void prepareEmp(IBZEmployee emp,Integer lastOrder)
     {
         String userName=emp.getUsername();
         if(StringUtils.isEmpty(emp.getUserid())&&(!StringUtils.isEmpty(emp.getUsercode()))&&(!StringUtils.isEmpty(emp.getOrgid())))
         {
-            emp.setUserid(emp.getOrgid()+"-"+emp.getUsercode());
+            emp.setUserid(String.format(empdefaultidformat,emp.getOrgid(),emp.getUsercode()));
         }
         if(StringUtils.isEmpty(userName))
         {
@@ -260,6 +263,9 @@ public class IBZEmp2UserAspect
         }
     }
 
+    @Value("${ibiz.dept.defaultidformat:%s%s}")
+    private String deptdefaultidformat;
+
     private void prepareDept(IBZDepartment dept,Integer lastOrder)
     {
         if ((!StringUtils.isEmpty(dept.getDeptid()))&&(!StringUtils.isEmpty(dept.getParentdeptid())))
@@ -269,7 +275,7 @@ public class IBZEmp2UserAspect
         }
         if (StringUtils.isEmpty(dept.getDeptid()) && (!StringUtils.isEmpty(dept.getDeptcode())) && (!StringUtils.isEmpty(dept.getOrgid())))
         {
-            dept.setDeptid(dept.getOrgid() + dept.getDeptcode());
+            dept.setDeptid(String.format(deptdefaultidformat,dept.getOrgid() ,dept.getDeptcode()));
         }
         if((!StringUtils.isEmpty(dept.getOrgid()))&&dept.getShoworder()==null)
         {

@@ -9,12 +9,14 @@
         <i-col v-show="detailsModel.sys_rolename.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
     <app-form-item name='sys_rolename' :itemRules="this.rules.sys_rolename" class='' :caption="$t('entities.sysrole.main_form.details.sys_rolename')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_rolename.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.sys_rolename"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.sys_rolename.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.memo.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 12, offset: 0 }">
     <app-form-item name='memo' :itemRules="this.rules.memo" class='' :caption="$t('entities.sysrole.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.memo"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.memo.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1247,9 +1249,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.sysrole){
-                Object.assign(this.context,{sysrole:data.sysrole})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

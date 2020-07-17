@@ -70,6 +70,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'memberid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'wfmember',

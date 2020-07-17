@@ -6,12 +6,14 @@
 <i-col v-show="detailsModel.deptcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='deptcode' :itemRules="this.rules.deptcode" class='' :caption="$t('entities.ibzdepartment.main_form.details.deptcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.deptcode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.deptcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.deptcode.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.deptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='deptname' :itemRules="this.rules.deptname" class='' :caption="$t('entities.ibzdepartment.main_form.details.deptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.deptname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.deptname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.deptname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -30,18 +32,21 @@
 <i-col v-show="detailsModel.shortname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='shortname' :itemRules="this.rules.shortname" class='' :caption="$t('entities.ibzdepartment.main_form.details.shortname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.shortname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.shortname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.shortname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.bcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='bcode' :itemRules="this.rules.bcode" class='' :caption="$t('entities.ibzdepartment.main_form.details.bcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.bcode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.bcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.bcode.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.deptlevel.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='deptlevel' :itemRules="this.rules.deptlevel" class='' :caption="$t('entities.ibzdepartment.main_form.details.deptlevel')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.deptlevel.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.deptlevel"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.deptlevel.disabled" type='number'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -69,20 +74,23 @@
 <i-col v-show="detailsModel.showorder.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='showorder' :itemRules="this.rules.showorder" class='' :caption="$t('entities.ibzdepartment.main_form.details.showorder')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.showorder.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.showorder"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.showorder.disabled" type='number'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.createdate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='createdate' :itemRules="this.rules.createdate" class='' :caption="$t('entities.ibzdepartment.main_form.details.createdate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.createdate.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='createdate' :value="data.createdate" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+<app-span name='createdate' :value="data.createdate" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.updatedate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='updatedate' :itemRules="this.rules.updatedate" class='' :caption="$t('entities.ibzdepartment.main_form.details.updatedate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.updatedate.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='updatedate' :value="data.updatedate" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+<app-span name='updatedate' :value="data.updatedate" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+
 </app-form-item>
 
 </i-col>
@@ -1483,9 +1491,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.ibzdepartment){
-                Object.assign(this.context,{ibzdepartment:data.ibzdepartment})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

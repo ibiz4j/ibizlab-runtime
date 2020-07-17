@@ -9,55 +9,64 @@
         <i-col v-show="detailsModel.job_id.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='job_id' :itemRules="this.rules.job_id" class='' :caption="$t('entities.jobslog.main_form.details.job_id')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.job_id.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.job_id"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.job_id.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.handler.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='handler' :itemRules="this.rules.handler" class='' :caption="$t('entities.jobslog.main_form.details.handler')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.handler.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.handler"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.handler.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.param.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='param' :itemRules="this.rules.param" class='' :caption="$t('entities.jobslog.main_form.details.param')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.param.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.param"  :disabled="detailsModel.param.disabled" type='textarea' style="" ></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.fail_retry_count.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='fail_retry_count' :itemRules="this.rules.fail_retry_count" class='' :caption="$t('entities.jobslog.main_form.details.fail_retry_count')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fail_retry_count.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.fail_retry_count"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.fail_retry_count.disabled" type='number'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.trigger_code.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='trigger_code' :itemRules="this.rules.trigger_code" class='' :caption="$t('entities.jobslog.main_form.details.trigger_code')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.trigger_code.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.trigger_code"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.trigger_code.disabled" type='number'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.trigger_type.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='trigger_type' :itemRules="this.rules.trigger_type" class='' :caption="$t('entities.jobslog.main_form.details.trigger_type')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.trigger_type.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.trigger_type"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.trigger_type.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.trigger_msg.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='trigger_msg' :itemRules="this.rules.trigger_msg" class='' :caption="$t('entities.jobslog.main_form.details.trigger_msg')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.trigger_msg.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.trigger_msg"  :disabled="detailsModel.trigger_msg.disabled" type='textarea' style="" ></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.address.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='address' :itemRules="this.rules.address" class='' :caption="$t('entities.jobslog.main_form.details.address')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.address.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.address"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.address.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.create_time.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='create_time' :itemRules="this.rules.create_time" class='' :caption="$t('entities.jobslog.main_form.details.create_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.create_time.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='create_time' :value="data.create_time" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+<app-span name='create_time' :value="data.create_time" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+
 </app-form-item>
 
 </i-col>
@@ -1326,9 +1335,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.jobslog){
-                Object.assign(this.context,{jobslog:data.jobslog})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

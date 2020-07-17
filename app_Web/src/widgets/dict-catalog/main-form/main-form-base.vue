@@ -9,24 +9,28 @@
         <i-col v-show="detailsModel.ccode.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
     <app-form-item name='ccode' :itemRules="this.rules.ccode" class='' :caption="$t('entities.dictcatalog.main_form.details.ccode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.ccode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.ccode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.ccode.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.cname.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
     <app-form-item name='cname' :itemRules="this.rules.cname" class='' :caption="$t('entities.dictcatalog.main_form.details.cname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.cname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.cname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.cgroup.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
     <app-form-item name='cgroup' :itemRules="this.rules.cgroup" class='' :caption="$t('entities.dictcatalog.main_form.details.cgroup')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cgroup.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.cgroup"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.cgroup.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.memo.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 24, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 24, offset: 0 }">
     <app-form-item name='memo' :itemRules="this.rules.memo" class='' :caption="$t('entities.dictcatalog.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.memo"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.memo.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1236,9 +1240,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.dictcatalog){
-                Object.assign(this.context,{dictcatalog:data.dictcatalog})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

@@ -58,7 +58,7 @@ export default class SysRolePermissionPickupViewBase extends Vue {
     public appEntityService: SysRolePermissionService = new SysRolePermissionService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysRolePermissionUIService
      * @memberof SysRolePermissionPickupViewBase
@@ -661,6 +661,7 @@ export default class SysRolePermissionPickupViewBase extends Vue {
      * @memberof SysRolePermissionPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

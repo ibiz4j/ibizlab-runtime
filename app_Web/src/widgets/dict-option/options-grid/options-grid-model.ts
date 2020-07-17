@@ -30,31 +30,37 @@ export default class OptionsModel {
           name: 'val',
           prop: 'value',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'pval',
           prop: 'parent',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'cls',
           prop: 'cls',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'expired',
           prop: 'expired',
           dataType: 'YESNO',
+          isEditable:true
         },
         {
           name: 'label',
           prop: 'label',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'cid',
           prop: 'catalog_id',
           dataType: 'PICKUP',
+          isEditable:true
         },
         {
           name: 'srfmajortext',
@@ -70,36 +76,43 @@ export default class OptionsModel {
           name: 'srfkey',
           prop: 'value_key',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'iconcls',
           prop: 'icon_class',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'extension',
           prop: 'extension',
           dataType: 'LONGTEXT_1000',
+          isEditable:true
         },
         {
           name: 'vfilter',
           prop: 'filter',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'showorder',
           prop: 'showorder',
           dataType: 'INT',
+          isEditable:true
         },
         {
           name: 'cname',
           prop: 'catalog_name',
           dataType: 'PICKUPTEXT',
+          isEditable:true
         },
         {
           name: 'disabled',
           prop: 'disabled',
           dataType: 'YESNO',
+          isEditable:true
         },
         {
           name: 'dictoption',

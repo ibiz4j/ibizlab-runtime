@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[DictOption] 服务对象接口
  */
-@FeignClient(value = "ibzdict-api", contextId = "DictOption", fallback = DictOptionFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzdict-api:ibzdict-api}", contextId = "DictOption", fallback = DictOptionFallback.class)
 public interface DictOptionFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/select")

@@ -7,6 +7,7 @@
                     <i-col v-show="detailsModel.n_app_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
               <app-form-item name='n_app_like' :itemRules="this.rules.n_app_like" class='' :caption="$t('entities.jobsregistry.default_searchform.details.n_app_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_app_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_app_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_app_like.disabled" type='text'  style=""></input-box>
+          
           </app-form-item>
           
           </i-col>
@@ -25,6 +26,7 @@
               codelistType='STATIC'
               placeholder='请选择...' style="">
            </dropdown-list>
+          
           </app-form-item>
           
           </i-col>

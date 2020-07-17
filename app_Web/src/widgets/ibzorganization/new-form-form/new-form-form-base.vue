@@ -9,12 +9,14 @@
         <i-col v-show="detailsModel.orgcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgcode' :itemRules="this.rules.orgcode" class='' :caption="$t('entities.ibzorganization.newform_form.details.orgcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgcode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.orgcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.orgcode.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.ibzorganization.newform_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.orgname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.orgname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1223,9 +1225,6 @@ export default class NewFormBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.ibzorganization){
-                Object.assign(this.context,{ibzorganization:data.ibzorganization})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

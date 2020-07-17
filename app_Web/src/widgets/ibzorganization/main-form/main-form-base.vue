@@ -6,12 +6,14 @@
 <i-col v-show="detailsModel.orgcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgcode' :itemRules="this.rules.orgcode" class='' :caption="$t('entities.ibzorganization.main_form.details.orgcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgcode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.orgcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.orgcode.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.ibzorganization.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.orgname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.orgname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -24,32 +26,37 @@
 <i-col v-show="detailsModel.orglevel.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orglevel' :itemRules="this.rules.orglevel" class='' :caption="$t('entities.ibzorganization.main_form.details.orglevel')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orglevel.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.orglevel"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.orglevel.disabled" type='number'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.shortname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='shortname' :itemRules="this.rules.shortname" class='' :caption="$t('entities.ibzorganization.main_form.details.shortname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.shortname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.shortname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.shortname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.showorder.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='showorder' :itemRules="this.rules.showorder" class='' :caption="$t('entities.ibzorganization.main_form.details.showorder')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.showorder.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.showorder"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.showorder.disabled" type='number'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.createdate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='createdate' :itemRules="this.rules.createdate" class='' :caption="$t('entities.ibzorganization.main_form.details.createdate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.createdate.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='createdate' :value="data.createdate" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+<app-span name='createdate' :value="data.createdate" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.updatedate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='updatedate' :itemRules="this.rules.updatedate" class='' :caption="$t('entities.ibzorganization.main_form.details.updatedate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.updatedate.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='updatedate' :value="data.updatedate" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+<app-span name='updatedate' :value="data.updatedate" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+
 </app-form-item>
 
 </i-col>
@@ -1332,9 +1339,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.ibzorganization){
-                Object.assign(this.context,{ibzorganization:data.ibzorganization})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

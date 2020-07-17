@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[WFUser] 服务对象接口
  */
-@FeignClient(value = "ibzwf-api", contextId = "WFUser", fallback = WFUserFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFUser", fallback = WFUserFallback.class)
 public interface WFUserFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfusers/select")

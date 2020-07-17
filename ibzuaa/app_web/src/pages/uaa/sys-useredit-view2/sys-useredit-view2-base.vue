@@ -108,7 +108,7 @@ export default class SYS_USEREditView2Base extends Vue {
     public appEntityService: SysUserService = new SysUserService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysUserUIService
      * @memberof SYS_USEREditView2Base

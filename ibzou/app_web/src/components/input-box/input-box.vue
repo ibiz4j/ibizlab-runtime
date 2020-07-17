@@ -7,8 +7,7 @@
       :precision="precision"
       v-model="CurrentVal"
       :disabled="disabled ? true : false"
-      :formatter="formatter"
-      :parser="parser"
+      :active-change="false"
     ></InputNumber>
     <i-input v-else
       :placeholder="placeholder"
@@ -188,29 +187,7 @@ export default class InputBox extends Vue {
     }
   }
 
-  /**
-   * 指定输入框展示值的格式
-   */
-  public formatter(value:any){
-    if(this.precision===0) return this.CurrentVal;
-    if(value.indexOf('.')!==-1){
-      let arr:Array<any> = value.split('.');
-      if(arr[1]==='00'){
-        return arr[0];
-      }
-      if(parseInt(arr[1])%10===0){
-        return arr[0]+'.'+parseInt(arr[1])/10;
-      }
-    }
-    return value;
-  }
 
-  /**
-   * 指定从 formatter 里转换回数字的方式
-   */
-  public parser(value:any){
-    return value;
-  }
 }
 </script>
 

@@ -271,6 +271,7 @@ export default class AppFormDRUIPart extends Vue {
         //设置顶层视图唯一标识
         Object.assign(tempContext,this.context);
         Object.assign(tempContext,{srfparentdename:this.parentName,srfparentkey:_paramitem});
+        Object.assign(tempParam,{srfparentdename:this.parentName,srfparentkey:_paramitem});
         // 设置局部上下文
         if(this.localContext && Object.keys(this.localContext).length >0){
             let _context:any = this.$util.computedNavData(formData,tempContext,this.viewparams,this.localContext);
@@ -292,9 +293,9 @@ export default class AppFormDRUIPart extends Vue {
             }
         }
         if(!this.isForbidLoad){
-            this.$nextTick(() => {
+            setTimeout(() => {
                 this.formDruipart.next({action:'load',data:{srfparentdename:this.parentName,srfparentkey:_paramitem}});
-            });
+            }, 0);
         }
     }
 

@@ -9,12 +9,14 @@
         <i-col v-show="detailsModel.deptcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='deptcode' :itemRules="this.rules.deptcode" class='' :caption="$t('entities.ibzdepartment.newform_form.details.deptcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.deptcode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.deptcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.deptcode.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.deptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='deptname' :itemRules="this.rules.deptname" class='' :caption="$t('entities.ibzdepartment.newform_form.details.deptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.deptname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.deptname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.deptname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1280,9 +1282,6 @@ export default class NewFormBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.ibzdepartment){
-                Object.assign(this.context,{ibzdepartment:data.ibzdepartment})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

@@ -4,8 +4,9 @@
     <row >
             
 <i-col v-show="detailsModel.sys_permissionname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='sys_permissionname' :itemRules="this.rules.sys_permissionname" class='' :caption="$t('entities.syspermission.main_form.details.sys_permissionname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_permissionname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='sys_permissionname' :itemRules="this.rules().sys_permissionname" class='' :caption="$t('entities.syspermission.main_form.details.sys_permissionname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_permissionname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.sys_permissionname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.sys_permissionname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -391,7 +392,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srfupdatedate: [
             { type: 'string', message: '更新时间 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '更新时间 值必须为字符串类型', trigger: 'blur' },
@@ -452,6 +454,51 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '资源标识 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '资源标识 值不能为空', trigger: 'blur' },
         ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -681,7 +728,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1112,9 +1159,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.syspermission){
-                Object.assign(this.context,{syspermission:data.syspermission})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

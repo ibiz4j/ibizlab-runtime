@@ -30,6 +30,7 @@ export default class MainModel {
           name: 'postid',
           prop: 'postid',
           dataType: 'PICKUP',
+          isEditable:true
         },
         {
           name: 'teamid',
@@ -40,16 +41,19 @@ export default class MainModel {
           name: 'postname',
           prop: 'postname',
           dataType: 'PICKUPTEXT',
+          isEditable:true
         },
         {
           name: 'userid',
           prop: 'userid',
           dataType: 'PICKUP',
+          isEditable:true
         },
         {
           name: 'personname',
           prop: 'personname',
           dataType: 'PICKUPTEXT',
+          isEditable:true
         },
         {
           name: 'srfmajortext',
@@ -65,6 +69,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'teammemberid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'ibzteammember',

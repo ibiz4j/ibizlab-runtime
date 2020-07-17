@@ -55,6 +55,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'postid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'ibzpost',

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Map;
 import java.util.Set;
 
-@FeignClient(value = "ibzou-api",fallback = IBZOUFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ou:ibzou-api}",fallback = IBZOUFallback.class)
 public interface IBZOUFeignClient
 {
 	/**

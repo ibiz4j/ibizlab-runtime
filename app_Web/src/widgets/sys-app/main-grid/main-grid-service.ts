@@ -99,7 +99,7 @@ export default class MainService extends ControlService {
      */
     @Errorlog
     public add(action: string, context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        const {data:Data,context:Context} = this.handleRequestData(action,context,data,true);
+        const {data:Data,context:Context} = this.handleRequestDataWithUpdate(action,context,data,true);
         return new Promise((resolve: any, reject: any) => {
             const _appEntityService: any = this.appEntityService;
             let result: Promise<any>;
@@ -158,14 +158,14 @@ export default class MainService extends ControlService {
      */
     @Errorlog
     public update(action: string, context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        const {data:Data,context:Context} = this.handleRequestData(action,context,data,true);
+        const {data:Data,context:Context} = this.handleRequestDataWithUpdate(action,context,data,true);
         return new Promise((resolve: any, reject: any) => {
             const _appEntityService: any = this.appEntityService;
             let result: Promise<any>;
             if (_appEntityService[action] && _appEntityService[action] instanceof Function) {
-                result = _appEntityService[action](Data,Context,isloading);
+                result = _appEntityService[action](Context,Data,isloading);
             }else{
-                result =_appEntityService.Update(Data,Context,isloading);
+                result =_appEntityService.Update(Context,Data,isloading);
             }
             result.then((response) => {
                 this.handleResponse(action, response);
@@ -304,6 +304,42 @@ export default class MainService extends ControlService {
                 reject(response);
             });
         })
+    }
+
+    /**
+     * 处理请求数据(修改或增加数据)
+     * 
+     * @param action 行为 
+     * @param data 数据
+     * @memberof MainService
+     */
+    public handleRequestDataWithUpdate(action: string,context:any ={},data: any = {},isMerge:boolean = false){
+        let model: any = this.getMode();
+        if (!model && model.getDataItems instanceof Function) {
+            return data;
+        }
+        let dataItems: any[] = model.getDataItems();
+        let requestData:any = {};
+        if(isMerge && (data && data.viewparams)){
+            Object.assign(requestData,data.viewparams);
+        }
+        dataItems.forEach((item:any) =>{
+            if(item && item.dataType && Object.is(item.dataType,'FONTKEY')){
+                if(item && item.prop && item.name ){
+                    requestData[item.prop] = context[item.name];
+                }
+            }else{
+                if(item && item.isEditable && item.prop && item.name && (data[item.name] || Object.is(data[item.name],0)) ){
+                    requestData[item.prop] = data[item.name];
+                }
+            }
+        });
+        let tempContext:any = JSON.parse(JSON.stringify(context));
+        if(tempContext && tempContext.srfsessionid){
+            tempContext.srfsessionkey = tempContext.srfsessionid;
+            delete tempContext.srfsessionid;
+        }
+        return {context:tempContext,data:requestData};
     }
     
 }

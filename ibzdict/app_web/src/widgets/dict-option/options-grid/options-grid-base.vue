@@ -40,10 +40,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='cid' editorType="HIDDEN" :value="row.cid"></app-span>
+            <app-span name='cid' editorType="HIDDEN" :value="row.cid" dataType="PICKUP" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -67,10 +68,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='val' editorType="TEXTBOX" :value="row.val"></app-span>
+            <app-span name='val' editorType="TEXTBOX" :value="row.val" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -94,10 +96,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='label' editorType="TEXTBOX" :value="row.label"></app-span>
+            <app-span name='label' editorType="TEXTBOX" :value="row.label" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -121,10 +124,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='pval' editorType="TEXTBOX" :value="row.pval"></app-span>
+            <app-span name='pval' editorType="TEXTBOX" :value="row.pval" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -148,10 +152,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='showorder' editorType="TEXTBOX" :value="row.showorder"></app-span>
+            <app-span name='showorder' editorType="TEXTBOX" :value="row.showorder" dataType="INT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -191,7 +196,7 @@
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='cname' editorType="PICKER" :value="row.cname"></app-span>
+            <app-span name='cname' editorType="PICKER" :value="row.cname" dataType="PICKUPTEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -215,10 +220,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='cls' editorType="TEXTBOX" :value="row.cls"></app-span>
+            <app-span name='cls' editorType="TEXTBOX" :value="row.cls" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -242,10 +248,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='iconcls' editorType="TEXTBOX" :value="row.iconcls"></app-span>
+            <app-span name='iconcls' editorType="TEXTBOX" :value="row.iconcls" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -269,10 +276,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='vfilter' editorType="TEXTBOX" :value="row.vfilter"></app-span>
+            <app-span name='vfilter' editorType="TEXTBOX" :value="row.vfilter" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -364,10 +372,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='extension' editorType="TEXTBOX" :value="row.extension"></app-span>
+            <app-span name='extension' editorType="TEXTBOX" :value="row.extension" dataType="LONGTEXT_1000" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -834,7 +843,7 @@ export default class OptionsBase extends Vue implements ControlInterface {
      * 
      * @memberof OptionsBase
      */
-    public defaultUpdateItems:Array<any> =['val','pval','cls','expired','label','cid','srfkey','iconcls','extension','vfilter','showorder','cname','disabled'];
+    public defaultUpdateItems:Array<any> =[,,,,,,,,,,,,];
 
     /**
      * 选中行数据
@@ -1938,7 +1947,7 @@ export default class OptionsBase extends Vue implements ControlInterface {
             this.$Notice.success({ title: '', desc: (this.$t('app.commonWords.saveSuccess') as string) });
         }else{
           errorItems.forEach((item:any,index:number)=>{
-            this.$Notice.error({ title: (this.$t('app.commonWords.saveFailed') as string), desc: item.majorentityname+(this.$t('app.commonWords.saveFailed') as string)+'!' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: errorMessage[index].data.message });
             console.error(errorMessage[index]);
           });
         }

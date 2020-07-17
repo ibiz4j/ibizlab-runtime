@@ -9,31 +9,31 @@ zuul:
   routes:
     sys_authlog:
       path: /sysauthlogs/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     sys_app:
       path: /sysapps/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     sys_role_permission:
       path: /sysrolepermissions/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     sys_permission:
       path: /syspermissions/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     sys_user_role:
       path: /sysuserroles/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     sys_user:
       path: /sysusers/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     sys_role:
       path: /sysroles/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

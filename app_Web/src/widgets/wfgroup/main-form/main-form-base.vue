@@ -9,12 +9,14 @@
         <i-col v-show="detailsModel.groupname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='groupname' :itemRules="this.rules.groupname" class='' :caption="$t('entities.wfgroup.main_form.details.groupname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.groupname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.groupname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.groupname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.groupscope.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='groupscope' :itemRules="this.rules.groupscope" class='' :caption="$t('entities.wfgroup.main_form.details.groupscope')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.groupscope.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.groupscope"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.groupscope.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1158,9 +1160,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.wfgroup){
-                Object.assign(this.context,{wfgroup:data.wfgroup})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

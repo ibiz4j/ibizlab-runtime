@@ -50,6 +50,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'teamid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'ibzteam',

@@ -1,0 +1,14 @@
+#eureka配置中心
+spring:
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8762/eureka/
+
+

@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[SysApp] 服务对象接口
  */
-@FeignClient(value = "ibzuaa-api", contextId = "SysApp", fallback = SysAppFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysApp", fallback = SysAppFallback.class)
 public interface SysAppFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysapps/select")

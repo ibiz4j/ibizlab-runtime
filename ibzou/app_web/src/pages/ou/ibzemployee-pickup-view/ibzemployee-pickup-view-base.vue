@@ -58,7 +58,7 @@ export default class IBZEmployeePickupViewBase extends Vue {
     public appEntityService: IBZEmployeeService = new IBZEmployeeService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type IBZEmployeeUIService
      * @memberof IBZEmployeePickupViewBase
@@ -661,6 +661,7 @@ export default class IBZEmployeePickupViewBase extends Vue {
      * @memberof IBZEmployeePickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

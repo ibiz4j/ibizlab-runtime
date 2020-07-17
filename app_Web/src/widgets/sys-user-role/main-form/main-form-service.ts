@@ -174,7 +174,6 @@ export default class MainService extends ControlService {
         });
     }
 
-
     /**
      * 添加数据
      *
@@ -188,7 +187,7 @@ export default class MainService extends ControlService {
     @Errorlog
     public add(action: string, context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         const {data:Data,context:Context} = this.handleRequestData(action,context,data);
-        Object.assign(Data,{userroleid: data.userroleid, srffrontuf: '1'});
+        Object.assign(Data,{userroleid: data.sys_user_roleid, srffrontuf: '1'});
         return new Promise((resolve: any, reject: any) => {
             let result: Promise<any>;
             const _appEntityService: any = this.appEntityService;

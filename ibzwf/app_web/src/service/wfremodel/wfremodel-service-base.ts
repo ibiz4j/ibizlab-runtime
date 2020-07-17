@@ -48,7 +48,9 @@ export default class WFREModelServiceBase extends EntityService {
      * @memberof WFREModelServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/wfremodels/${context.wfremodel}/select`,isloading);
+            let res:any = Http.getInstance().get(`/wfremodels/${context.wfremodel}/select`,isloading);
+            
+            return res;
     }
 
     /**
@@ -71,6 +73,7 @@ export default class WFREModelServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/wfremodels`,data,isloading);
+        
         return res;
     }
 
@@ -87,6 +90,7 @@ export default class WFREModelServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/wfremodels/${context.wfremodel}`,data,isloading);
+            
             return res;
     }
 
@@ -100,7 +104,8 @@ export default class WFREModelServiceBase extends EntityService {
      * @memberof WFREModelServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/wfremodels/${context.wfremodel}`,isloading);
+            let res:any = Http.getInstance().delete(`/wfremodels/${context.wfremodel}`,isloading);
+            return res;
     }
 
     /**
@@ -114,6 +119,7 @@ export default class WFREModelServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/wfremodels/${context.wfremodel}`,isloading);
+            
             return res;
     }
 
@@ -129,6 +135,7 @@ export default class WFREModelServiceBase extends EntityService {
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await  Http.getInstance().get(`/wfremodels/getdraft`,isloading);
         res.data.wfremodel = data.wfremodel;
+        
         return res;
     }
 
@@ -142,7 +149,8 @@ export default class WFREModelServiceBase extends EntityService {
      * @memberof WFREModelServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/wfremodels/${context.wfremodel}/checkkey`,data,isloading);
+            let res:any = Http.getInstance().post(`/wfremodels/${context.wfremodel}/checkkey`,data,isloading);
+            return res;
     }
 
     /**
@@ -158,6 +166,7 @@ export default class WFREModelServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/wfremodels/${context.wfremodel}/save`,data,isloading);
+            
             return res;
     }
 
@@ -172,6 +181,7 @@ export default class WFREModelServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/wfremodels/fetchdefault`,tempData,isloading);
+        let res:any = Http.getInstance().get(`/wfremodels/fetchdefault`,tempData,isloading);
+        return res;
     }
 }

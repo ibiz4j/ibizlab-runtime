@@ -161,6 +161,7 @@ export default class Breadcrumb extends Vue {
       if(item && item.meta && item.meta.viewType && Object.is(item.meta.viewType,"APPINDEX")){
         let path: string | null = window.sessionStorage.getItem(Environment.AppName);
         if (path) {
+          this.$store.commit("removeAllPage");
           this.$router.push({ path: path });
         } else {
           this.$router.push("/");

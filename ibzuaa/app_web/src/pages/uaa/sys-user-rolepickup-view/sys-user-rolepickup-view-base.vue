@@ -58,7 +58,7 @@ export default class SYS_USER_ROLEPickupViewBase extends Vue {
     public appEntityService: SysUserRoleService = new SysUserRoleService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysUserRoleUIService
      * @memberof SYS_USER_ROLEPickupViewBase
@@ -661,6 +661,7 @@ export default class SYS_USER_ROLEPickupViewBase extends Vue {
      * @memberof SYS_USER_ROLEPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

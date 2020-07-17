@@ -7,18 +7,21 @@
                     <i-col v-show="detailsModel.n_cname_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_cname_like' :itemRules="this.rules.n_cname_like" class='' :caption="$t('entities.dictoption.default_searchform.details.n_cname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_cname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_cname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_cname_like.disabled" type='text'  style=""></input-box>
+          
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_val_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_val_like' :itemRules="this.rules.n_val_like" class='' :caption="$t('entities.dictoption.default_searchform.details.n_val_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_val_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_val_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_val_like.disabled" type='text'  style=""></input-box>
+          
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_label_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_label_like' :itemRules="this.rules.n_label_like" class='' :caption="$t('entities.dictoption.default_searchform.details.n_label_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_label_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_label_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_label_like.disabled" type='text'  style=""></input-box>
+          
           </app-form-item>
           
           </i-col>

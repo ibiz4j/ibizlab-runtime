@@ -165,7 +165,7 @@ export default class AppFormGroup extends Vue {
             if(_item && _item['dataaccaction'] && UIService && data && Object.keys(data).length >0){
                 let dataActionResult:any = UIService.getAllOPPrivs(data)[_item['dataaccaction']];
                 // 无权限:0;有权限:1
-                if(!dataActionResult){
+                if(dataActionResult === 0){
                     // 禁用:1;隐藏:2;隐藏且默认隐藏:6
                     if(_item.noprivdisplaymode === 1){
                         _item.disabled = true;
@@ -175,7 +175,8 @@ export default class AppFormGroup extends Vue {
                     }else{
                         _item.visabled = true;
                     }
-                }else{
+                }
+                if(dataActionResult === 1){
                     _item.visabled = true;
                     _item.disabled = false;
                 }

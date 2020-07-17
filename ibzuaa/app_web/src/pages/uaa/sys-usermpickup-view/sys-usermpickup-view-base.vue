@@ -91,7 +91,7 @@ export default class SYS_USERMPickupViewBase extends Vue {
     public appEntityService: SysUserService = new SysUserService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysUserUIService
      * @memberof SYS_USERMPickupViewBase
@@ -826,6 +826,7 @@ export default class SYS_USERMPickupViewBase extends Vue {
      * @memberof SYS_USERMPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

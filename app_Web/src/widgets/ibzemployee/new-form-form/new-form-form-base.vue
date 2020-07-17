@@ -9,18 +9,21 @@
         <i-col v-show="detailsModel.usercode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='usercode' :itemRules="this.rules.usercode" class='' :caption="$t('entities.ibzemployee.newform_form.details.usercode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.usercode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.usercode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.usercode.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.personname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='personname' :itemRules="this.rules.personname" class='' :caption="$t('entities.ibzemployee.newform_form.details.personname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.personname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.personname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.personname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.loginname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='loginname' :itemRules="this.rules.loginname" class='' :caption="$t('entities.ibzemployee.newform_form.details.loginname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.loginname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.loginname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.loginname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1371,9 +1374,6 @@ export default class NewFormBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.ibzemployee){
-                Object.assign(this.context,{ibzemployee:data.ibzemployee})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

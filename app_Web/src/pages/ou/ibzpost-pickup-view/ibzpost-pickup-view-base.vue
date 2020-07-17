@@ -661,6 +661,7 @@ export default class IBZPostPickupViewBase extends Vue {
      * @memberof IBZPostPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

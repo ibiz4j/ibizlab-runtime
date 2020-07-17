@@ -174,7 +174,6 @@ export default class MainService extends ControlService {
         });
     }
 
-
     /**
      * 添加数据
      *
@@ -188,7 +187,7 @@ export default class MainService extends ControlService {
     @Errorlog
     public add(action: string, context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         const {data:Data,context:Context} = this.handleRequestData(action,context,data);
-        Object.assign(Data,{userroleid: data.userroleid, srffrontuf: '1'});
+        Object.assign(Data,{userroleid: data.sys_user_roleid, srffrontuf: '1'});
         return new Promise((resolve: any, reject: any) => {
             let result: Promise<any>;
             const _appEntityService: any = this.appEntityService;
@@ -393,6 +392,27 @@ export default class MainService extends ControlService {
             delete tempContext.srfsessionid;
         }
         return {context:tempContext,data:requestData};
+    }
+
+    /**
+     * 通过属性名称获取表单项名称
+     * 
+     * @param name 实体属性名称 
+     * @memberof MainService
+     */
+    public getItemNameByDeName(name:string) :string{
+        let itemName = name;
+        let mode: any = this.getMode();
+        if (!mode && mode.getDataItems instanceof Function) {
+            return name;
+        }
+        let formItemItems: any[] = mode.getDataItems();
+        formItemItems.forEach((item:any)=>{
+            if(item.prop === name){
+                itemName = item.name;
+            }
+        });
+        return itemName.trim();
     }
 
 }

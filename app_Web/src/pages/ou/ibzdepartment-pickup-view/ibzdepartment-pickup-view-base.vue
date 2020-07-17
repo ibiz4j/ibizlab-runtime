@@ -661,6 +661,7 @@ export default class IBZDepartmentPickupViewBase extends Vue {
      * @memberof IBZDepartmentPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

@@ -1215,9 +1215,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.ibzdeptmember){
-                Object.assign(this.context,{ibzdeptmember:data.ibzdeptmember})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

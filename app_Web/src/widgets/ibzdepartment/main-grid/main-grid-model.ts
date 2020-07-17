@@ -60,6 +60,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'deptid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'leadername',

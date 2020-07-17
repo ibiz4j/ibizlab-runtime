@@ -9,12 +9,14 @@
         <i-col v-show="detailsModel.app.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='app' :itemRules="this.rules.app" class='' :caption="$t('entities.jobsregistry.main_form.details.app')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.app.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.app"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.app.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.address.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='address' :itemRules="this.rules.address" class='' :caption="$t('entities.jobsregistry.main_form.details.address')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.address.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.address"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.address.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -33,6 +35,7 @@
     codelistType='STATIC'
     placeholder='请选择...' style="">
  </dropdown-list>
+
 </app-form-item>
 
 </i-col>
@@ -1169,9 +1172,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.jobsregistry){
-                Object.assign(this.context,{jobsregistry:data.jobsregistry})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

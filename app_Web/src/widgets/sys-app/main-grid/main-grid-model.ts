@@ -30,36 +30,43 @@ export default class MainModel {
           name: 'icon',
           prop: 'icon',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'visabled',
           prop: 'visabled',
           dataType: 'YESNO',
+          isEditable:true
         },
         {
           name: 'appname',
           prop: 'label',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'appid',
           prop: 'id',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'pssystemid',
           prop: 'systemid',
           dataType: 'PICKUP',
+          isEditable:true
         },
         {
           name: 'addr',
           prop: 'addr',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'apptype',
           prop: 'type',
           dataType: 'SSCODELIST',
+          isEditable:true
         },
         {
           name: 'srfmajortext',
@@ -75,16 +82,19 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'id',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'fullname',
           prop: 'fullname',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'appgroup',
           prop: 'group',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'sysapp',

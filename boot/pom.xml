@@ -137,7 +137,7 @@
 						<version>0.4.13</version>
 						<configuration>
 							<serverId>ibiz-dev</serverId>
-							<imageName>ibiz4j/ibizlab-runtime:1.0.8-RC1</imageName>
+							<imageName>ibiz4j/ibizlab-runtime:1.0.9-RC1</imageName>
 							<dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
 							<resources>
 								<resource>

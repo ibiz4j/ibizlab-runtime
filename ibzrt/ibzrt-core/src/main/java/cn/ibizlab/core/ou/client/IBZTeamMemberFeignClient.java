@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[IBZTeamMember] 服务对象接口
  */
-@FeignClient(value = "ibzou-api", contextId = "IBZTeamMember", fallback = IBZTeamMemberFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzou-api:ibzou-api}", contextId = "IBZTeamMember", fallback = IBZTeamMemberFallback.class)
 public interface IBZTeamMemberFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/ibzteammembers/select")

@@ -34,7 +34,7 @@ export default class SYS_PERMISSIONRedirectViewBase extends Vue {
     public appEntityService: SysPermissionService = new SysPermissionService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysPermissionUIService
      * @memberof SYS_PERMISSIONRedirectViewBase

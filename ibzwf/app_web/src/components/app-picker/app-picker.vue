@@ -177,6 +177,15 @@ export default class AppPicker extends Vue {
     @Prop() public valueitem!: string;
 
     /**
+     * 排序
+     *
+     * @type {string}
+     * @memberof AppPicker
+     */
+    @Prop() public sort?: string;
+
+
+    /**
      * 值
      *
      * @type {*}
@@ -242,7 +251,7 @@ export default class AppPicker extends Vue {
      * @param {*} oldVal
      * @memberof AppPicker
      */
-    @Watch('value')
+    @Watch('value',{immediate:true})
     public onValueChange(newVal: any, oldVal: any) {
         this.curvalue = newVal;
         if (Object.is(this.editortype, 'dropdown') && this.valueitem) {
@@ -320,6 +329,9 @@ export default class AppPicker extends Vue {
             query = '';
         }
         this.inputState = false;
+        if(this.sort && !Object.is(this.sort, "")) {
+            Object.assign(_param, { sort: this.sort });
+        }
         Object.assign(_param, { query: query });
         // 错误信息国际化
         let error: string = (this.$t('components.appPicker.error') as any);

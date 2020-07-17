@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: sys , web-prod
+    include: sys ,nacos, web-prod
   application:
     name: ibzuaa-web
 zuul:

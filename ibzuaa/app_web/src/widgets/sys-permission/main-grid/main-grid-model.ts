@@ -45,6 +45,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'permissionid',
           dataType: 'GUID',
+          isEditable:true
         },
         {
           name: 'sys_permissionname',

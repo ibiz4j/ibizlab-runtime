@@ -91,7 +91,7 @@ export default class SYS_PERMISSIONMPickupViewBase extends Vue {
     public appEntityService: SysPermissionService = new SysPermissionService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysPermissionUIService
      * @memberof SYS_PERMISSIONMPickupViewBase
@@ -826,6 +826,7 @@ export default class SYS_PERMISSIONMPickupViewBase extends Vue {
      * @memberof SYS_PERMISSIONMPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

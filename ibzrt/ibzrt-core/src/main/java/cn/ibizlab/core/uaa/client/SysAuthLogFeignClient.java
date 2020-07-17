@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[SysAuthLog] 服务对象接口
  */
-@FeignClient(value = "ibzuaa-api", contextId = "SysAuthLog", fallback = SysAuthLogFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysAuthLog", fallback = SysAuthLogFallback.class)
 public interface SysAuthLogFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/select")

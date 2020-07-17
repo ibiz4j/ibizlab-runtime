@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[JobsLock] 服务对象接口
  */
-@FeignClient(value = "ibztask-api", contextId = "JobsLock", fallback = JobsLockFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibztask-api:ibztask-api}", contextId = "JobsLock", fallback = JobsLockFallback.class)
 public interface JobsLockFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/select")

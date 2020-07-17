@@ -7,18 +7,21 @@
                     <i-col v-show="detailsModel.n_ccode_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_ccode_like' :itemRules="this.rules.n_ccode_like" class='' :caption="$t('entities.dictcatalog.default_searchform.details.n_ccode_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_ccode_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_ccode_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_ccode_like.disabled" type='text'  style="width:100px;"></input-box>
+          
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_cname_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_cname_like' :itemRules="this.rules.n_cname_like" class='' :caption="$t('entities.dictcatalog.default_searchform.details.n_cname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_cname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_cname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_cname_like.disabled" type='text'  style="width:100px;"></input-box>
+          
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_cgroup_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_cgroup_like' :itemRules="this.rules.n_cgroup_like" class='' :caption="$t('entities.dictcatalog.default_searchform.details.n_cgroup_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_cgroup_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_cgroup_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_cgroup_like.disabled" type='text'  style="width:100px;"></input-box>
+          
           </app-form-item>
           
           </i-col>

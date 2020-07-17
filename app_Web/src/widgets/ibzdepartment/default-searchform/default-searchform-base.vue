@@ -7,18 +7,21 @@
                     <i-col v-show="detailsModel.n_deptcode_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_deptcode_like' :itemRules="this.rules.n_deptcode_like" class='' :caption="$t('entities.ibzdepartment.default_searchform.details.n_deptcode_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_deptcode_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_deptcode_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_deptcode_like.disabled" type='text'  style=""></input-box>
+          
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_deptname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_deptname_like' :itemRules="this.rules.n_deptname_like" class='' :caption="$t('entities.ibzdepartment.default_searchform.details.n_deptname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_deptname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_deptname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_deptname_like.disabled" type='text'  style=""></input-box>
+          
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_bcode_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_bcode_like' :itemRules="this.rules.n_bcode_like" class='' :caption="$t('entities.ibzdepartment.default_searchform.details.n_bcode_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_bcode_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_bcode_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_bcode_like.disabled" type='text'  style=""></input-box>
+          
           </app-form-item>
           
           </i-col>

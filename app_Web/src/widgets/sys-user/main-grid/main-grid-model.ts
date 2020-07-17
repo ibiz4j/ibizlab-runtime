@@ -70,6 +70,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'userid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'sysuser',

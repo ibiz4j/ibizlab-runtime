@@ -213,6 +213,7 @@ public class IBZDeptMemberServiceImpl extends ServiceImpl<IBZDeptMemberMapper, I
                 dept=majorEntity;
             }
             et.setDeptname(dept.getDeptname());
+            et.setBcode(dept.getBcode());
         }
         //实体关系[DER1N_IBZDEPTMEMBER_IBZEMP_USERID]
         if(!ObjectUtils.isEmpty(et.getUserid())){

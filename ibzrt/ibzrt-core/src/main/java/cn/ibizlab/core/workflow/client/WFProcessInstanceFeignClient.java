@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[WFProcessInstance] 服务对象接口
  */
-@FeignClient(value = "ibzwf-api", contextId = "WFProcessInstance", fallback = WFProcessInstanceFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFProcessInstance", fallback = WFProcessInstanceFallback.class)
 public interface WFProcessInstanceFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfprocessinstances/select")

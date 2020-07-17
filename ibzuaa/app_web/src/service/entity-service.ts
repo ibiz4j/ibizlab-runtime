@@ -294,7 +294,8 @@ export default class EntityService {
             let result:any = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_'+this.APPDENAME) as any);
             if(result){
                 let tempResult:any = result.filter((item:any) =>{
-                    return !( Object.is(item[this.APPDEKEY],data[this.APPDEKEY]) && Object.is(item[this.APPDETEXT],data[this.APPDETEXT]));
+                    // return !( Object.is(item[this.APPDEKEY],data[this.APPDEKEY]) && Object.is(item[this.APPDETEXT],data[this.APPDETEXT]));
+                    return !Object.is(item[this.APPDEKEY],data[this.APPDEKEY]);
                 })
                 this.tempStorage.setItem(context.srfsessionkey+'_'+this.APPDENAME,JSON.stringify(tempResult));
                  return {"status":200,"data":data};
@@ -594,6 +595,19 @@ export default class EntityService {
      */
     public async createBatch(context: any = {},data: any, isloading?: boolean): Promise<any> {
         return Http.getInstance().post(`/${this.APPDENAME}/batch`,data,isloading);
+    }
+
+    /**
+     * saveBatch接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof EntityService
+     */
+    public async saveBatch(context: any = {},data: any, isloading?: boolean): Promise<any> {
+        return Http.getInstance().post(`/${this.APPDENAME}/savebatch`,data,isloading);
     }
 
     /**

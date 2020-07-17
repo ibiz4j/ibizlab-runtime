@@ -146,7 +146,7 @@ export default class WFUserEditViewBase extends Vue {
     public appEntityService: WFUserService = new WFUserService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type WFUserUIService
      * @memberof WFUserEditViewBase

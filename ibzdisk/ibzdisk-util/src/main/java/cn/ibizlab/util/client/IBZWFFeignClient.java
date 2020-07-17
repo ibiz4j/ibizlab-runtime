@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
-@FeignClient(value = "ibzwf-api",fallback = IBZWFFallback.class)
+@FeignClient(value = "${ibiz.ref.service.wf:ibzwf-api}",fallback = IBZWFFallback.class)
 public interface IBZWFFeignClient
 {
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/process-definitions/{processDefinitionKey}/usertasks/{taskDefinitionKey}/tasks")

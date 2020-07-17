@@ -76,7 +76,7 @@ export default class WFREModelEditViewBase extends Vue {
     public appEntityService: WFREModelService = new WFREModelService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type WFREModelUIService
      * @memberof WFREModelEditViewBase

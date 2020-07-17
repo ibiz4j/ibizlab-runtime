@@ -9,12 +9,14 @@
         <i-col v-show="detailsModel.postcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='postcode' :itemRules="this.rules.postcode" class='' :caption="$t('entities.ibzpost.main_form.details.postcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.postcode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.postcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.postcode.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.postname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='postname' :itemRules="this.rules.postname" class='' :caption="$t('entities.ibzpost.main_form.details.postname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.postname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.postname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.postname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1180,9 +1182,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.ibzpost){
-                Object.assign(this.context,{ibzpost:data.ibzpost})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

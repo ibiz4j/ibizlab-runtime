@@ -9,12 +9,14 @@
         <i-col v-show="detailsModel.appid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='appid' :itemRules="this.rules.appid" class='' :caption="$t('entities.sysapp.main_form.details.appid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appid.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.appid"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.appid.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.appname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='appname' :itemRules="this.rules.appname" class='' :caption="$t('entities.sysapp.main_form.details.appname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.appname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.appname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -33,36 +35,42 @@
     codelistType='STATIC'
     placeholder='请选择...' style="">
  </dropdown-list>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.appgroup.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='appgroup' :itemRules="this.rules.appgroup" class='' :caption="$t('entities.sysapp.main_form.details.appgroup')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appgroup.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.appgroup"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.appgroup.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.fullname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='fullname' :itemRules="this.rules.fullname" class='' :caption="$t('entities.sysapp.main_form.details.fullname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fullname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.fullname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.fullname.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.icon.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='icon' :itemRules="this.rules.icon" class='' :caption="$t('entities.sysapp.main_form.details.icon')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.icon.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.icon"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.icon.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.visabled.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='visabled' :itemRules="this.rules.visabled" class='' :caption="$t('entities.sysapp.main_form.details.visabled')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.visabled.error" :isEmptyCaption="false" labelPos="LEFT">
     <app-switch name='visabled' :value="this.data.visabled" @change="($event)=>{this.data.visabled = $event} " :disabled="detailsModel.visabled.disabled" style=""></app-switch>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.addr.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='addr' :itemRules="this.rules.addr" class='' :caption="$t('entities.sysapp.main_form.details.addr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.addr.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.addr"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.addr.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -1309,11 +1317,9 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.sysapp){
-                Object.assign(this.context,{sysapp:data.sysapp})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            this.data.appid = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });

@@ -58,7 +58,7 @@ export default class DictCatalogPickupViewBase extends Vue {
     public appEntityService: DictCatalogService = new DictCatalogService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type DictCatalogUIService
      * @memberof DictCatalogPickupViewBase
@@ -661,6 +661,7 @@ export default class DictCatalogPickupViewBase extends Vue {
      * @memberof DictCatalogPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

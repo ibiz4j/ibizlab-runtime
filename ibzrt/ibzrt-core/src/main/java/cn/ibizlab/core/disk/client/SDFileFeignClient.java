@@ -16,7 +16,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 /**
  * 实体[SDFile] 服务对象接口
  */
-@FeignClient(value = "ibzdisk-api", contextId = "SDFile", fallback = SDFileFallback.class)
+@FeignClient(value = "${ibiz.ref.service.ibzdisk-api:ibzdisk-api}", contextId = "SDFile", fallback = SDFileFallback.class)
 public interface SDFileFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/sdfiles/select")

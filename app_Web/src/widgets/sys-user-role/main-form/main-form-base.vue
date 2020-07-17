@@ -9,6 +9,7 @@
         <i-col v-show="detailsModel.sys_roleid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_roleid' :itemRules="this.rules.sys_roleid" class='' :caption="$t('entities.sysuserrole.main_form.details.sys_roleid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_roleid.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.sys_roleid"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.sys_roleid.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
@@ -16,6 +17,7 @@
     <app-form-item name='sys_user_roleid' :itemRules="this.rules.sys_user_roleid" class='' :caption="$t('entities.sysuserrole.main_form.details.sys_user_roleid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_user_roleid.error" :isEmptyCaption="false" labelPos="LEFT">
     
 <app-span name='sys_user_roleid' :value="data.sys_user_roleid" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+
 </app-form-item>
 
 </i-col>
@@ -1250,11 +1252,9 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.sysuserrole){
-                Object.assign(this.context,{sysuserrole:data.sysuserrole})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            this.data.sys_user_roleid = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });

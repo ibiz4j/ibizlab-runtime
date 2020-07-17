@@ -661,6 +661,7 @@ export default class SysUserPickupViewBase extends Vue {
      * @memberof SysUserPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

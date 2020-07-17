@@ -93,7 +93,7 @@ export default class SysAuthLogGridViewBase extends Vue {
     public appEntityService: SysAuthLogService = new SysAuthLogService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysAuthLogUIService
      * @memberof SysAuthLogGridViewBase

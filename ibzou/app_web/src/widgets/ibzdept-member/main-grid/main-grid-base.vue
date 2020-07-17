@@ -56,7 +56,7 @@
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='deptname' editorType="PICKER" :value="row.deptname"></app-span>
+            <app-span name='deptname' editorType="PICKER" :value="row.deptname" dataType="PICKUPTEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -96,7 +96,7 @@
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='postname' editorType="PICKER" :value="row.postname"></app-span>
+            <app-span name='postname' editorType="PICKER" :value="row.postname" dataType="PICKUPTEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -136,7 +136,7 @@
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='personname' editorType="PICKER" :value="row.personname"></app-span>
+            <app-span name='personname' editorType="PICKER" :value="row.personname" dataType="PICKUPTEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -160,10 +160,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='deptid' editorType="HIDDEN" :value="row.deptid"></app-span>
+            <app-span name='deptid' editorType="HIDDEN" :value="row.deptid" dataType="PICKUP" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -187,10 +188,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='postid' editorType="HIDDEN" :value="row.postid"></app-span>
+            <app-span name='postid' editorType="HIDDEN" :value="row.postid" dataType="PICKUP" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -214,10 +216,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='userid' editorType="HIDDEN" :value="row.userid"></app-span>
+            <app-span name='userid' editorType="HIDDEN" :value="row.userid" dataType="PICKUP" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -684,7 +687,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * 
      * @memberof MainBase
      */
-    public defaultUpdateItems:Array<any> =['postid','deptid','postname','userid','personname','deptname','srfkey'];
+    public defaultUpdateItems:Array<any> =[,,,,,,];
 
     /**
      * 选中行数据
@@ -1694,7 +1697,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.$Notice.success({ title: '', desc: (this.$t('app.commonWords.saveSuccess') as string) });
         }else{
           errorItems.forEach((item:any,index:number)=>{
-            this.$Notice.error({ title: (this.$t('app.commonWords.saveFailed') as string), desc: item.majorentityname+(this.$t('app.commonWords.saveFailed') as string)+'!' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: errorMessage[index].data.message });
             console.error(errorMessage[index]);
           });
         }

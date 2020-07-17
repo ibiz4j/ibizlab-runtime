@@ -9,47 +9,47 @@ zuul:
   routes:
     ibzdeptmember:
       path: /ibzdeptmembers/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     ibzteammember:
       path: /ibzteammembers/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     ibzdept:
       path: /ibzdepartments/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     ibzemp:
       path: /ibzemployees/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     ibzorg:
       path: /ibzorganizations/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     ibzpost:
       path: /ibzposts/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     ibzteam:
       path: /ibzteams/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     loginv7:
       path: /v7/login
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     changepwd:
       path: /v7/changepwd
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     uaa:
       path: /uaa/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     config:
       path: /config/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

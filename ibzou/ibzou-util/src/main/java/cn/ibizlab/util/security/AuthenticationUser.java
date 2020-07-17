@@ -65,6 +65,10 @@ public class AuthenticationUser implements UserDetails
     @JsonIgnore
     private Map<String,Object> userSessionParam;//用户自定义session值
     private Map<String, Set<String>> orgInfo;//上下级组织信息
+	private String porg;
+	private String sorg;
+	private String pdept;
+	private String sdept;
 
 
 	@JsonIgnore
@@ -133,6 +137,10 @@ public class AuthenticationUser implements UserDetails
 			sessionParams.put("srflocale", this.getLang());
 			sessionParams.put("srftimezone", "");
     		sessionParams.put("srfusercode", this.getUsercode());
+			sessionParams.put("srfporg", this.getPorg());
+			sessionParams.put("srfsorg", this.getSorg());
+			sessionParams.put("srfpdept", this.getPdept());
+			sessionParams.put("srfsdept", this.getSdept());
 		}
 		return this.sessionParams;
     }
@@ -142,6 +150,26 @@ public class AuthenticationUser implements UserDetails
 		else
 			return new HashMap<>();
     }
+
+	public void setOrgInfo(Map<String, Set<String>> orgInfo) {
+		this.orgInfo = orgInfo;
+		if(!ObjectUtils.isEmpty(orgInfo) && !ObjectUtils.isEmpty(orgInfo.get("parentorg"))){
+			porg=(String.format("'%s'",String.join("','",orgInfo.get("parentorg"))));
+            this.getSessionParams().put("srfporg",porg);
+		}
+		if(!ObjectUtils.isEmpty(orgInfo) && !ObjectUtils.isEmpty(orgInfo.get("suborg")) ){
+			sorg=(String.format("'%s'",String.join("','",orgInfo.get("suborg"))));
+            this.getSessionParams().put("srfsorg",sorg);
+		}
+		if(!ObjectUtils.isEmpty(orgInfo) && !ObjectUtils.isEmpty(orgInfo.get("parentdept"))){
+			pdept=(String.format("'%s'",String.join("','",orgInfo.get("parentdept"))));
+            this.getSessionParams().put("srfpdept",pdept);
+		}
+		if(!ObjectUtils.isEmpty(orgInfo) && !ObjectUtils.isEmpty(orgInfo.get("subdept"))){
+			sdept=(String.format("'%s'",String.join("','",orgInfo.get("subdept"))));
+            this.getSessionParams().put("srfsdept",sdept);
+		}
+	}
 
 	public void setPermissionList(JSONObject permissionList) {
 		this.permissionList = permissionList;

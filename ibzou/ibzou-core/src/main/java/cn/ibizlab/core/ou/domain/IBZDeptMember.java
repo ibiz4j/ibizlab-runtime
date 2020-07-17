@@ -91,6 +91,13 @@ public class IBZDeptMember extends EntityMP implements Serializable {
     @JsonProperty("postname")
     private String postname;
     /**
+     * 业务条线
+     */
+    @TableField(exist = false)
+    @JSONField(name = "bcode")
+    @JsonProperty("bcode")
+    private String bcode;
+    /**
      * 区属
      */
     @TableField(value = "domains")

@@ -37,6 +37,7 @@
     <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.wfmember.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
     
 <app-span name='orgname' :value="data.orgname" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+
 </app-form-item>
 
 </i-col>
@@ -44,6 +45,7 @@
     <app-form-item name='mdeptname' :itemRules="this.rules.mdeptname" class='' :caption="$t('entities.wfmember.main_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
     
 <app-span name='mdeptname' :value="data.mdeptname" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+
 </app-form-item>
 
 </i-col>
@@ -1273,9 +1275,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.wfmember){
-                Object.assign(this.context,{wfmember:data.wfmember})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

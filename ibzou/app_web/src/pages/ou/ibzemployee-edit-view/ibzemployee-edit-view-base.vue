@@ -90,7 +90,7 @@ export default class IBZEmployeeEditViewBase extends Vue {
     public appEntityService: IBZEmployeeService = new IBZEmployeeService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type IBZEmployeeUIService
      * @memberof IBZEmployeeEditViewBase

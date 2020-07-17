@@ -1,5 +1,5 @@
 spring:
   profiles:
-    include: sys , api-prod
+    include: sys ,nacos, api-prod
   application:
     name: ibzuaa-api

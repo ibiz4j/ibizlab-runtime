@@ -78,6 +78,7 @@ import AppOrgSelect from './components/app-org-select/app-org-select.vue'
 import AppDepartmentSelect from './components/app-department-select/app-department-select.vue'
 import AppGroupSelect from './components/app-group-select/app-group-select.vue'
 import UpdatePwd from './components/app-update-password/app-update-password.vue'
+import AppMenuItem from './components/app-menu-item/app-menu-item.vue'
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
 // 全局挂载实体权限服务注册中心
@@ -168,5 +169,6 @@ export const AppComponents = {
         v.component('app-transfer',AppTransfer);
         v.component('context-menu-drag',ContextMenuDrag);
         v.component('app-update-password',UpdatePwd);
+        v.component('app-menu-item', AppMenuItem);
     },
 };

@@ -90,6 +90,13 @@ public class IBZDeptMemberSearchContext extends QueryWrapperContext<IBZDeptMembe
             this.getSearchCond().like("postname", n_postname_like);
         }
     }
+	private String n_bcode_like;//[业务条线]
+	public void setN_bcode_like(String n_bcode_like) {
+        this.n_bcode_like = n_bcode_like;
+        if(!ObjectUtils.isEmpty(this.n_bcode_like)){
+            this.getSearchCond().like("bcode", n_bcode_like);
+        }
+    }
 
     /**
 	 * 启用快速搜索

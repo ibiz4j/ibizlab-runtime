@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 import com.alibaba.fastjson.JSONObject;
 
-@FeignClient(value = "ibzuaa-api",fallback = IBZUAAFallback.class)
+@FeignClient(value = "${ibiz.ref.service.uaa:ibzuaa-api}",fallback = IBZUAAFallback.class)
 public interface IBZUAAFeignClient
 {
 	/**

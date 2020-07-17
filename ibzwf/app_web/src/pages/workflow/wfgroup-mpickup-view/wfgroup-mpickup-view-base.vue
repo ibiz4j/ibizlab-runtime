@@ -91,7 +91,7 @@ export default class WFGroupMPickupViewBase extends Vue {
     public appEntityService: WFGroupService = new WFGroupService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type WFGroupUIService
      * @memberof WFGroupMPickupViewBase
@@ -826,6 +826,7 @@ export default class WFGroupMPickupViewBase extends Vue {
      * @memberof WFGroupMPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

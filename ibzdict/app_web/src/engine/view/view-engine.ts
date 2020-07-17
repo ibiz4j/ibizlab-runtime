@@ -193,7 +193,7 @@ export default class ViewEngine {
             if(_item && _item['dataaccaction'] && _this.view.appUIService && data && Object.keys(data).length >0){
                 let dataActionResult:any = _this.view.appUIService.getAllOPPrivs(data)[_item['dataaccaction']];
                 // 无权限:0;有权限:1
-                if(!dataActionResult){
+                if(dataActionResult === 0){
                     // 禁用:1;隐藏:2;隐藏且默认隐藏:6
                     if(_item.noprivdisplaymode === 1){
                         _this.view.toolBarModels[key].disabled = true;
@@ -203,8 +203,10 @@ export default class ViewEngine {
                     }else{
                         _this.view.toolBarModels[key].visabled = true;
                     }
-                }else{
+                }
+                if(dataActionResult === 1){
                     _this.view.toolBarModels[key].visabled = true;
+                    _this.view.toolBarModels[key].disabled = false;
                 }
             }
         }

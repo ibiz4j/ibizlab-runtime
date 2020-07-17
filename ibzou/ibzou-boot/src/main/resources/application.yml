@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: sys , web-dev,  api-dev,  dev
+    include: sys ,nacos, web-dev,  api-dev,  dev
   application:
     name: ibzou
   main:

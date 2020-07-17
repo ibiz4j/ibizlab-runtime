@@ -40,10 +40,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='pssystemid' editorType="HIDDEN" :value="row.pssystemid"></app-span>
+            <app-span name='pssystemid' editorType="HIDDEN" :value="row.pssystemid" dataType="PICKUP" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -67,10 +68,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='appid' editorType="TEXTBOX" :value="row.appid"></app-span>
+            <app-span name='appid' editorType="TEXTBOX" :value="row.appid" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -94,10 +96,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='appname' editorType="TEXTBOX" :value="row.appname"></app-span>
+            <app-span name='appname' editorType="TEXTBOX" :value="row.appname" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -121,10 +124,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='appgroup' editorType="TEXTBOX" :value="row.appgroup"></app-span>
+            <app-span name='appgroup' editorType="TEXTBOX" :value="row.appgroup" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -182,10 +186,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='fullname' editorType="TEXTBOX" :value="row.fullname"></app-span>
+            <app-span name='fullname' editorType="TEXTBOX" :value="row.fullname" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -209,10 +214,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='icon' editorType="TEXTBOX" :value="row.icon"></app-span>
+            <app-span name='icon' editorType="TEXTBOX" :value="row.icon" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -236,10 +242,11 @@
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
-                                <app-span name='addr' editorType="TEXTBOX" :value="row.addr"></app-span>
+            <app-span name='addr' editorType="TEXTBOX" :value="row.addr" dataType="TEXT" precision="0" ></app-span>
                         </template>
                     </template>
                 </el-table-column>
@@ -255,6 +262,7 @@
                         <template v-if="actualIsOpenEdit">
                             <app-form-item :error="gridItemsModel[$index][column.property].error">
                                 <app-switch name='visabled' :value="row[column.property]" @change="($event)=>{row[column.property] = $event;gridEditItemChange(row, column.property, $event, $index)} " :disabled="row.srfuf === 1 ? (3 & 2) !== 2 : (3 & 1) !== 1" style=""></app-switch>
+            
                             </app-form-item>
                         </template>
                         <template v-if="!actualIsOpenEdit">
@@ -692,7 +700,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * 
      * @memberof MainBase
      */
-    public defaultUpdateItems:Array<any> =['icon','visabled','appname','appid','pssystemid','addr','apptype','srfkey','fullname','appgroup'];
+    public defaultUpdateItems:Array<any> =[,,,,,,,,,];
 
     /**
      * 选中行数据
@@ -1757,7 +1765,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.$Notice.success({ title: '', desc: (this.$t('app.commonWords.saveSuccess') as string) });
         }else{
           errorItems.forEach((item:any,index:number)=>{
-            this.$Notice.error({ title: (this.$t('app.commonWords.saveFailed') as string), desc: item.majorentityname+(this.$t('app.commonWords.saveFailed') as string)+'!' });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: errorMessage[index].data.message });
             console.error(errorMessage[index]);
           });
         }

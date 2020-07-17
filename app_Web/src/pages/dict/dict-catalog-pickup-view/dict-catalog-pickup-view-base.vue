@@ -661,6 +661,7 @@ export default class DictCatalogPickupViewBase extends Vue {
      * @memberof DictCatalogPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

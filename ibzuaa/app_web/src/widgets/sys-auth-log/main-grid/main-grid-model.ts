@@ -80,6 +80,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'logid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'sysauthlog',

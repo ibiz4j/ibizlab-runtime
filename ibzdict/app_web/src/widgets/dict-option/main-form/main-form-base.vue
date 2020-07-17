@@ -7,7 +7,7 @@
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.dictoption.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.cname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='cname' :itemRules="this.rules.cname" class='' :caption="$t('entities.dictoption.main_form.details.cname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='cname' :itemRules="this.rules().cname" class='' :caption="$t('entities.dictoption.main_form.details.cname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cname.error" :isEmptyCaption="false" labelPos="LEFT">
     
 <app-picker 
   :formState="formState"
@@ -34,31 +34,35 @@
 
 </i-col>
 <i-col v-show="detailsModel.val.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='val' :itemRules="this.rules.val" class='' :caption="$t('entities.dictoption.main_form.details.val')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.val.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='val' :itemRules="this.rules().val" class='' :caption="$t('entities.dictoption.main_form.details.val')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.val.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.val"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.val.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.label.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='label' :itemRules="this.rules.label" class='' :caption="$t('entities.dictoption.main_form.details.label')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.label.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='label' :itemRules="this.rules().label" class='' :caption="$t('entities.dictoption.main_form.details.label')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.label.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.label"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.label.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.pval.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='pval' :itemRules="this.rules.pval" class='' :caption="$t('entities.dictoption.main_form.details.pval')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pval.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='pval' :itemRules="this.rules().pval" class='' :caption="$t('entities.dictoption.main_form.details.pval')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pval.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.pval"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.pval.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.showorder.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='showorder' :itemRules="this.rules.showorder" class='' :caption="$t('entities.dictoption.main_form.details.showorder')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.showorder.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='showorder' :itemRules="this.rules().showorder" class='' :caption="$t('entities.dictoption.main_form.details.showorder')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.showorder.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.showorder"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.showorder.disabled" type='number'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.disabled.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
-    <app-form-item name='disabled' :itemRules="this.rules.disabled" class='' :caption="$t('entities.dictoption.main_form.details.disabled')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.disabled.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='disabled' :itemRules="this.rules().disabled" class='' :caption="$t('entities.dictoption.main_form.details.disabled')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.disabled.error" :isEmptyCaption="false" labelPos="LEFT">
     
  <dropdown-list 
   v-model="data.disabled" 
@@ -73,11 +77,12 @@
   codelistType='STATIC'
   placeholder='请选择...'>
  </dropdown-list>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.expired.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
-    <app-form-item name='expired' :itemRules="this.rules.expired" class='' :caption="$t('entities.dictoption.main_form.details.expired')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.expired.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='expired' :itemRules="this.rules().expired" class='' :caption="$t('entities.dictoption.main_form.details.expired')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.expired.error" :isEmptyCaption="false" labelPos="LEFT">
     
  <dropdown-list 
   v-model="data.expired" 
@@ -92,29 +97,33 @@
   codelistType='STATIC'
   placeholder='请选择...'>
  </dropdown-list>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.vfilter.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 24, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 24, offset: 0 }">
-    <app-form-item name='vfilter' :itemRules="this.rules.vfilter" class='' :caption="$t('entities.dictoption.main_form.details.vfilter')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.vfilter.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='vfilter' :itemRules="this.rules().vfilter" class='' :caption="$t('entities.dictoption.main_form.details.vfilter')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.vfilter.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.vfilter"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.vfilter.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.iconcls.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='iconcls' :itemRules="this.rules.iconcls" class='' :caption="$t('entities.dictoption.main_form.details.iconcls')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.iconcls.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='iconcls' :itemRules="this.rules().iconcls" class='' :caption="$t('entities.dictoption.main_form.details.iconcls')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.iconcls.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.iconcls"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.iconcls.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.cls.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='cls' :itemRules="this.rules.cls" class='' :caption="$t('entities.dictoption.main_form.details.cls')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cls.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='cls' :itemRules="this.rules().cls" class='' :caption="$t('entities.dictoption.main_form.details.cls')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cls.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.cls"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.cls.disabled" type='text'  style=""></input-box>
+
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.extension.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 24, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 24, offset: 0 }">
-    <app-form-item name='extension' :itemRules="this.rules.extension" class='' :caption="$t('entities.dictoption.main_form.details.extension')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.extension.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='extension' :itemRules="this.rules().extension" class='' :caption="$t('entities.dictoption.main_form.details.extension')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.extension.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.extension" :textareaId="this.$util.createUUID()"  :disabled="detailsModel.extension.disabled" type='textarea' textareaStyle="height:200px;" ></input-box>
 
 </app-form-item>
@@ -518,7 +527,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srfupdatedate: [
             { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'blur' },
@@ -645,6 +655,51 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '标识 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '标识 值不能为空', trigger: 'blur' },
         ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -1042,7 +1097,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1473,9 +1528,6 @@ export default class MainBase extends Vue implements ControlInterface {
             }
 
             const data = response.data;
-            if(data.dictoption){
-                Object.assign(this.context,{dictoption:data.dictoption})
-            }
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.$emit('load', data);

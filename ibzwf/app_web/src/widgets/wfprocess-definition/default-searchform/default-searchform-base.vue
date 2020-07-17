@@ -7,12 +7,14 @@
                     <i-col v-show="detailsModel.n_deploykey_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
               <app-form-item name='n_deploykey_like' :itemRules="this.rules.n_deploykey_like" class='' :caption="$t('entities.wfprocessdefinition.default_searchform.details.n_deploykey_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_deploykey_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_deploykey_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_deploykey_like.disabled" type='text'  style="width:100px;"></input-box>
+          
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_definitionname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
               <app-form-item name='n_definitionname_like' :itemRules="this.rules.n_definitionname_like" class='' :caption="$t('entities.wfprocessdefinition.default_searchform.details.n_definitionname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_definitionname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box v-model="data.n_definitionname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_definitionname_like.disabled" type='text'  style="width:100px;"></input-box>
+          
           </app-form-item>
           
           </i-col>

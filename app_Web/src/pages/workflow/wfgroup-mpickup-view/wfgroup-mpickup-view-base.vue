@@ -826,6 +826,7 @@ export default class WFGroupMPickupViewBase extends Vue {
      * @memberof WFGroupMPickupViewBase
      */
     public onClickCancel(): void {
+        this.$emit('viewdataschange', null);
         this.$emit('close', null);
     }
 

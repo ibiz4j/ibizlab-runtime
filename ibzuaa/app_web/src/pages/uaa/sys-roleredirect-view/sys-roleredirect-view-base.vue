@@ -34,7 +34,7 @@ export default class SYS_ROLERedirectViewBase extends Vue {
     public appEntityService: SysRoleService = new SysRoleService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysRoleUIService
      * @memberof SYS_ROLERedirectViewBase

@@ -48,7 +48,9 @@ export default class JobsLogServiceBase extends EntityService {
      * @memberof JobsLogServiceBase
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().get(`/jobslogs/${context.jobslog}/select`,isloading);
+            let res:any = Http.getInstance().get(`/jobslogs/${context.jobslog}/select`,isloading);
+
+            return res;
     }
 
     /**
@@ -71,6 +73,7 @@ export default class JobsLogServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/jobslogs`,data,isloading);
+
         return res;
     }
 
@@ -87,6 +90,7 @@ export default class JobsLogServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/jobslogs/${context.jobslog}`,data,isloading);
+
             return res;
     }
 
@@ -100,7 +104,8 @@ export default class JobsLogServiceBase extends EntityService {
      * @memberof JobsLogServiceBase
      */
     public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().delete(`/jobslogs/${context.jobslog}`,isloading);
+            let res:any = Http.getInstance().delete(`/jobslogs/${context.jobslog}`,isloading);
+            return res;
     }
 
     /**
@@ -114,6 +119,7 @@ export default class JobsLogServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/jobslogs/${context.jobslog}`,isloading);
+
             return res;
     }
 
@@ -129,6 +135,7 @@ export default class JobsLogServiceBase extends EntityService {
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await  Http.getInstance().get(`/jobslogs/getdraft`,isloading);
         res.data.jobslog = data.jobslog;
+
         return res;
     }
 
@@ -142,7 +149,8 @@ export default class JobsLogServiceBase extends EntityService {
      * @memberof JobsLogServiceBase
      */
     public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            return Http.getInstance().post(`/jobslogs/${context.jobslog}/checkkey`,data,isloading);
+            let res:any = Http.getInstance().post(`/jobslogs/${context.jobslog}/checkkey`,data,isloading);
+            return res;
     }
 
     /**
@@ -158,6 +166,7 @@ export default class JobsLogServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/jobslogs/${context.jobslog}/save`,data,isloading);
+
             return res;
     }
 
@@ -172,6 +181,21 @@ export default class JobsLogServiceBase extends EntityService {
      */
     public async FetchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().get(`/jobslogs/fetchdefault`,tempData,isloading);
+        let res:any = Http.getInstance().get(`/jobslogs/fetchdefault`,tempData,isloading);
+        return res;
+    }
+
+    /**
+     * searchDefault接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof JobsLogServiceBase
+     */
+    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return Http.getInstance().post(`/jobslogs/searchdefault`,tempData,isloading);
     }
 }

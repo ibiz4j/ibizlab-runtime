@@ -97,7 +97,7 @@ export default class SYS_ROLE_PERMISSIONEditViewBase extends Vue {
     public appEntityService: SysRolePermissionService = new SysRolePermissionService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type SysRolePermissionUIService
      * @memberof SYS_ROLE_PERMISSIONEditViewBase

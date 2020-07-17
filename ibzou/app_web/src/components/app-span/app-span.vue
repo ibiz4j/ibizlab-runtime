@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch, Model } from 'vue-property-decorator';
-
+import moment from "moment"; 
 @Component({})
 export default class AppSpan extends Vue {
 
@@ -17,6 +17,38 @@ export default class AppSpan extends Vue {
      * @memberof AppSpan
      */
     @Prop() public value?: any;
+
+    /**
+     * 数据类型
+     * 
+     * @type {string}
+     * @memberof AppSpan
+     */
+    @Prop() public dataType?: string;
+
+    /**
+     * 单位名称
+     * 
+     * @type {string}
+     * @memberof AppSpan
+     */
+    @Prop({default:''}) public unitName?: string;
+
+    /**
+     * 精度
+     *
+     * @type {number}
+     * @memberof AppSpan
+     */
+    @Prop({default:'2'}) public precision?:number;
+
+    /**
+     * 日期值格式化
+     * 
+     * @type {string}
+     * @memberof AppSpan
+     */
+    @Prop() public valueFormat?: string;
 
     /**
      * 当前表单项名称
@@ -158,12 +190,52 @@ export default class AppSpan extends Vue {
         }else{
             if(this.$util.isEmpty(this.value)){
                 this.text = '';
+            }else if(this.dataType){
+                this.dataFormat();
             }else{
                 this.text = this.value;
             }
+                
         }
     }
-    
+
+    /**
+     * 数据格式化
+     * 
+     * @memberof AppSpan
+     */
+    public dataFormat(){
+        if(this.valueFormat){
+            this.dateFormat() ;
+            return;
+        }
+        if(Object.is(this.dataType,"CURRENCY")){
+            let number:any = Number(this.value); 
+            this.text = Number(number.toFixed(this.precision)).toLocaleString('en-US')+ ' '+ this.unitName;   
+        }else if(Object.is(this.dataType,"FLOAT") || Object.is(this.dataType,"DECIMAL")){
+            let number:any = Number(this.value);
+            this.text = number.toFixed(this.precision);
+        }else {
+            this.text = this.value;
+        }
+    }
+
+    /**
+     * 日期格式化
+     * 
+     * @memberof AppSpan
+     */
+    public dateFormat(){
+        if(this.valueFormat){
+            if(this.valueFormat.indexOf('%1$t') !== -1){
+                this.text= moment(this.data).format("YYYY-MM-DD HH:mm:ss");
+            }else if(this.valueFormat.indexOf('%1$s') == -1){
+                this.text= moment(this.data).format(this.valueFormat);
+            }else{
+                this.text= this.value;
+            }
+        }
+    }    
 }
 </script>
 

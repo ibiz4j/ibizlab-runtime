@@ -55,6 +55,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'orgid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'srfdataaccaction',

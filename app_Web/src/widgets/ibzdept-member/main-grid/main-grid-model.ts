@@ -30,31 +30,37 @@ export default class MainModel {
           name: 'postid',
           prop: 'postid',
           dataType: 'PICKUP',
+          isEditable:true
         },
         {
           name: 'deptid',
           prop: 'deptid',
           dataType: 'PICKUP',
+          isEditable:true
         },
         {
           name: 'postname',
           prop: 'postname',
           dataType: 'PICKUPTEXT',
+          isEditable:true
         },
         {
           name: 'userid',
           prop: 'userid',
           dataType: 'PICKUP',
+          isEditable:true
         },
         {
           name: 'personname',
           prop: 'personname',
           dataType: 'PICKUPTEXT',
+          isEditable:true
         },
         {
           name: 'deptname',
           prop: 'deptname',
           dataType: 'PICKUPTEXT',
+          isEditable:true
         },
         {
           name: 'srfmajortext',
@@ -70,6 +76,7 @@ export default class MainModel {
           name: 'srfkey',
           prop: 'memberid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'ibzdeptmember',
