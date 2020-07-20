@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: boot , web-dev,  api-dev,  dev
+    include: boot ,nacos , web-dev,  api-dev,  dev
   application:
     name: ibzrt
   main:
