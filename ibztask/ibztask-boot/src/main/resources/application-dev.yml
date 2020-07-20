@@ -6,23 +6,23 @@ zuul:
   routes:
       loginv7:
         path: /v7/login
-        serviceId: ibzuaa-api
+        serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
         stripPrefix: false
       changepwd:
         path: /v7/changepwd
-        serviceId: ibzuaa-api
+        serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
         stripPrefix: false
       uaa:
         path: /uaa/**
-        serviceId: ibzuaa-api
+        serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
         stripPrefix: false
       config:
         path: /config/**
-        serviceId: ibzuaa-api
+        serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
         stripPrefix: false
       oucore:
         path: /ibzorganizations/**
-        serviceId: ibzou-api
+        serviceId: ${ibiz.ref.service.ou:ibzou-api}
         stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

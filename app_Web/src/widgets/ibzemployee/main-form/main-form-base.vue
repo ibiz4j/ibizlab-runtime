@@ -7,21 +7,21 @@
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzemployee.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.usercode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='usercode' :itemRules="this.rules.usercode" class='' :caption="$t('entities.ibzemployee.main_form.details.usercode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.usercode.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='usercode' :itemRules="this.rules().usercode" class='' :caption="$t('entities.ibzemployee.main_form.details.usercode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.usercode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.usercode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.usercode.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.personname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='personname' :itemRules="this.rules.personname" class='' :caption="$t('entities.ibzemployee.main_form.details.personname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.personname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='personname' :itemRules="this.rules().personname" class='' :caption="$t('entities.ibzemployee.main_form.details.personname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.personname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.personname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.personname.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.loginname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='loginname' :itemRules="this.rules.loginname" class='' :caption="$t('entities.ibzemployee.main_form.details.loginname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.loginname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='loginname' :itemRules="this.rules().loginname" class='' :caption="$t('entities.ibzemployee.main_form.details.loginname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.loginname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.loginname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.loginname.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
@@ -31,13 +31,13 @@
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.grouppanel1.manageContainerStatus"  :isManageContainer="detailsModel.grouppanel1.isManageContainer" @managecontainerclick="manageContainerClick('grouppanel1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.grouppanel1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzemployee.main_form.details.grouppanel1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='orgname' :itemRules="this.rules.orgname" class='' :caption="$t('entities.ibzemployee.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='orgname' :itemRules="this.rules().orgname" class='' :caption="$t('entities.ibzemployee.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
     <app-org-select :data="data" :disabled="detailsModel.orgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{id:'orgid','label':'orgname','code':'orgcode'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.mdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='mdeptname' :itemRules="this.rules.mdeptname" class='' :caption="$t('entities.ibzemployee.main_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='mdeptname' :itemRules="this.rules().mdeptname" class='' :caption="$t('entities.ibzemployee.main_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
     <app-department-select :data="data" :disabled="detailsModel.mdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{id:'mdeptid','label':'mdeptname','code':'mdeptcode','bcode':'bcode'}" :multiple="false" style="" @select-change="onFormItemValueChange"></app-department-select>
 </app-form-item>
 
@@ -48,21 +48,21 @@
 
 </i-col>
 <i-col v-show="detailsModel.bcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='bcode' :itemRules="this.rules.bcode" class='' :caption="$t('entities.ibzemployee.main_form.details.bcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.bcode.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='bcode' :itemRules="this.rules().bcode" class='' :caption="$t('entities.ibzemployee.main_form.details.bcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.bcode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.bcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.bcode.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.nickname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='nickname' :itemRules="this.rules.nickname" class='' :caption="$t('entities.ibzemployee.main_form.details.nickname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.nickname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='nickname' :itemRules="this.rules().nickname" class='' :caption="$t('entities.ibzemployee.main_form.details.nickname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.nickname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.nickname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.nickname.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.sex.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='sex' :itemRules="this.rules.sex" class='' :caption="$t('entities.ibzemployee.main_form.details.sex')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sex.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='sex' :itemRules="this.rules().sex" class='' :caption="$t('entities.ibzemployee.main_form.details.sex')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sex.error" :isEmptyCaption="false" labelPos="LEFT">
     
  <dropdown-list 
     v-model="data.sex" 
@@ -81,91 +81,91 @@
 
 </i-col>
 <i-col v-show="detailsModel.birthday.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='birthday' :itemRules="this.rules.birthday" class='' :caption="$t('entities.ibzemployee.main_form.details.birthday')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.birthday.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='birthday' :itemRules="this.rules().birthday" class='' :caption="$t('entities.ibzemployee.main_form.details.birthday')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.birthday.error" :isEmptyCaption="false" labelPos="LEFT">
     <date-picker type="date" :transfer="true" format="yyyy-MM-dd" placeholder="请选择时间..." :value="data.birthday" :disabled="detailsModel.birthday.disabled" style="min-width: 150px; width:100px;" @on-change="(val1, val2) => { this.data.birthday = val1 }"></date-picker>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.certcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='certcode' :itemRules="this.rules.certcode" class='' :caption="$t('entities.ibzemployee.main_form.details.certcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.certcode.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='certcode' :itemRules="this.rules().certcode" class='' :caption="$t('entities.ibzemployee.main_form.details.certcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.certcode.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.certcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.certcode.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.phone.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='phone' :itemRules="this.rules.phone" class='' :caption="$t('entities.ibzemployee.main_form.details.phone')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.phone.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='phone' :itemRules="this.rules().phone" class='' :caption="$t('entities.ibzemployee.main_form.details.phone')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.phone.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.phone"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.phone.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.avatar.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='avatar' :itemRules="this.rules.avatar" class='' :caption="$t('entities.ibzemployee.main_form.details.avatar')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.avatar.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='avatar' :itemRules="this.rules().avatar" class='' :caption="$t('entities.ibzemployee.main_form.details.avatar')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.avatar.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.avatar"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.avatar.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.email.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='email' :itemRules="this.rules.email" class='' :caption="$t('entities.ibzemployee.main_form.details.email')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.email.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='email' :itemRules="this.rules().email" class='' :caption="$t('entities.ibzemployee.main_form.details.email')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.email.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.email"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.email.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.ipaddr.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='ipaddr' :itemRules="this.rules.ipaddr" class='' :caption="$t('entities.ibzemployee.main_form.details.ipaddr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.ipaddr.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='ipaddr' :itemRules="this.rules().ipaddr" class='' :caption="$t('entities.ibzemployee.main_form.details.ipaddr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.ipaddr.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.ipaddr"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.ipaddr.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.showorder.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='showorder' :itemRules="this.rules.showorder" class='' :caption="$t('entities.ibzemployee.main_form.details.showorder')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.showorder.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='showorder' :itemRules="this.rules().showorder" class='' :caption="$t('entities.ibzemployee.main_form.details.showorder')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.showorder.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.showorder"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.showorder.disabled" type='number'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.addr.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='addr' :itemRules="this.rules.addr" class='' :caption="$t('entities.ibzemployee.main_form.details.addr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.addr.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='addr' :itemRules="this.rules().addr" class='' :caption="$t('entities.ibzemployee.main_form.details.addr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.addr.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.addr"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.addr.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.memo.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='memo' :itemRules="this.rules.memo" class='' :caption="$t('entities.ibzemployee.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='memo' :itemRules="this.rules().memo" class='' :caption="$t('entities.ibzemployee.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.memo"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.memo.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.theme.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='theme' :itemRules="this.rules.theme" class='' :caption="$t('entities.ibzemployee.main_form.details.theme')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.theme.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='theme' :itemRules="this.rules().theme" class='' :caption="$t('entities.ibzemployee.main_form.details.theme')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.theme.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.theme"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.theme.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.lang.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='lang' :itemRules="this.rules.lang" class='' :caption="$t('entities.ibzemployee.main_form.details.lang')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.lang.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='lang' :itemRules="this.rules().lang" class='' :caption="$t('entities.ibzemployee.main_form.details.lang')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.lang.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.lang"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.lang.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.fontsize.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='fontsize' :itemRules="this.rules.fontsize" class='' :caption="$t('entities.ibzemployee.main_form.details.fontsize')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fontsize.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='fontsize' :itemRules="this.rules().fontsize" class='' :caption="$t('entities.ibzemployee.main_form.details.fontsize')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fontsize.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.fontsize"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.fontsize.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.reserver.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='reserver' :itemRules="this.rules.reserver" class='' :caption="$t('entities.ibzemployee.main_form.details.reserver')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.reserver.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='reserver' :itemRules="this.rules().reserver" class='' :caption="$t('entities.ibzemployee.main_form.details.reserver')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.reserver.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.reserver"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.reserver.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
@@ -180,7 +180,7 @@
 
 </i-col>
 <i-col v-show="detailsModel.usericon.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='usericon' :itemRules="this.rules.usericon" class='' :caption="$t('entities.ibzemployee.main_form.details.usericon')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.usericon.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='usericon' :itemRules="this.rules().usericon" class='' :caption="$t('entities.ibzemployee.main_form.details.usericon')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.usericon.error" :isEmptyCaption="false" labelPos="LEFT">
      <app-image-upload :multiple="false" :formState="formState" :ignorefieldvaluechange="ignorefieldvaluechange" @formitemvaluechange="onFormItemValueChange" :data="JSON.stringify(this.data)" name='usericon' :value="data.usericon" :disabled="detailsModel.usericon.disabled" :uploadparams='{}' :exportparams='{}' ></app-image-upload>
 
 </app-form-item>
@@ -205,7 +205,8 @@
     refviewtype='DEGRIDVIEW' 
     refreshitems='' 
     :ignorefieldvaluechange="ignorefieldvaluechange"
-    viewname='ibzdept-member-grid-view' 
+    viewname='ibzdept-member-grid-view'
+    tempMode='0'
     :data="JSON.stringify(this.data)" 
     @drdatasaved="drdatasaved($event)"
     style=";overflow: auto;">
@@ -625,7 +626,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srfupdatedate: [
             { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'blur' },
@@ -842,6 +844,51 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '用户标识 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '用户标识 值不能为空', trigger: 'blur' },
         ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -1493,7 +1540,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1926,6 +1973,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            data.ibzemployee = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -2029,8 +2077,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 1;
                 if(this.drcounter !== 0){

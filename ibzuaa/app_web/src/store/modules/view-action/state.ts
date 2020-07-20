@@ -120,6 +120,7 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
+                '8a32be8cf2c1e224867a93bb5fc90b67',
                 'e791be173ed0f4bbe9cce942b6edde63',
                 'fb89f9af95f2caf92ccc1249025c9a1b',
             ],
@@ -172,6 +173,7 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
+                '8a32be8cf2c1e224867a93bb5fc90b67',
                 'e791be173ed0f4bbe9cce942b6edde63',
                 'fb89f9af95f2caf92ccc1249025c9a1b',
             ],

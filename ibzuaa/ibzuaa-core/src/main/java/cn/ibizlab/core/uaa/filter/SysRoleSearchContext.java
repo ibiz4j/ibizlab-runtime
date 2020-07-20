@@ -52,6 +52,27 @@ public class SysRoleSearchContext extends QueryWrapperContext<SysRole> {
             this.getSearchCond().like("sys_rolename", n_sys_rolename_like);
         }
     }
+	private String n_proleid_eq;//[父角色标识]
+	public void setN_proleid_eq(String n_proleid_eq) {
+        this.n_proleid_eq = n_proleid_eq;
+        if(!ObjectUtils.isEmpty(this.n_proleid_eq)){
+            this.getSearchCond().eq("proleid", n_proleid_eq);
+        }
+    }
+	private String n_prolename_eq;//[父角色名称]
+	public void setN_prolename_eq(String n_prolename_eq) {
+        this.n_prolename_eq = n_prolename_eq;
+        if(!ObjectUtils.isEmpty(this.n_prolename_eq)){
+            this.getSearchCond().eq("prolename", n_prolename_eq);
+        }
+    }
+	private String n_prolename_like;//[父角色名称]
+	public void setN_prolename_like(String n_prolename_like) {
+        this.n_prolename_like = n_prolename_like;
+        if(!ObjectUtils.isEmpty(this.n_prolename_like)){
+            this.getSearchCond().like("prolename", n_prolename_like);
+        }
+    }
 
     /**
 	 * 启用快速搜索

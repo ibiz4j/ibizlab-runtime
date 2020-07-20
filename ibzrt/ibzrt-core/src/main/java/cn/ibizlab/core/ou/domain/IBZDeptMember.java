@@ -82,6 +82,13 @@ public class IBZDeptMember extends EntityClient implements Serializable {
     private String postname;
 
     /**
+     * 业务条线
+     */
+    @JSONField(name = "bcode")
+    @JsonProperty("bcode")
+    private String bcode;
+
+    /**
      * 区属
      */
     @JSONField(name = "domains")

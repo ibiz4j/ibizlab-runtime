@@ -6,7 +6,7 @@ import cn.ibizlab.api.dto.SysAuthLogDTO;
 import cn.ibizlab.util.domain.MappingBase;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {},
+@Mapper(componentModel = "spring", uses = {},implementationName="apiSysAuthLogMapping",
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface SysAuthLogMapping extends MappingBase<SysAuthLogDTO, SysAuthLog> {

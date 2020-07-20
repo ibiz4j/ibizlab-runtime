@@ -80,6 +80,14 @@ public class IBZDeptMemberDTO extends DTOBase implements Serializable {
     private String postname;
 
     /**
+     * 属性 [BCODE]
+     *
+     */
+    @JSONField(name = "bcode")
+    @JsonProperty("bcode")
+    private String bcode;
+
+    /**
      * 属性 [DOMAINS]
      *
      */

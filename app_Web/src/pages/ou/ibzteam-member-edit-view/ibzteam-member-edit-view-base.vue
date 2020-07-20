@@ -83,7 +83,7 @@ export default class IBZTeamMemberEditViewBase extends Vue {
     public appEntityService: IBZTeamMemberService = new IBZTeamMemberService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type IBZTeamMemberUIService
      * @memberof IBZTeamMemberEditViewBase

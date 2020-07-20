@@ -64,6 +64,20 @@ public class SysRole extends EntityMP implements Serializable {
     @JsonProperty("memo")
     private String memo;
     /**
+     * 父角色标识
+     */
+    @TableField(value = "proleid")
+    @JSONField(name = "proleid")
+    @JsonProperty("proleid")
+    private String proleid;
+    /**
+     * 父角色名称
+     */
+    @TableField(exist = false)
+    @JSONField(name = "prolename")
+    @JsonProperty("prolename")
+    private String prolename;
+    /**
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
@@ -82,6 +96,14 @@ public class SysRole extends EntityMP implements Serializable {
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
+    /**
+     * 父角色
+     */
+    @JsonIgnore
+    @JSONField(serialize = false)
+    @TableField(exist = false)
+    private cn.ibizlab.core.uaa.domain.SysRole parent;
+
 
 
     /**
@@ -98,6 +120,14 @@ public class SysRole extends EntityMP implements Serializable {
     public void setMemo(String memo){
         this.memo = memo ;
         this.modify("memo",memo);
+    }
+
+    /**
+     * 设置 [父角色标识]
+     */
+    public void setProleid(String proleid){
+        this.proleid = proleid ;
+        this.modify("proleid",proleid);
     }
 
 

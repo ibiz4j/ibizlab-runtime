@@ -121,7 +121,7 @@ public class JobsInfoResource {
 
     public ResponseEntity<JobsInfoDTO> execute(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
         JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
-        domain.setId(jobsinfo_id);
+domain.setId(jobsinfo_id);
         domain = jobsinfoService.execute(domain);
         jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
@@ -145,7 +145,7 @@ public class JobsInfoResource {
 
     public ResponseEntity<JobsInfoDTO> start(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
         JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
-        domain.setId(jobsinfo_id);
+domain.setId(jobsinfo_id);
         domain = jobsinfoService.start(domain);
         jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
@@ -156,7 +156,7 @@ public class JobsInfoResource {
 
     public ResponseEntity<JobsInfoDTO> stop(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
         JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
-        domain.setId(jobsinfo_id);
+domain.setId(jobsinfo_id);
         domain = jobsinfoService.stop(domain);
         jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);

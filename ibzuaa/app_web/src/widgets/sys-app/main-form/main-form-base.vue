@@ -1366,6 +1366,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.data.appid = null;
+            data.sysapp = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -1469,8 +1470,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 0;
                 if(this.drcounter !== 0){

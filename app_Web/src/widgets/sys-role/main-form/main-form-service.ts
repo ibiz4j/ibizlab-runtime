@@ -82,6 +82,9 @@ export default class MainService extends ControlService {
     public getItems(serviceName: string, interfaceName: string, context: any = {}, data: any, isloading?: boolean): Promise<any[]> {
         data.page = data.page ? data.page : 0;
         data.size = data.size ? data.size : 1000;
+        if (Object.is(serviceName, 'SysRoleService') && Object.is(interfaceName, 'FetchDefault')) {
+            return this.doItems(this.appEntityService.FetchDefault(JSON.parse(JSON.stringify(context)), data, isloading), 'roleid', 'sysrole');
+        }
 
         return Promise.reject([])
     }
@@ -367,6 +370,27 @@ export default class MainService extends ControlService {
             delete tempContext.srfsessionid;
         }
         return {context:tempContext,data:requestData};
+    }
+
+    /**
+     * 通过属性名称获取表单项名称
+     * 
+     * @param name 实体属性名称 
+     * @memberof MainService
+     */
+    public getItemNameByDeName(name:string) :string{
+        let itemName = name;
+        let mode: any = this.getMode();
+        if (!mode && mode.getDataItems instanceof Function) {
+            return name;
+        }
+        let formItemItems: any[] = mode.getDataItems();
+        formItemItems.forEach((item:any)=>{
+            if(item.prop === name){
+                itemName = item.name;
+            }
+        });
+        return itemName.trim();
     }
 
 }

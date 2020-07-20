@@ -83,7 +83,7 @@ export default class DictCatalogEditViewBase extends Vue {
     public appEntityService: DictCatalogService = new DictCatalogService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type DictCatalogUIService
      * @memberof DictCatalogEditViewBase

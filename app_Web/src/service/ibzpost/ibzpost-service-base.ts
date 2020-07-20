@@ -49,7 +49,7 @@ export default class IBZPostServiceBase extends EntityService {
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = Http.getInstance().get(`/ibzposts/${context.ibzpost}/select`,isloading);
-
+            
             return res;
     }
 
@@ -73,7 +73,7 @@ export default class IBZPostServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/ibzposts`,data,isloading);
-
+        
         return res;
     }
 
@@ -90,7 +90,7 @@ export default class IBZPostServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/ibzposts/${context.ibzpost}`,data,isloading);
-
+            
             return res;
     }
 
@@ -119,7 +119,7 @@ export default class IBZPostServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/ibzposts/${context.ibzpost}`,isloading);
-
+            
             return res;
     }
 
@@ -135,7 +135,7 @@ export default class IBZPostServiceBase extends EntityService {
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await  Http.getInstance().get(`/ibzposts/getdraft`,isloading);
         res.data.ibzpost = data.ibzpost;
-
+        
         return res;
     }
 
@@ -166,7 +166,7 @@ export default class IBZPostServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/ibzposts/${context.ibzpost}/save`,data,isloading);
-
+            
             return res;
     }
 
@@ -183,19 +183,5 @@ export default class IBZPostServiceBase extends EntityService {
         let tempData:any = JSON.parse(JSON.stringify(data));
         let res:any = Http.getInstance().get(`/ibzposts/fetchdefault`,tempData,isloading);
         return res;
-    }
-
-    /**
-     * searchDefault接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZPostServiceBase
-     */
-    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().post(`/ibzposts/searchdefault`,tempData,isloading);
     }
 }

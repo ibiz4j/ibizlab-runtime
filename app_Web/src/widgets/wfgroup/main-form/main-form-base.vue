@@ -7,14 +7,14 @@
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.wfgroup.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.groupname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='groupname' :itemRules="this.rules.groupname" class='' :caption="$t('entities.wfgroup.main_form.details.groupname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.groupname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='groupname' :itemRules="this.rules().groupname" class='' :caption="$t('entities.wfgroup.main_form.details.groupname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.groupname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.groupname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.groupname.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.groupscope.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='groupscope' :itemRules="this.rules.groupscope" class='' :caption="$t('entities.wfgroup.main_form.details.groupscope')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.groupscope.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='groupscope' :itemRules="this.rules().groupscope" class='' :caption="$t('entities.wfgroup.main_form.details.groupscope')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.groupscope.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.groupscope"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.groupscope.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
@@ -39,7 +39,8 @@
     refviewtype='DEGRIDVIEW' 
     refreshitems='' 
     :ignorefieldvaluechange="ignorefieldvaluechange"
-    viewname='wfmember-grid-view' 
+    viewname='wfmember-grid-view'
+    tempMode='0'
     :data="JSON.stringify(this.data)" 
     @drdatasaved="drdatasaved($event)"
     style=";overflow: auto;">
@@ -433,7 +434,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
@@ -494,6 +496,51 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '组标识 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '组标识 值不能为空', trigger: 'blur' },
         ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -729,7 +776,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1162,6 +1209,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            data.wfgroup = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -1265,8 +1313,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 1;
                 if(this.drcounter !== 0){

@@ -4,6 +4,8 @@ export default {
     roleid: "角色标识",
     rolename: "角色名称",
     memo: "备注",
+    proleid: "父角色标识",
+    prolename: "父角色名称",
     createdate: "建立时间",
     updatedate: "更新时间",
   },
@@ -55,8 +57,10 @@ export default {
 			srfdeid: "", 
 			srfsourcekey: "", 
 			sys_rolename: "角色名称", 
+			prolename: "父角色名称", 
 			memo: "备注", 
 			sys_roleid: "角色标识", 
+			proleid: "父角色标识", 
 		},
 		uiactions: {
 		},
@@ -67,6 +71,8 @@ export default {
 			sys_rolename: "角色名称",
 			memo: "备注",
 			updatedate: "更新时间",
+			proleid: "父角色标识",
+			prolename: "父角色名称",
 		},
 		uiactions: {
 		},
@@ -77,6 +83,32 @@ export default {
 			n_sys_rolename_like: "角色名称(%)", 
 		},
 		uiactions: {
+		},
+	},
+	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "Save",
+			tip: "Save",
+		},
+		tbitem5: {
+			caption: "Save And Close",
+			tip: "Save And Close Window",
+		},
+		tbitem6: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem12: {
+			caption: "New",
+			tip: "New",
+		},
+		tbitem13: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem14: {
+			caption: "Copy",
+			tip: "Copy {0}",
 		},
 	},
 	gridviewtoolbar_toolbar: {
@@ -115,32 +147,6 @@ export default {
 		tbitem19: {
 			caption: "Filter",
 			tip: "Filter",
-		},
-	},
-	editviewtoolbar_toolbar: {
-		tbitem3: {
-			caption: "Save",
-			tip: "Save",
-		},
-		tbitem5: {
-			caption: "Save And Close",
-			tip: "Save And Close Window",
-		},
-		tbitem6: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem12: {
-			caption: "New",
-			tip: "New",
-		},
-		tbitem13: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem14: {
-			caption: "Copy",
-			tip: "Copy {0}",
 		},
 	},
 	editview2toolbar_toolbar: {

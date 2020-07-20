@@ -39,6 +39,9 @@ public interface ISysRoleService{
     @CacheEvict(value="sysrole",allEntries=true)
     void saveBatch(List<SysRole> list) ;
     Page<SysRole> searchDefault(SysRoleSearchContext context) ;
+    List<SysRole> selectByProleid(String roleid) ;
+    @CacheEvict(value="sysrole",allEntries=true)
+    void removeByProleid(String roleid) ;
 
 }
 

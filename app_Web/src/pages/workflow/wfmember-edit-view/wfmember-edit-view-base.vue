@@ -83,7 +83,7 @@ export default class WFMemberEditViewBase extends Vue {
     public appEntityService: WFMemberService = new WFMemberService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type WFMemberUIService
      * @memberof WFMemberEditViewBase

@@ -39,7 +39,8 @@
     refviewtype='DEGRIDVIEW' 
     refreshitems='' 
     :ignorefieldvaluechange="ignorefieldvaluechange"
-    viewname='wfmember-grid-view' 
+    viewname='wfmember-grid-view'
+    tempMode='0'
     :data="JSON.stringify(this.data)" 
     @drdatasaved="drdatasaved($event)"
     style=";overflow: auto;">
@@ -1208,6 +1209,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            data.wfgroup = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -1311,8 +1313,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 1;
                 if(this.drcounter !== 0){

@@ -6,7 +6,7 @@ import cn.ibizlab.api.dto.SysRolePermissionDTO;
 import cn.ibizlab.util.domain.MappingBase;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {},
+@Mapper(componentModel = "spring", uses = {},implementationName="apiSysRolePermissionMapping",
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface SysRolePermissionMapping extends MappingBase<SysRolePermissionDTO, SysRolePermission> {

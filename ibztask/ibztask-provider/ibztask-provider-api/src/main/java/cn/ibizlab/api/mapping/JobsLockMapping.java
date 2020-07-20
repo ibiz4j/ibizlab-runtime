@@ -6,7 +6,7 @@ import cn.ibizlab.api.dto.JobsLockDTO;
 import cn.ibizlab.util.domain.MappingBase;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {},
+@Mapper(componentModel = "spring", uses = {},implementationName="apiJobsLockMapping",
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface JobsLockMapping extends MappingBase<JobsLockDTO, JobsLock> {

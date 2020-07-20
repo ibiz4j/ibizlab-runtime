@@ -106,7 +106,7 @@ export default class IBZTeamMemberGridViewBase extends Vue {
     public appEntityService: IBZTeamMemberService = new IBZTeamMemberService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type IBZTeamMemberUIService
      * @memberof IBZTeamMemberGridViewBase
@@ -969,7 +969,7 @@ export default class IBZTeamMemberGridViewBase extends Vue {
     public NewRow(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
         const _this: any = this;
         const data: any = {};
-        if (_this.newRow && _this.newRow instanceof Function) {
+        if (_this.hasOwnProperty('newRow') && _this.newRow instanceof Function) {
             _this.newRow([{ ...data }], params, $event, xData);
         } else if(xData.newRow && xData.newRow instanceof Function) {
             xData.newRow([{ ...data }], params, $event, xData);

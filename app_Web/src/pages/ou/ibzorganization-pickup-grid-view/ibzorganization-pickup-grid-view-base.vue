@@ -73,7 +73,7 @@ export default class IBZOrganizationPickupGridViewBase extends Vue {
     public appEntityService: IBZOrganizationService = new IBZOrganizationService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type IBZOrganizationUIService
      * @memberof IBZOrganizationPickupGridViewBase

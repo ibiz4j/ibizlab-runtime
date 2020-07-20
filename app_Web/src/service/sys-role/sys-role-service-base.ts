@@ -49,7 +49,7 @@ export default class SysRoleServiceBase extends EntityService {
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = Http.getInstance().get(`/sysroles/${context.sysrole}/select`,isloading);
-
+            
             return res;
     }
 
@@ -73,9 +73,9 @@ export default class SysRoleServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/sysroles`,data,isloading);
-        this.tempStorage.setItem(tempContext.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions));
-        this.tempStorage.setItem(tempContext.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles));
-
+        this.tempStorage.setItem(tempContext.srfsessionkey+'_sysrolepermissions',JSON.stringify(res.data.sysrolepermissions?res.data.sysrolepermissions:[]));
+        this.tempStorage.setItem(tempContext.srfsessionkey+'_sysuserroles',JSON.stringify(res.data.sysuserroles?res.data.sysuserroles:[]));
+        
         return res;
     }
 
@@ -92,7 +92,7 @@ export default class SysRoleServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/sysroles/${context.sysrole}`,data,isloading);
-
+            
             return res;
     }
 
@@ -121,7 +121,7 @@ export default class SysRoleServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/sysroles/${context.sysrole}`,isloading);
-
+            
             return res;
     }
 
@@ -137,7 +137,7 @@ export default class SysRoleServiceBase extends EntityService {
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await  Http.getInstance().get(`/sysroles/getdraft`,isloading);
         res.data.sysrole = data.sysrole;
-
+        
         return res;
     }
 
@@ -168,7 +168,7 @@ export default class SysRoleServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysroles/${context.sysrole}/save`,data,isloading);
-
+            
             return res;
     }
 
@@ -185,19 +185,5 @@ export default class SysRoleServiceBase extends EntityService {
         let tempData:any = JSON.parse(JSON.stringify(data));
         let res:any = Http.getInstance().get(`/sysroles/fetchdefault`,tempData,isloading);
         return res;
-    }
-
-    /**
-     * searchDefault接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysRoleServiceBase
-     */
-    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().post(`/sysroles/searchdefault`,tempData,isloading);
     }
 }

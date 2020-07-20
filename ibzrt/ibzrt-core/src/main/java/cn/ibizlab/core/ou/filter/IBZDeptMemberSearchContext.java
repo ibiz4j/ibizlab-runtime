@@ -43,6 +43,8 @@ public class IBZDeptMemberSearchContext extends SearchContextBase {
 
 	private String n_postname_like;//[岗位名称]
 
+	private String n_bcode_like;//[业务条线]
+
 }
 
 

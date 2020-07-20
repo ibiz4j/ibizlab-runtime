@@ -83,7 +83,7 @@ export default class WFProcessDefinitionEditViewBase extends Vue {
     public appEntityService: WFProcessDefinitionService = new WFProcessDefinitionService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type WFProcessDefinitionUIService
      * @memberof WFProcessDefinitionEditViewBase

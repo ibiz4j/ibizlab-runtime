@@ -48,6 +48,22 @@ public class SysRoleDTO extends DTOBase implements Serializable {
     private String memo;
 
     /**
+     * 属性 [PROLEID]
+     *
+     */
+    @JSONField(name = "proleid")
+    @JsonProperty("proleid")
+    private String proleid;
+
+    /**
+     * 属性 [PROLENAME]
+     *
+     */
+    @JSONField(name = "prolename")
+    @JsonProperty("prolename")
+    private String prolename;
+
+    /**
      * 属性 [CREATEDATE]
      *
      */
@@ -80,6 +96,14 @@ public class SysRoleDTO extends DTOBase implements Serializable {
     public void setMemo(String  memo){
         this.memo = memo ;
         this.modify("memo",memo);
+    }
+
+    /**
+     * 设置 [PROLEID]
+     */
+    public void setProleid(String  proleid){
+        this.proleid = proleid ;
+        this.modify("proleid",proleid);
     }
 
 

@@ -6,15 +6,42 @@
 <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysrole.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
-        <i-col v-show="detailsModel.sys_rolename.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
-    <app-form-item name='sys_rolename' :itemRules="this.rules.sys_rolename" class='' :caption="$t('entities.sysrole.main_form.details.sys_rolename')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_rolename.error" :isEmptyCaption="false" labelPos="LEFT">
+        <i-col v-show="detailsModel.sys_rolename.visible" :style="{}"  :md="{ span: 8, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+    <app-form-item name='sys_rolename' :itemRules="this.rules().sys_rolename" class='' :caption="$t('entities.sysrole.main_form.details.sys_rolename')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_rolename.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.sys_rolename"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.sys_rolename.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
-<i-col v-show="detailsModel.memo.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 12, offset: 0 }">
-    <app-form-item name='memo' :itemRules="this.rules.memo" class='' :caption="$t('entities.sysrole.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
+<i-col v-show="detailsModel.prolename.visible" :style="{}"  :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+    <app-form-item name='prolename' :itemRules="this.rules().prolename" class='' :caption="$t('entities.sysrole.main_form.details.prolename')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.prolename.error" :isEmptyCaption="false" labelPos="LEFT">
+    
+<app-picker 
+  :formState="formState"
+  :data="data"
+  :context="context"
+  :viewparams="viewparams"
+  :localContext ='{ }' 
+  :localParam ='{ }' 
+  :disabled="detailsModel.prolename.disabled"
+  name='prolename'
+  deMajorField='rolename'
+  deKeyField='sysrole'
+  :service="service"
+  :acParams="{ serviceName: 'SysRoleService', interfaceName: 'FetchDefault'}"
+  valueitem='proleid' 
+  :value="data.prolename" 
+  editortype="" 
+  :pickupView="{ viewname: 'sys-role-pickup-view', title: $t('entities.sysrole.views.pickupview.title'), deResParameters: [], parameters: [{ pathName: 'sysroles', parameterName: 'sysrole' }, { pathName: 'pickupview', parameterName: 'pickupview' } ], placement:'' }"
+  style=""  
+  @formitemvaluechange="onFormItemValueChange">
+</app-picker>
+
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.memo.visible" :style="{}"  :md="{ span: 8, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+    <app-form-item name='memo' :itemRules="this.rules().memo" class='' :caption="$t('entities.sysrole.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.memo"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.memo.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
@@ -56,7 +83,8 @@
     refviewtype='DECUSTOMVIEW' 
     refreshitems='' 
     :ignorefieldvaluechange="ignorefieldvaluechange"
-    viewname='sys-role-permission-custom-view' 
+    viewname='sys-role-permission-custom-view'
+    tempMode='0'
     :data="JSON.stringify(this.data)" 
     @drdatasaved="drdatasaved($event)"
     style=";overflow: auto;">
@@ -94,7 +122,8 @@
     refviewtype='DEGRIDVIEW' 
     refreshitems='' 
     :ignorefieldvaluechange="ignorefieldvaluechange"
-    viewname='sys-user-role-grid-view' 
+    viewname='sys-user-role-grid-view'
+    tempMode='0'
     :data="JSON.stringify(this.data)" 
     @drdatasaved="drdatasaved($event)"
     style=";overflow: auto;">
@@ -446,8 +475,10 @@ export default class MainBase extends Vue implements ControlInterface {
         srfdeid: null,
         srfsourcekey: null,
         sys_rolename: null,
+        prolename: null,
         memo: null,
         sys_roleid: null,
+        proleid: null,
         sysrole:null,
     };
 
@@ -489,7 +520,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srfupdatedate: [
             { type: 'string', message: '更新时间 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '更新时间 值必须为字符串类型', trigger: 'blur' },
@@ -544,6 +576,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '角色名称 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '角色名称 值不能为空', trigger: 'blur' },
         ],
+        prolename: [
+            { type: 'string', message: '父角色名称 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '父角色名称 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '父角色名称 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '父角色名称 值不能为空', trigger: 'blur' },
+        ],
         memo: [
             { type: 'string', message: '备注 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '备注 值必须为字符串类型', trigger: 'blur' },
@@ -556,6 +594,57 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '角色标识 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '角色标识 值不能为空', trigger: 'blur' },
         ],
+        proleid: [
+            { type: 'string', message: '父角色标识 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '父角色标识 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '父角色标识 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '父角色标识 值不能为空', trigger: 'blur' },
+        ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -597,9 +686,13 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         sys_rolename: new FormItemModel({ caption: '角色名称', detailType: 'FORMITEM', name: 'sys_rolename', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
+        prolename: new FormItemModel({ caption: '父角色名称', detailType: 'FORMITEM', name: 'prolename', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
         memo: new FormItemModel({ caption: '备注', detailType: 'FORMITEM', name: 'memo', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         sys_roleid: new FormItemModel({ caption: '角色标识', detailType: 'FORMITEM', name: 'sys_roleid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        proleid: new FormItemModel({ caption: '父角色标识', detailType: 'FORMITEM', name: 'proleid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
     };
 
@@ -712,6 +805,18 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 prolename 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.prolename')
+    onProlenameChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'prolename', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 memo 值
      *
      * @param {*} newVal
@@ -733,6 +838,18 @@ export default class MainBase extends Vue implements ControlInterface {
     @Watch('data.sys_roleid')
     onSys_roleidChange(newVal: any, oldVal: any) {
         this.formDataChange({ name: 'sys_roleid', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 proleid 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.proleid')
+    onProleidChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'proleid', newVal: newVal, oldVal: oldVal });
     }
 
 
@@ -807,6 +924,8 @@ export default class MainBase extends Vue implements ControlInterface {
 
 
 
+
+
     }
 
     /**
@@ -818,7 +937,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1251,6 +1370,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            data.sysrole = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -1354,8 +1474,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 2;
                 if(this.drcounter !== 0){

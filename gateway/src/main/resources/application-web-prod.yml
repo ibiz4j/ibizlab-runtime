@@ -3,69 +3,117 @@ server:
 #zuul网关路由设置
 zuul:
   routes:
+    jobs_log:
+      path: /jobslogs/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
     sys_role_permission:
       path: /sysrolepermissions/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    ibzpost:
+      path: /ibzposts/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     sys_user:
       path: /sysusers/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     sys_authlog:
       path: /sysauthlogs/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     wf_group_member:
       path: /wfmembers/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     wf_user:
       path: /wfusers/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     ibzorg:
       path: /ibzorganizations/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    jobs_registry:
+      path: /jobsregistries/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    dict_catalog:
+      path: /dictcatalogs/**
+      serviceId: ${ibiz.ref.service.ibzdict-api:ibzdict-api}
       stripPrefix: false
     wf_group:
       path: /wfgroups/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    ibzteam:
+      path: /ibzteams/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    jobs_info:
+      path: /jobsinfos/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
       stripPrefix: false
     wf_model:
       path: /wfremodels/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     sys_user_role:
       path: /sysuserroles/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     wf_definition:
       path: /wfprocessdefinitions/**
-      serviceId: ibzwf-api
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     sys_role:
       path: /sysroles/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     ibzdeptmember:
       path: /ibzdeptmembers/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     ibzdept:
       path: /ibzdepartments/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    ibzteammember:
+      path: /ibzteammembers/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     sys_permission:
       path: /syspermissions/**
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    dict_option:
+      path: /dictoptions/**
+      serviceId: ${ibiz.ref.service.ibzdict-api:ibzdict-api}
       stripPrefix: false
     ibzemp:
       path: /ibzemployees/**
-      serviceId: ibzou-api
+      serviceId: ${ibiz.ref.service.ibzrt-api:ibzrt-api}
+      stripPrefix: false
+    sys_app:
+      path: /sysapps/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     loginv7:
       path: /v7/login
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    changepwd:
+      path: /v7/changepwd
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    uaa:
+      path: /uaa/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    config:
+      path: /config/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

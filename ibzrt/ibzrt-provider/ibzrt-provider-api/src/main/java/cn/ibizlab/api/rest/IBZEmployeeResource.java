@@ -130,7 +130,7 @@ public class IBZEmployeeResource {
     @Transactional
     public ResponseEntity<IBZEmployeeDTO> initPwd(@PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZEmployeeDTO ibzemployeedto) {
         IBZEmployee domain = ibzemployeeMapping.toDomain(ibzemployeedto);
-        domain.setUserid(ibzemployee_id);
+domain.setUserid(ibzemployee_id);
         domain = ibzemployeeService.initPwd(domain);
         ibzemployeedto = ibzemployeeMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(ibzemployeedto);

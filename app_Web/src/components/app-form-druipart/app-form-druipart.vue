@@ -41,6 +41,14 @@ export default class AppFormDRUIPart extends Vue {
     @Prop() public viewname?: string;
 
     /**
+     * 临时数据模式：从数据模式:"2"、主数据模式:"1"、无临时数据模式:"0"
+     *
+     * @type {string}
+     * @memberof AppFormDRUIPart
+     */    
+    @Prop({default:"0"}) public tempMode?:string;
+
+    /**
      * 刷新关系项
      *
      * @type {string}
@@ -285,11 +293,16 @@ export default class AppFormDRUIPart extends Vue {
         }
         this.viewparam = JSON.stringify(tempParam);
         if (this.isRelationalData) {
-            if (!_paramitem || _paramitem == null || Object.is(_paramitem, '')) {
-                this.blockUIStart();
-                return;
-            } else {
+            // 从数据模式无遮罩层
+            if(this.tempMode && Object.is(this.tempMode,"2")){
                 this.blockUIStop();
+            }else{
+                if (!_paramitem || _paramitem == null || Object.is(_paramitem, '')) {
+                    this.blockUIStart();
+                    return;
+                } else {
+                    this.blockUIStop();
+                }
             }
         }
         if(!this.isForbidLoad){
@@ -319,8 +332,17 @@ export default class AppFormDRUIPart extends Vue {
             }
              // 表单保存之前
             if (Object.is($event.type, 'beforesave')) {
-                if(Object.is(this.refviewtype,'DEMEDITVIEW9') || Object.is(this.refviewtype,'DEGRIDVIEW9')){
-                    this.formDruipart.next({action:'save',data:$event.data});
+                if(Object.is(this.refviewtype,'DEMEDITVIEW9') || Object.is(this.refviewtype,'DEGRIDVIEW9') || Object.is(this.refviewtype,'DEGRIDVIEW')){
+                   // 从数据模式直接通知保存
+                   if(this.tempMode && Object.is(this.tempMode,"2")){
+                       this.formDruipart.next({action:'save',data:$event.data});
+                   }else{
+                       if($event.data && !Object.is($event.data.srfuf,"0")){
+                            this.formDruipart.next({action:'save',data:$event.data});
+                        }else{
+                            this.$emit('drdatasaved',$event);
+                        }
+                   }
                 } else {
                     // 不需要保存的界面也要抛出事件，供计数器计算
                     this.$emit('drdatasaved',$event);

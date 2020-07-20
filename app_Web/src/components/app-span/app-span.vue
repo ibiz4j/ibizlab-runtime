@@ -32,15 +32,15 @@ export default class AppSpan extends Vue {
      * @type {string}
      * @memberof AppSpan
      */
-    @Prop() public unitName?: string;
+    @Prop({default:''}) public unitName?: string;
 
     /**
      * 精度
      *
-     * @type {string}
-     * @memberof AppFormatData
+     * @type {number}
+     * @memberof AppSpan
      */
-    @Prop({default:'2'}) public precision?:string;
+    @Prop({default:'2'}) public precision?:number;
 
     /**
      * 日期值格式化
@@ -191,9 +191,7 @@ export default class AppSpan extends Vue {
             if(this.$util.isEmpty(this.value)){
                 this.text = '';
             }else if(this.dataType){
-                this.currencyFormat();
-            }else if(this.valueFormat){
-                this.dateFormat();
+                this.dataFormat();
             }else{
                 this.text = this.value;
             }
@@ -202,18 +200,21 @@ export default class AppSpan extends Vue {
     }
 
     /**
-     * 货币格式化
+     * 数据格式化
      * 
      * @memberof AppSpan
      */
-    public currencyFormat(){
-        let number:any = Number(this.value);
-        let _unitName = this.unitName?this.unitName:'';
-        let _precision = Number(this.precision);
-        if(Object.is(this.dataType,"CURRENCY")){     
-            this.text = Number(number.toFixed(_precision)).toLocaleString('en-US')+ ' '+ _unitName;   
+    public dataFormat(){
+        if(this.valueFormat){
+            this.dateFormat() ;
+            return;
+        }
+        if(Object.is(this.dataType,"CURRENCY")){
+            let number:any = Number(this.value); 
+            this.text = Number(number.toFixed(this.precision)).toLocaleString('en-US')+ ' '+ this.unitName;   
         }else if(Object.is(this.dataType,"FLOAT") || Object.is(this.dataType,"DECIMAL")){
-            this.text = number.toFixed(_precision);
+            let number:any = Number(this.value);
+            this.text = number.toFixed(this.precision);
         }else {
             this.text = this.value;
         }

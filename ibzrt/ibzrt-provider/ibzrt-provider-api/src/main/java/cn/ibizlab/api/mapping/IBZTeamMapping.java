@@ -6,7 +6,7 @@ import cn.ibizlab.api.dto.IBZTeamDTO;
 import cn.ibizlab.util.domain.MappingBase;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {},
+@Mapper(componentModel = "spring", uses = {},implementationName="apiIBZTeamMapping",
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface IBZTeamMapping extends MappingBase<IBZTeamDTO, IBZTeam> {

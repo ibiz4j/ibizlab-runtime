@@ -67,4 +67,6 @@ public interface SysRoleMapper extends BaseMapper<SysRole>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
+    List<SysRole> selectByProleid(@Param("roleid") Serializable roleid) ;
+
 }

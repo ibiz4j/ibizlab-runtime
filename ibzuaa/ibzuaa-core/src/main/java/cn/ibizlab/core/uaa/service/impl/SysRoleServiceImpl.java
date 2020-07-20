@@ -47,6 +47,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Autowired
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysRolePermissionService sysrolepermissionService;
+
+    protected cn.ibizlab.core.uaa.service.ISysRoleService sysroleService = this;
     @Autowired
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysUserRoleService sysuserroleService;
@@ -56,6 +58,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     @Transactional
     public boolean create(SysRole et) {
+        fillParentData(et);
         if(!this.retBool(this.baseMapper.insert(et)))
             return false;
         CachedBeanCopier.copy(get(et.getRoleid()),et);
@@ -64,12 +67,14 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Override
     public void createBatch(List<SysRole> list) {
+        list.forEach(item->fillParentData(item));
         this.saveBatch(list,batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysRole et) {
+        fillParentData(et);
         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_roleid",et.getRoleid())))
             return false;
         CachedBeanCopier.copy(get(et.getRoleid()),et);
@@ -78,6 +83,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Override
     public void updateBatch(List<SysRole> list) {
+        list.forEach(item->fillParentData(item));
         updateBatchById(list,batchSize);
     }
 
@@ -108,6 +114,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Override
     public SysRole getDraft(SysRole et) {
+        fillParentData(et);
         return et;
     }
 
@@ -137,15 +144,27 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Override
     public boolean saveBatch(Collection<SysRole> list) {
+        list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
         return true;
     }
 
     @Override
     public void saveBatch(List<SysRole> list) {
+        list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
     }
 
+
+	@Override
+    public List<SysRole> selectByProleid(String roleid) {
+        return baseMapper.selectByProleid(roleid);
+    }
+
+    @Override
+    public void removeByProleid(String roleid) {
+        this.remove(new QueryWrapper<SysRole>().eq("proleid",roleid));
+    }
 
 
     /**
@@ -159,6 +178,22 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
 
 
+    /**
+     * 为当前实体填充父数据（外键值文本、外键值附加数据）
+     * @param et
+     */
+    private void fillParentData(SysRole et){
+        //实体关系[DER1N_SYS_ROLE_SYS_ROLE_PROLEID]
+        if(!ObjectUtils.isEmpty(et.getProleid())){
+            cn.ibizlab.core.uaa.domain.SysRole parent=et.getParent();
+            if(ObjectUtils.isEmpty(parent)){
+                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.get(et.getProleid());
+                et.setParent(majorEntity);
+                parent=majorEntity;
+            }
+            et.setProlename(parent.getRolename());
+        }
+    }
 
 
 

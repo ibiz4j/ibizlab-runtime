@@ -177,6 +177,15 @@ export default class AppPicker extends Vue {
     @Prop() public valueitem!: string;
 
     /**
+     * 排序
+     *
+     * @type {string}
+     * @memberof AppPicker
+     */
+    @Prop() public sort?: string;
+
+
+    /**
      * 值
      *
      * @type {*}
@@ -320,6 +329,9 @@ export default class AppPicker extends Vue {
             query = '';
         }
         this.inputState = false;
+        if(this.sort && !Object.is(this.sort, "")) {
+            Object.assign(_param, { sort: this.sort });
+        }
         Object.assign(_param, { query: query });
         // 错误信息国际化
         let error: string = (this.$t('components.appPicker.error') as any);

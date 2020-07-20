@@ -9,10 +9,20 @@
     <resultMap id="SysRoleResultMap" type="cn.ibizlab.core.uaa.domain.SysRole" autoMapping="true">
         <id property="roleid" column="sys_roleid" /><!--主键字段映射-->
 		<result property="rolename" column="sys_rolename" />
+		<result property="proleid" column="proleid" />
             
 		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="parent" javaType="cn.ibizlab.core.uaa.domain.SysRole" column="proleid" select="cn.ibizlab.core.uaa.mapper.SysRoleMapper.selectById" fetchType="lazy"></association>
     </resultMap>
 
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_ROLE_SYS_ROLE_PROLEID] -->
+	 <select id="selectByProleid" resultMap="SysRoleResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         ) t1
+         where  proleid=#{roleid}
+     </select>
 
     <!--数据集合[Default]-->
 	 <select id="searchDefault"  parameterType="cn.ibizlab.core.uaa.filter.SysRoleSearchContext"  resultMap="SysRoleResultMap">
@@ -25,17 +35,17 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`MEMO`, t1.`SYS_ROLEID`, t1.`SYS_ROLENAME`, t1.`UPDATEDATE` FROM `IBZROLE` t1  
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`MEMO`, t1.`PROLEID`, t11.`SYS_ROLENAME` AS `PROLENAME`, t1.`SYS_ROLEID`, t1.`SYS_ROLENAME`, t1.`UPDATEDATE` FROM `IBZROLE` t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="oracle">
-		<![CDATA[ SELECT t1.CREATEDATE, t1.MEMO, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE FROM IBZROLE t1  
+		<![CDATA[ SELECT t1.CREATEDATE, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
-		<![CDATA[ SELECT t1.CREATEDATE, t1.MEMO, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE FROM IBZROLE t1  
+		<![CDATA[ SELECT t1.CREATEDATE, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
 			]]>
     </sql>
 </mapper>

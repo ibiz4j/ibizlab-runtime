@@ -73,7 +73,7 @@ export default class IBZPostPickupGridViewBase extends Vue {
     public appEntityService: IBZPostService = new IBZPostService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type IBZPostUIService
      * @memberof IBZPostPickupGridViewBase

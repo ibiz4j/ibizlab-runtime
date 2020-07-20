@@ -31,6 +31,12 @@ public class SysRoleSearchContext extends SearchContextBase {
 
 	private String n_sys_rolename_like;//[角色名称]
 
+	private String n_proleid_eq;//[父角色标识]
+
+	private String n_prolename_eq;//[父角色名称]
+
+	private String n_prolename_like;//[父角色名称]
+
 }
 
 

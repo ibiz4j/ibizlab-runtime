@@ -118,6 +118,24 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
 
 
+	@Override
+    public List<SysRole> selectByProleid(String roleid) {
+        SysRoleSearchContext context=new SysRoleSearchContext();
+        context.setSize(Integer.MAX_VALUE);
+        context.setN_proleid_eq(roleid);
+        return sysRoleFeignClient.searchDefault(context).getContent();
+    }
+
+    @Override
+    public void removeByProleid(String roleid) {
+        Set<String> delIds=new HashSet<String>();
+        for(SysRole before:selectByProleid(roleid)){
+            delIds.add(before.getRoleid());
+        }
+        if(delIds.size()>0)
+            this.removeBatch(delIds);
+    }
+
 
 
     /**

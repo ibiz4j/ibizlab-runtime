@@ -69,7 +69,7 @@ export default class JobsRegistryEditViewBase extends Vue {
     public appEntityService: JobsRegistryService = new JobsRegistryService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type JobsRegistryUIService
      * @memberof JobsRegistryEditViewBase

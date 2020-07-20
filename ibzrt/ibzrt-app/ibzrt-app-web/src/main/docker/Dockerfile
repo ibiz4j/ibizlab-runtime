@@ -1,9 +1,12 @@
 
 FROM openjdk:8-jre-alpine
 
-ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
+ENV TZ=Asia/Shanghai \
+    SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     IBIZ_SLEEP=0 \
     JAVA_OPTS=""
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 CMD echo "The application will start in ${IBIZ_SLEEP}s..." && \
     sleep ${IBIZ_SLEEP} && \

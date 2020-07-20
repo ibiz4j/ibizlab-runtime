@@ -61,6 +61,11 @@ export default class MainModel {
         dataType: 'TEXT',
       },
       {
+        name: 'prolename',
+        prop: 'prolename',
+        dataType: 'PICKUPTEXT',
+      },
+      {
         name: 'memo',
         prop: 'memo',
         dataType: 'TEXT',
@@ -69,6 +74,11 @@ export default class MainModel {
         name: 'sys_roleid',
         prop: 'roleid',
         dataType: 'GUID',
+      },
+      {
+        name: 'proleid',
+        prop: 'proleid',
+        dataType: 'PICKUP',
       },
       {
         name: 'sysrole',

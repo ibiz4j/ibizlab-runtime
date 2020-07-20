@@ -82,6 +82,9 @@ export default class MainService extends ControlService {
     public getItems(serviceName: string, interfaceName: string, context: any = {}, data: any, isloading?: boolean): Promise<any[]> {
         data.page = data.page ? data.page : 0;
         data.size = data.size ? data.size : 1000;
+        if (Object.is(serviceName, 'SysRoleService') && Object.is(interfaceName, 'FetchDefault')) {
+            return this.doItems(this.appEntityService.FetchDefault(JSON.parse(JSON.stringify(context)), data, isloading), 'roleid', 'sysrole');
+        }
 
         return Promise.reject([])
     }

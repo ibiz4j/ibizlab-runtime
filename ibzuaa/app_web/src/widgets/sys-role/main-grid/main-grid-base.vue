@@ -69,6 +69,37 @@
                     </template>
                 </el-table-column>
             </template>
+            <template v-if="getColumnState('proleid')">
+                <el-table-column show-overflow-tooltip :prop="'proleid'" :label="$t('entities.sysrole.main_grid.columns.proleid')" :width="100"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysrole.main_grid.columns.proleid')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.proleid}}</span>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('prolename')">
+                <el-table-column show-overflow-tooltip :prop="'prolename'" :label="$t('entities.sysrole.main_grid.columns.prolename')" :width="350"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysrole.main_grid.columns.prolename')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <app-column-link deKeyField='sysrole' :context="JSON.parse(JSON.stringify(context))" :viewparams="JSON.parse(JSON.stringify(viewparams))" :data="row" :linkview="{viewname: 'sys-roleredirect-view', height: 0,width: 0,title: $t('entities.sysrole.views.redirectview.title'),placement: '', isRedirectView: true,deResParameters: [
+            ]
+            ,parameters: [
+            { pathName: 'sysroles', parameterName: 'sysrole' },
+            { pathName: 'redirectview', parameterName: 'redirectview' }
+            ]}" valueitem="proleid">
+                            <span>{{row.prolename}}</span>
+                        </app-column-link >
+                    </template>
+                </el-table-column>
+            </template>
             <template v-if="adaptiveState">
                 <el-table-column></el-table-column>
             </template>
@@ -623,6 +654,22 @@ export default class MainBase extends Vue implements ControlInterface {
             langtag: 'entities.sysrole.main_grid.columns.updatedate',
             show: true,
             util: 'px',
+            isEnableRowEdit: false,
+        },
+        {
+            name: 'proleid',
+            label: '父角色标识',
+            langtag: 'entities.sysrole.main_grid.columns.proleid',
+            show: false,
+            util: 'PX',
+            isEnableRowEdit: false,
+        },
+        {
+            name: 'prolename',
+            label: '父角色名称',
+            langtag: 'entities.sysrole.main_grid.columns.prolename',
+            show: true,
+            util: 'PX',
             isEnableRowEdit: false,
         },
     ]

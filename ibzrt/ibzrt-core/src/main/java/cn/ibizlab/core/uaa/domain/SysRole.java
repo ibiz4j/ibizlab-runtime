@@ -55,6 +55,20 @@ public class SysRole extends EntityClient implements Serializable {
     private String memo;
 
     /**
+     * 父角色标识
+     */
+    @JSONField(name = "proleid")
+    @JsonProperty("proleid")
+    private String proleid;
+
+    /**
+     * 父角色名称
+     */
+    @JSONField(name = "prolename")
+    @JsonProperty("prolename")
+    private String prolename;
+
+    /**
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
@@ -73,6 +87,13 @@ public class SysRole extends EntityClient implements Serializable {
     private Timestamp updatedate;
 
 
+    /**
+     * 父角色
+     */
+    @JSONField(name = "parent")
+    @JsonProperty("parent")
+    private cn.ibizlab.core.uaa.domain.SysRole parent;
+
 
 
 
@@ -90,6 +111,14 @@ public class SysRole extends EntityClient implements Serializable {
     public void setMemo(String memo){
         this.memo = memo ;
         this.modify("memo",memo);
+    }
+
+    /**
+     * 设置 [父角色标识]
+     */
+    public void setProleid(String proleid){
+        this.proleid = proleid ;
+        this.modify("proleid",proleid);
     }
 
 

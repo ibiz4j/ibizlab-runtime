@@ -25,6 +25,12 @@ export default class MPickupViewpickupviewpanelModel {
         name: 'memo',
       },
       {
+        name: 'proleid',
+      },
+      {
+        name: 'prolename',
+      },
+      {
         name: 'createdate',
       },
       {

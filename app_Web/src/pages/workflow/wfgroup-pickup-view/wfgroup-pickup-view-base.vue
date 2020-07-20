@@ -58,7 +58,7 @@ export default class WFGroupPickupViewBase extends Vue {
     public appEntityService: WFGroupService = new WFGroupService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type WFGroupUIService
      * @memberof WFGroupPickupViewBase

@@ -50,20 +50,6 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-app-grid-view/sys-app-grid-view.vue'),
                 },
                 {
-                    path: 'sysroles/:sysrole?/pickupview/:pickupview?',
-                    meta: {
-                        caption: 'entities.sysrole.views.pickupview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysroles', parameterName: 'sysrole' },
-                            { pathName: 'pickupview', parameterName: 'pickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-rolepickup-view/sys-rolepickup-view.vue'),
-                },
-                {
                     path: 'sysapps/:sysapp?/editview/:editview?',
                     meta: {
                         caption: 'entities.sysapp.views.editview.title',
@@ -76,6 +62,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/uaa/sys-app-edit-view/sys-app-edit-view.vue'),
+                },
+                {
+                    path: 'sysroles/:sysrole?/pickupview/:pickupview?',
+                    meta: {
+                        caption: 'entities.sysrole.views.pickupview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-rolepickup-view/sys-rolepickup-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/mpickupview/:mpickupview?',

@@ -7,77 +7,77 @@
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.jobsinfo.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.app.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='app' :itemRules="this.rules.app" class='' :caption="$t('entities.jobsinfo.main_form.details.app')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.app.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='app' :itemRules="this.rules().app" class='' :caption="$t('entities.jobsinfo.main_form.details.app')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.app.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.app"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.app.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.handler.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='handler' :itemRules="this.rules.handler" class='' :caption="$t('entities.jobsinfo.main_form.details.handler')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.handler.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='handler' :itemRules="this.rules().handler" class='' :caption="$t('entities.jobsinfo.main_form.details.handler')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.handler.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.handler"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.handler.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.cron.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='cron' :itemRules="this.rules.cron" class='' :caption="$t('entities.jobsinfo.main_form.details.cron')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cron.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='cron' :itemRules="this.rules().cron" class='' :caption="$t('entities.jobsinfo.main_form.details.cron')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cron.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.cron"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.cron.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.param.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='param' :itemRules="this.rules.param" class='' :caption="$t('entities.jobsinfo.main_form.details.param')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.param.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='param' :itemRules="this.rules().param" class='' :caption="$t('entities.jobsinfo.main_form.details.param')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.param.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.param" :textareaId="this.$util.createUUID()"  :disabled="detailsModel.param.disabled" type='textarea' textareaStyle="height:200px;" ></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.last_time.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='last_time' :itemRules="this.rules.last_time" class='' :caption="$t('entities.jobsinfo.main_form.details.last_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.last_time.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='last_time' :itemRules="this.rules().last_time" class='' :caption="$t('entities.jobsinfo.main_form.details.last_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.last_time.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.last_time"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.last_time.disabled" type='number'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.next_time.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='next_time' :itemRules="this.rules.next_time" class='' :caption="$t('entities.jobsinfo.main_form.details.next_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.next_time.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='next_time' :itemRules="this.rules().next_time" class='' :caption="$t('entities.jobsinfo.main_form.details.next_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.next_time.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.next_time"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.next_time.disabled" type='number'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.timeout.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='timeout' :itemRules="this.rules.timeout" class='' :caption="$t('entities.jobsinfo.main_form.details.timeout')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.timeout.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='timeout' :itemRules="this.rules().timeout" class='' :caption="$t('entities.jobsinfo.main_form.details.timeout')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.timeout.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.timeout"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.timeout.disabled" type='number'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.fail_retry_count.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='fail_retry_count' :itemRules="this.rules.fail_retry_count" class='' :caption="$t('entities.jobsinfo.main_form.details.fail_retry_count')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fail_retry_count.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='fail_retry_count' :itemRules="this.rules().fail_retry_count" class='' :caption="$t('entities.jobsinfo.main_form.details.fail_retry_count')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fail_retry_count.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.fail_retry_count"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.fail_retry_count.disabled" type='number'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.author.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='author' :itemRules="this.rules.author" class='' :caption="$t('entities.jobsinfo.main_form.details.author')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.author.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='author' :itemRules="this.rules().author" class='' :caption="$t('entities.jobsinfo.main_form.details.author')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.author.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.author"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.author.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.remark.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='remark' :itemRules="this.rules.remark" class='' :caption="$t('entities.jobsinfo.main_form.details.remark')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.remark.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='remark' :itemRules="this.rules().remark" class='' :caption="$t('entities.jobsinfo.main_form.details.remark')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.remark.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.remark"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.remark.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.status.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='status' :itemRules="this.rules.status" class='' :caption="$t('entities.jobsinfo.main_form.details.status')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.status.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='status' :itemRules="this.rules().status" class='' :caption="$t('entities.jobsinfo.main_form.details.status')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.status.error" :isEmptyCaption="false" labelPos="LEFT">
     
  <dropdown-list 
     v-model="data.status" 
@@ -96,24 +96,28 @@
 
 </i-col>
 <i-col v-show="detailsModel.tenant_id.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='tenant_id' :itemRules="this.rules.tenant_id" class='' :caption="$t('entities.jobsinfo.main_form.details.tenant_id')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.tenant_id.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='tenant_id' :itemRules="this.rules().tenant_id" class='' :caption="$t('entities.jobsinfo.main_form.details.tenant_id')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.tenant_id.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.tenant_id"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.tenant_id.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.create_time.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='create_time' :itemRules="this.rules.create_time" class='' :caption="$t('entities.jobsinfo.main_form.details.create_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.create_time.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='create_time' :itemRules="this.rules().create_time" class='' :caption="$t('entities.jobsinfo.main_form.details.create_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.create_time.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='create_time' :value="data.create_time" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+<app-span name='create_time' :value="data.create_time" dataType="DATETIME" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS"     :precision="0"
+:data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
+</app-span>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.update_time.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='update_time' :itemRules="this.rules.update_time" class='' :caption="$t('entities.jobsinfo.main_form.details.update_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.update_time.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='update_time' :itemRules="this.rules().update_time" class='' :caption="$t('entities.jobsinfo.main_form.details.update_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.update_time.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='update_time' :value="data.update_time" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS" :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style=""></app-span>
+<app-span name='update_time' :value="data.update_time" dataType="DATETIME" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS"     :precision="0"
+:data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
+</app-span>
 
 </app-form-item>
 
@@ -517,7 +521,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
@@ -650,6 +655,51 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '主键ID 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '主键ID 值不能为空', trigger: 'blur' },
         ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -1062,7 +1112,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1495,6 +1545,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            data.jobsinfo = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -1598,8 +1649,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 0;
                 if(this.drcounter !== 0){

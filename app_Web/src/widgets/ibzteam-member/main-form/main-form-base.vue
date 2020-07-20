@@ -7,7 +7,7 @@
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.ibzteammember.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.personname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='personname' :itemRules="this.rules.personname" class='' :caption="$t('entities.ibzteammember.main_form.details.personname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.personname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='personname' :itemRules="this.rules().personname" class='' :caption="$t('entities.ibzteammember.main_form.details.personname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.personname.error" :isEmptyCaption="false" labelPos="LEFT">
     
 <app-picker 
   :formState="formState"
@@ -34,7 +34,7 @@
 
 </i-col>
 <i-col v-show="detailsModel.postname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='postname' :itemRules="this.rules.postname" class='' :caption="$t('entities.ibzteammember.main_form.details.postname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.postname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='postname' :itemRules="this.rules().postname" class='' :caption="$t('entities.ibzteammember.main_form.details.postname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.postname.error" :isEmptyCaption="false" labelPos="LEFT">
     
 <app-picker 
   :formState="formState"
@@ -451,7 +451,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
@@ -536,6 +537,51 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '组成员标识 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '组成员标识 值不能为空', trigger: 'blur' },
         ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -828,7 +874,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1261,6 +1307,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            data.ibzteammember = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -1364,8 +1411,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 0;
                 if(this.drcounter !== 0){

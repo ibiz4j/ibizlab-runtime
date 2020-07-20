@@ -6,7 +6,7 @@ import cn.ibizlab.api.dto.IBZDeptMemberDTO;
 import cn.ibizlab.util.domain.MappingBase;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {},
+@Mapper(componentModel = "spring", uses = {},implementationName="apiIBZDeptMemberMapping",
     nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface IBZDeptMemberMapping extends MappingBase<IBZDeptMemberDTO, IBZDeptMember> {

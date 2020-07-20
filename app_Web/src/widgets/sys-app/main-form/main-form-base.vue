@@ -7,21 +7,21 @@
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysapp.main_form.details.group1')" :isShowCaption="true" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.appid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='appid' :itemRules="this.rules.appid" class='' :caption="$t('entities.sysapp.main_form.details.appid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appid.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='appid' :itemRules="this.rules().appid" class='' :caption="$t('entities.sysapp.main_form.details.appid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appid.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.appid"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.appid.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.appname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='appname' :itemRules="this.rules.appname" class='' :caption="$t('entities.sysapp.main_form.details.appname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='appname' :itemRules="this.rules().appname" class='' :caption="$t('entities.sysapp.main_form.details.appname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.appname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.appname.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.apptype.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='apptype' :itemRules="this.rules.apptype" class='' :caption="$t('entities.sysapp.main_form.details.apptype')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.apptype.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='apptype' :itemRules="this.rules().apptype" class='' :caption="$t('entities.sysapp.main_form.details.apptype')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.apptype.error" :isEmptyCaption="false" labelPos="LEFT">
     
  <dropdown-list 
     v-model="data.apptype" 
@@ -40,35 +40,35 @@
 
 </i-col>
 <i-col v-show="detailsModel.appgroup.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='appgroup' :itemRules="this.rules.appgroup" class='' :caption="$t('entities.sysapp.main_form.details.appgroup')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appgroup.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='appgroup' :itemRules="this.rules().appgroup" class='' :caption="$t('entities.sysapp.main_form.details.appgroup')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.appgroup.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.appgroup"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.appgroup.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.fullname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='fullname' :itemRules="this.rules.fullname" class='' :caption="$t('entities.sysapp.main_form.details.fullname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fullname.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='fullname' :itemRules="this.rules().fullname" class='' :caption="$t('entities.sysapp.main_form.details.fullname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fullname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.fullname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.fullname.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.icon.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='icon' :itemRules="this.rules.icon" class='' :caption="$t('entities.sysapp.main_form.details.icon')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.icon.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='icon' :itemRules="this.rules().icon" class='' :caption="$t('entities.sysapp.main_form.details.icon')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.icon.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.icon"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.icon.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.visabled.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='visabled' :itemRules="this.rules.visabled" class='' :caption="$t('entities.sysapp.main_form.details.visabled')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.visabled.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='visabled' :itemRules="this.rules().visabled" class='' :caption="$t('entities.sysapp.main_form.details.visabled')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.visabled.error" :isEmptyCaption="false" labelPos="LEFT">
     <app-switch name='visabled' :value="this.data.visabled" @change="($event)=>{this.data.visabled = $event} " :disabled="detailsModel.visabled.disabled" style=""></app-switch>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.addr.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='addr' :itemRules="this.rules.addr" class='' :caption="$t('entities.sysapp.main_form.details.addr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.addr.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-form-item name='addr' :itemRules="this.rules().addr" class='' :caption="$t('entities.sysapp.main_form.details.addr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.addr.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box v-model="data.addr"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.addr.disabled" type='text'  style=""></input-box>
 
 </app-form-item>
@@ -467,7 +467,8 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
+    public rules() :any {
+    return {
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
@@ -564,6 +565,51 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '地址 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '地址 值不能为空', trigger: 'blur' },
         ],
+        }
+    }
+
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
+        let falg = {isPast:true,infoMessage:""};
+        if(!rule[name]){
+            return falg;
+        }
+        rule[name].forEach((item:any) => {
+            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
+                falg.isPast = false;
+                falg.infoMessage = item.ruleInfo;
+            }
+            if(item.type == 'STRINGLENGTH' ){
+                let valueLength :number = this.data[name]?this.data[name].length:0;
+                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
+                    falg.isPast = false;
+                    falg.infoMessage = item.ruleInfo;
+                }
+            }
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item)
+            }
+        });
+        return falg;
     }
 
     /**
@@ -886,7 +932,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public checkItem(name:string):Promise<any> {
         return new Promise((resolve, reject) => {
-                var validator = new schema({[name]:this.rules[name]});
+                var validator = new schema({[name]:this.rules()[name]});
                 validator.validate({[name]:this.data[name]}).then(()=>{
                     resolve(true);
                 })
@@ -1320,6 +1366,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.data.appid = null;
+            data.sysapp = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -1423,8 +1470,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 0;
                 if(this.drcounter !== 0){

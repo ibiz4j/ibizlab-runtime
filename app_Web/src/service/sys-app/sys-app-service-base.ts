@@ -49,7 +49,7 @@ export default class SysAppServiceBase extends EntityService {
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = Http.getInstance().get(`/sysapps/${context.sysapp}/select`,isloading);
-
+            
             return res;
     }
 
@@ -73,7 +73,7 @@ export default class SysAppServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/sysapps`,data,isloading);
-
+        
         return res;
     }
 
@@ -90,7 +90,7 @@ export default class SysAppServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/sysapps/${context.sysapp}`,data,isloading);
-
+            
             return res;
     }
 
@@ -119,7 +119,7 @@ export default class SysAppServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/sysapps/${context.sysapp}`,isloading);
-
+            
             return res;
     }
 
@@ -135,7 +135,7 @@ export default class SysAppServiceBase extends EntityService {
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await  Http.getInstance().get(`/sysapps/getdraft`,isloading);
         res.data.sysapp = data.sysapp;
-
+        
         return res;
     }
 
@@ -166,7 +166,7 @@ export default class SysAppServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysapps/${context.sysapp}/save`,data,isloading);
-
+            
             return res;
     }
 
@@ -183,19 +183,5 @@ export default class SysAppServiceBase extends EntityService {
         let tempData:any = JSON.parse(JSON.stringify(data));
         let res:any = Http.getInstance().get(`/sysapps/fetchdefault`,tempData,isloading);
         return res;
-    }
-
-    /**
-     * searchDefault接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysAppServiceBase
-     */
-    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().post(`/sysapps/searchdefault`,tempData,isloading);
     }
 }

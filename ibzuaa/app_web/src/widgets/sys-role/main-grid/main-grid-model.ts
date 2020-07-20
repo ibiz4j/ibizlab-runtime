@@ -42,9 +42,19 @@ export default class MainModel {
           dataType: 'GUID',
         },
         {
+          name: 'proleid',
+          prop: 'proleid',
+          dataType: 'PICKUP',
+        },
+        {
           name: 'updatedate',
           prop: 'updatedate',
           dataType: 'DATETIME',
+        },
+        {
+          name: 'prolename',
+          prop: 'prolename',
+          dataType: 'PICKUPTEXT',
         },
         {
           name: 'srfmajortext',

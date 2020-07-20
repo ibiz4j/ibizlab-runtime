@@ -49,7 +49,7 @@ export default class IBZOrganizationServiceBase extends EntityService {
      */
     public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}/select`,isloading);
-
+            
             return res;
     }
 
@@ -73,9 +73,9 @@ export default class IBZOrganizationServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/ibzorganizations`,data,isloading);
-        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments));
-        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees));
-
+        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments?res.data.ibzdepartments:[]));
+        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees?res.data.ibzemployees:[]));
+        
         return res;
     }
 
@@ -92,7 +92,7 @@ export default class IBZOrganizationServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().put(`/ibzorganizations/${context.ibzorganization}`,data,isloading);
-
+            
             return res;
     }
 
@@ -121,7 +121,7 @@ export default class IBZOrganizationServiceBase extends EntityService {
      */
     public async Get(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
             let res:any = await Http.getInstance().get(`/ibzorganizations/${context.ibzorganization}`,isloading);
-
+            
             return res;
     }
 
@@ -137,7 +137,7 @@ export default class IBZOrganizationServiceBase extends EntityService {
     public async GetDraft(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let res:any = await  Http.getInstance().get(`/ibzorganizations/getdraft`,isloading);
         res.data.ibzorganization = data.ibzorganization;
-
+        
         return res;
     }
 
@@ -168,7 +168,7 @@ export default class IBZOrganizationServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/save`,data,isloading);
-
+            
             return res;
     }
 
@@ -185,19 +185,5 @@ export default class IBZOrganizationServiceBase extends EntityService {
         let tempData:any = JSON.parse(JSON.stringify(data));
         let res:any = Http.getInstance().get(`/ibzorganizations/fetchdefault`,tempData,isloading);
         return res;
-    }
-
-    /**
-     * searchDefault接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof IBZOrganizationServiceBase
-     */
-    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let tempData:any = JSON.parse(JSON.stringify(data));
-        return Http.getInstance().post(`/ibzorganizations/searchdefault`,tempData,isloading);
     }
 }

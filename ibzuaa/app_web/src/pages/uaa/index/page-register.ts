@@ -1,8 +1,8 @@
 export const PageComponents = {
     install(Vue: any, opt: any) {
                 Vue.component('sys-app-grid-view', () => import('@pages/uaa/sys-app-grid-view/sys-app-grid-view.vue'));
-        Vue.component('sys-rolepickup-view', () => import('@pages/uaa/sys-rolepickup-view/sys-rolepickup-view.vue'));
         Vue.component('sys-app-edit-view', () => import('@pages/uaa/sys-app-edit-view/sys-app-edit-view.vue'));
+        Vue.component('sys-rolepickup-view', () => import('@pages/uaa/sys-rolepickup-view/sys-rolepickup-view.vue'));
         Vue.component('sys-usermpickup-view', () => import('@pages/uaa/sys-usermpickup-view/sys-usermpickup-view.vue'));
         Vue.component('sys-role-permission-custom-view', () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'));
         Vue.component('sys-userpickup-grid-view', () => import('@pages/uaa/sys-userpickup-grid-view/sys-userpickup-grid-view.vue'));

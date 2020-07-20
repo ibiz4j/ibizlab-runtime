@@ -144,7 +144,7 @@ export default class JobsInfoGridViewBase extends Vue {
     public appEntityService: JobsInfoService = new JobsInfoService;
 
     /**
-     * 实体权限服务对象
+     * 实体UI服务对象
      *
      * @type JobsInfoUIService
      * @memberof JobsInfoGridViewBase

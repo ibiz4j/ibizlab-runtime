@@ -9,5 +9,5 @@ zuul:
   routes:
     loginv7:
       path: /v7/login
-      serviceId: ibzuaa-api
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false

@@ -64,7 +64,8 @@
     refviewtype='DEGRIDVIEW' 
     refreshitems='' 
     :ignorefieldvaluechange="ignorefieldvaluechange"
-    viewname='sys-user-rolegrid-view' 
+    viewname='sys-user-rolegrid-view'
+    tempMode='0'
     :data="JSON.stringify(this.data)" 
     @drdatasaved="drdatasaved($event)"
     style=";overflow: auto;">
@@ -1292,6 +1293,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
             this.data.userid = null;
+            data.sysuser = null;
             this.$emit('load', data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
@@ -1395,8 +1397,8 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             const arg: any = { ...opt };
             const data = this.getValues();
-            Object.assign(arg, data);
             Object.assign(arg, this.context);
+            Object.assign(arg, data);
             if (ifStateNext) {
                 this.drcounter = 1;
                 if(this.drcounter !== 0){
