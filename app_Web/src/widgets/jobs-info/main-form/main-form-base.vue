@@ -8,21 +8,42 @@
     <row>
         <i-col v-show="detailsModel.app.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='app' :itemRules="this.rules().app" class='' :caption="$t('entities.jobsinfo.main_form.details.app')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.app.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.app"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.app.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.app"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.app.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.handler.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='handler' :itemRules="this.rules().handler" class='' :caption="$t('entities.jobsinfo.main_form.details.handler')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.handler.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.handler"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.handler.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.handler"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.handler.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.cron.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='cron' :itemRules="this.rules().cron" class='' :caption="$t('entities.jobsinfo.main_form.details.cron')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cron.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.cron"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.cron.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.cron"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.cron.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
@@ -36,42 +57,84 @@
 </i-col>
 <i-col v-show="detailsModel.last_time.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='last_time' :itemRules="this.rules().last_time" class='' :caption="$t('entities.jobsinfo.main_form.details.last_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.last_time.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.last_time"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.last_time.disabled" type='number'  style=""></input-box>
+    <input-box 
+    v-model="data.last_time"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.last_time.disabled" 
+    type='number' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.next_time.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='next_time' :itemRules="this.rules().next_time" class='' :caption="$t('entities.jobsinfo.main_form.details.next_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.next_time.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.next_time"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.next_time.disabled" type='number'  style=""></input-box>
+    <input-box 
+    v-model="data.next_time"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.next_time.disabled" 
+    type='number' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.timeout.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='timeout' :itemRules="this.rules().timeout" class='' :caption="$t('entities.jobsinfo.main_form.details.timeout')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.timeout.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.timeout"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.timeout.disabled" type='number'  style=""></input-box>
+    <input-box 
+    v-model="data.timeout"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.timeout.disabled" 
+    type='number' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.fail_retry_count.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='fail_retry_count' :itemRules="this.rules().fail_retry_count" class='' :caption="$t('entities.jobsinfo.main_form.details.fail_retry_count')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fail_retry_count.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.fail_retry_count"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.fail_retry_count.disabled" type='number'  style=""></input-box>
+    <input-box 
+    v-model="data.fail_retry_count"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.fail_retry_count.disabled" 
+    type='number' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.author.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='author' :itemRules="this.rules().author" class='' :caption="$t('entities.jobsinfo.main_form.details.author')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.author.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.author"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.author.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.author"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.author.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.remark.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='remark' :itemRules="this.rules().remark" class='' :caption="$t('entities.jobsinfo.main_form.details.remark')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.remark.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.remark"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.remark.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.remark"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.remark.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
@@ -97,7 +160,14 @@
 </i-col>
 <i-col v-show="detailsModel.tenant_id.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='tenant_id' :itemRules="this.rules().tenant_id" class='' :caption="$t('entities.jobsinfo.main_form.details.tenant_id')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.tenant_id.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.tenant_id"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.tenant_id.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.tenant_id"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.tenant_id.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
@@ -674,31 +744,62 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string }} { name }
      * @memberof MainBase
      */
-    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
-        let falg = {isPast:true,infoMessage:""};
+    public verifyDeRules(name:string,rule:any = this.deRules,op:string = "AND") :{isPast:boolean,infoMessage:string}{
+        let falg:any = {infoMessage:""};
         if(!rule[name]){
             return falg;
         }
-        rule[name].forEach((item:any) => {
-            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
-                falg.isPast = false;
-                falg.infoMessage = item.ruleInfo;
-            }
-            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
-                falg.isPast = false;
-                falg.infoMessage = item.ruleInfo;
-            }
-            if(item.type == 'STRINGLENGTH' ){
-                let valueLength :number = this.data[name]?this.data[name].length:0;
-                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
-                    falg.isPast = false;
-                    falg.infoMessage = item.ruleInfo;
+        let opValue = op == 'AND'? true :false;
+        let startOp = (val:boolean)=>{
+            if(falg.isPast){
+                if(opValue){
+                    falg.isPast = falg && val;
+                }else{
+                    falg.isPast = falg || val;
                 }
+            }else{
+                falg.isPast = val;
             }
+        }
+        rule[name].forEach((item:any) => {
+            let dataValue = item.deName?this.data[this.service.getItemNameByDeName(item.deName)]:"";
+            // 常规规则
+            if(item.type == 'SIMPLE'){
+                startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,{},item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 数值范围
+            if(item.type == 'VALUERANGE2'){
+                startOp( !this.$verify.checkFieldValueRangeRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 正则式
+            if (item.type == "REGEX") {
+                startOp(!this.$verify.checkFieldRegExRule(dataValue,item.regExCode,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 长度
+            if (item.type == "STRINGLENGTH") {
+                startOp(!this.$verify.checkFieldStringLengthRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 系统值规则
+            if(item.type == "SYSVALUERULE") {
+                startOp(!this.$verify.checkFieldSysValueRule(dataValue,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 分组
             if(item.type == 'GROUP'){
                 falg = this.verifyDeRules('group',item)
+                if(item.isNotMode){
+                   falg.isPast = !falg.isPast;
+                }
             }
+            
         });
+        if(!falg.hasOwnProperty("isPast")){
+            falg.isPast = true;
+        }
         return falg;
     }
 
@@ -1292,6 +1393,17 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 编辑器行为触发
+     *
+     * @param {*} arg
+     * @returns {void}
+     * @memberof MainBase
+     */
+    public onFormItemActionClick(arg:any){
+        if(arg && (arg instanceof Function)) arg();
+    }
+
+    /**
      * 设置数据项值
      *
      * @param {string} name
@@ -1667,6 +1779,9 @@ export default class MainBase extends Vue implements ControlInterface {
                 return;
             }
             Object.assign(arg,{viewparams:this.viewparams});
+            if(this.viewparams && this.viewparams.copymode){
+                data.srfuf = '0';
+            }
             const post: Promise<any> = Object.is(data.srfuf, '1')?this.service.update(action, JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator):this.service.add(action,JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator);
             post.then((response: any) => {
                 if (!response.status || response.status !== 200) {
@@ -1675,7 +1790,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     }
                     return;
                 }
-
+                this.viewparams.copymode = false;
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
@@ -1762,6 +1877,8 @@ export default class MainBase extends Vue implements ControlInterface {
             const post: Promise<any> = _this.save({},false);
             post.then((response:any) =>{
                 const arg:any = response.data;
+                // 准备工作流数据,填充未存库数据
+                Object.assign(arg,this.getData());
                 if(this.viewparams){
                     Object.assign(arg,{viewparams:this.viewparams});
                 }
@@ -1830,6 +1947,8 @@ export default class MainBase extends Vue implements ControlInterface {
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: arg });
                 });
+                // 准备工作流数据,填充未存库数据
+                Object.assign(arg,this.getData());
                 // 准备提交参数
                 if(this.viewparams){
                     Object.assign(arg,{viewparams:this.viewparams});

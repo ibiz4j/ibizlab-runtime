@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="mac (generated)" id="1596457930257-1">
+        <createTable tableName="IBZUSERAUTH">
+            <column name="AUTHID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SYS_USER_AUTH_AUTHID"/>
+            </column>
+            <column name="USERID" type="VARCHAR(100)"/>
+            <column name="IDENTITY_TYPE" type="VARCHAR(100)"/>
+            <column name="IDENTIFIER" type="VARCHAR(200)"/>
+            <column name="CREDENTIAL" type="VARCHAR(500)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1596457930257-2">
+        <addColumn tableName="IBZROLE">
+            <column name="CREATEMAN" type="VARCHAR(60 BYTE)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1596457930257-3">
+        <addColumn tableName="IBZROLE">
+            <column name="UPDATEMAN" type="VARCHAR(60 BYTE)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

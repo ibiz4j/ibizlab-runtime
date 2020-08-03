@@ -24,15 +24,15 @@
 	 <select id="selectByRoleid" resultMap="SysUserRoleResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  sys_roleid=#{roleid}
+			 ) t1
+			 where  sys_roleid=#{roleid}
      </select>
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_USER_ROLE_SYS_USER_SYS_USERID] -->
 	 <select id="selectByUserid" resultMap="SysUserRoleResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  sys_userid=#{userid}
+			 ) t1
+			 where  sys_userid=#{userid}
      </select>
 
     <!--数据集合[Default]-->

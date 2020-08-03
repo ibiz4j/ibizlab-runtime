@@ -40,4 +40,3 @@ public class SysRolePermissionSearchContext extends SearchContextBase {
 }
 
 
-

@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFUserSearchContext;
 import cn.ibizlab.core.workflow.service.IWFUserService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.workflow.client.WFUserFeignClient;
@@ -130,6 +131,8 @@ public class WFUserServiceImpl implements IWFUserService {
     }
 
 
+
 }
+
 
 

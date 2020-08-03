@@ -30,4 +30,3 @@ public class JobsLockSearchContext extends SearchContextBase {
 }
 
 
-

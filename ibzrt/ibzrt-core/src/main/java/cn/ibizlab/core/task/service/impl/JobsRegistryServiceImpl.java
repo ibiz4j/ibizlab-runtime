@@ -28,6 +28,7 @@ import cn.ibizlab.core.task.filter.JobsRegistrySearchContext;
 import cn.ibizlab.core.task.service.IJobsRegistryService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.task.client.JobsRegistryFeignClient;
@@ -130,6 +131,8 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
     }
 
 
+
 }
+
 
 

@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysUserRoleSearchContext;
 import cn.ibizlab.core.uaa.service.ISysUserRoleService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -129,9 +130,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(SysUserRole et) {
         if (null == et) {
             return false;
@@ -245,5 +244,6 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
 
 
 }
+
 
 

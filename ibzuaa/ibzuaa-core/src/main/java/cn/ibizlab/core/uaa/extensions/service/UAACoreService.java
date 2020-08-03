@@ -1,14 +1,9 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
 
-import cn.ibizlab.core.uaa.domain.SysPSSystem;
-import cn.ibizlab.core.uaa.domain.SysPermission;
-import cn.ibizlab.core.uaa.domain.SysRole;
-import cn.ibizlab.core.uaa.domain.SysRolePermission;
+import cn.ibizlab.core.uaa.domain.*;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionNode;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
-import cn.ibizlab.core.uaa.domain.SysApp;
-import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
 import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
@@ -21,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.data.domain.Page;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -95,11 +89,9 @@ public class UAACoreService {
     public Collection<GrantedAuthority> getAuthoritiesByUserId(String userId)
     {
         Set<GrantedAuthority> authorities = new LinkedHashSet<>();
-        Set<String> roleIds = new HashSet<>();
-        userRoleService.selectByUserid(userId).forEach(sysUserRole -> roleIds.add(sysUserRole.getRoleid()));
-        roleIds.forEach(roleid->authorities.add(new SimpleGrantedAuthority("ROLE_"+roleid)));
-
+        Set<String> roleIds = getRoleByUserId(userId);
         if(roleIds.size()>0){
+            roleIds.forEach(roleid->authorities.add(new SimpleGrantedAuthority("ROLE_"+roleid)));
             SysRolePermissionSearchContext context = new SysRolePermissionSearchContext();
             context.getSelectCond().in("sys_roleid",roleIds).eq("permissionenable",1).orderByAsc("permissiontype","sys_permissionid");
             context.setSize(Integer.MAX_VALUE);
@@ -124,6 +116,50 @@ public class UAACoreService {
         }
 
         return authorities;
+    }
+
+    /**
+     * 获取用户所属角色
+     * @param userId 用户标识
+     * @return
+     */
+    private Set<String> getRoleByUserId(String userId){
+
+        Set<String> roleIds = new HashSet<>();
+        List<SysUserRole> userRoles =userRoleService.selectByUserid(userId);
+        if(userRoles.size()==0)
+            return roleIds;
+
+        Map<String,SysRole> roleMap=new HashMap();
+        List<SysRole> roles=sysRoleService.list();
+        for(SysRole role: roles){
+            roleMap.put(role.getRoleid(),role);
+        }
+        if(roleMap.size()==0)
+            return roleIds;
+
+        for(SysUserRole userRole : userRoles){
+            String strRoleId=userRole.getRoleid();
+            setRoles(strRoleId,roleMap,roleIds);
+        }
+
+        return roleIds;
+    }
+
+    /**
+     * 获取用户角色列表（含父角色）
+     * @param roleId
+     * @param roles
+     * @param roleIds
+     */
+    private void setRoles(String roleId , Map <String,SysRole> roles,Set<String> roleIds){
+        if(roles.containsKey(roleId)){
+            SysRole sysRole =roles.get(roleId);
+            if(!ObjectUtils.isEmpty(sysRole.getProleid())) {
+                setRoles(sysRole.getProleid(),roles,roleIds);
+            }
+            roleIds.add(sysRole.getRoleid());
+        }
     }
 
     public void saveByRoleid(String roleid,List<SysRolePermission> list) {

@@ -25,10 +25,11 @@ export default {
             rulesException: "值规则校验异常",
             saveSuccess: "保存成功",
             saveFailed: "保存失败",
-            deleteSuccess: "删除成功！",
-            deleteError: "删除失败！",
+            deleteSuccess: "删除成功",
+            deleteError: "删除失败",
             delDataFail: "删除数据失败",
             noData: "暂无数据",
+            startsuccess:"启动成功"
         },
         local:{
             new: "新建",

@@ -1,5 +1,6 @@
 import { Store } from 'vuex';
 import { Http } from '@/utils';
+import CodeListService from "@service/app/codelist-service";
 
 /**
  * 实体服务基类
@@ -116,6 +117,34 @@ export default class EntityService {
     }
 
     /**
+     * 获取代码表
+     *
+     * @memberof EntityService
+     */
+    public getCodeList(tag:string,codelistType:string,context:any = {},param:any ={}){
+        return new Promise((resolve:any,reject:any) =>{
+            if(tag && Object.is(codelistType,"STATIC")){
+                let returnItems:Array<any> = [];
+                const codelist = (this.getStore() as Store<any>).getters.getCodeList(tag);
+                if (codelist) {
+                    returnItems = [...JSON.parse(JSON.stringify(codelist.items))];
+                } else {
+                    console.log(`----${tag}----代码表不存在`);
+                }
+                resolve(returnItems);
+            }else if(tag && Object.is(codelistType,"DYNAMIC")){
+                let codeListService = new CodeListService({ $store: this.$store });
+                codeListService.getItems(tag,context,param).then((res:any) => {
+                    resolve(res);
+                }).catch((error:any) => {
+                    reject(`${tag}代码表不存在`);
+                    console.log(`----${tag}----代码表不存在`);
+                });
+            }
+        })
+    }
+
+    /**
      * 初始化基础数据
      *
      * @memberof EntityService
@@ -174,6 +203,7 @@ export default class EntityService {
         if(context.srfsessionkey && !Object.is(this.tempStorage.getItem(context.srfsessionkey+'_'+this.APPDENAME),'undefined')){
             let tempData:any = JSON.parse(this.tempStorage.getItem(context.srfsessionkey+'_'+this.APPDENAME) as any);
             data.srffrontuf = "0";
+            data[this.APPDEKEY] = null;
             tempData.push(data);
             this.tempStorage.setItem(context.srfsessionkey+'_'+this.APPDENAME,JSON.stringify(tempData));
             return {"status":200,"data":data};
@@ -581,7 +611,9 @@ export default class EntityService {
      * @memberof EntityService
      */
     public async ImportData(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        return Http.getInstance().post(`/${this.APPDENAME}/import`,data,isloading);
+        let _data:Array<any> = [];
+        if (data && data.importData) _data = data.importData;
+        return Http.getInstance().post(`/${this.APPDENAME}/import?config=${data.name}`,_data,isloading);
     }
 
     /**

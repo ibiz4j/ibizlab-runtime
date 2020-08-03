@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import java.lang.reflect.Field;
+import java.util.Map;
 
 /**
  * 数据库版本检查
@@ -28,6 +29,7 @@ import java.lang.reflect.Field;
 public class VersionCheckAspect
 {
     private final ExpressionParser parser = new SpelExpressionParser();
+    private final String IgnoreField="ignoreversioncheck";
 
     @SneakyThrows
     @Before("execution(* cn.ibizlab.*.rest.*.update(..)) &&  @annotation(versionCheck)")
@@ -47,19 +49,26 @@ public class VersionCheckAspect
     @Before("execution(* cn.ibizlab.*.rest.*.updateBy*(..)) &&  @annotation(versionCheck)")
     public void BeforeUpdateBy(JoinPoint point, VersionCheck versionCheck){
         Object[] args = point.getArgs();
-        Object id=args[1];
-        Object dto=args[2];
-        if(ObjectUtils.isEmpty(id) || ObjectUtils.isEmpty(dto))
-            return;
-        String versionField=versionCheck.versionfield();
-        if(StringUtils.isEmpty(versionField))
-            return;
-        versionCheck(versionCheck,point.getTarget(),dto,id);
+        if(args.length>=2){
+            Object id=args[args.length-2];
+            Object dto=args[args.length-1];
+            if(ObjectUtils.isEmpty(id) || ObjectUtils.isEmpty(dto))
+                return;
+            String versionField=versionCheck.versionfield();
+            if(StringUtils.isEmpty(versionField))
+                return;
+            versionCheck(versionCheck,point.getTarget(),dto,id);
+        }
     }
 
     private void versionCheck(VersionCheck versionCheck,Object resource,Object dto,Object id ){
         EvaluationContext context = new StandardEvaluationContext();
         context.setVariable("dto",dto);
+        //忽略版本检查
+        Expression dtoParamsExp = parser.parseExpression("#dto.extensionparams");
+        Map dtoParam=dtoParamsExp.getValue(context, Map.class);
+        if(!ObjectUtils.isEmpty(dtoParam) && !ObjectUtils.isEmpty(dtoParam.get(IgnoreField)) && dtoParam.get(IgnoreField).equals(1))
+            return;
         Expression newExp = parser.parseExpression(String.format("#dto.%s",versionCheck.versionfield()));
         Object newVersion=newExp.getValue(context);
         if(ObjectUtils.isEmpty(newVersion))

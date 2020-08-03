@@ -25,10 +25,10 @@ export default class MPickupViewpickupviewpanelModel {
         name: 'personname',
       },
       {
-        name: 'password',
+        name: 'usercode',
       },
       {
-        name: 'usercode',
+        name: 'password',
       },
       {
         name: 'loginname',

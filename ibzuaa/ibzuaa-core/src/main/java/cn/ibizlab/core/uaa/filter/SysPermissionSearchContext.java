@@ -72,4 +72,3 @@ public class SysPermissionSearchContext extends QueryWrapperContext<SysPermissio
 
 
 
-

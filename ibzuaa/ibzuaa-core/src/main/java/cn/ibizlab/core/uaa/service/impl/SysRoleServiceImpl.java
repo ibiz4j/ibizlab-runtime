@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysRoleSearchContext;
 import cn.ibizlab.core.uaa.service.ISysRoleService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -131,9 +132,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(SysRole et) {
         if (null == et) {
             return false;
@@ -222,7 +221,27 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         return true;
     }
 
+    @Override
+    public List<SysRole> getSysroleByIds(List<String> ids) {
+         return this.listByIds(ids);
+    }
+
+    @Override
+    public List<SysRole> getSysroleByEntities(List<SysRole> entities) {
+        List ids =new ArrayList();
+        for(SysRole entity : entities){
+            Serializable id=entity.getRoleid();
+            if(!ObjectUtils.isEmpty(id)){
+                ids.add(id);
+            }
+        }
+        if(ids.size()>0)
+           return this.listByIds(ids);
+        else
+           return entities;
+    }
 
 }
+
 
 

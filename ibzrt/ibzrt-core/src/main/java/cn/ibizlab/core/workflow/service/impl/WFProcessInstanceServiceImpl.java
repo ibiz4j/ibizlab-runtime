@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFProcessInstanceSearchContext;
 import cn.ibizlab.core.workflow.service.IWFProcessInstanceService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.workflow.client.WFProcessInstanceFeignClient;
@@ -130,6 +131,8 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     }
 
 
+
 }
+
 
 

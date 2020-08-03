@@ -28,6 +28,7 @@ import cn.ibizlab.core.ou.filter.IBZDeptMemberSearchContext;
 import cn.ibizlab.core.ou.service.IIBZDeptMemberService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.ou.client.IBZDeptMemberFeignClient;
@@ -184,6 +185,8 @@ public class IBZDeptMemberServiceImpl implements IIBZDeptMemberService {
     }
 
 
+
 }
+
 
 

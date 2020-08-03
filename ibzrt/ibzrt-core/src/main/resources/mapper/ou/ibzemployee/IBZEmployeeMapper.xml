@@ -28,22 +28,22 @@
 	 <select id="selectByMdeptid" resultMap="IBZEmployeeResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  mdeptid=#{deptid}
+			 ) t1
+			 where  mdeptid=#{deptid}
      </select>
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZEMP_IBZORG_ORGID] -->
 	 <select id="selectByOrgid" resultMap="IBZEmployeeResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  orgid=#{orgid}
+			 ) t1
+			 where  orgid=#{orgid}
      </select>
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZEMP_IBZPOST_POSTID] -->
 	 <select id="selectByPostid" resultMap="IBZEmployeeResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  postid=#{postid}
+			 ) t1
+			 where  postid=#{postid}
      </select>
 
     <!--数据集合[Default]-->

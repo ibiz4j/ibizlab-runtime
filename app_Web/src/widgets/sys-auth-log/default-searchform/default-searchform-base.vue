@@ -6,14 +6,28 @@
       <row>
                     <i-col v-show="detailsModel.n_username_like.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_username_like' :itemRules="this.rules.n_username_like" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_username_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_username_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_username_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_username_like.disabled" type='text'  style=""></input-box>
+              <input-box 
+              v-model="data.n_username_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_username_like.disabled" 
+              type='text' 
+              style="">
+          </input-box>
           
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_personname_like.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_personname_like' :itemRules="this.rules.n_personname_like" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_personname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_personname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_personname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_personname_like.disabled" type='text'  style=""></input-box>
+              <input-box 
+              v-model="data.n_personname_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_personname_like.disabled" 
+              type='text' 
+              style="">
+          </input-box>
           
           </app-form-item>
           
@@ -53,7 +67,14 @@
           </i-col>
           <i-col v-show="detailsModel.n_domain_like.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_domain_like' :itemRules="this.rules.n_domain_like" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_domain_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_domain_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_domain_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_domain_like.disabled" type='text'  style=""></input-box>
+              <input-box 
+              v-model="data.n_domain_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_domain_like.disabled" 
+              type='text' 
+              style="">
+          </input-box>
           
           </app-form-item>
           

@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFREModelSearchContext;
 import cn.ibizlab.core.workflow.service.IWFREModelService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.workflow.client.WFREModelFeignClient;
@@ -130,6 +131,8 @@ public class WFREModelServiceImpl implements IWFREModelService {
     }
 
 
+
 }
+
 
 

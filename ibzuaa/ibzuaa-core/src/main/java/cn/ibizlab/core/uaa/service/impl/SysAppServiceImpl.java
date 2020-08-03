@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysAppSearchContext;
 import cn.ibizlab.core.uaa.service.ISysAppService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 /**
@@ -120,4 +121,5 @@ public class SysAppServiceImpl implements ISysAppService {
 
 
 }
+
 

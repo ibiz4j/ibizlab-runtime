@@ -578,7 +578,7 @@ export default class IBZOrganizationTreeExpViewBase extends Vue {
      * @param {*} [xData]
      * @memberof IBZOrganizationTreeExpView
      */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+    public opendata(args: any[],fullargs?:any,params?: any, $event?: any, xData?: any) {
         if(!this.viewDefaultUsage){
             if(Object.is(this.navModel,"route")){
                 this.initNavDataWithRoute(this.viewCacheData, false, true);

@@ -49,7 +49,7 @@
                                 <span class="form_tipinfo">其他登录方式</span>
                             </div>
                             <div style="text-align: center">
-                                <div class="sign-btn" @click="tencentHandleClick('tencent')">
+                                <div class="sign-btn" @click="qqHandleClick('qq')">
                                     <img src="/assets/img/QQ.svg" class="qq-svg-container" draggable="false">
                                 </div>
                                 <div class="sign-btn" @click="wechatHandleClick('wechat')">
@@ -258,7 +258,7 @@
          * qq授权登录
          * @param thirdpart
          */
-        public tencentHandleClick(thirdpart: any) {
+        public qqHandleClick(thirdpart: any) {
             // 截取地址，拼接需要部分组成新地址
             const baseUrl = this.getNeedLocation();
 

@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysPermissionSearchContext;
 import cn.ibizlab.core.uaa.service.ISysPermissionService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -121,9 +122,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(SysPermission et) {
         if (null == et) {
             return false;
@@ -186,5 +185,6 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
 
 
 }
+
 
 

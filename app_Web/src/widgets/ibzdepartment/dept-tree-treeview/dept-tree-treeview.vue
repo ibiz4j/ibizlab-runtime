@@ -17,7 +17,11 @@
                     :props="this.defaultProps"
                     @node-click="handleNodeClick"
             >
-
+                <span class="custom-tree-node" slot-scope="{node, data}">
+                    <i v-if="node.isLeaf" class="fa fa-building" style="margin-right: 2px;"></i>
+                    <i v-if="!node.isLeaf" class="fa fa-building-o" style="margin-right: 2px;"></i>
+                    <span>{{node.label}}</span>
+                </span>
             </el-tree>
         </context-menu-container>
     </div>

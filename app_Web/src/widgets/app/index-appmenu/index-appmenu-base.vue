@@ -8,7 +8,105 @@
       :collapse="isCollapse"
       @select="select"
       :default-active="defaultActive">
-        <app-menu-item :menus="menus" :ctrlName="'index'" :isFirst="true" :counterdata="counterdata" :popperclass="popperClass"></app-menu-item>
+        <template v-if="Object.is(mode,'horizontal')">
+            <template v-for="item0 in menus">
+                <template v-if="item0.items && Array.isArray(item0.items) && item0.items.length > 0">
+                    <el-submenu v-show="!item0.hidden" :index="item0.name" :popper-class="popperClass" :key="item0.id" :class="item0.textcls">
+                        <template slot='title'>
+                            <template v-if="item0.icon && item0.icon != ''">
+                                <img :src="item0.icon" class='app-menu-icon' />
+                            </template>
+                            <template v-else-if="item0.iconcls && item0.iconcls != ''">
+                                <i :class="[item0.iconcls, 'app-menu-icon']"></i>
+                            </template>
+                            <template v-else>
+                                <i class='fa fa-cogs app-menu-icon'></i>
+                            </template>
+                            <span class='text' :title="$t('app.menus.index.' + item0.name)">{{$t('app.menus.index.' + item0.name)}}</span>
+                        </template>
+                        <template v-for="item1 in item0.items">
+                            <template v-if="item1.items && Array.isArray(item1.items) && item1.items.length > 0">
+                                <el-submenu v-show="!item1.hidden" :index="item1.name" :popper-class="popperClass" :key="item1.id" :class="item1.textcls">
+                                    <template slot='title'>
+                                        <template v-if="item1.icon && item1.icon != ''">
+                                            <img :src="item1.icon" class='app-menu-icon' />
+                                        </template>
+                                        <template v-else-if="item1.iconcls && item1.iconcls != ''">
+                                            <i :class="[item1.iconcls, 'app-menu-icon']"></i>
+                                        </template>
+                                        <span class='text' :title="$t('app.menus.index.' + item1.name)">{{$t('app.menus.index.' + item1.name)}}</span>
+                                    </template>
+                                    <template v-for="item2 in item1.items">
+                                        <template v-if="item2.type =='MENUITEM'">
+                                            <el-menu-item v-show="!item2.hidden" :index="item2.name" :key="item2.id" :class="item2.textcls">
+                                                <template v-if="item2.icon && item2.icon != ''">
+                                                    <img :src="item2.icon" class='app-menu-icon' />
+                                                </template>
+                                                <template v-else-if="item2.iconcls && item2.iconcls != ''">
+                                                    <i :class="[item2.iconcls, 'app-menu-icon']"></i>
+                                                </template>
+                                                <template slot="title">
+                                                    <span class="text" :title="$t('app.menus.index.' + item2.name)">{{$t('app.menus.index.' + item2.name)}}</span>
+                                                    <template v-if="counterdata && counterdata[item2.counterid] && counterdata[item2.counterid] > 0">
+                                                        <span class="pull-right">
+                                                            <badge :count="counterdata[item2.counterid]" :overflow-count="9999"></badge>
+                                                        </span>
+                                                    </template>
+                                                </template>
+                                            </el-menu-item>
+                                        </template>
+                                    </template>
+                                </el-submenu>
+                            </template>
+                            <template v-else>
+                                <template v-if="item1.type =='MENUITEM'">
+                                    <el-menu-item v-show="!item1.hidden" :index="item1.name" :key="item1.id" :class="item1.textcls">
+                                        <template v-if="item1.icon && item1.icon != ''">
+                                            <img :src="item1.icon" class='app-menu-icon' />
+                                        </template>
+                                        <template v-else-if="item1.iconcls && item1.iconcls != ''">
+                                            <i :class="[item1.iconcls, 'app-menu-icon']"></i>
+                                        </template>
+                                        <template slot="title">
+                                            <span class="text" :title="$t('app.menus.index.' + item1.name)">{{$t('app.menus.index.' + item1.name)}} </span>
+                                            <template v-if="counterdata && counterdata[item1.counterid] && counterdata[item1.counterid] > 0">
+                                                <span class="pull-right">
+                                                    <badge :count="counterdata[item1.counterid]" :overflow-count="9999"></badge>
+                                                </span>
+                                            </template>
+                                        </template>
+                                    </el-menu-item>
+                                </template>
+                            </template>
+                        </template>
+                    </el-submenu>
+                </template>
+                <template v-else>
+                    <template v-if="item0.type =='MENUITEM'">
+                        <el-menu-item v-show="!item0.hidden" :index="item0.name" :key="item0.id" :class="item0.textcls">
+                            <template v-if="item0.icon && item0.icon != ''">
+                                <img :src="item0.icon" class='app-menu-icon' />
+                            </template>
+                            <template v-else-if="item0.iconcls && item0.iconcls != ''">
+                                <i :class="[item0.iconcls, 'app-menu-icon']"></i>
+                            </template>
+                            <template v-else>
+                                <i class='fa fa-cogs app-menu-icon'></i>
+                            </template>
+                            <template slot="title">
+                                <span class="text" :title="$t('app.menus.index.' + item0.name)">{{$t('app.menus.index.' + item0.name)}}</span>
+                                <template v-if="counterdata && counterdata[item0.counterid] && counterdata[item0.counterid] > 0">
+                                    <span class="pull-right">
+                                        <badge :count="counterdata[item0.counterid]" :overflow-count="9999"></badge>
+                                    </span>
+                                </template>
+                            </template>
+                        </el-menu-item>
+                    </template>
+                </template>
+            </template>   
+        </template> 
+        <app-menu-item v-else :isCollapse="isCollapse" :menus="menus" :ctrlName="'index'" :isFirst="true" :counterdata="counterdata" :popper-class="popperClass"></app-menu-item>
     </el-menu>
 </div>
 </template>
@@ -406,6 +504,9 @@ export default class IndexBase extends Vue implements ControlInterface {
                 navDataService.removeNavData(this.viewtag);
             }
             switch (item.appfunctag) {
+                case 'Auto9': 
+                    this.clickAuto9(item);
+                    return;
                 case 'Auto12': 
                     this.clickAuto12(item);
                     return;
@@ -415,41 +516,38 @@ export default class IndexBase extends Vue implements ControlInterface {
                 case 'Auto5': 
                     this.clickAuto5(item);
                     return;
-                case 'Auto9': 
-                    this.clickAuto9(item);
-                    return;
-                case 'Auto10': 
-                    this.clickAuto10(item);
-                    return;
-                case 'Auto6': 
-                    this.clickAuto6(item);
-                    return;
-                case 'Auto2': 
-                    this.clickAuto2(item);
-                    return;
-                case 'Auto11': 
-                    this.clickAuto11(item);
-                    return;
-                case 'Auto8': 
-                    this.clickAuto8(item);
-                    return;
-                case 'Auto15': 
-                    this.clickAuto15(item);
+                case 'Auto14': 
+                    this.clickAuto14(item);
                     return;
                 case 'Auto16': 
                     this.clickAuto16(item);
                     return;
+                case 'Auto2': 
+                    this.clickAuto2(item);
+                    return;
+                case 'Auto10': 
+                    this.clickAuto10(item);
+                    return;
+                case 'Auto15': 
+                    this.clickAuto15(item);
+                    return;
+                case 'Auto6': 
+                    this.clickAuto6(item);
+                    return;
+                case 'Auto8': 
+                    this.clickAuto8(item);
+                    return;
                 case 'Auto13': 
                     this.clickAuto13(item);
                     return;
-                case 'Auto14': 
-                    this.clickAuto14(item);
-                    return;
-                case 'Auto7': 
-                    this.clickAuto7(item);
+                case 'Auto11': 
+                    this.clickAuto11(item);
                     return;
                 case 'Auto1': 
                     this.clickAuto1(item);
+                    return;
+                case 'Auto7': 
+                    this.clickAuto7(item);
                     return;
                 case 'Auto4': 
                     this.clickAuto4(item);
@@ -460,6 +558,29 @@ export default class IndexBase extends Vue implements ControlInterface {
         }
     }
 
+    
+    /**
+     * 组管理
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAuto9(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'ibzteams', parameterName: 'ibzteam' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
     
     /**
      * 任务
@@ -531,155 +652,17 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 组管理
+     * 任务日志
      *
      * @param {*} [item={}]
      * @memberof Index
      */
-    public clickAuto9(item: any = {}) {
+    public clickAuto14(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'ibzteams', parameterName: 'ibzteam' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 字典管理
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAuto10(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 认证日志
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAuto6(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 部门管理
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAuto2(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-            { pathName: 'treeexpview', parameterName: 'treeexpview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 任务注册
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAuto11(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 流程定义
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAuto8(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 接入应用
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAuto15(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'sysapps', parameterName: 'sysapp' },
+            { pathName: 'jobslogs', parameterName: 'jobslog' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -715,6 +698,121 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
+     * 部门管理
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAuto2(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
+            { pathName: 'treeexpview', parameterName: 'treeexpview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 字典管理
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAuto10(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 接入应用
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAuto15(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysapps', parameterName: 'sysapp' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 认证日志
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAuto6(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 流程定义
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAuto8(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
      * 岗位管理
      *
      * @param {*} [item={}]
@@ -738,17 +836,40 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 任务日志
+     * 任务注册
      *
      * @param {*} [item={}]
      * @memberof Index
      */
-    public clickAuto14(item: any = {}) {
+    public clickAuto11(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'jobslogs', parameterName: 'jobslog' },
+            { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 流程角色
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAuto1(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'wfgroups', parameterName: 'wfgroup' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -773,29 +894,6 @@ export default class IndexBase extends Vue implements ControlInterface {
         const parameters: any[] = [
             { pathName: 'wfremodels', parameterName: 'wfremodel' },
             { pathName: 'editview', parameterName: 'editview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 流程角色
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAuto1(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'wfgroups', parameterName: 'wfgroup' },
-            { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
         if(Object.is(this.$route.fullPath,path)){

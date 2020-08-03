@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysPermissionSearchContext;
 import cn.ibizlab.core.uaa.service.ISysPermissionService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.uaa.client.SysPermissionFeignClient;
@@ -130,6 +131,8 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
     }
 
 
+
 }
+
 
 

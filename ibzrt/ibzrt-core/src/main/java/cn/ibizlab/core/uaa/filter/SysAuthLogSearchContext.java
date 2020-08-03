@@ -46,4 +46,3 @@ public class SysAuthLogSearchContext extends SearchContextBase {
 }
 
 
-

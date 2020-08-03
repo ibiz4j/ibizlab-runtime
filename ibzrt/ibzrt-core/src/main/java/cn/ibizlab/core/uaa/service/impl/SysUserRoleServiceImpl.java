@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysUserRoleSearchContext;
 import cn.ibizlab.core.uaa.service.ISysUserRoleService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.uaa.client.SysUserRoleFeignClient;
@@ -166,6 +167,8 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
     }
 
 
+
 }
+
 
 

@@ -10,8 +10,8 @@
         :filterable="filterable === true ? true : false"
         @on-open-change="onClick"
         :placeholder="$t('components.dropDownListMpicker.placeholder')">
-        <i-option v-for="(item, index) in items" :key="index" :value="item.value.toString()" :label="item.text">
-          <Checkbox :value = "(currentVal.indexOf(item.value.toString()))==-1?false:true">
+        <i-option v-for="(item, index) in items" :key="index" :value="item.value" :label="item.text">
+          <Checkbox :value = "(currentVal.indexOf(item.value))==-1?false:true">
              {{Object.is(codelistType,'STATIC') ? $t('codelist.'+tag+'.'+item.value) : item.text}}
           </Checkbox>
         </i-option>
@@ -155,6 +155,13 @@ export default class DropDownListMpicker extends Vue {
     public items: any[] = [];
 
     /**
+     * 属性类型
+     * @type {string}
+     * @memberof DropDownList
+     */
+    @Prop() public valueType?: string;
+
+    /**
      * 公共参数处理
      *
      * @param {*} arg
@@ -185,7 +192,8 @@ export default class DropDownListMpicker extends Vue {
       if(this.tag && Object.is(this.codelistType,"STATIC")){
           const codelist = this.$store.getters.getCodeList(this.tag);
           if (codelist) {
-              this.items = [...JSON.parse(JSON.stringify(codelist.items))];
+              let items: Array<any> = [...JSON.parse(JSON.stringify(codelist.items))];
+              this.formatCodeList(items);
           } else {
               console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           }
@@ -197,7 +205,8 @@ export default class DropDownListMpicker extends Vue {
           let _context = data.context;
           let _param = data.param;
           this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
-              this.items = res;
+            let items: Array<any> = [...res];
+            this.formatCodeList(items);
           }).catch((error:any) => {
               console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           });
@@ -219,13 +228,51 @@ export default class DropDownListMpicker extends Vue {
             let _context = data.context;
             let _param = data.param;
             this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
-                this.items = res;
+                let items: Array<any> = [...res];
+                this.formatCodeList(items);
             }).catch((error:any) => {
                 console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
             });
         }
     }
 
+    /**
+     * 代码表类型和属性匹配
+     * 
+     * @param {*} items
+     * @memberof DropDownList
+     */
+    public formatCodeList(items: Array<any>){
+        let matching: boolean = true;
+        this.items = [];
+        try{
+            if(this.valueType){
+                items.forEach((item: any)=>{
+                    const type = this.$util.typeOf(item.value);
+                    if(type != this.valueType){
+                        matching = false;
+                        if(type == 'number'){
+                            item.value = item.value.toString();
+                        }else{
+                            if(item.value.indexOf('.') == -1){
+                                item.value = parseInt(item.value);
+                            }else{
+                                item.value = parseFloat(item.value);
+                            }
+                        }
+                    }
+                    this.items.push(item);
+                });
+                if(!matching){
+                    console.warn(`代码表 ${ this.tag } 值类型和属性类型不匹配，已自动强制转换，请修正代码表值类型和属性类型匹配`);
+                }
+            }else{
+                this.items = items;
+            }
+        }catch(error){
+            console.warn('代码表值类型和属性类型不匹配，自动强制转换异常，请修正代码表值类型和属性类型匹配');
+        }
+    }
 }
 </script>
 

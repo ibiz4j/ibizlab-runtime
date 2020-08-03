@@ -268,6 +268,8 @@
                         closable: true
                     });
                 }
+                // 返回登录页
+                this.goLogin();
             });
         }
 

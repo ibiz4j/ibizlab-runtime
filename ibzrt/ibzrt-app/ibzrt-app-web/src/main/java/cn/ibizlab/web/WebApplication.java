@@ -27,7 +27,6 @@ import java.util.List;
 @MapperScan("cn.ibizlab.*.mapper")
 @SpringBootApplication(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
-            org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration.class,
 })
 public class WebApplication extends WebMvcConfigurerAdapter{
 

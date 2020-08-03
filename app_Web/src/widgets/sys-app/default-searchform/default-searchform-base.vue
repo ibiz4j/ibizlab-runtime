@@ -6,7 +6,14 @@
       <row>
                     <i-col v-show="detailsModel.n_appname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 12, offset: 0 }">
               <app-form-item name='n_appname_like' :itemRules="this.rules.n_appname_like" class='' :caption="$t('entities.sysapp.default_searchform.details.n_appname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_appname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_appname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_appname_like.disabled" type='text'  style=""></input-box>
+              <input-box 
+              v-model="data.n_appname_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_appname_like.disabled" 
+              type='text' 
+              style="">
+          </input-box>
           
           </app-form-item>
           

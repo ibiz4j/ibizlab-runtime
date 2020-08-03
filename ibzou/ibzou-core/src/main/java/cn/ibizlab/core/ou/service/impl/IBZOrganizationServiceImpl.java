@@ -28,6 +28,7 @@ import cn.ibizlab.core.ou.filter.IBZOrganizationSearchContext;
 import cn.ibizlab.core.ou.service.IIBZOrganizationService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -247,5 +248,6 @@ public class IBZOrganizationServiceImpl extends ServiceImpl<IBZOrganizationMappe
     }
 
 }
+
 
 

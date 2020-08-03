@@ -122,5 +122,13 @@ export default {
 		},
 	},
 	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "Save",
+			tip: "Save",
+		},
+		deuiaction1: {
+			caption: "关闭",
+			tip: "关闭",
+		},
 	},
 };

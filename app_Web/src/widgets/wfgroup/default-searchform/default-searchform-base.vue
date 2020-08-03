@@ -6,7 +6,14 @@
       <row>
                     <i-col v-show="detailsModel.n_groupname_like.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
               <app-form-item name='n_groupname_like' :itemRules="this.rules.n_groupname_like" class='' :caption="$t('entities.wfgroup.default_searchform.details.n_groupname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_groupname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_groupname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_groupname_like.disabled" type='text'  style=""></input-box>
+              <input-box 
+              v-model="data.n_groupname_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_groupname_like.disabled" 
+              type='text' 
+              style="">
+          </input-box>
           
           </app-form-item>
           

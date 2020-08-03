@@ -1034,7 +1034,7 @@ export default class JobsInfoGridViewBase extends Vue {
      * @param {*} [xData]
      * @memberof JobsInfoGridView
      */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+    public opendata(args: any[],fullargs?:any,params?: any, $event?: any, xData?: any) {
         if(!this.viewDefaultUsage){
             if(Object.is(this.navModel,"route")){
                 this.initNavDataWithRoute(this.viewCacheData, false, true);
@@ -1054,6 +1054,9 @@ export default class JobsInfoGridViewBase extends Vue {
             { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
         ];
         const _this: any = this;
+        if(fullargs && fullargs.copymode){
+            Object.assign(data,{copymode:true});
+        }
         const openDrawer = (view: any, data: any) => {
             let container: Subject<any> = this.$appdrawer.openDrawer(view, tempContext, data);
             container.subscribe((result: any) => {

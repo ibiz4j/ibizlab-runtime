@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysUserSearchContext;
 import cn.ibizlab.core.uaa.service.ISysUserService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.uaa.client.SysUserFeignClient;
@@ -130,6 +131,8 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
 
+
 }
+
 
 

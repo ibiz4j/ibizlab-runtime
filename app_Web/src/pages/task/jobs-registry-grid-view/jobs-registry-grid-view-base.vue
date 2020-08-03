@@ -1260,7 +1260,7 @@ export default class JobsRegistryGridViewBase extends Vue {
      * @param {*} [xData]
      * @memberof JobsRegistryGridView
      */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+    public opendata(args: any[],fullargs?:any,params?: any, $event?: any, xData?: any) {
         if(!this.viewDefaultUsage){
             if(Object.is(this.navModel,"route")){
                 this.initNavDataWithRoute(this.viewCacheData, false, true);
@@ -1280,6 +1280,9 @@ export default class JobsRegistryGridViewBase extends Vue {
             { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
         ];
         const _this: any = this;
+        if(fullargs && fullargs.copymode){
+            Object.assign(data,{copymode:true});
+        }
         const openDrawer = (view: any, data: any) => {
             let container: Subject<any> = this.$appdrawer.openDrawer(view, tempContext, data);
             container.subscribe((result: any) => {
@@ -1391,20 +1394,16 @@ export default class JobsRegistryGridViewBase extends Vue {
             return;
         }
         const _this: any = this;
-        if (_this.newdata && _this.newdata instanceof Function) {
-            const data: any = {};
+        if (_this.opendata && _this.opendata instanceof Function) {
+            const data: any = { };
             if (args.length > 0) {
-                Object.assign(data, { srfsourcekey: args[0].srfkey })
-                actionContext.$store.commit('addCopyData', { srfkey: args[0].srfkey, copyData: args[0] });
+                Object.assign(data, { jobsregistry: args[0].jobsregistry });
             }
-            _this.newdata([{ ...data }],[{ ...data }],params, $event, xData);
-        } else if (xData && xData.copy instanceof Function) {
-            if (args.length > 0) {
-                actionContext.$store.commit('addCopyData', { srfkey: args[0].srfkey, copyData: args[0] });
-            }
-            xData.copy(args[0].srfkey);
+            if(!params) params = {};
+            Object.assign(params,{copymode:true});
+            _this.opendata([{ ...data }], params, $event, xData);
         } else {
-            _this.$Notice.error({ title: '错误', desc: 'opendata 视图处理逻辑不存在，请添加!' });
+            Object.assign(this.viewparams,{copymode:true});
         }
     }
     /**

@@ -28,6 +28,7 @@ import cn.ibizlab.core.ou.filter.IBZOrganizationSearchContext;
 import cn.ibizlab.core.ou.service.IIBZOrganizationService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.ou.client.IBZOrganizationFeignClient;
@@ -151,6 +152,8 @@ public class IBZOrganizationServiceImpl implements IIBZOrganizationService {
     }
 
 
+
 }
+
 
 

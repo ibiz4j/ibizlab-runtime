@@ -42,4 +42,3 @@ public class WFMemberSearchContext extends SearchContextBase {
 }
 
 
-

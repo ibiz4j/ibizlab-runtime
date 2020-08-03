@@ -28,6 +28,7 @@ import cn.ibizlab.core.ou.filter.IBZPostSearchContext;
 import cn.ibizlab.core.ou.service.IIBZPostService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -192,5 +193,6 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
 
 
 }
+
 
 

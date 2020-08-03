@@ -30,4 +30,3 @@ public class WFSystemSearchContext extends SearchContextBase {
 }
 
 
-

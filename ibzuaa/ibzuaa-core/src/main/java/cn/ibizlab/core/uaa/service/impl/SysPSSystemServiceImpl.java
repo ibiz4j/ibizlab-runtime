@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -125,9 +126,7 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(SysPSSystem et) {
         if (null == et) {
             return false;
@@ -206,5 +205,6 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
 
 
 }
+
 
 

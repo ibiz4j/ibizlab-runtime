@@ -36,7 +36,6 @@ public class AuthenticationResource
     private AuthTokenUtil jwtTokenUtil;
 
     @Autowired
-    @Qualifier("userService")
     private AuthenticationUserService userDetailsService;
 
     @Autowired

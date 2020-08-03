@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFProcessDefinitionSearchContext;
 import cn.ibizlab.core.workflow.service.IWFProcessDefinitionService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.workflow.client.WFProcessDefinitionFeignClient;
@@ -130,6 +131,8 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
     }
 
 
+
 }
+
 
 

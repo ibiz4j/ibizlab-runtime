@@ -35,28 +35,56 @@
 </i-col>
 <i-col v-show="detailsModel.val.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='val' :itemRules="this.rules().val" class='' :caption="$t('entities.dictoption.main_form.details.val')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.val.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.val"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.val.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.val"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.val.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.label.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='label' :itemRules="this.rules().label" class='' :caption="$t('entities.dictoption.main_form.details.label')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.label.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.label"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.label.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.label"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.label.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.pval.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='pval' :itemRules="this.rules().pval" class='' :caption="$t('entities.dictoption.main_form.details.pval')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pval.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.pval"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.pval.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.pval"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.pval.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.showorder.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='showorder' :itemRules="this.rules().showorder" class='' :caption="$t('entities.dictoption.main_form.details.showorder')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.showorder.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.showorder"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.showorder.disabled" type='number'  style=""></input-box>
+    <input-box 
+    v-model="data.showorder"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.showorder.disabled" 
+    type='number' 
+    style="">
+</input-box>
 
 </app-form-item>
 
@@ -103,21 +131,42 @@
 </i-col>
 <i-col v-show="detailsModel.vfilter.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 24, offset: 0 }" :lg="{ span: 24, offset: 0 }" :xl="{ span: 24, offset: 0 }">
     <app-form-item name='vfilter' :itemRules="this.rules().vfilter" class='' :caption="$t('entities.dictoption.main_form.details.vfilter')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.vfilter.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.vfilter"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.vfilter.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.vfilter"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.vfilter.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.iconcls.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='iconcls' :itemRules="this.rules().iconcls" class='' :caption="$t('entities.dictoption.main_form.details.iconcls')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.iconcls.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.iconcls"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.iconcls.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.iconcls"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.iconcls.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.cls.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='cls' :itemRules="this.rules().cls" class='' :caption="$t('entities.dictoption.main_form.details.cls')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.cls.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.cls"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.cls.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.cls"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.cls.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
@@ -674,31 +723,62 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string }} { name }
      * @memberof MainBase
      */
-    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
-        let falg = {isPast:true,infoMessage:""};
+    public verifyDeRules(name:string,rule:any = this.deRules,op:string = "AND") :{isPast:boolean,infoMessage:string}{
+        let falg:any = {infoMessage:""};
         if(!rule[name]){
             return falg;
         }
-        rule[name].forEach((item:any) => {
-            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
-                falg.isPast = false;
-                falg.infoMessage = item.ruleInfo;
-            }
-            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
-                falg.isPast = false;
-                falg.infoMessage = item.ruleInfo;
-            }
-            if(item.type == 'STRINGLENGTH' ){
-                let valueLength :number = this.data[name]?this.data[name].length:0;
-                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
-                    falg.isPast = false;
-                    falg.infoMessage = item.ruleInfo;
+        let opValue = op == 'AND'? true :false;
+        let startOp = (val:boolean)=>{
+            if(falg.isPast){
+                if(opValue){
+                    falg.isPast = falg && val;
+                }else{
+                    falg.isPast = falg || val;
                 }
+            }else{
+                falg.isPast = val;
             }
+        }
+        rule[name].forEach((item:any) => {
+            let dataValue = item.deName?this.data[this.service.getItemNameByDeName(item.deName)]:"";
+            // 常规规则
+            if(item.type == 'SIMPLE'){
+                startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,{},item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 数值范围
+            if(item.type == 'VALUERANGE2'){
+                startOp( !this.$verify.checkFieldValueRangeRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 正则式
+            if (item.type == "REGEX") {
+                startOp(!this.$verify.checkFieldRegExRule(dataValue,item.regExCode,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 长度
+            if (item.type == "STRINGLENGTH") {
+                startOp(!this.$verify.checkFieldStringLengthRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 系统值规则
+            if(item.type == "SYSVALUERULE") {
+                startOp(!this.$verify.checkFieldSysValueRule(dataValue,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 分组
             if(item.type == 'GROUP'){
                 falg = this.verifyDeRules('group',item)
+                if(item.isNotMode){
+                   falg.isPast = !falg.isPast;
+                }
             }
+            
         });
+        if(!falg.hasOwnProperty("isPast")){
+            falg.isPast = true;
+        }
         return falg;
     }
 
@@ -1277,6 +1357,17 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 编辑器行为触发
+     *
+     * @param {*} arg
+     * @returns {void}
+     * @memberof MainBase
+     */
+    public onFormItemActionClick(arg:any){
+        if(arg && (arg instanceof Function)) arg();
+    }
+
+    /**
      * 设置数据项值
      *
      * @param {string} name
@@ -1652,6 +1743,9 @@ export default class MainBase extends Vue implements ControlInterface {
                 return;
             }
             Object.assign(arg,{viewparams:this.viewparams});
+            if(this.viewparams && this.viewparams.copymode){
+                data.srfuf = '0';
+            }
             const post: Promise<any> = Object.is(data.srfuf, '1')?this.service.update(action, JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator):this.service.add(action,JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator);
             post.then((response: any) => {
                 if (!response.status || response.status !== 200) {
@@ -1660,7 +1754,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     }
                     return;
                 }
-
+                this.viewparams.copymode = false;
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
@@ -1747,6 +1841,8 @@ export default class MainBase extends Vue implements ControlInterface {
             const post: Promise<any> = _this.save({},false);
             post.then((response:any) =>{
                 const arg:any = response.data;
+                // 准备工作流数据,填充未存库数据
+                Object.assign(arg,this.getData());
                 if(this.viewparams){
                     Object.assign(arg,{viewparams:this.viewparams});
                 }
@@ -1815,6 +1911,8 @@ export default class MainBase extends Vue implements ControlInterface {
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: arg });
                 });
+                // 准备工作流数据,填充未存库数据
+                Object.assign(arg,this.getData());
                 // 准备提交参数
                 if(this.viewparams){
                     Object.assign(arg,{viewparams:this.viewparams});

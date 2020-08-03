@@ -28,6 +28,7 @@ import cn.ibizlab.core.ou.filter.IBZPostSearchContext;
 import cn.ibizlab.core.ou.service.IIBZPostService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.ou.client.IBZPostFeignClient;
@@ -133,6 +134,8 @@ public class IBZPostServiceImpl implements IIBZPostService {
     }
 
 
+
 }
+
 
 

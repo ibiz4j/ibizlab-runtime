@@ -36,6 +36,12 @@ export default class DefaultModel {
       {
         name: 'updatedate',
       },
+      {
+        name: 'createman',
+      },
+      {
+        name: 'updateman',
+      },
     ]
   }
 

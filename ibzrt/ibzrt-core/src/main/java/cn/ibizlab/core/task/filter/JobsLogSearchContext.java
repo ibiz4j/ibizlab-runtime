@@ -34,4 +34,3 @@ public class JobsLogSearchContext extends SearchContextBase {
 }
 
 
-

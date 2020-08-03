@@ -695,7 +695,7 @@ export default class SysAuthLogGridViewBase extends Vue {
      * @param {*} [xData]
      * @memberof SysAuthLogGridView
      */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+    public opendata(args: any[],fullargs?:any,params?: any, $event?: any, xData?: any) {
         if(!this.viewDefaultUsage){
             if(Object.is(this.navModel,"route")){
                 this.initNavDataWithRoute(this.viewCacheData, false, true);

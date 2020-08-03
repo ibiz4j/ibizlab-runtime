@@ -52,7 +52,7 @@ export class UIActionTool {
                     return;
                 }
                 let value: string | null = _params[name];
-                if (value && value.startsWith('%') && value.endsWith('%')) {
+                if (value && typeof(value) === 'string' && value.startsWith('%') && value.endsWith('%')) {
                     const key = value.substring(1, value.length - 1);
                     if (arg && arg.hasOwnProperty(key)) {
                         value = (arg[key] !== null && arg[key] !== undefined) ? arg[key] : null;
@@ -76,7 +76,7 @@ export class UIActionTool {
                 }
                 let value: string | null = _params[name];
                 let values: any[] = [];
-                if (value && value.startsWith('%') && value.endsWith('%')) {
+                if (value && typeof(value) === 'string'  && value.startsWith('%') && value.endsWith('%')) {
                     const key = value.substring(1, value.length - 1);
                     args.forEach((arg: any) => {
                         if (arg && arg.hasOwnProperty(key)) {

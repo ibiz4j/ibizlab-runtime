@@ -123,6 +123,12 @@ export default class DropDownListDynamic extends Vue {
      */
     @Prop() public placeholder?: string;
 
+    /**
+     * 属性类型
+     * @type {string}
+     * @memberof DropDownList
+     */
+    @Prop() public valueType?: string;
 
     /**
      * 计算属性(当前值)
@@ -199,9 +205,10 @@ export default class DropDownListDynamic extends Vue {
       if(this.tag && Object.is(this.codelistType,"STATIC")){
           const codelist = this.$store.getters.getCodeList(this.tag);
           if (codelist) {
-              this.items = [...JSON.parse(JSON.stringify(codelist.items))];
+              let items: Array<any> = [...JSON.parse(JSON.stringify(codelist.items))];
+              this.formatCodeList(items);
           } else {
-              console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
+              console.log(`----${this.tag}----代码表不存在`);
           }
       }else if(this.tag && Object.is(this.codelistType,"DYNAMIC")){
           // 公共参数处理
@@ -211,9 +218,10 @@ export default class DropDownListDynamic extends Vue {
           let _context = data.context;
           let _param = data.param;
           this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
-              this.items = res;
+                let items: Array<any> = [...res];
+                this.formatCodeList(items);
           }).catch((error:any) => {
-              console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
+              console.log(`----${this.tag}----代码表不存在`);
           });
       }
     }
@@ -234,14 +242,51 @@ export default class DropDownListDynamic extends Vue {
                 let _context = data.context;
                 let _param = data.param;
                 this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
-                    this.items = res;
+                    let items: Array<any> = [...res];
+                    this.formatCodeList(items);
                 }).catch((error:any) => {
-                    console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
+                    console.log(`----${this.tag}----代码表不存在`);
                 });
             }
         }
     }
-
+    /**
+     * 代码表类型和属性匹配
+     * 
+     * @param {*} items
+     * @memberof DropDownList
+     */
+    public formatCodeList(items: Array<any>){
+        let matching: boolean = true;
+        this.items = [];
+        try{
+            if(this.valueType){
+                items.forEach((item: any)=>{
+                    const type = this.$util.typeOf(item.value);
+                    if(type != this.valueType){
+                        matching = false;
+                        if(type == 'number'){
+                            item.value = item.value.toString();
+                        }else{
+                            if(item.value.indexOf('.') == -1){
+                                item.value = parseInt(item.value);
+                            }else{
+                                item.value = parseFloat(item.value);
+                            }
+                        }
+                    }
+                    this.items.push(item);
+                });
+                if(!matching){
+                    console.warn(`代码表 ${ this.tag } 值类型和属性类型不匹配，已自动强制转换，请修正代码表值类型和属性类型匹配`);
+                }
+            }else{
+                this.items = items;
+            }
+        }catch(error){
+            console.warn('代码表值类型和属性类型不匹配，自动强制转换异常，请修正代码表值类型和属性类型匹配');
+        }
+    }
 }
 </script>
 

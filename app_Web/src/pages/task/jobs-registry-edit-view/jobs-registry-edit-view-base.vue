@@ -6,6 +6,20 @@
 <div slot='title' class="header-container">
     <span class='caption-info'>{{$t(model.srfTitle)}}</span>
     <div class='toolbar-container'>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
+                    <i class='fa fa-save'></i>
+                    <span class='caption'>{{$t('entities.jobsregistry.editviewtoolbar_toolbar.tbitem3.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.jobsregistry.editviewtoolbar_toolbar.tbitem3.tip')}}</div>
+        </tooltip>
+        <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
+                    <i class='fa fa-sign-out'></i>
+                    <span class='caption'>{{$t('entities.jobsregistry.editviewtoolbar_toolbar.deuiaction1.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.jobsregistry.editviewtoolbar_toolbar.deuiaction1.tip')}}</div>
+        </tooltip>
     </div>
 </div>
 
@@ -248,6 +262,10 @@ export default class JobsRegistryEditViewBase extends Vue {
      * @memberof JobsRegistryEditView
      */
     public toolBarModels: any = {
+        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+
+        deuiaction1: { name: 'deuiaction1', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
+
     };
 
 
@@ -538,6 +556,23 @@ export default class JobsRegistryEditViewBase extends Vue {
 
 
     /**
+     * toolbar 部件 click 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof JobsRegistryEditViewBase
+     */
+    public toolbar_click($event: any, $event2?: any) {
+        if (Object.is($event.tag, 'tbitem3')) {
+            this.toolbar_tbitem3_click(null, '', $event2);
+        }
+        if (Object.is($event.tag, 'deuiaction1')) {
+            this.toolbar_deuiaction1_click(null, '', $event2);
+        }
+    }
+
+
+    /**
      * form 部件 save 事件
      *
      * @param {*} [args={}]
@@ -573,6 +608,106 @@ export default class JobsRegistryEditViewBase extends Vue {
     }
 
 
+
+    /**
+     * 逻辑事件
+     *
+     * @param {*} [params={}]
+     * @param {*} [tag]
+     * @param {*} [$event]
+     * @memberof 
+     */
+    public toolbar_tbitem3_click(params: any = {}, tag?: any, $event?: any) {
+        // 参数
+        // 取数
+        let datas: any[] = [];
+        let xData: any = null;
+        // _this 指向容器对象
+        const _this: any = this;
+        let paramJO:any = {};
+        let contextJO:any = {};
+        xData = this.$refs.form;
+        if (xData.getDatas && xData.getDatas instanceof Function) {
+            datas = [...xData.getDatas()];
+        }
+        if(params){
+          datas = [params];
+        }
+        // 界面行为
+        this.Save(datas, contextJO,paramJO,  $event, xData,this,"JobsRegistry");
+    }
+
+    /**
+     * 逻辑事件
+     *
+     * @param {*} [params={}]
+     * @param {*} [tag]
+     * @param {*} [$event]
+     * @memberof 
+     */
+    public toolbar_deuiaction1_click(params: any = {}, tag?: any, $event?: any) {
+        // 参数
+        // 取数
+        let datas: any[] = [];
+        let xData: any = null;
+        // _this 指向容器对象
+        const _this: any = this;
+        let paramJO:any = {};
+        let contextJO:any = {};
+        xData = this.$refs.form;
+        if (xData.getDatas && xData.getDatas instanceof Function) {
+            datas = [...xData.getDatas()];
+        }
+        if(params){
+          datas = [params];
+        }
+        // 界面行为
+        this.Exit(datas, contextJO,paramJO,  $event, xData,this,"JobsRegistry");
+    }
+
+    /**
+     * 保存
+     *
+     * @param {any[]} args 当前数据
+     * @param {any} contextJO 行为附加上下文
+     * @param {*} [params] 附加参数
+     * @param {*} [$event] 事件源
+     * @param {*} [xData]  执行行为所需当前部件
+     * @param {*} [actionContext]  执行行为上下文
+     * @memberof JobsRegistryEditViewBase
+     */
+    public Save(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+        // 界面行为容器对象 _this
+        const _this: any = this;
+        if (xData && xData.save instanceof Function) {
+            xData.save().then((response: any) => {
+                if (!response || response.status !== 200) {
+                    return;
+                }
+                _this.$emit('viewdataschange', [{ ...response.data }]);
+            });
+        } else if (_this.save && _this.save instanceof Function) {
+            _this.save();
+        }
+    }
+
+    /**
+     * 关闭
+     *
+     * @param {any[]} args 当前数据
+     * @param {any} contextJO 行为附加上下文
+     * @param {*} [params] 附加参数
+     * @param {*} [$event] 事件源
+     * @param {*} [xData]  执行行为所需当前部件
+     * @param {*} [actionContext]  执行行为上下文
+     * @memberof JobsRegistryEditViewBase
+     */
+    public Exit(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+        this.closeView(args);
+        if(window.parent){
+            window.parent.postMessage([{ ...args }],'*');
+        }
+    }
 
 
     /**

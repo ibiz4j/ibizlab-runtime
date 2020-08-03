@@ -28,6 +28,7 @@ import cn.ibizlab.core.ou.filter.IBZDepartmentSearchContext;
 import cn.ibizlab.core.ou.service.IIBZDepartmentService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -179,6 +180,9 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
         this.remove(new QueryWrapper<IBZDepartment>().eq("orgid",orgid));
     }
 
+    @Autowired
+    @Lazy
+    IIBZDepartmentService proxyService;
 	@Override
     public void saveByOrgid(String orgid,List<IBZDepartment> list) {
         if(list==null)
@@ -201,11 +205,11 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
                 _create.add(sub);
         }
         if(_update.size()>0)
-            this.updateBatch(_update);
+            proxyService.updateBatch(_update);
         if(_create.size()>0)
-            this.createBatch(_create);
+            proxyService.createBatch(_create);
         if(delIds.size()>0)
-            this.removeBatch(delIds);
+            proxyService.removeBatch(delIds);
 	}
 
 
@@ -295,5 +299,6 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
     }
 
 }
+
 
 

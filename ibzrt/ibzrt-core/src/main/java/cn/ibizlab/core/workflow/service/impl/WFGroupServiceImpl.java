@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFGroupSearchContext;
 import cn.ibizlab.core.workflow.service.IWFGroupService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.workflow.client.WFGroupFeignClient;
@@ -130,6 +131,8 @@ public class WFGroupServiceImpl implements IWFGroupService {
     }
 
 
+
 }
+
 
 

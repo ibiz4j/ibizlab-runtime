@@ -81,6 +81,22 @@ public class SysRoleDTO extends DTOBase implements Serializable {
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
+    /**
+     * 属性 [CREATEMAN]
+     *
+     */
+    @JSONField(name = "createman")
+    @JsonProperty("createman")
+    private String createman;
+
+    /**
+     * 属性 [UPDATEMAN]
+     *
+     */
+    @JSONField(name = "updateman")
+    @JsonProperty("updateman")
+    private String updateman;
+
 
     /**
      * 设置 [SYS_ROLENAME]

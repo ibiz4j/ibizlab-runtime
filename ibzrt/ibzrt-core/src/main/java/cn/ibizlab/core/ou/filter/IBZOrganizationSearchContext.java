@@ -46,4 +46,3 @@ public class IBZOrganizationSearchContext extends SearchContextBase {
 }
 
 
-

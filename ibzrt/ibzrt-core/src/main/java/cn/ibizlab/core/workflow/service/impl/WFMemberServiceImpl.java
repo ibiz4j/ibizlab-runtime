@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFMemberSearchContext;
 import cn.ibizlab.core.workflow.service.IWFMemberService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.workflow.client.WFMemberFeignClient;
@@ -136,6 +137,9 @@ public class WFMemberServiceImpl implements IWFMemberService {
             this.removeBatch(delIds);
     }
 
+    @Autowired
+    @Lazy
+    IWFMemberService proxyService;
 	@Override
     public void saveByGroupid(String id,List<WFMember> list) {
         if(list==null)
@@ -158,11 +162,11 @@ public class WFMemberServiceImpl implements IWFMemberService {
                 _create.add(sub);
         }
         if(_update.size()>0)
-            this.updateBatch(_update);
+            proxyService.updateBatch(_update);
         if(_create.size()>0)
-            this.createBatch(_create);
+            proxyService.createBatch(_create);
         if(delIds.size()>0)
-            this.removeBatch(delIds);
+            proxyService.removeBatch(delIds);
 	}
 
 	@Override
@@ -195,6 +199,8 @@ public class WFMemberServiceImpl implements IWFMemberService {
     }
 
 
+
 }
+
 
 

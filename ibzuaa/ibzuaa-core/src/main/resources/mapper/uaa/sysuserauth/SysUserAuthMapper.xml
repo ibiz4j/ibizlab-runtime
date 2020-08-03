@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.uaa.mapper.SysUserAuthMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="SysUserAuthResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID` FROM `IBZUSERAUTH` t1  ) t1 where authid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysUserAuthResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  ) t1 where authid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysUserAuthResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  ) t1 where authid=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="SysUserAuthResultMap" type="cn.ibizlab.core.uaa.domain.SysUserAuth" autoMapping="true">
+        <id property="id" column="authid" /><!--主键字段映射-->
+		<result property="userid" column="userid" />
+		<result property="identityType" column="identity_type" />
+            
+		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="user" javaType="cn.ibizlab.core.uaa.domain.SysUser" column="userid" select="cn.ibizlab.core.uaa.mapper.SysUserMapper.selectById" fetchType="lazy"></association>
+    </resultMap>
+
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_USER_AUTH_SYS_USER_USERID] -->
+	 <select id="selectByUserid" resultMap="SysUserAuthResultMap">
+         select t1.* from (
+                <include refid="Default" />
+			 ) t1
+			 where  userid=#{userid}
+     </select>
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.uaa.filter.SysUserAuthSearchContext"  resultMap="SysUserAuthResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+		<![CDATA[ SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID` FROM `IBZUSERAUTH` t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID` FROM `IBZUSERAUTH` t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  
+			]]>
+    </sql>
+</mapper>
+

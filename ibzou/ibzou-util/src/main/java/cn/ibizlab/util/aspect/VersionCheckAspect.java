@@ -47,14 +47,16 @@ public class VersionCheckAspect
     @Before("execution(* cn.ibizlab.*.rest.*.updateBy*(..)) &&  @annotation(versionCheck)")
     public void BeforeUpdateBy(JoinPoint point, VersionCheck versionCheck){
         Object[] args = point.getArgs();
-        Object id=args[1];
-        Object dto=args[2];
-        if(ObjectUtils.isEmpty(id) || ObjectUtils.isEmpty(dto))
-            return;
-        String versionField=versionCheck.versionfield();
-        if(StringUtils.isEmpty(versionField))
-            return;
-        versionCheck(versionCheck,point.getTarget(),dto,id);
+        if(args.length>=2){
+            Object id=args[args.length-2];
+            Object dto=args[args.length-1];
+            if(ObjectUtils.isEmpty(id) || ObjectUtils.isEmpty(dto))
+                return;
+            String versionField=versionCheck.versionfield();
+            if(StringUtils.isEmpty(versionField))
+                return;
+            versionCheck(versionCheck,point.getTarget(),dto,id);
+        }
     }
 
     private void versionCheck(VersionCheck versionCheck,Object resource,Object dto,Object id ){

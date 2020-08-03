@@ -33,15 +33,15 @@
 	 <select id="selectByPermissionid" resultMap="SysRolePermissionResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  sys_permissionid=#{permissionid}
+			 ) t1
+			 where  sys_permissionid=#{permissionid}
      </select>
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_ROLE_PERMISSION_SYS_ROLE_SYS_ROLEID] -->
 	 <select id="selectByRoleid" resultMap="SysRolePermissionResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  sys_roleid=#{roleid}
+			 ) t1
+			 where  sys_roleid=#{roleid}
      </select>
 
     <!--数据集合[Default]-->

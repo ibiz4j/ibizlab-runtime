@@ -1,6 +1,8 @@
 package cn.ibizlab.api.rest.extensions;
 
+import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.extensions.service.UserQQRegisterService;
+import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
@@ -31,6 +33,8 @@ public class UserQQRegisterResource {
     private UserQQRegisterService userQQRegisterService;
     @Autowired
     private IBZUSERService ibzuserService;
+    @Autowired
+    private ISysUserAuthService sysUserAuthService;
     @Autowired
     private AuthTokenUtil jwtTokenUtil;
     @Autowired
@@ -84,11 +88,12 @@ public class UserQQRegisterResource {
             object.put("nickname", nickname);
         }
 
-        //根据openid查用户
-        List<IBZUSER> ibzusers = ibzuserService.list(Wrappers.<IBZUSER>query().eq("avatar", openid));
+        // 根据openid查用户授权信息
+        List<SysUserAuth> sysUserAuths = sysUserAuthService.list(Wrappers.<SysUserAuth>query().eq("identifier", openid));
         // 该QQ用户注册过账号，登录系统
-        if (ibzusers.size() > 0) {
-            IBZUSER ibzuser = ibzusers.get(0);
+        if (sysUserAuths.size()>0) {
+            SysUserAuth userauth = sysUserAuths.get(0);
+            IBZUSER ibzuser = ibzuserService.getById(userauth.getUserid());
             object.put("ibzuser", ibzuser);
 
             // 生成登录token信息
@@ -142,38 +147,21 @@ public class UserQQRegisterResource {
         if (ibzusers.size() > 0)
             throw new BadRequestAlertException("该用户名已被注册", "UserQQRegisterResource", "");
 
+        // QQ用户注册
         IBZUSER ibzuser = new IBZUSER();
-        if (StringUtils.isEmpty(openid)) {
-            // 通过code获取微信用户信息
-            JSONObject returnObj = userQQRegisterService.requestQQUserByCode(code, qqRedirectUri, qqAppId, qqAppKey);
-            if (!StringUtils.isEmpty(returnObj)) {
-                if (returnObj.containsKey("openid")) {
-                    // 微信注册
-                    String uuid = UUID.randomUUID().toString();
-                    ibzuser.setPassword(password);
-                    ibzuser.setLoginname(loginname);
-                    ibzuser.setUserid("tencent-" + uuid);
-                    ibzuser.setPersonname(returnObj.getString("nickname"));
-                    ibzuser.setNickname(returnObj.getString("nickname"));
-                    ibzuser.setAvatar(returnObj.getString("openid"));
-                    userQQRegisterService.toRegister(ibzuser);
-                } else {
-                    throw new BadRequestAlertException("获取QQ授权用户相关信息失败!", "UserQQRegisterResource", "");
-                }
-            } else {
-                throw new BadRequestAlertException("获取QQ授权用户相关信息失败!", "UserQQRegisterResource", "");
-            }
-        } else {
-            // 已经有微信用户信息直接注册
-            String uuid = UUID.randomUUID().toString();
-            ibzuser.setPassword(password);
-            ibzuser.setLoginname(loginname);
-            ibzuser.setUserid("tencent-" + uuid);
-            ibzuser.setPersonname(nickname);
-            ibzuser.setNickname(nickname);
-            ibzuser.setAvatar(openid);
-            userQQRegisterService.toRegister(ibzuser);
-        }
+        String uuid = UUID.randomUUID().toString();
+        ibzuser.setPassword(password);
+        ibzuser.setLoginname(loginname);
+        ibzuser.setUserid("qq-" + uuid);
+        ibzuser.setPersonname(nickname);
+        ibzuser.setNickname(nickname);
+        userQQRegisterService.toRegister(ibzuser);
+        // 创建QQ用户授权信息
+        SysUserAuth userAuth = new SysUserAuth();
+        userAuth.setUserid(ibzuser.getUserid());
+        userAuth.setIdentifier(openid);
+        userAuth.setIdentityType("qq");
+        userQQRegisterService.toCreateUserAuth(userAuth);
 
         // 注册成功，登录系统
         if (!StringUtils.isEmpty(ibzuser)) {

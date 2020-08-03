@@ -28,6 +28,7 @@ import cn.ibizlab.core.ou.filter.IBZTeamMemberSearchContext;
 import cn.ibizlab.core.ou.service.IIBZTeamMemberService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -265,5 +266,6 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
 
 
 }
+
 
 

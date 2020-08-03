@@ -28,6 +28,7 @@ import cn.ibizlab.core.task.filter.JobsLockSearchContext;
 import cn.ibizlab.core.task.service.IJobsLockService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.task.client.JobsLockFeignClient;
@@ -130,6 +131,8 @@ public class JobsLockServiceImpl implements IJobsLockService {
     }
 
 
+
 }
+
 
 

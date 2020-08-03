@@ -4,6 +4,15 @@
 <mapper	namespace="cn.ibizlab.core.uaa.mapper.SysRoleMapper">
 
     <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="SysRoleResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`CREATEDATE`, t1.`CREATEMAN`, t1.`MEMO`, t1.`PROLEID`, t11.`SYS_ROLENAME` AS `PROLENAME`, t1.`SYS_ROLEID`, t1.`SYS_ROLENAME`, t1.`UPDATEDATE`, t1.`UPDATEMAN` FROM `IBZROLE` t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  ) t1 where sys_roleid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysRoleResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  ) t1 where sys_roleid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysRoleResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  ) t1 where sys_roleid=#{id}]]>
+    </select>
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="SysRoleResultMap" type="cn.ibizlab.core.uaa.domain.SysRole" autoMapping="true">
@@ -20,8 +29,8 @@
 	 <select id="selectByProleid" resultMap="SysRoleResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  proleid=#{roleid}
+			 ) t1
+			 where  proleid=#{roleid}
      </select>
 
     <!--数据集合[Default]-->
@@ -35,17 +44,32 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`MEMO`, t1.`PROLEID`, t11.`SYS_ROLENAME` AS `PROLENAME`, t1.`SYS_ROLEID`, t1.`SYS_ROLENAME`, t1.`UPDATEDATE` FROM `IBZROLE` t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`CREATEMAN`, t1.`MEMO`, t1.`PROLEID`, t11.`SYS_ROLENAME` AS `PROLENAME`, t1.`SYS_ROLEID`, t1.`SYS_ROLENAME`, t1.`UPDATEDATE`, t1.`UPDATEMAN` FROM `IBZROLE` t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="oracle">
-		<![CDATA[ SELECT t1.CREATEDATE, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
-		<![CDATA[ SELECT t1.CREATEDATE, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`CREATEMAN`, t1.`MEMO`, t1.`PROLEID`, t11.`SYS_ROLENAME` AS `PROLENAME`, t1.`SYS_ROLEID`, t1.`SYS_ROLENAME`, t1.`UPDATEDATE`, t1.`UPDATEMAN` FROM `IBZROLE` t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
 			]]>
     </sql>
 </mapper>

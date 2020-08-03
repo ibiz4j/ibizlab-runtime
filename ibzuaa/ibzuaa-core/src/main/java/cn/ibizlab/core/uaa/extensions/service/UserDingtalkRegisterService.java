@@ -1,5 +1,7 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
+import cn.ibizlab.core.uaa.domain.SysUserAuth;
+import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.service.IBZUSERService;
@@ -33,7 +35,8 @@ public class UserDingtalkRegisterService {
 
     @Autowired
     private IBZUSERService ibzuserService;
-
+    @Autowired
+    private ISysUserAuthService sysUserAuthService;
 
     /**
      * 注册
@@ -45,6 +48,18 @@ public class UserDingtalkRegisterService {
         boolean flag = ibzuserService.save(ibzuser);
         if (!flag) {
             throw new BadRequestAlertException("注册失败","UserDingtalkRegisterService","");
+        }
+    }
+
+    /**
+     * 创建钉钉用户授权信息
+     * @param userAuth
+     */
+    public void toCreateUserAuth(SysUserAuth userAuth) {
+        // 创建用户授权信息
+        boolean flag = sysUserAuthService.create(userAuth);
+        if (!flag) {
+            throw new BadRequestAlertException("保存用户授权信息失败", "UserDingtalkRegisterService", "");
         }
     }
 
@@ -72,7 +87,7 @@ public class UserDingtalkRegisterService {
 
             // 通过临时授权码Code获取用户信息，临时授权码只能使用一次
             String url = "https://oapi.dingtalk.com/sns/getuserinfo_bycode?accessKey=" + dingTalkAppId
-                    + "&timestamp=" + String.valueOf(currentTimeMillis)
+                    + "&timestamp=" + currentTimeMillis
                     + "&signature=" + urlEncodeSignature;
 
             // 创建httpclient对象

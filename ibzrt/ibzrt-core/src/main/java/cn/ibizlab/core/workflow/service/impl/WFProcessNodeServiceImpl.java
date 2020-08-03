@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFProcessNodeSearchContext;
 import cn.ibizlab.core.workflow.service.IWFProcessNodeService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.workflow.client.WFProcessNodeFeignClient;
@@ -130,6 +131,8 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     }
 
 
+
 }
+
 
 

@@ -82,6 +82,14 @@ export default {
 		},
 	},
 	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "保存",
+			tip: "保存",
+		},
+		deuiaction1: {
+			caption: "关闭",
+			tip: "关闭",
+		},
 	},
 	gridviewtoolbar_toolbar: {
 		deuiaction1: {

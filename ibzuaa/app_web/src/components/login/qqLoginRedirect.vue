@@ -272,63 +272,11 @@
                         closable: true
                     });
                 }
+                // 返回登录页
+                this.goLogin();
             });
         }
 
-        /**
-         * 自动登录倒计时
-         */
-        public countDown(totalTime: any): void {
-            if (!this.canClick) return;
-            this.canClick = false;
-            this.BtnContent = totalTime + 's后自动登录';
-            // 设置定时器
-            let clock = window.setInterval(() => {
-                // 秒数-1
-                totalTime--;
-                this.BtnContent = totalTime + 's后自动登录';
-                if (totalTime < 0) {
-                    // 清除定时器
-                    window.clearInterval(clock);
-                    // 登录请求
-                    const loginname: any = this.form.loginname;
-                    const password: any = this.form.password;
-                    const post: Promise<any> = this.$http.post('v7/login', this.form, true);
-                    post.then((response: any) => {
-                        if (response && response.status === 200) {
-                            const data = response.data;
-                            if (data && data.token) {
-                                localStorage.setItem('token', data.token);
-                            }
-                            if (data && data.user) {
-                                localStorage.setItem('user', JSON.stringify(data.user));
-                            }
-                            // 设置cookie,保存账号密码7天
-                            this.setCookie(loginname, password, 7);
-                            // 跳转首页
-                            const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
-                            this.$router.push({path: url});
-                        }
-                    }).catch((error: any) => {
-                        const data = error.data;
-                        if (data && data.detail) {
-                            this.$Message.error({
-                                content: "登录失败，" + data.detail,
-                                duration: 3,
-                                closable: true
-                            });
-                        } else {
-                            this.$Message.error({
-                                content: "登录失败",
-                                duration: 3,
-                                closable: true
-                            });
-                        }
-                    });
-
-                }
-            }, 1000)
-        }
 
 
         /**

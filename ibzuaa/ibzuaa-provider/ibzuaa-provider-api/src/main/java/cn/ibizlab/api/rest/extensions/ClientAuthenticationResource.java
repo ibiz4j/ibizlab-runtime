@@ -47,7 +47,7 @@ public class ClientAuthenticationResource
     private AuthTokenUtil jwtTokenUtil;
 
     @Autowired
-    @Qualifier("UAAUserService")
+//    @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
 
     @Autowired

@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysAuthLogSearchContext;
 import cn.ibizlab.core.uaa.service.ISysAuthLogService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.uaa.client.SysAuthLogFeignClient;
@@ -130,6 +131,8 @@ public class SysAuthLogServiceImpl implements ISysAuthLogService {
     }
 
 
+
 }
+
 
 

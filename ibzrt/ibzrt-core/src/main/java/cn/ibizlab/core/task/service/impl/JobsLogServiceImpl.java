@@ -28,6 +28,7 @@ import cn.ibizlab.core.task.filter.JobsLogSearchContext;
 import cn.ibizlab.core.task.service.IJobsLogService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.task.client.JobsLogFeignClient;
@@ -130,6 +131,8 @@ public class JobsLogServiceImpl implements IJobsLogService {
     }
 
 
+
 }
+
 
 

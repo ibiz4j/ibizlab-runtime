@@ -83,7 +83,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	resourcetag: '',
 },
 		{
-	id: '82D1195C-F432-4A14-89B6-5160A37BA079',
+	id: '16cb3dfc2d881822f50d40deac4ab40c',
 	name: 'menuitem12',
 	text: '岗位管理',
 	type: 'MENUITEM',
@@ -101,7 +101,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	resourcetag: '',
 },
 		{
-	id: 'B36FBF11-A3AC-4778-87E3-336697896302',
+	id: '38886fcfd4b7c5c9f41e096d5824bb3e',
 	name: 'menuitem13',
 	text: '组管理',
 	type: 'MENUITEM',
@@ -175,7 +175,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	resourcetag: '',
 },
 		{
-	id: 'C40A209E-B7FA-47F3-8F81-78109D6430B4',
+	id: 'f0015a0b0a2aa46cb7b099889ccbe700',
 	name: 'menuitem21',
 	text: '接入应用',
 	type: 'MENUITEM',
@@ -269,7 +269,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	],
 },
             {
-	id: '63FF60A2-D212-49EA-AF2D-B8BDB94DEF75',
+	id: 'f5c8fcb77899ed12ec64afbc0cae965e',
 	name: 'menuitem14',
 	text: '任务管理',
 	type: 'MENUITEM',
@@ -287,7 +287,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	resourcetag: '',
 	items: [
 		{
-	id: '461C8EA9-5A62-4807-9D6C-216FDCA74866',
+	id: 'df5482196a70a9cf29da9b857df48767',
 	name: 'menuitem15',
 	text: '注册',
 	type: 'MENUITEM',
@@ -305,7 +305,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	resourcetag: '',
 },
 		{
-	id: 'E3DA2935-6AD1-4B22-99B0-0CEFB6E98D03',
+	id: '6cdd077f2810ff23ba3b4142103a333e',
 	name: 'menuitem16',
 	text: '任务',
 	type: 'MENUITEM',
@@ -323,7 +323,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	resourcetag: '',
 },
 		{
-	id: '7A1F333E-ED1C-4C39-A52E-E32C3FE36F7A',
+	id: '717880940152313ec5c0cf038ed70878',
 	name: 'menuitem17',
 	text: '日志',
 	type: 'MENUITEM',
@@ -343,7 +343,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	],
 },
             {
-	id: 'EB358659-A327-4195-9B88-0ABBED324F1E',
+	id: '50cbe52e6a446930a0af78bfa01fdcc8',
 	name: 'menuitem18',
 	text: '字典管理',
 	type: 'MENUITEM',
@@ -361,7 +361,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	resourcetag: '',
 	items: [
 		{
-	id: '93B39387-4DF9-4B87-B8E6-99B2F0759268',
+	id: '4442771531bc2b45277d0ed13f6b8d57',
 	name: 'menuitem19',
 	text: '目录',
 	type: 'MENUITEM',
@@ -379,7 +379,7 @@ mock.onGet('v7/indexappmenu').reply((config: any) => {
 	resourcetag: '',
 },
 		{
-	id: 'B24E45E8-5D6D-45A3-92D7-19E8EBDF476D',
+	id: '8459e35500245d7166b10ce4230df128',
 	name: 'menuitem20',
 	text: '字典项',
 	type: 'MENUITEM',

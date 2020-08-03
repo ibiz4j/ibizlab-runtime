@@ -59,6 +59,8 @@ public interface ISysRoleService extends IService<SysRole>{
      */
     boolean execute(String sql, Map param);
 
+    List<SysRole> getSysroleByIds(List<String> ids) ;
+    List<SysRole> getSysroleByEntities(List<SysRole> entities) ;
 }
 
 

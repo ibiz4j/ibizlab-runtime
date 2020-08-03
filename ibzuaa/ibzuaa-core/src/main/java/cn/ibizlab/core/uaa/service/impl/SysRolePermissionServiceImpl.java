@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
 import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -129,9 +130,7 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(SysRolePermission et) {
         if (null == et) {
             return false;
@@ -244,5 +243,6 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
 
 
 }
+
 
 

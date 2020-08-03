@@ -28,6 +28,7 @@ import cn.ibizlab.core.uaa.filter.SysUserSearchContext;
 import cn.ibizlab.core.uaa.service.ISysUserService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -44,6 +45,9 @@ import org.springframework.util.StringUtils;
 @Service("SysUserServiceImpl")
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
+    @Autowired
+    @Lazy
+    protected cn.ibizlab.core.uaa.service.ISysUserAuthService sysuserauthService;
     @Autowired
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysUserRoleService sysuserroleService;
@@ -121,9 +125,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(SysUser et) {
         if (null == et) {
             return false;
@@ -205,5 +207,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
 }
+
 
 

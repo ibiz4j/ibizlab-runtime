@@ -4,7 +4,6 @@ import cn.ibizlab.core.ou.extensions.domain.DeptMap;
 import cn.ibizlab.core.ou.extensions.domain.OrgMap;
 import cn.ibizlab.core.ou.extensions.service.OUCoreService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
-import cn.ibizlab.util.client.IBZOUFeignClient;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
@@ -31,6 +30,7 @@ import java.util.*;
 
 @Primary
 @Service
+@ConditionalOnExpression("'${ibiz.auth.service:UAAUserService}'.equals('UAAUserService')")
 public class UserService extends ServiceImpl<IBZUSERMapper, IBZUSER> implements IBZUSERService, AuthenticationUserService {
 
 	@Value("${ibiz.auth.pwencrymode:0}")

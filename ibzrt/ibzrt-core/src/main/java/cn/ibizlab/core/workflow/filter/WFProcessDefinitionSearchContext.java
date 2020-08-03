@@ -32,4 +32,3 @@ public class WFProcessDefinitionSearchContext extends SearchContextBase {
 }
 
 
-

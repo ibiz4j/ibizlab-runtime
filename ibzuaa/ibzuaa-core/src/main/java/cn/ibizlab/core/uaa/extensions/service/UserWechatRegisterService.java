@@ -1,5 +1,7 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
+import cn.ibizlab.core.uaa.domain.SysUserAuth;
+import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.HttpUtils;
@@ -21,7 +23,8 @@ public class UserWechatRegisterService {
 
     @Autowired
     private IBZUSERService ibzuserService;
-
+    @Autowired
+    private ISysUserAuthService sysUserAuthService;
 
     /**
      * 注册
@@ -36,6 +39,18 @@ public class UserWechatRegisterService {
         }
     }
 
+
+    /**
+     * 创建微信用户授权信息
+     * @param userAuth
+     */
+    public void toCreateUserAuth(SysUserAuth userAuth) {
+        // 创建用户授权信息
+        boolean flag = sysUserAuthService.create(userAuth);
+        if (!flag) {
+            throw new BadRequestAlertException("保存用户授权信息失败", "UserWechatRegisterService", "");
+        }
+    }
 
     /**
      * 通过code获取微信用户信息

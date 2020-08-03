@@ -1,14 +1,14 @@
 <template>
-<div class='grid' style="height:100%;">
-      <i-form style="height:100%">
+<div class='grid' style="height:100%">
+      <i-form style="height:100%;display:flex;flex-direction: column;justify-content: space-between">
     <el-table v-if="isDisplay === true"
         :default-sort="{ prop: minorSortPSDEF, order: Object.is(minorSortDir, 'ASC') ? 'ascending' : Object.is(minorSortDir, 'DESC') ? 'descending' : '' }"  
         @sort-change="onSortChange($event)"  
         :border="isDragendCol"
-        :height="isEnablePagingBar && items.length > 0 ? 'calc(100% - 50px)' : '100%'"  
         :highlight-current-row ="isSingleSelect"
         :row-class-name="getRowClassName"
         :cell-class-name="getCellClassName"
+        :height="isEnablePagingBar && items.length > 0 ? 'calc(100% - 50px)' : '100%'"
         @row-click="rowClick($event)"  
         @select-all="selectAll($event)"  
         @select="select($event)"  
@@ -45,6 +45,25 @@
                     </template>
                 </el-table-column>
             </template>
+            <template v-if="getColumnState('prolename')">
+                <el-table-column show-overflow-tooltip :prop="'prolename'" :label="$t('entities.sysrole.main_grid.columns.prolename')" :width="350"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysrole.main_grid.columns.prolename')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <app-column-link deKeyField='sysrole' :context="JSON.parse(JSON.stringify(context))" :viewparams="JSON.parse(JSON.stringify(viewparams))" :data="row" :linkview="{viewname: 'sys-roleredirect-view', height: 0,width: 0,title: $t('entities.sysrole.views.redirectview.title'),placement: '', isRedirectView: true,deResParameters: [
+            ]
+            ,parameters: [
+            { pathName: 'sysroles', parameterName: 'sysrole' },
+            { pathName: 'redirectview', parameterName: 'redirectview' }
+            ]}" valueitem="proleid">
+                            <span>{{row.prolename}}</span>
+                        </app-column-link >
+                    </template>
+                </el-table-column>
+            </template>
             <template v-if="getColumnState('memo')">
                 <el-table-column show-overflow-tooltip :prop="'memo'" :label="$t('entities.sysrole.main_grid.columns.memo')" :width="250"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
@@ -65,7 +84,7 @@
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
-                        <app-format-data format="YYYY-MM-DD hh:mm:ss" :data="row.updatedate"></app-format-data>
+                        <app-format-data format="YYYY-MM-DD HH:mm:ss" :data="row.updatedate"></app-format-data>
                     </template>
                 </el-table-column>
             </template>
@@ -78,25 +97,6 @@
                     </template>
                     <template v-slot="{row,column,$index}">
                         <span>{{row.proleid}}</span>
-                    </template>
-                </el-table-column>
-            </template>
-            <template v-if="getColumnState('prolename')">
-                <el-table-column show-overflow-tooltip :prop="'prolename'" :label="$t('entities.sysrole.main_grid.columns.prolename')" :width="350"  :align="'left'" :sortable="'custom'">
-                    <template v-slot:header="{column}">
-                      <span class="column-header ">
-                        {{$t('entities.sysrole.main_grid.columns.prolename')}}
-                      </span>
-                    </template>
-                    <template v-slot="{row,column,$index}">
-                        <app-column-link deKeyField='sysrole' :context="JSON.parse(JSON.stringify(context))" :viewparams="JSON.parse(JSON.stringify(viewparams))" :data="row" :linkview="{viewname: 'sys-roleredirect-view', height: 0,width: 0,title: $t('entities.sysrole.views.redirectview.title'),placement: '', isRedirectView: true,deResParameters: [
-            ]
-            ,parameters: [
-            { pathName: 'sysroles', parameterName: 'sysrole' },
-            { pathName: 'redirectview', parameterName: 'redirectview' }
-            ]}" valueitem="proleid">
-                            <span>{{row.prolename}}</span>
-                        </app-column-link >
                     </template>
                 </el-table-column>
             </template>
@@ -641,6 +641,14 @@ export default class MainBase extends Vue implements ControlInterface {
             isEnableRowEdit: false,
         },
         {
+            name: 'prolename',
+            label: '父角色名称',
+            langtag: 'entities.sysrole.main_grid.columns.prolename',
+            show: true,
+            util: 'PX',
+            isEnableRowEdit: false,
+        },
+        {
             name: 'memo',
             label: '备注',
             langtag: 'entities.sysrole.main_grid.columns.memo',
@@ -661,14 +669,6 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '父角色标识',
             langtag: 'entities.sysrole.main_grid.columns.proleid',
             show: false,
-            util: 'PX',
-            isEnableRowEdit: false,
-        },
-        {
-            name: 'prolename',
-            label: '父角色名称',
-            langtag: 'entities.sysrole.main_grid.columns.prolename',
-            show: true,
             util: 'PX',
             isEnableRowEdit: false,
         },
@@ -1495,6 +1495,12 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async save(args: any[], params?: any, $event?: any, xData?: any){
         let _this = this;
+        // 拷贝模式
+        if(_this.viewparams && _this.viewparams.copymode && Object.is(_this.viewparams.copymode,'true') && _this.items && _this.items.length >0){
+            for (const item of _this.items) {
+                item.rowDataState = 'create';
+            }
+        }
         if(_this.items && _this.items.length >0){
             for (const item of _this.items) {
                 if(Object.is(item.rowDataState, 'update')){

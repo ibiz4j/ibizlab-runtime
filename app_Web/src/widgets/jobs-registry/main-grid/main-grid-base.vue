@@ -1,11 +1,10 @@
 <template>
-<div class='grid' style="height:100%;">
-      <i-form style="height:100%">
+<div class='grid' style="height:100%">
+      <i-form style="height:100%;display:flex;flex-direction: column;justify-content: space-between">
     <el-table v-if="isDisplay === true"
         :default-sort="{ prop: minorSortPSDEF, order: Object.is(minorSortDir, 'ASC') ? 'ascending' : Object.is(minorSortDir, 'DESC') ? 'descending' : '' }"  
         @sort-change="onSortChange($event)"  
         :border="isDragendCol"
-        :height="isEnablePagingBar && items.length > 0 ? 'calc(100% - 50px)' : '100%'"  
         :highlight-current-row ="isSingleSelect"
         :row-class-name="getRowClassName"
         :cell-class-name="getCellClassName"
@@ -758,7 +757,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 return;
             }
             const data: any = response.data;
-            this.totalrow = response.total;
+            this.totalrow = response.data.length;
             this.items = JSON.parse(JSON.stringify(data));
             // 清空selections,gridItemsModel
             this.selections = [];
@@ -1458,6 +1457,12 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async save(args: any[], params?: any, $event?: any, xData?: any){
         let _this = this;
+        // 拷贝模式
+        if(_this.viewparams && _this.viewparams.copymode && Object.is(_this.viewparams.copymode,'true') && _this.items && _this.items.length >0){
+            for (const item of _this.items) {
+                item.rowDataState = 'create';
+            }
+        }
         if(_this.items && _this.items.length >0){
             for (const item of _this.items) {
                 if(Object.is(item.rowDataState, 'update')){
