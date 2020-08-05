@@ -8,7 +8,105 @@
       :collapse="isCollapse"
       @select="select"
       :default-active="defaultActive">
-        <app-menu-item :menus="menus" :ctrlName="'sdindexview'" :isFirst="true" :counterdata="counterdata" :popperclass="popperClass"></app-menu-item>
+        <template v-if="Object.is(mode,'horizontal')">
+            <template v-for="item0 in menus">
+                <template v-if="item0.items && Array.isArray(item0.items) && item0.items.length > 0">
+                    <el-submenu v-show="!item0.hidden" :index="item0.name" :popper-class="popperClass" :key="item0.id" :class="item0.textcls">
+                        <template slot='title'>
+                            <template v-if="item0.icon && item0.icon != ''">
+                                <img :src="item0.icon" class='app-menu-icon' />
+                            </template>
+                            <template v-else-if="item0.iconcls && item0.iconcls != ''">
+                                <i :class="[item0.iconcls, 'app-menu-icon']"></i>
+                            </template>
+                            <template v-else>
+                                <i class='fa fa-cogs app-menu-icon'></i>
+                            </template>
+                            <span class='text' :title="$t('app.menus.sdindexview.' + item0.name)">{{$t('app.menus.sdindexview.' + item0.name)}}</span>
+                        </template>
+                        <template v-for="item1 in item0.items">
+                            <template v-if="item1.items && Array.isArray(item1.items) && item1.items.length > 0">
+                                <el-submenu v-show="!item1.hidden" :index="item1.name" :popper-class="popperClass" :key="item1.id" :class="item1.textcls">
+                                    <template slot='title'>
+                                        <template v-if="item1.icon && item1.icon != ''">
+                                            <img :src="item1.icon" class='app-menu-icon' />
+                                        </template>
+                                        <template v-else-if="item1.iconcls && item1.iconcls != ''">
+                                            <i :class="[item1.iconcls, 'app-menu-icon']"></i>
+                                        </template>
+                                        <span class='text' :title="$t('app.menus.sdindexview.' + item1.name)">{{$t('app.menus.sdindexview.' + item1.name)}}</span>
+                                    </template>
+                                    <template v-for="item2 in item1.items">
+                                        <template v-if="item2.type =='MENUITEM'">
+                                            <el-menu-item v-show="!item2.hidden" :index="item2.name" :key="item2.id" :class="item2.textcls">
+                                                <template v-if="item2.icon && item2.icon != ''">
+                                                    <img :src="item2.icon" class='app-menu-icon' />
+                                                </template>
+                                                <template v-else-if="item2.iconcls && item2.iconcls != ''">
+                                                    <i :class="[item2.iconcls, 'app-menu-icon']"></i>
+                                                </template>
+                                                <template slot="title">
+                                                    <span class="text" :title="$t('app.menus.sdindexview.' + item2.name)">{{$t('app.menus.sdindexview.' + item2.name)}}</span>
+                                                    <template v-if="counterdata && counterdata[item2.counterid] && counterdata[item2.counterid] > 0">
+                                                        <span class="pull-right">
+                                                            <badge :count="counterdata[item2.counterid]" :overflow-count="9999"></badge>
+                                                        </span>
+                                                    </template>
+                                                </template>
+                                            </el-menu-item>
+                                        </template>
+                                    </template>
+                                </el-submenu>
+                            </template>
+                            <template v-else>
+                                <template v-if="item1.type =='MENUITEM'">
+                                    <el-menu-item v-show="!item1.hidden" :index="item1.name" :key="item1.id" :class="item1.textcls">
+                                        <template v-if="item1.icon && item1.icon != ''">
+                                            <img :src="item1.icon" class='app-menu-icon' />
+                                        </template>
+                                        <template v-else-if="item1.iconcls && item1.iconcls != ''">
+                                            <i :class="[item1.iconcls, 'app-menu-icon']"></i>
+                                        </template>
+                                        <template slot="title">
+                                            <span class="text" :title="$t('app.menus.sdindexview.' + item1.name)">{{$t('app.menus.sdindexview.' + item1.name)}} </span>
+                                            <template v-if="counterdata && counterdata[item1.counterid] && counterdata[item1.counterid] > 0">
+                                                <span class="pull-right">
+                                                    <badge :count="counterdata[item1.counterid]" :overflow-count="9999"></badge>
+                                                </span>
+                                            </template>
+                                        </template>
+                                    </el-menu-item>
+                                </template>
+                            </template>
+                        </template>
+                    </el-submenu>
+                </template>
+                <template v-else>
+                    <template v-if="item0.type =='MENUITEM'">
+                        <el-menu-item v-show="!item0.hidden" :index="item0.name" :key="item0.id" :class="item0.textcls">
+                            <template v-if="item0.icon && item0.icon != ''">
+                                <img :src="item0.icon" class='app-menu-icon' />
+                            </template>
+                            <template v-else-if="item0.iconcls && item0.iconcls != ''">
+                                <i :class="[item0.iconcls, 'app-menu-icon']"></i>
+                            </template>
+                            <template v-else>
+                                <i class='fa fa-cogs app-menu-icon'></i>
+                            </template>
+                            <template slot="title">
+                                <span class="text" :title="$t('app.menus.sdindexview.' + item0.name)">{{$t('app.menus.sdindexview.' + item0.name)}}</span>
+                                <template v-if="counterdata && counterdata[item0.counterid] && counterdata[item0.counterid] > 0">
+                                    <span class="pull-right">
+                                        <badge :count="counterdata[item0.counterid]" :overflow-count="9999"></badge>
+                                    </span>
+                                </template>
+                            </template>
+                        </el-menu-item>
+                    </template>
+                </template>
+            </template>   
+        </template> 
+        <app-menu-item v-else :isCollapse="isCollapse" :menus="menus" :ctrlName="'sdindexview'" :isFirst="true" :counterdata="counterdata" :popper-class="popperClass"></app-menu-item>
     </el-menu>
 </div>
 </template>

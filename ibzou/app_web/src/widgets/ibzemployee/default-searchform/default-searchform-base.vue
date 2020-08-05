@@ -6,21 +6,42 @@
       <row>
                     <i-col v-show="detailsModel.n_usercode_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_usercode_like' :itemRules="this.rules.n_usercode_like" class='' :caption="$t('entities.ibzemployee.default_searchform.details.n_usercode_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_usercode_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_usercode_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_usercode_like.disabled" type='text'  style="width:100px;"></input-box>
+              <input-box 
+              v-model="data.n_usercode_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_usercode_like.disabled" 
+              type='text' 
+              style="width:100px;">
+          </input-box>
           
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_personname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_personname_like' :itemRules="this.rules.n_personname_like" class='' :caption="$t('entities.ibzemployee.default_searchform.details.n_personname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_personname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_personname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_personname_like.disabled" type='text'  style="width:100px;"></input-box>
+              <input-box 
+              v-model="data.n_personname_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_personname_like.disabled" 
+              type='text' 
+              style="width:100px;">
+          </input-box>
           
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_mdeptname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_mdeptname_like' :itemRules="this.rules.n_mdeptname_like" class='' :caption="$t('entities.ibzemployee.default_searchform.details.n_mdeptname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_mdeptname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_mdeptname_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_mdeptname_like.disabled" type='text'  style="width:100px;"></input-box>
+              <input-box 
+              v-model="data.n_mdeptname_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_mdeptname_like.disabled" 
+              type='text' 
+              style="width:100px;">
+          </input-box>
           
           </app-form-item>
           

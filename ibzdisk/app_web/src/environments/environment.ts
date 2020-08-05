@@ -6,15 +6,15 @@ export const Environment = {
     // 应用 title
     AppTitle: '存储',
     // 应用基础路径
-    BaseUrl: '../',
+    BaseUrl: '',
     // 系统名称
     SysName: 'ibzdisk',
     // 远程登录地址，本地开发调试使用
-    RemoteLogin: 'ibizutil/login',
+    RemoteLogin: '/ibizutil/login',
     // 文件导出
-    ExportFile: 'ibizutil/download',
+    ExportFile: '/ibizutil/download',
     // 文件上传
-    UploadFile: 'ibizutil/upload',
+    UploadFile: '/ibizutil/upload',
     // 是否为pc端应用
     isAppMode:true,
     //统一地址

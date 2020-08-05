@@ -175,15 +175,18 @@ export default class InputBox extends Vue {
    */
   public addEvent(){
     if(Object.is(this.type, "number")){
-      let inputNumber :any = document.getElementById(this.numberId);
-      let handlerWrap :any = inputNumber.firstElementChild;
-      handlerWrap.onmouseover=()=>{
-        inputNumber.style.paddingRight="15px";
-        inputNumber.style.transition="all 0.2s linear";
-      }
-      handlerWrap.onmouseout=()=>{
-        inputNumber.style.paddingRight="0px";
-      }
+      // 整个页面渲染完之后再去执行
+      this.$nextTick(() => {
+        let inputNumber :any = document.getElementById(this.numberId);
+        let handlerWrap :any = inputNumber.firstElementChild;
+        handlerWrap.onmouseover=()=>{
+          inputNumber.style.paddingRight="15px";
+          inputNumber.style.transition="all 0.2s linear";
+        }
+        handlerWrap.onmouseout=()=>{
+          inputNumber.style.paddingRight="0px";
+        }
+      });
     }
   }
 

@@ -8,21 +8,42 @@
     <row>
         <i-col v-show="detailsModel.usercode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='usercode' :itemRules="this.rules().usercode" class='' :caption="$t('entities.ibzemployee.main_form.details.usercode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.usercode.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.usercode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.usercode.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.usercode"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.usercode.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.personname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='personname' :itemRules="this.rules().personname" class='' :caption="$t('entities.ibzemployee.main_form.details.personname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.personname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.personname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.personname.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.personname"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.personname.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.loginname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='loginname' :itemRules="this.rules().loginname" class='' :caption="$t('entities.ibzemployee.main_form.details.loginname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.loginname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.loginname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.loginname.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.loginname"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.loginname.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
@@ -49,14 +70,28 @@
 </i-col>
 <i-col v-show="detailsModel.bcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='bcode' :itemRules="this.rules().bcode" class='' :caption="$t('entities.ibzemployee.main_form.details.bcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.bcode.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.bcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.bcode.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.bcode"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.bcode.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.nickname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='nickname' :itemRules="this.rules().nickname" class='' :caption="$t('entities.ibzemployee.main_form.details.nickname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.nickname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.nickname"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.nickname.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.nickname"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.nickname.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
@@ -71,7 +106,8 @@
     :viewparams="viewparams"
     :localContext ='{ }' 
     :localParam ='{ }' 
-    :disabled="detailsModel.sex.disabled"  
+    :disabled="detailsModel.sex.disabled" 
+    valueType="string"
     tag='CLIBZSex' 
     codelistType='STATIC'
     placeholder='请选择...' style="">
@@ -89,84 +125,168 @@
 </i-col>
 <i-col v-show="detailsModel.certcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='certcode' :itemRules="this.rules().certcode" class='' :caption="$t('entities.ibzemployee.main_form.details.certcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.certcode.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.certcode"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.certcode.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.certcode"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.certcode.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.phone.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='phone' :itemRules="this.rules().phone" class='' :caption="$t('entities.ibzemployee.main_form.details.phone')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.phone.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.phone"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.phone.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.phone"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.phone.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.avatar.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='avatar' :itemRules="this.rules().avatar" class='' :caption="$t('entities.ibzemployee.main_form.details.avatar')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.avatar.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.avatar"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.avatar.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.avatar"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.avatar.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.email.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='email' :itemRules="this.rules().email" class='' :caption="$t('entities.ibzemployee.main_form.details.email')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.email.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.email"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.email.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.email"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.email.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.ipaddr.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='ipaddr' :itemRules="this.rules().ipaddr" class='' :caption="$t('entities.ibzemployee.main_form.details.ipaddr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.ipaddr.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.ipaddr"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.ipaddr.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.ipaddr"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.ipaddr.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.showorder.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='showorder' :itemRules="this.rules().showorder" class='' :caption="$t('entities.ibzemployee.main_form.details.showorder')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.showorder.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.showorder"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.showorder.disabled" type='number'  style=""></input-box>
+    <input-box 
+    v-model="data.showorder"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.showorder.disabled" 
+    type='number' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.addr.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='addr' :itemRules="this.rules().addr" class='' :caption="$t('entities.ibzemployee.main_form.details.addr')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.addr.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.addr"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.addr.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.addr"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.addr.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.memo.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='memo' :itemRules="this.rules().memo" class='' :caption="$t('entities.ibzemployee.main_form.details.memo')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.memo.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.memo"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.memo.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.memo"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.memo.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.theme.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='theme' :itemRules="this.rules().theme" class='' :caption="$t('entities.ibzemployee.main_form.details.theme')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.theme.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.theme"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.theme.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.theme"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.theme.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.lang.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='lang' :itemRules="this.rules().lang" class='' :caption="$t('entities.ibzemployee.main_form.details.lang')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.lang.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.lang"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.lang.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.lang"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.lang.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.fontsize.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='fontsize' :itemRules="this.rules().fontsize" class='' :caption="$t('entities.ibzemployee.main_form.details.fontsize')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.fontsize.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.fontsize"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.fontsize.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.fontsize"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.fontsize.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.reserver.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='reserver' :itemRules="this.rules().reserver" class='' :caption="$t('entities.ibzemployee.main_form.details.reserver')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.reserver.error" :isEmptyCaption="false" labelPos="LEFT">
-    <input-box v-model="data.reserver"  @enter="onEnter($event)"   unit=""  :disabled="detailsModel.reserver.disabled" type='text'  style=""></input-box>
+    <input-box 
+    v-model="data.reserver"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.reserver.disabled" 
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 
@@ -863,31 +983,62 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string }} { name }
      * @memberof MainBase
      */
-    public verifyDeRules(name:string,rule:any = this.deRules) :{isPast:boolean,infoMessage:string}{
-        let falg = {isPast:true,infoMessage:""};
+    public verifyDeRules(name:string,rule:any = this.deRules,op:string = "AND") :{isPast:boolean,infoMessage:string}{
+        let falg:any = {infoMessage:""};
         if(!rule[name]){
             return falg;
         }
-        rule[name].forEach((item:any) => {
-            if(item.type == 'SIMPLE' && this.data[this.service.getItemNameByDeName(item.deName)] != item.paramValue){
-                falg.isPast = false;
-                falg.infoMessage = item.ruleInfo;
-            }
-            if(item.type == 'REGEX' && (item.isNotMode? item.RegExCode.test(this.data[name]) : !item.RegExCode.test(this.data[name]))){
-                falg.isPast = false;
-                falg.infoMessage = item.ruleInfo;
-            }
-            if(item.type == 'STRINGLENGTH' ){
-                let valueLength :number = this.data[name]?this.data[name].length:0;
-                if(item.isNotMode? valueLength > item.minValue && valueLength < item.maxValue : !(valueLength > item.minValue && valueLength < item.maxValue)){
-                    falg.isPast = false;
-                    falg.infoMessage = item.ruleInfo;
+        let opValue = op == 'AND'? true :false;
+        let startOp = (val:boolean)=>{
+            if(falg.isPast){
+                if(opValue){
+                    falg.isPast = falg && val;
+                }else{
+                    falg.isPast = falg || val;
                 }
+            }else{
+                falg.isPast = val;
             }
+        }
+        rule[name].forEach((item:any) => {
+            let dataValue = item.deName?this.data[this.service.getItemNameByDeName(item.deName)]:"";
+            // 常规规则
+            if(item.type == 'SIMPLE'){
+                startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.data,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 数值范围
+            if(item.type == 'VALUERANGE2'){
+                startOp( !this.$verify.checkFieldValueRangeRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 正则式
+            if (item.type == "REGEX") {
+                startOp(!this.$verify.checkFieldRegExRule(dataValue,item.regExCode,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 长度
+            if (item.type == "STRINGLENGTH") {
+                startOp(!this.$verify.checkFieldStringLengthRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 系统值规则
+            if(item.type == "SYSVALUERULE") {
+                startOp(!this.$verify.checkFieldSysValueRule(dataValue,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
+                falg.infoMessage = item.ruleInfo;
+            }
+            // 分组
             if(item.type == 'GROUP'){
                 falg = this.verifyDeRules('group',item)
+                if(item.isNotMode){
+                   falg.isPast = !falg.isPast;
+                }
             }
+            
         });
+        if(!falg.hasOwnProperty("isPast")){
+            falg.isPast = true;
+        }
         return falg;
     }
 
@@ -1712,6 +1863,17 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 编辑器行为触发
+     *
+     * @param {*} arg
+     * @returns {void}
+     * @memberof MainBase
+     */
+    public onFormItemActionClick(arg:any){
+        if(arg && (arg instanceof Function)) arg();
+    }
+
+    /**
      * 设置数据项值
      *
      * @param {string} name
@@ -1771,11 +1933,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.load(data);
                 }
                 if (Object.is('loaddraft', action)) {
-                    if(this.context.srfsourcekey){
-                        this.copy(this.context.srfsourcekey);
-                    }else{
-                        this.loadDraft(data);
-                    }
+                    this.loadDraft(data);
                 }
                 if (Object.is('save', action)) {
                     this.save(data,data.showResultInfo);
@@ -1831,26 +1989,6 @@ export default class MainBase extends Vue implements ControlInterface {
         if (this.dataChangEvent) {
             this.dataChangEvent.unsubscribe();
         }
-    }
-
-    /**
-     * 拷贝内容
-     *
-     * @param {*} [arg={}]
-     * @memberof @memberof MainBase
-     */
-    public copy(srfkey: string): void {
-        let copyData = this.$store.getters.getCopyData(srfkey);
-        copyData.srfkey = Util.createUUID();
-        copyData.ibzemployee = copyData.srfkey;
-        copyData.userid = copyData.srfkey;
-        Object.assign(this.context,{ibzemployee:copyData.ibzemployee})
-        this.data = copyData;
-        this.$nextTick(() => {
-          this.formState.next({ type: 'load', data: copyData });
-          this.data.srfuf = '0';
-          this.setFormEnableCond(this.data);
-        });
     }
 
     /**
@@ -2080,6 +2218,9 @@ export default class MainBase extends Vue implements ControlInterface {
                     return;
                 }
             }
+            if(this.viewparams && this.viewparams.copymode){
+                data.srfuf = '0';
+            }
             const action: any = Object.is(data.srfuf, '1') ? this.updateAction : this.createAction;
             if(!action){
                 let actionName:any = Object.is(data.srfuf, '1')?"updateAction":"createAction";
@@ -2095,7 +2236,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     }
                     return;
                 }
-
+                this.viewparams.copymode = false;
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
@@ -2182,6 +2323,8 @@ export default class MainBase extends Vue implements ControlInterface {
             const post: Promise<any> = _this.save({},false);
             post.then((response:any) =>{
                 const arg:any = response.data;
+                // 准备工作流数据,填充未存库数据
+                Object.assign(arg,this.getData());
                 if(this.viewparams){
                     Object.assign(arg,{viewparams:this.viewparams});
                 }
@@ -2250,6 +2393,8 @@ export default class MainBase extends Vue implements ControlInterface {
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: arg });
                 });
+                // 准备工作流数据,填充未存库数据
+                Object.assign(arg,this.getData());
                 // 准备提交参数
                 if(this.viewparams){
                     Object.assign(arg,{viewparams:this.viewparams});

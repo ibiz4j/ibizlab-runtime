@@ -129,16 +129,6 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '2ed85bebb69b8d23388420b95163228a',
-            viewmodule: 'ou',
-            viewname: 'IBZOrganizationOptionView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'ccff36439eacae953f85ff636c9dac74',
-            ],
-        },
-        {
             viewtag: '323147bb0fc25046ab102674cb1abf21',
             viewmodule: 'ou',
             viewname: 'IBZTeamEditView',
@@ -194,7 +184,6 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '119fe650e7efd26bd14bd413cae37ded',
-                '9cf7a70099bff83a10f6ae65c4d54692',
             ],
         },
         {
@@ -353,7 +342,6 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '90c0ced2720b85d5e051e7935a93d3c5',
-                '9cdad5e2bed51cdcd90b4b7fb3104a5a',
             ],
         },
         {
@@ -480,28 +468,6 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-            ],
-        },
-        {
-            viewtag: '9cdad5e2bed51cdcd90b4b7fb3104a5a',
-            viewmodule: 'ou',
-            viewname: 'IBZDepartmentOptionView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '10dd7f45f36233049c4af9ca417089f5',
-                'ccff36439eacae953f85ff636c9dac74',
-            ],
-        },
-        {
-            viewtag: '9cf7a70099bff83a10f6ae65c4d54692',
-            viewmodule: 'ou',
-            viewname: 'IBZEmployeeOptionView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '10dd7f45f36233049c4af9ca417089f5',
-                'ccff36439eacae953f85ff636c9dac74',
             ],
         },
         {
@@ -636,7 +602,6 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '2ed85bebb69b8d23388420b95163228a',
                 '95e33ff2469ba40d3e0c00f5c3f61501',
                 'ccff36439eacae953f85ff636c9dac74',
             ],

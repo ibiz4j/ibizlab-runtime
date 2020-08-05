@@ -6,21 +6,42 @@
       <row>
                     <i-col v-show="detailsModel.n_job_id_eq.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_job_id_eq' :itemRules="this.rules.n_job_id_eq" class='' :caption="$t('entities.jobslog.default_searchform.details.n_job_id_eq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_job_id_eq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_job_id_eq"  @enter="onEnter($event)"    :disabled="detailsModel.n_job_id_eq.disabled" type='text'  style=""></input-box>
+              <input-box 
+              v-model="data.n_job_id_eq"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_job_id_eq.disabled" 
+              type='text' 
+              style="">
+          </input-box>
           
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_handler_like.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_handler_like' :itemRules="this.rules.n_handler_like" class='' :caption="$t('entities.jobslog.default_searchform.details.n_handler_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_handler_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_handler_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_handler_like.disabled" type='text'  style=""></input-box>
+              <input-box 
+              v-model="data.n_handler_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_handler_like.disabled" 
+              type='text' 
+              style="">
+          </input-box>
           
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_trigger_code_eq.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_trigger_code_eq' :itemRules="this.rules.n_trigger_code_eq" class='' :caption="$t('entities.jobslog.default_searchform.details.n_trigger_code_eq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_trigger_code_eq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_trigger_code_eq"  @enter="onEnter($event)"    :disabled="detailsModel.n_trigger_code_eq.disabled" type='number'  style=""></input-box>
+              <input-box 
+              v-model="data.n_trigger_code_eq"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_trigger_code_eq.disabled" 
+              type='number' 
+              style="">
+          </input-box>
           
           </app-form-item>
           

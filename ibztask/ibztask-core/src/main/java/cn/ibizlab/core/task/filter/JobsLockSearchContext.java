@@ -51,4 +51,3 @@ public class JobsLockSearchContext extends QueryWrapperContext<JobsLock> {
 
 
 
-

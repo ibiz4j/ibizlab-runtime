@@ -65,4 +65,3 @@ public class JobsLogSearchContext extends QueryWrapperContext<JobsLog> {
 
 
 
-

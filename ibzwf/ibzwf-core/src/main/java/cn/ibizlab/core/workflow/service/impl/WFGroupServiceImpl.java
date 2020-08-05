@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFGroupSearchContext;
 import cn.ibizlab.core.workflow.service.IWFGroupService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -125,9 +126,7 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(WFGroup et) {
         if (null == et) {
             return false;
@@ -190,5 +189,6 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
 
 
 }
+
 
 

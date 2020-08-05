@@ -395,7 +395,7 @@ export default class IBZDepartmentTreeExpViewBase extends Vue {
             }
 		}else{
 			// 先从导航上下文取数，没有再从导航参数（URL）取数，如果导航上下文和导航参数都没有则为null
-			if(this.context[(curNavData.value).toLowerCase()]){
+			if(this.context[(curNavData.value).toLowerCase()] != null){
 				Object.defineProperty(tempData, item.toLowerCase(), {
 					value: this.context[(curNavData.value).toLowerCase()],
 					writable : true,
@@ -403,7 +403,7 @@ export default class IBZDepartmentTreeExpViewBase extends Vue {
 					configurable : true
 				});
 			}else{
-				if(this.viewparams[(curNavData.value).toLowerCase()]){
+				if(this.viewparams[(curNavData.value).toLowerCase()] != null){
 					Object.defineProperty(tempData, item.toLowerCase(), {
 						value: this.viewparams[(curNavData.value).toLowerCase()],
 						writable : true,
@@ -578,7 +578,7 @@ export default class IBZDepartmentTreeExpViewBase extends Vue {
      * @param {*} [xData]
      * @memberof IBZDepartmentTreeExpView
      */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+    public opendata(args: any[],fullargs?:any,params?: any, $event?: any, xData?: any) {
         if(!this.viewDefaultUsage){
             if(Object.is(this.navModel,"route")){
                 this.initNavDataWithRoute(this.viewCacheData, false, true);

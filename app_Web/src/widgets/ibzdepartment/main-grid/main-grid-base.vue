@@ -8,6 +8,7 @@
         :highlight-current-row ="isSingleSelect"
         :row-class-name="getRowClassName"
         :cell-class-name="getCellClassName"
+        :height="isEnablePagingBar && items.length > 0 ? 'calc(100% - 50px)' : '100%'"
         @row-click="rowClick($event)"  
         @select-all="selectAll($event)"  
         @select="select($event)"  
@@ -941,7 +942,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 return;
             }
             const data: any = response.data;
-            this.totalrow = response.data.length;
+            this.totalrow = response.total;
             this.items = JSON.parse(JSON.stringify(data));
             // 清空selections,gridItemsModel
             this.selections = [];

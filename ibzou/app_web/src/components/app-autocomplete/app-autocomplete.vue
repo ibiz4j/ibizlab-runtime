@@ -7,6 +7,7 @@
       size='small'
       :trigger-on-focus="true" 
       :fetch-suggestions="onSearch" 
+      :sort="sort"
       @select="onACSelect"
       @input="onInput" 
       @blur="onBlur" 
@@ -124,6 +125,15 @@ export default class AppAutocomplete extends Vue {
     @Prop() public valueitem?: string;
 
     /**
+     * 排序
+     *
+     * @type {string}
+     * @memberof AppAutocomplete
+     */
+    @Prop() public sort?: string;
+
+
+    /**
      * 值
      *
      * @type {*}
@@ -196,6 +206,9 @@ export default class AppAutocomplete extends Vue {
             query = '';
         }
         this.inputState = false;
+        if(this.sort && !Object.is(this.sort, "")) {
+            Object.assign(_param, { sort: this.sort });
+        }
         Object.assign(_param, { query: query });
         // 错误信息国际化
         let error: string = (this.$t('components.appAutocomplete.error') as any);

@@ -175,7 +175,7 @@ export default class Login extends Vue {
 
         const loginname: any = this.form.loginname;
         const password: any = this.form.password;
-        const post: Promise<any> = this.$http.post('v7/login', this.form, true);
+        const post: Promise<any> = this.$http.post('/v7/login', this.form, true);
         post.then((response: any) => {
             if (response && response.status === 200) {
                 const data = response.data;

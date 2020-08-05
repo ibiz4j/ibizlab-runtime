@@ -79,8 +79,8 @@ export default class IBZDepartmentServiceBase extends EntityService {
             }
             let tempContext:any = JSON.parse(JSON.stringify(context));
             let res:any = await Http.getInstance().post(`/ibzorganizations/${context.ibzorganization}/ibzdepartments`,data,isloading);
-            this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees?res.data.ibzemployees:[]));
             this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers?res.data.ibzdeptmembers:[]));
+            this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees?res.data.ibzemployees:[]));
             
             return res;
         }
@@ -94,8 +94,8 @@ export default class IBZDepartmentServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/ibzdepartments`,data,isloading);
-        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees?res.data.ibzemployees:[]));
         this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdeptmembers',JSON.stringify(res.data.ibzdeptmembers?res.data.ibzdeptmembers:[]));
+        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees?res.data.ibzemployees:[]));
         
         return res;
     }

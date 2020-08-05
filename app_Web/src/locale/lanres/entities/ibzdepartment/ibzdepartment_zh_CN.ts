@@ -48,30 +48,6 @@ export default {
       		title: "部门选择表格视图",
 		},
 	},
-	newform_form: {
-		details: {
-			group1: "部门基本信息", 
-			formpage1: "基本信息", 
-			srfupdatedate: "最后修改时间", 
-			srforikey: "", 
-			srfkey: "部门标识", 
-			srfmajortext: "部门名称", 
-			srftempmode: "", 
-			srfuf: "", 
-			srfdeid: "", 
-			srfsourcekey: "", 
-			deptcode: "部门代码", 
-			deptname: "部门名称", 
-			orgid: "单位", 
-			orgname: "单位", 
-			pdeptid: "上级部门", 
-			pdeptname: "上级部门", 
-			enable: "逻辑有效", 
-			deptid: "部门标识", 
-		},
-		uiactions: {
-		},
-	},
 	main_form: {
 		details: {
 			formpage1: "基本信息", 
@@ -98,6 +74,30 @@ export default {
 			showorder: "排序", 
 			createdate: "创建时间", 
 			updatedate: "最后修改时间", 
+		},
+		uiactions: {
+		},
+	},
+	newform_form: {
+		details: {
+			group1: "部门基本信息", 
+			formpage1: "基本信息", 
+			srfupdatedate: "最后修改时间", 
+			srforikey: "", 
+			srfkey: "部门标识", 
+			srfmajortext: "部门名称", 
+			srftempmode: "", 
+			srfuf: "", 
+			srfdeid: "", 
+			srfsourcekey: "", 
+			deptcode: "部门代码", 
+			deptname: "部门名称", 
+			orgid: "单位", 
+			orgname: "单位", 
+			pdeptid: "上级部门", 
+			pdeptname: "上级部门", 
+			enable: "逻辑有效", 
+			deptid: "部门标识", 
 		},
 		uiactions: {
 		},
@@ -134,29 +134,7 @@ export default {
 		uiactions: {
 		},
 	},
-	editviewtoolbar_toolbar: {
-		tbitem3: {
-			caption: "保存",
-			tip: "保存",
-		},
-		tbitem6: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem14: {
-			caption: "拷贝",
-			tip: "拷贝",
-		},
-	},
 	gridviewtoolbar_toolbar: {
-		tbitem1_opennewcreateview: {
-			caption: "新建",
-			tip: "新建",
-		},
-		tbitem2: {
-			caption: "-",
-			tip: "",
-		},
 		tbitem3: {
 			caption: "新建",
 			tip: "新建",
@@ -208,6 +186,28 @@ export default {
 		tbitem19: {
 			caption: "过滤",
 			tip: "过滤",
+		},
+	},
+	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "保存",
+			tip: "保存",
+		},
+		deuiaction1: {
+			caption: "保存并关闭",
+			tip: "保存并关闭",
+		},
+		deuiaction2: {
+			caption: "关闭",
+			tip: "关闭",
+		},
+		tbitem6: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem14: {
+			caption: "拷贝",
+			tip: "拷贝",
 		},
 	},
 	depttree_treeview: {

@@ -28,7 +28,8 @@
               :viewparams="viewparams"
               :localContext ='{ }' 
               :localParam ='{ }' 
-              :disabled="detailsModel.n_status_eq.disabled"  
+              :disabled="detailsModel.n_status_eq.disabled" 
+              valueType="number"
               tag='CodeListJobStatus' 
               codelistType='STATIC'
               placeholder='请选择...' style="">

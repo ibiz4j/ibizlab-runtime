@@ -2,8 +2,7 @@ import { Store } from 'vuex';
 import axios from 'axios';
 import Router from 'vue-router';
 import i18n from '@/locale';
-
-
+import { Environment } from '@/environments/environment';
 /**
  * 拦截器
  *
@@ -96,9 +95,9 @@ export class Interceptors {
                 config.headers['Authorization'] = `Bearer ${token}`;
             }
             config.headers['Accept-Language'] =  i18n.locale;
-            // if (!config.url.startsWith('https://') && !config.url.startsWith('http://')) {
-            //     config.url = Environment.BaseUrl + config.url;
-            // }
+            if (!Object.is(Environment.BaseUrl,"") && !config.url.startsWith('https://') && !config.url.startsWith('http://') && !config.url.startsWith('./assets')) {
+                config.url = Environment.BaseUrl + config.url;
+            }
             return config;
         }, (error: any) => {
             return Promise.reject(error);

@@ -14,6 +14,13 @@
             <div slot='content'>{{$t('entities.jobsinfo.editviewtoolbar_toolbar.tbitem3.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
+                <i-button v-show="toolBarModels.deuiaction2.visabled" :disabled="toolBarModels.deuiaction2.disabled" class='' @click="toolbar_click({ tag: 'deuiaction2' }, $event)">
+                    <i class='sx-tb-saveandclose'></i>
+                    <span class='caption'>{{$t('entities.jobsinfo.editviewtoolbar_toolbar.deuiaction2.caption')}}</span>
+                </i-button>
+            <div slot='content'>{{$t('entities.jobsinfo.editviewtoolbar_toolbar.deuiaction2.tip')}}</div>
+        </tooltip>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
                     <i class='fa fa-sign-out'></i>
                     <span class='caption'>{{$t('entities.jobsinfo.editviewtoolbar_toolbar.deuiaction1.caption')}}</span>
@@ -264,6 +271,8 @@ export default class JobsInfoEditViewBase extends Vue {
     public toolBarModels: any = {
         tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
+        deuiaction2: { name: 'deuiaction2', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
+
         deuiaction1: { name: 'deuiaction1', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
 
     };
@@ -436,7 +445,7 @@ export default class JobsInfoEditViewBase extends Vue {
             }
 		}else{
 			// 先从导航上下文取数，没有再从导航参数（URL）取数，如果导航上下文和导航参数都没有则为null
-			if(this.context[(curNavData.value).toLowerCase()]){
+			if(this.context[(curNavData.value).toLowerCase()] != null){
 				Object.defineProperty(tempData, item.toLowerCase(), {
 					value: this.context[(curNavData.value).toLowerCase()],
 					writable : true,
@@ -444,7 +453,7 @@ export default class JobsInfoEditViewBase extends Vue {
 					configurable : true
 				});
 			}else{
-				if(this.viewparams[(curNavData.value).toLowerCase()]){
+				if(this.viewparams[(curNavData.value).toLowerCase()] != null){
 					Object.defineProperty(tempData, item.toLowerCase(), {
 						value: this.viewparams[(curNavData.value).toLowerCase()],
 						writable : true,
@@ -566,6 +575,9 @@ export default class JobsInfoEditViewBase extends Vue {
         if (Object.is($event.tag, 'tbitem3')) {
             this.toolbar_tbitem3_click(null, '', $event2);
         }
+        if (Object.is($event.tag, 'deuiaction2')) {
+            this.toolbar_deuiaction2_click(null, '', $event2);
+        }
         if (Object.is($event.tag, 'deuiaction1')) {
             this.toolbar_deuiaction1_click(null, '', $event2);
         }
@@ -645,6 +657,34 @@ export default class JobsInfoEditViewBase extends Vue {
      * @param {*} [$event]
      * @memberof 
      */
+    public toolbar_deuiaction2_click(params: any = {}, tag?: any, $event?: any) {
+        // 参数
+        // 取数
+        let datas: any[] = [];
+        let xData: any = null;
+        // _this 指向容器对象
+        const _this: any = this;
+        let paramJO:any = {};
+        let contextJO:any = {};
+        xData = this.$refs.form;
+        if (xData.getDatas && xData.getDatas instanceof Function) {
+            datas = [...xData.getDatas()];
+        }
+        if(params){
+          datas = [params];
+        }
+        // 界面行为
+        this.SaveAndExit(datas, contextJO,paramJO,  $event, xData,this,"JobsInfo");
+    }
+
+    /**
+     * 逻辑事件
+     *
+     * @param {*} [params={}]
+     * @param {*} [tag]
+     * @param {*} [$event]
+     * @memberof 
+     */
     public toolbar_deuiaction1_click(params: any = {}, tag?: any, $event?: any) {
         // 参数
         // 取数
@@ -691,6 +731,39 @@ export default class JobsInfoEditViewBase extends Vue {
         }
     }
 
+    /**
+     * 保存并关闭
+     *
+     * @param {any[]} args 当前数据
+     * @param {any} contextJO 行为附加上下文
+     * @param {*} [params] 附加参数
+     * @param {*} [$event] 事件源
+     * @param {*} [xData]  执行行为所需当前部件
+     * @param {*} [actionContext]  执行行为上下文
+     * @memberof JobsInfoEditViewBase
+     */
+    public SaveAndExit(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+        const _this: any = this;
+        if (xData && xData.saveAndExit instanceof Function) {
+            xData.saveAndExit().then((response: any) => {
+                if (!response || response.status !== 200) {
+                    return;
+                }
+                if(window.parent){
+                    window.parent.postMessage([{ ...response.data }],'*');
+                }
+            });
+        } else if (_this.saveAndExit && _this.saveAndExit instanceof Function) {
+            _this.saveAndExit().then((response: any) => {
+                if (!response || response.status !== 200) {
+                    return;
+                }
+                if(window.parent){
+                    window.parent.postMessage([{ ...response.data }],'*');
+                }
+            });
+        }
+    }
     /**
      * 关闭
      *

@@ -28,6 +28,7 @@ import cn.ibizlab.core.task.filter.JobsInfoSearchContext;
 import cn.ibizlab.core.task.service.IJobsInfoService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -125,9 +126,7 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(JobsInfo et) {
         if (null == et) {
             return false;
@@ -150,8 +149,8 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public JobsInfo start(JobsInfo et) {
-        et.set("Last_time","0");
         et.set("Status","0");
+        et.set("Last_time","0");
         update(et);
         return et;
     }
@@ -207,5 +206,6 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
 
 
 }
+
 
 

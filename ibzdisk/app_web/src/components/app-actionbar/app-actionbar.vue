@@ -2,9 +2,9 @@
   <div class="app-actionbar">
     <div class="app-actionbar-item" v-for="(item,index) in items" :key="index">
       <Badge v-if="item.counterService&&item.counterService.counterData" v-show="item.visabled" :count="item.counterService.counterData[item.counterId]" type="primary">
-         <i-button :style="{'pointer-events':item.disabled?'none':'auto'}" @click="handleClick(item.viewlogicname)"><i v-if="item.icon" style="margin-right: 5px;" :class="item.icon"></i>{{item.actionName}}</i-button>
+         <i-button :style="{'pointer-events':item.disabled?'none':'auto'}" @click="handleClick(item, $event)"><i v-if="item.icon" style="margin-right: 5px;" :class="item.icon"></i>{{item.actionName}}</i-button>
     </Badge>
-    <i-button v-show="item.visabled" :style="{'pointer-events':item.disabled?'none':'auto'}" v-else @click="handleClick(item.viewlogicname)">{{item.actionName}}</i-button>
+    <i-button v-show="item.visabled" :style="{'pointer-events':item.disabled?'none':'auto'}" v-else @click="handleClick(item, $event)">{{item.actionName}}</i-button>
     </div>
   </div>
 </template>
@@ -50,6 +50,14 @@ export default class AppActionBar extends Vue {
   public viewStateEvent: Subscription | undefined;
 
   /**
+   * 部件数据
+   *
+   * @type {*}
+   * @memberof AppActionBar
+   */
+  public data: any;
+
+  /**
    * 组件初始化
    *
    * @memberof AppActionBar
@@ -61,6 +69,7 @@ export default class AppActionBar extends Vue {
                 return;
             }
             if(Object.is(action,'loadmodel')){
+              this.data = data;
               this.calcActionItemAuthState(data,this.items,this.uiService);
             }
         });
@@ -72,8 +81,13 @@ export default class AppActionBar extends Vue {
    * 
    * @memberof AppActionBar
    */
-  public handleClick($event:any){
-    this.$emit('itemClick',$event);
+  public handleClick(item: any, $event:any){
+    let _data = {
+      tag : item.viewlogicname,
+      params : this.data,
+      event : $event
+    };
+    this.$emit('itemClick',_data);
   }
 
   /**

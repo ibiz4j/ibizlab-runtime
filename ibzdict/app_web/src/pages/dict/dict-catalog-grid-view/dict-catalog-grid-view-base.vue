@@ -547,7 +547,7 @@ export default class DictCatalogGridViewBase extends Vue {
             }
 		}else{
 			// 先从导航上下文取数，没有再从导航参数（URL）取数，如果导航上下文和导航参数都没有则为null
-			if(this.context[(curNavData.value).toLowerCase()]){
+			if(this.context[(curNavData.value).toLowerCase()] != null){
 				Object.defineProperty(tempData, item.toLowerCase(), {
 					value: this.context[(curNavData.value).toLowerCase()],
 					writable : true,
@@ -555,7 +555,7 @@ export default class DictCatalogGridViewBase extends Vue {
 					configurable : true
 				});
 			}else{
-				if(this.viewparams[(curNavData.value).toLowerCase()]){
+				if(this.viewparams[(curNavData.value).toLowerCase()] != null){
 					Object.defineProperty(tempData, item.toLowerCase(), {
 						value: this.viewparams[(curNavData.value).toLowerCase()],
 						writable : true,
@@ -1206,7 +1206,7 @@ export default class DictCatalogGridViewBase extends Vue {
      * @param {*} [xData]
      * @memberof DictCatalogGridView
      */
-    public opendata(args: any[],fullargs?:any[],params?: any, $event?: any, xData?: any) {
+    public opendata(args: any[],fullargs?:any,params?: any, $event?: any, xData?: any) {
         if(!this.viewDefaultUsage){
             if(Object.is(this.navModel,"route")){
                 this.initNavDataWithRoute(this.viewCacheData, false, true);
@@ -1227,6 +1227,9 @@ export default class DictCatalogGridViewBase extends Vue {
             { pathName: 'editview', parameterName: 'editview' },
         ];
         const _this: any = this;
+        if(fullargs && fullargs.copymode){
+            Object.assign(data,{copymode:true});
+        }
         const openIndexViewTab = (data: any) => {
             const routePath = this.$viewTool.buildUpRoutePath(this.$route, tempContext, deResParameters, parameters, args, data);
             this.$router.push(routePath);
@@ -1323,20 +1326,16 @@ export default class DictCatalogGridViewBase extends Vue {
             return;
         }
         const _this: any = this;
-        if (_this.newdata && _this.newdata instanceof Function) {
-            const data: any = {};
+        if (_this.opendata && _this.opendata instanceof Function) {
+            const data: any = { };
             if (args.length > 0) {
-                Object.assign(data, { srfsourcekey: args[0].srfkey })
-                actionContext.$store.commit('addCopyData', { srfkey: args[0].srfkey, copyData: args[0] });
+                Object.assign(data, { dictcatalog: args[0].dictcatalog });
             }
-            _this.newdata([{ ...data }],[{ ...data }],params, $event, xData);
-        } else if (xData && xData.copy instanceof Function) {
-            if (args.length > 0) {
-                actionContext.$store.commit('addCopyData', { srfkey: args[0].srfkey, copyData: args[0] });
-            }
-            xData.copy(args[0].srfkey);
+            if(!params) params = {};
+            Object.assign(params,{copymode:true});
+            _this.opendata([{ ...data }], params, $event, xData);
         } else {
-            _this.$Notice.error({ title: '错误', desc: 'opendata 视图处理逻辑不存在，请添加!' });
+            Object.assign(this.viewparams,{copymode:true});
         }
     }
     /**

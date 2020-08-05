@@ -162,10 +162,6 @@ export default class IBZOrganizationUIServiceBase extends UIService {
                     if (this.IBZOrganization_OpenMainView && this.IBZOrganization_OpenMainView instanceof Function) {
                         this.IBZOrganization_OpenMainView(result.datas,context, params, $event, xData,actionContext);
                     }
-                    if(window.opener){
-                        window.opener.postMessage({status:'OK',identification:'WF'},Environment.uniteAddress);
-                        window.close();
-                    }
                     return result.datas;
                 });
             }
@@ -224,10 +220,6 @@ export default class IBZOrganizationUIServiceBase extends UIService {
                         return;
                     }
                     const _this: any = actionContext;
-                    if(window.opener){
-                        window.opener.postMessage({status:'OK',identification:'WF'},Environment.uniteAddress);
-                        window.close();
-                    }
                     return result.datas;
                 });
             }

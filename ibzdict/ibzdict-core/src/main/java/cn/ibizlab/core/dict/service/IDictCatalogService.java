@@ -26,15 +26,19 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IDictCatalogService extends IService<DictCatalog>{
 
     boolean create(DictCatalog et) ;
+    @CacheEvict(value="dictcatalog",allEntries=true)
     void createBatch(List<DictCatalog> list) ;
     boolean update(DictCatalog et) ;
+    @CacheEvict(value="dictcatalog",allEntries=true)
     void updateBatch(List<DictCatalog> list) ;
     boolean remove(String key) ;
+    @CacheEvict(value="dictcatalog",allEntries=true)
     void removeBatch(Collection<String> idList) ;
     DictCatalog get(String key) ;
     DictCatalog getDraft(DictCatalog et) ;
     boolean checkKey(DictCatalog et) ;
     boolean save(DictCatalog et) ;
+    @CacheEvict(value="dictcatalog",allEntries=true)
     void saveBatch(List<DictCatalog> list) ;
     Page<DictCatalog> searchDefault(DictCatalogSearchContext context) ;
     /**

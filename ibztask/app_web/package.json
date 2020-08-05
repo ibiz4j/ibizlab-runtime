@@ -35,7 +35,7 @@
     "qs": "^6.9.1",
     "rxjs": "^6.5.4",
     "tinymce": "4.8.5",
-    "view-design": "^4.1.0",
+    "view-design": "4.2.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-grid-layout": "^2.3.7",

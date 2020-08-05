@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFUserSearchContext;
 import cn.ibizlab.core.workflow.service.IWFUserService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -121,9 +122,7 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(WFUser et) {
         if (null == et) {
             return false;
@@ -205,5 +204,6 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
     }
 
 }
+
 
 

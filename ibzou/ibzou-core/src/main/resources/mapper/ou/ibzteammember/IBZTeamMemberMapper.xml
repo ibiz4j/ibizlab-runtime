@@ -34,22 +34,22 @@
 	 <select id="selectByUserid" resultMap="IBZTeamMemberResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  userid=#{userid}
+			 ) t1
+			 where  userid=#{userid}
      </select>
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZTEAMMEMBER_IBZPOST_POSTID] -->
 	 <select id="selectByPostid" resultMap="IBZTeamMemberResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  postid=#{postid}
+			 ) t1
+			 where  postid=#{postid}
      </select>
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZTEAMMEMBER_IBZTEAM_TEAMID] -->
 	 <select id="selectByTeamid" resultMap="IBZTeamMemberResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  teamid=#{teamid}
+			 ) t1
+			 where  teamid=#{teamid}
      </select>
 
     <!--数据集合[Default]-->

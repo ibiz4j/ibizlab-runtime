@@ -24,18 +24,47 @@
             font-size: 12px;
             width: 18px;
         }
-        .el-submenu__title .app-menu-icon,.el-submenu__title .app-menu-icon{
+        .el-submenu__title .app-menu-icon,.el-menu-item .app-menu-icon{
             width:20px;
             font-size: 14px;
         }
         .el-submenu__title .text {
-            font-size: 16px;
+            font-size: 16px;      
         }
-        .el-menu-item, .el-submenu__title {
+        .el-submenu__title .app-menu-circle,.el-menu-item .app-menu-circle {
+            display: inline-block;
+            border-radius: 50%;       
+            width: 20px;
+            height: 20px;
+            line-height: 36px;
+            vertical-align:middle;
+            background: rgb(var(--app-footer-background-color-rgb));
+            border: 1px solid #fff;
+            border-color: rgb(var(--app-header-color-rgb));
+            color: rgb(var(--app-header-color-rgb));;
+            text-align: center;
+            font: 12px Arial, sans-serif;   
+         }
+
+        .el-submenu__title, .el-menu-item {
             height: 50px;
             font-size: 14px;
             line-height: 50px;
+            border-left: 4px !important;       
         }
+
+        .el-menu-item .el-tooltip {
+            padding-left: 12px !important; 
+        }
+
+        .isCollpase .el-submenu__title{
+            padding-left: 12px !important;
+        }
+
+        .isFirst > .text {
+            font-size: 16px !important;
+        }
+       
         .el-menu-item, .el-submenu, .el-menu {
             border-top: 1px solid #fff;
         }
@@ -73,6 +102,23 @@
             overflow: hidden;
         }
     }
+    .el-menu--horizontal{
+        display: flex;
+        width: calc(100vw - 1100px);
+        height: 65px;
+        flex-wrap: nowrap;
+        overflow-x:scroll;
+        padding-top: 3px;
+        .el-menu-item{
+            overflow: visible;
+        }
+        .el-submenu{
+            .el-submenu__title{
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+            }
+        } 
+    }
     .ivu-divider-horizontal {
         width: 100%;
         min-width: 100%;
@@ -109,6 +155,5 @@
         margin-bottom: 1px;
     }
 }
-
 
 // this is less

@@ -32,15 +32,15 @@
 	 <select id="selectByParentdeptid" resultMap="IBZDepartmentResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  pdeptid=#{deptid}
+			 ) t1
+			 where  pdeptid=#{deptid}
      </select>
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_IBZDEPT_IBZORG_ORGID] -->
 	 <select id="selectByOrgid" resultMap="IBZDepartmentResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  orgid=#{orgid}
+			 ) t1
+			 where  orgid=#{orgid}
      </select>
 
     <!--数据集合[Default]-->

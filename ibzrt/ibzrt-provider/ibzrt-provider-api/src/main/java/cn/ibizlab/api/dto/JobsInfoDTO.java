@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
 import cn.ibizlab.util.domain.DTOBase;
+import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
 
 /**

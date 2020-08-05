@@ -6,12 +6,16 @@
               :viewdata="viewdata"
               :viewparam="viewparam"
               :viewDefaultUsage="false"
-              @viewdataschange="setValue(args)"
+              @viewdataschange="setValue($event)"
               style="height:100%;">
             </component>
         </div>
         <template v-if="placeholder">
-            <div v-if="value" class="app-embed-value">{{value}}</div>
+            <div v-if="value" class="app-embed-value">
+                <span v-for="(item,index) in value" :key="index">
+                    {{item}}
+                </span>
+            </div>
             <div v-else class="app-embed-placeholder">{{placeholder}}</div>
         </template>
     </div>
@@ -174,8 +178,8 @@ export default class AppEmbedPicker extends Vue {
         }
         let arg: any = {};
         // 合并视图上下文参数和视图参数
-        let param: any = JSON.parse(JSON.stringify(this.viewparams));
-        let context: any = JSON.parse(JSON.stringify(this.context));
+        arg.param = JSON.parse(JSON.stringify(this.viewparams));
+        arg.context = JSON.parse(JSON.stringify(this.context));
         // 附加参数处理
          if (this.localContext && Object.keys(this.localContext).length >0) {
             let _context = this.$util.computedNavData(this.data,arg.context,arg.param,this.localContext);
@@ -185,8 +189,8 @@ export default class AppEmbedPicker extends Vue {
             let _param = this.$util.computedNavData(this.data,arg.param,arg.param,this.localParam);
             Object.assign(arg.param,_param);
         }
-        this.viewdata = JSON.stringify(context);
-        this.viewparam = JSON.stringify(param);
+        this.viewdata = JSON.stringify(arg.context);
+        this.viewparam = JSON.stringify(arg.param);
     }
 
     /**
@@ -243,11 +247,21 @@ export default class AppEmbedPicker extends Vue {
      * @memberof AppEmbedPicker
      */
     public setValue(item: any) {
-        if (this.valueItem) {
-            this.$emit('formitemvaluechange', { name: this.valueItem, value: item[0].srfkey });
-        }
-        if (this.name) {
-            this.$emit('formitemvaluechange', { name: this.name, value: item[0].srfmajortext });
+        let selectsrfkey: Array<any> = [];
+        let selectsrfmajortext: Array<any> = [];
+        if(item && Array.isArray(item)){
+            item.forEach((select: any)=>{
+                selectsrfkey.push(select.srfkey);
+                selectsrfmajortext.push(select.srfmajortext);
+            })
+            if (this.valueItem) {
+                let value = selectsrfkey.length > 0 ? selectsrfkey : '';
+                this.$emit('formitemvaluechange', { name: this.valueItem, value: value });
+            }
+            if (this.name) {
+                let value = selectsrfmajortext.length > 0 ? selectsrfmajortext : '';
+                this.$emit('formitemvaluechange', { name: this.name, value: value });
+            }
         }
     }
 

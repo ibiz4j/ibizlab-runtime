@@ -185,7 +185,7 @@ export default class DropDownListMpicker extends Vue {
       if(this.tag && Object.is(this.codelistType,"STATIC")){
           const codelist = this.$store.getters.getCodeList(this.tag);
           if (codelist) {
-              this.items = [...JSON.parse(JSON.stringify(codelist.items))];
+            this.items = [...JSON.parse(JSON.stringify(codelist.items))];
           } else {
               console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           }
@@ -197,7 +197,7 @@ export default class DropDownListMpicker extends Vue {
           let _context = data.context;
           let _param = data.param;
           this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
-              this.items = res;
+            this.items = res;
           }).catch((error:any) => {
               console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           });
@@ -225,7 +225,6 @@ export default class DropDownListMpicker extends Vue {
             });
         }
     }
-
 }
 </script>
 

@@ -184,7 +184,7 @@ export default class OrgTreeService extends ControlService {
         filter = this.handleResNavParams(context,filter,rsNavParams,rsParams);
         return new Promise((resolve:any,reject:any) =>{
             let treeNode: any = {};
-            Object.assign(treeNode, { text: 'entities.ibzorganization.orgtree_treeview.nodes.root' });
+            Object.assign(treeNode, { text: i18n.t('entities.ibzorganization.orgtree_treeview.nodes.root') });
             Object.assign(treeNode, { isUseLangRes: true });
             Object.assign(treeNode,{srfappctx:context});
             Object.assign(treeNode, { srfmajortext: treeNode.text });
@@ -525,7 +525,7 @@ export default class OrgTreeService extends ControlService {
             }
 		}else{
 			// 先从导航上下文取数，没有再从导航参数（URL）取数，如果导航上下文和导航参数都没有则为null
-			if(context[(curNavData.value).toLowerCase()]){
+			if(context[(curNavData.value).toLowerCase()] != null){
 				Object.defineProperty(tempData, item.toLowerCase(), {
 					value: context[(curNavData.value).toLowerCase()],
 					writable : true,
@@ -533,7 +533,7 @@ export default class OrgTreeService extends ControlService {
 					configurable : true
 				});
 			}else{
-				if(viewparams[(curNavData.value).toLowerCase()]){
+				if(viewparams[(curNavData.value).toLowerCase()] != null){
 					Object.defineProperty(tempData, item.toLowerCase(), {
 						value: viewparams[(curNavData.value).toLowerCase()],
 						writable : true,

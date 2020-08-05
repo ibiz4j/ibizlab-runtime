@@ -72,7 +72,7 @@ export default class AppRichTextEditor extends Vue {
      * @type {string}
      * @memberof AppRichTextEditor
      */
-    public uploadUrl = Environment.BaseUrl + Environment.UploadFile;
+    public uploadUrl = Environment.UploadFile;
 
     /**
      * 下载路径

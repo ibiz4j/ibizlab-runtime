@@ -93,7 +93,10 @@ public class UserDingtalkRegisterResource {
         if (sysUserAuths.size()>0) {
             SysUserAuth userauth = sysUserAuths.get(0);
             IBZUSER ibzuser = ibzuserService.getById(userauth.getUserid());
-            object.put("ibzuser", ibzuser);
+            JSONObject ibzuserObj = new JSONObject();
+            ibzuserObj.put("loginname", ibzuser.getLoginname());
+            ibzuserObj.put("password", ibzuser.getPassword());
+            object.put("ibzuser", ibzuserObj);
 
             // 生成登录token信息
             userDetailsService.resetByUsername(ibzuser.getLoginname());
@@ -153,7 +156,10 @@ public class UserDingtalkRegisterResource {
 
         // 注册成功，登录系统
         if (!StringUtils.isEmpty(ibzuser)) {
-            object.put("ibzuser", ibzuser);
+            JSONObject ibzuserObj = new JSONObject();
+            ibzuserObj.put("loginname", ibzuser.getLoginname());
+            ibzuserObj.put("password", ibzuser.getPassword());
+            object.put("ibzuser", ibzuserObj);
         }
 
         //　生成登录token信息

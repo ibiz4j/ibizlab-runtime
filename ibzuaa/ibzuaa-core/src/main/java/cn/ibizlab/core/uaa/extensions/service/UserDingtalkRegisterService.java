@@ -75,7 +75,7 @@ public class UserDingtalkRegisterService {
      */
     public JSONObject requestDingtalkUserByCode(String code, long currentTimeMillis, String dingTalkAppId, String dingTalkAppSecret) {
         JSONObject returnObj = null;
-
+        CloseableHttpClient client = null;
         try {
             // 根据timestamp, appSecret计算签名值
             String stringToSign = String.valueOf(currentTimeMillis);
@@ -91,7 +91,7 @@ public class UserDingtalkRegisterService {
                     + "&signature=" + urlEncodeSignature;
 
             // 创建httpclient对象
-            CloseableHttpClient client = HttpClients.createDefault();
+            client = HttpClients.createDefault();
 
             // 创建post方式请求对象
             HttpPost httpPost = new HttpPost(url);
@@ -133,6 +133,14 @@ public class UserDingtalkRegisterService {
             throw new BadRequestAlertException("钉钉生成安全签名失败", "UserDingtalkRegisterService", "");
         } catch (IOException e) {
             throw new BadRequestAlertException("连接钉钉服务端失败", "UserDingtalkRegisterService", "");
+        }
+        finally {
+            if(client != null) {
+                try {
+                    client.close();
+                } catch (IOException e) {
+                }
+            }
         }
 
         return returnObj;

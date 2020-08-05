@@ -73,8 +73,8 @@ export default class IBZOrganizationServiceBase extends EntityService {
         }
         let tempContext:any = JSON.parse(JSON.stringify(context));
         let res:any = await Http.getInstance().post(`/ibzorganizations`,data,isloading);
-        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees?res.data.ibzemployees:[]));
         this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzdepartments',JSON.stringify(res.data.ibzdepartments?res.data.ibzdepartments:[]));
+        this.tempStorage.setItem(tempContext.srfsessionkey+'_ibzemployees',JSON.stringify(res.data.ibzemployees?res.data.ibzemployees:[]));
         
         return res;
     }

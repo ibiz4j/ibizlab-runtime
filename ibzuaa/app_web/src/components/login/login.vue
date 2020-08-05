@@ -134,12 +134,21 @@
         }
 
         public mounted() {
-            if (this.getCookie("loginname") && this.getCookie("loginname") !== 'undefined') {
+            if (this.getCookie("loginname") && this.getCookie("loginname") !== 'undefined'
+                && this.getCookie("password") && this.getCookie("password") !== 'undefined') {
                 this.form.loginname = this.getCookie("loginname");
-            }
-            if (this.getCookie("password") && this.getCookie("password") !== 'undefined') {
                 this.form.password = this.getCookie("password");
+            }else {
+                if (localStorage.getItem("ibzuser")) {
+                    const ibzuser:any = localStorage.getItem("ibzuser");
+                    if (ibzuser) {
+                        const ibzuserObj:any = JSON.parse(ibzuser);
+                        this.form.loginname = ibzuserObj.loginname;
+                        this.form.password = ibzuserObj.password;
+                    }
+                }
             }
+
         }
 
         /**

@@ -65,4 +65,3 @@ public class JobsInfoSearchContext extends QueryWrapperContext<JobsInfo> {
 
 
 
-

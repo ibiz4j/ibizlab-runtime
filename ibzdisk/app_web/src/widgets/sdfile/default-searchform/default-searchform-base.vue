@@ -6,7 +6,14 @@
       <row>
                     <i-col v-show="detailsModel.n_filename_like.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
               <app-form-item name='n_filename_like' :itemRules="this.rules.n_filename_like" class='' :caption="$t('entities.sdfile.default_searchform.details.n_filename_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_filename_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <input-box v-model="data.n_filename_like"  @enter="onEnter($event)"    :disabled="detailsModel.n_filename_like.disabled" type='text'  style="width:100px;"></input-box>
+              <input-box 
+              v-model="data.n_filename_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_filename_like.disabled" 
+              type='text' 
+              style="width:100px;">
+          </input-box>
           
           </app-form-item>
           

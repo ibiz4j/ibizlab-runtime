@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFSystemSearchContext;
 import cn.ibizlab.core.workflow.service.IWFSystemService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -118,9 +119,7 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(WFSystem et) {
         if (null == et) {
             return false;
@@ -183,5 +182,6 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
 
 
 }
+
 
 

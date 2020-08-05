@@ -166,10 +166,6 @@ export default class IBZDepartmentUIServiceBase extends UIService {
                         return;
                     }
                     const _this: any = actionContext;
-                    if(window.opener){
-                        window.opener.postMessage({status:'OK',identification:'WF'},Environment.uniteAddress);
-                        window.close();
-                    }
                     return result.datas;
                 });
             }
@@ -236,10 +232,6 @@ export default class IBZDepartmentUIServiceBase extends UIService {
                     }
                     if (this.IBZDepartment_OpenMainView && this.IBZDepartment_OpenMainView instanceof Function) {
                         this.IBZDepartment_OpenMainView(result.datas,context, params, $event, xData,actionContext);
-                    }
-                    if(window.opener){
-                        window.opener.postMessage({status:'OK',identification:'WF'},Environment.uniteAddress);
-                        window.close();
                     }
                     return result.datas;
                 });

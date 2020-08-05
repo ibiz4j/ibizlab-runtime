@@ -114,6 +114,26 @@ export default {
 		uiactions: {
 		},
 	},
+	changepw_form: {
+		details: {
+			group1: "密码信息", 
+			formpage1: "基本信息", 
+			srfupdatedate: "最后修改时间", 
+			srforikey: "", 
+			srfkey: "用户标识", 
+			srfmajortext: "姓名", 
+			srftempmode: "", 
+			srfuf: "", 
+			srfdeid: "", 
+			srfsourcekey: "", 
+			oldpasswd: "原始密码", 
+			newpasswd: "新密码", 
+			cfmpasswd: "新密码确认", 
+			userid: "用户标识", 
+		},
+		uiactions: {
+		},
+	},
 	newform_form: {
 		details: {
 			group1: "人员基本信息", 
@@ -137,26 +157,6 @@ export default {
 			mdeptid: "主部门", 
 			enable: "逻辑有效", 
 			bcode: "业务编码", 
-			userid: "用户标识", 
-		},
-		uiactions: {
-		},
-	},
-	changepw_form: {
-		details: {
-			group1: "密码信息", 
-			formpage1: "基本信息", 
-			srfupdatedate: "最后修改时间", 
-			srforikey: "", 
-			srfkey: "用户标识", 
-			srfmajortext: "姓名", 
-			srftempmode: "", 
-			srfuf: "", 
-			srfdeid: "", 
-			srfsourcekey: "", 
-			oldpasswd: "原始密码", 
-			newpasswd: "新密码", 
-			cfmpasswd: "新密码确认", 
 			userid: "用户标识", 
 		},
 		uiactions: {
@@ -194,6 +194,14 @@ export default {
 			caption: "保存",
 			tip: "保存",
 		},
+		deuiaction1: {
+			caption: "保存并关闭",
+			tip: "保存并关闭",
+		},
+		deuiaction2: {
+			caption: "关闭",
+			tip: "关闭",
+		},
 		tbitem6: {
 			caption: "-",
 			tip: "",
@@ -204,14 +212,6 @@ export default {
 		},
 	},
 	gridviewtoolbar_toolbar: {
-		tbitem1_opennewcreateview: {
-			caption: "新建",
-			tip: "新建",
-		},
-		tbitem2: {
-			caption: "-",
-			tip: "",
-		},
 		tbitem3: {
 			caption: "新建",
 			tip: "新建",

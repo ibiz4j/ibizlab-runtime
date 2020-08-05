@@ -95,9 +95,9 @@ public class DEFieldDefaultValueAspect
                 for(Object item:(List)obj) {
                     if(item instanceof EntityBase) {
                         if(deFields==null) {
-                            deFields = DEFieldCacheMap.getDEFields(obj.getClass());
+                            deFields = DEFieldCacheMap.getDEFields(item.getClass());
                             curUser = AuthenticationUser.getAuthenticationUser();
-                            keyField=DEFieldCacheMap.getDEKeyField(obj.getClass());
+                            keyField=DEFieldCacheMap.getDEKeyField(item.getClass());
                             if(StringUtils.isEmpty(keyField))
                                 return true;
                         }

@@ -119,6 +119,14 @@ export default {
 			caption: "Save",
 			tip: "Save",
 		},
+		deuiaction1: {
+			caption: "Save And Close",
+			tip: "Save And Close Window",
+		},
+		deuiaction2: {
+			caption: "关闭",
+			tip: "关闭",
+		},
 		tbitem6: {
 			caption: "-",
 			tip: "",
@@ -129,14 +137,6 @@ export default {
 		},
 	},
 	gridviewtoolbar_toolbar: {
-		tbitem1_opennewcreateview: {
-			caption: "新建",
-			tip: "新建",
-		},
-		tbitem2: {
-			caption: "-",
-			tip: "",
-		},
 		tbitem3: {
 			caption: "New",
 			tip: "New",

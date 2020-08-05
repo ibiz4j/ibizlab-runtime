@@ -49,30 +49,6 @@ export default {
       		title: "Restart workflow",
 		},
 	},
-	newform_form: {
-		details: {
-			group1: "部门基本信息", 
-			formpage1: "基本信息", 
-			srfupdatedate: "The [{0}] value is not a character type", 
-			srforikey: "", 
-			srfkey: "decimal", 
-			srfmajortext: "{0}/P", 
-			srftempmode: "", 
-			srfuf: "", 
-			srfdeid: "", 
-			srfsourcekey: "", 
-			deptcode: "Cancel", 
-			deptname: "{0}/P", 
-			orgid: "单位", 
-			orgname: "单位", 
-			pdeptid: "上级部门", 
-			pdeptname: "上级部门", 
-			enable: "After the [{0}] is executed, no subsequent nodes are specified", 
-			deptid: "decimal", 
-		},
-		uiactions: {
-		},
-	},
 	main_form: {
 		details: {
 			formpage1: "Grid View", 
@@ -99,6 +75,30 @@ export default {
 			showorder: "排序", 
 			createdate: "{0}[{1}] relational data [{2}] cannot be deleted!", 
 			updatedate: "The [{0}] value is not a character type", 
+		},
+		uiactions: {
+		},
+	},
+	newform_form: {
+		details: {
+			group1: "部门基本信息", 
+			formpage1: "基本信息", 
+			srfupdatedate: "The [{0}] value is not a character type", 
+			srforikey: "", 
+			srfkey: "decimal", 
+			srfmajortext: "{0}/P", 
+			srftempmode: "", 
+			srfuf: "", 
+			srfdeid: "", 
+			srfsourcekey: "", 
+			deptcode: "Cancel", 
+			deptname: "{0}/P", 
+			orgid: "单位", 
+			orgname: "单位", 
+			pdeptid: "上级部门", 
+			pdeptname: "上级部门", 
+			enable: "After the [{0}] is executed, no subsequent nodes are specified", 
+			deptid: "decimal", 
 		},
 		uiactions: {
 		},
@@ -135,29 +135,7 @@ export default {
 		uiactions: {
 		},
 	},
-	editviewtoolbar_toolbar: {
-		tbitem3: {
-			caption: "Save",
-			tip: "Save",
-		},
-		tbitem6: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem14: {
-			caption: "Copy",
-			tip: "Copy {0}",
-		},
-	},
 	gridviewtoolbar_toolbar: {
-		tbitem1_opennewcreateview: {
-			caption: "新建",
-			tip: "新建",
-		},
-		tbitem2: {
-			caption: "-",
-			tip: "",
-		},
 		tbitem3: {
 			caption: "New",
 			tip: "New",
@@ -209,6 +187,28 @@ export default {
 		tbitem19: {
 			caption: "Filter",
 			tip: "Filter",
+		},
+	},
+	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "Save",
+			tip: "Save",
+		},
+		deuiaction1: {
+			caption: "Save And Close",
+			tip: "Save And Close Window",
+		},
+		deuiaction2: {
+			caption: "关闭",
+			tip: "关闭",
+		},
+		tbitem6: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem14: {
+			caption: "Copy",
+			tip: "Copy {0}",
 		},
 	},
 	depttree_treeview: {

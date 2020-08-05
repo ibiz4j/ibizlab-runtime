@@ -135,9 +135,7 @@ public class IBZDepartmentServiceImpl extends ServiceImpl<IBZDepartmentMapper, I
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(IBZDepartment et) {
         if (null == et) {
             return false;

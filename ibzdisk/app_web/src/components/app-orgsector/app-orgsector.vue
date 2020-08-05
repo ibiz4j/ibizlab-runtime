@@ -65,14 +65,36 @@ export default class AppOrgSector extends Vue {
    * @memberof AppOrgSector
    */
   public mounted() {
+    this.getData();
+  }
+
+  /**
+   * 获取数据
+   * 
+   * @memberof AppOrgSector
+   */
+  public getData(){
     if (this.$store.getters.getAppData()) {
-      if (this.$store.getters.getAppData().context && this.$store.getters.getAppData().context.srforgsectorid && this.$store.getters.getAppData().context.srforgsectorname) {
+      let _context = this.$store.getters.getAppData().context;
+      let _srforgname = this.$store.getters.getAppData().context.srforgname;
+      let _srforgsectorname = this.$store.getters.getAppData().context.srforgsectorname;
+      if (_context && this.$store.getters.getAppData().context.srforgsectorid ){
         this.selectedOrgId = this.$store.getters.getAppData().context.srforgsectorid;
-        this.selectedOrgName = this.$store.getters.getAppData().context.srforgsectorname;
+      } else {
+        return false;
+      }
+      
+      if(_context && _srforgname && _srforgsectorname){
+        this.selectedOrgName = _srforgname + '-' + _srforgsectorname;
+      } else if (_context && _srforgname) {
+        this.selectedOrgName = _srforgname;
+      } else if (_context && _srforgsectorname) {
+        this.selectedOrgName = _srforgsectorname;
       }
       if (this.$store.getters.getAppData().srforgsections) {
         this.selectedOrgArray = this.$store.getters.getAppData().srforgsections;
       }
+      
     }
   }
 

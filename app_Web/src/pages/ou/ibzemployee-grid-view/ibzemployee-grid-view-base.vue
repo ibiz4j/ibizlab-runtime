@@ -10,13 +10,6 @@
                 <div class='pull-right'>
                     <div class='toolbar-container'>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem1_opennewcreateview.visabled" :disabled="toolBarModels.tbitem1_opennewcreateview.disabled" class='' @click="toolbar_click({ tag: 'tbitem1_opennewcreateview' }, $event)">
-                                    <i class=''></i>
-                                    <span class='caption'>{{$t('entities.ibzemployee.gridviewtoolbar_toolbar.tbitem1_opennewcreateview.caption')}}</span>
-                                </i-button>
-                            <div slot='content'>{{$t('entities.ibzemployee.gridviewtoolbar_toolbar.tbitem1_opennewcreateview.tip')}}</div>
-                        </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
                                     <i class='fa fa-file-text-o'></i>
                                     <span class='caption'>{{$t('entities.ibzemployee.gridviewtoolbar_toolbar.tbitem3.caption')}}</span>
@@ -359,9 +352,6 @@ export default class IBZEmployeeGridViewBase extends Vue {
      * @memberof IBZEmployeeGridView
      */
     public toolBarModels: any = {
-        tbitem1_opennewcreateview: { name: 'tbitem1_opennewcreateview', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'OpenNewCreateView', target: 'NONE' } },
-
-        tbitem2: {  name: 'tbitem2', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
         tbitem3: { name: 'tbitem3', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
         tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
@@ -564,7 +554,7 @@ export default class IBZEmployeeGridViewBase extends Vue {
             }
 		}else{
 			// 先从导航上下文取数，没有再从导航参数（URL）取数，如果导航上下文和导航参数都没有则为null
-			if(this.context[(curNavData.value).toLowerCase()]){
+			if(this.context[(curNavData.value).toLowerCase()] != null){
 				Object.defineProperty(tempData, item.toLowerCase(), {
 					value: this.context[(curNavData.value).toLowerCase()],
 					writable : true,
@@ -572,7 +562,7 @@ export default class IBZEmployeeGridViewBase extends Vue {
 					configurable : true
 				});
 			}else{
-				if(this.viewparams[(curNavData.value).toLowerCase()]){
+				if(this.viewparams[(curNavData.value).toLowerCase()] != null){
 					Object.defineProperty(tempData, item.toLowerCase(), {
 						value: this.viewparams[(curNavData.value).toLowerCase()],
 						writable : true,
@@ -703,9 +693,6 @@ export default class IBZEmployeeGridViewBase extends Vue {
      * @memberof IBZEmployeeGridViewBase
      */
     public toolbar_click($event: any, $event2?: any) {
-        if (Object.is($event.tag, 'tbitem1_opennewcreateview')) {
-            this.toolbar_tbitem1_opennewcreateview_click(null, '', $event2);
-        }
         if (Object.is($event.tag, 'tbitem3')) {
             this.toolbar_tbitem3_click(null, '', $event2);
         }
@@ -847,35 +834,6 @@ export default class IBZEmployeeGridViewBase extends Vue {
     }
 
 
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem1_opennewcreateview_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.grid;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        const curUIService:IBZEmployeeUIService  = new IBZEmployeeUIService();
-        curUIService.IBZEmployee_OpenNewCreateView(datas,contextJO, paramJO,  $event, xData,this,"IBZEmployee");
-    }
 
     /**
      * 逻辑事件

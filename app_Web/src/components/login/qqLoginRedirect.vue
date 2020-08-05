@@ -144,7 +144,7 @@
          * 挂载
          */
         public mounted() {
-            let _this = this;
+
             // 从url获取授权code和state
             this.code = this.$route.query.code;
             if (!this.code) {
@@ -156,7 +156,7 @@
             }
             // 获取失败，回到登录页
             if (!this.code || !this.state) {
-                this.$message.error("微信授权，获取code失败");
+                this.$message.error("QQ授权，获取code失败");
                 this.goLogin();
             }
             else {
@@ -168,6 +168,7 @@
                     this.nickname = localStorage.getItem("nickname");
                 }
             }
+
         }
 
 
@@ -247,7 +248,8 @@
                             localStorage.setItem('user', JSON.stringify(data.user));
                         }
                         if (data.ibzuser) {
-                            let ibzuser: any = JSON.stringify(data.ibzuser);
+                            let ibzuser: any = data.ibzuser;
+                            localStorage.setItem('ibzuser',JSON.stringify(ibzuser));
                             // 设置cookie,保存账号密码7天
                             this.setCookie(ibzuser.loginname, ibzuser.password, 7);
                             // 跳转首页
@@ -271,80 +273,28 @@
                         closable: true
                     });
                 }
+                // 返回登录页
+                this.goLogin();
             });
         }
 
         /**
-         * 自动登录倒计时
+         * 设置cookie
          */
-        public countDown(totalTime: any): void {
-            if (!this.canClick) return;
-            this.canClick = false;
-            this.BtnContent = totalTime + 's后自动登录';
-            // 设置定时器
-            let clock = window.setInterval(() => {
-                // 秒数-1
-                totalTime--;
-                this.BtnContent = totalTime + 's后自动登录';
-                if (totalTime < 0) {
-                    // 清除定时器
-                    window.clearInterval(clock);
-                    // 登录请求
-                    const loginname: any = this.form.loginname;
-                    const password: any = this.form.password;
-                    const post: Promise<any> = this.$http.post('v7/login', this.form, true);
-                    post.then((response: any) => {
-                        if (response && response.status === 200) {
-                            const data = response.data;
-                            if (data && data.token) {
-                                localStorage.setItem('token', data.token);
-                            }
-                            if (data && data.user) {
-                                localStorage.setItem('user', JSON.stringify(data.user));
-                            }
-                            // 设置cookie,保存账号密码7天
-                            this.setCookie(loginname, password, 7);
-                            // 跳转首页
-                            const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
-                            this.$router.push({path: url});
-                        }
-                    }).catch((error: any) => {
-                        const data = error.data;
-                        if (data && data.detail) {
-                            this.$Message.error({
-                                content: "登录失败，" + data.detail,
-                                duration: 3,
-                                closable: true
-                            });
-                        } else {
-                            this.$Message.error({
-                                content: "登录失败",
-                                duration: 3,
-                                closable: true
-                            });
-                        }
-                    });
-
-                }
-            }, 1000)
+        public setCookie(name: any, value: any, day: any) {
+            if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+                var curDate = new Date();
+                var curTamp = curDate.getTime();
+                var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
+                var passedTamp = curTamp - curWeeHours;
+                var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
+                var leftTime = new Date();
+                leftTime.setTime(leftTamp + curTamp);
+                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+            } else {
+                document.cookie = name + "=" + escape(value);
+            }
         }
-
-
-        /**
-         * 设置cookie,保存账号密码
-         * @param loginname
-         * @param password
-         */
-        public setCookie(loginname: any, password: any, exdays: any) {
-            // 获取时间
-            let exdate = new Date();
-            // 保存的天数
-            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
-            // 字符串拼接cookie
-            window.document.cookie = "loginname" + "=" + loginname + ";path=/;expires=" + exdate.toUTCString();
-            window.document.cookie = "password" + "=" + password + ";path=/;expires=" + exdate.toUTCString();
-        }
-
 
     }
 </script>

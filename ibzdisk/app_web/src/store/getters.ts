@@ -78,19 +78,6 @@ export const getViewSplit = (state: any) => (viewUID: string) => {
 }
 
 /**
- * 获取拷贝数据
- * 
- * @param state 
- */
-export const getCopyData = (state: any) => (srfkey: string) => {
-  let copyData = state.copyDataMap[srfkey];
-  if(copyData){
-      delete state.copyDataMap[srfkey];
-  }
-  return copyData;
-}
-
-/**
  * 获取单位数据
  * 
  * @param state 

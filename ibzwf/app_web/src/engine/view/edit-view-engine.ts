@@ -198,7 +198,8 @@ export default class EditViewEngine extends ViewEngine {
             if(index !== -1){
                 viewdata.srfTitle = viewdata.srfTitle.substr(0,index);
             }
-            if(this.view.$tabPageExp){
+            // 解决表格视图标题问题
+            if(this.view.$tabPageExp && this.view.viewDefaultUsage){
                 this.view.$tabPageExp.setCurPageCaption(this.view.$t(viewdata.srfTitle), this.view.$t(viewdata.srfTitle), info);
             }
             if(this.view.$route){

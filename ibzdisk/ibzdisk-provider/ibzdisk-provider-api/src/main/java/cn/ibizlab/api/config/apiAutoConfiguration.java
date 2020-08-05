@@ -13,6 +13,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
+import org.springframework.context.annotation.Import;
 
 @Configuration
 @ConditionalOnClass(apiRestConfiguration.class)

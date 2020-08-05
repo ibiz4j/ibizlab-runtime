@@ -33,8 +33,8 @@
 	 <select id="selectByCatalogId" resultMap="DictOptionResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  cid=#{id}
+			 ) t1
+			 where  cid=#{id}
      </select>
 
     <!--数据集合[Default]-->

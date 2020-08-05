@@ -30,6 +30,22 @@ export default class AppColumnLink extends Vue {
      */
     @Prop() public linkview?: any;
 
+        /**
+     * 局部上下文导航参数
+     * 
+     * @type {any}
+     * @memberof AppColumnLink
+     */
+    @Prop() public localContext!:any;
+
+    /**
+     * 局部导航参数
+     * 
+     * @type {any}
+     * @memberof AppColumnLink
+     */
+    @Prop() public localParam!:any;
+
     /**
      * 值项名称
      *
@@ -281,6 +297,15 @@ export default class AppColumnLink extends Vue {
         // 合并表单参数
         arg.param = this.viewparams ? JSON.parse(JSON.stringify(this.viewparams)) : {};
         arg.context = this.context ? JSON.parse(JSON.stringify(this.context)) : {};
+         // 附加参数处理
+        if (this.localContext && Object.keys(this.localContext).length >0) {
+            let _context = this.$util.computedNavData(this.data,arg.context,arg.param,this.localContext);
+            Object.assign(arg.context,_context);
+        }
+        if (this.localParam && Object.keys(this.localParam).length >0) {
+            let _param = this.$util.computedNavData(this.data,arg.param,arg.param,this.localParam);
+            Object.assign(arg.param,_param);
+        }
         return true;
     }
 

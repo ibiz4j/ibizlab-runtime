@@ -29,8 +29,8 @@
 	 <select id="selectByParentorgid" resultMap="IBZOrganizationResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  porgid=#{orgid}
+			 ) t1
+			 where  porgid=#{orgid}
      </select>
 
     <!--数据集合[Default]-->

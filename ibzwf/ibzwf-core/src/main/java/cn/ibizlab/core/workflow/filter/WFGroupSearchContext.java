@@ -51,4 +51,3 @@ public class WFGroupSearchContext extends QueryWrapperContext<WFGroup> {
 
 
 
-

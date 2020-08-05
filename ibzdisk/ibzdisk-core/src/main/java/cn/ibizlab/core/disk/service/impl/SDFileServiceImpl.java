@@ -28,6 +28,7 @@ import cn.ibizlab.core.disk.filter.SDFileSearchContext;
 import cn.ibizlab.core.disk.service.ISDFileService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -118,9 +119,7 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(SDFile et) {
         if (null == et) {
             return false;
@@ -202,5 +201,6 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
     }
 
 }
+
 
 

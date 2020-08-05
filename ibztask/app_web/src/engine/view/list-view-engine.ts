@@ -123,15 +123,6 @@ export default class ListViewEngine extends MDViewEngine {
         if (!arg) {
             arg = {};
         }
-
-        // if (this.getParentMode()) {
-        //     Object.assign(arg, this.getParentMode());
-        // }
-
-        // if (this.getParentData()) {
-        //     Object.assign(arg, this.getParentData());
-        // }
-
         if (!arg.srfkeys) {
             // 获取要删除的数据集合
             const selectedData: Array<any> = this.getMDCtrl() && this.getMDCtrl().getSelection();

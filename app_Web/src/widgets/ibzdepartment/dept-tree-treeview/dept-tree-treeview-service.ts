@@ -524,7 +524,7 @@ export default class DeptTreeService extends ControlService {
             }
 		}else{
 			// 先从导航上下文取数，没有再从导航参数（URL）取数，如果导航上下文和导航参数都没有则为null
-			if(context[(curNavData.value).toLowerCase()]){
+			if(context[(curNavData.value).toLowerCase()] != null){
 				Object.defineProperty(tempData, item.toLowerCase(), {
 					value: context[(curNavData.value).toLowerCase()],
 					writable : true,
@@ -532,7 +532,7 @@ export default class DeptTreeService extends ControlService {
 					configurable : true
 				});
 			}else{
-				if(viewparams[(curNavData.value).toLowerCase()]){
+				if(viewparams[(curNavData.value).toLowerCase()] != null){
 					Object.defineProperty(tempData, item.toLowerCase(), {
 						value: viewparams[(curNavData.value).toLowerCase()],
 						writable : true,

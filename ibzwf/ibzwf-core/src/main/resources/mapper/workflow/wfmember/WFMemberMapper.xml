@@ -22,15 +22,15 @@
 	 <select id="selectByGroupid" resultMap="WFMemberResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  groupid=#{id}
+			 ) t1
+			 where  groupid=#{id}
      </select>
 	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_WF_GROUP_MEMBER_WF_USER_USERID] -->
 	 <select id="selectByUserid" resultMap="WFMemberResultMap">
          select t1.* from (
                 <include refid="Default" />
-         ) t1
-         where  userid=#{id}
+			 ) t1
+			 where  userid=#{id}
      </select>
 
     <!--数据集合[Default]-->

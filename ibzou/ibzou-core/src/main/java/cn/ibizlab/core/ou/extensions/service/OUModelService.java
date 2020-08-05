@@ -8,6 +8,7 @@ import cn.ibizlab.core.ou.service.IIBZDepartmentService;
 import cn.ibizlab.core.ou.service.IIBZOrganizationService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -218,7 +219,7 @@ public class OUModelService
 	}
 
 
-	//@CacheEvict( value="ibzou-model",allEntries = true)
+	@CacheEvict( value="ibzou-model",allEntries = true)
 	public synchronized void refreshModel()
 	{
 

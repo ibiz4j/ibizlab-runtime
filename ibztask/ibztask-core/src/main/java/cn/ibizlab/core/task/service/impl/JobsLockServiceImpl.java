@@ -28,6 +28,7 @@ import cn.ibizlab.core.task.filter.JobsLockSearchContext;
 import cn.ibizlab.core.task.service.IJobsLockService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -118,9 +119,7 @@ public class JobsLockServiceImpl extends ServiceImpl<JobsLockMapper, JobsLock> i
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(JobsLock et) {
         if (null == et) {
             return false;
@@ -183,5 +182,6 @@ public class JobsLockServiceImpl extends ServiceImpl<JobsLockMapper, JobsLock> i
 
 
 }
+
 
 

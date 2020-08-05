@@ -149,7 +149,6 @@
             if (!this.state) {
                 this.state = this.getUrlParam('state');
             }
-            // alert("code:" + this.code + "\nstate:" + this.state);
             // 获取失败，回到登录页
             if (!this.code || !this.state) {
                 this.$message.error("钉钉授权，获取code失败");
@@ -201,7 +200,6 @@
 
 
 
-
         /**
          * 注册处理
          */
@@ -244,7 +242,8 @@
                             localStorage.setItem('user', JSON.stringify(data.user));
                         }
                         if (data.ibzuser) {
-                            let ibzuser: any = JSON.stringify(data.ibzuser);
+                            let ibzuser: any = data.ibzuser;
+                            localStorage.setItem('ibzuser',JSON.stringify(ibzuser));
                             // 设置cookie,保存账号密码7天
                             this.setCookie(ibzuser.loginname, ibzuser.password, 7);
                             // 跳转首页
@@ -268,24 +267,29 @@
                         closable: true
                     });
                 }
+                // 返回登录页
+                this.goLogin();
             });
         }
 
 
 
         /**
-         * 设置cookie,保存账号密码
-         * @param loginname
-         * @param password
+         * 设置cookie
          */
-        public setCookie(loginname: any, password: any, exdays: any) {
-            // 获取时间
-            let exdate = new Date();
-            // 保存的天数
-            exdate.setTime(exdate.getTime() + 24 * 60 * 60 * 1000 * exdays);
-            // 字符串拼接cookie
-            window.document.cookie = "loginname" + "=" + loginname + ";path=/;expires=" + exdate.toUTCString();
-            window.document.cookie = "password" + "=" + password + ";path=/;expires=" + exdate.toUTCString();
+        public setCookie(name: any, value: any, day: any) {
+            if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+                var curDate = new Date();
+                var curTamp = curDate.getTime();
+                var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
+                var passedTamp = curTamp - curWeeHours;
+                var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
+                var leftTime = new Date();
+                leftTime.setTime(leftTamp + curTamp);
+                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+            } else {
+                document.cookie = name + "=" + escape(value);
+            }
         }
 
 

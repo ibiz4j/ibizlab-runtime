@@ -1,6 +1,7 @@
 <template>
     <div class="appAddressSelection">
         <el-cascader
+            style="width:100%"
             :disabled="disabled"
             size ="medium"
             v-model="CurrentVal"
@@ -14,6 +15,7 @@ import { Component, Vue, Prop, Model, Watch } from 'vue-property-decorator';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import axios from 'axios';
+import { cityCode } from './city_code'
 @Component({})
 export default class AppAddressSelection extends Vue {
 
@@ -63,12 +65,7 @@ export default class AppAddressSelection extends Vue {
    * @memberof AppAddressSelection
    */
     public  getcity() {
-            axios.get("../../assets/json/city_code.json").then((response: any) => {
-            this.format(response.data);
-            }).catch((response: any) => {
-                console.log((this.$t('components.appAddressSelection.loadDataFail') as string));
-            });
-
+        this.format(cityCode);
 
     }
     /**
@@ -86,11 +83,11 @@ export default class AppAddressSelection extends Vue {
    * @memberof AppAddressSelection
    */
     public format(data :any) {
-        let data1 = JSON.parse(JSON.stringify(data).replace(/city/g, 'children')) 
-        let data2 = JSON.parse(JSON.stringify(data1).replace(/name/g, 'label')) 
-        let data3 = JSON.parse(JSON.stringify(data2).replace(/area/g, 'children')) 
-        let data4 = JSON.parse(JSON.stringify(data3).replace(/code/g, 'value')) 
-        this.city = data4;
+        let town  = JSON.parse(JSON.stringify(data).replace(/city/g, 'children')) 
+        let county = JSON.parse(JSON.stringify(town).replace(/name/g, 'label')) 
+        let city = JSON.parse(JSON.stringify(county).replace(/area/g, 'children')) 
+        let province = JSON.parse(JSON.stringify(city).replace(/code/g, 'value')) 
+        this.city = province;
     }
     
 }

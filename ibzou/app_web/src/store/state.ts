@@ -13,7 +13,6 @@ export const rootstate: any = {
     localdata: {},
     zIndex: 300,
     viewSplit: {},
-    copyDataMap:{},
     orgDataMap:{},
     depDataMap:{},
 }

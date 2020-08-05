@@ -28,6 +28,7 @@ import cn.ibizlab.core.dict.filter.DictOptionSearchContext;
 import cn.ibizlab.core.dict.service.IDictOptionService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -126,9 +127,7 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(DictOption et) {
         if (null == et) {
             return false;
@@ -219,5 +218,6 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
 
 
 }
+
 
 

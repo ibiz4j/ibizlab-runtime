@@ -138,6 +138,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        //开放组织机构关系查询
                        .antMatchers("/ibzemployees/**/oumaps").permitAll()
                        .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()
+                       .antMatchers("/dictionarys/**").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();

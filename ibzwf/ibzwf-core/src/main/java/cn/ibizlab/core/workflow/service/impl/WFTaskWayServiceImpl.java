@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFTaskWaySearchContext;
 import cn.ibizlab.core.workflow.service.IWFTaskWayService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 /**
@@ -105,4 +106,5 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
 
 
 }
+
 

@@ -128,9 +128,7 @@ public class IBZPostServiceImpl extends ServiceImpl<IBZPostMapper, IBZPost> impl
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(IBZPost et) {
         if (null == et) {
             return false;

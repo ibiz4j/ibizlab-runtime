@@ -272,66 +272,6 @@ const router = new Router({
                     component: () => import('@pages/workflow/wfuser-mpickup-view/wfuser-mpickup-view.vue'),
                 },
                 {
-                    path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/optionview/:optionview?',
-                    meta: {
-                        caption: 'entities.ibzemployee.views.optionview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-                            { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-                            { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-                            { pathName: 'optionview', parameterName: 'optionview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/ibzemployee-option-view/ibzemployee-option-view.vue'),
-                },
-                {
-                    path: 'ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/optionview/:optionview?',
-                    meta: {
-                        caption: 'entities.ibzemployee.views.optionview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-                            { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-                            { pathName: 'optionview', parameterName: 'optionview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/ibzemployee-option-view/ibzemployee-option-view.vue'),
-                },
-                {
-                    path: 'ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/optionview/:optionview?',
-                    meta: {
-                        caption: 'entities.ibzemployee.views.optionview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-                            { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-                            { pathName: 'optionview', parameterName: 'optionview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/ibzemployee-option-view/ibzemployee-option-view.vue'),
-                },
-                {
-                    path: 'ibzemployees/:ibzemployee?/optionview/:optionview?',
-                    meta: {
-                        caption: 'entities.ibzemployee.views.optionview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-                            { pathName: 'optionview', parameterName: 'optionview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/ibzemployee-option-view/ibzemployee-option-view.vue'),
-                },
-                {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/ibzteammembers/:ibzteammember?/editview/:editview?',
                     meta: {
                         caption: 'entities.ibzteammember.views.editview.title',
@@ -728,35 +668,6 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/uaa/sys-role-edit-view/sys-role-edit-view.vue'),
-                },
-                {
-                    path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/optionview/:optionview?',
-                    meta: {
-                        caption: 'entities.ibzdepartment.views.optionview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-                            { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-                            { pathName: 'optionview', parameterName: 'optionview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/ibzdepartment-option-view/ibzdepartment-option-view.vue'),
-                },
-                {
-                    path: 'ibzdepartments/:ibzdepartment?/optionview/:optionview?',
-                    meta: {
-                        caption: 'entities.ibzdepartment.views.optionview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-                            { pathName: 'optionview', parameterName: 'optionview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/ibzdepartment-option-view/ibzdepartment-option-view.vue'),
                 },
                 {
                     path: 'ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/mpickupview/:mpickupview?',
@@ -1341,20 +1252,6 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/ou/ibzdepartment-pickup-grid-view/ibzdepartment-pickup-grid-view.vue'),
-                },
-                {
-                    path: 'ibzorganizations/:ibzorganization?/optionview/:optionview?',
-                    meta: {
-                        caption: 'entities.ibzorganization.views.optionview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-                            { pathName: 'optionview', parameterName: 'optionview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/ibzorganization-option-view/ibzorganization-option-view.vue'),
                 },
                 {
                     path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/editview/:editview?',
@@ -2272,19 +2169,6 @@ const router = new Router({
         component: () => import('@pages/ou/ibzteam-member-grid-view/ibzteam-member-grid-view.vue'),
     },
     {
-        path: '/ibzorganizations/:ibzorganization?/optionview/:optionview?',
-        meta: {
-            caption: 'entities.ibzorganization.views.optionview.title',
-            info:'',
-            parameters: [
-                { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-                { pathName: 'optionview', parameterName: 'optionview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/ou/ibzorganization-option-view/ibzorganization-option-view.vue'),
-    },
-    {
         path: '/ibzteams/:ibzteam?/editview/:editview?',
         meta: {
             caption: 'entities.ibzteam.views.editview.title',
@@ -3071,89 +2955,6 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
-    },
-    {
-        path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/optionview/:optionview?',
-        meta: {
-            caption: 'entities.ibzdepartment.views.optionview.title',
-            info:'',
-            parameters: [
-                { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-                { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-                { pathName: 'optionview', parameterName: 'optionview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/ou/ibzdepartment-option-view/ibzdepartment-option-view.vue'),
-    },
-    {
-        path: '/ibzdepartments/:ibzdepartment?/optionview/:optionview?',
-        meta: {
-            caption: 'entities.ibzdepartment.views.optionview.title',
-            info:'',
-            parameters: [
-                { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-                { pathName: 'optionview', parameterName: 'optionview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/ou/ibzdepartment-option-view/ibzdepartment-option-view.vue'),
-    },
-    {
-        path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/optionview/:optionview?',
-        meta: {
-            caption: 'entities.ibzemployee.views.optionview.title',
-            info:'',
-            parameters: [
-                { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-                { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-                { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-                { pathName: 'optionview', parameterName: 'optionview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/ou/ibzemployee-option-view/ibzemployee-option-view.vue'),
-    },
-    {
-        path: '/ibzorganizations/:ibzorganization?/ibzemployees/:ibzemployee?/optionview/:optionview?',
-        meta: {
-            caption: 'entities.ibzemployee.views.optionview.title',
-            info:'',
-            parameters: [
-                { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
-                { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-                { pathName: 'optionview', parameterName: 'optionview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/ou/ibzemployee-option-view/ibzemployee-option-view.vue'),
-    },
-    {
-        path: '/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/optionview/:optionview?',
-        meta: {
-            caption: 'entities.ibzemployee.views.optionview.title',
-            info:'',
-            parameters: [
-                { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-                { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-                { pathName: 'optionview', parameterName: 'optionview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/ou/ibzemployee-option-view/ibzemployee-option-view.vue'),
-    },
-    {
-        path: '/ibzemployees/:ibzemployee?/optionview/:optionview?',
-        meta: {
-            caption: 'entities.ibzemployee.views.optionview.title',
-            info:'',
-            parameters: [
-                { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-                { pathName: 'optionview', parameterName: 'optionview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/ou/ibzemployee-option-view/ibzemployee-option-view.vue'),
     },
     {
         path: '/ibzorganizations/:ibzorganization?/ibzdepartments/:ibzdepartment?/ibzemployees/:ibzemployee?/pickupview/:pickupview?',

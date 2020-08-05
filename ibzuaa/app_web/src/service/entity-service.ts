@@ -963,7 +963,7 @@ export default class EntityService {
      * @param isloading 
      */
     public async getAllApp(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        return Http.getInstance().get(`uaa/access-center/app-switcher/default`,data,isloading);
+        return Http.getInstance().get(`/uaa/access-center/app-switcher/default`,data,isloading);
     }
 
     /**
@@ -974,7 +974,7 @@ export default class EntityService {
      * @param isloading 
      */
     public async updateChooseApp(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        return Http.getInstance().put(`uaa/access-center/app-switcher/default`,data,isloading);
+        return Http.getInstance().put(`/uaa/access-center/app-switcher/default`,data,isloading);
     }
 
     /**
@@ -985,7 +985,7 @@ export default class EntityService {
      * @param isloading 
      */
     public async changPassword(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        return Http.getInstance().post(`v7/changepwd`,data,isloading);
+        return Http.getInstance().post(`/v7/changepwd`,data,isloading);
     }
 
 }

@@ -133,9 +133,7 @@ public class IBZTeamMemberServiceImpl extends ServiceImpl<IBZTeamMemberMapper, I
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(IBZTeamMember et) {
         if (null == et) {
             return false;

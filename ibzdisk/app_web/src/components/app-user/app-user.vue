@@ -92,7 +92,7 @@ export default class AppUser extends Vue {
      * @memberof AppUser
      */
     public logout() {
-        const get: Promise<any> = this.$http.get('v7/logout');
+        const get: Promise<any> = this.$http.get('/v7/logout');
         get.then((response:any) =>{
             if (response && response.status === 200) {
                 localStorage.removeItem('user');

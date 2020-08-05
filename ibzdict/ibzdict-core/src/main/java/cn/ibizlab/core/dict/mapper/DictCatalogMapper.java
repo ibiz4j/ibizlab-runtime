@@ -21,14 +21,19 @@ public interface DictCatalogMapper extends BaseMapper<DictCatalog>{
 
     Page<DictCatalog> searchDefault(IPage page, @Param("srf") DictCatalogSearchContext context, @Param("ew") Wrapper<DictCatalog> wrapper) ;
     @Override
+    @Cacheable( value="dictcatalog",key = "'row:'+#p0")
     DictCatalog selectById(Serializable id);
     @Override
+    @CacheEvict( value="dictcatalog",key = "'row:'+#p0.id")
     int insert(DictCatalog entity);
     @Override
+    @CacheEvict( value="dictcatalog",key = "'row:'+#p0.id")
     int updateById(@Param(Constants.ENTITY) DictCatalog entity);
     @Override
+    @CacheEvict(value="dictcatalog",key = "'row:'+#p0.id")
     int update(@Param(Constants.ENTITY) DictCatalog entity, @Param("ew") Wrapper<DictCatalog> updateWrapper);
     @Override
+    @CacheEvict( value="dictcatalog",key = "'row:'+#p0")
     int deleteById(Serializable id);
      /**
       * 自定义查询SQL

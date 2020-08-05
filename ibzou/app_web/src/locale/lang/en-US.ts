@@ -29,6 +29,7 @@ export default {
             deleteError: "Failed to delete",
             delDataFail: "Failed to delete data",
             noData: "No data",
+            startsuccess:"Start successful"
         },
         local:{
             new: "New",

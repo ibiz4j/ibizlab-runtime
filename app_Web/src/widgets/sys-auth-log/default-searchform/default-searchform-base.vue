@@ -42,7 +42,8 @@
               :viewparams="viewparams"
               :localContext ='{ }' 
               :localParam ='{ }' 
-              :disabled="detailsModel.n_authcode_eq.disabled"  
+              :disabled="detailsModel.n_authcode_eq.disabled" 
+              valueType="string"
               tag='CLAuthCode' 
               codelistType='STATIC'
               placeholder='请选择...' style="">

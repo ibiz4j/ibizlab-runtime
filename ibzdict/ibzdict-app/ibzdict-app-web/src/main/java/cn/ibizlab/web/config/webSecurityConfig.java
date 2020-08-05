@@ -117,6 +117,7 @@ public class webSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/"+downloadpath+"/**").permitAll()
                 .antMatchers("/"+uploadpath).permitAll()
                 .antMatchers("/"+previewpath+"/**").permitAll()
+                .antMatchers("/dictionarys/**").permitAll()
                 // 所有请求都需要认证
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域

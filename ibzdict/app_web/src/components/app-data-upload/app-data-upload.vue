@@ -1,6 +1,6 @@
 <template>
     <div class="app-data-upload-view">
-        <el-row :gutter="20">
+        <el-row style="margin-top:24px" :gutter="20">
             <el-col :span="4">
                 <el-button type="primary" @click="handleUpLoad">{{$t('components.appDataUploadView.selectfile')}}</el-button>
                 <input ref="inputUpLoad" type="file" style="display: none" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" @change="importFile"/>
@@ -13,12 +13,12 @@
             </el-col>
         </el-row>
         <el-divider></el-divider>
-        <el-row style="height:calc(100% - 128px);padding: 0px 12px;">
+        <el-row style="height:480px;padding: 0px 12px;">
             <div class="data-info-content" >
                 <template v-if="importDataArray.length >0 && isUploading === false">
                     <ul>
                         <li v-for="(item,index) in importDataArray" :key="index" class="font-class">
-                            {{$t('components.appDataUploadView.dataid')+item[importUniqueItem]+$t('components.appDataUploadView.read')+'......'}}
+                            {{item[importUniqueItem]?$t('components.appDataUploadView.dataid')+item[importUniqueItem]+$t('components.appDataUploadView.read')+'......':$t('components.appDataUploadView.read')+'......'}}
                         </li>
                     </ul>
                 </template>
@@ -285,7 +285,7 @@ export default class AppDataUploadView extends Vue {
         this.importDataArray = [];
         try{
             this.entityService.getService(this.viewparams.serviceName).then((service:any) =>{
-            service.ImportData(this.viewdata,{name:this.importId,data:tempDataArray}).then((res:any) =>{
+            service.ImportData(this.viewdata,{name:this.importId,importData:tempDataArray}).then((res:any) =>{
                 const result:any = res.data;
                 if(result && result.rst !== 0){
                     this.promptInfo = (this.$t('components.appDataUploadView.importfailed') as string);
@@ -295,6 +295,10 @@ export default class AppDataUploadView extends Vue {
                 this.importSuccessData = result.data;
                 this.promptInfo = (this.$t('components.appDataUploadView.completed') as string);
                 this.isUploading = false;
+            }).catch((error:any) =>{
+                this.isUploading = false;
+                this.promptInfo = (this.$t('components.appDataUploadView.importfailed') as string);
+                console.error(error);
             })
             }).catch((error:any) =>{
                 this.isUploading = false;

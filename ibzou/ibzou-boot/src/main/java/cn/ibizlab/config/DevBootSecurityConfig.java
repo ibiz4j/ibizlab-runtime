@@ -92,6 +92,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                        .antMatchers("/ibzou/org/**").permitAll()
                        .antMatchers("/ibzemployees/**/oumaps").permitAll()
+                       .antMatchers("/dictionarys/**").permitAll()
                     //放行登录请求
                    .antMatchers( HttpMethod.POST,"/"+loginPath).permitAll()
                 .anyRequest().authenticated()

@@ -3,7 +3,7 @@ ibiz:
     # 指定用于认证的用户服务，
     # UAAUserService ：使用系统配置关联的（本系统）数据库用户。
     # LdapUserService ：使用Ldap服务，进行远端数据验证（平台账号服务）。
-    service: LdapUserService
+    service: UAAUserService
 
 ldap:
   #url: ldap://127.0.0.1:389

@@ -28,6 +28,7 @@ import cn.ibizlab.core.workflow.filter.WFMemberSearchContext;
 import cn.ibizlab.core.workflow.service.IWFMemberService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -129,9 +130,7 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(WFMember et) {
         if (null == et) {
             return false;
@@ -164,6 +163,9 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         this.remove(new QueryWrapper<WFMember>().eq("groupid",id));
     }
 
+    @Autowired
+    @Lazy
+    IWFMemberService proxyService;
 	@Override
     public void saveByGroupid(String id,List<WFMember> list) {
         if(list==null)
@@ -186,11 +188,11 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
                 _create.add(sub);
         }
         if(_update.size()>0)
-            this.updateBatch(_update);
+            proxyService.updateBatch(_update);
         if(_create.size()>0)
-            this.createBatch(_create);
+            proxyService.createBatch(_create);
         if(delIds.size()>0)
-            this.removeBatch(delIds);
+            proxyService.removeBatch(delIds);
 	}
 
 	@Override
@@ -294,5 +296,6 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     }
 
 }
+
 
 

@@ -126,6 +126,10 @@ export default {
 			caption: "Save",
 			tip: "Save",
 		},
+		deuiaction2: {
+			caption: "Save And Close",
+			tip: "Save And Close Window",
+		},
 		deuiaction1: {
 			caption: "关闭",
 			tip: "关闭",

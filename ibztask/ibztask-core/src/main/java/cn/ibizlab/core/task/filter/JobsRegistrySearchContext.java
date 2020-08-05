@@ -58,4 +58,3 @@ public class JobsRegistrySearchContext extends QueryWrapperContext<JobsRegistry>
 
 
 
-

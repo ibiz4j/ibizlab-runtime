@@ -120,6 +120,14 @@ export default {
 			caption: "保存",
 			tip: "保存",
 		},
+		deuiaction1: {
+			caption: "保存并关闭",
+			tip: "保存并关闭",
+		},
+		deuiaction2: {
+			caption: "关闭",
+			tip: "关闭",
+		},
 		tbitem6: {
 			caption: "-",
 			tip: "",

@@ -291,6 +291,7 @@ export default class AppFormDRUIPart extends Vue {
             let _param:any = this.$util.computedNavData(formData,tempContext,this.viewparams,this.localParam);
             Object.assign(tempParam,_param);
         }
+        if(this.viewparams.hasOwnProperty('copymode')) Object.assign(tempParam,{copymode:this.viewparams.copymode});
         this.viewparam = JSON.stringify(tempParam);
         if (this.isRelationalData) {
             // 从数据模式无遮罩层
@@ -332,21 +333,22 @@ export default class AppFormDRUIPart extends Vue {
             }
              // 表单保存之前
             if (Object.is($event.type, 'beforesave')) {
-                if(Object.is(this.refviewtype,'DEMEDITVIEW9') || Object.is(this.refviewtype,'DEGRIDVIEW9') || Object.is(this.refviewtype,'DEGRIDVIEW')){
-                   // 从数据模式直接通知保存
-                   if(this.tempMode && Object.is(this.tempMode,"2")){
-                       this.formDruipart.next({action:'save',data:$event.data});
-                   }else{
-                       if($event.data && !Object.is($event.data.srfuf,"0")){
-                            this.formDruipart.next({action:'save',data:$event.data});
-                        }else{
-                            this.$emit('drdatasaved',$event);
-                        }
-                   }
-                } else {
-                    // 不需要保存的界面也要抛出事件，供计数器计算
-                    this.$emit('drdatasaved',$event);
+                // 支持嵌入视图类型：嵌入视图本身抛drdatasaved的视图，如：DEMEDITVIEW9，DEGRIDVIEW9，DEGRIDVIEW等
+                // 从数据模式直接通知保存 
+                // 临时补充，todo
+               if(Object.is(this.refviewtype,'DEMEDITVIEW9') || Object.is(this.refviewtype,'DEGRIDVIEW9') || Object.is(this.refviewtype,'DEGRIDVIEW')){
+                if(this.tempMode && Object.is(this.tempMode,"2")){
+                    this.formDruipart.next({action:'save',data:$event.data});
+                }else{
+                    if($event.data && !Object.is($event.data.srfuf,"0")){
+                        this.formDruipart.next({action:'save',data:$event.data});
+                    }else{
+                        this.$emit('drdatasaved',$event);
+                    }
                 }
+               }else{
+                   this.$emit('drdatasaved',$event);
+               }
             }
             // 表单保存完成
             if (Object.is($event.type, 'save')) {

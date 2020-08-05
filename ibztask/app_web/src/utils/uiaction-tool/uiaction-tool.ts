@@ -52,9 +52,9 @@ export class UIActionTool {
                     return;
                 }
                 let value: string | null = _params[name];
-                if (value && value.startsWith('%') && value.endsWith('%')) {
+                if (value && typeof(value) === 'string' && value.startsWith('%') && value.endsWith('%')) {
                     const key = value.substring(1, value.length - 1);
-                    if (arg && arg.hasOwnProperty(key)) {
+                    if (arg && arg.hasOwnProperty(key) && Object.is(actionTarget, 'SINGLEKEY')) {
                         value = (arg[key] !== null && arg[key] !== undefined) ? arg[key] : null;
                     } else if(parentContext && parentContext.hasOwnProperty(key)){
                         value = (parentContext[key] !== null && parentContext[key] !== undefined) ? parentContext[key] : null;
@@ -76,7 +76,7 @@ export class UIActionTool {
                 }
                 let value: string | null = _params[name];
                 let values: any[] = [];
-                if (value && value.startsWith('%') && value.endsWith('%')) {
+                if (value && typeof(value) === 'string'  && value.startsWith('%') && value.endsWith('%')) {
                     const key = value.substring(1, value.length - 1);
                     args.forEach((arg: any) => {
                         if (arg && arg.hasOwnProperty(key)) {

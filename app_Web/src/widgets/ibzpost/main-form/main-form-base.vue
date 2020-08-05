@@ -544,7 +544,7 @@ export default class MainBase extends Vue implements ControlInterface {
             let dataValue = item.deName?this.data[this.service.getItemNameByDeName(item.deName)]:"";
             // 常规规则
             if(item.type == 'SIMPLE'){
-                startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,{},item.isKeyCond));
+                startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.data,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
             }
             // 数值范围
@@ -1092,11 +1092,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.load(data);
                 }
                 if (Object.is('loaddraft', action)) {
-                    if(this.context.srfsourcekey){
-                        this.copy(this.context.srfsourcekey);
-                    }else{
-                        this.loadDraft(data);
-                    }
+                    this.loadDraft(data);
                 }
                 if (Object.is('save', action)) {
                     this.save(data,data.showResultInfo);
@@ -1152,26 +1148,6 @@ export default class MainBase extends Vue implements ControlInterface {
         if (this.dataChangEvent) {
             this.dataChangEvent.unsubscribe();
         }
-    }
-
-    /**
-     * 拷贝内容
-     *
-     * @param {*} [arg={}]
-     * @memberof @memberof MainBase
-     */
-    public copy(srfkey: string): void {
-        let copyData = this.$store.getters.getCopyData(srfkey);
-        copyData.srfkey = Util.createUUID();
-        copyData.ibzpost = copyData.srfkey;
-        copyData.postid = copyData.srfkey;
-        Object.assign(this.context,{ibzpost:copyData.ibzpost})
-        this.data = copyData;
-        this.$nextTick(() => {
-          this.formState.next({ type: 'load', data: copyData });
-          this.data.srfuf = '0';
-          this.setFormEnableCond(this.data);
-        });
     }
 
     /**
@@ -1401,6 +1377,9 @@ export default class MainBase extends Vue implements ControlInterface {
                     return;
                 }
             }
+            if(this.viewparams && this.viewparams.copymode){
+                data.srfuf = '0';
+            }
             const action: any = Object.is(data.srfuf, '1') ? this.updateAction : this.createAction;
             if(!action){
                 let actionName:any = Object.is(data.srfuf, '1')?"updateAction":"createAction";
@@ -1408,9 +1387,6 @@ export default class MainBase extends Vue implements ControlInterface {
                 return;
             }
             Object.assign(arg,{viewparams:this.viewparams});
-            if(this.viewparams && this.viewparams.copymode){
-                data.srfuf = '0';
-            }
             const post: Promise<any> = Object.is(data.srfuf, '1')?this.service.update(action, JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator):this.service.add(action,JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator);
             post.then((response: any) => {
                 if (!response.status || response.status !== 200) {

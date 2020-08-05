@@ -152,9 +152,7 @@ public class IBZEmployeeServiceImpl extends ServiceImpl<IBZEmployeeMapper, IBZEm
     }
 
     @Override
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
+    @Transactional
     public boolean saveOrUpdate(IBZEmployee et) {
         if (null == et) {
             return false;

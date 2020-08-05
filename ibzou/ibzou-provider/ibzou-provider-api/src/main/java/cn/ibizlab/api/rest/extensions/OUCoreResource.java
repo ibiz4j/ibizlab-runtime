@@ -1,16 +1,23 @@
 package cn.ibizlab.api.rest.extensions;
 
+import cn.ibizlab.core.ou.domain.IBZDepartment;
+import cn.ibizlab.core.ou.domain.IBZOrganization;
 import cn.ibizlab.core.ou.extensions.domain.*;
 import cn.ibizlab.core.ou.extensions.service.OUCoreService;
 import cn.ibizlab.core.ou.domain.IBZEmployee;
+import cn.ibizlab.core.ou.service.IIBZDepartmentService;
 import cn.ibizlab.core.ou.service.IIBZEmployeeService;
+import cn.ibizlab.core.ou.service.IIBZOrganizationService;
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Wrapper;
 import java.util.*;
 
 @RestController
@@ -23,6 +30,14 @@ public class OUCoreResource
 
     @Autowired
     private IIBZEmployeeService iibzEmployeeService;
+
+
+    @Autowired
+    private IIBZOrganizationService iibzOrganizationService;
+
+
+    @Autowired
+    private IIBZDepartmentService iibzDepartmentService;
 
     @GetMapping("/ibzemployees/{userId}/oumaps")
     public ResponseEntity<Map<String, Set<String>>> getOUMapsByUserId(@PathVariable("userId") String userId)
@@ -169,6 +184,68 @@ public class OUCoreResource
         map.put("fatherdept",storedeptmap.getFather());
         return map;
     }
+
+
+
+    @Cacheable( value="ibzou-model",key = "'catalog:'+#p0")
+    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/ibzou{catalog}")
+    public ResponseEntity<JSONObject> getCatalog(@PathVariable("catalog") String catalog) {
+        return getOptions("ibzou"+catalog);
+    }
+
+    @Cacheable( value="ibzou-model",key = "'codelist:'+#p0")
+    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/ibzou{catalog}")
+    public ResponseEntity<JSONObject> getCodeList(@PathVariable("catalog") String catalog) {
+        return getOptions("ibzou"+catalog);
+    }
+
+
+    public ResponseEntity<JSONObject> getOptions(String catalog) {
+        JSONObject jo=new JSONObject();
+        jo.put("srfkey",catalog);
+        jo.put("emptytext","");
+        List<JSONObject> list=new ArrayList<>();
+
+        if("IbzouOrg".equalsIgnoreCase(catalog))
+        {
+            iibzOrganizationService.list(Wrappers.<IBZOrganization>query().orderByAsc("showorder")).forEach(item -> {
+                JSONObject option=new JSONObject();
+                option.put("id",item.getOrgid());
+                option.put("value",item.getOrgid());
+                option.put("label",item.getOrgname());
+                option.put("text",item.getOrgname());
+                list.add(option);
+            });
+        }
+        else if("IbzouDept".equalsIgnoreCase(catalog)||"IbzouOrgSector".equalsIgnoreCase(catalog))
+        {
+            iibzDepartmentService.list(Wrappers.<IBZDepartment>query().orderByAsc("showorder")).forEach(item -> {
+                JSONObject option=new JSONObject();
+                option.put("id",item.getDeptid());
+                option.put("value",item.getDeptid());
+                option.put("label",item.getDeptname());
+                option.put("text",item.getDeptname());
+                list.add(option);
+            });
+        }
+        else if("IbzouUser".equalsIgnoreCase(catalog)||"IbzouOperator".equalsIgnoreCase(catalog)||"IbzouEmp".equalsIgnoreCase(catalog)||"IbzouPerson".equalsIgnoreCase(catalog))
+        {
+            iibzEmployeeService.list(Wrappers.<IBZEmployee>query().orderByAsc("showorder")).forEach(item -> {
+                JSONObject option=new JSONObject();
+                option.put("id",item.getUserid());
+                option.put("value",item.getUserid());
+                option.put("label",item.getPersonname());
+                option.put("text",item.getPersonname());
+                list.add(option);
+            });
+        }
+
+
+        jo.put("items",list);
+
+        return ResponseEntity.status(HttpStatus.OK).body(jo);
+    }
+
 
 
 }
