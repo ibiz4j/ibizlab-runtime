@@ -9,6 +9,13 @@ export default {
         "THIRD-PARTY": "第三方应用",
         "empty": "",
     },
+    OpenAccessType: {
+        "aliyun": "阿里云",
+        "webchart": "微信开放平台",
+        "qq": "QQ互联",
+        "dingtalk": "钉钉开放平台",
+        "empty": "",
+    },
     CLAuthCode: {
         "200": "成功",
         "400": "用户不存在",

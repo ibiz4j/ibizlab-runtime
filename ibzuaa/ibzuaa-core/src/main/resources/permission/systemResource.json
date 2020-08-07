@@ -4,6 +4,14 @@
     ],
     "entities":[
     {
+    "dename":"SysOpenAccess",
+    "delogicname":"第三方认证平台",
+    "sysmoudle":{"id":"UAA","name":"uaa"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
     "dename":"SysAuthLog",
     "delogicname":"认证日志",
     "sysmoudle":{"id":"UAA","name":"uaa"},
@@ -65,7 +73,7 @@
             {
                "appid":"web",
                "appname":"UAA鉴权",
-               "appmenu":[{"menuid":"Main", "menuname":"MAIN", "menuitem":[{ "id":"menuitem3" , "name":"用户" },{ "id":"menuitem6" , "name":"角色" },{ "id":"menuitem1" , "name":"认证日志" },{ "id":"menuitem2" , "name":"接入应用" }] }]
+               "appmenu":[{"menuid":"Main", "menuname":"MAIN", "menuitem":[{ "id":"menuitem3" , "name":"用户" },{ "id":"menuitem6" , "name":"角色" },{ "id":"menuitem1" , "name":"认证日志" },{ "id":"menuitem2" , "name":"接入应用" },{ "id":"menuitem4" , "name":"第三方认证" }] }]
             }
             ]
     }

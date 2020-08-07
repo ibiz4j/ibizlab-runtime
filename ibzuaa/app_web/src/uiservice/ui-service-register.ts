@@ -39,7 +39,8 @@ export class UIServiceRegister {
      * @memberof UIServiceRegister
      */
     protected init(): void {
-                this.allUIService.set('sysauthlog', () => import('@/uiservice/sys-auth-log/sys-auth-log-ui-service'));
+                this.allUIService.set('sysopenaccess', () => import('@/uiservice/sys-open-access/sys-open-access-ui-service'));
+        this.allUIService.set('sysauthlog', () => import('@/uiservice/sys-auth-log/sys-auth-log-ui-service'));
         this.allUIService.set('sysapp', () => import('@/uiservice/sys-app/sys-app-ui-service'));
         this.allUIService.set('sysrolepermission', () => import('@/uiservice/sys-role-permission/sys-role-permission-ui-service'));
         this.allUIService.set('syspermission', () => import('@/uiservice/sys-permission/sys-permission-ui-service'));

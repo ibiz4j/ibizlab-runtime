@@ -69,24 +69,24 @@ public class UserDingtalkRegisterService {
      *
      * @param code
      * @param currentTimeMillis
-     * @param dingTalkAppId
-     * @param dingTalkAppSecret
+     * @param appId
+     * @param appSecret
      * @return
      */
-    public JSONObject requestDingtalkUserByCode(String code, long currentTimeMillis, String dingTalkAppId, String dingTalkAppSecret) {
+    public JSONObject requestDingtalkUserByCode(String code, long currentTimeMillis, String appId, String appSecret) {
         JSONObject returnObj = null;
         CloseableHttpClient client = null;
         try {
             // 根据timestamp, appSecret计算签名值
             String stringToSign = String.valueOf(currentTimeMillis);
             Mac mac = Mac.getInstance("HmacSHA256");
-            mac.init(new SecretKeySpec(dingTalkAppSecret.getBytes("UTF-8"), "HmacSHA256"));
+            mac.init(new SecretKeySpec(appSecret.getBytes("UTF-8"), "HmacSHA256"));
             byte[] signatureBytes = mac.doFinal(stringToSign.getBytes("UTF-8"));
             String signature = new String(Base64.encodeBase64(signatureBytes));
             String urlEncodeSignature = URLEncoder.encode(signature, "UTF-8");
 
             // 通过临时授权码Code获取用户信息，临时授权码只能使用一次
-            String url = "https://oapi.dingtalk.com/sns/getuserinfo_bycode?accessKey=" + dingTalkAppId
+            String url = "https://oapi.dingtalk.com/sns/getuserinfo_bycode?accessKey=" + appId
                     + "&timestamp=" + currentTimeMillis
                     + "&signature=" + urlEncodeSignature;
 

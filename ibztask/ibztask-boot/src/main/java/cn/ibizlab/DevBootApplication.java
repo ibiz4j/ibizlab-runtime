@@ -14,6 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import java.util.List;
+import cn.ibizlab.util.web.SearchContextHandlerMethodArgumentResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @EnableDiscoveryClient
@@ -34,6 +36,9 @@ import java.util.List;
 @EnableScheduling
 public class DevBootApplication extends WebMvcConfigurerAdapter{
 
+    @Autowired
+    SearchContextHandlerMethodArgumentResolver resolver;
+
     public static void main(String[] args) {
         SpringApplication.run(DevBootApplication.class,args);
     }
@@ -41,6 +46,6 @@ public class DevBootApplication extends WebMvcConfigurerAdapter{
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         super.addArgumentResolvers(argumentResolvers);
-        argumentResolvers.add(new cn.ibizlab.util.web.SearchContextHandlerMethodArgumentResolver());
+        argumentResolvers.add(resolver);
     }
 }

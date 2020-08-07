@@ -33,7 +33,7 @@
 </i-col>
 <i-col v-show="detailsModel.porgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='porgname' :itemRules="this.rules().porgname" class='' :caption="$t('entities.ibzorganization.main_form.details.porgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.porgname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-org-select :data="data" :disabled="detailsModel.porgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'porgid','label':'porgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
+    <app-org-select :data="data" :disabled="detailsModel.porgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'porgid','label':'porgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-org-select>
 </app-form-item>
 
 </i-col>

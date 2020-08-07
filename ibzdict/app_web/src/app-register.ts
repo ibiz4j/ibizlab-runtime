@@ -12,6 +12,7 @@ import { authServiceRegister } from '@/authservice/auth-service-register';
 import { utilServiceRegister } from '@/utilservice/util-service-register';
 import { entityServiceRegister } from '@/service/entity-service-register';
 import { counterServiceRegister } from '@/counter/counter-service-register';
+import { codeListRegister } from '@codelist/codelist-register';
 
 import InputBox from './components/input-box/input-box.vue'
 import AppKeepAlive from './components/app-keep-alive/app-keep-alive.vue'
@@ -38,6 +39,7 @@ import AppFormGroup from './components/app-form-group/app-form-group.vue'
 import AppFormItem from './components/app-form-item/app-form-item.vue'
 import AppPicker from './components/app-picker/app-picker.vue'
 import AppMpicker from './components/app-mpicker/app-mpicker.vue'
+import AppUpicker from './components/app-upicker/app-upicker.vue'
 import AppFormGroup2 from './components/app-form-group2/app-form-group2.vue'
 import AppFormItem2 from './components/app-form-item2/app-form-item2.vue'
 import CodeList from './components/codelist/codelist.vue'
@@ -89,6 +91,8 @@ window['utilServiceRegister'] = utilServiceRegister;
 window['entityServiceRegister'] = entityServiceRegister;
 // 全局挂载计数器服务注册中心
 window['counterServiceRegister'] = counterServiceRegister;
+// 全局挂载代码表服务注册中心
+window['codeListRegister'] = codeListRegister;
 
 export const AppComponents = {
     install(v: any, opt: any) {
@@ -127,6 +131,7 @@ export const AppComponents = {
         v.component('app-form-item',AppFormItem);
         v.component('app-picker', AppPicker);
         v.component('app-mpicker', AppMpicker);
+        v.component('app-upicker', AppUpicker);
         v.component('app-form-group2', AppFormGroup2);
         v.component('app-form-item2', AppFormItem2);
         v.component('codelist', CodeList);

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.uaa.mapper.SysOpenAccessMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="SysOpenAccessResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  ) t1 where accessid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysOpenAccessResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.ACCESSID, t1.ACCESSNAME, t1.ACCESS_KEY, t1.ACCESS_TOKEN, t1.DISABLED, t1.EXPIRES_TIME, t1.OPEN_TYPE, t1.REDIRECT_URI, t1.REGION_ID, t1.SECRET_KEY FROM IBZOPENACCESS t1  ) t1 where accessid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysOpenAccessResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.ACCESSID, t1.ACCESSNAME, t1.ACCESS_KEY, t1.ACCESS_TOKEN, t1.DISABLED, t1.EXPIRES_TIME, t1.OPEN_TYPE, t1.REDIRECT_URI, t1.REGION_ID, t1.SECRET_KEY FROM IBZOPENACCESS t1  ) t1 where accessid=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="SysOpenAccessResultMap" type="cn.ibizlab.core.uaa.domain.SysOpenAccess" autoMapping="true">
+        <id property="id" column="accessid" /><!--主键字段映射-->
+		<result property="name" column="accessname" />
+		<result property="openType" column="open_type" />
+		<result property="accessKey" column="access_key" />
+		<result property="secretKey" column="secret_key" />
+		<result property="regionId" column="region_id" />
+		<result property="accessToken" column="access_token" />
+		<result property="expiresTime" column="expires_time" />
+		<result property="redirectUri" column="redirect_uri" />
+            
+		
+    </resultMap>
+
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.uaa.filter.SysOpenAccessSearchContext"  resultMap="SysOpenAccessResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.ACCESS_KEY, t1.ACCESS_TOKEN, t1.DISABLED, t1.EXPIRES_TIME, t1.OPEN_TYPE, t1.REDIRECT_URI, t1.REGION_ID, t1.SECRET_KEY FROM IBZOPENACCESS t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.ACCESS_KEY, t1.ACCESS_TOKEN, t1.DISABLED, t1.EXPIRES_TIME, t1.OPEN_TYPE, t1.REDIRECT_URI, t1.REGION_ID, t1.SECRET_KEY FROM IBZOPENACCESS t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.ACCESS_KEY, t1.ACCESS_TOKEN, t1.DISABLED, t1.EXPIRES_TIME, t1.OPEN_TYPE, t1.REDIRECT_URI, t1.REGION_ID, t1.SECRET_KEY FROM IBZOPENACCESS t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.ACCESS_KEY, t1.ACCESS_TOKEN, t1.DISABLED, t1.EXPIRES_TIME, t1.OPEN_TYPE, t1.REDIRECT_URI, t1.REGION_ID, t1.SECRET_KEY FROM IBZOPENACCESS t1  
+			]]>
+    </sql>
+</mapper>
+

@@ -188,13 +188,13 @@ public class OUCoreResource
 
 
     @Cacheable( value="ibzou-model",key = "'catalog:'+#p0")
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/ibzou{catalog}")
+    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/Ibzou{catalog}")
     public ResponseEntity<JSONObject> getCatalog(@PathVariable("catalog") String catalog) {
         return getOptions("ibzou"+catalog);
     }
 
     @Cacheable( value="ibzou-model",key = "'codelist:'+#p0")
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/ibzou{catalog}")
+    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/Ibzou{catalog}")
     public ResponseEntity<JSONObject> getCodeList(@PathVariable("catalog") String catalog) {
         return getOptions("ibzou"+catalog);
     }

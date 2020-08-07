@@ -1,3 +1,4 @@
+import sysopenaccess_en_US from '@locale/lanres/entities/sys-open-access/sys-open-access_en_US';
 import sysauthlog_en_US from '@locale/lanres/entities/sys-auth-log/sys-auth-log_en_US';
 import sysapp_en_US from '@locale/lanres/entities/sys-app/sys-app_en_US';
 import sysrolepermission_en_US from '@locale/lanres/entities/sys-role-permission/sys-role-permission_en_US';
@@ -130,6 +131,7 @@ export default {
                 menuitem6: "角色",
                 menuitem1: "认证日志",
                 menuitem2: "接入应用",
+                menuitem4: "第三方认证",
             },
         },
         formpage:{
@@ -222,6 +224,7 @@ export default {
         },
     },
     entities: {
+        sysopenaccess: sysopenaccess_en_US,
         sysauthlog: sysauthlog_en_US,
         sysapp: sysapp_en_US,
         sysrolepermission: sysrolepermission_en_US,

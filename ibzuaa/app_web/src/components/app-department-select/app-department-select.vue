@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator';
+import CodeListService from '@/service/app/codelist-service';
 @Component({
 })
 export default class AppDepartmentSelect extends Vue {
@@ -17,6 +18,20 @@ export default class AppDepartmentSelect extends Vue {
      * @memberof AppDepartmentSelect
      */
     @Prop() public url?: any;
+
+    /**
+     * 代码表标识
+     * 
+     * @memberof AppDepartmentSelect
+     */
+    @Prop() public tag?:string;
+
+    /**
+     * 代码表类型
+     * 
+     * @memberof AppDepartmentSelect
+     */
+    @Prop() public codelistType?:string;
 
     /**
      * 过滤项
@@ -121,14 +136,14 @@ export default class AppDepartmentSelect extends Vue {
       }
       this.oldurl = _url;
       // 缓存机制
-      const result:any = this.$store.getters.getCopyData(_url);
+      const result:any = this.$store.getters.getDepData(this.filter);
       if(result){
         this.Nodesdata = result;
         return;
       }
       this.$http.get(_url).then((response: any) => {
           this.Nodesdata = response.data;
-          this.$store.commit('addDepData', { srfkey: this.filter, orgData: response.data });
+          this.$store.commit('addDepData', { srfkey: this.filter, depData: response.data });
       }).catch((response: any) => {
           if (!response || !response.status || !response.data) {
               this.$Notice.error({ title: (this.$t('app.commonWords.error') as string), desc: (this.$t('app.commonWords.sysException') as string) });
@@ -163,13 +178,19 @@ export default class AppDepartmentSelect extends Vue {
       // 单选
       if(!this.multiple){
         if(this.fillMap && Object.keys(this.fillMap).length >0){
-        let templateValue = {};
+        let templateValue:any = {};
         Object.keys(this.fillMap).forEach((item:any) =>{
           if(this.data && this.data[this.fillMap[item]]){
             Object.assign(templateValue,{[item]:this.data[this.fillMap[item]]});
           }
         })
-        this.selectTreeValue = JSON.stringify([templateValue]);
+          if(!templateValue.label && templateValue.id && this.tag && this.codelistType && Object.is(this.codelistType,"DYNAMIC")){
+            this.fillLabel(templateValue,templateValue.id,(templateValue:any) =>{
+              this.selectTreeValue = JSON.stringify([templateValue]);
+            });
+          }else{
+            this.selectTreeValue = JSON.stringify([templateValue]);
+          }
         }
       }else{
       // 多选
@@ -188,8 +209,30 @@ export default class AppDepartmentSelect extends Vue {
               })
             }
           })
-          this.selectTreeValue = JSON.stringify(tempArray);
+          let tempflag:boolean = false;
+          if(tempArray.length >0 && tempArray.length >0){
+            tempArray.forEach((item:any) =>{
+              if(!item.label) tempflag = true;
+            })
           }
+          if(tempflag && this.tag && this.codelistType && Object.is(this.codelistType,"DYNAMIC")){
+            let tempStatus:number = 0;
+            tempArray.forEach((item:any) =>{
+              if(!item.label){
+                tempStatus += 1;
+                this.fillLabel(item,item.id,(result:any) =>{
+                  item = result;
+                  tempStatus -= 1;
+                  if(tempStatus === 0){
+                    this.selectTreeValue = JSON.stringify(tempArray);
+                  }
+                })
+              }
+            })
+          }else{
+            this.selectTreeValue = JSON.stringify(tempArray);
+          }
+        }
       }
     } 
 
@@ -208,10 +251,35 @@ export default class AppDepartmentSelect extends Vue {
                 let _name = this.fillMap[attribute];
                 let values = selectArr.map((item:any) => item[attribute]);
                 let _value = $event === "[]" ? null : values.join(",");
-                this.$emit('select-change',{name: this.fillMap[attribute], value: _value})
+                setTimeout(() => {
+                  this.$emit('select-change',{name: this.fillMap[attribute], value: _value});
+                },0);
             });
         }
     }
+
+  /**
+   * 填充label
+   * 
+   * @memberof AppOrgSelect
+   */
+  public fillLabel(tempObject:any,valueItem:any,callback:any){
+    if(!tempObject.label && tempObject.id && this.tag && this.codelistType && Object.is(this.codelistType,"DYNAMIC")){
+      let codeListService:CodeListService = new CodeListService();
+      codeListService.getItems(this.tag).then((items:any) =>{
+        if(items && items.length >0){
+          let result:any = items.find((item:any) =>{
+            return item.id === valueItem;
+          })
+          Object.assign(tempObject,{label:result.label});
+        }
+        callback(tempObject);
+      }).catch((error:any) =>{
+        console.log(error);
+      })
+    }
+  }
+  
 }
 </script>
 

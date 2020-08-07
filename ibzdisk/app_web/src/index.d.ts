@@ -3,13 +3,14 @@ import { AuthServiceRegister } from '@/authservice/auth-service-register';
 import { UtilServiceRegister } from '@/utilservice/util-service-register';
 import { EntityServiceRegister } from '@/service/entity-service-register';
 import { CounterServiceRegister } from '@/counter/counter-service-register';
-
+import { CodeListRegister } from '@codelist/codelist-register';
 declare global {
     interface Window {
         uiServiceRegister: UIServiceRegister,
         authServiceRegister: AuthServiceRegister,
         utilServiceRegister: UtilServiceRegister,
         entityServiceRegister: EntityServiceRegister,
-        counterServiceRegister: CounterServiceRegister
+        counterServiceRegister: CounterServiceRegister,
+        codeListRegister:CodeListRegister
     }
 }

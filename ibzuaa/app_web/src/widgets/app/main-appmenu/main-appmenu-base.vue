@@ -582,6 +582,9 @@ export default class MainBase extends Vue implements ControlInterface {
                 navDataService.removeNavData(this.viewtag);
             }
             switch (item.appfunctag) {
+                case 'Auto13': 
+                    this.clickAuto13(item);
+                    return;
                 case 'Auto10': 
                     this.clickAuto10(item);
                     return;
@@ -600,6 +603,29 @@ export default class MainBase extends Vue implements ControlInterface {
         }
     }
 
+    
+    /**
+     * 第三方认证平台
+     *
+     * @param {*} [item={}]
+     * @memberof Main
+     */
+    public clickAuto13(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
     
     /**
      * 角色

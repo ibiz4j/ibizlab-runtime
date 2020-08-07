@@ -1,4 +1,3 @@
-import { Store } from 'vuex';
 import { Http } from '@/utils';
 import CodeListService from "@service/app/codelist-service";
 
@@ -9,15 +8,6 @@ import CodeListService from "@service/app/codelist-service";
  * @class EntityService
  */
 export default class EntityService {
-
-    /**
-     * Vue 状态管理器
-     *
-     * @private
-     * @type {(any | null)}
-     * @memberof EntityService
-     */
-    private $store: Store<any> | null = null;
 
     /**
      * 获取实体数据服务
@@ -101,19 +91,8 @@ export default class EntityService {
      * @memberof EntityService
      */
     constructor(opts: any = {}) {
-        this.$store = opts.$store;
         this.tempStorage = localStorage;
         this.initBasicData();
-    }
-
-    /**
-     * 获取状态管理器
-     *
-     * @returns {(any | null)}
-     * @memberof EntityService
-     */
-    public getStore(): Store<any> | null {
-        return this.$store;
     }
 
     /**
@@ -123,22 +102,16 @@ export default class EntityService {
      */
     public getCodeList(tag:string,codelistType:string,context:any = {},param:any ={}){
         return new Promise((resolve:any,reject:any) =>{
+            let codeListService = new CodeListService();
             if(tag && Object.is(codelistType,"STATIC")){
-                let returnItems:Array<any> = [];
-                const codelist = (this.getStore() as Store<any>).getters.getCodeList(tag);
-                if (codelist) {
-                    returnItems = [...JSON.parse(JSON.stringify(codelist.items))];
-                } else {
-                    console.log(`----${tag}----代码表不存在`);
-                }
-                resolve(returnItems);
+                codeListService.getStaticItems(tag).then((items:any) =>{
+                    resolve(items);
+                })
             }else if(tag && Object.is(codelistType,"DYNAMIC")){
-                let codeListService = new CodeListService({ $store: this.$store });
                 codeListService.getItems(tag,context,param).then((res:any) => {
                     resolve(res);
                 }).catch((error:any) => {
                     reject(`${tag}代码表不存在`);
-                    console.log(`----${tag}----代码表不存在`);
                 });
             }
         })
@@ -986,6 +959,17 @@ export default class EntityService {
      */
     public async changPassword(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         return Http.getInstance().post(`/v7/changepwd`,data,isloading);
+    }
+
+    /**
+     * 获取数字字典
+     * 
+     * @param tag 
+     * @param data 
+     * @param isloading 
+     */
+    public async getPredefinedCodelist(tag:string,data: any = {}, isloading?: boolean): Promise<any> {
+        return Http.getInstance().get(`/dictionarys/codelist/${tag}`,data,isloading);
     }
 
 }

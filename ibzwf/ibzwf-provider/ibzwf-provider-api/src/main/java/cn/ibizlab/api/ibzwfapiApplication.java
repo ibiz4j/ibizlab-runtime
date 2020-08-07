@@ -15,6 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import cn.ibizlab.util.web.SearchContextHandlerMethodArgumentResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Slf4j
@@ -40,6 +42,9 @@ import java.util.List;
 @EnableScheduling
 public class ibzwfapiApplication extends WebMvcConfigurerAdapter{
 
+    @Autowired
+    SearchContextHandlerMethodArgumentResolver resolver;
+
     public static void main(String[] args) {
         SpringApplication.run(ibzwfapiApplication.class, args);
     }
@@ -47,6 +52,6 @@ public class ibzwfapiApplication extends WebMvcConfigurerAdapter{
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         super.addArgumentResolvers(argumentResolvers);
-        argumentResolvers.add(new cn.ibizlab.util.web.SearchContextHandlerMethodArgumentResolver());
+        argumentResolvers.add(resolver);
     }
 }

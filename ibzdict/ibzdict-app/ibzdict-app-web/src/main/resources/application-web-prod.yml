@@ -35,5 +35,17 @@ zuul:
       path: /ibzorganizations/**
       serviceId: ${ibiz.ref.service.ou:ibzou-api}
       stripPrefix: false
+    oudict:
+      path: /dictionarys/**/Ibzou**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    uaadict:
+      path: /dictionarys/**/SysOperator
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    dict:
+      path: /dictionarys/**
+      serviceId: ${ibiz.ref.service.dict:ibzdict-api}
+      stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

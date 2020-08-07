@@ -36,13 +36,13 @@
 </i-col>
 <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules().orgname" class='' :caption="$t('entities.ibzdepartment.newform_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-org-select :data="data" :disabled="detailsModel.orgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'orgid','label':'orgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange"></app-org-select>
+    <app-org-select :data="data" :disabled="detailsModel.orgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'orgid','label':'orgname'}" url="/ibzorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-org-select>
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.pdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='pdeptname' :itemRules="this.rules().pdeptname" class='' :caption="$t('entities.ibzdepartment.newform_form.details.pdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-department-select :data="data" :disabled="detailsModel.pdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{'id':'pdeptid','label':'pdeptname'}" :multiple="false" style="" @select-change="onFormItemValueChange"></app-department-select>
+    <app-department-select :data="data" :disabled="detailsModel.pdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/ibzorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{'id':'pdeptid','label':'pdeptname'}" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-department-select>
 </app-form-item>
 
 </i-col>

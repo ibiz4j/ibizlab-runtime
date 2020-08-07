@@ -1,5 +1,6 @@
 <template>
-    <i-select
+    <div class="dropdown-list-container">
+        <i-select v-if="!hasChildren"
         class='dropdown-list'
         :transfer="true"
         v-model="currentVal"
@@ -9,12 +10,15 @@
         @on-open-change="onClick"
         :placeholder="$t('components.dropDownList.placeholder')">
         <i-option v-for="(item, index) in items" :key="index" :value="item.value">{{($t('codelist.'+tag+'.'+item.value)!== ('codelist.'+tag+'.'+item.value))?$t('codelist.'+tag+'.'+item.value) : item.text}}</i-option>
-    </i-select>
+        </i-select>
+        <ibiz-select-tree v-if="hasChildren" class="tree-dropdown-list" :disabled="disabled" :NodesData="items" v-model="currentVal" :multiple="false"></ibiz-select-tree>
+    </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator';
 import CodeListService from "@service/app/codelist-service";
+import { Util } from '@/utils';
 
 @Component({
 })
@@ -41,6 +45,13 @@ export default class DropDownList extends Vue {
      * @memberof DropDownList
      */
     public queryParam:any;
+
+    /**
+     * 是否有子集
+     * @type {boolean}
+     * @memberof DropDownList
+     */
+    public hasChildren:boolean = false;
 
     /**
      * 当前选中值
@@ -152,6 +163,10 @@ export default class DropDownList extends Vue {
      * @memberof DropDownList
      */
     set currentVal(val: any) {
+        if(this.hasChildren && val){
+            let tempVal:any = JSON.parse(val);
+            val = tempVal.length >0?tempVal[0].value:null;
+        }
         const type: string = this.$util.typeOf(val);
         val = Object.is(type, 'null') || Object.is(type, 'undefined') ? undefined : val;
         this.$emit('change', val);
@@ -163,7 +178,31 @@ export default class DropDownList extends Vue {
      * @memberof DropDownList
      */
     get currentVal() {
+        if(this.hasChildren && this.itemValue){
+            let list:Array<any> = [];
+            this.getItemList(list,this.items);
+            let result:any = list.find((item:any) =>{
+                return item.value == this.itemValue;
+            })
+            return JSON.stringify([result]);
+        }
         return this.itemValue;
+    }
+
+    /**
+     * 获取代码表列表
+     *
+     * @memberof DropDownList
+     */
+    public getItemList(list:Array<any>,items:Array<any>){
+        if(items && items.length >0){
+            items.forEach((item:any) =>{
+                if(item.children){
+                    this.getItemList(list,item.children);
+                }
+                list.push(item);
+            })
+        }
     }
 
     /**
@@ -287,6 +326,51 @@ export default class DropDownList extends Vue {
         }catch(error){
             console.warn('代码表值类型和属性类型不匹配，自动强制转换异常，请修正代码表值类型和属性类型匹配');
         }
+        this.handleLevelCodeList(Util.deepCopy(this.items));
+    }
+
+    /**
+     * 处理层级代码表
+     * 
+     * @param {*} items
+     * @memberof DropDownList
+     */
+    public handleLevelCodeList(items: Array<any>){
+        if(items && items.length >0){
+            this.hasChildren = items.some((item:any) =>{
+                return item.pvalue;
+            })
+            if(this.hasChildren){
+                let list:Array<any> = [];
+                items.forEach((codeItem:any) =>{
+                    if(!codeItem.pvalue){
+                        let valueField:string = codeItem.value;
+                        this.setChildCodeItems(valueField,items,codeItem);
+                        list.push(codeItem);
+                    }
+                })
+                this.items = list;
+            }
+        }
+    }
+
+    /**
+     * 计算子类代码表
+     * 
+     * @param {*} items
+     * @memberof DropDownList
+     */
+    public setChildCodeItems(pValue:string,result:Array<any>,codeItem:any){
+        result.forEach((item:any) =>{
+            if(item.pvalue == pValue){
+                let valueField:string = item.value;
+                this.setChildCodeItems(valueField,result,item);
+                if(!codeItem.children){
+                    codeItem.children = [];
+                }
+                codeItem.children.push(item);
+            }
+        })
     }
 }
 </script>

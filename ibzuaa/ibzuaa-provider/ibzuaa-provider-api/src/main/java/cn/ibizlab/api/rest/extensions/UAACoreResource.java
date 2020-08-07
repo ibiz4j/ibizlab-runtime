@@ -6,16 +6,20 @@ import cn.ibizlab.api.mapping.SysPSSystemMapping;
 import cn.ibizlab.api.mapping.SysRolePermissionMapping;
 import cn.ibizlab.core.uaa.domain.SysPSSystem;
 import cn.ibizlab.core.uaa.domain.SysRolePermission;
+import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionNode;
 import cn.ibizlab.core.uaa.extensions.domain.SysStructure;
 import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
+import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.security.AuthenticationUser;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -110,4 +115,39 @@ public class UAACoreResource {
 		return ResponseEntity.ok().body(uaaCoreService.getPublicKey());
 	}
 
+
+    @Cacheable( value="ibzuaa-model",key = "'catalog:SysOperator'")
+    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/SysOperator")
+    public ResponseEntity<JSONObject> getCatalog() {
+        return getOptions("SysOperator");
+    }
+
+    @Cacheable( value="ibzuaa-model",key = "'codelist:SysOperator'")
+    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/SysOperator")
+    public ResponseEntity<JSONObject> getCodeList() {
+        return getOptions("SysOperator");
+    }
+
+    @Autowired
+    private ISysUserService userService;;
+
+    public ResponseEntity<JSONObject> getOptions(String catalog) {
+        JSONObject jo = new JSONObject();
+        jo.put("srfkey", catalog);
+        jo.put("emptytext", "");
+        List<JSONObject> list = new ArrayList<>();
+
+        userService.list().forEach(item -> {
+            JSONObject option = new JSONObject();
+            option.put("id", item.getUserid());
+            option.put("value", item.getUserid());
+            option.put("label", item.getUsername());
+            option.put("text", item.getUsername());
+            list.add(option);
+        });
+
+        jo.put("items",list);
+
+        return ResponseEntity.status(HttpStatus.OK).body(jo);
+    }
 }

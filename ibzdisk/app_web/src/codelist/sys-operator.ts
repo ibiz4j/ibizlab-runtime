@@ -23,6 +23,14 @@ export default class SysOperator {
     public expirationTime:any;
 
     /**
+     * 预定义类型
+     *
+     * @type string
+     * @memberof SysOperator
+     */
+    public predefinedType:string ='OPERATOR';
+
+    /**
      * 缓存超长时长
      *
      * @type any

@@ -57,17 +57,17 @@ public class UserWechatRegisterService {
      *
      * @param code
      * @param state
-     * @param wechatAppId
-     * @param wechatappsecret
+     * @param appId
+     * @param appSecret
      * @return
      */
-    public JSONObject requestWechatUserByCode(String code, String state, String wechatAppId, String wechatappsecret) {
+    public JSONObject requestWechatUserByCode(String code, String state, String appId, String appSecret) {
         JSONObject returnObj = null;
         try {
             // 1.根据code获取access_token、openid、refresh_token
             String getAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
-                    "appid=" + wechatAppId +
-                    "&secret=" + wechatappsecret +
+                    "appid=" + appId +
+                    "&secret=" + appSecret +
                     "&code=" + code +
                     "&grant_type=authorization_code";
             JSONObject responseObj = JSONObject.parseObject(HttpUtils.get(getAccessTokenUrl, null, null));
@@ -86,7 +86,7 @@ public class UserWechatRegisterService {
             if (responseObj2.getInteger("errcode") != 0) {
                 // access_token已失效，使用refresh_token刷新access_token
                 String refreshAccess_token = "https://api.weixin.qq.com/sns/oauth2/refresh_token?" +
-                        "appid=" + wechatAppId +
+                        "appid=" + appId +
                         "&grant_type=refresh_token" +
                         "&refresh_token=" + refresh_token;
                 JSONObject responseObj3 = JSONObject.parseObject(HttpUtils.get(refreshAccess_token, null, null));

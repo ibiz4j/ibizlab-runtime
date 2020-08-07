@@ -1,7 +1,9 @@
 package cn.ibizlab.api.rest.extensions;
 
+import cn.ibizlab.core.uaa.domain.SysOpenAccess;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.extensions.service.UserWechatRegisterService;
+import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
@@ -14,7 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,12 +41,8 @@ public class UserWechatRegisterResource {
     @Autowired
     @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
-
-    @Value("${ibiz.auth.wechat.appID:}")// 微信开放平台appid,最好在配置文件进行初始化
-    private String WechatAppid;
-    @Value("${ibiz.auth.wechat.appsecret:}")// 微信开放平台appsecret,最好在配置文件进行初始化
-    private String WechatAppsecret;
-
+    @Autowired
+    private ISysOpenAccessService openAccessService;
 
     /**
      * 获取微信开放平台创建的网站应用appid
@@ -53,9 +50,12 @@ public class UserWechatRegisterResource {
     @GetMapping(value = "/uaa/getWechatAppId")
     public ResponseEntity<JSONObject> getWechatAppId() {
         JSONObject obj = new JSONObject();
-        String appid = WechatAppid;
-        if (!StringUtils.isEmpty(appid)) {
-            obj.put("appid", appid);
+        SysOpenAccess openAccess = openAccessService.getById("webchart");
+        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
+            return ResponseEntity.ok(obj);
+        String appId = openAccess.getAccessKey();// qq互联appid
+        if (!StringUtils.isEmpty(appId)) {
+            obj.put("appid", appId);
         }
 
         return ResponseEntity.ok(obj);
@@ -74,12 +74,19 @@ public class UserWechatRegisterResource {
         // 空校验
         String code = param.getString("code");
         if (StringUtils.isEmpty(code))
-            throw new BadRequestAlertException("code为空", "UserRegisterResource", "");
+            throw new BadRequestAlertException("code为空", "UserWechatRegisterResource", "");
+
+        // 从数据库中获取微信授权应用信息
+        SysOpenAccess openAccess = openAccessService.getById("webchart");
+        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
+            throw new BadRequestAlertException("未找到配置", "UserWechatRegisterResource", "");
+        String appId = openAccess.getAccessKey();// 微信开放平台appid
+        String appSecret = openAccess.getSecretKey();// 微信开放平台appsecret
 
         // 通过code获取微信用户信息
         String openid = null;
         String nickname = null;
-        JSONObject returnObj = userWechatRegisterService.requestWechatUserByCode(code, null, WechatAppid, WechatAppsecret);
+        JSONObject returnObj = userWechatRegisterService.requestWechatUserByCode(code, null, appId, appSecret);
         if (!StringUtils.isEmpty(returnObj) && !returnObj.containsKey("errcode")) {
             openid = returnObj.getString("openid");
             nickname = returnObj.getString("nickname");
@@ -88,11 +95,10 @@ public class UserWechatRegisterResource {
         }
 
         // 根据openid查用户授权信息
-        List<SysUserAuth> sysUserAuths = sysUserAuthService.list(Wrappers.<SysUserAuth>query().eq("identifier", openid));
+        SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>query().eq("identifier", openid));
         // 该微信用户注册过账号，登录系统
-        if (sysUserAuths.size()>0) {
-            SysUserAuth userauth = sysUserAuths.get(0);
-            IBZUSER ibzuser = ibzuserService.getById(userauth.getUserid());
+        if (!StringUtils.isEmpty(userAuth)) {
+            IBZUSER ibzuser = ibzuserService.getById(userAuth.getUserid());
             JSONObject ibzuserObj = new JSONObject();
             ibzuserObj.put("loginname", ibzuser.getLoginname());
             ibzuserObj.put("password", ibzuser.getPassword());
@@ -109,7 +115,6 @@ public class UserWechatRegisterResource {
             object.put("token", token);
             object.put("user", user2);
         }
-
 
         return ResponseEntity.ok().body(object);
     }

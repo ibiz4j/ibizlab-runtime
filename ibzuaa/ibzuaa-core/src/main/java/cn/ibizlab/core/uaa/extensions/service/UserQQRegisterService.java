@@ -55,21 +55,21 @@ public class UserQQRegisterService {
      * 通过code获取QQ用户信息
      *
      * @param code
-     * @param qqRedirectUri
-     * @param qqAppid
-     * @param qqAppkey
+     * @param redirectUri
+     * @param appId
+     * @param appSecret
      * @return
      */
-    public JSONObject requestQQUserByCode(String code, String qqRedirectUri, String qqAppid, String qqAppkey) {
+    public JSONObject requestQQUserByCode(String code, String redirectUri, String appId, String appSecret) {
         JSONObject returnObj = null;
         try {
             // 1.根据code获取access_token
             String getAccessTokenUrl = "https://graph.qq.com/oauth2.0/token?" +
                     "grant_type=authorization_code" +
-                    "&client_id=" + qqAppid +
-                    "&client_secret=" + qqAppkey +
+                    "&client_id=" + appId +
+                    "&client_secret=" + appSecret +
                     "&code=" + code +
-                    "&redirect_uri=" + qqRedirectUri;
+                    "&redirect_uri=" + redirectUri;
             String responserStr = HttpUtils.get(getAccessTokenUrl, null, null);
             JSONObject responseObj = new JSONObject();
             if (StringUtils.isEmpty(responserStr)) {
@@ -108,7 +108,7 @@ public class UserQQRegisterService {
             // 3.使用access_token以及OpenID来访问和修改用户数据
             String getQQUserInfoUrl = "https://graph.qq.com/user/get_user_info?" +
                     "access_token=" + access_token +
-                    "&oauth_consumer_key=" + qqAppid +
+                    "&oauth_consumer_key=" + appId +
                     "&openid=" + openid;
             returnObj = JSONObject.parseObject(HttpUtils.get(getQQUserInfoUrl, null, null));
             if (StringUtils.isEmpty(returnObj)) {

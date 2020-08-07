@@ -19,10 +19,21 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
+                '08a1b3f1982aeed0d7ace10329315343',
                 '9e9a67908b3c85516085fe19e3dd4113',
                 'bb58e4db8024f089e1d808f0ede81302',
                 '0134ebf9391cb5f988839332c1352cd9',
                 'cb64b5009e70f225a91046314f40977a',
+            ],
+        },
+        {
+            viewtag: '08a1b3f1982aeed0d7ace10329315343',
+            viewmodule: 'uaa',
+            viewname: 'SysOpenAccessGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '502f094c8574dc383709aca00a4b5093',
             ],
         },
         {
@@ -133,6 +144,15 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '812d0052dbbf9be1d9db9117d0988de5',
+            ],
+        },
+        {
+            viewtag: '502f094c8574dc383709aca00a4b5093',
+            viewmodule: 'uaa',
+            viewname: 'SysOpenAccessEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
         {

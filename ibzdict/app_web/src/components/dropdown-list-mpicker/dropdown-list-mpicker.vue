@@ -1,26 +1,31 @@
 <template>
-    <i-select
-        class='dropdown-list-mpicker'
-        multiple 
-        :transfer="true"
-        transfer-class-name="dropdown-list-mpicker-transfer"
-        v-model="currentVal"
-        :disabled="disabled === true ? true : false"
-        :clearable="true"
-        :filterable="filterable === true ? true : false"
-        @on-open-change="onClick"
-        :placeholder="$t('components.dropDownListMpicker.placeholder')">
-        <i-option v-for="(item, index) in items" :key="index" :value="item.value.toString()" :label="item.text">
-          <Checkbox :value = "(currentVal.indexOf(item.value.toString()))==-1?false:true">
-             {{Object.is(codelistType,'STATIC') ? $t('codelist.'+tag+'.'+item.value) : item.text}}
-          </Checkbox>
-        </i-option>
-    </i-select>
+    <div class="dropdown-list-mpicker-container">
+        <i-select
+            v-if="!hasChildren"
+            class='dropdown-list-mpicker'
+            multiple 
+            :transfer="true"
+            transfer-class-name="dropdown-list-mpicker-transfer"
+            v-model="currentVal"
+            :disabled="disabled === true ? true : false"
+            :clearable="true"
+            :filterable="filterable === true ? true : false"
+            @on-open-change="onClick"
+            :placeholder="$t('components.dropDownListMpicker.placeholder')">
+            <i-option v-for="(item, index) in items" :key="index" :value="item.value.toString()" :label="item.text">
+            <Checkbox :value = "(currentVal.indexOf(item.value.toString()))==-1?false:true">
+                {{Object.is(codelistType,'STATIC') ? $t('codelist.'+tag+'.'+item.value) : item.text}}
+            </Checkbox>
+            </i-option>
+        </i-select>
+        <ibiz-select-tree v-if="hasChildren" class="tree-dropdown-list-mpicker" :disabled="disabled" :NodesData="items" v-model="currentVal" :multiple="true"></ibiz-select-tree>
+    </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop, Model } from 'vue-property-decorator';
 import CodeListService from "@service/app/codelist-service";
+import { Util } from '@/utils';
 @Component({
 })
 export default class DropDownListMpicker extends Vue {
@@ -31,6 +36,13 @@ export default class DropDownListMpicker extends Vue {
      * @memberof DropDownListMpicker
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 是否有子集
+     * @type {boolean}
+     * @memberof DropDownListMpicker
+     */
+    public hasChildren:boolean = false;
 
     /**
      * 当前选中值
@@ -131,6 +143,14 @@ export default class DropDownListMpicker extends Vue {
      * @memberof DropDownListMpicker
      */
     set currentVal(val: any) {
+        if(this.hasChildren && val){
+            let tempVal:any = JSON.parse(val);
+            if(tempVal.length >0){
+                val = tempVal.map((item:any) =>{
+                    return item.value;
+                })
+            }
+        }
         const type: string = this.$util.typeOf(val);
         val = Object.is(type, 'null') || Object.is(type, 'undefined') ? [] : val;
         let value = val.length > 0 ? val.join(this.valueSeparator) : '';
@@ -143,7 +163,43 @@ export default class DropDownListMpicker extends Vue {
      * @memberof DropDownListMpicker
      */
     get currentVal() {
+        if(this.hasChildren){
+            if(this.itemValue){
+                let list:Array<any> = [];
+                let selectedvalueArray:Array<any> = [];
+                let curSelectedValue:Array<any> = this.itemValue.split(this.valueSeparator);
+                this.getItemList(list,this.items);
+                if(curSelectedValue.length > 0){
+                    curSelectedValue.forEach((selectedVal:any) =>{
+                        let tempResult:any = list.find((item:any) =>{
+                            return item.value == selectedVal;
+                        })
+                        selectedvalueArray.push(tempResult);
+                    })
+                }
+                return selectedvalueArray.length >0?JSON.stringify(selectedvalueArray):null;
+            }else{
+                return null;
+            }
+
+        }
         return this.itemValue? this.itemValue.split(this.valueSeparator):[];
+    }
+
+    /**
+     * 获取代码表列表
+     *
+     * @memberof DropDownListMpicker
+     */
+    public getItemList(list:Array<any>,items:Array<any>){
+        if(items && items.length >0){
+            items.forEach((item:any) =>{
+                if(item.children){
+                    this.getItemList(list,item.children);
+                }
+                list.push(item);
+            })
+        }
     }
 
     /**
@@ -186,6 +242,7 @@ export default class DropDownListMpicker extends Vue {
           const codelist = this.$store.getters.getCodeList(this.tag);
           if (codelist) {
             this.items = [...JSON.parse(JSON.stringify(codelist.items))];
+            this.handleLevelCodeList(Util.deepCopy(this.items));
           } else {
               console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           }
@@ -198,6 +255,7 @@ export default class DropDownListMpicker extends Vue {
           let _param = data.param;
           this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
             this.items = res;
+            this.handleLevelCodeList(Util.deepCopy(this.items));
           }).catch((error:any) => {
               console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
           });
@@ -220,11 +278,57 @@ export default class DropDownListMpicker extends Vue {
             let _param = data.param;
             this.codeListService.getItems(this.tag,_context,_param).then((res:any) => {
                 this.items = res;
+                this.handleLevelCodeList(Util.deepCopy(this.items));
             }).catch((error:any) => {
                 console.log(`----${this.tag}----${(this.$t('app.commonWords.codeNotExist') as string)}`);
             });
         }
     }
+
+    /**
+     * 处理层级代码表
+     * 
+     * @param {*} items
+     * @memberof DropDownListMpicker
+     */
+    public handleLevelCodeList(items: Array<any>){
+        if(items && items.length >0){
+            this.hasChildren = items.some((item:any) =>{
+                return item.pvalue;
+            })
+            if(this.hasChildren){
+                let list:Array<any> = [];
+                items.forEach((codeItem:any) =>{
+                    if(!codeItem.pvalue){
+                        let valueField:string = codeItem.value;
+                        this.setChildCodeItems(valueField,items,codeItem);
+                        list.push(codeItem);
+                    }
+                })
+                this.items = list;
+            }
+        }
+    }
+
+    /**
+     * 计算子类代码表
+     * 
+     * @param {*} items
+     * @memberof DropDownListMpicker
+     */
+    public setChildCodeItems(pValue:string,result:Array<any>,codeItem:any){
+        result.forEach((item:any) =>{
+            if(item.pvalue == pValue){
+                let valueField:string = item.value;
+                this.setChildCodeItems(valueField,result,item);
+                if(!codeItem.children){
+                    codeItem.children = [];
+                }
+                codeItem.children.push(item);
+            }
+        })
+    }
+
 }
 </script>
 

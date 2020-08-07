@@ -107,7 +107,7 @@ public class SysPSSystemResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/syspssystems/save")
     public ResponseEntity<Boolean> save(@RequestBody SysPSSystemDTO syspssystemdto) {
         SysPSSystem system = syspssystemService.getById(syspssystemdto.getPssystemid());
-        if( !StringUtils.isEmpty(system.getMd5check()) && system.getMd5check().equals(syspssystemdto.getMd5check())){
+        if( system!=null && !StringUtils.isEmpty(system.getMd5check()) && system.getMd5check().equals(syspssystemdto.getMd5check())){
             log.warn(String.format("[%s]系统资源没有变化，忽略本次同步请求:",syspssystemdto.getPssystemid()));
             return ResponseEntity.status(HttpStatus.OK).body(true);
         }

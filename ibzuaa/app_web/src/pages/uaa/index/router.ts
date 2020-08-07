@@ -36,6 +36,20 @@ const router = new Router({
             component: () => import('@pages/uaa/index/index.vue'),
             children: [
                 {
+                    path: 'sysopenaccesses/:sysopenaccess?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysopenaccess.views.editview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-open-access-edit-view/sys-open-access-edit-view.vue'),
+                },
+                {
                     path: 'sysapps/:sysapp?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.sysapp.views.gridview.title',
@@ -150,20 +164,6 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-userpickup-grid-view/sys-userpickup-grid-view.vue'),
                 },
                 {
-                    path: 'sysroles/:sysrole?/editview/:editview?',
-                    meta: {
-                        caption: 'entities.sysrole.views.editview.title',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysroles', parameterName: 'sysrole' },
-                            { pathName: 'editview', parameterName: 'editview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-role-edit-view/sys-role-edit-view.vue'),
-                },
-                {
                     path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
                     meta: {
                         caption: 'entities.sysuserrole.views.editview.title',
@@ -208,6 +208,20 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
                 },
                 {
+                    path: 'sysroles/:sysrole?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysrole.views.editview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-role-edit-view/sys-role-edit-view.vue'),
+                },
+                {
                     path: 'sysroles/:sysrole?/mpickupview/:mpickupview?',
                     meta: {
                         caption: 'entities.sysrole.views.mpickupview.title',
@@ -234,6 +248,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/uaa/sys-auth-log-grid-view/sys-auth-log-grid-view.vue'),
+                },
+                {
+                    path: 'sysopenaccesses/:sysopenaccess?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.sysopenaccess.views.gridview.title',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-open-access-grid-view/sys-open-access-grid-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/pickupview/:pickupview?',
@@ -426,6 +454,19 @@ const router = new Router({
         component: () => import('@pages/uaa/sys-auth-log-grid-view/sys-auth-log-grid-view.vue'),
     },
     {
+        path: '/sysopenaccesses/:sysopenaccess?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.sysopenaccess.views.gridview.title',
+            info:'',
+            parameters: [
+                { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-open-access-grid-view/sys-open-access-grid-view.vue'),
+    },
+    {
         path: '/sysapps/:sysapp?/editview/:editview?',
         meta: {
             caption: 'entities.sysapp.views.editview.title',
@@ -504,6 +545,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/uaa/sys-usermpickup-view/sys-usermpickup-view.vue'),
+    },
+    {
+        path: '/sysopenaccesses/:sysopenaccess?/editview/:editview?',
+        meta: {
+            caption: 'entities.sysopenaccess.views.editview.title',
+            info:'',
+            parameters: [
+                { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-open-access-edit-view/sys-open-access-edit-view.vue'),
     },
     {
         path: '/sysroles/:sysrole?/editview/:editview?',

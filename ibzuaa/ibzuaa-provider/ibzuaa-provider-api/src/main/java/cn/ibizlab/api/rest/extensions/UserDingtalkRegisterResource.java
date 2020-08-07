@@ -1,7 +1,9 @@
 package cn.ibizlab.api.rest.extensions;
 
+import cn.ibizlab.core.uaa.domain.SysOpenAccess;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.extensions.service.UserDingtalkRegisterService;
+import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
@@ -14,7 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
 
 
@@ -40,11 +40,8 @@ public class UserDingtalkRegisterResource {
     @Autowired
     @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
-
-    @Value("${ibiz.auth.dingtalk.appid:}")// 个人应用开发过程中的唯一性标识AppId,最好在配置文件进行初始化
-    private String DingtalkAppid;
-    @Value("${ibiz.auth.dingtalk.appsecret:}")// 个人应用AppSecret,最好在配置文件进行初始化
-    private String DingtalkAppSecret;
+    @Autowired
+    private ISysOpenAccessService openAccessService;
 
     /**
      * 获取钉钉开放平台创建的网站应用appid
@@ -52,9 +49,12 @@ public class UserDingtalkRegisterResource {
     @GetMapping(value = "/uaa/getDingtalkAppId")
     public ResponseEntity<JSONObject> getDingtalkAppId() {
         JSONObject obj = new JSONObject();
-        String appid = DingtalkAppid;
-        if (!StringUtils.isEmpty(appid)) {
-            obj.put("appid", appid);
+        SysOpenAccess openAccess = openAccessService.getById("dingtalk");
+        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
+            return ResponseEntity.ok(obj);
+        String appId = openAccess.getAccessKey();// qq互联appid
+        if (!StringUtils.isEmpty(appId)) {
+            obj.put("appid", appId);
         }
 
         return ResponseEntity.ok(obj);
@@ -75,11 +75,18 @@ public class UserDingtalkRegisterResource {
         if (StringUtils.isEmpty(code))
             throw new BadRequestAlertException("code为空", "UserDingtalkRegisterResource", "");
 
+        // 从数据库中获取钉钉授权应用信息
+        SysOpenAccess openAccess = openAccessService.getById("dingtalk");
+        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
+            throw new BadRequestAlertException("未找到配置", "UserDingtalkRegisterResource", "");
+        String appId = openAccess.getAccessKey();// 个人应用开发过程中的唯一性标识AppId
+        String appSecret = openAccess.getSecretKey();// 个人应用AppSecret
+
         // 通过code获取钉钉用户信息
         String openid = null;
         String nickname = null;
         long currentTimeMillis = System.currentTimeMillis();
-        JSONObject returnObj = userDingtalkRegisterService.requestDingtalkUserByCode(code, currentTimeMillis, DingtalkAppid, DingtalkAppSecret);
+        JSONObject returnObj = userDingtalkRegisterService.requestDingtalkUserByCode(code, currentTimeMillis, appId, appSecret);
         if (!StringUtils.isEmpty(returnObj) && !returnObj.containsKey("errcode")) {
             openid = returnObj.getString("openid");
             nickname = returnObj.getString("nick");
@@ -88,11 +95,10 @@ public class UserDingtalkRegisterResource {
         }
 
         // 根据openid查用户授权信息
-        List<SysUserAuth> sysUserAuths = sysUserAuthService.list(Wrappers.<SysUserAuth>query().eq("identifier", openid));
+        SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>query().eq("identifier", openid));
         // 该钉钉用户注册过账号，登录系统
-        if (sysUserAuths.size()>0) {
-            SysUserAuth userauth = sysUserAuths.get(0);
-            IBZUSER ibzuser = ibzuserService.getById(userauth.getUserid());
+        if (!StringUtils.isEmpty(userAuth)) {
+            IBZUSER ibzuser = ibzuserService.getById(userAuth.getUserid());
             JSONObject ibzuserObj = new JSONObject();
             ibzuserObj.put("loginname", ibzuser.getLoginname());
             ibzuserObj.put("password", ibzuser.getPassword());
@@ -152,7 +158,6 @@ public class UserDingtalkRegisterResource {
         userAuth.setIdentifier(openid);
         userAuth.setIdentityType("dingtalk");
         userDingtalkRegisterService.toCreateUserAuth(userAuth);
-
 
         // 注册成功，登录系统
         if (!StringUtils.isEmpty(ibzuser)) {

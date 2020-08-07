@@ -90,6 +90,25 @@ export default class MainModel {
 	resourcetag: '',
 	authtag:'web-Main-menuitem2',
 },
+        {
+	id: 'A045832E-C0C7-4E66-A0E0-E9286DC96A8C',
+	name: 'menuitem4',
+	text: '第三方认证',
+	type: 'MENUITEM',
+	counterid: '',
+	tooltip: '第三方认证',
+	expanded: false,
+	separator: false,
+	hidden: false,
+	hidesidebar: false,
+	opendefault: false,
+	iconcls: 'fa fa-slack',
+	icon: '',
+	textcls: '',
+	appfunctag: 'Auto13',
+	resourcetag: '',
+	authtag:'web-Main-menuitem4',
+},
     ];
 
 	/**
@@ -100,6 +119,18 @@ export default class MainModel {
 	 * @memberof MainModel
 	 */
 	public funcs: any[] = [
+        {
+            appfunctag: 'Auto13',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'sysopenaccessgridview',
+            deResParameters: [],
+            routepath: '/index/:index?/sysopenaccesses/:sysopenaccess?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
         {
             appfunctag: 'Auto10',
             appfuncyype: 'APPVIEW',

@@ -6,6 +6,8 @@
 <script lang = 'ts'>
 import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 import { Http } from '@/utils';
+import CodeListService from "@service/app/codelist-service";
+import { observable } from 'rxjs';
 @Component({})
 export default class AppOrgSelect extends Vue {
 
@@ -36,6 +38,20 @@ export default class AppOrgSelect extends Vue {
    * @memberof AppOrgSelect
    */
   @Prop() public filter?:string;
+
+  /**
+   * 代码表标识
+   * 
+   * @memberof AppOrgSelect
+   */
+  @Prop() public tag?:string;
+
+  /**
+   * 代码表类型
+   * 
+   * @memberof AppOrgSelect
+   */
+  @Prop() public codelistType?:string;
 
   /**
    * 是否多选
@@ -138,13 +154,19 @@ export default class AppOrgSelect extends Vue {
     // 单选
     if(!this.multiple){
       if(this.fillMap && Object.keys(this.fillMap).length >0){
-      let templateValue = {};
-      Object.keys(this.fillMap).forEach((item:any) =>{
-        if(this.data && this.data[this.fillMap[item]]){
-          Object.assign(templateValue,{[item]:this.data[this.fillMap[item]]});
+        let templateValue:any = {};
+        Object.keys(this.fillMap).forEach((item:any) =>{
+          if(this.data && this.data[this.fillMap[item]]){
+            Object.assign(templateValue,{[item]:this.data[this.fillMap[item]]});
+          }
+        })
+        if(!templateValue.label && templateValue.id && this.tag && this.codelistType && Object.is(this.codelistType,"DYNAMIC")){
+          this.fillLabel(templateValue,templateValue.id,(templateValue:any) =>{
+            this.selectTreeValue = JSON.stringify([templateValue]);
+          });
+        }else{
+          this.selectTreeValue = JSON.stringify([templateValue]);
         }
-      })
-      this.selectTreeValue = JSON.stringify([templateValue]);
       }
     }else{
     // 多选
@@ -163,8 +185,30 @@ export default class AppOrgSelect extends Vue {
             })
           }
         })
-        this.selectTreeValue = JSON.stringify(tempArray);
+        let tempflag:boolean = false;
+        if(tempArray.length >0 && tempArray.length >0){
+          tempArray.forEach((item:any) =>{
+            if(!item.label) tempflag = true;
+          })
         }
+        if(tempflag && this.tag && this.codelistType && Object.is(this.codelistType,"DYNAMIC")){
+          let tempStatus:number = 0;
+          tempArray.forEach((item:any) =>{
+            if(!item.label){
+              tempStatus += 1;
+              this.fillLabel(item,item.id,(result:any) =>{
+                item = result;
+                tempStatus -= 1;
+                if(tempStatus === 0){
+                  this.selectTreeValue = JSON.stringify(tempArray);
+                }
+              })
+            }
+          })
+        }else{
+          this.selectTreeValue = JSON.stringify(tempArray);
+        }
+      }
     }
   }
 
@@ -175,7 +219,7 @@ export default class AppOrgSelect extends Vue {
    */
   public loadTreeData(requestUrl:string){
     if(this.filter){
-      const result:any = this.$store.getters.getCopyData(this.filter);
+      const result:any = this.$store.getters.getOrgData(this.filter);
       if(result){
         this.NodesData = result;
         return;
@@ -209,7 +253,9 @@ export default class AppOrgSelect extends Vue {
             tempValue.forEach((value:any,index:number) =>{
               tempResult += index>0?`,${value[item]}`:`${value[item]}`;
             })
-            this.emitValue(this.fillMap[item],tempResult);
+            setTimeout(() => {
+              this.emitValue(this.fillMap[item],tempResult);
+            }, 0);
           })
         }
       }else{
@@ -225,7 +271,9 @@ export default class AppOrgSelect extends Vue {
         const tempValue:any = JSON.parse($event)[0];
         if(this.fillMap && Object.keys(this.fillMap).length >0){
           Object.keys(this.fillMap).forEach((item:any) =>{
-            this.emitValue(this.fillMap[item],tempValue[item]);
+            setTimeout(() => {
+              this.emitValue(this.fillMap[item],tempValue[item]);
+            }, 0);
           })
         }
       }else{
@@ -245,6 +293,28 @@ export default class AppOrgSelect extends Vue {
    */
   public emitValue(name:string,value:any){
     this.$emit('select-change',{name:name,value:value});
+  }
+
+  /**
+   * 填充label
+   * 
+   * @memberof AppOrgSelect
+   */
+  public fillLabel(tempObject:any,valueItem:any,callback:any){
+    if(!tempObject.label && tempObject.id && this.tag && this.codelistType && Object.is(this.codelistType,"DYNAMIC")){
+      let codeListService:CodeListService = new CodeListService();
+      codeListService.getItems(this.tag).then((items:any) =>{
+        if(items && items.length >0){
+          let result:any = items.find((item:any) =>{
+            return item.id === valueItem;
+          })
+          Object.assign(tempObject,{label:result.label});
+        }
+        callback(tempObject);
+      }).catch((error:any) =>{
+        console.log(error);
+      })
+    }
   }
 
 }

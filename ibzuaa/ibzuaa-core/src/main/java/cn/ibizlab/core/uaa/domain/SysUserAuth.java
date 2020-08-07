@@ -29,7 +29,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
 
 /**
- * 实体[实体]
+ * 实体[账号绑定]
  */
 @Getter
 @Setter

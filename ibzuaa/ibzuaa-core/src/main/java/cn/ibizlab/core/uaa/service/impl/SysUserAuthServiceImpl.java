@@ -39,7 +39,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
 
 /**
- * 实体[实体] 服务对象接口实现
+ * 实体[账号绑定] 服务对象接口实现
  */
 @Slf4j
 @Service("SysUserAuthServiceImpl")

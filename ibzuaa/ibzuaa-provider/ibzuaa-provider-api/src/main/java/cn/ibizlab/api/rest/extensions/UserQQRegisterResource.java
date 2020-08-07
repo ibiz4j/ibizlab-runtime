@@ -1,7 +1,9 @@
 package cn.ibizlab.api.rest.extensions;
 
+import cn.ibizlab.core.uaa.domain.SysOpenAccess;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.extensions.service.UserQQRegisterService;
+import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
@@ -14,7 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,14 +41,8 @@ public class UserQQRegisterResource {
     @Autowired
     @Qualifier("UAAUserService")
     private AuthenticationUserService userDetailsService;
-
-    @Value("${ibiz.auth.qq.appid:}")// qq互联appid,在配置文件进行初始化
-    private String qqAppId;
-    @Value("${ibiz.auth.qq.appkey:}")// qq互联appkey,在配置文件进行初始化
-    private String qqAppKey;
-    @Value("${ibiz.auth.qq.redirect_uri:}")// qq互联应用回调地址,在配置文件进行初始化
-    private String qqRedirectUri;
-
+    @Autowired
+    private ISysOpenAccessService openAccessService;
 
     /**
      * 获取QQ互联平台创建的网站应用appid
@@ -55,10 +50,14 @@ public class UserQQRegisterResource {
     @GetMapping(value = "/uaa/getQQAppId")
     public ResponseEntity<JSONObject> getQQAppId() {
         JSONObject obj = new JSONObject();
-        String appid = qqAppId;
-        if (!StringUtils.isEmpty(appid)) {
-            obj.put("appid", appid);
+        SysOpenAccess openAccess = openAccessService.getById("qq");
+        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
+            return ResponseEntity.ok(obj);
+        String appId = openAccess.getAccessKey();// qq互联appid
+        if (!StringUtils.isEmpty(appId)) {
+            obj.put("appid", appId);
         }
+
 
         return ResponseEntity.ok(obj);
     }
@@ -77,10 +76,18 @@ public class UserQQRegisterResource {
         if (StringUtils.isEmpty(code))
             throw new BadRequestAlertException("code为空", "UserQQRegisterResource", "");
 
+        //　从数据库中获取qq互联信息
+        SysOpenAccess openAccess = openAccessService.getById("qq");
+        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
+            throw new BadRequestAlertException("未找到配置", "UserQQRegisterResource", "");
+        String appId = openAccess.getAccessKey();// qq互联appid
+        String appSecret = openAccess.getSecretKey();// qq互联appkey
+        String redirectUri = openAccess.getRedirectUri();// qq互联应用回调地址
+
         // 通过code获取QQ用户信息
         String openid = null;
         String nickname = null;
-        JSONObject returnObj = userQQRegisterService.requestQQUserByCode(code, qqRedirectUri, qqAppId, qqAppKey);
+        JSONObject returnObj = userQQRegisterService.requestQQUserByCode(code, redirectUri, appId, appSecret);
         if (!StringUtils.isEmpty(returnObj) && !returnObj.containsKey("errcode")) {
             openid = returnObj.getString("openid");
             nickname = returnObj.getString("nickname");
@@ -89,11 +96,10 @@ public class UserQQRegisterResource {
         }
 
         // 根据openid查用户授权信息
-        List<SysUserAuth> sysUserAuths = sysUserAuthService.list(Wrappers.<SysUserAuth>query().eq("identifier", openid));
+        SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>query().eq("identifier", openid));
         // 该QQ用户注册过账号，登录系统
-        if (sysUserAuths.size()>0) {
-            SysUserAuth userauth = sysUserAuths.get(0);
-            IBZUSER ibzuser = ibzuserService.getById(userauth.getUserid());
+        if (!StringUtils.isEmpty(userAuth)) {
+            IBZUSER ibzuser = ibzuserService.getById(userAuth.getUserid());
             JSONObject ibzuserObj = new JSONObject();
             ibzuserObj.put("loginname", ibzuser.getLoginname());
             ibzuserObj.put("password", ibzuser.getPassword());

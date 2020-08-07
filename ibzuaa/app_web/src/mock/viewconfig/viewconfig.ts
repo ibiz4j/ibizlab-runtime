@@ -23,6 +23,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "Index",
             "viewtag": "045e3ba6825a802770d6eca089a6484d"
         },
+        "sysopenaccessgridview": {
+            "title": "第三方认证平台",
+            "caption": "第三方认证平台",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "uaa",
+            "viewname": "SysOpenAccessGridView",
+            "viewtag": "08a1b3f1982aeed0d7ace10329315343"
+        },
         "sys_user_roleredirectview": {
             "title": "用户角色关系表数据重定向视图",
             "caption": "用户角色关系",
@@ -110,6 +118,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "uaa",
             "viewname": "SysRolePermissionRedirectView",
             "viewtag": "47fb02384b5797f4b095e247619515f4"
+        },
+        "sysopenaccesseditview": {
+            "title": "第三方认证平台",
+            "caption": "第三方认证平台",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "uaa",
+            "viewname": "SysOpenAccessEditView",
+            "viewtag": "502f094c8574dc383709aca00a4b5093"
         },
         "sysrolepermissiongridview": {
             "title": "角色权限关系表表格视图",

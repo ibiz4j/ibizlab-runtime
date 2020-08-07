@@ -13,6 +13,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import cn.ibizlab.util.web.SearchContextHandlerMethodArgumentResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Slf4j
@@ -30,6 +32,9 @@ import java.util.List;
 })
 public class WebApplication extends WebMvcConfigurerAdapter{
 
+    @Autowired
+    SearchContextHandlerMethodArgumentResolver resolver;
+
     public static void main(String[] args) {
         SpringApplication.run(WebApplication.class,args);
     }
@@ -37,6 +42,6 @@ public class WebApplication extends WebMvcConfigurerAdapter{
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         super.addArgumentResolvers(argumentResolvers);
-        argumentResolvers.add(new cn.ibizlab.util.web.SearchContextHandlerMethodArgumentResolver());
+        argumentResolvers.add(resolver);
     }
 }

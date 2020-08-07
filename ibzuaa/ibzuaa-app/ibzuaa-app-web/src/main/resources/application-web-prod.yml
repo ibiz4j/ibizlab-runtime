@@ -7,6 +7,10 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
+    sys_open_access:
+      path: /sysopenaccesses/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
     sys_authlog:
       path: /sysauthlogs/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
