@@ -47,6 +47,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "WFGroupMPickupView",
             "viewtag": "5db49698557288612b9247b259ffbcd7"
         },
+        "wftaskgridview": {
+            "title": "我的待办",
+            "caption": "我的待办",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "workflow",
+            "viewname": "WFTaskGridView",
+            "viewtag": "67f605f39e4d0d7cfa524ea97bc29ced"
+        },
         "wfusereditview": {
             "title": "用户编辑视图",
             "caption": "用户",
@@ -54,6 +62,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "workflow",
             "viewname": "WFUserEditView",
             "viewtag": "77dd35badedcc0f6b98e83ee1ff82bda"
+        },
+        "wftaskeditview": {
+            "title": "工作流任务编辑视图",
+            "caption": "工作流任务",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "workflow",
+            "viewname": "WFTaskEditView",
+            "viewtag": "84f38898137b7bd1f9f135ac74b4b850"
         },
         "wfprocessdefinitioneditview": {
             "title": "流程定义查看",

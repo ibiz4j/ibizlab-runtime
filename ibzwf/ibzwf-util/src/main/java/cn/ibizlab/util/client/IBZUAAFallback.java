@@ -4,6 +4,7 @@ import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.security.AuthorizationLogin;
 import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Component
 public class IBZUAAFallback implements IBZUAAFeignClient {
@@ -25,6 +26,11 @@ public class IBZUAAFallback implements IBZUAAFeignClient {
 
     @Override
     public String getPublicKey() {
+        return null;
+    }
+
+    @Override
+    public JSONObject getAppSwitcher(String id, String userId) {
         return null;
     }
 }

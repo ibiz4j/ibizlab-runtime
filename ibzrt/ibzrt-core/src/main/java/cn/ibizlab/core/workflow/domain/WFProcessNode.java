@@ -63,6 +63,20 @@ public class WFProcessNode extends EntityClient implements Serializable {
     @JsonProperty("processdefinitionname")
     private String processdefinitionname;
 
+    /**
+     * 版本
+     */
+    @JSONField(name = "version")
+    @JsonProperty("version")
+    private Integer version;
+
+    /**
+     * 数量
+     */
+    @JSONField(name = "cnt")
+    @JsonProperty("cnt")
+    private Integer cnt;
+
 
 
 
@@ -89,6 +103,22 @@ public class WFProcessNode extends EntityClient implements Serializable {
     public void setProcessdefinitionname(String processdefinitionname){
         this.processdefinitionname = processdefinitionname ;
         this.modify("definitionname",processdefinitionname);
+    }
+
+    /**
+     * 设置 [版本]
+     */
+    public void setVersion(Integer version){
+        this.version = version ;
+        this.modify("version",version);
+    }
+
+    /**
+     * 设置 [数量]
+     */
+    public void setCnt(Integer cnt){
+        this.cnt = cnt ;
+        this.modify("cnt",cnt);
     }
 
 

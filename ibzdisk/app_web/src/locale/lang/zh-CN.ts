@@ -191,6 +191,7 @@ export default {
             back: "上一步",
             next: "下一步",
             complete: "完成",
+            preactionmessage:"未配置计算上一步行为"
         },
         viewLayoutPanel: {
             appLogoutView: {

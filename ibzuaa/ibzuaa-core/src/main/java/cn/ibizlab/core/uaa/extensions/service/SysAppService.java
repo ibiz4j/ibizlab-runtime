@@ -47,7 +47,7 @@ public class SysAppService extends SysAppServiceImpl
     @Value("${spring.cloud.nacos.discovery.server-addr:127.0.0.1:8848}")
     private String serverAddr;
 
-    //@Cacheable( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
+    @Cacheable( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
     public JSONObject getAppSwitcher(String id,String userId)
     {
         JSONObject jo=ibzConfigService.getConfig("AppSwitcher",id, userId);

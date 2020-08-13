@@ -60,10 +60,9 @@ public class WFTaskWay extends EntityBase implements Serializable {
     /**
      * TaskDefinitionKey
      */
-    @DEField(name = "taskdefinitionkey")
-    @JSONField(name = "taskProcessDefinitionKey")
-    @JsonProperty("taskProcessDefinitionKey")
-    private String taskprocessdefinitionkey;
+    @JSONField(name = "taskDefinitionKey")
+    @JsonProperty("taskDefinitionKey")
+    private String taskdefinitionkey;
 
     /**
      * 实例标识

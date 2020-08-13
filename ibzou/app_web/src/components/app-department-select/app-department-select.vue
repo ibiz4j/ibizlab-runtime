@@ -103,7 +103,7 @@ export default class AppDepartmentSelect extends Vue {
      * @type {*}
      * @memberof AppDepartmentSelect
      */
-    public oldurl: any[] = [];
+    public oldurl: any;
 
     /**
      * 获取节点数据
@@ -136,14 +136,14 @@ export default class AppDepartmentSelect extends Vue {
       }
       this.oldurl = _url;
       // 缓存机制
-      const result:any = this.$store.getters.getDepData(this.filter);
+      const result:any = this.$store.getters.getDepData(_url);
       if(result){
         this.Nodesdata = result;
         return;
       }
       this.$http.get(_url).then((response: any) => {
           this.Nodesdata = response.data;
-          this.$store.commit('addDepData', { srfkey: this.filter, depData: response.data });
+          this.$store.commit('addDepData', { srfkey: _url, depData: response.data });
       }).catch((response: any) => {
           if (!response || !response.status || !response.data) {
               this.$Notice.error({ title: (this.$t('app.commonWords.error') as string), desc: (this.$t('app.commonWords.sysException') as string) });

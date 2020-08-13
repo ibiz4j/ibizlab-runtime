@@ -1,10 +1,10 @@
 <template>
 <div class="view-container decustomview sys-role-permission-custom-view">
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="sysrolepermissioncustomview"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="sysrolepermissioncustomview"></app-studioaction>
     <card class='view-card  view-no-toolbar' :disHover="true" :padding="0" :bordered="false">
 
 <div slot='title' class="header-container">
-    <span class='caption-info'>{{$t(model.srfTitle)}}</span>
+    <span class='caption-info'>{{$t(model.srfCaption)}}</span>
 </div>
 
         <div class="content-container">
@@ -395,7 +395,7 @@ export default class SysRolePermissionCustomViewBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'sys-role-permission-custom-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'sys-role-permission-custom-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysrolepermission,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -406,7 +406,7 @@ export default class SysRolePermissionCustomViewBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'sys-role-permission-custom-view',tag:this.viewtag,srfkey:this.context.sysrolepermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'sys-role-permission-custom-view',tag:this.viewtag,srfkey:this.context.sysrolepermission,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

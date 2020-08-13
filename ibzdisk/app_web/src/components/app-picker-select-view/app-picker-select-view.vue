@@ -316,14 +316,22 @@ export default class AppPickerSelectView extends Vue {
             this.keySet = [];
             this.selectItems = [];
             if (newVal) {
-                this.selectItems = JSON.parse(newVal);
-                this.selectItems.forEach((item: any) => {
-                    this.keySet.push(item.srfkey);
-                    let index = this.items.findIndex((i) => Object.is(i.srfkey, item.srfkey));
-                    if (index < 0) {
-                        this.items.push({ srfmajortext : item.srfmajortext, srfkey: item.srfkey });
-                    }
-                });
+                if (!this.data || !this.valueitem || !this.data[this.valueitem]) {
+                    this.$Notice.error({ title: (this.$t('components.appPickerSelectView.error') as any), desc: (this.$t('components.appPickerSelectView.editor') as any)+this.name+(this.$t('components.appPickerSelectView.valueitemException') as any) });
+                }else{
+                    let tempvalue: Array<any> = this.data[this.valueitem].split(',');
+                    let temptext: Array<any> = newVal.split(',');
+                    tempvalue.forEach((srfkey: any, index: number)=>{
+                        this.selectItems.push({ srfmajortext : temptext[index], srfkey: srfkey });
+                    });
+                    this.selectItems.forEach((item: any) => {
+                        this.keySet.push(item.srfkey);
+                        let index = this.items.findIndex((i) => Object.is(i.srfkey, item.srfkey));
+                        if (index < 0) {
+                            this.items.push({ srfmajortext : item.srfmajortext, srfkey: item.srfkey });
+                        }
+                    });
+                }
             }
             let _viewparam = JSON.parse(this.viewparam);
             _viewparam.selectedData = this.selectItems;
@@ -376,23 +384,31 @@ export default class AppPickerSelectView extends Vue {
                 this.$emit('formitemvaluechange', { name: this.valueitem, value: tempvalue });
             }
             if (this.name) {
-                let tempvalue = $event[0][this.deMajorField] ? $event[0][this.deMajorField] : $event[0].srfmajortext;
-                this.$emit('formitemvaluechange', { name: this.name, value: tempvalue });
+                let temptext = $event[0][this.deMajorField] ? $event[0][this.deMajorField] : $event[0].srfmajortext;
+                this.$emit('formitemvaluechange', { name: this.name, value: temptext });
             }
         }else{
-            let selects: Array<any> = [];
+            let tempvalue: string = '';
+            let temptext: string = '';
             if ($event && Array.isArray($event)) {
                 $event.forEach((select: any) => {
-                    selects.push({ srfkey: select.srfkey, srfmajortext: select.srfmajortext });
-                    let index = this.items.findIndex((item) => Object.is(item.srfkey, select.srfkey));
+                    let srfkey = select[this.deKeyField] ? select[this.deKeyField] : select.srfkey;
+                    tempvalue += srfkey+",";
+                    let srfmajortext = select[this.deMajorField] ? select[this.deMajorField] : select.srfmajortext;
+                    temptext += srfmajortext+","; 
+                    let index = this.items.findIndex((item) => Object.is(item.srfkey, srfkey));
                     if (index < 0) {
-                        this.items.push({ srfmajortext : select.srfmajortext, srfkey: select.srfkey });
+                        this.items.push({ srfmajortext : srfmajortext, srfkey: srfkey });
                     }
                 });
             }
+            tempvalue = tempvalue.substring(0,tempvalue.length-1);
+            temptext = temptext.substring(0,temptext.length-1);
+            if(this.valueitem){
+                this.$emit('formitemvaluechange',{ name: this.valueitem, value: tempvalue });
+            }
             if (this.name) {
-                let value = selects.length > 0 ? JSON.stringify(selects) : '';
-                this.$emit('formitemvaluechange', { name: this.name, value: value });
+                this.$emit('formitemvaluechange', { name: this.name, value: temptext });
             }
         }
     }
@@ -553,8 +569,18 @@ export default class AppPickerSelectView extends Vue {
                 }
             });
         }
-        let value = val.length > 0 ? JSON.stringify(val) : '';
-        this.$emit('formitemvaluechange', { name: this.name, value: value });
+        let tempvalue: string = '';
+        let temptext: string = '';
+        val.forEach((select: any)=>{
+            let srfkey = select[this.deKeyField] ? select[this.deKeyField] : select.srfkey;
+            tempvalue += srfkey+",";
+            let srfmajortext = select[this.deMajorField] ? select[this.deMajorField] : select.srfmajortext;
+            temptext += srfmajortext+","; 
+        });
+        tempvalue = tempvalue.substring(0,tempvalue.length-1);
+        temptext = temptext.substring(0,temptext.length-1);
+        this.$emit('formitemvaluechange',{ name: this.valueitem, value: tempvalue });
+        this.$emit('formitemvaluechange', { name: this.name, value: temptext });
     }
 
 }

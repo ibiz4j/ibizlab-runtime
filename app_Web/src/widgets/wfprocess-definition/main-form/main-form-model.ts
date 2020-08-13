@@ -91,6 +91,16 @@ export default class MainModel {
         dataType: 'TEXT',
       },
       {
+        name: 'webserviceids',
+        prop: 'webserviceids',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'mobileserviceids',
+        prop: 'mobileserviceids',
+        dataType: 'TEXT',
+      },
+      {
         name: 'wfprocessdefinition',
         prop: 'definitionkey',
         dataType: 'FONTKEY',

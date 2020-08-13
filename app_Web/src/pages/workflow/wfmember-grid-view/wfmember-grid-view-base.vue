@@ -1,9 +1,9 @@
 <template>
 <div class='view-container degridview wfmember-grid-view'>
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="wfmembergridview"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="wfmembergridview"></app-studioaction>
     <card class='view-card '  :dis-hover="true" :bordered="false">
         <div slot='title' class="header-container">
-        <span class='caption-info'>{{$t(model.srfTitle)}}</span>
+        <span class='caption-info'>{{$t(model.srfCaption)}}</span>
         </div>
         <div class='content-container'>
             <div class='view-top-messages'>
@@ -112,6 +112,7 @@
                 :showBusyIndicator="true"
                 :isOpenEdit="false"
                 :gridRowActiveMode="gridRowActiveMode"
+                :isformDruipart="isformDruipart"
                 @save="onSave"
                 updateAction=""
                 removeAction="Remove"
@@ -581,7 +582,7 @@ export default class WFMemberGridViewBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'wfmember-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.wfmember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'wfmember-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.wfmember,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -592,7 +593,7 @@ export default class WFMemberGridViewBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'wfmember-grid-view',tag:this.viewtag,srfkey:this.context.wfmember,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'wfmember-grid-view',tag:this.viewtag,srfkey:this.context.wfmember,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

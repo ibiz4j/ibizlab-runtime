@@ -25,7 +25,27 @@ import cn.ibizlab.util.filter.SearchContextBase;
 @Slf4j
 @Data
 public class WFTaskSearchContext extends SearchContextBase {
-	private String n_taskname_like;//[任务名称]
+	private String n_taskname_like;//[状态]
+
+	private String n_definitionkey_leftlike;//[DefinitionKey]
+
+	private String n_definitionkey_like;//[DefinitionKey]
+
+	private String n_definitionname_like;//[流程]
+
+	private String n_taskdefinitionkey_like;//[TaskDefinitionKey]
+
+	private String n_description_like;//[待办事项]
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+	private Timestamp n_createtime_gtandeq;//[发起时间]
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+	private Timestamp n_createtime_ltandeq;//[发起时间]
+
+	private String n_businesskey_eq;//[业务键值]
 
 }
 

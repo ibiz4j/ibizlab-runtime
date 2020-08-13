@@ -4,4 +4,7 @@ export default {
         "0": "否",
         "empty": ""
     },
+    WFSystemList: {
+        "empty": "",
+    },
 };

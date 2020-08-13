@@ -44,6 +44,8 @@
                         <app-lang style='font-size: 15px;padding: 0 10px;'></app-lang>
                         <app-orgsector></app-orgsector>
                         <app-user></app-user>
+                        <app-lock-scren />
+                        <app-full-scren />
                         <app-theme style="width:45px;display: flex;justify-content: center;"></app-theme>
                     </div>
                 </header>
@@ -412,7 +414,7 @@ export default class IndexBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'index',tag:this.viewtag,srfkey:isNew ? null : null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'index',tag:this.viewtag,srfkey:isNew ? null : null,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -423,7 +425,7 @@ export default class IndexBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'index',tag:this.viewtag,srfkey:null,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'index',tag:this.viewtag,srfkey:null,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

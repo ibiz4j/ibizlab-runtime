@@ -1,11 +1,11 @@
 <template>
 <div class="view-container deeditview2 sys-user-role-edit-view2">
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="sysuserroleeditview2"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="sysuserroleeditview2"></app-studioaction>
     <card class='view-card  ' :dis-hover="true" :bordered="false">
 
 
 <div slot='title' class="header-container">
-    <span class='caption-info'>{{$t(model.srfTitle)}}</span>
+    <span class='caption-info'>{{$t(model.srfCaption)}}</span>
     <template v-if="Object.is(this.selection.id, 'form')">
           <div class='toolbar-container'>
         <tooltip :transfer="true" :max-width="600">
@@ -502,7 +502,7 @@ export default class SysUserRoleEditView2Base extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'sys-user-role-edit-view2',tag:this.viewtag,srfkey:isNew ? null : this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'sys-user-role-edit-view2',tag:this.viewtag,srfkey:isNew ? null : this.context.sysuserrole,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -513,7 +513,7 @@ export default class SysUserRoleEditView2Base extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'sys-user-role-edit-view2',tag:this.viewtag,srfkey:this.context.sysuserrole,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'sys-user-role-edit-view2',tag:this.viewtag,srfkey:this.context.sysuserrole,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

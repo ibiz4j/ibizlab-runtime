@@ -2,14 +2,19 @@ package cn.ibizlab.core.workflow.extensions.service;
 
 import cn.ibizlab.core.workflow.extensions.domain.FlowUser;
 import cn.ibizlab.core.workflow.domain.*;
+import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
+import cn.ibizlab.core.workflow.mapper.WFCoreMapper;
 import cn.ibizlab.core.workflow.service.IWFGroupService;
 import cn.ibizlab.core.workflow.service.IWFProcessDefinitionService;
 import cn.ibizlab.core.workflow.service.IWFUserService;
+import cn.ibizlab.util.client.IBZUAAFeignClient;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.RuleUtils;
 import cn.ibizlab.util.security.AuthTokenUtil;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.RemoteService;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -50,6 +55,8 @@ import org.flowable.ui.modeler.serviceapi.AppDefinitionService;
 import org.flowable.ui.modeler.serviceapi.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
@@ -72,10 +79,13 @@ public class WFCoreService
 
 	@Autowired
 	private RepositoryService repositoryService;
+
 	@Autowired
 	private HistoryService historyService;
+
 	@Autowired
 	private TaskService taskService;
+
 	@Autowired
 	private RuntimeService runtimeService;
 
@@ -88,7 +98,6 @@ public class WFCoreService
 	@Autowired
 	private IWFUserService iwfUserService;
 
-
 	@Autowired
 	protected AppDefinitionService appDefinitionService;
 
@@ -100,6 +109,12 @@ public class WFCoreService
 
 	@Autowired
 	private AuthTokenUtil jwtTokenUtil;
+
+	@Autowired
+	private WFCoreMapper wfCoreMapper;
+
+	@Autowired
+	private IBZUAAFeignClient ibzuaaFeignClient;
 
 	private AuthenticationContext createAuthenticationContext()
 	{
@@ -154,6 +169,13 @@ public class WFCoreService
 		return rt;
 	}
 
+	public List<WFProcessNode> getWFStep2(String system,String appname, String entity) {
+		WFTaskSearchContext context = new WFTaskSearchContext();
+		context.setSize(1000);
+		context.setN_definitionkey_leftlike(system+"-"+entity);
+		return wfCoreMapper.searchMyTaskCnt(context,context.getSearchCond());
+	}
+
 
 	public Map<String,Long> getWFStepCnt(String system,String appname, String entity,String processDefinitionKey,String wfstepcode)
 	{
@@ -198,6 +220,95 @@ public class WFCoreService
 				break;
 		}
 		return wfStepCnt;
+	}
+
+	public Page<WFTask> searchMyTask(WFTaskSearchContext context) {
+		context.setSort("createtime,desc");
+		com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFTask> pages=wfCoreMapper.searchMyTask(context.getPages(),context,context.getSelectCond());
+		return new PageImpl<WFTask>(pages.getRecords(), context.getPageable(), pages.getTotal());
+	}
+
+	public String getTaskUrl(String type,String processDefinitionKey,String processInstanceId,String businessKey,String taskDefinitionKey)
+	{
+		JSONObject app = ibzuaaFeignClient.getAppSwitcher("default",AuthenticationUser.getAuthenticationUser().getUserid());
+
+		String[] arr = processDefinitionKey.split("-");
+		String systemId = arr[0];
+		String entity = arr[1];
+
+		if(app!=null && app.containsKey("model"))
+		{
+			List<Map> array = app.getObject("model",ArrayList.class);
+			int cnt=0;
+			Map<String,String> serviceAddrs=new HashMap<>();
+			String addr="";
+			for(Map item:array) {
+				if(item.get("systemId")!=null&&systemId.equalsIgnoreCase(item.get("systemId").toString())) {
+					cnt++;
+					if(!StringUtils.isEmpty(item.get("addr"))) {
+						addr = item.get("addr").toString();
+						if(!addr.endsWith("/"))
+							addr+="/";
+						if(!StringUtils.isEmpty(item.get("id")))
+							serviceAddrs.put(item.get("id").toString(),addr);
+					}
+				}
+			}
+			if(cnt==1&&(!StringUtils.isEmpty(addr))) {
+				addr+=String.format("#/appwfdataredirectview?srfappde=%1$s;srfappkey=%2$s;userTaskId=%3$s",entity,businessKey,taskDefinitionKey);
+				return addr;
+			}
+			String serviceIds="";
+			WFProcessDefinition definition = iwfProcessDefinitionService.get(processDefinitionKey);
+			if((!StringUtils.isEmpty(type))&&type.toUpperCase().startsWith("mob"))
+				serviceIds=definition.getMobileserviceids();
+			else
+				serviceIds=definition.getWebserviceids();
+			if(!StringUtils.isEmpty(serviceIds)) {
+				for(String serviceId:serviceIds.split(",")) {
+					if(serviceAddrs.containsKey(serviceId)) {
+						addr = serviceAddrs.get(serviceId);
+						break;
+					}
+				}
+				if(!StringUtils.isEmpty(addr)) {
+					addr+=String.format("#/appwfdataredirectview?srfappde=%1$s;srfappkey=%2$s;userTaskId=%3$s",entity,businessKey,taskDefinitionKey);
+					return addr;
+				}
+			}
+
+
+		}
+		return "";
+	}
+
+	public List<String> getBusinessKeys(String system,String appname, String entity,String processDefinitionKey,String taskDefinitionKey,String userId)
+	{
+		List<String> businessKeys = new ArrayList<>();
+		String processInstanceBusinessKeyLike=system+":"+entity+":k-";
+		if(StringUtils.isEmpty(userId))
+			userId=AuthenticationUser.getAuthenticationUser().getUserid();
+		if(StringUtils.isEmpty(userId))
+			return businessKeys;
+		TaskQuery query=taskService.createTaskQuery().taskCandidateOrAssigned(userId);
+		if(!StringUtils.isEmpty(processDefinitionKey))
+			query.processDefinitionKey(processDefinitionKey);
+		else {
+			query.processDefinitionKeyIn(this.getWorkflowKey(system,appname,entity));
+		}
+		if(!StringUtils.isEmpty(taskDefinitionKey))
+			query.taskDefinitionKey(taskDefinitionKey);
+		List<Task> tasks=query.listPage(0,500);
+		for(Task task:tasks) {
+			Object key=task.getCategory();
+			if(key!=null) {
+				String str=key.toString();
+				if(str.indexOf(":k-")>0)
+					str=str.split(":k-")[1];
+				businessKeys.add(str);
+			}
+		}
+		return businessKeys;
 	}
 
 	public WFProcessInstance wfStart(String system,String appname,
@@ -274,7 +385,7 @@ public class WFCoreService
 						way.setProcessdefinitionkey(task.getProcessDefinitionId().split(":")[0]);
 					way.setTaskid(task.getId());
 					way.setProcessinstanceid(task.getProcessInstanceId());
-					way.setTaskprocessdefinitionkey(task.getTaskDefinitionKey());
+					way.setTaskdefinitionkey(task.getTaskDefinitionKey());
 					way.setProcessinstancebusinesskey(processInstanceBusinessKey);
 					taskWays.add(way);
 				}
@@ -305,43 +416,13 @@ public class WFCoreService
 						way.setProcessdefinitionkey(task.getProcessDefinitionId().split(":")[0]);
 					way.setTaskid(task.getId());
 					way.setProcessinstanceid(task.getProcessInstanceId());
-					way.setTaskprocessdefinitionkey(task.getTaskDefinitionKey());
+					way.setTaskdefinitionkey(task.getTaskDefinitionKey());
 					way.setProcessinstancebusinesskey(processInstanceBusinessKey);
 					taskWays.add(way);
 				}
 			}
 		}
 		return taskWays;
-	}
-
-
-	public List<String> getBusinessKeys(String system,String appname, String entity,String processDefinitionKey,String taskDefinitionKey,String userId)
-	{
-		List<String> businessKeys = new ArrayList<>();
-		String processInstanceBusinessKeyLike=system+":"+entity+":k-";
-		if(StringUtils.isEmpty(userId))
-			userId=AuthenticationUser.getAuthenticationUser().getUserid();
-		if(StringUtils.isEmpty(userId))
-			return businessKeys;
-		TaskQuery query=taskService.createTaskQuery().taskCandidateOrAssigned(userId);
-		if(!StringUtils.isEmpty(processDefinitionKey))
-			query.processDefinitionKey(processDefinitionKey);
-		else {
-			query.processDefinitionKeyIn(this.getWorkflowKey(system,appname,entity));
-		}
-		if(!StringUtils.isEmpty(taskDefinitionKey))
-			query.taskDefinitionKey(taskDefinitionKey);
-		List<Task> tasks=query.listPage(0,500);
-		for(Task task:tasks) {
-			Object key=task.getCategory();
-			if(key!=null) {
-				String str=key.toString();
-				if(str.indexOf(":k-")>0)
-					str=str.split(":k-")[1];
-				businessKeys.add(str);
-			}
-		}
-		return businessKeys;
 	}
 
 	public WFProcessInstance wfsubmit(String system,String appname,
@@ -597,12 +678,36 @@ public class WFCoreService
 				wfreModel.setName(deployInfo);
 				return false;
 			}
+			Map<String,String> bookingapps = new HashMap<String,String>();
+			Map<String,String> bookingmobs = new HashMap<String,String>();
 			for(ExtensionElement field:curProcess.getExtensionElements().get("field"))
 			{
 				if("bookings".equals(field.getAttributes().get("name").get(0).getValue()))
 					bookings=field.getChildElements().get("string").get(0).getElementText();
 				if("refgroups".equals(field.getAttributes().get("name").get(0).getValue()))
 					refgroups=field.getChildElements().get("string").get(0).getElementText();
+
+				if(field.getAttributes().get("name").get(0).getValue().startsWith("bookingapps_"))
+				{
+					String bookingapp=field.getChildElements().get("string").get(0).getElementText();
+					if(!StringUtils.isEmpty(bookingapp))
+					{
+						String[] arr=field.getAttributes().get("name").get(0).getValue().split("_");
+						if(arr.length>1)
+							bookingapps.put(arr[1],bookingapp);
+					}
+				}
+
+				if(field.getAttributes().get("name").get(0).getValue().startsWith("bookingmobs_"))
+				{
+					String bookingmob=field.getChildElements().get("string").get(0).getElementText();
+					if(!StringUtils.isEmpty(bookingmob))
+					{
+						String[] arr=field.getAttributes().get("name").get(0).getValue().split("_");
+						if(arr.length>1)
+							bookingmobs.put(arr[1],bookingmob);
+					}
+				}
 			}
 			if(StringUtils.isEmpty(bookings))
 			{
@@ -670,6 +775,34 @@ public class WFCoreService
 				wfProcessDefinition.setModelenable(1);
 				wfProcessDefinition.setModelversion(version);
 				wfProcessDefinition.setDefinitionname(curProcess.getName());
+				if(bookingapps.containsKey(booking))
+				{
+					String[] arr = bookingapps.get(booking).split(",");
+					String serviceIds = "";
+					for(String str:arr)
+					{
+						if(StringUtils.isEmpty(str))
+							continue;
+						if(!StringUtils.isEmpty(serviceIds))
+							serviceIds+=",";
+						serviceIds=serviceIds+system+"-"+str;
+					}
+					wfProcessDefinition.setWebserviceids(serviceIds);
+				}
+				if(bookingmobs.containsKey(booking))
+				{
+					String[] arr = bookingmobs.get(booking).split(",");
+					String serviceIds = "";
+					for(String str:arr)
+					{
+						if(StringUtils.isEmpty(str))
+							continue;
+						if(!StringUtils.isEmpty(serviceIds))
+							serviceIds+=",";
+						serviceIds=serviceIds+system+"-"+str;
+					}
+					wfProcessDefinition.setMobileserviceids(serviceIds);
+				}
 
 				OutputStream out =null;
 				InputStream is = null;
@@ -950,6 +1083,11 @@ public class WFCoreService
 			{
 				for(WFMember member : list)
 				{
+					if((!StringUtils.isEmpty(deptid))&&(!deptid.equals(member.getMdeptid())))
+						continue;
+					if((!StringUtils.isEmpty(orgid))&&(!orgid.equals(member.getOrgid())))
+						continue;
+
 					if(!StringUtils.isEmpty(strUsers))
 						strUsers+=",";
 					strUsers+=member.getUserid();

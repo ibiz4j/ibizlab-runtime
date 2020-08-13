@@ -1,0 +1,49 @@
+.item {
+  height: 24px;
+  line-height: 24px;
+}
+
+#bellBtn {
+  height: 24px;
+  font-size: 16px;
+  padding-top: 2px;
+}
+
+.Row {
+  height: 60px;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+
+  .column1 {
+    text-align: center;
+    border: 0px solid red;
+  }
+
+  .column2 {
+    border: 0px red solid;
+
+    .el-row {
+      display: flex;
+
+      .el-col {
+        flex-grow: 1;
+
+        div:first-child {
+          font-weight: 500;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        div:nth-child(n+2) {
+          font-size: 12px;
+        }
+      }
+    }
+
+
+  }
+
+
+}

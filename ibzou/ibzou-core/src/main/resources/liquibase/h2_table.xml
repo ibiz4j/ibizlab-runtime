@@ -4,7 +4,7 @@
 
 
     <!--输出实体[IBZDEPT]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-ibzdept-734-1">
+    <changeSet author="a_A_5d9d78509" id="tab-ibzdept-736-1">
         <createTable tableName="IBZDEPT">
                 <column name="DEPTID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_IBZDEPT_DEPTID"/>
@@ -221,10 +221,10 @@
     </changeSet>
 
         <!--输出实体[IBZDEPT]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-ibzdept-734-8">
+    <changeSet author="a_A_5d9d78509" id="fk-ibzdept-736-8">
        <addForeignKeyConstraint baseColumnNames="PDEPTID" baseTableName="IBZDEPT" constraintName="DER1N_IBZDEPT_IBZDEPT_PDEPTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-ibzdept-734-9">
+    <changeSet author="a_A_5d9d78509" id="fk-ibzdept-736-9">
        <addForeignKeyConstraint baseColumnNames="ORGID" baseTableName="IBZDEPT" constraintName="DER1N_IBZDEPT_IBZORG_ORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
     </changeSet>
         <!--输出实体[IBZDEPTMEMBER]外键关系 -->

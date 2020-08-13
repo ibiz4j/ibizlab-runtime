@@ -246,6 +246,18 @@ export default {
       localUpload:'Local upload',
       or:'Or',
       imgMsg1:'Select from stock'
+    },
+    lockScren:{
+      title:'Set the password lock screen',
+      label:'password',
+      message:'The lock screen password cannot be empty',
+      placeholder:'Please enter the lock screen password',
+      placeholder1:'Please enter your login password',
+      message1: 'The unlock password is wrong. Please reenter it',
+      promptInformation:'Do you want to quit the system? Do you want to continue?',
+      prompt:'prompt',
+      confirmButtonText:'determine',
+      cancelButtonText:'cancel',
     }
 
 };

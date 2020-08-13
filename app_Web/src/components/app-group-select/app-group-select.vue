@@ -21,6 +21,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { Subject } from 'rxjs';
+import CodeListService from '@/service/app/codelist-service';
 
 @Component({})
 export default class AppGroupSelect extends Vue {
@@ -63,6 +64,20 @@ export default class AppGroupSelect extends Vue {
      * @memberof AppGroupSelect
      */  
     @Prop() data: any;
+
+    /**
+     * 代码表标识
+     * 
+     * @memberof AppGroupSelect
+     */
+    @Prop() public tag?:string;
+
+    /**
+     * 代码表类型
+     * 
+     * @memberof AppGroupSelect
+     */
+    @Prop() public codelistType?:string;
 
     /**
      * 过滤属性标识
@@ -126,12 +141,12 @@ export default class AppGroupSelect extends Vue {
      * @type {*}
      * @memberof AppGroupSelect
      */  
-    @Watch('value')
-    onValueChange(newVal: any) {
+    @Watch('data',{immediate:true,deep:true})
+    onValueChange(newVal: any, oldVal: any) {
         this.selects = [];
         if (newVal) {
             let item: any = {};
-            item.label = newVal.split(',');
+            item.label = this.data[this.name]?this.data[this.name].split(','):[];
             if(this.valueitem) {
                 item.id = this.data[this.valueitem] ? this.data[this.valueitem].split(',') : [];
             }
@@ -140,13 +155,24 @@ export default class AppGroupSelect extends Vue {
                     item[this.fillmap[key]] = this.data[key] ? this.data[key].split(',') : [];
                 }
             }
-            item.label.forEach((val: string, index: number) => {
-                let _item: any = {};
-                for(let key in item) {
-                    _item[key] = item[key][index] ? item[key][index] : null;
-                }
-                this.selects.push(_item)
-            })
+            const callback:any = (item:any) =>{
+                item.label.forEach((val: string, index: number) => {
+                    let _item: any = {};
+                    for(let key in item) {
+                        _item[key] = item[key][index] ? item[key][index] : null;
+                    }
+                    this.selects.push(_item)
+                })
+            }
+            if(item.label.length == 0 && item.id.length > 0){
+                this.fillLabel(item,item.id,(result:any) =>{
+                    item.label = result.label;
+                    callback(item);
+                });
+            }else{
+                callback(item);
+            }
+            
         }
     }
 
@@ -259,7 +285,6 @@ export default class AppGroupSelect extends Vue {
                 }
             });
         } else {
-            item = this.selects.length > 0 ? this.selects[0] : {};
             item[this.name] = this.selects.length > 0 ? this.selects[0].label : null;
             if(this.valueitem) {
                 item[this.valueitem] = this.selects.length > 0 ? this.selects[0].id : null;
@@ -273,7 +298,34 @@ export default class AppGroupSelect extends Vue {
         for(let key in item) {
             this.$emit('formitemvaluechange', { name: key, value: item[key] });
         }
-    } 
+    }
+
+    /**
+     * 填充label
+     * 
+     * @memberof AppGroupSelect
+     */
+    public fillLabel(tempObject:any,valueItem:Array<any>,callback:any){
+        if(tempObject.label.length === 0 && tempObject.id.length >0 && this.tag && this.codelistType && Object.is(this.codelistType,"DYNAMIC")){
+        let codeListService:CodeListService = new CodeListService();
+        codeListService.getItems(this.tag).then((items:any) =>{
+            if(items && items.length >0 && valueItem.length >0){
+            let tempLabel:Array<any> = [];
+            valueItem.forEach((value:any) =>{
+                let result:any = items.find((item:any) =>{
+                    return item.id === value;
+                })
+                tempLabel.push(result.label);
+            })
+            Object.assign(tempObject,{label:tempLabel});
+            }
+            callback(tempObject);
+        }).catch((error:any) =>{
+            console.log(error);
+        })
+        }
+    }
+  
 }
 </script>
 

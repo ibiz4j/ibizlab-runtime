@@ -23,6 +23,10 @@ zuul:
       path: /wfusers/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
+    wf_task:
+      path: /wftasks/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
     wf_definition:
       path: /wfprocessdefinitions/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}

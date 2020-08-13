@@ -25,7 +25,7 @@ const router = new Router({
                 });
             },
             meta: {  
-                caption: 'app.views.appindexview.title',
+                caption: 'app.views.appindexview.caption',
                 info:'',
                 viewType: 'APPINDEX',
                 parameters: [
@@ -38,7 +38,7 @@ const router = new Router({
                 {
                     path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/editview/:editview?',
                     meta: {
-                        caption: 'entities.dictoption.views.editview.title',
+                        caption: 'entities.dictoption.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -53,7 +53,7 @@ const router = new Router({
                 {
                     path: 'dictoptions/:dictoption?/editview/:editview?',
                     meta: {
-                        caption: 'entities.dictoption.views.editview.title',
+                        caption: 'entities.dictoption.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -67,7 +67,7 @@ const router = new Router({
                 {
                     path: 'dictcatalogs/:dictcatalog?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.dictcatalog.views.pickupgridview.title',
+                        caption: 'entities.dictcatalog.views.pickupgridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -81,7 +81,7 @@ const router = new Router({
                 {
                     path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.dictoption.views.gridview.title',
+                        caption: 'entities.dictoption.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -96,7 +96,7 @@ const router = new Router({
                 {
                     path: 'dictoptions/:dictoption?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.dictoption.views.gridview.title',
+                        caption: 'entities.dictoption.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -110,7 +110,7 @@ const router = new Router({
                 {
                     path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/grideditview/:grideditview?',
                     meta: {
-                        caption: 'entities.dictoption.views.grideditview.title',
+                        caption: 'entities.dictoption.views.grideditview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -125,7 +125,7 @@ const router = new Router({
                 {
                     path: 'dictoptions/:dictoption?/grideditview/:grideditview?',
                     meta: {
-                        caption: 'entities.dictoption.views.grideditview.title',
+                        caption: 'entities.dictoption.views.grideditview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -139,7 +139,7 @@ const router = new Router({
                 {
                     path: 'dictcatalogs/:dictcatalog?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.dictcatalog.views.pickupview.title',
+                        caption: 'entities.dictcatalog.views.pickupview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -153,7 +153,7 @@ const router = new Router({
                 {
                     path: 'dictcatalogs/:dictcatalog?/editview/:editview?',
                     meta: {
-                        caption: 'entities.dictcatalog.views.editview.title',
+                        caption: 'entities.dictcatalog.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -167,7 +167,7 @@ const router = new Router({
                 {
                     path: 'dictcatalogs/:dictcatalog?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.dictcatalog.views.gridview.title',
+                        caption: 'entities.dictcatalog.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
@@ -184,7 +184,7 @@ const router = new Router({
     {
         path: '/dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/gridview/:gridview?',
         meta: {
-            caption: 'entities.dictoption.views.gridview.title',
+            caption: 'entities.dictoption.views.gridview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
@@ -198,7 +198,7 @@ const router = new Router({
     {
         path: '/dictoptions/:dictoption?/gridview/:gridview?',
         meta: {
-            caption: 'entities.dictoption.views.gridview.title',
+            caption: 'entities.dictoption.views.gridview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictoptions', parameterName: 'dictoption' },
@@ -211,7 +211,7 @@ const router = new Router({
     {
         path: '/dictcatalogs/:dictcatalog?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.dictcatalog.views.pickupgridview.title',
+            caption: 'entities.dictcatalog.views.pickupgridview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
@@ -224,7 +224,7 @@ const router = new Router({
     {
         path: '/dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/grideditview/:grideditview?',
         meta: {
-            caption: 'entities.dictoption.views.grideditview.title',
+            caption: 'entities.dictoption.views.grideditview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
@@ -238,7 +238,7 @@ const router = new Router({
     {
         path: '/dictoptions/:dictoption?/grideditview/:grideditview?',
         meta: {
-            caption: 'entities.dictoption.views.grideditview.title',
+            caption: 'entities.dictoption.views.grideditview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictoptions', parameterName: 'dictoption' },
@@ -251,7 +251,7 @@ const router = new Router({
     {
         path: '/dictcatalogs/:dictcatalog?/gridview/:gridview?',
         meta: {
-            caption: 'entities.dictcatalog.views.gridview.title',
+            caption: 'entities.dictcatalog.views.gridview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
@@ -264,7 +264,7 @@ const router = new Router({
     {
         path: '/dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/editview/:editview?',
         meta: {
-            caption: 'entities.dictoption.views.editview.title',
+            caption: 'entities.dictoption.views.editview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
@@ -278,7 +278,7 @@ const router = new Router({
     {
         path: '/dictoptions/:dictoption?/editview/:editview?',
         meta: {
-            caption: 'entities.dictoption.views.editview.title',
+            caption: 'entities.dictoption.views.editview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictoptions', parameterName: 'dictoption' },
@@ -291,7 +291,7 @@ const router = new Router({
     {
         path: '/dictcatalogs/:dictcatalog?/editview/:editview?',
         meta: {
-            caption: 'entities.dictcatalog.views.editview.title',
+            caption: 'entities.dictcatalog.views.editview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
@@ -304,7 +304,7 @@ const router = new Router({
     {
         path: '/dictcatalogs/:dictcatalog?/pickupview/:pickupview?',
         meta: {
-            caption: 'entities.dictcatalog.views.pickupview.title',
+            caption: 'entities.dictcatalog.views.pickupview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
@@ -329,6 +329,20 @@ const router = new Router({
                 next();
             },
             component: () => import('@components/login/login.vue'),
+        },
+        {
+            path: '/lock',
+            name: 'lock',
+            meta: {  
+                caption: '锁屏',
+                viewType: 'lock',
+                requireAuth: false,
+                ignoreAddPage: true,
+            },
+            beforeEnter: (to: any, from: any, next: any) => {
+                next();
+            },
+            component: () => import('@components/app-lock/app-lock.vue'),
         },
         {
             path: '/404',

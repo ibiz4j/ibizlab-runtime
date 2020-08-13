@@ -7,6 +7,7 @@ import cn.ibizlab.core.uaa.extensions.domain.Structure.EntityNode;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.FuncItem;
 import cn.ibizlab.core.uaa.extensions.domain.Structure.UniResNode;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -17,6 +18,9 @@ import java.util.*;
 public class SysStructure
 {
 	private String systemid;
+
+	@JsonIgnore
+	private String systemname;
 
 	private List<EntityNode> entities;
 
@@ -31,7 +35,7 @@ public class SysStructure
 
 	public PermissionNode getPermissionTree(PermissionType type)
 	{
-		PermissionNode root = PermissionNode.builder().id(systemid).label(systemid).systemid(systemid).build();
+		PermissionNode root = PermissionNode.builder().id(systemid).label(systemname).systemid(systemid).build();
 		switch (type)
 		{
 		case OPPRIV:

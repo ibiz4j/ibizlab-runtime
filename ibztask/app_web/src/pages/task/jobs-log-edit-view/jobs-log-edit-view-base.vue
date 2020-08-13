@@ -1,10 +1,10 @@
 <template>
 <div class="view-container deeditview jobs-log-edit-view">
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="jobslogeditview"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="jobslogeditview"></app-studioaction>
     <card class='view-card  view-no-toolbar' :disHover="true" :bordered="false">
 
 <div slot='title' class="header-container">
-    <span class='caption-info'>{{$t(model.srfTitle)}}</span>
+    <span class='caption-info'>{{$t(model.srfCaption)}}</span>
 </div>
 
         <div class="content-container">
@@ -440,7 +440,7 @@ export default class JobsLogEditViewBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'jobs-log-edit-view',tag:this.viewtag,srfkey:isNew ? null : this.context.jobslog,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'jobs-log-edit-view',tag:this.viewtag,srfkey:isNew ? null : this.context.jobslog,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -451,7 +451,7 @@ export default class JobsLogEditViewBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'jobs-log-edit-view',tag:this.viewtag,srfkey:this.context.jobslog,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'jobs-log-edit-view',tag:this.viewtag,srfkey:this.context.jobslog,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

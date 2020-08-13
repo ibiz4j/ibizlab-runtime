@@ -43,12 +43,20 @@ public class WFTask extends EntityBase implements Serializable {
     private String id;
 
     /**
-     * 任务名称
+     * 状态
      */
     @DEField(name = "taskname")
     @JSONField(name = "name")
     @JsonProperty("name")
     private String name;
+
+    /**
+     * DefinitionId
+     */
+    @DEField(name = "definitionid")
+    @JSONField(name = "processDefinitionId")
+    @JsonProperty("processDefinitionId")
+    private String processdefinitionid;
 
     /**
      * DefinitionKey
@@ -57,6 +65,36 @@ public class WFTask extends EntityBase implements Serializable {
     @JSONField(name = "processDefinitionKey")
     @JsonProperty("processDefinitionKey")
     private String processdefinitionkey;
+
+    /**
+     * 流程
+     */
+    @DEField(name = "definitionname")
+    @JSONField(name = "processDefinitionName")
+    @JsonProperty("processDefinitionName")
+    private String processdefinitionname;
+
+    /**
+     * TaskDefinitionKey
+     */
+    @JSONField(name = "taskDefinitionKey")
+    @JsonProperty("taskDefinitionKey")
+    private String taskdefinitionkey;
+
+    /**
+     * 待办事项
+     */
+    @JSONField(name = "description")
+    @JsonProperty("description")
+    private String description;
+
+    /**
+     * 发起时间
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
+    @JSONField(name = "createTime" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonProperty("createTime")
+    private Timestamp createtime;
 
     /**
      * 实例标识
@@ -74,17 +112,19 @@ public class WFTask extends EntityBase implements Serializable {
     @JsonProperty("processInstanceBusinessKey")
     private String processinstancebusinesskey;
 
+
+
+
     /**
-     * TaskDefinitionKey
+     * 格式化日期 [发起时间]
      */
-    @DEField(name = "taskdefinitionkey")
-    @JSONField(name = "taskProcessDefinitionKey")
-    @JsonProperty("taskProcessDefinitionKey")
-    private String taskprocessdefinitionkey;
-
-
-
-
+    public String formatCreatetime(){
+        if (this.createtime == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(createtime);
+    }
 }
 
 

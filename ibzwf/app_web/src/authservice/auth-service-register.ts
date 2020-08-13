@@ -43,6 +43,7 @@ export class AuthServiceRegister {
         this.allAuthService.set('wfmember', () => import('@/authservice/wfmember/wfmember-auth-service'));
         this.allAuthService.set('wfgroup', () => import('@/authservice/wfgroup/wfgroup-auth-service'));
         this.allAuthService.set('wfuser', () => import('@/authservice/wfuser/wfuser-auth-service'));
+        this.allAuthService.set('wftask', () => import('@/authservice/wftask/wftask-auth-service'));
         this.allAuthService.set('wfprocessdefinition', () => import('@/authservice/wfprocess-definition/wfprocess-definition-auth-service'));
         this.allAuthService.set('wfsystem', () => import('@/authservice/wfsystem/wfsystem-auth-service'));
     }

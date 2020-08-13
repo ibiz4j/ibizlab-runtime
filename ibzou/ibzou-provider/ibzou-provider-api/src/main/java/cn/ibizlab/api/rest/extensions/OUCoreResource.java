@@ -8,12 +8,15 @@ import cn.ibizlab.core.ou.domain.IBZEmployee;
 import cn.ibizlab.core.ou.service.IIBZDepartmentService;
 import cn.ibizlab.core.ou.service.IIBZEmployeeService;
 import cn.ibizlab.core.ou.service.IIBZOrganizationService;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -190,17 +193,39 @@ public class OUCoreResource
     @Cacheable( value="ibzou-model",key = "'catalog:'+#p0")
     @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/Ibzou{catalog}")
     public ResponseEntity<JSONObject> getCatalog(@PathVariable("catalog") String catalog) {
-        return getOptions("ibzou"+catalog);
+        return ResponseEntity.status(HttpStatus.OK).body(getItems("Ibzou"+catalog));
     }
 
     @Cacheable( value="ibzou-model",key = "'codelist:'+#p0")
     @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/Ibzou{catalog}")
     public ResponseEntity<JSONObject> getCodeList(@PathVariable("catalog") String catalog) {
-        return getOptions("ibzou"+catalog);
+        return ResponseEntity.status(HttpStatus.OK).body(getItems("Ibzou"+catalog));
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/Ibzou{code}/options")
+    public ResponseEntity<List> getOptions(@PathVariable("code") String code) {
+        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code).get("items"));
+    }
 
-    public ResponseEntity<JSONObject> getOptions(String catalog) {
+    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/Ibzou{code}/items")
+    public ResponseEntity<List> getCodeItems(@PathVariable("code") String code) {
+        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code).get("items"));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/catalogs/Ibzou{code}/options")
+    public ResponseEntity<List> getOptions(@PathVariable("code") String code,@RequestBody List<String> values) {
+        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code,values).get("items"));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/codelist/Ibzou{code}/items")
+    public ResponseEntity<List> getCodeItems(@PathVariable("code") String code, @RequestBody List<String> values) {
+        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code,values).get("items"));
+    }
+
+    public JSONObject getItems(String catalog) {
+        return getItems(catalog,null);
+    }
+    public JSONObject getItems(String catalog,List<String> values) {
         JSONObject jo=new JSONObject();
         jo.put("srfkey",catalog);
         jo.put("emptytext","");
@@ -208,7 +233,11 @@ public class OUCoreResource
 
         if("IbzouOrg".equalsIgnoreCase(catalog))
         {
-            iibzOrganizationService.list(Wrappers.<IBZOrganization>query().orderByAsc("showorder")).forEach(item -> {
+            LambdaQueryWrapper<IBZOrganization> queryWrapper = Wrappers.<IBZOrganization>lambdaQuery();
+            if(!ObjectUtils.isEmpty(values))
+                queryWrapper.in(IBZOrganization::getOrgid,values);
+            queryWrapper.orderByAsc(IBZOrganization::getShoworder);
+            iibzOrganizationService.list(queryWrapper).forEach(item -> {
                 JSONObject option=new JSONObject();
                 option.put("id",item.getOrgid());
                 option.put("value",item.getOrgid());
@@ -219,7 +248,11 @@ public class OUCoreResource
         }
         else if("IbzouDept".equalsIgnoreCase(catalog)||"IbzouOrgSector".equalsIgnoreCase(catalog))
         {
-            iibzDepartmentService.list(Wrappers.<IBZDepartment>query().orderByAsc("showorder")).forEach(item -> {
+            LambdaQueryWrapper<IBZDepartment> queryWrapper = Wrappers.<IBZDepartment>lambdaQuery();
+            if(!ObjectUtils.isEmpty(values))
+                queryWrapper.in(IBZDepartment::getDeptid,values);
+            queryWrapper.orderByAsc(IBZDepartment::getShoworder);
+            iibzDepartmentService.list(queryWrapper).forEach(item -> {
                 JSONObject option=new JSONObject();
                 option.put("id",item.getDeptid());
                 option.put("value",item.getDeptid());
@@ -230,7 +263,11 @@ public class OUCoreResource
         }
         else if("IbzouUser".equalsIgnoreCase(catalog)||"IbzouOperator".equalsIgnoreCase(catalog)||"IbzouEmp".equalsIgnoreCase(catalog)||"IbzouPerson".equalsIgnoreCase(catalog))
         {
-            iibzEmployeeService.list(Wrappers.<IBZEmployee>query().orderByAsc("showorder")).forEach(item -> {
+            LambdaQueryWrapper<IBZEmployee> queryWrapper = Wrappers.<IBZEmployee>lambdaQuery();
+            if(!ObjectUtils.isEmpty(values))
+                queryWrapper.in(IBZEmployee::getUserid,values);
+            queryWrapper.orderByAsc(IBZEmployee::getShoworder);
+            iibzEmployeeService.list(queryWrapper).forEach(item -> {
                 JSONObject option=new JSONObject();
                 option.put("id",item.getUserid());
                 option.put("value",item.getUserid());
@@ -243,7 +280,7 @@ public class OUCoreResource
 
         jo.put("items",list);
 
-        return ResponseEntity.status(HttpStatus.OK).body(jo);
+        return jo;
     }
 
 

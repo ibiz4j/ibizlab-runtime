@@ -33,6 +33,14 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
                 disabled: false,
             },
         ]
+    },
+    {
+        "srfkey": "WFSystemList",
+        "emptytext": "未定义",
+        "codelisttype":"dynamic",
+        "appdataentity":"WFSystem",
+        "appdedataset":"FetchDefault",
+        "items": []
     }
     ]];
 });

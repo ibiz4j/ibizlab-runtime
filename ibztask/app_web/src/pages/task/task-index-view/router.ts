@@ -25,7 +25,7 @@ const router = new Router({
                 });
             },
             meta: {  
-                caption: 'app.views.taskindexview.title',
+                caption: 'app.views.taskindexview.caption',
                 info:'',
                 viewType: 'APPINDEX',
                 parameters: [
@@ -38,7 +38,7 @@ const router = new Router({
                 {
                     path: 'jobslogs/:jobslog?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.jobslog.views.gridview.title',
+                        caption: 'entities.jobslog.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'taskindexview', parameterName: 'taskindexview' },
@@ -52,7 +52,7 @@ const router = new Router({
                 {
                     path: 'jobsregistries/:jobsregistry?/editview/:editview?',
                     meta: {
-                        caption: 'entities.jobsregistry.views.editview.title',
+                        caption: 'entities.jobsregistry.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'taskindexview', parameterName: 'taskindexview' },
@@ -66,7 +66,7 @@ const router = new Router({
                 {
                     path: 'jobsregistries/:jobsregistry?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.jobsregistry.views.gridview.title',
+                        caption: 'entities.jobsregistry.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'taskindexview', parameterName: 'taskindexview' },
@@ -80,7 +80,7 @@ const router = new Router({
                 {
                     path: 'jobslogs/:jobslog?/editview/:editview?',
                     meta: {
-                        caption: 'entities.jobslog.views.editview.title',
+                        caption: 'entities.jobslog.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'taskindexview', parameterName: 'taskindexview' },
@@ -94,7 +94,7 @@ const router = new Router({
                 {
                     path: 'jobsinfos/:jobsinfo?/editview/:editview?',
                     meta: {
-                        caption: 'entities.jobsinfo.views.editview.title',
+                        caption: 'entities.jobsinfo.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'taskindexview', parameterName: 'taskindexview' },
@@ -108,7 +108,7 @@ const router = new Router({
                 {
                     path: 'jobsinfos/:jobsinfo?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.jobsinfo.views.gridview.title',
+                        caption: 'entities.jobsinfo.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'taskindexview', parameterName: 'taskindexview' },
@@ -125,7 +125,7 @@ const router = new Router({
     {
         path: '/jobsinfos/:jobsinfo?/gridview/:gridview?',
         meta: {
-            caption: 'entities.jobsinfo.views.gridview.title',
+            caption: 'entities.jobsinfo.views.gridview.caption',
             info:'',
             parameters: [
                 { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
@@ -138,7 +138,7 @@ const router = new Router({
     {
         path: '/jobsinfos/:jobsinfo?/editview/:editview?',
         meta: {
-            caption: 'entities.jobsinfo.views.editview.title',
+            caption: 'entities.jobsinfo.views.editview.caption',
             info:'',
             parameters: [
                 { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
@@ -151,7 +151,7 @@ const router = new Router({
     {
         path: '/jobsregistries/:jobsregistry?/editview/:editview?',
         meta: {
-            caption: 'entities.jobsregistry.views.editview.title',
+            caption: 'entities.jobsregistry.views.editview.caption',
             info:'',
             parameters: [
                 { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
@@ -164,7 +164,7 @@ const router = new Router({
     {
         path: '/jobslogs/:jobslog?/editview/:editview?',
         meta: {
-            caption: 'entities.jobslog.views.editview.title',
+            caption: 'entities.jobslog.views.editview.caption',
             info:'',
             parameters: [
                 { pathName: 'jobslogs', parameterName: 'jobslog' },
@@ -177,7 +177,7 @@ const router = new Router({
     {
         path: '/jobsregistries/:jobsregistry?/gridview/:gridview?',
         meta: {
-            caption: 'entities.jobsregistry.views.gridview.title',
+            caption: 'entities.jobsregistry.views.gridview.caption',
             info:'',
             parameters: [
                 { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
@@ -190,7 +190,7 @@ const router = new Router({
     {
         path: '/jobslogs/:jobslog?/gridview/:gridview?',
         meta: {
-            caption: 'entities.jobslog.views.gridview.title',
+            caption: 'entities.jobslog.views.gridview.caption',
             info:'',
             parameters: [
                 { pathName: 'jobslogs', parameterName: 'jobslog' },
@@ -215,6 +215,20 @@ const router = new Router({
                 next();
             },
             component: () => import('@components/login/login.vue'),
+        },
+        {
+            path: '/lock',
+            name: 'lock',
+            meta: {  
+                caption: '锁屏',
+                viewType: 'lock',
+                requireAuth: false,
+                ignoreAddPage: true,
+            },
+            beforeEnter: (to: any, from: any, next: any) => {
+                next();
+            },
+            component: () => import('@components/app-lock/app-lock.vue'),
         },
         {
             path: '/404',

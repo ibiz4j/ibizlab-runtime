@@ -12,6 +12,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.math.BigInteger;
 
+import cn.ibizlab.core.workflow.domain.WFSystem;
+import cn.ibizlab.core.workflow.mapper.WFCoreMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,13 +97,16 @@ public class WFTaskServiceImpl implements IWFTaskService {
 
 
 
+    @Autowired
+    private WFCoreMapper wfCoreMapper;
 
     /**
      * 查询集合 DEFAULT
      */
     @Override
     public Page<WFTask> searchDefault(WFTaskSearchContext context) {
-        return new PageImpl<WFTask>(new ArrayList(),context.getPageable(),0);
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFTask> pages=wfCoreMapper.searchMyTask(context.getPages(),context,context.getSelectCond());
+        return new PageImpl<WFTask>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

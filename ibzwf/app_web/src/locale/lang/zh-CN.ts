@@ -2,6 +2,7 @@ import wfremodel_zh_CN from '@locale/lanres/entities/wfremodel/wfremodel_zh_CN';
 import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
 import wfgroup_zh_CN from '@locale/lanres/entities/wfgroup/wfgroup_zh_CN';
 import wfuser_zh_CN from '@locale/lanres/entities/wfuser/wfuser_zh_CN';
+import wftask_zh_CN from '@locale/lanres/entities/wftask/wftask_zh_CN';
 import wfprocessdefinition_zh_CN from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_zh_CN';
 import wfsystem_zh_CN from '@locale/lanres/entities/wfsystem/wfsystem_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
@@ -128,6 +129,7 @@ export default {
                 menuitem1: "流程定义",
                 menuitem3: "发布新流程",
                 menuitem2: "用户组",
+                menuitem4: "我的待办",
             },
         },
         formpage:{
@@ -198,6 +200,7 @@ export default {
             back: "上一步",
             next: "下一步",
             complete: "完成",
+            preactionmessage:"未配置计算上一步行为"
         },
         viewLayoutPanel: {
             appLogoutView: {
@@ -223,6 +226,7 @@ export default {
         wfmember: wfmember_zh_CN,
         wfgroup: wfgroup_zh_CN,
         wfuser: wfuser_zh_CN,
+        wftask: wftask_zh_CN,
         wfprocessdefinition: wfprocessdefinition_zh_CN,
         wfsystem: wfsystem_zh_CN,
     },

@@ -88,6 +88,20 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     @JsonProperty("deploykey")
     private String deploykey;
 
+    /**
+     * WebServiceIds
+     */
+    @JSONField(name = "webserviceids")
+    @JsonProperty("webserviceids")
+    private String webserviceids;
+
+    /**
+     * MobileServiceIds
+     */
+    @JSONField(name = "mobileserviceids")
+    @JsonProperty("mobileserviceids")
+    private String mobileserviceids;
+
 
 
 
@@ -146,6 +160,22 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     public void setDeploykey(String deploykey){
         this.deploykey = deploykey ;
         this.modify("deploykey",deploykey);
+    }
+
+    /**
+     * 设置 [WebServiceIds]
+     */
+    public void setWebserviceids(String webserviceids){
+        this.webserviceids = webserviceids ;
+        this.modify("webserviceids",webserviceids);
+    }
+
+    /**
+     * 设置 [MobileServiceIds]
+     */
+    public void setMobileserviceids(String mobileserviceids){
+        this.mobileserviceids = mobileserviceids ;
+        this.modify("mobileserviceids",mobileserviceids);
     }
 
 

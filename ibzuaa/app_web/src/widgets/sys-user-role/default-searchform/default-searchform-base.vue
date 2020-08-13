@@ -12,7 +12,7 @@
                 
               :disabled="detailsModel.n_sys_username_like.disabled" 
               type='text' 
-              style="width:100px;">
+              style="">
           </input-box>
           
           </app-form-item>
@@ -28,6 +28,7 @@
     </i-col>
   </row>
 </i-form>
+
 </template>
 <script lang='tsx'>
 import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
@@ -362,11 +363,12 @@ export default class DefaultBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {*} [data={}]
+     * @param {string} [action]
      * @memberof DefaultBase
      */
-    public onFormLoad(data: any = {}): void {
+    public onFormLoad(data: any = {},action:string): void {
         this.setFormEnableCond(data);
-        this.fillForm(data);
+        this.fillForm(data,action);
         this.formLogic({ name: '', newVal: null, oldVal: null });
     }
 
@@ -374,15 +376,19 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 值填充
      *
      * @param {*} [_datas={}]
+     * @param {string} [action]
      * @memberof DefaultBase
      */
-    public fillForm(_datas: any = {}): void {
+    public fillForm(_datas: any = {},action:string): void {
         this.ignorefieldvaluechange = true;
         Object.keys(_datas).forEach((name: string) => {
             if (this.data.hasOwnProperty(name)) {
                 this.data[name] = _datas[name];
             }
         });
+        if(Object.is(action,'loadDraft')){
+            this.createDefault();
+        }
         this.$nextTick(function () {
             this.ignorefieldvaluechange = false;
         })
@@ -403,6 +409,13 @@ export default class DefaultBase extends Vue implements ControlInterface {
             const formItem: FormItemModel = detail;
             formItem.setEnableCond(data.srfuf);
         });
+    }
+
+    /**
+     * 新建默认值
+     * @memberof DefaultBase
+     */
+    public createDefault(){                    
     }
 
     /**
@@ -621,7 +634,6 @@ export default class DefaultBase extends Vue implements ControlInterface {
         get.then((response: any) => {
             if (response && response.status === 200) {
                 const data = response.data;
-                this.onFormLoad(data);
                 this.$emit('load', data);
                 this.$nextTick(() => {
                     this.formState.next({ type: 'load', data: data });
@@ -665,7 +677,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
 
             const data = response.data;
             this.resetDraftFormStates();
-            this.onFormLoad(data);
+            this.onFormLoad(data,'loadDraft');
             setTimeout(() => {
                 const form: any = this.$refs.form;
                 if (form) {

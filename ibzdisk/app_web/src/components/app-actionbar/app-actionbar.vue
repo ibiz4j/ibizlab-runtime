@@ -2,9 +2,9 @@
   <div class="app-actionbar">
     <div class="app-actionbar-item" v-for="(item,index) in items" :key="index">
       <Badge v-if="item.counterService&&item.counterService.counterData" v-show="item.visabled" :count="item.counterService.counterData[item.counterId]" type="primary">
-         <i-button :style="{'pointer-events':item.disabled?'none':'auto'}" @click="handleClick(item, $event)"><i v-if="item.icon" style="margin-right: 5px;" :class="item.icon"></i>{{item.actionName}}</i-button>
+         <i-button :disabled="item.disabled" @click="handleClick(item, $event)"><i v-if="item.icon" style="margin-right: 5px;" :class="item.icon"></i>{{item.actionName}}</i-button>
     </Badge>
-    <i-button v-show="item.visabled" :style="{'pointer-events':item.disabled?'none':'auto'}" v-else @click="handleClick(item, $event)">{{item.actionName}}</i-button>
+    <i-button v-show="item.visabled" :disabled="item.disabled" v-else @click="handleClick(item, $event)">{{item.actionName}}</i-button>
     </div>
   </div>
 </template>

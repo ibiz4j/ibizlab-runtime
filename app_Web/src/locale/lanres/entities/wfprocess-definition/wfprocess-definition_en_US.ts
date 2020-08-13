@@ -9,6 +9,8 @@ export default {
     md5check: "校验",
     bpmnfile: "BPMN",
     deploykey: "DeployKey",
+    webserviceids: "WebServiceIds",
+    mobileserviceids: "MobileServiceIds",
   },
 	views: {
 		editview: {
@@ -39,6 +41,8 @@ export default {
 			modelenable: "模型是否启用", 
 			bpmnfile: "BPMN", 
 			md5check: "校验", 
+			webserviceids: "WebServiceIds", 
+			mobileserviceids: "MobileServiceIds", 
 		},
 		uiactions: {
 		},

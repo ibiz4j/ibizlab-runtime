@@ -25,7 +25,11 @@ import cn.ibizlab.util.filter.SearchContextBase;
 @Slf4j
 @Data
 public class WFProcessNodeSearchContext extends SearchContextBase {
+	private String n_nodeid_eq;//[节点标识]
+
 	private String n_nodename_like;//[节点名称]
+
+	private String n_definitionkey_leftlike;//[DefinitionKey]
 
 }
 

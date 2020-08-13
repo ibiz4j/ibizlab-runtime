@@ -50,10 +50,14 @@ Vue.use(UserComponent);
 Vue.use(PortletComponent);
 
 router.beforeEach((to: any, from: any, next: any) => {
-  if (to.meta && !to.meta.ignoreAddPage) {
-    router.app.$store.commit('addPage', to);
+  if(sessionStorage.getItem('lockState') && to.path != '/lock'){
+    next({ path: '/lock'});
+  }else{
+    if (to.meta && !to.meta.ignoreAddPage) {
+      router.app.$store.commit('addPage', to);
+    }
+    next();
   }
-  next();
 });
 
 Interceptors.getInstance(router,store);

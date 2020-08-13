@@ -40,12 +40,20 @@ public class WFTask extends EntityClient implements Serializable {
     private String id;
 
     /**
-     * 任务名称
+     * 状态
      */
     @DEField(name = "taskname")
     @JSONField(name = "name")
     @JsonProperty("name")
     private String name;
+
+    /**
+     * DefinitionId
+     */
+    @DEField(name = "definitionid")
+    @JSONField(name = "processdefinitionid")
+    @JsonProperty("processdefinitionid")
+    private String processdefinitionid;
 
     /**
      * DefinitionKey
@@ -54,6 +62,36 @@ public class WFTask extends EntityClient implements Serializable {
     @JSONField(name = "processdefinitionkey")
     @JsonProperty("processdefinitionkey")
     private String processdefinitionkey;
+
+    /**
+     * 流程
+     */
+    @DEField(name = "definitionname")
+    @JSONField(name = "processdefinitionname")
+    @JsonProperty("processdefinitionname")
+    private String processdefinitionname;
+
+    /**
+     * TaskDefinitionKey
+     */
+    @JSONField(name = "taskdefinitionkey")
+    @JsonProperty("taskdefinitionkey")
+    private String taskdefinitionkey;
+
+    /**
+     * 待办事项
+     */
+    @JSONField(name = "description")
+    @JsonProperty("description")
+    private String description;
+
+    /**
+     * 发起时间
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
+    @JSONField(name = "createtime" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonProperty("createtime")
+    private Timestamp createtime;
 
     /**
      * 实例标识
@@ -71,24 +109,24 @@ public class WFTask extends EntityClient implements Serializable {
     @JsonProperty("processinstancebusinesskey")
     private String processinstancebusinesskey;
 
-    /**
-     * TaskDefinitionKey
-     */
-    @DEField(name = "taskdefinitionkey")
-    @JSONField(name = "taskprocessdefinitionkey")
-    @JsonProperty("taskprocessdefinitionkey")
-    private String taskprocessdefinitionkey;
-
 
 
 
 
     /**
-     * 设置 [任务名称]
+     * 设置 [状态]
      */
     public void setName(String name){
         this.name = name ;
         this.modify("taskname",name);
+    }
+
+    /**
+     * 设置 [DefinitionId]
+     */
+    public void setProcessdefinitionid(String processdefinitionid){
+        this.processdefinitionid = processdefinitionid ;
+        this.modify("definitionid",processdefinitionid);
     }
 
     /**
@@ -99,6 +137,48 @@ public class WFTask extends EntityClient implements Serializable {
         this.modify("definitionkey",processdefinitionkey);
     }
 
+    /**
+     * 设置 [流程]
+     */
+    public void setProcessdefinitionname(String processdefinitionname){
+        this.processdefinitionname = processdefinitionname ;
+        this.modify("definitionname",processdefinitionname);
+    }
+
+    /**
+     * 设置 [TaskDefinitionKey]
+     */
+    public void setTaskdefinitionkey(String taskdefinitionkey){
+        this.taskdefinitionkey = taskdefinitionkey ;
+        this.modify("taskdefinitionkey",taskdefinitionkey);
+    }
+
+    /**
+     * 设置 [待办事项]
+     */
+    public void setDescription(String description){
+        this.description = description ;
+        this.modify("description",description);
+    }
+
+    /**
+     * 设置 [发起时间]
+     */
+    public void setCreatetime(Timestamp createtime){
+        this.createtime = createtime ;
+        this.modify("createtime",createtime);
+    }
+
+    /**
+     * 格式化日期 [发起时间]
+     */
+    public String formatCreatetime(){
+        if (this.createtime == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(createtime);
+    }
     /**
      * 设置 [实例标识]
      */
@@ -113,14 +193,6 @@ public class WFTask extends EntityClient implements Serializable {
     public void setProcessinstancebusinesskey(String processinstancebusinesskey){
         this.processinstancebusinesskey = processinstancebusinesskey ;
         this.modify("businesskey",processinstancebusinesskey);
-    }
-
-    /**
-     * 设置 [TaskDefinitionKey]
-     */
-    public void setTaskprocessdefinitionkey(String taskprocessdefinitionkey){
-        this.taskprocessdefinitionkey = taskprocessdefinitionkey ;
-        this.modify("taskdefinitionkey",taskprocessdefinitionkey);
     }
 
 

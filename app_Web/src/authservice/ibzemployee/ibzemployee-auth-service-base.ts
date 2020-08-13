@@ -27,7 +27,7 @@ export default class IBZEmployeeAuthServiceBase extends AuthService {
      * @memberof IBZEmployeeAuthServiceBase
      */
     public getOPPrivs(mainSateOPPrivs:any):any{
-        let curDefaultOPPrivs:any = JSON.parse(JSON.stringify(this.defaultOPPrivs));
+        let curDefaultOPPrivs:any = this.getSysOPPrivs();
         if(mainSateOPPrivs){
             Object.assign(curDefaultOPPrivs,mainSateOPPrivs);
         }

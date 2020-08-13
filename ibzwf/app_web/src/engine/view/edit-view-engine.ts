@@ -193,19 +193,19 @@ export default class EditViewEngine extends ViewEngine {
      */
     public setTabCaption(info: string,isNew:boolean): void {
         let viewdata: any = this.view.model;
-        let index:number = viewdata.srfTitle.indexOf("-");
+        let index:number = viewdata.srfCaption.indexOf("-");
         if (viewdata  && info && !Object.is(info, '')) {
             if(index !== -1){
-                viewdata.srfTitle = viewdata.srfTitle.substr(0,index);
+                viewdata.srfCaption = viewdata.srfCaption.substr(0,index);
             }
             // 解决表格视图标题问题
             if(this.view.$tabPageExp && this.view.viewDefaultUsage){
-                this.view.$tabPageExp.setCurPageCaption(this.view.$t(viewdata.srfTitle), this.view.$t(viewdata.srfTitle), info);
+                this.view.$tabPageExp.setCurPageCaption(this.view.$t(viewdata.srfCaption), this.view.$t(viewdata.srfCaption), info);
             }
             if(this.view.$route){
                 this.view.$route.meta.info = info;
             }
-            this.view.model.srfTitle = `${this.view.$t(viewdata.srfTitle)}-${viewdata.dataInfo}`;
+            this.view.model.srfCaption = `${this.view.$t(viewdata.srfCaption)}-${viewdata.dataInfo}`;
             this.view.initNavDataWithRoute(null,isNew);
         }
     }

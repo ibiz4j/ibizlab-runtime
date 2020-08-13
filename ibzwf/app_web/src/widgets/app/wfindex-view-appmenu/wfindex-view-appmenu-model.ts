@@ -71,6 +71,25 @@ export default class WFIndexViewModel {
 	resourcetag: '',
 	authtag:'web-WFIndexView-menuitem2',
 },
+        {
+	id: '0F72A458-D47D-4305-AF77-4D643124741D',
+	name: 'menuitem4',
+	text: '我的待办',
+	type: 'MENUITEM',
+	counterid: '',
+	tooltip: '我的待办',
+	expanded: false,
+	separator: false,
+	hidden: false,
+	hidesidebar: false,
+	opendefault: false,
+	iconcls: 'fa fa-list-alt',
+	icon: '',
+	textcls: '',
+	appfunctag: '_2',
+	resourcetag: '',
+	authtag:'web-WFIndexView-menuitem4',
+},
     ];
 
 	/**
@@ -81,6 +100,18 @@ export default class WFIndexViewModel {
 	 * @memberof WFIndexViewModel
 	 */
 	public funcs: any[] = [
+        {
+            appfunctag: '_2',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'wftaskgridview',
+            deResParameters: [],
+            routepath: '/wfindexview/:wfindexview?/wftasks/:wftask?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'wftasks', parameterName: 'wftask' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
         {
             appfunctag: 'Auto3',
             appfuncyype: 'APPVIEW',

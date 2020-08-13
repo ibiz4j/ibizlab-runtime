@@ -11,5 +11,6 @@ import './entity/wfremodels/wfremodels';
 import './entity/wfmembers/wfmembers';
 import './entity/wfgroups/wfgroups';
 import './entity/wfusers/wfusers';
+import './entity/wftasks/wftasks';
 import './entity/wfprocess-definitions/wfprocess-definitions';
 import './entity/wfsystems/wfsystems';

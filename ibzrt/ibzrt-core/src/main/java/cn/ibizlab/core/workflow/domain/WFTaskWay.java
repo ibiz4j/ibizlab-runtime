@@ -49,10 +49,9 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * TaskDefinitionKey
      */
-    @DEField(name = "taskdefinitionkey")
-    @JSONField(name = "taskprocessdefinitionkey")
-    @JsonProperty("taskprocessdefinitionkey")
-    private String taskprocessdefinitionkey;
+    @JSONField(name = "taskdefinitionkey")
+    @JsonProperty("taskdefinitionkey")
+    private String taskdefinitionkey;
 
     /**
      * 实例标识
@@ -108,9 +107,9 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 设置 [TaskDefinitionKey]
      */
-    public void setTaskprocessdefinitionkey(String taskprocessdefinitionkey){
-        this.taskprocessdefinitionkey = taskprocessdefinitionkey ;
-        this.modify("taskdefinitionkey",taskprocessdefinitionkey);
+    public void setTaskdefinitionkey(String taskdefinitionkey){
+        this.taskdefinitionkey = taskdefinitionkey ;
+        this.modify("taskdefinitionkey",taskdefinitionkey);
     }
 
     /**

@@ -1,10 +1,10 @@
 <template>
 <div class="view-container deeditview dict-catalog-edit-view">
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="dictcatalogeditview"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="dictcatalogeditview"></app-studioaction>
     <card class='view-card ' :disHover="true" :bordered="false">
 
 <div slot='title' class="header-container">
-    <span class='caption-info'>{{$t(model.srfTitle)}}</span>
+    <span class='caption-info'>{{$t(model.srfCaption)}}</span>
     <div class='toolbar-container'>
         <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
@@ -556,7 +556,7 @@ export default class DictCatalogEditViewBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'dict-catalog-edit-view',tag:this.viewtag,srfkey:isNew ? null : this.context.dictcatalog,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'dict-catalog-edit-view',tag:this.viewtag,srfkey:isNew ? null : this.context.dictcatalog,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -567,7 +567,7 @@ export default class DictCatalogEditViewBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'dict-catalog-edit-view',tag:this.viewtag,srfkey:this.context.dictcatalog,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'dict-catalog-edit-view',tag:this.viewtag,srfkey:this.context.dictcatalog,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

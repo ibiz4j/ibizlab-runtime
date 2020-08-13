@@ -77,14 +77,6 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
     @JsonProperty("pssystemid")
     private String pssystemid;
     /**
-     * TaskDefinitionKey
-     */
-    @DEField(name = "taskdefinitionkey")
-    @TableField(value = "taskdefinitionkey")
-    @JSONField(name = "taskprocessdefinitionkey")
-    @JsonProperty("taskprocessdefinitionkey")
-    private String taskprocessdefinitionkey;
-    /**
      * 校验
      */
     @TableField(value = "md5check")
@@ -105,6 +97,20 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
     @JSONField(name = "deploykey")
     @JsonProperty("deploykey")
     private String deploykey;
+    /**
+     * WebServiceIds
+     */
+    @TableField(value = "webserviceids")
+    @JSONField(name = "webserviceids")
+    @JsonProperty("webserviceids")
+    private String webserviceids;
+    /**
+     * MobileServiceIds
+     */
+    @TableField(value = "mobileserviceids")
+    @JSONField(name = "mobileserviceids")
+    @JsonProperty("mobileserviceids")
+    private String mobileserviceids;
 
 
 
@@ -141,14 +147,6 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
     }
 
     /**
-     * 设置 [TaskDefinitionKey]
-     */
-    public void setTaskprocessdefinitionkey(String taskprocessdefinitionkey){
-        this.taskprocessdefinitionkey = taskprocessdefinitionkey ;
-        this.modify("taskdefinitionkey",taskprocessdefinitionkey);
-    }
-
-    /**
      * 设置 [校验]
      */
     public void setMd5check(String md5check){
@@ -170,6 +168,22 @@ public class WFProcessDefinition extends EntityMP implements Serializable {
     public void setDeploykey(String deploykey){
         this.deploykey = deploykey ;
         this.modify("deploykey",deploykey);
+    }
+
+    /**
+     * 设置 [WebServiceIds]
+     */
+    public void setWebserviceids(String webserviceids){
+        this.webserviceids = webserviceids ;
+        this.modify("webserviceids",webserviceids);
+    }
+
+    /**
+     * 设置 [MobileServiceIds]
+     */
+    public void setMobileserviceids(String mobileserviceids){
+        this.mobileserviceids = mobileserviceids ;
+        this.modify("mobileserviceids",mobileserviceids);
     }
 
 

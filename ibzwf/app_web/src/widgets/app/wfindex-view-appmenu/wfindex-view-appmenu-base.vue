@@ -582,6 +582,9 @@ export default class WFIndexViewBase extends Vue implements ControlInterface {
                 navDataService.removeNavData(this.viewtag);
             }
             switch (item.appfunctag) {
+                case '_2': 
+                    this.click_2(item);
+                    return;
                 case 'Auto3': 
                     this.clickAuto3(item);
                     return;
@@ -597,6 +600,29 @@ export default class WFIndexViewBase extends Vue implements ControlInterface {
         }
     }
 
+    
+    /**
+     * 我的待办
+     *
+     * @param {*} [item={}]
+     * @memberof WFIndexView
+     */
+    public click_2(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'wftasks', parameterName: 'wftask' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
     
     /**
      * 发布流程

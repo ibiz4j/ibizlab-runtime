@@ -27,7 +27,7 @@ export default class DictCatalogAuthServiceBase extends AuthService {
      * @memberof DictCatalogAuthServiceBase
      */
     public getOPPrivs(mainSateOPPrivs:any):any{
-        let curDefaultOPPrivs:any = JSON.parse(JSON.stringify(this.defaultOPPrivs));
+        let curDefaultOPPrivs:any = this.getSysOPPrivs();
         if(mainSateOPPrivs){
             Object.assign(curDefaultOPPrivs,mainSateOPPrivs);
         }

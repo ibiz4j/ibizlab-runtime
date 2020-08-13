@@ -12,7 +12,7 @@
         </div>
         <template v-if="placeholder">
             <div v-if="value" class="app-embed-value">
-                <span v-for="(item,index) in value" :key="index">
+                <span v-for="(item,index) in value.split(',')" :key="index">
                     {{item}}
                 </span>
             </div>
@@ -247,19 +247,21 @@ export default class AppEmbedPicker extends Vue {
      * @memberof AppEmbedPicker
      */
     public setValue(item: any) {
-        let selectsrfkey: Array<any> = [];
-        let selectsrfmajortext: Array<any> = [];
+        let srfkey: string = '';
+        let srfmajortext: string = '';
         if(item && Array.isArray(item)){
             item.forEach((select: any)=>{
-                selectsrfkey.push(select.srfkey);
-                selectsrfmajortext.push(select.srfmajortext);
+                srfkey += select.srfkey+",";
+                srfmajortext += select.srfmajortext+',';
             })
+            srfkey = srfkey.substring(0,srfkey.length-1);
+            srfmajortext = srfmajortext.substring(0,srfmajortext.length-1);
             if (this.valueItem) {
-                let value = selectsrfkey.length > 0 ? selectsrfkey : '';
+                let value = srfkey;
                 this.$emit('formitemvaluechange', { name: this.valueItem, value: value });
             }
             if (this.name) {
-                let value = selectsrfmajortext.length > 0 ? selectsrfmajortext : '';
+                let value = srfmajortext;
                 this.$emit('formitemvaluechange', { name: this.name, value: value });
             }
         }

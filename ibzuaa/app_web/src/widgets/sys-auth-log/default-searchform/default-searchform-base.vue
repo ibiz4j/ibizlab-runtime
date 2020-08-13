@@ -12,7 +12,7 @@
                 
               :disabled="detailsModel.n_username_like.disabled" 
               type='text' 
-              style="width:100px;">
+              style="">
           </input-box>
           
           </app-form-item>
@@ -26,7 +26,7 @@
                 
               :disabled="detailsModel.n_personname_like.disabled" 
               type='text' 
-              style="width:100px;">
+              style="">
           </input-box>
           
           </app-form-item>
@@ -46,7 +46,7 @@
               valueType="string"
               tag='CLAuthCode' 
               codelistType='STATIC'
-              placeholder='请选择...' style="width:100px;">
+              placeholder='请选择...' style="">
            </dropdown-list>
           
           </app-form-item>
@@ -54,14 +54,14 @@
           </i-col>
           <i-col v-show="detailsModel.n_authtime_gtandeq.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_authtime_gtandeq' :itemRules="this.rules.n_authtime_gtandeq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authtime_gtandeq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authtime_gtandeq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_gtandeq" :disabled="detailsModel.n_authtime_gtandeq.disabled" style="min-width: 150px; width:100px;" @on-change="(val1, val2) => { this.data.n_authtime_gtandeq = val1 }"></date-picker>
+              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_gtandeq" :disabled="detailsModel.n_authtime_gtandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_gtandeq = val1 }"></date-picker>
           
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_authtime_ltandeq.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_authtime_ltandeq' :itemRules="this.rules.n_authtime_ltandeq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authtime_ltandeq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authtime_ltandeq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_ltandeq" :disabled="detailsModel.n_authtime_ltandeq.disabled" style="min-width: 150px; width:100px;" @on-change="(val1, val2) => { this.data.n_authtime_ltandeq = val1 }"></date-picker>
+              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_ltandeq" :disabled="detailsModel.n_authtime_ltandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_ltandeq = val1 }"></date-picker>
           
           </app-form-item>
           
@@ -74,7 +74,7 @@
                 
               :disabled="detailsModel.n_domain_like.disabled" 
               type='text' 
-              style="width:100px;">
+              style="">
           </input-box>
           
           </app-form-item>
@@ -90,6 +90,7 @@
     </i-col>
   </row>
 </i-form>
+
 </template>
 <script lang='tsx'>
 import { Vue, Component, Prop, Provide, Emit, Watch, Model,Inject } from 'vue-property-decorator';
@@ -534,11 +535,12 @@ export default class DefaultBase extends Vue implements ControlInterface {
      *
      * @public
      * @param {*} [data={}]
+     * @param {string} [action]
      * @memberof DefaultBase
      */
-    public onFormLoad(data: any = {}): void {
+    public onFormLoad(data: any = {},action:string): void {
         this.setFormEnableCond(data);
-        this.fillForm(data);
+        this.fillForm(data,action);
         this.formLogic({ name: '', newVal: null, oldVal: null });
     }
 
@@ -546,15 +548,19 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * 值填充
      *
      * @param {*} [_datas={}]
+     * @param {string} [action]
      * @memberof DefaultBase
      */
-    public fillForm(_datas: any = {}): void {
+    public fillForm(_datas: any = {},action:string): void {
         this.ignorefieldvaluechange = true;
         Object.keys(_datas).forEach((name: string) => {
             if (this.data.hasOwnProperty(name)) {
                 this.data[name] = _datas[name];
             }
         });
+        if(Object.is(action,'loadDraft')){
+            this.createDefault();
+        }
         this.$nextTick(function () {
             this.ignorefieldvaluechange = false;
         })
@@ -575,6 +581,13 @@ export default class DefaultBase extends Vue implements ControlInterface {
             const formItem: FormItemModel = detail;
             formItem.setEnableCond(data.srfuf);
         });
+    }
+
+    /**
+     * 新建默认值
+     * @memberof DefaultBase
+     */
+    public createDefault(){                    
     }
 
     /**
@@ -793,7 +806,6 @@ export default class DefaultBase extends Vue implements ControlInterface {
         get.then((response: any) => {
             if (response && response.status === 200) {
                 const data = response.data;
-                this.onFormLoad(data);
                 this.$emit('load', data);
                 this.$nextTick(() => {
                     this.formState.next({ type: 'load', data: data });
@@ -837,7 +849,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
 
             const data = response.data;
             this.resetDraftFormStates();
-            this.onFormLoad(data);
+            this.onFormLoad(data,'loadDraft');
             setTimeout(() => {
                 const form: any = this.$refs.form;
                 if (form) {

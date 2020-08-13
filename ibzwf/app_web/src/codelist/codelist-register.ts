@@ -39,7 +39,8 @@ export class CodeListRegister {
      * @memberof CodeListRegister
      */
     protected init(): void {
-        }
+            this.allCodeList.set('WFSystemList', () => import('@/codelist/wfsystem-list'));
+    }
 
     /**
      * 加载实体数据服务

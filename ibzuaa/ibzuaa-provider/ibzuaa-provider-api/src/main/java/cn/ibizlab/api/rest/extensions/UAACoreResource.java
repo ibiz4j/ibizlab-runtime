@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpRequest;
@@ -89,18 +90,24 @@ public class UAACoreResource {
     @Autowired
     private SysAppService sysAppService;
 
-    @GetMapping(value = "uaa/access-center/app-switcher/{id}")
-    public ResponseEntity<JSONObject> appswitcher(@PathVariable("id") String id, HttpServletRequest request)
-    {
-        String proto=request.getHeader("x-forwarded-proto");
-        String hosts=request.getHeader("x-forwarded-for");
-        String domains="";
-        if(StringUtils.isEmpty(proto))
-            proto="http";
-        if(!StringUtils.isEmpty(hosts))
-            domains=proto+"://"+hosts;
+    @Value("${ibiz.admin.userid:0100}")
+    private String adminuserid;
 
-        return ResponseEntity.ok(sysAppService.getAppSwitcher(id, AuthenticationUser.getAuthenticationUser().getUserid()));
+    @GetMapping(value = "uaa/access-center/app-switcher/{id}")
+    public ResponseEntity<JSONObject> appswitcher(@PathVariable("id") String id)
+    {
+//        String proto=request.getHeader("x-forwarded-proto");
+//        String hosts=request.getHeader("x-forwarded-for");
+//        String domains="";
+//        if(StringUtils.isEmpty(proto))
+//            proto="http";
+//        if(!StringUtils.isEmpty(hosts))
+//            domains=proto+"://"+hosts;
+        String userId = AuthenticationUser.getAuthenticationUser().getUserid();
+        if(StringUtils.isEmpty(userId))
+            userId = adminuserid;
+
+        return ResponseEntity.ok(sysAppService.getAppSwitcher(id,userId));
     }
 
     @PutMapping(value = "uaa/access-center/app-switcher/{id}")

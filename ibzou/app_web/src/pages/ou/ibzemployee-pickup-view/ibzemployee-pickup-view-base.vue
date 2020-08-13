@@ -1,6 +1,6 @@
 <template>
 <div class="view-container depickupview ibzemployee-pickup-view">
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="ibzemployeepickupview"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="ibzemployeepickupview"></app-studioaction>
     <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :padding="0" :bordered="false">
         <div class="content-container pickup-view">
             <view_pickupviewpanel 
@@ -439,7 +439,7 @@ export default class IBZEmployeePickupViewBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'ibzemployee-pickup-view',tag:this.viewtag,srfkey:isNew ? null : this.context.ibzemployee,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'ibzemployee-pickup-view',tag:this.viewtag,srfkey:isNew ? null : this.context.ibzemployee,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -450,7 +450,7 @@ export default class IBZEmployeePickupViewBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'ibzemployee-pickup-view',tag:this.viewtag,srfkey:this.context.ibzemployee,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'ibzemployee-pickup-view',tag:this.viewtag,srfkey:this.context.ibzemployee,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

@@ -66,6 +66,20 @@ public class WFProcessNode extends EntityBase implements Serializable {
     @JsonProperty("processDefinitionName")
     private String processdefinitionname;
 
+    /**
+     * 版本
+     */
+    @JSONField(name = "version")
+    @JsonProperty("version")
+    private Integer version;
+
+    /**
+     * 数量
+     */
+    @JSONField(name = "cnt")
+    @JsonProperty("cnt")
+    private Integer cnt;
+
 
 
 

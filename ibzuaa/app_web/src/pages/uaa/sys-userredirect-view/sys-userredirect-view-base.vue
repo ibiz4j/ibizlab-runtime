@@ -1,7 +1,7 @@
 
 <template>
 <div class="view-container deredirectview sys-userredirect-view">
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="sys_userredirectview"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="sys_userredirectview"></app-studioaction>
 </div>
 </template>
 
@@ -389,7 +389,7 @@ export default class SYS_USERRedirectViewBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'sys-userredirect-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysuser,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'sys-userredirect-view',tag:this.viewtag,srfkey:isNew ? null : this.context.sysuser,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -400,7 +400,7 @@ export default class SYS_USERRedirectViewBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'sys-userredirect-view',tag:this.viewtag,srfkey:this.context.sysuser,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'sys-userredirect-view',tag:this.viewtag,srfkey:this.context.sysuser,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

@@ -29,6 +29,9 @@ public class PermissionSyncJob implements ApplicationRunner {
 
     @Value("${ibiz.systemid:ibzwf}")
     private String systemId;
+    
+    @Value("${ibiz.systemname:ibzwf}")
+    private String systemName;
 
 
     @Override
@@ -39,7 +42,7 @@ public class PermissionSyncJob implements ApplicationRunner {
             String permissionResult = IOUtils.toString(permission,"UTF-8");
             JSONObject system= new JSONObject();
             system.put("pssystemid",systemId);
-            system.put("pssystemname",systemId);
+            system.put("pssystemname",systemName);
             system.put("sysstructure",JSONObject.parseObject(permissionResult));
             system.put("md5check",DigestUtils.md5DigestAsHex(permissionResult.getBytes()));
             if(client.syncSysAuthority(system)){

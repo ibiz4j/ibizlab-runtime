@@ -1,6 +1,6 @@
 <template>
 <div class='grid' style="height:100%">
-      <i-form style="height:100%;display:flex;flex-direction: column;justify-content: space-between">
+  <i-form style="height:100%;display:flex;flex-direction: column;justify-content: space-between">
     <el-table v-if="isDisplay === true"
         :default-sort="{ prop: minorSortPSDEF, order: Object.is(minorSortDir, 'ASC') ? 'ascending' : Object.is(minorSortDir, 'DESC') ? 'descending' : '' }"  
         @sort-change="onSortChange($event)"  
@@ -8,7 +8,7 @@
         :highlight-current-row ="isSingleSelect"
         :row-class-name="getRowClassName"
         :cell-class-name="getCellClassName"
-        :height="isEnablePagingBar && items.length > 0 ? 'calc(100% - 50px)' : '100%'"
+        max-height="items.length > 0 ? 'calc(100%-50px)' : '100%'"
         @row-click="rowClick($event)"  
         @select-all="selectAll($event)"  
         @select="select($event)"  
@@ -308,6 +308,14 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     @Prop() public opendata: any;
+    
+    /**
+    * 是否嵌入关系界面
+    *
+    * @type {boolean}
+    * @memberof MainBase
+    */
+    @Prop({default:false}) public isformDruipart?: boolean;
 
     /**
      * 显示处理提示
@@ -1477,7 +1485,7 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         this.$emit('save', successItems);
         this.refresh([]);
-        if(errorItems.length === 0){
+        if(errorItems.length === 0 && successItems.length >0 && !this.isformDruipart){
             this.$Notice.success({ title: '', desc: (this.$t('app.commonWords.saveSuccess') as string) });
         }else{
           errorItems.forEach((item:any,index:number)=>{

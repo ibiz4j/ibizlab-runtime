@@ -119,7 +119,7 @@ public class UserQQRegisterService {
                 returnObj.put("openid", openid);
             }
         } catch (UnsupportedEncodingException e) {
-            throw new BadRequestAlertException("连接微信服务端失败!", "UserQQRegisterService", "");
+            throw new BadRequestAlertException("连接QQ服务端失败!", "UserQQRegisterService", "");
         }
 
         return returnObj;

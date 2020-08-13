@@ -1,5 +1,4 @@
-import { Store } from 'vuex';
-
+import store from '@/store';
 /**
  * 实体权限服务
  *
@@ -15,16 +14,25 @@ export default class AuthService {
      * @type {(any | null)}
      * @memberof AuthService
      */
-    public $store: Store<any> | null = null;
+    public $store: any;
 
     /**
-     * 默认操作符
+     * 系统操作标识映射统一资源Map
+     *
+     * @public
+     * @type {Map<string,any>}
+     * @memberof AuthService
+     */
+    public sysOPPrivsMap:Map<string,any> = new  Map();
+
+    /**
+     * 默认操作标识
      *
      * @public
      * @type {(any)}
      * @memberof AuthService
      */
-    public defaultOPPrivs: any = { UPDATE: 1, CREATE: 1, READ: 1, DELETE: 1, WFSTART:1,DENY:1,NONE:1 };
+    public defaultOPPrivs: any = {CREATE: 1,DELETE: 1,DENY: 1,NONE: 1,READ: 1,UPDATE: 1,WFSTART: 1}; 
 
     /**
      * Creates an instance of AuthService.
@@ -33,7 +41,8 @@ export default class AuthService {
      * @memberof AuthService
      */
     constructor(opts: any = {}) {
-        this.$store = opts.$store;
+        this.$store = store;
+        this.registerSysOPPrivs();
     }
 
     /**
@@ -42,8 +51,25 @@ export default class AuthService {
      * @returns {(any | null)}
      * @memberof AuthService
      */
-    public getStore(): Store<any> | null {
+    public getStore(): any {
         return this.$store;
+    }
+
+    /**
+     * 获取计算统一资源之后的系统操作标识
+     *
+     * @returns {}
+     * @memberof AuthService
+     */
+    public getSysOPPrivs(){
+        let copySysOPPrivs:any = JSON.parse(JSON.stringify(this.defaultOPPrivs));
+        if(Object.keys(copySysOPPrivs).length === 0) return {};
+        Object.keys(copySysOPPrivs).forEach((name:any) =>{
+            if(this.sysOPPrivsMap.get(name)){
+                copySysOPPrivs[name] = this.getResourcePermission(this.sysOPPrivsMap.get(name))?1:0;
+            }
+        })
+        return copySysOPPrivs;
     }
 
     /**
@@ -55,6 +81,16 @@ export default class AuthService {
      */
     public getService(name: string): Promise<any> {
         return (window as any)['authServiceRegister'].getService(name);
+    }
+
+    /**
+     * 注册系统操作标识统一资源
+     *
+     * @param {string} name 实体名称
+     * @returns {Promise<any>}
+     * @memberof AuthService
+     */ 
+    public registerSysOPPrivs(){
     }
 
     /**
@@ -76,7 +112,7 @@ export default class AuthService {
      * @memberof AuthService
      */
     public getMenusPermission(item: any): boolean {
-        return true;
+        return this.$store.getters['authresource/getAuthMenu'](item);
     }
 
     /**
@@ -87,7 +123,7 @@ export default class AuthService {
      * @memberof AuthService
      */
     public getResourcePermission(tag: any): boolean {
-        return true;
+        return this.$store.getters['authresource/getResourceData'](tag);
     }
 
 }

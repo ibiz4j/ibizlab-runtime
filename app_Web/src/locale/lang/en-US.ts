@@ -235,6 +235,7 @@ export default {
             back: "Back",
             next: "Next",
             complete: "Complete",
+            preactionmessage:"The calculation of the previous behavior is not configured"
         },
         viewLayoutPanel: {
             appLogoutView: {

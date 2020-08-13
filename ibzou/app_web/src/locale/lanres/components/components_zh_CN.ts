@@ -247,5 +247,17 @@ export default {
       localUpload:'本地上传',
       or:'或',
       imgMsg1:'从素材库选择'
+    },
+    lockScren:{
+      title:'设置锁屏密码',
+      label:'锁屏密码',
+      message:'锁屏密码不能为空',
+      placeholder:'请输入锁屏密码',
+      placeholder1:'请输入登录密码',
+      message1: '解锁密码错误,请重新输入',
+      promptInformation:'是否退出系统, 是否继续?',
+      prompt:'提示',
+      confirmButtonText:'确定',
+      cancelButtonText:'取消',
     }
 };

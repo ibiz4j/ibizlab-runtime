@@ -605,6 +605,9 @@ export default class MainBase extends Vue implements ControlInterface {
         if(!falg.hasOwnProperty("isPast")){
             falg.isPast = true;
         }
+        if(!this.data[name]){
+           falg.isPast = true;
+        }
         return falg;
     }
 
@@ -1091,6 +1094,26 @@ export default class MainBase extends Vue implements ControlInterface {
         this.data[name] = value;
     }
 
+    /**
+     * 计算表单按钮权限状态
+     *
+     * @param {*} [data] 传入数据
+     * @memberof MainBase
+     */
+    public computeButtonState(data:any){
+        let targetData:any = this.transformData(data);
+        if(this.detailsModel && Object.keys(this.detailsModel).length >0){
+            Object.keys(this.detailsModel).forEach((name:any) =>{
+                if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
+                    let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
+                    ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
+                    this.detailsModel[name].visible = tempUIAction.visabled;
+                    this.detailsModel[name].disabled = tempUIAction.disabled;
+                }
+            })
+        }
+    }
+
 
 
     /**
@@ -1152,6 +1175,9 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
                 if (Object.is('refresh', action)) {
                     this.refresh(data);
+                }
+                if (Object.is('panelaction', action)) {
+                    this.panelAction(data.action,data.emitAction,data);
                 }
             });
         }
@@ -1262,6 +1288,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'load');
                 this.$emit('load', data);
+                this.computeButtonState(data);
                 this.$nextTick(() => {
                     this.formState.next({ type: 'load', data: data });
                 });
@@ -1305,6 +1332,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.onFormLoad(data,'loadDraft');
             data.sysrolepermission = null;
             this.$emit('load', data);
+            this.computeButtonState(data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
             });
@@ -1362,6 +1390,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.onFormLoad(data,'autoSave');
             this.$emit('save', data);
+            this.computeButtonState(data);
             AppCenterService.notifyMessage({name:"SysRolePermission",action:'appRefresh',data:data});
             this.$nextTick(() => {
                 this.formState.next({ type: 'save', data: data });
@@ -1440,6 +1469,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
+                this.computeButtonState(data);
                 AppCenterService.notifyMessage({name:"SysRolePermission",action:'appRefresh',data:data});
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: data });
@@ -1642,6 +1672,50 @@ export default class MainBase extends Vue implements ControlInterface {
                     reject(response);
             })
         })
+    }
+
+    /**
+     * 面板行为
+     *
+     * @param {string} [action] 调用的实体行为
+     * @param {string} [emitAction] 抛出行为
+     * @param {*} [data={}] 传入数据
+     * @param {boolean} [showloading] 是否显示加载状态
+     * 
+     * @memberof MainBase
+     */
+    public panelAction(action:string,emitAction:string,data:any ={},showloading?:boolean):void{
+        if (!action || (action && Object.is(action, ''))) {
+            return;
+        }
+        const arg: any = { ...data };
+        const formdata = this.getValues();
+        Object.assign(arg, formdata);
+        Object.assign(arg,this.viewparams);
+        const post: Promise<any> = this.service.frontLogic(action,JSON.parse(JSON.stringify(this.context)),arg, showloading);
+        post.then((response: any) => {
+            if (!response.status || response.status !== 200) {
+                if (response.data) {
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                }
+                return;
+            }
+            const data = response.data;
+            this.onFormLoad(data,emitAction);
+            this.$emit(emitAction, data);
+            this.$nextTick(() => {
+                this.formState.next({ type: emitAction, data: data });
+            });
+        }).catch((response: any) => {
+            if (response && response.status && response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                return;
+            }
+            if (!response || !response.status || !response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
+                return;
+            }
+        });
     }
 
     /**

@@ -12,7 +12,7 @@
 
 
     <!--输出实体[IBZEMP]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-ibzemp-2-1">
+    <changeSet author="a_A_5d9d78509" id="tab-ibzemp-6-1">
         <createTable tableName="IBZEMP">
                 <column name="USERID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_IBZEMP_USERID"/>
@@ -145,13 +145,13 @@
 
 
         <!--输出实体[IBZEMP]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-2-2">
+    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-6-2">
        <addForeignKeyConstraint baseColumnNames="MDEPTID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZDEPT_MDEPTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-2-3">
+    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-6-3">
        <addForeignKeyConstraint baseColumnNames="ORGID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZORG_ORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-2-4">
+    <changeSet author="a_A_5d9d78509" id="fk-ibzemp-6-4">
        <addForeignKeyConstraint baseColumnNames="POSTID" baseTableName="IBZEMP" constraintName="DER1N_IBZEMP_IBZPOST_POSTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="POSTID" referencedTableName="IBZPOST" validate="true"/>
     </changeSet>
 

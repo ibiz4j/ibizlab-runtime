@@ -1,6 +1,6 @@
 <template>
 <div class='view-container degridview ibzemployee-grid-view'>
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="ibzemployeegridview"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="ibzemployeegridview"></app-studioaction>
     <card class='view-card  view-no-caption'  :dis-hover="true" :bordered="false">
         <div class='content-container'>
             <div class='view-top-messages'>
@@ -116,6 +116,7 @@
                 :showBusyIndicator="true"
                 :isOpenEdit="false"
                 :gridRowActiveMode="gridRowActiveMode"
+                :isformDruipart="isformDruipart"
                 @save="onSave"
                 updateAction=""
                 removeAction="Remove"
@@ -588,7 +589,7 @@ export default class IBZEmployeeGridViewBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'ibzemployee-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.ibzemployee,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'ibzemployee-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.ibzemployee,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -599,7 +600,7 @@ export default class IBZEmployeeGridViewBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'ibzemployee-grid-view',tag:this.viewtag,srfkey:this.context.ibzemployee,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'ibzemployee-grid-view',tag:this.viewtag,srfkey:this.context.ibzemployee,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

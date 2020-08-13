@@ -21,14 +21,19 @@ public interface WFProcessDefinitionMapper extends BaseMapper<WFProcessDefinitio
 
     Page<WFProcessDefinition> searchDefault(IPage page, @Param("srf") WFProcessDefinitionSearchContext context, @Param("ew") Wrapper<WFProcessDefinition> wrapper) ;
     @Override
+    @Cacheable( value="wfprocessdefinition",key = "'row:'+#p0")
     WFProcessDefinition selectById(Serializable id);
     @Override
+    @CacheEvict( value="wfprocessdefinition",key = "'row:'+#p0.definitionkey")
     int insert(WFProcessDefinition entity);
     @Override
+    @CacheEvict( value="wfprocessdefinition",key = "'row:'+#p0.definitionkey")
     int updateById(@Param(Constants.ENTITY) WFProcessDefinition entity);
     @Override
+    @CacheEvict(value="wfprocessdefinition",key = "'row:'+#p0.definitionkey")
     int update(@Param(Constants.ENTITY) WFProcessDefinition entity, @Param("ew") Wrapper<WFProcessDefinition> updateWrapper);
     @Override
+    @CacheEvict( value="wfprocessdefinition",key = "'row:'+#p0")
     int deleteById(Serializable id);
      /**
       * 自定义查询SQL

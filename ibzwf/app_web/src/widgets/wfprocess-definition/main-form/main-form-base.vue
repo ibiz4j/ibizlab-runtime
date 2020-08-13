@@ -104,6 +104,34 @@
 </app-form-item>
 
 </i-col>
+<i-col v-show="detailsModel.webserviceids.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='webserviceids' :itemRules="this.rules().webserviceids" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.webserviceids')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.webserviceids.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box 
+    v-model="data.webserviceids"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.webserviceids.disabled" 
+    type='text' 
+    style="">
+</input-box>
+
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.mobileserviceids.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='mobileserviceids' :itemRules="this.rules().mobileserviceids" class='' :caption="$t('entities.wfprocessdefinition.main_form.details.mobileserviceids')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mobileserviceids.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box 
+    v-model="data.mobileserviceids"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.mobileserviceids.disabled" 
+    type='text' 
+    style="">
+</input-box>
+
+</app-form-item>
+
+</i-col>
     
     </row>
 </app-form-group>
@@ -455,6 +483,8 @@ export default class MainBase extends Vue implements ControlInterface {
         modelenable: null,
         bpmnfile: null,
         md5check: null,
+        webserviceids: null,
+        mobileserviceids: null,
         wfprocessdefinition:null,
     };
 
@@ -588,6 +618,18 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '校验 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '校验 值不能为空', trigger: 'blur' },
         ],
+        webserviceids: [
+            { type: 'string', message: 'WebServiceIds 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: 'WebServiceIds 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: 'WebServiceIds 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: 'WebServiceIds 值不能为空', trigger: 'blur' },
+        ],
+        mobileserviceids: [
+            { type: 'string', message: 'MobileServiceIds 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: 'MobileServiceIds 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: 'MobileServiceIds 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: 'MobileServiceIds 值不能为空', trigger: 'blur' },
+        ],
         }
     }
 
@@ -663,6 +705,9 @@ export default class MainBase extends Vue implements ControlInterface {
         if(!falg.hasOwnProperty("isPast")){
             falg.isPast = true;
         }
+        if(!this.data[name]){
+           falg.isPast = true;
+        }
         return falg;
     }
 
@@ -706,6 +751,10 @@ export default class MainBase extends Vue implements ControlInterface {
         bpmnfile: new FormItemModel({ caption: 'BPMN', detailType: 'FORMITEM', name: 'bpmnfile', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         md5check: new FormItemModel({ caption: '校验', detailType: 'FORMITEM', name: 'md5check', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        webserviceids: new FormItemModel({ caption: 'WebServiceIds', detailType: 'FORMITEM', name: 'webserviceids', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        mobileserviceids: new FormItemModel({ caption: 'MobileServiceIds', detailType: 'FORMITEM', name: 'mobileserviceids', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
     };
 
@@ -889,6 +938,30 @@ export default class MainBase extends Vue implements ControlInterface {
         this.formDataChange({ name: 'md5check', newVal: newVal, oldVal: oldVal });
     }
 
+    /**
+     * 监控表单属性 webserviceids 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.webserviceids')
+    onWebserviceidsChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'webserviceids', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 mobileserviceids 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.mobileserviceids')
+    onMobileserviceidsChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'mobileserviceids', newVal: newVal, oldVal: oldVal });
+    }
+
 
     /**
      * 显示更多模式切换操作
@@ -943,6 +1016,8 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
+
+
 
 
 
@@ -1179,6 +1254,26 @@ export default class MainBase extends Vue implements ControlInterface {
         this.data[name] = value;
     }
 
+    /**
+     * 计算表单按钮权限状态
+     *
+     * @param {*} [data] 传入数据
+     * @memberof MainBase
+     */
+    public computeButtonState(data:any){
+        let targetData:any = this.transformData(data);
+        if(this.detailsModel && Object.keys(this.detailsModel).length >0){
+            Object.keys(this.detailsModel).forEach((name:any) =>{
+                if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
+                    let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
+                    ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
+                    this.detailsModel[name].visible = tempUIAction.visabled;
+                    this.detailsModel[name].disabled = tempUIAction.disabled;
+                }
+            })
+        }
+    }
+
 
 
     /**
@@ -1240,6 +1335,9 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
                 if (Object.is('refresh', action)) {
                     this.refresh(data);
+                }
+                if (Object.is('panelaction', action)) {
+                    this.panelAction(data.action,data.emitAction,data);
                 }
             });
         }
@@ -1350,6 +1448,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'load');
                 this.$emit('load', data);
+                this.computeButtonState(data);
                 this.$nextTick(() => {
                     this.formState.next({ type: 'load', data: data });
                 });
@@ -1393,6 +1492,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.onFormLoad(data,'loadDraft');
             data.wfprocessdefinition = null;
             this.$emit('load', data);
+            this.computeButtonState(data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
             });
@@ -1450,6 +1550,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.onFormLoad(data,'autoSave');
             this.$emit('save', data);
+            this.computeButtonState(data);
             AppCenterService.notifyMessage({name:"WFProcessDefinition",action:'appRefresh',data:data});
             this.$nextTick(() => {
                 this.formState.next({ type: 'save', data: data });
@@ -1528,6 +1629,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
+                this.computeButtonState(data);
                 AppCenterService.notifyMessage({name:"WFProcessDefinition",action:'appRefresh',data:data});
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: data });
@@ -1730,6 +1832,50 @@ export default class MainBase extends Vue implements ControlInterface {
                     reject(response);
             })
         })
+    }
+
+    /**
+     * 面板行为
+     *
+     * @param {string} [action] 调用的实体行为
+     * @param {string} [emitAction] 抛出行为
+     * @param {*} [data={}] 传入数据
+     * @param {boolean} [showloading] 是否显示加载状态
+     * 
+     * @memberof MainBase
+     */
+    public panelAction(action:string,emitAction:string,data:any ={},showloading?:boolean):void{
+        if (!action || (action && Object.is(action, ''))) {
+            return;
+        }
+        const arg: any = { ...data };
+        const formdata = this.getValues();
+        Object.assign(arg, formdata);
+        Object.assign(arg,this.viewparams);
+        const post: Promise<any> = this.service.frontLogic(action,JSON.parse(JSON.stringify(this.context)),arg, showloading);
+        post.then((response: any) => {
+            if (!response.status || response.status !== 200) {
+                if (response.data) {
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                }
+                return;
+            }
+            const data = response.data;
+            this.onFormLoad(data,emitAction);
+            this.$emit(emitAction, data);
+            this.$nextTick(() => {
+                this.formState.next({ type: emitAction, data: data });
+            });
+        }).catch((response: any) => {
+            if (response && response.status && response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                return;
+            }
+            if (!response || !response.status || !response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
+                return;
+            }
+        });
     }
 
     /**

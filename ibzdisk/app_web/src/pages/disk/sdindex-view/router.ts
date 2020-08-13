@@ -25,7 +25,7 @@ const router = new Router({
                 });
             },
             meta: {  
-                caption: 'app.views.sdindexview.title',
+                caption: 'app.views.sdindexview.caption',
                 info:'',
                 viewType: 'APPINDEX',
                 parameters: [
@@ -38,7 +38,7 @@ const router = new Router({
                 {
                     path: 'sdfiles/:sdfile?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sdfile.views.gridview.title',
+                        caption: 'entities.sdfile.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'sdindexview', parameterName: 'sdindexview' },
@@ -52,7 +52,7 @@ const router = new Router({
                 {
                     path: 'sdfiles/:sdfile?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sdfile.views.editview.title',
+                        caption: 'entities.sdfile.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'sdindexview', parameterName: 'sdindexview' },
@@ -69,7 +69,7 @@ const router = new Router({
     {
         path: '/sdfiles/:sdfile?/gridview/:gridview?',
         meta: {
-            caption: 'entities.sdfile.views.gridview.title',
+            caption: 'entities.sdfile.views.gridview.caption',
             info:'',
             parameters: [
                 { pathName: 'sdfiles', parameterName: 'sdfile' },
@@ -82,7 +82,7 @@ const router = new Router({
     {
         path: '/sdfiles/:sdfile?/editview/:editview?',
         meta: {
-            caption: 'entities.sdfile.views.editview.title',
+            caption: 'entities.sdfile.views.editview.caption',
             info:'',
             parameters: [
                 { pathName: 'sdfiles', parameterName: 'sdfile' },
@@ -107,6 +107,20 @@ const router = new Router({
                 next();
             },
             component: () => import('@components/login/login.vue'),
+        },
+        {
+            path: '/lock',
+            name: 'lock',
+            meta: {  
+                caption: '锁屏',
+                viewType: 'lock',
+                requireAuth: false,
+                ignoreAddPage: true,
+            },
+            beforeEnter: (to: any, from: any, next: any) => {
+                next();
+            },
+            component: () => import('@components/app-lock/app-lock.vue'),
         },
         {
             path: '/404',

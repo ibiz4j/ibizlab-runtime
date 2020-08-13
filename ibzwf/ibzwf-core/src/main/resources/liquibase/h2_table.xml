@@ -36,7 +36,7 @@
 
 
     <!--输出实体[WF_DEFINITION]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-wf_definition-57-3">
+    <changeSet author="a_A_5d9d78509" id="tab-wf_definition-63-3">
         <createTable tableName="IBZWFDEFINITION">
                 <column name="DEFINITIONKEY" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_WF_DEFINITION_DEFINITIONKEY"/>
@@ -49,13 +49,15 @@
                 </column>
                 <column name="PSSYSTEMID" remarks="" type="VARCHAR(100)">
                 </column>
-                <column name="TASKDEFINITIONKEY" remarks="" type="VARCHAR(100)">
-                </column>
                 <column name="MD5CHECK" remarks="" type="VARCHAR(100)">
                 </column>
                 <column name="BPMNFILE" remarks="" type="VARCHAR(1000)">
                 </column>
                 <column name="DEPLOYKEY" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="WEBSERVICEIDS" remarks="" type="VARCHAR(200)">
+                </column>
+                <column name="MOBILESERVICEIDS" remarks="" type="VARCHAR(200)">
                 </column>
         </createTable>
     </changeSet>

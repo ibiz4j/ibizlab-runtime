@@ -38,6 +38,10 @@
 .el-table th {
   padding: 5px 0;
 }
+.el-table th.gutter:last-of-type {
+    display: block !important;
+    width: 10px !important;
+}
 .grid .el-table__body-wrapper .el-table__row td{
     border-left: 1px solid rgb(245,245,245);
     border-top: 1px solid rgb(245,245,245);
@@ -116,7 +120,7 @@
         > .ivu-card-body {
             // height: 50%;
             // flex-grow: 1;
-            height: calc(100% - 62px);
+            height: calc(100% - 74px);
             padding: 0px;
             > .content-container {
                 height: 100%;

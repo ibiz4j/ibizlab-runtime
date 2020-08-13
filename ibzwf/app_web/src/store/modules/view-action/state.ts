@@ -25,6 +25,7 @@ export const viewstate: any = {
                 'a06aed382ebc28e6521b4398880388cd',
                 'c0e7fb60c35f15d4f23800acae7afbd1',
                 'f11ad9a3b9260fb68a2a2e870419bffa',
+                '67f605f39e4d0d7cfa524ea97bc29ced',
             ],
         },
         {
@@ -58,9 +59,28 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '67f605f39e4d0d7cfa524ea97bc29ced',
+            viewmodule: 'workflow',
+            viewname: 'WFTaskGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '84f38898137b7bd1f9f135ac74b4b850',
+            ],
+        },
+        {
             viewtag: '77dd35badedcc0f6b98e83ee1ff82bda',
             viewmodule: 'workflow',
             viewname: 'WFUserEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: '84f38898137b7bd1f9f135ac74b4b850',
+            viewmodule: 'workflow',
+            viewname: 'WFTaskEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [

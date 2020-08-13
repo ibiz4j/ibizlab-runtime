@@ -13,6 +13,6 @@ import cn.ibizlab.core.ou.domain.IBZEmployee;
  */
 public interface IIBZEmployeesaveDeptMemberLogic {
 
-    void execute(IBZEmployee ibzemployee ) ;
+    void execute(IBZEmployee et) ;
 
 }

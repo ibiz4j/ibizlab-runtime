@@ -1,6 +1,6 @@
 <template>
 <div class='view-container depickupgridview sys-permission-pickup-grid-view'>
-    <app-studioaction :viewTitle="$t(model.srfTitle)" viewName="syspermissionpickupgridview"></app-studioaction>
+    <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="syspermissionpickupgridview"></app-studioaction>
     <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :bordered="false">
         <div class='content-container pickup-grid-view'>
             <view_searchform 
@@ -446,7 +446,7 @@ export default class SysPermissionPickupGridViewBase extends Vue {
      */
     public initNavDataWithRoute(data:any = null, isNew:boolean = false,  isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavData({id:'sys-permission-pickup-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.syspermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
+            this.navDataService.addNavData({id:'sys-permission-pickup-grid-view',tag:this.viewtag,srfkey:isNew ? null : this.context.syspermission,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath});
         }
     }
 
@@ -457,7 +457,7 @@ export default class SysPermissionPickupGridViewBase extends Vue {
      */
     public initNavDataWithTab(data:any = null,isOnlyAdd:boolean = true, isAlways:boolean = false){
         if( isAlways || (this.viewDefaultUsage && !Object.is(this.navModel,"route")) ){
-            this.navDataService.addNavDataByOnly({id:'sys-permission-pickup-grid-view',tag:this.viewtag,srfkey:this.context.syspermission,title:this.$t(this.model.srfTitle),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
+            this.navDataService.addNavDataByOnly({id:'sys-permission-pickup-grid-view',tag:this.viewtag,srfkey:this.context.syspermission,title:this.$t(this.model.srfCaption),data:data,context:this.context,viewparams:this.viewparams,path:this.$route.fullPath},isOnlyAdd);
         }
     }
 	

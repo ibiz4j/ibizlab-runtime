@@ -137,6 +137,10 @@ public class SysPSSystem extends EntityMP implements Serializable {
         {
             if (!StringUtils.isEmpty(this.getPssystemid()))
                 this.sysstructure.setSystemid(this.getPssystemid());
+            if (!StringUtils.isEmpty(this.getPssystemname()))
+                this.sysstructure.setSystemname(this.getPssystemname());
+            else
+                this.sysstructure.setSystemname(this.getPssystemid());
         }
         return this.sysstructure;
     }

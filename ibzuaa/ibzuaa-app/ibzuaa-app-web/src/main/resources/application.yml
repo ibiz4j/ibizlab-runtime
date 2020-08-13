@@ -17,3 +17,7 @@ zuul:
       path: /config/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
+    wfcore:
+      path: /wfcore/**
+      serviceId: ${ibiz.ref.service.wf:ibzwf-api}
+      stripPrefix: true

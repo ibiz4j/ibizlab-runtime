@@ -81,6 +81,8 @@ import AppDepartmentSelect from './components/app-department-select/app-departme
 import AppGroupSelect from './components/app-group-select/app-group-select.vue'
 import UpdatePwd from './components/app-update-password/app-update-password.vue'
 import AppMenuItem from './components/app-menu-item/app-menu-item.vue'
+import AppFullScren from './components/app-full-scren/app-full-scren.vue'
+import AppLockScren from './components/app-lock-scren/app-lock-scren.vue'
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
 // 全局挂载实体权限服务注册中心
@@ -105,6 +107,8 @@ export const AppComponents = {
         v.prototype.$verify = Verify;
         v.prototype.$viewTool = ViewTool;
         v.prototype.$uiActionTool = UIActionTool;
+        v.component('app-full-scren',AppFullScren);
+        v.component('app-lock-scren',AppLockScren);
         v.component('input-box', InputBox);
         v.component('app-keep-alive',AppKeepAlive);
         v.component('tab-page-exp',TabPageExp);

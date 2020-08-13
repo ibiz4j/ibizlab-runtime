@@ -27,7 +27,7 @@
                             </a>
                             <dropdown-menu slot='list' v-if="uiActionGroup.details && Array.isArray(uiActionGroup.details)">
                                 <dropdown-item v-for="(detail,index) in (uiActionGroup.details)" :key="index" :name="detail.name">
-                                    <span class='item' v-show="detail.visabled" :style="{'pointer-events':detail.disabled?'none':'auto'}" @click="doUIAction($event, detail)">
+                                    <span class='item' v-show="detail.visabled" :style="{'pointer-events':detail.disabled?'none':'auto','color':detail.disabled?'#7b7979':'#2d8cf0'}" @click="doUIAction($event, detail)">
                                         <template v-if="detail.isShowIcon">
                                             <template v-if="detail.icon && !Object.is(detail.icon, '')">
                                                 <i :class="detail.icon" ></i>
@@ -58,7 +58,7 @@
                              <span class='item-extract-mode'>
                                 <template v-if="uiActionGroup.details && Array.isArray(uiActionGroup.details)">
                                     <div v-for="(detail,index) in uiActionGroup.details" :key="index">
-                                        <span v-show="detail.visabled" :style="{'pointer-events':detail.disabled?'none':'auto'}" class='item' @click="doUIAction($event, detail)">
+                                        <span v-show="detail.visabled" :style="{'pointer-events':detail.disabled?'none':'auto','color':detail.disabled?'#7b7979':'#2d8cf0'}" class='item' @click="doUIAction($event, detail)">
                                             <template v-if="detail.isShowIcon">
                                                 <template v-if="detail.icon && !Object.is(detail.icon, '')">
                                                     <i :class="detail.icon" ></i>
