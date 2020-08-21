@@ -21,7 +21,7 @@ export default class WFSystemList {
      * @type any
      * @memberof WFSystemList
      */
-    public expirationTime:any;
+    public static expirationTime:any;
 
     /**
      * 预定义类型
@@ -48,6 +48,26 @@ export default class WFSystemList {
     public codelistModel:any = {
         codelistid:"WFSystemList"
     };
+
+    /**
+     * 获取过期时间
+     *
+     * @type any
+     * @memberof WFSystemList
+     */
+    public getExpirationTime(){
+        return WFSystemList.expirationTime;
+    }
+
+    /**
+     * 设置过期时间
+     *
+     * @type any
+     * @memberof WFSystemList
+     */
+    public setExpirationTime(value:any){
+        WFSystemList.expirationTime = value; 
+    }
 
     /**
      * 自定义参数集合

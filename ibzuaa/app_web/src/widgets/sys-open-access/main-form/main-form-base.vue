@@ -110,6 +110,13 @@
 </app-form-item>
 
 </i-col>
+<i-col v-show="detailsModel.lic.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='lic' :itemRules="this.rules().lic" class='' :caption="$t('entities.sysopenaccess.main_form.details.lic')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.lic.error" :isEmptyCaption="false" labelPos="LEFT">
+    <app-file-upload :formState="formState" :ignorefieldvaluechange="ignorefieldvaluechange" @formitemvaluechange="onFormItemValueChange" :data="JSON.stringify(this.data)" name='lic' :value="data.lic" :disabled="detailsModel.lic.disabled" :uploadparams='{}' :exportparams='{}'  style="overflow: auto;"></app-file-upload>
+
+</app-form-item>
+
+</i-col>
     
     </row>
 </app-form-group>
@@ -460,6 +467,7 @@ export default class MainBase extends Vue implements ControlInterface {
         redirect_uri: null,
         region_id: null,
         disabled: null,
+        lic: null,
         accessid: null,
         sysopenaccess:null,
     };
@@ -588,6 +596,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'number', message: '是否禁用 值不能为空', trigger: 'change' },
             { required: false, type: 'number', message: '是否禁用 值不能为空', trigger: 'blur' },
         ],
+        lic: [
+            { type: 'string', message: '授权 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '授权 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '授权 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '授权 值不能为空', trigger: 'blur' },
+        ],
         accessid: [
             { type: 'string', message: '开放平台接入标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '开放平台接入标识 值必须为字符串类型', trigger: 'blur' },
@@ -713,6 +727,8 @@ export default class MainBase extends Vue implements ControlInterface {
         region_id: new FormItemModel({ caption: 'RegionId', detailType: 'FORMITEM', name: 'region_id', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         disabled: new FormItemModel({ caption: '是否禁用', detailType: 'FORMITEM', name: 'disabled', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        lic: new FormItemModel({ caption: '授权', detailType: 'FORMITEM', name: 'lic', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         accessid: new FormItemModel({ caption: '开放平台接入标识', detailType: 'FORMITEM', name: 'accessid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
@@ -887,6 +903,18 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 lic 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.lic')
+    onLicChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'lic', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 accessid 值
      *
      * @param {*} newVal
@@ -952,6 +980,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
+
 
 
 

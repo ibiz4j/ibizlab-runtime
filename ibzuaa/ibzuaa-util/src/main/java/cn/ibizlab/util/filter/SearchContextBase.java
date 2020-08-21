@@ -67,6 +67,33 @@ public class SearchContextBase implements ISearchContext{
      * 工作流流程标识
      */
     public String processDefinitionKey;
+
+    /**
+     * 获取工作流步骤标识
+     */
+    public String getUserTaskId() {
+        if(StringUtils.isEmpty(userTaskId)){
+            Object taskId=params.get("usertaskid");
+            return StringUtils.isEmpty(taskId)?null:String.valueOf(taskId);
+        }else{
+            return userTaskId;
+        }
+    }
+
+    /**
+     * 获取工作流流程标识
+     * @return
+     */
+    public String getProcessDefinitionKey() {
+        if(StringUtils.isEmpty(processDefinitionKey)){
+            Object processKey=params.get("processdefinitionkey");
+            return StringUtils.isEmpty(processKey)?null:String.valueOf(processKey);
+        }
+        else{
+            return processDefinitionKey;
+        }
+    }
+
     /**
      * 获取分页参数
      * @return

@@ -34,4 +34,43 @@ export default class WFDynaExpGridViewEngine extends GridViewEngine {
             }
         })
     }
+
+    /**
+     * 部件事件
+     *
+     * @param {string} ctrlName
+     * @param {string} eventName
+     * @param {*} args
+     * @memberof WFDynaExpGridViewEngine
+     */
+    public onCtrlEvent(ctrlName: string, eventName: string, args: any): void {
+        if (Object.is(ctrlName, 'grid')) {
+            this.GridEvent(eventName, args);
+        }
+        super.onCtrlEvent(ctrlName, eventName, args);
+    }
+
+    /**
+     * 事件处理
+     *
+     * @param {string} eventName
+     * @param {*} args
+     * @memberof WFDynaExpGridViewEngine
+     */
+    public GridEvent(eventName: string, args: any): void {
+        if (Object.is(eventName, 'load')) {
+            this.GridLoad(args);
+        }
+        super.MDCtrlEvent(eventName, args);
+    }
+
+    /**
+     * 表格加载完成
+     *
+     * @param {any[]} args
+     * @memberof WFDynaExpGridViewEngine
+     */
+    public GridLoad(args: any[]) {
+        this.view.getWFStepModel();
+    }
 }

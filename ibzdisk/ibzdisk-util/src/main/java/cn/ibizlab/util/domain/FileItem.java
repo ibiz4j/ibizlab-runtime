@@ -18,4 +18,14 @@ public class FileItem
 	private String filename;
 	private long size;
 	private String ext;
+	private String authcode;
+
+	public FileItem(String id, String name, String fileid, String filename, long size, String ext) {
+		this.id = id;
+		this.name = name;
+		this.fileid = fileid;
+		this.filename = filename;
+		this.size = size;
+		this.ext = ext;
+	}
 }

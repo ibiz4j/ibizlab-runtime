@@ -122,6 +122,23 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/uaa/login").permitAll()
                 .antMatchers("/uaa/loginbyusername").permitAll()
                .antMatchers("/uaa/publickey").permitAll()
+               .antMatchers("/uaa/open/**").permitAll()
+
+               .antMatchers("/uaa/register").permitAll()
+
+               .antMatchers("/uaa/responseTokenToWeiXin").permitAll()
+               .antMatchers("/uaa/getWechatAppId").permitAll()
+               .antMatchers("/uaa/queryWechatUserByCode").permitAll()
+               .antMatchers("/uaa/bindWechatToRegister").permitAll()
+
+               .antMatchers("/uaa/getDingtalkAppId").permitAll()
+               .antMatchers("/uaa/queryDingtalkUserByCode").permitAll()
+               .antMatchers("/uaa/bindDingtalkToRegister").permitAll()
+
+               .antMatchers("/uaa/getQQAppId").permitAll()
+               .antMatchers("/uaa/queryQQUserByCode").permitAll()
+               .antMatchers("/uaa/bindQQtoRegister").permitAll()
+
                 // 所有请求都需要认证
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域

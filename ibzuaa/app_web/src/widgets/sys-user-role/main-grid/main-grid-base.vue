@@ -571,7 +571,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * 选中行数据
      *
      * @type {any[]}
-     * @memberof Main
+     * @memberof MainBase
      */
     public selections: any[] = [];
 
@@ -579,9 +579,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * 拦截行选中
      *
      * @type {boolean}
-     * @memberof Main
+     * @memberof MainBase
      */
     public stopRowClick: boolean = false;
+
+    /**
+     * 当前编辑行数据
+     *
+     * @type {boolean}
+     * @memberof MainBase
+     */
+    public curEditRowData:any;
 
 
 
@@ -703,6 +711,15 @@ export default class MainBase extends Vue implements ControlInterface {
 
     /**
      * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 值规则集合
      *
      * @type {*}
      * @memberof MainBase
@@ -1624,6 +1641,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 row.hasUpdated = true;
             }
         }
+        this.curEditRowData = row;
         this.validate(property,row,rowIndex);
     }
 
@@ -1720,6 +1738,70 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public updateDefault(row: any){                    
     }
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules,op:string = "AND",value:any) :{isPast:boolean}{
+        let falg:any = {};
+        if(!rule || !rule[name]){
+            return falg;
+        }
+        let opValue = op == 'AND'? true :false;
+        let startOp = (val:boolean)=>{
+            if(falg.isPast){
+                if(opValue){
+                    falg.isPast = falg && val;
+                }else{
+                    falg.isPast = falg || val;
+                }
+            }else{
+                falg.isPast = val;
+            }
+        }
+        rule[name].forEach((item:any) => {
+            // 常规规则
+            if(item.type == 'SIMPLE'){
+                startOp(!this.$verify.checkFieldSimpleRule(value,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.curEditRowData,item.isKeyCond));
+            }
+            // 数值范围
+            if(item.type == 'VALUERANGE2'){
+                startOp( !this.$verify.checkFieldValueRangeRule(value,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
+            }
+            // 正则式
+            if (item.type == "REGEX") {
+                startOp(!this.$verify.checkFieldRegExRule(value,item.regExCode,item.ruleInfo,item.isKeyCond));
+            }
+            // 长度
+            if (item.type == "STRINGLENGTH") {
+                startOp(!this.$verify.checkFieldStringLengthRule(value,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
+            }
+            // 系统值规则
+            if(item.type == "SYSVALUERULE") {
+                startOp(!this.$verify.checkFieldSysValueRule(value,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
+            }
+            // 分组
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item,"AND",value)
+                if(item.isNotMode){
+                   falg.isPast = !falg.isPast;
+                }
+            }
+            
+        });
+        if(!falg.hasOwnProperty("isPast")){
+            falg.isPast = true;
+        }
+        if(!value){
+           falg.isPast = true;
+        }
+        return falg;
+    }
+
 }
 </script>
 

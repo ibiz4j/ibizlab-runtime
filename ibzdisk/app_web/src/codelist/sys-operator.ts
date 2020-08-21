@@ -20,7 +20,7 @@ export default class SysOperator {
      * @type any
      * @memberof SysOperator
      */
-    public expirationTime:any;
+    public static expirationTime:any;
 
     /**
      * 预定义类型
@@ -47,6 +47,26 @@ export default class SysOperator {
     public codelistModel:any = {
         codelistid:"SysOperator"
     };
+
+    /**
+     * 获取过期时间
+     *
+     * @type any
+     * @memberof SysOperator
+     */
+    public getExpirationTime(){
+        return SysOperator.expirationTime;
+    }
+
+    /**
+     * 设置过期时间
+     *
+     * @type any
+     * @memberof SysOperator
+     */
+    public setExpirationTime(value:any){
+        SysOperator.expirationTime = value; 
+    }
 
     /**
      * 自定义参数集合

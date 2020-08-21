@@ -1,10 +1,14 @@
 package cn.ibizlab.core.workflow.extensions.listener;
 
 import cn.ibizlab.core.workflow.extensions.domain.FlowUser;
+import cn.ibizlab.core.workflow.extensions.service.WFCoreService;
 import cn.ibizlab.core.workflow.extensions.service.WFModelService;
+import cn.ibizlab.util.client.IBZNotifyFeignClient;
 import cn.ibizlab.util.service.RemoteService;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-
+import org.flowable.bpmn.model.FormProperty;
+import org.flowable.bpmn.model.UserTask;
 import org.flowable.common.engine.api.delegate.event.*;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEventType;
 import org.flowable.common.engine.impl.event.FlowableEntityEventImpl;
@@ -18,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,6 +42,13 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
     @Lazy
     private TaskService taskService;
 
+    @Autowired
+    @Lazy
+    WFCoreService wfCoreService;
+
+    @Autowired
+    @Lazy
+    IBZNotifyFeignClient notifyFeignClient;
 
     @Override
     public void onEvent(FlowableEvent evt) {
@@ -183,9 +193,27 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                     remoteService.getClient(cloudServiceid).put(entity + "/" + businessKey, token,callbackArg);
                 }
             }
+            if(event.getExecution().getCurrentFlowElement() instanceof UserTask){
+                UserTask task=(UserTask)event.getExecution().getCurrentFlowElement();
+                if(task.getFormProperties().size()>0){
+                    FormProperty property=task.getFormProperties().get(0);
+                    String templId = property.getId();
+                    String templTypes=  property.getType();
+                    String userIds =wfCoreService.getGroupUsers(property.getVariable(),event.getExecution());
+                    if(StringUtils.isEmpty(templId)|| StringUtils.isEmpty(templTypes) || StringUtils.isEmpty(userIds))
+                        return ;
+
+                    Object activeData=event.getExecution().getVariable("activedata");
+                    JSONObject msg =new JSONObject();
+                    msg.put("templateid",templId);
+                    msg.put("msgtypes",Integer.parseInt(templTypes));
+                    msg.put("userids",userIds);
+                    msg.put("templparams",activeData);
+                    notifyFeignClient.SendMsg(msg);
+                    log.info(String.format("成功向用户[%s]发送一条消息",userIds));
+                }
+            }
         }
-
-
     }
 
     @Override

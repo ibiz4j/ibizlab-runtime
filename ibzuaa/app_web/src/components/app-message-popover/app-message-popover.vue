@@ -79,28 +79,29 @@
         public myTasksLabel: any = "待办";
         // 消息列表
         public myMsgs: any = [];
-        // 消息列表标签
+        // 消息面板标签
         public myMsgsLabel: any = "消息";
 
         /**
          * vue创建
          */
-        created(): void {
-
-        }
+        created(): void {}
 
         /**
          * vue挂载
          */
         mounted(): void {
-            // 第一次获取待办列表
+            // 首次获取待办列表
             this.getMyTasks();
-            let count = 1;
-            // 每隔１分钟重新获取待办列表
-            setInterval(()=>{
+            // 定时器:每隔１分钟重新获取待办列表
+            const timer = setInterval(()=>{
                 this.getMyTasks();
-                count++;
-            },1000*60);
+            },60000);
+            // 监听定时器,在vue销毁前清除定时器
+            this.$once('hook:beforeDestroy',()=>{
+                // 清除定时器
+                clearInterval(timer);
+            });
         }
 
         /**
@@ -129,6 +130,7 @@
          * 获取消息列表
          */
         public getMyMsgs(){
+            // TODO:接口获取消息列表，这里用的待办数据
             this.myMsgs = this.myTasks;
             if (this.myMsgs.length > 0 && this.myTasks.length == 0) {
                 // 显示小圆点
@@ -136,18 +138,23 @@
             }
         }
 
-
         /**
          * 点击标签事件
          */
         public handleTag(data: any) {
-            alert(JSON.stringify(data));
+            if (!data)  return this.$message.error("未获取到标签内容");
+            // 拼接要打开的窗口地址
+            const baseUrl:any = Environment.BaseUrl;
+            const openUrl:any = baseUrl + `/wfcore/mytasks/${data.processDefinitionKey}/web/${data.processInstanceBusinessKey}/usertasks/${data.taskDefinitionKey}`;
+            // 打开新窗口
+            window.open(openUrl,'_blank');
         }
 
         /**
          * 销毁之前
          */
         beforeDestroy(): void {
+            // 清空数据
             this.showIsDot = false;
             this.myTasks = [];
             this.myMsgs = [];

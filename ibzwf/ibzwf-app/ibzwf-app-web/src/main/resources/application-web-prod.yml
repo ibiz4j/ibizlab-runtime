@@ -67,5 +67,9 @@ zuul:
       path: /dictionarys/**
       serviceId: ${ibiz.ref.service.dict:ibzdict-api}
       stripPrefix: false
+    disk:
+      path: /net-disk/**
+      serviceId: ${ibiz.ref.service.disk:ibzdisk-api}
+      stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

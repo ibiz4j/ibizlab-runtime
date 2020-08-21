@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -67,6 +68,14 @@ public class WFCoreResource
 		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getWFLink(system,appname,entity,businessKey,taskDefinitionKey));
 	}
 
+	@ApiOperation(value = "getWayByProcessDefinitionKey", tags = {"WFStepWay" },  notes = "根据流程和当前步骤获取操作路径")
+	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/process-definitions/{processDefinitionKey}/usertasks/{taskDefinitionKey}/ways")
+	public ResponseEntity<List<WFTaskWay>> getWayByDefKey(@PathVariable("system") String system,@PathVariable("appname") String appname,
+													 @PathVariable("entity") String entity,
+													 @PathVariable("processDefinitionKey") String processDefinitionKey,@PathVariable("taskDefinitionKey") String taskDefinitionKey) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getWFLinkByStep(system,appname,entity,processDefinitionKey,taskDefinitionKey));
+	}
+
 	@ApiOperation(value = "getWayByTaskId", tags = {"WFTaskWay" },  notes = "根据业务主键和当前步骤获取操作路径")
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/ways")
 	public ResponseEntity<List<WFTaskWay>> gettasklink(@PathVariable("system") String system,@PathVariable("appname") String appname,
@@ -86,7 +95,7 @@ public class WFCoreResource
     }
 
 	//@PreAuthorize("hasPermission(#entity,'WFSTART',this.getEntity())")
-	@ApiOperation(value = "wfsubmit", tags = {"WFProcessInstance" },  notes = "工作流执行步骤")
+	@ApiOperation(value = "wfsubmit", tags = {"Submit" },  notes = "工作流执行步骤")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}")
 	public ResponseEntity<WFProcessInstance> wfsubmit(@PathVariable("system") String system,@PathVariable("appname") String appname,
 			@PathVariable("entity") String entity,
@@ -96,6 +105,31 @@ public class WFCoreResource
 		return ResponseEntity.ok(wfCoreService.wfsubmit(system,appname,entity,businessKey,taskId,taskWay));
 	}
 
+	//@PreAuthorize("hasPermission(#entity,'WFSTART',this.getEntity())")
+	@ApiOperation(value = "wfsubmitbatch", tags = {"SubmitBatch" },  notes = "批量工作流执行步骤")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/process-definitions/{processDefinitionKey}/usertasks/{taskDefinitionKey}/ways/{sequenceFlowId}/submit")
+	public ResponseEntity<Boolean> wfsubmit(@PathVariable("system") String system,@PathVariable("appname") String appname,
+													  @PathVariable("entity") String entity,
+													  @PathVariable("processDefinitionKey") String processDefinitionKey,@PathVariable("taskDefinitionKey") String taskDefinitionKey,
+											          @PathVariable("sequenceFlowId") String sequenceFlowId,
+													  @RequestBody List<Map> businessList) {
+		WFProcessInstance instance = new WFProcessInstance();
+
+		businessList.forEach(business -> {
+			if(business.get("srfkey")==null)
+				return;
+			String businessKey = business.get("srfkey").toString();
+			wfCoreService.getWFLink(system,appname,entity,businessKey,taskDefinitionKey).forEach(way ->{
+				if(way.getSequenceflowid().equals(sequenceFlowId))
+				{
+					way.set("activedata",business);
+					wfCoreService.wfsubmit(system,appname,entity,businessKey,way.getTaskid(),way);
+				}
+			});
+		});
+
+		return ResponseEntity.ok(true);
+	}
 
 	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据流程步骤查询我的待办主键清单")
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/process-definitions/{processDefinitionKey}/usertasks/{taskDefinitionKey}/tasks")
@@ -145,15 +179,14 @@ public class WFCoreResource
 	}
 
 	@RequestMapping(value = "/mytasks/{processDefinitionKey}/{type}/{businessKey}/usertasks/{taskDefinitionKey}", method = RequestMethod.GET  )
-	@ResponseStatus(HttpStatus.FOUND)
-	public void openTask(@PathVariable("processDefinitionKey") final String processDefinitionKey,@PathVariable("type") final String type,
+	public ResponseEntity openTask(@PathVariable("processDefinitionKey") final String processDefinitionKey,@PathVariable("type") final String type,
 						 @PathVariable("businessKey") final String businessKey, @PathVariable("taskDefinitionKey") final String taskDefinitionKey,
 						 HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String path =  wfCoreService.getTaskUrl(type,processDefinitionKey,"",businessKey,taskDefinitionKey);
 		if(StringUtils.isEmpty(path))
 			throw new BadRequestAlertException("未找到待办任务处理页","","");
 
-    	response.setHeader("Location", path);
+		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, path).build();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/deploybpmn")

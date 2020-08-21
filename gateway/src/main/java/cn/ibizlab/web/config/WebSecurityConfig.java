@@ -116,6 +116,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/"+downloadpath+"/**").permitAll()
                 .antMatchers("/"+uploadpath).permitAll()
                 .antMatchers("/"+previewpath+"/**").permitAll()
+
+                .antMatchers("/syspssystems/**/permissiondata").permitAll()
+                //同步系统权限资源
+                .antMatchers("/syspssystems/save").permitAll()
+                .antMatchers("/uaa/login").permitAll()
+                .antMatchers("/uaa/loginbyusername").permitAll()
+                .antMatchers("/uaa/publickey").permitAll()
+                .antMatchers("/uaa/register").permitAll()
+
+                .antMatchers("/uaa/open/**").permitAll()
+
+                .antMatchers("/uaa/responseTokenToWeiXin").permitAll()
+                .antMatchers("/uaa/getWechatAppId").permitAll()
+                .antMatchers("/uaa/queryWechatUserByCode").permitAll()
+                .antMatchers("/uaa/bindWechatToRegister").permitAll()
+
+                .antMatchers("/uaa/getDingtalkAppId").permitAll()
+                .antMatchers("/uaa/queryDingtalkUserByCode").permitAll()
+                .antMatchers("/uaa/bindDingtalkToRegister").permitAll()
+
+                .antMatchers("/uaa/getQQAppId").permitAll()
+                .antMatchers("/uaa/queryQQUserByCode").permitAll()
+                .antMatchers("/uaa/bindQQtoRegister").permitAll()
+                .antMatchers("/deploybpmn").permitAll()
+                //开放组织机构关系查询
+                .antMatchers("/ibzemployees/**/oumaps").permitAll()
+                .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()
+                .antMatchers("/dictionarys/**").permitAll()
+
+                .antMatchers("/jobs-api").permitAll()
                 // 所有请求都需要认证
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域

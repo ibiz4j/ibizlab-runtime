@@ -11,3 +11,11 @@ zuul:
       path: /v7/login
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
+    wfcore:
+      path: /wfcore/**
+      serviceId: ${ibiz.ref.service.wf:ibzwf-api}
+      stripPrefix: true
+    disk:
+      path: /net-disk/**
+      serviceId: ${ibiz.ref.service.disk:ibzdisk-api}
+      stripPrefix: true

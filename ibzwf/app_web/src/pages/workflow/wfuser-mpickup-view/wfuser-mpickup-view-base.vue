@@ -207,6 +207,7 @@ export default class WFUserMPickupViewBase extends Vue {
             Object.assign(this.viewparams, JSON.parse(this.viewparam));
             if(this.viewparams.selectedData){
                 this.selectedData = JSON.stringify(this.viewparams.selectedData);
+                this.viewSelections = this.viewparams.selectedData;
             }
 
         } 

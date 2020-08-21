@@ -3,12 +3,14 @@ package cn.ibizlab.api.rest.extensions;
 import cn.ibizlab.core.uaa.domain.SysOpenAccess;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.extensions.service.UserDingtalkRegisterService;
+import cn.ibizlab.core.uaa.extensions.service.UserRegisterService;
 import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.security.AuthTokenUtil;
+import cn.ibizlab.util.security.AuthenticationInfo;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import cn.ibizlab.util.service.IBZUSERService;
@@ -18,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -31,6 +30,8 @@ public class UserDingtalkRegisterResource {
 
     @Autowired
     private UserDingtalkRegisterService userDingtalkRegisterService;
+    @Autowired
+    private UserRegisterService userRegisterService;
     @Autowired
     private IBZUSERService ibzuserService;
     @Autowired
@@ -46,15 +47,18 @@ public class UserDingtalkRegisterResource {
     /**
      * 获取钉钉开放平台创建的网站应用appid
      */
-    @GetMapping(value = "/uaa/getDingtalkAppId")
-    public ResponseEntity<JSONObject> getDingtalkAppId() {
+    @GetMapping(value = {"/uaa/getDingtalkAppId","/uaa/open/dingtalk/access_token","/uaa/open/dingtalk/appid"})
+    public ResponseEntity<JSONObject> getDingtalkAppId(@RequestParam(value = "id",required = false) String id) {
         JSONObject obj = new JSONObject();
-        SysOpenAccess openAccess = openAccessService.getById("dingtalk");
+        SysOpenAccess openAccess = userDingtalkRegisterService.getOpenAccess(id);
         if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
             return ResponseEntity.ok(obj);
-        String appId = openAccess.getAccessKey();// qq互联appid
+        String appId = openAccess.getAccessKey();
         if (!StringUtils.isEmpty(appId)) {
             obj.put("appid", appId);
+            obj.put("access_token",openAccess.getAccessToken());
+            obj.put("corp_id",openAccess.getRegionId());
+            obj.put("redirect_uri",openAccess.getRedirectUri());
         }
 
         return ResponseEntity.ok(obj);
@@ -68,45 +72,34 @@ public class UserDingtalkRegisterResource {
      * @return
      */
     @PostMapping(value = "/uaa/queryDingtalkUserByCode")
-    public ResponseEntity<JSONObject> queryDingtalkUserByCode(@RequestBody JSONObject param) {
-        JSONObject object = new JSONObject();
+    public ResponseEntity<JSONObject> queryDingtalkUserByCode(@RequestParam(value = "id",required = false) String id,@RequestParam(value = "code",required = false) String tmpcode,@RequestBody JSONObject param) {
+
         // 空校验
         String code = param.getString("code");
         if (StringUtils.isEmpty(code))
+            code = tmpcode;
+        if (StringUtils.isEmpty(code))
             throw new BadRequestAlertException("code为空", "UserDingtalkRegisterResource", "");
 
-        // 从数据库中获取钉钉授权应用信息
-        SysOpenAccess openAccess = openAccessService.getById("dingtalk");
-        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
-            throw new BadRequestAlertException("未找到配置", "UserDingtalkRegisterResource", "");
-        String appId = openAccess.getAccessKey();// 个人应用开发过程中的唯一性标识AppId
-        String appSecret = openAccess.getSecretKey();// 个人应用AppSecret
+        return ResponseEntity.ok().body(getUserBySnsCode(id,code));
+    }
 
-        // 通过code获取钉钉用户信息
-        String openid = null;
-        String nickname = null;
-        long currentTimeMillis = System.currentTimeMillis();
-        JSONObject returnObj = userDingtalkRegisterService.requestDingtalkUserByCode(code, currentTimeMillis, appId, appSecret);
-        if (!StringUtils.isEmpty(returnObj) && !returnObj.containsKey("errcode")) {
-            openid = returnObj.getString("openid");
-            nickname = returnObj.getString("nick");
-            object.put("openid", openid);
-            object.put("nickname", nickname);
-        }
+    @GetMapping(value = "/uaa/open/dingtalk/sns/{code}")
+    public ResponseEntity<JSONObject> getUserBySnsToken(@PathVariable(value = "code") String code, @RequestParam(value = "id",required = false) String id) {
+        if (StringUtils.isEmpty(code))
+            throw new BadRequestAlertException("code为空", "UserDingtalkRegisterResource", "");
 
-        // 根据openid查用户授权信息
-        SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>query().eq("identifier", openid));
-        // 该钉钉用户注册过账号，登录系统
-        if (!StringUtils.isEmpty(userAuth)) {
-            IBZUSER ibzuser = ibzuserService.getById(userAuth.getUserid());
-            JSONObject ibzuserObj = new JSONObject();
-            ibzuserObj.put("loginname", ibzuser.getLoginname());
-            ibzuserObj.put("password", ibzuser.getPassword());
-            object.put("ibzuser", ibzuserObj);
+        return ResponseEntity.ok().body(getUserBySnsCode(id,code));
+    }
 
+    private JSONObject getUserBySnsCode(String id,String code)
+    {
+        JSONObject object = userDingtalkRegisterService.getUserBySnsToken(id,code);
+        if (!StringUtils.isEmpty(object.getString("username"))) {
+            String username = object.getString("username");
             // 生成登录token信息
-            userDetailsService.resetByUsername(ibzuser.getLoginname());
-            AuthenticationUser user = userDetailsService.loadUserByLogin(ibzuser.getLoginname(), ibzuser.getPassword());
+            userDetailsService.resetByUsername(username);
+            AuthenticationUser user = userDetailsService.loadUserByUsername(username);
             final String token = jwtTokenUtil.generateToken(user);
             AuthenticationUser user2 = new AuthenticationUser();
             CachedBeanCopier.copy(user, user2);
@@ -115,8 +108,7 @@ public class UserDingtalkRegisterResource {
             object.put("token", token);
             object.put("user", user2);
         }
-
-        return ResponseEntity.ok().body(object);
+        return object;
     }
 
 
@@ -126,14 +118,18 @@ public class UserDingtalkRegisterResource {
      * @param param
      * @return
      */
-    @PostMapping(value = "/uaa/bindDingtalkToRegister")
-    public ResponseEntity<JSONObject> bindDingtalkToRegister(@RequestBody JSONObject param) {
-        JSONObject object = new JSONObject();
+    @PostMapping(value = {"/uaa/bindDingtalkToRegister","/uaa/open/dingtalk/bind"})
+    public ResponseEntity<AuthenticationInfo> bindDingtalkToRegister(@RequestBody JSONObject param) {
+
         // 空校验
         String loginname = param.getString("loginname");
         String password = param.getString("password");
         String openid = param.getString("openid");
         String nickname = param.getString("nickname");
+        String personname = param.getString("personname");
+        String phone = param.getString("phone");
+        String email = param.getString("email");
+        String domains = param.getString("domains");
         if (StringUtils.isEmpty(loginname))
             throw new BadRequestAlertException("用户名为空", "UserDingtalkRegisterResource", "");
         if (StringUtils.isEmpty(password))
@@ -145,40 +141,50 @@ public class UserDingtalkRegisterResource {
 
         // 钉钉用户注册
         IBZUSER ibzuser = new IBZUSER();
-        String uuid = UUID.randomUUID().toString();
         ibzuser.setPassword(password);
         ibzuser.setLoginname(loginname);
-        ibzuser.setUserid("dingtalk-" + uuid);
-        ibzuser.setPersonname(nickname);
+        ibzuser.setPersonname(StringUtils.isEmpty(personname)?nickname:personname);
         ibzuser.setNickname(nickname);
-        userDingtalkRegisterService.toRegister(ibzuser);
-        // 创建钉钉用户授权信息
+        ibzuser.setPhone(phone);
+        ibzuser.setEmail(email);
+        ibzuser.setDomains(domains);
+
         SysUserAuth userAuth = new SysUserAuth();
-        userAuth.setUserid(ibzuser.getUserid());
         userAuth.setIdentifier(openid);
         userAuth.setIdentityType("dingtalk");
-        userDingtalkRegisterService.toCreateUserAuth(userAuth);
 
-        // 注册成功，登录系统
-        if (!StringUtils.isEmpty(ibzuser)) {
-            JSONObject ibzuserObj = new JSONObject();
-            ibzuserObj.put("loginname", ibzuser.getLoginname());
-            ibzuserObj.put("password", ibzuser.getPassword());
-            object.put("ibzuser", ibzuserObj);
-        }
+        userRegisterService.toRegister(ibzuser,userAuth);
+
+
 
         //　生成登录token信息
-        userDetailsService.resetByUsername(ibzuser.getLoginname());
-        AuthenticationUser user = userDetailsService.loadUserByLogin(ibzuser.getLoginname(), ibzuser.getPassword());
+        userDetailsService.resetByUsername(ibzuser.getLoginname()+(StringUtils.isEmpty(ibzuser.getDomains())?"":("|"+ibzuser.getDomains())));
+        AuthenticationUser user = userDetailsService.loadUserByUsername(ibzuser.getLoginname()+(StringUtils.isEmpty(ibzuser.getDomains())?"":("|"+ibzuser.getDomains())));
         final String token = jwtTokenUtil.generateToken(user);
         AuthenticationUser user2 = new AuthenticationUser();
         CachedBeanCopier.copy(user, user2);
         user2.setAuthorities(null);
         user2.setPermissionList(null);
-        object.put("token", token);
-        object.put("user", user2);
 
-        return ResponseEntity.ok().body(object);
+
+        return ResponseEntity.ok().body(new AuthenticationInfo(token,user2));
+    }
+
+
+    @GetMapping(value = {"/uaa/open/dingtalk/auth/{code}"})
+    public ResponseEntity<AuthenticationInfo> getUserByToken(@PathVariable(value = "code") String code, @RequestParam(value = "id",required = false) String id) {
+
+        AuthenticationUser user=userDingtalkRegisterService.getUserByToken(id,code);
+
+        final String token = jwtTokenUtil.generateToken(user);
+
+        AuthenticationUser user2=new AuthenticationUser();
+        CachedBeanCopier.copy(user,user2);
+        user2.setAuthorities(null);
+        user2.setPermissionList(null);
+        // 返回 token
+        return ResponseEntity.ok().body(new AuthenticationInfo(token,user2));
+
     }
 
 

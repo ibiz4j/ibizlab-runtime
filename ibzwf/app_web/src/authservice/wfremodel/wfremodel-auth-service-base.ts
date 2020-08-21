@@ -28,9 +28,16 @@ export default class WFREModelAuthServiceBase extends AuthService {
      */
     public getOPPrivs(mainSateOPPrivs:any):any{
         let curDefaultOPPrivs:any = this.getSysOPPrivs();
+        let copyDefaultOPPrivs:any = JSON.parse(JSON.stringify(curDefaultOPPrivs));
         if(mainSateOPPrivs){
             Object.assign(curDefaultOPPrivs,mainSateOPPrivs);
         }
+        // 统一资源优先
+        Object.keys(curDefaultOPPrivs).forEach((name:string) => {
+            if(this.sysOPPrivsMap.get(name) && copyDefaultOPPrivs[name] === 0){
+                curDefaultOPPrivs[name] = copyDefaultOPPrivs[name];
+            }
+        });
         return curDefaultOPPrivs;
     }
 

@@ -103,7 +103,14 @@
             <artifactId>spring-ldap-core</artifactId>
         </dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>alibaba-dingtalk-service-sdk</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+
+    </dependencies>
 
     <properties>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>

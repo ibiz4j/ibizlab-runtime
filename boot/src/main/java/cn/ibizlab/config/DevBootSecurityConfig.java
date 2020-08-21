@@ -122,6 +122,8 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/uaa/publickey").permitAll()
                        .antMatchers("/uaa/register").permitAll()
 
+                       .antMatchers("/uaa/open/**").permitAll()
+
                        .antMatchers("/uaa/responseTokenToWeiXin").permitAll()
                        .antMatchers("/uaa/getWechatAppId").permitAll()
                        .antMatchers("/uaa/queryWechatUserByCode").permitAll()
@@ -139,6 +141,8 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/ibzemployees/**/oumaps").permitAll()
                        .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()
                        .antMatchers("/dictionarys/**").permitAll()
+
+                       .antMatchers("/jobs-api").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();

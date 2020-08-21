@@ -2,6 +2,7 @@ package cn.ibizlab.util.job;
 
 import cn.ibizlab.util.client.IBZUAAFeignClient;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class PermissionSyncJob implements ApplicationRunner {
     private String systemName;
 
 
+    @Autowired
+    @Lazy
+    private cn.ibizlab.util.client.IBZNotifyFeignClient notifyFeignClient;
+
     @Override
     public void run(ApplicationArguments args) {
         try {
@@ -55,5 +60,22 @@ public class PermissionSyncJob implements ApplicationRunner {
             log.error(String.format("向[UAA]同步系统资源失败，请检查[UAA]服务是否正常! [%s]",ex));
         }
 
+
+        try {
+            InputStream msgTemplate= this.getClass().getResourceAsStream("/msgtempl/systemMsgTempl.json"); //获取当前系统所有实体资源能力
+            String strMsgTemplate = IOUtils.toString(msgTemplate,"UTF-8");
+            JSONObject template= new JSONObject();
+            template.put("system",systemId);
+            template.put("template",JSONArray.parseArray(strMsgTemplate));
+            //数值代码表：email(2)、sms(4)、wechat(32)、dingtalk(64)
+            template.put("templtypes", 102);
+            if(notifyFeignClient.createMsgTemplate(template)){
+                log.info("推送消息模板成功");
+            }else{
+                log.error("推送消息模板失败");
+            }
+        } catch (Exception e) {
+            log.error("推送消息模板失败");
+        }
     }
 }

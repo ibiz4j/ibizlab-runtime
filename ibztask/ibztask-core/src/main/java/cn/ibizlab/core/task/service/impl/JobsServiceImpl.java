@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 //import java.math.BigInteger;
 import java.sql.Timestamp;
@@ -84,6 +85,7 @@ public class JobsServiceImpl implements IJobsService {
     }
 
     @Override
+    @Transactional
     public boolean tryLock(String name, String owner) {
         JobsLock lock = new JobsLock();
         lock.setName(name);
@@ -93,9 +95,11 @@ public class JobsServiceImpl implements IJobsService {
     }
 
     @Override
+    @Transactional
     public boolean unlock(String name, String owner) {
-        return jobsLockService.remove(Wrappers.<JobsLock>lambdaQuery().eq(JobsLock::getName, name)
+        jobsLockService.getBaseMapper().delete(Wrappers.<JobsLock>lambdaQuery().eq(JobsLock::getName, name)
                 .eq(null != owner, JobsLock::getOwner, owner));
+        return true;
     }
 
     @Override

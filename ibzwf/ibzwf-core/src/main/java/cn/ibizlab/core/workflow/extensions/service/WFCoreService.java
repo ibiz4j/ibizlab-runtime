@@ -228,6 +228,27 @@ public class WFCoreService
 		return new PageImpl<WFTask>(pages.getRecords(), context.getPageable(), pages.getTotal());
 	}
 
+
+	public List<WFTaskWay> getWFLinkByStep(String system,String appname,
+									 String entity, String processDefinitionKey,String taskDefinitionKey) {
+		List<WFTaskWay> taskWays=new ArrayList<>();
+
+		if((!StringUtils.isEmpty(processDefinitionKey))&&(!StringUtils.isEmpty(taskDefinitionKey))) {
+			UserTask userTask = wfModelService.getModelStepByKey(processDefinitionKey).get(taskDefinitionKey);
+			if(userTask!=null&&userTask.getOutgoingFlows()!=null) {
+				for(SequenceFlow sequenceFlow:userTask.getOutgoingFlows()) {
+					WFTaskWay way=new WFTaskWay();
+					way.setSequenceflowid(sequenceFlow.getId());
+					way.setSequenceflowname(sequenceFlow.getName());
+					way.setProcessdefinitionkey(processDefinitionKey);
+					way.setTaskdefinitionkey(taskDefinitionKey);
+					taskWays.add(way);
+				}
+			}
+		}
+		return taskWays;
+	}
+
 	public String getTaskUrl(String type,String processDefinitionKey,String processInstanceId,String businessKey,String taskDefinitionKey)
 	{
 		JSONObject app = ibzuaaFeignClient.getAppSwitcher("default",AuthenticationUser.getAuthenticationUser().getUserid());
@@ -484,6 +505,22 @@ public class WFCoreService
 			processInstanceIds.add(processInstanceId);
 
 		Map<String,WFProcessNode> nodes=new LinkedHashMap<>();
+
+		for(String id:processInstanceIds) {
+			LinkedHashMap<String,UserTask> userTasks = wfModelService.getModelStepById(id);
+			for(UserTask userTask:userTasks.values()) {
+				if(!nodes.containsKey(userTask.getId())) {
+					WFProcessNode node = new WFProcessNode();
+					node.setUsertaskid(userTask.getId());
+					node.setUsertaskname(userTask.getName());
+					node.set("comments", new ArrayList<WFHistory>());
+					node.set("identityLinks", new ArrayList<WFUser>());
+					nodes.put(userTask.getId(), node);
+				}
+			}
+		}
+
+
 		List<Comment> comments = new ArrayList<>();
 		Map<String,HistoricTaskInstanceEntity> tasks=new LinkedHashMap<>();
 		Set<String> waitTaskId=new LinkedHashSet<>();

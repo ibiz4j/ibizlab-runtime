@@ -86,6 +86,9 @@ export default class MainModel {
         dataType: 'YESNO',
       },
       {
+        name: 'lic',
+      },
+      {
         name: 'accessid',
         prop: 'id',
         dataType: 'TEXT',

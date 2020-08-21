@@ -3,9 +3,9 @@
         class='dropdown-list-dynamic'
         :transfer="true"
         v-model="currentVal"
-        :disabled="disabled === true ? true : false"
+        :disabled="disabled"
         :clearable="true"
-        :filterable="filterable === true ? true : false"
+        :filterable="filterable"
         @on-open-change="onClick"
         :placeholder="$t('components.dropDownListDynamic.placeholder')">
         <i-option v-for="(item, index) in items" :key="index" :value="item.value">{{($t('userCustom.'+tag+'.'+item.value)!== ('userCustom.'+tag+'.'+item.value))?$t('userCustom.'+tag+'.'+item.value) : item.text}}</i-option>
@@ -114,7 +114,7 @@ export default class DropDownListDynamic extends Vue {
      * @type {boolean}
      * @memberof DropDownListDynamic
      */
-    @Prop() public filterable?: boolean;
+    public filterable: boolean = true;
 
     /**
      * 下拉选提示内容
