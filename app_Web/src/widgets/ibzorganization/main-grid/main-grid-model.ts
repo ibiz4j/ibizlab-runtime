@@ -99,47 +99,53 @@ export default class MainModel {
       {
         name: 'orgcode',
         prop: 'orgcode',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_orgname_like',
         prop: 'n_orgname_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_porgid_eq',
         prop: 'n_porgid_eq',
-        dataType: 'PICKUP',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_porgname_eq',
         prop: 'n_porgname_eq',
-        dataType: 'PICKUPTEXT',
+        dataType: 'QUERYPARAM'
       },
 
         {
           name:'size',
-          prop:'size'
+          prop:'size',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'query',
-          prop:'query'
+          prop:'query',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'filter',
-          prop:'filter'
+          prop:'filter',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'page',
-          prop:'page'
+          prop:'page',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'sort',
-          prop:'sort'
+          prop:'sort',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'srfparentdata',
-          prop:'srfparentdata'
+          prop:'srfparentdata',
+          dataType: 'QUERYPARAM'
         },
         // 前端新增修改标识，新增为"0",修改为"1"或未设值
         {

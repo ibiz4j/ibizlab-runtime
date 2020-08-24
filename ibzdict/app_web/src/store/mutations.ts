@@ -98,7 +98,10 @@ export const addPage = (state: any, arg: any) => {
     if (!arg) {
         return;
     }
-    if (Object.is(arg.meta.viewType, 'APPINDEX')) {
+    // 视图类型为REDIRECTVIEW和NOTAB的视图不添加缓存
+    if(Object.is(arg.meta.viewType, 'REDIRECTVIEW') || Object.is(arg.meta.viewType, 'NOTAB')){
+        return;
+    }else if(Object.is(arg.meta.viewType, 'APPINDEX')) {
         window.sessionStorage.setItem(Environment.AppName, arg.fullPath);
     } else {
         const page: any = {};

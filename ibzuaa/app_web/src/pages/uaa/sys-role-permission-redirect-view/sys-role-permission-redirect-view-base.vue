@@ -16,7 +16,8 @@ import SysRolePermissionAuthService from '@/authservice/sys-role-permission/sys-
 
 
 import SysRolePermissionUIService from '@/uiservice/sys-role-permission/sys-role-permission-ui-service';
-import UIService from '@/uiservice/ui-service';
+import qs from 'qs';
+import { ViewTool } from '@/utils';
 
 
 @Component({
@@ -267,6 +268,9 @@ export default class SysRolePermissionRedirectViewBase extends Vue {
         for(let key in this.context){
             delete this.context[key];
         }
+        if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
+            Object.assign(this.context,this.$store.getters.getAppData().context);
+        }
         if (!this.viewDefaultUsage && this.viewdata && !Object.is(this.viewdata, '')) {
             Object.assign(this.context, JSON.parse(this.viewdata));
             if(this.context && this.context.srfparentdename){
@@ -274,9 +278,6 @@ export default class SysRolePermissionRedirectViewBase extends Vue {
             }
             if(this.context && this.context.srfparentkey){
                 Object.assign(this.viewparams,{srfparentkey:this.context.srfparentkey});
-            }
-            if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
-                Object.assign(this.context,this.$store.getters.getAppData().context);
             }
             this.handleCustomViewData();
             return;
@@ -295,9 +296,6 @@ export default class SysRolePermissionRedirectViewBase extends Vue {
         this.$viewTool.formatRouteParams(tempValue,this.$route,this.context,this.viewparams);
         if(inputvalue){
             Object.assign(this.context,{'sysrolepermission':inputvalue});
-        }
-        if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
-            Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         //初始化视图唯一标识
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});
@@ -531,13 +529,12 @@ export default class SysRolePermissionRedirectViewBase extends Vue {
      * @memberof SysRolePermissionRedirectViewBase
      */    
     public async viewInit(){
-        const {srfkey:srfkey,srfappde:srfappde} = this.viewparams;
-        const uiService:UIService = new UIService();
-        const targetService:any = await uiService.getService(srfappde.toLowerCase());
-        targetService.getRDAppView(srfkey,true).then((res:any) =>{
+        let srfkey:any = this.context.sysrolepermission;
+        this.appUIService.getRDAppView(srfkey,false).then((res:any) =>{
             if(res && res.viewname && res.srfappde){
-                const path:string =`/${res.srfappde}/${srfkey}/${res.viewname}`;
-                this.$router.push({path:path});
+                let indexPath:string = ViewTool.getIndexRoutePath(this.$route);
+                const path:string =`${indexPath}/${res.srfappde}/${srfkey}/${res.viewname}?${qs.stringify(this.viewparams, { delimiter: ';' })}`;
+                this.$router.replace({path:path});
             }else{
                 console.error("未查找到重定向视图")
             }

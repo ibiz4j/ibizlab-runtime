@@ -162,8 +162,15 @@ export default class AppFormGroup extends Vue {
                 return;
             }
             const _item = ActionModel[key];
-            if(_item && _item['dataaccaction'] && UIService && data && Object.keys(data).length >0){
-                let dataActionResult:any = UIService.getAllOPPrivs(data)[_item['dataaccaction']];
+            if(_item && _item['dataaccaction'] && UIService){
+                let dataActionResult:any;
+                if(Object.is(_item['actiontarget'],"NONE")){
+                    dataActionResult = UIService.getResourceOPPrivs(_item['dataaccaction']);
+                }else{
+                    if(data && Object.keys(data).length >0){
+                        dataActionResult = UIService.getAllOPPrivs(data)[_item['dataaccaction']];
+                    }
+                }
                 // 无权限:0;有权限:1
                 if(dataActionResult === 0){
                     // 禁用:1;隐藏:2;隐藏且默认隐藏:6

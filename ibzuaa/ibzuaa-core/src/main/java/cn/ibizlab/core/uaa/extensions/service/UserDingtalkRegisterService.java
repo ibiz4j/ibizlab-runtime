@@ -15,12 +15,8 @@ import com.alibaba.nacos.client.identify.Base64;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
-import com.dingtalk.api.request.OapiGettokenRequest;
-import com.dingtalk.api.request.OapiSnsGetuserinfoBycodeRequest;
-import com.dingtalk.api.request.OapiUserGetuserinfoRequest;
-import com.dingtalk.api.response.OapiGettokenResponse;
-import com.dingtalk.api.response.OapiSnsGetuserinfoBycodeResponse;
-import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
+import com.dingtalk.api.request.*;
+import com.dingtalk.api.response.*;
 import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -103,10 +99,14 @@ public class UserDingtalkRegisterService {
 
     public SysOpenAccess getOpenAccess(String id)
     {
+        return getOpenAccess(id,true);
+    }
+    public SysOpenAccess getOpenAccess(String id,boolean throwEx)
+    {
         final String accessid = StringUtils.isEmpty(id)?"dingtalk":id;
         SysOpenAccess sysOpenAccess=sysOpenAccessService.getOne(Wrappers.<SysOpenAccess>lambdaQuery().eq(SysOpenAccess::getOpenType,"dingtalk").
                 and(wrapper -> wrapper.eq(SysOpenAccess::getAccessKey,accessid).or().eq(SysOpenAccess::getId,accessid)),false);
-        if(sysOpenAccess==null|| (sysOpenAccess.getDisabled()!=null && sysOpenAccess.getDisabled()==1))
+        if((sysOpenAccess==null|| (sysOpenAccess.getDisabled()!=null && sysOpenAccess.getDisabled()==1))&&throwEx)
             throw new BadRequestAlertException("获取接入配置失败","UserDingtalkRegisterService","");
 
         String accessToken = getAccessToken(sysOpenAccess.getAccessKey(),sysOpenAccess.getSecretKey());
@@ -190,7 +190,10 @@ public class UserDingtalkRegisterService {
 
             returnObj.put("openid", response.getUserInfo().getOpenid());
             returnObj.put("nickname", response.getUserInfo().getNick());
-            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"dingtalk").eq(SysUserAuth::getIdentifier, response.getUserInfo().getOpenid()),false);
+            returnObj.put("unionid", response.getUserInfo().getUnionid());
+            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"dingtalk")
+                    .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, response.getUserInfo().getOpenid()).or().eq(SysUserAuth::getIdentifier, response.getUserInfo().getUnionid())
+                    ),false);
 
             IBZUSER user = null;
             // 该钉钉用户注册过账号，登录系统

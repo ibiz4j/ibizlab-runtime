@@ -25,6 +25,24 @@ public class DevNamingRegister implements ApplicationRunner {
     @Value("${server.port:10086}")
     private Integer port;
 
+
+
+    @Value("${ibiz.ref.service.wf:ibzwf-api}")
+    private String wfapi;
+    @Value("${ibiz.ref.service.uaa:ibzuaa-api}")
+    private String uaaapi;
+    @Value("${ibiz.ref.service.ou:ibzou-api}")
+    private String ouapi;
+    @Value("${ibiz.ref.service.task:ibztask-api}")
+    private String taskapi;
+    @Value("${ibiz.ref.service.dict:ibzdict-api}")
+    private String dictapi;
+    @Value("${ibiz.ref.service.disk:ibzdisk-api}")
+    private String diskapi;
+    @Value("${ibiz.ref.gateway.rt:ibzrt-web}")
+    private String rtgw;
+
+
     @Override
     public void run(ApplicationArguments args) {
         try {
@@ -37,13 +55,13 @@ public class DevNamingRegister implements ApplicationRunner {
             Instance instance = naming.selectOneHealthyInstance(serviceName);
             if(instance!=null&&(!StringUtils.isEmpty(instance.getIp())))
             {
-                naming.registerInstance("ibzrt-web", instance);
-                naming.registerInstance("ibzuaa-api", instance);
-                naming.registerInstance("ibzou-api", instance);
-                naming.registerInstance("ibzwf-api", instance);
-                naming.registerInstance("ibztask-api", instance);
-                naming.registerInstance("ibzdict-api", instance);
-                naming.registerInstance("ibzdisk-api", instance);
+                naming.registerInstance(rtgw, instance);
+                naming.registerInstance(uaaapi, instance);
+                naming.registerInstance(ouapi, instance);
+                naming.registerInstance(wfapi, instance);
+                naming.registerInstance(taskapi, instance);
+                naming.registerInstance(dictapi, instance);
+                naming.registerInstance(diskapi, instance);
             }
         }
         catch (Exception ex) {

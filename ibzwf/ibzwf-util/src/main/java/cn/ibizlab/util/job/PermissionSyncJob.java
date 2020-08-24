@@ -65,10 +65,7 @@ public class PermissionSyncJob implements ApplicationRunner {
             InputStream msgTemplate= this.getClass().getResourceAsStream("/msgtempl/systemMsgTempl.json"); //获取当前系统所有实体资源能力
             String strMsgTemplate = IOUtils.toString(msgTemplate,"UTF-8");
             JSONObject template= new JSONObject();
-            template.put("system",systemId);
             template.put("template",JSONArray.parseArray(strMsgTemplate));
-            //数值代码表：email(2)、sms(4)、wechat(32)、dingtalk(64)
-            template.put("templtypes", 102);
             if(notifyFeignClient.createMsgTemplate(template)){
                 log.info("推送消息模板成功");
             }else{

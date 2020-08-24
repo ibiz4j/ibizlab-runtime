@@ -280,7 +280,7 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
      */
     @Watch('selectedData')
     public onValueChange(newVal: any, oldVal: any) {
-        this.echoselectedNodes = newVal ? this.isSingleSelect ? JSON.parse(newVal)[0] : JSON.parse(newVal) : [];
+        this.echoselectedNodes = newVal ? this.isSingleSelect ? [JSON.parse(newVal)[0]] : JSON.parse(newVal) : [];
         this.selectedNodes = [];
         if(this.echoselectedNodes.length > 0){
             let AllnodesObj = (this.$refs.treeexpbar_tree as any).store.nodesMap;
@@ -708,6 +708,8 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
                 return this.echoselectedNodes.some((val:any)=> {
                     if(Object.is(item.srfkey,val.srfkey) && Object.is(item.srfmajortext,val.srfmajortext)){
                         val.used = true;
+                        this.selectedNodes.push(val);
+                        this.$emit('selectionchange', this.selectedNodes);
                         return true;
                     }
                 });

@@ -101,7 +101,7 @@ export default class AppEmbedPicker extends Vue {
      * @type {string}
      * @memberof AppEmbedPicker
      */
-    @Prop() public valueItem?: string;
+    @Prop() public valueItem!: string;
 
     /**
      * 关联视图名称
@@ -176,17 +176,28 @@ export default class AppEmbedPicker extends Vue {
         if (!this.data) {
             return;
         }
+        let formData:any = JSON.parse(this.data);
         let arg: any = {};
         // 合并视图上下文参数和视图参数
         arg.param = JSON.parse(JSON.stringify(this.viewparams));
         arg.context = JSON.parse(JSON.stringify(this.context));
+        if(formData[this.name] && formData[this.valueItem]){
+            let selectItems:Array<any> = [];
+            let tempvalue: Array<any> = formData[this.valueItem].split(',');
+            let temptext: Array<any> = formData[this.name].split(',');
+            tempvalue.forEach((srfkey: any, index: number)=>{
+                selectItems.push({ srfmajortext : temptext[index], srfkey: srfkey });
+            });
+            arg.param.selectedData = selectItems;
+            this.$forceUpdate();
+        }
         // 附加参数处理
          if (this.localContext && Object.keys(this.localContext).length >0) {
-            let _context = this.$util.computedNavData(this.data,arg.context,arg.param,this.localContext);
+            let _context = this.$util.computedNavData(formData,arg.context,arg.param,this.localContext);
             Object.assign(arg.context,_context);
         }
         if (this.localParam && Object.keys(this.localParam).length >0) {
-            let _param = this.$util.computedNavData(this.data,arg.param,arg.param,this.localParam);
+            let _param = this.$util.computedNavData(formData,arg.context,arg.param,this.localParam);
             Object.assign(arg.param,_param);
         }
         this.viewdata = JSON.stringify(arg.context);
@@ -257,12 +268,10 @@ export default class AppEmbedPicker extends Vue {
             srfkey = srfkey.substring(0,srfkey.length-1);
             srfmajortext = srfmajortext.substring(0,srfmajortext.length-1);
             if (this.valueItem) {
-                let value = srfkey;
-                this.$emit('formitemvaluechange', { name: this.valueItem, value: value });
+                this.$emit('formitemvaluechange', { name: this.valueItem, value: srfkey });
             }
             if (this.name) {
-                let value = srfmajortext;
-                this.$emit('formitemvaluechange', { name: this.name, value: value });
+                this.$emit('formitemvaluechange', { name: this.name, value: srfmajortext });
             }
         }
     }

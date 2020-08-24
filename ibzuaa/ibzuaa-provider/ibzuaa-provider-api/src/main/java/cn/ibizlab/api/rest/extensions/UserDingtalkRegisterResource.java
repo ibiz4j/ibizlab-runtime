@@ -50,7 +50,7 @@ public class UserDingtalkRegisterResource {
     @GetMapping(value = {"/uaa/getDingtalkAppId","/uaa/open/dingtalk/access_token","/uaa/open/dingtalk/appid"})
     public ResponseEntity<JSONObject> getDingtalkAppId(@RequestParam(value = "id",required = false) String id) {
         JSONObject obj = new JSONObject();
-        SysOpenAccess openAccess = userDingtalkRegisterService.getOpenAccess(id);
+        SysOpenAccess openAccess = userDingtalkRegisterService.getOpenAccess(id,false);
         if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
             return ResponseEntity.ok(obj);
         String appId = openAccess.getAccessKey();

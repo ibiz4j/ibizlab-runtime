@@ -94,42 +94,48 @@ export default class MainModel {
       {
         name: 'n_app_like',
         prop: 'n_app_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_handler_like',
         prop: 'n_handler_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_status_eq',
         prop: 'n_status_eq',
-        dataType: 'NSCODELIST',
+        dataType: 'QUERYPARAM'
       },
 
         {
           name:'size',
-          prop:'size'
+          prop:'size',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'query',
-          prop:'query'
+          prop:'query',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'filter',
-          prop:'filter'
+          prop:'filter',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'page',
-          prop:'page'
+          prop:'page',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'sort',
-          prop:'sort'
+          prop:'sort',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'srfparentdata',
-          prop:'srfparentdata'
+          prop:'srfparentdata',
+          dataType: 'QUERYPARAM'
         },
         // 前端新增修改标识，新增为"0",修改为"1"或未设值
         {

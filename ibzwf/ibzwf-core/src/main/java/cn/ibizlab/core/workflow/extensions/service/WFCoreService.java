@@ -490,7 +490,8 @@ public class WFCoreService
 	{
 		WFProcessInstance wfProcessInstance=new WFProcessInstance();
 		String processInstanceBusinessKey=system+":"+entity+":k-"+businessKey;
-		List<String> processInstanceIds=new ArrayList<>();
+		Set<String> processInstanceIds=new HashSet<>();
+		Set<String> processDefinitionIds=new HashSet<>();
 		if(StringUtils.isEmpty(processInstanceId))
 		{
 			List<HistoricProcessInstance> instances=historyService.createHistoricProcessInstanceQuery().processInstanceBusinessKey(processInstanceBusinessKey).orderByProcessInstanceStartTime().asc().list();
@@ -499,14 +500,19 @@ public class WFCoreService
 			for(HistoricProcessInstance instance:instances)
 			{
 				processInstanceIds.add(instance.getId());
+				processDefinitionIds.add(instance.getProcessDefinitionId());
 			}
 		}
-		else
+		else {
+			runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).list().forEach(item ->{
+				processDefinitionIds.add(item.getProcessDefinitionId());
+			});
 			processInstanceIds.add(processInstanceId);
+		}
 
 		Map<String,WFProcessNode> nodes=new LinkedHashMap<>();
 
-		for(String id:processInstanceIds) {
+		for(String id:processDefinitionIds) {
 			LinkedHashMap<String,UserTask> userTasks = wfModelService.getModelStepById(id);
 			for(UserTask userTask:userTasks.values()) {
 				if(!nodes.containsKey(userTask.getId())) {

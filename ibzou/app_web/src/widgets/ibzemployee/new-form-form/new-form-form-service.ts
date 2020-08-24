@@ -123,7 +123,7 @@ export default class NewFormService extends ControlService {
      */
     @Errorlog
     public wfstart(action: string,context: any = {},data: any = {}, isloading?: boolean,localdata?:any): Promise<any> {
-        data = this.handleWFData(data);
+        data = this.handleWFData(data,true);
         context = this.handleRequestData(action,context,data).context;
         return new Promise((resolve: any, reject: any) => {
             let result: Promise<any>;
@@ -181,11 +181,12 @@ export default class NewFormService extends ControlService {
      * @param {*} [context={}]
      * @param {*} [data={}]
      * @param {boolean} [isloading]
+     * @param {boolean} [isWorkflow] 是否在工作流中添加数据
      * @returns {Promise<any>}
      * @memberof NewFormService
      */
     @Errorlog
-    public add(action: string, context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public add(action: string, context: any = {},data: any = {}, isloading?: boolean,isWorkflow?:boolean): Promise<any> {
         const {data:Data,context:Context} = this.handleRequestData(action,context,data);
         return new Promise((resolve: any, reject: any) => {
             let result: Promise<any>;
@@ -196,8 +197,12 @@ export default class NewFormService extends ControlService {
                 result = this.appEntityService.Create(Context,Data, isloading);
             }
             result.then((response) => {
-                this.handleResponse(action, response);
-                resolve(response);
+                if(isWorkflow){
+                    resolve(response);
+                }else{
+                    this.handleResponse(action, response);
+                    resolve(response);
+                }
             }).catch(response => {
                 reject(response);
             });
@@ -240,11 +245,12 @@ export default class NewFormService extends ControlService {
      * @param {*} [context={}]
      * @param {*} [data={}]
      * @param {boolean} [isloading]
+     * @param {boolean} [isWorkflow] 是否在工作流中修改数据
      * @returns {Promise<any>}
      * @memberof NewFormService
      */
     @Errorlog
-    public update(action: string, context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public update(action: string, context: any = {},data: any = {}, isloading?: boolean,isWorkflow?:boolean): Promise<any> {
         const {data:Data,context:Context} = this.handleRequestData(action,context,data);
         return new Promise((resolve: any, reject: any) => {
             let result: Promise<any>;
@@ -255,8 +261,12 @@ export default class NewFormService extends ControlService {
                 result = this.appEntityService.Update(Context,Data, isloading);
             }
             result.then((response) => {
-                this.handleResponse(action, response);
-                resolve(response);
+                if(isWorkflow){
+                    resolve(response);
+                }else{
+                    this.handleResponse(action, response);
+                    resolve(response);
+                }
             }).catch(response => {
                 reject(response);
             });

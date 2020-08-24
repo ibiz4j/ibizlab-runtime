@@ -77,12 +77,12 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
                 disabled: false,
             },
             {
-                id: "webchart",
+                id: "wechat",
                 label: "微信开放平台",
                 text: "微信开放平台",
                 "data":"",
-                "codename":"Webchart",
-                value: "webchart",
+                "codename":"Wechat",
+                value: "wechat",
                 
                 disabled: false,
             },

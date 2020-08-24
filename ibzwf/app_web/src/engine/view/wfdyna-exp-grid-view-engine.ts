@@ -25,6 +25,9 @@ export default class WFDynaExpGridViewEngine extends GridViewEngine {
      */
     public load(opts: any = {},isnotify:boolean=false): void {
         this.view.getWFStepModel().then((res:any) =>{
+            if(!res || res.length === 0) {
+                return;
+            }
             if(!this.view.isformDruipart){
                 super.load(opts);
             }else{
@@ -72,5 +75,38 @@ export default class WFDynaExpGridViewEngine extends GridViewEngine {
      */
     public GridLoad(args: any[]) {
         this.view.getWFStepModel();
+    }
+
+    /**
+     * 选中变化
+     *
+     * @param {any[]} args
+     * @memberof WFDynaExpGridViewEngine
+     */
+    public selectionChange(args: any[]): void {
+        if (this.view) {
+            this.view.selectedData = args;
+            this.view.$emit('viewdataschange', args);
+        }
+        const state = args.length > 0 && !Object.is(args[0].srfkey, '') ? false : true;
+        this.calcToolbarItemState(state);
+    }
+
+    /**
+     * 计算工具栏状态
+     *
+     * @param {boolean} state
+     * @param {*} [dataaccaction]
+     * @memberof WFDynaExpGridViewEngine
+     */
+    public calcToolbarItemState(state: boolean, dataaccaction?: any) {
+        const _this: any = this;
+        if (!_this.view.linkModel || Object.keys(_this.view.linkModel).length === 0) {
+            return;
+        }
+        _this.view.linkModel.forEach((item:any) => {
+            item.disabled = state;
+        });
+        this.view.$forceUpdate();
     }
 }

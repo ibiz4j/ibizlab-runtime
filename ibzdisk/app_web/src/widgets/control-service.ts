@@ -214,6 +214,10 @@ export default class ControlService {
         dataItems.forEach((item:any) =>{
             if(item && item.prop){
                 requestData[item.prop] = data[item.name];
+            }else{
+                if(item && item.dataType && Object.is(item.dataType,"FORMITEM")){
+                    requestData[item.name] = data[item.name]
+                }
             }
         });
         if(isMerge && (data.viewparams && Object.keys(data.viewparams).length > 0)){

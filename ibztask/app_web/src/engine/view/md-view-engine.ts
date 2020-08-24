@@ -360,6 +360,8 @@ export default class MDViewEngine extends ViewEngine {
         this.calcToolbarItemState(state);
         if(args && args.length > 0){
             this.calcToolbarItemAuthState(this.transformData(args[0]));
+        }else{
+            this.calcToolbarItemAuthState(null);
         }
     }
 
@@ -383,6 +385,7 @@ export default class MDViewEngine extends ViewEngine {
             this.view.$emit('viewload', args);
         }
         this.calcToolbarItemState(true);
+        this.calcToolbarItemAuthState(null);
     }
 
     /**

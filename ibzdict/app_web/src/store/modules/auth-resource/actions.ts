@@ -11,7 +11,7 @@ export const commitAuthData = ({ commit, state }: { commit: any, state: any }, {
     if(appmenu && appmenu.length >0){
         commit('setMenuData', appmenu);
     }
-    if(enablepermissionvalid){
+    if(enablepermissionvalid === true || enablepermissionvalid === false){
         commit('setEnablePermissionValid', enablepermissionvalid);
     }
 }

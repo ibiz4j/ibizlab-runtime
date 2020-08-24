@@ -380,6 +380,9 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
         for(let key in this.context){
             delete this.context[key];
         }
+        if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
+            Object.assign(this.context,this.$store.getters.getAppData().context);
+        }
         if (!this.viewDefaultUsage && this.viewdata && !Object.is(this.viewdata, '')) {
             Object.assign(this.context, JSON.parse(this.viewdata));
             if(this.context && this.context.srfparentdename){
@@ -387,9 +390,6 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
             }
             if(this.context && this.context.srfparentkey){
                 Object.assign(this.viewparams,{srfparentkey:this.context.srfparentkey});
-            }
-            if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
-                Object.assign(this.context,this.$store.getters.getAppData().context);
             }
             this.handleCustomViewData();
             return;
@@ -408,9 +408,6 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
         this.$viewTool.formatRouteParams(tempValue,this.$route,this.context,this.viewparams);
         if(inputvalue){
             Object.assign(this.context,{'sysrolepermission':inputvalue});
-        }
-        if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
-            Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         //初始化视图唯一标识
         Object.assign(this.context,{srfsessionid:this.$util.createUUID()});

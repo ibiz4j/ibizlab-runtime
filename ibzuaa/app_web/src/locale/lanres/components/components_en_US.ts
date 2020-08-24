@@ -258,6 +258,75 @@ export default {
       prompt:'prompt',
       confirmButtonText:'determine',
       cancelButtonText:'cancel',
+    },
+    cronEditor: {
+      label: {
+        second: 'Second',
+        minute: 'Minute',
+        hour: 'Hour',
+        day: 'Day',
+        week: 'Week',
+        month: 'Month',
+        year: 'Year',
+      },
+      public : {
+        specify: 'Specify',
+        notSpecify: 'Not specify',
+        cycle: 'Cycle',
+        from: 'From',
+        to: 'to',
+        loop: 'Loop',
+        every: 'Every',
+        once: 'execute once',
+      },
+      second: 'second',
+      minute: 'minute',
+      hour: {
+        title: 'hour',
+        everyHour: 'Every hour',
+        hourStart: "o'clock start, every ",
+        onceAHour: "o'clock to execute once.",
+      },
+      day: {
+        title: 'day',
+        daily: 'Every day',
+        workDay: 'Working day',
+        dayStart: 'rd start, every ',
+        onceADay: 'rd to execute once',
+        thisMonth: 'this month',
+        lastWorkDay: 'rd, Recent working day',
+        lastDayOfMonth: 'Last day of the month',
+      },
+      month: {
+        title: 'month',
+        everyMonth: 'Every month',
+        monthStart: ' month start, every',
+        onceAMonth: ' month to execute once',
+      },
+      week: {
+        title: 'week',
+        everyWeek: 'Every week',
+        from: '',
+        to: 'from weekday',
+        start: 'start, every',
+        onceADay: 'days to execute once',
+        specifyWeek: 'Specify week',
+        weekOfMonth: 'this month',
+        weekWeek: 'week, weekday',
+        lastOfMonth: 'Last of the month',
+        week: 'weekday',
+      },
+      year: {
+        title: 'year',
+        everyYear: 'Every year',
+      },
+      message: {
+        error1: 'Date and day of the week cannot be "not specified" at the same time',
+        error2: 'Both the date and the day of the week must be "not specified"',
+      },
+    },
+    appMessagePopover: {
+      loadMore: 'Load more',
+      noMore: 'No more'
     }
-
 };

@@ -42,6 +42,14 @@ export default class OptionsService extends ControlService {
         this.model = new OptionsModel();
     }
 
+    /**
+     * 备份原生数据
+     *
+     * @type {*}
+     * @memberof OptionsService
+     */
+    public copynativeData:any;
+
 
     /**
      * 字典服务对象
@@ -243,6 +251,7 @@ export default class OptionsService extends ControlService {
                 result =_appEntityService.FetchDefault(Context,Data, isloading);
             }
             result.then((response) => {
+                this.copynativeData = Util.deepCopy(response.data);
                 this.handleResponse(action, response);
                 resolve(response);
             }).catch(response => {
@@ -341,7 +350,7 @@ export default class OptionsService extends ControlService {
                     requestData[item.prop] = context[item.name];
                 }
             }else{
-                if(item && item.isEditable && item.prop && item.name && (data[item.name] || Object.is(data[item.name],0)) ){
+                if(item && item.isEditable && item.prop && item.name && (data[item.name] || Object.is(data[item.name],0) || Object.is(data[item.name],"")) ){
                     requestData[item.prop] = data[item.name];
                 }
             }
@@ -352,6 +361,98 @@ export default class OptionsService extends ControlService {
             delete tempContext.srfsessionid;
         }
         return {context:tempContext,data:requestData};
+    }
+
+    /**
+     * 处理工作流数据
+     * 
+     * @param data 传入数据
+     *  @memberof OptionsService
+     */
+    public handleWFData(data:any, isMerge:boolean = false){
+        let model: any = this.getMode();
+        if (!model && model.getDataItems instanceof Function) {
+            return data;
+        }
+        let dataItems: any[] = model.getDataItems();
+        let requestData:any = {};
+        dataItems.forEach((item:any) =>{
+            if(item && item.prop){
+                if(item.dataType){
+                    if(!Object.is(item.dataType,'QUERYPARAM')){
+                        requestData[item.prop] = data[item.name];
+                    }
+                }else{
+                    requestData[item.prop] = data[item.name];
+                }  
+            }
+        });
+        if(isMerge && (data.viewparams && Object.keys(data.viewparams).length > 0)){
+            Object.assign(requestData,data.viewparams);
+        }
+        // 删除前端srffrontuf标识
+        if(requestData.hasOwnProperty('srffrontuf')){
+            delete requestData.srffrontuf;
+        }
+        //补充工作流所需主键
+        requestData.srfkey = data.dictoption;
+        //补充全量数据
+        requestData = this.fillNativeData(requestData);
+        return requestData;
+    }
+
+    /**
+     * 补充全量数据
+     *
+     * @param {*} [data]
+     * @memberof OptionsService
+     */
+    public fillNativeData(data:any){
+        if(this.copynativeData && this.copynativeData.length >0){
+            let targetData:any = this.copynativeData.find((item:any) =>{
+                return item.value_key === data.srfkey;
+            })
+            data = Object.assign(targetData,data);
+            return data;
+        }
+    }
+
+    /**
+     * 提交工作流
+     *
+     * @param {string} action
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @param {*} [localdata]
+     * @returns {Promise<any>}
+     * @memberof OptionsService
+     */
+    @Errorlog
+    public submitbatch(action: string,context: any = {}, data: any,localdata:any,isloading?: boolean): Promise<any> {
+        let tempData:any = [];
+        if(data && data.length > 0){
+            data.forEach((item:any) => {
+                let data:any = this.handleWFData(item,true);
+                tempData.push(data);
+            });
+        }
+        context = this.handleRequestData(action,context,data,true).context;
+        return new Promise((resolve: any, reject: any) => {
+            let result: Promise<any>;
+            const _appEntityService: any = this.appEntityService;
+            if (_appEntityService[action] && _appEntityService[action] instanceof Function) {
+                result = _appEntityService[action](context,tempData, localdata,isloading);
+            } else {
+                result = this.appEntityService.wfSubmitBatch(context,tempData,localdata,isloading);
+            }
+            result.then((response) => {
+                this.handleResponse(action, response);
+                resolve(response);
+            }).catch(response => {
+                reject(response);
+            });
+        });
     }
     
 }

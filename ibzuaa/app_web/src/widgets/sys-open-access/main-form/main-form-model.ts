@@ -87,6 +87,7 @@ export default class MainModel {
       },
       {
         name: 'lic',
+        dataType:'FORMITEM',
       },
       {
         name: 'accessid',

@@ -645,7 +645,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '角色标识',
             langtag: 'entities.sysrole.main_grid.columns.sys_roleid',
             show: false,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -653,7 +653,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '角色名称',
             langtag: 'entities.sysrole.main_grid.columns.sys_rolename',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -661,7 +661,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '父角色名称',
             langtag: 'entities.sysrole.main_grid.columns.prolename',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -669,7 +669,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '备注',
             langtag: 'entities.sysrole.main_grid.columns.memo',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -677,7 +677,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '更新时间',
             langtag: 'entities.sysrole.main_grid.columns.updatedate',
             show: true,
-            util: 'px',
+            unit: 'px',
             isEnableRowEdit: false,
         },
         {
@@ -685,7 +685,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '父角色标识',
             langtag: 'entities.sysrole.main_grid.columns.proleid',
             show: false,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
     ]
@@ -1508,7 +1508,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     get adaptiveState(): boolean {
-        return !this.allColumns.find((column: any) => column.show && Object.is(column.util, 'STAR'));
+        return !this.allColumns.find((column: any) => column.show && Object.is(column.unit, 'STAR'));
     }
 
     /**
@@ -1813,6 +1813,44 @@ export default class MainBase extends Vue implements ControlInterface {
            falg.isPast = true;
         }
         return falg;
+    }
+
+    /**
+     * 工作流提交
+     *
+     * @param {*} [data={}]
+     * @param {*} [localdata={}]
+     * @returns {Promise<any>}
+     * @memberof MainBase
+     */
+    public async submitbatch(data: any,localdata:any): Promise<any> {
+        return new Promise((resolve: any, reject: any) => {
+        const _this: any = this;
+        const arg: any = data;
+        const result: Promise<any> = this.service.submitbatch(_this.WFSubmitAction, JSON.parse(JSON.stringify(this.context)),arg,localdata,this.showBusyIndicator);
+        result.then((response: any) => {
+            if (!response || response.status !== 200) {
+                if(response.data){
+                    this.$Notice.error({ title: '', desc: (this.$t('app.formpage.workflow.submiterror') as string) + ', ' + response.data.message });
+                }
+                return;
+            }
+            this.$Notice.info({ title: '', desc: (this.$t('app.formpage.workflow.submitsuccess') as string) });
+            resolve(response);
+        }).catch((response: any) => {
+            if (response && response.status && response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                reject(response);
+                return;
+            }
+            if (!response || !response.status || !response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
+                reject(response);
+                return;
+            }
+            reject(response);
+        });
+        })
     }
 
 }

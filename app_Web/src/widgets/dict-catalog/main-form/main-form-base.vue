@@ -1582,13 +1582,35 @@ export default class MainBase extends Vue implements ControlInterface {
     public async wfstart(data: any,localdata?:any): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
             const _this: any = this;
-            const post: Promise<any> = _this.save({},false);
+            const formData:any = this.getData();
+            const copyData:any = Util.deepCopy(formData);
+            const post: Promise<any> =  Object.is(formData.srfuf, '1')?this.service.update(this.updateAction, JSON.parse(JSON.stringify(this.context)),formData, this.showBusyIndicator,true):this.service.add(this.createAction,JSON.parse(JSON.stringify(this.context)),formData, this.showBusyIndicator,true);
             post.then((response:any) =>{
-                const arg:any = response.data;
+                const responseData:any = response.data;
+                let tempResponseData:any = Util.deepCopy(response);
+                this.service.handleResponse('save', tempResponseData);
+                const arg:any = tempResponseData.data;
+                // 保存完成UI处理
+                this.onFormLoad(arg,'save');
+                this.$emit('save', arg);
+                AppCenterService.notifyMessage({name:"DictCatalog",action:'appRefresh',data:data});
+                this.$nextTick(() => {
+                    this.formState.next({ type: 'save', data: arg });
+                });
                 // 准备工作流数据,填充未存库数据
-                Object.assign(arg,this.getData());
+                Object.assign(arg,copyData);
+                // 准备提交参数
                 if(this.viewparams){
-                    Object.assign(arg,{viewparams:this.viewparams});
+                    let copyViewParams:any = Util.deepCopy(this.viewparams);
+                    if(copyViewParams.w){
+                        delete copyViewParams.w;
+                    }
+                    Object.assign(responseData,copyViewParams);
+                }
+                Object.assign(arg,{viewparams:responseData});
+                // 强制补充srfwfmemo
+                if(this.srfwfmemo){
+                    Object.assign(arg,{srfwfmemo:this.srfwfmemo});
                 }
                 const result: Promise<any> = this.service.wfstart(_this.WFStartAction, JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator,localdata);
                 result.then((response: any) => {
@@ -1641,13 +1663,17 @@ export default class MainBase extends Vue implements ControlInterface {
         return new Promise((resolve: any, reject: any) => {
         const _this: any = this;
         const arg: any = data[0];
+        const copyData:any = Util.deepCopy(arg);
         Object.assign(arg,{viewparams:this.viewparams});
         if (!arg.dictcatalog || Object.is(arg.dictcatalog, '')) {
             return;
         }
-        const post: Promise<any> = Object.is(arg.srfuf, '1')?this.service.update(this.updateAction, JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator):this.service.add(this.createAction,JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator);
+        const post: Promise<any> = Object.is(arg.srfuf, '1')?this.service.update(this.updateAction, JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator,true):this.service.add(this.createAction,JSON.parse(JSON.stringify(this.context)),arg, this.showBusyIndicator,true);
         post.then((response:any) =>{
-                const arg:any = response.data;
+                const responseData:any = response.data;
+                let tempResponseData:any = Util.deepCopy(response);
+                this.service.handleResponse('save', tempResponseData);
+                const arg:any = tempResponseData.data;
                 // 保存完成UI处理
                 this.onFormLoad(arg,'save');
                 this.$emit('save', arg);
@@ -1656,11 +1682,12 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.formState.next({ type: 'save', data: arg });
                 });
                 // 准备工作流数据,填充未存库数据
-                Object.assign(arg,this.getData());
+                Object.assign(arg,copyData);
                 // 准备提交参数
                 if(this.viewparams){
-                    Object.assign(arg,{viewparams:this.viewparams});
+                    Object.assign(responseData,this.viewparams);
                 }
+                Object.assign(arg,{viewparams:responseData});
                 // 强制补充srfwfmemo
                 if(this.srfwfmemo){
                     Object.assign(arg,{srfwfmemo:this.srfwfmemo});

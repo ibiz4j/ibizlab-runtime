@@ -3,12 +3,14 @@ package cn.ibizlab.api.rest.extensions;
 import cn.ibizlab.core.uaa.domain.SysOpenAccess;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.extensions.service.UserQQRegisterService;
+import cn.ibizlab.core.uaa.extensions.service.UserRegisterService;
 import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.security.AuthTokenUtil;
+import cn.ibizlab.util.security.AuthenticationInfo;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import cn.ibizlab.util.service.IBZUSERService;
@@ -18,10 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,6 +31,8 @@ public class UserQQRegisterResource {
 
     @Autowired
     private UserQQRegisterService userQQRegisterService;
+    @Autowired
+    private UserRegisterService userRegisterService;
     @Autowired
     private IBZUSERService ibzuserService;
     @Autowired
@@ -47,67 +48,59 @@ public class UserQQRegisterResource {
     /**
      * 获取QQ互联平台创建的网站应用appid
      */
-    @GetMapping(value = "/uaa/getQQAppId")
-    public ResponseEntity<JSONObject> getQQAppId() {
+    @GetMapping(value = {"/uaa/getQQAppId","/uaa/open/qq/access_token","/uaa/open/qq/appid"})
+    public ResponseEntity<JSONObject> getQQAppId(@RequestParam(value = "id",required = false) String id) {
         JSONObject obj = new JSONObject();
-        SysOpenAccess openAccess = openAccessService.getById("qq");
+        SysOpenAccess openAccess = userQQRegisterService.getOpenAccess(id);
         if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
             return ResponseEntity.ok(obj);
         String appId = openAccess.getAccessKey();// qq互联appid
         if (!StringUtils.isEmpty(appId)) {
             obj.put("appid", appId);
+            obj.put("corp_id",openAccess.getRegionId());
+            obj.put("redirect_uri",openAccess.getRedirectUri());
         }
 
 
         return ResponseEntity.ok(obj);
     }
 
+
     /**
-     * 根据code查QQ用户
+     * 根据code查qq用户
      *
      * @param param
      * @return
      */
     @PostMapping(value = "/uaa/queryQQUserByCode")
-    public ResponseEntity<JSONObject> queryQQUserByCode(@RequestBody JSONObject param) {
-        JSONObject object = new JSONObject();
+    public ResponseEntity<JSONObject> queryQQUserByCode(@RequestParam(value = "id",required = false) String id,@RequestParam(value = "code",required = false) String tmpcode,@RequestBody JSONObject param) {
+
         // 空校验
         String code = param.getString("code");
         if (StringUtils.isEmpty(code))
+            code = tmpcode;
+        if (StringUtils.isEmpty(code))
             throw new BadRequestAlertException("code为空", "UserQQRegisterResource", "");
 
-        //　从数据库中获取qq互联信息
-        SysOpenAccess openAccess = openAccessService.getById("qq");
-        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
-            throw new BadRequestAlertException("未找到配置", "UserQQRegisterResource", "");
-        String appId = openAccess.getAccessKey();// qq互联appid
-        String appSecret = openAccess.getSecretKey();// qq互联appkey
-        String redirectUri = openAccess.getRedirectUri();// qq互联应用回调地址
+        return ResponseEntity.ok().body(getUserBySnsCode(id,code));
+    }
 
-        // 通过code获取QQ用户信息
-        String openid = null;
-        String nickname = null;
-        JSONObject returnObj = userQQRegisterService.requestQQUserByCode(code, redirectUri, appId, appSecret);
-        if (!StringUtils.isEmpty(returnObj) && !returnObj.containsKey("errcode")) {
-            openid = returnObj.getString("openid");
-            nickname = returnObj.getString("nickname");
-            object.put("openid", openid);
-            object.put("nickname", nickname);
-        }
+    @GetMapping(value = "/uaa/open/qq/sns/{code}")
+    public ResponseEntity<JSONObject> getUserBySnsToken(@PathVariable(value = "code") String code, @RequestParam(value = "id",required = false) String id) {
+        if (StringUtils.isEmpty(code))
+            throw new BadRequestAlertException("code为空", "UserQQRegisterResource", "");
 
-        // 根据openid查用户授权信息
-        SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>query().eq("identifier", openid));
-        // 该QQ用户注册过账号，登录系统
-        if (!StringUtils.isEmpty(userAuth)) {
-            IBZUSER ibzuser = ibzuserService.getById(userAuth.getUserid());
-            JSONObject ibzuserObj = new JSONObject();
-            ibzuserObj.put("loginname", ibzuser.getLoginname());
-            ibzuserObj.put("password", ibzuser.getPassword());
-            object.put("ibzuser", ibzuserObj);
+        return ResponseEntity.ok().body(getUserBySnsCode(id,code));
+    }
 
+    private JSONObject getUserBySnsCode(String id,String code)
+    {
+        JSONObject object = userQQRegisterService.getUserBySnsToken(id,code);
+        if (!StringUtils.isEmpty(object.getString("username"))) {
+            String username = object.getString("username");
             // 生成登录token信息
-            userDetailsService.resetByUsername(ibzuser.getLoginname());
-            AuthenticationUser user = userDetailsService.loadUserByLogin(ibzuser.getLoginname(), ibzuser.getPassword());
+            userDetailsService.resetByUsername(username);
+            AuthenticationUser user = userDetailsService.loadUserByUsername(username);
             final String token = jwtTokenUtil.generateToken(user);
             AuthenticationUser user2 = new AuthenticationUser();
             CachedBeanCopier.copy(user, user2);
@@ -116,8 +109,7 @@ public class UserQQRegisterResource {
             object.put("token", token);
             object.put("user", user2);
         }
-
-        return ResponseEntity.ok().body(object);
+        return object;
     }
 
 
@@ -127,71 +119,55 @@ public class UserQQRegisterResource {
      * @param param
      * @return
      */
-    @PostMapping(value = "/uaa/bindQQtoRegister")
-    public ResponseEntity<JSONObject> bindQQtoRegister(@RequestBody JSONObject param) {
-        JSONObject object = new JSONObject();
+    @PostMapping(value = {"/uaa/bindQQtoRegister","/uaa/open/qq/bind"})
+    public ResponseEntity<AuthenticationInfo> bindQQToRegister(@RequestBody JSONObject param) {
+
         // 空校验
         String loginname = param.getString("loginname");
         String password = param.getString("password");
-        String code = param.getString("code");
-        String state = param.getString("state");
         String openid = param.getString("openid");
         String nickname = param.getString("nickname");
-
+        String personname = param.getString("personname");
+        String phone = param.getString("phone");
+        String email = param.getString("email");
+        String domains = param.getString("domains");
         if (StringUtils.isEmpty(loginname))
             throw new BadRequestAlertException("用户名为空", "UserQQRegisterResource", "");
         if (StringUtils.isEmpty(password))
             throw new BadRequestAlertException("密码为空", "UserQQRegisterResource", "");
-        if (StringUtils.isEmpty(code))
-            throw new BadRequestAlertException("QQ授权code为空", "UserQQRegisterResource", "");
-        if (StringUtils.isEmpty(state))
-            throw new BadRequestAlertException("QQ授权state为空", "UserQQRegisterResource", "");
         if (StringUtils.isEmpty(openid))
-            throw new BadRequestAlertException("QQ信息openid为空", "UserWechatRegisterResource", "");
-        if (StringUtils.isEmpty(nickname))
-            throw new BadRequestAlertException("QQ信息nickname为空", "UserWechatRegisterResource", "");
+            throw new BadRequestAlertException("QQ信息openid为空", "UserQQRegisterResource", "");
 
-        // 检查用户名是否已被注册
-        List<IBZUSER> ibzusers = ibzuserService.list(Wrappers.<IBZUSER>query().eq("loginname", loginname));
-        if (ibzusers.size() > 0)
-            throw new BadRequestAlertException("该用户名已被注册", "UserQQRegisterResource", "");
 
-        // QQ用户注册
+        // 微信用户注册
         IBZUSER ibzuser = new IBZUSER();
-        String uuid = UUID.randomUUID().toString();
         ibzuser.setPassword(password);
         ibzuser.setLoginname(loginname);
-        ibzuser.setUserid("qq-" + uuid);
-        ibzuser.setPersonname(nickname);
+        ibzuser.setPersonname(StringUtils.isEmpty(personname)?nickname:personname);
         ibzuser.setNickname(nickname);
-        userQQRegisterService.toRegister(ibzuser);
-        // 创建QQ用户授权信息
+        ibzuser.setPhone(phone);
+        ibzuser.setEmail(email);
+        ibzuser.setDomains(domains);
+
         SysUserAuth userAuth = new SysUserAuth();
-        userAuth.setUserid(ibzuser.getUserid());
         userAuth.setIdentifier(openid);
         userAuth.setIdentityType("qq");
-        userQQRegisterService.toCreateUserAuth(userAuth);
 
-        // 注册成功，登录系统
-        if (!StringUtils.isEmpty(ibzuser)) {
-            JSONObject ibzuserObj = new JSONObject();
-            ibzuserObj.put("loginname", ibzuser.getLoginname());
-            ibzuserObj.put("password", ibzuser.getPassword());
-            object.put("ibzuser", ibzuserObj);
-        }
+        userRegisterService.toRegister(ibzuser,userAuth);
+
+
 
         //　生成登录token信息
-        userDetailsService.resetByUsername(ibzuser.getLoginname());
-        AuthenticationUser user = userDetailsService.loadUserByLogin(ibzuser.getLoginname(), ibzuser.getPassword());
+        userDetailsService.resetByUsername(ibzuser.getLoginname()+(StringUtils.isEmpty(ibzuser.getDomains())?"":("|"+ibzuser.getDomains())));
+        AuthenticationUser user = userDetailsService.loadUserByUsername(ibzuser.getLoginname()+(StringUtils.isEmpty(ibzuser.getDomains())?"":("|"+ibzuser.getDomains())));
         final String token = jwtTokenUtil.generateToken(user);
         AuthenticationUser user2 = new AuthenticationUser();
         CachedBeanCopier.copy(user, user2);
         user2.setAuthorities(null);
         user2.setPermissionList(null);
-        object.put("token", token);
-        object.put("user", user2);
 
-        return ResponseEntity.ok().body(object);
+
+        return ResponseEntity.ok().body(new AuthenticationInfo(token,user2));
     }
 
 }

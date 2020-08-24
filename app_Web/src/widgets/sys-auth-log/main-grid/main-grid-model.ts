@@ -89,57 +89,63 @@ export default class MainModel {
       {
         name: 'n_username_like',
         prop: 'n_username_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_personname_like',
         prop: 'n_personname_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_authcode_eq',
         prop: 'n_authcode_eq',
-        dataType: 'SSCODELIST',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_authtime_gtandeq',
         prop: 'n_authtime_gtandeq',
-        dataType: 'DATETIME',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_authtime_ltandeq',
         prop: 'n_authtime_ltandeq',
-        dataType: 'DATETIME',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_domain_like',
         prop: 'n_domain_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
 
         {
           name:'size',
-          prop:'size'
+          prop:'size',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'query',
-          prop:'query'
+          prop:'query',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'filter',
-          prop:'filter'
+          prop:'filter',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'page',
-          prop:'page'
+          prop:'page',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'sort',
-          prop:'sort'
+          prop:'sort',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'srfparentdata',
-          prop:'srfparentdata'
+          prop:'srfparentdata',
+          dataType: 'QUERYPARAM'
         },
         // 前端新增修改标识，新增为"0",修改为"1"或未设值
         {

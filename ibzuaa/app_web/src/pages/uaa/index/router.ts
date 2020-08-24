@@ -378,60 +378,75 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-user-grid-view/sys-user-grid-view.vue'),
                 },
             {
-                path: 'sys_user_roleredirectview/:sys_user_roleredirectview?',
+                path: 'sysuserroles/:sysuserrole?/redirectview/:redirectview?',
                 meta: {
                     caption: 'entities.sysuserrole.views.redirectview.caption',
                     info:'',
+                    viewType: 'REDIRECTVIEW',
                     parameters: [
-                        { pathName: 'sys_user_roleredirectview', parameterName: 'sys_user_roleredirectview' },
+                        { pathName: 'index', parameterName: 'index' },
+                        { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
+                        { pathName: 'redirectview', parameterName: 'redirectview' },
                     ],
                     requireAuth: true,
                 },
                 component: () => import('@pages/uaa/sys-user-roleredirect-view/sys-user-roleredirect-view.vue'),
             },
             {
-                path: 'sysrolepermissionredirectview/:sysrolepermissionredirectview?',
+                path: 'sysrolepermissions/:sysrolepermission?/redirectview/:redirectview?',
                 meta: {
                     caption: 'entities.sysrolepermission.views.redirectview.caption',
                     info:'',
+                    viewType: 'REDIRECTVIEW',
                     parameters: [
-                        { pathName: 'sysrolepermissionredirectview', parameterName: 'sysrolepermissionredirectview' },
+                        { pathName: 'index', parameterName: 'index' },
+                        { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
+                        { pathName: 'redirectview', parameterName: 'redirectview' },
                     ],
                     requireAuth: true,
                 },
                 component: () => import('@pages/uaa/sys-role-permission-redirect-view/sys-role-permission-redirect-view.vue'),
             },
             {
-                path: 'sys_userredirectview/:sys_userredirectview?',
+                path: 'sysusers/:sysuser?/redirectview/:redirectview?',
                 meta: {
                     caption: 'entities.sysuser.views.redirectview.caption',
                     info:'',
+                    viewType: 'REDIRECTVIEW',
                     parameters: [
-                        { pathName: 'sys_userredirectview', parameterName: 'sys_userredirectview' },
+                        { pathName: 'index', parameterName: 'index' },
+                        { pathName: 'sysusers', parameterName: 'sysuser' },
+                        { pathName: 'redirectview', parameterName: 'redirectview' },
                     ],
                     requireAuth: true,
                 },
                 component: () => import('@pages/uaa/sys-userredirect-view/sys-userredirect-view.vue'),
             },
             {
-                path: 'sys_roleredirectview/:sys_roleredirectview?',
+                path: 'sysroles/:sysrole?/redirectview/:redirectview?',
                 meta: {
                     caption: 'entities.sysrole.views.redirectview.caption',
                     info:'',
+                    viewType: 'REDIRECTVIEW',
                     parameters: [
-                        { pathName: 'sys_roleredirectview', parameterName: 'sys_roleredirectview' },
+                        { pathName: 'index', parameterName: 'index' },
+                        { pathName: 'sysroles', parameterName: 'sysrole' },
+                        { pathName: 'redirectview', parameterName: 'redirectview' },
                     ],
                     requireAuth: true,
                 },
                 component: () => import('@pages/uaa/sys-roleredirect-view/sys-roleredirect-view.vue'),
             },
             {
-                path: 'sys_permissionredirectview/:sys_permissionredirectview?',
+                path: 'syspermissions/:syspermission?/redirectview/:redirectview?',
                 meta: {
                     caption: 'entities.syspermission.views.redirectview.caption',
                     info:'',
+                    viewType: 'REDIRECTVIEW',
                     parameters: [
-                        { pathName: 'sys_permissionredirectview', parameterName: 'sys_permissionredirectview' },
+                        { pathName: 'index', parameterName: 'index' },
+                        { pathName: 'syspermissions', parameterName: 'syspermission' },
+                        { pathName: 'redirectview', parameterName: 'redirectview' },
                     ],
                     requireAuth: true,
                 },
@@ -802,5 +817,10 @@ const router = new Router({
         },
     ],
 });
-
+// 解决路由跳转路由重复时报错
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location: any) {
+    let result: any = originalPush.call(this, location);
+    return result.catch((err: any) => err);
+}
 export default router;

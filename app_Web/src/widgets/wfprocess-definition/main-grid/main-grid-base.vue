@@ -559,7 +559,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * 选中行数据
      *
      * @type {any[]}
-     * @memberof Main
+     * @memberof MainBase
      */
     public selections: any[] = [];
 
@@ -567,9 +567,17 @@ export default class MainBase extends Vue implements ControlInterface {
      * 拦截行选中
      *
      * @type {boolean}
-     * @memberof Main
+     * @memberof MainBase
      */
     public stopRowClick: boolean = false;
+
+    /**
+     * 当前编辑行数据
+     *
+     * @type {boolean}
+     * @memberof MainBase
+     */
+    public curEditRowData:any;
 
 
 
@@ -620,7 +628,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: 'DefinitionKey',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.definitionkey',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -628,7 +636,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '流程定义名称',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.definitionname',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -636,7 +644,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '系统标识',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.pssystemid',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -644,7 +652,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '模型版本',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.modelversion',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -652,7 +660,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '模型是否启用',
             langtag: 'entities.wfprocessdefinition.main_grid.columns.modelenable',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
     ]
@@ -691,6 +699,15 @@ export default class MainBase extends Vue implements ControlInterface {
 
     /**
      * 属性值规则
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public deRules:any = {
+    };
+
+    /**
+     * 值规则集合
      *
      * @type {*}
      * @memberof MainBase
@@ -1474,7 +1491,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     get adaptiveState(): boolean {
-        return !this.allColumns.find((column: any) => column.show && Object.is(column.util, 'STAR'));
+        return !this.allColumns.find((column: any) => column.show && Object.is(column.unit, 'STAR'));
     }
 
     /**
@@ -1620,6 +1637,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 row.hasUpdated = true;
             }
         }
+        this.curEditRowData = row;
         this.validate(property,row,rowIndex);
     }
 
@@ -1716,6 +1734,108 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public updateDefault(row: any){                    
     }
+
+    /**
+     * 校验属性值规则
+     *
+     * @public
+     * @param {{ name: string }} { name }
+     * @memberof MainBase
+     */
+    public verifyDeRules(name:string,rule:any = this.deRules,op:string = "AND",value:any) :{isPast:boolean}{
+        let falg:any = {};
+        if(!rule || !rule[name]){
+            return falg;
+        }
+        let opValue = op == 'AND'? true :false;
+        let startOp = (val:boolean)=>{
+            if(falg.isPast){
+                if(opValue){
+                    falg.isPast = falg && val;
+                }else{
+                    falg.isPast = falg || val;
+                }
+            }else{
+                falg.isPast = val;
+            }
+        }
+        rule[name].forEach((item:any) => {
+            // 常规规则
+            if(item.type == 'SIMPLE'){
+                startOp(!this.$verify.checkFieldSimpleRule(value,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.curEditRowData,item.isKeyCond));
+            }
+            // 数值范围
+            if(item.type == 'VALUERANGE2'){
+                startOp( !this.$verify.checkFieldValueRangeRule(value,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
+            }
+            // 正则式
+            if (item.type == "REGEX") {
+                startOp(!this.$verify.checkFieldRegExRule(value,item.regExCode,item.ruleInfo,item.isKeyCond));
+            }
+            // 长度
+            if (item.type == "STRINGLENGTH") {
+                startOp(!this.$verify.checkFieldStringLengthRule(value,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
+            }
+            // 系统值规则
+            if(item.type == "SYSVALUERULE") {
+                startOp(!this.$verify.checkFieldSysValueRule(value,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
+            }
+            // 分组
+            if(item.type == 'GROUP'){
+                falg = this.verifyDeRules('group',item,"AND",value)
+                if(item.isNotMode){
+                   falg.isPast = !falg.isPast;
+                }
+            }
+            
+        });
+        if(!falg.hasOwnProperty("isPast")){
+            falg.isPast = true;
+        }
+        if(!value){
+           falg.isPast = true;
+        }
+        return falg;
+    }
+
+    /**
+     * 工作流提交
+     *
+     * @param {*} [data={}]
+     * @param {*} [localdata={}]
+     * @returns {Promise<any>}
+     * @memberof MainBase
+     */
+    public async submitbatch(data: any,localdata:any): Promise<any> {
+        return new Promise((resolve: any, reject: any) => {
+        const _this: any = this;
+        const arg: any = data;
+        const result: Promise<any> = this.service.submitbatch(_this.WFSubmitAction, JSON.parse(JSON.stringify(this.context)),arg,localdata,this.showBusyIndicator);
+        result.then((response: any) => {
+            if (!response || response.status !== 200) {
+                if(response.data){
+                    this.$Notice.error({ title: '', desc: (this.$t('app.formpage.workflow.submiterror') as string) + ', ' + response.data.message });
+                }
+                return;
+            }
+            this.$Notice.info({ title: '', desc: (this.$t('app.formpage.workflow.submitsuccess') as string) });
+            resolve(response);
+        }).catch((response: any) => {
+            if (response && response.status && response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                reject(response);
+                return;
+            }
+            if (!response || !response.status || !response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
+                reject(response);
+                return;
+            }
+            reject(response);
+        });
+        })
+    }
+
 }
 </script>
 

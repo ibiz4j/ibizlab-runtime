@@ -830,6 +830,32 @@ export default class EntityService {
     }
 
     /**
+     * GetWFLinks接口方法(根据当前步骤和任务获取批量操作路径)
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof EntityService
+     */   
+    public async getWFLinks(context: any = {},data: any = {}, isloading?: boolean):Promise<any>{
+        return Http.getInstance().get(`/wfcore/${this.SYSTEMNAME}-app-${this.APPNAME}/${this.APPDENAME}/process-definitions/${data['processDefinitionKey']}/usertasks/${data['userTaskId']}/ways`);
+    }
+
+    /**
+     * wfSubmitBatch接口方法(批量提交)
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof EntityService
+     */   
+    public async wfSubmitBatch(context: any = {},data: any = {},localdata:any,isloading?: boolean):Promise<any>{
+        return Http.getInstance().post(`/wfcore/${this.SYSTEMNAME}-app-${this.APPNAME}/${this.APPDENAME}/process-definitions/${localdata['processDefinitionKey']}/usertasks/${localdata['taskDefinitionKey']}/ways/${localdata['sequenceFlowId']}/submit`,data);
+    }
+
+    /**
      * GetWFHistory接口方法(根据业务主键获取工作流程记录)
      *
      * @param {*} [context={}]

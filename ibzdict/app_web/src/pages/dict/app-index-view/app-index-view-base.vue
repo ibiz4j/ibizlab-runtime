@@ -44,6 +44,7 @@
                         <app-lang style='font-size: 15px;padding: 0 10px;'></app-lang>
                         <app-orgsector></app-orgsector>
                         <app-user></app-user>
+                        <app-message-popover></app-message-popover>
                         <app-lock-scren />
                         <app-full-scren />
                         <app-theme style="width:45px;display: flex;justify-content: center;"></app-theme>
@@ -297,6 +298,9 @@ export default class AppIndexViewBase extends Vue {
         for(let key in this.context){
             delete this.context[key];
         }
+        if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
+            Object.assign(this.context,this.$store.getters.getAppData().context);
+        }
         if (!this.viewDefaultUsage && this.viewdata && !Object.is(this.viewdata, '')) {
             Object.assign(this.context, JSON.parse(this.viewdata));
             if(this.context && this.context.srfparentdename){
@@ -304,9 +308,6 @@ export default class AppIndexViewBase extends Vue {
             }
             if(this.context && this.context.srfparentkey){
                 Object.assign(this.viewparams,{srfparentkey:this.context.srfparentkey});
-            }
-            if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
-                Object.assign(this.context,this.$store.getters.getAppData().context);
             }
             this.handleCustomViewData();
             return;
@@ -323,9 +324,6 @@ export default class AppIndexViewBase extends Vue {
             });
         });
         this.$viewTool.formatRouteParams(tempValue,this.$route,this.context,this.viewparams);
-        if(this.$store.getters.getAppData() && this.$store.getters.getAppData().context){
-            Object.assign(this.context,this.$store.getters.getAppData().context);
-        }
         this.handleCustomViewData();
         //初始化导航数据
         this.initNavDataWithRoute();

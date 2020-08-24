@@ -358,5 +358,10 @@ const router = new Router({
         },
     ],
 });
-
+// 解决路由跳转路由重复时报错
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location: any) {
+    let result: any = originalPush.call(this, location);
+    return result.catch((err: any) => err);
+}
 export default router;

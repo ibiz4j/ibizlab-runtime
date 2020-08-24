@@ -614,7 +614,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '用户',
             langtag: 'entities.wfmember.main_grid.columns.personname',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -622,7 +622,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '单位',
             langtag: 'entities.wfmember.main_grid.columns.orgname',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -630,7 +630,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '主部门',
             langtag: 'entities.wfmember.main_grid.columns.mdeptname',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
         {
@@ -638,7 +638,7 @@ export default class MainBase extends Vue implements ControlInterface {
             label: '用户组',
             langtag: 'entities.wfmember.main_grid.columns.groupname',
             show: true,
-            util: 'PX',
+            unit: 'PX',
             isEnableRowEdit: false,
         },
     ]
@@ -1461,7 +1461,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     get adaptiveState(): boolean {
-        return !this.allColumns.find((column: any) => column.show && Object.is(column.util, 'STAR'));
+        return !this.allColumns.find((column: any) => column.show && Object.is(column.unit, 'STAR'));
     }
 
     /**
@@ -1766,6 +1766,44 @@ export default class MainBase extends Vue implements ControlInterface {
            falg.isPast = true;
         }
         return falg;
+    }
+
+    /**
+     * 工作流提交
+     *
+     * @param {*} [data={}]
+     * @param {*} [localdata={}]
+     * @returns {Promise<any>}
+     * @memberof MainBase
+     */
+    public async submitbatch(data: any,localdata:any): Promise<any> {
+        return new Promise((resolve: any, reject: any) => {
+        const _this: any = this;
+        const arg: any = data;
+        const result: Promise<any> = this.service.submitbatch(_this.WFSubmitAction, JSON.parse(JSON.stringify(this.context)),arg,localdata,this.showBusyIndicator);
+        result.then((response: any) => {
+            if (!response || response.status !== 200) {
+                if(response.data){
+                    this.$Notice.error({ title: '', desc: (this.$t('app.formpage.workflow.submiterror') as string) + ', ' + response.data.message });
+                }
+                return;
+            }
+            this.$Notice.info({ title: '', desc: (this.$t('app.formpage.workflow.submitsuccess') as string) });
+            resolve(response);
+        }).catch((response: any) => {
+            if (response && response.status && response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                reject(response);
+                return;
+            }
+            if (!response || !response.status || !response.data) {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
+                reject(response);
+                return;
+            }
+            reject(response);
+        });
+        })
     }
 
 }

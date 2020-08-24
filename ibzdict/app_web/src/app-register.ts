@@ -83,6 +83,10 @@ import UpdatePwd from './components/app-update-password/app-update-password.vue'
 import AppMenuItem from './components/app-menu-item/app-menu-item.vue'
 import AppFullScren from './components/app-full-scren/app-full-scren.vue'
 import AppLockScren from './components/app-lock-scren/app-lock-scren.vue'
+import ActionTimeline from './components/action-timeline/action-timeline.vue'
+import CronEditor from './components/cron-editor/cron-editor.vue'
+import AppMessagePopover from './components/app-message-popover/app-message-popover.vue'
+
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
 // 全局挂载实体权限服务注册中心
@@ -179,5 +183,8 @@ export const AppComponents = {
         v.component('context-menu-drag',ContextMenuDrag);
         v.component('app-update-password',UpdatePwd);
         v.component('app-menu-item', AppMenuItem);
+        v.component('action-timeline', ActionTimeline);
+        v.component('cron-editor', CronEditor);
+        v.component('app-message-popover', AppMessagePopover);
     },
 };

@@ -119,52 +119,58 @@ export default class MainModel {
       {
         name: 'n_deptcode_like',
         prop: 'n_deptcode_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_deptname_like',
         prop: 'n_deptname_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_orgid_eq',
         prop: 'n_orgid_eq',
-        dataType: 'PICKUP',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_pdeptid_eq',
         prop: 'n_pdeptid_eq',
-        dataType: 'PICKUP',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_bcode_like',
         prop: 'n_bcode_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
 
         {
           name:'size',
-          prop:'size'
+          prop:'size',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'query',
-          prop:'query'
+          prop:'query',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'filter',
-          prop:'filter'
+          prop:'filter',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'page',
-          prop:'page'
+          prop:'page',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'sort',
-          prop:'sort'
+          prop:'sort',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'srfparentdata',
-          prop:'srfparentdata'
+          prop:'srfparentdata',
+          dataType: 'QUERYPARAM'
         },
         // 前端新增修改标识，新增为"0",修改为"1"或未设值
         {

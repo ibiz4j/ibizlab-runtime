@@ -121,42 +121,48 @@ export default class OptionsModel {
       {
         name: 'n_cname_like',
         prop: 'n_cname_like',
-        dataType: 'PICKUPTEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_val_like',
         prop: 'n_val_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
       {
         name: 'n_label_like',
         prop: 'n_label_like',
-        dataType: 'TEXT',
+        dataType: 'QUERYPARAM'
       },
 
         {
           name:'size',
-          prop:'size'
+          prop:'size',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'query',
-          prop:'query'
+          prop:'query',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'filter',
-          prop:'filter'
+          prop:'filter',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'page',
-          prop:'page'
+          prop:'page',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'sort',
-          prop:'sort'
+          prop:'sort',
+          dataType: 'QUERYPARAM'
         },
         {
           name:'srfparentdata',
-          prop:'srfparentdata'
+          prop:'srfparentdata',
+          dataType: 'QUERYPARAM'
         },
         // 前端新增修改标识，新增为"0",修改为"1"或未设值
         {

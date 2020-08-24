@@ -1,18 +1,27 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
+import cn.ibizlab.core.uaa.domain.SysOpenAccess;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
+import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
+import cn.ibizlab.util.errors.InternalServerErrorException;
 import cn.ibizlab.util.helper.HttpUtils;
 import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.dingtalk.api.DefaultDingTalkClient;
+import com.dingtalk.api.request.OapiSnsGetuserinfoBycodeRequest;
+import com.dingtalk.api.response.OapiSnsGetuserinfoBycodeResponse;
+import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 
 /**
  * 实体[IBZUSER] 微信用户注册接口实现
@@ -26,92 +35,78 @@ public class UserWechatRegisterService {
     @Autowired
     private ISysUserAuthService sysUserAuthService;
 
-    /**
-     * 注册
-     *
-     * @param ibzuser
-     */
-    public void toRegister(IBZUSER ibzuser) {
-        // 创建ibzuser
-        boolean flag = ibzuserService.save(ibzuser);
-        if (!flag) {
-            throw new BadRequestAlertException("注册失败", "UserWechatRegisterService", "");
-        }
+
+    @Autowired
+    private ISysOpenAccessService sysOpenAccessService;
+
+    public SysOpenAccess getOpenAccess(String id)
+    {
+        return getOpenAccess(id,true);
     }
+    public SysOpenAccess getOpenAccess(String id,boolean throwEx)
+    {
+        final String accessid = StringUtils.isEmpty(id)?"wechat":id;
+        SysOpenAccess sysOpenAccess=sysOpenAccessService.getOne(Wrappers.<SysOpenAccess>lambdaQuery().eq(SysOpenAccess::getOpenType,"wechat").
+                and(wrapper -> wrapper.eq(SysOpenAccess::getAccessKey,accessid).or().eq(SysOpenAccess::getId,accessid)),false);
+        if((sysOpenAccess==null|| (sysOpenAccess.getDisabled()!=null && sysOpenAccess.getDisabled()==1))&&throwEx)
+            throw new BadRequestAlertException("获取接入配置失败","UserWechatRegisterService","");
 
 
-    /**
-     * 创建微信用户授权信息
-     * @param userAuth
-     */
-    public void toCreateUserAuth(SysUserAuth userAuth) {
-        // 创建用户授权信息
-        boolean flag = sysUserAuthService.create(userAuth);
-        if (!flag) {
-            throw new BadRequestAlertException("保存用户授权信息失败", "UserWechatRegisterService", "");
-        }
+        return sysOpenAccess;
     }
 
     /**
-     * 通过code获取微信用户信息
+     * 微信服务端通过临时授权码code获取授权用户的个人信息
      *
-     * @param code
-     * @param state
-     * @param appId
-     * @param appSecret
      * @return
      */
-    public JSONObject requestWechatUserByCode(String code, String state, String appId, String appSecret) {
+    public JSONObject getUserBySnsToken(String id,String requestAuthCode) {
         JSONObject returnObj = null;
+
+        SysOpenAccess openAccess = getOpenAccess(id);
+        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
+            throw new BadRequestAlertException("未找到配置", "UserWechatRegisterService", "");
+
+
         try {
+
             // 1.根据code获取access_token、openid、refresh_token
             String getAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
-                    "appid=" + appId +
-                    "&secret=" + appSecret +
-                    "&code=" + code +
+                    "appid=" + openAccess.getAccessKey() +
+                    "&secret=" + openAccess.getSecretKey() +
+                    "&code=" + requestAuthCode +
                     "&grant_type=authorization_code";
-            JSONObject responseObj = JSONObject.parseObject(HttpUtils.get(getAccessTokenUrl, null, null));
-            if (!responseObj.containsKey("access_token") && !responseObj.containsKey("openid")) {
+            returnObj = JSONObject.parseObject(HttpUtils.get(getAccessTokenUrl, null, null));
+            if (!returnObj.containsKey("access_token") && !returnObj.containsKey("openid")) {
                 throw new BadRequestAlertException("微信服务端获取access_token失败!", "UserWechatRegisterService", "");
             }
-            String access_token = responseObj.getString("access_token");
-            String openid = responseObj.getString("openid");
-            String refresh_token = responseObj.getString("refresh_token");
+            String access_token = returnObj.getString("access_token");
+            String openid = returnObj.getString("openid");
+            String refresh_token = returnObj.getString("refresh_token");
+            String unionid = returnObj.getString("unionid");
 
-            // 2.检验授权凭证（access_token）是否有效，无效则需要刷新access_token
-            String checkAccessTokenUrl = "https://api.weixin.qq.com/sns/auth?" +
-                    "access_token=" + access_token +
-                    "&openid=" + openid;
-            JSONObject responseObj2 = JSONObject.parseObject(HttpUtils.get(checkAccessTokenUrl, null, null));
-            if (responseObj2.getInteger("errcode") != 0) {
-                // access_token已失效，使用refresh_token刷新access_token
-                String refreshAccess_token = "https://api.weixin.qq.com/sns/oauth2/refresh_token?" +
-                        "appid=" + appId +
-                        "&grant_type=refresh_token" +
-                        "&refresh_token=" + refresh_token;
-                JSONObject responseObj3 = JSONObject.parseObject(HttpUtils.get(refreshAccess_token, null, null));
-                if (!responseObj3.containsKey("access_token") || !responseObj3.containsKey("openid")) {
-                    throw new BadRequestAlertException("微信服务端刷新access_token失败!", "UserWechatRegisterService", "");
+
+            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"webchat")
+                    .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, openid).or().eq(SysUserAuth::getIdentifier, unionid)
+                    ),false);
+
+            IBZUSER user = null;
+            // 该wechat用户注册过账号，登录系统
+            if (userAuth!=null) {
+                user = ibzuserService.getById(userAuth.getUserid());
+                if (user == null)
+                    user = ibzuserService.getOne(Wrappers.<IBZUSER>lambdaQuery().eq(IBZUSER::getUserid,openid).or().eq(IBZUSER::getUsername,openid),false);
+
+                if(user!=null)
+                {
+                    returnObj.put("username",user.getLoginname()+(StringUtils.isEmpty(user.getDomains())?"":("|"+user.getDomains())));
                 }
-                // 重新拿到access_token、openid、refresh_token
-                access_token = responseObj3.getString("access_token");
-                openid = responseObj3.getString("openid");
-                refresh_token = responseObj3.getString("refresh_token");
+
             }
 
-            // 3.access_token有效，拉取用户信息
-            String getweChatUserInfoUrl = "https://api.weixin.qq.com/sns/userinfo?" +
-                    "access_token=" + access_token +
-                    "&openid=" + openid +
-                    "&lang=zh_CN";
-            returnObj = JSONObject.parseObject(HttpUtils.get(getweChatUserInfoUrl, null, null));
-            if (StringUtils.isEmpty(returnObj)) {
-                throw new BadRequestAlertException("微信服务端返回结果为空!", "UserWechatRegisterService", "");
-            } else if (!returnObj.containsKey("openid")) {
-                throw new BadRequestAlertException("获取微信用户信息失败!", "UserWechatRegisterService", "");
-            }
-        } catch (UnsupportedEncodingException e) {
-            throw new BadRequestAlertException("连接微信服务端失败!", "UserWechatRegisterService", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new InternalServerErrorException("获取user失败");
         }
 
         return returnObj;
