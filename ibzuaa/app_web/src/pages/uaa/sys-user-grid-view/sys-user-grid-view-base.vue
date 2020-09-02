@@ -202,7 +202,7 @@ export default class SysUserGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysUserGridViewBase
 	 */
-	public viewtag: string = 'cb64b5009e70f225a91046314f40977a';
+	public viewtag: string = '1ea24a0d62ab391e6dbff850a804d9b2';
 
 	/**
 	 * 自定义视图导航上下文集合

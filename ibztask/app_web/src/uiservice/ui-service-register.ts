@@ -39,10 +39,10 @@ export class UIServiceRegister {
      * @memberof UIServiceRegister
      */
     protected init(): void {
-                this.allUIService.set('jobsinfo', () => import('@/uiservice/jobs-info/jobs-info-ui-service'));
-        this.allUIService.set('jobslog', () => import('@/uiservice/jobs-log/jobs-log-ui-service'));
-        this.allUIService.set('jobslock', () => import('@/uiservice/jobs-lock/jobs-lock-ui-service'));
+                this.allUIService.set('jobslog', () => import('@/uiservice/jobs-log/jobs-log-ui-service'));
         this.allUIService.set('jobsregistry', () => import('@/uiservice/jobs-registry/jobs-registry-ui-service'));
+        this.allUIService.set('jobsinfo', () => import('@/uiservice/jobs-info/jobs-info-ui-service'));
+        this.allUIService.set('jobslock', () => import('@/uiservice/jobs-lock/jobs-lock-ui-service'));
     }
 
     /**

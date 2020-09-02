@@ -11,15 +11,7 @@ export default {
     updateman: "更新人",
   },
 	views: {
-		pickupgridview: {
-			caption: "系统角色",
-      		title: "角色选择表格视图",
-		},
-		editview2: {
-			caption: "角色",
-      		title: "角色",
-		},
-		editview: {
+		gridview: {
 			caption: "角色",
       		title: "角色",
 		},
@@ -31,7 +23,15 @@ export default {
 			caption: "系统角色",
       		title: "角色数据重定向视图",
 		},
-		gridview: {
+		editview: {
+			caption: "角色",
+      		title: "角色",
+		},
+		pickupgridview: {
+			caption: "系统角色",
+      		title: "角色选择表格视图",
+		},
+		editview2: {
 			caption: "角色",
       		title: "角色",
 		},

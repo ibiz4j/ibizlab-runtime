@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class SysOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysOpenAccess-Create-all')")
     @ApiOperation(value = "新建第三方认证平台", tags = {"第三方认证平台" },  notes = "新建第三方认证平台")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses")
-    @Transactional
     public ResponseEntity<SysOpenAccessDTO> create(@RequestBody SysOpenAccessDTO sysopenaccessdto) {
         SysOpenAccess domain = sysopenaccessMapping.toDomain(sysopenaccessdto);
 		sysopenaccessService.create(domain);
@@ -69,7 +67,6 @@ public class SysOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysOpenAccess-Update-all')")
     @ApiOperation(value = "更新第三方认证平台", tags = {"第三方认证平台" },  notes = "更新第三方认证平台")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysopenaccesses/{sysopenaccess_id}")
-    @Transactional
     public ResponseEntity<SysOpenAccessDTO> update(@PathVariable("sysopenaccess_id") String sysopenaccess_id, @RequestBody SysOpenAccessDTO sysopenaccessdto) {
 		SysOpenAccess domain  = sysopenaccessMapping.toDomain(sysopenaccessdto);
         domain .setId(sysopenaccess_id);
@@ -89,7 +86,6 @@ public class SysOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysOpenAccess-Remove-all')")
     @ApiOperation(value = "删除第三方认证平台", tags = {"第三方认证平台" },  notes = "删除第三方认证平台")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysopenaccesses/{sysopenaccess_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("sysopenaccess_id") String sysopenaccess_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysopenaccessService.remove(sysopenaccess_id));
     }

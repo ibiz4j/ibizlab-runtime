@@ -17,13 +17,13 @@ export default {
     create_time: "创建时间",
   },
 	views: {
-		gridview: {
-			caption: "任务信息",
-      		title: "任务信息表格视图",
-		},
 		editview: {
 			caption: "任务信息",
       		title: "任务信息编辑视图",
+		},
+		gridview: {
+			caption: "任务信息",
+      		title: "任务信息表格视图",
 		},
 	},
 	main_form: {
@@ -81,6 +81,16 @@ export default {
 		uiactions: {
 		},
 	},
+	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "保存",
+			tip: "保存",
+		},
+		deuiaction1: {
+			caption: "关闭",
+			tip: "关闭",
+		},
+	},
 	gridviewtoolbar_toolbar: {
 		deuiaction1: {
 			caption: "启动",
@@ -109,16 +119,6 @@ export default {
 		deuiaction7: {
 			caption: "过滤",
 			tip: "过滤",
-		},
-	},
-	editviewtoolbar_toolbar: {
-		tbitem3: {
-			caption: "保存",
-			tip: "保存",
-		},
-		deuiaction1: {
-			caption: "关闭",
-			tip: "关闭",
 		},
 	},
 };

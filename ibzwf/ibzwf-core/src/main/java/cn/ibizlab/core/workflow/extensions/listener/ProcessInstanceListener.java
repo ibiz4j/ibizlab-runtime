@@ -46,9 +46,9 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
     @Lazy
     WFCoreService wfCoreService;
 
-    @Autowired
-    @Lazy
-    IBZNotifyFeignClient notifyFeignClient;
+//    @Autowired
+//    @Lazy
+//    IBZNotifyFeignClient notifyFeignClient;
 
     @Override
     public void onEvent(FlowableEvent evt) {
@@ -209,8 +209,8 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                     msg.put("msgtypes",Integer.parseInt(templTypes));
                     msg.put("userids",userIds);
                     msg.put("templparams",activeData);
-                    notifyFeignClient.SendMsg(msg);
-                    log.info(String.format("成功向用户[%s]发送一条消息",userIds));
+//                    notifyFeignClient.SendMsg(msg);
+//                    log.info(String.format("成功向用户[%s]发送一条消息",userIds));
                 }
             }
         }

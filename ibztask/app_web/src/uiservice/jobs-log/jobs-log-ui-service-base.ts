@@ -89,8 +89,8 @@ export default class JobsLogUIServiceBase extends UIService {
      * @memberof  JobsLogUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'jobslogs'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'jobslogs'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'jobslogs'});
     }
 
     /**

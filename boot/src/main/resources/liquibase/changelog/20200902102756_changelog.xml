@@ -1,0 +1,75 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="mac (generated)" id="1599042482245-1">
+        <createTable tableName="IBZMSGBODY">
+            <column name="TEMPLATEID" type="VARCHAR(100)"/>
+            <column name="MSGTYPE" type="INT"/>
+            <column name="TOUSERS" type="VARCHAR(1000)"/>
+            <column name="TEMPLPARAMS" type="CLOB"/>
+            <column name="ISSEND" type="INT"/>
+            <column name="ISERROR" type="INT"/>
+            <column name="SUBJECT" type="VARCHAR(100)"/>
+            <column name="CONTENT" type="VARCHAR(100)"/>
+            <column name="MSGLINK" type="VARCHAR(100)"/>
+            <column name="USERDATA" type="VARCHAR(100)"/>
+            <column name="MSGID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_MSG_BODY_MSGID"/>
+            </column>
+            <column name="MSGNAME" type="VARCHAR(100)"/>
+            <column name="ERRORINFO" type="CLOB"/>
+            <column name="USERDATA2" type="VARCHAR(1000)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1599042482245-2">
+        <createTable tableName="IBZMSGTEMPL">
+            <column name="TID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_MSG_TEMPLATE_TID"/>
+            </column>
+            <column name="TEMPLATE_NAME" type="VARCHAR(100)"/>
+            <column name="TEMPLATE_TYPE" type="VARCHAR(100)"/>
+            <column name="CONTENT" type="VARCHAR(4000)"/>
+            <column name="TEMPLATE_ID" type="VARCHAR(100)"/>
+            <column name="TEMPLATE_URL" type="VARCHAR(1000)"/>
+            <column name="ACCESSID" type="VARCHAR(100)"/>
+            <column name="ACCESSNAME" type="VARCHAR(100)"/>
+            <column name="OPEN_TYPE" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1599042482245-3">
+        <preConditions onFail="MARK_RAN"  >
+            <not>
+                <tableExists tableName="IBZOPENACCESS" />
+            </not>
+        </preConditions>
+        <createTable tableName="IBZOPENACCESS">
+            <column name="ACCESSID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_MSG_OPEN_ACCESS_ACCESSID"/>
+            </column>
+            <column name="ACCESSNAME" type="VARCHAR(100)"/>
+            <column name="OPEN_TYPE" type="VARCHAR(100)"/>
+            <column name="ACCESS_KEY" type="VARCHAR(100)"/>
+            <column name="SECRET_KEY" type="VARCHAR(100)"/>
+            <column name="REGION_ID" type="VARCHAR(100)"/>
+            <column name="ACCESS_TOKEN" type="VARCHAR(1000)"/>
+            <column name="EXPIRES_TIME" type="TIMESTAMP"/>
+            <column name="DISABLED" type="INT"/>
+            <column name="REDIRECT_URI" type="VARCHAR(500)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1599042482245-4">
+        <preConditions onFail="MARK_RAN"  >
+            <not>
+                <tableExists tableName="IBZUSERAUTH" />
+            </not>
+        </preConditions>
+        <createTable tableName="IBZUSERAUTH">
+            <column name="AUTHID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_MSG_USER_ACCOUNT_AUTHID"/>
+            </column>
+            <column name="USERID" type="VARCHAR(100)"/>
+            <column name="IDENTITY_TYPE" type="VARCHAR(100)"/>
+            <column name="IDENTIFIER" type="VARCHAR(200)"/>
+            <column name="CREDENTIAL" type="VARCHAR(500)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

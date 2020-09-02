@@ -150,7 +150,7 @@ export default class DictOptionEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof DictOptionEditViewBase
 	 */
-	public viewtag: string = '8ad70084b5f98a26370b74da612d3f49';
+	public viewtag: string = '0986ae2314847b586b20edfbb40fc82b';
 
 	/**
 	 * 自定义视图导航上下文集合

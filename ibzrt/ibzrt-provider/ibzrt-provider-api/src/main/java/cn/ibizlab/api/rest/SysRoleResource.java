@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class SysRoleResource {
 
     @ApiOperation(value = "新建系统角色", tags = {"系统角色" },  notes = "新建系统角色")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles")
-
     public ResponseEntity<SysRoleDTO> create(@RequestBody SysRoleDTO sysroledto) {
         SysRole domain = sysroleMapping.toDomain(sysroledto);
 		sysroleService.create(domain);
@@ -67,7 +65,6 @@ public class SysRoleResource {
     @VersionCheck(entity = "sysrole" , versionfield = "updatedate")
     @ApiOperation(value = "更新系统角色", tags = {"系统角色" },  notes = "更新系统角色")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{sysrole_id}")
-
     public ResponseEntity<SysRoleDTO> update(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRoleDTO sysroledto) {
 		SysRole domain  = sysroleMapping.toDomain(sysroledto);
         domain .setRoleid(sysrole_id);
@@ -85,7 +82,6 @@ public class SysRoleResource {
 
     @ApiOperation(value = "删除系统角色", tags = {"系统角色" },  notes = "删除系统角色")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("sysrole_id") String sysrole_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysroleService.remove(sysrole_id));
     }

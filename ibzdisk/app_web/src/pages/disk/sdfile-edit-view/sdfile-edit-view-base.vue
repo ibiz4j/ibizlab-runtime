@@ -213,7 +213,7 @@ export default class SDFileEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SDFileEditViewBase
 	 */
-	public viewtag: string = 'd655c8b630fcdc664b330967c012950e';
+	public viewtag: string = '646581c57dbd5cf6c2570e4013f3adb8';
 
 	/**
 	 * 自定义视图导航上下文集合

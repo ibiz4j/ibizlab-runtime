@@ -1,10 +1,10 @@
-import wfremodel_zh_CN from '@locale/lanres/entities/wfremodel/wfremodel_zh_CN';
-import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
-import wfgroup_zh_CN from '@locale/lanres/entities/wfgroup/wfgroup_zh_CN';
-import wfuser_zh_CN from '@locale/lanres/entities/wfuser/wfuser_zh_CN';
 import wftask_zh_CN from '@locale/lanres/entities/wftask/wftask_zh_CN';
-import wfprocessdefinition_zh_CN from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_zh_CN';
+import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
+import wfuser_zh_CN from '@locale/lanres/entities/wfuser/wfuser_zh_CN';
+import wfgroup_zh_CN from '@locale/lanres/entities/wfgroup/wfgroup_zh_CN';
+import wfremodel_zh_CN from '@locale/lanres/entities/wfremodel/wfremodel_zh_CN';
 import wfsystem_zh_CN from '@locale/lanres/entities/wfsystem/wfsystem_zh_CN';
+import wfprocessdefinition_zh_CN from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
 import userCustom_zh_CN from '@locale/lanres/userCustom/userCustom_zh_CN';
@@ -222,13 +222,13 @@ export default {
         },
     },
     entities: {
-        wfremodel: wfremodel_zh_CN,
-        wfmember: wfmember_zh_CN,
-        wfgroup: wfgroup_zh_CN,
-        wfuser: wfuser_zh_CN,
         wftask: wftask_zh_CN,
-        wfprocessdefinition: wfprocessdefinition_zh_CN,
+        wfmember: wfmember_zh_CN,
+        wfuser: wfuser_zh_CN,
+        wfgroup: wfgroup_zh_CN,
+        wfremodel: wfremodel_zh_CN,
         wfsystem: wfsystem_zh_CN,
+        wfprocessdefinition: wfprocessdefinition_zh_CN,
     },
     components: components_zh_CN,
     codelist: codelist_zh_CN,

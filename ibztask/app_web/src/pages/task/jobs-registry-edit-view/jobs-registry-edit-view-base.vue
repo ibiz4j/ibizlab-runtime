@@ -150,7 +150,7 @@ export default class JobsRegistryEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof JobsRegistryEditViewBase
 	 */
-	public viewtag: string = '433753123a4269a61a7a13d22cf567de';
+	public viewtag: string = '56cc39a16e3269c082694b50f89338e3';
 
 	/**
 	 * 自定义视图导航上下文集合

@@ -1,10 +1,10 @@
-import ibzdeptmember_en_US from '@locale/lanres/entities/ibzdept-member/ibzdept-member_en_US';
-import ibzteammember_en_US from '@locale/lanres/entities/ibzteam-member/ibzteam-member_en_US';
-import ibzdepartment_en_US from '@locale/lanres/entities/ibzdepartment/ibzdepartment_en_US';
-import ibzemployee_en_US from '@locale/lanres/entities/ibzemployee/ibzemployee_en_US';
-import ibzorganization_en_US from '@locale/lanres/entities/ibzorganization/ibzorganization_en_US';
 import ibzpost_en_US from '@locale/lanres/entities/ibzpost/ibzpost_en_US';
+import ibzorganization_en_US from '@locale/lanres/entities/ibzorganization/ibzorganization_en_US';
 import ibzteam_en_US from '@locale/lanres/entities/ibzteam/ibzteam_en_US';
+import ibzdeptmember_en_US from '@locale/lanres/entities/ibzdept-member/ibzdept-member_en_US';
+import ibzdepartment_en_US from '@locale/lanres/entities/ibzdepartment/ibzdepartment_en_US';
+import ibzteammember_en_US from '@locale/lanres/entities/ibzteam-member/ibzteam-member_en_US';
+import ibzemployee_en_US from '@locale/lanres/entities/ibzemployee/ibzemployee_en_US';
 import components_en_US from '@locale/lanres/components/components_en_US';
 import codelist_en_US from '@locale/lanres/codelist/codelist_en_US';
 import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';
@@ -224,13 +224,13 @@ export default {
         },
     },
     entities: {
-        ibzdeptmember: ibzdeptmember_en_US,
-        ibzteammember: ibzteammember_en_US,
-        ibzdepartment: ibzdepartment_en_US,
-        ibzemployee: ibzemployee_en_US,
-        ibzorganization: ibzorganization_en_US,
         ibzpost: ibzpost_en_US,
+        ibzorganization: ibzorganization_en_US,
         ibzteam: ibzteam_en_US,
+        ibzdeptmember: ibzdeptmember_en_US,
+        ibzdepartment: ibzdepartment_en_US,
+        ibzteammember: ibzteammember_en_US,
+        ibzemployee: ibzemployee_en_US,
     },
     components: components_en_US,
     codelist: codelist_en_US,

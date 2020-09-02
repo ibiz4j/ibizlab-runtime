@@ -89,14 +89,14 @@ export default class IBZEmployeeUIServiceBase extends UIService {
      * @memberof  IBZEmployeeUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set(':',{viewname:'editgridview',srfappde:'ibzemployees'});
         this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'ibzemployees'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'ibzemployees'});
-        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'ibzemployees'});
-        this.allViewMap.set(':',{viewname:'optionview',srfappde:'ibzemployees'});
         this.allViewMap.set(':',{viewname:'changepwdview',srfappde:'ibzemployees'});
+        this.allViewMap.set(':',{viewname:'editgridview',srfappde:'ibzemployees'});
+        this.allViewMap.set(':',{viewname:'optionview',srfappde:'ibzemployees'});
         this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'ibzemployees'});
         this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'ibzemployees'});
+        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'ibzemployees'});
     }
 
     /**
@@ -113,6 +113,72 @@ export default class IBZEmployeeUIServiceBase extends UIService {
      * @memberof  IBZEmployeeUIServiceBase
      */  
     public initDeMainStateOPPrivsMap(){
+    }
+
+    /**
+     * 快速新建
+     *
+     * @param {any[]} args 当前数据
+     * @param {any} context 行为附加上下文
+     * @param {*} [params] 附加参数
+     * @param {*} [$event] 事件源
+     * @param {*} [xData]  执行行为所需当前部件
+     * @param {*} [actionContext]  执行行为上下文
+     * @param {*} [srfParentDeName] 父实体名称
+     * @returns {Promise<any>}
+     */
+    public async IBZEmployee_OpenNewCreateView(args: any[], context:any = {} ,params: any={}, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+    
+        let data: any = {};
+        let parentContext:any = {};
+        let parentViewParam:any = {};
+        const _this: any = actionContext;
+        const _args: any[] = Util.deepCopy(args);
+        const actionTarget: string | null = 'NONE';
+        if(_this.context){
+            parentContext = _this.context;
+        }
+        if(_this.viewparams){
+            parentViewParam = _this.viewparams;
+        }
+        context = UIActionTool.handleContextParam(actionTarget,_args,parentContext,parentViewParam,context);
+        data = UIActionTool.handleActionParam(actionTarget,_args,parentContext,parentViewParam,params);
+        context = Object.assign({},actionContext.context,context);
+        let parentObj:any = {srfparentdename:srfParentDeName?srfParentDeName:null,srfparentkey:srfParentDeName?context[srfParentDeName.toLowerCase()]:null};
+        Object.assign(data,parentObj);
+        Object.assign(context,parentObj);
+        let deResParameters: any[] = [];
+        if(context.ibzdepartment && true){
+            deResParameters = [
+            { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
+            ]
+        }
+        const parameters: any[] = [
+            { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
+        ];
+            const openPopupModal = (view: any, data: any) => {
+                let container: Subject<any> = actionContext.$appmodal.openModal(view, context, data);
+                container.subscribe((result: any) => {
+                    if (!result || !Object.is(result.ret, 'OK')) {
+                        return;
+                    }
+                    const _this: any = actionContext;
+                    if (xData && xData.refresh && xData.refresh instanceof Function) {
+                        xData.refresh(args);
+                    }
+                    if (this.IBZEmployee_OpenMainView && this.IBZEmployee_OpenMainView instanceof Function) {
+                        this.IBZEmployee_OpenMainView(result.datas,context, params, $event, xData,actionContext);
+                    }
+                    return result.datas;
+                });
+            }
+            const view: any = {
+                viewname: 'ibzemployee-option-view', 
+                height: 450, 
+                width: 700,  
+                title: actionContext.$t('entities.ibzemployee.views.optionview.title'),
+            };
+            openPopupModal(view, data);
     }
 
     /**
@@ -241,72 +307,6 @@ export default class IBZEmployeeUIServiceBase extends UIService {
             });
         };
         backend();
-    }
-
-    /**
-     * 快速新建
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} context 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @param {*} [srfParentDeName] 父实体名称
-     * @returns {Promise<any>}
-     */
-    public async IBZEmployee_OpenNewCreateView(args: any[], context:any = {} ,params: any={}, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-    
-        let data: any = {};
-        let parentContext:any = {};
-        let parentViewParam:any = {};
-        const _this: any = actionContext;
-        const _args: any[] = Util.deepCopy(args);
-        const actionTarget: string | null = 'NONE';
-        if(_this.context){
-            parentContext = _this.context;
-        }
-        if(_this.viewparams){
-            parentViewParam = _this.viewparams;
-        }
-        context = UIActionTool.handleContextParam(actionTarget,_args,parentContext,parentViewParam,context);
-        data = UIActionTool.handleActionParam(actionTarget,_args,parentContext,parentViewParam,params);
-        context = Object.assign({},actionContext.context,context);
-        let parentObj:any = {srfparentdename:srfParentDeName?srfParentDeName:null,srfparentkey:srfParentDeName?context[srfParentDeName.toLowerCase()]:null};
-        Object.assign(data,parentObj);
-        Object.assign(context,parentObj);
-        let deResParameters: any[] = [];
-        if(context.ibzdepartment && true){
-            deResParameters = [
-            { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
-            ]
-        }
-        const parameters: any[] = [
-            { pathName: 'ibzemployees', parameterName: 'ibzemployee' },
-        ];
-            const openPopupModal = (view: any, data: any) => {
-                let container: Subject<any> = actionContext.$appmodal.openModal(view, context, data);
-                container.subscribe((result: any) => {
-                    if (!result || !Object.is(result.ret, 'OK')) {
-                        return;
-                    }
-                    const _this: any = actionContext;
-                    if (xData && xData.refresh && xData.refresh instanceof Function) {
-                        xData.refresh(args);
-                    }
-                    if (this.IBZEmployee_OpenMainView && this.IBZEmployee_OpenMainView instanceof Function) {
-                        this.IBZEmployee_OpenMainView(result.datas,context, params, $event, xData,actionContext);
-                    }
-                    return result.datas;
-                });
-            }
-            const view: any = {
-                viewname: 'ibzemployee-option-view', 
-                height: 450, 
-                width: 700,  
-                title: actionContext.$t('entities.ibzemployee.views.optionview.title'),
-            };
-            openPopupModal(view, data);
     }
 
 

@@ -130,7 +130,7 @@ export default class WFIndexViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFIndexViewBase
 	 */
-	public viewtag: string = '380EA9D7-5F04-46C1-9E82-2877EE29336A';
+	public viewtag: string = '096fd4090f21e0fa0f4a303ed9041bff';
 
 	/**
 	 * 自定义视图导航上下文集合

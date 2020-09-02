@@ -141,15 +141,6 @@ export default class IBZPostGridViewBase extends Vue {
      * @memberof IBZPostGridViewBase
      */
     public appUIService: IBZPostUIService = new IBZPostUIService(this.$store);
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof IBZPostGridViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -202,7 +193,7 @@ export default class IBZPostGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof IBZPostGridViewBase
 	 */
-	public viewtag: string = 'e87180c121ce75a22893d5e3ce0951fc';
+	public viewtag: string = 'd907ddd1845887ecabac4d8d199bf792';
 
 	/**
 	 * 自定义视图导航上下文集合
@@ -408,6 +399,15 @@ export default class IBZPostGridViewBase extends Vue {
      * @memberof IBZPostGridViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof IBZPostGridViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数

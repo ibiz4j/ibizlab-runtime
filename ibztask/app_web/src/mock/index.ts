@@ -7,7 +7,7 @@ import './login/login';
 import './upload/upload';
 
 // 实体级接口对象
-import './entity/jobs-infos/jobs-infos';
 import './entity/jobs-logs/jobs-logs';
-import './entity/jobs-locks/jobs-locks';
 import './entity/jobs-registrys/jobs-registrys';
+import './entity/jobs-infos/jobs-infos';
+import './entity/jobs-locks/jobs-locks';

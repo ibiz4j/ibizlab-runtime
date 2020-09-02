@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class WFSystemResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFSystem-Create-all')")
     @ApiOperation(value = "新建系统", tags = {"系统" },  notes = "新建系统")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems")
-    @Transactional
     public ResponseEntity<WFSystemDTO> create(@RequestBody WFSystemDTO wfsystemdto) {
         WFSystem domain = wfsystemMapping.toDomain(wfsystemdto);
 		wfsystemService.create(domain);
@@ -69,7 +67,6 @@ public class WFSystemResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFSystem-Update-all')")
     @ApiOperation(value = "更新系统", tags = {"系统" },  notes = "更新系统")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{wfsystem_id}")
-    @Transactional
     public ResponseEntity<WFSystemDTO> update(@PathVariable("wfsystem_id") String wfsystem_id, @RequestBody WFSystemDTO wfsystemdto) {
 		WFSystem domain  = wfsystemMapping.toDomain(wfsystemdto);
         domain .setPssystemid(wfsystem_id);
@@ -89,7 +86,6 @@ public class WFSystemResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFSystem-Remove-all')")
     @ApiOperation(value = "删除系统", tags = {"系统" },  notes = "删除系统")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/{wfsystem_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("wfsystem_id") String wfsystem_id) {
          return ResponseEntity.status(HttpStatus.OK).body(wfsystemService.remove(wfsystem_id));
     }

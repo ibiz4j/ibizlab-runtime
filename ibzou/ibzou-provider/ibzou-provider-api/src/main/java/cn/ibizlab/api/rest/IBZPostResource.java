@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class IBZPostResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Create-all')")
     @ApiOperation(value = "新建岗位", tags = {"岗位" },  notes = "新建岗位")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts")
-    @Transactional
     public ResponseEntity<IBZPostDTO> create(@RequestBody IBZPostDTO ibzpostdto) {
         IBZPost domain = ibzpostMapping.toDomain(ibzpostdto);
 		ibzpostService.create(domain);
@@ -69,7 +67,6 @@ public class IBZPostResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Update-all')")
     @ApiOperation(value = "更新岗位", tags = {"岗位" },  notes = "更新岗位")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzposts/{ibzpost_id}")
-    @Transactional
     public ResponseEntity<IBZPostDTO> update(@PathVariable("ibzpost_id") String ibzpost_id, @RequestBody IBZPostDTO ibzpostdto) {
 		IBZPost domain  = ibzpostMapping.toDomain(ibzpostdto);
         domain .setPostid(ibzpost_id);
@@ -89,7 +86,6 @@ public class IBZPostResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZPost-Remove-all')")
     @ApiOperation(value = "删除岗位", tags = {"岗位" },  notes = "删除岗位")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzposts/{ibzpost_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("ibzpost_id") String ibzpost_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzpostService.remove(ibzpost_id));
     }

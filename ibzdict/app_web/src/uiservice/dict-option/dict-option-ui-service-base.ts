@@ -89,9 +89,9 @@ export default class DictOptionUIServiceBase extends UIService {
      * @memberof  DictOptionUIServiceBase
      */  
     public initViewMap(){
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'dictoptions'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'dictoptions'});
         this.allViewMap.set(':',{viewname:'grideditview',srfappde:'dictoptions'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'dictoptions'});
     }
 
     /**

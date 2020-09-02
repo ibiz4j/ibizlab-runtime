@@ -212,7 +212,7 @@ export default class JobsInfoGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof JobsInfoGridViewBase
 	 */
-	public viewtag: string = '33e6e9dda70646c9fc4674606152894b';
+	public viewtag: string = 'e4856779577562e9880855e6c66d63e5';
 
 	/**
 	 * 自定义视图导航上下文集合

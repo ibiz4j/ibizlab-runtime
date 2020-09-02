@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class SysAuthLogResource {
 
     @ApiOperation(value = "新建认证日志", tags = {"认证日志" },  notes = "新建认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
-
     public ResponseEntity<SysAuthLogDTO> create(@RequestBody SysAuthLogDTO sysauthlogdto) {
         SysAuthLog domain = sysauthlogMapping.toDomain(sysauthlogdto);
 		sysauthlogService.create(domain);
@@ -66,7 +64,6 @@ public class SysAuthLogResource {
 
     @ApiOperation(value = "更新认证日志", tags = {"认证日志" },  notes = "更新认证日志")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysauthlogs/{sysauthlog_id}")
-
     public ResponseEntity<SysAuthLogDTO> update(@PathVariable("sysauthlog_id") String sysauthlog_id, @RequestBody SysAuthLogDTO sysauthlogdto) {
 		SysAuthLog domain  = sysauthlogMapping.toDomain(sysauthlogdto);
         domain .setLogid(sysauthlog_id);
@@ -84,7 +81,6 @@ public class SysAuthLogResource {
 
     @ApiOperation(value = "删除认证日志", tags = {"认证日志" },  notes = "删除认证日志")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysauthlogs/{sysauthlog_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("sysauthlog_id") String sysauthlog_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysauthlogService.remove(sysauthlog_id));
     }

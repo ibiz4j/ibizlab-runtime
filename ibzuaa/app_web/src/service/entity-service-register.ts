@@ -39,14 +39,14 @@ export class EntityServiceRegister {
      * @memberof EntityServiceRegister
      */
     protected init(): void {
-                this.allEntityService.set('sysopenaccess', () => import('@/service/sys-open-access/sys-open-access-service'));
-        this.allEntityService.set('sysauthlog', () => import('@/service/sys-auth-log/sys-auth-log-service'));
-        this.allEntityService.set('sysapp', () => import('@/service/sys-app/sys-app-service'));
-        this.allEntityService.set('sysrolepermission', () => import('@/service/sys-role-permission/sys-role-permission-service'));
-        this.allEntityService.set('syspermission', () => import('@/service/sys-permission/sys-permission-service'));
-        this.allEntityService.set('sysuserrole', () => import('@/service/sys-user-role/sys-user-role-service'));
+                this.allEntityService.set('sysrolepermission', () => import('@/service/sys-role-permission/sys-role-permission-service'));
         this.allEntityService.set('sysuser', () => import('@/service/sys-user/sys-user-service'));
+        this.allEntityService.set('sysauthlog', () => import('@/service/sys-auth-log/sys-auth-log-service'));
+        this.allEntityService.set('sysopenaccess', () => import('@/service/sys-open-access/sys-open-access-service'));
+        this.allEntityService.set('sysuserrole', () => import('@/service/sys-user-role/sys-user-role-service'));
         this.allEntityService.set('sysrole', () => import('@/service/sys-role/sys-role-service'));
+        this.allEntityService.set('syspermission', () => import('@/service/sys-permission/sys-permission-service'));
+        this.allEntityService.set('sysapp', () => import('@/service/sys-app/sys-app-service'));
     }
 
     /**

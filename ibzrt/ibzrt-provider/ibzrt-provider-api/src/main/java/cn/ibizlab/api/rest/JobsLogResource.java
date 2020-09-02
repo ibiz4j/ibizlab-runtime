@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class JobsLogResource {
 
     @ApiOperation(value = "新建任务调度日志", tags = {"任务调度日志" },  notes = "新建任务调度日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs")
-
     public ResponseEntity<JobsLogDTO> create(@RequestBody JobsLogDTO jobslogdto) {
         JobsLog domain = jobslogMapping.toDomain(jobslogdto);
 		jobslogService.create(domain);
@@ -66,7 +64,6 @@ public class JobsLogResource {
 
     @ApiOperation(value = "更新任务调度日志", tags = {"任务调度日志" },  notes = "更新任务调度日志")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/{jobslog_id}")
-
     public ResponseEntity<JobsLogDTO> update(@PathVariable("jobslog_id") String jobslog_id, @RequestBody JobsLogDTO jobslogdto) {
 		JobsLog domain  = jobslogMapping.toDomain(jobslogdto);
         domain .setId(jobslog_id);
@@ -84,7 +81,6 @@ public class JobsLogResource {
 
     @ApiOperation(value = "删除任务调度日志", tags = {"任务调度日志" },  notes = "删除任务调度日志")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/{jobslog_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("jobslog_id") String jobslog_id) {
          return ResponseEntity.status(HttpStatus.OK).body(jobslogService.remove(jobslog_id));
     }

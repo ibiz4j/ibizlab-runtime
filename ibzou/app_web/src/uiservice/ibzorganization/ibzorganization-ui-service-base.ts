@@ -89,12 +89,12 @@ export default class IBZOrganizationUIServiceBase extends UIService {
      * @memberof  IBZOrganizationUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'ibzorganizations'});
-        this.allViewMap.set(':',{viewname:'treeexpview',srfappde:'ibzorganizations'});
-        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'ibzorganizations'});
         this.allViewMap.set(':',{viewname:'optionview',srfappde:'ibzorganizations'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'ibzorganizations'});
+        this.allViewMap.set(':',{viewname:'treeexpview',srfappde:'ibzorganizations'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'ibzorganizations'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'ibzorganizations'});
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'ibzorganizations'});
+        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'ibzorganizations'});
     }
 
     /**

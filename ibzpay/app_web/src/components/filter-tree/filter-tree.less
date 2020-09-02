@@ -1,0 +1,31 @@
+.filter-tree {
+    .el-tree-node__content {
+        height: 40px;
+        .filter-tree-item {
+            display: flex;
+            width: 100%;
+            >div {
+                margin-right: 10px;
+            }
+            >div:nth-last-child(1) {
+                margin-right: 0;
+            }
+            .filter-tree-action {
+                display: none;
+                align-items: center;
+                .ivu-btn {
+                    margin-right: 5px;
+                }
+                .ivu-icon-md-close {
+                    color: red;
+                    font-size: 24px;
+                }
+            }
+        }
+        .filter-tree-item:hover {
+            .filter-tree-action {
+                display: flex;
+            }
+        }
+    }
+}

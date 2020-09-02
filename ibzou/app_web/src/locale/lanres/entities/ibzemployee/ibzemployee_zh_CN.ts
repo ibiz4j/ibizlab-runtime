@@ -38,10 +38,6 @@ export default {
     updatedate: "最后修改时间",
   },
 	views: {
-		editgridview: {
-			caption: "人员",
-      		title: "人员表格视图",
-		},
 		editview: {
 			caption: "人员管理",
       		title: "人员管理",
@@ -50,17 +46,17 @@ export default {
 			caption: "人员",
       		title: "人员表格视图",
 		},
-		mpickupview: {
+		changepwdview: {
 			caption: "人员",
-      		title: "人员数据多项选择视图",
+      		title: "人员编辑视图",
+		},
+		editgridview: {
+			caption: "人员",
+      		title: "人员表格视图",
 		},
 		optionview: {
 			caption: "人员快速新建",
       		title: "人员快速新建",
-		},
-		changepwdview: {
-			caption: "人员",
-      		title: "人员编辑视图",
 		},
 		pickupview: {
 			caption: "人员",
@@ -69,6 +65,10 @@ export default {
 		pickupgridview: {
 			caption: "人员",
       		title: "人员选择表格视图",
+		},
+		mpickupview: {
+			caption: "人员",
+      		title: "人员数据多项选择视图",
 		},
 	},
 	main_form: {
@@ -166,7 +166,7 @@ export default {
 		uiactions: {
 		},
 	},
-	editgrid_grid: {
+	main_grid: {
 		columns: {
 			usercode: "用户工号",
 			personname: "姓名",
@@ -183,7 +183,7 @@ export default {
 		uiactions: {
 		},
 	},
-	main_grid: {
+	editgrid_grid: {
 		columns: {
 			usercode: "用户工号",
 			personname: "姓名",
@@ -208,36 +208,6 @@ export default {
 			n_mdeptname_like: "部门", 
 		},
 		uiactions: {
-		},
-	},
-	editgridviewtoolbar_toolbar: {
-		tbitem24: {
-			caption: "行编辑",
-			tip: "行编辑",
-		},
-		tbitem25: {
-			caption: "新建行",
-			tip: "新建行",
-		},
-		deuiaction1: {
-			caption: "保存行",
-			tip: "保存行",
-		},
-		tbitem26: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem8: {
-			caption: "删除",
-			tip: "删除",
-		},
-		tbitem9: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem19: {
-			caption: "过滤",
-			tip: "过滤",
 		},
 	},
 	editviewtoolbar_toolbar: {
@@ -320,6 +290,36 @@ export default {
 		tbitem1: {
 			caption: "保存",
 			tip: "保存",
+		},
+	},
+	editgridviewtoolbar_toolbar: {
+		tbitem24: {
+			caption: "行编辑",
+			tip: "行编辑",
+		},
+		tbitem25: {
+			caption: "新建行",
+			tip: "新建行",
+		},
+		deuiaction1: {
+			caption: "保存行",
+			tip: "保存行",
+		},
+		tbitem26: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem8: {
+			caption: "删除",
+			tip: "删除",
+		},
+		tbitem9: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem19: {
+			caption: "过滤",
+			tip: "过滤",
 		},
 	},
 };

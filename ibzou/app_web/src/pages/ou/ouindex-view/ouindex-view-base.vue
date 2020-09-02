@@ -77,15 +77,6 @@ import { Subject,Subscription } from 'rxjs';
     },
 })
 export default class OUIndexViewBase extends Vue {
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof OUIndexViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -130,7 +121,7 @@ export default class OUIndexViewBase extends Vue {
 	 * @type {string}
 	 * @memberof OUIndexViewBase
 	 */
-	public viewtag: string = 'B0D69856-0C83-421E-B5A9-5021F0BB057C';
+	public viewtag: string = 'f364dd366b28dbc2194d7dc9c08d8dbd';
 
 	/**
 	 * 自定义视图导航上下文集合
@@ -287,6 +278,15 @@ export default class OUIndexViewBase extends Vue {
      * @memberof OUIndexViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof OUIndexViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数

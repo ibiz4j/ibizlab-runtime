@@ -71,15 +71,6 @@ export default class IBZEmployeeOptionViewBase extends Vue {
      * @memberof IBZEmployeeOptionViewBase
      */
     public appUIService: IBZEmployeeUIService = new IBZEmployeeUIService(this.$store);
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof IBZEmployeeOptionViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -132,7 +123,7 @@ export default class IBZEmployeeOptionViewBase extends Vue {
 	 * @type {string}
 	 * @memberof IBZEmployeeOptionViewBase
 	 */
-	public viewtag: string = '61a772e0bde33e5e8e9b83ea0f354271';
+	public viewtag: string = '9cf7a70099bff83a10f6ae65c4d54692';
 
 	/**
 	 * 自定义视图导航上下文集合
@@ -311,6 +302,15 @@ export default class IBZEmployeeOptionViewBase extends Vue {
      * @memberof IBZEmployeeOptionViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof IBZEmployeeOptionViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数

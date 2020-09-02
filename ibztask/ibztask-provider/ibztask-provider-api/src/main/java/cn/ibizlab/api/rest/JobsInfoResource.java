@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class JobsInfoResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Create-all')")
     @ApiOperation(value = "新建任务信息", tags = {"任务信息" },  notes = "新建任务信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos")
-    @Transactional
     public ResponseEntity<JobsInfoDTO> create(@RequestBody JobsInfoDTO jobsinfodto) {
         JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
 		jobsinfoService.create(domain);
@@ -69,7 +67,6 @@ public class JobsInfoResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Update-all')")
     @ApiOperation(value = "更新任务信息", tags = {"任务信息" },  notes = "更新任务信息")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/{jobsinfo_id}")
-    @Transactional
     public ResponseEntity<JobsInfoDTO> update(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
 		JobsInfo domain  = jobsinfoMapping.toDomain(jobsinfodto);
         domain .setId(jobsinfo_id);
@@ -89,7 +86,6 @@ public class JobsInfoResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Remove-all')")
     @ApiOperation(value = "删除任务信息", tags = {"任务信息" },  notes = "删除任务信息")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsinfos/{jobsinfo_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("jobsinfo_id") String jobsinfo_id) {
          return ResponseEntity.status(HttpStatus.OK).body(jobsinfoService.remove(jobsinfo_id));
     }
@@ -126,10 +122,9 @@ public class JobsInfoResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Execute-all')")
     @ApiOperation(value = "执行", tags = {"任务信息" },  notes = "执行")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/execute")
-    @Transactional
     public ResponseEntity<JobsInfoDTO> execute(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
         JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
-domain.setId(jobsinfo_id);
+        domain.setId(jobsinfo_id);
         domain = jobsinfoService.execute(domain);
         jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
@@ -153,10 +148,9 @@ domain.setId(jobsinfo_id);
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Start-all')")
     @ApiOperation(value = "开始", tags = {"任务信息" },  notes = "开始")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/start")
-    @Transactional
     public ResponseEntity<JobsInfoDTO> start(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
         JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
-domain.setId(jobsinfo_id);
+        domain.setId(jobsinfo_id);
         domain = jobsinfoService.start(domain);
         jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
@@ -165,10 +159,9 @@ domain.setId(jobsinfo_id);
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Stop-all')")
     @ApiOperation(value = "停止", tags = {"任务信息" },  notes = "停止")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/stop")
-    @Transactional
     public ResponseEntity<JobsInfoDTO> stop(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
         JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
-domain.setId(jobsinfo_id);
+        domain.setId(jobsinfo_id);
         domain = jobsinfoService.stop(domain);
         jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);

@@ -112,8 +112,19 @@
 </i-col>
 <i-col v-show="detailsModel.lic.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='lic' :itemRules="this.rules().lic" class='' :caption="$t('entities.sysopenaccess.main_form.details.lic')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.lic.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-file-upload :formState="formState" :ignorefieldvaluechange="ignorefieldvaluechange" @formitemvaluechange="onFormItemValueChange" :data="JSON.stringify(this.data)" name='lic' :value="data.lic" :disabled="detailsModel.lic.disabled" :uploadparams='{}' :exportparams='{}'  style="overflow: auto;"></app-file-upload>
-
+	<ibiz-file-upload
+		:data="data"
+		formitemname="lic"
+		:value="data.lic"
+		folder='ibizutil'
+		ownertype='sys_open_access'
+		:ownerid="data.srfkey"
+		:show-ocrview=true
+		:show-preview=true
+		:show-edit=true
+		:show-drag=true
+		:persistence=true
+		@formitemvaluechange="onFormItemValueChange"></ibiz-file-upload>
 </app-form-item>
 
 </i-col>
@@ -142,6 +153,7 @@ import SysOpenAccessUIService from '@/uiservice/sys-open-access/sys-open-access-
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import schema from 'async-validator';
+import { Environment } from '@/environments/environment';
 
 
 @Component({
@@ -1051,6 +1063,7 @@ export default class MainBase extends Vue implements ControlInterface {
             Object.assign(this.context,{sysopenaccess:data.sysopenaccess})
         }
         this.setFormEnableCond(data);
+        this.computeButtonState(data);
         this.fillForm(data,action);
         this.oldData = {};
         Object.assign(this.oldData, JSON.parse(JSON.stringify(this.data)));
@@ -1224,16 +1237,20 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public computeButtonState(data:any){
-        let targetData:any = this.transformData(data);
-        if(this.detailsModel && Object.keys(this.detailsModel).length >0){
-            Object.keys(this.detailsModel).forEach((name:any) =>{
-                if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
-                    let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
-                    ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
-                    this.detailsModel[name].visible = tempUIAction.visabled;
-                    this.detailsModel[name].disabled = tempUIAction.disabled;
-                }
-            })
+        if(Environment.enablePermissionValid){
+            let targetData:any = this.transformData(data);
+            if(this.detailsModel && Object.keys(this.detailsModel).length >0){
+                Object.keys(this.detailsModel).forEach((name:any) =>{
+                    if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
+                        this.detailsModel[name].isPower = true;
+                        let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
+                        let result: any[] = ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
+                        this.detailsModel[name].visible = tempUIAction.visabled;
+                        this.detailsModel[name].disabled = tempUIAction.disabled;
+                        this.detailsModel[name].isPower = result[0] === 1 ? true : false;
+                    }
+                })
+            }
         }
     }
 
@@ -1300,7 +1317,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.refresh(data);
                 }
                 if (Object.is('panelaction', action)) {
-                    this.panelAction(data.action,data.emitAction,data);
+                    this.panelAction(data.action,data.emitAction,data.data);
                 }
             });
         }
@@ -1411,7 +1428,6 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'load');
                 this.$emit('load', data);
-                this.computeButtonState(data);
                 this.$nextTick(() => {
                     this.formState.next({ type: 'load', data: data });
                 });
@@ -1455,7 +1471,6 @@ export default class MainBase extends Vue implements ControlInterface {
             this.onFormLoad(data,'loadDraft');
             data.sysopenaccess = null;
             this.$emit('load', data);
-            this.computeButtonState(data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
             });
@@ -1513,7 +1528,6 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.onFormLoad(data,'autoSave');
             this.$emit('save', data);
-            this.computeButtonState(data);
             AppCenterService.notifyMessage({name:"SysOpenAccess",action:'appRefresh',data:data});
             this.$nextTick(() => {
                 this.formState.next({ type: 'save', data: data });
@@ -1592,7 +1606,6 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
-                this.computeButtonState(data);
                 AppCenterService.notifyMessage({name:"SysOpenAccess",action:'appRefresh',data:data});
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: data });

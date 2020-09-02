@@ -6,11 +6,11 @@ export default {
     domains: "区属",
   },
 	views: {
-		gridview: {
+		editview: {
 			caption: "组管理",
       		title: "组管理",
 		},
-		editview: {
+		gridview: {
 			caption: "组管理",
       		title: "组管理",
 		},
@@ -51,6 +51,28 @@ export default {
 		uiactions: {
 		},
 	},
+	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "保存",
+			tip: "保存",
+		},
+		tbitem6: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem7: {
+			caption: "删除",
+			tip: "删除",
+		},
+		tbitem8: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem14: {
+			caption: "拷贝",
+			tip: "拷贝",
+		},
+	},
 	gridviewtoolbar_toolbar: {
 		deuiaction1: {
 			caption: "新建",
@@ -87,28 +109,6 @@ export default {
 		tbitem19: {
 			caption: "过滤",
 			tip: "过滤",
-		},
-	},
-	editviewtoolbar_toolbar: {
-		tbitem3: {
-			caption: "保存",
-			tip: "保存",
-		},
-		tbitem6: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem7: {
-			caption: "删除",
-			tip: "删除",
-		},
-		tbitem8: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem14: {
-			caption: "拷贝",
-			tip: "拷贝",
 		},
 	},
 };

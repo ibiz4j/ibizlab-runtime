@@ -202,7 +202,7 @@ export default class SysOpenAccessGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysOpenAccessGridViewBase
 	 */
-	public viewtag: string = '08a1b3f1982aeed0d7ace10329315343';
+	public viewtag: string = '29ebd67c0eba9fb1464bcd1397112f6f';
 
 	/**
 	 * 自定义视图导航上下文集合

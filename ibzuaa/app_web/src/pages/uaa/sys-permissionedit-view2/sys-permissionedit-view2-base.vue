@@ -175,7 +175,7 @@ export default class SYS_PERMISSIONEditView2Base extends Vue {
 	 * @type {string}
 	 * @memberof SYS_PERMISSIONEditView2Base
 	 */
-	public viewtag: string = '87e2742f27704bc23e3848796e6f6ef8';
+	public viewtag: string = '24488cee58a4d8b8bf45f468b385cb9b';
 
 	/**
 	 * 自定义视图导航上下文集合

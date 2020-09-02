@@ -130,7 +130,7 @@ export default class SDIndexViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SDIndexViewBase
 	 */
-	public viewtag: string = '84B85718-5EB1-45E3-97F4-A1AC21B4DBE6';
+	public viewtag: string = 'c0a8e8c1058d9a5cdb5a6edbf9855886';
 
 	/**
 	 * 自定义视图导航上下文集合

@@ -39,10 +39,10 @@ export class EntityServiceRegister {
      * @memberof EntityServiceRegister
      */
     protected init(): void {
-                this.allEntityService.set('jobsinfo', () => import('@/service/jobs-info/jobs-info-service'));
-        this.allEntityService.set('jobslog', () => import('@/service/jobs-log/jobs-log-service'));
-        this.allEntityService.set('jobslock', () => import('@/service/jobs-lock/jobs-lock-service'));
+                this.allEntityService.set('jobslog', () => import('@/service/jobs-log/jobs-log-service'));
         this.allEntityService.set('jobsregistry', () => import('@/service/jobs-registry/jobs-registry-service'));
+        this.allEntityService.set('jobsinfo', () => import('@/service/jobs-info/jobs-info-service'));
+        this.allEntityService.set('jobslock', () => import('@/service/jobs-lock/jobs-lock-service'));
     }
 
     /**

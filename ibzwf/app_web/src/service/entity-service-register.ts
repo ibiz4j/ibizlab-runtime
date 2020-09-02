@@ -39,13 +39,13 @@ export class EntityServiceRegister {
      * @memberof EntityServiceRegister
      */
     protected init(): void {
-                this.allEntityService.set('wfremodel', () => import('@/service/wfremodel/wfremodel-service'));
+                this.allEntityService.set('wftask', () => import('@/service/wftask/wftask-service'));
         this.allEntityService.set('wfmember', () => import('@/service/wfmember/wfmember-service'));
-        this.allEntityService.set('wfgroup', () => import('@/service/wfgroup/wfgroup-service'));
         this.allEntityService.set('wfuser', () => import('@/service/wfuser/wfuser-service'));
-        this.allEntityService.set('wftask', () => import('@/service/wftask/wftask-service'));
-        this.allEntityService.set('wfprocessdefinition', () => import('@/service/wfprocess-definition/wfprocess-definition-service'));
+        this.allEntityService.set('wfgroup', () => import('@/service/wfgroup/wfgroup-service'));
+        this.allEntityService.set('wfremodel', () => import('@/service/wfremodel/wfremodel-service'));
         this.allEntityService.set('wfsystem', () => import('@/service/wfsystem/wfsystem-service'));
+        this.allEntityService.set('wfprocessdefinition', () => import('@/service/wfprocess-definition/wfprocess-definition-service'));
     }
 
     /**

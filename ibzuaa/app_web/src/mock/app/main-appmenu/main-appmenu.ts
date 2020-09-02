@@ -11,7 +11,7 @@ mock.onGet('v7/mainappmenu').reply((config: any) => {
         name: 'appmenu',
         items:  [
             {
-	id: 'f59655c22753740bbcf200f5cfee8a54',
+	id: '4e5ae0f4c2068ebb778c0a4d375b1b57',
 	name: 'menuitem3',
 	text: '用户',
 	type: 'MENUITEM',
@@ -29,7 +29,7 @@ mock.onGet('v7/mainappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: 'db3e0d48d6e76a66784adc84edd90cdc',
+	id: 'ca41663c49618c9183db99a85fcc0d5a',
 	name: 'menuitem6',
 	text: '角色',
 	type: 'MENUITEM',
@@ -47,7 +47,7 @@ mock.onGet('v7/mainappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: 'BCF452A9-F6C1-40C9-B107-1D3E9E8839D3',
+	id: 'bfecb2c9bbc493c5308dac05afdd3f91',
 	name: 'menuitem1',
 	text: '认证日志',
 	type: 'MENUITEM',
@@ -65,7 +65,7 @@ mock.onGet('v7/mainappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: '1CDA0214-F2CF-44CD-ACD1-2DE168FF5C0F',
+	id: '570ca07ed70320c1495e0649cc11523d',
 	name: 'menuitem2',
 	text: '接入应用',
 	type: 'MENUITEM',
@@ -83,7 +83,7 @@ mock.onGet('v7/mainappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: 'A045832E-C0C7-4E66-A0E0-E9286DC96A8C',
+	id: '6ef06cc33bf45a48cc0234cd7e6c2dbd',
 	name: 'menuitem4',
 	text: '第三方认证',
 	type: 'MENUITEM',

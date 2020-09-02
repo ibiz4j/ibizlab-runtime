@@ -5,17 +5,17 @@
             <tns:import name="java.util.Map" />
             <tns:import name="org.springframework.util.StringUtils"/>
             <tns:import name="cn.ibizlab.util.helper.RuleUtils"/>
-        <tns:global identifier="ibzemployeesavedeptmemberdefault" type="cn.ibizlab.core.ou.domain.IBZEmployee" />
         <tns:global identifier="ibzemployeesavedeptmembermember" type="cn.ibizlab.core.ou.domain.IBZDeptMember" />
+        <tns:global identifier="ibzemployeesavedeptmemberdefault" type="cn.ibizlab.core.ou.domain.IBZEmployee" />
         </extensionElements>
-     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="ibzemployeesavedeptmemberdeaction1" id="F58FA774-B371-4481-8E9B-8483341ABB57" implementation="http://www.jboss.org/drools/rule" name="保存成员"/>
-     <endEvent id="F58FA774-B371-4481-8E9B-8483341ABB57_End" name="End"/>
-     <sequenceFlow id="F58FA774-B371-4481-8E9B-8483341ABB57_End_Line" sourceRef="F58FA774-B371-4481-8E9B-8483341ABB57" targetRef="F58FA774-B371-4481-8E9B-8483341ABB57_End"/>
-     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="ibzemployeesavedeptmemberprepareparam1" id="EE4970ED-28DF-4578-9B6B-7E468DD9B866" implementation="http://www.jboss.org/drools/rule" name="准备成员"/>
-     <startEvent id="E3FF4728-CD18-4940-BAEF-8A71111A5D05" isInterrupting="true"/>
-     <sequenceFlow id="0DF4511B-818D-493E-9CC6-77B2E3EEFAE7" sourceRef="E3FF4728-CD18-4940-BAEF-8A71111A5D05" targetRef="EE4970ED-28DF-4578-9B6B-7E468DD9B866">
+     <startEvent id="185d3d9e0375d4a0bc23e2b5e0c5d6b0" isInterrupting="true"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="ibzemployeesavedeptmemberprepareparam1" id="4ce2ddabe497161f1eafae705330da51" implementation="http://www.jboss.org/drools/rule" name="准备成员"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="ibzemployeesavedeptmemberdeaction1" id="9c1c19bacf602767e76375b11255b4ec" implementation="http://www.jboss.org/drools/rule" name="保存成员"/>
+     <endEvent id="9c1c19bacf602767e76375b11255b4ec_End" name="End"/>
+     <sequenceFlow id="9c1c19bacf602767e76375b11255b4ec_End_Line" sourceRef="9c1c19bacf602767e76375b11255b4ec" targetRef="9c1c19bacf602767e76375b11255b4ec_End"/>
+     <sequenceFlow id="70b5c736e24a0f2dc570905062ca7900" sourceRef="185d3d9e0375d4a0bc23e2b5e0c5d6b0" targetRef="4ce2ddabe497161f1eafae705330da51">
      </sequenceFlow>
-     <sequenceFlow id="BDDA5BD4-EA82-4239-952F-B33AEC733ACB" sourceRef="EE4970ED-28DF-4578-9B6B-7E468DD9B866" targetRef="F58FA774-B371-4481-8E9B-8483341ABB57">
+     <sequenceFlow id="2e3fe3ab38dfe17f568e1473bc1a1467" sourceRef="4ce2ddabe497161f1eafae705330da51" targetRef="9c1c19bacf602767e76375b11255b4ec">
      </sequenceFlow>
     </process>
 </definitions>

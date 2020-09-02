@@ -125,7 +125,7 @@ export default class DictCatalogPickupViewBase extends Vue {
 	 * @type {string}
 	 * @memberof DictCatalogPickupViewBase
 	 */
-	public viewtag: string = 'eb4772f75066d6c9eb26d8b01d4e16b7';
+	public viewtag: string = 'a9c82814d9bcd23dbf78c4c073759d7c';
 
 	/**
 	 * 自定义视图导航上下文集合

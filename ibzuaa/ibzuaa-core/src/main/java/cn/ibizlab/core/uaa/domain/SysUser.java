@@ -63,19 +63,19 @@ public class SysUser extends EntityMP implements Serializable {
     @JsonProperty("personname")
     private String personname;
     /**
-     * 密码
-     */
-    @TableField(value = "password")
-    @JSONField(name = "password")
-    @JsonProperty("password")
-    private String password;
-    /**
      * 用户工号
      */
     @TableField(value = "usercode")
     @JSONField(name = "usercode")
     @JsonProperty("usercode")
     private String usercode;
+    /**
+     * 密码
+     */
+    @TableField(value = "password")
+    @JSONField(name = "password")
+    @JsonProperty("password")
+    private String password;
     /**
      * 登录名
      */
@@ -289,19 +289,19 @@ public class SysUser extends EntityMP implements Serializable {
     }
 
     /**
-     * 设置 [密码]
-     */
-    public void setPassword(String password){
-        this.password = password ;
-        this.modify("password",password);
-    }
-
-    /**
      * 设置 [用户工号]
      */
     public void setUsercode(String usercode){
         this.usercode = usercode ;
         this.modify("usercode",usercode);
+    }
+
+    /**
+     * 设置 [密码]
+     */
+    public void setPassword(String password){
+        this.password = password ;
+        this.modify("password",password);
     }
 
     /**

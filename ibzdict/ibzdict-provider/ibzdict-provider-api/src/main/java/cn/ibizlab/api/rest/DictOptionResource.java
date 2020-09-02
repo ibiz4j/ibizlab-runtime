@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class DictOptionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
     @ApiOperation(value = "新建字典项", tags = {"字典项" },  notes = "新建字典项")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions")
-    @Transactional
     public ResponseEntity<DictOptionDTO> create(@RequestBody DictOptionDTO dictoptiondto) {
         DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
 		dictoptionService.create(domain);
@@ -70,7 +68,6 @@ public class DictOptionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Update-all')")
     @ApiOperation(value = "更新字典项", tags = {"字典项" },  notes = "更新字典项")
 	@RequestMapping(method = RequestMethod.PUT, value = "/dictoptions/{dictoption_id}")
-    @Transactional
     public ResponseEntity<DictOptionDTO> update(@PathVariable("dictoption_id") String dictoption_id, @RequestBody DictOptionDTO dictoptiondto) {
 		DictOption domain  = dictoptionMapping.toDomain(dictoptiondto);
         domain .setValueKey(dictoption_id);
@@ -90,7 +87,6 @@ public class DictOptionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Remove-all')")
     @ApiOperation(value = "删除字典项", tags = {"字典项" },  notes = "删除字典项")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/{dictoption_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("dictoption_id") String dictoption_id) {
          return ResponseEntity.status(HttpStatus.OK).body(dictoptionService.remove(dictoption_id));
     }
@@ -163,7 +159,6 @@ public class DictOptionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
     @ApiOperation(value = "根据字典建立字典项", tags = {"字典项" },  notes = "根据字典建立字典项")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions")
-    @Transactional
     public ResponseEntity<DictOptionDTO> createByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
         DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
         domain.setCatalogId(dictcatalog_id);
@@ -188,7 +183,6 @@ public class DictOptionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Update-all')")
     @ApiOperation(value = "根据字典更新字典项", tags = {"字典项" },  notes = "根据字典更新字典项")
 	@RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")
-    @Transactional
     public ResponseEntity<DictOptionDTO> updateByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @PathVariable("dictoption_id") String dictoption_id, @RequestBody DictOptionDTO dictoptiondto) {
         DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
         domain.setCatalogId(dictcatalog_id);
@@ -213,7 +207,6 @@ public class DictOptionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Remove-all')")
     @ApiOperation(value = "根据字典删除字典项", tags = {"字典项" },  notes = "根据字典删除字典项")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/{dictoption_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @PathVariable("dictoption_id") String dictoption_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(dictoptionService.remove(dictoption_id));
     }

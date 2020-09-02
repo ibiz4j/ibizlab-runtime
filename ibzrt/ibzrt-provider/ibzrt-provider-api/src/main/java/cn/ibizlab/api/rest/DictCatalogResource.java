@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class DictCatalogResource {
 
     @ApiOperation(value = "新建字典", tags = {"字典" },  notes = "新建字典")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs")
-
     public ResponseEntity<DictCatalogDTO> create(@RequestBody DictCatalogDTO dictcatalogdto) {
         DictCatalog domain = dictcatalogMapping.toDomain(dictcatalogdto);
 		dictcatalogService.create(domain);
@@ -67,7 +65,6 @@ public class DictCatalogResource {
     @VersionCheck(entity = "dictcatalog" , versionfield = "updatedate")
     @ApiOperation(value = "更新字典", tags = {"字典" },  notes = "更新字典")
 	@RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/{dictcatalog_id}")
-
     public ResponseEntity<DictCatalogDTO> update(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictCatalogDTO dictcatalogdto) {
 		DictCatalog domain  = dictcatalogMapping.toDomain(dictcatalogdto);
         domain .setId(dictcatalog_id);
@@ -85,7 +82,6 @@ public class DictCatalogResource {
 
     @ApiOperation(value = "删除字典", tags = {"字典" },  notes = "删除字典")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("dictcatalog_id") String dictcatalog_id) {
          return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.remove(dictcatalog_id));
     }

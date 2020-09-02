@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class WFProcessDefinitionResource {
 
     @ApiOperation(value = "新建流程定义", tags = {"流程定义" },  notes = "新建流程定义")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions")
-
     public ResponseEntity<WFProcessDefinitionDTO> create(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
         WFProcessDefinition domain = wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto);
 		wfprocessdefinitionService.create(domain);
@@ -66,7 +64,6 @@ public class WFProcessDefinitionResource {
 
     @ApiOperation(value = "更新流程定义", tags = {"流程定义" },  notes = "更新流程定义")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfprocessdefinitions/{wfprocessdefinition_id}")
-
     public ResponseEntity<WFProcessDefinitionDTO> update(@PathVariable("wfprocessdefinition_id") String wfprocessdefinition_id, @RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
 		WFProcessDefinition domain  = wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto);
         domain .setDefinitionkey(wfprocessdefinition_id);
@@ -84,7 +81,6 @@ public class WFProcessDefinitionResource {
 
     @ApiOperation(value = "删除流程定义", tags = {"流程定义" },  notes = "删除流程定义")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessdefinitions/{wfprocessdefinition_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("wfprocessdefinition_id") String wfprocessdefinition_id) {
          return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionService.remove(wfprocessdefinition_id));
     }

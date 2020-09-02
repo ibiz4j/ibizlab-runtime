@@ -39,14 +39,14 @@ export class AuthServiceRegister {
      * @memberof AuthServiceRegister
      */
     protected init(): void {
-                this.allAuthService.set('sysopenaccess', () => import('@/authservice/sys-open-access/sys-open-access-auth-service'));
-        this.allAuthService.set('sysauthlog', () => import('@/authservice/sys-auth-log/sys-auth-log-auth-service'));
-        this.allAuthService.set('sysapp', () => import('@/authservice/sys-app/sys-app-auth-service'));
-        this.allAuthService.set('sysrolepermission', () => import('@/authservice/sys-role-permission/sys-role-permission-auth-service'));
-        this.allAuthService.set('syspermission', () => import('@/authservice/sys-permission/sys-permission-auth-service'));
-        this.allAuthService.set('sysuserrole', () => import('@/authservice/sys-user-role/sys-user-role-auth-service'));
+                this.allAuthService.set('sysrolepermission', () => import('@/authservice/sys-role-permission/sys-role-permission-auth-service'));
         this.allAuthService.set('sysuser', () => import('@/authservice/sys-user/sys-user-auth-service'));
+        this.allAuthService.set('sysauthlog', () => import('@/authservice/sys-auth-log/sys-auth-log-auth-service'));
+        this.allAuthService.set('sysopenaccess', () => import('@/authservice/sys-open-access/sys-open-access-auth-service'));
+        this.allAuthService.set('sysuserrole', () => import('@/authservice/sys-user-role/sys-user-role-auth-service'));
         this.allAuthService.set('sysrole', () => import('@/authservice/sys-role/sys-role-auth-service'));
+        this.allAuthService.set('syspermission', () => import('@/authservice/sys-permission/sys-permission-auth-service'));
+        this.allAuthService.set('sysapp', () => import('@/authservice/sys-app/sys-app-auth-service'));
     }
 
     /**

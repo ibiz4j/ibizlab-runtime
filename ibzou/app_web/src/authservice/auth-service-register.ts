@@ -39,13 +39,13 @@ export class AuthServiceRegister {
      * @memberof AuthServiceRegister
      */
     protected init(): void {
-                this.allAuthService.set('ibzdeptmember', () => import('@/authservice/ibzdept-member/ibzdept-member-auth-service'));
-        this.allAuthService.set('ibzteammember', () => import('@/authservice/ibzteam-member/ibzteam-member-auth-service'));
-        this.allAuthService.set('ibzdepartment', () => import('@/authservice/ibzdepartment/ibzdepartment-auth-service'));
-        this.allAuthService.set('ibzemployee', () => import('@/authservice/ibzemployee/ibzemployee-auth-service'));
+                this.allAuthService.set('ibzpost', () => import('@/authservice/ibzpost/ibzpost-auth-service'));
         this.allAuthService.set('ibzorganization', () => import('@/authservice/ibzorganization/ibzorganization-auth-service'));
-        this.allAuthService.set('ibzpost', () => import('@/authservice/ibzpost/ibzpost-auth-service'));
         this.allAuthService.set('ibzteam', () => import('@/authservice/ibzteam/ibzteam-auth-service'));
+        this.allAuthService.set('ibzdeptmember', () => import('@/authservice/ibzdept-member/ibzdept-member-auth-service'));
+        this.allAuthService.set('ibzdepartment', () => import('@/authservice/ibzdepartment/ibzdepartment-auth-service'));
+        this.allAuthService.set('ibzteammember', () => import('@/authservice/ibzteam-member/ibzteam-member-auth-service'));
+        this.allAuthService.set('ibzemployee', () => import('@/authservice/ibzemployee/ibzemployee-auth-service'));
     }
 
     /**

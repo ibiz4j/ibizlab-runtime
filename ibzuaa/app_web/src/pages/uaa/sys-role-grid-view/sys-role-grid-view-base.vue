@@ -202,7 +202,7 @@ export default class SysRoleGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysRoleGridViewBase
 	 */
-	public viewtag: string = '9e9a67908b3c85516085fe19e3dd4113';
+	public viewtag: string = '13c174556f45e9b10b66dc51834a6ab5';
 
 	/**
 	 * 自定义视图导航上下文集合

@@ -110,15 +110,6 @@ export default class IBZDeptMemberGridViewBase extends Vue {
      * @memberof IBZDeptMemberGridViewBase
      */
     public appUIService: IBZDeptMemberUIService = new IBZDeptMemberUIService(this.$store);
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof IBZDeptMemberGridViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -171,7 +162,7 @@ export default class IBZDeptMemberGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof IBZDeptMemberGridViewBase
 	 */
-	public viewtag: string = 'c9aa00ee38b42ea5ba1d2deb5959ac2b';
+	public viewtag: string = '61541167ccebbc3f174242ce73e436dd';
 
 	/**
 	 * 自定义视图导航上下文集合
@@ -369,6 +360,15 @@ export default class IBZDeptMemberGridViewBase extends Vue {
      * @memberof IBZDeptMemberGridViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof IBZDeptMemberGridViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数

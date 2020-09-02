@@ -36,20 +36,6 @@ const router = new Router({
             component: () => import('@pages/disk/sdindex-view/sdindex-view.vue'),
             children: [
                 {
-                    path: 'sdfiles/:sdfile?/gridview/:gridview?',
-                    meta: {
-                        caption: 'entities.sdfile.views.gridview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'sdindexview', parameterName: 'sdindexview' },
-                            { pathName: 'sdfiles', parameterName: 'sdfile' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/disk/sdfile-grid-view/sdfile-grid-view.vue'),
-                },
-                {
                     path: 'sdfiles/:sdfile?/editview/:editview?',
                     meta: {
                         caption: 'entities.sdfile.views.editview.caption',
@@ -63,22 +49,23 @@ const router = new Router({
                     },
                     component: () => import('@pages/disk/sdfile-edit-view/sdfile-edit-view.vue'),
                 },
+                {
+                    path: 'sdfiles/:sdfile?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.sdfile.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'sdindexview', parameterName: 'sdindexview' },
+                            { pathName: 'sdfiles', parameterName: 'sdfile' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/disk/sdfile-grid-view/sdfile-grid-view.vue'),
+                },
             ...indexRoutes,
             ],
         },
-    {
-        path: '/sdfiles/:sdfile?/gridview/:gridview?',
-        meta: {
-            caption: 'entities.sdfile.views.gridview.caption',
-            info:'',
-            parameters: [
-                { pathName: 'sdfiles', parameterName: 'sdfile' },
-                { pathName: 'gridview', parameterName: 'gridview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/disk/sdfile-grid-view/sdfile-grid-view.vue'),
-    },
     {
         path: '/sdfiles/:sdfile?/editview/:editview?',
         meta: {
@@ -91,6 +78,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/disk/sdfile-edit-view/sdfile-edit-view.vue'),
+    },
+    {
+        path: '/sdfiles/:sdfile?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.sdfile.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'sdfiles', parameterName: 'sdfile' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/disk/sdfile-grid-view/sdfile-grid-view.vue'),
     },
         ...globalRoutes,
         {

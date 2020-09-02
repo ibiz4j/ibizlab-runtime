@@ -213,7 +213,7 @@ export default class WFProcessDefinitionEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFProcessDefinitionEditViewBase
 	 */
-	public viewtag: string = '9aad4530afb58f5c348a5b21d9c7ae72';
+	public viewtag: string = '3fcd491c13d05ab7dcce8d2c920d0aec';
 
 	/**
 	 * 自定义视图导航上下文集合

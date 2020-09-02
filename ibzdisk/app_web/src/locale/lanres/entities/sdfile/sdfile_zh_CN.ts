@@ -1,12 +1,12 @@
 export default {
 	views: {
-		gridview: {
-			caption: "文件",
-      		title: "文件表格视图",
-		},
 		editview: {
 			caption: "文件",
       		title: "文件编辑视图",
+		},
+		gridview: {
+			caption: "文件",
+      		title: "文件表格视图",
 		},
 	},
 	main_form: {
@@ -61,64 +61,6 @@ export default {
 			n_filename_like: "名称(文本包含(%))", 
 		},
 		uiactions: {
-		},
-	},
-	gridviewtoolbar_toolbar: {
-		tbitem3: {
-			caption: "新建",
-			tip: "新建",
-		},
-		tbitem4: {
-			caption: "编辑",
-			tip: "编辑",
-		},
-		tbitem6: {
-			caption: "拷贝",
-			tip: "拷贝",
-		},
-		tbitem7: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem8: {
-			caption: "删除",
-			tip: "删除",
-		},
-		tbitem9: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem13: {
-			caption: "导出",
-			tip: "导出",
-		},
-		tbitem10: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem16: {
-			caption: "其它",
-			tip: "其它",
-		},
-		tbitem21: {
-			caption: "导出数据模型",
-			tip: "导出数据模型",
-		},
-		tbitem23: {
-			caption: "数据导入",
-			tip: "数据导入",
-		},
-		tbitem17: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem19: {
-			caption: "过滤",
-			tip: "过滤",
-		},
-		tbitem18: {
-			caption: "帮助",
-			tip: "帮助",
 		},
 	},
 	editviewtoolbar_toolbar: {
@@ -183,6 +125,64 @@ export default {
 			tip: "",
 		},
 		tbitem22: {
+			caption: "帮助",
+			tip: "帮助",
+		},
+	},
+	gridviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "新建",
+			tip: "新建",
+		},
+		tbitem4: {
+			caption: "编辑",
+			tip: "编辑",
+		},
+		tbitem6: {
+			caption: "拷贝",
+			tip: "拷贝",
+		},
+		tbitem7: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem8: {
+			caption: "删除",
+			tip: "删除",
+		},
+		tbitem9: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem13: {
+			caption: "导出",
+			tip: "导出",
+		},
+		tbitem10: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem16: {
+			caption: "其它",
+			tip: "其它",
+		},
+		tbitem21: {
+			caption: "导出数据模型",
+			tip: "导出数据模型",
+		},
+		tbitem23: {
+			caption: "数据导入",
+			tip: "数据导入",
+		},
+		tbitem17: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem19: {
+			caption: "过滤",
+			tip: "过滤",
+		},
+		tbitem18: {
 			caption: "帮助",
 			tip: "帮助",
 		},

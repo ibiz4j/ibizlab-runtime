@@ -158,7 +158,7 @@ export default class SysRolePermissionMPickupViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysRolePermissionMPickupViewBase
 	 */
-	public viewtag: string = '3e133a839b837d9e47f80e161d66a861';
+	public viewtag: string = '2cd587cefc5e7ded579bf8fe5564a74e';
 
 	/**
 	 * 自定义视图导航上下文集合

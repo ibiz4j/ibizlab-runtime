@@ -1,5 +1,5 @@
 server:
-  port: 30005
+  port: 8080
 #Log配置
 logging:
   level:
@@ -7,20 +7,20 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
-    jobs_info:
-      path: /jobsinfos/**
-      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-      stripPrefix: false
     jobs_log:
       path: /jobslogs/**
       serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
       stripPrefix: false
-    jobs_lock:
-      path: /jobslocks/**
-      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-      stripPrefix: false
     jobs_registry:
       path: /jobsregistries/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    jobs_info:
+      path: /jobsinfos/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    jobs_lock:
+      path: /jobslocks/**
       serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
       stripPrefix: false
     loginv7:
@@ -45,6 +45,10 @@ zuul:
       stripPrefix: false
     oudict:
       path: /dictionarys/**/Ibzou**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    ou:
+      path: /ibzdepartments/**
       serviceId: ${ibiz.ref.service.ou:ibzou-api}
       stripPrefix: false
     uaadict:

@@ -4,8 +4,8 @@ export default {
     userid: "用户标识",
     username: "用户全局名",
     personname: "用户姓名",
-    password: "密码",
     usercode: "用户工号",
+    password: "密码",
     loginname: "登录名",
     domains: "区属",
     mdeptid: "主部门",
@@ -35,17 +35,21 @@ export default {
     superuser: "超级管理员",
   },
 	views: {
+		gridview: {
+			caption: "用户",
+      		title: "用户",
+		},
 		mpickupview: {
 			caption: "系统用户",
       		title: "用户表数据多项选择视图",
 		},
+		pickupview: {
+			caption: "系统用户",
+      		title: "用户表数据选择视图",
+		},
 		editview2: {
 			caption: "系统用户",
       		title: "用户表编辑视图",
-		},
-		redirectview: {
-			caption: "系统用户",
-      		title: "用户表数据重定向视图",
 		},
 		pickupgridview: {
 			caption: "系统用户",
@@ -55,13 +59,9 @@ export default {
 			caption: "用户",
       		title: "用户",
 		},
-		gridview: {
-			caption: "用户",
-      		title: "用户",
-		},
-		pickupview: {
+		redirectview: {
 			caption: "系统用户",
-      		title: "用户表数据选择视图",
+      		title: "用户表数据重定向视图",
 		},
 	},
 	main_form: {

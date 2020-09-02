@@ -85,6 +85,7 @@ import SysRolePermissionUIService from '@/uiservice/sys-role-permission/sys-role
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import schema from 'async-validator';
+import { Environment } from '@/environments/environment';
 
 
 @Component({
@@ -928,6 +929,7 @@ export default class MainBase extends Vue implements ControlInterface {
             Object.assign(this.context,{sysrolepermission:data.sysrolepermission})
         }
         this.setFormEnableCond(data);
+        this.computeButtonState(data);
         this.fillForm(data,action);
         this.oldData = {};
         Object.assign(this.oldData, JSON.parse(JSON.stringify(this.data)));
@@ -1101,16 +1103,20 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public computeButtonState(data:any){
-        let targetData:any = this.transformData(data);
-        if(this.detailsModel && Object.keys(this.detailsModel).length >0){
-            Object.keys(this.detailsModel).forEach((name:any) =>{
-                if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
-                    let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
-                    ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
-                    this.detailsModel[name].visible = tempUIAction.visabled;
-                    this.detailsModel[name].disabled = tempUIAction.disabled;
-                }
-            })
+        if(Environment.enablePermissionValid){
+            let targetData:any = this.transformData(data);
+            if(this.detailsModel && Object.keys(this.detailsModel).length >0){
+                Object.keys(this.detailsModel).forEach((name:any) =>{
+                    if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
+                        this.detailsModel[name].isPower = true;
+                        let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
+                        let result: any[] = ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
+                        this.detailsModel[name].visible = tempUIAction.visabled;
+                        this.detailsModel[name].disabled = tempUIAction.disabled;
+                        this.detailsModel[name].isPower = result[0] === 1 ? true : false;
+                    }
+                })
+            }
         }
     }
 
@@ -1177,7 +1183,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.refresh(data);
                 }
                 if (Object.is('panelaction', action)) {
-                    this.panelAction(data.action,data.emitAction,data);
+                    this.panelAction(data.action,data.emitAction,data.data);
                 }
             });
         }
@@ -1277,7 +1283,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}): void {
         if(!this.loadAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView2' + (this.$t('app.formpage.notconfig.loadaction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView' + (this.$t('app.formpage.notconfig.loadaction') as string) });
             return;
         }
         const arg: any = { ...opt };
@@ -1288,7 +1294,6 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'load');
                 this.$emit('load', data);
-                this.computeButtonState(data);
                 this.$nextTick(() => {
                     this.formState.next({ type: 'load', data: data });
                 });
@@ -1313,7 +1318,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public loadDraft(opt: any = {}): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView2' + (this.$t('app.formpage.notconfig.loaddraftaction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView' + (this.$t('app.formpage.notconfig.loaddraftaction') as string) });
             return;
         }
         const arg: any = { ...opt } ;
@@ -1332,7 +1337,6 @@ export default class MainBase extends Vue implements ControlInterface {
             this.onFormLoad(data,'loadDraft');
             data.sysrolepermission = null;
             this.$emit('load', data);
-            this.computeButtonState(data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
             });
@@ -1374,7 +1378,7 @@ export default class MainBase extends Vue implements ControlInterface {
         const action: any = Object.is(data.srfuf, '1') ? this.updateAction : this.createAction;
         if(!action){
             let actionName:any = Object.is(data.srfuf, '1')?"updateAction":"createAction";
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView2' + (this.$t('app.formpage.notconfig.actionname') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView' + (this.$t('app.formpage.notconfig.actionname') as string) });
             return;
         }
         Object.assign(arg,{viewparams:this.viewparams});
@@ -1390,7 +1394,6 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.onFormLoad(data,'autoSave');
             this.$emit('save', data);
-            this.computeButtonState(data);
             AppCenterService.notifyMessage({name:"SysRolePermission",action:'appRefresh',data:data});
             this.$nextTick(() => {
                 this.formState.next({ type: 'save', data: data });
@@ -1453,7 +1456,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const action: any = Object.is(data.srfuf, '1') ? this.updateAction : this.createAction;
             if(!action){
                 let actionName:any = Object.is(data.srfuf, '1')?"updateAction":"createAction";
-                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView2' + (this.$t('app.formpage.notconfig.actionname') as string) });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView' + (this.$t('app.formpage.notconfig.actionname') as string) });
                 return;
             }
             Object.assign(arg,{viewparams:this.viewparams});
@@ -1469,7 +1472,6 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
-                this.computeButtonState(data);
                 AppCenterService.notifyMessage({name:"SysRolePermission",action:'appRefresh',data:data});
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: data });
@@ -1515,7 +1517,7 @@ export default class MainBase extends Vue implements ControlInterface {
     public remove(opt:Array<any> = [],showResultInfo?: boolean): Promise<any> {
         return new Promise((resolve: any, reject: any) => {
             if(!this.removeAction){
-                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView2' + (this.$t('app.formpage.notconfig.removeaction') as string) });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_ROLE_PERMISSIONEditView' + (this.$t('app.formpage.notconfig.removeaction') as string) });
                 return;
             }
             const arg: any = opt[0];

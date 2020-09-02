@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class WFTaskResource {
 
     @ApiOperation(value = "新建工作流任务", tags = {"工作流任务" },  notes = "新建工作流任务")
 	@RequestMapping(method = RequestMethod.POST, value = "/wftasks")
-    @Transactional
     public ResponseEntity<WFTaskDTO> create(@RequestBody WFTaskDTO wftaskdto) {
         WFTask domain = wftaskMapping.toDomain(wftaskdto);
 		wftaskService.create(domain);
@@ -66,7 +64,6 @@ public class WFTaskResource {
 
     @ApiOperation(value = "更新工作流任务", tags = {"工作流任务" },  notes = "更新工作流任务")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wftasks/{wftask_id}")
-    @Transactional
     public ResponseEntity<WFTaskDTO> update(@PathVariable("wftask_id") String wftask_id, @RequestBody WFTaskDTO wftaskdto) {
 		WFTask domain  = wftaskMapping.toDomain(wftaskdto);
         domain .setId(wftask_id);
@@ -84,7 +81,6 @@ public class WFTaskResource {
 
     @ApiOperation(value = "删除工作流任务", tags = {"工作流任务" },  notes = "删除工作流任务")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wftasks/{wftask_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("wftask_id") String wftask_id) {
          return ResponseEntity.status(HttpStatus.OK).body(wftaskService.remove(wftask_id));
     }

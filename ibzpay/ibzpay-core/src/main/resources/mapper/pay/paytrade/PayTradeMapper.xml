@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.pay.mapper.PayTradeMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="PayTradeResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`APPID`, t1.`OUTTRADENO`, t1.`SUBJECT`, t1.`TOTALAMOUNT`, t1.`TRADEID`, t1.`TRADENAME`, t1.`TRADESTATUS`, t1.`TRADETYPE` FROM `IBZPAYTRADE` t1  ) t1 where tradeid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="PayTradeResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.ACCESSID, t1.ACCESSNAME, t1.APPID, t1.OUTTRADENO, t1.SUBJECT, t1.TOTALAMOUNT, t1.TRADEID, t1.TRADENAME, t1.TRADESTATUS, t1.TRADETYPE FROM IBZPAYTRADE t1  ) t1 where tradeid=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="PayTradeResultMap" type="cn.ibizlab.core.pay.domain.PayTrade" autoMapping="true">
+        <id property="tradeId" column="tradeid" /><!--主键字段映射-->
+		<result property="accessId" column="accessid" />
+            
+		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="openaccess" javaType="cn.ibizlab.core.pay.domain.PayOpenAccess" column="accessid" select="cn.ibizlab.core.pay.mapper.PayOpenAccessMapper.selectById" fetchType="lazy"></association>
+    </resultMap>
+
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_PAY_TRADE_PAY_OPEN_ACCESS_ACCESSID] -->
+	 <select id="selectByAccessId" resultMap="PayTradeResultMap">
+         select t1.* from (
+                <include refid="Default" />
+			 ) t1
+			 where  accessid=#{id}
+     </select>
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.pay.filter.PayTradeSearchContext"  resultMap="PayTradeResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`APPID`, t1.`OUTTRADENO`, t1.`SUBJECT`, t1.`TOTALAMOUNT`, t1.`TRADEID`, t1.`TRADENAME`, t1.`TRADESTATUS`, t1.`TRADETYPE` FROM `IBZPAYTRADE` t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.APPID, t1.OUTTRADENO, t1.SUBJECT, t1.TOTALAMOUNT, t1.TRADEID, t1.TRADENAME, t1.TRADESTATUS, t1.TRADETYPE FROM IBZPAYTRADE t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`APPID`, t1.`OUTTRADENO`, t1.`SUBJECT`, t1.`TOTALAMOUNT`, t1.`TRADEID`, t1.`TRADENAME`, t1.`TRADESTATUS`, t1.`TRADETYPE` FROM `IBZPAYTRADE` t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.APPID, t1.OUTTRADENO, t1.SUBJECT, t1.TOTALAMOUNT, t1.TRADEID, t1.TRADENAME, t1.TRADESTATUS, t1.TRADETYPE FROM IBZPAYTRADE t1  
+			]]>
+    </sql>
+</mapper>
+

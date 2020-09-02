@@ -8,13 +8,13 @@ export default {
     update_time: "更新时间",
   },
 	views: {
-		editview: {
-			caption: "任务注册信息",
-      		title: "任务注册信息编辑视图",
-		},
 		gridview: {
 			caption: "任务注册信息",
       		title: "任务注册信息表格视图",
+		},
+		editview: {
+			caption: "任务注册信息",
+      		title: "任务注册信息编辑视图",
 		},
 	},
 	main_form: {
@@ -55,16 +55,6 @@ export default {
 		uiactions: {
 		},
 	},
-	editviewtoolbar_toolbar: {
-		tbitem3: {
-			caption: "Save",
-			tip: "Save",
-		},
-		deuiaction1: {
-			caption: "关闭",
-			tip: "关闭",
-		},
-	},
 	gridviewtoolbar_toolbar: {
 		tbitem3: {
 			caption: "New",
@@ -81,6 +71,16 @@ export default {
 		deuiaction1: {
 			caption: "Filter",
 			tip: "Filter",
+		},
+	},
+	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "Save",
+			tip: "Save",
+		},
+		deuiaction1: {
+			caption: "关闭",
+			tip: "关闭",
 		},
 	},
 };

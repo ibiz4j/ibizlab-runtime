@@ -1,7 +1,7 @@
-import jobsinfo_en_US from '@locale/lanres/entities/jobs-info/jobs-info_en_US';
 import jobslog_en_US from '@locale/lanres/entities/jobs-log/jobs-log_en_US';
-import jobslock_en_US from '@locale/lanres/entities/jobs-lock/jobs-lock_en_US';
 import jobsregistry_en_US from '@locale/lanres/entities/jobs-registry/jobs-registry_en_US';
+import jobsinfo_en_US from '@locale/lanres/entities/jobs-info/jobs-info_en_US';
+import jobslock_en_US from '@locale/lanres/entities/jobs-lock/jobs-lock_en_US';
 import components_en_US from '@locale/lanres/components/components_en_US';
 import codelist_en_US from '@locale/lanres/codelist/codelist_en_US';
 import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';
@@ -219,10 +219,10 @@ export default {
         },
     },
     entities: {
-        jobsinfo: jobsinfo_en_US,
         jobslog: jobslog_en_US,
-        jobslock: jobslock_en_US,
         jobsregistry: jobsregistry_en_US,
+        jobsinfo: jobsinfo_en_US,
+        jobslock: jobslock_en_US,
     },
     components: components_en_US,
     codelist: codelist_en_US,

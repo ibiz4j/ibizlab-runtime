@@ -39,10 +39,10 @@ export class AuthServiceRegister {
      * @memberof AuthServiceRegister
      */
     protected init(): void {
-                this.allAuthService.set('jobsinfo', () => import('@/authservice/jobs-info/jobs-info-auth-service'));
-        this.allAuthService.set('jobslog', () => import('@/authservice/jobs-log/jobs-log-auth-service'));
-        this.allAuthService.set('jobslock', () => import('@/authservice/jobs-lock/jobs-lock-auth-service'));
+                this.allAuthService.set('jobslog', () => import('@/authservice/jobs-log/jobs-log-auth-service'));
         this.allAuthService.set('jobsregistry', () => import('@/authservice/jobs-registry/jobs-registry-auth-service'));
+        this.allAuthService.set('jobsinfo', () => import('@/authservice/jobs-info/jobs-info-auth-service'));
+        this.allAuthService.set('jobslock', () => import('@/authservice/jobs-lock/jobs-lock-auth-service'));
     }
 
     /**

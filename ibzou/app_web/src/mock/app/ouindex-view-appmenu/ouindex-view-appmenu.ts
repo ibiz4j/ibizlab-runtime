@@ -11,7 +11,7 @@ mock.onGet('v7/ouindex-viewappmenu').reply((config: any) => {
         name: 'appmenu',
         items:  [
             {
-	id: 'CC24ABE9-84D6-4F04-8770-E9739A62AC34',
+	id: 'da40118e7372d3073b986ea6fb93df59',
 	name: 'menuitem1',
 	text: '单位管理',
 	type: 'MENUITEM',
@@ -29,7 +29,7 @@ mock.onGet('v7/ouindex-viewappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: '26353959-9246-4DDF-8ADA-E8A229572BC7',
+	id: '6570af5ada0a428b98d5ba1ca5073298',
 	name: 'menuitem2',
 	text: '部门管理',
 	type: 'MENUITEM',
@@ -47,7 +47,7 @@ mock.onGet('v7/ouindex-viewappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: '18F0AA9B-5281-46B7-AC6E-1A40E088AEE8',
+	id: '6cfdcaea521dd35aaa969ce9331fc24e',
 	name: 'menuitem3',
 	text: '人员管理',
 	type: 'MENUITEM',
@@ -65,7 +65,7 @@ mock.onGet('v7/ouindex-viewappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: 'BF61871D-B5F5-4633-B6BA-30A66DE710BB',
+	id: 'd2a12485fdd3bf8ad7f18f689422b006',
 	name: 'menuitem4',
 	text: '岗位管理',
 	type: 'MENUITEM',
@@ -83,7 +83,7 @@ mock.onGet('v7/ouindex-viewappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: '3EE7101C-7039-4836-8AB7-81C0CAD3C288',
+	id: '4a64b39273ba2fb82beadff8315e4d02',
 	name: 'menuitem5',
 	text: '组管理',
 	type: 'MENUITEM',

@@ -89,14 +89,14 @@ export default class SysRolePermissionUIServiceBase extends UIService {
      * @memberof  SysRolePermissionUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'sysrolepermissions'});
-        this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'sysrolepermissions'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sysrolepermissions'});
+        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'sysrolepermissions'});
         this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysrolepermissions'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysrolepermissions'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysrolepermissions'});
         this.allViewMap.set(':',{viewname:'editview2',srfappde:'sysrolepermissions'});
+        this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'sysrolepermissions'});
         this.allViewMap.set(':',{viewname:'customview',srfappde:'sysrolepermissions'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysrolepermissions'});
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysrolepermissions'});
     }
 
     /**

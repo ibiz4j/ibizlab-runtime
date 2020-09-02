@@ -11,11 +11,11 @@ export default {
     addr: "地址",
   },
 	views: {
-		editview: {
+		gridview: {
 			caption: "接入应用",
       		title: "接入应用",
 		},
-		gridview: {
+		editview: {
 			caption: "接入应用",
       		title: "接入应用",
 		},

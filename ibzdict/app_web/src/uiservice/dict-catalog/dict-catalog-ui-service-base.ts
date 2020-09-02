@@ -89,10 +89,10 @@ export default class DictCatalogUIServiceBase extends UIService {
      * @memberof  DictCatalogUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'dictcatalogs'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'dictcatalogs'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'dictcatalogs'});
+        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'dictcatalogs'});
         this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'dictcatalogs'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'dictcatalogs'});
     }
 
     /**

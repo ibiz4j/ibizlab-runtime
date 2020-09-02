@@ -13,13 +13,13 @@ export default {
     create_time: "创建时间",
   },
 	views: {
-		editview: {
-			caption: "任务调度日志",
-      		title: "任务调度日志编辑视图",
-		},
 		gridview: {
 			caption: "任务调度日志",
       		title: "任务调度日志表格视图",
+		},
+		editview: {
+			caption: "任务调度日志",
+      		title: "任务调度日志编辑视图",
 		},
 	},
 	main_form: {

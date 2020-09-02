@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class IBZDepartmentResource {
 
     @ApiOperation(value = "新建部门", tags = {"部门" },  notes = "新建部门")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments")
-
     public ResponseEntity<IBZDepartmentDTO> create(@RequestBody IBZDepartmentDTO ibzdepartmentdto) {
         IBZDepartment domain = ibzdepartmentMapping.toDomain(ibzdepartmentdto);
 		ibzdepartmentService.create(domain);
@@ -67,7 +65,6 @@ public class IBZDepartmentResource {
     @VersionCheck(entity = "ibzdepartment" , versionfield = "updatedate")
     @ApiOperation(value = "更新部门", tags = {"部门" },  notes = "更新部门")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}")
-
     public ResponseEntity<IBZDepartmentDTO> update(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZDepartmentDTO ibzdepartmentdto) {
 		IBZDepartment domain  = ibzdepartmentMapping.toDomain(ibzdepartmentdto);
         domain .setDeptid(ibzdepartment_id);
@@ -85,7 +82,6 @@ public class IBZDepartmentResource {
 
     @ApiOperation(value = "删除部门", tags = {"部门" },  notes = "删除部门")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{ibzdepartment_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("ibzdepartment_id") String ibzdepartment_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzdepartmentService.remove(ibzdepartment_id));
     }
@@ -151,7 +147,6 @@ public class IBZDepartmentResource {
 	}
     @ApiOperation(value = "根据单位机构建立部门", tags = {"部门" },  notes = "根据单位机构建立部门")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments")
-
     public ResponseEntity<IBZDepartmentDTO> createByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody IBZDepartmentDTO ibzdepartmentdto) {
         IBZDepartment domain = ibzdepartmentMapping.toDomain(ibzdepartmentdto);
         domain.setOrgid(ibzorganization_id);
@@ -174,7 +169,6 @@ public class IBZDepartmentResource {
     @VersionCheck(entity = "ibzdepartment" , versionfield = "updatedate")
     @ApiOperation(value = "根据单位机构更新部门", tags = {"部门" },  notes = "根据单位机构更新部门")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}")
-
     public ResponseEntity<IBZDepartmentDTO> updateByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZDepartmentDTO ibzdepartmentdto) {
         IBZDepartment domain = ibzdepartmentMapping.toDomain(ibzdepartmentdto);
         domain.setOrgid(ibzorganization_id);
@@ -197,7 +191,6 @@ public class IBZDepartmentResource {
 
     @ApiOperation(value = "根据单位机构删除部门", tags = {"部门" },  notes = "根据单位机构删除部门")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}")
-
     public ResponseEntity<Boolean> removeByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzdepartmentService.remove(ibzdepartment_id));
     }

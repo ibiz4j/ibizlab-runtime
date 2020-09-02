@@ -11,7 +11,7 @@ export class FormButtonModel extends FormDetailModel {
 
     constructor(opts: any = {}) {
         super(opts);
-        this.disabled = opts.disabled;
+        this.$disabled = opts.disabled;
         this.uiaction = opts.uiaction;
     }
 
@@ -21,7 +21,7 @@ export class FormButtonModel extends FormDetailModel {
      * @type {boolean}
      * @memberof FormButtonModel
      */
-    public disabled:boolean = false;
+    private $disabled:boolean = false;
 
     /**
      * 按钮对应的界面行为
@@ -30,5 +30,27 @@ export class FormButtonModel extends FormDetailModel {
      * @memberof FormButtonModel
      */
     public uiaction:any;
+
+    /**
+     * 是否启用
+     *
+     * @type {boolean}
+     * @memberof FormButtonModel
+     */
+    public get disabled(): boolean {
+        return this.$disabled;
+    }
+
+    /**
+     * 设置是否启用
+     *
+     * @memberof FormButtonModel
+     */
+    public set disabled(val: boolean) {
+        if(this.isPower) {
+            this.$disabled = val;
+        }
+    }
+
 
 }

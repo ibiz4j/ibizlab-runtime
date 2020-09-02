@@ -9,33 +9,33 @@ export default {
     updatedate: "更新时间",
   },
 	views: {
-		gridview: {
-			caption: "权限/资源",
-      		title: "权限表表格视图",
-		},
 		editview2: {
 			caption: "权限/资源",
       		title: "权限表编辑视图",
+		},
+		gridview: {
+			caption: "权限/资源",
+      		title: "权限表表格视图",
 		},
 		pickupview: {
 			caption: "权限/资源",
       		title: "权限表数据选择视图",
 		},
-		pickupgridview: {
-			caption: "权限/资源",
-      		title: "权限表选择表格视图",
-		},
 		mpickupview: {
 			caption: "权限/资源",
       		title: "权限表数据多项选择视图",
 		},
-		redirectview: {
+		pickupgridview: {
 			caption: "权限/资源",
-      		title: "权限表数据重定向视图",
+      		title: "权限表选择表格视图",
 		},
 		editview: {
 			caption: "权限/资源",
       		title: "权限表编辑视图",
+		},
+		redirectview: {
+			caption: "权限/资源",
+      		title: "权限表数据重定向视图",
 		},
 	},
 	main_form: {
@@ -70,7 +70,7 @@ export default {
 		uiactions: {
 		},
 	},
-	editviewtoolbar_toolbar: {
+	editview2toolbar_toolbar: {
 		tbitem3: {
 			caption: "保存",
 			tip: "保存",
@@ -134,7 +134,7 @@ export default {
 			tip: "过滤",
 		},
 	},
-	editview2toolbar_toolbar: {
+	editviewtoolbar_toolbar: {
 		tbitem3: {
 			caption: "保存",
 			tip: "保存",

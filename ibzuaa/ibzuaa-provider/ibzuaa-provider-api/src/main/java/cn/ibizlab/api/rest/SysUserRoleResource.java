@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Create-all')")
     @ApiOperation(value = "新建用户角色关系", tags = {"用户角色关系" },  notes = "新建用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles")
-    @Transactional
     public ResponseEntity<SysUserRoleDTO> create(@RequestBody SysUserRoleDTO sysuserroledto) {
         SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
 		sysuserroleService.create(domain);
@@ -70,7 +68,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Update-all')")
     @ApiOperation(value = "更新用户角色关系", tags = {"用户角色关系" },  notes = "更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/{sysuserrole_id}")
-    @Transactional
     public ResponseEntity<SysUserRoleDTO> update(@PathVariable("sysuserrole_id") String sysuserrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
 		SysUserRole domain  = sysuserroleMapping.toDomain(sysuserroledto);
         domain .setUserroleid(sysuserrole_id);
@@ -90,7 +87,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Remove-all')")
     @ApiOperation(value = "删除用户角色关系", tags = {"用户角色关系" },  notes = "删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserroles/{sysuserrole_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("sysuserrole_id") String sysuserrole_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.remove(sysuserrole_id));
     }
@@ -163,7 +159,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Create-all')")
     @ApiOperation(value = "根据系统角色建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色建立用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles")
-    @Transactional
     public ResponseEntity<SysUserRoleDTO> createBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
         SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
         domain.setRoleid(sysrole_id);
@@ -188,7 +183,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Update-all')")
     @ApiOperation(value = "根据系统角色更新用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{sysrole_id}/sysuserroles/{sysuserrole_id}")
-    @Transactional
     public ResponseEntity<SysUserRoleDTO> updateBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysuserrole_id") String sysuserrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
         SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
         domain.setRoleid(sysrole_id);
@@ -213,7 +207,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Remove-all')")
     @ApiOperation(value = "根据系统角色删除用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}/sysuserroles/{sysuserrole_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysuserrole_id") String sysuserrole_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.remove(sysuserrole_id));
     }
@@ -296,7 +289,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Create-all')")
     @ApiOperation(value = "根据系统用户建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户建立用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles")
-    @Transactional
     public ResponseEntity<SysUserRoleDTO> createBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleDTO sysuserroledto) {
         SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
         domain.setUserid(sysuser_id);
@@ -321,7 +313,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Update-all')")
     @ApiOperation(value = "根据系统用户更新用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}/sysuserroles/{sysuserrole_id}")
-    @Transactional
     public ResponseEntity<SysUserRoleDTO> updateBySysUser(@PathVariable("sysuser_id") String sysuser_id, @PathVariable("sysuserrole_id") String sysuserrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
         SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
         domain.setUserid(sysuser_id);
@@ -346,7 +337,6 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Remove-all')")
     @ApiOperation(value = "根据系统用户删除用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}/sysuserroles/{sysuserrole_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeBySysUser(@PathVariable("sysuser_id") String sysuser_id, @PathVariable("sysuserrole_id") String sysuserrole_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.remove(sysuserrole_id));
     }

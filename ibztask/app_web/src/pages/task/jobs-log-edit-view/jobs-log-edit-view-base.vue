@@ -134,7 +134,7 @@ export default class JobsLogEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof JobsLogEditViewBase
 	 */
-	public viewtag: string = '8be420cc327846b003dc0a97dda81ceb';
+	public viewtag: string = 'b4b9140b8844a2d60cfc7944cd4f5b79';
 
 	/**
 	 * 自定义视图导航上下文集合

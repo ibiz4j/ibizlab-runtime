@@ -102,7 +102,7 @@ export default class SysRolePermissionRedirectViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysRolePermissionRedirectViewBase
 	 */
-	public viewtag: string = '47fb02384b5797f4b095e247619515f4';
+	public viewtag: string = '93445da4f0b5711d28cc535077d34a87';
 
 	/**
 	 * 自定义视图导航上下文集合

@@ -12,15 +12,15 @@ export default {
 			caption: "岗位",
       		title: "岗位数据选择视图",
 		},
+		editview: {
+			caption: "岗位管理",
+      		title: "岗位管理",
+		},
 		pickupgridview: {
 			caption: "岗位",
       		title: "岗位选择表格视图",
 		},
 		gridview: {
-			caption: "岗位管理",
-      		title: "岗位管理",
-		},
-		editview: {
 			caption: "岗位管理",
       		title: "岗位管理",
 		},
@@ -61,6 +61,28 @@ export default {
 		uiactions: {
 		},
 	},
+	editviewtoolbar_toolbar: {
+		tbitem3: {
+			caption: "Save",
+			tip: "Save",
+		},
+		tbitem6: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem7: {
+			caption: "Remove And Close",
+			tip: "Remove And Close Window",
+		},
+		tbitem8: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem14: {
+			caption: "Copy",
+			tip: "Copy {0}",
+		},
+	},
 	gridviewtoolbar_toolbar: {
 		deuiaction1: {
 			caption: "New",
@@ -97,28 +119,6 @@ export default {
 		tbitem19: {
 			caption: "Filter",
 			tip: "Filter",
-		},
-	},
-	editviewtoolbar_toolbar: {
-		tbitem3: {
-			caption: "Save",
-			tip: "Save",
-		},
-		tbitem6: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem7: {
-			caption: "Remove And Close",
-			tip: "Remove And Close Window",
-		},
-		tbitem8: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem14: {
-			caption: "Copy",
-			tip: "Copy {0}",
 		},
 	},
 };

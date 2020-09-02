@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class WFREModelResource {
 
     @ApiOperation(value = "新建流程模型", tags = {"流程模型" },  notes = "新建流程模型")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels")
-
     public ResponseEntity<WFREModelDTO> create(@RequestBody WFREModelDTO wfremodeldto) {
         WFREModel domain = wfremodelMapping.toDomain(wfremodeldto);
 		wfremodelService.create(domain);
@@ -66,7 +64,6 @@ public class WFREModelResource {
 
     @ApiOperation(value = "更新流程模型", tags = {"流程模型" },  notes = "更新流程模型")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/{wfremodel_id}")
-
     public ResponseEntity<WFREModelDTO> update(@PathVariable("wfremodel_id") String wfremodel_id, @RequestBody WFREModelDTO wfremodeldto) {
 		WFREModel domain  = wfremodelMapping.toDomain(wfremodeldto);
         domain .setId(wfremodel_id);
@@ -84,7 +81,6 @@ public class WFREModelResource {
 
     @ApiOperation(value = "删除流程模型", tags = {"流程模型" },  notes = "删除流程模型")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/{wfremodel_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("wfremodel_id") String wfremodel_id) {
          return ResponseEntity.status(HttpStatus.OK).body(wfremodelService.remove(wfremodel_id));
     }

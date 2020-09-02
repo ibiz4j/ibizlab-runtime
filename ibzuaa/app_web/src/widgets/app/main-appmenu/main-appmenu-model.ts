@@ -15,7 +15,7 @@ export default class MainModel {
      */
     public items: any[] = [
         {
-	id: 'f59655c22753740bbcf200f5cfee8a54',
+	id: '4e5ae0f4c2068ebb778c0a4d375b1b57',
 	name: 'menuitem3',
 	text: '用户',
 	type: 'MENUITEM',
@@ -34,7 +34,7 @@ export default class MainModel {
 	authtag:'web-Main-menuitem3',
 },
         {
-	id: 'db3e0d48d6e76a66784adc84edd90cdc',
+	id: 'ca41663c49618c9183db99a85fcc0d5a',
 	name: 'menuitem6',
 	text: '角色',
 	type: 'MENUITEM',
@@ -53,7 +53,7 @@ export default class MainModel {
 	authtag:'web-Main-menuitem6',
 },
         {
-	id: 'BCF452A9-F6C1-40C9-B107-1D3E9E8839D3',
+	id: 'bfecb2c9bbc493c5308dac05afdd3f91',
 	name: 'menuitem1',
 	text: '认证日志',
 	type: 'MENUITEM',
@@ -72,7 +72,7 @@ export default class MainModel {
 	authtag:'web-Main-menuitem1',
 },
         {
-	id: '1CDA0214-F2CF-44CD-ACD1-2DE168FF5C0F',
+	id: '570ca07ed70320c1495e0649cc11523d',
 	name: 'menuitem2',
 	text: '接入应用',
 	type: 'MENUITEM',
@@ -91,7 +91,7 @@ export default class MainModel {
 	authtag:'web-Main-menuitem2',
 },
         {
-	id: 'A045832E-C0C7-4E66-A0E0-E9286DC96A8C',
+	id: '6ef06cc33bf45a48cc0234cd7e6c2dbd',
 	name: 'menuitem4',
 	text: '第三方认证',
 	type: 'MENUITEM',
@@ -120,26 +120,14 @@ export default class MainModel {
 	 */
 	public funcs: any[] = [
         {
-            appfunctag: 'Auto13',
+            appfunctag: 'Auto12',
             appfuncyype: 'APPVIEW',
             openmode: '',
-            codename: 'sysopenaccessgridview',
+            codename: 'sysappgridview',
             deResParameters: [],
-            routepath: '/index/:index?/sysopenaccesses/:sysopenaccess?/gridview/:gridview?',
+            routepath: '/index/:index?/sysapps/:sysapp?/gridview/:gridview?',
             parameters: [
-                { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
-                { pathName: 'gridview', parameterName: 'gridview' },
-            ],
-        },
-        {
-            appfunctag: 'Auto10',
-            appfuncyype: 'APPVIEW',
-            openmode: '',
-            codename: 'sysrolegridview',
-            deResParameters: [],
-            routepath: '/index/:index?/sysroles/:sysrole?/gridview/:gridview?',
-            parameters: [
-                { pathName: 'sysroles', parameterName: 'sysrole' },
+                { pathName: 'sysapps', parameterName: 'sysapp' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },
@@ -156,18 +144,6 @@ export default class MainModel {
             ],
         },
         {
-            appfunctag: 'Auto12',
-            appfuncyype: 'APPVIEW',
-            openmode: '',
-            codename: 'sysappgridview',
-            deResParameters: [],
-            routepath: '/index/:index?/sysapps/:sysapp?/gridview/:gridview?',
-            parameters: [
-                { pathName: 'sysapps', parameterName: 'sysapp' },
-                { pathName: 'gridview', parameterName: 'gridview' },
-            ],
-        },
-        {
             appfunctag: 'Auto6',
             appfuncyype: 'APPVIEW',
             openmode: '',
@@ -176,6 +152,30 @@ export default class MainModel {
             routepath: '/index/:index?/sysauthlogs/:sysauthlog?/gridview/:gridview?',
             parameters: [
                 { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
+        {
+            appfunctag: 'Auto10',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'sysrolegridview',
+            deResParameters: [],
+            routepath: '/index/:index?/sysroles/:sysrole?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'sysroles', parameterName: 'sysrole' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
+        {
+            appfunctag: 'Auto13',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'sysopenaccessgridview',
+            deResParameters: [],
+            routepath: '/index/:index?/sysopenaccesses/:sysopenaccess?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },

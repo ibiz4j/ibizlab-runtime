@@ -222,7 +222,12 @@ export default class AppEmbedPicker extends Vue {
         if(Object.is(newFormData[this.refreshitems], oldDormData[this.refreshitems])) {
             return;
         }
-        this.setValue([{srfmajortext: null, srfkey: null}]);
+        if (this.valueItem) {
+            this.$emit('formitemvaluechange', { name: this.valueItem, value: null });
+        }
+        if (this.name) {
+            this.$emit('formitemvaluechange', { name: this.name, value: null });
+        }
     }
 
     /**
@@ -231,6 +236,7 @@ export default class AppEmbedPicker extends Vue {
      * @memberof AppEmbedPicker
      */
     public created() {
+        this.setViewParam();
         if(this.formState) {
             this.formStateEvent = this.formState.subscribe(({ tag, action, data }) => {
                 if (Object.is('load', action)) {

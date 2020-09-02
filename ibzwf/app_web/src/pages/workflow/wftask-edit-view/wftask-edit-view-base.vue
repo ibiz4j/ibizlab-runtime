@@ -213,7 +213,7 @@ export default class WFTaskEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFTaskEditViewBase
 	 */
-	public viewtag: string = '84f38898137b7bd1f9f135ac74b4b850';
+	public viewtag: string = 'e3020680a441ab58a29db6fe2434f08b';
 
 	/**
 	 * 自定义视图导航上下文集合

@@ -150,7 +150,7 @@ export default class JobsInfoEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof JobsInfoEditViewBase
 	 */
-	public viewtag: string = '3b16681a0aca643f5830e15d768c1ab1';
+	public viewtag: string = '49b6b437f10c4e73e47d87d5d0f76cfd';
 
 	/**
 	 * 自定义视图导航上下文集合

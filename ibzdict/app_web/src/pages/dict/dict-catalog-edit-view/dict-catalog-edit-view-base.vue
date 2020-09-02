@@ -213,7 +213,7 @@ export default class DictCatalogEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof DictCatalogEditViewBase
 	 */
-	public viewtag: string = 'e294ce8c6557ca26a032efa08eeb5508';
+	public viewtag: string = 'aef11c4ae15f8255ee53623adf148f2a';
 
 	/**
 	 * 自定义视图导航上下文集合

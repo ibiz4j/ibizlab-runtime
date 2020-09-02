@@ -2,7 +2,7 @@ package cn.ibizlab.core.disk.extensions.service;
 
 import cn.ibizlab.core.disk.domain.SDFile;
 import cn.ibizlab.core.disk.service.ISDFileService;
-import cn.ibizlab.util.domain.FileItem;
+import cn.ibizlab.core.disk.extensions.vo.FileItem;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.errors.InternalServerErrorException;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
@@ -59,7 +59,7 @@ public class DiskCoreService {
         if(!StringUtils.isEmpty(fileId))
             sdFile.setId(fileId);
         if(!StringUtils.isEmpty(folder))
-            sdFile.setId(folder);
+            sdFile.setFolder(folder);
         if(!StringUtils.isEmpty(ownerId))
             sdFile.setOwnerId(ownerId);
         if(!StringUtils.isEmpty(ownerType))

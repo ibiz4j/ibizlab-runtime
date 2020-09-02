@@ -89,8 +89,8 @@ export default class SDFileUIServiceBase extends UIService {
      * @memberof  SDFileUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sdfiles'});
         this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sdfiles'});
+        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sdfiles'});
     }
 
     /**

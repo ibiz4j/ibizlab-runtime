@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "新建组成员", tags = {"组成员" },  notes = "新建组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzteammembers")
-
     public ResponseEntity<IBZTeamMemberDTO> create(@RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
 		ibzteammemberService.create(domain);
@@ -66,7 +64,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "更新组成员", tags = {"组成员" },  notes = "更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<IBZTeamMemberDTO> update(@PathVariable("ibzteammember_id") String ibzteammember_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
 		IBZTeamMember domain  = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain .setTeammemberid(ibzteammember_id);
@@ -84,7 +81,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "删除组成员", tags = {"组成员" },  notes = "删除组成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("ibzteammember_id") String ibzteammember_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzteammemberService.remove(ibzteammember_id));
     }
@@ -150,7 +146,6 @@ public class IBZTeamMemberResource {
 	}
     @ApiOperation(value = "根据人员建立组成员", tags = {"组成员" },  notes = "根据人员建立组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/{ibzemployee_id}/ibzteammembers")
-
     public ResponseEntity<IBZTeamMemberDTO> createByIBZEmployee(@PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setUserid(ibzemployee_id);
@@ -172,7 +167,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据人员更新组成员", tags = {"组成员" },  notes = "根据人员更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzemployees/{ibzemployee_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<IBZTeamMemberDTO> updateByIBZEmployee(@PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzteammember_id") String ibzteammember_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setUserid(ibzemployee_id);
@@ -195,7 +189,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据人员删除组成员", tags = {"组成员" },  notes = "根据人员删除组成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzemployees/{ibzemployee_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<Boolean> removeByIBZEmployee(@PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzteammember_id") String ibzteammember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzteammemberService.remove(ibzteammember_id));
     }
@@ -271,7 +264,6 @@ public class IBZTeamMemberResource {
 	}
     @ApiOperation(value = "根据组建立组成员", tags = {"组成员" },  notes = "根据组建立组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams/{ibzteam_id}/ibzteammembers")
-
     public ResponseEntity<IBZTeamMemberDTO> createByIBZTeam(@PathVariable("ibzteam_id") String ibzteam_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setTeamid(ibzteam_id);
@@ -293,7 +285,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据组更新组成员", tags = {"组成员" },  notes = "根据组更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzteams/{ibzteam_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<IBZTeamMemberDTO> updateByIBZTeam(@PathVariable("ibzteam_id") String ibzteam_id, @PathVariable("ibzteammember_id") String ibzteammember_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setTeamid(ibzteam_id);
@@ -316,7 +307,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据组删除组成员", tags = {"组成员" },  notes = "根据组删除组成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzteams/{ibzteam_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<Boolean> removeByIBZTeam(@PathVariable("ibzteam_id") String ibzteam_id, @PathVariable("ibzteammember_id") String ibzteammember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzteammemberService.remove(ibzteammember_id));
     }
@@ -392,7 +382,6 @@ public class IBZTeamMemberResource {
 	}
     @ApiOperation(value = "根据部门人员建立组成员", tags = {"组成员" },  notes = "根据部门人员建立组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers")
-
     public ResponseEntity<IBZTeamMemberDTO> createByIBZDepartmentIBZEmployee(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setUserid(ibzemployee_id);
@@ -414,7 +403,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据部门人员更新组成员", tags = {"组成员" },  notes = "根据部门人员更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<IBZTeamMemberDTO> updateByIBZDepartmentIBZEmployee(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzteammember_id") String ibzteammember_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setUserid(ibzemployee_id);
@@ -437,7 +425,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据部门人员删除组成员", tags = {"组成员" },  notes = "根据部门人员删除组成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<Boolean> removeByIBZDepartmentIBZEmployee(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzteammember_id") String ibzteammember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzteammemberService.remove(ibzteammember_id));
     }
@@ -513,7 +500,6 @@ public class IBZTeamMemberResource {
 	}
     @ApiOperation(value = "根据单位机构人员建立组成员", tags = {"组成员" },  notes = "根据单位机构人员建立组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/ibzteammembers")
-
     public ResponseEntity<IBZTeamMemberDTO> createByIBZOrganizationIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setUserid(ibzemployee_id);
@@ -535,7 +521,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据单位机构人员更新组成员", tags = {"组成员" },  notes = "根据单位机构人员更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<IBZTeamMemberDTO> updateByIBZOrganizationIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzteammember_id") String ibzteammember_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setUserid(ibzemployee_id);
@@ -558,7 +543,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据单位机构人员删除组成员", tags = {"组成员" },  notes = "根据单位机构人员删除组成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<Boolean> removeByIBZOrganizationIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzteammember_id") String ibzteammember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzteammemberService.remove(ibzteammember_id));
     }
@@ -634,7 +618,6 @@ public class IBZTeamMemberResource {
 	}
     @ApiOperation(value = "根据单位机构部门人员建立组成员", tags = {"组成员" },  notes = "根据单位机构部门人员建立组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers")
-
     public ResponseEntity<IBZTeamMemberDTO> createByIBZOrganizationIBZDepartmentIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setUserid(ibzemployee_id);
@@ -656,7 +639,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据单位机构部门人员更新组成员", tags = {"组成员" },  notes = "根据单位机构部门人员更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<IBZTeamMemberDTO> updateByIBZOrganizationIBZDepartmentIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzteammember_id") String ibzteammember_id, @RequestBody IBZTeamMemberDTO ibzteammemberdto) {
         IBZTeamMember domain = ibzteammemberMapping.toDomain(ibzteammemberdto);
         domain.setUserid(ibzemployee_id);
@@ -679,7 +661,6 @@ public class IBZTeamMemberResource {
 
     @ApiOperation(value = "根据单位机构部门人员删除组成员", tags = {"组成员" },  notes = "根据单位机构部门人员删除组成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzteammembers/{ibzteammember_id}")
-
     public ResponseEntity<Boolean> removeByIBZOrganizationIBZDepartmentIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzteammember_id") String ibzteammember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzteammemberService.remove(ibzteammember_id));
     }

@@ -164,7 +164,7 @@ export default class SysRoleEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysRoleEditViewBase
 	 */
-	public viewtag: string = '6f5a41631520da5e33294a1225101e66';
+	public viewtag: string = '6bd0981f6dd67a59f211b5cf97ac8f30';
 
 	/**
 	 * 自定义视图导航上下文集合

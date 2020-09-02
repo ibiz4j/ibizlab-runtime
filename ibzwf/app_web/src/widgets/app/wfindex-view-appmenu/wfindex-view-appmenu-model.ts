@@ -15,7 +15,7 @@ export default class WFIndexViewModel {
      */
     public items: any[] = [
         {
-	id: 'DE6BF5A8-9640-47AF-9AE7-7C73C5FCC8BF',
+	id: 'f7995aae13c2a12ed1bca0f098371b7f',
 	name: 'menuitem1',
 	text: '流程定义',
 	type: 'MENUITEM',
@@ -34,7 +34,7 @@ export default class WFIndexViewModel {
 	authtag:'web-WFIndexView-menuitem1',
 },
         {
-	id: 'F6C65EF1-F523-466D-9C63-7FA2F87BA90B',
+	id: '2738fed9d24a10a28095fb04fd468883',
 	name: 'menuitem3',
 	text: '发布新流程',
 	type: 'MENUITEM',
@@ -53,7 +53,7 @@ export default class WFIndexViewModel {
 	authtag:'web-WFIndexView-menuitem3',
 },
         {
-	id: 'A2004B9C-B0CE-4180-8C76-6FD90059F17B',
+	id: '27b0edb66e9777d3d6271163680881e8',
 	name: 'menuitem2',
 	text: '用户组',
 	type: 'MENUITEM',
@@ -72,7 +72,7 @@ export default class WFIndexViewModel {
 	authtag:'web-WFIndexView-menuitem2',
 },
         {
-	id: '0F72A458-D47D-4305-AF77-4D643124741D',
+	id: '4e8e7629980b4670ef786b281bf0feae',
 	name: 'menuitem4',
 	text: '我的待办',
 	type: 'MENUITEM',
@@ -86,7 +86,7 @@ export default class WFIndexViewModel {
 	iconcls: 'fa fa-list-alt',
 	icon: '',
 	textcls: '',
-	appfunctag: '_2',
+	appfunctag: 'Auto4',
 	resourcetag: '',
 	authtag:'web-WFIndexView-menuitem4',
 },
@@ -101,18 +101,6 @@ export default class WFIndexViewModel {
 	 */
 	public funcs: any[] = [
         {
-            appfunctag: '_2',
-            appfuncyype: 'APPVIEW',
-            openmode: '',
-            codename: 'wftaskgridview',
-            deResParameters: [],
-            routepath: '/wfindexview/:wfindexview?/wftasks/:wftask?/gridview/:gridview?',
-            parameters: [
-                { pathName: 'wftasks', parameterName: 'wftask' },
-                { pathName: 'gridview', parameterName: 'gridview' },
-            ],
-        },
-        {
             appfunctag: 'Auto3',
             appfuncyype: 'APPVIEW',
             openmode: '',
@@ -122,6 +110,18 @@ export default class WFIndexViewModel {
             parameters: [
                 { pathName: 'wfremodels', parameterName: 'wfremodel' },
                 { pathName: 'editview', parameterName: 'editview' },
+            ],
+        },
+        {
+            appfunctag: 'Auto2',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'wfgroupgridview',
+            deResParameters: [],
+            routepath: '/wfindexview/:wfindexview?/wfgroups/:wfgroup?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'wfgroups', parameterName: 'wfgroup' },
+                { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },
         {
@@ -137,14 +137,14 @@ export default class WFIndexViewModel {
             ],
         },
         {
-            appfunctag: 'Auto2',
+            appfunctag: 'Auto4',
             appfuncyype: 'APPVIEW',
             openmode: '',
-            codename: 'wfgroupgridview',
+            codename: 'wftaskgridview',
             deResParameters: [],
-            routepath: '/wfindexview/:wfindexview?/wfgroups/:wfgroup?/gridview/:gridview?',
+            routepath: '/wfindexview/:wfindexview?/wftasks/:wftask?/gridview/:gridview?',
             parameters: [
-                { pathName: 'wfgroups', parameterName: 'wfgroup' },
+                { pathName: 'wftasks', parameterName: 'wftask' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },

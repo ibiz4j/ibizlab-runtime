@@ -1,0 +1,59 @@
+server:
+  port: 8080
+#Log配置
+logging:
+  level:
+    cn.ibizlab: info
+#zuul网关路由设置
+zuul:
+  routes:
+    pay_trade:
+      path: /paytrades/**
+      serviceId: ${ibiz.ref.service.ibzpay-api:ibzpay-api}
+      stripPrefix: false
+    pay_open_access:
+      path: /payopenaccesses/**
+      serviceId: ${ibiz.ref.service.ibzpay-api:ibzpay-api}
+      stripPrefix: false
+    loginv7:
+      path: /v7/login
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    changepwd:
+      path: /v7/changepwd
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    uaa:
+      path: /uaa/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    config:
+      path: /config/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    oucore:
+      path: /ibzorganizations/**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    oudict:
+      path: /dictionarys/**/Ibzou**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    ou:
+      path: /ibzdepartments/**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    uaadict:
+      path: /dictionarys/**/SysOperator
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    dict:
+      path: /dictionarys/**
+      serviceId: ${ibiz.ref.service.dict:ibzdict-api}
+      stripPrefix: false
+    disk:
+      path: /net-disk/**
+      serviceId: ${ibiz.ref.service.disk:ibzdisk-api}
+      stripPrefix: false
+  sensitive-headers:
+    - Cookie,Set-Cookie,Authorization

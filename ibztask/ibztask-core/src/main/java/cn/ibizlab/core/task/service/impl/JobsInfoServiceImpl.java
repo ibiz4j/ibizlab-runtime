@@ -21,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.task.domain.JobsInfo;
@@ -157,9 +158,9 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public JobsInfo stop(JobsInfo et) {
+        et.set("Next_time","0");
         et.set("Last_time","0");
         et.set("Status","1");
-        et.set("Next_time","0");
         update(et);
         return et;
     }

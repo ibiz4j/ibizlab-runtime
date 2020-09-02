@@ -4,5 +4,5 @@ Tip: If the failing expression is known to be legally refer to something that's 
 
 ----
 FTL stack trace ("~" means nesting-related):
-	- Failed at: #assign sysApi = appDataEntity.getPSD...  [in template "CODETEMPL_zh_CN" at line 37, column 9]
+	- Failed at: #assign sysApi = appDataEntity.getPSD...  [in template "CODETEMPL_en_US" at line 37, column 9]
 ----

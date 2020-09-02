@@ -4,17 +4,17 @@
 export const viewstate: any = {
     appviews: [
         {
-            viewtag: '33e6e9dda70646c9fc4674606152894b',
+            viewtag: '3fc39744066bd5343be378ec5703f556',
             viewmodule: 'task',
-            viewname: 'JobsInfoGridView',
+            viewname: 'JobsRegistryGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '3b16681a0aca643f5830e15d768c1ab1',
+                '56cc39a16e3269c082694b50f89338e3',
             ],
         },
         {
-            viewtag: '3b16681a0aca643f5830e15d768c1ab1',
+            viewtag: '49b6b437f10c4e73e47d87d5d0f76cfd',
             viewmodule: 'task',
             viewname: 'JobsInfoEditView',
             viewaction: '',
@@ -23,7 +23,7 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '433753123a4269a61a7a13d22cf567de',
+            viewtag: '56cc39a16e3269c082694b50f89338e3',
             viewmodule: 'task',
             viewname: 'JobsRegistryEditView',
             viewaction: '',
@@ -32,19 +32,29 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '49432823-363C-43AB-AA9A-8F0BB0445335',
+            viewtag: '67b4d1e928a08679ce63051ccc88da9c',
+            viewmodule: 'task',
+            viewname: 'JobsLogGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'b4b9140b8844a2d60cfc7944cd4f5b79',
+            ],
+        },
+        {
+            viewtag: 'aa348881bb7ef951e281edc58131246b',
             viewmodule: 'task',
             viewname: 'TaskIndexView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'd55df600239abf11fb0df2bded105b5d',
-                'b10fda534ad827548d6902807e8dc8cf',
-                '33e6e9dda70646c9fc4674606152894b',
+                '3fc39744066bd5343be378ec5703f556',
+                '67b4d1e928a08679ce63051ccc88da9c',
+                'e4856779577562e9880855e6c66d63e5',
             ],
         },
         {
-            viewtag: '8be420cc327846b003dc0a97dda81ceb',
+            viewtag: 'b4b9140b8844a2d60cfc7944cd4f5b79',
             viewmodule: 'task',
             viewname: 'JobsLogEditView',
             viewaction: '',
@@ -53,23 +63,13 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: 'b10fda534ad827548d6902807e8dc8cf',
+            viewtag: 'e4856779577562e9880855e6c66d63e5',
             viewmodule: 'task',
-            viewname: 'JobsRegistryGridView',
+            viewname: 'JobsInfoGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '433753123a4269a61a7a13d22cf567de',
-            ],
-        },
-        {
-            viewtag: 'd55df600239abf11fb0df2bded105b5d',
-            viewmodule: 'task',
-            viewname: 'JobsLogGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '8be420cc327846b003dc0a97dda81ceb',
+                '49b6b437f10c4e73e47d87d5d0f76cfd',
             ],
         },
     ],

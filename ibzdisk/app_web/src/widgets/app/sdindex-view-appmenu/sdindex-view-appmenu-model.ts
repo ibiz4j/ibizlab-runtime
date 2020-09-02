@@ -15,7 +15,7 @@ export default class SDIndexViewModel {
      */
     public items: any[] = [
         {
-	id: 'A47FFDFF-3B2F-429E-9D21-02E0630F6164',
+	id: '541951a398d53d906d35436fcb39a9f3',
 	name: 'menuitem1',
 	text: '文件',
 	type: 'MENUITEM',

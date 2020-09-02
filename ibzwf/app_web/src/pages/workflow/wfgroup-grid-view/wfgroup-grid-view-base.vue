@@ -243,7 +243,7 @@ export default class WFGroupGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFGroupGridViewBase
 	 */
-	public viewtag: string = 'f11ad9a3b9260fb68a2a2e870419bffa';
+	public viewtag: string = 'f498dfb24e88df7c70a5c09ecb587647';
 
 	/**
 	 * 自定义视图导航上下文集合

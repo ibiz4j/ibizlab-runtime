@@ -39,13 +39,13 @@ export class EntityServiceRegister {
      * @memberof EntityServiceRegister
      */
     protected init(): void {
-                this.allEntityService.set('ibzdeptmember', () => import('@/service/ibzdept-member/ibzdept-member-service'));
-        this.allEntityService.set('ibzteammember', () => import('@/service/ibzteam-member/ibzteam-member-service'));
-        this.allEntityService.set('ibzdepartment', () => import('@/service/ibzdepartment/ibzdepartment-service'));
-        this.allEntityService.set('ibzemployee', () => import('@/service/ibzemployee/ibzemployee-service'));
+                this.allEntityService.set('ibzpost', () => import('@/service/ibzpost/ibzpost-service'));
         this.allEntityService.set('ibzorganization', () => import('@/service/ibzorganization/ibzorganization-service'));
-        this.allEntityService.set('ibzpost', () => import('@/service/ibzpost/ibzpost-service'));
         this.allEntityService.set('ibzteam', () => import('@/service/ibzteam/ibzteam-service'));
+        this.allEntityService.set('ibzdeptmember', () => import('@/service/ibzdept-member/ibzdept-member-service'));
+        this.allEntityService.set('ibzdepartment', () => import('@/service/ibzdepartment/ibzdepartment-service'));
+        this.allEntityService.set('ibzteammember', () => import('@/service/ibzteam-member/ibzteam-member-service'));
+        this.allEntityService.set('ibzemployee', () => import('@/service/ibzemployee/ibzemployee-service'));
     }
 
     /**

@@ -7,10 +7,10 @@ import './login/login';
 import './upload/upload';
 
 // 实体级接口对象
-import './entity/wfremodels/wfremodels';
-import './entity/wfmembers/wfmembers';
-import './entity/wfgroups/wfgroups';
-import './entity/wfusers/wfusers';
 import './entity/wftasks/wftasks';
-import './entity/wfprocess-definitions/wfprocess-definitions';
+import './entity/wfmembers/wfmembers';
+import './entity/wfusers/wfusers';
+import './entity/wfgroups/wfgroups';
+import './entity/wfremodels/wfremodels';
 import './entity/wfsystems/wfsystems';
+import './entity/wfprocess-definitions/wfprocess-definitions';

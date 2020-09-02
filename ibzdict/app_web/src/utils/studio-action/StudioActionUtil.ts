@@ -119,8 +119,12 @@ export class StudioActionUtil {
                 }, '*');
                 Vue.prototype.$message.warning('请在已打开的配置平台查看!');
             } else {
-                console.log(`${Environment.StudioUrl}?ov=${JSON.stringify(params)}#/common_slnindex/srfkeys=${Environment.SlnId}/sysdesign_psdevslnsysmodeltreeexpview/srfkey=${Environment.SysId}`);
-                this.studioWin = window.open(`${Environment.StudioUrl}?ov=${encodeURIComponent(JSON.stringify(params))}#/common_slnindex/srfkeys=${Environment.SlnId}/sysdesign_psdevslnsysmodeltreeexpview/srfkey=${Environment.SysId}`, '_blank');
+                if(Environment.debugOpenMode === 'sln'){
+                    console.log("打开sln未支持");
+                    // this.studioWin = window.open(`${Environment.StudioUrl}?ov=${encodeURIComponent(JSON.stringify(params))}#/common_slnindex/srfkeys=${Environment.SlnId}/sysdesign_psdevslnsysmodeltreeexpview/srfkey=${Environment.SysId}`, '_blank');
+                }else{
+                    this.studioWin = window.open(`${Environment.StudioUrl}?ov=${encodeURIComponent(JSON.stringify(params))}#/common_mosindex/srfkeys=${Environment.SysId}`, '_blank');
+                }
             }
         }
     }

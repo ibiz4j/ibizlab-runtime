@@ -36,34 +36,6 @@ const router = new Router({
             component: () => import('@pages/task/task-index-view/task-index-view.vue'),
             children: [
                 {
-                    path: 'jobslogs/:jobslog?/gridview/:gridview?',
-                    meta: {
-                        caption: 'entities.jobslog.views.gridview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'taskindexview', parameterName: 'taskindexview' },
-                            { pathName: 'jobslogs', parameterName: 'jobslog' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/task/jobs-log-grid-view/jobs-log-grid-view.vue'),
-                },
-                {
-                    path: 'jobsregistries/:jobsregistry?/editview/:editview?',
-                    meta: {
-                        caption: 'entities.jobsregistry.views.editview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'taskindexview', parameterName: 'taskindexview' },
-                            { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
-                            { pathName: 'editview', parameterName: 'editview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/task/jobs-registry-edit-view/jobs-registry-edit-view.vue'),
-                },
-                {
                     path: 'jobsregistries/:jobsregistry?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.jobsregistry.views.gridview.caption',
@@ -76,6 +48,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/task/jobs-registry-grid-view/jobs-registry-grid-view.vue'),
+                },
+                {
+                    path: 'jobsinfos/:jobsinfo?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.jobsinfo.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'taskindexview', parameterName: 'taskindexview' },
+                            { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/task/jobs-info-edit-view/jobs-info-edit-view.vue'),
                 },
                 {
                     path: 'jobslogs/:jobslog?/editview/:editview?',
@@ -92,18 +78,32 @@ const router = new Router({
                     component: () => import('@pages/task/jobs-log-edit-view/jobs-log-edit-view.vue'),
                 },
                 {
-                    path: 'jobsinfos/:jobsinfo?/editview/:editview?',
+                    path: 'jobsregistries/:jobsregistry?/editview/:editview?',
                     meta: {
-                        caption: 'entities.jobsinfo.views.editview.caption',
+                        caption: 'entities.jobsregistry.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'taskindexview', parameterName: 'taskindexview' },
-                            { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
+                            { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
                             { pathName: 'editview', parameterName: 'editview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/task/jobs-info-edit-view/jobs-info-edit-view.vue'),
+                    component: () => import('@pages/task/jobs-registry-edit-view/jobs-registry-edit-view.vue'),
+                },
+                {
+                    path: 'jobslogs/:jobslog?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.jobslog.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'taskindexview', parameterName: 'taskindexview' },
+                            { pathName: 'jobslogs', parameterName: 'jobslog' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/task/jobs-log-grid-view/jobs-log-grid-view.vue'),
                 },
                 {
                     path: 'jobsinfos/:jobsinfo?/gridview/:gridview?',
@@ -123,17 +123,17 @@ const router = new Router({
             ],
         },
     {
-        path: '/jobsinfos/:jobsinfo?/gridview/:gridview?',
+        path: '/jobsregistries/:jobsregistry?/gridview/:gridview?',
         meta: {
-            caption: 'entities.jobsinfo.views.gridview.caption',
+            caption: 'entities.jobsregistry.views.gridview.caption',
             info:'',
             parameters: [
-                { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
+                { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/task/jobs-info-grid-view/jobs-info-grid-view.vue'),
+        component: () => import('@pages/task/jobs-registry-grid-view/jobs-registry-grid-view.vue'),
     },
     {
         path: '/jobsinfos/:jobsinfo?/editview/:editview?',
@@ -162,6 +162,19 @@ const router = new Router({
         component: () => import('@pages/task/jobs-registry-edit-view/jobs-registry-edit-view.vue'),
     },
     {
+        path: '/jobslogs/:jobslog?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.jobslog.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'jobslogs', parameterName: 'jobslog' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/task/jobs-log-grid-view/jobs-log-grid-view.vue'),
+    },
+    {
         path: '/jobslogs/:jobslog?/editview/:editview?',
         meta: {
             caption: 'entities.jobslog.views.editview.caption',
@@ -175,30 +188,17 @@ const router = new Router({
         component: () => import('@pages/task/jobs-log-edit-view/jobs-log-edit-view.vue'),
     },
     {
-        path: '/jobsregistries/:jobsregistry?/gridview/:gridview?',
+        path: '/jobsinfos/:jobsinfo?/gridview/:gridview?',
         meta: {
-            caption: 'entities.jobsregistry.views.gridview.caption',
+            caption: 'entities.jobsinfo.views.gridview.caption',
             info:'',
             parameters: [
-                { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
+                { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/task/jobs-registry-grid-view/jobs-registry-grid-view.vue'),
-    },
-    {
-        path: '/jobslogs/:jobslog?/gridview/:gridview?',
-        meta: {
-            caption: 'entities.jobslog.views.gridview.caption',
-            info:'',
-            parameters: [
-                { pathName: 'jobslogs', parameterName: 'jobslog' },
-                { pathName: 'gridview', parameterName: 'gridview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/task/jobs-log-grid-view/jobs-log-grid-view.vue'),
+        component: () => import('@pages/task/jobs-info-grid-view/jobs-info-grid-view.vue'),
     },
         ...globalRoutes,
         {

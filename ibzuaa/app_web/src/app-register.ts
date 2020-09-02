@@ -177,5 +177,6 @@ export const AppComponents = {
         v.component('app-update-password',UpdatePwd);
         v.component('app-menu-item', AppMenuItem);
         v.component('app-message-popover', AppMessagePopover);
+        v.component('ibiz-file-upload', ()=> import('./components/ibiz-file-upload/ibiz-file-upload.vue'));
     },
 };

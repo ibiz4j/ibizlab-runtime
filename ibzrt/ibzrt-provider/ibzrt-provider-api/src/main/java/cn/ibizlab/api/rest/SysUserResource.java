@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class SysUserResource {
 
     @ApiOperation(value = "新建系统用户", tags = {"系统用户" },  notes = "新建系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers")
-
     public ResponseEntity<SysUserDTO> create(@RequestBody SysUserDTO sysuserdto) {
         SysUser domain = sysuserMapping.toDomain(sysuserdto);
 		sysuserService.create(domain);
@@ -66,7 +64,6 @@ public class SysUserResource {
 
     @ApiOperation(value = "更新系统用户", tags = {"系统用户" },  notes = "更新系统用户")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}")
-
     public ResponseEntity<SysUserDTO> update(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserDTO sysuserdto) {
 		SysUser domain  = sysuserMapping.toDomain(sysuserdto);
         domain .setUserid(sysuser_id);
@@ -84,7 +81,6 @@ public class SysUserResource {
 
     @ApiOperation(value = "删除系统用户", tags = {"系统用户" },  notes = "删除系统用户")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("sysuser_id") String sysuser_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysuserService.remove(sysuser_id));
     }

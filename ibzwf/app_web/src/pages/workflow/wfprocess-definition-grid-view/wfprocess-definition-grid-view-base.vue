@@ -243,7 +243,7 @@ export default class WFProcessDefinitionGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFProcessDefinitionGridViewBase
 	 */
-	public viewtag: string = 'a06aed382ebc28e6521b4398880388cd';
+	public viewtag: string = 'bfa86be8c02420f87d5cf4ff9a768948';
 
 	/**
 	 * 自定义视图导航上下文集合

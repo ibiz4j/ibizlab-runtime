@@ -252,9 +252,10 @@ export class ViewTool {
      * @memberof ViewTool
      */
     public static calcActionItemAuthState(data:any,ActionModel:any,UIService:any){
+        let result: any[] = [];
         for (const key in ActionModel) {
             if (!ActionModel.hasOwnProperty(key)) {
-                return;
+                return result;
             }
             const _item = ActionModel[key];
             if(_item && _item['dataaccaction'] && UIService){
@@ -282,7 +283,9 @@ export class ViewTool {
                     _item.visabled = true;
                     _item.disabled = false;
                 }
+                result.push(dataActionResult);
             }
         }
+        return result;
     } 
 }

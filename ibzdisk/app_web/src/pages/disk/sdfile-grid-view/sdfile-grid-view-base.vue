@@ -243,7 +243,7 @@ export default class SDFileGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SDFileGridViewBase
 	 */
-	public viewtag: string = '254cf228e42d864c1cefd0f5526492ad';
+	public viewtag: string = '795a12a2bfb63a98ce5bb80310509360';
 
 	/**
 	 * 自定义视图导航上下文集合

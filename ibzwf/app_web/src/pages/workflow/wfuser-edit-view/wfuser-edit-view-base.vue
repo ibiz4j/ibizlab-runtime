@@ -213,7 +213,7 @@ export default class WFUserEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFUserEditViewBase
 	 */
-	public viewtag: string = '77dd35badedcc0f6b98e83ee1ff82bda';
+	public viewtag: string = 'ffd6ce24e0a1aa780920b48721e502a7';
 
 	/**
 	 * 自定义视图导航上下文集合

@@ -223,7 +223,7 @@ export default class SysAppGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysAppGridViewBase
 	 */
-	public viewtag: string = 'bb58e4db8024f089e1d808f0ede81302';
+	public viewtag: string = '1ef170b14b7a70f4609a9f13692d1414';
 
 	/**
 	 * 自定义视图导航上下文集合

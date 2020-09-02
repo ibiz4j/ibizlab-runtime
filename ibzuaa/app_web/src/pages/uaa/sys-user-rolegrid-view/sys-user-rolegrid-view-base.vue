@@ -199,7 +199,7 @@ export default class SYS_USER_ROLEGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SYS_USER_ROLEGridViewBase
 	 */
-	public viewtag: string = 'fb89f9af95f2caf92ccc1249025c9a1b';
+	public viewtag: string = '6736591aca71edc23df760e278378566';
 
 	/**
 	 * 自定义视图导航上下文集合

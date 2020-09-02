@@ -711,7 +711,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}): void {
         if(!this.loadAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'IBZOrganizationGridView' + (this.$t('app.searchForm.notConfig.loadAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'IBZOrganizationPickupGridView' + (this.$t('app.searchForm.notConfig.loadAction') as string) });
             return;
         }
         const arg: any = { ...opt };
@@ -747,7 +747,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public loadDraft(opt: any = {},mode?:string): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'IBZOrganizationGridView' + (this.$t('app.searchForm.notConfig.loaddraftAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'IBZOrganizationPickupGridView' + (this.$t('app.searchForm.notConfig.loaddraftAction') as string) });
             return;
         }
         const arg: any = { ...opt } ;

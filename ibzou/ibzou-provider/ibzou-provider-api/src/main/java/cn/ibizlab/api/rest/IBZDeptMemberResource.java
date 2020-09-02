@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Create-all')")
     @ApiOperation(value = "新建部门成员", tags = {"部门成员" },  notes = "新建部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdeptmembers")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> create(@RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
 		ibzdeptmemberService.create(domain);
@@ -69,7 +67,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Update-all')")
     @ApiOperation(value = "更新部门成员", tags = {"部门成员" },  notes = "更新部门成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> update(@PathVariable("ibzdeptmember_id") String ibzdeptmember_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
 		IBZDeptMember domain  = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain .setMemberid(ibzdeptmember_id);
@@ -89,7 +86,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Remove-all')")
     @ApiOperation(value = "删除部门成员", tags = {"部门成员" },  notes = "删除部门成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("ibzdeptmember_id") String ibzdeptmember_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzdeptmemberService.remove(ibzdeptmember_id));
     }
@@ -162,7 +158,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Create-all')")
     @ApiOperation(value = "根据部门建立部门成员", tags = {"部门成员" },  notes = "根据部门建立部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/{ibzdepartment_id}/ibzdeptmembers")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> createByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzdepartment_id);
@@ -186,7 +181,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Update-all')")
     @ApiOperation(value = "根据部门更新部门成员", tags = {"部门成员" },  notes = "根据部门更新部门成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> updateByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzdepartment_id);
@@ -211,7 +205,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Remove-all')")
     @ApiOperation(value = "根据部门删除部门成员", tags = {"部门成员" },  notes = "根据部门删除部门成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{ibzdepartment_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeByIBZDepartment(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzdeptmemberService.remove(ibzdeptmember_id));
     }
@@ -294,7 +287,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Create-all')")
     @ApiOperation(value = "根据人员建立部门成员", tags = {"部门成员" },  notes = "根据人员建立部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzemployees/{ibzemployee_id}/ibzdeptmembers")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> createByIBZEmployee(@PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzemployee_id);
@@ -318,7 +310,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Update-all')")
     @ApiOperation(value = "根据人员更新部门成员", tags = {"部门成员" },  notes = "根据人员更新部门成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzemployees/{ibzemployee_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> updateByIBZEmployee(@PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzemployee_id);
@@ -343,7 +334,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Remove-all')")
     @ApiOperation(value = "根据人员删除部门成员", tags = {"部门成员" },  notes = "根据人员删除部门成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzemployees/{ibzemployee_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeByIBZEmployee(@PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzdeptmemberService.remove(ibzdeptmember_id));
     }
@@ -426,7 +416,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Create-all')")
     @ApiOperation(value = "根据部门人员建立部门成员", tags = {"部门成员" },  notes = "根据部门人员建立部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> createByIBZDepartmentIBZEmployee(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzemployee_id);
@@ -450,7 +439,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Update-all')")
     @ApiOperation(value = "根据部门人员更新部门成员", tags = {"部门成员" },  notes = "根据部门人员更新部门成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> updateByIBZDepartmentIBZEmployee(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzemployee_id);
@@ -475,7 +463,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Remove-all')")
     @ApiOperation(value = "根据部门人员删除部门成员", tags = {"部门成员" },  notes = "根据部门人员删除部门成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeByIBZDepartmentIBZEmployee(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzdeptmemberService.remove(ibzdeptmember_id));
     }
@@ -558,7 +545,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Create-all')")
     @ApiOperation(value = "根据单位机构部门建立部门成员", tags = {"部门成员" },  notes = "根据单位机构部门建立部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzdeptmembers")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> createByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzdepartment_id);
@@ -582,7 +568,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Update-all')")
     @ApiOperation(value = "根据单位机构部门更新部门成员", tags = {"部门成员" },  notes = "根据单位机构部门更新部门成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> updateByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzdepartment_id);
@@ -607,7 +592,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Remove-all')")
     @ApiOperation(value = "根据单位机构部门删除部门成员", tags = {"部门成员" },  notes = "根据单位机构部门删除部门成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeByIBZOrganizationIBZDepartment(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzdeptmemberService.remove(ibzdeptmember_id));
     }
@@ -690,7 +674,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Create-all')")
     @ApiOperation(value = "根据单位机构人员建立部门成员", tags = {"部门成员" },  notes = "根据单位机构人员建立部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> createByIBZOrganizationIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzemployee_id);
@@ -714,7 +697,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Update-all')")
     @ApiOperation(value = "根据单位机构人员更新部门成员", tags = {"部门成员" },  notes = "根据单位机构人员更新部门成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> updateByIBZOrganizationIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzemployee_id);
@@ -739,7 +721,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Remove-all')")
     @ApiOperation(value = "根据单位机构人员删除部门成员", tags = {"部门成员" },  notes = "根据单位机构人员删除部门成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeByIBZOrganizationIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzdeptmemberService.remove(ibzdeptmember_id));
     }
@@ -822,7 +803,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Create-all')")
     @ApiOperation(value = "根据单位机构部门人员建立部门成员", tags = {"部门成员" },  notes = "根据单位机构部门人员建立部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> createByIBZOrganizationIBZDepartmentIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzemployee_id);
@@ -846,7 +826,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Update-all')")
     @ApiOperation(value = "根据单位机构部门人员更新部门成员", tags = {"部门成员" },  notes = "根据单位机构部门人员更新部门成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<IBZDeptMemberDTO> updateByIBZOrganizationIBZDepartmentIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id, @RequestBody IBZDeptMemberDTO ibzdeptmemberdto) {
         IBZDeptMember domain = ibzdeptmemberMapping.toDomain(ibzdeptmemberdto);
         domain.setUserid(ibzemployee_id);
@@ -871,7 +850,6 @@ public class IBZDeptMemberResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-IBZDeptMember-Remove-all')")
     @ApiOperation(value = "根据单位机构部门人员删除部门成员", tags = {"部门成员" },  notes = "根据单位机构部门人员删除部门成员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}/ibzemployees/{ibzemployee_id}/ibzdeptmembers/{ibzdeptmember_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeByIBZOrganizationIBZDepartmentIBZEmployee(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @PathVariable("ibzemployee_id") String ibzemployee_id, @PathVariable("ibzdeptmember_id") String ibzdeptmember_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzdeptmemberService.remove(ibzdeptmember_id));
     }

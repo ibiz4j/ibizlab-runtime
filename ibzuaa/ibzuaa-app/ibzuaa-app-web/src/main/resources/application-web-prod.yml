@@ -1,5 +1,5 @@
 server:
-  port: 30002
+  port: 8080
 #Log配置
 logging:
   level:
@@ -7,36 +7,36 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
-    sys_open_access:
-      path: /sysopenaccesses/**
-      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-      stripPrefix: false
-    sys_authlog:
-      path: /sysauthlogs/**
-      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-      stripPrefix: false
-    sys_app:
-      path: /sysapps/**
-      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-      stripPrefix: false
     sys_role_permission:
       path: /sysrolepermissions/**
-      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-      stripPrefix: false
-    sys_permission:
-      path: /syspermissions/**
-      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-      stripPrefix: false
-    sys_user_role:
-      path: /sysuserroles/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
     sys_user:
       path: /sysusers/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
+    sys_authlog:
+      path: /sysauthlogs/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_open_access:
+      path: /sysopenaccesses/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_user_role:
+      path: /sysuserroles/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
     sys_role:
       path: /sysroles/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_permission:
+      path: /syspermissions/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_app:
+      path: /sysapps/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
   sensitive-headers:

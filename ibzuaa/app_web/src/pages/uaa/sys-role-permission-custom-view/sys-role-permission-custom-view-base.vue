@@ -107,7 +107,7 @@ export default class SysRolePermissionCustomViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysRolePermissionCustomViewBase
 	 */
-	public viewtag: string = 'e791be173ed0f4bbe9cce942b6edde63';
+	public viewtag: string = '983f3ae1533a5cd62619dedb79bb4b28';
 
 	/**
 	 * 自定义视图导航上下文集合

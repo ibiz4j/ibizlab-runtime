@@ -9,7 +9,6 @@ import lombok.Data;
 @Data
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@AllArgsConstructor
 public class FileItem
 {
 	private String id;
@@ -27,5 +26,14 @@ public class FileItem
 		this.filename = filename;
 		this.size = size;
 		this.ext = ext;
+	}
+	public FileItem(String id, String name, String fileid, String filename, long size, String ext,String authcode) {
+		this.id = id;
+		this.name = name;
+		this.fileid = fileid;
+		this.filename = filename;
+		this.size = size;
+		this.ext = ext;
+		this.authcode = authcode;
 	}
 }

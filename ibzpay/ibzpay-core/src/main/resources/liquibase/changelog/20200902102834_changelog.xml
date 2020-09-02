@@ -1,0 +1,40 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="mac (generated)" id="1599042522708-1">
+        <preConditions onFail="MARK_RAN"  >
+            <not>
+                <tableExists tableName="IBZOPENACCESS" />
+            </not>
+        </preConditions>
+        <createTable tableName="IBZOPENACCESS">
+            <column name="ACCESSID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PAY_OPEN_ACCESS_ACCESSID"/>
+            </column>
+            <column name="ACCESSNAME" type="VARCHAR(100)"/>
+            <column name="OPEN_TYPE" type="VARCHAR(100)"/>
+            <column name="ACCESS_KEY" type="VARCHAR(100)"/>
+            <column name="SECRET_KEY" type="VARCHAR(100)"/>
+            <column name="REGION_ID" type="VARCHAR(100)"/>
+            <column name="ACCESS_TOKEN" type="VARCHAR(1000)"/>
+            <column name="EXPIRES_TIME" type="TIMESTAMP"/>
+            <column name="DISABLED" type="INT"/>
+            <column name="REDIRECT_URI" type="VARCHAR(500)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1599042522708-2">
+        <createTable tableName="IBZPAYTRADE">
+            <column name="TRADEID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PAY_TRADE_TRADEID"/>
+            </column>
+            <column name="TRADENAME" type="VARCHAR(100)"/>
+            <column name="SUBJECT" type="VARCHAR(100)"/>
+            <column name="OUTTRADENO" type="VARCHAR(100)"/>
+            <column name="TOTALAMOUNT" type="VARCHAR(100)"/>
+            <column name="ACCESSID" type="VARCHAR(100)"/>
+            <column name="ACCESSNAME" type="VARCHAR(100)"/>
+            <column name="APPID" type="VARCHAR(100)"/>
+            <column name="TRADETYPE" type="VARCHAR(100)"/>
+            <column name="TRADESTATUS" type="VARCHAR(60)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class JobsLockResource {
 
     @ApiOperation(value = "新建任务锁", tags = {"任务锁" },  notes = "新建任务锁")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks")
-
     public ResponseEntity<JobsLockDTO> create(@RequestBody JobsLockDTO jobslockdto) {
         JobsLock domain = jobslockMapping.toDomain(jobslockdto);
 		jobslockService.create(domain);
@@ -66,7 +64,6 @@ public class JobsLockResource {
 
     @ApiOperation(value = "更新任务锁", tags = {"任务锁" },  notes = "更新任务锁")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/{jobslock_id}")
-
     public ResponseEntity<JobsLockDTO> update(@PathVariable("jobslock_id") String jobslock_id, @RequestBody JobsLockDTO jobslockdto) {
 		JobsLock domain  = jobslockMapping.toDomain(jobslockdto);
         domain .setId(jobslock_id);
@@ -84,7 +81,6 @@ public class JobsLockResource {
 
     @ApiOperation(value = "删除任务锁", tags = {"任务锁" },  notes = "删除任务锁")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslocks/{jobslock_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("jobslock_id") String jobslock_id) {
          return ResponseEntity.status(HttpStatus.OK).body(jobslockService.remove(jobslock_id));
     }

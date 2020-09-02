@@ -23,6 +23,8 @@
         <module>ibzwf</module>
         <module>ibzdisk</module>
         <module>ibztask</module>
+        <module>ibznotify</module>
+        <module>ibzpay</module>
         <module>ibzdict</module>
         <module>boot</module>
         <module>gateway</module>

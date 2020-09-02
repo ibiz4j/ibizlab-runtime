@@ -191,7 +191,7 @@ export default class JobsRegistryGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof JobsRegistryGridViewBase
 	 */
-	public viewtag: string = 'b10fda534ad827548d6902807e8dc8cf';
+	public viewtag: string = '3fc39744066bd5343be378ec5703f556';
 
 	/**
 	 * 自定义视图导航上下文集合

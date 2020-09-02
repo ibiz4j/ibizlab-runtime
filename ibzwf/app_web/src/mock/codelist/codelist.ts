@@ -8,6 +8,14 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status, [
         {
+        "srfkey": "WFSystemList",
+        "emptytext": "未定义",
+        "codelisttype":"dynamic",
+        "appdataentity":"WFSystem",
+        "appdedataset":"FetchDefault",
+        "items": []
+    },
+    {
         srfkey: "YesNo",
         emptytext: "未定义",
         "codelisttype":"static",
@@ -16,6 +24,7 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
                 id: "1",
                 label: "是",
                 text: "是",
+                "class":"",
                 "data":"",
                 "codename":"Item_1",
                 value: "1",
@@ -26,6 +35,7 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
                 id: "0",
                 label: "否",
                 text: "否",
+                "class":"",
                 "data":"",
                 "codename":"Item_0",
                 value: "0",
@@ -33,14 +43,6 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
                 disabled: false,
             },
         ]
-    },
-    {
-        "srfkey": "WFSystemList",
-        "emptytext": "未定义",
-        "codelisttype":"dynamic",
-        "appdataentity":"WFSystem",
-        "appdedataset":"FetchDefault",
-        "items": []
     }
     ]];
 });

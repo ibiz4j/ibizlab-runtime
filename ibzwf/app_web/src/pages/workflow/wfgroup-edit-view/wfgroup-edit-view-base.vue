@@ -213,7 +213,7 @@ export default class WFGroupEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFGroupEditViewBase
 	 */
-	public viewtag: string = 'aeb28973b7182f671fa50aa5d87e9346';
+	public viewtag: string = 'b23a721ca159ac2490b768d795e85d17';
 
 	/**
 	 * 自定义视图导航上下文集合

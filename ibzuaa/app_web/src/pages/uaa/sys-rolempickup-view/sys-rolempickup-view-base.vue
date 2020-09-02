@@ -158,7 +158,7 @@ export default class SYS_ROLEMPickupViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SYS_ROLEMPickupViewBase
 	 */
-	public viewtag: string = 'cdb0155128cac2c36012ae9692690e21';
+	public viewtag: string = 'a1f8d44a9d7be49687062c63434b0f3f';
 
 	/**
 	 * 自定义视图导航上下文集合

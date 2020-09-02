@@ -89,10 +89,10 @@ export default class WFGroupUIServiceBase extends UIService {
      * @memberof  WFGroupUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'wfgroups'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'wfgroups'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'wfgroups'});
         this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'wfgroups'});
+        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'wfgroups'});
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'wfgroups'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'wfgroups'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'wfgroups'});
     }
 

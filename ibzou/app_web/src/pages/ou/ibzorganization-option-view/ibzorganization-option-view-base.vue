@@ -71,15 +71,6 @@ export default class IBZOrganizationOptionViewBase extends Vue {
      * @memberof IBZOrganizationOptionViewBase
      */
     public appUIService: IBZOrganizationUIService = new IBZOrganizationUIService(this.$store);
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof IBZOrganizationOptionViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -132,7 +123,7 @@ export default class IBZOrganizationOptionViewBase extends Vue {
 	 * @type {string}
 	 * @memberof IBZOrganizationOptionViewBase
 	 */
-	public viewtag: string = '995d26f289a30e31573d557a5f5ba254';
+	public viewtag: string = '2ed85bebb69b8d23388420b95163228a';
 
 	/**
 	 * 自定义视图导航上下文集合
@@ -311,6 +302,15 @@ export default class IBZOrganizationOptionViewBase extends Vue {
      * @memberof IBZOrganizationOptionViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof IBZOrganizationOptionViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数

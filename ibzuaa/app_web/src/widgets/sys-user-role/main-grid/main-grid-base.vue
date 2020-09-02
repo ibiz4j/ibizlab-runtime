@@ -149,6 +149,7 @@ import MainService from './main-grid-service';
 import SysUserRoleUIService from '@/uiservice/sys-user-role/sys-user-role-ui-service';
 import CodeListService from "@service/app/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
+import { Environment } from '@/environments/environment';
 
 
 @Component({
@@ -332,20 +333,6 @@ export default class MainBase extends Vue implements ControlInterface {
         return this.selections[0];
     }
 
-    /**
-     * 打开新建数据视图
-     *
-     * @type {any}
-     * @memberof MainBase
-     */
-    @Prop() public newdata: any;
-    /**
-     * 打开编辑数据视图
-     *
-     * @type {any}
-     * @memberof MainBase
-     */
-    @Prop() public opendata: any;
     
     /**
     * 是否嵌入关系界面
@@ -691,9 +678,11 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getActionState(data:any){
-        let targetData:any = this.transformData(data);
         let tempActionModel:any = JSON.parse(JSON.stringify(this.ActionModel));
-        ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
+        if(Environment.enablePermissionValid){
+            let targetData:any = this.transformData(data);
+            ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
+        }
         return tempActionModel;
     }
 
@@ -783,7 +772,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}, pageReset: boolean = false): void {
         if(!this.fetchAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEPickupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
             return;
         }
         if(pageReset){
@@ -863,7 +852,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async remove(datas: any[]): Promise<any> {
         if(!this.removeAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEGridView'+(this.$t('app.gridpage.notConfig.removeAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEPickupGridView'+(this.$t('app.gridpage.notConfig.removeAction') as string) });
             return;
         }
         let _datas:any[] = [];
@@ -969,7 +958,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public addBatch(arg: any = {}): void {
         if(!this.fetchAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEPickupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
             return;
         }
         if(!arg){
@@ -1531,7 +1520,7 @@ export default class MainBase extends Vue implements ControlInterface {
             try {
                 if(Object.is(item.rowDataState, 'create')){
                     if(!this.createAction){
-                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEGridView'+(this.$t('app.gridpage.notConfig.createAction') as string) });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEPickupGridView'+(this.$t('app.gridpage.notConfig.createAction') as string) });
                     }else{
                       Object.assign(item,{viewparams:this.viewparams});
                       let response = await this.service.add(this.createAction, JSON.parse(JSON.stringify(this.context)),item, this.showBusyIndicator);
@@ -1539,7 +1528,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     }
                 }else if(Object.is(item.rowDataState, 'update')){
                     if(!this.updateAction){
-                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEGridView'+(this.$t('app.gridpage.notConfig.updateAction') as string) });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEPickupGridView'+(this.$t('app.gridpage.notConfig.updateAction') as string) });
                     }else{
                         Object.assign(item,{viewparams:this.viewparams});
                         if(item.sysuserrole){
@@ -1576,7 +1565,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public newRow(args: any[], params?: any, $event?: any, xData?: any): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEGridView'+(this.$t('app.gridpage.notConfig.loaddraftAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'SYS_USER_ROLEPickupGridView'+(this.$t('app.gridpage.notConfig.loaddraftAction') as string) });
             return;
         }
         let _this = this;

@@ -11,7 +11,7 @@ mock.onGet('v7/app-index-viewappmenu').reply((config: any) => {
         name: 'appmenu',
         items:  [
             {
-	id: '3F92DBA9-3532-49CD-A482-E9048A132684',
+	id: '801bacb689744f3de00c39b84618cbf5',
 	name: 'menuitem1',
 	text: '目录',
 	type: 'MENUITEM',
@@ -29,7 +29,7 @@ mock.onGet('v7/app-index-viewappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: '73B8AFA0-9EDB-4224-93B8-F8B7C4D01AE3',
+	id: 'edcf745c76c1c398b5e5511586f4e4c8',
 	name: 'menuitem2',
 	text: '栏目',
 	type: 'MENUITEM',

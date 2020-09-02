@@ -79,15 +79,6 @@ export default class IBZPostPickupGridViewBase extends Vue {
      * @memberof IBZPostPickupGridViewBase
      */
     public appUIService: IBZPostUIService = new IBZPostUIService(this.$store);
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof IBZPostPickupGridViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -140,7 +131,7 @@ export default class IBZPostPickupGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof IBZPostPickupGridViewBase
 	 */
-	public viewtag: string = '395d443de520bbaee17c18ea0747abce';
+	public viewtag: string = 'cbaccf404d6c33b995df3ace323ccec0';
 
 	/**
 	 * 自定义视图导航上下文集合
@@ -313,6 +304,15 @@ export default class IBZPostPickupGridViewBase extends Vue {
      * @memberof IBZPostPickupGridViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof IBZPostPickupGridViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数

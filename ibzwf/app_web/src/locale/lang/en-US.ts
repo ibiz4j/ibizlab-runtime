@@ -1,10 +1,10 @@
-import wfremodel_en_US from '@locale/lanres/entities/wfremodel/wfremodel_en_US';
-import wfmember_en_US from '@locale/lanres/entities/wfmember/wfmember_en_US';
-import wfgroup_en_US from '@locale/lanres/entities/wfgroup/wfgroup_en_US';
-import wfuser_en_US from '@locale/lanres/entities/wfuser/wfuser_en_US';
 import wftask_en_US from '@locale/lanres/entities/wftask/wftask_en_US';
-import wfprocessdefinition_en_US from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_en_US';
+import wfmember_en_US from '@locale/lanres/entities/wfmember/wfmember_en_US';
+import wfuser_en_US from '@locale/lanres/entities/wfuser/wfuser_en_US';
+import wfgroup_en_US from '@locale/lanres/entities/wfgroup/wfgroup_en_US';
+import wfremodel_en_US from '@locale/lanres/entities/wfremodel/wfremodel_en_US';
 import wfsystem_en_US from '@locale/lanres/entities/wfsystem/wfsystem_en_US';
+import wfprocessdefinition_en_US from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_en_US';
 import components_en_US from '@locale/lanres/components/components_en_US';
 import codelist_en_US from '@locale/lanres/codelist/codelist_en_US';
 import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';
@@ -223,13 +223,13 @@ export default {
         },
     },
     entities: {
-        wfremodel: wfremodel_en_US,
-        wfmember: wfmember_en_US,
-        wfgroup: wfgroup_en_US,
-        wfuser: wfuser_en_US,
         wftask: wftask_en_US,
-        wfprocessdefinition: wfprocessdefinition_en_US,
+        wfmember: wfmember_en_US,
+        wfuser: wfuser_en_US,
+        wfgroup: wfgroup_en_US,
+        wfremodel: wfremodel_en_US,
         wfsystem: wfsystem_en_US,
+        wfprocessdefinition: wfprocessdefinition_en_US,
     },
     components: components_en_US,
     codelist: codelist_en_US,

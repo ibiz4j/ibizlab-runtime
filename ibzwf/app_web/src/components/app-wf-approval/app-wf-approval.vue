@@ -5,30 +5,35 @@
             <span>{{data.startUserName}}{{$t('components.appWFApproval.commit')}}</span>
         </div>
         <div class="app-wf-approval-content" v-if="data.usertasks && data.usertasks.length >0">
-            <div class="approval-content-item" v-for="(usertask,index) in data.usertasks" :key="index">
-                <div class="approval-content-item-left">
-                    {{usertask.userTaskName}}
-                </div>
-                <div class="approval-content-item-right">
-                    <div class="approval-content-item-wait" v-if="usertask.identitylinks.length >0">
-                        {{$t('components.appWFApproval.wait')}}<span v-for="(identitylink,inx) in usertask.identitylinks" :key="inx">{{identitylink.displayname}}<span v-if="inx >0">、</span></span>{{$t('components.appWFApproval.handle')}}
-                    </div>
-                    <div class="approval-content-item-info" v-if="usertask.comments.length >0">
-                        <div v-for="(comment,commentInx) in usertask.comments" :key="commentInx">
-                            <div class="approval-content-item-info-item approval-content-item-info-top">
-                                {{`【${comment.type}】${comment.fullMessage}`}}
+            <template v-for="(usertask,index) in data.usertasks" >
+                <template v-if="usertask.identitylinks.length >0">
+                    <div class="approval-content-item" :key="index">
+                        <div class="approval-content-item-left">
+                            {{usertask.userTaskName}}
+                        </div>
+                        <div class="approval-content-item-right">
+                            <div class="approval-content-item-wait" v-if="usertask.identitylinks.length >0">
+                                {{$t('components.appWFApproval.wait')}}<span v-for="(identitylink,inx) in usertask.identitylinks" :key="inx">{{identitylink.displayname}}<span v-if="inx >0">、</span></span>{{$t('components.appWFApproval.handle')}}
                             </div>
-                             <div class="approval-content-item-info-item approval-content-item-info-bottom">
-                                <span class="info-bottom-name">{{comment.authorName}}</span>
-                                <span>{{comment.time}}</span>
+                            <div class="approval-content-item-info" v-if="usertask.comments.length >0">
+                                <div v-for="(comment,commentInx) in usertask.comments" :key="commentInx">
+                                    <div class="approval-content-item-info-item approval-content-item-info-top">
+                                        {{`【${comment.type}】${comment.fullMessage}`}}
+                                    </div>
+                                    <div class="approval-content-item-info-item approval-content-item-info-bottom">
+                                        <span class="info-bottom-name">{{comment.authorName}}</span>
+                                        <span>{{comment.time}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="approval-content-item-memo" v-if="usertask.userTaskId === viewparams.userTaskId">
+                                <el-input type="textarea"  v-model="initmemo" :rows="2" @blur="handleBlur" :placeholder="$t('components.appWFApproval.placeholder')"></el-input>
                             </div>
                         </div>
                     </div>
-                    <div class="approval-content-item-memo" v-if="usertask.userTaskId === viewparams.userTaskId">
-                        <el-input type="textarea"  v-model="initmemo" :rows="2" @blur="handleBlur" :placeholder="$t('components.appWFApproval.placeholder')"></el-input>
-                    </div>
-                </div>
-            </div>
+                </template>
+            </template>
+            
         </div>
          <div class="app-wf-approval-bottom">
             <span v-if="data.endTime">{{data.endTime}}{{$t('components.appWFApproval.end')}}</span>

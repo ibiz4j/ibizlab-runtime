@@ -89,8 +89,8 @@ export default class SysAppUIServiceBase extends UIService {
      * @memberof  SysAppUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysapps'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sysapps'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysapps'});
     }
 
     /**

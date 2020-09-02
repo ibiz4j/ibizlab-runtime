@@ -11,7 +11,7 @@ mock.onGet('v7/wfindex-viewappmenu').reply((config: any) => {
         name: 'appmenu',
         items:  [
             {
-	id: 'DE6BF5A8-9640-47AF-9AE7-7C73C5FCC8BF',
+	id: 'f7995aae13c2a12ed1bca0f098371b7f',
 	name: 'menuitem1',
 	text: '流程定义',
 	type: 'MENUITEM',
@@ -29,7 +29,7 @@ mock.onGet('v7/wfindex-viewappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: 'F6C65EF1-F523-466D-9C63-7FA2F87BA90B',
+	id: '2738fed9d24a10a28095fb04fd468883',
 	name: 'menuitem3',
 	text: '发布新流程',
 	type: 'MENUITEM',
@@ -47,7 +47,7 @@ mock.onGet('v7/wfindex-viewappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: 'A2004B9C-B0CE-4180-8C76-6FD90059F17B',
+	id: '27b0edb66e9777d3d6271163680881e8',
 	name: 'menuitem2',
 	text: '用户组',
 	type: 'MENUITEM',
@@ -65,7 +65,7 @@ mock.onGet('v7/wfindex-viewappmenu').reply((config: any) => {
 	resourcetag: '',
 },
             {
-	id: '0F72A458-D47D-4305-AF77-4D643124741D',
+	id: '4e8e7629980b4670ef786b281bf0feae',
 	name: 'menuitem4',
 	text: '我的待办',
 	type: 'MENUITEM',
@@ -79,7 +79,7 @@ mock.onGet('v7/wfindex-viewappmenu').reply((config: any) => {
 	iconcls: 'fa fa-list-alt',
 	icon: '',
 	textcls: '',
-	appfunctag: '_2',
+	appfunctag: 'Auto4',
 	resourcetag: '',
 },
         ],

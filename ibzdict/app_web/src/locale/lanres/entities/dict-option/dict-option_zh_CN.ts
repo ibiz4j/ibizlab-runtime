@@ -16,6 +16,10 @@ export default {
     updatedate: "最后修改时间",
   },
 	views: {
+		editview: {
+			caption: "字典项",
+      		title: "字典项编辑视图",
+		},
 		gridview: {
 			caption: "字典项",
       		title: "字典项表格视图",
@@ -23,10 +27,6 @@ export default {
 		grideditview: {
 			caption: "字典项",
       		title: "字典项表格视图",
-		},
-		editview: {
-			caption: "字典项",
-      		title: "字典项编辑视图",
 		},
 	},
 	main_form: {
@@ -105,6 +105,16 @@ export default {
 		uiactions: {
 		},
 	},
+	editviewtoolbar_toolbar: {
+		tbitem1: {
+			caption: "保存并关闭",
+			tip: "保存并关闭",
+		},
+		tbitem2: {
+			caption: "关闭",
+			tip: "关闭",
+		},
+	},
 	gridviewtoolbar_toolbar: {
 		tbitem3: {
 			caption: "新建",
@@ -157,16 +167,6 @@ export default {
 		deuiaction2: {
 			caption: "过滤",
 			tip: "过滤",
-		},
-	},
-	editviewtoolbar_toolbar: {
-		tbitem1: {
-			caption: "保存并关闭",
-			tip: "保存并关闭",
-		},
-		tbitem2: {
-			caption: "关闭",
-			tip: "关闭",
 		},
 	},
 	grideditviewtoolbar_toolbar: {

@@ -223,7 +223,7 @@ export default class DictOptionGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof DictOptionGridViewBase
 	 */
-	public viewtag: string = '56893daa82632caa84a6edeeb0acabaf';
+	public viewtag: string = '22e202992971f634c00e022b2cae335e';
 
 	/**
 	 * 自定义视图导航上下文集合

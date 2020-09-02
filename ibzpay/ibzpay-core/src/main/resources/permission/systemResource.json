@@ -1,0 +1,31 @@
+    {
+    "systemid":"ibzpay",
+    "unires":[
+    ],
+    "entities":[
+    {
+    "dename":"PayTrade",
+    "delogicname":"支付交易",
+    "sysmoudle":{"id":"PAY","name":"pay"},
+    "dedataset":[{"id":"Default" , "name":"数据集"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ,    {
+    "dename":"PayOpenAccess",
+    "delogicname":"支付平台",
+    "sysmoudle":{"id":"PAY","name":"pay"},
+    "dedataset":[{"id":"Default" , "name":"数据集"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+     }
+    ],
+    "appmenus":[
+            
+            {
+               "appid":"web",
+               "appname":"支付",
+               "appmenu":[{"menuid":"PayIndexView", "menuname":"PayIndexView", "menuitem":[{ "id":"menuitem1" , "name":"支付平台" },{ "id":"menuitem2" , "name":"交易记录" }] }]
+            }
+            ]
+    }

@@ -9,21 +9,21 @@ export default {
     updatedate: "最后修改时间",
   },
 	views: {
-		pickupgridview: {
-			caption: "字典",
-      		title: "字典选择表格视图",
-		},
 		gridview: {
 			caption: "字典",
       		title: "字典表格视图",
 		},
-		editview: {
+		pickupgridview: {
 			caption: "字典",
-      		title: "字典编辑视图",
+      		title: "字典选择表格视图",
 		},
 		pickupview: {
 			caption: "字典",
       		title: "字典数据选择视图",
+		},
+		editview: {
+			caption: "字典",
+      		title: "字典编辑视图",
 		},
 	},
 	main_form: {

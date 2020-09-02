@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class WFGroupResource {
 
     @ApiOperation(value = "新建角色/用户组", tags = {"角色/用户组" },  notes = "新建角色/用户组")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups")
-
     public ResponseEntity<WFGroupDTO> create(@RequestBody WFGroupDTO wfgroupdto) {
         WFGroup domain = wfgroupMapping.toDomain(wfgroupdto);
 		wfgroupService.create(domain);
@@ -66,7 +64,6 @@ public class WFGroupResource {
 
     @ApiOperation(value = "更新角色/用户组", tags = {"角色/用户组" },  notes = "更新角色/用户组")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/{wfgroup_id}")
-
     public ResponseEntity<WFGroupDTO> update(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFGroupDTO wfgroupdto) {
 		WFGroup domain  = wfgroupMapping.toDomain(wfgroupdto);
         domain .setId(wfgroup_id);
@@ -84,7 +81,6 @@ public class WFGroupResource {
 
     @ApiOperation(value = "删除角色/用户组", tags = {"角色/用户组" },  notes = "删除角色/用户组")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("wfgroup_id") String wfgroup_id) {
          return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.remove(wfgroup_id));
     }

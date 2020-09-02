@@ -36,6 +36,49 @@ const router = new Router({
             component: () => import('@pages/dict/app-index-view/app-index-view.vue'),
             children: [
                 {
+                    path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/grideditview/:grideditview?',
+                    meta: {
+                        caption: 'entities.dictoption.views.grideditview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'appindexview', parameterName: 'appindexview' },
+                            { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
+                            { pathName: 'dictoptions', parameterName: 'dictoption' },
+                            { pathName: 'grideditview', parameterName: 'grideditview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/dict/dict-option-grid-edit-view/dict-option-grid-edit-view.vue'),
+                },
+                {
+                    path: 'dictoptions/:dictoption?/grideditview/:grideditview?',
+                    meta: {
+                        caption: 'entities.dictoption.views.grideditview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'appindexview', parameterName: 'appindexview' },
+                            { pathName: 'dictoptions', parameterName: 'dictoption' },
+                            { pathName: 'grideditview', parameterName: 'grideditview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/dict/dict-option-grid-edit-view/dict-option-grid-edit-view.vue'),
+                },
+                {
+                    path: 'dictcatalogs/:dictcatalog?/pickupgridview/:pickupgridview?',
+                    meta: {
+                        caption: 'entities.dictcatalog.views.pickupgridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'appindexview', parameterName: 'appindexview' },
+                            { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
+                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/dict/dict-catalog-pickup-grid-view/dict-catalog-pickup-grid-view.vue'),
+                },
+                {
                     path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/editview/:editview?',
                     meta: {
                         caption: 'entities.dictoption.views.editview.caption',
@@ -63,20 +106,6 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/dict/dict-option-edit-view/dict-option-edit-view.vue'),
-                },
-                {
-                    path: 'dictcatalogs/:dictcatalog?/pickupgridview/:pickupgridview?',
-                    meta: {
-                        caption: 'entities.dictcatalog.views.pickupgridview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'appindexview', parameterName: 'appindexview' },
-                            { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
-                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/dict/dict-catalog-pickup-grid-view/dict-catalog-pickup-grid-view.vue'),
                 },
                 {
                     path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/gridview/:gridview?',
@@ -108,33 +137,18 @@ const router = new Router({
                     component: () => import('@pages/dict/dict-option-grid-view/dict-option-grid-view.vue'),
                 },
                 {
-                    path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/grideditview/:grideditview?',
+                    path: 'dictcatalogs/:dictcatalog?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.dictoption.views.grideditview.caption',
+                        caption: 'entities.dictcatalog.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'appindexview', parameterName: 'appindexview' },
                             { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
-                            { pathName: 'dictoptions', parameterName: 'dictoption' },
-                            { pathName: 'grideditview', parameterName: 'grideditview' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/dict/dict-option-grid-edit-view/dict-option-grid-edit-view.vue'),
-                },
-                {
-                    path: 'dictoptions/:dictoption?/grideditview/:grideditview?',
-                    meta: {
-                        caption: 'entities.dictoption.views.grideditview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'appindexview', parameterName: 'appindexview' },
-                            { pathName: 'dictoptions', parameterName: 'dictoption' },
-                            { pathName: 'grideditview', parameterName: 'grideditview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/dict/dict-option-grid-edit-view/dict-option-grid-edit-view.vue'),
+                    component: () => import('@pages/dict/dict-catalog-grid-view/dict-catalog-grid-view.vue'),
                 },
                 {
                     path: 'dictcatalogs/:dictcatalog?/pickupview/:pickupview?',
@@ -164,23 +178,36 @@ const router = new Router({
                     },
                     component: () => import('@pages/dict/dict-catalog-edit-view/dict-catalog-edit-view.vue'),
                 },
-                {
-                    path: 'dictcatalogs/:dictcatalog?/gridview/:gridview?',
-                    meta: {
-                        caption: 'entities.dictcatalog.views.gridview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'appindexview', parameterName: 'appindexview' },
-                            { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/dict/dict-catalog-grid-view/dict-catalog-grid-view.vue'),
-                },
             ...indexRoutes,
             ],
         },
+    {
+        path: '/dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/editview/:editview?',
+        meta: {
+            caption: 'entities.dictoption.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
+                { pathName: 'dictoptions', parameterName: 'dictoption' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/dict/dict-option-edit-view/dict-option-edit-view.vue'),
+    },
+    {
+        path: '/dictoptions/:dictoption?/editview/:editview?',
+        meta: {
+            caption: 'entities.dictoption.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'dictoptions', parameterName: 'dictoption' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/dict/dict-option-edit-view/dict-option-edit-view.vue'),
+    },
     {
         path: '/dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/gridview/:gridview?',
         meta: {
@@ -207,19 +234,6 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/dict/dict-option-grid-view/dict-option-grid-view.vue'),
-    },
-    {
-        path: '/dictcatalogs/:dictcatalog?/pickupgridview/:pickupgridview?',
-        meta: {
-            caption: 'entities.dictcatalog.views.pickupgridview.caption',
-            info:'',
-            parameters: [
-                { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
-                { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/dict/dict-catalog-pickup-grid-view/dict-catalog-pickup-grid-view.vue'),
     },
     {
         path: '/dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/grideditview/:grideditview?',
@@ -262,44 +276,17 @@ const router = new Router({
         component: () => import('@pages/dict/dict-catalog-grid-view/dict-catalog-grid-view.vue'),
     },
     {
-        path: '/dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/editview/:editview?',
+        path: '/dictcatalogs/:dictcatalog?/pickupgridview/:pickupgridview?',
         meta: {
-            caption: 'entities.dictoption.views.editview.caption',
+            caption: 'entities.dictcatalog.views.pickupgridview.caption',
             info:'',
             parameters: [
                 { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
-                { pathName: 'dictoptions', parameterName: 'dictoption' },
-                { pathName: 'editview', parameterName: 'editview' },
+                { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
             ],
             requireAuth: true,
         },
-        component: () => import('@pages/dict/dict-option-edit-view/dict-option-edit-view.vue'),
-    },
-    {
-        path: '/dictoptions/:dictoption?/editview/:editview?',
-        meta: {
-            caption: 'entities.dictoption.views.editview.caption',
-            info:'',
-            parameters: [
-                { pathName: 'dictoptions', parameterName: 'dictoption' },
-                { pathName: 'editview', parameterName: 'editview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/dict/dict-option-edit-view/dict-option-edit-view.vue'),
-    },
-    {
-        path: '/dictcatalogs/:dictcatalog?/editview/:editview?',
-        meta: {
-            caption: 'entities.dictcatalog.views.editview.caption',
-            info:'',
-            parameters: [
-                { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
-                { pathName: 'editview', parameterName: 'editview' },
-            ],
-            requireAuth: true,
-        },
-        component: () => import('@pages/dict/dict-catalog-edit-view/dict-catalog-edit-view.vue'),
+        component: () => import('@pages/dict/dict-catalog-pickup-grid-view/dict-catalog-pickup-grid-view.vue'),
     },
     {
         path: '/dictcatalogs/:dictcatalog?/pickupview/:pickupview?',
@@ -313,6 +300,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/dict/dict-catalog-pickup-view/dict-catalog-pickup-view.vue'),
+    },
+    {
+        path: '/dictcatalogs/:dictcatalog?/editview/:editview?',
+        meta: {
+            caption: 'entities.dictcatalog.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'dictcatalogs', parameterName: 'dictcatalog' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/dict/dict-catalog-edit-view/dict-catalog-edit-view.vue'),
     },
         ...globalRoutes,
         {

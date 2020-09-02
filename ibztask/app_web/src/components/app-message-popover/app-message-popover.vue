@@ -20,8 +20,8 @@
                                     <el-row :draggable="false">
                                         <el-col :span="16" :draggable="false">
                                             <div class="process-definition-name" :draggable="false"><strong>{{myTask.processDefinitionName}}</strong></div>
-                                            <div :draggable="false">{{myTask.description}}</div>
-                                            <div :draggable="false">{{ formatDate(myTask.createTime, 'MM-DD hh:mm') }}</div>
+                                            <div class="description" :draggable="false">{{myTask.description}}</div>
+                                            <div class="createtime" :draggable="false">{{ formatDate(myTask.createTime, 'MM-DD hh:mm') }}</div>
                                         </el-col>
                                         <el-col :span="5" :draggable="false" style='display: flex; align-items: center'>
                                             <el-tag :type="myTask.name.indexOf('驳回')!=-1?'danger':(myTask.name.indexOf('成功')!=-1?'success':(myTask.name.indexOf('取消')!=-1?'info':'-'))"
@@ -54,8 +54,8 @@
                                     <el-row :draggable="false">
                                         <el-col :span="16" :draggable="false">
                                             <div class="process-definition-name" :draggable="false"><strong>{{myMsg.processDefinitionName}}</strong></div>
-                                            <div :draggable="false">{{myMsg.description}}</div>
-                                            <div :draggable="false">{{ formatDate(myMsg.createTime, 'MM-DD hh:mm') }}</div>
+                                            <div class="description" :draggable="false">{{myMsg.description}}</div>
+                                            <div class="createtime" :draggable="false">{{ formatDate(myMsg.createTime, 'MM-DD hh:mm') }}</div>
                                         </el-col>
                                         <el-col :span="5" :draggable="false" style='display: flex; align-items: center'>
                                             <el-tag :type="myMsg.name.indexOf('驳回')!=-1?'danger':(myMsg.name.indexOf('成功')!=-1?'success':(myMsg.name.indexOf('取消')!=-1?'info':'-'))"

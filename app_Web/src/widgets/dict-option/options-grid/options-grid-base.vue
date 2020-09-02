@@ -435,6 +435,7 @@ import OptionsService from './options-grid-service';
 import DictOptionUIService from '@/uiservice/dict-option/dict-option-ui-service';
 import CodeListService from "@service/app/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
+import { Environment } from '@/environments/environment';
 
 
 @Component({
@@ -1033,9 +1034,11 @@ export default class OptionsBase extends Vue implements ControlInterface {
      * @memberof OptionsBase
      */
     public getActionState(data:any){
-        let targetData:any = this.transformData(data);
         let tempActionModel:any = JSON.parse(JSON.stringify(this.ActionModel));
-        ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
+        if(Environment.enablePermissionValid){
+            let targetData:any = this.transformData(data);
+            ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
+        }
         return tempActionModel;
     }
 

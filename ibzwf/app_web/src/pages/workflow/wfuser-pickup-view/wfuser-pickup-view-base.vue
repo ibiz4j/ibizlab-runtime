@@ -125,7 +125,7 @@ export default class WFUserPickupViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFUserPickupViewBase
 	 */
-	public viewtag: string = '5592ca3571d551675c5306a0a9f1352e';
+	public viewtag: string = '61c5bff70bcf56e1dc0bb0900df9c98c';
 
 	/**
 	 * 自定义视图导航上下文集合

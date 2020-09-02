@@ -202,7 +202,7 @@ export default class SYS_PERMISSIONGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SYS_PERMISSIONGridViewBase
 	 */
-	public viewtag: string = '42f3fa04c9dc77f235207bcbe6ac3888';
+	public viewtag: string = '289b56658be0136636e6183ba9888e5c';
 
 	/**
 	 * 自定义视图导航上下文集合

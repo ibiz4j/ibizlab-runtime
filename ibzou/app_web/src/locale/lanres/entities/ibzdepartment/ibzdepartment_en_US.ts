@@ -20,13 +20,29 @@ export default {
     updatedate: "最后修改时间",
   },
 	views: {
-		optionview: {
-			caption: "部门快速新建",
-      		title: "部门快速新建",
+		pickupview: {
+			caption: "部门",
+      		title: "部门选择视图",
+		},
+		gridview: {
+			caption: "部门",
+      		title: "部门表格视图",
 		},
 		editview: {
 			caption: "部门管理",
       		title: "部门管理",
+		},
+		mpickupview: {
+			caption: "部门",
+      		title: "部门数据多项选择视图",
+		},
+		optionview: {
+			caption: "部门快速新建",
+      		title: "部门快速新建",
+		},
+		treeexpview: {
+			caption: "人员管理",
+      		title: "人员管理",
 		},
 		editgridview: {
 			caption: "部门",
@@ -35,22 +51,6 @@ export default {
 		pickupgridview: {
 			caption: "部门",
       		title: "部门选择表格视图",
-		},
-		mpickupview: {
-			caption: "部门",
-      		title: "部门数据多项选择视图",
-		},
-		pickupview: {
-			caption: "部门",
-      		title: "部门选择视图",
-		},
-		treeexpview: {
-			caption: "人员管理",
-      		title: "人员管理",
-		},
-		gridview: {
-			caption: "部门",
-      		title: "部门表格视图",
 		},
 	},
 	newform_form: {
@@ -181,36 +181,6 @@ export default {
 			tip: "Copy {0}",
 		},
 	},
-	editgridviewtoolbar_toolbar: {
-		tbitem24: {
-			caption: "行编辑",
-			tip: "行编辑",
-		},
-		tbitem25: {
-			caption: "新建行",
-			tip: "新建行",
-		},
-		deuiaction1: {
-			caption: "保存行",
-			tip: "保存行",
-		},
-		tbitem26: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem8: {
-			caption: "Remove",
-			tip: "Remove {0}",
-		},
-		tbitem9: {
-			caption: "-",
-			tip: "",
-		},
-		tbitem19: {
-			caption: "Filter",
-			tip: "Filter",
-		},
-	},
 	gridviewtoolbar_toolbar: {
 		tbitem1_opennewcreateview: {
 			caption: "快速新建",
@@ -249,6 +219,36 @@ export default {
 			tip: "Export {0} Data To Excel",
 		},
 		tbitem10: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem19: {
+			caption: "Filter",
+			tip: "Filter",
+		},
+	},
+	editgridviewtoolbar_toolbar: {
+		tbitem24: {
+			caption: "行编辑",
+			tip: "行编辑",
+		},
+		tbitem25: {
+			caption: "新建行",
+			tip: "新建行",
+		},
+		deuiaction1: {
+			caption: "保存行",
+			tip: "保存行",
+		},
+		tbitem26: {
+			caption: "-",
+			tip: "",
+		},
+		tbitem8: {
+			caption: "Remove",
+			tip: "Remove {0}",
+		},
+		tbitem9: {
 			caption: "-",
 			tip: "",
 		},

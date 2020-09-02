@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class WFUserResource {
     @PreAuthorize("hasPermission(this.wfuserMapping.toDomain(#wfuserdto),'ibzwf-WFUser-Create')")
     @ApiOperation(value = "新建用户", tags = {"用户" },  notes = "新建用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfusers")
-    @Transactional
     public ResponseEntity<WFUserDTO> create(@RequestBody WFUserDTO wfuserdto) {
         WFUser domain = wfuserMapping.toDomain(wfuserdto);
 		wfuserService.create(domain);
@@ -69,7 +67,6 @@ public class WFUserResource {
     @PreAuthorize("hasPermission(this.wfuserService.get(#wfuser_id),'ibzwf-WFUser-Update')")
     @ApiOperation(value = "更新用户", tags = {"用户" },  notes = "更新用户")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfusers/{wfuser_id}")
-    @Transactional
     public ResponseEntity<WFUserDTO> update(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFUserDTO wfuserdto) {
 		WFUser domain  = wfuserMapping.toDomain(wfuserdto);
         domain .setId(wfuser_id);
@@ -89,7 +86,6 @@ public class WFUserResource {
     @PreAuthorize("hasPermission(this.wfuserService.get(#wfuser_id),'ibzwf-WFUser-Remove')")
     @ApiOperation(value = "删除用户", tags = {"用户" },  notes = "删除用户")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("wfuser_id") String wfuser_id) {
          return ResponseEntity.status(HttpStatus.OK).body(wfuserService.remove(wfuser_id));
     }

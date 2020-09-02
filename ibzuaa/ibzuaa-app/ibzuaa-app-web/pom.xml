@@ -21,9 +21,6 @@
 		</dependency>
     </dependencies>
 
-    <properties>
-        <docker.image.prefix>registry.cn-shanghai.aliyuncs.com/ibizsys</docker.image.prefix>
-    </properties>
 
 
     <profiles>
@@ -98,23 +95,6 @@
                         </executions>
                     </plugin>
                     
-                    <plugin>
-                            <groupId>com.spotify</groupId>
-                            <artifactId>docker-maven-plugin</artifactId>
-                            <version>0.4.13</version>
-                            <configuration>
-                            <serverId>ibiz-dev</serverId>
-                            <imageName>${docker.image.prefix}/${project.artifactId}:latest</imageName>
-                            <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
-                            <resources>
-                                <resource>
-                                    <targetPath>/</targetPath>
-                                    <directory>../../</directory>
-                                    <include>${project.artifactId}.jar</include>
-                                </resource>
-                            </resources>
-                            </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>

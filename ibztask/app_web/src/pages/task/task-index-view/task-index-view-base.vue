@@ -130,7 +130,7 @@ export default class TaskIndexViewBase extends Vue {
 	 * @type {string}
 	 * @memberof TaskIndexViewBase
 	 */
-	public viewtag: string = '49432823-363C-43AB-AA9A-8F0BB0445335';
+	public viewtag: string = 'aa348881bb7ef951e281edc58131246b';
 
 	/**
 	 * 自定义视图导航上下文集合

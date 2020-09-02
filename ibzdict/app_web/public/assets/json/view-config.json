@@ -1,19 +1,19 @@
 {
+    "dictoptioneditview": {
+        "title": "字典项编辑视图",
+        "caption": "字典项",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "dict",
+        "viewname": "DictOptionEditView",
+        "viewtag": "0986ae2314847b586b20edfbb40fc82b"
+    },
     "dictoptiongridview": {
         "title": "字典项表格视图",
         "caption": "字典项",
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "dict",
         "viewname": "DictOptionGridView",
-        "viewtag": "56893daa82632caa84a6edeeb0acabaf"
-    },
-    "dictcatalogpickupgridview": {
-        "title": "字典选择表格视图",
-        "caption": "字典",
-        "viewtype": "DEPICKUPGRIDVIEW",
-        "viewmodule": "dict",
-        "viewname": "DictCatalogPickupGridView",
-        "viewtag": "66f9c86e5a56857f977ef91461338255"
+        "viewtag": "22e202992971f634c00e022b2cae335e"
     },
     "dictoptiongrideditview": {
         "title": "字典项表格视图",
@@ -21,7 +21,7 @@
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "dict",
         "viewname": "DictOptionGridEditView",
-        "viewtag": "6aa3306d5c50039f771e4617a8a5cd64"
+        "viewtag": "44488f30cf90677019077ed9ad33628e"
     },
     "dictcataloggridview": {
         "title": "字典表格视图",
@@ -29,31 +29,15 @@
         "viewtype": "DEGRIDVIEW",
         "viewmodule": "dict",
         "viewname": "DictCatalogGridView",
-        "viewtag": "7395bd2cc14d34a67b772f13a50b2587"
+        "viewtag": "74a6ce3ddf610ce7fb201662c6d4b8da"
     },
-    "dictoptioneditview": {
-        "title": "字典项编辑视图",
-        "caption": "字典项",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "dict",
-        "viewname": "DictOptionEditView",
-        "viewtag": "8ad70084b5f98a26370b74da612d3f49"
-    },
-    "appindexview": {
-        "title": "dictionary",
-        "caption": "ibizlab",
-        "viewtype": "APPINDEXVIEW",
-        "viewmodule": "dict",
-        "viewname": "AppIndexView",
-        "viewtag": "D394F269-6F97-4ED7-AFE8-F4A2E09BA602"
-    },
-    "dictcatalogeditview": {
-        "title": "字典编辑视图",
+    "dictcatalogpickupgridview": {
+        "title": "字典选择表格视图",
         "caption": "字典",
-        "viewtype": "DEEDITVIEW",
+        "viewtype": "DEPICKUPGRIDVIEW",
         "viewmodule": "dict",
-        "viewname": "DictCatalogEditView",
-        "viewtag": "e294ce8c6557ca26a032efa08eeb5508"
+        "viewname": "DictCatalogPickupGridView",
+        "viewtag": "842cfc03d5e93435fc52d317a55cdfd4"
     },
     "dictcatalogpickupview": {
         "title": "字典数据选择视图",
@@ -61,6 +45,22 @@
         "viewtype": "DEPICKUPVIEW",
         "viewmodule": "dict",
         "viewname": "DictCatalogPickupView",
-        "viewtag": "eb4772f75066d6c9eb26d8b01d4e16b7"
+        "viewtag": "a9c82814d9bcd23dbf78c4c073759d7c"
+    },
+    "dictcatalogeditview": {
+        "title": "字典编辑视图",
+        "caption": "字典",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "dict",
+        "viewname": "DictCatalogEditView",
+        "viewtag": "aef11c4ae15f8255ee53623adf148f2a"
+    },
+    "appindexview": {
+        "title": "dictionary",
+        "caption": "ibizlab",
+        "viewtype": "APPINDEXVIEW",
+        "viewmodule": "dict",
+        "viewname": "AppIndexView",
+        "viewtag": "d28e2613c581adb940ff8c3469365646"
     }
 }

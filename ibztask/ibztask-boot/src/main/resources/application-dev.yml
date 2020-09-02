@@ -28,6 +28,10 @@ zuul:
         path: /dictionarys/**/Ibzou**
         serviceId: ${ibiz.ref.service.ou:ibzou-api}
         stripPrefix: false
+      ou:
+        path: /ibzdepartments/**
+        serviceId: ${ibiz.ref.service.ou:ibzou-api}
+        stripPrefix: false
       uaadict:
         path: /dictionarys/**/SysOperator
         serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}

@@ -1,10 +1,10 @@
-import ibzdeptmember_zh_CN from '@locale/lanres/entities/ibzdept-member/ibzdept-member_zh_CN';
-import ibzteammember_zh_CN from '@locale/lanres/entities/ibzteam-member/ibzteam-member_zh_CN';
-import ibzdepartment_zh_CN from '@locale/lanres/entities/ibzdepartment/ibzdepartment_zh_CN';
-import ibzemployee_zh_CN from '@locale/lanres/entities/ibzemployee/ibzemployee_zh_CN';
-import ibzorganization_zh_CN from '@locale/lanres/entities/ibzorganization/ibzorganization_zh_CN';
 import ibzpost_zh_CN from '@locale/lanres/entities/ibzpost/ibzpost_zh_CN';
+import ibzorganization_zh_CN from '@locale/lanres/entities/ibzorganization/ibzorganization_zh_CN';
 import ibzteam_zh_CN from '@locale/lanres/entities/ibzteam/ibzteam_zh_CN';
+import ibzdeptmember_zh_CN from '@locale/lanres/entities/ibzdept-member/ibzdept-member_zh_CN';
+import ibzdepartment_zh_CN from '@locale/lanres/entities/ibzdepartment/ibzdepartment_zh_CN';
+import ibzteammember_zh_CN from '@locale/lanres/entities/ibzteam-member/ibzteam-member_zh_CN';
+import ibzemployee_zh_CN from '@locale/lanres/entities/ibzemployee/ibzemployee_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
 import userCustom_zh_CN from '@locale/lanres/userCustom/userCustom_zh_CN';
@@ -223,13 +223,13 @@ export default {
         },
     },
     entities: {
-        ibzdeptmember: ibzdeptmember_zh_CN,
-        ibzteammember: ibzteammember_zh_CN,
-        ibzdepartment: ibzdepartment_zh_CN,
-        ibzemployee: ibzemployee_zh_CN,
-        ibzorganization: ibzorganization_zh_CN,
         ibzpost: ibzpost_zh_CN,
+        ibzorganization: ibzorganization_zh_CN,
         ibzteam: ibzteam_zh_CN,
+        ibzdeptmember: ibzdeptmember_zh_CN,
+        ibzdepartment: ibzdepartment_zh_CN,
+        ibzteammember: ibzteammember_zh_CN,
+        ibzemployee: ibzemployee_zh_CN,
     },
     components: components_zh_CN,
     codelist: codelist_zh_CN,

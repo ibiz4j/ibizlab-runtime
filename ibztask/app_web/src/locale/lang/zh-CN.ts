@@ -1,7 +1,7 @@
-import jobsinfo_zh_CN from '@locale/lanres/entities/jobs-info/jobs-info_zh_CN';
 import jobslog_zh_CN from '@locale/lanres/entities/jobs-log/jobs-log_zh_CN';
-import jobslock_zh_CN from '@locale/lanres/entities/jobs-lock/jobs-lock_zh_CN';
 import jobsregistry_zh_CN from '@locale/lanres/entities/jobs-registry/jobs-registry_zh_CN';
+import jobsinfo_zh_CN from '@locale/lanres/entities/jobs-info/jobs-info_zh_CN';
+import jobslock_zh_CN from '@locale/lanres/entities/jobs-lock/jobs-lock_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
 import userCustom_zh_CN from '@locale/lanres/userCustom/userCustom_zh_CN';
@@ -218,10 +218,10 @@ export default {
         },
     },
     entities: {
-        jobsinfo: jobsinfo_zh_CN,
         jobslog: jobslog_zh_CN,
-        jobslock: jobslock_zh_CN,
         jobsregistry: jobsregistry_zh_CN,
+        jobsinfo: jobsinfo_zh_CN,
+        jobslock: jobslock_zh_CN,
     },
     components: components_zh_CN,
     codelist: codelist_zh_CN,

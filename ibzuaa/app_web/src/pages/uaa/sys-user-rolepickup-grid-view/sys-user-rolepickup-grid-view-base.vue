@@ -140,7 +140,7 @@ export default class SYS_USER_ROLEPickupGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SYS_USER_ROLEPickupGridViewBase
 	 */
-	public viewtag: string = '320dc0d5f5dc15c74cdfe3dbb820d2ac';
+	public viewtag: string = '727613036152932e67097969f0ee5b3d';
 
 	/**
 	 * 自定义视图导航上下文集合

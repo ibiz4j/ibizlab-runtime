@@ -140,7 +140,7 @@ export default class WFGroupPickupGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFGroupPickupGridViewBase
 	 */
-	public viewtag: string = 'c539c8d177b0401b79fa0808de6f13dd';
+	public viewtag: string = '17ccd6d8d2bb7cf30158253da129ec1b';
 
 	/**
 	 * 自定义视图导航上下文集合

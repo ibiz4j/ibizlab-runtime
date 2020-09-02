@@ -1,5 +1,5 @@
 server:
-  port: 30003
+  port: 8080
 #Log配置
 logging:
   level:
@@ -7,32 +7,32 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
-    wf_model:
-      path: /wfremodels/**
+    wf_task:
+      path: /wftasks/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     wf_group_member:
       path: /wfmembers/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
-    wf_group:
-      path: /wfgroups/**
-      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
     wf_user:
       path: /wfusers/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
-    wf_task:
-      path: /wftasks/**
+    wf_group:
+      path: /wfgroups/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
-    wf_definition:
-      path: /wfprocessdefinitions/**
+    wf_model:
+      path: /wfremodels/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     wf_pssystem:
       path: /wfsystems/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_definition:
+      path: /wfprocessdefinitions/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
     loginv7:
@@ -57,6 +57,10 @@ zuul:
       stripPrefix: false
     oudict:
       path: /dictionarys/**/Ibzou**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    ou:
+      path: /ibzdepartments/**
       serviceId: ${ibiz.ref.service.ou:ibzou-api}
       stripPrefix: false
     uaadict:

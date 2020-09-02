@@ -4,5 +4,5 @@ Tip: If the failing expression is known to be legally refer to something that's 
 
 ----
 FTL stack trace ("~" means nesting-related):
-	- Failed at: ${appde.getKeyPSAppDEField().getCodeN...  [in template "TEMPLCODE_zh_CN" at line 359, column 14]
+	- Failed at: ${appde.getKeyPSAppDEField().getCodeN...  [in template "TEMPLCODE_en_US" at line 359, column 14]
 ----

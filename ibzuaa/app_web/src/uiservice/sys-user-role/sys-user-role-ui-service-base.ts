@@ -89,13 +89,13 @@ export default class SysUserRoleUIServiceBase extends UIService {
      * @memberof  SysUserRoleUIServiceBase
      */  
     public initViewMap(){
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysuserroles'});
+        this.allViewMap.set(':',{viewname:'editview2',srfappde:'sysuserroles'});
+        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sysuserroles'});
+        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysuserroles'});
         this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'sysuserroles'});
         this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysuserroles'});
-        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysuserroles'});
         this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'sysuserroles'});
-        this.allViewMap.set(':',{viewname:'editview2',srfappde:'sysuserroles'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysuserroles'});
-        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sysuserroles'});
     }
 
     /**

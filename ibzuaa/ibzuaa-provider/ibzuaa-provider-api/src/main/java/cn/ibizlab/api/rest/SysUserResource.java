@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class SysUserResource {
     @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdto),'ibzuaa-SysUser-Create')")
     @ApiOperation(value = "新建系统用户", tags = {"系统用户" },  notes = "新建系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers")
-    @Transactional
     public ResponseEntity<SysUserDTO> create(@RequestBody SysUserDTO sysuserdto) {
         SysUser domain = sysuserMapping.toDomain(sysuserdto);
 		sysuserService.create(domain);
@@ -69,7 +67,6 @@ public class SysUserResource {
     @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzuaa-SysUser-Update')")
     @ApiOperation(value = "更新系统用户", tags = {"系统用户" },  notes = "更新系统用户")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}")
-    @Transactional
     public ResponseEntity<SysUserDTO> update(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserDTO sysuserdto) {
 		SysUser domain  = sysuserMapping.toDomain(sysuserdto);
         domain .setUserid(sysuser_id);
@@ -89,7 +86,6 @@ public class SysUserResource {
     @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzuaa-SysUser-Remove')")
     @ApiOperation(value = "删除系统用户", tags = {"系统用户" },  notes = "删除系统用户")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("sysuser_id") String sysuser_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysuserService.remove(sysuser_id));
     }

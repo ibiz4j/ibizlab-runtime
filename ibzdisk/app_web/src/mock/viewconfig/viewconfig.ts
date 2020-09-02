@@ -7,13 +7,21 @@ import Mock from 'mockjs'
 mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status,{
-                "sdfilegridview": {
+                "sdfileeditview": {
+            "title": "文件编辑视图",
+            "caption": "文件",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "disk",
+            "viewname": "SDFileEditView",
+            "viewtag": "646581c57dbd5cf6c2570e4013f3adb8"
+        },
+        "sdfilegridview": {
             "title": "文件表格视图",
             "caption": "文件",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "disk",
             "viewname": "SDFileGridView",
-            "viewtag": "254cf228e42d864c1cefd0f5526492ad"
+            "viewtag": "795a12a2bfb63a98ce5bb80310509360"
         },
         "sdindexview": {
             "title": "ibizlab-disk",
@@ -21,15 +29,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewtype": "APPINDEXVIEW",
             "viewmodule": "disk",
             "viewname": "SDIndexView",
-            "viewtag": "84B85718-5EB1-45E3-97F4-A1AC21B4DBE6"
-        },
-        "sdfileeditview": {
-            "title": "文件编辑视图",
-            "caption": "文件",
-            "viewtype": "DEEDITVIEW",
-            "viewmodule": "disk",
-            "viewname": "SDFileEditView",
-            "viewtag": "d655c8b630fcdc664b330967c012950e"
+            "viewtag": "c0a8e8c1058d9a5cdb5a6edbf9855886"
         }
     }];
 });

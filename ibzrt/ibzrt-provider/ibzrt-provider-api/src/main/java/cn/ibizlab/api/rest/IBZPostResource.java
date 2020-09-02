@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class IBZPostResource {
 
     @ApiOperation(value = "新建岗位", tags = {"岗位" },  notes = "新建岗位")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzposts")
-
     public ResponseEntity<IBZPostDTO> create(@RequestBody IBZPostDTO ibzpostdto) {
         IBZPost domain = ibzpostMapping.toDomain(ibzpostdto);
 		ibzpostService.create(domain);
@@ -66,7 +64,6 @@ public class IBZPostResource {
 
     @ApiOperation(value = "更新岗位", tags = {"岗位" },  notes = "更新岗位")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzposts/{ibzpost_id}")
-
     public ResponseEntity<IBZPostDTO> update(@PathVariable("ibzpost_id") String ibzpost_id, @RequestBody IBZPostDTO ibzpostdto) {
 		IBZPost domain  = ibzpostMapping.toDomain(ibzpostdto);
         domain .setPostid(ibzpost_id);
@@ -84,7 +81,6 @@ public class IBZPostResource {
 
     @ApiOperation(value = "删除岗位", tags = {"岗位" },  notes = "删除岗位")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzposts/{ibzpost_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("ibzpost_id") String ibzpost_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzpostService.remove(ibzpost_id));
     }

@@ -64,15 +64,6 @@ export default class IBZDepartmentPickupViewBase extends Vue {
      * @memberof IBZDepartmentPickupViewBase
      */
     public appUIService: IBZDepartmentUIService = new IBZDepartmentUIService(this.$store);
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof IBZDepartmentPickupViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -125,7 +116,7 @@ export default class IBZDepartmentPickupViewBase extends Vue {
 	 * @type {string}
 	 * @memberof IBZDepartmentPickupViewBase
 	 */
-	public viewtag: string = 'b59db4df07430a34645566a64d59244c';
+	public viewtag: string = '10dd7f45f36233049c4af9ca417089f5';
 
 	/**
 	 * 自定义视图导航上下文集合
@@ -306,6 +297,15 @@ export default class IBZDepartmentPickupViewBase extends Vue {
      * @memberof IBZDepartmentPickupViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof IBZDepartmentPickupViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数

@@ -49,20 +49,20 @@ public class SysUserDTO extends DTOBase implements Serializable {
     private String personname;
 
     /**
-     * 属性 [PASSWORD]
-     *
-     */
-    @JSONField(name = "password")
-    @JsonProperty("password")
-    private String password;
-
-    /**
      * 属性 [USERCODE]
      *
      */
     @JSONField(name = "usercode")
     @JsonProperty("usercode")
     private String usercode;
+
+    /**
+     * 属性 [PASSWORD]
+     *
+     */
+    @JSONField(name = "password")
+    @JsonProperty("password")
+    private String password;
 
     /**
      * 属性 [LOGINNAME]
@@ -299,19 +299,19 @@ public class SysUserDTO extends DTOBase implements Serializable {
     }
 
     /**
-     * 设置 [PASSWORD]
-     */
-    public void setPassword(String  password){
-        this.password = password ;
-        this.modify("password",password);
-    }
-
-    /**
      * 设置 [USERCODE]
      */
     public void setUsercode(String  usercode){
         this.usercode = usercode ;
         this.modify("usercode",usercode);
+    }
+
+    /**
+     * 设置 [PASSWORD]
+     */
+    public void setPassword(String  password){
+        this.password = password ;
+        this.modify("password",password);
     }
 
     /**

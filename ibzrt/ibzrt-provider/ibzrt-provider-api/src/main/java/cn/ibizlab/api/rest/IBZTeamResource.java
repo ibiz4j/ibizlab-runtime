@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class IBZTeamResource {
 
     @ApiOperation(value = "新建组", tags = {"组" },  notes = "新建组")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzteams")
-
     public ResponseEntity<IBZTeamDTO> create(@RequestBody IBZTeamDTO ibzteamdto) {
         IBZTeam domain = ibzteamMapping.toDomain(ibzteamdto);
 		ibzteamService.create(domain);
@@ -66,7 +64,6 @@ public class IBZTeamResource {
 
     @ApiOperation(value = "更新组", tags = {"组" },  notes = "更新组")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzteams/{ibzteam_id}")
-
     public ResponseEntity<IBZTeamDTO> update(@PathVariable("ibzteam_id") String ibzteam_id, @RequestBody IBZTeamDTO ibzteamdto) {
 		IBZTeam domain  = ibzteamMapping.toDomain(ibzteamdto);
         domain .setTeamid(ibzteam_id);
@@ -84,7 +81,6 @@ public class IBZTeamResource {
 
     @ApiOperation(value = "删除组", tags = {"组" },  notes = "删除组")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzteams/{ibzteam_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("ibzteam_id") String ibzteam_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzteamService.remove(ibzteam_id));
     }

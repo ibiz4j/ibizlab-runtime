@@ -221,7 +221,7 @@ export default class WFTaskGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFTaskGridViewBase
 	 */
-	public viewtag: string = '67f605f39e4d0d7cfa524ea97bc29ced';
+	public viewtag: string = '66f4bcca719e75fa9645380cc81bc3e2';
 
 	/**
 	 * 自定义视图导航上下文集合

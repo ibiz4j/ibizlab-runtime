@@ -14,29 +14,51 @@ export default {
     updatedate: "最后修改时间",
   },
 	views: {
-		editview: {
-			caption: "单位管理",
-      		title: "单位管理",
+		optionview: {
+			caption: "单位快速新建",
+      		title: "单位快速新建",
 		},
 		treeexpview: {
 			caption: "部门管理",
       		title: "部门管理",
 		},
-		pickupgridview: {
-			caption: "单位机构",
-      		title: "单位机构选择表格视图",
+		editview: {
+			caption: "单位管理",
+      		title: "单位管理",
 		},
-		optionview: {
-			caption: "单位快速新建",
-      		title: "单位快速新建",
+		gridview: {
+			caption: "单位管理",
+      		title: "单位管理",
 		},
 		pickupview: {
 			caption: "单位机构",
       		title: "单位机构数据选择视图",
 		},
-		gridview: {
-			caption: "单位管理",
-      		title: "单位管理",
+		pickupgridview: {
+			caption: "单位机构",
+      		title: "单位机构选择表格视图",
+		},
+	},
+	newform_form: {
+		details: {
+			group1: "单位机构基本信息", 
+			formpage1: "基本信息", 
+			srfupdatedate: "最后修改时间", 
+			srforikey: "", 
+			srfkey: "单位标识", 
+			srfmajortext: "名称", 
+			srftempmode: "", 
+			srfuf: "", 
+			srfdeid: "", 
+			srfsourcekey: "", 
+			orgcode: "单位代码", 
+			orgname: "名称", 
+			porgname: "上级单位", 
+			porgid: "上级单位", 
+			enable: "逻辑有效", 
+			orgid: "单位标识", 
+		},
+		uiactions: {
 		},
 	},
 	main_form: {
@@ -60,28 +82,6 @@ export default {
 			porgid: "上级单位", 
 			createdate: "创建时间", 
 			updatedate: "最后修改时间", 
-		},
-		uiactions: {
-		},
-	},
-	newform_form: {
-		details: {
-			group1: "单位机构基本信息", 
-			formpage1: "基本信息", 
-			srfupdatedate: "最后修改时间", 
-			srforikey: "", 
-			srfkey: "单位标识", 
-			srfmajortext: "名称", 
-			srftempmode: "", 
-			srfuf: "", 
-			srfdeid: "", 
-			srfsourcekey: "", 
-			orgcode: "单位代码", 
-			orgname: "名称", 
-			porgname: "上级单位", 
-			porgid: "上级单位", 
-			enable: "逻辑有效", 
-			orgid: "单位标识", 
 		},
 		uiactions: {
 		},

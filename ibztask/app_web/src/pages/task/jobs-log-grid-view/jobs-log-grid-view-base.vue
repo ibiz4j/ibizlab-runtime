@@ -161,7 +161,7 @@ export default class JobsLogGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof JobsLogGridViewBase
 	 */
-	public viewtag: string = 'd55df600239abf11fb0df2bded105b5d';
+	public viewtag: string = '67b4d1e928a08679ce63051ccc88da9c';
 
 	/**
 	 * 自定义视图导航上下文集合

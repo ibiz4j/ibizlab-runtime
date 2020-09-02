@@ -1,11 +1,11 @@
-import sysopenaccess_zh_CN from '@locale/lanres/entities/sys-open-access/sys-open-access_zh_CN';
-import sysauthlog_zh_CN from '@locale/lanres/entities/sys-auth-log/sys-auth-log_zh_CN';
-import sysapp_zh_CN from '@locale/lanres/entities/sys-app/sys-app_zh_CN';
 import sysrolepermission_zh_CN from '@locale/lanres/entities/sys-role-permission/sys-role-permission_zh_CN';
-import syspermission_zh_CN from '@locale/lanres/entities/sys-permission/sys-permission_zh_CN';
-import sysuserrole_zh_CN from '@locale/lanres/entities/sys-user-role/sys-user-role_zh_CN';
 import sysuser_zh_CN from '@locale/lanres/entities/sys-user/sys-user_zh_CN';
+import sysauthlog_zh_CN from '@locale/lanres/entities/sys-auth-log/sys-auth-log_zh_CN';
+import sysopenaccess_zh_CN from '@locale/lanres/entities/sys-open-access/sys-open-access_zh_CN';
+import sysuserrole_zh_CN from '@locale/lanres/entities/sys-user-role/sys-user-role_zh_CN';
 import sysrole_zh_CN from '@locale/lanres/entities/sys-role/sys-role_zh_CN';
+import syspermission_zh_CN from '@locale/lanres/entities/sys-permission/sys-permission_zh_CN';
+import sysapp_zh_CN from '@locale/lanres/entities/sys-app/sys-app_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
 import userCustom_zh_CN from '@locale/lanres/userCustom/userCustom_zh_CN';
@@ -224,14 +224,14 @@ export default {
         },
     },
     entities: {
-        sysopenaccess: sysopenaccess_zh_CN,
-        sysauthlog: sysauthlog_zh_CN,
-        sysapp: sysapp_zh_CN,
         sysrolepermission: sysrolepermission_zh_CN,
-        syspermission: syspermission_zh_CN,
-        sysuserrole: sysuserrole_zh_CN,
         sysuser: sysuser_zh_CN,
+        sysauthlog: sysauthlog_zh_CN,
+        sysopenaccess: sysopenaccess_zh_CN,
+        sysuserrole: sysuserrole_zh_CN,
         sysrole: sysrole_zh_CN,
+        syspermission: syspermission_zh_CN,
+        sysapp: sysapp_zh_CN,
     },
     components: components_zh_CN,
     codelist: codelist_zh_CN,

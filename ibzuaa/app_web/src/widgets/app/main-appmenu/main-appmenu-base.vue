@@ -582,20 +582,20 @@ export default class MainBase extends Vue implements ControlInterface {
                 navDataService.removeNavData(this.viewtag);
             }
             switch (item.appfunctag) {
-                case 'Auto13': 
-                    this.clickAuto13(item);
-                    return;
-                case 'Auto10': 
-                    this.clickAuto10(item);
+                case 'Auto12': 
+                    this.clickAuto12(item);
                     return;
                 case 'Auto5': 
                     this.clickAuto5(item);
                     return;
-                case 'Auto12': 
-                    this.clickAuto12(item);
-                    return;
                 case 'Auto6': 
                     this.clickAuto6(item);
+                    return;
+                case 'Auto10': 
+                    this.clickAuto10(item);
+                    return;
+                case 'Auto13': 
+                    this.clickAuto13(item);
                     return;
                 default:
                     console.warn('未指定应用功能');
@@ -605,40 +605,17 @@ export default class MainBase extends Vue implements ControlInterface {
 
     
     /**
-     * 第三方认证平台
+     * 接入应用
      *
      * @param {*} [item={}]
      * @memberof Main
      */
-    public clickAuto13(item: any = {}) {
+    public clickAuto12(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 角色
-     *
-     * @param {*} [item={}]
-     * @memberof Main
-     */
-    public clickAuto10(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'sysroles', parameterName: 'sysrole' },
+            { pathName: 'sysapps', parameterName: 'sysapp' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -674,17 +651,17 @@ export default class MainBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 接入应用
+     * 认证日志
      *
      * @param {*} [item={}]
      * @memberof Main
      */
-    public clickAuto12(item: any = {}) {
+    public clickAuto6(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'sysapps', parameterName: 'sysapp' },
+            { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -697,17 +674,40 @@ export default class MainBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 认证日志
+     * 角色
      *
      * @param {*} [item={}]
      * @memberof Main
      */
-    public clickAuto6(item: any = {}) {
+    public clickAuto10(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'sysauthlogs', parameterName: 'sysauthlog' },
+            { pathName: 'sysroles', parameterName: 'sysrole' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 第三方认证平台
+     *
+     * @param {*} [item={}]
+     * @memberof Main
+     */
+    public clickAuto13(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);

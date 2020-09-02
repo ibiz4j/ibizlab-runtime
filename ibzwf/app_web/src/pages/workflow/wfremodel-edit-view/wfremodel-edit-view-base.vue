@@ -143,7 +143,7 @@ export default class WFREModelEditViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFREModelEditViewBase
 	 */
-	public viewtag: string = 'c0e7fb60c35f15d4f23800acae7afbd1';
+	public viewtag: string = '5856bfb8b576cc2ee743801b23e58299';
 
 	/**
 	 * 自定义视图导航上下文集合

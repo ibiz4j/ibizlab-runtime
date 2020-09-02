@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class SysPermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Create-all')")
     @ApiOperation(value = "新建权限/资源", tags = {"权限/资源" },  notes = "新建权限/资源")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
-    @Transactional
     public ResponseEntity<SysPermissionDTO> create(@RequestBody SysPermissionDTO syspermissiondto) {
         SysPermission domain = syspermissionMapping.toDomain(syspermissiondto);
 		syspermissionService.create(domain);
@@ -70,7 +68,6 @@ public class SysPermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Update-all')")
     @ApiOperation(value = "更新权限/资源", tags = {"权限/资源" },  notes = "更新权限/资源")
 	@RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/{syspermission_id}")
-    @Transactional
     public ResponseEntity<SysPermissionDTO> update(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysPermissionDTO syspermissiondto) {
 		SysPermission domain  = syspermissionMapping.toDomain(syspermissiondto);
         domain .setPermissionid(syspermission_id);
@@ -90,7 +87,6 @@ public class SysPermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Remove-all')")
     @ApiOperation(value = "删除权限/资源", tags = {"权限/资源" },  notes = "删除权限/资源")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("syspermission_id") String syspermission_id) {
          return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.remove(syspermission_id));
     }

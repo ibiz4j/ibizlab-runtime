@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class IBZOrganizationResource {
     @PreAuthorize("hasPermission(this.ibzorganizationMapping.toDomain(#ibzorganizationdto),'ibzou-IBZOrganization-Create')")
     @ApiOperation(value = "新建单位机构", tags = {"单位机构" },  notes = "新建单位机构")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations")
-    @Transactional
     public ResponseEntity<IBZOrganizationDTO> create(@RequestBody IBZOrganizationDTO ibzorganizationdto) {
         IBZOrganization domain = ibzorganizationMapping.toDomain(ibzorganizationdto);
 		ibzorganizationService.create(domain);
@@ -70,7 +68,6 @@ public class IBZOrganizationResource {
     @PreAuthorize("hasPermission(this.ibzorganizationService.get(#ibzorganization_id),'ibzou-IBZOrganization-Update')")
     @ApiOperation(value = "更新单位机构", tags = {"单位机构" },  notes = "更新单位机构")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}")
-    @Transactional
     public ResponseEntity<IBZOrganizationDTO> update(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody IBZOrganizationDTO ibzorganizationdto) {
 		IBZOrganization domain  = ibzorganizationMapping.toDomain(ibzorganizationdto);
         domain .setOrgid(ibzorganization_id);
@@ -90,7 +87,6 @@ public class IBZOrganizationResource {
     @PreAuthorize("hasPermission(this.ibzorganizationService.get(#ibzorganization_id),'ibzou-IBZOrganization-Remove')")
     @ApiOperation(value = "删除单位机构", tags = {"单位机构" },  notes = "删除单位机构")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("ibzorganization_id") String ibzorganization_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzorganizationService.remove(ibzorganization_id));
     }

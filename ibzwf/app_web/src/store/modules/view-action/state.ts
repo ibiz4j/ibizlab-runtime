@@ -4,158 +4,32 @@
 export const viewstate: any = {
     appviews: [
         {
-            viewtag: '2543a3f227c806c6433bf9710717de93',
-            viewmodule: 'workflow',
-            viewname: 'WFMemberGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'ac7cba0b131aa74021747169735a4f90',
-                '3b32fb97ab849d5f36e8a283c85b5098',
-                '5db49698557288612b9247b259ffbcd7',
-            ],
-        },
-        {
-            viewtag: '380EA9D7-5F04-46C1-9E82-2877EE29336A',
+            viewtag: '096fd4090f21e0fa0f4a303ed9041bff',
             viewmodule: 'workflow',
             viewname: 'WFIndexView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'a06aed382ebc28e6521b4398880388cd',
-                'c0e7fb60c35f15d4f23800acae7afbd1',
-                'f11ad9a3b9260fb68a2a2e870419bffa',
-                '67f605f39e4d0d7cfa524ea97bc29ced',
+                '5856bfb8b576cc2ee743801b23e58299',
+                '66f4bcca719e75fa9645380cc81bc3e2',
+                'f498dfb24e88df7c70a5c09ecb587647',
+                'bfa86be8c02420f87d5cf4ff9a768948',
             ],
         },
         {
-            viewtag: '3b32fb97ab849d5f36e8a283c85b5098',
+            viewtag: '135872676ba63d430b2f20bd20364286',
             viewmodule: 'workflow',
-            viewname: 'WFUserMPickupView',
+            viewname: 'WFMemberGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'a9dfca1bcb877df49bfed9a2bd177d14',
+                '84e5a5b589b434dfdc60a3d0ad087d37',
+                '6e1b35989dd6470b5c890369ab87b545',
+                '90a777962337daaf4cffd846eecb1f0f',
             ],
         },
         {
-            viewtag: '5592ca3571d551675c5306a0a9f1352e',
-            viewmodule: 'workflow',
-            viewname: 'WFUserPickupView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'a9dfca1bcb877df49bfed9a2bd177d14',
-            ],
-        },
-        {
-            viewtag: '5db49698557288612b9247b259ffbcd7',
-            viewmodule: 'workflow',
-            viewname: 'WFGroupMPickupView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'c539c8d177b0401b79fa0808de6f13dd',
-            ],
-        },
-        {
-            viewtag: '67f605f39e4d0d7cfa524ea97bc29ced',
-            viewmodule: 'workflow',
-            viewname: 'WFTaskGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '84f38898137b7bd1f9f135ac74b4b850',
-            ],
-        },
-        {
-            viewtag: '77dd35badedcc0f6b98e83ee1ff82bda',
-            viewmodule: 'workflow',
-            viewname: 'WFUserEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-            ],
-        },
-        {
-            viewtag: '84f38898137b7bd1f9f135ac74b4b850',
-            viewmodule: 'workflow',
-            viewname: 'WFTaskEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-            ],
-        },
-        {
-            viewtag: '9aad4530afb58f5c348a5b21d9c7ae72',
-            viewmodule: 'workflow',
-            viewname: 'WFProcessDefinitionEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-            ],
-        },
-        {
-            viewtag: 'a06aed382ebc28e6521b4398880388cd',
-            viewmodule: 'workflow',
-            viewname: 'WFProcessDefinitionGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '9aad4530afb58f5c348a5b21d9c7ae72',
-            ],
-        },
-        {
-            viewtag: 'a9dfca1bcb877df49bfed9a2bd177d14',
-            viewmodule: 'workflow',
-            viewname: 'WFUserPickupGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-            ],
-        },
-        {
-            viewtag: 'ac7cba0b131aa74021747169735a4f90',
-            viewmodule: 'workflow',
-            viewname: 'WFMemberEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '5592ca3571d551675c5306a0a9f1352e',
-                'bfd32eedd618add6408b75a98f40f809',
-            ],
-        },
-        {
-            viewtag: 'aeb28973b7182f671fa50aa5d87e9346',
-            viewmodule: 'workflow',
-            viewname: 'WFGroupEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '2543a3f227c806c6433bf9710717de93',
-            ],
-        },
-        {
-            viewtag: 'bfd32eedd618add6408b75a98f40f809',
-            viewmodule: 'workflow',
-            viewname: 'WFGroupPickupView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'c539c8d177b0401b79fa0808de6f13dd',
-            ],
-        },
-        {
-            viewtag: 'c0e7fb60c35f15d4f23800acae7afbd1',
-            viewmodule: 'workflow',
-            viewname: 'WFREModelEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-            ],
-        },
-        {
-            viewtag: 'c539c8d177b0401b79fa0808de6f13dd',
+            viewtag: '17ccd6d8d2bb7cf30158253da129ec1b',
             viewmodule: 'workflow',
             viewname: 'WFGroupPickupGridView',
             viewaction: '',
@@ -164,23 +38,149 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: 'ec44dccb75670532aa3e9bfae73c4259',
+            viewtag: '3fcd491c13d05ab7dcce8d2c920d0aec',
+            viewmodule: 'workflow',
+            viewname: 'WFProcessDefinitionEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: '5856bfb8b576cc2ee743801b23e58299',
+            viewmodule: 'workflow',
+            viewname: 'WFREModelEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: '61c5bff70bcf56e1dc0bb0900df9c98c',
+            viewmodule: 'workflow',
+            viewname: 'WFUserPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'c9c73c8d2e61bd29a304622f3d39b522',
+            ],
+        },
+        {
+            viewtag: '66f4bcca719e75fa9645380cc81bc3e2',
+            viewmodule: 'workflow',
+            viewname: 'WFTaskGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'e3020680a441ab58a29db6fe2434f08b',
+            ],
+        },
+        {
+            viewtag: '6e1b35989dd6470b5c890369ab87b545',
+            viewmodule: 'workflow',
+            viewname: 'WFMemberEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'b05c9353d499f973106e6ed4dde58074',
+                '61c5bff70bcf56e1dc0bb0900df9c98c',
+            ],
+        },
+        {
+            viewtag: '84e5a5b589b434dfdc60a3d0ad087d37',
+            viewmodule: 'workflow',
+            viewname: 'WFUserMPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'c9c73c8d2e61bd29a304622f3d39b522',
+            ],
+        },
+        {
+            viewtag: '90a777962337daaf4cffd846eecb1f0f',
+            viewmodule: 'workflow',
+            viewname: 'WFGroupMPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '17ccd6d8d2bb7cf30158253da129ec1b',
+            ],
+        },
+        {
+            viewtag: 'b05c9353d499f973106e6ed4dde58074',
+            viewmodule: 'workflow',
+            viewname: 'WFGroupPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '17ccd6d8d2bb7cf30158253da129ec1b',
+            ],
+        },
+        {
+            viewtag: 'b23a721ca159ac2490b768d795e85d17',
+            viewmodule: 'workflow',
+            viewname: 'WFGroupEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '135872676ba63d430b2f20bd20364286',
+            ],
+        },
+        {
+            viewtag: 'bfa86be8c02420f87d5cf4ff9a768948',
+            viewmodule: 'workflow',
+            viewname: 'WFProcessDefinitionGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '3fcd491c13d05ab7dcce8d2c920d0aec',
+            ],
+        },
+        {
+            viewtag: 'c9c73c8d2e61bd29a304622f3d39b522',
+            viewmodule: 'workflow',
+            viewname: 'WFUserPickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: 'cf0fdabd8378e07ca72ac167b1406756',
             viewmodule: 'workflow',
             viewname: 'WFUserGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '77dd35badedcc0f6b98e83ee1ff82bda',
+                'ffd6ce24e0a1aa780920b48721e502a7',
             ],
         },
         {
-            viewtag: 'f11ad9a3b9260fb68a2a2e870419bffa',
+            viewtag: 'e3020680a441ab58a29db6fe2434f08b',
+            viewmodule: 'workflow',
+            viewname: 'WFTaskEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: 'f498dfb24e88df7c70a5c09ecb587647',
             viewmodule: 'workflow',
             viewname: 'WFGroupGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'aeb28973b7182f671fa50aa5d87e9346',
+                'b23a721ca159ac2490b768d795e85d17',
+            ],
+        },
+        {
+            viewtag: 'ffd6ce24e0a1aa780920b48721e502a7',
+            viewmodule: 'workflow',
+            viewname: 'WFUserEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
     ],

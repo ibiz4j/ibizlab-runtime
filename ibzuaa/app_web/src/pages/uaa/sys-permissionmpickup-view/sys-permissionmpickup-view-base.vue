@@ -158,7 +158,7 @@ export default class SYS_PERMISSIONMPickupViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SYS_PERMISSIONMPickupViewBase
 	 */
-	public viewtag: string = 'b8a97c1797a1b91fbb37f8c2d14b1fb6';
+	public viewtag: string = '86bd4f6d4f771870e10b9717046a1b14';
 
 	/**
 	 * 自定义视图导航上下文集合

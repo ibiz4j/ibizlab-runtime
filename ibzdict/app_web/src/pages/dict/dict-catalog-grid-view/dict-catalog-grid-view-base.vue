@@ -236,7 +236,7 @@ export default class DictCatalogGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof DictCatalogGridViewBase
 	 */
-	public viewtag: string = '7395bd2cc14d34a67b772f13a50b2587';
+	public viewtag: string = '74a6ce3ddf610ce7fb201662c6d4b8da';
 
 	/**
 	 * 自定义视图导航上下文集合

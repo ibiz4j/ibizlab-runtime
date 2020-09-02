@@ -582,14 +582,14 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
                 navDataService.removeNavData(this.viewtag);
             }
             switch (item.appfunctag) {
-                case 'Auto6': 
-                    this.clickAuto6(item);
+                case 'Auto3': 
+                    this.clickAuto3(item);
                     return;
                 case 'Auto5': 
                     this.clickAuto5(item);
                     return;
-                case 'Auto3': 
-                    this.clickAuto3(item);
+                case 'Auto6': 
+                    this.clickAuto6(item);
                     return;
                 case 'Auto7': 
                     this.clickAuto7(item);
@@ -605,17 +605,17 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
 
     
     /**
-     * 岗位管理
+     * 单位管理
      *
      * @param {*} [item={}]
      * @memberof OUIndexView
      */
-    public clickAuto6(item: any = {}) {
+    public clickAuto3(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'ibzposts', parameterName: 'ibzpost' },
+            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -651,17 +651,17 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 单位管理
+     * 岗位管理
      *
      * @param {*} [item={}]
      * @memberof OUIndexView
      */
-    public clickAuto3(item: any = {}) {
+    public clickAuto6(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
+            { pathName: 'ibzposts', parameterName: 'ibzpost' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -736,7 +736,7 @@ export default class OUIndexViewBase extends Vue implements ControlInterface {
      * @memberof OUIndexViewBase
      */
     public handleMenusResource(inputMenus:Array<any>){
-        if(Environment.enablePermissionValid){
+        if(this.$store.getters['authresource/getEnablePermissionValid']){
             this.computedEffectiveMenus(inputMenus);
             this.computeParentMenus(inputMenus);
         }

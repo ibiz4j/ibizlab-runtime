@@ -13,6 +13,22 @@ export default {
     updatedate: "更新时间",
   },
 	views: {
+		pickupview: {
+			caption: "用户角色关系",
+      		title: "用户角色关系表数据选择视图",
+		},
+		editview2: {
+			caption: "用户",
+      		title: "用户",
+		},
+		gridview: {
+			caption: "用户角色关系",
+      		title: "用户角色关系表表格视图",
+		},
+		pickupgridview: {
+			caption: "用户角色关系",
+      		title: "用户角色关系表选择表格视图",
+		},
 		redirectview: {
 			caption: "用户角色关系",
       		title: "用户角色关系表数据重定向视图",
@@ -21,25 +37,9 @@ export default {
 			caption: "用户",
       		title: "用户",
 		},
-		pickupgridview: {
-			caption: "用户角色关系",
-      		title: "用户角色关系表选择表格视图",
-		},
 		mpickupview: {
 			caption: "用户角色关系",
       		title: "用户角色关系表数据多项选择视图",
-		},
-		editview2: {
-			caption: "用户",
-      		title: "用户",
-		},
-		pickupview: {
-			caption: "用户角色关系",
-      		title: "用户角色关系表数据选择视图",
-		},
-		gridview: {
-			caption: "用户角色关系",
-      		title: "用户角色关系表表格视图",
 		},
 	},
 	main_form: {

@@ -1,0 +1,143 @@
+.pay-index-view{
+    position: relative;
+}
+
+
+.pay-index-view{
+    position: relative;
+}
+.index_view{
+    margin-bottom: 1px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    color:#303133;
+    background-color: #fff;
+    .app-horizontal-layout{
+        .view-container{
+            height: calc(100% - 32px);
+            margin: 12px;
+        }
+    }
+    .index_header{
+        height:65px;
+        padding:0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
+        .page-logo{
+          display: flex;
+          align-items: center;
+        }
+        .header-left{
+            i{
+                color:#b4bcc8;
+            }
+            i:hover{
+                color:#1890ff;
+            }
+            > .app-breadcrumb{
+                > span .el-breadcrumb__item .el-breadcrumb__inner{
+                    a{
+                        color:#606d80 !important;
+                        cursor: pointer !important;
+                    }
+                    a:last-child:hover{
+                        color:#1890ff !important;
+                    }
+                }
+            }
+            .ivu-icon{
+                 font-size: 20px;
+                padding: 4px;
+                margin-top: -2px;
+                cursor: pointer;
+            }
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .el-menu.el-menu--horizontal{
+                border-bottom: none;
+                 .el-submenu{
+                    border-top: none;
+                }
+            }
+        }
+        > div {
+            line-height: 49px;
+        }
+    }
+    .index_content{
+        background-color:#F0F2F5;
+        height:calc(100vh - 50px);
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    >.ivu-layout {
+        >.ivu-layout {
+            height: calc(100vh - 50px);
+        }
+    }
+    .ivu-layout .ivu-layout-sider .ivu-layout-sider-children .sider-top{
+        margin-top: -2px;
+        line-height: 58px;
+        text-align: center;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .sider-top{
+        padding: 0px;
+        margin-bottom: 1px;
+        height:65px;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
+        > .page-logo{
+          display: flex;
+          align-items: center;
+          height: 100%;
+          justify-content: center;
+          >.menuicon{
+            display: block;
+            text-align: center;
+            font-weight: 300;
+            font-size: 28px;
+            width:64px;
+            height:100%;
+          }
+        }
+    }
+}
+
+#move_axis{
+    position: absolute;
+    left: 195px;
+    width: 5px;
+    height: 100%;
+    cursor: w-resize;
+    background-color: rgba(255,255,255,0);
+}
+.index_sider{
+    flex: none!important;
+    max-width: none !important;
+    transition: none 0s ease 0s;
+}
+
+/***    BRGIN:滚动条样式    ***/
+::-webkit-scrollbar {
+    background: transparent;
+    width: 4px;
+    height: 4px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+    background-color: #cecece;
+}
+::-webkit-scrollbar-track {
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+}

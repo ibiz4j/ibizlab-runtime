@@ -25,8 +25,10 @@ export const Environment = {
     enablePermissionValid:false,
     // 项目模板地址
     ProjectUrl: "http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7",
+    // 打开目标工具，可选参数：sln、mos
+    debugOpenMode:'mos',
     // 配置平台地址
-    StudioUrl: "http://172.16.170.145/slnstudio/",
+    StudioUrl: "http://172.16.170.145/mos/",
     // 中心标识
     SlnId: "B4BF5C84-D020-4D9A-A986-8FA4FD72816C",
     // 系统标识
@@ -34,9 +36,13 @@ export const Environment = {
     // 前端应用标识
     AppId: "6e0b7357169ef4eba84e1347ed94bd84",
     // 项目发布文件地址
-    PublishProjectUrl: 'http://oauth2:ymrzrgzh97axsgq_TjR3@labcs.ibizee.cn/ibiz4jteam/ibztask.git',
+    PublishProjectUrl: 'http://oauth2:cTux_e7Aoz1PrasP5dDq@demo.ibizlab.cn/ibiz4jteam/ibztask.git',
     // ibiz开放平台地址
     ibizlabtUrl: 'https://www.ibizlab.cn',
     // ibiz论坛地址
     ibizbbstUrl: 'https://bbs.ibizlab.cn',
 };
+// 挂载外部配置文件
+if ((window as any).Environment) {
+    Object.assign(Environment, (window as any).Environment);
+}

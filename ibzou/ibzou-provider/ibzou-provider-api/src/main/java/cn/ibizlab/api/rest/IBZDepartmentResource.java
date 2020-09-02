@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class IBZDepartmentResource {
     @PreAuthorize("hasPermission(this.ibzdepartmentMapping.toDomain(#ibzdepartmentdto),'ibzou-IBZDepartment-Create')")
     @ApiOperation(value = "新建部门", tags = {"部门" },  notes = "新建部门")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzdepartments")
-    @Transactional
     public ResponseEntity<IBZDepartmentDTO> create(@RequestBody IBZDepartmentDTO ibzdepartmentdto) {
         IBZDepartment domain = ibzdepartmentMapping.toDomain(ibzdepartmentdto);
 		ibzdepartmentService.create(domain);
@@ -70,7 +68,6 @@ public class IBZDepartmentResource {
     @PreAuthorize("hasPermission(this.ibzdepartmentService.get(#ibzdepartment_id),'ibzou-IBZDepartment-Update')")
     @ApiOperation(value = "更新部门", tags = {"部门" },  notes = "更新部门")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzdepartments/{ibzdepartment_id}")
-    @Transactional
     public ResponseEntity<IBZDepartmentDTO> update(@PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZDepartmentDTO ibzdepartmentdto) {
 		IBZDepartment domain  = ibzdepartmentMapping.toDomain(ibzdepartmentdto);
         domain .setDeptid(ibzdepartment_id);
@@ -90,7 +87,6 @@ public class IBZDepartmentResource {
     @PreAuthorize("hasPermission(this.ibzdepartmentService.get(#ibzdepartment_id),'ibzou-IBZDepartment-Remove')")
     @ApiOperation(value = "删除部门", tags = {"部门" },  notes = "删除部门")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzdepartments/{ibzdepartment_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("ibzdepartment_id") String ibzdepartment_id) {
          return ResponseEntity.status(HttpStatus.OK).body(ibzdepartmentService.remove(ibzdepartment_id));
     }
@@ -163,7 +159,6 @@ public class IBZDepartmentResource {
     @PreAuthorize("hasPermission(this.ibzdepartmentMapping.toDomain(#ibzdepartmentdto),'ibzou-IBZDepartment-Create')")
     @ApiOperation(value = "根据单位机构建立部门", tags = {"部门" },  notes = "根据单位机构建立部门")
 	@RequestMapping(method = RequestMethod.POST, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments")
-    @Transactional
     public ResponseEntity<IBZDepartmentDTO> createByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @RequestBody IBZDepartmentDTO ibzdepartmentdto) {
         IBZDepartment domain = ibzdepartmentMapping.toDomain(ibzdepartmentdto);
         domain.setOrgid(ibzorganization_id);
@@ -188,7 +183,6 @@ public class IBZDepartmentResource {
     @PreAuthorize("hasPermission(this.ibzdepartmentService.get(#ibzdepartment_id),'ibzou-IBZDepartment-Update')")
     @ApiOperation(value = "根据单位机构更新部门", tags = {"部门" },  notes = "根据单位机构更新部门")
 	@RequestMapping(method = RequestMethod.PUT, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}")
-    @Transactional
     public ResponseEntity<IBZDepartmentDTO> updateByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id, @RequestBody IBZDepartmentDTO ibzdepartmentdto) {
         IBZDepartment domain = ibzdepartmentMapping.toDomain(ibzdepartmentdto);
         domain.setOrgid(ibzorganization_id);
@@ -213,7 +207,6 @@ public class IBZDepartmentResource {
     @PreAuthorize("hasPermission(this.ibzdepartmentService.get(#ibzdepartment_id),'ibzou-IBZDepartment-Remove')")
     @ApiOperation(value = "根据单位机构删除部门", tags = {"部门" },  notes = "根据单位机构删除部门")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/ibzorganizations/{ibzorganization_id}/ibzdepartments/{ibzdepartment_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeByIBZOrganization(@PathVariable("ibzorganization_id") String ibzorganization_id, @PathVariable("ibzdepartment_id") String ibzdepartment_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(ibzdepartmentService.remove(ibzdepartment_id));
     }

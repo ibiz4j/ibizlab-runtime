@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>ibzpay-app</artifactId>
+        <groupId>cn.ibizlab</groupId>
+        <version>1.0.0.0</version>
+    </parent>
+
+    <artifactId>ibzpay-app-web</artifactId>
+    <name>Ibzpay Gateway web</name>
+    <description>Ibzpay web</description>
+
+    <dependencies>
+		<dependency>
+			<groupId>cn.ibizlab</groupId>
+			<artifactId>ibzpay-util</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+    </dependencies>
+
+
+
+    <profiles>
+        <profile>
+            <id>web</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${basedir}/src/main/webapp</directory>
+                        <!--注意此次必须要放在此目录下才能被访问到 -->
+                        <targetPath>META-INF/resources</targetPath>
+                        <includes>
+                            <include>**/**</include>
+                        </includes>
+                    </resource>
+                    <resource>
+                        <directory>${basedir}/src/main/resources</directory>
+                        <includes>
+                            <include>**/**</include>
+                        </includes>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>exec-yarn-run-install</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>yarn</executable>
+                                    <workingDirectory>../../app_web</workingDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>exec-yarn-run-build</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>yarn</executable>
+                                    <arguments>
+                                        <argument>build</argument>
+                                    </arguments>
+                                    <workingDirectory>../../app_web</workingDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <finalName>ibzpay-app-web</finalName>
+                            <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                            <mainClass>cn.ibizlab.web.webApplication</mainClass>
+                            <outputDirectory>../../</outputDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>repackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
+

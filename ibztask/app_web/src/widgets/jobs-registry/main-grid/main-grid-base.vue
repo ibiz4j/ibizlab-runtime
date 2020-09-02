@@ -125,6 +125,7 @@ import MainService from './main-grid-service';
 import JobsRegistryUIService from '@/uiservice/jobs-registry/jobs-registry-ui-service';
 import CodeListService from "@service/app/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
+import { Environment } from '@/environments/environment';
 
 
 @Component({
@@ -659,9 +660,11 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getActionState(data:any){
-        let targetData:any = this.transformData(data);
         let tempActionModel:any = JSON.parse(JSON.stringify(this.ActionModel));
-        ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
+        if(Environment.enablePermissionValid){
+            let targetData:any = this.transformData(data);
+            ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
+        }
         return tempActionModel;
     }
 

@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class SysAppResource {
 
     @ApiOperation(value = "新建应用", tags = {"应用" },  notes = "新建应用")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysapps")
-    @Transactional
     public ResponseEntity<SysAppDTO> create(@RequestBody SysAppDTO sysappdto) {
         SysApp domain = sysappMapping.toDomain(sysappdto);
 		sysappService.create(domain);
@@ -66,7 +64,6 @@ public class SysAppResource {
 
     @ApiOperation(value = "更新应用", tags = {"应用" },  notes = "更新应用")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysapps/{sysapp_id}")
-    @Transactional
     public ResponseEntity<SysAppDTO> update(@PathVariable("sysapp_id") String sysapp_id, @RequestBody SysAppDTO sysappdto) {
 		SysApp domain  = sysappMapping.toDomain(sysappdto);
         domain .setId(sysapp_id);
@@ -84,7 +81,6 @@ public class SysAppResource {
 
     @ApiOperation(value = "删除应用", tags = {"应用" },  notes = "删除应用")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysapps/{sysapp_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("sysapp_id") String sysapp_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysappService.remove(sysapp_id));
     }

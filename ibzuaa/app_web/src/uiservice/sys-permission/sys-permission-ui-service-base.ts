@@ -89,13 +89,13 @@ export default class SysPermissionUIServiceBase extends UIService {
      * @memberof  SysPermissionUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'syspermissions'});
         this.allViewMap.set(':',{viewname:'editview2',srfappde:'syspermissions'});
+        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'syspermissions'});
         this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'syspermissions'});
-        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'syspermissions'});
         this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'syspermissions'});
-        this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'syspermissions'});
+        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'syspermissions'});
         this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'syspermissions'});
+        this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'syspermissions'});
     }
 
     /**

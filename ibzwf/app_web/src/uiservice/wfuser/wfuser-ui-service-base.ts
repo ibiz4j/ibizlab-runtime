@@ -89,11 +89,11 @@ export default class WFUserUIServiceBase extends UIService {
      * @memberof  WFUserUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'wfusers'});
         this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'wfusers'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'wfusers'});
+        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'wfusers'});
         this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'wfusers'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'wfusers'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'wfusers'});
     }
 
     /**

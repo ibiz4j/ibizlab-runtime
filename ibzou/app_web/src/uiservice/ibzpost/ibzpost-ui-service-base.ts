@@ -90,9 +90,9 @@ export default class IBZPostUIServiceBase extends UIService {
      */  
     public initViewMap(){
         this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'ibzposts'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'ibzposts'});
         this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'ibzposts'});
         this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'ibzposts'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'ibzposts'});
     }
 
     /**

@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -49,7 +48,6 @@ public class SysPermissionResource {
 
     @ApiOperation(value = "新建权限/资源", tags = {"权限/资源" },  notes = "新建权限/资源")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
-
     public ResponseEntity<SysPermissionDTO> create(@RequestBody SysPermissionDTO syspermissiondto) {
         SysPermission domain = syspermissionMapping.toDomain(syspermissiondto);
 		syspermissionService.create(domain);
@@ -67,7 +65,6 @@ public class SysPermissionResource {
     @VersionCheck(entity = "syspermission" , versionfield = "updatedate")
     @ApiOperation(value = "更新权限/资源", tags = {"权限/资源" },  notes = "更新权限/资源")
 	@RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/{syspermission_id}")
-
     public ResponseEntity<SysPermissionDTO> update(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysPermissionDTO syspermissiondto) {
 		SysPermission domain  = syspermissionMapping.toDomain(syspermissiondto);
         domain .setPermissionid(syspermission_id);
@@ -85,7 +82,6 @@ public class SysPermissionResource {
 
     @ApiOperation(value = "删除权限/资源", tags = {"权限/资源" },  notes = "删除权限/资源")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}")
-
     public ResponseEntity<Boolean> remove(@PathVariable("syspermission_id") String syspermission_id) {
          return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.remove(syspermission_id));
     }

@@ -142,6 +142,7 @@ import SysAppUIService from '@/uiservice/sys-app/sys-app-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import schema from 'async-validator';
+import { Environment } from '@/environments/environment';
 
 
 @Component({
@@ -1051,6 +1052,7 @@ export default class MainBase extends Vue implements ControlInterface {
             Object.assign(this.context,{sysapp:data.sysapp})
         }
         this.setFormEnableCond(data);
+        this.computeButtonState(data);
         this.fillForm(data,action);
         this.oldData = {};
         Object.assign(this.oldData, JSON.parse(JSON.stringify(this.data)));
@@ -1224,16 +1226,20 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public computeButtonState(data:any){
-        let targetData:any = this.transformData(data);
-        if(this.detailsModel && Object.keys(this.detailsModel).length >0){
-            Object.keys(this.detailsModel).forEach((name:any) =>{
-                if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
-                    let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
-                    ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
-                    this.detailsModel[name].visible = tempUIAction.visabled;
-                    this.detailsModel[name].disabled = tempUIAction.disabled;
-                }
-            })
+        if(Environment.enablePermissionValid){
+            let targetData:any = this.transformData(data);
+            if(this.detailsModel && Object.keys(this.detailsModel).length >0){
+                Object.keys(this.detailsModel).forEach((name:any) =>{
+                    if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
+                        this.detailsModel[name].isPower = true;
+                        let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
+                        let result: any[] = ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
+                        this.detailsModel[name].visible = tempUIAction.visabled;
+                        this.detailsModel[name].disabled = tempUIAction.disabled;
+                        this.detailsModel[name].isPower = result[0] === 1 ? true : false;
+                    }
+                })
+            }
         }
     }
 
@@ -1300,7 +1306,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.refresh(data);
                 }
                 if (Object.is('panelaction', action)) {
-                    this.panelAction(data.action,data.emitAction,data);
+                    this.panelAction(data.action,data.emitAction,data.data);
                 }
             });
         }
@@ -1411,7 +1417,6 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'load');
                 this.$emit('load', data);
-                this.computeButtonState(data);
                 this.$nextTick(() => {
                     this.formState.next({ type: 'load', data: data });
                 });
@@ -1456,7 +1461,6 @@ export default class MainBase extends Vue implements ControlInterface {
             this.data.appid = null;
             data.sysapp = null;
             this.$emit('load', data);
-            this.computeButtonState(data);
             this.$nextTick(() => {
                 this.formState.next({ type: 'load', data: data });
             });
@@ -1514,7 +1518,6 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.onFormLoad(data,'autoSave');
             this.$emit('save', data);
-            this.computeButtonState(data);
             AppCenterService.notifyMessage({name:"SysApp",action:'appRefresh',data:data});
             this.$nextTick(() => {
                 this.formState.next({ type: 'save', data: data });
@@ -1593,7 +1596,6 @@ export default class MainBase extends Vue implements ControlInterface {
                 const data = response.data;
                 this.onFormLoad(data,'save');
                 this.$emit('save', data);
-                this.computeButtonState(data);
                 AppCenterService.notifyMessage({name:"SysApp",action:'appRefresh',data:data});
                 this.$nextTick(() => {
                     this.formState.next({ type: 'save', data: data });

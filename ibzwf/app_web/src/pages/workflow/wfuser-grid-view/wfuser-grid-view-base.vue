@@ -243,7 +243,7 @@ export default class WFUserGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof WFUserGridViewBase
 	 */
-	public viewtag: string = 'ec44dccb75670532aa3e9bfae73c4259';
+	public viewtag: string = 'cf0fdabd8378e07ca72ac167b1406756';
 
 	/**
 	 * 自定义视图导航上下文集合

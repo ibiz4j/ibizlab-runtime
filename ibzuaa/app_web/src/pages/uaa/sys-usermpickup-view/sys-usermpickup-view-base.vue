@@ -158,7 +158,7 @@ export default class SYS_USERMPickupViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SYS_USERMPickupViewBase
 	 */
-	public viewtag: string = '2bc46dc8f156db2f024c1ad1b513768a';
+	public viewtag: string = '1f8cf7e78d6d88588d1d568d1866cc77';
 
 	/**
 	 * 自定义视图导航上下文集合

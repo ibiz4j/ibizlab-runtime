@@ -89,14 +89,14 @@ export default class IBZDepartmentUIServiceBase extends UIService {
      * @memberof  IBZDepartmentUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set(':',{viewname:'optionview',srfappde:'ibzdepartments'});
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'ibzdepartments'});
+        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'ibzdepartments'});
         this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'ibzdepartments'});
+        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'ibzdepartments'});
+        this.allViewMap.set(':',{viewname:'optionview',srfappde:'ibzdepartments'});
+        this.allViewMap.set(':',{viewname:'treeexpview',srfappde:'ibzdepartments'});
         this.allViewMap.set(':',{viewname:'editgridview',srfappde:'ibzdepartments'});
         this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'ibzdepartments'});
-        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'ibzdepartments'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'ibzdepartments'});
-        this.allViewMap.set(':',{viewname:'treeexpview',srfappde:'ibzdepartments'});
-        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'ibzdepartments'});
     }
 
     /**

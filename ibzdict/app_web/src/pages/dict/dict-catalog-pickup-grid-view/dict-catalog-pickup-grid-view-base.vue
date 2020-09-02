@@ -140,7 +140,7 @@ export default class DictCatalogPickupGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof DictCatalogPickupGridViewBase
 	 */
-	public viewtag: string = '66f9c86e5a56857f977ef91461338255';
+	public viewtag: string = '842cfc03d5e93435fc52d317a55cdfd4';
 
 	/**
 	 * 自定义视图导航上下文集合

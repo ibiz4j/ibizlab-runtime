@@ -89,13 +89,13 @@ export default class SysUserUIServiceBase extends UIService {
      * @memberof  SysUserUIServiceBase
      */  
     public initViewMap(){
+        this.allViewMap.set(':',{viewname:'gridview',srfappde:'sysusers'});
         this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'sysusers'});
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysusers'});
         this.allViewMap.set(':',{viewname:'editview2',srfappde:'sysusers'});
-        this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'sysusers'});
         this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysusers'});
         this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysusers'});
-        this.allViewMap.set(':',{viewname:'gridview',srfappde:'sysusers'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysusers'});
+        this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'sysusers'});
     }
 
     /**

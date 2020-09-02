@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class SDFileResource {
     @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledto),'ibzdisk-SDFile-Create')")
     @ApiOperation(value = "新建文件", tags = {"文件" },  notes = "新建文件")
 	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles")
-    @Transactional
     public ResponseEntity<SDFileDTO> create(@RequestBody SDFileDTO sdfiledto) {
         SDFile domain = sdfileMapping.toDomain(sdfiledto);
 		sdfileService.create(domain);
@@ -70,7 +68,6 @@ public class SDFileResource {
     @PreAuthorize("hasPermission(this.sdfileService.get(#sdfile_id),'ibzdisk-SDFile-Update')")
     @ApiOperation(value = "更新文件", tags = {"文件" },  notes = "更新文件")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/{sdfile_id}")
-    @Transactional
     public ResponseEntity<SDFileDTO> update(@PathVariable("sdfile_id") String sdfile_id, @RequestBody SDFileDTO sdfiledto) {
 		SDFile domain  = sdfileMapping.toDomain(sdfiledto);
         domain .setId(sdfile_id);
@@ -90,7 +87,6 @@ public class SDFileResource {
     @PreAuthorize("hasPermission(this.sdfileService.get(#sdfile_id),'ibzdisk-SDFile-Remove')")
     @ApiOperation(value = "删除文件", tags = {"文件" },  notes = "删除文件")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sdfiles/{sdfile_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("sdfile_id") String sdfile_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sdfileService.remove(sdfile_id));
     }

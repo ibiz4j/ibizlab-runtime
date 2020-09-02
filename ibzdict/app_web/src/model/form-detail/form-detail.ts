@@ -7,6 +7,14 @@
 export class FormDetailModel {
 
     /**
+     * 是否有权限
+     *
+     * @type {boolean}
+     * @memberof FormDetailModel
+     */
+    public isPower: boolean = true;
+
+    /**
      * 成员标题
      *
      * @type {string}
@@ -44,7 +52,7 @@ export class FormDetailModel {
      * @type {boolean}
      * @memberof FormDetailModel
      */
-    public visible: boolean = true;
+    public $visible: boolean = true;
 
     /**
      * 成员是否显示(旧)
@@ -83,11 +91,32 @@ export class FormDetailModel {
         this.detailType = !Object.is(opts.detailType, '') ? opts.detailType : '';
         this.form = opts.form ? opts.form : {};
         this.name = !Object.is(opts.name, '') ? opts.name : '';
-        this.visible = opts.visible ? true : false;
+        this.$visible = opts.visible ? true : false;
         this.oldVisible = opts.visible ? true : false;
         this.isShowCaption = opts.isShowCaption ? true : false;
         this.isControlledContent = opts.isControlledContent ? true : false;
     }
+
+    /**
+     * 设置成员是否隐藏
+     *
+     * @memberof FormDetailModel
+     */
+    public set visible(val: boolean) {
+        if(this.isPower) {
+            this.$visible = val;
+        }
+    }
+
+    /**
+     * 获取成员是否隐藏
+     *
+     * @memberof FormDetailModel
+     */
+    public get visible() {
+        return  this.$visible;
+    }
+
 
     /**
      * 设置显示与隐藏
@@ -96,7 +125,9 @@ export class FormDetailModel {
      * @memberof FormDetailModel
      */
     public setVisible(state: boolean): void {
-        this.visible = state;
+        if(this.isPower) {
+            this.visible = state;
+        }
     }
 
     /**

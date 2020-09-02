@@ -102,7 +102,7 @@ export default class SYS_USERRedirectViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SYS_USERRedirectViewBase
 	 */
-	public viewtag: string = '7ea39c4b28cbc9984c7c1dd31cefc224';
+	public viewtag: string = 'f274f75a31e0c301efcc8d16698fb059';
 
 	/**
 	 * 自定义视图导航上下文集合

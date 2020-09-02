@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import javax.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -50,7 +49,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Create-all')")
     @ApiOperation(value = "新建角色权限关系", tags = {"角色权限关系" },  notes = "新建角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions")
-    @Transactional
     public ResponseEntity<SysRolePermissionDTO> create(@RequestBody SysRolePermissionDTO sysrolepermissiondto) {
         SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
 		sysrolepermissionService.create(domain);
@@ -70,7 +68,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Update-all')")
     @ApiOperation(value = "更新角色权限关系", tags = {"角色权限关系" },  notes = "更新角色权限关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
     public ResponseEntity<SysRolePermissionDTO> update(@PathVariable("sysrolepermission_id") String sysrolepermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
 		SysRolePermission domain  = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
         domain .setRolepermissionid(sysrolepermission_id);
@@ -90,7 +87,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
     @ApiOperation(value = "删除角色权限关系", tags = {"角色权限关系" },  notes = "删除角色权限关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
     public ResponseEntity<Boolean> remove(@PathVariable("sysrolepermission_id") String sysrolepermission_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
     }
@@ -163,7 +159,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Create-all')")
     @ApiOperation(value = "根据权限/资源建立角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源建立角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions")
-    @Transactional
     public ResponseEntity<SysRolePermissionDTO> createBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
         SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
         domain.setPermissionid(syspermission_id);
@@ -188,7 +183,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Update-all')")
     @ApiOperation(value = "根据权限/资源更新角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源更新角色权限关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/{syspermission_id}/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
     public ResponseEntity<SysRolePermissionDTO> updateBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
         SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
         domain.setPermissionid(syspermission_id);
@@ -213,7 +207,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
     @ApiOperation(value = "根据权限/资源删除角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源删除角色权限关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
     }
@@ -296,7 +289,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Create-all')")
     @ApiOperation(value = "根据系统角色建立角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色建立角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions")
-    @Transactional
     public ResponseEntity<SysRolePermissionDTO> createBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
         SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
         domain.setRoleid(sysrole_id);
@@ -321,7 +313,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Update-all')")
     @ApiOperation(value = "根据系统角色更新角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色更新角色权限关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{sysrole_id}/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
     public ResponseEntity<SysRolePermissionDTO> updateBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
         SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
         domain.setRoleid(sysrole_id);
@@ -346,7 +337,6 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Remove-all')")
     @ApiOperation(value = "根据系统角色删除角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色删除角色权限关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}/sysrolepermissions/{sysrolepermission_id}")
-    @Transactional
     public ResponseEntity<Boolean> removeBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysrolepermission_id") String sysrolepermission_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.remove(sysrolepermission_id));
     }

@@ -2,7 +2,7 @@ package cn.ibizlab.api.rest.extensions;
 
 
 import cn.ibizlab.core.disk.extensions.service.DiskCoreService;
-import cn.ibizlab.util.domain.FileItem;
+import cn.ibizlab.core.disk.extensions.vo.FileItem;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

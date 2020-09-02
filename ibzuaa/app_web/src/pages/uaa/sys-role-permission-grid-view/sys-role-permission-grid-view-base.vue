@@ -199,7 +199,7 @@ export default class SysRolePermissionGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysRolePermissionGridViewBase
 	 */
-	public viewtag: string = '61a949e3c23ebdda724888662ded1478';
+	public viewtag: string = '29aee89d4b8aa6756862dc9f0b077feb';
 
 	/**
 	 * 自定义视图导航上下文集合

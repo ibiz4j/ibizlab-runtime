@@ -46,11 +46,11 @@ public class IBZEmployeesaveDeptMemberLogicImpl implements IIBZEmployeesaveDeptM
           KieSession kieSession = null;
         try{
            kieSession=kieContainer.newKieSession();
-           kieSession.insert(et); 
-           kieSession.setGlobal("ibzemployeesavedeptmemberdefault",et);
            cn.ibizlab.core.ou.domain.IBZDeptMember  ibzemployeesavedeptmembermember =new cn.ibizlab.core.ou.domain.IBZDeptMember();
            kieSession.insert(ibzemployeesavedeptmembermember); 
            kieSession.setGlobal("ibzemployeesavedeptmembermember",ibzemployeesavedeptmembermember);
+           kieSession.insert(et); 
+           kieSession.setGlobal("ibzemployeesavedeptmemberdefault",et);
            kieSession.setGlobal("ibzdeptmemberservice",ibzdeptmemberservice);
            kieSession.setGlobal("iBzSysIbzemployeeDefaultService",iBzSysDefaultService);
            kieSession.setGlobal("curuser", cn.ibizlab.util.security.AuthenticationUser.getAuthenticationUser());

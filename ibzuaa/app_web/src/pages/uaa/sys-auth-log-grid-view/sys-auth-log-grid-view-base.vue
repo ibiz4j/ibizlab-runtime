@@ -161,7 +161,7 @@ export default class SysAuthLogGridViewBase extends Vue {
 	 * @type {string}
 	 * @memberof SysAuthLogGridViewBase
 	 */
-	public viewtag: string = '0134ebf9391cb5f988839332c1352cd9';
+	public viewtag: string = '255944d6d1a575d0eda2b68bc19314f3';
 
 	/**
 	 * 自定义视图导航上下文集合

@@ -1,5 +1,5 @@
 server:
-  port: 40002
+  port: 8081
 #Log配置
 logging:
   level:

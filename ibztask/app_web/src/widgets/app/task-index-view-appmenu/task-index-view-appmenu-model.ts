@@ -15,7 +15,7 @@ export default class TaskIndexViewModel {
      */
     public items: any[] = [
         {
-	id: '535929B8-1901-4DD5-8402-6C4156AFBBC8',
+	id: '1533f672a72310f0374987cf5e6a2be1',
 	name: 'menuitem3',
 	text: '注册',
 	type: 'MENUITEM',
@@ -34,7 +34,7 @@ export default class TaskIndexViewModel {
 	authtag:'web-TaskIndexView-menuitem3',
 },
         {
-	id: 'B1156652-77DE-48DA-8E60-86D3D70685BE',
+	id: '2ed1ec3a057e182249e73c42e44b4bef',
 	name: 'menuitem1',
 	text: '任务',
 	type: 'MENUITEM',
@@ -53,7 +53,7 @@ export default class TaskIndexViewModel {
 	authtag:'web-TaskIndexView-menuitem1',
 },
         {
-	id: '0A22F1FE-2628-45EE-B1BD-EA50A4E87157',
+	id: '0190c56b092d15c61accee1d70ae1d67',
 	name: 'menuitem2',
 	text: '日志',
 	type: 'MENUITEM',
