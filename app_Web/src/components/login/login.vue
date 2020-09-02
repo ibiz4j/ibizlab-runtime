@@ -89,7 +89,7 @@
          * @type {*}
          * @memberof Login
          */
-        public form: any = {loginname: 'guest', password: '123456'};
+        public form: any = {loginname: 'ibzadmin', password: '123456'};
 
 
         /**

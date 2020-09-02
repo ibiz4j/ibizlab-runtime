@@ -41,7 +41,7 @@ export default class AppHeaderMenus extends Vue {
       {
           name: "ibizstudio",
           title: "components.appHeaderMenus.ibizstudio.title",
-          url: `${Environment.StudioUrl}?#/common_slnindex/srfkeys=${Environment.SlnId}/sysdesign_psdevslnsysmodeltreeexpview`,
+          url: `${Environment.StudioUrl}?#/common_mosindex/srfkeys=${Environment.SysId}`,
           iconcls: 'fa fa-wrench',
       },
       {

@@ -126,14 +126,14 @@ public class DiskCoreService {
     public File getFile(String folder,String fileId,String authcode) {
         if(StringUtils.isEmpty(folder))
             folder = "ibizutil";
-        if(folder.toUpperCase().startsWith("ibizutil")) {
+        if(folder.toLowerCase().startsWith("ibizutil")) {
             String dirpath = this.fileRoot.concat(folder).concat(File.separator).concat(fileId.replace("_", File.separator));
             File parent = new File(dirpath);
             if (parent.exists() && parent.isDirectory() && parent.listFiles().length > 0) {
                 return parent.listFiles()[0];
             }
         }
-        else if (StringUtils.isEmpty(authcode)||(authcode.equals(fileCoreService.getAuthCode(fileId)))) {
+        else if (StringUtils.isEmpty(authcode)||(!authcode.equals(fileCoreService.getAuthCode(fileId)))) {
             throw new BadRequestAlertException("没有权限下载","SDFile","");
         }
         SDFile sdFile = sdFileService.get(fileId);
