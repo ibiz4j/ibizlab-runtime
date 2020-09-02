@@ -46,6 +46,17 @@
 * 使用yarn便捷安装最新的JavaScript库
 * 使用Vue-cli构建
 
+
+### 系统地址
+演示Demo地址：http://rt.ebs.ibizlab.cn
+
+演示账号/密码：ibzadmin/123456
+
+配置平台：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=2AFD15C7-9AE2-4108-BCC4-6AE6F7BC6087
+
+欢迎加入开源商业套件交流QQ群：1056401976
+
+
 ### 开发配置
 
 * 后端依赖jdk1.8 + maven3  
