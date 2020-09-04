@@ -14,6 +14,29 @@
 - [ ]  ~~ibz-notify:通知微服务~~  
 - [ ]  ~~ibz-dst:分布式统计分析微服务（基于Cassandra+drools）~~  
 
+
+### 系统地址
+演示Demo地址：http://rt.ebs.ibizlab.cn
+演示账号/密码：ibzadmin/123456
+
+### 配置平台
+ibz-rt：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=2AFD15C7-9AE2-4108-BCC4-6AE6F7BC6087
+
+ibz-uaa：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=4DA00F51-1D2D-40F9-B48A-D3CC094F0355
+
+ibz-ou：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=C43977E6-4307-486E-8189-DF2E5E53A6F9
+
+ibz-wf：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=16B3DF56-B7CD-4B7D-9306-2E89A6E6C3EF
+
+ibz-disk：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=E735807E-353E-4BFC-A94A-6D316BF0BF56
+
+ibz-task：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=D8E692AB-B2E6-4946-847D-893BD7FC890B
+
+ibz-dict：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=B55147E6-6E60-4F23-99E5-58ADFDBB5EF7
+
+欢迎加入开源商业套件交流QQ群：1056401976
+
+
 ### 技术栈
 #### 完整的[Spring应用](https://spring.io/)
 * 基于[Spring Boot](https://projects.spring.io/spring-boot/)提供应用配置简化
@@ -46,15 +69,6 @@
 * 使用yarn便捷安装最新的JavaScript库
 * 使用Vue-cli构建
 
-
-### 系统地址
-演示Demo地址：http://rt.ebs.ibizlab.cn
-
-演示账号/密码：ibzadmin/123456
-
-配置平台：http://mos.ibizlab.cn/mos/#/common_mosindex/srfkeys=2AFD15C7-9AE2-4108-BCC4-6AE6F7BC6087
-
-欢迎加入开源商业套件交流QQ群：1056401976
 
 
 ### 开发配置

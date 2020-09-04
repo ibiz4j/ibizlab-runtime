@@ -24,7 +24,7 @@ export const Environment = {
     // 是否开启权限认证
     enablePermissionValid:false,
     // 项目模板地址
-    ProjectUrl: "http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7",
+    ProjectUrl: "https://gitee.com/ibizlab/ibizlab-runtime",
     // 打开目标工具，可选参数：sln、mos
     debugOpenMode:'mos',
     // 配置平台地址
