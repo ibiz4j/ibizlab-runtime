@@ -3,7 +3,9 @@ package cn.ibizlab.api.rest.extensions;
 
 import cn.ibizlab.core.disk.extensions.service.DiskCoreService;
 import cn.ibizlab.core.disk.extensions.vo.FileItem;
+import cn.ibizlab.core.disk.service.ISDFileService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +30,9 @@ public class DiskCoreResource
 
 	@Autowired
 	private DiskCoreService diskCoreService;
+
+	@Autowired
+	private ISDFileService fileService;
 
 	private Hashtable<String, String> type = null;
 	private String getType(String ext)
@@ -96,6 +101,13 @@ public class DiskCoreResource
 			response.setHeader("Content-Disposition", "attachment;filename="+getFileName(file.getName()));
 		this.sendRespose(response, file);
 	}
+
+	@ApiOperation(value = "删除文件", tags = {"文件" },  notes = "删除文件")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/net-disk/files/{sdfile_id}")
+	public ResponseEntity<Boolean> remove(@PathVariable("sdfile_id") String sdfile_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(fileService.remove(sdfile_id));
+	}
+
 
 	@Value("ibiz.file.proxy.previewpath")
 	private String previewPath;
