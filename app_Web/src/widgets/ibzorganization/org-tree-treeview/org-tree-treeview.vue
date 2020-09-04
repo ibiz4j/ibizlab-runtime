@@ -92,14 +92,25 @@
          */
         private initTree() {
             const _this = this;
-            // 获取当前登录人所处组织及其下级组织
-            var url;
-            if (_this.curUserContext && _this.curUserContext.srforgid) {
-                url = 'ibzorganizations/' + _this.curUserContext.srforgid + '/suborg/picker';
-            } else {
-                // 获取所有组织及其下级组织
-                url = 'ibzorganizations/picker';
+            // 获取当前登录人的身份
+            const userStr = localStorage.getItem('user');
+            let user: any = {};
+            if (userStr) {
+                user = JSON.parse(userStr);
             }
+            // 获取当前登录人所处组织及其下级组织
+            let url = '';
+            if (user.superuser==1) {
+                // 获取所有组织
+                url = 'ibzorganizations/alls/suborg/picker';
+            }else {
+                if (_this.curUserContext && _this.curUserContext.srforgid) {
+                    url = 'ibzorganizations/' + _this.curUserContext.srforgid + '/suborg/picker';
+                } else {
+                    this.$Notice.error({title: '错误', desc: '当前登录人组织为空'});
+                }
+            }
+
             this.$http.get(url).then((response: any) => {
                 if (!response || response.status !== 200) {
                     this.$Notice.error({title: '错误', desc: response.message});
@@ -117,7 +128,7 @@
                         _this.selectionChange(response.data[0]);
                     }
                 }
-            }).catch((e) => {
+            }).catch((e:any) => {
                 console.log(e);
             });
         }

@@ -18,6 +18,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import java.lang.reflect.Field;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -109,7 +112,8 @@ public class VersionCheckAspect
      */
     @SneakyThrows
     private Object getDBVersion(VersionCheck versionCheck,Object service,Object id){
-        Object dbVersion=null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp dbVersion=null;
         String versionField=versionCheck.versionfield();
         if(!ObjectUtils.isEmpty(service)){
             EvaluationContext oldContext = new StandardEvaluationContext();
@@ -117,7 +121,12 @@ public class VersionCheckAspect
             oldContext.setVariable("id",id);
             Expression oldExp = parser.parseExpression("#service.get(#id)");
             EntityBase oldEntity =oldExp.getValue(oldContext, EntityBase.class);
-            return oldEntity.get(versionField);
+            Object oldDate=oldEntity.get(versionField);
+            if(oldDate!=null && oldDate instanceof Timestamp){
+                Timestamp db_time= (Timestamp) oldDate;
+                Date db_date = sdf.parse(sdf.format(db_time));
+                dbVersion=new Timestamp(db_date.getTime());
+            }
         }
         return dbVersion;
     }

@@ -49,7 +49,6 @@ export default class WFDynaExpGridViewEngine extends GridViewEngine {
     public onCtrlEvent(ctrlName: string, eventName: string, args: any): void {
         if (Object.is(ctrlName, 'grid')) {
             this.GridEvent(eventName, args);
-            return;
         }
         super.onCtrlEvent(ctrlName, eventName, args);
     }
