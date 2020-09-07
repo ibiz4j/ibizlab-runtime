@@ -293,13 +293,12 @@ export default class ContextMenuDrag extends Vue {
   mounted() {
     let that: any = this;
     const get: Promise<any> = this.entityService.getAllApp(null,{});
-    get.then((response: any) => {
+    get
+      .then((response: any) => {
         if (response) {
           that.list = response.data.model;
           that.listFilter();
         }
-      }).catch((error:any) =>{
-        console.warn("加载数据错误")
       });
   }
 }

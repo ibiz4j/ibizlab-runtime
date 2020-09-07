@@ -1,259 +1,259 @@
 {
-    "ibzdepartmentpickupview": {
-        "title": "部门选择视图",
-        "caption": "部门",
-        "viewtype": "DEPICKUPVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDepartmentPickupView",
-        "viewtag": "10dd7f45f36233049c4af9ca417089f5"
-    },
-    "ibzemployeeeditview": {
-        "title": "人员管理",
-        "caption": "人员管理",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZEmployeeEditView",
-        "viewtag": "119fe650e7efd26bd14bd413cae37ded"
-    },
-    "ibzteammembergridview": {
-        "title": "组成员表格视图",
-        "caption": "组成员",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZTeamMemberGridView",
-        "viewtag": "281f49b284494f9ba207e6bce8416b7d"
-    },
-    "ibzorganizationoptionview": {
-        "title": "单位快速新建",
-        "caption": "单位快速新建",
-        "viewtype": "DEOPTVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZOrganizationOptionView",
-        "viewtag": "2ed85bebb69b8d23388420b95163228a"
-    },
-    "ibzteameditview": {
-        "title": "组管理",
-        "caption": "组管理",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZTeamEditView",
-        "viewtag": "323147bb0fc25046ab102674cb1abf21"
-    },
-    "ibzemployeegridview": {
-        "title": "人员表格视图",
-        "caption": "人员",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZEmployeeGridView",
-        "viewtag": "40fe6b28b9f7902341da46bb74a02d59"
-    },
-    "ibzemployeechangepwdview": {
-        "title": "人员编辑视图",
-        "caption": "人员",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZEmployeeChangePwdView",
-        "viewtag": "55cd5acdacb8aecec7d4574216e10625"
-    },
-    "ibzteamgridview": {
-        "title": "组管理",
-        "caption": "组管理",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZTeamGridView",
-        "viewtag": "5bd45246d1f387729c0d8658e07ddb9f"
-    },
-    "ibzteammembereditview": {
-        "title": "组成员编辑视图",
-        "caption": "组成员",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZTeamMemberEditView",
-        "viewtag": "5e88ef37a2da46d66c41c8838d31096b"
-    },
-    "ibzdeptmembergridview": {
-        "title": "部门成员表格视图",
-        "caption": "部门成员",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDeptMemberGridView",
-        "viewtag": "61541167ccebbc3f174242ce73e436dd"
-    },
-    "ibzorganizationtreeexpview": {
-        "title": "部门管理",
-        "caption": "部门管理",
-        "viewtype": "DETREEEXPVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZOrganizationTreeExpView",
-        "viewtag": "6435e95f9bd03acceda6b7fd610873db"
-    },
-    "ibzdepartmentgridview": {
-        "title": "部门表格视图",
-        "caption": "部门",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDepartmentGridView",
-        "viewtag": "7362390ee25dac238b23fa9ab05ea4ac"
-    },
-    "ibzemployeeeditgridview": {
-        "title": "人员表格视图",
-        "caption": "人员",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZEmployeeEditGridView",
-        "viewtag": "7de880cb7b69c350b0c6c47785634f71"
-    },
-    "ibzpostpickupview": {
-        "title": "岗位数据选择视图",
-        "caption": "岗位",
-        "viewtype": "DEPICKUPVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZPostPickupView",
-        "viewtag": "7e3fbce8277ad89674307e6a0d7ddd43"
-    },
-    "ibzposteditview": {
-        "title": "岗位管理",
-        "caption": "岗位管理",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZPostEditView",
-        "viewtag": "88af20e0a8e819dff22f1a198e8989e3"
-    },
-    "ibzdepartmenteditview": {
-        "title": "部门管理",
-        "caption": "部门管理",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDepartmentEditView",
-        "viewtag": "90c0ced2720b85d5e051e7935a93d3c5"
-    },
-    "ibzorganizationeditview": {
-        "title": "单位管理",
-        "caption": "单位管理",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZOrganizationEditView",
-        "viewtag": "95e33ff2469ba40d3e0c00f5c3f61501"
-    },
-    "ibzdepartmentmpickupview": {
-        "title": "部门数据多项选择视图",
-        "caption": "部门",
-        "viewtype": "DEMPICKUPVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDepartmentMPickupView",
-        "viewtag": "97224ac0397dbe38b4679b4060ee29e5"
-    },
-    "ibzdepartmentoptionview": {
-        "title": "部门快速新建",
-        "caption": "部门快速新建",
-        "viewtype": "DEOPTVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDepartmentOptionView",
-        "viewtag": "9cdad5e2bed51cdcd90b4b7fb3104a5a"
-    },
-    "ibzemployeeoptionview": {
-        "title": "人员快速新建",
-        "caption": "人员快速新建",
-        "viewtype": "DEOPTVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZEmployeeOptionView",
-        "viewtag": "9cf7a70099bff83a10f6ae65c4d54692"
-    },
-    "ibzemployeepickupview": {
-        "title": "人员数据选择视图",
-        "caption": "人员",
-        "viewtype": "DEPICKUPVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZEmployeePickupView",
-        "viewtag": "9ffa35efe3d70cf4b9fa4e83dd1979c6"
-    },
-    "ibzdeptmembereditview": {
-        "title": "部门成员编辑视图",
-        "caption": "部门成员",
-        "viewtype": "DEEDITVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDeptMemberEditView",
-        "viewtag": "bf5e850471bab461fbb6739578e510c5"
-    },
-    "ibzdepartmenttreeexpview": {
-        "title": "人员管理",
-        "caption": "人员管理",
-        "viewtype": "DETREEEXPVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDepartmentTreeExpView",
-        "viewtag": "c0cdac5d5b5691ae8a326f5972aec67f"
-    },
-    "ibzorganizationgridview": {
-        "title": "单位管理",
-        "caption": "单位管理",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZOrganizationGridView",
-        "viewtag": "c42bc30741bd6add20b00494231dfa24"
-    },
-    "ibzemployeepickupgridview": {
-        "title": "人员选择表格视图",
-        "caption": "人员",
-        "viewtype": "DEPICKUPGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZEmployeePickupGridView",
-        "viewtag": "c84df2684f29705ac6c5dec67df9f217"
-    },
-    "ibzpostpickupgridview": {
-        "title": "岗位选择表格视图",
-        "caption": "岗位",
-        "viewtype": "DEPICKUPGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZPostPickupGridView",
-        "viewtag": "cbaccf404d6c33b995df3ace323ccec0"
-    },
-    "ibzorganizationpickupview": {
-        "title": "单位机构数据选择视图",
-        "caption": "单位机构",
-        "viewtype": "DEPICKUPVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZOrganizationPickupView",
-        "viewtag": "ccff36439eacae953f85ff636c9dac74"
-    },
-    "ibzorganizationpickupgridview": {
-        "title": "单位机构选择表格视图",
-        "caption": "单位机构",
-        "viewtype": "DEPICKUPGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZOrganizationPickupGridView",
-        "viewtag": "cf8e6d455f8e88e66bbbe1bdb4c84274"
-    },
-    "ibzdepartmenteditgridview": {
-        "title": "部门表格视图",
-        "caption": "部门",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZDepartmentEditGridView",
-        "viewtag": "d1d44c8c35f438bc24c4bf49b42e678a"
-    },
-    "ibzpostgridview": {
-        "title": "岗位管理",
-        "caption": "岗位管理",
-        "viewtype": "DEGRIDVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZPostGridView",
-        "viewtag": "d907ddd1845887ecabac4d8d199bf792"
-    },
-    "ibzemployeempickupview": {
-        "title": "人员数据多项选择视图",
-        "caption": "人员",
-        "viewtype": "DEMPICKUPVIEW",
-        "viewmodule": "ou",
-        "viewname": "IBZEmployeeMPickupView",
-        "viewtag": "d946240b09028ae684e1eb31281a4caf"
-    },
-    "ibzdepartmentpickupgridview": {
+    "sysdepartmentpickupgridview": {
         "title": "部门选择表格视图",
         "caption": "部门",
         "viewtype": "DEPICKUPGRIDVIEW",
         "viewmodule": "ou",
-        "viewname": "IBZDepartmentPickupGridView",
-        "viewtag": "e3284e895913f7d38d1bcbe898bda0b7"
+        "viewname": "SysDepartmentPickupGridView",
+        "viewtag": "06dc389605323456129e342bbdfbbd16"
+    },
+    "syspostpickupview": {
+        "title": "岗位数据选择视图",
+        "caption": "岗位",
+        "viewtype": "DEPICKUPVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysPostPickupView",
+        "viewtag": "09089840aeb5b072e9d6217cdad34c03"
+    },
+    "sysdepartmenttreeexpview": {
+        "title": "人员管理",
+        "caption": "人员管理",
+        "viewtype": "DETREEEXPVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDepartmentTreeExpView",
+        "viewtag": "0f73ceaa7ce0ec11d9b6aaf27e05ad4f"
+    },
+    "sysdepartmenteditview": {
+        "title": "部门管理",
+        "caption": "部门管理",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDepartmentEditView",
+        "viewtag": "16e80ec413946364504f9f79bce1e0ba"
+    },
+    "sysdepartmentgridview": {
+        "title": "部门表格视图",
+        "caption": "部门",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDepartmentGridView",
+        "viewtag": "1a71a212ed794d05b51b9c825b9cf19a"
+    },
+    "sysemployeeeditgridview": {
+        "title": "人员表格视图",
+        "caption": "人员",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysEmployeeEditGridView",
+        "viewtag": "1ee0edac198fa6d2369d440b31f10960"
+    },
+    "sysposteditview": {
+        "title": "岗位管理",
+        "caption": "岗位管理",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysPostEditView",
+        "viewtag": "22be3cbaf3e2beeb404f53573f0a917a"
+    },
+    "sysdepartmenteditgridview": {
+        "title": "部门表格视图",
+        "caption": "部门",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDepartmentEditGridView",
+        "viewtag": "3a977f8cf3e9ee9bc8c1d6ff14ffe622"
+    },
+    "sysorganizationpickupgridview": {
+        "title": "单位机构选择表格视图",
+        "caption": "单位机构",
+        "viewtype": "DEPICKUPGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysOrganizationPickupGridView",
+        "viewtag": "3cbffb72d0ebf81304545ddeda64c066"
+    },
+    "sysorganizationeditview": {
+        "title": "单位管理",
+        "caption": "单位管理",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysOrganizationEditView",
+        "viewtag": "456373e5385deb29b6863c5a22c8a29a"
+    },
+    "sysemployeeoptionview": {
+        "title": "人员快速新建",
+        "caption": "人员快速新建",
+        "viewtype": "DEOPTVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysEmployeeOptionView",
+        "viewtag": "463709b32df0a807dc1d2e6d2db77dd1"
+    },
+    "sysdeptmembergridview": {
+        "title": "部门成员表格视图",
+        "caption": "部门成员",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDeptMemberGridView",
+        "viewtag": "523b25cb9c95d2ef731c39ca24cfe98a"
+    },
+    "sysorganizationtreeexpview": {
+        "title": "部门管理",
+        "caption": "部门管理",
+        "viewtype": "DETREEEXPVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysOrganizationTreeExpView",
+        "viewtag": "5c403d904f82265cde504f205e98f95e"
+    },
+    "systeameditview": {
+        "title": "组管理",
+        "caption": "组管理",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysTeamEditView",
+        "viewtag": "5f46660051966f3e0b4c377decd638b1"
+    },
+    "sysorganizationgridview": {
+        "title": "单位管理",
+        "caption": "单位管理",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysOrganizationGridView",
+        "viewtag": "64f014192d8afcee483c623ee8a2b07b"
+    },
+    "syspostpickupgridview": {
+        "title": "岗位选择表格视图",
+        "caption": "岗位",
+        "viewtype": "DEPICKUPGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysPostPickupGridView",
+        "viewtag": "65c16575fd8b1fa8bf111e17f573f697"
+    },
+    "sysdepartmentoptionview": {
+        "title": "部门快速新建",
+        "caption": "部门快速新建",
+        "viewtype": "DEOPTVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDepartmentOptionView",
+        "viewtag": "67360f94c8e641ed5c329dee6dc6639e"
+    },
+    "sysemployeegridview": {
+        "title": "人员表格视图",
+        "caption": "人员",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysEmployeeGridView",
+        "viewtag": "67d7a9f7291d44a10ffc356769bcac1d"
+    },
+    "sysorganizationpickupview": {
+        "title": "单位机构数据选择视图",
+        "caption": "单位机构",
+        "viewtype": "DEPICKUPVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysOrganizationPickupView",
+        "viewtag": "82ba8656757a5080e5265648aab13de7"
+    },
+    "systeammembergridview": {
+        "title": "组成员表格视图",
+        "caption": "组成员",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysTeamMemberGridView",
+        "viewtag": "89ff98e46167a4688e63362931496818"
+    },
+    "sysorganizationoptionview": {
+        "title": "单位快速新建",
+        "caption": "单位快速新建",
+        "viewtype": "DEOPTVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysOrganizationOptionView",
+        "viewtag": "915900ff6a784bf46e91a9a6aec79cf0"
+    },
+    "syspostgridview": {
+        "title": "岗位管理",
+        "caption": "岗位管理",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysPostGridView",
+        "viewtag": "a26ed59459b6d3b6f7ff36ad38b06c1b"
+    },
+    "sysemployeechangepwdview": {
+        "title": "人员编辑视图",
+        "caption": "人员",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysEmployeeChangePwdView",
+        "viewtag": "acaeba3ced75ad754dd6cf0b3b11fbcc"
+    },
+    "sysemployeepickupview": {
+        "title": "人员数据选择视图",
+        "caption": "人员",
+        "viewtype": "DEPICKUPVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysEmployeePickupView",
+        "viewtag": "ad75752476891204e7b409cabc499e70"
+    },
+    "sysemployeempickupview": {
+        "title": "人员数据多项选择视图",
+        "caption": "人员",
+        "viewtype": "DEMPICKUPVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysEmployeeMPickupView",
+        "viewtag": "af7290279f8b7645020401c1beb9269e"
+    },
+    "sysemployeeeditview": {
+        "title": "人员管理",
+        "caption": "人员管理",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysEmployeeEditView",
+        "viewtag": "b1abd7783d9e3b9393630428ebde3a86"
+    },
+    "systeammembereditview": {
+        "title": "组成员编辑视图",
+        "caption": "组成员",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysTeamMemberEditView",
+        "viewtag": "b2d81cb8d4121eb95c848e5b1cbfddd8"
+    },
+    "sysdeptmembereditview": {
+        "title": "部门成员编辑视图",
+        "caption": "部门成员",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDeptMemberEditView",
+        "viewtag": "c52fb5e147b7ab7e6cfe158e2494de19"
+    },
+    "sysdepartmentpickupview": {
+        "title": "部门选择视图",
+        "caption": "部门",
+        "viewtype": "DEPICKUPVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDepartmentPickupView",
+        "viewtag": "d076f344eefde0fdc8d5ea6eab40e4c5"
+    },
+    "systeamgridview": {
+        "title": "组管理",
+        "caption": "组管理",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysTeamGridView",
+        "viewtag": "d356c19266944e00bc8ebc1bbd85ca7c"
+    },
+    "sysdepartmentmpickupview": {
+        "title": "部门数据多项选择视图",
+        "caption": "部门",
+        "viewtype": "DEMPICKUPVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysDepartmentMPickupView",
+        "viewtag": "df6caa8751fdf4ee4918b55727f025a9"
+    },
+    "sysemployeepickupgridview": {
+        "title": "人员选择表格视图",
+        "caption": "人员",
+        "viewtype": "DEPICKUPGRIDVIEW",
+        "viewmodule": "ou",
+        "viewname": "SysEmployeePickupGridView",
+        "viewtag": "ed2bd80851a999d7a0d70ea15507ad0d"
     },
     "ouindexview": {
         "title": "organizational-unit",

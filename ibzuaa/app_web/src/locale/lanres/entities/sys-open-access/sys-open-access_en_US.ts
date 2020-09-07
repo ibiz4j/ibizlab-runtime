@@ -41,6 +41,7 @@ export default {
 			region_id: "RegionId", 
 			disabled: "是否禁用", 
 			lic: "授权", 
+			image: "图片", 
 			accessid: "开放平台接入标识", 
 		},
 		uiactions: {

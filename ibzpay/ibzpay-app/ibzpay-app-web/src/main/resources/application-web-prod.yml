@@ -55,5 +55,13 @@ zuul:
       path: /net-disk/**
       serviceId: ${ibiz.ref.service.disk:ibzdisk-api}
       stripPrefix: false
+    ou_sys_org:
+      path: /sysorganizations/**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    ou_sys_dept:
+      path: /sysdepartments/**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

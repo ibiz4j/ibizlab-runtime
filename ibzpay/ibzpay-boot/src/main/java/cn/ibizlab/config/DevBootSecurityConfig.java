@@ -115,9 +115,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                    .antMatchers("/"+uploadpath).permitAll()
                    .antMatchers("/"+previewpath+"/**").permitAll()
                    //开放支付接口
-                   .antMatchers("/trade/pagepay").permitAll()
-                   .antMatchers("/trade/precreate").permitAll()
-                   .antMatchers("/trade/query").permitAll()
+                   .antMatchers("/pay/trade/**").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();

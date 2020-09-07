@@ -62,21 +62,16 @@
 
 </i-col>
 <i-col v-show="detailsModel.redirect_uri.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
-    <app-form-item name='lic' :itemRules="this.rules().lic" class='' :caption="$t('entities.sysopenaccess.main_form.details.lic')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.lic.error" :isEmptyCaption="false" labelPos="LEFT">
-	<ibiz-file-upload
-		:data="data"
-		formItemName="redirect_uri"
-		:value="data.redirect_uri"
-		:formState="formState"
-		folder='sysopenaccess'
-		ownertype='redirect_uri'
-		:ownerid="data.srfkey"
-		:show-ocrview=true
-		:show-preview=true
-		:show-edit=true
-		:show-drag=true
-		:persistence=true
-		@formitemvaluechange="onFormItemValueChange"></ibiz-file-upload>
+    <app-form-item name='redirect_uri' :itemRules="this.rules().redirect_uri" class='' :caption="$t('entities.sysopenaccess.main_form.details.redirect_uri')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.redirect_uri.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box 
+    v-model="data.redirect_uri"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.redirect_uri.disabled" 
+    type='text' 
+    style="">
+</input-box>
+
 </app-form-item>
 
 </i-col>
@@ -117,8 +112,37 @@
 </i-col>
 <i-col v-show="detailsModel.lic.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='lic' :itemRules="this.rules().lic" class='' :caption="$t('entities.sysopenaccess.main_form.details.lic')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.lic.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-file-upload :formState="formState" :ignorefieldvaluechange="ignorefieldvaluechange" @formitemvaluechange="onFormItemValueChange" :data="JSON.stringify(this.data)" name='lic' :value="data.lic" :disabled="detailsModel.lic.disabled" :uploadparams='{}' :exportparams='{}'  style="overflow: auto;"></app-file-upload>
+	<ibiz-file-upload
+		:data="data"
+		formItemName="lic"
+		:value="data.lic"
+		:formState="formState"
+		folder="sysopenaccess"
+		ownertype="lic"
+		:ownerid="data.srfkey"
+		:show-ocrview="true"
+		:show-preview="true"
+		:show-edit="true"
+		:show-drag="false"
+		:persistence="false"
+		@formitemvaluechange="onFormItemValueChange"></ibiz-file-upload>
+</app-form-item>
 
+</i-col>
+<i-col v-show="detailsModel.image.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='image' :itemRules="this.rules().image" class='' :caption="$t('entities.sysopenaccess.main_form.details.image')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.lic.error" :isEmptyCaption="false" labelPos="LEFT">
+	<ibiz-image-upload
+		:data="data"
+		formItemName="image"
+		:value="data.image"
+		:formState="formState"
+		folder="sysopenaccess"
+		ownertype="image"
+		:ownerid="data.srfkey"
+		:show-ocrview="true"
+		:show-preview="true"
+		:persistence="false"
+		@formitemvaluechange="onFormItemValueChange"></ibiz-image-upload>
 </app-form-item>
 
 </i-col>
@@ -474,6 +498,7 @@ export default class MainBase extends Vue implements ControlInterface {
         region_id: null,
         disabled: null,
         lic: null,
+        image: null,
         accessid: null,
         sysopenaccess:null,
     };
@@ -608,6 +633,12 @@ export default class MainBase extends Vue implements ControlInterface {
             { required: false, type: 'string', message: '授权 值不能为空', trigger: 'change' },
             { required: false, type: 'string', message: '授权 值不能为空', trigger: 'blur' },
         ],
+        image: [
+            { type: 'string', message: '图片 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '图片 值必须为字符串类型', trigger: 'blur' },
+            { required: false, type: 'string', message: '图片 值不能为空', trigger: 'change' },
+            { required: false, type: 'string', message: '图片 值不能为空', trigger: 'blur' },
+        ],
         accessid: [
             { type: 'string', message: '开放平台接入标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '开放平台接入标识 值必须为字符串类型', trigger: 'blur' },
@@ -735,6 +766,8 @@ export default class MainBase extends Vue implements ControlInterface {
         disabled: new FormItemModel({ caption: '是否禁用', detailType: 'FORMITEM', name: 'disabled', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         lic: new FormItemModel({ caption: '授权', detailType: 'FORMITEM', name: 'lic', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+, 
+        image: new FormItemModel({ caption: '图片', detailType: 'FORMITEM', name: 'image', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
         accessid: new FormItemModel({ caption: '开放平台接入标识', detailType: 'FORMITEM', name: 'accessid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
 , 
@@ -921,6 +954,18 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 image 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.image')
+    onImageChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'image', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 accessid 值
      *
      * @param {*} newVal
@@ -986,6 +1031,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
+
 
 
 

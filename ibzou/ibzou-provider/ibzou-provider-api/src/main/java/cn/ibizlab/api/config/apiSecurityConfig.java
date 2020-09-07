@@ -106,7 +106,10 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/fonts/**",
                         "/**/js/**",
                         "/**/img/**",
-                        "/"
+                        "/",
+                        "webjars/**",
+                        "/swagger-resources/**",
+                        "/v2/**"
                 ).permitAll()
                 //放行登录请求
                 .antMatchers( HttpMethod.POST,"/"+loginPath).permitAll()
@@ -116,11 +119,11 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/"+downloadpath+"/**").permitAll()
                 .antMatchers("/"+uploadpath).permitAll()
                 .antMatchers("/"+previewpath+"/**").permitAll()
-
-                //开放组织机构关系查询
-                .antMatchers("/ibzemployees/**/oumaps").permitAll()
-                .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()
+               //开放组织机构关系查询
+               .antMatchers("/ibzemployees/**/oumaps").permitAll()
+               .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()
                .antMatchers("/dictionarys/**").permitAll()
+               .antMatchers("/sysemployees/**/oumaps").permitAll()
                 // 所有请求都需要认证
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域

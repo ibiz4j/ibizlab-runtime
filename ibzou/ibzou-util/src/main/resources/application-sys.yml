@@ -1,9 +1,6 @@
-#nacos配置中心、数据源
+
+#缓存、数据源
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
   cache:
     redis:
       time-to-live: 3600
@@ -20,6 +17,10 @@ spring:
         max-wait: 300ms
         max-idle: 16
         min-idle: 8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   datasource:
     username: root
     password: root
@@ -95,7 +96,7 @@ ibiz:
 ### jobs
 jobs:
   #admin-address: http://127.0.0.1:40005
-  app-name: ibzuaa
+  app-name: ibzou
   app-port: 9999
   #app-ip: 127.0.0.1
 

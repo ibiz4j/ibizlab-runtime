@@ -39,13 +39,13 @@ export class EntityServiceRegister {
      * @memberof EntityServiceRegister
      */
     protected init(): void {
-                this.allEntityService.set('ibzpost', () => import('@/service/ibzpost/ibzpost-service'));
-        this.allEntityService.set('ibzorganization', () => import('@/service/ibzorganization/ibzorganization-service'));
-        this.allEntityService.set('ibzteam', () => import('@/service/ibzteam/ibzteam-service'));
-        this.allEntityService.set('ibzdeptmember', () => import('@/service/ibzdept-member/ibzdept-member-service'));
-        this.allEntityService.set('ibzdepartment', () => import('@/service/ibzdepartment/ibzdepartment-service'));
-        this.allEntityService.set('ibzteammember', () => import('@/service/ibzteam-member/ibzteam-member-service'));
-        this.allEntityService.set('ibzemployee', () => import('@/service/ibzemployee/ibzemployee-service'));
+                this.allEntityService.set('syspost', () => import('@/service/sys-post/sys-post-service'));
+        this.allEntityService.set('sysdepartment', () => import('@/service/sys-department/sys-department-service'));
+        this.allEntityService.set('sysemployee', () => import('@/service/sys-employee/sys-employee-service'));
+        this.allEntityService.set('systeam', () => import('@/service/sys-team/sys-team-service'));
+        this.allEntityService.set('sysorganization', () => import('@/service/sys-organization/sys-organization-service'));
+        this.allEntityService.set('systeammember', () => import('@/service/sys-team-member/sys-team-member-service'));
+        this.allEntityService.set('sysdeptmember', () => import('@/service/sys-dept-member/sys-dept-member-service'));
     }
 
     /**

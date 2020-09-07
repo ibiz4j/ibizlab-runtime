@@ -7,32 +7,32 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
-    ibzpost:
-      path: /ibzposts/**
+    sys_post:
+      path: /sysposts/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
-    ibzorg:
-      path: /ibzorganizations/**
+    sys_dept:
+      path: /sysdepartments/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
-    ibzteam:
-      path: /ibzteams/**
+    sys_emp:
+      path: /sysemployees/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
-    ibzdeptmember:
-      path: /ibzdeptmembers/**
+    sys_team:
+      path: /systeams/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
-    ibzdept:
-      path: /ibzdepartments/**
+    sys_org:
+      path: /sysorganizations/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
-    ibzteammember:
-      path: /ibzteammembers/**
+    sys_teammember:
+      path: /systeammembers/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
-    ibzemp:
-      path: /ibzemployees/**
+    sys_deptmember:
+      path: /sysdeptmembers/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     loginv7:

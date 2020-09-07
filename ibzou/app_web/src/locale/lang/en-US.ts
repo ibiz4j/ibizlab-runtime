@@ -1,10 +1,10 @@
-import ibzpost_en_US from '@locale/lanres/entities/ibzpost/ibzpost_en_US';
-import ibzorganization_en_US from '@locale/lanres/entities/ibzorganization/ibzorganization_en_US';
-import ibzteam_en_US from '@locale/lanres/entities/ibzteam/ibzteam_en_US';
-import ibzdeptmember_en_US from '@locale/lanres/entities/ibzdept-member/ibzdept-member_en_US';
-import ibzdepartment_en_US from '@locale/lanres/entities/ibzdepartment/ibzdepartment_en_US';
-import ibzteammember_en_US from '@locale/lanres/entities/ibzteam-member/ibzteam-member_en_US';
-import ibzemployee_en_US from '@locale/lanres/entities/ibzemployee/ibzemployee_en_US';
+import syspost_en_US from '@locale/lanres/entities/sys-post/sys-post_en_US';
+import sysdepartment_en_US from '@locale/lanres/entities/sys-department/sys-department_en_US';
+import sysemployee_en_US from '@locale/lanres/entities/sys-employee/sys-employee_en_US';
+import systeam_en_US from '@locale/lanres/entities/sys-team/sys-team_en_US';
+import sysorganization_en_US from '@locale/lanres/entities/sys-organization/sys-organization_en_US';
+import systeammember_en_US from '@locale/lanres/entities/sys-team-member/sys-team-member_en_US';
+import sysdeptmember_en_US from '@locale/lanres/entities/sys-dept-member/sys-dept-member_en_US';
 import components_en_US from '@locale/lanres/components/components_en_US';
 import codelist_en_US from '@locale/lanres/codelist/codelist_en_US';
 import userCustom_en_US from '@locale/lanres/userCustom/userCustom_en_US';
@@ -224,13 +224,13 @@ export default {
         },
     },
     entities: {
-        ibzpost: ibzpost_en_US,
-        ibzorganization: ibzorganization_en_US,
-        ibzteam: ibzteam_en_US,
-        ibzdeptmember: ibzdeptmember_en_US,
-        ibzdepartment: ibzdepartment_en_US,
-        ibzteammember: ibzteammember_en_US,
-        ibzemployee: ibzemployee_en_US,
+        syspost: syspost_en_US,
+        sysdepartment: sysdepartment_en_US,
+        sysemployee: sysemployee_en_US,
+        systeam: systeam_en_US,
+        sysorganization: sysorganization_en_US,
+        systeammember: systeammember_en_US,
+        sysdeptmember: sysdeptmember_en_US,
     },
     components: components_en_US,
     codelist: codelist_en_US,

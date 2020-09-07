@@ -65,6 +65,7 @@ export default class AppQuickGroup extends Vue {
      */
     get renderArray(){
       if(this.items && this.items.length >0){
+        this.selectedUiItem = this.items[0];
         this.handleClick(this.items[0]);
         return this.handleDataSet(this.items)
       }else{
@@ -144,9 +145,6 @@ export default class AppQuickGroup extends Vue {
      * @memberof AppQuickGroup
      */
     public handleClick($event:any,isswitch:boolean = true){
-      if(this.selectedUiItem && (this.selectedUiItem.id === $event.id)){
-        return;
-      }
       this.$emit('valuechange',$event);
       if(isswitch){
         this.selectedUiItem = $event;

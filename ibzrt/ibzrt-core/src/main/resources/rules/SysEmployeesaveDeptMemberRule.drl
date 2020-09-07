@@ -1,0 +1,41 @@
+package cn.ibizlab.ou.logic.sysemployeelogic.savedeptmember;
+
+import java.util.Map;
+import java.util.HashMap;
+import com.alibaba.fastjson.JSONObject;
+global cn.ibizlab.core.ou.domain.SysEmployee sysemployeesavedeptmemberdefault;
+global cn.ibizlab.core.ou.domain.SysDeptMember sysemployeesavedeptmembermember;
+global cn.ibizlab.core.ou.service.ISysDeptMemberService sysdeptmemberservice;
+global cn.ibizlab.core.ou.service.ISysEmployeeService iBzSysSysemployeeDefaultService;
+global cn.ibizlab.util.security.AuthenticationUser curuser;
+
+no-loop
+
+//逻辑处理节点[开始]
+rule "begin"
+ruleflow-group "sysemployeesavedeptmemberbegin"
+    when
+    then
+    end
+
+//逻辑处理节点[保存成员]
+rule "deaction1"
+ruleflow-group "sysemployeesavedeptmemberdeaction1"
+    when
+    then
+    sysdeptmemberservice.save(sysemployeesavedeptmembermember);
+    update(sysemployeesavedeptmemberdefault);//更新fact中变量值
+    update(sysemployeesavedeptmembermember);//更新fact中变量值
+    end
+
+//逻辑处理节点[准备成员]
+rule "prepareparam1"
+ruleflow-group "sysemployeesavedeptmemberprepareparam1"
+    when
+    then
+    sysemployeesavedeptmembermember.set("deptid",sysemployeesavedeptmemberdefault.get("mdeptid"));
+    sysemployeesavedeptmembermember.set("userid",sysemployeesavedeptmemberdefault.get("userid"));
+    update(sysemployeesavedeptmemberdefault);//更新fact中变量值
+    update(sysemployeesavedeptmembermember);//更新fact中变量值
+    end
+

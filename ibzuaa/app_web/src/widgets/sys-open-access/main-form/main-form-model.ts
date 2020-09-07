@@ -90,6 +90,10 @@ export default class MainModel {
         dataType:'FORMITEM',
       },
       {
+        name: 'image',
+        dataType:'FORMITEM',
+      },
+      {
         name: 'accessid',
         prop: 'id',
         dataType: 'TEXT',

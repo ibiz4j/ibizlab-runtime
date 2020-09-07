@@ -15,8 +15,6 @@ export const Environment = {
     ExportFile: '/ibizutil/download',
     // 文件上传
     UploadFile: '/ibizutil/upload',
-    // 数据导入单次上传最大数量
-    sliceUploadCnt: 100,
     // 是否为pc端应用
     isAppMode:true,
     //统一地址

@@ -1,13 +1,13 @@
 package cn.ibizlab.core.ou.extensions.service;
 
+import cn.ibizlab.core.ou.domain.SysDepartment;
+import cn.ibizlab.core.ou.domain.SysEmployee;
+import cn.ibizlab.core.ou.domain.SysOrganization;
 import cn.ibizlab.core.ou.extensions.domain.*;
-import cn.ibizlab.core.ou.extensions.mapping.IBZDept2NodeMapping;
-import cn.ibizlab.core.ou.extensions.mapping.IBZEmp2NodeMapping;
-import cn.ibizlab.core.ou.extensions.mapping.IBZOrg2NodeMapping;
-import cn.ibizlab.core.ou.domain.IBZDepartment;
-import cn.ibizlab.core.ou.domain.IBZEmployee;
-import cn.ibizlab.core.ou.domain.IBZOrganization;
-import cn.ibizlab.core.ou.service.IIBZEmployeeService;
+import cn.ibizlab.core.ou.extensions.mapping.SysDept2NodeMapping;
+import cn.ibizlab.core.ou.extensions.mapping.SysEmp2NodeMapping;
+import cn.ibizlab.core.ou.extensions.mapping.SysOrg2NodeMapping;
+import cn.ibizlab.core.ou.service.ISysEmployeeService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -27,24 +27,24 @@ public class OUCoreService
 
 	@Autowired
 	@Lazy
-	private IIBZEmployeeService iibzEmployeeService;
+	private ISysEmployeeService iibzEmployeeService;
 
 
-	public List<IBZEmployee> getEmpByOrg(String orgid)
+	public List<SysEmployee> getEmpByOrg(String orgid)
 	{
 		if(StringUtils.isEmpty(orgid) || "nullorgid".equals(orgid))
 			return new ArrayList<>();
-		return iibzEmployeeService.list(new QueryWrapper<IBZEmployee>().eq("orgid",orgid).orderByAsc("showorder"));
+		return iibzEmployeeService.list(new QueryWrapper<SysEmployee>().eq("orgid",orgid).orderByAsc("showorder"));
 	}
 
-	public List<IBZEmployee> getEmpByDept(String deptid)
+	public List<SysEmployee> getEmpByDept(String deptid)
 	{
 		if(StringUtils.isEmpty(deptid) || "nulldeptid".equals(deptid))
 			return new ArrayList<>();
-		return iibzEmployeeService.list(new QueryWrapper<IBZEmployee>().eq("mdeptid",deptid).orderByAsc("showorder"));
+		return iibzEmployeeService.list(new QueryWrapper<SysEmployee>().eq("mdeptid",deptid).orderByAsc("showorder"));
 	}
 
-	public List<IBZEmployee> getSubEmpByOrg(String orgid)
+	public List<SysEmployee> getSubEmpByOrg(String orgid)
 	{
 		if(StringUtils.isEmpty(orgid) || "nullorgid".equals(orgid))
 			return new ArrayList<>();
@@ -52,18 +52,18 @@ public class OUCoreService
 		OrgMap orgmodel=this.getOrgModel(orgid);
 		if(orgmodel.getSub().size()==store.size())
 			return iibzEmployeeService.list();
-		return iibzEmployeeService.list(new QueryWrapper<IBZEmployee>().in("orgid",orgmodel.getSub()));
+		return iibzEmployeeService.list(new QueryWrapper<SysEmployee>().in("orgid",orgmodel.getSub()));
 	}
 
-	public List<IBZEmployee> getSubEmpByDept(String deptid)
+	public List<SysEmployee> getSubEmpByDept(String deptid)
 	{
 		if(StringUtils.isEmpty(deptid) || "nulldeptid".equals(deptid))
 			return new ArrayList<>();
 		DeptMap deptmodel=this.getDeptModel(deptid);
-		return iibzEmployeeService.list(new QueryWrapper<IBZEmployee>().in("mdeptid",deptmodel.getSub()));
+		return iibzEmployeeService.list(new QueryWrapper<SysEmployee>().in("mdeptid",deptmodel.getSub()));
 	}
 
-	public List<IBZEmployee> getParentEmpByOrg(String orgid,boolean bRecurrence)
+	public List<SysEmployee> getParentEmpByOrg(String orgid,boolean bRecurrence)
 	{
 		if(StringUtils.isEmpty(orgid) || "nullorgid".equals(orgid))
 			return new ArrayList<>();
@@ -77,10 +77,10 @@ public class OUCoreService
 		}
 		if(parent.size()==0)
 			return new ArrayList<>();
-		return iibzEmployeeService.list(new QueryWrapper<IBZEmployee>().in("orgid",parent));
+		return iibzEmployeeService.list(new QueryWrapper<SysEmployee>().in("orgid",parent));
 	}
 
-	public List<IBZEmployee> getParentEmpByDept(String deptid,boolean bRecurrence)
+	public List<SysEmployee> getParentEmpByDept(String deptid,boolean bRecurrence)
 	{
 		if(StringUtils.isEmpty(deptid) || "nulldeptid".equals(deptid))
 			return new ArrayList<>();
@@ -94,7 +94,7 @@ public class OUCoreService
 		}
 		if(parent.size()==0)
 			return new ArrayList<>();
-		return iibzEmployeeService.list(new QueryWrapper<IBZEmployee>().in("mdeptid",parent));
+		return iibzEmployeeService.list(new QueryWrapper<SysEmployee>().in("mdeptid",parent));
 	}
 
 	public OrgMap getOrgModel(String orgid)
@@ -131,7 +131,7 @@ public class OUCoreService
 
 
 	@Autowired
-	private IBZOrg2NodeMapping org2NodeMapping;
+	private SysOrg2NodeMapping org2NodeMapping;
 
 	public List<OrgNode> getOrgNode(String root)
 	{
@@ -147,7 +147,7 @@ public class OUCoreService
 			int rootcnt=0;
 			String tmp="";
 			for(OrgMap map:store.values()) {
-				IBZOrganization org = map.getOrg();
+				SysOrganization org = map.getOrg();
 				if(StringUtils.isEmpty(org.getParentorgid())) {
 					rootcnt++;
 					tmp=org.getOrgid();
@@ -159,7 +159,7 @@ public class OUCoreService
 
 		for(OrgMap map:store.values())
 		{
-			IBZOrganization org=map.getOrg();
+			SysOrganization org=map.getOrg();
 			String parent=org.getParentorgid();
 			if(StringUtils.isEmpty(parent))
 				parent="alls";
@@ -196,7 +196,7 @@ public class OUCoreService
 
 
 	@Autowired
-	private IBZDept2NodeMapping dept2NodeMapping;
+	private SysDept2NodeMapping dept2NodeMapping;
 
 	public List<DeptNode> getDeptNode(String orgid)
 	{
@@ -207,7 +207,7 @@ public class OUCoreService
 		Map<String,DeptMap> store=ouModelService.getDeptModel(ouModelService.getOrgModel());
 		for(DeptMap map:store.values())
 		{
-			IBZDepartment dept=map.getDept();
+			SysDepartment dept=map.getDept();
 			if(StringUtils.isEmpty(dept.getParentdeptid())&&orgid.equals(dept.getOrgid()))
 			{
 				DeptNode node=dept2NodeMapping.toDto(dept);
@@ -237,7 +237,7 @@ public class OUCoreService
 		Map<String,DeptMap> store=ouModelService.getDeptModel(ouModelService.getOrgModel());
 		for(DeptMap map:store.values())
 		{
-			IBZDepartment dept=map.getDept();
+			SysDepartment dept=map.getDept();
 			if(StringUtils.isEmpty(dept.getParentdeptid()))
 			{
 				DeptNode node=dept2NodeMapping.toDto(dept);
@@ -282,7 +282,7 @@ public class OUCoreService
 
 
 	@Autowired
-	private IBZEmp2NodeMapping emp2NodeMapping;
+	private SysEmp2NodeMapping emp2NodeMapping;
 
 	public List<EmpNode> getEmpNode(String orgid)
 	{
@@ -294,7 +294,7 @@ public class OUCoreService
 		Map<String,DeptMap> store=ouModelService.getDeptModel(ouModelService.getOrgModel());
 		for(DeptMap map:store.values())
 		{
-			IBZDepartment dept=map.getDept();
+			SysDepartment dept=map.getDept();
 			if(StringUtils.isEmpty(dept.getParentdeptid())&&orgid.equals(dept.getOrgid()))
 			{
 				list.add(dept.getDeptid());

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:g="http://www.jboss.org/drools/flow/gpd" xmlns:tns="http://www.jboss.org/drools" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.mvel.org/2.0" id="Definition" name="" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+    <process id="cn.ibizlab.core.ou.service.logic.sysemployeesavedeptmember" isClosed="false" isExecutable="true" name="ScoreRule" processType="Private" tns:packageName="cn.ibizlab.core.ou.service.logic.sysemployeesavedeptmember">
+        <extensionElements>
+            <tns:import name="java.util.Map" />
+            <tns:import name="org.springframework.util.StringUtils"/>
+            <tns:import name="cn.ibizlab.util.helper.RuleUtils"/>
+        <tns:global identifier="sysemployeesavedeptmemberdefault" type="cn.ibizlab.core.ou.domain.SysEmployee" />
+        <tns:global identifier="sysemployeesavedeptmembermember" type="cn.ibizlab.core.ou.domain.SysDeptMember" />
+        </extensionElements>
+     <startEvent id="ce0d0ff1776568ee1d4aa9b085a05300" isInterrupting="true"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysemployeesavedeptmemberdeaction1" id="40d4f46408c08c5c1182a2471c1deddf" implementation="http://www.jboss.org/drools/rule" name="保存成员"/>
+     <endEvent id="40d4f46408c08c5c1182a2471c1deddf_End" name="End"/>
+     <sequenceFlow id="40d4f46408c08c5c1182a2471c1deddf_End_Line" sourceRef="40d4f46408c08c5c1182a2471c1deddf" targetRef="40d4f46408c08c5c1182a2471c1deddf_End"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysemployeesavedeptmemberprepareparam1" id="c97400ea14003bae9f2ae38840a1e7bc" implementation="http://www.jboss.org/drools/rule" name="准备成员"/>
+     <sequenceFlow id="cee3ceec6fe80812d8ec99e25778a347" sourceRef="c97400ea14003bae9f2ae38840a1e7bc" targetRef="40d4f46408c08c5c1182a2471c1deddf">
+     </sequenceFlow>
+     <sequenceFlow id="25a3b987e2538039354c424b25412af1" sourceRef="ce0d0ff1776568ee1d4aa9b085a05300" targetRef="c97400ea14003bae9f2ae38840a1e7bc">
+     </sequenceFlow>
+    </process>
+</definitions>
+

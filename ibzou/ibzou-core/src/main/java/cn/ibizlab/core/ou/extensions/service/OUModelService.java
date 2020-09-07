@@ -1,11 +1,11 @@
 package cn.ibizlab.core.ou.extensions.service;
 
+import cn.ibizlab.core.ou.domain.SysDepartment;
+import cn.ibizlab.core.ou.domain.SysOrganization;
 import cn.ibizlab.core.ou.extensions.domain.DeptMap;
 import cn.ibizlab.core.ou.extensions.domain.OrgMap;
-import cn.ibizlab.core.ou.domain.IBZDepartment;
-import cn.ibizlab.core.ou.domain.IBZOrganization;
-import cn.ibizlab.core.ou.service.IIBZDepartmentService;
-import cn.ibizlab.core.ou.service.IIBZOrganizationService;
+import cn.ibizlab.core.ou.service.ISysDepartmentService;
+import cn.ibizlab.core.ou.service.ISysOrganizationService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -19,10 +19,10 @@ public class OUModelService
 {
 
 	@Autowired
-	private IIBZOrganizationService iibzOrganizationService;
+	private ISysOrganizationService iibzOrganizationService;
 
 	@Autowired
-	private IIBZDepartmentService iibzDepartmentService;
+	private ISysDepartmentService iibzDepartmentService;
 
 	private Map<String, OrgMap> orgmap=null;
 
@@ -39,15 +39,15 @@ public class OUModelService
 			if(orgmap!=null)
 				return orgmap;
 			Map<String, OrgMap> store=new LinkedHashMap<>();
-			List<IBZOrganization> listOrg=iibzOrganizationService.list(new QueryWrapper<IBZOrganization>().orderByAsc("showorder","orgcode"));
-			for(IBZOrganization org:listOrg)
+			List<SysOrganization> listOrg=iibzOrganizationService.list(new QueryWrapper<SysOrganization>().orderByAsc("showorder","orgcode"));
+			for(SysOrganization org:listOrg)
 			{
 				OrgMap map=new OrgMap();
 				map.setOrg(org);
 				store.put(org.getOrgid(),map);
 			}
 
-			for(IBZOrganization org:listOrg)
+			for(SysOrganization org:listOrg)
 			{
 				loopOrg(org,store);
 				if(!StringUtils.isEmpty(org.getParentorgid())) {
@@ -58,7 +58,7 @@ public class OUModelService
 
 			}
 
-			for(IBZOrganization org:listOrg)
+			for(SysOrganization org:listOrg)
 			{
 				for(String sub:store.get(org.getOrgid()).getSub())
 				{
@@ -73,7 +73,7 @@ public class OUModelService
 		return orgmap;
 	}
 
-	public void loopOrg(IBZOrganization org,Map<String, OrgMap> store)
+	public void loopOrg(SysOrganization org,Map<String, OrgMap> store)
 	{
 		if(!StringUtils.isEmpty(org.getParentorgid()))
 		{
@@ -106,8 +106,8 @@ public class OUModelService
 			Map<String, DeptMap> store=new LinkedHashMap<>();
 			Map<String, Set<String>> bcmap=new HashMap<>();
 
-			List<IBZDepartment> listDept=iibzDepartmentService.list(new QueryWrapper<IBZDepartment>().orderByAsc("showorder","deptcode"));
-			for(IBZDepartment dept:listDept)
+			List<SysDepartment> listDept=iibzDepartmentService.list(new QueryWrapper<SysDepartment>().orderByAsc("showorder","deptcode"));
+			for(SysDepartment dept:listDept)
 			{
 				DeptMap map=new DeptMap();
 				map.setDept(dept);
@@ -136,7 +136,7 @@ public class OUModelService
 
 			}
 
-			for(IBZDepartment dept:listDept)
+			for(SysDepartment dept:listDept)
 			{
 				loopDept(dept,store);
 				if(!StringUtils.isEmpty(dept.getParentdeptid())) {
@@ -146,7 +146,7 @@ public class OUModelService
 				}
 			}
 
-			for(IBZDepartment dept:listDept)
+			for(SysDepartment dept:listDept)
 			{
 				for(String sub:store.get(dept.getDeptid()).getSub())
 				{
@@ -155,7 +155,7 @@ public class OUModelService
 				}
 			}
 
-			for(IBZDepartment dept:listDept)
+			for(SysDepartment dept:listDept)
 			{
 				String orgid=dept.getOrgid();
 				if(StringUtils.isEmpty(orgid)||(!orgstore.containsKey(orgid)))
@@ -205,7 +205,7 @@ public class OUModelService
 		return deptmap;
 	}
 
-	public void loopDept(IBZDepartment dept,Map<String,DeptMap> store)
+	public void loopDept(SysDepartment dept,Map<String,DeptMap> store)
 	{
 		if(!StringUtils.isEmpty(dept.getParentdeptid()))
 		{

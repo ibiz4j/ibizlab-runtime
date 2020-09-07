@@ -1,5 +1,6 @@
 const path = require('path');
 const os = require('os');
+
 function resolve(dir) {
     return path.join(__dirname, dir)
 }
@@ -8,13 +9,13 @@ module.exports = {
     publicPath: './',
     // 去除 map 文件 1
     productionSourceMap: false,
-    outputDir:"../ibzou-app/ibzou-app-web/target/classes/META-INF/resources",
+    outputDir:"../ou-app/ou-app-web/target/classes/META-INF/resources",
     devServer: {
         host: '0.0.0.0',
         port: 8111,
         compress: true,
         disableHostCheck: true,
-        // proxy: "http://127.0.0.1:8080/",
+        proxy: "http://127.0.0.1:8080/",
         historyApiFallback: {
             rewrites: [
             ]

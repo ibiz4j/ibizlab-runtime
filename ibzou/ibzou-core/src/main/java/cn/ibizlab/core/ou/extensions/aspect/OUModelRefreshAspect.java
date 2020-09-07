@@ -21,36 +21,36 @@ public class OUModelRefreshAspect
     @Lazy
     private OUModelService ouModelService;
 
-    @After(value = "execution(* cn.ibizlab.core.ou.service.IIBZOrganizationService.creat*(..))")
+    @After(value = "execution(* cn.ibizlab.core.ou.service.ISysOrganizationService.creat*(..))")
     public void AfterCreateOrg(JoinPoint point) throws Exception {
         ouModelService.refreshModel();
     }
-    @After(value = "execution(* cn.ibizlab.core.ou.service.IIBZOrganizationService.updat*(..))")
+    @After(value = "execution(* cn.ibizlab.core.ou.service.ISysOrganizationService.updat*(..))")
     public void AfterUpdateOrg(JoinPoint point) throws Exception {
         ouModelService.refreshModel();
     }
-    @After(value = "execution(* cn.ibizlab.core.ou.service.IIBZOrganizationService.remov*(..))")
+    @After(value = "execution(* cn.ibizlab.core.ou.service.ISysOrganizationService.remov*(..))")
     public void AfterRemoveOrg(JoinPoint point) throws Exception {
         ouModelService.refreshModel();
     }
-    @After(value = "execution(* cn.ibizlab.core.ou.service.IIBZOrganizationService.sav*(..))")
+    @After(value = "execution(* cn.ibizlab.core.ou.service.ISysOrganizationService.sav*(..))")
     public void AfterSaveOrg(JoinPoint point) throws Exception {
         ouModelService.refreshModel();
     }
 
-    @After(value = "execution(* cn.ibizlab.core.ou.service.IIBZDepartmentService.creat*(..))")
+    @After(value = "execution(* cn.ibizlab.core.ou.service.ISysDepartmentService.creat*(..))")
     public void AfterCreateDept(JoinPoint point) throws Exception {
         ouModelService.refreshModel();
     }
-    @After(value = "execution(* cn.ibizlab.core.ou.service.IIBZDepartmentService.updat*(..))")
+    @After(value = "execution(* cn.ibizlab.core.ou.service.ISysDepartmentService.updat*(..))")
     public void AfterUpdateDept(JoinPoint point) throws Exception {
         ouModelService.refreshModel();
     }
-    @After(value = "execution(* cn.ibizlab.core.ou.service.IIBZDepartmentService.remov*(..))")
+    @After(value = "execution(* cn.ibizlab.core.ou.service.ISysDepartmentService.remov*(..))")
     public void AfterRemoveDept(JoinPoint point) throws Exception {
         ouModelService.refreshModel();
     }
-    @After(value = "execution(* cn.ibizlab.core.ou.service.IIBZDepartmentService.sav*(..))")
+    @After(value = "execution(* cn.ibizlab.core.ou.service.ISysDepartmentService.sav*(..))")
     public void AfterSaveDept(JoinPoint point) throws Exception {
         ouModelService.refreshModel();
     }

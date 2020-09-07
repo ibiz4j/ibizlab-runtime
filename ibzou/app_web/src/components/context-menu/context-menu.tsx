@@ -92,14 +92,6 @@ export default class ContextMenu extends Vue {
      */
     @Prop()
     public menus?: any[]
-    /**
-     * 是否阻止默认绘制上下文菜单
-     *
-     * @type {any}
-     * @memberof ContextMenu
-     */
-    @Prop({default:false})
-    public isBlocked?:any;
 
     /**
      * 显示右键菜单
@@ -203,10 +195,7 @@ export default class ContextMenu extends Vue {
         if (contextRef) {
             contextRef.oncontextmenu = (event: MouseEvent) => {
                 event.preventDefault();
-                if(!this.isBlocked){
-                    this.showContextMenu(event.clientX, event.clientY);
-                }
-                this.$emit("showContext",event);
+                this.showContextMenu(event.clientX, event.clientY);
             };
         }
     }

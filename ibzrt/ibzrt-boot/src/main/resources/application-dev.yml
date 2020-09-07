@@ -12,30 +12,6 @@ zuul:
         path: /dict_options/**
         serviceId: ${ibiz.ref.service.ibzdict-api:ibzdict-api}
         stripPrefix: false
-      ibzdept:
-        path: /ibzdepts/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      ibzdeptmember:
-        path: /ibzdeptmembers/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      ibzorg:
-        path: /ibzorgs/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      ibzpost:
-        path: /ibzposts/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      ibzteam:
-        path: /ibzteams/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      ibzteammember:
-        path: /ibzteammembers/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
       jobs_info:
         path: /jobs_infos/**
         serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
@@ -64,6 +40,18 @@ zuul:
         path: /sys_authlogs/**
         serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
         stripPrefix: false
+      sys_dept:
+        path: /sys_depts/**
+        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+        stripPrefix: false
+      sys_deptmember:
+        path: /sys_deptmembers/**
+        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+        stripPrefix: false
+      sys_org:
+        path: /sys_orgs/**
+        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+        stripPrefix: false
       sys_pssystem:
         path: /sys_pssystems/**
         serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
@@ -72,6 +60,10 @@ zuul:
         path: /sys_permissions/**
         serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
         stripPrefix: false
+      sys_post:
+        path: /sys_posts/**
+        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+        stripPrefix: false
       sys_role:
         path: /sys_roles/**
         serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
@@ -79,6 +71,14 @@ zuul:
       sys_role_permission:
         path: /sys_role_permissions/**
         serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+        stripPrefix: false
+      sys_team:
+        path: /sys_teams/**
+        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+        stripPrefix: false
+      sys_teammember:
+        path: /sys_teammembers/**
+        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
         stripPrefix: false
       sys_user:
         path: /sys_users/**

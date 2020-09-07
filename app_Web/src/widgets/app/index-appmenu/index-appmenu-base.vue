@@ -570,7 +570,7 @@ export default class IndexBase extends Vue implements ControlInterface {
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'ibzteams', parameterName: 'ibzteam' },
+            { pathName: 'systeams', parameterName: 'systeam' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -616,7 +616,7 @@ export default class IndexBase extends Vue implements ControlInterface {
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
+            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -708,7 +708,7 @@ export default class IndexBase extends Vue implements ControlInterface {
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
+            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
             { pathName: 'treeexpview', parameterName: 'treeexpview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -823,7 +823,7 @@ export default class IndexBase extends Vue implements ControlInterface {
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'ibzposts', parameterName: 'ibzpost' },
+            { pathName: 'sysposts', parameterName: 'syspost' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -915,7 +915,7 @@ export default class IndexBase extends Vue implements ControlInterface {
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'ibzdepartments', parameterName: 'ibzdepartment' },
+            { pathName: 'sysdepartments', parameterName: 'sysdepartment' },
             { pathName: 'treeexpview', parameterName: 'treeexpview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);

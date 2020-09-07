@@ -5,7 +5,7 @@
 
     <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
 	<select id="selectById"  resultMap="PayOpenAccessResultMap" databaseId="mysql">
-        <![CDATA[select t1.* from (SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  ) t1 where accessid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`NOTIFY_URL`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  ) t1 where accessid=#{id}]]>
     </select>
 	<select id="selectById"  resultMap="PayOpenAccessResultMap" databaseId="oracle">
         <![CDATA[select t1.* from (SELECT t1.ACCESSID, t1.ACCESSNAME, t1.ACCESS_KEY, t1.ACCESS_TOKEN, t1.DISABLED, t1.EXPIRES_TIME, t1.OPEN_TYPE, t1.REDIRECT_URI, t1.REGION_ID, t1.SECRET_KEY FROM IBZOPENACCESS t1  ) t1 where accessid=#{id}]]>
@@ -22,6 +22,7 @@
 		<result property="accessToken" column="access_token" />
 		<result property="expiresTime" column="expires_time" />
 		<result property="redirectUri" column="redirect_uri" />
+		<result property="notifyUrl" column="notify_url" />
             
 		
     </resultMap>
@@ -38,7 +39,7 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  
+		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`NOTIFY_URL`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  
 			]]>
     </sql>
     <!--数据查询[Default]-->
@@ -48,7 +49,7 @@
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
-		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  
+		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`ACCESS_KEY`, t1.`ACCESS_TOKEN`, t1.`DISABLED`, t1.`EXPIRES_TIME`, t1.`NOTIFY_URL`, t1.`OPEN_TYPE`, t1.`REDIRECT_URI`, t1.`REGION_ID`, t1.`SECRET_KEY` FROM `IBZOPENACCESS` t1  
 			]]>
     </sql>
     <!--数据查询[View]-->

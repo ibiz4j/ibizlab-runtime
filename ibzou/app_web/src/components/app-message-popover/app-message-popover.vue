@@ -149,7 +149,7 @@
                     this.getMyMsgs();
                 }
             }).catch((error: any) => {
-                console.warn("加载数据错误");
+                this.$Notice.error({title: '错误', desc: error});
             })
         }
 

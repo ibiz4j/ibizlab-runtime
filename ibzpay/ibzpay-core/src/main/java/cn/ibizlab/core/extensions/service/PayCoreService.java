@@ -5,7 +5,9 @@ import cn.ibizlab.core.extensions.service.wechat.WechatPayConfig;
 import cn.ibizlab.core.pay.domain.PayOpenAccess;
 import cn.ibizlab.core.pay.domain.PayTrade;
 import cn.ibizlab.core.pay.service.IPayOpenAccessService;
+import cn.ibizlab.core.pay.service.IPayTradeService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
+import cn.ibizlab.util.helper.HttpUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -15,9 +17,12 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Service
@@ -25,17 +30,20 @@ import java.util.*;
 public class PayCoreService {
 
     @Autowired
+    @Lazy
     IPayOpenAccessService openAccessService;
+    @Autowired
+    @Lazy
+    IPayTradeService tradeService;
 
-    //支付宝沙箱环境
-    private final String aliPayUrl="https://openapi.alipaydev.com/gateway.do";
+    @Value("${ibz.pay.ali.pagepay.returnurl:http://127.0.0.1:8080/pay/trade/pagepay/callback}")
+    private  String ali_return_url;
 
+    @Value("${ibz.pay.ali.gateway:https://openapi.alipaydev.com/gateway.do}")
+    private  String ali_gateway;
     private final String format="json";
-
     private final String charset="UTF-8";
-
     private final String signType="RSA2";
-
     private static Map<String,AlipayClient> aliPayClientMap = Collections.synchronizedMap(new HashMap<>());
 
     /**
@@ -49,7 +57,7 @@ public class PayCoreService {
         AlipayClient alipayClient = getAliPayClient(openAccess);
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
         request.setReturnUrl(openAccess.getRedirectUri());
-        request.setNotifyUrl(openAccess.getRedirectUri());
+        request.setNotifyUrl(ali_return_url);
         request.setBizContent(
                 "{\"out_trade_no\":\""+ trade.getOutTradeNo() +"\","
                         + "\"total_amount\":\""+ trade.getTotalAmount() +"\","
@@ -58,20 +66,65 @@ public class PayCoreService {
                         + "}");
         AlipayTradePagePayResponse response = alipayClient.pageExecute(request);
         if (response.isSuccess()) {
-            log.info("调用成功");
+            log.info("支付接口调用成功");
         } else {
-            log.error("调用失败");
+            log.error("支付接口调用失败");
         }
         return response.getBody();
     }
 
     /**
-     * 支付宝支付结果回调
-     * @param trade
+     * 支付平台回调:修改订单状态，回调业务系统
+     * @param req
      * @return
      */
-    public String pagePayCallBack(PayTrade trade){
-        //更新payTrade status
+    public String pagePayCallBack(HttpServletRequest req){
+
+        JSONObject paramMap=new JSONObject();
+        Enumeration names = req.getParameterNames();
+        while(names.hasMoreElements()) {
+            String key = (String)names.nextElement();
+            String value = req.getParameter(key);
+            paramMap.put(key,value);
+        }
+//        String result_code=paramMap.getString("code");
+//        String result_sub_code=paramMap.getString("sub_code");
+        String out_trade_no=paramMap.getString("out_trade_no");
+//        String app_id=paramMap.getString("app_id");
+        String total_amount=paramMap.getString("total_amount");
+        String trade_status=paramMap.getString("trade_status");
+
+        if(StringUtils.isEmpty(out_trade_no))
+            return String.format("没有找到[%s]订单信息",out_trade_no);
+
+//        String tradeId= DigestUtils.md5DigestAsHex(String.format(out_trade_no+"||"+app_id).getBytes());
+        PayTrade trade = tradeService.getOne(Wrappers.<PayTrade>lambdaQuery().eq(PayTrade::getOutTradeNo,out_trade_no).eq(PayTrade::getTradeStatus,"pending"));
+
+        if(trade==null)
+            return String.format("没有找到[%s]待付款订单",out_trade_no);
+
+        //确认订单金额
+        if(!total_amount.equals(trade.getTotalAmount()))
+            return String.format("交易订单金额[%s]与支付平台金额[%s]不吻合",total_amount,trade.getTotalAmount());
+
+        PayOpenAccess openAccess=trade.getOpenaccess();
+        if(openAccess==null){
+            openAccess= openAccessService.get(trade.getAccessId());
+        }
+        String notify_url=openAccess.getNotifyUrl();
+        if(StringUtils.isEmpty(notify_url))
+            return String.format("无法获取[%s]开放平台回调地址",trade.getAccessId());
+
+        //修改订单状态
+        if(trade_status.equals("TRADE_SUCCESS")){
+            trade.setTradeStatus("success");
+        }
+        else{
+            trade.setTradeStatus("fail");
+        }
+        tradeService.update(trade);
+        //回调业务系统
+        HttpUtils.post(notify_url, null, paramMap);
         return "success";
     }
 
@@ -132,67 +185,67 @@ public class PayCoreService {
         return rs;
     }
 
-    /**
-     * 交易预创建，生成正扫二维码
-     * @param trade
-     */
-    @SneakyThrows
-    private String aliPayPreCreate(PayOpenAccess openAccess,PayTrade trade){
-        AlipayClient alipayClient = getAliPayClient(openAccess);
-        AlipayTradePrecreateRequest  request = new AlipayTradePrecreateRequest();
-        request.setBizContent("{" +
-                "\"out_trade_no\":\""+trade.getOutTradeNo()+"\"," +
-                "\"subject\":\""+trade.getSubject()+"\"," +
-                "\"total_amount\":"+trade.getTotalAmount()+"," +
-                "  }");
-        AlipayTradePrecreateResponse response = alipayClient.execute(request);
-        if(response.isSuccess()){
-            System.out.println("调用成功");
-        } else {
-            System.out.println("调用失败");
-        }
-        return response.getQrCode();
-    }
-
-    /**
-     * 交易查询
-     * @param trade
-     */
-    @SneakyThrows
-    private String aliPayQuery(PayOpenAccess openAccess,PayTrade trade){
-        AlipayClient alipayClient = getAliPayClient(openAccess);
-        AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
-        request.setBizContent("{" +
-                "\"out_trade_no\":\""+trade.getOutTradeNo()+"\"," +
-                "  }");
-        AlipayTradeQueryResponse response = alipayClient.execute(request);
-        if(response.isSuccess()){
-            System.out.println("调用成功");
-        } else {
-            System.out.println("调用失败");
-        }
-        return response.getBody();
-    }
-
-    /**
-     * 撤销交易
-     * @param trade
-     */
-    @SneakyThrows
-    private String aliPayCancel(PayOpenAccess openAccess,PayTrade trade) {
-        AlipayClient alipayClient = getAliPayClient(openAccess);
-        AlipayTradeCancelRequest request = new AlipayTradeCancelRequest();
-        request.setBizContent("{" +
-                "\"out_trade_no\":\""+trade.getOutTradeNo()+"\"," +
-                "  }");
-        AlipayTradeCancelResponse response = alipayClient.execute(request);
-        if(response.isSuccess()){
-            System.out.println("调用成功");
-        } else {
-            System.out.println("调用失败");
-        }
-        return response.getOutTradeNo();
-    }
+//    /**
+//     * 交易预创建，生成正扫二维码
+//     * @param trade
+//     */
+//    @SneakyThrows
+//    private String aliPayPreCreate(PayOpenAccess openAccess,PayTrade trade){
+//        AlipayClient alipayClient = getAliPayClient(openAccess);
+//        AlipayTradePrecreateRequest  request = new AlipayTradePrecreateRequest();
+//        request.setBizContent("{" +
+//                "\"out_trade_no\":\""+trade.getOutTradeNo()+"\"," +
+//                "\"subject\":\""+trade.getSubject()+"\"," +
+//                "\"total_amount\":"+trade.getTotalAmount()+"," +
+//                "  }");
+//        AlipayTradePrecreateResponse response = alipayClient.execute(request);
+//        if(response.isSuccess()){
+//            System.out.println("调用成功");
+//        } else {
+//            System.out.println("调用失败");
+//        }
+//        return response.getQrCode();
+//    }
+//
+//    /**
+//     * 交易查询
+//     * @param trade
+//     */
+//    @SneakyThrows
+//    private String aliPayQuery(PayOpenAccess openAccess,PayTrade trade){
+//        AlipayClient alipayClient = getAliPayClient(openAccess);
+//        AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
+//        request.setBizContent("{" +
+//                "\"out_trade_no\":\""+trade.getOutTradeNo()+"\"," +
+//                "  }");
+//        AlipayTradeQueryResponse response = alipayClient.execute(request);
+//        if(response.isSuccess()){
+//            System.out.println("调用成功");
+//        } else {
+//            System.out.println("调用失败");
+//        }
+//        return response.getBody();
+//    }
+//
+//    /**
+//     * 撤销交易
+//     * @param trade
+//     */
+//    @SneakyThrows
+//    private String aliPayCancel(PayOpenAccess openAccess,PayTrade trade) {
+//        AlipayClient alipayClient = getAliPayClient(openAccess);
+//        AlipayTradeCancelRequest request = new AlipayTradeCancelRequest();
+//        request.setBizContent("{" +
+//                "\"out_trade_no\":\""+trade.getOutTradeNo()+"\"," +
+//                "  }");
+//        AlipayTradeCancelResponse response = alipayClient.execute(request);
+//        if(response.isSuccess()){
+//            System.out.println("调用成功");
+//        } else {
+//            System.out.println("调用失败");
+//        }
+//        return response.getOutTradeNo();
+//    }
 
     /**
      * 微信预创建订单
@@ -283,7 +336,7 @@ public class PayCoreService {
         if(aliPayClientMap.get(appId)!=null){
             return aliPayClientMap.get(appId);
         }
-        AlipayClient alipayClient = new DefaultAlipayClient(aliPayUrl,openAccess.getAccessKey(),openAccess.getSecretKey(),format,charset,openAccess.getAccessToken(),signType);
+        AlipayClient alipayClient = new DefaultAlipayClient(ali_gateway,openAccess.getAccessKey(),openAccess.getSecretKey(),format,charset,openAccess.getAccessToken(),signType);
         aliPayClientMap.put(appId,alipayClient);
         return alipayClient;
     }

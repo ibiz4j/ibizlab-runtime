@@ -1,26 +1,26 @@
 import jobslog_zh_CN from '@locale/lanres/entities/jobs-log/jobs-log_zh_CN';
 import sysrolepermission_zh_CN from '@locale/lanres/entities/sys-role-permission/sys-role-permission_zh_CN';
-import ibzpost_zh_CN from '@locale/lanres/entities/ibzpost/ibzpost_zh_CN';
 import sysuser_zh_CN from '@locale/lanres/entities/sys-user/sys-user_zh_CN';
 import sysauthlog_zh_CN from '@locale/lanres/entities/sys-auth-log/sys-auth-log_zh_CN';
 import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
+import syspost_zh_CN from '@locale/lanres/entities/sys-post/sys-post_zh_CN';
+import sysdepartment_zh_CN from '@locale/lanres/entities/sys-department/sys-department_zh_CN';
+import sysemployee_zh_CN from '@locale/lanres/entities/sys-employee/sys-employee_zh_CN';
+import systeam_zh_CN from '@locale/lanres/entities/sys-team/sys-team_zh_CN';
 import wfuser_zh_CN from '@locale/lanres/entities/wfuser/wfuser_zh_CN';
-import ibzorganization_zh_CN from '@locale/lanres/entities/ibzorganization/ibzorganization_zh_CN';
+import sysorganization_zh_CN from '@locale/lanres/entities/sys-organization/sys-organization_zh_CN';
 import jobsregistry_zh_CN from '@locale/lanres/entities/jobs-registry/jobs-registry_zh_CN';
 import dictcatalog_zh_CN from '@locale/lanres/entities/dict-catalog/dict-catalog_zh_CN';
 import wfgroup_zh_CN from '@locale/lanres/entities/wfgroup/wfgroup_zh_CN';
-import ibzteam_zh_CN from '@locale/lanres/entities/ibzteam/ibzteam_zh_CN';
 import jobsinfo_zh_CN from '@locale/lanres/entities/jobs-info/jobs-info_zh_CN';
 import wfremodel_zh_CN from '@locale/lanres/entities/wfremodel/wfremodel_zh_CN';
 import sysuserrole_zh_CN from '@locale/lanres/entities/sys-user-role/sys-user-role_zh_CN';
 import wfprocessdefinition_zh_CN from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_zh_CN';
 import sysrole_zh_CN from '@locale/lanres/entities/sys-role/sys-role_zh_CN';
-import ibzdeptmember_zh_CN from '@locale/lanres/entities/ibzdept-member/ibzdept-member_zh_CN';
-import ibzdepartment_zh_CN from '@locale/lanres/entities/ibzdepartment/ibzdepartment_zh_CN';
-import ibzteammember_zh_CN from '@locale/lanres/entities/ibzteam-member/ibzteam-member_zh_CN';
 import syspermission_zh_CN from '@locale/lanres/entities/sys-permission/sys-permission_zh_CN';
+import systeammember_zh_CN from '@locale/lanres/entities/sys-team-member/sys-team-member_zh_CN';
+import sysdeptmember_zh_CN from '@locale/lanres/entities/sys-dept-member/sys-dept-member_zh_CN';
 import dictoption_zh_CN from '@locale/lanres/entities/dict-option/dict-option_zh_CN';
-import ibzemployee_zh_CN from '@locale/lanres/entities/ibzemployee/ibzemployee_zh_CN';
 import sysapp_zh_CN from '@locale/lanres/entities/sys-app/sys-app_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
@@ -258,27 +258,27 @@ export default {
     entities: {
         jobslog: jobslog_zh_CN,
         sysrolepermission: sysrolepermission_zh_CN,
-        ibzpost: ibzpost_zh_CN,
         sysuser: sysuser_zh_CN,
         sysauthlog: sysauthlog_zh_CN,
         wfmember: wfmember_zh_CN,
+        syspost: syspost_zh_CN,
+        sysdepartment: sysdepartment_zh_CN,
+        sysemployee: sysemployee_zh_CN,
+        systeam: systeam_zh_CN,
         wfuser: wfuser_zh_CN,
-        ibzorganization: ibzorganization_zh_CN,
+        sysorganization: sysorganization_zh_CN,
         jobsregistry: jobsregistry_zh_CN,
         dictcatalog: dictcatalog_zh_CN,
         wfgroup: wfgroup_zh_CN,
-        ibzteam: ibzteam_zh_CN,
         jobsinfo: jobsinfo_zh_CN,
         wfremodel: wfremodel_zh_CN,
         sysuserrole: sysuserrole_zh_CN,
         wfprocessdefinition: wfprocessdefinition_zh_CN,
         sysrole: sysrole_zh_CN,
-        ibzdeptmember: ibzdeptmember_zh_CN,
-        ibzdepartment: ibzdepartment_zh_CN,
-        ibzteammember: ibzteammember_zh_CN,
         syspermission: syspermission_zh_CN,
+        systeammember: systeammember_zh_CN,
+        sysdeptmember: sysdeptmember_zh_CN,
         dictoption: dictoption_zh_CN,
-        ibzemployee: ibzemployee_zh_CN,
         sysapp: sysapp_zh_CN,
     },
     components: components_zh_CN,

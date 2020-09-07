@@ -39,13 +39,13 @@ export class UIServiceRegister {
      * @memberof UIServiceRegister
      */
     protected init(): void {
-                this.allUIService.set('ibzpost', () => import('@/uiservice/ibzpost/ibzpost-ui-service'));
-        this.allUIService.set('ibzorganization', () => import('@/uiservice/ibzorganization/ibzorganization-ui-service'));
-        this.allUIService.set('ibzteam', () => import('@/uiservice/ibzteam/ibzteam-ui-service'));
-        this.allUIService.set('ibzdeptmember', () => import('@/uiservice/ibzdept-member/ibzdept-member-ui-service'));
-        this.allUIService.set('ibzdepartment', () => import('@/uiservice/ibzdepartment/ibzdepartment-ui-service'));
-        this.allUIService.set('ibzteammember', () => import('@/uiservice/ibzteam-member/ibzteam-member-ui-service'));
-        this.allUIService.set('ibzemployee', () => import('@/uiservice/ibzemployee/ibzemployee-ui-service'));
+                this.allUIService.set('syspost', () => import('@/uiservice/sys-post/sys-post-ui-service'));
+        this.allUIService.set('sysdepartment', () => import('@/uiservice/sys-department/sys-department-ui-service'));
+        this.allUIService.set('sysemployee', () => import('@/uiservice/sys-employee/sys-employee-ui-service'));
+        this.allUIService.set('systeam', () => import('@/uiservice/sys-team/sys-team-ui-service'));
+        this.allUIService.set('sysorganization', () => import('@/uiservice/sys-organization/sys-organization-ui-service'));
+        this.allUIService.set('systeammember', () => import('@/uiservice/sys-team-member/sys-team-member-ui-service'));
+        this.allUIService.set('sysdeptmember', () => import('@/uiservice/sys-dept-member/sys-dept-member-ui-service'));
     }
 
     /**

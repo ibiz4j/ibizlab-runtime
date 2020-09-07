@@ -1,6 +1,6 @@
 package cn.ibizlab.core.ou.extensions.domain;
 
-import cn.ibizlab.core.ou.domain.IBZOrganization;
+import cn.ibizlab.core.ou.domain.SysOrganization;
 import lombok.Data;
 import org.springframework.util.StringUtils;
 
@@ -10,7 +10,7 @@ import java.util.Set;
 @Data
 public class OrgMap {
     private String orgid;
-    private IBZOrganization org;
+    private SysOrganization org;
     private Set<String> parent=new LinkedHashSet<>();
     private Set<String> sub=new LinkedHashSet<>();
     private Set<String> father=new LinkedHashSet<>();

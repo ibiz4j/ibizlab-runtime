@@ -77,6 +77,15 @@ import { Subject,Subscription } from 'rxjs';
     },
 })
 export default class OUIndexViewBase extends Vue {
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof OUIndexViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -278,15 +287,6 @@ export default class OUIndexViewBase extends Vue {
      * @memberof OUIndexViewBase
      */
     public viewCacheData:any;
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof OUIndexViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数

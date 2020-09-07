@@ -19,6 +19,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @Configuration
 @EnableWebSecurity
@@ -39,6 +40,18 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${ibiz.auth.path:v7/login}")
     private String loginPath;
+
+    @Value("${ibiz.auth.logoutpath:v7/logout}")
+    private String logoutPath;
+
+    @Value("${ibiz.file.uploadpath:ibizutil/upload}")
+    private String uploadpath;
+
+    @Value("${ibiz.file.downloadpath:ibizutil/download}")
+    private String downloadpath;
+
+    @Value("${ibiz.file.previewpath:ibizutil/preview}")
+    private String previewpath;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -88,14 +101,24 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/fonts/**",
                         "/**/js/**",
                         "/**/img/**",
-                        "/"
+                        "/",
+                        "webjars/**",
+                        "/swagger-resources/**",
+                        "/v2/**"
                 ).permitAll()
-                       .antMatchers("/ibzou/org/**").permitAll()
-                       .antMatchers("/ibzemployees/**/oumaps").permitAll()
-                       .antMatchers("/dictionarys/**").permitAll()
                     //放行登录请求
                    .antMatchers( HttpMethod.POST,"/"+loginPath).permitAll()
-                .anyRequest().authenticated()
+                    //放行注销请求
+                    .antMatchers( HttpMethod.GET,"/"+logoutPath).permitAll()
+                    // 文件操作
+                   .antMatchers("/"+downloadpath+"/**").permitAll()
+                   .antMatchers("/"+uploadpath).permitAll()
+                   .antMatchers("/"+previewpath+"/**").permitAll()
+                   .antMatchers("/ibzou/org/**").permitAll()
+                   .antMatchers("/ibzemployees/**/oumaps").permitAll()
+                   .antMatchers("/dictionarys/**").permitAll()
+                   .antMatchers("/sysemployees/**/oumaps").permitAll()
+                   .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();
         httpSecurity

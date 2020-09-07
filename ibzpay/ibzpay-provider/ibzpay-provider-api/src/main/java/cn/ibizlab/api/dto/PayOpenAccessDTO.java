@@ -105,6 +105,14 @@ public class PayOpenAccessDTO extends DTOBase implements Serializable {
     @JsonProperty("redirect_uri")
     private String redirectUri;
 
+    /**
+     * 属性 [NOTIFY_URL]
+     *
+     */
+    @JSONField(name = "notify_url")
+    @JsonProperty("notify_url")
+    private String notifyUrl;
+
 
     /**
      * 设置 [ACCESSNAME]
@@ -176,6 +184,14 @@ public class PayOpenAccessDTO extends DTOBase implements Serializable {
     public void setRedirectUri(String  redirectUri){
         this.redirectUri = redirectUri ;
         this.modify("redirect_uri",redirectUri);
+    }
+
+    /**
+     * 设置 [NOTIFY_URL]
+     */
+    public void setNotifyUrl(String  notifyUrl){
+        this.notifyUrl = notifyUrl ;
+        this.modify("notify_url",notifyUrl);
     }
 
 

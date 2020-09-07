@@ -22,4 +22,3 @@ zuul:
         stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization
-

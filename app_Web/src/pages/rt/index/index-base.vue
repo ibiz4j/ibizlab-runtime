@@ -619,15 +619,15 @@ export default class IndexBase extends Vue {
      * @memberof IndexBase
      */
     public defPSAppView: any = {
-        codename: 'ibzorganizationgridview',
+        codename: 'sysorganizationgridview',
         viewtitle: '单位管理',
         openmode: '',
         width: 0,
         height: 0,
         deResParameters: [],
-        routepath: '/index/:index?/ibzorganizations/:ibzorganization?/gridview/:gridview?',
+        routepath: '/index/:index?/sysorganizations/:sysorganization?/gridview/:gridview?',
         parameters: [
-            { pathName: 'ibzorganizations', parameterName: 'ibzorganization' },
+            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ],
     };

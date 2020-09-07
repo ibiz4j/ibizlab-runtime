@@ -15,10 +15,6 @@ zuul:
       path: /sysrolepermissions/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
-    ibzpost:
-      path: /ibzposts/**
-      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-      stripPrefix: false
     sys_user:
       path: /sysusers/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
@@ -31,12 +27,28 @@ zuul:
       path: /wfmembers/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
+    sys_post:
+      path: /sysposts/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_dept:
+      path: /sysdepartments/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_emp:
+      path: /sysemployees/**
+      serviceId: ${ibiz.ref.service.ibzrt-api:ibzrt-api}
+      stripPrefix: false
+    sys_team:
+      path: /systeams/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
     wf_user:
       path: /wfusers/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
-    ibzorg:
-      path: /ibzorganizations/**
+    sys_org:
+      path: /sysorganizations/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     jobs_registry:
@@ -50,10 +62,6 @@ zuul:
     wf_group:
       path: /wfgroups/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
-    ibzteam:
-      path: /ibzteams/**
-      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     jobs_info:
       path: /jobsinfos/**
@@ -75,29 +83,21 @@ zuul:
       path: /sysroles/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
-    ibzdeptmember:
-      path: /ibzdeptmembers/**
-      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-      stripPrefix: false
-    ibzdept:
-      path: /ibzdepartments/**
-      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-      stripPrefix: false
-    ibzteammember:
-      path: /ibzteammembers/**
-      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-      stripPrefix: false
     sys_permission:
       path: /syspermissions/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
+    sys_teammember:
+      path: /systeammembers/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_deptmember:
+      path: /sysdeptmembers/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
     dict_option:
       path: /dictoptions/**
       serviceId: ${ibiz.ref.service.ibzdict-api:ibzdict-api}
-      stripPrefix: false
-    ibzemp:
-      path: /ibzemployees/**
-      serviceId: ${ibiz.ref.service.ibzrt-api:ibzrt-api}
       stripPrefix: false
     sys_app:
       path: /sysapps/**

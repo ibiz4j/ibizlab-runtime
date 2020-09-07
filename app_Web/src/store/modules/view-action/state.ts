@@ -4,6 +4,25 @@
 export const viewstate: any = {
     appviews: [
         {
+            viewtag: '06dc389605323456129e342bbdfbbd16',
+            viewmodule: 'ou',
+            viewname: 'SysDepartmentPickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: '09089840aeb5b072e9d6217cdad34c03',
+            viewmodule: 'ou',
+            viewname: 'SysPostPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '65c16575fd8b1fa8bf111e17f573f697',
+            ],
+        },
+        {
             viewtag: '0986ae2314847b586b20edfbb40fc82b',
             viewmodule: 'dict',
             viewname: 'DictOptionEditView',
@@ -14,25 +33,13 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '10dd7f45f36233049c4af9ca417089f5',
+            viewtag: '0f73ceaa7ce0ec11d9b6aaf27e05ad4f',
             viewmodule: 'ou',
-            viewname: 'IBZDepartmentPickupView',
+            viewname: 'SysDepartmentTreeExpView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'e3284e895913f7d38d1bcbe898bda0b7',
-            ],
-        },
-        {
-            viewtag: '119fe650e7efd26bd14bd413cae37ded',
-            viewmodule: 'ou',
-            viewname: 'IBZEmployeeEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '61541167ccebbc3f174242ce73e436dd',
-                '10dd7f45f36233049c4af9ca417089f5',
-                'ccff36439eacae953f85ff636c9dac74',
+                '67d7a9f7291d44a10ffc356769bcac1d',
             ],
         },
         {
@@ -58,12 +65,33 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '16e80ec413946364504f9f79bce1e0ba',
+            viewmodule: 'ou',
+            viewname: 'SysDepartmentEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '82ba8656757a5080e5265648aab13de7',
+                'd076f344eefde0fdc8d5ea6eab40e4c5',
+            ],
+        },
+        {
             viewtag: '17ccd6d8d2bb7cf30158253da129ec1b',
             viewmodule: 'workflow',
             viewname: 'WFGroupPickupGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
+            ],
+        },
+        {
+            viewtag: '1a71a212ed794d05b51b9c825b9cf19a',
+            viewmodule: 'ou',
+            viewname: 'SysDepartmentGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '16e80ec413946364504f9f79bce1e0ba',
             ],
         },
         {
@@ -84,6 +112,15 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '6869875c7409bd1dddd3d0fc62c502db',
+            ],
+        },
+        {
+            viewtag: '22be3cbaf3e2beeb404f53573f0a917a',
+            viewmodule: 'ou',
+            viewname: 'SysPostEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
         {
@@ -117,28 +154,6 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '281f49b284494f9ba207e6bce8416b7d',
-            viewmodule: 'ou',
-            viewname: 'IBZTeamMemberGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '9ffa35efe3d70cf4b9fa4e83dd1979c6',
-                '7e3fbce8277ad89674307e6a0d7ddd43',
-                '5e88ef37a2da46d66c41c8838d31096b',
-            ],
-        },
-        {
-            viewtag: '323147bb0fc25046ab102674cb1abf21',
-            viewmodule: 'ou',
-            viewname: 'IBZTeamEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '281f49b284494f9ba207e6bce8416b7d',
-            ],
-        },
-        {
             viewtag: '32fe9ab4a9e1b8d62b9ee802e4746965',
             viewmodule: 'uaa',
             viewname: 'SysUserPickupView',
@@ -146,6 +161,16 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '6869875c7409bd1dddd3d0fc62c502db',
+            ],
+        },
+        {
+            viewtag: '3cbffb72d0ebf81304545ddeda64c066',
+            viewmodule: 'ou',
+            viewname: 'SysOrganizationPickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '82ba8656757a5080e5265648aab13de7',
             ],
         },
         {
@@ -177,16 +202,6 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '40fe6b28b9f7902341da46bb74a02d59',
-            viewmodule: 'ou',
-            viewname: 'IBZEmployeeGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '119fe650e7efd26bd14bd413cae37ded',
-            ],
-        },
-        {
             viewtag: '44488f30cf90677019077ed9ad33628e',
             viewmodule: 'dict',
             viewname: 'DictOptionGridEditView',
@@ -198,12 +213,37 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '456373e5385deb29b6863c5a22c8a29a',
+            viewmodule: 'ou',
+            viewname: 'SysOrganizationEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '82ba8656757a5080e5265648aab13de7',
+            ],
+        },
+        {
             viewtag: '49b6b437f10c4e73e47d87d5d0f76cfd',
             viewmodule: 'task',
             viewname: 'JobsInfoEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
+            ],
+        },
+        {
+            viewtag: '523b25cb9c95d2ef731c39ca24cfe98a',
+            viewmodule: 'ou',
+            viewname: 'SysDeptMemberGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'af7290279f8b7645020401c1beb9269e',
+                'd076f344eefde0fdc8d5ea6eab40e4c5',
+                '09089840aeb5b072e9d6217cdad34c03',
+                'df6caa8751fdf4ee4918b55727f025a9',
+                'c52fb5e147b7ab7e6cfe158e2494de19',
+                'ad75752476891204e7b409cabc499e70',
             ],
         },
         {
@@ -225,39 +265,23 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '5bd45246d1f387729c0d8658e07ddb9f',
+            viewtag: '5c403d904f82265cde504f205e98f95e',
             viewmodule: 'ou',
-            viewname: 'IBZTeamGridView',
+            viewname: 'SysOrganizationTreeExpView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '323147bb0fc25046ab102674cb1abf21',
+                '1a71a212ed794d05b51b9c825b9cf19a',
             ],
         },
         {
-            viewtag: '5e88ef37a2da46d66c41c8838d31096b',
+            viewtag: '5f46660051966f3e0b4c377decd638b1',
             viewmodule: 'ou',
-            viewname: 'IBZTeamMemberEditView',
+            viewname: 'SysTeamEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '9ffa35efe3d70cf4b9fa4e83dd1979c6',
-                '7e3fbce8277ad89674307e6a0d7ddd43',
-            ],
-        },
-        {
-            viewtag: '61541167ccebbc3f174242ce73e436dd',
-            viewmodule: 'ou',
-            viewname: 'IBZDeptMemberGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'd946240b09028ae684e1eb31281a4caf',
-                '9ffa35efe3d70cf4b9fa4e83dd1979c6',
-                'bf5e850471bab461fbb6739578e510c5',
-                '10dd7f45f36233049c4af9ca417089f5',
-                '7e3fbce8277ad89674307e6a0d7ddd43',
-                '97224ac0397dbe38b4679b4060ee29e5',
+                '89ff98e46167a4688e63362931496818',
             ],
         },
         {
@@ -271,13 +295,23 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '6435e95f9bd03acceda6b7fd610873db',
+            viewtag: '64f014192d8afcee483c623ee8a2b07b',
             viewmodule: 'ou',
-            viewname: 'IBZOrganizationTreeExpView',
+            viewname: 'SysOrganizationGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '7362390ee25dac238b23fa9ab05ea4ac',
+                '456373e5385deb29b6863c5a22c8a29a',
+                '82ba8656757a5080e5265648aab13de7',
+            ],
+        },
+        {
+            viewtag: '65c16575fd8b1fa8bf111e17f573f697',
+            viewmodule: 'ou',
+            viewname: 'SysPostPickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
         {
@@ -300,6 +334,16 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 'b4b9140b8844a2d60cfc7944cd4f5b79',
+            ],
+        },
+        {
+            viewtag: '67d7a9f7291d44a10ffc356769bcac1d',
+            viewmodule: 'ou',
+            viewname: 'SysEmployeeGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'b1abd7783d9e3b9393630428ebde3a86',
             ],
         },
         {
@@ -335,16 +379,6 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '7362390ee25dac238b23fa9ab05ea4ac',
-            viewmodule: 'ou',
-            viewname: 'IBZDepartmentGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '90c0ced2720b85d5e051e7935a93d3c5',
-            ],
-        },
-        {
             viewtag: '74a6ce3ddf610ce7fb201662c6d4b8da',
             viewmodule: 'dict',
             viewname: 'DictCatalogGridView',
@@ -364,13 +398,13 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '7e3fbce8277ad89674307e6a0d7ddd43',
+            viewtag: '82ba8656757a5080e5265648aab13de7',
             viewmodule: 'ou',
-            viewname: 'IBZPostPickupView',
+            viewname: 'SysOrganizationPickupView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'cbaccf404d6c33b995df3ace323ccec0',
+                '3cbffb72d0ebf81304545ddeda64c066',
             ],
         },
         {
@@ -403,12 +437,15 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '88af20e0a8e819dff22f1a198e8989e3',
+            viewtag: '89ff98e46167a4688e63362931496818',
             viewmodule: 'ou',
-            viewname: 'IBZPostEditView',
+            viewname: 'SysTeamMemberGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
+                'b2d81cb8d4121eb95c848e5b1cbfddd8',
+                '09089840aeb5b072e9d6217cdad34c03',
+                'ad75752476891204e7b409cabc499e70',
             ],
         },
         {
@@ -422,17 +459,6 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '90c0ced2720b85d5e051e7935a93d3c5',
-            viewmodule: 'ou',
-            viewname: 'IBZDepartmentEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '10dd7f45f36233049c4af9ca417089f5',
-                'ccff36439eacae953f85ff636c9dac74',
-            ],
-        },
-        {
             viewtag: '95d8c933cf4df47634a25d791b3d8564',
             viewmodule: 'uaa',
             viewname: 'SysPermissionPickupGridView',
@@ -442,42 +468,12 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: '95e33ff2469ba40d3e0c00f5c3f61501',
-            viewmodule: 'ou',
-            viewname: 'IBZOrganizationEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'ccff36439eacae953f85ff636c9dac74',
-            ],
-        },
-        {
-            viewtag: '97224ac0397dbe38b4679b4060ee29e5',
-            viewmodule: 'ou',
-            viewname: 'IBZDepartmentMPickupView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'e3284e895913f7d38d1bcbe898bda0b7',
-            ],
-        },
-        {
             viewtag: '983f3ae1533a5cd62619dedb79bb4b28',
             viewmodule: 'uaa',
             viewname: 'SysRolePermissionCustomView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-            ],
-        },
-        {
-            viewtag: '9ffa35efe3d70cf4b9fa4e83dd1979c6',
-            viewmodule: 'ou',
-            viewname: 'IBZEmployeePickupView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'c84df2684f29705ac6c5dec67df9f217',
             ],
         },
         {
@@ -491,6 +487,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: 'a26ed59459b6d3b6f7ff36ad38b06c1b',
+            viewmodule: 'ou',
+            viewname: 'SysPostGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '22be3cbaf3e2beeb404f53573f0a917a',
+            ],
+        },
+        {
             viewtag: 'a9c82814d9bcd23dbf78c4c073759d7c',
             viewmodule: 'dict',
             viewname: 'DictCatalogPickupView',
@@ -498,6 +504,16 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '842cfc03d5e93435fc52d317a55cdfd4',
+            ],
+        },
+        {
+            viewtag: 'ad75752476891204e7b409cabc499e70',
+            viewmodule: 'ou',
+            viewname: 'SysEmployeePickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'ed2bd80851a999d7a0d70ea15507ad0d',
             ],
         },
         {
@@ -511,6 +527,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: 'af7290279f8b7645020401c1beb9269e',
+            viewmodule: 'ou',
+            viewname: 'SysEmployeeMPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'ed2bd80851a999d7a0d70ea15507ad0d',
+            ],
+        },
+        {
             viewtag: 'b05c9353d499f973106e6ed4dde58074',
             viewmodule: 'workflow',
             viewname: 'WFGroupPickupView',
@@ -521,6 +547,18 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: 'b1abd7783d9e3b9393630428ebde3a86',
+            viewmodule: 'ou',
+            viewname: 'SysEmployeeEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '523b25cb9c95d2ef731c39ca24cfe98a',
+                '82ba8656757a5080e5265648aab13de7',
+                'd076f344eefde0fdc8d5ea6eab40e4c5',
+            ],
+        },
+        {
             viewtag: 'b23a721ca159ac2490b768d795e85d17',
             viewmodule: 'workflow',
             viewname: 'WFGroupEditView',
@@ -528,6 +566,17 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '135872676ba63d430b2f20bd20364286',
+            ],
+        },
+        {
+            viewtag: 'b2d81cb8d4121eb95c848e5b1cbfddd8',
+            viewmodule: 'ou',
+            viewname: 'SysTeamMemberEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '09089840aeb5b072e9d6217cdad34c03',
+                'ad75752476891204e7b409cabc499e70',
             ],
         },
         {
@@ -546,33 +595,22 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'c42bc30741bd6add20b00494231dfa24',
                 '3fc39744066bd5343be378ec5703f556',
                 '5856bfb8b576cc2ee743801b23e58299',
-                '6435e95f9bd03acceda6b7fd610873db',
+                '0f73ceaa7ce0ec11d9b6aaf27e05ad4f',
                 '255944d6d1a575d0eda2b68bc19314f3',
-                '5bd45246d1f387729c0d8658e07ddb9f',
+                'a26ed59459b6d3b6f7ff36ad38b06c1b',
                 'e4856779577562e9880855e6c66d63e5',
                 'bfa86be8c02420f87d5cf4ff9a768948',
+                'd356c19266944e00bc8ebc1bbd85ca7c',
+                '5c403d904f82265cde504f205e98f95e',
                 '1ef170b14b7a70f4609a9f13692d1414',
-                'c0cdac5d5b5691ae8a326f5972aec67f',
                 '67b4d1e928a08679ce63051ccc88da9c',
-                'd907ddd1845887ecabac4d8d199bf792',
                 '13c174556f45e9b10b66dc51834a6ab5',
                 'f498dfb24e88df7c70a5c09ecb587647',
                 '22e202992971f634c00e022b2cae335e',
                 '74a6ce3ddf610ce7fb201662c6d4b8da',
-            ],
-        },
-        {
-            viewtag: 'bf5e850471bab461fbb6739578e510c5',
-            viewmodule: 'ou',
-            viewname: 'IBZDeptMemberEditView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '9ffa35efe3d70cf4b9fa4e83dd1979c6',
-                '10dd7f45f36233049c4af9ca417089f5',
+                '64f014192d8afcee483c623ee8a2b07b',
             ],
         },
         {
@@ -586,33 +624,14 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: 'c0cdac5d5b5691ae8a326f5972aec67f',
+            viewtag: 'c52fb5e147b7ab7e6cfe158e2494de19',
             viewmodule: 'ou',
-            viewname: 'IBZDepartmentTreeExpView',
+            viewname: 'SysDeptMemberEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '40fe6b28b9f7902341da46bb74a02d59',
-            ],
-        },
-        {
-            viewtag: 'c42bc30741bd6add20b00494231dfa24',
-            viewmodule: 'ou',
-            viewname: 'IBZOrganizationGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '95e33ff2469ba40d3e0c00f5c3f61501',
-                'ccff36439eacae953f85ff636c9dac74',
-            ],
-        },
-        {
-            viewtag: 'c84df2684f29705ac6c5dec67df9f217',
-            viewmodule: 'ou',
-            viewname: 'IBZEmployeePickupGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
+                'd076f344eefde0fdc8d5ea6eab40e4c5',
+                'ad75752476891204e7b409cabc499e70',
             ],
         },
         {
@@ -625,61 +644,33 @@ export const viewstate: any = {
             ],
         },
         {
-            viewtag: 'cbaccf404d6c33b995df3ace323ccec0',
+            viewtag: 'd076f344eefde0fdc8d5ea6eab40e4c5',
             viewmodule: 'ou',
-            viewname: 'IBZPostPickupGridView',
+            viewname: 'SysDepartmentPickupView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
+                '06dc389605323456129e342bbdfbbd16',
             ],
         },
         {
-            viewtag: 'ccff36439eacae953f85ff636c9dac74',
+            viewtag: 'd356c19266944e00bc8ebc1bbd85ca7c',
             viewmodule: 'ou',
-            viewname: 'IBZOrganizationPickupView',
+            viewname: 'SysTeamGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'cf8e6d455f8e88e66bbbe1bdb4c84274',
+                '5f46660051966f3e0b4c377decd638b1',
             ],
         },
         {
-            viewtag: 'cf8e6d455f8e88e66bbbe1bdb4c84274',
+            viewtag: 'df6caa8751fdf4ee4918b55727f025a9',
             viewmodule: 'ou',
-            viewname: 'IBZOrganizationPickupGridView',
+            viewname: 'SysDepartmentMPickupView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'ccff36439eacae953f85ff636c9dac74',
-            ],
-        },
-        {
-            viewtag: 'd907ddd1845887ecabac4d8d199bf792',
-            viewmodule: 'ou',
-            viewname: 'IBZPostGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                '88af20e0a8e819dff22f1a198e8989e3',
-            ],
-        },
-        {
-            viewtag: 'd946240b09028ae684e1eb31281a4caf',
-            viewmodule: 'ou',
-            viewname: 'IBZEmployeeMPickupView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
-                'c84df2684f29705ac6c5dec67df9f217',
-            ],
-        },
-        {
-            viewtag: 'e3284e895913f7d38d1bcbe898bda0b7',
-            viewmodule: 'ou',
-            viewname: 'IBZDepartmentPickupGridView',
-            viewaction: '',
-            viewdatachange: false,
-            refviews: [
+                '06dc389605323456129e342bbdfbbd16',
             ],
         },
         {
@@ -690,6 +681,15 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '49b6b437f10c4e73e47d87d5d0f76cfd',
+            ],
+        },
+        {
+            viewtag: 'ed2bd80851a999d7a0d70ea15507ad0d',
+            viewmodule: 'ou',
+            viewname: 'SysEmployeePickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
         {

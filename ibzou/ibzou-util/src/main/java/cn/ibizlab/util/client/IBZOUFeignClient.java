@@ -15,7 +15,7 @@ public interface IBZOUFeignClient
 	 * @param userId
 	 * @return
 	 */
-	@GetMapping("/ibzemployees/{userId}/oumaps")
+	@GetMapping("/sysemployees/{userId}/oumaps")
 	Map<String, Set<String>> getOUMapsByUserId(@PathVariable("userId") String userId);
 
 }

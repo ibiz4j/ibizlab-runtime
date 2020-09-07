@@ -41,27 +41,27 @@ export class AuthServiceRegister {
     protected init(): void {
                 this.allAuthService.set('jobslog', () => import('@/authservice/jobs-log/jobs-log-auth-service'));
         this.allAuthService.set('sysrolepermission', () => import('@/authservice/sys-role-permission/sys-role-permission-auth-service'));
-        this.allAuthService.set('ibzpost', () => import('@/authservice/ibzpost/ibzpost-auth-service'));
         this.allAuthService.set('sysuser', () => import('@/authservice/sys-user/sys-user-auth-service'));
         this.allAuthService.set('sysauthlog', () => import('@/authservice/sys-auth-log/sys-auth-log-auth-service'));
         this.allAuthService.set('wfmember', () => import('@/authservice/wfmember/wfmember-auth-service'));
+        this.allAuthService.set('syspost', () => import('@/authservice/sys-post/sys-post-auth-service'));
+        this.allAuthService.set('sysdepartment', () => import('@/authservice/sys-department/sys-department-auth-service'));
+        this.allAuthService.set('sysemployee', () => import('@/authservice/sys-employee/sys-employee-auth-service'));
+        this.allAuthService.set('systeam', () => import('@/authservice/sys-team/sys-team-auth-service'));
         this.allAuthService.set('wfuser', () => import('@/authservice/wfuser/wfuser-auth-service'));
-        this.allAuthService.set('ibzorganization', () => import('@/authservice/ibzorganization/ibzorganization-auth-service'));
+        this.allAuthService.set('sysorganization', () => import('@/authservice/sys-organization/sys-organization-auth-service'));
         this.allAuthService.set('jobsregistry', () => import('@/authservice/jobs-registry/jobs-registry-auth-service'));
         this.allAuthService.set('dictcatalog', () => import('@/authservice/dict-catalog/dict-catalog-auth-service'));
         this.allAuthService.set('wfgroup', () => import('@/authservice/wfgroup/wfgroup-auth-service'));
-        this.allAuthService.set('ibzteam', () => import('@/authservice/ibzteam/ibzteam-auth-service'));
         this.allAuthService.set('jobsinfo', () => import('@/authservice/jobs-info/jobs-info-auth-service'));
         this.allAuthService.set('wfremodel', () => import('@/authservice/wfremodel/wfremodel-auth-service'));
         this.allAuthService.set('sysuserrole', () => import('@/authservice/sys-user-role/sys-user-role-auth-service'));
         this.allAuthService.set('wfprocessdefinition', () => import('@/authservice/wfprocess-definition/wfprocess-definition-auth-service'));
         this.allAuthService.set('sysrole', () => import('@/authservice/sys-role/sys-role-auth-service'));
-        this.allAuthService.set('ibzdeptmember', () => import('@/authservice/ibzdept-member/ibzdept-member-auth-service'));
-        this.allAuthService.set('ibzdepartment', () => import('@/authservice/ibzdepartment/ibzdepartment-auth-service'));
-        this.allAuthService.set('ibzteammember', () => import('@/authservice/ibzteam-member/ibzteam-member-auth-service'));
         this.allAuthService.set('syspermission', () => import('@/authservice/sys-permission/sys-permission-auth-service'));
+        this.allAuthService.set('systeammember', () => import('@/authservice/sys-team-member/sys-team-member-auth-service'));
+        this.allAuthService.set('sysdeptmember', () => import('@/authservice/sys-dept-member/sys-dept-member-auth-service'));
         this.allAuthService.set('dictoption', () => import('@/authservice/dict-option/dict-option-auth-service'));
-        this.allAuthService.set('ibzemployee', () => import('@/authservice/ibzemployee/ibzemployee-auth-service'));
         this.allAuthService.set('sysapp', () => import('@/authservice/sys-app/sys-app-auth-service'));
     }
 

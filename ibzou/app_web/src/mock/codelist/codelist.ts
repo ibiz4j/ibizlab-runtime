@@ -8,7 +8,7 @@ mock.onGet('./assets/json/data-dictionary.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status, [
         {
-        srfkey: "CLIBZSex",
+        srfkey: "CLSYS_Sex",
         emptytext: "",
         "codelisttype":"static",
         items: [

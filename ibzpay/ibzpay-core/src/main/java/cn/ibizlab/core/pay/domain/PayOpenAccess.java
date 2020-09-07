@@ -121,6 +121,14 @@ public class PayOpenAccess extends EntityMP implements Serializable {
     @JSONField(name = "redirect_uri")
     @JsonProperty("redirect_uri")
     private String redirectUri;
+    /**
+     * NotifyUrl
+     */
+    @DEField(name = "notify_url")
+    @TableField(value = "notify_url")
+    @JSONField(name = "notify_url")
+    @JsonProperty("notify_url")
+    private String notifyUrl;
 
 
 
@@ -204,6 +212,14 @@ public class PayOpenAccess extends EntityMP implements Serializable {
     public void setRedirectUri(String redirectUri){
         this.redirectUri = redirectUri ;
         this.modify("redirect_uri",redirectUri);
+    }
+
+    /**
+     * 设置 [NotifyUrl]
+     */
+    public void setNotifyUrl(String notifyUrl){
+        this.notifyUrl = notifyUrl ;
+        this.modify("notify_url",notifyUrl);
     }
 
 

@@ -8,14 +8,12 @@
                         drag
                         multiple
                         list-type="text"
-                        :action="action"
+                        :action="getAction"
                         :headers="myHeaders"
                         :file-list="uploadFileList"
                         :show-file-list="false"
                         :limit="limit"
-                        :before-upload="beforeUpload"
-                        :on-success="uploadSuccess"
-                        :on-error="uploadError">
+                        :http-request="customUploadFile">
                     <div>
                         <i class="el-icon-upload"></i>
                         <div>
@@ -32,13 +30,12 @@
                         ref="upload"
                         multiple
                         list-type="text"
-                        :action="action"
+                        :action="getAction"
+                        :headers="myHeaders"
                         :file-list="uploadFileList"
                         :show-file-list="false"
                         :limit="limit"
-                        :http-request="uploadFile"
-                        :on-success="uploadSuccess"
-                        :on-error="uploadError">
+                        :http-request="customUploadFile">
                     <el-button type="primary" size="small" icon="el-icon-upload">点击上传</el-button>
                     <div slot="tip" class="el-upload__tip">{{uploadTip}}</div>
                 </el-upload>
@@ -54,11 +51,11 @@
                     <el-link type="warning" icon="el-icon-view" v-show="showPreview" @click="onPreview(item)">预览
                     </el-link>
                     <el-link type="primary" icon="el-icon-edit"
-                             v-show="showEdit && (item.name.toString().match(/^.+\.(doc|DOC|docx|DOCX|wps|WPS|xls|XLS|xlsx|XLSX|ppt|PPT|et|ET)$/))"
+                             v-show="showEdit && (item.name.match(/^.+\.(doc|DOC|docx|DOCX|wps|WPS|xls|XLS|xlsx|XLSX|ppt|PPT|et|ET)$/))"
                              @click="onEdit(item)">编辑
                     </el-link>
                     <el-link icon="el-icon-camera"
-                             v-show="showOcrview && (item.name.toString().match(/^.+\.(gif|GIF|jpg|JPG|jpeg|JPEG|png|PNG|bmp|BMP|pdf|PDF)$/))"
+                             v-show="showOcrview && (item.name.match(/^.+\.(gif|GIF|jpg|JPG|jpeg|JPEG|png|PNG|bmp|BMP|pdf|PDF)$/))"
                              @click="onOcr(item)">OCR
                     </el-link>
                     <el-link type="danger" icon="el-icon-delete" @click="onRemove(item,index)">删除</el-link>
@@ -71,9 +68,11 @@
 <script>
     import {Button, Row, Col, Link, Icon, Upload, Message, MessageBox} from 'element-ui';
     import Axios from 'axios';
-    import Qs from 'qs';
+    import {Subject, Unsubscribable} from 'rxjs';
 
-    var token ="Bearer " +localStorage.getItem('token');
+    // 当前登录人token
+    var token = "Bearer " + localStorage.getItem('token');
+
     export default {
         name: "ibiz-file-upload",
         components: {
@@ -85,17 +84,21 @@
             'el-upload': Upload,
         },
         props: {
-            // 当前父表单对象
+            // 当前表单对象
             data: {
                 type: Object,
             },
             // 当前属性名
-            name: {
+            formItemName: {
                 type: String,
             },
             // 当前属性值
             value: {
                 type: String,
+            },
+            // 订阅表单状态
+            formState: {
+                type: Subject
             },
             // 默认为当前实体名称，有指定则按表单参数
             folder: {
@@ -147,211 +150,204 @@
         },
         data() {
             return {
+                // 表单是否处于编辑状态（有真实主键,srfuf='1';srfuf='0'时处于新建未保存）
+                srfuf: '0',
                 // 上传提示语
                 uploadTip: `单个文件大小不超过${this.size}M，文件不超过${this.limit}个`,
                 // 文件列表
                 uploadFileList: [],
                 // headers
                 myHeaders: {Authorization: token},
+                // 表单状态事件
+                formStateEvent: Unsubscribable | undefined,
+                // 批量更新标识，false为不更新，true才可以更新
+                isUpdateBatch: true,
+                // 新建状态标识,true为新建，false为编辑
+                isCreate: true,
             }
         },
         computed: {
-            action() {
-                const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
-                const ownertype = typeof this.ownertype == "string" ? this.ownertype : JSON.stringify(this.ownertype);
-                const ownerid = typeof this.ownerid == "string" ? this.ownerid : JSON.stringify(this.ownerid);
-                const uploadUrl = '../net-disk/upload/sysopenaccesses?ownertype=' + ownertype + '&ownerid=' + ownerid;
-                // const uploadUrl = '../ibizutil/upload';
+            /**
+             * return action
+             */
+            getAction() {
+                const uploadUrl = '/net-disk/upload/' + this.getFolder + '?ownertype=' + this.getOwnertype + '&ownerid=' + this.getOwnerid;
                 return uploadUrl;
+            },
+            /**
+             *  return folder
+             */
+            getFolder() {
+                const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
+                return folder;
+            },
+            /**
+             *  return ownertype
+             */
+            getOwnertype() {
+                const ownertype = typeof this.ownertype == "string" ? this.ownertype : JSON.stringify(this.ownertype);
+                return ownertype;
+            },
+            /**
+             *  return ownerid
+             */
+            getOwnerid() {
+                const ownerid = typeof this.ownerid == "string" ? this.ownerid : JSON.stringify(this.ownerid);
+                return ownerid;
             }
         },
-        watch: {
-            data: {
-                handler(newVal, oldVal) {
-                    if (newVal) {
-                        // 解析表单数据
-                        const data = JSON.parse(JSON.stringify(newVal));
-                        if (data.srfkey) {
-                            this.ownerid = data.srfkey;
-                        }
-                        // 当persistence = true时，直接从表单的data数据里获取当前属性的值
-                        if (this.persistence == true && data[this.name]) {
-                            const files = data[this.name];
-                            if (files) this.uploadFileList = files;
-                        }
+        watch: {},
+        created() {
+            this.formStateEvent = this.formState.subscribe(($event) => {
+                // 表单加载完成
+                if (Object.is($event.type, 'load')) {
+                    const data = JSON.parse(JSON.stringify($event.data));
+                    // 编辑表单，保存时不进行批量更新
+                    if (data.srfuf == '1') {
+                        this.isCreate = false;
+                        this.isUpdateBatch = false;
                     }
-                },
-                immediate: false,
-                deep: true
-            },
-            ownerid: {
-                handler(newVal, oldVal) {
-                    if (newVal) {
-                        // 当persistence = false并且表单保存后，有主键ownerid了，调用接口批量更新下文件表里的fileid
-                        if (this.persistence == false) {
-                            this.updateFileBatch();
-                        } else {
-                            // this.getFiles();
+                    // 当persistence = true时
+                    if (this.persistence == true) {
+                        // 直接从表单的data数据里获取当前属性的值
+                        if (data[this.formItemName] && this.uploadFileList.length == 0) {
+                            const files = JSON.parse(data[this.formItemName]);
+                            for (let i = 0; i < files.length; i++) {
+                                this.uploadFileList.push(files[i]);
+                            }
                         }
+                    } else {
+                        // 发送get请求获取文件列表
+                        this.getFiles();
                     }
-                },
-                immediate: false,
-                deep: true
-            }
+                }
+                // 表单保存完成
+                if (Object.is($event.type, 'save')) {
+                    // 批量更新文件表中的ownerid
+                    if (this.isUpdateBatch == true && this.uploadFileList.length > 0) {
+                        this.updateFileBatch(this.uploadFileList, 'update');
+                    }
+                }
+            });
         },
         mounted() {
-            /*
-             * 1.当persistence = true时，直接从表单的data数据里获取当前属性的值
-             * 2.当persistence = false时,判断ownerid是否有值
-             *      ownerid有值，表单data数据里并没有这个值，这时需要get请求获取文件列表
-             *      ownerid无值，给一个空数组
-             * 3.默认情况下给一个空数组
-             */
-            if (this.persistence == true) {
-                const files = JSON.parse(JSON.stringify(this.value));
-                if (files) this.uploadFileList = files;
-            } else if (this.persistence == false) {
-                if (this.ownerid) {
-                    this.getFiles();
-                } else {
-                    this.uploadFileList = [];
-                }
-            } else {
-                this.uploadFileList = [];
-            }
+
         },
         methods: {
             /**
              * 获取文件列表
              */
             getFiles() {
-                const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
-                const ownertype = typeof this.ownertype == "string" ? this.ownertype : JSON.stringify(this.ownertype);
-                const ownerid = typeof this.ownerid == "string" ? this.ownerid : JSON.stringify(this.ownerid);
-                const getUrl = `net-disk/files/${folder}`;
+                // 拼接url
+                const getUrl = '/net-disk/files/' + this.getFolder;
+                // 发送get请求
                 Axios.get(getUrl, {
                     params: {
-                        ownertype: ownertype,
-                        ownerid: ownerid,
+                        ownertype: this.getOwnertype,
+                        ownerid: this.getOwnerid,
                     },
                 }).then(response => {
                     if (!response || response.status != 200) {
-                        Message.error("请求当前控件的值发生错误!");
+                        Message.error("获取文件列表失败!");
                         return;
                     }
+                    // 返回的是一个jsonArray
                     if (response.data) {
                         const files = JSON.parse(JSON.stringify(response.data));
-                        this.uploadFileList = files;
+                        if (this.uploadFileList.length == 0) {
+                            this.uploadFileList.push.apply(this.uploadFileList, files);
+                        }
                     }
                 }).catch(error => {
-                    Message.error("请求当前控件的值发生错误:" + error);
+                    Message.error("获取文件列表失败:" + error);
                 });
             },
             /**
-             * 上传之前
+             * 自定义上传文件
              */
-            beforeUpload(file) {
-                const isSize = file.size / 1024 / 1024 < this.size;
-                if (!isSize) {
-                    Message.error(`上传失败,单个文件不得超过${this.size}M!`);
-                    return false;
-                }
-            },
-            /**
-             * 自定义的文件上传行为
-             * @param param
-             */
-            uploadFile(param) {
-                console.log("uploadFile run");
-                return;
+            customUploadFile(param) {
                 // 上传的文件
                 let file = param.file;
+                // 文件大小
                 const isSize = file.size / 1024 / 1024 < this.size;
                 if (!isSize) {
                     Message.error(`上传失败,单个文件不得超过${this.size}M!`);
                     return;
                 }
-                // url及参数
-                const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
-                const ownertype = typeof this.ownertype == "string" ? this.ownertype : JSON.stringify(this.ownertype);
-                const ownerid = typeof this.ownerid == "string" ? this.ownerid : JSON.stringify(this.ownerid);
-                const uploadUrl = 'net-disk/upload/sysopenaccesses?ownertype=' + ownertype + '&ownerid=' + ownerid;
+                // formData传参
                 let formData = new FormData();
                 formData.append('file', file);
-                formData.append('ownertype', ownertype);
-                formData.append('ownerid', ownerid);
-                // post请求
-                Axios.post(uploadUrl, formData, {timeout: 2000}).then(res => {
-                    // 成功回调->uploadSuccess
-                    param.onSuccess(res);
+                // 拼接url
+                const uploadUrl = this.getAction;
+                // 发送post请求
+                Axios.post(uploadUrl, formData, {timeout: 2000}).then(response => {
+                    if (!response || response.status != 200) {
+                        Message.error('上传文件失败!');
+                    }
+                    // 返回的是一个jsonobject
+                    if (response.data) {
+                        // 新建表单上传，后续需要批量更新操作
+                        if (this.isCreate == true) {
+                            this.isUpdateBatch = true;
+                        }
+                        // 保存到文件列表进行显示
+                        this.uploadFileList.push(response.data);
+                        // persistence=true时需要持久化表单属性
+                        if (this.persistence == true && this.uploadFileList.length > 0) {
+                            const value = JSON.stringify(this.uploadFileList);
+                            this.$emit('formitemvaluechange', {name: this.formItemName, value: value});
+                        }
+                    }
                 }).catch(err => {
-                    // 失败回调->uploadError
-                    param.onError(err);
+                    Message.error('上传文件失败:' + err);
                 });
-            },
-            /**
-             * 上传成功的回调
-             * @param response
-             * @param file
-             * @param fileList
-             */
-            uploadSuccess(response, file, fileList) {
-                if (response.data) {
-                    // 后端返回的是一个jsonObject
-                    const data = response.data;
-                    // 刷新上传文件列表
-                    this.uploadFileList.push(data);
-                    // 需要持久化表单属性到数据库
-                    if (this.persistence == true) {
-                        // json转字符串给父组件表单对象指定属性
-                        this.$emit('formitemvaluechange', {
-                            name: this.name,
-                            value: JSON.stringify(this.uploadFileList)
-                        });
-                    }
-                } else {
-                    // 刷新上传文件列表
-                    let files = fileList;
-                    this.uploadFileList = files;
-                    // 需要持久化表单属性到数据库
-                    if (this.persistence == true) {
-                        // json转字符串给父组件表单对象指定属性
-                        this.$emit('formitemvaluechange', {
-                            name: this.name,
-                            value: JSON.stringify(this.uploadFileList)
-                        });
-                    }
-                }
-            },
-            /**
-             * 上传失败的回调
-             * @param err
-             * @param file
-             * @param fileList
-             */
-            uploadError(err, file, fileList) {
-                Message.error('文件上传失败,' + err);
             },
             /**
              * 下载文件
              * @param item
              */
             onDownload(item) {
-                const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
+                // 拼接url
                 const id = typeof item.id == "string" ? item.id : JSON.stringify(item.id);
-                const name = typeof item.name == "string" ? item.name : JSON.stringify(item.name);
-                const downloadUrl = `net-disk/download/${folder}/${id}/${name}`;
+                const name = typeof item.name == "string" ? item.name : JSON.stringify(item.filename);
+                const downloadUrl = '/net-disk/download/' + this.getFolder + '/' + id + '/' + name;
+                // 发送get请求
                 Axios.get(downloadUrl, {
                     headers: {
-                        authcode: item.authcode
+                        'authcode': item.authcode
                     },
+                    responseType: 'arraybuffer',
                 }).then(response => {
                     if (!response || response.status != 200) {
-                        Message.error("请求当前文件发生错误!");
+                        Message.error("下载文件失败!");
                         return;
                     }
+                    // 请求成功，后台返回的是一个文件流
+                    if (response.data) {
+                        // 获取文件名
+                        const disposition = response.headers['content-disposition'];
+                        const filename = disposition.split('filename=')[1];
+                        // 用blob对象获取文件流
+                        var blob = new Blob([response.data], {type: response.headers['content-type']});
+                        // 创建下载链接
+                        var href = URL.createObjectURL(blob);
+                        // 创建一个a元素并设置相关属性
+                        var a = document.createElement('a');
+                        a.href = href;
+                        a.download = filename;
+                        // 添加a元素到当前网页
+                        document.body.appendChild(a);
+                        // 触发a元素的点击事件，实现下载
+                        a.click();
+                        // 从当前网页移除a元素
+                        document.body.removeChild(a);
+                        // 释放blob对象
+                        URL.revokeObjectURL(href);
+                    } else {
+                        Message.error('下载文件失败,未获取到文件!');
+                    }
                 }).catch(error => {
-                    Message.error("请求当前文件发生错误!" + error);
+                    Message.error("下载文件失败:" + error);
                 });
             },
             /**
@@ -359,66 +355,37 @@
              * @param item
              */
             onPreview(item) {
-                const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
+                // 拼接url
                 const id = typeof item.id == "string" ? item.id : JSON.stringify(item.id);
                 const name = typeof item.name == "string" ? item.name : JSON.stringify(item.name);
-                const previewUrl = `net-disk/preview/${folder}/${id}/${name}`;
-                Axios.get(previewUrl, {
-                    headers: {
-                        authcode: item.authcode
-                    },
-                }).then(response => {
-                    if (!response || response.status != 200) {
-                        Message.error("请求当前文件发生错误!");
-                        return;
-                    }
-                }).catch(error => {
-                    Message.error("请求当前文件发生错误!" + error);
-                });
+                const previewUrl = '/net-disk/preview/' + this.getFolder + '/' + id + '/' + name + '?authcode=' + item.authcode;
+                // 新窗口打开url
+                window.open(previewUrl);
             },
             /**
              * 编辑文件
              * @param item
              */
             onEdit(item) {
-                const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
+                // 拼接url
                 const id = typeof item.id == "string" ? item.id : JSON.stringify(item.id);
                 const name = typeof item.name == "string" ? item.name : JSON.stringify(item.name);
-                const editUrl = `net-disk/edit/${folder}/${id}/${name}`;
-                Axios.get(editUrl, {
-                    headers: {
-                        authcode: item.authcode
-                    },
-                }).then(response => {
-                    if (!response || response.status != 200) {
-                        Message.error("请求当前文件发生错误!");
-                        return;
-                    }
-                }).catch(error => {
-                    Message.error("请求当前文件发生错误!" + error);
-                });
+                const editUrl = '/net-disk/edit/' + this.getFolder + '/' + id + '/' + name + '?authcode=' + item.authcode;
+                // 新窗口打开url
+                window.open(editUrl);
             },
             /**
              * ocr识别
              * @param item
              */
             onOcr(item) {
+                // 拼接url
                 const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
                 const id = typeof item.id == "string" ? item.id : JSON.stringify(item.id);
                 const name = typeof item.name == "string" ? item.name : JSON.stringify(item.name);
-                const ocrviewUrl = `net-disk/ocrview/${folder}/${id}/${name}`;
-                Axios.get(ocrviewUrl, {
-                    headers: {
-                        authcode: item.authcode
-                    },
-                }).then(response => {
-                    if (!response || response.status != 200) {
-                        Message.error("请求当前文件发生错误!");
-                        return;
-                    }
-                }).catch(error => {
-                    Message.error("请求当前文件发生错误!" + error);
-                });
+                const ocrUrl = '/net-disk/ocrview/' + this.getFolder + '/' + id + '/' + name + '?authcode=' + item.authcode;
+                // 新窗口打开url
+                window.open(ocrUrl);
             },
             /**
              * 删除文件
@@ -432,51 +399,52 @@
                         cancelButtonText: '取消',
                         type: 'warning'
                     }).then(() => {
-                        // 从文件列表中删除
-                        this.uploadFileList.splice(index, 1);
-                        // 需要持久化表单属性到数据库
-                        if (this.persistence == true) {
-                            // json转字符串给父组件表单对象指定属性
-                            this.$emit('formitemvaluechange', {
-                                name: this.name,
-                                value: JSON.stringify(this.uploadFileList)
-                            });
-                        }
-                        // 提示删除成功
-                        Message({
-                            type: 'success',
-                            message: '删除成功!'
-                        });
-                    }).catch(() => {
-                        Message({
-                            type: 'info',
-                            message: '已取消删除'
+                        //　拼接url
+                        const deleteUrl = '/net-disk/files/' + item.id;
+                        // 发送delete请求
+                        Axios.delete(deleteUrl).then(response => {
+                            if (!response || response.status != 200) {
+                                Message.error("删除文件失败!");
+                            }
+                            // 从文件列表中删除
+                            this.uploadFileList.splice(index, 1);
+                            // persistence=true时需要持久化表单属性
+                            if (this.persistence == true) {
+                                const value = JSON.stringify(this.uploadFileList);
+                                this.$emit('formitemvaluechange', {name: this.formItemName, value: value});
+                            }
+                        }).catch(error => {
+                            // 提示删除失败
+                            Message.error("删除文件失败:" + error);
                         });
                     });
                 }
             },
             /**
-             * 批量更新文件表的fileid
+             * 批量更新文件表的ownerid
              */
-            updateFileBatch() {
-                // 当persistence = false时,新建表单保存之后会拿到主键id
-                if (this.persistence == false && this.ownerid) {
-                    const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
-                    const ownertype = typeof this.ownertype == "string" ? this.ownertype : JSON.stringify(this.ownertype);
-                    const ownerid = typeof this.ownerid == "string" ? this.ownerid : JSON.stringify(this.ownerid);
-                    const url = `net-disk/files/${folder}?ownertype=${ownertype}&ownerid=${ownerid}`;
-                    let requestbody = this.uploadFileList;
-                    Axios.post(url, requestbody, {
-                        timeout: 2000,
-                    }).then(res => {
-                        if (!res || res.status != 200) {
-                            Message.error("批量更新文件失败!");
-                            return;
-                        }
-                    }).catch(error => {
-                        Message.error("批量更新文件失败!" + error);
-                    });
+            updateFileBatch(files, opt) {
+                // 拼接url
+                const updateUrl = '/net-disk/files/' + this.getFolder + '?ownertype=' + this.getOwnertype + "&ownerid=" + this.getOwnerid;
+                // requestBody参数
+                let requestBody = [];
+                if (files) {
+                    requestBody = files;
                 }
+                // 发送post请求
+                Axios.post(updateUrl, requestBody, {
+                    headers: {
+                        "Content-Type": "application/json;charset=UTF-8"
+                    },
+                    timeout: 2000
+                }).then(response => {
+                    if (!response || response.status != 200) {
+                        Message.error("批量更新文件失败!");
+                        return;
+                    }
+                }).catch(error => {
+                    Message.error("批量更新文件失败:" + error);
+                });
             },
 
         }

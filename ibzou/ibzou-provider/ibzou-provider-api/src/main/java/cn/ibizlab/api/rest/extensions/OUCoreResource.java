@@ -1,14 +1,13 @@
 package cn.ibizlab.api.rest.extensions;
 
-import cn.ibizlab.core.ou.domain.IBZDepartment;
-import cn.ibizlab.core.ou.domain.IBZOrganization;
+import cn.ibizlab.core.ou.domain.SysDepartment;
+import cn.ibizlab.core.ou.domain.SysEmployee;
+import cn.ibizlab.core.ou.domain.SysOrganization;
 import cn.ibizlab.core.ou.extensions.domain.*;
 import cn.ibizlab.core.ou.extensions.service.OUCoreService;
-import cn.ibizlab.core.ou.domain.IBZEmployee;
-import cn.ibizlab.core.ou.service.IIBZDepartmentService;
-import cn.ibizlab.core.ou.service.IIBZEmployeeService;
-import cn.ibizlab.core.ou.service.IIBZOrganizationService;
-import com.alibaba.fastjson.JSONArray;
+import cn.ibizlab.core.ou.service.ISysDepartmentService;
+import cn.ibizlab.core.ou.service.ISysEmployeeService;
+import cn.ibizlab.core.ou.service.ISysOrganizationService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -19,8 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.Wrapper;
 import java.util.*;
 
 @RestController
@@ -32,20 +29,20 @@ public class OUCoreResource
     private OUCoreService ouCoreService;
 
     @Autowired
-    private IIBZEmployeeService iibzEmployeeService;
+    private ISysEmployeeService iibzEmployeeService;
 
 
     @Autowired
-    private IIBZOrganizationService iibzOrganizationService;
+    private ISysOrganizationService iibzOrganizationService;
 
 
     @Autowired
-    private IIBZDepartmentService iibzDepartmentService;
+    private ISysDepartmentService iibzDepartmentService;
 
-    @GetMapping("/ibzemployees/{userId}/oumaps")
+    @GetMapping(value={"/ibzemployees/{userId}/oumaps","/sysemployees/{userId}/oumaps"})
     public ResponseEntity<Map<String, Set<String>>> getOUMapsByUserId(@PathVariable("userId") String userId)
     {
-        IBZEmployee emp=iibzEmployeeService.get(userId);
+        SysEmployee emp=iibzEmployeeService.get(userId);
         String orgid="nullorgid";
         if(!StringUtils.isEmpty(emp.getOrgid()))
             orgid=emp.getOrgid();
@@ -55,109 +52,109 @@ public class OUCoreResource
         return ResponseEntity.ok(this.getMaps(orgid,deptid));
     }
 
-    @GetMapping("/ibzdepartments/{deptId}/emp")
+    @GetMapping(value={"/ibzdepartments/{deptId}/emp","/sysdepartments/{deptId}/emp"})
     public ResponseEntity<Map> getEmpByDept(@PathVariable("deptId") String deptId)
     {
         Map map=new LinkedHashMap<>();
-        List<IBZEmployee> list=ouCoreService.getEmpByDept(deptId);
-        for(IBZEmployee emp:list)
+        List<SysEmployee> list=ouCoreService.getEmpByDept(deptId);
+        for(SysEmployee emp:list)
             map.put(emp.getUserid(),emp);
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/ibzdepartments/{deptId}/fatheremp")
+    @GetMapping(value={"/ibzdepartments/{deptId}/fatheremp","/sysdepartments/{deptId}/fatheremp"})
     public ResponseEntity<Map> getFatherEmpByDept(@PathVariable("deptId") String deptId)
     {
         Map map=new LinkedHashMap<>();
-        List<IBZEmployee> list=ouCoreService.getParentEmpByDept(deptId,false);
-        for(IBZEmployee emp:list)
+        List<SysEmployee> list=ouCoreService.getParentEmpByDept(deptId,false);
+        for(SysEmployee emp:list)
             map.put(emp.getUserid(),emp);
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/ibzdepartments/{deptId}/parentemp")
+    @GetMapping(value={"/ibzdepartments/{deptId}/parentemp","/sysdepartments/{deptId}/parentemp"})
     public ResponseEntity<Map> getParentEmpByDept(@PathVariable("deptId") String deptId)
     {
         Map map=new LinkedHashMap<>();
-        List<IBZEmployee> list=ouCoreService.getParentEmpByDept(deptId,true);
-        for(IBZEmployee emp:list)
+        List<SysEmployee> list=ouCoreService.getParentEmpByDept(deptId,true);
+        for(SysEmployee emp:list)
             map.put(emp.getUserid(),emp);
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/ibzdepartments/{deptId}/subemp")
+    @GetMapping(value={"/ibzdepartments/{deptId}/subemp","/sysdepartments/{deptId}/subemp"})
     public ResponseEntity<Map> getSubEmpByDept(@PathVariable("deptId") String deptId)
     {
         Map map=new LinkedHashMap<>();
-        List<IBZEmployee> list=ouCoreService.getSubEmpByDept(deptId);
-        for(IBZEmployee emp:list)
+        List<SysEmployee> list=ouCoreService.getSubEmpByDept(deptId);
+        for(SysEmployee emp:list)
             map.put(emp.getUserid(),emp);
         return ResponseEntity.ok(map);
     }
 
 
-    @GetMapping("/ibzorganizations/{orgId}/emp")
+    @GetMapping(value={"/ibzorganizations/{orgId}/emp","/sysorganizations/{orgId}/emp"})
     public ResponseEntity<Map> getEmpByOrg(@PathVariable("orgId") String orgId)
     {
         Map map=new LinkedHashMap<>();
-        List<IBZEmployee> list=ouCoreService.getEmpByOrg(orgId);
-        for(IBZEmployee emp:list)
+        List<SysEmployee> list=ouCoreService.getEmpByOrg(orgId);
+        for(SysEmployee emp:list)
             map.put(emp.getUserid(),emp);
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/ibzorganizations/{orgId}/fatheremp")
+    @GetMapping(value={"/ibzorganizations/{orgId}/fatheremp","/sysorganizations/{orgId}/fatheremp"})
     public ResponseEntity<Map> getFatherEmpByOrg(@PathVariable("orgId") String orgId)
     {
         Map map=new LinkedHashMap<>();
-        List<IBZEmployee> list=ouCoreService.getParentEmpByOrg(orgId,false);
-        for(IBZEmployee emp:list)
+        List<SysEmployee> list=ouCoreService.getParentEmpByOrg(orgId,false);
+        for(SysEmployee emp:list)
             map.put(emp.getUserid(),emp);
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/ibzorganizations/{orgId}/parentemp")
+    @GetMapping(value={"/ibzorganizations/{orgId}/parentemp","/sysorganizations/{orgId}/parentemp"})
     public ResponseEntity<Map> getParentEmpByOrg(@PathVariable("orgId") String orgId)
     {
         Map map=new LinkedHashMap<>();
-        List<IBZEmployee> list=ouCoreService.getParentEmpByOrg(orgId,true);
-        for(IBZEmployee emp:list)
+        List<SysEmployee> list=ouCoreService.getParentEmpByOrg(orgId,true);
+        for(SysEmployee emp:list)
             map.put(emp.getUserid(),emp);
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/ibzorganizations/{orgId}/subemp")
+    @GetMapping(value={"/ibzorganizations/{orgId}/subemp","/sysorganizations/{orgId}/subemp"})
     public ResponseEntity<Map> getSubEmpByOrg(@PathVariable("orgId") String orgId)
     {
         Map map=new LinkedHashMap<>();
-        List<IBZEmployee> list=ouCoreService.getSubEmpByOrg(orgId);
-        for(IBZEmployee emp:list)
+        List<SysEmployee> list=ouCoreService.getSubEmpByOrg(orgId);
+        for(SysEmployee emp:list)
             map.put(emp.getUserid(),emp);
         return ResponseEntity.ok(map);
     }
 
-    @GetMapping("/ibzorganizations/picker")
+    @GetMapping(value={"/ibzorganizations/picker","/sysorganizations/picker"})
     public ResponseEntity<List<OrgNode>> getPicker()
     {
         List<OrgNode> list=ouCoreService.getOrgNode("alls");
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/ibzorganizations/{orgId}/ibzdepartments/picker")
+    @GetMapping(value={"/ibzorganizations/{orgId}/ibzdepartments/picker","/sysorganizations/{orgId}/sysdepartments/picker"})
     public ResponseEntity<List<DeptNode>> getOrgDeptPicker(@PathVariable("orgId") String orgId)
     {
         List<DeptNode> list=ouCoreService.getDeptNode(orgId);
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/ibzorganizations/{orgId}/suborg/picker")
+    @GetMapping(value={"/ibzorganizations/{orgId}/suborg/picker","/sysorganizations/{orgId}/suborg/picker"})
     public ResponseEntity<List<OrgNode>> getSubOrgPicker(@PathVariable("orgId") String orgId)
     {
         List<OrgNode> list=ouCoreService.getOrgNode(orgId);
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/ibzorganizations/{orgId}/suborg/ibzdepartments/picker")
+    @GetMapping(value={"/ibzorganizations/{orgId}/suborg/ibzdepartments/picker","/sysorganizations/{orgId}/suborg/sysdepartments/picker"})
     public ResponseEntity<List<DeptNode>> getSubOrgDeptPicker(@PathVariable("orgId") String orgId)
     {
         List<DeptNode> list=ouCoreService.getOrgDeptNode(orgId);
@@ -165,7 +162,7 @@ public class OUCoreResource
     }
 
 
-    @GetMapping("/ibzorganizations/{orgId}/ibzemployees/picker")
+    @GetMapping(value={"/ibzorganizations/{orgId}/ibzemployees/picker","/sysorganizations/{orgId}/sysemployees/picker"})
     public ResponseEntity<List<EmpNode>> getEmpPicker(@PathVariable("orgId") String orgId)
     {
         List<EmpNode> list=ouCoreService.getEmpNode(orgId);
@@ -233,10 +230,10 @@ public class OUCoreResource
 
         if("IbzouOrg".equalsIgnoreCase(catalog))
         {
-            LambdaQueryWrapper<IBZOrganization> queryWrapper = Wrappers.<IBZOrganization>lambdaQuery();
+            LambdaQueryWrapper<SysOrganization> queryWrapper = Wrappers.<SysOrganization>lambdaQuery();
             if(!ObjectUtils.isEmpty(values))
-                queryWrapper.in(IBZOrganization::getOrgid,values);
-            queryWrapper.orderByAsc(IBZOrganization::getShoworder);
+                queryWrapper.in(SysOrganization::getOrgid,values);
+            queryWrapper.orderByAsc(SysOrganization::getShoworder);
             iibzOrganizationService.list(queryWrapper).forEach(item -> {
                 JSONObject option=new JSONObject();
                 option.put("id",item.getOrgid());
@@ -248,10 +245,10 @@ public class OUCoreResource
         }
         else if("IbzouDept".equalsIgnoreCase(catalog)||"IbzouOrgSector".equalsIgnoreCase(catalog))
         {
-            LambdaQueryWrapper<IBZDepartment> queryWrapper = Wrappers.<IBZDepartment>lambdaQuery();
+            LambdaQueryWrapper<SysDepartment> queryWrapper = Wrappers.<SysDepartment>lambdaQuery();
             if(!ObjectUtils.isEmpty(values))
-                queryWrapper.in(IBZDepartment::getDeptid,values);
-            queryWrapper.orderByAsc(IBZDepartment::getShoworder);
+                queryWrapper.in(SysDepartment::getDeptid,values);
+            queryWrapper.orderByAsc(SysDepartment::getShoworder);
             iibzDepartmentService.list(queryWrapper).forEach(item -> {
                 JSONObject option=new JSONObject();
                 option.put("id",item.getDeptid());
@@ -263,10 +260,10 @@ public class OUCoreResource
         }
         else if("IbzouUser".equalsIgnoreCase(catalog)||"IbzouOperator".equalsIgnoreCase(catalog)||"IbzouEmp".equalsIgnoreCase(catalog)||"IbzouPerson".equalsIgnoreCase(catalog))
         {
-            LambdaQueryWrapper<IBZEmployee> queryWrapper = Wrappers.<IBZEmployee>lambdaQuery();
+            LambdaQueryWrapper<SysEmployee> queryWrapper = Wrappers.<SysEmployee>lambdaQuery();
             if(!ObjectUtils.isEmpty(values))
-                queryWrapper.in(IBZEmployee::getUserid,values);
-            queryWrapper.orderByAsc(IBZEmployee::getShoworder);
+                queryWrapper.in(SysEmployee::getUserid,values);
+            queryWrapper.orderByAsc(SysEmployee::getShoworder);
             iibzEmployeeService.list(queryWrapper).forEach(item -> {
                 JSONObject option=new JSONObject();
                 option.put("id",item.getUserid());

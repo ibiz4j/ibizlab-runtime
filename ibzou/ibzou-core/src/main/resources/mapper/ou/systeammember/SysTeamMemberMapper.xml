@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.ou.mapper.SysTeamMemberMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="SysTeamMemberResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`DOMAINS`, t21.`PERSONNAME`, t1.`POSTID`, t31.`POSTNAME`, t1.`TEAMID`, t1.`TEAMMEMBERID`, t11.`TEAMNAME`, t1.`USERID` FROM `IBZTEAMMEMBER` t1  LEFT JOIN IBZTEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  LEFT JOIN IBZPOST t31 ON t1.POSTID = t31.POSTID  ) t1 where teammemberid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysTeamMemberResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.DOMAINS, t21.PERSONNAME, t1.POSTID, t31.POSTNAME, t1.TEAMID, t1.TEAMMEMBERID, t11.TEAMNAME, t1.USERID FROM SYS_TEAMMEMBER t1  LEFT JOIN SYS_TEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN SYS_EMP t21 ON t1.USERID = t21.USERID  LEFT JOIN SYS_POST t31 ON t1.POSTID = t31.POSTID  ) t1 where teammemberid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="SysTeamMemberResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t21.PERSONNAME, t1.TEAMID, t1.TEAMMEMBERID, t11.TEAMNAME, t1.USERID FROM SYS_TEAMMEMBER t1  LEFT JOIN SYS_TEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN SYS_EMP t21 ON t1.USERID = t21.USERID  ) t1 where teammemberid=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="SysTeamMemberResultMap" type="cn.ibizlab.core.ou.domain.SysTeamMember" autoMapping="true">
+        <id property="teammemberid" column="teammemberid" /><!--主键字段映射-->
+		<result property="teamid" column="teamid" />
+		<result property="userid" column="userid" />
+		<result property="postid" column="postid" />
+            
+		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="emp" javaType="cn.ibizlab.core.ou.domain.SysEmployee" column="userid" select="cn.ibizlab.core.ou.mapper.SysEmployeeMapper.selectById" fetchType="lazy"></association>
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="post" javaType="cn.ibizlab.core.ou.domain.SysPost" column="postid" select="cn.ibizlab.core.ou.mapper.SysPostMapper.selectById" fetchType="lazy"></association>
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="team" javaType="cn.ibizlab.core.ou.domain.SysTeam" column="teamid" select="cn.ibizlab.core.ou.mapper.SysTeamMapper.selectById" fetchType="lazy"></association>
+    </resultMap>
+
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_TEAMMEMBER_SYS_EMP_USERID] -->
+	 <select id="selectByUserid" resultMap="SysTeamMemberResultMap">
+         select t1.* from (
+                <include refid="Default" />
+			 ) t1
+			 where  userid=#{userid}
+     </select>
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_TEAMMEMBER_SYS_POST_POSTID] -->
+	 <select id="selectByPostid" resultMap="SysTeamMemberResultMap">
+         select t1.* from (
+                <include refid="Default" />
+			 ) t1
+			 where  postid=#{postid}
+     </select>
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_SYS_TEAMMEMBER_SYS_TEAM_TEAMID] -->
+	 <select id="selectByTeamid" resultMap="SysTeamMemberResultMap">
+         select t1.* from (
+                <include refid="Default" />
+			 ) t1
+			 where  teamid=#{teamid}
+     </select>
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.ou.filter.SysTeamMemberSearchContext"  resultMap="SysTeamMemberResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+		<![CDATA[ SELECT t1.`DOMAINS`, t21.`PERSONNAME`, t1.`POSTID`, t31.`POSTNAME`, t1.`TEAMID`, t1.`TEAMMEMBERID`, t11.`TEAMNAME`, t1.`USERID` FROM `IBZTEAMMEMBER` t1  LEFT JOIN IBZTEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  LEFT JOIN IBZPOST t31 ON t1.POSTID = t31.POSTID  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+		<![CDATA[ SELECT t1.DOMAINS, t21.PERSONNAME, t1.POSTID, t31.POSTNAME, t1.TEAMID, t1.TEAMMEMBERID, t11.TEAMNAME, t1.USERID FROM SYS_TEAMMEMBER t1  LEFT JOIN SYS_TEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN SYS_EMP t21 ON t1.USERID = t21.USERID  LEFT JOIN SYS_POST t31 ON t1.POSTID = t31.POSTID  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+		<![CDATA[ SELECT t21.PERSONNAME, t1.TEAMID, t1.TEAMMEMBERID, t11.TEAMNAME, t1.USERID FROM SYS_TEAMMEMBER t1  LEFT JOIN SYS_TEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN SYS_EMP t21 ON t1.USERID = t21.USERID  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`DOMAINS`, t21.`PERSONNAME`, t1.`POSTID`, t31.`POSTNAME`, t1.`TEAMID`, t1.`TEAMMEMBERID`, t11.`TEAMNAME`, t1.`USERID` FROM `IBZTEAMMEMBER` t1  LEFT JOIN IBZTEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN IBZEMP t21 ON t1.USERID = t21.USERID  LEFT JOIN IBZPOST t31 ON t1.POSTID = t31.POSTID  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.DOMAINS, t21.PERSONNAME, t1.POSTID, t31.POSTNAME, t1.TEAMID, t1.TEAMMEMBERID, t11.TEAMNAME, t1.USERID FROM SYS_TEAMMEMBER t1  LEFT JOIN SYS_TEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN SYS_EMP t21 ON t1.USERID = t21.USERID  LEFT JOIN SYS_POST t31 ON t1.POSTID = t31.POSTID  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+		<![CDATA[ SELECT t21.PERSONNAME, t1.TEAMID, t1.TEAMMEMBERID, t11.TEAMNAME, t1.USERID FROM SYS_TEAMMEMBER t1  LEFT JOIN SYS_TEAM t11 ON t1.TEAMID = t11.TEAMID  LEFT JOIN SYS_EMP t21 ON t1.USERID = t21.USERID  
+			]]>
+    </sql>
+</mapper>
+

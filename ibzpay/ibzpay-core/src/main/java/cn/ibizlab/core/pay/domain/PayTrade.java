@@ -71,6 +71,7 @@ public class PayTrade extends EntityMP implements Serializable {
     /**
      * 支付状态
      */
+    @DEField(defaultValue = "pending")
     @TableField(value = "tradestatus")
     @JSONField(name = "trade_status")
     @JsonProperty("trade_status")
