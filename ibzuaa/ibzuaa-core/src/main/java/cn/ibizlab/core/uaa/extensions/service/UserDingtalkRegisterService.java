@@ -77,8 +77,8 @@ public class UserDingtalkRegisterService {
         if(isExpire()) {
             DefaultDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/gettoken");
             OapiGettokenRequest request = new OapiGettokenRequest();
-            request.setAppkey("appKey");
-            request.setAppsecret("appSecret");
+            request.setAppkey(appKey);
+            request.setAppsecret(appSecret);
             request.setHttpMethod("GET");
             try {
                 OapiGettokenResponse response = client.execute(request);
