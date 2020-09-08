@@ -144,7 +144,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/ibzemployees/**/oumaps").permitAll()
                 .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()
                 .antMatchers("/dictionarys/**").permitAll()
+                .antMatchers("/sysemployees/**/oumaps").permitAll()
 
+                //开放支付接口
+                .antMatchers("/pay/trade/**").permitAll()
+                .antMatchers("/notify/**").permitAll()
                 .antMatchers("/jobs-api").permitAll()
                 // 所有请求都需要认证
                 .anyRequest().authenticated()
