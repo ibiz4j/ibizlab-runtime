@@ -1,0 +1,74 @@
+.item {
+  height: 24px;
+  line-height: 24px;
+}
+
+.show-more {
+  text-align: center;
+  margin-top: 10px;
+  height: 20px;
+  color: #409eff;
+  label {
+    cursor: pointer;
+  }
+}
+
+#bellBtn {
+  height: 24px;
+  font-size: 19px;
+  padding-top: 2px;
+  padding-right: 2px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.Row {
+  min-height: 70px;
+  height: auto;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+
+  .column1 {
+    text-align: center;
+    border: 0px solid red;
+  }
+
+  .column2 {
+    border: 0px red solid;
+    .process-definition-name {
+      font-size: 14px;
+      padding-top: 5px; 
+    }
+    .description {
+      margin-top: 6px;
+      margin-bottom: 6px;
+      max-width: 95%;
+    }
+    .createtime {
+      padding-bottom: 5px;
+    }
+
+    .el-row {
+      display: flex;
+      .el-col {
+        flex-grow: 1;
+
+        div:first-child {
+          font-weight: 500;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        div:nth-child(n+2) {
+          font-size: 12px;
+        }
+      }
+    }
+
+
+  }
+
+
+}

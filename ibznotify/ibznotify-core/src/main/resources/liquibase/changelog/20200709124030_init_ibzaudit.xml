@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Think (generated)" id="1566027230162-1">
+        <preConditions onFail="MARK_RAN"  >
+            <not>
+                <tableExists tableName="IBZDATAAUDIT" />
+            </not>
+        </preConditions>
+        <createTable remarks="数据审计" tableName="IBZDATAAUDIT">
+            <column name="DATAAUDITID" remarks="数据审计标识" type="VARCHAR2(100 BYTE)">
+                <constraints primaryKey="true" primaryKeyName="SYS_C00115093"/>
+            </column>
+            <column name="OPPERSONID" remarks="操作人标识" type="VARCHAR2(100 BYTE)"/>
+            <column name="OPPERSONNAME" remarks="操作人名称" type="VARCHAR2(100 BYTE)"/>
+            <column name="AUDITTYPE" remarks="审计行为类型" type="VARCHAR2(60 BYTE)"/>
+            <column name="OPTIME" remarks="操作时间" type="date"/>
+            <column name="IPADDRESS" remarks="访问地址" type="VARCHAR2(100 BYTE)"/>
+            <column name="AUDITOBJECTDATA" remarks="审计对象（表数据）" type="VARCHAR2(100 BYTE)"/>
+            <column name="AUDITOBJECT" remarks="审计对象（表）" type="VARCHAR2(100 BYTE)"/>
+            <column name="AUDITINFO" remarks="审计明细" type="CLOB"/>
+            <column name="ISDATACHANGED" remarks="审计数据是否发生变化" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

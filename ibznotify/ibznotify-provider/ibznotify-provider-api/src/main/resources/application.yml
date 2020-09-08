@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    include: sys ,nacos, api-prod
+  application:
+    name: ibznotify-api

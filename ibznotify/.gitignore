@@ -1,0 +1,14 @@
+*volumes
+*target
+.settings
+*node_modules
+*bin
+*.project
+*.classpath
+*.factorypath
+.history
+.vscode
+.idea
+**.iml
+*.jar
+*.log

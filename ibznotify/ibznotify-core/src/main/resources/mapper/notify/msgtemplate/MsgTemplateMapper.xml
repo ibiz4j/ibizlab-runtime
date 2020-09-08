@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.notify.mapper.MsgTemplateMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="MsgTemplateResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`CONTENT`, t1.`OPEN_TYPE`, t1.`TEMPLATE_ID`, t1.`TEMPLATE_NAME`, t1.`TEMPLATE_TYPE`, t1.`TEMPLATE_URL`, t1.`TID` FROM `IBZMSGTEMPL` t1  ) t1 where tid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="MsgTemplateResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.ACCESSID, t1.ACCESSNAME, t1.CONTENT, t1.OPEN_TYPE, t1.TEMPLATE_ID, t1.TEMPLATE_NAME, t1.TEMPLATE_TYPE, t1.TEMPLATE_URL, t1.TID FROM IBZMSGTEMPL t1  ) t1 where tid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="MsgTemplateResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.ACCESSID, t1.ACCESSNAME, t1.CONTENT, t1.OPEN_TYPE, t1.TEMPLATE_ID, t1.TEMPLATE_NAME, t1.TEMPLATE_TYPE, t1.TEMPLATE_URL, t1.TID FROM IBZMSGTEMPL t1  ) t1 where tid=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="MsgTemplateResultMap" type="cn.ibizlab.core.notify.domain.MsgTemplate" autoMapping="true">
+        <id property="tid" column="tid" /><!--主键字段映射-->
+		<result property="templateName" column="template_name" />
+		<result property="templateType" column="template_type" />
+		<result property="templateId" column="template_id" />
+		<result property="templateUrl" column="template_url" />
+		<result property="accessId" column="accessid" />
+		<result property="openType" column="open_type" />
+            
+		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="openaccess" javaType="cn.ibizlab.core.notify.domain.MsgOpenAccess" column="accessid" select="cn.ibizlab.core.notify.mapper.MsgOpenAccessMapper.selectById" fetchType="lazy"></association>
+    </resultMap>
+
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_MSG_TEMPLATE_MSG_OPEN_ACCESS_ACCESSID] -->
+	 <select id="selectByAccessId" resultMap="MsgTemplateResultMap">
+         select t1.* from (
+                <include refid="Default" />
+			 ) t1
+			 where  accessid=#{id}
+     </select>
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.notify.filter.MsgTemplateSearchContext"  resultMap="MsgTemplateResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`CONTENT`, t1.`OPEN_TYPE`, t1.`TEMPLATE_ID`, t1.`TEMPLATE_NAME`, t1.`TEMPLATE_TYPE`, t1.`TEMPLATE_URL`, t1.`TID` FROM `IBZMSGTEMPL` t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.CONTENT, t1.OPEN_TYPE, t1.TEMPLATE_ID, t1.TEMPLATE_NAME, t1.TEMPLATE_TYPE, t1.TEMPLATE_URL, t1.TID FROM IBZMSGTEMPL t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.CONTENT, t1.OPEN_TYPE, t1.TEMPLATE_ID, t1.TEMPLATE_NAME, t1.TEMPLATE_TYPE, t1.TEMPLATE_URL, t1.TID FROM IBZMSGTEMPL t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`ACCESSID`, t1.`ACCESSNAME`, t1.`CONTENT`, t1.`OPEN_TYPE`, t1.`TEMPLATE_ID`, t1.`TEMPLATE_NAME`, t1.`TEMPLATE_TYPE`, t1.`TEMPLATE_URL`, t1.`TID` FROM `IBZMSGTEMPL` t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.CONTENT, t1.OPEN_TYPE, t1.TEMPLATE_ID, t1.TEMPLATE_NAME, t1.TEMPLATE_TYPE, t1.TEMPLATE_URL, t1.TID FROM IBZMSGTEMPL t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+		<![CDATA[ SELECT t1.ACCESSID, t1.ACCESSNAME, t1.CONTENT, t1.OPEN_TYPE, t1.TEMPLATE_ID, t1.TEMPLATE_NAME, t1.TEMPLATE_TYPE, t1.TEMPLATE_URL, t1.TID FROM IBZMSGTEMPL t1  
+			]]>
+    </sql>
+</mapper>
+

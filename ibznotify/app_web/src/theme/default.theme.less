@@ -1,0 +1,79 @@
+/***    BRGIN:默认亮色主题    ***/
+.app-default-theme {
+    > .ivu-layout-has-sider > .ivu-layout > header {
+        .app-theme-icon {
+            color: #aaaaaa;
+        }
+    }
+    > .ivu-layout {
+        > .ivu-layout-sider {
+            background-color: #f6f6f6;
+            .sider-top {
+                background-color: #f6f6f6;
+                >.page-logo{
+                    >.menuicon:hover{
+                        background-color: #fff;
+                        color:#000;
+                      }
+                  }
+            }
+        }
+    }
+    > .el-menu , > .ivu-layout > .ivu-layout-sider .app-app-menu > .app-menu {
+        background: #f6f6f6;
+        .el-menu-item:hover, .el-menu-item:hover,.el-menu-item.is-active {
+            background: #fff !important;
+            color: #1890ff !important;
+            i {
+                color: #1890ff;
+            }
+        }
+        .el-submenu__title:hover{
+            color: #1890ff !important;
+            i {
+                color: #1890ff;
+            }
+        }
+        .el-menu-item.is-active{
+          border-left: 4px solid #1890ff;
+          background: #fff !important;
+        }
+        .el-submenu.is-opened, .el-submenu:hover{
+            > .el-submenu__title {
+                background: #f6f6f6;
+            }
+        }
+        .el-submenu__title, .el-menu-item {
+            color: #666666;
+            i {
+                color: #666666;
+            }
+        }
+        .el-menu-item {
+            border-top: 1px solid #f6f6f6;
+            background: #f6f6f6;
+            border-left: 4px solid transparent;
+        }
+        .el-submenu {
+            border-top: 1px solid #f6f6f6;
+            background: #f6f6f6;
+            > .el-menu {
+                border-top: 1px solid #f6f6f6;
+                background: #f6f6f6;
+            }
+        }
+    }
+    .ivu-menu-light{
+        background: #f6f6f6;
+    }
+    .ivu-menu-submenu-title{
+        color: #000;
+    }
+    .sider-top{
+        color:#000;
+    }
+    div.ivu-divider{
+      background-color: #b3b3b3;
+    }
+  }
+  /***    END:默认亮色主题   ***/
