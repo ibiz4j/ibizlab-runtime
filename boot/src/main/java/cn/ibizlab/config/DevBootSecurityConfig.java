@@ -142,6 +142,8 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()
                        .antMatchers("/dictionarys/**").permitAll()
 
+                       .antMatchers("/sysemployees/**/oumaps").permitAll()
+
                        .antMatchers("/jobs-api").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
