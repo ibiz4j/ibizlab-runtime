@@ -144,6 +144,10 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
 
                        .antMatchers("/sysemployees/**/oumaps").permitAll()
 
+                       //开放支付接口
+                       .antMatchers("/pay/trade/**").permitAll()
+                       .antMatchers("/notify/**").permitAll()
+
                        .antMatchers("/jobs-api").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
