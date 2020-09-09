@@ -45,12 +45,14 @@ export class EntityServiceRegister {
         this.allEntityService.set('sysauthlog', () => import('@/service/sys-auth-log/sys-auth-log-service'));
         this.allEntityService.set('wfmember', () => import('@/service/wfmember/wfmember-service'));
         this.allEntityService.set('syspost', () => import('@/service/sys-post/sys-post-service'));
+        this.allEntityService.set('sysuserauth', () => import('@/service/sys-user-auth/sys-user-auth-service'));
         this.allEntityService.set('sysdepartment', () => import('@/service/sys-department/sys-department-service'));
         this.allEntityService.set('sysemployee', () => import('@/service/sys-employee/sys-employee-service'));
         this.allEntityService.set('systeam', () => import('@/service/sys-team/sys-team-service'));
         this.allEntityService.set('wfuser', () => import('@/service/wfuser/wfuser-service'));
         this.allEntityService.set('sysorganization', () => import('@/service/sys-organization/sys-organization-service'));
         this.allEntityService.set('jobsregistry', () => import('@/service/jobs-registry/jobs-registry-service'));
+        this.allEntityService.set('sysopenaccess', () => import('@/service/sys-open-access/sys-open-access-service'));
         this.allEntityService.set('dictcatalog', () => import('@/service/dict-catalog/dict-catalog-service'));
         this.allEntityService.set('wfgroup', () => import('@/service/wfgroup/wfgroup-service'));
         this.allEntityService.set('jobsinfo', () => import('@/service/jobs-info/jobs-info-service'));

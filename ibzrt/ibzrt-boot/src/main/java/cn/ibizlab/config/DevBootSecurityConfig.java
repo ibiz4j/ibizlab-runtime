@@ -3,6 +3,7 @@ package cn.ibizlab.config;
 import cn.ibizlab.util.security.AuthenticationEntryPoint;
 import cn.ibizlab.util.security.AuthorizationTokenFilter;
 import cn.ibizlab.util.service.AuthenticationUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -52,6 +53,9 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${ibiz.file.previewpath:ibizutil/preview}")
     private String previewpath;
+    
+    @Value("${ibiz.auth.excludesPattern:}")
+    private String excludesPattern;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -113,8 +117,16 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                     // 文件操作
                    .antMatchers("/"+downloadpath+"/**").permitAll()
                    .antMatchers("/"+uploadpath).permitAll()
-                   .antMatchers("/"+previewpath+"/**").permitAll()
-                .anyRequest().authenticated()
+                   .antMatchers("/"+previewpath+"/**").permitAll();
+                   
+        if (StringUtils.isNotBlank(excludesPattern)) {
+            for (String excludePattern : excludesPattern.split("\\s*,\\s*")) {
+                authenticationTokenFilter.addExcludePattern(excludePattern);
+                httpSecurity.authorizeRequests().antMatchers(excludePattern).permitAll();
+            }
+        }
+        
+        httpSecurity.authorizeRequests().anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();
         httpSecurity

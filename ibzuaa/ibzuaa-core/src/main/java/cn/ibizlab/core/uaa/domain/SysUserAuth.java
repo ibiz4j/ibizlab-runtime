@@ -27,6 +27,7 @@ import cn.ibizlab.util.annotation.Audit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 
 /**
  * 实体[账号绑定]
@@ -77,6 +78,13 @@ public class SysUserAuth extends EntityMP implements Serializable {
     @JSONField(name = "credential")
     @JsonProperty("credential")
     private String credential;
+    /**
+     * 人员
+     */
+    @TableField(exist = false)
+    @JSONField(name = "username")
+    @JsonProperty("username")
+    private String username;
 
     /**
      * 用户

@@ -10,22 +10,20 @@
     <script src="https://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
     <script>
 
+        /**
+         * 初始化
+         */
         $(function () {
             var code = getUrlParam('code');
             var state = getUrlParam('state');
-            // alert("code:" + code + "\n state:" + state);
-
             if (code && state) {
                 // 通过授权code请求后台
-                var opt = {"code": code, "state": state};
                 $.ajax({
-                    type: "post",
-                    url: "../uaa/queryDingtalkUserByCode",
+                    type: "get",
+                    url: "../uaa/open/dingtalk/sns/" + code + "?state=" + state,
                     dataType: "json",
-                    data: JSON.stringify(opt),
                     contentType: 'application/json',
                     success: function (data) {
-                        // console.log(JSON.stringify(data));
                         if (data) {
                             if (data.openid) {
                                 localStorage.setItem('openid', data.openid);
@@ -33,17 +31,17 @@
                             if (data.nickname) {
                                 localStorage.setItem('nickname', data.nickname);
                             }
+                            if (data.unionid) {
+                                localStorage.setItem('unionid',data.unionid);
+                            }
                             if (data.token) {
                                 localStorage.setItem('token', data.token);
                             }
                             if (data.user) {
-                                localStorage.setItem('user', JSON.stringify(data.user));
-                            }
-                            if (data.ibzuser) {
-                                var ibzuser = data.ibzuser;
-                                localStorage.setItem('ibzuser',JSON.stringify(ibzuser));
-                                // 设置cookie,保存账号密码7天
-                                setCookie(ibzuser.loginname, ibzuser.password, 7);
+                                var user = data.user;
+                                localStorage.setItem('user',JSON.stringify(user));
+                                // 设置cookie,保存账号7天
+                                setCookie("loginname", ibzuser.loginname, 7);
                                 // 跳转首页
                                 window.location.href = "../index";
                             } else {
@@ -65,7 +63,11 @@
 
         });
 
-        // 获取url中的参数
+        /**
+         * 获取url中的参数
+         * @param name
+         * @returns {*}
+         */
         function getUrlParam(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
             var r = window.location.search.substr(1).match(reg); //匹配目标参数
@@ -73,7 +75,12 @@
             return null; //返回参数值
         }
 
-        // 设置Cookie
+        /**
+         * 设置Cookie
+         * @param name
+         * @param value
+         * @param day
+         */
         function setCookie(name, value, day) {
             if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
                 var curDate = new Date();
@@ -83,7 +90,7 @@
                 var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
                 var leftTime = new Date();
                 leftTime.setTime(leftTamp + curTamp);
-                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString() + ";path=/";
             } else {
                 document.cookie = name + "=" + escape(value);
             }

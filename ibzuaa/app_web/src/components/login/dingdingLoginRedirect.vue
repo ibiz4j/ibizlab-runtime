@@ -62,37 +62,25 @@
     })
     export default class dingdingLoginRedirect extends Vue {
 
-        /**
-         * 表单对象
-         *
-         * @type {*}
-         * @memberof Register
-         */
+        // 表单
         public form: any = {loginname: '', password: ''};
 
-        /**
-         *　按钮可点击
-         */
+        // 按钮可点击
         public canClick: any = true;
 
-        /**
-         * 按钮内容
-         */
+        // 按钮内容
         public BtnContent: any = "注册并绑定钉钉";
 
-        /**
-         * 钉钉授权成功返回的code和state
-         */
+        // 钉钉授权成功返回的code和state
         public code: any;
         public state: any;
-        /**
-         * 钉钉用户身份的唯一标识
-         */
-        public openid: any;
-        /**
-         * 钉钉用户名称
-         */
-        public nickname: any;
+
+        public dingtalkUserInfo:any ={
+            openid:'',// 钉钉用户身份的唯一标识
+            nickname:'',// 钉钉用户名称
+            unionid:'',// 钉钉用户唯一标识
+        }
+
 
         /**
          * 应用名称
@@ -139,7 +127,6 @@
          * 挂载
          */
         public mounted() {
-
             // 从url获取授权code和state
             this.code = this.$route.query.code;
             if (!this.code) {
@@ -155,12 +142,15 @@
                 this.goLogin();
             }
             else {
-                // 从local中获取该用户的openid和nickname
+                // 从local中获取钉钉用户的openid,可用于后续请求及绑定操作
                 if (localStorage.getItem("openid")) {
-                    this.openid = localStorage.getItem("openid");
+                    this.dingtalkUserInfo.openid = localStorage.getItem("openid");
                 }
                 if (localStorage.getItem("nickname")) {
-                    this.nickname = localStorage.getItem("nickname");
+                    this.dingtalkUserInfo.nickname = localStorage.getItem("nickname");
+                }
+                if (localStorage.getItem("unionid")) {
+                    this.dingtalkUserInfo.unionid = localStorage.getItem("unionid");
                 }
             }
 
@@ -190,6 +180,7 @@
 
         /**
          * 获取url参数
+         * @param name
          */
         public getUrlParam(name: any) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -216,18 +207,17 @@
             if (!validatestate) {
                 return;
             }
-
             // 请求传参
             var param: any = this.form;
             if (this.code && this.state) {
-                param.openid = this.openid;
-                param.nickname = this.nickname;
+                param.openid = this.dingtalkUserInfo.openid;
+                param.nickname = this.dingtalkUserInfo.nickname;
             } else {
                 this.$message.error("钉钉授权，获取code失败");
                 return;
             }
-
-            const post: Promise<any> = this.$http.post('/uaa/bindDingtalkToRegister', param, true);
+            // post请求绑定钉钉
+            const post: Promise<any> = this.$http.post('/uaa/open/dingtalk/bind', param, true);
             post.then((response: any) => {
                 if (response && response.status === 200) {
                     const data = response.data;
@@ -239,13 +229,10 @@
                             localStorage.setItem('token', data.token);
                         }
                         if (data.user) {
-                            localStorage.setItem('user', JSON.stringify(data.user));
-                        }
-                        if (data.ibzuser) {
-                            let ibzuser: any = data.ibzuser;
-                            localStorage.setItem('ibzuser',JSON.stringify(ibzuser));
-                            // 设置cookie,保存账号密码7天
-                            this.setCookie(ibzuser.loginname, ibzuser.password, 7);
+                            let user: any = data.user;
+                            localStorage.setItem('user',JSON.stringify(user));
+                            // 设置cookie,保存账号7天
+                            this.setCookie("loginname", user.loginname, 7);
                             // 跳转首页
                             const url: any = '*';
                             this.$router.push({path: url});
@@ -273,9 +260,11 @@
         }
 
 
-
         /**
-         * 设置cookie
+         * 设置Cookie
+         * @param name
+         * @param value
+         * @param day
          */
         public setCookie(name: any, value: any, day: any) {
             if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
@@ -286,7 +275,7 @@
                 var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
                 var leftTime = new Date();
                 leftTime.setTime(leftTamp + curTamp);
-                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString() + ";path=/";
             } else {
                 document.cookie = name + "=" + escape(value);
             }

@@ -71,7 +71,7 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Override
     public void createBatch(List<SysDeptMember> list) {
         list.forEach(item->fillParentData(item));
-        this.saveOrUpdateBatch(list,batchSize);
+        this.saveBatch(list,batchSize);
     }
 
     @Override

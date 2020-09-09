@@ -1,8 +1,110 @@
-!!!!模版产生代码错误:----
-Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
-----
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-----
-FTL stack trace ("~" means nesting-related):
-	- Failed at: ${dbinst.getUserName()}  [in template "CODETEMPL_en_US" at line 28, column 24]
-----
+
+
+    <!--输出实体[JOBS_INFO]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-jobs_info-1-1">
+        <createTable tableName="JOBS_INFO">
+                <column name="ID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_JOBS_INFO_ID"/>
+                </column>
+                <column name="TENANT_ID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="APP" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CRON" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="HANDLER" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="PARAM" remarks="" type="VARCHAR(512)">
+                </column>
+                <column name="TIMEOUT" remarks="" type="INT">
+                </column>
+                <column name="FAIL_RETRY_COUNT" remarks="" type="INT">
+                </column>
+                <column name="LAST_TIME" remarks="" type="BIGINT">
+                </column>
+                <column name="NEXT_TIME" remarks="" type="BIGINT">
+                </column>
+                <column name="AUTHOR" remarks="" type="VARCHAR(30)">
+                </column>
+                <column name="REMARK" remarks="" type="VARCHAR(30)">
+                </column>
+                <column name="STATUS" remarks="" type="INT">
+                </column>
+                <column name="UPDATE_TIME" remarks="" type="DATETIME">
+                </column>
+                <column name="CREATE_TIME" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
+
+
+    <!--输出实体[JOBS_LOCK]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-jobs_lock-1-2">
+        <createTable tableName="JOBS_LOCK">
+                <column name="ID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_JOBS_LOCK_ID"/>
+                </column>
+                <column name="NAME" remarks="" type="VARCHAR(30)">
+                </column>
+                <column name="OWNER" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CREATE_TIME" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
+
+
+    <!--输出实体[JOBS_LOG]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-jobs_log-1-3">
+        <createTable tableName="JOBS_LOG">
+                <column name="ID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_JOBS_LOG_ID"/>
+                </column>
+                <column name="JOB_ID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ADDRESS" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="HANDLER" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="PARAM" remarks="" type="VARCHAR(512)">
+                </column>
+                <column name="FAIL_RETRY_COUNT" remarks="" type="INT">
+                </column>
+                <column name="TRIGGER_CODE" remarks="" type="INT">
+                </column>
+                <column name="TRIGGER_TYPE" remarks="" type="VARCHAR(30)">
+                </column>
+                <column name="TRIGGER_MSG" remarks="" type="TEXT(1048576)">
+                </column>
+                <column name="CREATE_TIME" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
+
+
+    <!--输出实体[JOBS_REGISTRY]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-jobs_registry-1-4">
+        <createTable tableName="JOBS_REGISTRY">
+                <column name="ID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_JOBS_REGISTRY_ID"/>
+                </column>
+                <column name="APP" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ADDRESS" remarks="" type="VARCHAR(255)">
+                </column>
+                <column name="STATUS" remarks="" type="INT">
+                </column>
+                <column name="UPDATE_TIME" remarks="" type="DATETIME">
+                </column>
+        </createTable>
+    </changeSet>
+
+        <!--输出实体[JOBS_INFO]外键关系 -->
+        <!--输出实体[JOBS_LOCK]外键关系 -->
+        <!--输出实体[JOBS_LOG]外键关系 -->
+        <!--输出实体[JOBS_REGISTRY]外键关系 -->
+
+</databaseChangeLog>

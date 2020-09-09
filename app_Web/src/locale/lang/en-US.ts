@@ -4,12 +4,14 @@ import sysuser_en_US from '@locale/lanres/entities/sys-user/sys-user_en_US';
 import sysauthlog_en_US from '@locale/lanres/entities/sys-auth-log/sys-auth-log_en_US';
 import wfmember_en_US from '@locale/lanres/entities/wfmember/wfmember_en_US';
 import syspost_en_US from '@locale/lanres/entities/sys-post/sys-post_en_US';
+import sysuserauth_en_US from '@locale/lanres/entities/sys-user-auth/sys-user-auth_en_US';
 import sysdepartment_en_US from '@locale/lanres/entities/sys-department/sys-department_en_US';
 import sysemployee_en_US from '@locale/lanres/entities/sys-employee/sys-employee_en_US';
 import systeam_en_US from '@locale/lanres/entities/sys-team/sys-team_en_US';
 import wfuser_en_US from '@locale/lanres/entities/wfuser/wfuser_en_US';
 import sysorganization_en_US from '@locale/lanres/entities/sys-organization/sys-organization_en_US';
 import jobsregistry_en_US from '@locale/lanres/entities/jobs-registry/jobs-registry_en_US';
+import sysopenaccess_en_US from '@locale/lanres/entities/sys-open-access/sys-open-access_en_US';
 import dictcatalog_en_US from '@locale/lanres/entities/dict-catalog/dict-catalog_en_US';
 import wfgroup_en_US from '@locale/lanres/entities/wfgroup/wfgroup_en_US';
 import jobsinfo_en_US from '@locale/lanres/entities/jobs-info/jobs-info_en_US';
@@ -153,6 +155,8 @@ export default {
                 menuitem4: "用户角色",
                 menuitem9: "认证日志",
                 menuitem21: "接入应用",
+                menuitem22: "第三方认证",
+                menuitem23: "账户绑定",
                 menuitem10: "流程管理",
                 menuitem6: "流程定义",
                 menuitem5: "流程角色",
@@ -263,12 +267,14 @@ export default {
         sysauthlog: sysauthlog_en_US,
         wfmember: wfmember_en_US,
         syspost: syspost_en_US,
+        sysuserauth: sysuserauth_en_US,
         sysdepartment: sysdepartment_en_US,
         sysemployee: sysemployee_en_US,
         systeam: systeam_en_US,
         wfuser: wfuser_en_US,
         sysorganization: sysorganization_en_US,
         jobsregistry: jobsregistry_en_US,
+        sysopenaccess: sysopenaccess_en_US,
         dictcatalog: dictcatalog_en_US,
         wfgroup: wfgroup_en_US,
         jobsinfo: jobsinfo_en_US,

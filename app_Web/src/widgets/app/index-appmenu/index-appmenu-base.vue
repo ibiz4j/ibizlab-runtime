@@ -513,6 +513,9 @@ export default class IndexBase extends Vue implements ControlInterface {
                 case 'Auto3': 
                     this.clickAuto3(item);
                     return;
+                case 'AppFunc2': 
+                    this.clickAppFunc2(item);
+                    return;
                 case 'Auto5': 
                     this.clickAuto5(item);
                     return;
@@ -528,6 +531,9 @@ export default class IndexBase extends Vue implements ControlInterface {
                 case 'Auto10': 
                     this.clickAuto10(item);
                     return;
+                case 'AppFunc': 
+                    this.clickAppFunc(item);
+                    return;
                 case 'Auto15': 
                     this.clickAuto15(item);
                     return;
@@ -537,17 +543,17 @@ export default class IndexBase extends Vue implements ControlInterface {
                 case 'Auto8': 
                     this.clickAuto8(item);
                     return;
-                case 'Auto13': 
-                    this.clickAuto13(item);
-                    return;
                 case 'Auto11': 
                     this.clickAuto11(item);
                     return;
-                case 'Auto1': 
-                    this.clickAuto1(item);
+                case 'Auto13': 
+                    this.clickAuto13(item);
                     return;
                 case 'Auto7': 
                     this.clickAuto7(item);
+                    return;
+                case 'Auto1': 
+                    this.clickAuto1(item);
                     return;
                 case 'Auto4': 
                     this.clickAuto4(item);
@@ -617,6 +623,29 @@ export default class IndexBase extends Vue implements ControlInterface {
         const deResParameters: any[] = [];
         const parameters: any[] = [
             { pathName: 'sysorganizations', parameterName: 'sysorganization' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 账户绑定
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAppFunc2(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysuserauths', parameterName: 'sysuserauth' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -744,6 +773,29 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
+     * 第三方认证平台
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAppFunc(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
      * 接入应用
      *
      * @param {*} [item={}]
@@ -813,29 +865,6 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 岗位管理
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAuto13(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'sysposts', parameterName: 'syspost' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
      * 任务注册
      *
      * @param {*} [item={}]
@@ -859,17 +888,17 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 流程角色
+     * 岗位管理
      *
      * @param {*} [item={}]
      * @memberof Index
      */
-    public clickAuto1(item: any = {}) {
+    public clickAuto13(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'wfgroups', parameterName: 'wfgroup' },
+            { pathName: 'sysposts', parameterName: 'syspost' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -894,6 +923,29 @@ export default class IndexBase extends Vue implements ControlInterface {
         const parameters: any[] = [
             { pathName: 'wfremodels', parameterName: 'wfremodel' },
             { pathName: 'editview', parameterName: 'editview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 流程角色
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAuto1(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'wfgroups', parameterName: 'wfgroup' },
+            { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
         if(Object.is(this.$route.fullPath,path)){

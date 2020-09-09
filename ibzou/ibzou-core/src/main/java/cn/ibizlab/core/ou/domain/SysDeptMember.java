@@ -27,6 +27,7 @@ import cn.ibizlab.util.annotation.Audit;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.baomidou.mybatisplus.annotation.*;
 import cn.ibizlab.util.domain.EntityMP;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 
 /**
  * 实体[部门成员]
@@ -164,22 +165,6 @@ public class SysDeptMember extends EntityMP implements Serializable {
     }
 
 
-    /**
-     * 获取 [标识]
-     */
-    public String getMemberid(){
-        if(ObjectUtils.isEmpty(memberid)){
-            memberid=(String)getDefaultKey(true);
-        }
-        return memberid;
-    }
-
-    @Override
-    public Serializable getDefaultKey(boolean gen) {
-        if((!ObjectUtils.isEmpty(this.getDeptid()))&&(!ObjectUtils.isEmpty(this.getUserid())))
-            return DigestUtils.md5DigestAsHex(String.format("%s||%s" ,this.getDeptid(),this.getUserid()).getBytes());
-        return null;
-    }
 }
 
 

@@ -1,6 +1,7 @@
 import sysrolepermission_en_US from '@locale/lanres/entities/sys-role-permission/sys-role-permission_en_US';
 import sysuser_en_US from '@locale/lanres/entities/sys-user/sys-user_en_US';
 import sysauthlog_en_US from '@locale/lanres/entities/sys-auth-log/sys-auth-log_en_US';
+import sysuserauth_en_US from '@locale/lanres/entities/sys-user-auth/sys-user-auth_en_US';
 import sysopenaccess_en_US from '@locale/lanres/entities/sys-open-access/sys-open-access_en_US';
 import sysuserrole_en_US from '@locale/lanres/entities/sys-user-role/sys-user-role_en_US';
 import sysrole_en_US from '@locale/lanres/entities/sys-role/sys-role_en_US';
@@ -228,6 +229,7 @@ export default {
         sysrolepermission: sysrolepermission_en_US,
         sysuser: sysuser_en_US,
         sysauthlog: sysauthlog_en_US,
+        sysuserauth: sysuserauth_en_US,
         sysopenaccess: sysopenaccess_en_US,
         sysuserrole: sysuserrole_en_US,
         sysrole: sysrole_en_US,

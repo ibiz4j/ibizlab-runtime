@@ -1,8 +1,120 @@
-!!!!模版产生代码错误:----
-Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
-----
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-----
-FTL stack trace ("~" means nesting-related):
-	- Failed at: ${dbinst.getUserName()}  [in template "CODETEMPL_en_US" at line 28, column 24]
-----
+
+
+    <!--输出实体[MSG_BODY]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-msg_body-3-1">
+        <createTable tableName="IBZMSGBODY">
+                <column name="ISERROR" remarks="" type="INT">
+                </column>
+                <column name="ISSEND" remarks="" type="INT">
+                </column>
+                <column name="MSGID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_MSG_BODY_MSGID"/>
+                </column>
+                <column name="TOUSERS" remarks="" type="VARCHAR(1000)">
+                </column>
+                <column name="MSGLINK" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="SUBJECT" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CONTENT" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="MSGTYPE" remarks="" type="INT">
+                </column>
+                <column name="MSGNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="TEMPLATEID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ERRORINFO" remarks="" type="TEXT(1048576)">
+                </column>
+                <column name="USERDATA" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="TEMPLPARAMS" remarks="" type="TEXT(1048576)">
+                </column>
+                <column name="USERDATA2" remarks="" type="VARCHAR(200)">
+                </column>
+                <column name="MSGLINK_PC" remarks="" type="VARCHAR(100)">
+                </column>
+        </createTable>
+    </changeSet>
+
+
+    <!--输出实体[MSG_OPEN_ACCESS]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-msg_open_access-1-2">
+        <createTable tableName="IBZOPENACCESS">
+                <column name="ACCESSID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_MSG_OPEN_ACCESS_ACCESSID"/>
+                </column>
+                <column name="ACCESSNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="OPEN_TYPE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ACCESS_KEY" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="SECRET_KEY" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="REGION_ID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ACCESS_TOKEN" remarks="" type="VARCHAR(1000)">
+                </column>
+                <column name="EXPIRES_TIME" remarks="" type="DATETIME">
+                </column>
+                <column name="DISABLED" remarks="" type="INT">
+                </column>
+                <column name="REDIRECT_URI" remarks="" type="VARCHAR(500)">
+                </column>
+        </createTable>
+    </changeSet>
+
+
+    <!--输出实体[MSG_TEMPLATE]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-msg_template-1-3">
+        <createTable tableName="IBZMSGTEMPL">
+                <column name="TID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_MSG_TEMPLATE_TID"/>
+                </column>
+                <column name="TEMPLATE_NAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="TEMPLATE_TYPE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CONTENT" remarks="" type="VARCHAR(4000)">
+                </column>
+                <column name="TEMPLATE_ID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="TEMPLATE_URL" remarks="" type="VARCHAR(1000)">
+                </column>
+                <column name="ACCESSID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="ACCESSNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="OPEN_TYPE" remarks="" type="VARCHAR(100)">
+                </column>
+        </createTable>
+    </changeSet>
+
+
+    <!--输出实体[MSG_USER_ACCOUNT]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-msg_user_account-1-4">
+        <createTable tableName="IBZUSERAUTH">
+                <column name="AUTHID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_MSG_USER_ACCOUNT_AUTHID"/>
+                </column>
+                <column name="USERID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="IDENTITY_TYPE" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="IDENTIFIER" remarks="" type="VARCHAR(200)">
+                </column>
+                <column name="CREDENTIAL" remarks="" type="VARCHAR(500)">
+                </column>
+        </createTable>
+    </changeSet>
+
+        <!--输出实体[MSG_BODY]外键关系 -->
+        <!--输出实体[MSG_OPEN_ACCESS]外键关系 -->
+        <!--输出实体[MSG_TEMPLATE]外键关系 -->
+        <!--输出实体[MSG_USER_ACCOUNT]外键关系 -->
+
+</databaseChangeLog>

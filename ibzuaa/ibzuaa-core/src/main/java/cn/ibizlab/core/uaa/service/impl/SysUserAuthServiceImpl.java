@@ -55,6 +55,7 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
     @Override
     @Transactional
     public boolean create(SysUserAuth et) {
+        fillParentData(et);
         if(!this.retBool(this.baseMapper.insert(et)))
             return false;
         CachedBeanCopier.copy(get(et.getId()),et);
@@ -63,12 +64,14 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
 
     @Override
     public void createBatch(List<SysUserAuth> list) {
+        list.forEach(item->fillParentData(item));
         this.saveOrUpdateBatch(list,batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysUserAuth et) {
+        fillParentData(et);
         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("authid",et.getId())))
             return false;
         CachedBeanCopier.copy(get(et.getId()),et);
@@ -77,6 +80,7 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
 
     @Override
     public void updateBatch(List<SysUserAuth> list) {
+        list.forEach(item->fillParentData(item));
         updateBatchById(list,batchSize);
     }
 
@@ -107,6 +111,7 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
 
     @Override
     public SysUserAuth getDraft(SysUserAuth et) {
+        fillParentData(et);
         return et;
     }
 
@@ -134,12 +139,14 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
 
     @Override
     public boolean saveBatch(Collection<SysUserAuth> list) {
+        list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
         return true;
     }
 
     @Override
     public void saveBatch(List<SysUserAuth> list) {
+        list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
     }
 
@@ -166,6 +173,22 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
 
 
 
+    /**
+     * 为当前实体填充父数据（外键值文本、外键值附加数据）
+     * @param et
+     */
+    private void fillParentData(SysUserAuth et){
+        //实体关系[DER1N_SYS_USER_AUTH_SYS_USER_USERID]
+        if(!ObjectUtils.isEmpty(et.getUserid())){
+            cn.ibizlab.core.uaa.domain.SysUser user=et.getUser();
+            if(ObjectUtils.isEmpty(user)){
+                cn.ibizlab.core.uaa.domain.SysUser majorEntity=sysuserService.get(et.getUserid());
+                et.setUser(majorEntity);
+                user=majorEntity;
+            }
+            et.setUsername(user.getUsername());
+        }
+    }
 
 
 

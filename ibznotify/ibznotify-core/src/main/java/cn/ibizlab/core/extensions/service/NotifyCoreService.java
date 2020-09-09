@@ -274,7 +274,7 @@ public class NotifyCoreService {
      */
     @SneakyThrows
     private boolean aliSmsService(MsgBody msg){
-        String msgUsers=getMsgUsers(msg);
+        String msgUsers=msg.getToUsers();
         MsgTemplate template=templateService.getById(msg.getTemplateId());
         MsgOpenAccess openAccess =template.getOpenaccess();
         String region=openAccess.getRegionId();
@@ -306,7 +306,7 @@ public class NotifyCoreService {
      */
     @SneakyThrows
     private boolean aliEMailService(MsgBody msg){
-        String msgUsers=getMsgUsers(msg);
+        String msgUsers=msg.getToUsers();
         MsgTemplate template=templateService.getById(msg.getTemplateId());
         MsgOpenAccess openAccess =template.getOpenaccess();
         String region=openAccess.getRegionId();

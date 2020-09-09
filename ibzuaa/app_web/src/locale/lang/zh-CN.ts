@@ -1,6 +1,7 @@
 import sysrolepermission_zh_CN from '@locale/lanres/entities/sys-role-permission/sys-role-permission_zh_CN';
 import sysuser_zh_CN from '@locale/lanres/entities/sys-user/sys-user_zh_CN';
 import sysauthlog_zh_CN from '@locale/lanres/entities/sys-auth-log/sys-auth-log_zh_CN';
+import sysuserauth_zh_CN from '@locale/lanres/entities/sys-user-auth/sys-user-auth_zh_CN';
 import sysopenaccess_zh_CN from '@locale/lanres/entities/sys-open-access/sys-open-access_zh_CN';
 import sysuserrole_zh_CN from '@locale/lanres/entities/sys-user-role/sys-user-role_zh_CN';
 import sysrole_zh_CN from '@locale/lanres/entities/sys-role/sys-role_zh_CN';
@@ -227,6 +228,7 @@ export default {
         sysrolepermission: sysrolepermission_zh_CN,
         sysuser: sysuser_zh_CN,
         sysauthlog: sysauthlog_zh_CN,
+        sysuserauth: sysuserauth_zh_CN,
         sysopenaccess: sysopenaccess_zh_CN,
         sysuserrole: sysuserrole_zh_CN,
         sysrole: sysrole_zh_CN,

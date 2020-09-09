@@ -94,7 +94,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "last_time")
     @JsonProperty("last_time")
-    private BigInteger lastTime;
+    private Long lastTime;
 
     /**
      * 属性 [NEXT_TIME]
@@ -102,7 +102,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "next_time")
     @JsonProperty("next_time")
-    private BigInteger nextTime;
+    private Long nextTime;
 
     /**
      * 属性 [AUTHOR]
@@ -206,7 +206,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     /**
      * 设置 [LAST_TIME]
      */
-    public void setLastTime(BigInteger  lastTime){
+    public void setLastTime(Long  lastTime){
         this.lastTime = lastTime ;
         this.modify("last_time",lastTime);
     }
@@ -214,7 +214,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     /**
      * 设置 [NEXT_TIME]
      */
-    public void setNextTime(BigInteger  nextTime){
+    public void setNextTime(Long  nextTime){
         this.nextTime = nextTime ;
         this.modify("next_time",nextTime);
     }

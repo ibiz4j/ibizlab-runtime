@@ -380,7 +380,6 @@
              */
             onOcr(item) {
                 // 拼接url
-                const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
                 const id = typeof item.id == "string" ? item.id : JSON.stringify(item.id);
                 const name = typeof item.name == "string" ? item.name : JSON.stringify(item.name);
                 const ocrUrl = '/net-disk/ocrview/' + this.getFolder + '/' + id + '/' + name + '?authcode=' + item.authcode;

@@ -8,14 +8,14 @@
         <tns:global identifier="sysemployeesavedeptmemberdefault" type="cn.ibizlab.core.ou.domain.SysEmployee" />
         <tns:global identifier="sysemployeesavedeptmembermember" type="cn.ibizlab.core.ou.domain.SysDeptMember" />
         </extensionElements>
-     <startEvent id="ce0d0ff1776568ee1d4aa9b085a05300" isInterrupting="true"/>
-     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysemployeesavedeptmemberdeaction1" id="40d4f46408c08c5c1182a2471c1deddf" implementation="http://www.jboss.org/drools/rule" name="保存成员"/>
-     <endEvent id="40d4f46408c08c5c1182a2471c1deddf_End" name="End"/>
-     <sequenceFlow id="40d4f46408c08c5c1182a2471c1deddf_End_Line" sourceRef="40d4f46408c08c5c1182a2471c1deddf" targetRef="40d4f46408c08c5c1182a2471c1deddf_End"/>
-     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysemployeesavedeptmemberprepareparam1" id="c97400ea14003bae9f2ae38840a1e7bc" implementation="http://www.jboss.org/drools/rule" name="准备成员"/>
-     <sequenceFlow id="76b387bbed38f85b4ac2c6b15f29c6a4" sourceRef="c97400ea14003bae9f2ae38840a1e7bc" targetRef="40d4f46408c08c5c1182a2471c1deddf">
+     <startEvent id="begin" isInterrupting="true"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysemployeesavedeptmemberdeaction1" id="deaction1" implementation="http://www.jboss.org/drools/rule" name="保存成员"/>
+     <endEvent id="deaction1_end" name="end"/>
+     <sequenceFlow id="deaction1_end_line" sourceRef="deaction1" targetRef="deaction1_end"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysemployeesavedeptmemberprepareparam1" id="prepareparam1" implementation="http://www.jboss.org/drools/rule" name="准备成员"/>
+     <sequenceFlow id="prepareparam1_deaction1" sourceRef="prepareparam1" targetRef="deaction1">
      </sequenceFlow>
-     <sequenceFlow id="7413689f072b128776511ab28821a100" sourceRef="ce0d0ff1776568ee1d4aa9b085a05300" targetRef="c97400ea14003bae9f2ae38840a1e7bc">
+     <sequenceFlow id="begin_prepareparam1" sourceRef="begin" targetRef="prepareparam1">
      </sequenceFlow>
     </process>
 </definitions>

@@ -34,6 +34,20 @@ public class SysUserAuthSearchContext extends QueryWrapperContext<SysUserAuth> {
             this.getSearchCond().eq("userid", n_userid_eq);
         }
     }
+	private String n_username_eq;//[人员]
+	public void setN_username_eq(String n_username_eq) {
+        this.n_username_eq = n_username_eq;
+        if(!ObjectUtils.isEmpty(this.n_username_eq)){
+            this.getSearchCond().eq("username", n_username_eq);
+        }
+    }
+	private String n_username_like;//[人员]
+	public void setN_username_like(String n_username_like) {
+        this.n_username_like = n_username_like;
+        if(!ObjectUtils.isEmpty(this.n_username_like)){
+            this.getSearchCond().like("username", n_username_like);
+        }
+    }
 
     /**
 	 * 启用快速搜索
@@ -42,6 +56,9 @@ public class SysUserAuthSearchContext extends QueryWrapperContext<SysUserAuth> {
 	{
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
+            this.getSearchCond().and( wrapper ->
+                     wrapper.like("username", query)   
+            );
 		 }
 	}
 }

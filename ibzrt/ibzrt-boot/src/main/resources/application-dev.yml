@@ -48,6 +48,10 @@ zuul:
         path: /sys_deptmembers/**
         serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
         stripPrefix: false
+      sys_open_access:
+        path: /sys_open_accesses/**
+        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+        stripPrefix: false
       sys_org:
         path: /sys_orgs/**
         serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
@@ -82,6 +86,10 @@ zuul:
         stripPrefix: false
       sys_user:
         path: /sys_users/**
+        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+        stripPrefix: false
+      sys_user_auth:
+        path: /sys_user_auths/**
         serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
         stripPrefix: false
       sys_user_role:

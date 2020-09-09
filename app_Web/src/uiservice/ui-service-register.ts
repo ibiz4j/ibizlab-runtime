@@ -45,12 +45,14 @@ export class UIServiceRegister {
         this.allUIService.set('sysauthlog', () => import('@/uiservice/sys-auth-log/sys-auth-log-ui-service'));
         this.allUIService.set('wfmember', () => import('@/uiservice/wfmember/wfmember-ui-service'));
         this.allUIService.set('syspost', () => import('@/uiservice/sys-post/sys-post-ui-service'));
+        this.allUIService.set('sysuserauth', () => import('@/uiservice/sys-user-auth/sys-user-auth-ui-service'));
         this.allUIService.set('sysdepartment', () => import('@/uiservice/sys-department/sys-department-ui-service'));
         this.allUIService.set('sysemployee', () => import('@/uiservice/sys-employee/sys-employee-ui-service'));
         this.allUIService.set('systeam', () => import('@/uiservice/sys-team/sys-team-ui-service'));
         this.allUIService.set('wfuser', () => import('@/uiservice/wfuser/wfuser-ui-service'));
         this.allUIService.set('sysorganization', () => import('@/uiservice/sys-organization/sys-organization-ui-service'));
         this.allUIService.set('jobsregistry', () => import('@/uiservice/jobs-registry/jobs-registry-ui-service'));
+        this.allUIService.set('sysopenaccess', () => import('@/uiservice/sys-open-access/sys-open-access-ui-service'));
         this.allUIService.set('dictcatalog', () => import('@/uiservice/dict-catalog/dict-catalog-ui-service'));
         this.allUIService.set('wfgroup', () => import('@/uiservice/wfgroup/wfgroup-ui-service'));
         this.allUIService.set('jobsinfo', () => import('@/uiservice/jobs-info/jobs-info-ui-service'));

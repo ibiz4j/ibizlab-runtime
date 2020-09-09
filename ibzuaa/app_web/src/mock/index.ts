@@ -10,6 +10,7 @@ import './upload/upload';
 import './entity/sys-role-permissions/sys-role-permissions';
 import './entity/sys-users/sys-users';
 import './entity/sys-auth-logs/sys-auth-logs';
+import './entity/sys-user-auths/sys-user-auths';
 import './entity/sys-open-accesss/sys-open-accesss';
 import './entity/sys-user-roles/sys-user-roles';
 import './entity/sys-roles/sys-roles';

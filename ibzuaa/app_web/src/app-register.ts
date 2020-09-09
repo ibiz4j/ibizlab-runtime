@@ -178,5 +178,6 @@ export const AppComponents = {
         v.component('app-menu-item', AppMenuItem);
         v.component('app-message-popover', AppMessagePopover);
         v.component('ibiz-file-upload', ()=> import('./components/ibiz-file-upload/ibiz-file-upload.vue'));
+        v.component('ibiz-image-upload', ()=> import('./components/ibiz-image-upload/ibiz-image-upload.vue'));
     },
 };

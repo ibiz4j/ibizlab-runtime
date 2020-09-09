@@ -4,12 +4,14 @@ import sysuser_zh_CN from '@locale/lanres/entities/sys-user/sys-user_zh_CN';
 import sysauthlog_zh_CN from '@locale/lanres/entities/sys-auth-log/sys-auth-log_zh_CN';
 import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
 import syspost_zh_CN from '@locale/lanres/entities/sys-post/sys-post_zh_CN';
+import sysuserauth_zh_CN from '@locale/lanres/entities/sys-user-auth/sys-user-auth_zh_CN';
 import sysdepartment_zh_CN from '@locale/lanres/entities/sys-department/sys-department_zh_CN';
 import sysemployee_zh_CN from '@locale/lanres/entities/sys-employee/sys-employee_zh_CN';
 import systeam_zh_CN from '@locale/lanres/entities/sys-team/sys-team_zh_CN';
 import wfuser_zh_CN from '@locale/lanres/entities/wfuser/wfuser_zh_CN';
 import sysorganization_zh_CN from '@locale/lanres/entities/sys-organization/sys-organization_zh_CN';
 import jobsregistry_zh_CN from '@locale/lanres/entities/jobs-registry/jobs-registry_zh_CN';
+import sysopenaccess_zh_CN from '@locale/lanres/entities/sys-open-access/sys-open-access_zh_CN';
 import dictcatalog_zh_CN from '@locale/lanres/entities/dict-catalog/dict-catalog_zh_CN';
 import wfgroup_zh_CN from '@locale/lanres/entities/wfgroup/wfgroup_zh_CN';
 import jobsinfo_zh_CN from '@locale/lanres/entities/jobs-info/jobs-info_zh_CN';
@@ -153,6 +155,8 @@ export default {
                 menuitem4: "用户角色",
                 menuitem9: "认证日志",
                 menuitem21: "接入应用",
+                menuitem22: "第三方认证",
+                menuitem23: "账户绑定",
                 menuitem10: "流程管理",
                 menuitem6: "流程定义",
                 menuitem5: "流程角色",
@@ -262,12 +266,14 @@ export default {
         sysauthlog: sysauthlog_zh_CN,
         wfmember: wfmember_zh_CN,
         syspost: syspost_zh_CN,
+        sysuserauth: sysuserauth_zh_CN,
         sysdepartment: sysdepartment_zh_CN,
         sysemployee: sysemployee_zh_CN,
         systeam: systeam_zh_CN,
         wfuser: wfuser_zh_CN,
         sysorganization: sysorganization_zh_CN,
         jobsregistry: jobsregistry_zh_CN,
+        sysopenaccess: sysopenaccess_zh_CN,
         dictcatalog: dictcatalog_zh_CN,
         wfgroup: wfgroup_zh_CN,
         jobsinfo: jobsinfo_zh_CN,

@@ -89,7 +89,7 @@
          * @type {*}
          * @memberof Login
          */
-        public form: any = {loginname: 'guest', password: '123456'};
+        public form: any = {loginname: 'ibzadmin', password: '123456'};
 
 
         /**
@@ -134,17 +134,14 @@
         }
 
         public mounted() {
-            if (this.getCookie("loginname") && this.getCookie("loginname") !== 'undefined'
-                && this.getCookie("password") && this.getCookie("password") !== 'undefined') {
+            if (this.getCookie("loginname") && this.getCookie("loginname") !== 'undefined') {
                 this.form.loginname = this.getCookie("loginname");
-                this.form.password = this.getCookie("password");
             }else {
-                if (localStorage.getItem("ibzuser")) {
-                    const ibzuser:any = localStorage.getItem("ibzuser");
-                    if (ibzuser) {
-                        const ibzuserObj:any = JSON.parse(ibzuser);
-                        this.form.loginname = ibzuserObj.loginname;
-                        this.form.password = ibzuserObj.password;
+                if (localStorage.getItem("user")) {
+                    const user:any = localStorage.getItem("user");
+                    if (user) {
+                        const userObj:any = JSON.parse(user);
+                        this.form.loginname = userObj.loginname;
                     }
                 }
             }
@@ -245,7 +242,7 @@
                 var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
                 var leftTime = new Date();
                 leftTime.setTime(leftTamp + curTamp);
-                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString() + ";path=/";
             } else {
                 document.cookie = name + "=" + escape(value);
             }
@@ -272,7 +269,7 @@
             const baseUrl = this.getNeedLocation();
 
             // 从后台获取qq互联创建的网站应用appid
-            const get: Promise<any> = this.$http.get('/uaa/getQQAppId');
+            const get: Promise<any> = this.$http.get('/uaa/open/qq/appid');
             get.then((response: any) => {
                 if (response && response.status === 200) {
                     const data = response.data;
@@ -326,7 +323,7 @@
          */
         public wechatHandleClick(thirdpart: any) {
             // 从后台获取微信开放平台提供的appid
-            const get: Promise<any> = this.$http.get('/uaa/getWechatAppId');
+            const get: Promise<any> = this.$http.get('/uaa/open/wechat/appid');
             get.then((response: any) => {
                 if (response && response.status === 200) {
                     const data = response.data;
@@ -381,7 +378,7 @@
          */
         public dingtalkHandleClick(thirdpart: any) {
             // 从后台获取钉钉开放平台提供的appid
-            const get: Promise<any> = this.$http.get('/uaa/getDingtalkAppId');
+            const get: Promise<any> = this.$http.get('/uaa/open/dingtalk/appid');
             get.then((response: any) => {
                 if (response && response.status === 200) {
                     const data = response.data;

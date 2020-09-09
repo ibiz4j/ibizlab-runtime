@@ -18,58 +18,173 @@ import com.alibaba.fastjson.JSONObject;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthenticationUser implements UserDetails
 {
-	public AuthenticationUser()
-	{
-
-	}
-
+	public AuthenticationUser(){}
+	/**
+	 * 用戶标识
+	 */
 	private String userid;
+	/**
+	 * 用户全局名
+	 */
 	private String username;
+	/**
+	 * 用户姓名
+	 */
 	private String personname;
-	private String usercode;
+	/**
+	 * 登录名
+	 */
 	private String loginname;
+	/**
+	 * 用户工号
+	 */
+	private String usercode;
+	/**
+	 * 登录密码
+	 */
 	private String password;
+	/**
+	 * 区属
+	 */
 	private String domain;
+	/**
+	 * 部门标识
+	 */
 	private String mdeptid;
+	/**
+	 * 部门编码
+	 */
 	private String mdeptcode;
+	/**
+	 * 部门名称
+	 */
 	private String mdeptname;
+	/**
+	 * 业务编码
+	 */
 	private String bcode;
+	/**
+	 * 岗位标识
+	 */
 	private String postid;
+	/**
+	 * 岗位代码
+	 */
 	private String postcode;
+	/**
+	 * 岗位名称
+	 */
 	private String postname;
+	/**
+	 * 单位标识
+	 */
 	private String orgid;
+	/**
+	 * 单位编码
+	 */
 	private String orgcode;
+	/**
+	 * 单位名称
+	 */
 	private String orgname;
+	/**
+	 * 昵称别名
+	 */
 	private String nickname;
+	/**
+	 * 邮箱
+	 */
 	private String email;
+	/**
+	 * 社交账号
+	 */
 	private String avatar;
+	/**
+	 * 电话
+	 */
 	private String phone;
-	private String reserver;
+	/**
+	 * 照片
+	 */
 	private String usericon;
+	/**
+	 * 性别
+	 */
 	private String sex;
+	/**
+	 * 出生日期
+	 */
 	private Timestamp birthday;
+	/**
+	 * 证件号码
+	 */
 	private String certcode;
+	/**
+	 * 地址
+	 */
 	private String addr;
+	/**
+	 * 主题
+	 */
 	private String theme;
+	/**
+	 * 字号
+	 */
 	private String fontsize;
+	/**
+	 * 语言
+	 */
 	private String lang;
+	/**
+	 * 备注
+	 */
 	private String memo;
+	/**
+	 * 保留字段
+	 */
+	private String reserver;
+	/**
+	 * 用户上下文参数
+	 */
 	private Map <String,Object> sessionParams;
+	/**
+	 * 用户权限资源
+	 */
 	@JsonIgnore
 	private Collection<GrantedAuthority> authorities;
-
+    /**
+    * 是否为超级管理员
+    */
     private int superuser;
+    /**
+    * 用户权限资源
+    */
     private JSONObject permissionList;
-    private String orglevel;//单位级别
-    private String deptlevel;//部门级别
+    /**
+    * 用户上下文参数
+    */
     @JsonIgnore
-    private Map<String,Object> userSessionParam;//用户自定义session值
-    private Map<String, Set<String>> orgInfo;//上下级组织信息
+    private Map<String,Object> userSessionParam;
+    /**
+    * 当前用户上下级组织信息
+    */
+    private Map<String, Set<String>> orgInfo;
+	/**
+	* 上级组织
+	*/
 	private String porg;
+	/**
+	* 下级组织
+	*/
 	private String sorg;
+	/**
+	* 上级部门
+	*/
 	private String pdept;
+	/**
+	* 下级部门
+	*/
 	private String sdept;
-
 
 	@JsonIgnore
 	@Override

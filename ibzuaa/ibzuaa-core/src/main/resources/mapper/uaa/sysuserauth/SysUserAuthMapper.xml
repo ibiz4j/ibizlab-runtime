@@ -5,10 +5,10 @@
 
     <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
 	<select id="selectById"  resultMap="SysUserAuthResultMap" databaseId="mysql">
-        <![CDATA[select t1.* from (SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID` FROM `IBZUSERAUTH` t1  ) t1 where authid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID`, t11.`USERNAME` FROM `IBZUSERAUTH` t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  ) t1 where authid=#{id}]]>
     </select>
 	<select id="selectById"  resultMap="SysUserAuthResultMap" databaseId="oracle">
-        <![CDATA[select t1.* from (SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  ) t1 where authid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID, t11.USERNAME FROM IBZUSERAUTH t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  ) t1 where authid=#{id}]]>
     </select>
 	<select id="selectById"  resultMap="SysUserAuthResultMap" databaseId="postgresql">
         <![CDATA[select t1.* from (SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  ) t1 where authid=#{id}]]>
@@ -44,12 +44,12 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-		<![CDATA[ SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID` FROM `IBZUSERAUTH` t1  
+		<![CDATA[ SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID`, t11.`USERNAME` FROM `IBZUSERAUTH` t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="oracle">
-		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  
+		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID, t11.USERNAME FROM IBZUSERAUTH t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  
 			]]>
     </sql>
     <!--数据查询[Default]-->
@@ -59,12 +59,12 @@
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
-		<![CDATA[ SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID` FROM `IBZUSERAUTH` t1  
+		<![CDATA[ SELECT t1.`AUTHID`, t1.`CREDENTIAL`, t1.`IDENTIFIER`, t1.`IDENTITY_TYPE`, t1.`USERID`, t11.`USERNAME` FROM `IBZUSERAUTH` t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="oracle">
-		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  
+		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID, t11.USERNAME FROM IBZUSERAUTH t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  
 			]]>
     </sql>
     <!--数据查询[View]-->

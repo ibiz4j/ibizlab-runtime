@@ -71,6 +71,14 @@
         "viewname": "SysDepartmentGridView",
         "viewtag": "1a71a212ed794d05b51b9c825b9cf19a"
     },
+    "sysuserautheditview": {
+        "title": "账号编辑视图",
+        "caption": "账号绑定",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "uaa",
+        "viewname": "SysUserAuthEditView",
+        "viewtag": "1ee5253453314436a2c78ca1dfa87bc6"
+    },
     "sysappgridview": {
         "title": "接入应用",
         "caption": "接入应用",
@@ -119,6 +127,14 @@
         "viewname": "SysRolePickupView",
         "viewtag": "26cc2d5c69f1525eaa415b7de1a0d4a6"
     },
+    "sysopenaccessgridview": {
+        "title": "第三方认证平台",
+        "caption": "第三方认证平台",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "uaa",
+        "viewname": "SysOpenAccessGridView",
+        "viewtag": "29ebd67c0eba9fb1464bcd1397112f6f"
+    },
     "sysuserpickupview": {
         "title": "用户表数据选择视图",
         "caption": "系统用户",
@@ -126,6 +142,14 @@
         "viewmodule": "uaa",
         "viewname": "SysUserPickupView",
         "viewtag": "32fe9ab4a9e1b8d62b9ee802e4746965"
+    },
+    "sysopenaccesseditview": {
+        "title": "第三方认证平台",
+        "caption": "第三方认证平台",
+        "viewtype": "DEEDITVIEW",
+        "viewmodule": "uaa",
+        "viewname": "SysOpenAccessEditView",
+        "viewtag": "349cda61e4dc5e38045ef7c77321d1c7"
     },
     "sysorganizationpickupgridview": {
         "title": "单位机构选择表格视图",
@@ -590,5 +614,13 @@
         "viewmodule": "workflow",
         "viewname": "WFGroupGridView",
         "viewtag": "f498dfb24e88df7c70a5c09ecb587647"
+    },
+    "sysuserauthgridview": {
+        "title": "账号表格视图",
+        "caption": "账号绑定",
+        "viewtype": "DEGRIDVIEW",
+        "viewmodule": "uaa",
+        "viewname": "SysUserAuthGridView",
+        "viewtag": "fd7c41ae2348a07694aa65a26bca0df5"
     }
 }

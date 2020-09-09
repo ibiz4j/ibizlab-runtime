@@ -78,6 +78,20 @@ const router = new Router({
                     component: () => import('@pages/workflow/wfuser-mpickup-view/wfuser-mpickup-view.vue'),
                 },
                 {
+                    path: 'sysuserauths/:sysuserauth?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.sysuserauth.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysuserauths', parameterName: 'sysuserauth' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-user-auth-grid-view/sys-user-auth-grid-view.vue'),
+                },
+                {
                     path: 'sysposts/:syspost?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.syspost.views.gridview.caption',
@@ -104,6 +118,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/ou/sys-organization-tree-exp-view/sys-organization-tree-exp-view.vue'),
+                },
+                {
+                    path: 'sysopenaccesses/:sysopenaccess?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysopenaccess.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-open-access-edit-view/sys-open-access-edit-view.vue'),
                 },
                 {
                     path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/gridview/:gridview?',
@@ -531,6 +559,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/ou/sys-department-pickup-grid-view/sys-department-pickup-grid-view.vue'),
+                },
+                {
+                    path: 'sysopenaccesses/:sysopenaccess?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.sysopenaccess.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-open-access-grid-view/sys-open-access-grid-view.vue'),
                 },
                 {
                     path: 'systeams/:systeam?/gridview/:gridview?',
@@ -976,6 +1018,20 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-post-pickup-view/sys-post-pickup-view.vue'),
                 },
                 {
+                    path: 'jobsinfos/:jobsinfo?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.jobsinfo.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/task/jobs-info-grid-view/jobs-info-grid-view.vue'),
+                },
+                {
                     path: 'sysusers/:sysuser?/pickupview/:pickupview?',
                     meta: {
                         caption: 'entities.sysuser.views.pickupview.caption',
@@ -990,18 +1046,18 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-user-pickup-view/sys-user-pickup-view.vue'),
                 },
                 {
-                    path: 'jobsinfos/:jobsinfo?/gridview/:gridview?',
+                    path: 'wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.jobsinfo.views.gridview.caption',
+                        caption: 'entities.wfprocessdefinition.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'jobsinfos', parameterName: 'jobsinfo' },
+                            { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
                             { pathName: 'gridview', parameterName: 'gridview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/task/jobs-info-grid-view/jobs-info-grid-view.vue'),
+                    component: () => import('@pages/workflow/wfprocess-definition-grid-view/wfprocess-definition-grid-view.vue'),
                 },
                 {
                     path: 'systeams/:systeam?/editview/:editview?',
@@ -1018,18 +1074,64 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-team-edit-view/sys-team-edit-view.vue'),
                 },
                 {
-                    path: 'wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
+                    path: 'sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/sysemployees/:sysemployee?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.wfprocessdefinition.views.gridview.caption',
+                        caption: 'entities.sysemployee.views.pickupview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
+                            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
+                            { pathName: 'sysdepartments', parameterName: 'sysdepartment' },
+                            { pathName: 'sysemployees', parameterName: 'sysemployee' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/workflow/wfprocess-definition-grid-view/wfprocess-definition-grid-view.vue'),
+                    component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
+                },
+                {
+                    path: 'sysorganizations/:sysorganization?/sysemployees/:sysemployee?/pickupview/:pickupview?',
+                    meta: {
+                        caption: 'entities.sysemployee.views.pickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
+                            { pathName: 'sysemployees', parameterName: 'sysemployee' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
+                },
+                {
+                    path: 'sysdepartments/:sysdepartment?/sysemployees/:sysemployee?/pickupview/:pickupview?',
+                    meta: {
+                        caption: 'entities.sysemployee.views.pickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysdepartments', parameterName: 'sysdepartment' },
+                            { pathName: 'sysemployees', parameterName: 'sysemployee' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
+                },
+                {
+                    path: 'sysemployees/:sysemployee?/pickupview/:pickupview?',
+                    meta: {
+                        caption: 'entities.sysemployee.views.pickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysemployees', parameterName: 'sysemployee' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
                 },
                 {
                     path: 'sysorganizations/:sysorganization?/pickupgridview/:pickupgridview?',
@@ -1139,66 +1241,6 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-team-member-grid-view/sys-team-member-grid-view.vue'),
                 },
                 {
-                    path: 'sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/sysemployees/:sysemployee?/pickupview/:pickupview?',
-                    meta: {
-                        caption: 'entities.sysemployee.views.pickupview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
-                            { pathName: 'sysdepartments', parameterName: 'sysdepartment' },
-                            { pathName: 'sysemployees', parameterName: 'sysemployee' },
-                            { pathName: 'pickupview', parameterName: 'pickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
-                },
-                {
-                    path: 'sysorganizations/:sysorganization?/sysemployees/:sysemployee?/pickupview/:pickupview?',
-                    meta: {
-                        caption: 'entities.sysemployee.views.pickupview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
-                            { pathName: 'sysemployees', parameterName: 'sysemployee' },
-                            { pathName: 'pickupview', parameterName: 'pickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
-                },
-                {
-                    path: 'sysdepartments/:sysdepartment?/sysemployees/:sysemployee?/pickupview/:pickupview?',
-                    meta: {
-                        caption: 'entities.sysemployee.views.pickupview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysdepartments', parameterName: 'sysdepartment' },
-                            { pathName: 'sysemployees', parameterName: 'sysemployee' },
-                            { pathName: 'pickupview', parameterName: 'pickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
-                },
-                {
-                    path: 'sysemployees/:sysemployee?/pickupview/:pickupview?',
-                    meta: {
-                        caption: 'entities.sysemployee.views.pickupview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysemployees', parameterName: 'sysemployee' },
-                            { pathName: 'pickupview', parameterName: 'pickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
-                },
-                {
                     path: 'sysapps/:sysapp?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.sysapp.views.gridview.caption',
@@ -1239,6 +1281,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/task/jobs-info-edit-view/jobs-info-edit-view.vue'),
+                },
+                {
+                    path: 'sysuserauths/:sysuserauth?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysuserauth.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysuserauths', parameterName: 'sysuserauth' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-user-auth-edit-view/sys-user-auth-edit-view.vue'),
                 },
                 {
                     path: 'dictcatalogs/:dictcatalog?/dictoptions/:dictoption?/editview/:editview?',
@@ -1603,20 +1659,6 @@ const router = new Router({
                     component: () => import('@pages/dict/dict-catalog-pickup-grid-view/dict-catalog-pickup-grid-view.vue'),
                 },
                 {
-                    path: 'sysorganizations/:sysorganization?/editview/:editview?',
-                    meta: {
-                        caption: 'entities.sysorganization.views.editview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
-                            { pathName: 'editview', parameterName: 'editview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/sys-organization-edit-view/sys-organization-edit-view.vue'),
-                },
-                {
                     path: 'sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/sysemployees/:sysemployee?/systeammembers/:systeammember?/editview/:editview?',
                     meta: {
                         caption: 'entities.systeammember.views.editview.caption',
@@ -1708,6 +1750,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/ou/sys-team-member-edit-view/sys-team-member-edit-view.vue'),
+                },
+                {
+                    path: 'sysorganizations/:sysorganization?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysorganization.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/ou/sys-organization-edit-view/sys-organization-edit-view.vue'),
                 },
                 {
                     path: 'sysroles/:sysrole?/pickupview/:pickupview?',
@@ -2041,6 +2097,19 @@ const router = new Router({
         component: () => import('@pages/ou/sys-department-grid-view/sys-department-grid-view.vue'),
     },
     {
+        path: '/sysuserauths/:sysuserauth?/editview/:editview?',
+        meta: {
+            caption: 'entities.sysuserauth.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'sysuserauths', parameterName: 'sysuserauth' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-user-auth-edit-view/sys-user-auth-edit-view.vue'),
+    },
+    {
         path: '/sysapps/:sysapp?/gridview/:gridview?',
         meta: {
             caption: 'entities.sysapp.views.gridview.caption',
@@ -2133,6 +2202,19 @@ const router = new Router({
         component: () => import('@pages/uaa/sys-role-pickup-view/sys-role-pickup-view.vue'),
     },
     {
+        path: '/sysopenaccesses/:sysopenaccess?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.sysopenaccess.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-open-access-grid-view/sys-open-access-grid-view.vue'),
+    },
+    {
         path: '/sysusers/:sysuser?/pickupview/:pickupview?',
         meta: {
             caption: 'entities.sysuser.views.pickupview.caption',
@@ -2144,6 +2226,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/uaa/sys-user-pickup-view/sys-user-pickup-view.vue'),
+    },
+    {
+        path: '/sysopenaccesses/:sysopenaccess?/editview/:editview?',
+        meta: {
+            caption: 'entities.sysopenaccess.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-open-access-edit-view/sys-open-access-edit-view.vue'),
     },
     {
         path: '/sysorganizations/:sysorganization?/pickupgridview/:pickupgridview?',
@@ -3515,6 +3610,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/workflow/wfgroup-grid-view/wfgroup-grid-view.vue'),
+    },
+    {
+        path: '/sysuserauths/:sysuserauth?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.sysuserauth.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'sysuserauths', parameterName: 'sysuserauth' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-user-auth-grid-view/sys-user-auth-grid-view.vue'),
     },
         ...globalRoutes,
         {

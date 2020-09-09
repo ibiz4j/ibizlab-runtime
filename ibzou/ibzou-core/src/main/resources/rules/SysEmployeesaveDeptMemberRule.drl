@@ -1,13 +1,14 @@
 package cn.ibizlab.ou.logic.sysemployeelogic.savedeptmember;
-
 import java.util.Map;
 import java.util.HashMap;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.StringUtils;
 global cn.ibizlab.core.ou.domain.SysEmployee sysemployeesavedeptmemberdefault;
 global cn.ibizlab.core.ou.domain.SysDeptMember sysemployeesavedeptmembermember;
 global cn.ibizlab.core.ou.service.ISysDeptMemberService sysdeptmemberservice;
 global cn.ibizlab.core.ou.service.ISysEmployeeService iBzSysSysemployeeDefaultService;
 global cn.ibizlab.util.security.AuthenticationUser curuser;
+
 
 no-loop
 

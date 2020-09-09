@@ -97,7 +97,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @DEField(name = "last_time")
     @JSONField(name = "last_time")
     @JsonProperty("last_time")
-    private BigInteger lastTime;
+    private Long lastTime;
 
     /**
      * 下次调度时间
@@ -105,7 +105,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @DEField(name = "next_time")
     @JSONField(name = "next_time")
     @JsonProperty("next_time")
-    private BigInteger nextTime;
+    private Long nextTime;
 
     /**
      * 所有者
@@ -209,7 +209,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [上次调度时间]
      */
-    public void setLastTime(BigInteger lastTime){
+    public void setLastTime(Long lastTime){
         this.lastTime = lastTime ;
         this.modify("last_time",lastTime);
     }
@@ -217,7 +217,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [下次调度时间]
      */
-    public void setNextTime(BigInteger nextTime){
+    public void setNextTime(Long nextTime){
         this.nextTime = nextTime ;
         this.modify("next_time",nextTime);
     }

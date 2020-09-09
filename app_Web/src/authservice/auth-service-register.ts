@@ -45,12 +45,14 @@ export class AuthServiceRegister {
         this.allAuthService.set('sysauthlog', () => import('@/authservice/sys-auth-log/sys-auth-log-auth-service'));
         this.allAuthService.set('wfmember', () => import('@/authservice/wfmember/wfmember-auth-service'));
         this.allAuthService.set('syspost', () => import('@/authservice/sys-post/sys-post-auth-service'));
+        this.allAuthService.set('sysuserauth', () => import('@/authservice/sys-user-auth/sys-user-auth-auth-service'));
         this.allAuthService.set('sysdepartment', () => import('@/authservice/sys-department/sys-department-auth-service'));
         this.allAuthService.set('sysemployee', () => import('@/authservice/sys-employee/sys-employee-auth-service'));
         this.allAuthService.set('systeam', () => import('@/authservice/sys-team/sys-team-auth-service'));
         this.allAuthService.set('wfuser', () => import('@/authservice/wfuser/wfuser-auth-service'));
         this.allAuthService.set('sysorganization', () => import('@/authservice/sys-organization/sys-organization-auth-service'));
         this.allAuthService.set('jobsregistry', () => import('@/authservice/jobs-registry/jobs-registry-auth-service'));
+        this.allAuthService.set('sysopenaccess', () => import('@/authservice/sys-open-access/sys-open-access-auth-service'));
         this.allAuthService.set('dictcatalog', () => import('@/authservice/dict-catalog/dict-catalog-auth-service'));
         this.allAuthService.set('wfgroup', () => import('@/authservice/wfgroup/wfgroup-auth-service'));
         this.allAuthService.set('jobsinfo', () => import('@/authservice/jobs-info/jobs-info-auth-service'));

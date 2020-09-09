@@ -95,6 +95,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '1ee5253453314436a2c78ca1dfa87bc6',
+            viewmodule: 'uaa',
+            viewname: 'SysUserAuthEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '32fe9ab4a9e1b8d62b9ee802e4746965',
+            ],
+        },
+        {
             viewtag: '1ef170b14b7a70f4609a9f13692d1414',
             viewmodule: 'uaa',
             viewname: 'SysAppGridView',
@@ -154,6 +164,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '29ebd67c0eba9fb1464bcd1397112f6f',
+            viewmodule: 'uaa',
+            viewname: 'SysOpenAccessGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '349cda61e4dc5e38045ef7c77321d1c7',
+            ],
+        },
+        {
             viewtag: '32fe9ab4a9e1b8d62b9ee802e4746965',
             viewmodule: 'uaa',
             viewname: 'SysUserPickupView',
@@ -161,6 +181,15 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '6869875c7409bd1dddd3d0fc62c502db',
+            ],
+        },
+        {
+            viewtag: '349cda61e4dc5e38045ef7c77321d1c7',
+            viewmodule: 'uaa',
+            viewname: 'SysOpenAccessEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
         {
@@ -599,8 +628,10 @@ export const viewstate: any = {
                 '5856bfb8b576cc2ee743801b23e58299',
                 '0f73ceaa7ce0ec11d9b6aaf27e05ad4f',
                 '255944d6d1a575d0eda2b68bc19314f3',
+                'fd7c41ae2348a07694aa65a26bca0df5',
                 'a26ed59459b6d3b6f7ff36ad38b06c1b',
                 'e4856779577562e9880855e6c66d63e5',
+                '29ebd67c0eba9fb1464bcd1397112f6f',
                 'bfa86be8c02420f87d5cf4ff9a768948',
                 'd356c19266944e00bc8ebc1bbd85ca7c',
                 '5c403d904f82265cde504f205e98f95e',
@@ -711,6 +742,17 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 'b23a721ca159ac2490b768d795e85d17',
+            ],
+        },
+        {
+            viewtag: 'fd7c41ae2348a07694aa65a26bca0df5',
+            viewmodule: 'uaa',
+            viewname: 'SysUserAuthGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '1ee5253453314436a2c78ca1dfa87bc6',
+                '32fe9ab4a9e1b8d62b9ee802e4746965',
             ],
         },
     ],
