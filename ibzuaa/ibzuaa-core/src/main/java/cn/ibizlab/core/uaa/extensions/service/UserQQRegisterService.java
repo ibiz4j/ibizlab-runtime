@@ -59,7 +59,7 @@ public class UserQQRegisterService {
      * @return
      */
     public JSONObject getUserBySnsToken(String id,String requestAuthCode) {
-        JSONObject returnObj = null;
+        JSONObject returnObj = new JSONObject();
 
         SysOpenAccess openAccess = getOpenAccess(id);
         if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))

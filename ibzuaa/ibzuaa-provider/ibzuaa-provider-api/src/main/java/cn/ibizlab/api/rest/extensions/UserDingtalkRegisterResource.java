@@ -44,8 +44,11 @@ public class UserDingtalkRegisterResource {
     @Autowired
     private ISysOpenAccessService openAccessService;
 
+
     /**
      * 获取钉钉开放平台创建的网站应用appid
+     * @param id
+     * @return
      */
     @GetMapping(value = {"/uaa/getDingtalkAppId","/uaa/open/dingtalk/access_token","/uaa/open/dingtalk/appid"})
     public ResponseEntity<JSONObject> getDingtalkAppId(@RequestParam(value = "id",required = false) String id) {
@@ -64,26 +67,14 @@ public class UserDingtalkRegisterResource {
         return ResponseEntity.ok(obj);
     }
 
-
     /**
-     * 根据code查钉钉用户
-     *
-     * @param param
+     * 扫码后查询钉钉用户
+     *    已注册:返回注册用户并登录
+     *    未注册:进行注册
+     * @param code
+     * @param id
      * @return
      */
-    @PostMapping(value = "/uaa/queryDingtalkUserByCode")
-    public ResponseEntity<JSONObject> queryDingtalkUserByCode(@RequestParam(value = "id",required = false) String id,@RequestParam(value = "code",required = false) String tmpcode,@RequestBody JSONObject param) {
-
-        // 空校验
-        String code = param.getString("code");
-        if (StringUtils.isEmpty(code))
-            code = tmpcode;
-        if (StringUtils.isEmpty(code))
-            throw new BadRequestAlertException("code为空", "UserDingtalkRegisterResource", "");
-
-        return ResponseEntity.ok().body(getUserBySnsCode(id,code));
-    }
-
     @GetMapping(value = "/uaa/open/dingtalk/sns/{code}")
     public ResponseEntity<JSONObject> getUserBySnsToken(@PathVariable(value = "code") String code, @RequestParam(value = "id",required = false) String id) {
         if (StringUtils.isEmpty(code))
@@ -114,13 +105,11 @@ public class UserDingtalkRegisterResource {
 
     /**
      * 绑定钉钉并注册
-     *
      * @param param
      * @return
      */
     @PostMapping(value = {"/uaa/bindDingtalkToRegister","/uaa/open/dingtalk/bind"})
     public ResponseEntity<AuthenticationInfo> bindDingtalkToRegister(@RequestBody JSONObject param) {
-
         // 空校验
         String loginname = param.getString("loginname");
         String password = param.getString("password");
@@ -136,8 +125,6 @@ public class UserDingtalkRegisterResource {
             throw new BadRequestAlertException("密码为空", "UserDingtalkRegisterResource", "");
         if (StringUtils.isEmpty(openid))
             throw new BadRequestAlertException("钉钉信息openid为空", "UserDingtalkRegisterResource", "");
-        if (StringUtils.isEmpty(nickname))
-            throw new BadRequestAlertException("钉钉信息nickname为空", "UserDingtalkRegisterResource", "");
 
         // 钉钉用户注册
         IBZUSER ibzuser = new IBZUSER();
@@ -154,8 +141,6 @@ public class UserDingtalkRegisterResource {
         userAuth.setIdentityType("dingtalk");
 
         userRegisterService.toRegister(ibzuser,userAuth);
-
-
 
         //　生成登录token信息
         userDetailsService.resetByUsername(ibzuser.getLoginname()+(StringUtils.isEmpty(ibzuser.getDomains())?"":("|"+ibzuser.getDomains())));

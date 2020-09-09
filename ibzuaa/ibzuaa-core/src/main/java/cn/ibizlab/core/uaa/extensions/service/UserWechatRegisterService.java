@@ -86,7 +86,7 @@ public class UserWechatRegisterService {
             String unionid = returnObj.getString("unionid");
 
 
-            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"webchat")
+            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"wechat")
                     .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, openid).or().eq(SysUserAuth::getIdentifier, unionid)
                     ),false);
 

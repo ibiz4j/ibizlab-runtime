@@ -109,12 +109,17 @@ public class UserDingtalkRegisterService {
         if((sysOpenAccess==null|| (sysOpenAccess.getDisabled()!=null && sysOpenAccess.getDisabled()==1))&&throwEx)
             throw new BadRequestAlertException("获取接入配置失败","UserDingtalkRegisterService","");
 
-        String accessToken = getAccessToken(sysOpenAccess.getAccessKey(),sysOpenAccess.getSecretKey());
-        if(!accessToken.equals(sysOpenAccess.getAccessToken()))
-        {
-            sysOpenAccess.setAccessToken(accessToken);
-            sysOpenAccess.setExpiresTime(new Timestamp(lastRefreshTime));
-            sysOpenAccessService.update(sysOpenAccess);
+        try {
+            // 可能抛出异常，但暂时不进行处理
+            String accessToken = getAccessToken(sysOpenAccess.getAccessKey(),sysOpenAccess.getSecretKey());
+            if(!accessToken.equals(sysOpenAccess.getAccessToken()))
+            {
+                sysOpenAccess.setAccessToken(accessToken);
+                sysOpenAccess.setExpiresTime(new Timestamp(lastRefreshTime));
+                sysOpenAccessService.update(sysOpenAccess);
+            }
+        }catch (Exception e) {
+
         }
 
         return sysOpenAccess;
@@ -171,7 +176,7 @@ public class UserDingtalkRegisterService {
      * @return
      */
     public JSONObject getUserBySnsToken(String id,String requestAuthCode) {
-        JSONObject returnObj = null;
+        JSONObject returnObj = new JSONObject();
 
         SysOpenAccess openAccess = getOpenAccess(id);
         if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))

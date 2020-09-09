@@ -45,8 +45,11 @@ public class UserWechatRegisterResource {
     @Autowired
     private ISysOpenAccessService openAccessService;
 
+
     /**
      * 获取微信开放平台创建的网站应用appid
+     * @param id
+     * @return
      */
     @GetMapping(value = {"/uaa/getWechatAppId","/uaa/open/wechat/access_token","/uaa/open/wechat/appid"})
     public ResponseEntity<JSONObject> getWechatAppId(@RequestParam(value = "id",required = false) String id) {
@@ -54,7 +57,7 @@ public class UserWechatRegisterResource {
         SysOpenAccess openAccess = userWechatRegisterService.getOpenAccess(id,false);
         if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
             return ResponseEntity.ok(obj);
-        String appId = openAccess.getAccessKey();// qq互联appid
+        String appId = openAccess.getAccessKey();// 微信开放平台appid
         if (!StringUtils.isEmpty(appId)) {
             obj.put("appid", appId);
             obj.put("corp_id",openAccess.getRegionId());
@@ -65,27 +68,14 @@ public class UserWechatRegisterResource {
     }
 
 
-
-
     /**
-     * 根据code查微信用户
-     *
-     * @param param
+     * 扫码后查询微信用户
+     *  已注册:返回注册用户并登录
+     *  未注册:进行注册
+     * @param code
+     * @param id
      * @return
      */
-    @PostMapping(value = "/uaa/queryWechatUserByCode")
-    public ResponseEntity<JSONObject> queryWechatUserByCode(@RequestParam(value = "id",required = false) String id,@RequestParam(value = "code",required = false) String tmpcode,@RequestBody JSONObject param) {
-
-        // 空校验
-        String code = param.getString("code");
-        if (StringUtils.isEmpty(code))
-            code = tmpcode;
-        if (StringUtils.isEmpty(code))
-            throw new BadRequestAlertException("code为空", "UserWechatRegisterResource", "");
-
-        return ResponseEntity.ok().body(getUserBySnsCode(id,code));
-    }
-
     @GetMapping(value = "/uaa/open/wechat/sns/{code}")
     public ResponseEntity<JSONObject> getUserBySnsToken(@PathVariable(value = "code") String code, @RequestParam(value = "id",required = false) String id) {
         if (StringUtils.isEmpty(code))
@@ -116,13 +106,11 @@ public class UserWechatRegisterResource {
 
     /**
      * 绑定微信并注册
-     *
      * @param param
      * @return
      */
     @PostMapping(value = {"/uaa/bindWechatToRegister","/uaa/open/wechat/bind"})
     public ResponseEntity<AuthenticationInfo> bindWechatToRegister(@RequestBody JSONObject param) {
-
         // 空校验
         String loginname = param.getString("loginname");
         String password = param.getString("password");
@@ -139,7 +127,6 @@ public class UserWechatRegisterResource {
         if (StringUtils.isEmpty(openid))
             throw new BadRequestAlertException("微信信息openid为空", "UserWechatRegisterResource", "");
 
-
         // 微信用户注册
         IBZUSER ibzuser = new IBZUSER();
         ibzuser.setPassword(password);
@@ -155,8 +142,6 @@ public class UserWechatRegisterResource {
         userAuth.setIdentityType("wechat");
 
         userRegisterService.toRegister(ibzuser,userAuth);
-
-
 
         //　生成登录token信息
         userDetailsService.resetByUsername(ibzuser.getLoginname()+(StringUtils.isEmpty(ibzuser.getDomains())?"":("|"+ibzuser.getDomains())));

@@ -62,41 +62,22 @@
     })
     export default class qqLoginRedirect extends Vue {
 
-        /**
-         * 表单对象
-         *
-         * @type {*}
-         * @memberof Register
-         */
+        //　表单
         public form: any = {loginname: '', password: ''};
-
-        /**
-         *　按钮可点击
-         */
+        // 按钮可点击
         public canClick: any = true;
-
-        /**
-         * 按钮内容
-         */
+        // 按钮内容
         public BtnContent: any = "注册并绑定QQ";
-
-
-        /**
-         * QQ授权成功返回的code和state
-         */
+        // qq授权成功后返回的code和state
         public code: any;
         public state: any;
-
-        /**
-         *　QQ用户身份的唯一标识
-         */
-        public openid: any;
-
-        /**
-         * QQ用户名称
-         */
-        public nickname: any;
-
+        // qq用户信息
+        public qqUserInfo: any = {
+            openid:'',//QQ用户身份的唯一标识
+            nickname:'',// QQ用户名称
+            access_token: '',// 临时授权token
+            refresh_token:'',// 刷新授权token
+        }
 
         /**
          * 应用名称
@@ -144,7 +125,6 @@
          * 挂载
          */
         public mounted() {
-
             // 从url获取授权code和state
             this.code = this.$route.query.code;
             if (!this.code) {
@@ -154,18 +134,20 @@
             if (!this.state) {
                 this.state = this.getUrlParam('state');
             }
-            // 获取失败，回到登录页
+            // 获取授权code和state失败，回到登录页重新授权
             if (!this.code || !this.state) {
                 this.$message.error("QQ授权，获取code失败");
                 this.goLogin();
-            }
-            else {
-                // 从local中获取该用户的openid和nickname
+            } else {
+                // 从local中获取qq用户的授权openid,可用于后续请求及绑定操作
                 if (localStorage.getItem("openid")) {
-                    this.openid = localStorage.getItem("openid");
+                    this.qqUserInfo.openid = localStorage.getItem("openid");
                 }
-                if (localStorage.getItem("nickname")) {
-                    this.nickname = localStorage.getItem("nickname");
+                if (localStorage.getItem("access_token")) {
+                    this.qqUserInfo.access_token = localStorage.getItem("access_token");
+                }
+                if (localStorage.getItem("refresh_token")) {
+                    this.qqUserInfo.refresh_token = localStorage.getItem("refresh_token");
                 }
             }
 
@@ -195,6 +177,7 @@
 
         /**
          * 获取url参数
+         * @param name
          */
         public getUrlParam(name: any) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -220,20 +203,19 @@
             if (!validatestate) {
                 return;
             }
-
+            // 请求参数
             var param: any = this.form;
             if (this.code && this.state) {
                 param.code = this.code;
                 param.state = this.state;
-                param.openid = this.openid;
-                param.nickname = this.nickname;
-            }
-            else {
+                param.openid = this.qqUserInfo.openid;
+                param.nickname = this.qqUserInfo.nickname;
+            }else {
                 this.$message.error("QQ授权，获取code失败");
                 return;
             }
-
-            const post: Promise<any> = this.$http.post('/uaa/bindQQtoRegister', param, true);
+            // post请求绑定qq
+            const post: Promise<any> = this.$http.post('/uaa/open/qq/bind', param, true);
             post.then((response: any) => {
                 if (response && response.status === 200) {
                     const data = response.data;
@@ -245,13 +227,10 @@
                             localStorage.setItem('token', data.token);
                         }
                         if (data.user) {
-                            localStorage.setItem('user', JSON.stringify(data.user));
-                        }
-                        if (data.ibzuser) {
-                            let ibzuser: any = data.ibzuser;
-                            localStorage.setItem('ibzuser',JSON.stringify(ibzuser));
+                            const user: any = data.user;
+                            localStorage.setItem('user', JSON.stringify(user));
                             // 设置cookie,保存账号密码7天
-                            this.setCookie(ibzuser.loginname, ibzuser.password, 7);
+                            this.setCookie("loginname", user.loginname, 7);
                             // 跳转首页
                             const url: any = '*';
                             this.$router.push({path: url});
@@ -278,8 +257,12 @@
             });
         }
 
+
         /**
-         * 设置cookie
+         * 设置Cookie
+         * @param name
+         * @param value
+         * @param day
          */
         public setCookie(name: any, value: any, day: any) {
             if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
@@ -290,7 +273,7 @@
                 var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
                 var leftTime = new Date();
                 leftTime.setTime(leftTamp + curTamp);
-                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString() + ";path=/";
             } else {
                 document.cookie = name + "=" + escape(value);
             }
