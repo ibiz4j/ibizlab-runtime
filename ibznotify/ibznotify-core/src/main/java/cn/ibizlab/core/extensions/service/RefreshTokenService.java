@@ -26,7 +26,7 @@ public class RefreshTokenService{
     @Autowired
     NotifyCoreService notifyCoreService;
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 3600000)
     public void refreshToken() {
         QueryWrapper<MsgOpenAccess> qw=new QueryWrapper();
         qw.eq("disabled",0).isNotNull("access_key").isNotNull("secret_key").and(i -> i.eq("open_type","wechat").or().eq("open_type","dingtalk"));
