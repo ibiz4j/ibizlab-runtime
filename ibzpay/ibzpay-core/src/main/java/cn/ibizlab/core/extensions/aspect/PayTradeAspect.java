@@ -32,7 +32,9 @@ public class PayTradeAspect {
         Object serviceParam =args[0];
         if(serviceParam instanceof  PayTrade){
             PayTrade entity=(PayTrade)serviceParam;
+            entity.setTradeId((String) entity.getDefaultKey(true));
             entity.setTradeName(entity.getSubject());
+            entity.setTradeStatus("NOTPAY");
             payTradeService.save(entity);
         }
     }

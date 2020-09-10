@@ -62,10 +62,6 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysPostService syspostService;
 
-    @Autowired
-    @Lazy
-    protected cn.ibizlab.core.ou.service.logic.ISysEmployeesaveDeptMemberLogic savedeptmemberLogic;
-
     protected int batchSize = 500;
 
     @Override
@@ -75,7 +71,6 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
         if(!this.retBool(this.baseMapper.insert(et)))
             return false;
         CachedBeanCopier.copy(get(et.getUserid()),et);
-        savedeptmemberLogic.execute(et);
         return true;
     }
 
@@ -92,7 +87,6 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getUserid())))
             return false;
         CachedBeanCopier.copy(get(et.getUserid()),et);
-        savedeptmemberLogic.execute(et);
         return true;
     }
 

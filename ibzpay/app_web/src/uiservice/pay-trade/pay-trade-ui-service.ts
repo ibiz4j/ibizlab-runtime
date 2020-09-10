@@ -1,7 +1,7 @@
 import PayTradeUIServiceBase from './pay-trade-ui-service-base';
 
 /**
- * 支付交易UI服务对象
+ * 支付交易1UI服务对象
  *
  * @export
  * @class PayTradeUIService

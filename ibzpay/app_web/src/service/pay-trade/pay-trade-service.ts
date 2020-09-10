@@ -3,7 +3,7 @@ import PayTradeServiceBase from './pay-trade-service-base';
 
 
 /**
- * 支付交易服务对象
+ * 支付交易1服务对象
  *
  * @export
  * @class PayTradeService

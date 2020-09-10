@@ -30,7 +30,7 @@ import cn.ibizlab.util.domain.EntityMP;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 
 /**
- * 实体[支付交易]
+ * 实体[支付交易1]
  */
 @Getter
 @Setter
@@ -72,7 +72,6 @@ public class PayTrade extends EntityMP implements Serializable {
     /**
      * 支付状态
      */
-    @DEField(defaultValue = "pending")
     @TableField(value = "tradestatus")
     @JSONField(name = "trade_status")
     @JsonProperty("trade_status")
@@ -197,6 +196,22 @@ public class PayTrade extends EntityMP implements Serializable {
     }
 
 
+    /**
+     * 获取 [交易标识]
+     */
+    public String getTradeId(){
+        if(ObjectUtils.isEmpty(tradeId)){
+            tradeId=(String)getDefaultKey(true);
+        }
+        return tradeId;
+    }
+
+    @Override
+    public Serializable getDefaultKey(boolean gen) {
+        if((!ObjectUtils.isEmpty(this.getAccessId()))&&(!ObjectUtils.isEmpty(this.getOutTradeNo())))
+            return DigestUtils.md5DigestAsHex(String.format("%s||%s" ,this.getAccessId(),this.getOutTradeNo()).getBytes());
+        return null;
+    }
 }
 
 

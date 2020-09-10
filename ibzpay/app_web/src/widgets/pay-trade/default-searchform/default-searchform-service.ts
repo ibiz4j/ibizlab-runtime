@@ -13,7 +13,7 @@ import DefaultModel from './default-searchform-model';
 export default class DefaultService extends ControlService {
 
     /**
-     * 支付交易服务对象
+     * 支付交易1服务对象
      *
      * @type {PayTradeService}
      * @memberof DefaultService

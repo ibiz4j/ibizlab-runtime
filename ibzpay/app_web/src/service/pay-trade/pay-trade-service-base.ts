@@ -4,7 +4,7 @@ import EntityService from '../entity-service';
 
 
 /**
- * 支付交易服务对象基类
+ * 支付交易1服务对象基类
  *
  * @export
  * @class PayTradeServiceBase

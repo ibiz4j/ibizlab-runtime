@@ -2,7 +2,7 @@ import PayTradeAuthServiceBase from './pay-trade-auth-service-base';
 
 
 /**
- * 支付交易权限服务对象
+ * 支付交易1权限服务对象
  *
  * @export
  * @class PayTradeAuthService

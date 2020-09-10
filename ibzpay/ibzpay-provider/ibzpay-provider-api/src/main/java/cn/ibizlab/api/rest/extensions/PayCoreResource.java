@@ -10,11 +10,10 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotBlank;
 
 @RestController
 public class PayCoreResource {
@@ -34,15 +33,23 @@ public class PayCoreResource {
     }
 
     @ApiOperation(value = "查询订单", tags = {"查询订单" },  notes = "查询订单")
-    @RequestMapping(method = RequestMethod.POST,value = "/pay/trade/query")
-    public ResponseEntity<JSONObject> query(@Validated @RequestBody PayTradeDTO dto){
-        return ResponseEntity.status(HttpStatus.OK).body(payCoreService.query(payTradeMapping.toDomain(dto)));
+    @RequestMapping(method = RequestMethod.GET,value = "/pay/trade/query")
+    public ResponseEntity<JSONObject> query(@Validated @NotBlank(message = "开放平台配置标识不允许为空")@RequestParam("accessid") String accessId,
+                                            @NotBlank(message = "订单号不允许为空") @RequestParam("out_trade_no") String outTradeNo){
+        return ResponseEntity.status(HttpStatus.OK).body(payCoreService.query(accessId,outTradeNo));
     }
 
     @ApiOperation(value = "取消订单", tags = {"取消订单" },  notes = "取消订单")
-    @RequestMapping(method = RequestMethod.POST,value = "/pay/trade/cancel")
-    public ResponseEntity<JSONObject> cancel(@Validated @RequestBody PayTradeDTO dto){
-        return ResponseEntity.status(HttpStatus.OK).body(payCoreService.cancel(payTradeMapping.toDomain(dto)));
+    @RequestMapping(method = RequestMethod.GET,value = "/pay/trade/cancel")
+    public ResponseEntity<JSONObject> cancel(@Validated @NotBlank(message = "开放平台配置标识不允许为空")@RequestParam("accessid") String accessId,
+                                             @NotBlank(message = "订单号不允许为空") @RequestParam("out_trade_no") String outTradeNo){
+        return ResponseEntity.status(HttpStatus.OK).body(payCoreService.cancel(accessId,outTradeNo));
+    }
+
+    @ApiOperation(value = "支付回调", tags = {"支付回调" },  notes = "支付回调")
+    @RequestMapping(value = "/pay/trade/callback")
+    public ResponseEntity<String> callBack(HttpServletRequest req) {
+        return ResponseEntity.status(HttpStatus.OK).body(payCoreService.callBack(req));
     }
 
     @ApiOperation(value = "网页支付", tags = {"网页支付" },  notes = "网页支付")

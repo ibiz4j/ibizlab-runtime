@@ -1,11 +1,13 @@
 package cn.ibizlab.core.ou.extensions.aspect;
 
 import cn.ibizlab.core.ou.domain.SysDepartment;
+import cn.ibizlab.core.ou.domain.SysDeptMember;
 import cn.ibizlab.core.ou.domain.SysEmployee;
 import cn.ibizlab.core.ou.domain.SysOrganization;
 import cn.ibizlab.core.ou.extensions.mapping.SysEmp2UserMapping;
 import cn.ibizlab.core.ou.extensions.service.OUCoreService;
 import cn.ibizlab.core.ou.service.ISysDepartmentService;
+import cn.ibizlab.core.ou.service.ISysDeptMemberService;
 import cn.ibizlab.core.ou.service.ISysEmployeeService;
 import cn.ibizlab.core.ou.service.ISysOrganizationService;
 import cn.ibizlab.util.domain.IBZUSER;
@@ -49,6 +51,10 @@ public class SysEmp2UserAspect
     @Autowired
     @Lazy
     private ISysDepartmentService iibzDepartmentService;
+
+    @Autowired
+    @Lazy
+    private ISysDeptMemberService iSysDeptMemberService;
 
     @Autowired
     @Lazy
@@ -319,14 +325,52 @@ public class SysEmp2UserAspect
             Object obj = args[0];
             if(obj instanceof SysEmployee)
             {
-                IBZUSER ibzuser=ibzEmp2UserMapping.toDto((SysEmployee)obj);
+                SysEmployee employee = (SysEmployee)obj;
+                IBZUSER ibzuser=ibzEmp2UserMapping.toDto(employee);
                 if(ibzuser.getLoginname().equalsIgnoreCase("ibzadmin"))
                     ibzuser.setSuperuser(1);
                 ibzuserService.saveOrUpdate(ibzuser);
+
+                if((!StringUtils.isEmpty(employee.getMdeptid()))&&(!StringUtils.isEmpty(employee.getUserid()))) {
+                    String memberid = DigestUtils.md5DigestAsHex(String.format("%s||%s", employee.getMdeptid(), employee.getUserid()).getBytes());
+                    SysDeptMember sysDeptMember = new SysDeptMember();
+                    sysDeptMember.setDeptid(employee.getMdeptid());
+                    sysDeptMember.setDeptname(employee.getMdeptname());
+                    sysDeptMember.setPostid(employee.getPostid());
+                    sysDeptMember.setPostname(employee.getPostname());
+                    sysDeptMember.setUserid(employee.getUserid());
+                    sysDeptMember.setEmp(employee);
+                    sysDeptMember.setMemberid(memberid);
+                    iSysDeptMemberService.save(sysDeptMember);
+
+                }
+
+
             }
             else if (obj instanceof List)
             {
-                ibzuserService.saveOrUpdateBatch(ibzEmp2UserMapping.toDto((List<SysEmployee>) obj));
+                List<SysEmployee> list = (List<SysEmployee>) obj;
+                ibzuserService.saveOrUpdateBatch(ibzEmp2UserMapping.toDto(list));
+
+                List<SysDeptMember> mebs = (List<SysDeptMember>) obj;
+
+                list.forEach( item ->{
+                    if((!StringUtils.isEmpty(item.getMdeptid()))&&(!StringUtils.isEmpty(item.getUserid()))) {
+                        String memberid = DigestUtils.md5DigestAsHex(String.format("%s||%s", item.getMdeptid(), item.getUserid()).getBytes());
+                        SysDeptMember sysDeptMember = new SysDeptMember();
+                        sysDeptMember.setDeptid(item.getMdeptid());
+                        sysDeptMember.setDeptname(item.getMdeptname());
+                        sysDeptMember.setUserid(item.getUserid());
+                        sysDeptMember.setPostid(item.getPostid());
+                        sysDeptMember.setPostname(item.getPostname());
+                        sysDeptMember.setEmp(item);
+                        sysDeptMember.setMemberid(memberid);
+                        mebs.add(sysDeptMember);
+                    }
+                });
+
+                if(mebs.size()>0)
+                    iSysDeptMemberService.saveBatch(mebs);
             }
         }
     }
