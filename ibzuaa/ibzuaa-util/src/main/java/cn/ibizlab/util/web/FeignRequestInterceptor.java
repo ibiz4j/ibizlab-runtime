@@ -22,7 +22,7 @@ public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
 
-        if(requestTemplate.path().matches("/ibzemployees/.*/oumaps"))
+        if(requestTemplate.path().matches("/sysemployees/.*/oumaps"))
             return;
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if(requestAttributes!=null){

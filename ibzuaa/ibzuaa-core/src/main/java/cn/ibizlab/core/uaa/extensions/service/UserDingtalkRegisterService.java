@@ -28,6 +28,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.crypto.Mac;
@@ -38,7 +39,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.sql.Wrapper;
-import java.util.Date;
+import java.util.*;
 
 /**
  * 实体[IBZUSER] 钉钉用户注册接口实现
@@ -57,24 +58,22 @@ public class UserDingtalkRegisterService {
     private ISysUserAuthService sysUserAuthService;
 
 
-
-
-    private long lastRefreshTime=System.currentTimeMillis()-7200001;
-    private String accessToken="";
-    public boolean isExpire()
-    {
-        if(System.currentTimeMillis()<(lastRefreshTime+7200000))
-        {
-            System.currentTimeMillis();
-            return false;
-        }
-        return true;
-    }
+//    private long lastRefreshTime=System.currentTimeMillis()-7200001;
+//    private String accessToken="";
+//    public boolean isExpire()
+//    {
+//        if(System.currentTimeMillis()<(lastRefreshTime+7200000))
+//        {
+//            System.currentTimeMillis();
+//            return false;
+//        }
+//        return true;
+//    }
 
 
     public synchronized String getAccessToken(String appKey,String appSecret)
     {
-        if(isExpire()) {
+        if (isExpire(appKey)) {
             DefaultDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/gettoken");
             OapiGettokenRequest request = new OapiGettokenRequest();
             request.setAppkey(appKey);
@@ -82,16 +81,17 @@ public class UserDingtalkRegisterService {
             request.setHttpMethod("GET");
             try {
                 OapiGettokenResponse response = client.execute(request);
-                if(response.getErrcode()!=0||StringUtils.isEmpty(response.getAccessToken()))
-                    throw new BadRequestAlertException("获取access_token失败","UserDingtalkRegisterService",response.getErrmsg());
-                lastRefreshTime = System.currentTimeMillis();
-                accessToken = response.getAccessToken();
+                if (response.getErrcode() != 0 || StringUtils.isEmpty(response.getAccessToken()))
+                    throw new BadRequestAlertException("获取access_token失败", "UserDingtalkRegisterService", response.getErrmsg());
+//                lastRefreshTime = System.currentTimeMillis();
+//                accessToken = response.getAccessToken();
+                setTokenInfo(appKey, response.getAccessToken(), System.currentTimeMillis());
             } catch (ApiException e) {
                 e.printStackTrace();
                 throw new InternalServerErrorException("获取access_token失败");
             }
         }
-        return accessToken;
+        return getToken(appKey);
     }
 
     @Autowired
@@ -101,7 +101,8 @@ public class UserDingtalkRegisterService {
     {
         return getOpenAccess(id,true);
     }
-    public SysOpenAccess getOpenAccess(String id,boolean throwEx)
+
+    public SysOpenAccess getOpenAccess(String id, boolean throwEx)
     {
         final String accessid = StringUtils.isEmpty(id)?"dingtalk":id;
         SysOpenAccess sysOpenAccess=sysOpenAccessService.getOne(Wrappers.<SysOpenAccess>lambdaQuery().eq(SysOpenAccess::getOpenType,"dingtalk").
@@ -115,7 +116,7 @@ public class UserDingtalkRegisterService {
             if(!accessToken.equals(sysOpenAccess.getAccessToken()))
             {
                 sysOpenAccess.setAccessToken(accessToken);
-                sysOpenAccess.setExpiresTime(new Timestamp(lastRefreshTime));
+                sysOpenAccess.setExpiresTime(new Timestamp(getLastRefreshTime(sysOpenAccess.getAccessKey())));
                 sysOpenAccessService.update(sysOpenAccess);
             }
         }catch (Exception e) {
@@ -222,5 +223,76 @@ public class UserDingtalkRegisterService {
         return returnObj;
     }
 
+    private static Map<String,TokenInfo> tokenMapping = new HashMap<>();
+
+
+    /**
+     * 适配当UAA接入多个钉钉应用的情况。
+     *
+     * @param appkey 钉钉appkey
+     * @return
+     */
+    public boolean isExpire(String appkey) {
+        if (!tokenMapping.containsKey(appkey))
+            return true;
+
+        TokenInfo accessTokenInfo = tokenMapping.get(appkey);
+
+        if (accessTokenInfo == null)
+            return true;
+
+        String accessToken = accessTokenInfo.accessToken;
+        Long refreshtime = accessTokenInfo.lastRefreshTime;
+
+
+        if (StringUtils.isEmpty(accessToken) || refreshtime == null)
+            return true;
+
+        if (System.currentTimeMillis() < refreshtime + 7100000) {
+            System.currentTimeMillis();
+            return false;
+        }
+        return true;
+    }
+
+    private void setTokenInfo(String appkey, String token, Long refreshTime) {
+        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(refreshTime))
+            return;
+
+        if (!tokenMapping.containsKey(appkey)) {
+            tokenMapping.put(appkey, new TokenInfo());
+        }
+
+        TokenInfo tokenInfo = tokenMapping.get(appkey);
+        tokenInfo.accessToken = token;
+        tokenInfo.lastRefreshTime = refreshTime;
+
+    }
+
+    private String getToken(String appkey){
+        if (!StringUtils.isEmpty(appkey)){
+            TokenInfo tokenInfo = tokenMapping.get(appkey);
+            if (tokenInfo != null)
+                return tokenMapping.get(appkey).accessToken;
+        }
+        return null;
+    }
+    /**
+     * 钉钉默认超时时间为2小时（7200秒），防止程序卡点，换成7100秒（100秒预留）
+     */
+    private Long getLastRefreshTime(String appkey){
+        if (!StringUtils.isEmpty(appkey)){
+            TokenInfo tokenInfo = tokenMapping.get(appkey);
+            if (tokenInfo != null){
+                return tokenInfo.lastRefreshTime;
+            }
+        }
+        return System.currentTimeMillis()-7100001;
+    }
+
+    class TokenInfo{
+        String accessToken;
+        Long lastRefreshTime;
+    }
 
 }
