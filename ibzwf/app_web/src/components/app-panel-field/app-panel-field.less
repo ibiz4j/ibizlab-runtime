@@ -1,0 +1,50 @@
+.app-panel-field {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 0 6px;
+  .editor{
+    flex-grow: 1;
+    .editorstyle{
+      .ivu-input.ivu-input-default{
+        border-color: red;
+      }
+    }
+    .errorstyle{
+      color:red !important;
+    }
+  }
+  .app-panel-field-label {
+    height: 34px !important;
+    line-height: 25px;
+    flex-shrink: 0;
+    padding: 6px 10px 6px 0px;
+  }
+}
+
+.app-panel-field.label-top {
+  flex-flow: column;
+}
+
+.app-panel-field.label-bottom{
+  flex-flow: column-reverse;
+}
+
+.app-panel-field.label-left {
+  .app-panel-field-label {
+      text-align: right;
+  }
+}
+
+.app-panel-field.label-right {
+  flex-flow: row-reverse;
+  .app-panel-field-label {
+      padding: 6px 0px 6px 10px;
+  }
+}
+
+.app-panel-field.label-none {
+  .app-panel-field-label {
+      display: none !important;
+  }
+}
