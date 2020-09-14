@@ -53,6 +53,10 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${ibiz.file.previewpath:ibizutil/preview}")
     private String previewpath;
 
+    @Value("${ibiz.auth.excludesPattern:}")
+    private String[] excludesPattern;
+
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -148,8 +152,15 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/pay/trade/**").permitAll()
                        .antMatchers("/notify/**").permitAll()
 
-                       .antMatchers("/jobs-api").permitAll()
-                .anyRequest().authenticated()
+                       .antMatchers("/jobs-api").permitAll();
+
+
+        for (String excludePattern : excludesPattern) {
+            authenticationTokenFilter.addExcludePattern(excludePattern);
+            httpSecurity.authorizeRequests().antMatchers(excludePattern).permitAll();
+        }
+
+        httpSecurity.authorizeRequests().anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();
         httpSecurity

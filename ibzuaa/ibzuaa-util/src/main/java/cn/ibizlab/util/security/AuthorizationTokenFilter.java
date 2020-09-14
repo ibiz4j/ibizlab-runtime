@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -18,6 +20,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 @Slf4j
 @Component
@@ -26,6 +32,8 @@ public class AuthorizationTokenFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
     private final AuthTokenUtil authTokenUtil;
     private final String tokenHeader;
+    private Set<String> excludesPattern = new HashSet<>();
+    private PathMatcher pathMatcher = new AntPathMatcher();
 
     public AuthorizationTokenFilter(AuthenticationUserService userDetailsService, AuthTokenUtil authTokenUtil, @Value("${ibiz.jwt.header:Authorization}") String tokenHeader) {
         this.userDetailsService = userDetailsService;
@@ -35,8 +43,12 @@ public class AuthorizationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        if (isExclusion(request.getRequestURI())) {
+            chain.doFilter(request, response);
+            return;
+        }
 
-        if(request.getRequestURI().equals("/uaa/publickey")||request.getRequestURI().indexOf("/uaa/lgoin")>=0){
+        if (request.getRequestURI().equals("/uaa/publickey") || request.getRequestURI().indexOf("/uaa/lgoin") >= 0) {
             chain.doFilter(request, response);
             return;
         }
@@ -70,5 +82,29 @@ public class AuthorizationTokenFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
+    }
+
+    public void setExcludesPattern(String excludesPattern) {
+        this.excludesPattern = new HashSet(Arrays.asList(excludesPattern.split("\\s*,\\s*")));
+    }
+
+    public void addExcludePattern(String excludePattern) {
+        excludesPattern.add(excludePattern);
+    }
+
+    private boolean isExclusion(String requestURI) {
+        if (this.excludesPattern == null) {
+            return false;
+        } else {
+            Iterator excludeIterator = this.excludesPattern.iterator();
+            String pattern;
+            do {
+                if (!excludeIterator.hasNext()) {
+                    return false;
+                }
+                pattern = (String) excludeIterator.next();
+            } while (!pathMatcher.match(pattern, requestURI));
+            return true;
+        }
     }
 }
