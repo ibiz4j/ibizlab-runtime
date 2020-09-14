@@ -1,71 +1,87 @@
 {
-    "systemid":"ibzuaa",
-    "unires":[
-    ],
-    "entities":[
-        {
-            "dename":"SysAuthLog",
-            "delogicname":"认证日志",
-            "sysmoudle":{"id":"UAA","name":"uaa"},
-            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
-            "datascope":[{"id":"all","name":"全部数据"}]
-        }
-    ,    {
-            "dename":"SysApp",
-            "delogicname":"应用",
-            "sysmoudle":{"id":"UAA","name":"uaa"},
-            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
-            "datascope":[{"id":"all","name":"全部数据"}]
-        }
-    ,    {
-            "dename":"SysRolePermission",
-            "delogicname":"角色权限关系",
-            "sysmoudle":{"id":"UAA","name":"uaa"},
-            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
-            "datascope":[{"id":"all","name":"全部数据"}]
-        }
-    ,    {
-            "dename":"SysPermission",
-            "delogicname":"权限/资源",
-            "sysmoudle":{"id":"UAA","name":"uaa"},
-            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
-            "datascope":[{"id":"all","name":"全部数据"}]
-        }
-    ,    {
-            "dename":"SysUserRole",
-            "delogicname":"用户角色关系",
-            "sysmoudle":{"id":"UAA","name":"uaa"},
-            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
-            "datascope":[{"id":"all","name":"全部数据"}]
-        }
-    ,    {
-            "dename":"SysUser",
-            "delogicname":"系统用户",
-            "sysmoudle":{"id":"UAA","name":"uaa"},
-            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
-            "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
-        }
-    ,    {
-            "dename":"SysRole",
-            "delogicname":"系统角色",
-            "sysmoudle":{"id":"UAA","name":"uaa"},
-            "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
-            "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
-            "datascope":[{"id":"all","name":"全部数据"}]
-        }
-    ],
-    "appmenus":[
+  "systemid":"ibzuaa",
+  "unires":[
+  ],
+  "entities":[
+    {
+      "dename":"SysRolePermission",
+      "delogicname":"角色权限关系",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ,    {
+      "dename":"SysUser",
+      "delogicname":"系统用户",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}, {"id":"curorg","name":"当前单位"},{"id":"porg","name":"上级单位"},{"id":"sorg","name":"下级单位"} ]
+    }
+  ,    {
+      "dename":"SysAuthLog",
+      "delogicname":"认证日志",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ,    {
+      "dename":"SysUserAuth",
+      "delogicname":"账号绑定",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ,    {
+      "dename":"SysOpenAccess",
+      "delogicname":"第三方认证平台",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ,    {
+      "dename":"SysUserRole",
+      "delogicname":"用户角色关系",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ,    {
+      "dename":"SysRole",
+      "delogicname":"系统角色",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}, {"id":"createman","name":"创建人"}]
+    }
+  ,    {
+      "dename":"SysPermission",
+      "delogicname":"权限/资源",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ,    {
+      "dename":"SysApp",
+      "delogicname":"应用",
+      "sysmoudle":{"id":"UAA","name":"uaa"},
+      "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+      "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+      "datascope":[{"id":"all","name":"全部数据"}]
+    }
+  ],
+  "appmenus":[
 
-        {
-            "appid":"web",
-            "appname":"UAA鉴权",
-            "appmenu":[{"menuid":"Main", "menuname":"MAIN", "menuitem":[{ "id":"menuitem3" , "name":"用户" },{ "id":"menuitem6" , "name":"角色" },{ "id":"menuitem1" , "name":"认证日志" },{ "id":"menuitem2" , "name":"接入应用" }] }]
-        }
-    ]
+    {
+      "appid":"web",
+      "appname":"UAA鉴权",
+      "appmenu":[{"menuid":"Main", "menuname":"MAIN", "menuitem":[{ "id":"menuitem3" , "name":"用户" },{ "id":"menuitem6" , "name":"角色" },{ "id":"menuitem1" , "name":"认证日志" },{ "id":"menuitem2" , "name":"接入应用" },{ "id":"menuitem4" , "name":"第三方认证" }] }]
+    }
+  ]
 }

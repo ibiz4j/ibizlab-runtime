@@ -39,8 +39,14 @@ public class DevNamingRegister implements ApplicationRunner {
     private String dictapi;
     @Value("${ibiz.ref.service.disk:ibzdisk-api}")
     private String diskapi;
+    @Value("${ibiz.ref.service.notify:ibznotify-api}")
+    private String notifyapi;
+    @Value("${ibiz.ref.service.pay:ibzpay-api}")
+    private String payapi;
+
     @Value("${ibiz.ref.gateway.rt:ibzrt-web}")
     private String rtgw;
+
 
 
     @Override
@@ -62,6 +68,8 @@ public class DevNamingRegister implements ApplicationRunner {
                 naming.registerInstance(taskapi, instance);
                 naming.registerInstance(dictapi, instance);
                 naming.registerInstance(diskapi, instance);
+                naming.registerInstance(notifyapi, instance);
+                naming.registerInstance(payapi, instance);
             }
         }
         catch (Exception ex) {

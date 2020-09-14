@@ -1,0 +1,23 @@
+    {
+    "systemid":"ibzdisk",
+    "unires":[
+    ],
+    "entities":[
+    {
+    "dename":"SDFile",
+    "delogicname":"文件",
+    "sysmoudle":{"id":"DISK","name":"disk"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}, {"id":"createman","name":"创建人"}]
+     }
+    ],
+    "appmenus":[
+            
+            {
+               "appid":"web",
+               "appname":"存储",
+               "appmenu":[{"menuid":"SDIndexView", "menuname":"SDIndexView", "menuitem":[{ "id":"menuitem1" , "name":"文件" }] }]
+            }
+            ]
+    }

@@ -36,7 +36,7 @@ public class PermissionSyncJob implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         try {
             Thread.sleep(30000);
-            InputStream permission= this.getClass().getResourceAsStream("/permission/systemResource.json"); //获取当前系统所有实体资源能力
+            InputStream permission= this.getClass().getResourceAsStream("/permission/ibzuaa/systemResource.json"); //获取当前系统所有实体资源能力
             SysStructure permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
             SysPSSystem system= new SysPSSystem();
             permissionResult.setApps(new ArrayList<>());
@@ -105,6 +105,38 @@ public class PermissionSyncJob implements ApplicationRunner {
             system.setSysstructure(permissionResult);
             system.setPssystemid("ibzdict");
             system.setPssystemname("ibzdict");
+            if(systemService.save(system)){
+                log.info("向[UAA]同步系统资源成功");
+            }else{
+                log.error("向[UAA]同步系统资源失败");
+            }
+            permission.close();
+
+
+            permission= this.getClass().getResourceAsStream("/permission/ibzpay/systemResource.json"); //获取当前系统所有实体资源能力
+            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
+            system= new SysPSSystem();
+            permissionResult.setApps(new ArrayList<>());
+            permissionResult.setUniResIds(new ArrayList<>());
+            system.setSysstructure(permissionResult);
+            system.setPssystemid("ibzpay");
+            system.setPssystemname("ibzpay");
+            if(systemService.save(system)){
+                log.info("向[UAA]同步系统资源成功");
+            }else{
+                log.error("向[UAA]同步系统资源失败");
+            }
+            permission.close();
+
+
+            permission= this.getClass().getResourceAsStream("/permission/ibznotify/systemResource.json"); //获取当前系统所有实体资源能力
+            permissionResult = JSONObject.parseObject(IOUtils.toString(permission,"UTF-8"),SysStructure.class);
+            system= new SysPSSystem();
+            permissionResult.setApps(new ArrayList<>());
+            permissionResult.setUniResIds(new ArrayList<>());
+            system.setSysstructure(permissionResult);
+            system.setPssystemid("ibznotify");
+            system.setPssystemname("ibznotify");
             if(systemService.save(system)){
                 log.info("向[UAA]同步系统资源成功");
             }else{
