@@ -59,7 +59,7 @@ public interface SysAuthLogFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/save")
     Boolean save(@RequestBody SysAuthLog sysauthlog);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/savebatch")
     Boolean saveBatch(@RequestBody List<SysAuthLog> sysauthlogs);
 
 

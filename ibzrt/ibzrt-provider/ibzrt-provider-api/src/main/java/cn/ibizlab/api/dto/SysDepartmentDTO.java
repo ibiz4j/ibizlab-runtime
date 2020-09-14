@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "deptid")
     @JsonProperty("deptid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String deptid;
 
     /**
@@ -38,6 +42,8 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "deptcode")
     @JsonProperty("deptcode")
+    @NotBlank(message = "[部门代码]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String deptcode;
 
     /**
@@ -46,6 +52,8 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "deptname")
     @JsonProperty("deptname")
+    @NotBlank(message = "[部门名称]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String deptname;
 
     /**
@@ -54,6 +62,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String orgid;
 
     /**
@@ -62,6 +71,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "parentdeptid")
     @JsonProperty("parentdeptid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String parentdeptid;
 
     /**
@@ -70,6 +80,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "shortname")
     @JsonProperty("shortname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String shortname;
 
     /**
@@ -86,6 +97,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String domains;
 
     /**
@@ -102,6 +114,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String bcode;
 
     /**
@@ -110,6 +123,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "leaderid")
     @JsonProperty("leaderid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String leaderid;
 
     /**
@@ -118,6 +132,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "leadername")
     @JsonProperty("leadername")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String leadername;
 
     /**
@@ -134,6 +149,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String orgname;
 
     /**
@@ -142,6 +158,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "parentdeptname")
     @JsonProperty("parentdeptname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String parentdeptname;
 
     /**
@@ -245,4 +262,5 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
 
 
 }
+
 

@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.uaa.domain.SysOpenAccess;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.uaa.mapper.SysOpenAccessMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -59,6 +61,7 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
     }
 
     @Override
+    @Transactional
     public void createBatch(List<SysOpenAccess> list) {
         this.saveBatch(list,batchSize);
     }
@@ -66,13 +69,14 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
     @Override
     @Transactional
     public boolean update(SysOpenAccess et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("accessid",et.getId())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("accessid",et.getId())))
             return false;
         CachedBeanCopier.copy(get(et.getId()),et);
         return true;
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<SysOpenAccess> list) {
         updateBatchById(list,batchSize);
     }
@@ -85,6 +89,7 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -130,12 +135,14 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<SysOpenAccess> list) {
         saveOrUpdateBatch(list,batchSize);
         return true;
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<SysOpenAccess> list) {
         saveOrUpdateBatch(list,batchSize);
     }
@@ -180,6 +187,7 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 }

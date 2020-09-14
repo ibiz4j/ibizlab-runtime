@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class PayTradeResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Create-all')")
     @ApiOperation(value = "新建支付交易1", tags = {"支付交易1" },  notes = "新建支付交易1")
 	@RequestMapping(method = RequestMethod.POST, value = "/paytrades")
-    public ResponseEntity<PayTradeDTO> create(@RequestBody PayTradeDTO paytradedto) {
+    public ResponseEntity<PayTradeDTO> create(@Validated @RequestBody PayTradeDTO paytradedto) {
         PayTrade domain = paytradeMapping.toDomain(paytradedto);
 		paytradeService.create(domain);
         PayTradeDTO dto = paytradeMapping.toDto(domain);

@@ -16,7 +16,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="DictOptionResultMap" type="cn.ibizlab.core.dict.domain.DictOption" autoMapping="true">
-        <id property="valueKey" column="vkey" /><!--主键字段映射-->
+		<id property="valueKey" column="vkey" /><!--主键字段映射-->
 		<result property="catalogId" column="cid" />
 		<result property="catalogName" column="cname" />
 		<result property="value" column="val" />

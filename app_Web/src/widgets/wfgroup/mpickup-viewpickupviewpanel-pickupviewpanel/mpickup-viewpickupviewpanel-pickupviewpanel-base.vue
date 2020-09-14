@@ -255,7 +255,7 @@ export default class MPickupViewpickupviewpanelBase extends Vue implements Contr
     public onViewDatasChange($event: any): void {
         if($event.length>0){
           $event.forEach((item:any,index:any) => {
-              let srfmajortext = item['name'];
+              let srfmajortext = item.srfmajortext?item.srfmajortext:item['name'];
               if(srfmajortext){
                 Object.assign($event[index],{srfmajortext: srfmajortext});
               }

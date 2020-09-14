@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -46,6 +49,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "msg_id")
     @JsonProperty("msg_id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String msgId;
 
     /**
@@ -54,6 +58,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "to_users")
     @JsonProperty("to_users")
+    @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
     private String toUsers;
 
     /**
@@ -62,6 +67,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "msg_link")
     @JsonProperty("msg_link")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String msgLink;
 
     /**
@@ -70,6 +76,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "subject")
     @JsonProperty("subject")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String subject;
 
     /**
@@ -78,6 +85,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "content")
     @JsonProperty("content")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String content;
 
     /**
@@ -94,6 +102,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "msg_name")
     @JsonProperty("msg_name")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String msgName;
 
     /**
@@ -102,6 +111,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "template_id")
     @JsonProperty("template_id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String templateId;
 
     /**
@@ -110,6 +120,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "error_info")
     @JsonProperty("error_info")
+    @Size(min = 0, max = 1048576, message = "内容长度必须小于等于[1048576]")
     private String errorInfo;
 
     /**
@@ -118,6 +129,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "user_data")
     @JsonProperty("user_data")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String userData;
 
     /**
@@ -126,6 +138,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "template_params")
     @JsonProperty("template_params")
+    @Size(min = 0, max = 1048576, message = "内容长度必须小于等于[1048576]")
     private String templateParams;
 
     /**
@@ -134,6 +147,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "user_data2")
     @JsonProperty("user_data2")
+    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
     private String userData2;
 
     /**
@@ -142,6 +156,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "msg_link_pc")
     @JsonProperty("msg_link_pc")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String msgLinkPc;
 
 
@@ -259,4 +274,5 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
 
 
 }
+
 

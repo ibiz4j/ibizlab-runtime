@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.workflow.domain.WFGroup;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.workflow.mapper.WFGroupMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -63,6 +65,7 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     }
 
     @Override
+    @Transactional
     public void createBatch(List<WFGroup> list) {
         this.saveBatch(list,batchSize);
     }
@@ -70,7 +73,7 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     @Override
     @Transactional
     public boolean update(WFGroup et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("groupid",et.getId())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("groupid",et.getId())))
             return false;
         wfmemberService.saveByGroupid(et.getId(),et.getWfmember());
         CachedBeanCopier.copy(get(et.getId()),et);
@@ -78,6 +81,7 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<WFGroup> list) {
         updateBatchById(list,batchSize);
     }
@@ -91,6 +95,7 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -137,12 +142,14 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<WFGroup> list) {
         saveOrUpdateBatch(list,batchSize);
         return true;
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<WFGroup> list) {
         saveOrUpdateBatch(list,batchSize);
     }
@@ -187,6 +194,7 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 }

@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SysEmployeeResource {
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzou-SysEmployee-Create')")
     @ApiOperation(value = "新建人员", tags = {"人员" },  notes = "新建人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees")
-    public ResponseEntity<SysEmployeeDTO> create(@RequestBody SysEmployeeDTO sysemployeedto) {
+    public ResponseEntity<SysEmployeeDTO> create(@Validated @RequestBody SysEmployeeDTO sysemployeedto) {
         SysEmployee domain = sysemployeeMapping.toDomain(sysemployeedto);
 		sysemployeeService.create(domain);
         SysEmployeeDTO dto = sysemployeeMapping.toDto(domain);

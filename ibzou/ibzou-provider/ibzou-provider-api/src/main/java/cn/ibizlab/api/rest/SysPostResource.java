@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SysPostResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysPost-Create-all')")
     @ApiOperation(value = "新建岗位", tags = {"岗位" },  notes = "新建岗位")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysposts")
-    public ResponseEntity<SysPostDTO> create(@RequestBody SysPostDTO syspostdto) {
+    public ResponseEntity<SysPostDTO> create(@Validated @RequestBody SysPostDTO syspostdto) {
         SysPost domain = syspostMapping.toDomain(syspostdto);
 		syspostService.create(domain);
         SysPostDTO dto = syspostMapping.toDto(domain);

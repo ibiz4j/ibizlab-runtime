@@ -176,7 +176,12 @@ export default class AppGroupPicker extends Vue {
      */  
     public loadTree() {
         let orgid = this.viewParam.filtervalue;
-        let tempTreeUrl:string = this.treeurl.replace('${orgid}',orgid);
+        let tempTreeUrl: string = '';
+        if(this.viewParam.selectType && Object.is(this.viewParam.selectType,"dept")){
+            tempTreeUrl = this.treeurl.replace('{deptId}',orgid);
+        }else{
+            tempTreeUrl = this.treeurl.replace('${orgid}',orgid);
+        }
         let get = Http.getInstance().get(tempTreeUrl, true);
         get.then((response: any) => {
             if(response.status === 200) {
@@ -194,7 +199,12 @@ export default class AppGroupPicker extends Vue {
      * @memberof AppGroupPicker
      */  
     public loadGroupData(key: string) {
-        let tempUrl = this.url.replace('${selected-orgid}',key);
+        let tempUrl: string = '';
+        if(this.viewParam.selectType && Object.is(this.viewParam.selectType,"dept")){
+            tempUrl = this.url.replace('{deptId}',key);
+        }else{
+            tempUrl = this.url.replace('${selected-orgid}',key);
+        }
         let get = Http.getInstance().get(tempUrl, true);
         get.then((response: any) => {
             if(response.status === 200) {

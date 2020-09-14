@@ -63,6 +63,7 @@
 
 </template>
 
+
 <script lang='tsx'>
 import { Vue, Component, Prop, Provide, Emit, Watch,Inject } from 'vue-property-decorator';
 import { UIActionTool,Util } from '@/utils';
@@ -71,21 +72,14 @@ import { Subject,Subscription } from 'rxjs';
 
 
 
+import { appConfig } from '@/config/appConfig';
+
 
 @Component({
     components: {
     },
 })
 export default class WFIndexViewBase extends Vue {
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof WFIndexViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -197,6 +191,8 @@ export default class WFIndexViewBase extends Vue {
               _this.engine.load();
               
             });
+        } else if(!Object.is(newVal, oldVal) && _this.refresh() && Object.is(_this.$util.typeOf(_this.refresh()), 'function')) {
+            _this.refresh();
         }
     }
 
@@ -287,6 +283,15 @@ export default class WFIndexViewBase extends Vue {
      * @memberof WFIndexViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof WFIndexViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数
@@ -575,7 +580,7 @@ export default class WFIndexViewBase extends Vue {
         } else if (localStorage.getItem('theme-class')) {
             return localStorage.getItem('theme-class');
         } else {
-            return 'app-default-theme';
+            return appConfig.defaultTheme;
         }
     }
 
@@ -591,7 +596,7 @@ export default class WFIndexViewBase extends Vue {
         } else if (localStorage.getItem('font-family')) {
             return localStorage.getItem('font-family');
         } else {
-            return 'Microsoft YaHei';
+            return appConfig.defaultFont;
         }
     }
 
@@ -644,12 +649,8 @@ export default class WFIndexViewBase extends Vue {
      * @type {string[]}
      * @memberof WFIndexViewBase
      */
-    get themeClasses(): string[] {
-        return [
-            Object.is(this.selectTheme, 'app_theme_blue') ? 'app_theme_blue' : '',
-            Object.is(this.selectTheme, 'app-default-theme') ? 'app-default-theme' : '',
-            Object.is(this.selectTheme, 'app_theme_darkblue') ? 'app_theme_darkblue' : '',
-        ];
+    get themeClasses(): string {
+        return this.selectTheme;
     }
 
     /**

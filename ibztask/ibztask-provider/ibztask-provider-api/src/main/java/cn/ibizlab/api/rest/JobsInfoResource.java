@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class JobsInfoResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Create-all')")
     @ApiOperation(value = "新建任务信息", tags = {"任务信息" },  notes = "新建任务信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos")
-    public ResponseEntity<JobsInfoDTO> create(@RequestBody JobsInfoDTO jobsinfodto) {
+    public ResponseEntity<JobsInfoDTO> create(@Validated @RequestBody JobsInfoDTO jobsinfodto) {
         JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
 		jobsinfoService.create(domain);
         JobsInfoDTO dto = jobsinfoMapping.toDto(domain);

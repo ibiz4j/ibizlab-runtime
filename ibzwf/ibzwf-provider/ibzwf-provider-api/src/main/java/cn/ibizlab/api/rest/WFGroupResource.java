@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class WFGroupResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Create-all')")
     @ApiOperation(value = "新建角色/用户组", tags = {"角色/用户组" },  notes = "新建角色/用户组")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups")
-    public ResponseEntity<WFGroupDTO> create(@RequestBody WFGroupDTO wfgroupdto) {
+    public ResponseEntity<WFGroupDTO> create(@Validated @RequestBody WFGroupDTO wfgroupdto) {
         WFGroup domain = wfgroupMapping.toDomain(wfgroupdto);
 		wfgroupService.create(domain);
         WFGroupDTO dto = wfgroupMapping.toDto(domain);

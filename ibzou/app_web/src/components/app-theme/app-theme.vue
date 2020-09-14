@@ -48,6 +48,7 @@
 
 <script lang = 'ts'>
 import { Component, Vue } from 'vue-property-decorator';
+import { appConfig } from '@/config/appConfig';
 
 @Component({
 })
@@ -75,23 +76,7 @@ export default class AppTheme extends Vue {
      * @type {Array<any>}
      * @memberof AppTheme
      */
-    defaultThemes: Array<any> = [
-        {
-            tag: 'app-default-theme',
-            title: 'light',
-            color: '#f6f6f6',
-        },
-        {
-            title: 'Blue',
-            tag: 'app_theme_blue',
-            color: '#6ba1d1'
-        },
-        {
-            title: 'Dark Blue',
-            tag: 'app_theme_darkblue',
-            color: '#606d80'
-        }
-    ];
+    defaultThemes: Array<any> = appConfig.themes;
 
     /**
      * 所选择的字体
@@ -106,20 +91,7 @@ export default class AppTheme extends Vue {
      *
      * @memberof AppTheme
      */
-    public fontFamilys = [
-        {
-            label: 'MicrosoftYaHei',
-            value: 'Microsoft YaHei',
-        },
-        {
-            label: 'SimHei',
-            value: 'SimHei',
-        },
-        {
-            label: 'YouYuan',
-            value: 'YouYuan',
-        },
-    ];
+    public fontFamilys = appConfig.fonts;
 
     /**
      * 挂载元素事件
@@ -130,12 +102,12 @@ export default class AppTheme extends Vue {
         if (localStorage.getItem('theme-class')) {
             this.selectTheme = localStorage.getItem('theme-class');
         } else {
-            this.selectTheme = 'app-default-theme';
+            this.selectTheme = appConfig.defaultTheme;
         }
         if (localStorage.getItem('font-family')) {
             this.selectFont = localStorage.getItem('font-family');
         } else {
-            this.selectFont = 'Microsoft YaHei';
+            this.selectFont = appConfig.defaultFont;
         }
     }
 
@@ -146,7 +118,7 @@ export default class AppTheme extends Vue {
      * @memberof AppTheme
      */
     public themeChange(val: any) {
-        if (!Object.is(this.activeTheme, val)) {
+        if (!Object.is(this.selectTheme, val)) {
             this.selectTheme = val;
             localStorage.setItem('theme-class', val);
             this.$router.app.$store.commit('setCurrentSelectTheme', val);

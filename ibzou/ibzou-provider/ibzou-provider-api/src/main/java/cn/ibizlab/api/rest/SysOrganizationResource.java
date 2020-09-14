@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SysOrganizationResource {
     @PreAuthorize("hasPermission(this.sysorganizationMapping.toDomain(#sysorganizationdto),'ibzou-SysOrganization-Create')")
     @ApiOperation(value = "新建单位机构", tags = {"单位机构" },  notes = "新建单位机构")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations")
-    public ResponseEntity<SysOrganizationDTO> create(@RequestBody SysOrganizationDTO sysorganizationdto) {
+    public ResponseEntity<SysOrganizationDTO> create(@Validated @RequestBody SysOrganizationDTO sysorganizationdto) {
         SysOrganization domain = sysorganizationMapping.toDomain(sysorganizationdto);
 		sysorganizationService.create(domain);
         SysOrganizationDTO dto = sysorganizationMapping.toDto(domain);

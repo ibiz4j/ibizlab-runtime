@@ -63,7 +63,7 @@ public interface SysEmployeeFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/sysemployees/save")
     Boolean save(@RequestBody SysEmployee sysemployee);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysemployees/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/sysemployees/savebatch")
     Boolean saveBatch(@RequestBody List<SysEmployee> sysemployees);
 
 

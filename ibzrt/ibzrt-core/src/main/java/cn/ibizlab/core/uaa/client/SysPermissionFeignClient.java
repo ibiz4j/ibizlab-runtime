@@ -59,7 +59,7 @@ public interface SysPermissionFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
     Boolean save(@RequestBody SysPermission syspermission);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/savebatch")
     Boolean saveBatch(@RequestBody List<SysPermission> syspermissions);
 
 

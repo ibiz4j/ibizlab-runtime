@@ -59,7 +59,7 @@ public interface WFUserFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers/save")
     Boolean save(@RequestBody WFUser wfuser);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfusers/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/wfusers/savebatch")
     Boolean saveBatch(@RequestBody List<WFUser> wfusers);
 
 

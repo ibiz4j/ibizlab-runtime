@@ -32,7 +32,7 @@ public class AuthorizationTokenFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
     private final AuthTokenUtil authTokenUtil;
     private final String tokenHeader;
-    private Set<String> excludesPattern;
+    private Set<String> excludesPattern = new HashSet<String>();
     private PathMatcher pathMatcher = new AntPathMatcher();
 
     public AuthorizationTokenFilter(AuthenticationUserService userDetailsService, AuthTokenUtil authTokenUtil, @Value("${ibiz.jwt.header:Authorization}") String tokenHeader) {

@@ -59,7 +59,7 @@ public interface JobsLockFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
     Boolean save(@RequestBody JobsLock jobslock);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/savebatch")
     Boolean saveBatch(@RequestBody List<JobsLock> jobslocks);
 
 

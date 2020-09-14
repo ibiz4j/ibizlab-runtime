@@ -86,6 +86,12 @@ import AppLockScren from './components/app-lock-scren/app-lock-scren.vue'
 import ActionTimeline from './components/action-timeline/action-timeline.vue'
 import CronEditor from './components/cron-editor/cron-editor.vue'
 import AppMessagePopover from './components/app-message-popover/app-message-popover.vue'
+import AppPanelField from './components/app-panel-field/app-panel-field.vue'
+import AppPanelItem from './components/app-panel-item/app-panel-item.vue'
+import AppDepartmentPersonnel from './components/app-department-personnel/app-department-personnel.vue'
+import DiskFileUpload from './components/disk-file-upload/disk-file-upload.vue'
+import AvueCustomForm  from './components/avue-custom-form/avue-custom-form.vue'
+import DiskImageUpload from './components/disk-image-upload/disk-image-upload.vue'
 
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
@@ -111,6 +117,9 @@ export const AppComponents = {
         v.prototype.$verify = Verify;
         v.prototype.$viewTool = ViewTool;
         v.prototype.$uiActionTool = UIActionTool;
+        v.component('app-department-personnel',AppDepartmentPersonnel);
+        v.component('app-panel-item',AppPanelItem);
+        v.component('app-panel-field',AppPanelField);
         v.component('app-full-scren',AppFullScren);
         v.component('app-lock-scren',AppLockScren);
         v.component('input-box', InputBox);
@@ -186,5 +195,8 @@ export const AppComponents = {
         v.component('action-timeline', ActionTimeline);
         v.component('cron-editor', CronEditor);
         v.component('app-message-popover', AppMessagePopover);
+        v.component('disk-file-upload', DiskFileUpload);
+        v.component('avue-custom-form', AvueCustomForm);
+        v.component('disk-image-upload', DiskImageUpload);
     },
 };

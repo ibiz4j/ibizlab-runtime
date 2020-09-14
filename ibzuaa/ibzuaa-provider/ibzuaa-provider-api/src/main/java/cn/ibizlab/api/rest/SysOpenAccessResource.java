@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SysOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysOpenAccess-Create-all')")
     @ApiOperation(value = "新建第三方认证平台", tags = {"第三方认证平台" },  notes = "新建第三方认证平台")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses")
-    public ResponseEntity<SysOpenAccessDTO> create(@RequestBody SysOpenAccessDTO sysopenaccessdto) {
+    public ResponseEntity<SysOpenAccessDTO> create(@Validated @RequestBody SysOpenAccessDTO sysopenaccessdto) {
         SysOpenAccess domain = sysopenaccessMapping.toDomain(sysopenaccessdto);
 		sysopenaccessService.create(domain);
         SysOpenAccessDTO dto = sysopenaccessMapping.toDto(domain);

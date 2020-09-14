@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class DictCatalogResource {
 
     @ApiOperation(value = "新建字典", tags = {"字典" },  notes = "新建字典")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs")
-    public ResponseEntity<DictCatalogDTO> create(@RequestBody DictCatalogDTO dictcatalogdto) {
+    public ResponseEntity<DictCatalogDTO> create(@Validated @RequestBody DictCatalogDTO dictcatalogdto) {
         DictCatalog domain = dictcatalogMapping.toDomain(dictcatalogdto);
 		dictcatalogService.create(domain);
         DictCatalogDTO dto = dictcatalogMapping.toDto(domain);

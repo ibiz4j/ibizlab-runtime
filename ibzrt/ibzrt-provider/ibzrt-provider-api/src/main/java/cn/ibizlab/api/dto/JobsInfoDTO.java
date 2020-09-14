@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "id")
     @JsonProperty("id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String id;
 
     /**
@@ -38,6 +42,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "tenant_id")
     @JsonProperty("tenant_id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String tenantId;
 
     /**
@@ -46,6 +51,8 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "app")
     @JsonProperty("app")
+    @NotBlank(message = "[服务名]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String app;
 
     /**
@@ -54,6 +61,8 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "cron")
     @JsonProperty("cron")
+    @NotBlank(message = "[任务执行CRON]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String cron;
 
     /**
@@ -62,6 +71,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "handler")
     @JsonProperty("handler")
+    @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
     private String handler;
 
     /**
@@ -70,6 +80,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "param")
     @JsonProperty("param")
+    @Size(min = 0, max = 512, message = "内容长度必须小于等于[512]")
     private String param;
 
     /**
@@ -78,6 +89,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "timeout")
     @JsonProperty("timeout")
+    @NotNull(message = "[任务执行超时时间（秒）]不允许为空!")
     private Integer timeout;
 
     /**
@@ -86,6 +98,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "fail_retry_count")
     @JsonProperty("fail_retry_count")
+    @NotNull(message = "[失败重试次数]不允许为空!")
     private Integer failRetryCount;
 
     /**
@@ -94,6 +107,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "last_time")
     @JsonProperty("last_time")
+    @NotNull(message = "[上次调度时间]不允许为空!")
     private Long lastTime;
 
     /**
@@ -102,6 +116,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "next_time")
     @JsonProperty("next_time")
+    @NotNull(message = "[下次调度时间]不允许为空!")
     private Long nextTime;
 
     /**
@@ -110,6 +125,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "author")
     @JsonProperty("author")
+    @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
     private String author;
 
     /**
@@ -118,6 +134,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "remark")
     @JsonProperty("remark")
+    @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
     private String remark;
 
     /**
@@ -126,6 +143,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "status")
     @JsonProperty("status")
+    @NotNull(message = "[状态]不允许为空!")
     private Integer status;
 
     /**
@@ -253,4 +271,5 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
 
 
 }
+
 

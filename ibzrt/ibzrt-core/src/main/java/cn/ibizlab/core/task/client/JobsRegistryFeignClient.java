@@ -59,7 +59,7 @@ public interface JobsRegistryFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/save")
     Boolean save(@RequestBody JobsRegistry jobsregistry);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/savebatch")
     Boolean saveBatch(@RequestBody List<JobsRegistry> jobsregistries);
 
 

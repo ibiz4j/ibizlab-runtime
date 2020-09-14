@@ -18,7 +18,7 @@
                                 </el-col>
                                 <el-col :span="21" class="column2" :draggable="false">
                                     <el-row :draggable="false">
-                                        <el-col :span="16" :draggable="false">
+                                        <el-col :span="16" :draggable="false" style="width: 65%;">
                                             <div class="process-definition-name" :draggable="false"><strong>{{myTask.processDefinitionName}}</strong></div>
                                             <div class="description" :draggable="false">{{myTask.description}}</div>
                                             <div class="createtime" :draggable="false">{{ formatDate(myTask.createTime, 'MM-DD hh:mm') }}</div>
@@ -26,7 +26,7 @@
                                         <el-col :span="5" :draggable="false" style='display: flex; align-items: center'>
                                             <el-tag :type="myTask.name.indexOf('驳回')!=-1?'danger':(myTask.name.indexOf('成功')!=-1?'success':(myTask.name.indexOf('取消')!=-1?'info':'-'))"
                                                 size="small" @click="handleTag(myTask)"
-                                                style="cursor: pointer;" :draggable="false">
+                                                style="cursor: pointer;overflow: hidden;text-overflow: ellipsis;" :draggable="false">
                                                 {{myTask.name}}
                                             </el-tag>
                                         </el-col>
@@ -52,7 +52,7 @@
                                 </el-col>
                                 <el-col :span="21" class="column2" :draggable="false">
                                     <el-row :draggable="false">
-                                        <el-col :span="16" :draggable="false">
+                                        <el-col :span="16" :draggable="false" style="width: 65%;">
                                             <div class="process-definition-name" :draggable="false"><strong>{{myMsg.processDefinitionName}}</strong></div>
                                             <div class="description" :draggable="false">{{myMsg.description}}</div>
                                             <div class="createtime" :draggable="false">{{ formatDate(myMsg.createTime, 'MM-DD hh:mm') }}</div>
@@ -60,7 +60,7 @@
                                         <el-col :span="5" :draggable="false" style='display: flex; align-items: center'>
                                             <el-tag :type="myMsg.name.indexOf('驳回')!=-1?'danger':(myMsg.name.indexOf('成功')!=-1?'success':(myMsg.name.indexOf('取消')!=-1?'info':'-'))"
                                                 size="small" @click="handleTag(myMsg)"
-                                                style="cursor: pointer;" :draggable="false">
+                                                style="cursor: pointer;overflow: hidden;text-overflow: ellipsis;" :draggable="false">
                                                 {{myMsg.name}}
                                             </el-tag>
                                         </el-col>
@@ -149,7 +149,7 @@
                     this.getMyMsgs();
                 }
             }).catch((error: any) => {
-                this.$Notice.error({title: '错误', desc: error});
+                console.warn("加载数据错误");
             })
         }
 

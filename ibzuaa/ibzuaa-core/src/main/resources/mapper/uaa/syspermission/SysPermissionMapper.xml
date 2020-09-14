@@ -7,7 +7,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="SysPermissionResultMap" type="cn.ibizlab.core.uaa.domain.SysPermission" autoMapping="true">
-        <id property="permissionid" column="sys_permissionid" /><!--主键字段映射-->
+		<id property="permissionid" column="sys_permissionid" /><!--主键字段映射-->
 		<result property="permissionname" column="sys_permissionname" />
             
 		

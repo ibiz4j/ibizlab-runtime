@@ -7,7 +7,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="SysUserRoleResultMap" type="cn.ibizlab.core.uaa.domain.SysUserRole" autoMapping="true">
-        <id property="userroleid" column="sys_user_roleid" /><!--主键字段映射-->
+		<id property="userroleid" column="sys_user_roleid" /><!--主键字段映射-->
 		<result property="roleid" column="sys_roleid" />
 		<result property="rolename" column="sys_rolename" />
 		<result property="userid" column="sys_userid" />

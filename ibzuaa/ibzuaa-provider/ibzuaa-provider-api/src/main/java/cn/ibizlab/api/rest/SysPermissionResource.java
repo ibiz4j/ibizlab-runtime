@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SysPermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPermission-Create-all')")
     @ApiOperation(value = "新建权限/资源", tags = {"权限/资源" },  notes = "新建权限/资源")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
-    public ResponseEntity<SysPermissionDTO> create(@RequestBody SysPermissionDTO syspermissiondto) {
+    public ResponseEntity<SysPermissionDTO> create(@Validated @RequestBody SysPermissionDTO syspermissiondto) {
         SysPermission domain = syspermissionMapping.toDomain(syspermissiondto);
 		syspermissionService.create(domain);
         SysPermissionDTO dto = syspermissionMapping.toDto(domain);

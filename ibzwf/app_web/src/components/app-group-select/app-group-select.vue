@@ -1,19 +1,19 @@
 <template>
     <div class="ibiz-group-select">
         <div class="ibiz-group-content">
-            <span v-if="!multiple">
+            <span class="group-item-text" v-if="!multiple">
                 {{ selectName }}
             </span>
             <template v-else v-for="(select, index) of selects">
                 <div :key="index" class="ibiz-group-item">
-                    {{ select.label }}
+                    <span class="group-item-multiple">{{ select.label }}</span>
                     <i v-if="!disabled" class="el-icon-close" @click="remove(select)"></i>
                 </div>
             </template>
         </div>
         <div v-if="!disabled" class="ibiz-group-open">
             <i v-if="!disabled && !multiple && selects.length > 0" class="el-icon-close" @click="remove(selects[0])"></i>
-            <i class="el-icon-search" @click="openView"></i>
+            <i class="el-icon-search" @click="openView" style="color: #c0c4cc;"></i>
         </div>
     </div>
 </template>
@@ -147,9 +147,7 @@ export default class AppGroupSelect extends Vue {
         if (newVal) {
             let item: any = {};
             item.label = this.data[this.name]?this.data[this.name].split(','):[];
-            if(this.valueitem) {
-                item.id = this.data[this.valueitem] ? this.data[this.valueitem].split(',') : [];
-            }
+            item.id = this.data[this.valueitem] ? this.data[this.valueitem].split(',') : [];
             if(this.fillmap) {
                 for(let key in this.fillmap) {
                     item[this.fillmap[key]] = this.data[key] ? this.data[key].split(',') : [];
@@ -219,7 +217,7 @@ export default class AppGroupSelect extends Vue {
             treeurl:this.treeurl,
             filtervalue: filtervalue,
             multiple: this.multiple,
-            selects: this.selects
+            selects: this.selects,
         });
         let container: Subject<any> = this.$appmodal.openModal(view, context, param);
         container.subscribe((result: any) => {
@@ -330,32 +328,5 @@ export default class AppGroupSelect extends Vue {
 </script>
 
 <style lang="less">
-.ibiz-group-select {
-    width: 100%;
-    display: flex;
-    border: 1px solid #DCDFE6;
-    min-height: 32px;
-    border-radius: 4px;
-    .ibiz-group-content {
-        flex-grow: 1;
-        padding: 0 16px;
-        .ibiz-group-item {
-            display: inline-block;
-            border: 1px solid #bbb;
-            line-height: 24px;
-            border-radius: 5px;
-            margin-right: 5px;
-            padding: 0 5px;
-        }
-    }
-    .ibiz-group-open {
-        display: flex;
-        text-align: center;
-        align-items: center;
-        padding: 0 5px;
-    }
-}
-.ibiz-group-select:hover {
-    border-color: #108cee;
-}
+@import './app-group-select.less';
 </style>

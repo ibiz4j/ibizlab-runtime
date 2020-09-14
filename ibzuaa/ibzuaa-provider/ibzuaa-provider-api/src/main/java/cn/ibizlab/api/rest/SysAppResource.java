@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class SysAppResource {
 
     @ApiOperation(value = "新建应用", tags = {"应用" },  notes = "新建应用")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysapps")
-    public ResponseEntity<SysAppDTO> create(@RequestBody SysAppDTO sysappdto) {
+    public ResponseEntity<SysAppDTO> create(@Validated @RequestBody SysAppDTO sysappdto) {
         SysApp domain = sysappMapping.toDomain(sysappdto);
 		sysappService.create(domain);
         SysAppDTO dto = sysappMapping.toDto(domain);

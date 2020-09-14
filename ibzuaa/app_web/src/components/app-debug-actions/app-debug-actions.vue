@@ -1,5 +1,5 @@
 <template>
-<div class="app-debug-actions">
+<div class="app-debug-actions" v-if="isShow">
     <div class="actions">
         <button-group vertical>
             <i-button :title="$t('components.appDebugActions.button')" :type="sdc.isShowTool ? 'warning' : 'info'" ghost @click="() => sdc.showToolChange()" :icon="sdc.isShowTool ? 'ios-bug' : 'ios-bug-outline'" ></i-button>
@@ -24,6 +24,14 @@ import { Environment } from '@/environments/environment';
 @Component({
 })
 export default class AppDebugActions extends Vue {
+
+    /**
+     * 是否显示
+     *
+     * @type {boolean}
+     * @memberof AppDebugActions
+     */
+    public isShow:boolean = Environment.devMode;
 
     /**
      * 配置平台操作控制器

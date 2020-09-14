@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "tid")
     @JsonProperty("tid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String tid;
 
     /**
@@ -38,6 +42,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "template_name")
     @JsonProperty("template_name")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String templateName;
 
     /**
@@ -46,6 +51,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "template_type")
     @JsonProperty("template_type")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String templateType;
 
     /**
@@ -54,6 +60,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "content")
     @JsonProperty("content")
+    @Size(min = 0, max = 4000, message = "内容长度必须小于等于[4000]")
     private String content;
 
     /**
@@ -62,6 +69,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "template_id")
     @JsonProperty("template_id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String templateId;
 
     /**
@@ -70,6 +78,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "template_url")
     @JsonProperty("template_url")
+    @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
     private String templateUrl;
 
     /**
@@ -78,6 +87,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "access_id")
     @JsonProperty("access_id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String accessId;
 
     /**
@@ -86,6 +96,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "access_name")
     @JsonProperty("access_name")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String accessName;
 
     /**
@@ -94,6 +105,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "open_type")
     @JsonProperty("open_type")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String openType;
 
 
@@ -163,4 +175,5 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
 
 
 }
+
 

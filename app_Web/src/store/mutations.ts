@@ -1,6 +1,17 @@
 import { Environment } from '@/environments/environment';
 
 /**
+ * 添加部门成员
+ * 
+ * @param state 
+ * @param codelists 
+ */
+export const addDepartmentPersonnel = (state: any, departmentPersonnel: Array<any>) => {
+    state.departmentPersonnel = [];
+    state.departmentPersonnel = [...departmentPersonnel];
+}
+
+/**
  * 添加代码表
  * 
  * @param state 
@@ -101,7 +112,7 @@ export const addPage = (state: any, arg: any) => {
     // 视图类型为REDIRECTVIEW和NOTAB的视图不添加缓存
     if(Object.is(arg.meta.viewType, 'REDIRECTVIEW') || Object.is(arg.meta.viewType, 'NOTAB')){
         return;
-    }else if(Object.is(arg.meta.viewType, 'APPINDEX')) {
+    }else if (Object.is(arg.meta.viewType, 'APPINDEX')) {
         window.sessionStorage.setItem(Environment.AppName, arg.fullPath);
     } else {
         const page: any = {};

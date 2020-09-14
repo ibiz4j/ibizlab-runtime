@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class SysPostDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "postid")
     @JsonProperty("postid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String postid;
 
     /**
@@ -38,6 +42,8 @@ public class SysPostDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "postcode")
     @JsonProperty("postcode")
+    @NotBlank(message = "[岗位编码]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String postcode;
 
     /**
@@ -46,6 +52,8 @@ public class SysPostDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "postname")
     @JsonProperty("postname")
+    @NotBlank(message = "[岗位名称]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String postname;
 
     /**
@@ -54,6 +62,7 @@ public class SysPostDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String domains;
 
     /**
@@ -62,6 +71,7 @@ public class SysPostDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @Size(min = 0, max = 2000, message = "内容长度必须小于等于[2000]")
     private String memo;
 
 
@@ -99,4 +109,5 @@ public class SysPostDTO extends DTOBase implements Serializable {
 
 
 }
+
 

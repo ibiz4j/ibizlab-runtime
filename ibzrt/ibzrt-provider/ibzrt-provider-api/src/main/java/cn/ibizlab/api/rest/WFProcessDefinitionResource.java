@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class WFProcessDefinitionResource {
 
     @ApiOperation(value = "新建流程定义", tags = {"流程定义" },  notes = "新建流程定义")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions")
-    public ResponseEntity<WFProcessDefinitionDTO> create(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
+    public ResponseEntity<WFProcessDefinitionDTO> create(@Validated @RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
         WFProcessDefinition domain = wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto);
 		wfprocessdefinitionService.create(domain);
         WFProcessDefinitionDTO dto = wfprocessdefinitionMapping.toDto(domain);

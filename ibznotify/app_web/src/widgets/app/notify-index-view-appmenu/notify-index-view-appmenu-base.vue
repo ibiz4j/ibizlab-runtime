@@ -606,7 +606,7 @@ export default class NotifyIndexViewBase extends Vue implements ControlInterface
      * @memberof NotifyIndexViewBase
      */
     public handleMenusResource(inputMenus:Array<any>){
-        if(Environment.enablePermissionValid){
+        if(this.$store.getters['authresource/getEnablePermissionValid']){
             this.computedEffectiveMenus(inputMenus);
             this.computeParentMenus(inputMenus);
         }

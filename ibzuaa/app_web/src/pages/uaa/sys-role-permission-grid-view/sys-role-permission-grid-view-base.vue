@@ -138,15 +138,6 @@ export default class SysRolePermissionGridViewBase extends Vue {
      * @memberof SysRolePermissionGridViewBase
      */
     public appUIService: SysRolePermissionUIService = new SysRolePermissionUIService(this.$store);
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof SysRolePermissionGridViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -266,6 +257,8 @@ export default class SysRolePermissionGridViewBase extends Vue {
               _this.engine.load();
               
             });
+        } else if(!Object.is(newVal, oldVal) && _this.refresh() && Object.is(_this.$util.typeOf(_this.refresh()), 'function')) {
+            _this.refresh();
         }
     }
 
@@ -405,6 +398,15 @@ export default class SysRolePermissionGridViewBase extends Vue {
      * @memberof SysRolePermissionGridViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof SysRolePermissionGridViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数
@@ -1464,6 +1466,14 @@ export default class SysRolePermissionGridViewBase extends Vue {
             if (this.serviceStateEvent) {
                 this.serviceStateEvent.unsubscribe();
             }
+        }
+        // 销毁计数器定时器
+        if(this.counterServiceArray && this.counterServiceArray.length >0){
+            this.counterServiceArray.forEach((item:any) =>{
+                if(item.destroyCounter && item.destroyCounter instanceof Function){
+                    item.destroyCounter();
+                }
+            })
         }
     }
 

@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class PayOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayOpenAccess-Create-all')")
     @ApiOperation(value = "新建支付平台", tags = {"支付平台" },  notes = "新建支付平台")
 	@RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses")
-    public ResponseEntity<PayOpenAccessDTO> create(@RequestBody PayOpenAccessDTO payopenaccessdto) {
+    public ResponseEntity<PayOpenAccessDTO> create(@Validated @RequestBody PayOpenAccessDTO payopenaccessdto) {
         PayOpenAccess domain = payopenaccessMapping.toDomain(payopenaccessdto);
 		payopenaccessService.create(domain);
         PayOpenAccessDTO dto = payopenaccessMapping.toDto(domain);

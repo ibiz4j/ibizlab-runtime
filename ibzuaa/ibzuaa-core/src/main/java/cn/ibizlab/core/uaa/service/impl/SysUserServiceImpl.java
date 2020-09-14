@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.uaa.domain.SysUser;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.uaa.mapper.SysUserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -65,6 +67,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
+    @Transactional
     public void createBatch(List<SysUser> list) {
         this.saveBatch(list,batchSize);
     }
@@ -72,13 +75,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @Transactional
     public boolean update(SysUser et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getUserid())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getUserid())))
             return false;
         CachedBeanCopier.copy(get(et.getUserid()),et);
         return true;
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<SysUser> list) {
         updateBatchById(list,batchSize);
     }
@@ -91,6 +95,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -136,12 +141,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<SysUser> list) {
         saveOrUpdateBatch(list,batchSize);
         return true;
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<SysUser> list) {
         saveOrUpdateBatch(list,batchSize);
     }
@@ -206,6 +213,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         else
            return entities;
     }
+
 
 }
 

@@ -96,15 +96,6 @@ export default class SysDepartmentEditViewBase extends Vue {
      * @memberof SysDepartmentEditViewBase
      */
     public appUIService: SysDepartmentUIService = new SysDepartmentUIService(this.$store);
-
-
-    /**
-     * 计数器服务对象集合
-     *
-     * @type {Array<*>}
-     * @memberof SysDepartmentEditViewBase
-     */    
-    public counterServiceArray:Array<any> = [];
     
     /**
      * 数据变化
@@ -224,6 +215,8 @@ export default class SysDepartmentEditViewBase extends Vue {
               _this.engine.load();
               
             });
+        } else if(!Object.is(newVal, oldVal) && _this.refresh() && Object.is(_this.$util.typeOf(_this.refresh()), 'function')) {
+            _this.refresh();
         }
     }
 
@@ -348,6 +341,15 @@ export default class SysDepartmentEditViewBase extends Vue {
      * @memberof SysDepartmentEditViewBase
      */
     public viewCacheData:any;
+
+
+    /**
+     * 计数器服务对象集合
+     *
+     * @type {Array<*>}
+     * @memberof SysDepartmentEditViewBase
+     */    
+    public counterServiceArray:Array<any> = [];
 
     /**
      * 解析视图参数
@@ -962,6 +964,14 @@ export default class SysDepartmentEditViewBase extends Vue {
             if (this.serviceStateEvent) {
                 this.serviceStateEvent.unsubscribe();
             }
+        }
+        // 销毁计数器定时器
+        if(this.counterServiceArray && this.counterServiceArray.length >0){
+            this.counterServiceArray.forEach((item:any) =>{
+                if(item.destroyCounter && item.destroyCounter instanceof Function){
+                    item.destroyCounter();
+                }
+            })
         }
     }
 

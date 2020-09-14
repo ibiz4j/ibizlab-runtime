@@ -7,7 +7,7 @@
         :clearable="true"
         :filterable="filterable"
         @on-open-change="onClick"
-        :placeholder="$t('components.dropDownListDynamic.placeholder')">
+        :placeholder="placeholder?placeholder:$t('components.dropDownListDynamic.placeholder')">
         <i-option v-for="(item, index) in items" :key="index" :class="item.class" :value="item.value">{{($t('userCustom.'+tag+'.'+item.value)!== ('userCustom.'+tag+'.'+item.value))?$t('userCustom.'+tag+'.'+item.value) : item.text}}</i-option>
     </i-select>
 </template>

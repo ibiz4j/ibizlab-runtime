@@ -59,7 +59,7 @@ public interface WFTaskWayFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/save")
     Boolean save(@RequestBody WFTaskWay wftaskway);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/savebatch")
     Boolean saveBatch(@RequestBody List<WFTaskWay> wftaskways);
 
 

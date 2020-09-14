@@ -16,7 +16,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="MsgOpenAccessResultMap" type="cn.ibizlab.core.notify.domain.MsgOpenAccess" autoMapping="true">
-        <id property="id" column="accessid" /><!--主键字段映射-->
+		<id property="id" column="accessid" /><!--主键字段映射-->
 		<result property="name" column="accessname" />
 		<result property="openType" column="open_type" />
 		<result property="accessKey" column="access_key" />

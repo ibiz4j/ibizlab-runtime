@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class MsgOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Create-all')")
     @ApiOperation(value = "新建接入开放平台", tags = {"接入开放平台" },  notes = "新建接入开放平台")
 	@RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses")
-    public ResponseEntity<MsgOpenAccessDTO> create(@RequestBody MsgOpenAccessDTO msgopenaccessdto) {
+    public ResponseEntity<MsgOpenAccessDTO> create(@Validated @RequestBody MsgOpenAccessDTO msgopenaccessdto) {
         MsgOpenAccess domain = msgopenaccessMapping.toDomain(msgopenaccessdto);
 		msgopenaccessService.create(domain);
         MsgOpenAccessDTO dto = msgopenaccessMapping.toDto(domain);

@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "definitionkey")
     @JsonProperty("definitionkey")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String definitionkey;
 
     /**
@@ -38,6 +42,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "definitionname")
     @JsonProperty("definitionname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String definitionname;
 
     /**
@@ -62,6 +67,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String pssystemid;
 
     /**
@@ -70,6 +76,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "md5check")
     @JsonProperty("md5check")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String md5check;
 
     /**
@@ -78,6 +85,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "bpmnfile")
     @JsonProperty("bpmnfile")
+    @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
     private String bpmnfile;
 
     /**
@@ -86,6 +94,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "deploykey")
     @JsonProperty("deploykey")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String deploykey;
 
     /**
@@ -94,6 +103,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "webserviceids")
     @JsonProperty("webserviceids")
+    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
     private String webserviceids;
 
     /**
@@ -102,6 +112,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "mobileserviceids")
     @JsonProperty("mobileserviceids")
+    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
     private String mobileserviceids;
 
 
@@ -179,4 +190,5 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
 
 
 }
+
 

@@ -16,7 +16,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="JobsRegistryResultMap" type="cn.ibizlab.core.task.domain.JobsRegistry" autoMapping="true">
-        <id property="id" column="id" /><!--主键字段映射-->
+		<id property="id" column="id" /><!--主键字段映射-->
 		<result property="updateTime" column="update_time" />
             
 		

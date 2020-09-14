@@ -11,7 +11,7 @@
         max-height="items.length > 0 ? 'calc(100%-50px)' : '100%'"
         @row-click="rowClick($event)"  
         @select-all="selectAll($event)"  
-        @select="select($event)"  
+        @select="select"  
         @row-class-name="onRowClassName($event)"  
         @row-dblclick="rowDBLClick($event)"  
         ref='multipleTable' :data="items" :show-header="!isHideHeader">
@@ -675,16 +675,38 @@ export default class MainBase extends Vue implements ControlInterface {
     public gridItemsModel: any[] = [];
 
     /**
+     * 是否启用分组
+     *
+     * @type {boolean}
+     * @memberof MainBase
+     */
+    public isEnableGroup:boolean = false;
+
+    /**
+     * 分组属性
+     *
+     * @type {string}
+     * @memberof MainBase
+     */
+    public groupAppField:string ="";
+
+    /**
+     * 分组模式
+     *
+     * @type {string}
+     * @memberof MainBase
+     */
+    public groupMode:string ="NONE";
+
+    /**
      * 获取界面行为权限状态
      *
      * @memberof MainBase
      */
     public getActionState(data:any){
         let tempActionModel:any = JSON.parse(JSON.stringify(this.ActionModel));
-        if(Environment.enablePermissionValid){
-            let targetData:any = this.transformData(data);
-            ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
-        }
+        let targetData:any = this.transformData(data);
+        ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
         return tempActionModel;
     }
 
@@ -1265,6 +1287,10 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public rowDBLClick($event: any): void {
+        // 分组行跳过
+        if($event && $event.children && $event.children.length >0){
+            return;
+        }
         if (!$event || this.actualIsOpenEdit || Object.is(this.gridRowActiveMode,0)) {
             return;
         }
@@ -1282,19 +1308,164 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
-     * 复选框数据选中
-     *
-     * @param {*} $event
-     * @returns {void}
+    * 合并分组行
+    * 
+    * @memberof MainBase
+    */
+    public arraySpanMethod({row, column, rowIndex, columnIndex} : any) {
+        let allColumns:Array<any> = ['definitionkey','definitionname','pssystemid','modelversion','modelenable'];
+        if(row && row.children && row.children.length>0) {
+            if(columnIndex == (this.isSingleSelect ? 0:1)) {
+                return [1, allColumns.length+1];
+            } else if(columnIndex > (this.isSingleSelect ? 0:1)) {
+                return [0,0];
+            }
+        }
+    }
+
+    /**
+     * 绘制分组
+     * 
      * @memberof MainBase
      */
-    public select($event: any): void {
-        if (!$event) {
-            return;
+    public drawGroup(){
+        if(!this.isEnableGroup) return;
+        // 分组
+        let allGroup: Array<any> = [];
+        this.items.forEach((item: any)=>{
+            if(item.hasOwnProperty(this.groupAppField)){
+                allGroup.push(item[this.groupAppField]);
+            }
+        });
+        let groupTree:Array<any> = [];
+        allGroup = [...new Set(allGroup)];
+        if(allGroup.length == 0){
+            console.warn("分组数据无效");
         }
-        this.selections = [];
-        this.selections = [...JSON.parse(JSON.stringify($event))];
+        // 组装数据
+        allGroup.forEach((group: any, groupIndex: number)=>{
+            let children:Array<any> = [];
+            this.items.forEach((item: any,itemIndex: number)=>{
+                if(Object.is(group,item[this.groupAppField])){
+                    item.groupById = Number((groupIndex+1) * 10 + (itemIndex+1) * 1);
+                    item.group = '';
+                    children.push(item);
+                }
+            });
+            group = group ? group : this.$t('app.gridpage.other');
+            const tree: any ={
+                groupById: Number((groupIndex+1)*10),
+                group: group,
+                definitionkey:'',
+                definitionname:'',
+                pssystemid:'',
+                modelversion:'',
+                modelenable:'',
+                children: children,
+            }
+            groupTree.push(tree);
+        });
+        this.items = groupTree;
+        if(this.actualIsOpenEdit) {
+            for(let i = 0; i < this.items.length; i++) {
+                this.gridItemsModel.push(this.getGridRowModel());
+            }
+        }
+    }
+
+    /**
+     * 单个复选框选中
+     *
+     * @param {*} selection 所有选中行数据
+     * @param {*} row 当前选中行数据
+     * @memberof MainBase
+     */
+    public select(selection: any, row: any): void {
+        if(this.groupAppField) {
+            let isContain:boolean = selection.some((item:any) =>{
+                return  item == row;
+            }) 
+            // 是否选中当前行，选中为true，否则为false
+            if(isContain) {
+                // 当前行为分组行
+                if(row.children && row.children.length > 0) {
+                    this.toggleSelection(row.children, true);
+                    row.children.forEach((children: any) => {
+                        this.selections.push(children);
+                    });
+                } else {
+                    this.selections.push(row);
+                }
+            } else {
+                if(row.children && row.children.length > 0) {
+                    this.toggleSelection(row.children, false);
+                    this.selections = this.computeCheckedData(this.selections, row.children);
+                } else {
+                    this.selections = this.computeCheckedData(this.selections, row);
+                }
+            }
+            this.selections = [...new Set(this.selections)]
+        } else {
+            if(!selection) {
+                return;
+            }
+            this.selections = [...JSON.parse(JSON.stringify(selection))];
+        }
         this.$emit('selectionchange', this.selections);
+    }
+
+    /**
+     * 计算当前选中数据
+     *
+     * @param {*} selectionArray 所有选中行数据
+     * @param {*} cancelData 被取消选中行数据，分组行为数组，非分组行为对象
+     * @memberof MainBase
+     */
+    public computeCheckedData(selectionArray: any[], cancelData: Array<any> | any) {
+        let targetArray: Array<any> = [];
+        //  分组行
+        if(Array.isArray(cancelData)) {
+            if(selectionArray && selectionArray.length > 0) {
+                selectionArray.forEach((selection:any) =>{
+                    let tempFlag:boolean = true;
+                    cancelData.forEach((child:any) =>{
+                        if(selection.groupById===child.groupById){
+                            tempFlag = false;
+                        }
+                    })
+                    if(tempFlag) targetArray.push(selection);
+                })
+            }
+        } else {
+        //  非分组行
+            if(selectionArray && selectionArray.length > 0) {
+                selectionArray.forEach((selection:any) =>{
+                    let tempFlag:boolean = true;
+                    if(selection.groupById===cancelData.groupById){
+                        tempFlag = false;
+                    }
+                    if(tempFlag) targetArray.push(selection);
+                })
+            }
+        }
+        return targetArray;
+    }
+
+    /**
+     * 设置非分组行checkbox选中状态
+     *
+     * @param {*} rows 选中数据数组
+     * @param {boolean} flag 是否选中
+     * @memberof MainBase
+     */
+    public toggleSelection(rows?: any, flag?: boolean) {
+        if(rows) {
+            rows.forEach((row:any) => {
+                (this.$refs.multipleTable as any).toggleRowSelection(row, flag);
+            });
+        } else {
+            (this.$refs.multipleTable as any).clearSelection();
+        }
     }
 
     /**
@@ -1303,12 +1474,33 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {*} $event
      * @memberof MainBase
      */
-    public selectAll($event: any): void {
-        if (!$event) {
-            return;
+    public selectAll(selection: any): void {
+        this.selections = [];   
+        if(this.groupAppField) {
+            let flag: boolean = true;
+            if(selection && selection.length === this.items.length) {
+                selection.forEach((element: any) => {
+                    if(element.children && element.children.length > 0) {
+                        this.toggleSelection(element.children, flag);
+                        element.children.forEach((children: any) => {
+                            this.selections.push(children);
+                        });
+                    } else {
+                        flag = false;
+                    }
+                });
+            } else {
+                flag = false;
+            }
+            if(!flag) {
+                this.toggleSelection();
+            }
+        } else {
+            if(!selection) {
+                return;
+            }
+            this.selections = [...JSON.parse(JSON.stringify(selection))];
         }
-        this.selections = [];
-        this.selections = [...JSON.parse(JSON.stringify($event))];
         this.$emit('selectionchange', this.selections);
     }
 
@@ -1321,6 +1513,10 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public rowClick($event: any, ifAlways: boolean = false): void {
+        // 分组行跳过
+        if($event && $event.children && $event.children.length >0){
+            return;
+        }
         if (!ifAlways && (!$event || this.actualIsOpenEdit)) {
             return;
         }
@@ -1591,7 +1787,9 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.createDefault(data);
             data.rowDataState = "create";
-            _this.items.push(data);
+            let tempItems: any[] = [];
+            tempItems.push(data);
+            _this.items = tempItems.concat(_this.items);
             _this.gridItemsModel.push(_this.getGridRowModel());
         }).catch((response: any) => {
             if (response && response.status === 401) {
@@ -1702,24 +1900,59 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
-     * 获取对应列class
+     * 获取对应单元格class
      *
-     * @param {*} $args row 行数据，column 列数据，rowIndex 行索引，列索引
+     * @param {*} $args row 行数据，column 列数据，rowIndex 行索引，columnIndex 列索引
      * @returns {void}
      * @memberof MainBase
      */
     public getCellClassName(args:{row: any, column: any, rowIndex: number, columnIndex:number}){
+        let className: string = '';
         if(args.column.property){
           let col = this.allColumns.find((item:any)=>{
               return Object.is(args.column.property,item.name);
           })
           if(col !== undefined){
               if(col.isEnableRowEdit && this.actualIsOpenEdit ){
-                  return 'edit-cell';
+                className += 'edit-cell ';
               }
+          } else {
+              className += 'info-cell';
           }
         }
-        return 'info-cell';
+        if(this.groupAppField && args.columnIndex === 0 && !this.isSingleSelect) {
+            if(args.row.children && args.row.children.length > 0) {
+                className += this.computeGroupRow(args.row.children, args.row);
+            }
+        }
+        return className;
+    }
+
+    /**
+     * 计算分组行checkbox选中样式
+     *
+     * @param {*} rows 当前分组行下的所有数据
+     * @returns {*} currentRow 当前分组行
+     * @memberof MainBase
+     */
+    public computeGroupRow(rows: any[], currentRow: any) {
+        let count: number = 0;
+        this.selections.forEach((select: any) => {
+            rows.forEach((row: any) => {
+                if(row.groupById === select.groupById) {
+                    count++;
+                }
+            })
+        })
+        if(count === rows.length) {
+            (this.$refs.multipleTable as any).toggleRowSelection(currentRow, true);
+            return 'cell-select-all ';
+        } else if(count !== 0 && count < rows.length) {
+            return 'cell-indeterminate '
+        } else if(count === 0) {
+            (this.$refs.multipleTable as any).toggleRowSelection(currentRow, false);
+            return '';
+        }
     }
 
     /**

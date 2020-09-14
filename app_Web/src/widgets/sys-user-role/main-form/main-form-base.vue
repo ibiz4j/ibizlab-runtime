@@ -470,7 +470,7 @@ export default class MainBase extends Vue implements ControlInterface {
     public saveState:any ;
 
     /**
-     * 属性值规则
+     * 值规则
      *
      * @type {*}
      * @memberof MainBase
@@ -1127,20 +1127,18 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public computeButtonState(data:any){
-        if(Environment.enablePermissionValid){
-            let targetData:any = this.transformData(data);
-            if(this.detailsModel && Object.keys(this.detailsModel).length >0){
-                Object.keys(this.detailsModel).forEach((name:any) =>{
-                    if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
-                        this.detailsModel[name].isPower = true;
-                        let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
-                        let result: any[] = ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
-                        this.detailsModel[name].visible = tempUIAction.visabled;
-                        this.detailsModel[name].disabled = tempUIAction.disabled;
-                        this.detailsModel[name].isPower = result[0] === 1 ? true : false;
-                    }
-                })
-            }
+        let targetData:any = this.transformData(data);
+        if(this.detailsModel && Object.keys(this.detailsModel).length >0){
+            Object.keys(this.detailsModel).forEach((name:any) =>{
+                if(this.detailsModel[name] && this.detailsModel[name].uiaction && this.detailsModel[name].uiaction.dataaccaction && Object.is(this.detailsModel[name].detailType,"BUTTON")){
+                    this.detailsModel[name].isPower = true;
+                    let tempUIAction:any = JSON.parse(JSON.stringify(this.detailsModel[name].uiaction));
+                    let result: any[] = ViewTool.calcActionItemAuthState(targetData,[tempUIAction],this.appUIService);
+                    this.detailsModel[name].visible = tempUIAction.visabled;
+                    this.detailsModel[name].disabled = tempUIAction.disabled;
+                    this.detailsModel[name].isPower = result[0] === 1 ? true : false;
+                }
+            })
         }
     }
 

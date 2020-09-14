@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.workflow.domain.WFMember;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.workflow.mapper.WFMemberMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -66,6 +68,7 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     }
 
     @Override
+    @Transactional
     public void createBatch(List<WFMember> list) {
         list.forEach(item->fillParentData(item));
         this.saveOrUpdateBatch(list,batchSize);
@@ -75,13 +78,14 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Transactional
     public boolean update(WFMember et) {
         fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("memberid",et.getMemberid())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("memberid",et.getMemberid())))
             return false;
         CachedBeanCopier.copy(get(et.getMemberid()),et);
         return true;
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<WFMember> list) {
         list.forEach(item->fillParentData(item));
         updateBatchById(list,batchSize);
@@ -95,6 +99,7 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -141,6 +146,7 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<WFMember> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
@@ -148,6 +154,7 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<WFMember> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
@@ -295,6 +302,7 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         else
            return entities;
     }
+
 
 }
 

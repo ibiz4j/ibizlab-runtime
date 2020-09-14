@@ -16,7 +16,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="MsgTemplateResultMap" type="cn.ibizlab.core.notify.domain.MsgTemplate" autoMapping="true">
-        <id property="tid" column="tid" /><!--主键字段映射-->
+		<id property="tid" column="tid" /><!--主键字段映射-->
 		<result property="templateName" column="template_name" />
 		<result property="templateType" column="template_type" />
 		<result property="templateId" column="template_id" />

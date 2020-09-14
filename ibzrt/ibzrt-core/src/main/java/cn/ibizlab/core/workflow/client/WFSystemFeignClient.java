@@ -59,7 +59,7 @@ public interface WFSystemFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
     Boolean save(@RequestBody WFSystem wfsystem);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/savebatch")
     Boolean saveBatch(@RequestBody List<WFSystem> wfsystems);
 
 

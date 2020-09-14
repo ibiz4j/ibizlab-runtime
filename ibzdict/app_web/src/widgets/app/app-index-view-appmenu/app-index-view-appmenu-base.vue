@@ -580,7 +580,7 @@ export default class AppIndexViewBase extends Vue implements ControlInterface {
      * @memberof AppIndexViewBase
      */
     public handleMenusResource(inputMenus:Array<any>){
-        if(Environment.enablePermissionValid){
+        if(this.$store.getters['authresource/getEnablePermissionValid']){
             this.computedEffectiveMenus(inputMenus);
             this.computeParentMenus(inputMenus);
         }

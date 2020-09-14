@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String orgid;
 
     /**
@@ -38,6 +42,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String orgcode;
 
     /**
@@ -46,6 +51,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String orgname;
 
     /**
@@ -54,6 +60,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "parentorgid")
     @JsonProperty("parentorgid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String parentorgid;
 
     /**
@@ -62,6 +69,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "shortname")
     @JsonProperty("shortname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String shortname;
 
     /**
@@ -86,6 +94,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "parentorgname")
     @JsonProperty("parentorgname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String parentorgname;
 
     /**
@@ -94,6 +103,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String domains;
 
     /**
@@ -173,4 +183,5 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
 
 
 }
+
 

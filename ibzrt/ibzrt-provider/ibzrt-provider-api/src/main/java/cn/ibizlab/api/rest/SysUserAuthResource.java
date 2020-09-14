@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class SysUserAuthResource {
 
     @ApiOperation(value = "新建账号绑定", tags = {"账号绑定" },  notes = "新建账号绑定")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths")
-    public ResponseEntity<SysUserAuthDTO> create(@RequestBody SysUserAuthDTO sysuserauthdto) {
+    public ResponseEntity<SysUserAuthDTO> create(@Validated @RequestBody SysUserAuthDTO sysuserauthdto) {
         SysUserAuth domain = sysuserauthMapping.toDomain(sysuserauthdto);
 		sysuserauthService.create(domain);
         SysUserAuthDTO dto = sysuserauthMapping.toDto(domain);

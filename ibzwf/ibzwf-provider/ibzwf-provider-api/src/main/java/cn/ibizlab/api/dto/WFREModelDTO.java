@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class WFREModelDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "id")
     @JsonProperty("id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String id;
 
     /**
@@ -38,6 +42,7 @@ public class WFREModelDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "name")
     @JsonProperty("name")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String name;
 
     /**
@@ -46,6 +51,7 @@ public class WFREModelDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "bpmnfile")
     @JsonProperty("bpmnfile")
+    @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
     private String bpmnfile;
 
 
@@ -67,4 +73,5 @@ public class WFREModelDTO extends DTOBase implements Serializable {
 
 
 }
+
 

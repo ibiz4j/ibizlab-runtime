@@ -8,7 +8,7 @@
         :clearable="true"
         :filterable="filterable"
         @on-open-change="onClick"
-        :placeholder="$t('components.dropDownList.placeholder')">
+        :placeholder="placeholder?placeholder:$t('components.dropDownList.placeholder')">
         <i-option v-for="(item, index) in items" :key="index" :class="item.class" :value="item.value">{{($t('codelist.'+tag+'.'+item.value)!== ('codelist.'+tag+'.'+item.value))?$t('codelist.'+tag+'.'+item.value) : item.text}}</i-option>
         </i-select>
         <ibiz-select-tree v-if="hasChildren" class="tree-dropdown-list" :disabled="disabled" :NodesData="items" v-model="currentVal" :multiple="false"></ibiz-select-tree>

@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class WFSystemResource {
 
     @ApiOperation(value = "新建系统", tags = {"系统" },  notes = "新建系统")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems")
-    public ResponseEntity<WFSystemDTO> create(@RequestBody WFSystemDTO wfsystemdto) {
+    public ResponseEntity<WFSystemDTO> create(@Validated @RequestBody WFSystemDTO wfsystemdto) {
         WFSystem domain = wfsystemMapping.toDomain(wfsystemdto);
 		wfsystemService.create(domain);
         WFSystemDTO dto = wfsystemMapping.toDto(domain);

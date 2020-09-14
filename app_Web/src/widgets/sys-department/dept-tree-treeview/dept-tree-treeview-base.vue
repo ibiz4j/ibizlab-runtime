@@ -23,7 +23,7 @@
             :filter-node-method="filterNode"
             >
                 <template slot-scope="{ node, data }">
-                  <context-menu :contextMenuStyle="{width: '100%'}" :data="node" :renderContent="renderContextMenu">
+                  <context-menu :ref='data.id'  :isBlocked="true" :contextMenuStyle="{width: '100%'}" :data="node" :renderContent="renderContextMenu" @showContext="showContext(data,$event)">
                     <tooltip transfer style="width: 100%;" max-width="2000" placement="right">
                         <div class="tree-node" @dblclick="doDefaultAction(node)">
                             <span class="icon">
@@ -58,6 +58,8 @@ import AppCenterService from "@service/app/app-center-service";
 import SysDepartmentService from '@/service/sys-department/sys-department-service';
 import DeptTreeService from './dept-tree-treeview-service';
 import SysDepartmentUIService from '@/uiservice/sys-department/sys-department-ui-service';
+import { Environment } from '@/environments/environment';
+import UIService from '@/uiservice/ui-service';
 
 
 @Component({
@@ -377,6 +379,24 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
      */
     public appStateEvent: Subscription | undefined;
 
+
+    /**
+     * 树节点上下文菜单集合
+     *
+     * @type {string[]}
+     * @memberof DeptTreeBase
+     */
+     public actionModel: any = {
+    }
+
+    /**
+     * 备份树节点上下文菜单
+     * 
+     * @type any
+     * @memberof MainTreeBase
+     */
+    public copyActionModel:any;
+
     /**
      * 选中数据变更事件
      *
@@ -454,6 +474,9 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
                 if (Object.is('refresh_parent', action)) {
                     this.refresh_parent();
                 }
+                if (Object.is('refresh_current', action)) {
+                    this.refresh_current();
+                }
             });
         }
         if(AppCenterService && AppCenterService.getMessageCenter()){
@@ -511,6 +534,33 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
         this.$nextTick(() => {
             this.inited = true;
         });
+    }
+
+    /**
+     * 刷新当前节点
+     *
+     * @memberof DeptTreeBase
+     */
+    public refresh_current(): void {
+        if (Object.keys(this.currentselectedNode).length === 0) {
+            return;
+        }
+        const tree: any = this.$refs.treeexpbar_tree;
+        const node: any = tree.getNode(this.currentselectedNode.id);
+        if (!node || !node.parent) {
+            return;
+        }
+        let curNode:any = {}; 
+        curNode = Util.deepObjectMerge(curNode,node);
+        let tempContext:any = {};
+        if(curNode.data && curNode.data.srfappctx){
+            Object.assign(tempContext,curNode.data.srfappctx);
+        }else{
+            Object.assign(tempContext,this.context);
+        }
+        const id: string = node.key ? node.key : '#';
+        const param: any = { srfnodeid: id };
+        this.refresh_node(tempContext,param, false);
     }
 
     /**
@@ -642,6 +692,7 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
             if (parentnode) {
                 this.currentselectedNode = {};
             }
+            this.$forceUpdate();
             this.setDefaultSelection(_items);
         }).catch((response: any) => {
             if (response && response.status === 401) {
@@ -747,12 +798,75 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
      */
     public renderContextMenu(node: any) {
         let content;
+
         if (node && node.data) {
             const data: any = JSON.parse(JSON.stringify(node.data));
             this.currentselectedNode = { ...data };
             const tags: string[] = data.id.split(';');
+            let copyActionModel:any =Util.deepCopy(this.actionModel);
         }
         return content;
+    }
+
+    /**
+     * 显示上下文菜单
+     * 
+     * @param data 节点数据
+     * @param event 事件源
+     * @memberof DeptTreeBase
+     */
+    public showContext(data:any,event:any){
+        let _this:any = this;
+        this.copyActionModel = {};
+        const tags: string[] = data.id.split(';');
+        Object.values(this.actionModel).forEach((item:any) =>{
+            if(Object.is(item.nodeOwner,tags[0])){
+                this.copyActionModel[item.name] = item;
+            }
+        })
+        if(Object.keys(this.copyActionModel).length === 0){
+            return;
+        }
+        this.computeNodeState(data,data.nodeType,data.appEntityName).then((result:any) => {
+            let flag:boolean = false;
+            if(Object.values(result).length>0){
+                flag =Object.values(result).some((item:any) =>{
+                    return item.visabled === true;
+                })
+            }
+            if(flag){
+                (_this.$refs[data.id] as any).showContextMenu(event.clientX, event.clientY);
+            }
+        });
+    }
+
+    /**
+     * 计算节点右键权限
+     *
+     * @param {*} node 节点数据
+     * @param {*} nodeType 节点类型
+     * @param {*} appEntityName 应用实体名称  
+     * @returns
+     * @memberof DeptTreeBase
+     */
+    public async computeNodeState(node:any,nodeType:string,appEntityName:string) {
+        if(Object.is(nodeType,"STATIC")){
+            return this.copyActionModel;
+        }
+        let service:any = await this.appEntityService.getService(appEntityName);
+        if(this.copyActionModel && Object.keys(this.copyActionModel).length > 0) {
+            if(service['Get'] && service['Get'] instanceof Function){
+                let tempContext:any = Util.deepCopy(this.context);
+                tempContext[appEntityName] = node.srfkey;
+                let targetData = await service.Get(tempContext,{}, false);
+                let uiservice:any = await new UIService().getService(appEntityName);
+                let result: any[] = ViewTool.calcActionItemAuthState(targetData.data,this.copyActionModel,uiservice);
+                return this.copyActionModel;
+            }else{
+                console.warn("获取数据异常");
+                return this.copyActionModel;
+            }
+        }
     }
 
     /**

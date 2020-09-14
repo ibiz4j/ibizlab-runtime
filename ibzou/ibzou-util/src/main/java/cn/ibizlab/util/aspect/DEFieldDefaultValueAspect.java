@@ -213,7 +213,7 @@ public class DEFieldDefaultValueAspect
     private void fillPreFieldValue(String fieldname ,  DEPredefinedFieldType preFieldType ,EntityBase et , String actionName,String logicValue ,AuthenticationUser curUser) throws Exception {
         Object fieldValue = et.get(fieldname);
         //为预置属性进行赋值
-        if( actionName.equalsIgnoreCase("create")||
+        if( actionName.toLowerCase().startsWith("create") ||
                 preFieldType== DEPredefinedFieldType.UPDATEDATE|| preFieldType== DEPredefinedFieldType.UPDATEMAN||
                 preFieldType== DEPredefinedFieldType.UPDATEMANNAME){
 

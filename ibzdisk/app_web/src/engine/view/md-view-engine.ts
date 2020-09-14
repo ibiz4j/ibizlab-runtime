@@ -144,6 +144,9 @@ export default class MDViewEngine extends ViewEngine {
         if (Object.is(eventName, 'beforeload')) {
             this.MDCtrlBeforeLoad(args)
         }
+        if (Object.is(eventName, 'remove')) {
+            this.MDCtrlRemove(args)
+        }
     }
 
     /**
@@ -454,5 +457,13 @@ export default class MDViewEngine extends ViewEngine {
         return this.getMDCtrl().transformData(arg);
     }
 
-
+    /**
+     * 多数据部件删除后
+     *
+     * @param {*} [arg={}]
+     * @memberof MDViewEngine
+     */
+    public MDCtrlRemove(arg: any = {}): void {
+        this.view.$emit('drdatasremove', arg);
+    }
 }

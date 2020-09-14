@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SysUserRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserRole-Create-all')")
     @ApiOperation(value = "新建用户角色关系", tags = {"用户角色关系" },  notes = "新建用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles")
-    public ResponseEntity<SysUserRoleDTO> create(@RequestBody SysUserRoleDTO sysuserroledto) {
+    public ResponseEntity<SysUserRoleDTO> create(@Validated @RequestBody SysUserRoleDTO sysuserroledto) {
         SysUserRole domain = sysuserroleMapping.toDomain(sysuserroledto);
 		sysuserroleService.create(domain);
         SysUserRoleDTO dto = sysuserroleMapping.toDto(domain);

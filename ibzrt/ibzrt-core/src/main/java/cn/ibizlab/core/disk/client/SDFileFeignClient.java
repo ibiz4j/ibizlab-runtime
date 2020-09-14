@@ -59,7 +59,7 @@ public interface SDFileFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
     Boolean save(@RequestBody SDFile sdfile);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/savebatch")
     Boolean saveBatch(@RequestBody List<SDFile> sdfiles);
 
 

@@ -5,14 +5,14 @@
         <i v-if=" item.iconcls && !Object.is(item.iconcls, '')" :class="item.iconcls"></i>
         <img v-else-if="item.icon && !Object.is(item.icon, '')" :src="item.icon" />
         <span class="app-quick-item-label">{{item.label}}</span>
-        <span v-show="isSelectedItem(item) && counterService && counterService.counterData && counterService.counterData[item.codename]" class="app-quick-item-counter">{{itemTag(item)}}</span>
+        <span v-show="isSelectedItem(item) && counterService && counterService.counterData && counterService.counterData[item.codename.toLowerCase()]" class="app-quick-item-counter">{{itemTag(item)}}</span>
       </span>
       <el-dropdown v-if="item.children" style="outline: none !important;" trigger="click" @command="handleCommand($event,item)">
         <span :style="{color:item.color}" :class="{'app-seleted-item':isSelectedItem(item)}">
           <i v-if=" item.iconcls && !Object.is(item.iconcls, '')" :class="item.iconcls"></i>
           <img v-else-if="item.icon && !Object.is(item.icon, '')" :src="item.icon" />
           <span class="app-quick-item-label">{{item.label}}</span>
-          <span v-show="isSelectedItem(item) && counterService && counterService.counterData && counterService.counterData[item.codename]" class="app-quick-item-counter">{{itemTag(item)}}</span>
+          <span v-show="isSelectedItem(item) && counterService && counterService.counterData && counterService.counterData[item.codename.toLowerCase()]" class="app-quick-item-counter">{{itemTag(item)}}</span>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-for="childitem in item.children" :command="childitem" :key="childitem.id">
@@ -65,7 +65,6 @@ export default class AppQuickGroup extends Vue {
      */
     get renderArray(){
       if(this.items && this.items.length >0){
-        this.selectedUiItem = this.items[0];
         this.handleClick(this.items[0]);
         return this.handleDataSet(this.items)
       }else{
@@ -75,7 +74,7 @@ export default class AppQuickGroup extends Vue {
 
     public itemTag(item:any){
       if(this.counterService && this.counterService.counterData && item.codename){
-        return this.counterService.counterData[item.codename];
+        return this.counterService.counterData[item.codename.toLowerCase()];
       }else{
         return "";
       }
@@ -145,6 +144,9 @@ export default class AppQuickGroup extends Vue {
      * @memberof AppQuickGroup
      */
     public handleClick($event:any,isswitch:boolean = true){
+      if(this.selectedUiItem && (this.selectedUiItem.id === $event.id)){
+        return;
+      }
       this.$emit('valuechange',$event);
       if(isswitch){
         this.selectedUiItem = $event;

@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.ou.domain.SysEmployee;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.ou.mapper.SysEmployeeMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -75,6 +77,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     }
 
     @Override
+    @Transactional
     public void createBatch(List<SysEmployee> list) {
         list.forEach(item->fillParentData(item));
         this.saveBatch(list,batchSize);
@@ -84,13 +87,14 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     @Transactional
     public boolean update(SysEmployee et) {
         fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getUserid())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getUserid())))
             return false;
         CachedBeanCopier.copy(get(et.getUserid()),et);
         return true;
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<SysEmployee> list) {
         list.forEach(item->fillParentData(item));
         updateBatchById(list,batchSize);
@@ -104,6 +108,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -157,6 +162,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<SysEmployee> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
@@ -164,6 +170,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<SysEmployee> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
@@ -298,6 +305,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
         else
            return entities;
     }
+
 
 }
 

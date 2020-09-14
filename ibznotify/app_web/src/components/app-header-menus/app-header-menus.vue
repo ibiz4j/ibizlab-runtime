@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header-menus">
+  <div class="app-header-menus" v-if="isShow">
     <div v-for="(menu,index) in menus" :key="index" class="app-header-menu-item text" @click="openWindow(menu)">
       <div class="app-header-menu-item-icon">
         <i :class="menu.iconcls" :aria-hidden="true" />
@@ -19,6 +19,14 @@ import { Environment } from '@/environments/environment';
 })
 export default class AppHeaderMenus extends Vue {
 
+  /**
+   * 是否显示
+   *
+   * @type {boolean}
+   * @memberof AppHeaderMenus
+   */
+  public isShow:boolean = Environment.devMode;
+  
   /**
    * 菜单数据
    * 
@@ -41,7 +49,7 @@ export default class AppHeaderMenus extends Vue {
       {
           name: "ibizstudio",
           title: "components.appHeaderMenus.ibizstudio.title",
-          url: `${Environment.StudioUrl}?#/common_slnindex/srfkeys=${Environment.SlnId}/sysdesign_psdevslnsysmodeltreeexpview`,
+          url: `${Environment.StudioUrl}?#/common_mosindex/srfkeys=${Environment.SysId}`,
           iconcls: 'fa fa-wrench',
       },
       {

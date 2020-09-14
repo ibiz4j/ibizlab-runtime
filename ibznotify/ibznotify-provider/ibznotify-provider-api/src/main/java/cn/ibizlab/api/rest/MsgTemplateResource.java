@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class MsgTemplateResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Create-all')")
     @ApiOperation(value = "新建消息模板", tags = {"消息模板" },  notes = "新建消息模板")
 	@RequestMapping(method = RequestMethod.POST, value = "/msgtemplates")
-    public ResponseEntity<MsgTemplateDTO> create(@RequestBody MsgTemplateDTO msgtemplatedto) {
+    public ResponseEntity<MsgTemplateDTO> create(@Validated @RequestBody MsgTemplateDTO msgtemplatedto) {
         MsgTemplate domain = msgtemplateMapping.toDomain(msgtemplatedto);
 		msgtemplateService.create(domain);
         MsgTemplateDTO dto = msgtemplateMapping.toDto(domain);

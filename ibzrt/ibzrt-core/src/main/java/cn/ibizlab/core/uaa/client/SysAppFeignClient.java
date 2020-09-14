@@ -59,7 +59,7 @@ public interface SysAppFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/sysapps/save")
     Boolean save(@RequestBody SysApp sysapp);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysapps/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/sysapps/savebatch")
     Boolean saveBatch(@RequestBody List<SysApp> sysapps);
 
 

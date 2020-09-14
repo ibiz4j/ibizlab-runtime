@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class WFSystemDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String pssystemid;
 
     /**
@@ -38,6 +42,7 @@ public class WFSystemDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "pssystemname")
     @JsonProperty("pssystemname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String pssystemname;
 
 
@@ -51,4 +56,5 @@ public class WFSystemDTO extends DTOBase implements Serializable {
 
 
 }
+
 

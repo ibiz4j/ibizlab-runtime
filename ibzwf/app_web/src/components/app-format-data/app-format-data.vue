@@ -72,10 +72,14 @@ export default class AppFormatData extends Vue {
           return result;
         } 
       } else if (this.format){
+        let date: any = moment(this.data);
+        if(!date._isValid) {
+          return this.data;
+        }
         if(this.format.indexOf('%1$t') !== -1){
-          return moment(this.data).format("YYYY-MM-DD HH:mm:ss");
+          return date.format("YYYY-MM-DD HH:mm:ss");
         }else{
-          return moment(this.data).format(this.format);
+          return date.format(this.format);
         }
       }else{
         return this.data;

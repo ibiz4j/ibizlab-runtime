@@ -59,7 +59,7 @@ public interface WFMemberFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
     Boolean save(@RequestBody WFMember wfmember);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/savebatch")
     Boolean saveBatch(@RequestBody List<WFMember> wfmembers);
 
 

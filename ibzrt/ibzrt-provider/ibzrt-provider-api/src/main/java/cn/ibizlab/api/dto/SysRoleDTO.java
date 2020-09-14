@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class SysRoleDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "roleid")
     @JsonProperty("roleid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String roleid;
 
     /**
@@ -38,6 +42,7 @@ public class SysRoleDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "rolename")
     @JsonProperty("rolename")
+    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
     private String rolename;
 
     /**
@@ -46,6 +51,7 @@ public class SysRoleDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String memo;
 
     /**
@@ -54,6 +60,7 @@ public class SysRoleDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "proleid")
     @JsonProperty("proleid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String proleid;
 
     /**
@@ -62,6 +69,7 @@ public class SysRoleDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "prolename")
     @JsonProperty("prolename")
+    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
     private String prolename;
 
     /**
@@ -109,4 +117,5 @@ public class SysRoleDTO extends DTOBase implements Serializable {
 
 
 }
+
 

@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SysRoleResource {
     @PreAuthorize("hasPermission(this.sysroleMapping.toDomain(#sysroledto),'ibzuaa-SysRole-Create')")
     @ApiOperation(value = "新建系统角色", tags = {"系统角色" },  notes = "新建系统角色")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles")
-    public ResponseEntity<SysRoleDTO> create(@RequestBody SysRoleDTO sysroledto) {
+    public ResponseEntity<SysRoleDTO> create(@Validated @RequestBody SysRoleDTO sysroledto) {
         SysRole domain = sysroleMapping.toDomain(sysroledto);
 		sysroleService.create(domain);
         SysRoleDTO dto = sysroleMapping.toDto(domain);

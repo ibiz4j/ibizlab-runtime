@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "value_key")
     @JsonProperty("value_key")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String valueKey;
 
     /**
@@ -38,6 +42,8 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "catalog_id")
     @JsonProperty("catalog_id")
+    @NotBlank(message = "[目录代码]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String catalogId;
 
     /**
@@ -46,6 +52,8 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "catalog_name")
     @JsonProperty("catalog_name")
+    @NotBlank(message = "[目录]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String catalogName;
 
     /**
@@ -54,6 +62,8 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "value")
     @JsonProperty("value")
+    @NotBlank(message = "[代码值]不允许为空!")
+    @Size(min = 0, max = 40, message = "内容长度必须小于等于[40]")
     private String value;
 
     /**
@@ -62,6 +72,8 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "label")
     @JsonProperty("label")
+    @NotBlank(message = "[名称]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String label;
 
     /**
@@ -70,6 +82,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "parent")
     @JsonProperty("parent")
+    @Size(min = 0, max = 40, message = "内容长度必须小于等于[40]")
     private String parent;
 
     /**
@@ -78,6 +91,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "filter")
     @JsonProperty("filter")
+    @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
     private String filter;
 
     /**
@@ -86,6 +100,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "cls")
     @JsonProperty("cls")
+    @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
     private String cls;
 
     /**
@@ -94,6 +109,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "icon_class")
     @JsonProperty("icon_class")
+    @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
     private String iconClass;
 
     /**
@@ -126,6 +142,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "extension")
     @JsonProperty("extension")
+    @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
     private String extension;
 
     /**
@@ -236,4 +253,5 @@ public class DictOptionDTO extends DTOBase implements Serializable {
 
 
 }
+
 

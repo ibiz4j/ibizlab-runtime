@@ -1,4 +1,13 @@
 /**
+ * 获取部门成员
+ * 
+ * @param state 
+ */
+export const getDepartmentPersonnel = (state: any) => () => {
+    return state.departmentPersonnel;
+}
+
+/**
  * 获取代码表对象
  * 
  * @param state 

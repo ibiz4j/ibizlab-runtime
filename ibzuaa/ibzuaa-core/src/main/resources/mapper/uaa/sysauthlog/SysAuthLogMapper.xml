@@ -16,7 +16,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="SysAuthLogResultMap" type="cn.ibizlab.core.uaa.domain.SysAuthLog" autoMapping="true">
-        <id property="logid" column="logid" /><!--主键字段映射-->
+		<id property="logid" column="logid" /><!--主键字段映射-->
             
 		
     </resultMap>

@@ -255,7 +255,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
     public onViewDatasChange($event: any): void {
         if($event.length>0){
           $event.forEach((item:any,index:any) => {
-              let srfmajortext = item['personname'];
+              let srfmajortext = item.srfmajortext?item.srfmajortext:item['personname'];
               if(srfmajortext){
                 Object.assign($event[index],{srfmajortext: srfmajortext});
               }

@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class WFREModelResource {
 
     @ApiOperation(value = "新建流程模型", tags = {"流程模型" },  notes = "新建流程模型")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels")
-    public ResponseEntity<WFREModelDTO> create(@RequestBody WFREModelDTO wfremodeldto) {
+    public ResponseEntity<WFREModelDTO> create(@Validated @RequestBody WFREModelDTO wfremodeldto) {
         WFREModel domain = wfremodelMapping.toDomain(wfremodeldto);
 		wfremodelService.create(domain);
         WFREModelDTO dto = wfremodelMapping.toDto(domain);

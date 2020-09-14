@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SDFileResource {
     @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledto),'ibzdisk-SDFile-Create')")
     @ApiOperation(value = "新建文件", tags = {"文件" },  notes = "新建文件")
 	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles")
-    public ResponseEntity<SDFileDTO> create(@RequestBody SDFileDTO sdfiledto) {
+    public ResponseEntity<SDFileDTO> create(@Validated @RequestBody SDFileDTO sdfiledto) {
         SDFile domain = sdfileMapping.toDomain(sdfiledto);
 		sdfileService.create(domain);
         SDFileDTO dto = sdfileMapping.toDto(domain);

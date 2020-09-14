@@ -214,7 +214,8 @@ export default class AppSpan extends Vue {
             this.text = Number(number.toFixed(this.precision)).toLocaleString('en-US')+ ' '+ this.unitName;   
         }else if(Object.is(this.dataType,"FLOAT") || Object.is(this.dataType,"DECIMAL")){
             let number:any = Number(this.value);
-            this.text = number.toFixed(this.precision);
+            const decimalCnt:number = this.value.toString().split('.').length > 1 ? this.value.toString().split('.')[1].length : 0;
+            this.text = (Number(this.precision) === 0 && decimalCnt !== 0) ? number.toFixed(decimalCnt) : number.toFixed(this.precision);
         }else {
             this.text = this.value;
         }

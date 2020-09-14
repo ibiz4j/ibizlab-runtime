@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "id")
     @JsonProperty("id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String id;
 
     /**
@@ -38,6 +42,8 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "job_id")
     @JsonProperty("job_id")
+    @NotBlank(message = "[任务ID]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String jobId;
 
     /**
@@ -46,6 +52,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "address")
     @JsonProperty("address")
+    @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
     private String address;
 
     /**
@@ -54,6 +61,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "handler")
     @JsonProperty("handler")
+    @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
     private String handler;
 
     /**
@@ -62,6 +70,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "param")
     @JsonProperty("param")
+    @Size(min = 0, max = 512, message = "内容长度必须小于等于[512]")
     private String param;
 
     /**
@@ -70,6 +79,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "fail_retry_count")
     @JsonProperty("fail_retry_count")
+    @NotNull(message = "[失败重试次数]不允许为空!")
     private Integer failRetryCount;
 
     /**
@@ -78,6 +88,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "trigger_code")
     @JsonProperty("trigger_code")
+    @NotNull(message = "[触发器调度返回码]不允许为空!")
     private Integer triggerCode;
 
     /**
@@ -86,6 +97,8 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "trigger_type")
     @JsonProperty("trigger_type")
+    @NotBlank(message = "[触发器调度类型]不允许为空!")
+    @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
     private String triggerType;
 
     /**
@@ -94,6 +107,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "trigger_msg")
     @JsonProperty("trigger_msg")
+    @Size(min = 0, max = 1048576, message = "内容长度必须小于等于[1048576]")
     private String triggerMsg;
 
     /**
@@ -103,6 +117,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "create_time" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
+    @NotNull(message = "[创建时间]不允许为空!")
     private Timestamp createTime;
 
 
@@ -180,4 +195,5 @@ public class JobsLogDTO extends DTOBase implements Serializable {
 
 
 }
+
 

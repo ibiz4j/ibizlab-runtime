@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class SysAuthLogResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Create-all')")
     @ApiOperation(value = "新建认证日志", tags = {"认证日志" },  notes = "新建认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
-    public ResponseEntity<SysAuthLogDTO> create(@RequestBody SysAuthLogDTO sysauthlogdto) {
+    public ResponseEntity<SysAuthLogDTO> create(@Validated @RequestBody SysAuthLogDTO sysauthlogdto) {
         SysAuthLog domain = sysauthlogMapping.toDomain(sysauthlogdto);
 		sysauthlogService.create(domain);
         SysAuthLogDTO dto = sysauthlogMapping.toDto(domain);

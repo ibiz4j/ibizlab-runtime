@@ -33,6 +33,7 @@ mock.onGet('/appdata').reply((config: any) => {
           // 当前用户条线代码
          srfsectorbc:""
         },
+        enablepermissionvalid:false,
         unires:["RESOURCE1","RESOURCE2"],
          //当前用户所有组织部门标识
          srforgsections:[{"srforgsectorid":"5bd1ecf4d3c31e31cb66373df56b852f","srforgsectorname":"项目一部"},{"srforgsectorid":"2ad1ecf4d3c31e31cb66373df56b852f","srforgsectorname":"项目二部"}]

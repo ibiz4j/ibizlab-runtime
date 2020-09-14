@@ -1,4 +1,6 @@
 import { Store } from 'vuex';
+import EntityService from '@/service/entity-service';
+
 
 /**
  * 计数器服务基类
@@ -16,6 +18,51 @@ export default class CounterService {
      * @memberof CounterService
      */
     private $store: Store<any> | null = null;
+    
+    /**
+     * 当前计数器数据
+     * 
+     * @protected
+     * @type {*}
+     * @memberof  CounterService
+     */
+    protected counterData:any ={};
+
+    /**
+     * 应用实体数据服务
+     *
+     * @protected
+     * @type {EntityService}
+     * @memberof CounterService
+     */    
+    protected appEntityService:EntityService = new EntityService();
+
+    /**
+     * 当前计数器导航上下文
+     * 
+     * @protected
+     * @type {*}
+     * @memberof  CounterService
+     */
+    protected context:any ={};
+
+    /**
+     * 当前计数器导航参数
+     * 
+     * @protected
+     * @type {*}
+     * @memberof  CounterService
+     */
+    protected viewparams:any ={};
+
+    /**
+     * 当前计数器定时器对象
+     * 
+     * @protected
+     * @type {*}
+     * @memberof  CounterService
+     */
+    protected timer:any;
 
     /**
      * Creates an instance of CounterService.
@@ -25,6 +72,8 @@ export default class CounterService {
      */
     constructor(opts: any = {}) {
         this.$store = opts.$store;
+        this.context = opts.context?opts.context:{};
+        this.viewparams = opts.viewparams?opts.viewparams:{};
     }
 
     /**
@@ -49,5 +98,13 @@ export default class CounterService {
         return (window as any)['counterServiceRegister'].getService(name);
     }
 
-   
+    /**
+     * 销毁计数器
+     *
+     * @memberof ActionCounterCounterServiceBase
+     */
+    public destroyCounter(){
+        if(this.timer) clearInterval(this.timer);
+    }
+  
 }

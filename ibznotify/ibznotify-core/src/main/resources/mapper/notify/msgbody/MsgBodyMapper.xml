@@ -16,7 +16,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="MsgBodyResultMap" type="cn.ibizlab.core.notify.domain.MsgBody" autoMapping="true">
-        <id property="msgId" column="msgid" /><!--主键字段映射-->
+		<id property="msgId" column="msgid" /><!--主键字段映射-->
 		<result property="templateParams" column="templparams" />
 		<result property="msgLinkPc" column="msglink_pc" />
             

@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.ou.domain.SysOrganization;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.ou.mapper.SysOrganizationMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -69,6 +71,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     }
 
     @Override
+    @Transactional
     public void createBatch(List<SysOrganization> list) {
         list.forEach(item->fillParentData(item));
         this.saveBatch(list,batchSize);
@@ -78,7 +81,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public boolean update(SysOrganization et) {
         fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("orgid",et.getOrgid())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("orgid",et.getOrgid())))
             return false;
         sysdepartmentService.saveByOrgid(et.getOrgid(),et.getDepts());
         CachedBeanCopier.copy(get(et.getOrgid()),et);
@@ -86,6 +89,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<SysOrganization> list) {
         list.forEach(item->fillParentData(item));
         updateBatchById(list,batchSize);
@@ -100,6 +104,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -147,6 +152,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<SysOrganization> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
@@ -154,6 +160,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<SysOrganization> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
@@ -245,6 +252,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
         else
            return entities;
     }
+
 
 }
 

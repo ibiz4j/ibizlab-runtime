@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "id")
     @JsonProperty("id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String id;
 
     /**
@@ -38,6 +42,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "label")
     @JsonProperty("label")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String label;
 
     /**
@@ -46,6 +51,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "systemid")
     @JsonProperty("systemid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String systemid;
 
     /**
@@ -54,6 +60,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "fullname")
     @JsonProperty("fullname")
+    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
     private String fullname;
 
     /**
@@ -62,6 +69,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "type")
     @JsonProperty("type")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String type;
 
     /**
@@ -70,6 +78,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "group")
     @JsonProperty("group")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String group;
 
     /**
@@ -78,6 +87,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "icon")
     @JsonProperty("icon")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String icon;
 
     /**
@@ -94,6 +104,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "addr")
     @JsonProperty("addr")
+    @Size(min = 0, max = 300, message = "内容长度必须小于等于[300]")
     private String addr;
 
 
@@ -163,4 +174,5 @@ public class SysAppDTO extends DTOBase implements Serializable {
 
 
 }
+
 

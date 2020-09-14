@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class WFTaskResource {
 
     @ApiOperation(value = "新建工作流任务", tags = {"工作流任务" },  notes = "新建工作流任务")
 	@RequestMapping(method = RequestMethod.POST, value = "/wftasks")
-    public ResponseEntity<WFTaskDTO> create(@RequestBody WFTaskDTO wftaskdto) {
+    public ResponseEntity<WFTaskDTO> create(@Validated @RequestBody WFTaskDTO wftaskdto) {
         WFTask domain = wftaskMapping.toDomain(wftaskdto);
 		wftaskService.create(domain);
         WFTaskDTO dto = wftaskMapping.toDto(domain);

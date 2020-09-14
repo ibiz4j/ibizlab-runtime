@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "新建组成员", tags = {"组成员" },  notes = "新建组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/systeammembers")
-    public ResponseEntity<SysTeamMemberDTO> create(@RequestBody SysTeamMemberDTO systeammemberdto) {
+    public ResponseEntity<SysTeamMemberDTO> create(@Validated @RequestBody SysTeamMemberDTO systeammemberdto) {
         SysTeamMember domain = systeammemberMapping.toDomain(systeammemberdto);
 		systeammemberService.create(domain);
         SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);

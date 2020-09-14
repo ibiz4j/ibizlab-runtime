@@ -30,6 +30,8 @@
               :viewdata="JSON.stringify(selection.context)"
               :viewparam="JSON.stringify(selection.viewparam)"
               @viewdataschange="onViewDatasChange"
+              @drdatasaved="onDrViewDatasChange"
+              @drdatasremove="onDrViewDatasChange"
               @viewdatasactivated="viewDatasActivated"
               @viewload="onViewLoad">
             </component>
@@ -497,6 +499,16 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
      */
     public onViewDatasChange($event: any): void {
         this.$emit('selectionchange', $event);
+    }
+
+    /**
+     * 视图数据变化
+     *
+     * @param {*} $event
+     * @memberof TreeExpViewtreeexpbarBase
+     */
+    public onDrViewDatasChange($event: any): void {
+        this.viewState.next({ tag: 'treeexpbar_tree', action: 'refresh_current' });
     }
 
     /**

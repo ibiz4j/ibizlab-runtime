@@ -7,7 +7,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="WFUserResultMap" type="cn.ibizlab.core.workflow.domain.WFUser" autoMapping="true">
-        <id property="id" column="userid" /><!--主键字段映射-->
+		<id property="id" column="userid" /><!--主键字段映射-->
 		<result property="firstname" column="username" />
 		<result property="displayname" column="personname" />
             

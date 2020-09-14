@@ -59,7 +59,7 @@ public interface SysUserFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
     Boolean save(@RequestBody SysUser sysuser);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/sysusers/savebatch")
     Boolean saveBatch(@RequestBody List<SysUser> sysusers);
 
 

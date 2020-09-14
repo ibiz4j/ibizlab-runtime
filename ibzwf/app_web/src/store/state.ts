@@ -7,6 +7,7 @@ export const rootstate: any = {
     pageMetas: [],
     historyPathList: [],
     codelists: [],
+    departmentPersonnel:[],
     selectTheme: '',
     selectFont: '',
     appdata: '',

@@ -23,25 +23,13 @@ public class PayTrade{
     @JsonProperty("total_amount")
     private String totalAmount;
     /**
-     * 支付类型
-     */
-    @JSONField(name = "trade_type")
-    @JsonProperty("trade_type")
-    private String tradeType;
-    /**
      * 订单号
      */
     @JSONField(name = "out_trade_no")
     @JsonProperty("out_trade_no")
     private String outTradeNo;
     /**
-     * 应用标识
-     */
-    @JSONField(name = "app_id")
-    @JsonProperty("app_id")
-    private String appId;
-    /**
-     * 支付平台接入标识
+     * rt开放平台配置标识(OpenAccessId或AppId)
      */
     @JSONField(name = "access_id")
     @JsonProperty("access_id")

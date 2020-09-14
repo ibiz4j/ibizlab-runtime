@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "permissionid")
     @JsonProperty("permissionid")
+    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
     private String permissionid;
 
     /**
@@ -38,6 +42,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "permissionname")
     @JsonProperty("permissionname")
+    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
     private String permissionname;
 
     /**
@@ -46,6 +51,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "permissiontype")
     @JsonProperty("permissiontype")
+    @Size(min = 0, max = 60, message = "内容长度必须小于等于[60]")
     private String permissiontype;
 
     /**
@@ -54,6 +60,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String pssystemid;
 
     /**
@@ -109,4 +116,5 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
 
 
 }
+
 

@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "subject")
     @JsonProperty("subject")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String subject;
 
     /**
@@ -38,6 +42,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "total_amount")
     @JsonProperty("total_amount")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String totalAmount;
 
     /**
@@ -46,6 +51,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "trade_name")
     @JsonProperty("trade_name")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String tradeName;
 
     /**
@@ -54,6 +60,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "trade_type")
     @JsonProperty("trade_type")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String tradeType;
 
     /**
@@ -62,6 +69,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "trade_status")
     @JsonProperty("trade_status")
+    @Size(min = 0, max = 60, message = "内容长度必须小于等于[60]")
     private String tradeStatus;
 
     /**
@@ -70,6 +78,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "out_trade_no")
     @JsonProperty("out_trade_no")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String outTradeNo;
 
     /**
@@ -78,6 +87,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "trade_id")
     @JsonProperty("trade_id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String tradeId;
 
     /**
@@ -86,6 +96,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "app_id")
     @JsonProperty("app_id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String appId;
 
     /**
@@ -94,6 +105,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "access_name")
     @JsonProperty("access_name")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String accessName;
 
     /**
@@ -102,6 +114,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "access_id")
     @JsonProperty("access_id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String accessId;
 
 
@@ -179,4 +192,5 @@ public class PayTradeDTO extends DTOBase implements Serializable {
 
 
 }
+
 

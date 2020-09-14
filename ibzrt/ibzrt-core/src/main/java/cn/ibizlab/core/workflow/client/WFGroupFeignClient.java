@@ -59,7 +59,7 @@ public interface WFGroupFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
     Boolean save(@RequestBody WFGroup wfgroup);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/savebatch")
     Boolean saveBatch(@RequestBody List<WFGroup> wfgroups);
 
 

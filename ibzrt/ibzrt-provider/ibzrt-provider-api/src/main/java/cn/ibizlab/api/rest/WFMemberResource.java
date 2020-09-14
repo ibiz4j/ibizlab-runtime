@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,7 +49,7 @@ public class WFMemberResource {
 
     @ApiOperation(value = "新建成员", tags = {"成员" },  notes = "新建成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers")
-    public ResponseEntity<WFMemberDTO> create(@RequestBody WFMemberDTO wfmemberdto) {
+    public ResponseEntity<WFMemberDTO> create(@Validated @RequestBody WFMemberDTO wfmemberdto) {
         WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
 		wfmemberService.create(domain);
         WFMemberDTO dto = wfmemberMapping.toDto(domain);

@@ -59,7 +59,7 @@ public interface WFProcessNodeFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/wfprocessnodes/save")
     Boolean save(@RequestBody WFProcessNode wfprocessnode);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessnodes/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessnodes/savebatch")
     Boolean saveBatch(@RequestBody List<WFProcessNode> wfprocessnodes);
 
 

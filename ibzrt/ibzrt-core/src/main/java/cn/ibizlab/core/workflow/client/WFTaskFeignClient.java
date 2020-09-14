@@ -59,7 +59,7 @@ public interface WFTaskFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/wftasks/save")
     Boolean save(@RequestBody WFTask wftask);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/wftasks/save")
+    @RequestMapping(method = RequestMethod.POST, value = "/wftasks/savebatch")
     Boolean saveBatch(@RequestBody List<WFTask> wftasks);
 
 

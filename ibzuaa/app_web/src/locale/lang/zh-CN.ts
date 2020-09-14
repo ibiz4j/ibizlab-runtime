@@ -31,7 +31,10 @@ export default {
             deleteError: "删除失败",
             delDataFail: "删除数据失败",
             noData: "暂无数据",
-            startsuccess:"启动成功"
+            startsuccess:"启动成功",
+            loadmore:"加载更多",
+            nomore:"没有更多了",
+            other:"其他"
         },
         local:{
             new: "新建",
@@ -45,6 +48,8 @@ export default {
             totle: "共",
             noData: "无数据",
             valueVail: "值不能为空",
+            group:"分组",
+            other:"其他",
             notConfig: {
                 fetchAction: "视图表格fetchAction参数未配置",
                 removeAction: "视图表格removeAction参数未配置",

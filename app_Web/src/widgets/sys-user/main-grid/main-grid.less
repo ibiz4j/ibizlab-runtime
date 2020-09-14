@@ -116,7 +116,61 @@
         }
     }
 }
+.cell-indeterminate {
+  >div>label {
+    >span {
+      .el-checkbox__inner {
+        background-color: #409eff;
+        border-color: #409eff;
+      }
+      .el-checkbox__inner:before {
+        content: "";
+        position: absolute;
+        display: block;
+        background-color: #fff;
+        height: 2px;
+        transform: scale(.5);
+        left: 0;
+        right: 0;
+        top: 5px;
+      }
+    }
+    >span.is-checked {
+      .el-checkbox__inner {
+        background-color: #409eff;
+        border-color: #409eff;
+      }
+      .el-checkbox__inner:after {
+        border: 0px;
+      }
+    }
+  }
+}
 
-
+.cell-select-all {
+  >div>label {
+    >span {
+      .el-checkbox__inner {
+        background-color: #409eff;
+        border-color: #409eff;
+      }
+      .el-checkbox__inner:after {
+        box-sizing: content-box;
+        content: "";
+        border: 1px solid #fff;
+        border-left: 0;
+        border-top: 0;
+        height: 7px;
+        left: 4px;
+        position: absolute;
+        top: 1px;
+        transform: rotate(45deg) scaleY(1);
+        width: 3px;
+        transition: transform .15s ease-in .05s;
+        transform-origin: center;
+      }
+    }
+  }
+}
 
 // this is less

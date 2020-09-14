@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.task.domain.JobsInfo;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.task.mapper.JobsInfoMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -59,6 +61,7 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     }
 
     @Override
+    @Transactional
     public void createBatch(List<JobsInfo> list) {
         this.saveBatch(list,batchSize);
     }
@@ -66,13 +69,14 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public boolean update(JobsInfo et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("id",et.getId())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("id",et.getId())))
             return false;
         CachedBeanCopier.copy(get(et.getId()),et);
         return true;
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<JobsInfo> list) {
         updateBatchById(list,batchSize);
     }
@@ -85,6 +89,7 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -137,12 +142,14 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<JobsInfo> list) {
         saveOrUpdateBatch(list,batchSize);
         return true;
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<JobsInfo> list) {
         saveOrUpdateBatch(list,batchSize);
     }
@@ -150,17 +157,17 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public JobsInfo start(JobsInfo et) {
-        et.set("Status","0");
         et.set("Last_time","0");
+        et.set("Status","0");
         update(et);
         return et;
     }
     @Override
     @Transactional
     public JobsInfo stop(JobsInfo et) {
-        et.set("Next_time","0");
         et.set("Last_time","0");
         et.set("Status","1");
+        et.set("Next_time","0");
         update(et);
         return et;
     }
@@ -204,6 +211,7 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 }

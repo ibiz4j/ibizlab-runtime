@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.ou.domain.SysPost;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.ou.mapper.SysPostMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -68,6 +70,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     }
 
     @Override
+    @Transactional
     public void createBatch(List<SysPost> list) {
         this.saveBatch(list,batchSize);
     }
@@ -75,13 +78,14 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     @Override
     @Transactional
     public boolean update(SysPost et) {
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("postid",et.getPostid())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("postid",et.getPostid())))
             return false;
         CachedBeanCopier.copy(get(et.getPostid()),et);
         return true;
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<SysPost> list) {
         updateBatchById(list,batchSize);
     }
@@ -94,6 +98,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -139,12 +144,14 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<SysPost> list) {
         saveOrUpdateBatch(list,batchSize);
         return true;
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<SysPost> list) {
         saveOrUpdateBatch(list,batchSize);
     }
@@ -189,6 +196,7 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 }

@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class JobsLockDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "id")
     @JsonProperty("id")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String id;
 
     /**
@@ -38,6 +42,8 @@ public class JobsLockDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "name")
     @JsonProperty("name")
+    @NotBlank(message = "[名称]不允许为空!")
+    @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
     private String name;
 
     /**
@@ -46,6 +52,8 @@ public class JobsLockDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "owner")
     @JsonProperty("owner")
+    @NotBlank(message = "[持有者]不允许为空!")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String owner;
 
     /**
@@ -55,6 +63,7 @@ public class JobsLockDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "create_time" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
+    @NotNull(message = "[创建时间]不允许为空!")
     private Timestamp createTime;
 
 
@@ -84,4 +93,5 @@ public class JobsLockDTO extends DTOBase implements Serializable {
 
 
 }
+
 

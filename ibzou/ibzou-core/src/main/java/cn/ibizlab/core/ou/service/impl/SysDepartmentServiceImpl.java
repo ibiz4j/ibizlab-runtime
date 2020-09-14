@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.ou.domain.SysDepartment;
@@ -35,6 +36,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.core.ou.mapper.SysDepartmentMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
@@ -71,6 +73,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     }
 
     @Override
+    @Transactional
     public void createBatch(List<SysDepartment> list) {
         list.forEach(item->fillParentData(item));
         this.saveBatch(list,batchSize);
@@ -80,13 +83,14 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Transactional
     public boolean update(SysDepartment et) {
         fillParentData(et);
-        if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("deptid",et.getDeptid())))
+         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("deptid",et.getDeptid())))
             return false;
         CachedBeanCopier.copy(get(et.getDeptid()),et);
         return true;
     }
 
     @Override
+    @Transactional
     public void updateBatch(List<SysDepartment> list) {
         list.forEach(item->fillParentData(item));
         updateBatchById(list,batchSize);
@@ -100,6 +104,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     }
 
     @Override
+    @Transactional
     public void removeBatch(Collection<String> idList) {
         removeByIds(idList);
     }
@@ -146,6 +151,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     }
 
     @Override
+    @Transactional
     public boolean saveBatch(Collection<SysDepartment> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
@@ -153,6 +159,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     }
 
     @Override
+    @Transactional
     public void saveBatch(List<SysDepartment> list) {
         list.forEach(item->fillParentData(item));
         saveOrUpdateBatch(list,batchSize);
@@ -296,6 +303,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         else
            return entities;
     }
+
 
 }
 

@@ -736,7 +736,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public handleMenusResource(inputMenus:Array<any>){
-        if(Environment.enablePermissionValid){
+        if(this.$store.getters['authresource/getEnablePermissionValid']){
             this.computedEffectiveMenus(inputMenus);
             this.computeParentMenus(inputMenus);
         }

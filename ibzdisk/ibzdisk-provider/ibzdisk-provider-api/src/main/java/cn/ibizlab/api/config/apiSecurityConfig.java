@@ -3,7 +3,6 @@ package cn.ibizlab.api.config;
 import cn.ibizlab.util.security.AuthenticationEntryPoint;
 import cn.ibizlab.util.security.AuthorizationTokenFilter;
 import cn.ibizlab.util.service.AuthenticationUserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -57,7 +56,7 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
     private String previewpath;
     
     @Value("${ibiz.auth.excludesPattern:}")
-    private String excludesPattern;
+    private String[] excludesPattern;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -124,11 +123,9 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/"+uploadpath).permitAll()
                 .antMatchers("/"+previewpath+"/**").permitAll();
                 
-        if (StringUtils.isNotBlank(excludesPattern)) {
-            for (String excludePattern : excludesPattern.split("\\s*,\\s*")) {
-                authenticationTokenFilter.addExcludePattern(excludePattern);
-                httpSecurity.authorizeRequests().antMatchers(excludePattern).permitAll();
-            }
+        for (String excludePattern : excludesPattern) {
+            authenticationTokenFilter.addExcludePattern(excludePattern);
+            httpSecurity.authorizeRequests().antMatchers(excludePattern).permitAll();
         }
                 
         // 所有请求都需要认证

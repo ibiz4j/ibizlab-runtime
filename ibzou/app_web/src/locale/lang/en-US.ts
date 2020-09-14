@@ -29,7 +29,10 @@ export default {
             deleteError: "Failed to delete",
             delDataFail: "Failed to delete data",
             noData: "No data",
-            startsuccess:"Start successful"
+            startsuccess:"Start successful",
+            loadmore:"Load more",
+            nomore:"No more",
+            other:"other"
         },
         local:{
             new: "New",
@@ -43,6 +46,8 @@ export default {
             totle: "totle",
             noData: "No data",
             valueVail: "Value cannot be empty",
+            group:"Group",
+            other:"Other",
             notConfig: {
                 fetchAction: "The view table fetchaction parameter is not configured",
                 removeAction: "The view table removeaction parameter is not configured",

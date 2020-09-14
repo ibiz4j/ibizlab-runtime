@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.validation.annotation.Validated;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -49,7 +50,7 @@ public class MsgUserAccountResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Create-all')")
     @ApiOperation(value = "新建绑定消息账号", tags = {"绑定消息账号" },  notes = "新建绑定消息账号")
 	@RequestMapping(method = RequestMethod.POST, value = "/msguseraccounts")
-    public ResponseEntity<MsgUserAccountDTO> create(@RequestBody MsgUserAccountDTO msguseraccountdto) {
+    public ResponseEntity<MsgUserAccountDTO> create(@Validated @RequestBody MsgUserAccountDTO msguseraccountdto) {
         MsgUserAccount domain = msguseraccountMapping.toDomain(msguseraccountdto);
 		msguseraccountService.create(domain);
         MsgUserAccountDTO dto = msguseraccountMapping.toDto(domain);

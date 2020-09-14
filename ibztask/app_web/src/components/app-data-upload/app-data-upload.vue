@@ -1,5 +1,5 @@
 <template>
-    <div class="app-data-upload-view">
+    <div class="app-data-upload-view" v-loading.fullscreen="isUploading" element-loading-background="rgba(57, 57, 57, 0.2)">
         <el-row style="margin-top:24px" :gutter="20">
             <el-col :span="4">
                 <el-button type="primary" @click="handleUpLoad">{{$t('components.appDataUploadView.selectfile')}}</el-button>
@@ -13,6 +13,7 @@
             </el-col>
         </el-row>
         <el-divider></el-divider>
+        <el-progress class="progress" v-show="isUploading" :text-inside="true" :stroke-width="14" :percentage="uploadProgress"></el-progress>
         <el-row style="height:480px;padding: 0px 12px;">
             <div class="data-info-content" >
                 <template v-if="importDataArray.length >0 && isUploading === false">
@@ -50,6 +51,7 @@ import XLSX from 'xlsx';
 import CodeListService from "@service/app/codelist-service";
 import EntityService from '@/service/entity-service';
 import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
+import { Environment } from '@/environments/environment';
 
 @Component({
 })
@@ -191,6 +193,22 @@ export default class AppDataUploadView extends Vue {
      * @memberof AppDataUploadView
      */
     public allFieldMap:Map<string,any> = new Map();
+    
+    /**
+     * 上传服务器数据切片数
+     *
+     * @type {number}
+     * @memberof AppDataUploadView
+     */
+    public sliceUploadCnt: number = Environment.sliceUploadCnt;
+
+    /**
+     * 上传服务器进度条百分比
+     *
+     * @type {number}
+     * @memberof AppDataUploadView
+     */
+    public uploadProgress: number = 0;
 
     /**
      * 视图参数变化
@@ -282,10 +300,29 @@ export default class AppDataUploadView extends Vue {
         this.transformData(this.importDataArray,tempDataArray);
         this.hasImported = true;
         this.isUploading = true;
+        this.uploadProgress = 0;
         this.importDataArray = [];
+        this.sliceUploadService(tempDataArray, 0);
+    }
+
+    /**
+     * 数据切片上传
+     *
+     * @memberof AppDataUploadView
+     */
+    public sliceUploadService(dataArray: Array<any>, cnt: number) {
+        if(cnt > dataArray.length) {
+            this.isUploading = false;
+            this.uploadProgress = 100;
+            return;
+        }
+        let sliceArray: Array<any> = [];
+        if(dataArray) {
+            sliceArray = dataArray.slice(cnt, cnt+this.sliceUploadCnt);
+        }
         try{
             this.entityService.getService(this.viewparams.serviceName).then((service:any) =>{
-            service.ImportData(this.viewdata,{name:this.importId,importData:tempDataArray}).then((res:any) =>{
+            service.ImportData(this.viewdata,{name:this.importId,importData:sliceArray}).then((res:any) =>{
                 const result:any = res.data;
                 if(result && result.rst !== 0){
                     this.promptInfo = (this.$t('components.appDataUploadView.importfailed') as string);
@@ -294,7 +331,8 @@ export default class AppDataUploadView extends Vue {
                 }
                 this.importSuccessData = result.data;
                 this.promptInfo = (this.$t('components.appDataUploadView.completed') as string);
-                this.isUploading = false;
+                this.uploadProgress = Number((cnt / dataArray.length * 100).toFixed(2));
+                this.sliceUploadService(dataArray, cnt + this.sliceUploadCnt);
             }).catch((error:any) =>{
                 this.isUploading = false;
                 this.promptInfo = (this.$t('components.appDataUploadView.importfailed') as string);
@@ -311,7 +349,6 @@ export default class AppDataUploadView extends Vue {
             console.error(error);
         };
     }
-
     /**
      * 导出excel
      *

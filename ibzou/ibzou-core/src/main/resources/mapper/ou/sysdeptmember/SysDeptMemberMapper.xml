@@ -16,7 +16,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="SysDeptMemberResultMap" type="cn.ibizlab.core.ou.domain.SysDeptMember" autoMapping="true">
-        <id property="memberid" column="memberid" /><!--主键字段映射-->
+		<id property="memberid" column="memberid" /><!--主键字段映射-->
 		<result property="deptid" column="deptid" />
 		<result property="userid" column="userid" />
 		<result property="postid" column="postid" />

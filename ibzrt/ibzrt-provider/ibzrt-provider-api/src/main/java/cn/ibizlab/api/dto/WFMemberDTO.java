@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.alibaba.fastjson.annotation.JSONField;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
@@ -30,6 +33,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String memberid;
 
     /**
@@ -38,6 +42,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "membername")
     @JsonProperty("membername")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String membername;
 
     /**
@@ -46,6 +51,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "groupid")
     @JsonProperty("groupid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String groupid;
 
     /**
@@ -54,6 +60,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "groupname")
     @JsonProperty("groupname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String groupname;
 
     /**
@@ -62,6 +69,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String userid;
 
     /**
@@ -70,6 +78,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String personname;
 
     /**
@@ -78,6 +87,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String orgid;
 
     /**
@@ -86,6 +96,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String orgname;
 
     /**
@@ -94,6 +105,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String mdeptid;
 
     /**
@@ -102,6 +114,7 @@ public class WFMemberDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
+    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
     private String mdeptname;
 
 
@@ -131,4 +144,5 @@ public class WFMemberDTO extends DTOBase implements Serializable {
 
 
 }
+
 

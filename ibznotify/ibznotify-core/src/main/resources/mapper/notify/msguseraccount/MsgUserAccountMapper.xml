@@ -16,7 +16,7 @@
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
     <resultMap id="MsgUserAccountResultMap" type="cn.ibizlab.core.notify.domain.MsgUserAccount" autoMapping="true">
-        <id property="id" column="authid" /><!--主键字段映射-->
+		<id property="id" column="authid" /><!--主键字段映射-->
 		<result property="identityType" column="identity_type" />
             
 		
