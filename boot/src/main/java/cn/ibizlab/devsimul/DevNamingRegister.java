@@ -48,6 +48,9 @@ public class DevNamingRegister implements ApplicationRunner {
     private String rtgw;
 
 
+    @Value("${spring.cloud.nacos.discovery.group:DEFAULT_GROUP}")
+    private String group;
+
 
     @Override
     public void run(ApplicationArguments args) {
@@ -58,18 +61,18 @@ public class DevNamingRegister implements ApplicationRunner {
 
             NamingService naming = NamingFactory.createNamingService(properties);
 
-            Instance instance = naming.selectOneHealthyInstance(serviceName);
+            Instance instance = naming.selectOneHealthyInstance(serviceName,group);
             if(instance!=null&&(!StringUtils.isEmpty(instance.getIp())))
             {
-                naming.registerInstance(rtgw, instance);
-                naming.registerInstance(uaaapi, instance);
-                naming.registerInstance(ouapi, instance);
-                naming.registerInstance(wfapi, instance);
-                naming.registerInstance(taskapi, instance);
-                naming.registerInstance(dictapi, instance);
-                naming.registerInstance(diskapi, instance);
-                naming.registerInstance(notifyapi, instance);
-                naming.registerInstance(payapi, instance);
+                naming.registerInstance(rtgw, group, instance);
+                naming.registerInstance(uaaapi, group, instance);
+                naming.registerInstance(ouapi, group, instance);
+                naming.registerInstance(wfapi, group, instance);
+                naming.registerInstance(taskapi, group, instance);
+                naming.registerInstance(dictapi, group, instance);
+                naming.registerInstance(diskapi, group, instance);
+                naming.registerInstance(notifyapi, group, instance);
+                naming.registerInstance(payapi, group, instance);
             }
         }
         catch (Exception ex) {
