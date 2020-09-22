@@ -308,6 +308,23 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_usercode_like: new FormItemModel({ caption: '工号', detailType: 'FORMITEM', name: 'n_usercode_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_personname_like: new FormItemModel({ caption: '姓名', detailType: 'FORMITEM', name: 'n_personname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_mdeptname_like: new FormItemModel({ caption: '部门', detailType: 'FORMITEM', name: 'n_mdeptname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -317,39 +334,22 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_usercode_like: [
             { type: 'string', message: '工号 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '工号 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '工号 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '工号 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_usercode_like.required, type: 'string', message: '工号 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_usercode_like.required, type: 'string', message: '工号 值不能为空', trigger: 'blur' },
         ],
         n_personname_like: [
             { type: 'string', message: '姓名 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '姓名 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '姓名 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '姓名 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_personname_like.required, type: 'string', message: '姓名 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_personname_like.required, type: 'string', message: '姓名 值不能为空', trigger: 'blur' },
         ],
         n_mdeptname_like: [
             { type: 'string', message: '部门 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '部门 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '部门 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_mdeptname_like.required, type: 'string', message: '部门 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_mdeptname_like.required, type: 'string', message: '部门 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_usercode_like: new FormItemModel({ caption: '工号', detailType: 'FORMITEM', name: 'n_usercode_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_personname_like: new FormItemModel({ caption: '姓名', detailType: 'FORMITEM', name: 'n_personname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_mdeptname_like: new FormItemModel({ caption: '部门', detailType: 'FORMITEM', name: 'n_mdeptname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_usercode_like 值

@@ -16,10 +16,6 @@ import java.util.*;
 @Service("SysEmployeeExService")
 public class SysEmployeeExService extends SysEmployeeServiceImpl {
 
-    @Override
-    protected Class currentModelClass() {
-        return com.baomidou.mybatisplus.core.toolkit.ReflectionKit.getSuperClassGenericType(this.getClass().getSuperclass(), 1);
-    }
 
     /**
      * 自定义行为[InitPwd]用户扩展

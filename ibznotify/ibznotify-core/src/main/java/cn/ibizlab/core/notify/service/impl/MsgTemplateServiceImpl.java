@@ -189,7 +189,9 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
         if(!ObjectUtils.isEmpty(et.getAccessId())){
             cn.ibizlab.core.notify.domain.MsgOpenAccess openaccess=et.getOpenaccess();
             if(ObjectUtils.isEmpty(openaccess)){
-                cn.ibizlab.core.notify.domain.MsgOpenAccess majorEntity=msgopenaccessService.get(et.getAccessId());
+                cn.ibizlab.core.notify.domain.MsgOpenAccess majorEntity=msgopenaccessService.getById(et.getAccessId());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setOpenaccess(majorEntity);
                 openaccess=majorEntity;
             }

@@ -124,7 +124,7 @@ Boot on port:40001
 #### Docker + Docker-compose
 
 本系统提供了docker镜像，方便快速部署  
-docker pull [ibiz4j/ibizlab-runtime:1.0.22-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
+docker pull [ibiz4j/ibizlab-runtime:1.0.23-RC1](https://hub.docker.com/repository/docker/ibiz4j/ibizlab-runtime) 
 
 启动基础配套服务，nacos+redis    
 ```

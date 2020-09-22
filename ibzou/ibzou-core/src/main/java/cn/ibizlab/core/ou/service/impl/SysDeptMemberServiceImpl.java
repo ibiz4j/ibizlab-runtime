@@ -215,7 +215,9 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
         if(!ObjectUtils.isEmpty(et.getDeptid())){
             cn.ibizlab.core.ou.domain.SysDepartment dept=et.getDept();
             if(ObjectUtils.isEmpty(dept)){
-                cn.ibizlab.core.ou.domain.SysDepartment majorEntity=sysdepartmentService.get(et.getDeptid());
+                cn.ibizlab.core.ou.domain.SysDepartment majorEntity=sysdepartmentService.getById(et.getDeptid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setDept(majorEntity);
                 dept=majorEntity;
             }
@@ -226,7 +228,9 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
         if(!ObjectUtils.isEmpty(et.getUserid())){
             cn.ibizlab.core.ou.domain.SysEmployee emp=et.getEmp();
             if(ObjectUtils.isEmpty(emp)){
-                cn.ibizlab.core.ou.domain.SysEmployee majorEntity=sysemployeeService.get(et.getUserid());
+                cn.ibizlab.core.ou.domain.SysEmployee majorEntity=sysemployeeService.getById(et.getUserid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setEmp(majorEntity);
                 emp=majorEntity;
             }
@@ -236,7 +240,9 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
         if(!ObjectUtils.isEmpty(et.getPostid())){
             cn.ibizlab.core.ou.domain.SysPost post=et.getPost();
             if(ObjectUtils.isEmpty(post)){
-                cn.ibizlab.core.ou.domain.SysPost majorEntity=syspostService.get(et.getPostid());
+                cn.ibizlab.core.ou.domain.SysPost majorEntity=syspostService.getById(et.getPostid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setPost(majorEntity);
                 post=majorEntity;
             }

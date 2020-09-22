@@ -189,7 +189,9 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
         if(!ObjectUtils.isEmpty(et.getCatalogId())){
             cn.ibizlab.core.dict.domain.DictCatalog catalog=et.getCatalog();
             if(ObjectUtils.isEmpty(catalog)){
-                cn.ibizlab.core.dict.domain.DictCatalog majorEntity=dictcatalogService.get(et.getCatalogId());
+                cn.ibizlab.core.dict.domain.DictCatalog majorEntity=dictcatalogService.getById(et.getCatalogId());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setCatalog(majorEntity);
                 catalog=majorEntity;
             }

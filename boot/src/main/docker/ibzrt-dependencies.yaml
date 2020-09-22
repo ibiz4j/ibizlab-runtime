@@ -11,12 +11,7 @@ services:
     command: redis-server
     networks:
       - agent_network
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-        reservations:
-          memory: 256M
+
   nacos:
     image: nacos/nacos-server:latest
     container_name: nacos-standalone
@@ -27,12 +22,7 @@ services:
       - "8848:8848"
     networks:
       - agent_network
-    deploy:
-      resources:
-        limits:
-          memory: 256M
-        reservations:
-          memory: 512M
+
 networks:
   agent_network:
     attachable: true

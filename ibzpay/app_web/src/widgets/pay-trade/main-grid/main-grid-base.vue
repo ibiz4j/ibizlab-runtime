@@ -133,7 +133,7 @@ import AppCenterService from "@service/app/app-center-service";
 import PayTradeService from '@/service/pay-trade/pay-trade-service';
 import MainService from './main-grid-service';
 import PayTradeUIService from '@/uiservice/pay-trade/pay-trade-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

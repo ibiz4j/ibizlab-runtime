@@ -145,7 +145,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysUserService from '@/service/sys-user/sys-user-service';
 import MainService from './main-grid-service';
 import SysUserUIService from '@/uiservice/sys-user/sys-user-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

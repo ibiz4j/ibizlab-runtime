@@ -116,7 +116,9 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                     // 文件操作
                    .antMatchers("/"+downloadpath+"/**").permitAll()
                    .antMatchers("/"+uploadpath).permitAll()
-                   .antMatchers("/"+previewpath+"/**").permitAll();
+                   .antMatchers("/"+previewpath+"/**").permitAll()
+                       .antMatchers("/net-disk/download/**").permitAll()
+                       .antMatchers("/net-disk/**view/**").permitAll();
                    
 
         for (String excludePattern : excludesPattern) {

@@ -87,7 +87,6 @@
          * 表单对象
          *
          * @type {*}
-         * @memberof Login
          */
         public form: any = {loginname: 'ibzadmin', password: '123456'};
 
@@ -96,7 +95,6 @@
          * 应用名称
          *
          * @type {string}
-         * @memberof Login
          */
         public appTitle: string = Environment.AppTitle;
 
@@ -104,14 +102,12 @@
          * 值规则
          *
          * @type {*}
-         * @memberof Login
          */
         public rules = {};
 
         /**
          * 设置值规则
          *
-         * @memberof Login
          */
         public setRules() {
             this.rules = {
@@ -125,14 +121,15 @@
         };
 
         /**
-         * 生命周期Create
-         *
-         * @memberof Login
+         * 生命周期created
          */
         public created() {
             this.setRules();
         }
 
+        /**
+         * 生命周期mounted
+         */
         public mounted() {
             if (this.getCookie("loginname") && this.getCookie("loginname") !== 'undefined') {
                 this.form.loginname = this.getCookie("loginname");
@@ -150,8 +147,6 @@
 
         /**
          * 监听语言变化
-         *
-         * @memberof Login
          */
         @Watch('$i18n.locale')
         onLocaleChange(newval: any, val: any) {
@@ -160,8 +155,6 @@
 
         /**
          * 登陆处理
-         *
-         * @memberof Login
          */
         public handleSubmit(): void {
             const form: any = this.$refs.loginForm;
@@ -214,8 +207,6 @@
 
         /**
          * 重置页面
-         *
-         * @memberof Login
          */
         public goReset(): void {
             const _this = this;
@@ -224,6 +215,8 @@
 
         /**
          * 跳转注册页面
+         *
+         * @memberof Login
          */
         public goRegister(): void {
             const _this = this;
@@ -435,8 +428,7 @@
             // 截取地址，拼接需要部分组成新地址
             const scheme = window.location.protocol;
             const host = window.location.host;
-            let baseUrl: any;
-            baseUrl = scheme + "//" + host;
+            let baseUrl: any = scheme + "//" + host;
             const port = window.location.port;
             if (port) {
                 if (port == '80' || port == '443') {
@@ -447,7 +439,6 @@
             } else {
                 baseUrl += "/";
             }
-            // console.log(baseUrl);
 
             return baseUrl;
         }

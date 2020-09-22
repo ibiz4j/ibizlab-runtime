@@ -45,9 +45,6 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
     @Autowired
     SysDepartmentFeignClient sysDepartmentFeignClient;
 
-    @Autowired
-    @Lazy
-    protected cn.ibizlab.core.ou.service.ISysEmployeeService sysemployeeService;
 
     @Override
     public boolean create(SysDepartment et) {

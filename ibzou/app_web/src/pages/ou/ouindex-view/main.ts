@@ -5,6 +5,7 @@ import App from '@/App.vue';
 import ElementUi from 'element-ui';
 import ViewUI from 'view-design';
 import ibizLab from 'ibiz-vue-lib';
+import axios from "axios";
 import { Interceptors } from '@/utils';
 import  {Print} from '@/utils/print';
 import i18n from '@/locale'
@@ -27,13 +28,18 @@ import { PortletComponent } from '@/portlet-register';
 import store from '@/store';
 import router from './router';
 
+const win: any = window;
+win.axios = axios;
+
 Vue.config.errorHandler = function (err: any, vm: any, info: any) {
   console.log(err);
 }
+
 Vue.config.productionTip = false;
 Vue.use(Print);
 Vue.use(ibizLab);
 Vue.use(Vuex);
+Vue.use(win.AVUE);
 Vue.use(VueRouter);;
 Vue.use(ElementUi, {
   i18n: (key: any, value: any) => i18n.t(key, value)

@@ -1,6 +1,6 @@
 <template>
     <!-- 消息弹出框绘制开始 -->
-    <el-badge :is-dot="showIsDot" class="item">
+    <el-badge :is-dot="showIsDot" class="app-message-popover">
         <el-popover
                 placement="bottom"
                 trigger="click"

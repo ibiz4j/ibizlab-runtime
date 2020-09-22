@@ -23,310 +23,297 @@ import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.baomidou.mybatisplus.annotation.*;
-import cn.ibizlab.util.domain.EntityMP;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import cn.ibizlab.util.domain.EntityClient;
 
 /**
- * 实体[人员]
+ * ServiceApi [人员] 对象
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZEMP",resultMap = "SysEmployeeResultMap")
-public class SysEmployee extends EntityMP implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Data
+public class SysEmployee extends EntityClient implements Serializable {
 
     /**
      * 用户标识
      */
     @DEField(isKeyField=true)
-    @TableId(value= "userid",type=IdType.ASSIGN_UUID)
     @JSONField(name = "userid")
     @JsonProperty("userid")
     private String userid;
+
     /**
      * 用户全局名
      */
-    @TableField(value = "username")
     @JSONField(name = "username")
     @JsonProperty("username")
     private String username;
+
     /**
      * 姓名
      */
-    @TableField(value = "personname")
     @JSONField(name = "personname")
     @JsonProperty("personname")
     private String personname;
+
     /**
      * 用户工号
      */
-    @TableField(value = "usercode")
     @JSONField(name = "usercode")
     @JsonProperty("usercode")
     private String usercode;
+
     /**
      * 登录名
      */
-    @TableField(value = "loginname")
     @JSONField(name = "loginname")
     @JsonProperty("loginname")
     private String loginname;
+
     /**
      * 密码
      */
-    @TableField(value = "password")
     @JSONField(name = "password")
     @JsonProperty("password")
     private String password;
+
     /**
      * 区属
      */
-    @TableField(value = "domains")
     @JSONField(name = "domains")
     @JsonProperty("domains")
     private String domains;
+
     /**
      * 主部门
      */
-    @TableField(value = "mdeptid")
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
     private String mdeptid;
+
     /**
      * 主部门代码
      */
-    @TableField(value = "mdeptcode")
     @JSONField(name = "mdeptcode")
     @JsonProperty("mdeptcode")
     private String mdeptcode;
+
     /**
      * 主部门名称
      */
-    @TableField(value = "mdeptname")
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
     private String mdeptname;
+
     /**
      * 业务编码
      */
-    @TableField(value = "bcode")
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
     private String bcode;
+
     /**
      * 岗位标识
      */
-    @TableField(value = "postid")
     @JSONField(name = "postid")
     @JsonProperty("postid")
     private String postid;
+
     /**
      * 岗位代码
      */
-    @TableField(value = "postcode")
     @JSONField(name = "postcode")
     @JsonProperty("postcode")
     private String postcode;
+
     /**
      * 岗位名称
      */
-    @TableField(value = "postname")
     @JSONField(name = "postname")
     @JsonProperty("postname")
     private String postname;
+
     /**
      * 单位
      */
     @DEField(preType = DEPredefinedFieldType.ORGID)
-    @TableField(value = "orgid")
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
     private String orgid;
+
     /**
      * 单位代码
      */
-    @TableField(value = "orgcode")
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
     private String orgcode;
+
     /**
      * 单位名称
      */
     @DEField(preType = DEPredefinedFieldType.ORGNAME)
-    @TableField(value = "orgname")
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
     private String orgname;
+
     /**
      * 昵称别名
      */
-    @TableField(value = "nickname")
     @JSONField(name = "nickname")
     @JsonProperty("nickname")
     private String nickname;
+
     /**
      * 性别
      */
-    @TableField(value = "sex")
     @JSONField(name = "sex")
     @JsonProperty("sex")
     private String sex;
+
     /**
      * 证件号码
      */
-    @TableField(value = "certcode")
     @JSONField(name = "certcode")
     @JsonProperty("certcode")
     private String certcode;
+
     /**
      * 联系方式
      */
-    @TableField(value = "phone")
     @JSONField(name = "phone")
     @JsonProperty("phone")
     private String phone;
+
     /**
      * 出生日期
      */
-    @TableField(value = "birthday")
     @JsonFormat(pattern="yyyy-MM-dd", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "birthday" , format="yyyy-MM-dd")
     @JsonProperty("birthday")
     private Timestamp birthday;
+
     /**
      * 邮件
      */
-    @TableField(value = "email")
     @JSONField(name = "email")
     @JsonProperty("email")
     private String email;
+
     /**
      * 社交账号
      */
-    @TableField(value = "avatar")
     @JSONField(name = "avatar")
     @JsonProperty("avatar")
     private String avatar;
+
     /**
      * 地址
      */
-    @TableField(value = "addr")
     @JSONField(name = "addr")
     @JsonProperty("addr")
     private String addr;
+
     /**
      * 照片
      */
-    @TableField(value = "usericon")
     @JSONField(name = "usericon")
     @JsonProperty("usericon")
     private String usericon;
+
     /**
      * ip地址
      */
-    @TableField(value = "ipaddr")
     @JSONField(name = "ipaddr")
     @JsonProperty("ipaddr")
     private String ipaddr;
+
     /**
      * 样式
      */
-    @TableField(value = "theme")
     @JSONField(name = "theme")
     @JsonProperty("theme")
     private String theme;
+
     /**
      * 语言
      */
-    @TableField(value = "lang")
     @JSONField(name = "lang")
     @JsonProperty("lang")
     private String lang;
+
     /**
      * 字号
      */
-    @TableField(value = "fontsize")
     @JSONField(name = "fontsize")
     @JsonProperty("fontsize")
     private String fontsize;
+
     /**
      * 备注
      */
-    @TableField(value = "memo")
     @JSONField(name = "memo")
     @JsonProperty("memo")
     private String memo;
+
     /**
      * 保留
      */
-    @TableField(value = "reserver")
     @JSONField(name = "reserver")
     @JsonProperty("reserver")
     private String reserver;
+
     /**
      * 排序
      */
-    @TableField(value = "showorder")
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
     private Integer showorder;
+
     /**
      * 逻辑有效
      */
     @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
-    @TableLogic(value= "1",delval="0")
-    @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
     private Integer enable;
+
     /**
      * 创建时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @TableField(value = "createdate" , fill = FieldFill.INSERT)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
+
     /**
      * 最后修改时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @TableField(value = "updatedate")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
+
     /**
      * 
      */
-    @JsonIgnore
-    @JSONField(serialize = false)
-    @TableField(exist = false)
+    @JSONField(name = "maindept")
+    @JsonProperty("maindept")
     private cn.ibizlab.core.ou.domain.SysDepartment maindept;
 
     /**
      * 
      */
-    @JsonIgnore
-    @JSONField(serialize = false)
-    @TableField(exist = false)
+    @JSONField(name = "org")
+    @JsonProperty("org")
     private cn.ibizlab.core.ou.domain.SysOrganization org;
 
     /**
      * 
      */
-    @JsonIgnore
-    @JSONField(serialize = false)
-    @TableField(exist = false)
+    @JSONField(name = "post")
+    @JsonProperty("post")
     private cn.ibizlab.core.ou.domain.SysPost post;
+
 
 
 
@@ -580,7 +567,18 @@ public class SysEmployee extends EntityMP implements Serializable {
         this.modify("showorder",showorder);
     }
 
-
+    /**
+     * 复制当前对象数据到目标对象(粘贴重置)
+     * @param targetEntity 目标数据对象
+     * @param bIncEmpty  是否包括空值
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
+        this.reset("userid");
+        return super.copyTo(targetEntity,bIncEmpty);
+    }
 }
 
 

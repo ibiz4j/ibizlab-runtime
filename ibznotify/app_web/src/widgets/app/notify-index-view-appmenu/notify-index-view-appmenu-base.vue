@@ -122,6 +122,7 @@ import AppCenterService from "@service/app/app-center-service";
 import NotifyIndexViewService from './notify-index-view-appmenu-service';
 import NotifyIndexViewModel from './notify-index-view-appmenu-model';
 import { Environment } from '@/environments/environment';
+import AuthService from '@/authservice/auth-service';
 
 
 @Component({
@@ -386,6 +387,15 @@ export default class NotifyIndexViewBase extends Vue implements ControlInterface
      * @memberof NotifyIndexViewBase
      */
     public counterdata: any = {};
+
+    /**
+     * 建构权限服务对象
+     *
+     * @type {AuthService}
+     * @memberof NotifyIndexViewBase
+     */
+    public authService:AuthService = new AuthService({ $store: this.$store });
+
     /**
      * vue  生命周期
      *
@@ -622,7 +632,7 @@ export default class NotifyIndexViewBase extends Vue implements ControlInterface
      */
     public computedEffectiveMenus(inputMenus:Array<any>){
         inputMenus.forEach((_item:any) =>{
-            if(!this.$store.getters['authresource/getAuthMenu'](_item)){
+            if(!this.authService.getMenusPermission(_item)){
                 _item.hidden = true;
                 if (_item.items && _item.items.length > 0) {
                     this.computedEffectiveMenus(_item.items);

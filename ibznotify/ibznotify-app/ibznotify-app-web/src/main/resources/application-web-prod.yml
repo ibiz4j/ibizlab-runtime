@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 30007
 #Log配置
 logging:
   level:
@@ -66,6 +66,10 @@ zuul:
     ou_sys_dept:
       path: /sysdepartments/**
       serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    lite-core:
+      path: /lite/**
+      serviceId: ${ibiz.ref.service.lite:ibzlite-api}
       stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

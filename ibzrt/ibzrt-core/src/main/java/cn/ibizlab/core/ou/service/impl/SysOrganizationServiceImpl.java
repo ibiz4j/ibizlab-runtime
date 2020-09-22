@@ -45,9 +45,6 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
     @Autowired
     SysOrganizationFeignClient sysOrganizationFeignClient;
 
-    @Autowired
-    @Lazy
-    protected cn.ibizlab.core.ou.service.ISysEmployeeService sysemployeeService;
 
     @Override
     public boolean create(SysOrganization et) {

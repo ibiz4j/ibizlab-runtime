@@ -256,7 +256,18 @@ public class SysDepartment extends EntityClient implements Serializable {
         this.modify("leadername",leadername);
     }
 
-
+    /**
+     * 复制当前对象数据到目标对象(粘贴重置)
+     * @param targetEntity 目标数据对象
+     * @param bIncEmpty  是否包括空值
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
+        this.reset("deptid");
+        return super.copyTo(targetEntity,bIncEmpty);
+    }
 }
 
 

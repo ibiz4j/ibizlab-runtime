@@ -13,6 +13,7 @@ import { utilServiceRegister } from '@/utilservice/util-service-register';
 import { entityServiceRegister } from '@/service/entity-service-register';
 import { counterServiceRegister } from '@/counter/counter-service-register';
 import { codeListRegister } from '@codelist/codelist-register';
+import { messageServiceRegister } from '@/message/message-service-register';
 
 import InputBox from './components/input-box/input-box.vue'
 import AppKeepAlive from './components/app-keep-alive/app-keep-alive.vue'
@@ -87,11 +88,15 @@ import ActionTimeline from './components/action-timeline/action-timeline.vue'
 import CronEditor from './components/cron-editor/cron-editor.vue'
 import AppMessagePopover from './components/app-message-popover/app-message-popover.vue'
 import AppPanelField from './components/app-panel-field/app-panel-field.vue'
-import AppPanelItem from './components/app-panel-item/app-panel-item.vue'
+import AppPanelButton from './components/app-panel-button/app-panel-button.vue'
 import AppDepartmentPersonnel from './components/app-department-personnel/app-department-personnel.vue'
 import DiskFileUpload from './components/disk-file-upload/disk-file-upload.vue'
 import AvueCustomForm  from './components/avue-custom-form/avue-custom-form.vue'
 import DiskImageUpload from './components/disk-image-upload/disk-image-upload.vue'
+import AppFormPart from './components/app-form-part/app-form-part.vue'
+import AppAlert from './components/app-alert/app-alert.vue'
+import AppAlertGroup from './components/app-alert-group/app-alert-group.vue'
+import AppRawItem from './components/app-rawitem/app-rawitem.vue'
 
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
@@ -105,6 +110,8 @@ window['entityServiceRegister'] = entityServiceRegister;
 window['counterServiceRegister'] = counterServiceRegister;
 // 全局挂载代码表服务注册中心
 window['codeListRegister'] = codeListRegister;
+// 全局挂载视图消息服务注册中心
+window['messageServiceRegister'] = messageServiceRegister;
 
 export const AppComponents = {
     install(v: any, opt: any) {
@@ -118,7 +125,7 @@ export const AppComponents = {
         v.prototype.$viewTool = ViewTool;
         v.prototype.$uiActionTool = UIActionTool;
         v.component('app-department-personnel',AppDepartmentPersonnel);
-        v.component('app-panel-item',AppPanelItem);
+        v.component('app-panel-button',AppPanelButton);
         v.component('app-panel-field',AppPanelField);
         v.component('app-full-scren',AppFullScren);
         v.component('app-lock-scren',AppLockScren);
@@ -198,5 +205,9 @@ export const AppComponents = {
         v.component('disk-file-upload', DiskFileUpload);
         v.component('avue-custom-form', AvueCustomForm);
         v.component('disk-image-upload', DiskImageUpload);
+        v.component('app-form-part', AppFormPart);
+        v.component('app-alert', AppAlert);
+        v.component('app-alert-group', AppAlertGroup);
+        v.component('app-rawitem',AppRawItem);
     },
 };

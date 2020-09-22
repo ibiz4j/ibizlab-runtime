@@ -123,7 +123,7 @@ import AppCenterService from "@service/app/app-center-service";
 import JobsRegistryService from '@/service/jobs-registry/jobs-registry-service';
 import MainService from './main-grid-service';
 import JobsRegistryUIService from '@/uiservice/jobs-registry/jobs-registry-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

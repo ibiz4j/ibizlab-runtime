@@ -39,6 +39,14 @@ export class FormItemModel extends FormDetailModel {
     public enableCond: number | 0 | 1 | 2 | 3 = 3;
 
     /**
+     * 是否必填
+     *
+     * @type {boolean}
+     * @memberof FormItemModel
+     */
+    public required:boolean = false;
+
+    /**
      * Creates an instance of FormItemModel.
      * FormItemModel 实例
      * 
@@ -49,6 +57,7 @@ export class FormItemModel extends FormDetailModel {
         super(opts);
         this.disabled = opts.disabled ? true : false;
         this.enableCond = opts.enableCond;
+        this.required = opts.required;
     }
 
     /**

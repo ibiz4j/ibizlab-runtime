@@ -121,7 +121,10 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 文件操作
                 .antMatchers("/"+downloadpath+"/**").permitAll()
                 .antMatchers("/"+uploadpath).permitAll()
-                .antMatchers("/"+previewpath+"/**").permitAll();
+                .antMatchers("/"+previewpath+"/**").permitAll()
+               .antMatchers("/net-disk/download/**").permitAll()
+               .antMatchers("/net-disk/**view/**").permitAll()
+               .antMatchers("/net-disk/edit/**").permitAll();
                 
         for (String excludePattern : excludesPattern) {
             authenticationTokenFilter.addExcludePattern(excludePattern);

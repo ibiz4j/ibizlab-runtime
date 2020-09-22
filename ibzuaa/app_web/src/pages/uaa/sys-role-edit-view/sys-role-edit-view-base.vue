@@ -13,19 +13,12 @@
                 </i-button>
             <div slot='content'>{{$t('entities.sysrole.editviewtoolbar_toolbar.tbitem3.tip')}}</div>
         </tooltip>
-        <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem5.visabled" :disabled="toolBarModels.tbitem5.disabled" class='' @click="toolbar_click({ tag: 'tbitem5' }, $event)">
-                    <i class='sx-tb-saveandclose'></i>
-                    <span class='caption'>{{$t('entities.sysrole.editviewtoolbar_toolbar.tbitem5.caption')}}</span>
-                </i-button>
-            <div slot='content'>{{$t('entities.sysrole.editviewtoolbar_toolbar.tbitem5.tip')}}</div>
-        </tooltip>
         <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
-                    <i class='fa fa-file-text-o'></i>
-                    <span class='caption'>{{$t('entities.sysrole.editviewtoolbar_toolbar.tbitem12.caption')}}</span>
+                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
+                    <i class='fa fa-sign-out'></i>
+                    <span class='caption'>{{$t('entities.sysrole.editviewtoolbar_toolbar.deuiaction1.caption')}}</span>
                 </i-button>
-            <div slot='content'>{{$t('entities.sysrole.editviewtoolbar_toolbar.tbitem12.tip')}}</div>
+            <div slot='content'>{{$t('entities.sysrole.editviewtoolbar_toolbar.deuiaction1.tip')}}</div>
         </tooltip>
         <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
@@ -201,7 +194,9 @@ export default class SysRoleEditViewBase extends Vue {
             for(let key in this.viewparams){
                 delete this.viewparams[key];
             }
-            Object.assign(this.viewparams, JSON.parse(this.viewparam));
+            if(typeof this.viewparams == 'string') {
+                Object.assign(this.viewparams, JSON.parse(this.viewparam));
+            }
             
         } 
     }
@@ -222,7 +217,7 @@ export default class SysRoleEditViewBase extends Vue {
               _this.engine.load();
               
             });
-        } else if(!Object.is(newVal, oldVal) && _this.refresh() && Object.is(_this.$util.typeOf(_this.refresh()), 'function')) {
+        } else if(!Object.is(newVal, oldVal) && _this.refresh && _this.refresh instanceof Function) {
             _this.refresh();
         }
     }
@@ -271,10 +266,8 @@ export default class SysRoleEditViewBase extends Vue {
     public toolBarModels: any = {
         tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
-        tbitem5: { name: 'tbitem5', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
-
         tbitem6: {  name: 'tbitem6', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem12: { name: 'tbitem12', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        deuiaction1: { name: 'deuiaction1', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
 
         tbitem13: {  name: 'tbitem13', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
         tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
@@ -374,7 +367,9 @@ export default class SysRoleEditViewBase extends Vue {
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         if (!this.viewDefaultUsage && this.viewdata && !Object.is(this.viewdata, '')) {
-            Object.assign(this.context, JSON.parse(this.viewdata));
+            if(typeof this.viewdata == 'string') {
+                Object.assign(this.context, JSON.parse(this.viewdata));
+            }
             if(this.context && this.context.srfparentdename){
                 Object.assign(this.viewparams,{srfparentdename:this.context.srfparentdename});
             }
@@ -585,23 +580,11 @@ export default class SysRoleEditViewBase extends Vue {
         if (Object.is($event.tag, 'tbitem3')) {
             this.toolbar_tbitem3_click(null, '', $event2);
         }
-        if (Object.is($event.tag, 'tbitem5')) {
-            this.toolbar_tbitem5_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem9')) {
-            this.toolbar_tbitem9_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem10')) {
-            this.toolbar_tbitem10_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem12')) {
-            this.toolbar_tbitem12_click(null, '', $event2);
+        if (Object.is($event.tag, 'deuiaction1')) {
+            this.toolbar_deuiaction1_click(null, '', $event2);
         }
         if (Object.is($event.tag, 'tbitem14')) {
             this.toolbar_tbitem14_click(null, '', $event2);
-        }
-        if (Object.is($event.tag, 'tbitem15')) {
-            this.toolbar_tbitem15_click(null, '', $event2);
         }
     }
 
@@ -679,7 +662,7 @@ export default class SysRoleEditViewBase extends Vue {
      * @param {*} [$event]
      * @memberof 
      */
-    public toolbar_tbitem5_click(params: any = {}, tag?: any, $event?: any) {
+    public toolbar_deuiaction1_click(params: any = {}, tag?: any, $event?: any) {
         // 参数
         // 取数
         let datas: any[] = [];
@@ -696,91 +679,7 @@ export default class SysRoleEditViewBase extends Vue {
           datas = [params];
         }
         // 界面行为
-        this.SaveAndExit(datas, contextJO,paramJO,  $event, xData,this,"SysRole");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem9_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.form;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.SaveAndStart(datas, contextJO,paramJO,  $event, xData,this,"SysRole");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem10_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.form;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.ViewWFStep(datas, contextJO,paramJO,  $event, xData,this,"SysRole");
-    }
-
-    /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem12_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.form;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.New(datas, contextJO,paramJO,  $event, xData,this,"SysRole");
+        this.Exit(datas, contextJO,paramJO,  $event, xData,this,"SysRole");
     }
 
     /**
@@ -812,34 +711,6 @@ export default class SysRoleEditViewBase extends Vue {
     }
 
     /**
-     * 逻辑事件
-     *
-     * @param {*} [params={}]
-     * @param {*} [tag]
-     * @param {*} [$event]
-     * @memberof 
-     */
-    public toolbar_tbitem15_click(params: any = {}, tag?: any, $event?: any) {
-        // 参数
-        // 取数
-        let datas: any[] = [];
-        let xData: any = null;
-        // _this 指向容器对象
-        const _this: any = this;
-        let paramJO:any = {};
-        let contextJO:any = {};
-        xData = this.$refs.form;
-        if (xData.getDatas && xData.getDatas instanceof Function) {
-            datas = [...xData.getDatas()];
-        }
-        if(params){
-          datas = [params];
-        }
-        // 界面行为
-        this.Print(datas, contextJO,paramJO,  $event, xData,this,"SysRole");
-    }
-
-    /**
      * 保存
      *
      * @param {any[]} args 当前数据
@@ -866,7 +737,7 @@ export default class SysRoleEditViewBase extends Vue {
     }
 
     /**
-     * 保存并关闭
+     * 关闭
      *
      * @param {any[]} args 当前数据
      * @param {any} contextJO 行为附加上下文
@@ -876,110 +747,13 @@ export default class SysRoleEditViewBase extends Vue {
      * @param {*} [actionContext]  执行行为上下文
      * @memberof SysRoleEditViewBase
      */
-    public SaveAndExit(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        const _this: any = this;
-        if (xData && xData.saveAndExit instanceof Function) {
-            xData.saveAndExit().then((response: any) => {
-                if (!response || response.status !== 200) {
-                    return;
-                }
-                if(window.parent){
-                    window.parent.postMessage([{ ...response.data }],'*');
-                }
-            });
-        } else if (_this.saveAndExit && _this.saveAndExit instanceof Function) {
-            _this.saveAndExit().then((response: any) => {
-                if (!response || response.status !== 200) {
-                    return;
-                }
-                if(window.parent){
-                    window.parent.postMessage([{ ...response.data }],'*');
-                }
-            });
+    public Exit(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
+        this.closeView(args);
+        if(window.parent){
+            window.parent.postMessage([{ ...args }],'*');
         }
     }
-    /**
-     * 开始流程
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof SysRoleEditViewBase
-     */
-    public SaveAndStart(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        const _this: any = this;
-        if (!xData || !(xData.wfstart instanceof Function)) {
-            return;
-        }
-        xData.wfstart(args).then((response: any) => {
-            if (!response || response.status !== 200) {
-                return;
-            }
-            const { data: _data } = response;
-            if(window.parent){
-                window.parent.postMessage({ ..._data },'*');
-            }
-            if (_this.viewdata) {
-                _this.$emit('viewdataschange', [{ ..._data }]);
-                _this.$emit('close');
-            }else if (this.$tabPageExp) {
-                this.$tabPageExp.onClose(this.$route.fullPath);
-            }
-        });
-    }
-    /**
-     * 当前流程步骤
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof SysRoleEditViewBase
-     */
-    public ViewWFStep(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        let _this:any = this;
-        if (!xData || !(xData.wfsubmit instanceof Function)) {
-            return;
-        }
-        xData.wfsubmit(args).then((response: any) => {
-            if (!response || response.status !== 200) {
-                return;
-            }
-            const { data: _data } = response;
 
-            if (_this.viewdata) {
-                _this.$emit('viewdataschange', [{ ..._data }]);
-                _this.$emit('close');
-            } else if (_this.$tabPageExp) {
-                _this.$tabPageExp.onClose(_this.$route.fullPath);
-            }
-        });
-    }
-    /**
-     * 新建
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof SysRoleEditViewBase
-     */
-    public New(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-         const _this: any = this;
-        if (_this.newdata && _this.newdata instanceof Function) {
-            const data: any = {};
-            _this.newdata([{ ...data }],[{ ...data }], params, $event, xData);
-        } else {
-            _this.$Notice.error({ title: '错误', desc: 'newdata 视图处理逻辑不存在，请添加!' });
-        }
-    }
     /**
      * 拷贝
      *
@@ -1007,24 +781,6 @@ export default class SysRoleEditViewBase extends Vue {
         } else {
             Object.assign(this.viewparams,{copymode:true});
         }
-    }
-    /**
-     * 打印
-     *
-     * @param {any[]} args 当前数据
-     * @param {any} contextJO 行为附加上下文
-     * @param {*} [params] 附加参数
-     * @param {*} [$event] 事件源
-     * @param {*} [xData]  执行行为所需当前部件
-     * @param {*} [actionContext]  执行行为上下文
-     * @memberof SysRoleEditViewBase
-     */
-    public Print(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        let _this:any = this;
-        if (!xData || !(xData.print instanceof Function) || !$event) {
-            return ;
-        }
-        xData.print();
     }
 
     /**

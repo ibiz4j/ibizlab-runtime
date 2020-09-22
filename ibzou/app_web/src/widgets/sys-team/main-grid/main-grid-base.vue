@@ -97,7 +97,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysTeamService from '@/service/sys-team/sys-team-service';
 import MainService from './main-grid-service';
 import SysTeamUIService from '@/uiservice/sys-team/sys-team-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

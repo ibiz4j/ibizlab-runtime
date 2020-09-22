@@ -290,7 +290,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysAppService from '@/service/sys-app/sys-app-service';
 import MainService from './main-grid-service';
 import SysAppUIService from '@/uiservice/sys-app/sys-app-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

@@ -149,6 +149,7 @@ public class SearchContextBase implements ISearchContext{
      * 获取用户上下文
      * @return
      */
+    @JsonIgnore
     public Map<String,Object> getSessioncontext() {
         return AuthenticationUser.getAuthenticationUser().getSessionParams();
     }

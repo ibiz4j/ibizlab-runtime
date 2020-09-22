@@ -633,3 +633,10 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
         }
     }];
 });
+
+// 获取视图消息分组信息
+mock.onGet('./assets/json/view-message-group.json').reply((config: any) => {
+    let status = MockAdapter.mockStatus(config);
+    return [status,{
+    }];
+});

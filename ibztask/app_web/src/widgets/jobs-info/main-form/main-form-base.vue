@@ -147,6 +147,7 @@
     :data="data" 
     :context="context"
     :viewparams="viewparams"
+    :formState="formState" 
     :localContext ='{ }' 
     :localParam ='{ }' 
     :disabled="detailsModel.status.disabled" 
@@ -524,6 +525,14 @@ export default class MainBase extends Vue implements ControlInterface {
     public oldData: any = {};
 
     /**
+     * 混入表单数据对象
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public mixinData:any = {};
+
+    /**
      * 表单数据对象
      *
      * @type {*}
@@ -598,134 +607,134 @@ export default class MainBase extends Vue implements ControlInterface {
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfkey: [
             { type: 'string', message: '主键ID 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '主键ID 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '主键ID 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '主键ID 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '主键ID 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '主键ID 值不能为空', trigger: 'blur' },
         ],
         srfmajortext: [
             { type: 'string', message: '执行器任务HANDLER 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '执行器任务HANDLER 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'blur' },
         ],
         srftempmode: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfuf: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfdeid: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfsourcekey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         app: [
             { type: 'string', message: '服务名 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '服务名 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '服务名 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '服务名 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.app.required, type: 'string', message: '服务名 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.app.required, type: 'string', message: '服务名 值不能为空', trigger: 'blur' },
         ],
         handler: [
             { type: 'string', message: '执行器任务HANDLER 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '执行器任务HANDLER 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.handler.required, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.handler.required, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'blur' },
         ],
         cron: [
             { type: 'string', message: '任务执行CRON 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '任务执行CRON 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '任务执行CRON 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '任务执行CRON 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.cron.required, type: 'string', message: '任务执行CRON 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.cron.required, type: 'string', message: '任务执行CRON 值不能为空', trigger: 'blur' },
         ],
         param: [
             { type: 'string', message: '执行器任务参数 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '执行器任务参数 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '执行器任务参数 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '执行器任务参数 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.param.required, type: 'string', message: '执行器任务参数 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.param.required, type: 'string', message: '执行器任务参数 值不能为空', trigger: 'blur' },
         ],
         last_time: [
             { type: 'number', message: '上次调度时间 值必须为数值类型', trigger: 'change' },
             { type: 'number', message: '上次调度时间 值必须为数值类型', trigger: 'blur' },
-            { required: true, type: 'number', message: '上次调度时间 值不能为空', trigger: 'change' },
-            { required: true, type: 'number', message: '上次调度时间 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.last_time.required, type: 'number', message: '上次调度时间 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.last_time.required, type: 'number', message: '上次调度时间 值不能为空', trigger: 'blur' },
         ],
         next_time: [
             { type: 'number', message: '下次调度时间 值必须为数值类型', trigger: 'change' },
             { type: 'number', message: '下次调度时间 值必须为数值类型', trigger: 'blur' },
-            { required: true, type: 'number', message: '下次调度时间 值不能为空', trigger: 'change' },
-            { required: true, type: 'number', message: '下次调度时间 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.next_time.required, type: 'number', message: '下次调度时间 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.next_time.required, type: 'number', message: '下次调度时间 值不能为空', trigger: 'blur' },
         ],
         timeout: [
             { type: 'number', message: '任务执行超时时间（秒） 值必须为数值类型', trigger: 'change' },
             { type: 'number', message: '任务执行超时时间（秒） 值必须为数值类型', trigger: 'blur' },
-            { required: true, type: 'number', message: '任务执行超时时间（秒） 值不能为空', trigger: 'change' },
-            { required: true, type: 'number', message: '任务执行超时时间（秒） 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.timeout.required, type: 'number', message: '任务执行超时时间（秒） 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.timeout.required, type: 'number', message: '任务执行超时时间（秒） 值不能为空', trigger: 'blur' },
         ],
         fail_retry_count: [
             { type: 'number', message: '失败重试次数 值必须为数值类型', trigger: 'change' },
             { type: 'number', message: '失败重试次数 值必须为数值类型', trigger: 'blur' },
-            { required: true, type: 'number', message: '失败重试次数 值不能为空', trigger: 'change' },
-            { required: true, type: 'number', message: '失败重试次数 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.fail_retry_count.required, type: 'number', message: '失败重试次数 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.fail_retry_count.required, type: 'number', message: '失败重试次数 值不能为空', trigger: 'blur' },
         ],
         author: [
             { type: 'string', message: '所有者 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '所有者 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '所有者 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '所有者 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.author.required, type: 'string', message: '所有者 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.author.required, type: 'string', message: '所有者 值不能为空', trigger: 'blur' },
         ],
         remark: [
             { type: 'string', message: '备注 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '备注 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '备注 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '备注 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.remark.required, type: 'string', message: '备注 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.remark.required, type: 'string', message: '备注 值不能为空', trigger: 'blur' },
         ],
         status: [
             { type: 'number', message: '状态 值必须为数值类型', trigger: 'change' },
             { type: 'number', message: '状态 值必须为数值类型', trigger: 'blur' },
-            { required: true, type: 'number', message: '状态 值不能为空', trigger: 'change' },
-            { required: true, type: 'number', message: '状态 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.status.required, type: 'number', message: '状态 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.status.required, type: 'number', message: '状态 值不能为空', trigger: 'blur' },
         ],
         tenant_id: [
             { type: 'string', message: '租户ID 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '租户ID 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '租户ID 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '租户ID 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.tenant_id.required, type: 'string', message: '租户ID 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.tenant_id.required, type: 'string', message: '租户ID 值不能为空', trigger: 'blur' },
         ],
         create_time: [
             { type: 'string', message: '创建时间 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '创建时间 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '创建时间 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '创建时间 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.create_time.required, type: 'string', message: '创建时间 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.create_time.required, type: 'string', message: '创建时间 值不能为空', trigger: 'blur' },
         ],
         update_time: [
             { type: 'string', message: '更新时间 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '更新时间 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '更新时间 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '更新时间 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.update_time.required, type: 'string', message: '更新时间 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.update_time.required, type: 'string', message: '更新时间 值不能为空', trigger: 'blur' },
         ],
         id: [
             { type: 'string', message: '主键ID 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '主键ID 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '主键ID 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '主键ID 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.id.required, type: 'string', message: '主键ID 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.id.required, type: 'string', message: '主键ID 值不能为空', trigger: 'blur' },
         ],
         }
     }
@@ -819,49 +828,49 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
 , 
-        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfkey: new FormItemModel({ caption: '主键ID', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfkey: new FormItemModel({ caption: '主键ID', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfmajortext: new FormItemModel({ caption: '执行器任务HANDLER', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfmajortext: new FormItemModel({ caption: '执行器任务HANDLER', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        app: new FormItemModel({ caption: '服务名', detailType: 'FORMITEM', name: 'app', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        app: new FormItemModel({ caption: '服务名', detailType: 'FORMITEM', name: 'app', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        handler: new FormItemModel({ caption: '执行器任务HANDLER', detailType: 'FORMITEM', name: 'handler', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        handler: new FormItemModel({ caption: '执行器任务HANDLER', detailType: 'FORMITEM', name: 'handler', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        cron: new FormItemModel({ caption: '任务执行CRON', detailType: 'FORMITEM', name: 'cron', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        cron: new FormItemModel({ caption: '任务执行CRON', detailType: 'FORMITEM', name: 'cron', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        param: new FormItemModel({ caption: '执行器任务参数', detailType: 'FORMITEM', name: 'param', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        param: new FormItemModel({ caption: '执行器任务参数', detailType: 'FORMITEM', name: 'param', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        last_time: new FormItemModel({ caption: '上次调度时间', detailType: 'FORMITEM', name: 'last_time', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        last_time: new FormItemModel({ caption: '上次调度时间', detailType: 'FORMITEM', name: 'last_time', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        next_time: new FormItemModel({ caption: '下次调度时间', detailType: 'FORMITEM', name: 'next_time', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        next_time: new FormItemModel({ caption: '下次调度时间', detailType: 'FORMITEM', name: 'next_time', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        timeout: new FormItemModel({ caption: '任务执行超时时间（秒）', detailType: 'FORMITEM', name: 'timeout', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        timeout: new FormItemModel({ caption: '任务执行超时时间（秒）', detailType: 'FORMITEM', name: 'timeout', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        fail_retry_count: new FormItemModel({ caption: '失败重试次数', detailType: 'FORMITEM', name: 'fail_retry_count', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        fail_retry_count: new FormItemModel({ caption: '失败重试次数', detailType: 'FORMITEM', name: 'fail_retry_count', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        author: new FormItemModel({ caption: '所有者', detailType: 'FORMITEM', name: 'author', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        author: new FormItemModel({ caption: '所有者', detailType: 'FORMITEM', name: 'author', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        remark: new FormItemModel({ caption: '备注', detailType: 'FORMITEM', name: 'remark', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        remark: new FormItemModel({ caption: '备注', detailType: 'FORMITEM', name: 'remark', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        status: new FormItemModel({ caption: '状态', detailType: 'FORMITEM', name: 'status', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        status: new FormItemModel({ caption: '状态', detailType: 'FORMITEM', name: 'status', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        tenant_id: new FormItemModel({ caption: '租户ID', detailType: 'FORMITEM', name: 'tenant_id', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        tenant_id: new FormItemModel({ caption: '租户ID', detailType: 'FORMITEM', name: 'tenant_id', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        create_time: new FormItemModel({ caption: '创建时间', detailType: 'FORMITEM', name: 'create_time', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        create_time: new FormItemModel({ caption: '创建时间', detailType: 'FORMITEM', name: 'create_time', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        update_time: new FormItemModel({ caption: '更新时间', detailType: 'FORMITEM', name: 'update_time', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        update_time: new FormItemModel({ caption: '更新时间', detailType: 'FORMITEM', name: 'update_time', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        id: new FormItemModel({ caption: '主键ID', detailType: 'FORMITEM', name: 'id', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        id: new FormItemModel({ caption: '主键ID', detailType: 'FORMITEM', name: 'id', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
     };
 
@@ -1276,6 +1285,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public fillForm(_datas: any = {},action:string): void {
+        this.mixinData = _datas;
         this.ignorefieldvaluechange = true;
         Object.keys(_datas).forEach((name: string) => {
             if (this.data.hasOwnProperty(name)) {

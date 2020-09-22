@@ -29,8 +29,8 @@ export const addCodeLists = (state: any, codelists: any) => {
  * @param localdata 
  */
 export const addLocalData = (state: any, localdata: any = {}) => {
-    state.localdata = {};
     Object.assign(state.localdata, localdata);
+    localStorage.setItem('localdata',JSON.stringify(state.localdata));
 }
 
 /**
@@ -290,5 +290,17 @@ export const addOrgData = (state: any, args: {srfkey: string,orgData: any}) => {
 export const addDepData = (state: any, args: {srfkey: string,depData: any}) => {
     if(args && args.srfkey && args.depData){
         state.depDataMap[args.srfkey] = JSON.parse(JSON.stringify(args.depData));
+    }
+}
+
+/**
+ * 添加视图信息
+ * 
+ * @param state 
+ * @param args 
+ */
+export const addViewMessage = (state: any, args: { tag: string, id: any }) => {
+    if(args && args.tag && args.id) {
+        state.viewMessage[args.tag] = args.id;
     }
 }

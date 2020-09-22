@@ -123,7 +123,7 @@ import AppCenterService from "@service/app/app-center-service";
 import PayOpenAccessService from '@/service/pay-open-access/pay-open-access-service';
 import MainService from './main-grid-service';
 import PayOpenAccessUIService from '@/uiservice/pay-open-access/pay-open-access-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

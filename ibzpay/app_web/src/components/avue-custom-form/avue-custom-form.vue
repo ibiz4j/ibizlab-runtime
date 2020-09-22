@@ -1,13 +1,20 @@
 <template>
   <div v-if="formOption!=null" class="app-custom-form">
-    <avue-form :option="formOption" v-model="formvalue"></avue-form>
+    <avue-form :option="formOption" v-model="formVal"></avue-form>
   </div>
 </template>
 
 <script lang="ts">
-import {Vue,Component,Prop,Model,Emit,Watch,} from "vue-property-decorator";
-import { Subject, Subscription } from "rxjs";
+import {
+  Vue,
+  Component,
+  Prop,
+  Model,
+  Emit,
+  Watch,
+} from "vue-property-decorator";
 
+import { Subject, Subscription } from "rxjs";
 @Component({})
 export default class AvueCustomForm extends Vue {
   /**
@@ -16,8 +23,7 @@ export default class AvueCustomForm extends Vue {
    * @type {any}
    * @memberof AvueCustomForm
    */
-  @Prop()
-  public options?: any;
+  @Prop() public options?: any;
 
   /**
    * 是否需要转换为string类型
@@ -25,8 +31,7 @@ export default class AvueCustomForm extends Vue {
    * @type {boolean}
    * @memberof AvueCustomForm
    */
-  @Prop()
-  public isParseString?: boolean;
+  @Prop() public isParseString?: boolean;
 
   /**
    * 远端地址
@@ -42,7 +47,7 @@ export default class AvueCustomForm extends Vue {
    * @type {any}
    * @memberof AvueCustomForm
    */
-  @Prop() public value: any;
+  @Model('change') public value: any;
 
   /**
    * 是否将表单数据通过组件配置带入组件中
@@ -53,32 +58,12 @@ export default class AvueCustomForm extends Vue {
   @Prop() public isFormData?: boolean;
 
   /**
-   * 监听事件
-   *
-   * @param {*} newVal
-   * @param {*} oldVal
-   * @memberof AvueCustomForm
-   */
-  @Watch("value")
-  public onValueChange(newVal: any, oldVal: any) {
-    if (newVal) {
-      let obj: any = {};
-      if (newVal && newVal != null) {
-        if (this.isParseString) obj = JSON.parse(newVal);
-        else obj = newVal;
-      }
-      if (obj) this.formvalue = JSON.parse(JSON.stringify(obj));
-    }
-  }
-
-  /**
    * 表单数据
    *
    * @type {any}
    * @memberof AvueCustomForm
    */
-  @Prop()
-  public formData: any;
+  @Prop() public formData: any;
 
   /**
    * 表单状态
@@ -89,7 +74,32 @@ export default class AvueCustomForm extends Vue {
   @Prop() public formState!: Subject<any>;
 
   /**
-   * 视图状态事件
+   * 获取组件值
+   *
+   * @return {any}
+   * @memberof AvueCustomForm
+   */
+  get formVal() {
+    let obj: any = {};
+      if (this.value) {
+        if (this.isParseString) obj = JSON.parse(this.value);
+        else obj = this.value;
+      }
+    return obj;
+  }
+
+  /**
+   * 设置组件值
+   *
+   * @param value
+   * @memberof AvueCustomForm
+   */
+  set formVal(value: any) {
+    this.setValue(value);
+  }
+
+  /**
+   * 订阅对象
    *
    * @protected
    * @type {(Subscription | undefined)}
@@ -104,14 +114,6 @@ export default class AvueCustomForm extends Vue {
    * @memberof AvueCustomForm
    */
   public formOption: any = null;
-
-  /**
-   * avue-form绑定值
-   *
-   * @type {any}
-   * @memberof AvueCustomForm
-   */
-  public formvalue: any = {};
 
   /**
    * avue-form默认配置
@@ -189,10 +191,8 @@ export default class AvueCustomForm extends Vue {
       if (this.url && this.options == null) {
         const get: Promise<any> = this.$http.get(this.url);
         get.then((response: any) => {
-          if (response && response.data && response.data.view_config) {
-            that.formOption = JSON.parse(response.data.view_config)[
-              "formConfig"
-            ];
+          if (response && response.data) {
+            that.formOption = response.data;
             if (this.isFormData) that.getFormData();
           }
         });
@@ -214,7 +214,7 @@ export default class AvueCustomForm extends Vue {
   public getFormData() {
     let that: any = this;
     let obj: any;
-    if (this.value) obj = JSON.parse(JSON.stringify(this.value));
+    if (this.formVal) obj = JSON.parse(JSON.stringify(this.formVal));
     else obj = {};
     let recursionOption: any = function (group: any) {
       group.column.forEach((gItem: any) => {
@@ -241,6 +241,18 @@ export default class AvueCustomForm extends Vue {
   public setValue(value: any) {
     if (this.isParseString) this.$emit("change", JSON.stringify(value));
     else this.$emit("change", value);
+  }
+
+  /**
+   * 销毁组件(vue生命周期)
+   *
+   * @type {Subject<any>}
+   * @memberof AvueCustomForm
+   */
+  public destroy(){
+    if(this.formStateEvent){
+        this.formStateEvent.unsubscribe();
+    }
   }
 }
 </script>

@@ -15,6 +15,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -220,7 +221,11 @@ public class UAACoreService {
         return appNode;
     }
 
-    @CacheEvict( value="syspssystem",key = "'row:all-apps'")
+    @Caching( evict = {
+            @CacheEvict( value="syspssystem",key = "'row:all-apps'"),
+            @CacheEvict( value="syspssystem",key = "'row:all-dst-apps'"),
+            @CacheEvict( value="syspssystem",key = "'row:all-dst-sys-apps'")
+    })
     public void resetApps()
     {
 

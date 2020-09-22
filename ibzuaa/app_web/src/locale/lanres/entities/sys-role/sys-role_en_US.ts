@@ -92,17 +92,13 @@ export default {
 			caption: "Save",
 			tip: "Save",
 		},
-		tbitem5: {
-			caption: "Save And Close",
-			tip: "Save And Close Window",
-		},
 		tbitem6: {
 			caption: "-",
 			tip: "",
 		},
-		tbitem12: {
-			caption: "New",
-			tip: "New",
+		deuiaction1: {
+			caption: "关闭",
+			tip: "关闭",
 		},
 		tbitem13: {
 			caption: "-",

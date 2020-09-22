@@ -202,7 +202,9 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         if(!ObjectUtils.isEmpty(et.getRoleid())){
             cn.ibizlab.core.uaa.domain.SysRole role=et.getRole();
             if(ObjectUtils.isEmpty(role)){
-                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.get(et.getRoleid());
+                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.getById(et.getRoleid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setRole(majorEntity);
                 role=majorEntity;
             }
@@ -212,7 +214,9 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         if(!ObjectUtils.isEmpty(et.getUserid())){
             cn.ibizlab.core.uaa.domain.SysUser user=et.getUser();
             if(ObjectUtils.isEmpty(user)){
-                cn.ibizlab.core.uaa.domain.SysUser majorEntity=sysuserService.get(et.getUserid());
+                cn.ibizlab.core.uaa.domain.SysUser majorEntity=sysuserService.getById(et.getUserid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setUser(majorEntity);
                 user=majorEntity;
             }

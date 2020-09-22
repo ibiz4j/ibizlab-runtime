@@ -1,10 +1,13 @@
 package cn.ibizlab.api.rest.extensions;
 
 
+import cn.ibizlab.core.disk.domain.SDFile;
 import cn.ibizlab.core.disk.extensions.service.DiskCoreService;
+import cn.ibizlab.core.disk.extensions.service.FileCoreService;
 import cn.ibizlab.core.disk.extensions.vo.FileItem;
 import cn.ibizlab.core.disk.service.ISDFileService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -33,6 +39,9 @@ public class DiskCoreResource
 
 	@Autowired
 	private ISDFileService fileService;
+
+	@Autowired
+	private FileCoreService fileCoreService;
 
 	private Hashtable<String, String> type = null;
 	private String getType(String ext)
@@ -56,8 +65,12 @@ public class DiskCoreResource
 			type.put(".txt","text/plain");
 		}
 
-		if(type.containsKey(ext.toLowerCase()))
-			return type.get(ext.toLowerCase());
+		String key=ext.toLowerCase();
+		key=ext.toLowerCase();
+		if(!key.startsWith("."))
+			key="."+key;
+		if(type.containsKey(key))
+			return type.get(key);
 		else
 			return "application/octet-stream";
 
@@ -77,28 +90,28 @@ public class DiskCoreResource
 
 
 
-	@GetMapping(value = {"net-disk/download/{folder}/{id}/{name}.{ext}","{folder}/download/{id}"})
+	@GetMapping(value = {"net-disk/download/{folder}/{id}/{name}.{ext}","net-disk/download/{id}","{folder}/download/{id}"})
 	@ResponseStatus(HttpStatus.OK)
 	public void download(@PathVariable("folder") String folder, @PathVariable("id") String id,
 						 @PathVariable(value = "name",required = false) String name, @PathVariable(value = "ext", required = false) String ext,
 						 @RequestHeader(value = "authcode",required = false) String authcode,
-						 @RequestParam(value = "authcode",required = false) String checkcode,HttpServletResponse response){
+						 @RequestParam(value = "authcode",required = false) String checkcode,HttpServletRequest request,HttpServletResponse response){
 		File file = diskCoreService.getFile(folder,id, StringUtils.isEmpty(authcode)?checkcode:authcode);
-		response.setHeader("Content-Disposition", "attachment;filename="+getFileName(file.getName()));
+		response.setHeader("Content-Disposition", "attachment;filename="+getFileName(request.getHeader("User-Agent"),file.getName()));
 		this.sendRespose(response, file);
 	}
 
-	@GetMapping(value = "net-disk/files/{folder}/{id}/{name}.{ext}")
+	@GetMapping(value = {"net-disk/openview/{folder}/{id}/{name}.{ext}","net-disk/files/{folder}/{id}/{name}.{ext}"})
 	@ResponseStatus(HttpStatus.OK)
 	public void open(@PathVariable("folder") String folder, @PathVariable("id") String id,
 					 @PathVariable("name") String name, @PathVariable("ext") String ext,
 					 @RequestHeader(value = "authcode",required = false) String authcode,
-					 @RequestParam(value = "authcode",required = false) String checkcode,HttpServletResponse response){
+					 @RequestParam(value = "authcode",required = false) String checkcode,HttpServletRequest request,HttpServletResponse response){
 		File file = diskCoreService.getFile(folder,id,StringUtils.isEmpty(authcode)?checkcode:authcode);
-		String type = getType(ext);
+		String type = getType(DiskCoreService.getExtensionName(file));
 		response.setContentType(type);
 		if(type.toLowerCase().equals("application/octet-stream"))
-			response.setHeader("Content-Disposition", "attachment;filename="+getFileName(file.getName()));
+			response.setHeader("Content-Disposition", "attachment;filename="+getFileName(request.getHeader("User-Agent"),file.getName()));
 		this.sendRespose(response, file);
 	}
 
@@ -106,45 +119,6 @@ public class DiskCoreResource
 	@RequestMapping(method = RequestMethod.DELETE, value = "/net-disk/files/{sdfile_id}")
 	public ResponseEntity<Boolean> remove(@PathVariable("sdfile_id") String sdfile_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(fileService.remove(sdfile_id));
-	}
-
-
-	@Value("ibiz.file.proxy.previewpath")
-	private String previewPath;
-
-	@GetMapping(value = "net-disk/preview/{folder}/{id}/{name}.{ext}")
-	public ResponseEntity preview(@PathVariable("folder") String folder, @PathVariable("id") String id,
-								  @PathVariable("name") String name, @PathVariable("ext") String ext,
-								  @RequestHeader(value = "authcode",required = false) String authcode,
-								  @RequestParam(value = "authcode",required = false) String checkcode, HttpServletRequest request){
-		if(StringUtils.isEmpty(previewPath))
-			throw new BadRequestAlertException("未配置预览系统地址","SDFile","");
-		String redirectUrl = request.getScheme().concat("://").concat(request.getServerName());
-		if(request.getServerPort()!=80&&request.getServerPort()!=443)
-			redirectUrl=redirectUrl.concat(":").concat(request.getServerPort()+"");
-		redirectUrl=redirectUrl.concat("/net-disk/download/")
-				.concat(folder).concat("/").concat(folder).concat("/").concat(name).concat(".").concat(ext).concat("?authcode=").concat(StringUtils.isEmpty(authcode)?checkcode:authcode);
-		redirectUrl=previewPath.concat("?url=").concat(encodeURIComponent(redirectUrl));
-		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, redirectUrl).build();
-	}
-
-	@Value("ibiz.file.proxy.ocrpath")
-	private String ocrPath;
-
-	@GetMapping(value = "net-disk/ocrview/{folder}/{id}/{name}.{ext}")
-	public ResponseEntity ocrview(@PathVariable("folder") String folder, @PathVariable("id") String id,
-								  @PathVariable("name") String name, @PathVariable("ext") String ext,
-								  @RequestHeader(value = "authcode",required = false) String authcode,
-								  @RequestParam(value = "authcode",required = false) String checkcode, HttpServletRequest request){
-		if(StringUtils.isEmpty(previewPath))
-			throw new BadRequestAlertException("未配置预览系统地址","SDFile","");
-		String redirectUrl = request.getScheme().concat("://").concat(request.getServerName());
-		if(request.getServerPort()!=80&&request.getServerPort()!=443)
-			redirectUrl=redirectUrl.concat(":").concat(request.getServerPort()+"");
-		redirectUrl=redirectUrl.concat("/net-disk/download/")
-				.concat(folder).concat("/").concat(folder).concat("/").concat(name).concat(".").concat(ext).concat("?authcode=").concat(StringUtils.isEmpty(authcode)?checkcode:authcode);
-		redirectUrl=ocrPath.concat("?url=").concat(encodeURIComponent(redirectUrl));
-		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, redirectUrl).build();
 	}
 
 	@GetMapping(value = "net-disk/files/{folder}")
@@ -157,6 +131,159 @@ public class DiskCoreResource
 		diskCoreService.saveFileList(folder,ownertype,ownerid,fileItems);
 		return ResponseEntity.ok().body(true);
 	}
+
+	@Value("${ibiz.file.proxy.previewpath:http://172.16.100.243:8012/onlinePreview?url=}")
+	private String previewPath;
+
+	@GetMapping(value = "net-disk/preview/{folder}/{id}/{name}.{ext}")
+	public ResponseEntity preview(@PathVariable("folder") String folder, @PathVariable("id") String id,
+								  @PathVariable("name") String name, @PathVariable("ext") String ext,
+								  @RequestHeader(value = "authcode",required = false) String authcode,
+								  @RequestParam(value = "authcode",required = false) String checkcode, HttpServletRequest request){
+		if(StringUtils.isEmpty(previewPath))
+			throw new BadRequestAlertException("未配置预览系统地址","SDFile","");
+		authcode=StringUtils.isEmpty(authcode)?checkcode:authcode;
+		if ((!folder.toLowerCase().startsWith("ibizutil"))&&(StringUtils.isEmpty(authcode)||(!authcode.equals(fileCoreService.getAuthCode(id)))))
+			throw new BadRequestAlertException("没有权限预览","SDFile","");
+		String redirectUrl = request.getScheme().concat("://").concat(request.getServerName());
+		if(request.getServerPort()!=80&&request.getServerPort()!=443)
+			redirectUrl=redirectUrl.concat(":").concat(request.getServerPort()+"");
+		redirectUrl=redirectUrl.concat("/net-disk/openview/")
+				.concat(folder).concat("/").concat(id).concat("/").concat(name).concat(".").concat(ext).concat("?authcode=").concat(StringUtils.isEmpty(authcode)?checkcode:authcode);
+		redirectUrl=previewPath.concat("").concat(encodeURIComponent(redirectUrl));
+		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, redirectUrl).build();
+	}
+
+	@Value("${ibiz.file.proxy.ocrpath:http://101.132.236.47:58114/ocr/view?url=}")
+	private String ocrPath;
+
+	@GetMapping(value = "net-disk/ocrview/{folder}/{id}/{name}.{ext}")
+	public ResponseEntity ocrview(@PathVariable("folder") String folder, @PathVariable("id") String id,
+								  @PathVariable("name") String name, @PathVariable("ext") String ext,
+								  @RequestHeader(value = "authcode",required = false) String authcode,
+								  @RequestParam(value = "authcode",required = false) String checkcode, HttpServletRequest request){
+		if(StringUtils.isEmpty(ocrPath))
+			throw new BadRequestAlertException("未配置预览系统地址","SDFile","");
+		if(!this.checkOcr(ext))
+			throw new BadRequestAlertException("不支持识别","SDFile",ext);
+		authcode=StringUtils.isEmpty(authcode)?checkcode:authcode;
+		if ((!folder.toLowerCase().startsWith("ibizutil"))&&(StringUtils.isEmpty(authcode)||(!authcode.equals(fileCoreService.getAuthCode(id)))))
+			throw new BadRequestAlertException("没有权限识别","SDFile","");
+		String redirectUrl = request.getScheme().concat("://").concat(request.getServerName());
+		if(request.getServerPort()!=80&&request.getServerPort()!=443)
+			redirectUrl=redirectUrl.concat(":").concat(request.getServerPort()+"");
+		redirectUrl=redirectUrl.concat("/net-disk/openview/")
+				.concat(folder).concat("/").concat(id).concat("/").concat(name).concat(".").concat(ext).concat("?authcode=").concat(StringUtils.isEmpty(authcode)?checkcode:authcode);
+		redirectUrl=ocrPath.concat("").concat(encodeURIComponent(redirectUrl));
+		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, redirectUrl).build();
+	}
+
+	@Value("${ibiz.file.proxy.editpath:http://172.16.180.233:39980/loleaflet/dist/loleaflet.html?file_path=}")
+	private String editPath;
+
+	@GetMapping(value = {"net-disk/editview/{folder}/{id}/{name}.{ext}","net-disk/edit/{folder}/{id}/{name}.{ext}"})
+	public ResponseEntity editview(@PathVariable("folder") String folder, @PathVariable("id") String id,
+								  @PathVariable("name") String name, @PathVariable("ext") String ext,
+								  @RequestHeader(value = "authcode",required = false) String authcode,
+								  @RequestParam(value = "authcode",required = false) String checkcode, HttpServletRequest request){
+		if(StringUtils.isEmpty(editPath))
+			throw new BadRequestAlertException("未配置预览系统地址","SDFile","");
+		if(!this.checkEdit(ext))
+			throw new BadRequestAlertException("不支持编辑","SDFile",ext);
+		authcode=StringUtils.isEmpty(authcode)?checkcode:authcode;
+		if ((!folder.toLowerCase().startsWith("ibizutil"))&&(StringUtils.isEmpty(authcode)||(!authcode.equals(fileCoreService.getAuthCode(id)))))
+			throw new BadRequestAlertException("没有权限编辑","SDFile","");
+		String redirectUrl = request.getScheme().concat("://").concat(request.getServerName());
+		if(request.getServerPort()!=80&&request.getServerPort()!=443)
+			redirectUrl=redirectUrl.concat(":").concat(request.getServerPort()+"");
+		redirectUrl=redirectUrl.concat("/net-disk/wopiview/")
+				.concat(folder).concat("/").concat(id).concat("/").concat(encodeURIComponent(name)).concat(".").concat(ext);
+		redirectUrl=editPath.concat("").concat(redirectUrl);
+		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, redirectUrl).build();
+	}
+
+	@GetMapping(value = "net-disk/wopiview/{folder}/{id}/{name}.{ext}")
+	public ResponseEntity<JSONObject> getWoAPI(@PathVariable("folder") String folder, @PathVariable("id") String id,
+						 @PathVariable(value = "name",required = false) String name, @PathVariable(value = "ext", required = false) String ext){
+
+		SDFile sdFile = fileService.getById(id);
+		if(sdFile==null)
+			throw new BadRequestAlertException("文件未找到","SDFile",id);
+
+		File file = diskCoreService.getFile(sdFile);
+		JSONObject json = new JSONObject();
+		// 取得文件名
+		json.put("BaseFileName", file.getName());
+		json.put("Size", file.length());
+		json.put("OwnerId", StringUtils.isEmpty(sdFile.getUpdateman())?"admin":sdFile.getUpdateman());
+		json.put("Version", file.lastModified());
+		json.put("Sha256", DiskCoreService.getHash256(file));
+		json.put("AllowExternalMarketplace", true);
+		json.put("UserCanWrite", true);
+		json.put("SupportsUpdate", true);
+		json.put("SupportsLocks", true);
+		return ResponseEntity.ok().body(json);
+	}
+
+	@GetMapping(value = "net-disk/wopiview/{folder}/{id}/{name}.{ext}/contents")
+	@ResponseStatus(HttpStatus.OK)
+	public void getWoAPIContents(@PathVariable("folder") String folder, @PathVariable("id") String id,
+								@PathVariable(value = "name",required = false) String name, @PathVariable(value = "ext", required = false) String ext, HttpServletResponse response) {
+		File file = diskCoreService.getFile(folder,id, fileCoreService.getAuthCode(id));
+		InputStream fis = null;
+		OutputStream toClient = null;
+		try {
+			if (file != null) {
+				// 取得文件名
+				String filename = file.getName();
+				fis = new BufferedInputStream(new FileInputStream(file));
+				byte[] buffer = new byte[fis.available()];
+				fis.read(buffer);
+				// 清空response
+				response.reset();
+				// 设置response的Header
+				response.addHeader("Content-Disposition", "attachment;filename=" +
+						getFileName("",filename));
+				response.addHeader("Content-Length", "" + file.length());
+				toClient = new BufferedOutputStream(response.getOutputStream());
+				response.setContentType("application/octet-stream");
+				toClient.write(buffer);
+				toClient.flush();
+			}
+
+		} catch (IOException ex) {
+		} finally {
+			if (fis != null) {
+				try {
+					fis.close();
+				}
+				catch (IOException e) {
+
+				}
+			}
+			if (toClient != null) {
+				try {
+					toClient.close();
+				}
+				catch (IOException e) {
+
+				}
+			}
+		}
+	}
+
+	@PostMapping("net-disk/wopiview/{folder}/{id}/{name}.{ext}/contents")
+	@ResponseStatus(HttpStatus.OK)
+	public void postWoAPIFile(@PathVariable("folder") String folder, @PathVariable("id") String id,
+							  @PathVariable(value = "name",required = false) String name, @PathVariable(value = "ext", required = false) String ext, @RequestBody byte[] content) {
+
+		SDFile sdFile = fileService.getById(id);
+		if(sdFile==null)
+			throw new BadRequestAlertException("文件未找到","SDFile",id);
+
+		diskCoreService.saveFile(sdFile,content);
+	}
+
 
 	protected void sendRespose(HttpServletResponse response, File file){
 		BufferedInputStream bis = null;
@@ -193,9 +320,13 @@ public class DiskCoreResource
 		}
 	}
 
-	protected String getFileName(String fileName){
+	protected String getFileName(String userAgent,String fileName){
 		try {
-			return new String(fileName.getBytes("utf-8"),"iso8859-1");//防止中文乱码
+			if(userAgent.contains("MSIE")||userAgent.contains("Trident")) {
+				return java.net.URLEncoder.encode(fileName,"UTF-8");
+			}else {
+				return new String(fileName.getBytes("UTF-8"),"ISO-8859-1");
+			}
 		}
 		catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -223,4 +354,23 @@ public class DiskCoreResource
 
 		return result;
 	}
+
+
+	protected boolean checkOcr(String ext)
+	{
+		ext = ext.toLowerCase();
+		if(ext.equals("bmp")||ext.equals("gif")||ext.equals("tif")||ext.equals("tiff")||ext.equals("jpg")||ext.equals("jpeg")||ext.equals("png")||ext.equals("pdf"))
+			return true;
+		return false;
+	}
+
+	protected boolean checkEdit(String ext)
+	{
+		ext = ext.toLowerCase();
+		if(ext.equals("wps")||ext.equals("et")||ext.equals("doc")||ext.equals("docx")||ext.equals("xls")||ext.equals("xlsx")||ext.equals("ppt")||ext.equals("pptx")
+				||ext.equals("dps")||ext.equals("rtf")||ext.equals("cvs")||ext.equals("txt")||ext.equals("odt"))
+			return true;
+		return false;
+	}
+
 }

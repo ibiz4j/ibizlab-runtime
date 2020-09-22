@@ -152,6 +152,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //开放支付接口
                 .antMatchers("/pay/trade/**").permitAll()
                 .antMatchers("/notify/**").permitAll()
+
+                .antMatchers("/net-disk/download/**").permitAll()
+                .antMatchers("/net-disk/**view/**").permitAll()
+
                 .antMatchers("/jobs-api").permitAll();
 
         for (String excludePattern : excludesPattern) {

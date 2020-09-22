@@ -1,6 +1,6 @@
 import { Store } from 'vuex';
 import { Util } from '@/utils/util/util';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 
 /**
  * 部件服务基类

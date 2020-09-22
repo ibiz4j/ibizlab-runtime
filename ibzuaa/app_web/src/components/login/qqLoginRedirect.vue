@@ -77,13 +77,12 @@
             nickname:'',// QQ用户名称
             access_token: '',// 临时授权token
             refresh_token:'',// 刷新授权token
-        }
+        };
 
         /**
          * 应用名称
          *
          * @type {string}
-         * @memberof Register
          */
         public appTitle: string = Environment.AppTitle;
 
@@ -91,14 +90,11 @@
          * 值规则
          *
          * @type {*}
-         * @memberof Register
          */
         public rules = {};
 
         /**
          * 设置值规则
-         *
-         * @memberof Register
          */
         public setRules() {
             this.rules = {
@@ -113,16 +109,14 @@
 
 
         /**
-         * 生命周期Create
-         *
-         * @memberof Register
+         * 生命周期created
          */
         public created() {
             this.setRules();
         }
 
         /**
-         * 挂载
+         * 生命周期mounted
          */
         public mounted() {
             // 从url获取授权code和state
@@ -156,8 +150,6 @@
 
         /**
          * 监听语言变化
-         *
-         * @memberof Login
          */
         @Watch('$i18n.locale')
         onLocaleChange(newval: any, val: any) {
@@ -166,8 +158,6 @@
 
         /**
          * 跳转登录页面
-         *
-         * @memberof Register
          */
         public goLogin(): void {
             const _this = this;

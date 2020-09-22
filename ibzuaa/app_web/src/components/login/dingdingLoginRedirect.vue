@@ -64,29 +64,25 @@
 
         // 表单
         public form: any = {loginname: '', password: ''};
-
         // 按钮可点击
         public canClick: any = true;
-
         // 按钮内容
         public BtnContent: any = "注册并绑定钉钉";
-
         // 钉钉授权成功返回的code和state
         public code: any;
         public state: any;
-
+        // 钉钉用户信息
         public dingtalkUserInfo:any ={
             openid:'',// 钉钉用户身份的唯一标识
             nickname:'',// 钉钉用户名称
             unionid:'',// 钉钉用户唯一标识
-        }
+        };
 
 
         /**
          * 应用名称
          *
          * @type {string}
-         * @memberof Register
          */
         public appTitle: string = Environment.AppTitle;
 
@@ -100,8 +96,6 @@
 
         /**
          * 设置值规则
-         *
-         * @memberof Register
          */
         public setRules() {
             this.rules = {
@@ -115,16 +109,14 @@
         };
 
         /**
-         * 生命周期Create
-         *
-         * @memberof Register
+         * 生命周期created
          */
         public created() {
             this.setRules();
         }
 
         /**
-         * 挂载
+         * 生命周期mounted
          */
         public mounted() {
             // 从url获取授权code和state
@@ -159,8 +151,6 @@
 
         /**
          * 监听语言变化
-         *
-         * @memberof Login
          */
         @Watch('$i18n.locale')
         onLocaleChange(newval: any, val: any) {
@@ -169,8 +159,6 @@
 
         /**
          * 跳转登录页面
-         *
-         * @memberof Register
          */
         public goLogin(): void {
             const _this = this;

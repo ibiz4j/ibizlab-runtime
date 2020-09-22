@@ -21,7 +21,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import { Subject } from 'rxjs';
-import CodeListService from '@/service/app/codelist-service';
+import CodeListService from "@/codelist/codelist-service";
 
 @Component({})
 export default class AppGroupSelect extends Vue {

@@ -78,12 +78,12 @@ export default class MDViewEngine extends ViewEngine {
      * @param {*} [opts={}]
      * @memberof MDViewEngine
      */
-    public load(opts: any = {}): void {
+    public load(opts: any = {}, isnotify: boolean=false): void {
         super.load(opts);
-        if (this.getSearchForm()) {
+        if (this.getSearchForm() && (this.isLoadDefault || isnotify)) {
             const tag = this.getSearchForm().name;
             this.setViewState2({ tag: tag, action: 'loaddraft', viewdata: this.view.viewparams });
-        } else if (this.getMDCtrl() && this.isLoadDefault) {
+        } else if (this.getMDCtrl() && (this.isLoadDefault || isnotify)) {
             const tag = this.getMDCtrl().name;
             this.setViewState2({ tag: tag, action: 'load', viewdata: Object.assign(this.view.viewparams,opts) });
         } else {

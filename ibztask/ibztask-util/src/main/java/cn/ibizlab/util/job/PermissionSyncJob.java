@@ -1,6 +1,7 @@
 package cn.ibizlab.util.job;
 
 import cn.ibizlab.util.client.IBZUAAFeignClient;
+import cn.ibizlab.util.client.IBZLiteFeignClient;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,10 @@ public class PermissionSyncJob implements ApplicationRunner {
 
 
 
+    @Autowired
+    @Lazy
+    IBZLiteFeignClient liteFeignClient;
+
     @Override
     public void run(ApplicationArguments args) {
         try {
@@ -55,6 +60,19 @@ public class PermissionSyncJob implements ApplicationRunner {
         }
         catch (Exception ex) {
             log.error(String.format("向[UAA]同步系统资源失败，请检查[UAA]服务是否正常! [%s]",ex));
+        }
+
+        try {
+            InputStream sysModel= this.getClass().getResourceAsStream("/sysmodel/ibztask.json"); //获取当前系统所有实体资源能力
+            String strSysModel = IOUtils.toString(sysModel,"UTF-8");
+            if(liteFeignClient.syncSysModel(JSONObject.parseObject(strSysModel))){
+                log.info("向[lite]同步系统模型成功");
+            }else{
+                log.error("向[lite]同步系统模型失败");
+            }
+        }
+        catch (Exception ex) {
+            log.error(String.format("向[lite]同步系统模型失败，请检查[lite]服务是否正常! [%s]",ex));
         }
 
 

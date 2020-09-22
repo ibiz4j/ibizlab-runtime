@@ -111,7 +111,7 @@ import AppCenterService from "@service/app/app-center-service";
 import MsgUserAccountService from '@/service/msg-user-account/msg-user-account-service';
 import MainService from './main-grid-service';
 import MsgUserAccountUIService from '@/uiservice/msg-user-account/msg-user-account-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

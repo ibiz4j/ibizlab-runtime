@@ -97,7 +97,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysPermissionService from '@/service/sys-permission/sys-permission-service';
 import MainService from './main-grid-service';
 import SysPermissionUIService from '@/uiservice/sys-permission/sys-permission-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

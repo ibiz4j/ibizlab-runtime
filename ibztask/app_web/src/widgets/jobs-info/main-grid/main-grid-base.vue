@@ -183,7 +183,7 @@ import AppCenterService from "@service/app/app-center-service";
 import JobsInfoService from '@/service/jobs-info/jobs-info-service';
 import MainService from './main-grid-service';
 import JobsInfoUIService from '@/uiservice/jobs-info/jobs-info-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

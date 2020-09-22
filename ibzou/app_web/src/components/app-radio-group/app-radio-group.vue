@@ -7,7 +7,7 @@
 </template>
 <script lang = 'ts'>
 import { Component, Vue, Prop, Model,Watch } from 'vue-property-decorator';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 
 @Component({})
 export default class AppRadioGroup extends Vue {

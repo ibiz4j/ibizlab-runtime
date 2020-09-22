@@ -102,7 +102,7 @@
 
 
     <!--输出实体[SYS_ROLE]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_role-1-5">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_role-4-5">
         <createTable tableName="IBZROLE">
                 <column name="SYS_ROLEID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_ROLE_SYS_ROLEID"/>
@@ -185,7 +185,7 @@
         <!--输出实体[SYS_PSSYSTEM]外键关系 -->
         <!--输出实体[SYS_PERMISSION]外键关系 -->
         <!--输出实体[SYS_ROLE]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_role-1-9">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_role-4-9">
        <addForeignKeyConstraint baseColumnNames="PROLEID" baseTableName="IBZROLE" constraintName="DER1N_SYS_ROLE_SYS_ROLE_PROLEI" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SYS_ROLEID" referencedTableName="IBZROLE" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_ROLE_PERMISSION]外键关系 -->

@@ -1,5 +1,7 @@
 package cn.ibizlab.util.domain;
 
+import org.springframework.util.StringUtils;
+
 public class EntityClient extends EntityBase {
 
     @Override
@@ -15,5 +17,14 @@ public class EntityClient extends EntityBase {
         }
     }
 
+    @Override
+    public void reset(String field) {
+        if(!StringUtils.isEmpty(field)){
+            String resetField=field.toLowerCase();
+            this.set(resetField,null);
+            this.getFocusNull().remove(resetField);
+            getExtensionparams().remove(resetField+"dirtyflag");
+        }
+    }
 }
 

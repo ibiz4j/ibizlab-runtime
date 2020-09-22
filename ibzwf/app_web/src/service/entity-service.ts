@@ -1,5 +1,5 @@
 import { Http } from '@/utils';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 
 /**
  * 实体服务基类

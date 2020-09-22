@@ -293,6 +293,21 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_accessname_like: new FormItemModel({ caption: '接入平台(%)', detailType: 'FORMITEM', name: 'n_accessname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_template_name_like: new FormItemModel({ caption: '模板标题(文本包含(%))', detailType: 'FORMITEM', name: 'n_template_name_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -302,31 +317,16 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_accessname_like: [
             { type: 'string', message: '接入平台(%) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '接入平台(%) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '接入平台(%) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '接入平台(%) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_accessname_like.required, type: 'string', message: '接入平台(%) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_accessname_like.required, type: 'string', message: '接入平台(%) 值不能为空', trigger: 'blur' },
         ],
         n_template_name_like: [
             { type: 'string', message: '模板标题(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '模板标题(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '模板标题(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '模板标题(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_template_name_like.required, type: 'string', message: '模板标题(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_template_name_like.required, type: 'string', message: '模板标题(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_accessname_like: new FormItemModel({ caption: '接入平台(%)', detailType: 'FORMITEM', name: 'n_accessname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_template_name_like: new FormItemModel({ caption: '模板标题(文本包含(%))', detailType: 'FORMITEM', name: 'n_template_name_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_accessname_like 值

@@ -310,6 +310,27 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_deptcode_like: new FormItemModel({ caption: '部门代码(%)', detailType: 'FORMITEM', name: 'n_deptcode_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_deptname_like: new FormItemModel({ caption: '部门名称(%)', detailType: 'FORMITEM', name: 'n_deptname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_orgid_eq: new FormItemModel({ caption: '单位(=)', detailType: 'FORMITEM', name: 'n_orgid_eq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_pdeptid_eq: new FormItemModel({ caption: '上级部门(=)', detailType: 'FORMITEM', name: 'n_pdeptid_eq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_bcode_like: new FormItemModel({ caption: '业务编码(%)', detailType: 'FORMITEM', name: 'n_bcode_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -319,55 +340,34 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_deptcode_like: [
             { type: 'string', message: '部门代码(%) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门代码(%) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '部门代码(%) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '部门代码(%) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_deptcode_like.required, type: 'string', message: '部门代码(%) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_deptcode_like.required, type: 'string', message: '部门代码(%) 值不能为空', trigger: 'blur' },
         ],
         n_deptname_like: [
             { type: 'string', message: '部门名称(%) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门名称(%) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '部门名称(%) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '部门名称(%) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_deptname_like.required, type: 'string', message: '部门名称(%) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_deptname_like.required, type: 'string', message: '部门名称(%) 值不能为空', trigger: 'blur' },
         ],
         n_orgid_eq: [
             { type: 'string', message: '单位(=) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '单位(=) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '单位(=) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '单位(=) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_orgid_eq.required, type: 'string', message: '单位(=) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_orgid_eq.required, type: 'string', message: '单位(=) 值不能为空', trigger: 'blur' },
         ],
         n_pdeptid_eq: [
             { type: 'string', message: '上级部门(=) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '上级部门(=) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '上级部门(=) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '上级部门(=) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_pdeptid_eq.required, type: 'string', message: '上级部门(=) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_pdeptid_eq.required, type: 'string', message: '上级部门(=) 值不能为空', trigger: 'blur' },
         ],
         n_bcode_like: [
             { type: 'string', message: '业务编码(%) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '业务编码(%) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '业务编码(%) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '业务编码(%) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_bcode_like.required, type: 'string', message: '业务编码(%) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_bcode_like.required, type: 'string', message: '业务编码(%) 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_deptcode_like: new FormItemModel({ caption: '部门代码(%)', detailType: 'FORMITEM', name: 'n_deptcode_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_deptname_like: new FormItemModel({ caption: '部门名称(%)', detailType: 'FORMITEM', name: 'n_deptname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_orgid_eq: new FormItemModel({ caption: '单位(=)', detailType: 'FORMITEM', name: 'n_orgid_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_pdeptid_eq: new FormItemModel({ caption: '上级部门(=)', detailType: 'FORMITEM', name: 'n_pdeptid_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_bcode_like: new FormItemModel({ caption: '业务编码(%)', detailType: 'FORMITEM', name: 'n_bcode_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_deptcode_like 值

@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.cglib.beans.BeanMap;
 import org.springframework.data.annotation.Transient;
 import org.springframework.util.AlternativeJdkIdGenerator;
+import org.springframework.util.ObjectUtils;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import org.springframework.util.StringUtils;
 import java.util.*;
 
@@ -96,4 +98,32 @@ public class EntityBase implements Serializable {
             this.extensionparams.put(field.toLowerCase(),value);
     }
 
+    /**
+    * 复制当前对象数据到目标对象
+    * @param targetEntity 目标数据对象
+    * @param bIncEmpty  是否包括空值
+    * @param <T>
+    * @return
+    */
+    public <T> T copyTo(T targetEntity, boolean bIncEmpty){
+        if(targetEntity instanceof EntityBase){
+            EntityBase target= (EntityBase) targetEntity;
+            Hashtable<String, Field> sourceFields=DEFieldCacheMap.getFieldMap(this.getClass());
+            for(String field : sourceFields.keySet()){
+                Object value=this.get(field);
+                if( !ObjectUtils.isEmpty(value) ||  ObjectUtils.isEmpty(value) &&  getFocusNull().contains(field) &&  bIncEmpty ){
+                    target.set(field,value);
+                }
+            }
+        }
+        return targetEntity;
+    }
+
+    /**
+    * 重置当前数据对象属性值
+    * @param field
+    */
+    public void reset(String field){
+
+    }
 }

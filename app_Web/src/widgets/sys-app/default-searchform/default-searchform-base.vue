@@ -279,6 +279,21 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_pssystemid_eq: new FormItemModel({ caption: '系统标识(等于(=))', detailType: 'FORMITEM', name: 'n_pssystemid_eq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_appname_like: new FormItemModel({ caption: '应用名(文本包含(%))', detailType: 'FORMITEM', name: 'n_appname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -288,31 +303,16 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_pssystemid_eq: [
             { type: 'string', message: '系统标识(等于(=)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '系统标识(等于(=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '系统标识(等于(=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '系统标识(等于(=)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_pssystemid_eq.required, type: 'string', message: '系统标识(等于(=)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_pssystemid_eq.required, type: 'string', message: '系统标识(等于(=)) 值不能为空', trigger: 'blur' },
         ],
         n_appname_like: [
             { type: 'string', message: '应用名(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '应用名(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '应用名(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '应用名(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_appname_like.required, type: 'string', message: '应用名(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_appname_like.required, type: 'string', message: '应用名(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_pssystemid_eq: new FormItemModel({ caption: '系统标识(等于(=))', detailType: 'FORMITEM', name: 'n_pssystemid_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_appname_like: new FormItemModel({ caption: '应用名(文本包含(%))', detailType: 'FORMITEM', name: 'n_appname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_pssystemid_eq 值

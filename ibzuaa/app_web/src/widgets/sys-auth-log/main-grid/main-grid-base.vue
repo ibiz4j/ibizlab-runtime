@@ -171,7 +171,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysAuthLogService from '@/service/sys-auth-log/sys-auth-log-service';
 import MainService from './main-grid-service';
 import SysAuthLogUIService from '@/uiservice/sys-auth-log/sys-auth-log-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

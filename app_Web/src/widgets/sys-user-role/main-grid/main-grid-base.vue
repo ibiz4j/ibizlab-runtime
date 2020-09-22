@@ -133,7 +133,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysUserRoleService from '@/service/sys-user-role/sys-user-role-service';
 import MainService from './main-grid-service';
 import SysUserRoleUIService from '@/uiservice/sys-user-role/sys-user-role-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

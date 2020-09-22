@@ -212,6 +212,18 @@ public class PayTrade extends EntityMP implements Serializable {
             return DigestUtils.md5DigestAsHex(String.format("%s||%s" ,this.getAccessId(),this.getOutTradeNo()).getBytes());
         return null;
     }
+    /**
+     * 复制当前对象数据到目标对象(粘贴重置)
+     * @param targetEntity 目标数据对象
+     * @param bIncEmpty  是否包括空值
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
+        this.reset("tradeid");
+        return super.copyTo(targetEntity,bIncEmpty);
+    }
 }
 
 

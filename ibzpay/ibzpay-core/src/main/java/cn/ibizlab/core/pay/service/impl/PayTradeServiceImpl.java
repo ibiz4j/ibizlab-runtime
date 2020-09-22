@@ -189,7 +189,9 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
         if(!ObjectUtils.isEmpty(et.getAccessId())){
             cn.ibizlab.core.pay.domain.PayOpenAccess openaccess=et.getOpenaccess();
             if(ObjectUtils.isEmpty(openaccess)){
-                cn.ibizlab.core.pay.domain.PayOpenAccess majorEntity=payopenaccessService.get(et.getAccessId());
+                cn.ibizlab.core.pay.domain.PayOpenAccess majorEntity=payopenaccessService.getById(et.getAccessId());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setOpenaccess(majorEntity);
                 openaccess=majorEntity;
             }

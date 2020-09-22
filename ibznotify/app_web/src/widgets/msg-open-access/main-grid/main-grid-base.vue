@@ -123,7 +123,7 @@ import AppCenterService from "@service/app/app-center-service";
 import MsgOpenAccessService from '@/service/msg-open-access/msg-open-access-service';
 import MainService from './main-grid-service';
 import MsgOpenAccessUIService from '@/uiservice/msg-open-access/msg-open-access-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

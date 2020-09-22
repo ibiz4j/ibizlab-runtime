@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import XLSX from 'xlsx';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import EntityService from '@/service/entity-service';
 import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
 import { Environment } from '@/environments/environment';

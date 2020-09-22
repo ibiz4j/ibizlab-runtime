@@ -301,6 +301,25 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        orgcode: new FormItemModel({ caption: '单位代码(文本左包含(%#))', detailType: 'FORMITEM', name: 'orgcode', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_orgname_like: new FormItemModel({ caption: '名称(%)', detailType: 'FORMITEM', name: 'n_orgname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_porgid_eq: new FormItemModel({ caption: '上级单位(=)', detailType: 'FORMITEM', name: 'n_porgid_eq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        porgname: new FormItemModel({ caption: '上级单位(等于(=))', detailType: 'FORMITEM', name: 'porgname', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -310,47 +329,28 @@ export default class DefaultBase extends Vue implements ControlInterface {
         orgcode: [
             { type: 'string', message: '单位代码(文本左包含(%#)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '单位代码(文本左包含(%#)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '单位代码(文本左包含(%#)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '单位代码(文本左包含(%#)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.orgcode.required, type: 'string', message: '单位代码(文本左包含(%#)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.orgcode.required, type: 'string', message: '单位代码(文本左包含(%#)) 值不能为空', trigger: 'blur' },
         ],
         n_orgname_like: [
             { type: 'string', message: '名称(%) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '名称(%) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '名称(%) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '名称(%) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_orgname_like.required, type: 'string', message: '名称(%) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_orgname_like.required, type: 'string', message: '名称(%) 值不能为空', trigger: 'blur' },
         ],
         n_porgid_eq: [
             { type: 'string', message: '上级单位(=) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '上级单位(=) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '上级单位(=) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '上级单位(=) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_porgid_eq.required, type: 'string', message: '上级单位(=) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_porgid_eq.required, type: 'string', message: '上级单位(=) 值不能为空', trigger: 'blur' },
         ],
         porgname: [
             { type: 'string', message: '上级单位(等于(=)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '上级单位(等于(=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '上级单位(等于(=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '上级单位(等于(=)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.porgname.required, type: 'string', message: '上级单位(等于(=)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.porgname.required, type: 'string', message: '上级单位(等于(=)) 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        orgcode: new FormItemModel({ caption: '单位代码(文本左包含(%#))', detailType: 'FORMITEM', name: 'orgcode', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_orgname_like: new FormItemModel({ caption: '名称(%)', detailType: 'FORMITEM', name: 'n_orgname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_porgid_eq: new FormItemModel({ caption: '上级单位(=)', detailType: 'FORMITEM', name: 'n_porgid_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        porgname: new FormItemModel({ caption: '上级单位(等于(=))', detailType: 'FORMITEM', name: 'porgname', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 orgcode 值

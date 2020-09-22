@@ -1,6 +1,7 @@
 package cn.ibizlab.util.domain;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import org.springframework.util.StringUtils;
 
 public class EntityMP extends EntityBase {
 
@@ -22,6 +23,15 @@ public class EntityMP extends EntityBase {
             this.getFocusNull().add(field.toLowerCase());
         else
             this.getFocusNull().remove(field.toLowerCase());
+    }
+
+    @Override
+    public void reset(String field){
+        if(!StringUtils.isEmpty(field)){
+            String resetField=field.toLowerCase();
+            this.set(resetField,null);
+            getFocusNull().remove(resetField);
+        }
     }
 
 }

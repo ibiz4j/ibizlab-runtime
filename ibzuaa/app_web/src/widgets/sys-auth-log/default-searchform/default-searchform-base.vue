@@ -40,6 +40,7 @@
               :data="data" 
               :context="context"
               :viewparams="viewparams"
+              :formState="formState" 
               :localContext ='{ }' 
               :localParam ='{ }' 
               :disabled="detailsModel.n_authcode_eq.disabled" 
@@ -345,6 +346,29 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_username_like: new FormItemModel({ caption: '用户全局名(文本包含(%))', detailType: 'FORMITEM', name: 'n_username_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_personname_like: new FormItemModel({ caption: '用户名称(文本包含(%))', detailType: 'FORMITEM', name: 'n_personname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_authcode_eq: new FormItemModel({ caption: '认证结果(等于(=))', detailType: 'FORMITEM', name: 'n_authcode_eq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_authtime_gtandeq: new FormItemModel({ caption: '认证时间(大于等于(>=))', detailType: 'FORMITEM', name: 'n_authtime_gtandeq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_authtime_ltandeq: new FormItemModel({ caption: '认证时间(小于等于(<=))', detailType: 'FORMITEM', name: 'n_authtime_ltandeq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_domain_like: new FormItemModel({ caption: '域(文本包含(%))', detailType: 'FORMITEM', name: 'n_domain_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -354,63 +378,40 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_username_like: [
             { type: 'string', message: '用户全局名(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '用户全局名(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '用户全局名(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '用户全局名(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_username_like.required, type: 'string', message: '用户全局名(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_username_like.required, type: 'string', message: '用户全局名(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
         n_personname_like: [
             { type: 'string', message: '用户名称(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '用户名称(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '用户名称(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '用户名称(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_personname_like.required, type: 'string', message: '用户名称(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_personname_like.required, type: 'string', message: '用户名称(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
         n_authcode_eq: [
             { type: 'string', message: '认证结果(等于(=)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '认证结果(等于(=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '认证结果(等于(=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '认证结果(等于(=)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_authcode_eq.required, type: 'string', message: '认证结果(等于(=)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_authcode_eq.required, type: 'string', message: '认证结果(等于(=)) 值不能为空', trigger: 'blur' },
         ],
         n_authtime_gtandeq: [
             { type: 'string', message: '认证时间(大于等于(>=)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '认证时间(大于等于(>=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '认证时间(大于等于(>=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '认证时间(大于等于(>=)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_authtime_gtandeq.required, type: 'string', message: '认证时间(大于等于(>=)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_authtime_gtandeq.required, type: 'string', message: '认证时间(大于等于(>=)) 值不能为空', trigger: 'blur' },
         ],
         n_authtime_ltandeq: [
             { type: 'string', message: '认证时间(小于等于(<=)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '认证时间(小于等于(<=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '认证时间(小于等于(<=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '认证时间(小于等于(<=)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_authtime_ltandeq.required, type: 'string', message: '认证时间(小于等于(<=)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_authtime_ltandeq.required, type: 'string', message: '认证时间(小于等于(<=)) 值不能为空', trigger: 'blur' },
         ],
         n_domain_like: [
             { type: 'string', message: '域(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '域(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '域(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '域(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_domain_like.required, type: 'string', message: '域(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_domain_like.required, type: 'string', message: '域(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_username_like: new FormItemModel({ caption: '用户全局名(文本包含(%))', detailType: 'FORMITEM', name: 'n_username_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_personname_like: new FormItemModel({ caption: '用户名称(文本包含(%))', detailType: 'FORMITEM', name: 'n_personname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_authcode_eq: new FormItemModel({ caption: '认证结果(等于(=))', detailType: 'FORMITEM', name: 'n_authcode_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_authtime_gtandeq: new FormItemModel({ caption: '认证时间(大于等于(>=))', detailType: 'FORMITEM', name: 'n_authtime_gtandeq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_authtime_ltandeq: new FormItemModel({ caption: '认证时间(小于等于(<=))', detailType: 'FORMITEM', name: 'n_authtime_ltandeq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_domain_like: new FormItemModel({ caption: '域(文本包含(%))', detailType: 'FORMITEM', name: 'n_domain_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_username_like 值

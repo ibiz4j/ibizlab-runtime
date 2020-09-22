@@ -41,10 +41,11 @@ export class AuthGuard {
     private constructor() { }
 
     /**
-     * post请求
+     * 获取应用数据
      *
      * @param {string} url url 请求路径
      * @param {*} [params={}] 请求参数
+     * @param {*} [router] 路由对象
      * @returns {Promise<any>} 请求相响应对象
      * @memberof AuthGuard
      */
@@ -64,6 +65,9 @@ export class AuthGuard {
                                 Object.assign(localAppData,data);
                             }
                             data = JSON.parse(JSON.stringify(localAppData));
+                        }
+                        if(localStorage.getItem('localdata')){
+                            router.app.$store.commit('addLocalData', JSON.parse(localStorage.getItem('localdata') as string));
                         }
                         router.app.$store.commit('addAppData', data);
                         // 提交统一资源数据

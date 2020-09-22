@@ -444,6 +444,14 @@ export default class MainBase extends Vue implements ControlInterface {
     public oldData: any = {};
 
     /**
+     * 混入表单数据对象
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public mixinData:any = {};
+
+    /**
      * 表单数据对象
      *
      * @type {*}
@@ -512,98 +520,98 @@ export default class MainBase extends Vue implements ControlInterface {
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfkey: [
             { type: 'string', message: '模板标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '模板标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '模板标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '模板标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '模板标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '模板标识 值不能为空', trigger: 'blur' },
         ],
         srfmajortext: [
             { type: 'string', message: '模板标题 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '模板标题 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '模板标题 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '模板标题 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '模板标题 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '模板标题 值不能为空', trigger: 'blur' },
         ],
         srftempmode: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfuf: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfdeid: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfsourcekey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         accessid: [
             { type: 'string', message: '开放平台接入标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '开放平台接入标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '开放平台接入标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '开放平台接入标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.accessid.required, type: 'string', message: '开放平台接入标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.accessid.required, type: 'string', message: '开放平台接入标识 值不能为空', trigger: 'blur' },
         ],
         accessname: [
             { type: 'string', message: '接入平台 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '接入平台 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '接入平台 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '接入平台 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.accessname.required, type: 'string', message: '接入平台 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.accessname.required, type: 'string', message: '接入平台 值不能为空', trigger: 'blur' },
         ],
         open_type: [
             { type: 'string', message: '接入平台类型 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '接入平台类型 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '接入平台类型 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '接入平台类型 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.open_type.required, type: 'string', message: '接入平台类型 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.open_type.required, type: 'string', message: '接入平台类型 值不能为空', trigger: 'blur' },
         ],
         template_type: [
             { type: 'string', message: '模板类型 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '模板类型 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '模板类型 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '模板类型 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.template_type.required, type: 'string', message: '模板类型 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.template_type.required, type: 'string', message: '模板类型 值不能为空', trigger: 'blur' },
         ],
         template_name: [
             { type: 'string', message: '模板标题 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '模板标题 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '模板标题 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '模板标题 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.template_name.required, type: 'string', message: '模板标题 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.template_name.required, type: 'string', message: '模板标题 值不能为空', trigger: 'blur' },
         ],
         template_id: [
             { type: 'string', message: '模板标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '模板标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '模板标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '模板标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.template_id.required, type: 'string', message: '模板标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.template_id.required, type: 'string', message: '模板标识 值不能为空', trigger: 'blur' },
         ],
         content: [
             { type: 'string', message: '模板内容 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '模板内容 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '模板内容 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '模板内容 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.content.required, type: 'string', message: '模板内容 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.content.required, type: 'string', message: '模板内容 值不能为空', trigger: 'blur' },
         ],
         template_url: [
             { type: 'string', message: 'URL 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: 'URL 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: 'URL 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: 'URL 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.template_url.required, type: 'string', message: 'URL 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.template_url.required, type: 'string', message: 'URL 值不能为空', trigger: 'blur' },
         ],
         tid: [
             { type: 'string', message: '模板标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '模板标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '模板标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '模板标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.tid.required, type: 'string', message: '模板标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.tid.required, type: 'string', message: '模板标识 值不能为空', trigger: 'blur' },
         ],
         }
     }
@@ -699,37 +707,37 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
 , 
-        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfkey: new FormItemModel({ caption: '模板标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfkey: new FormItemModel({ caption: '模板标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfmajortext: new FormItemModel({ caption: '模板标题', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfmajortext: new FormItemModel({ caption: '模板标题', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        accessid: new FormItemModel({ caption: '开放平台接入标识', detailType: 'FORMITEM', name: 'accessid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        accessid: new FormItemModel({ caption: '开放平台接入标识', detailType: 'FORMITEM', name: 'accessid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        accessname: new FormItemModel({ caption: '接入平台', detailType: 'FORMITEM', name: 'accessname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        accessname: new FormItemModel({ caption: '接入平台', detailType: 'FORMITEM', name: 'accessname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        open_type: new FormItemModel({ caption: '接入平台类型', detailType: 'FORMITEM', name: 'open_type', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        open_type: new FormItemModel({ caption: '接入平台类型', detailType: 'FORMITEM', name: 'open_type', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        template_type: new FormItemModel({ caption: '模板类型', detailType: 'FORMITEM', name: 'template_type', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        template_type: new FormItemModel({ caption: '模板类型', detailType: 'FORMITEM', name: 'template_type', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        template_name: new FormItemModel({ caption: '模板标题', detailType: 'FORMITEM', name: 'template_name', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        template_name: new FormItemModel({ caption: '模板标题', detailType: 'FORMITEM', name: 'template_name', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        template_id: new FormItemModel({ caption: '模板标识', detailType: 'FORMITEM', name: 'template_id', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        template_id: new FormItemModel({ caption: '模板标识', detailType: 'FORMITEM', name: 'template_id', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        content: new FormItemModel({ caption: '模板内容', detailType: 'FORMITEM', name: 'content', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        content: new FormItemModel({ caption: '模板内容', detailType: 'FORMITEM', name: 'content', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        template_url: new FormItemModel({ caption: 'URL', detailType: 'FORMITEM', name: 'template_url', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        template_url: new FormItemModel({ caption: 'URL', detailType: 'FORMITEM', name: 'template_url', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        tid: new FormItemModel({ caption: '模板标识', detailType: 'FORMITEM', name: 'tid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        tid: new FormItemModel({ caption: '模板标识', detailType: 'FORMITEM', name: 'tid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
     };
 
@@ -1067,6 +1075,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public fillForm(_datas: any = {},action:string): void {
+        this.mixinData = _datas;
         this.ignorefieldvaluechange = true;
         Object.keys(_datas).forEach((name: string) => {
             if (this.data.hasOwnProperty(name)) {

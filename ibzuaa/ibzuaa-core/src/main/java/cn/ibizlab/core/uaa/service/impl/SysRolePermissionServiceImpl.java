@@ -202,7 +202,9 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
         if(!ObjectUtils.isEmpty(et.getPermissionid())){
             cn.ibizlab.core.uaa.domain.SysPermission permission=et.getPermission();
             if(ObjectUtils.isEmpty(permission)){
-                cn.ibizlab.core.uaa.domain.SysPermission majorEntity=syspermissionService.get(et.getPermissionid());
+                cn.ibizlab.core.uaa.domain.SysPermission majorEntity=syspermissionService.getById(et.getPermissionid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setPermission(majorEntity);
                 permission=majorEntity;
             }
@@ -214,7 +216,9 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
         if(!ObjectUtils.isEmpty(et.getRoleid())){
             cn.ibizlab.core.uaa.domain.SysRole role=et.getRole();
             if(ObjectUtils.isEmpty(role)){
-                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.get(et.getRoleid());
+                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.getById(et.getRoleid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setRole(majorEntity);
                 role=majorEntity;
             }

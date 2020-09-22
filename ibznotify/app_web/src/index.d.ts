@@ -4,6 +4,7 @@ import { UtilServiceRegister } from '@/utilservice/util-service-register';
 import { EntityServiceRegister } from '@/service/entity-service-register';
 import { CounterServiceRegister } from '@/counter/counter-service-register';
 import { CodeListRegister } from '@codelist/codelist-register';
+import { MessageServiceRegister } from '@/message/message-service-register';
 declare global {
     interface Window {
         uiServiceRegister: UIServiceRegister,
@@ -11,6 +12,7 @@ declare global {
         utilServiceRegister: UtilServiceRegister,
         entityServiceRegister: EntityServiceRegister,
         counterServiceRegister: CounterServiceRegister,
-        codeListRegister:CodeListRegister
+        codeListRegister:CodeListRegister,
+        messageServiceRegister:MessageServiceRegister
     }
 }

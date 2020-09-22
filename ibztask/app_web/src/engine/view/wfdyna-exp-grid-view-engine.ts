@@ -29,10 +29,10 @@ export default class WFDynaExpGridViewEngine extends GridViewEngine {
                 return;
             }
             if(!this.view.isformDruipart){
-                super.load(opts);
+                super.load(opts, isnotify);
             }else{
                 if(isnotify){
-                    super.load(opts);
+                    super.load(opts, isnotify);
                 }
             }
         })

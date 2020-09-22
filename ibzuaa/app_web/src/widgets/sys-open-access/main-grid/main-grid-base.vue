@@ -161,7 +161,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysOpenAccessService from '@/service/sys-open-access/sys-open-access-service';
 import MainService from './main-grid-service';
 import SysOpenAccessUIService from '@/uiservice/sys-open-access/sys-open-access-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

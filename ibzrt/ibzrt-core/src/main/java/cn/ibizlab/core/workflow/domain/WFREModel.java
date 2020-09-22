@@ -74,7 +74,18 @@ public class WFREModel extends EntityClient implements Serializable {
         this.modify("bpmnfile",bpmnfile);
     }
 
-
+    /**
+     * 复制当前对象数据到目标对象(粘贴重置)
+     * @param targetEntity 目标数据对象
+     * @param bIncEmpty  是否包括空值
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
+        this.reset("modelid");
+        return super.copyTo(targetEntity,bIncEmpty);
+    }
 }
 
 

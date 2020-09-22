@@ -308,6 +308,23 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_job_id_eq: new FormItemModel({ caption: '任务ID(等于(=))', detailType: 'FORMITEM', name: 'n_job_id_eq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_handler_like: new FormItemModel({ caption: '执行器任务HANDLER(文本包含(%))', detailType: 'FORMITEM', name: 'n_handler_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_trigger_code_eq: new FormItemModel({ caption: '触发器调度返回码(等于(=))', detailType: 'FORMITEM', name: 'n_trigger_code_eq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -317,39 +334,22 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_job_id_eq: [
             { type: 'string', message: '任务ID(等于(=)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '任务ID(等于(=)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '任务ID(等于(=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '任务ID(等于(=)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_job_id_eq.required, type: 'string', message: '任务ID(等于(=)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_job_id_eq.required, type: 'string', message: '任务ID(等于(=)) 值不能为空', trigger: 'blur' },
         ],
         n_handler_like: [
             { type: 'string', message: '执行器任务HANDLER(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '执行器任务HANDLER(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '执行器任务HANDLER(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '执行器任务HANDLER(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_handler_like.required, type: 'string', message: '执行器任务HANDLER(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_handler_like.required, type: 'string', message: '执行器任务HANDLER(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
         n_trigger_code_eq: [
             { type: 'number', message: '触发器调度返回码(等于(=)) 值必须为数值类型', trigger: 'change' },
             { type: 'number', message: '触发器调度返回码(等于(=)) 值必须为数值类型', trigger: 'blur' },
-            { required: false, type: 'number', message: '触发器调度返回码(等于(=)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'number', message: '触发器调度返回码(等于(=)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_trigger_code_eq.required, type: 'number', message: '触发器调度返回码(等于(=)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_trigger_code_eq.required, type: 'number', message: '触发器调度返回码(等于(=)) 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_job_id_eq: new FormItemModel({ caption: '任务ID(等于(=))', detailType: 'FORMITEM', name: 'n_job_id_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_handler_like: new FormItemModel({ caption: '执行器任务HANDLER(文本包含(%))', detailType: 'FORMITEM', name: 'n_handler_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_trigger_code_eq: new FormItemModel({ caption: '触发器调度返回码(等于(=))', detailType: 'FORMITEM', name: 'n_trigger_code_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_job_id_eq 值

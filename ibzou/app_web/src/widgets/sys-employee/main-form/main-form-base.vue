@@ -104,6 +104,7 @@
     :data="data" 
     :context="context"
     :viewparams="viewparams"
+    :formState="formState" 
     :localContext ='{ }' 
     :localParam ='{ }' 
     :disabled="detailsModel.sex.disabled" 
@@ -664,6 +665,14 @@ export default class MainBase extends Vue implements ControlInterface {
     public oldData: any = {};
 
     /**
+     * 混入表单数据对象
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public mixinData:any = {};
+
+    /**
      * 表单数据对象
      *
      * @type {*}
@@ -752,218 +761,218 @@ export default class MainBase extends Vue implements ControlInterface {
         srfupdatedate: [
             { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '最后修改时间 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '最后修改时间 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfupdatedate.required, type: 'string', message: '最后修改时间 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfupdatedate.required, type: 'string', message: '最后修改时间 值不能为空', trigger: 'blur' },
         ],
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfkey: [
             { type: 'string', message: '用户标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '用户标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '用户标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '用户标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '用户标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '用户标识 值不能为空', trigger: 'blur' },
         ],
         srfmajortext: [
             { type: 'string', message: '姓名 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '姓名 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '姓名 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '姓名 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '姓名 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '姓名 值不能为空', trigger: 'blur' },
         ],
         srftempmode: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfuf: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfdeid: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfsourcekey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         usercode: [
             { type: 'string', message: '用户工号 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '用户工号 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '用户工号 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '用户工号 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.usercode.required, type: 'string', message: '用户工号 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.usercode.required, type: 'string', message: '用户工号 值不能为空', trigger: 'blur' },
         ],
         personname: [
             { type: 'string', message: '姓名 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '姓名 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '姓名 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '姓名 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.personname.required, type: 'string', message: '姓名 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.personname.required, type: 'string', message: '姓名 值不能为空', trigger: 'blur' },
         ],
         loginname: [
             { type: 'string', message: '登录名 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '登录名 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '登录名 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '登录名 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.loginname.required, type: 'string', message: '登录名 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.loginname.required, type: 'string', message: '登录名 值不能为空', trigger: 'blur' },
         ],
         orgid: [
             { type: 'string', message: '单位 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '单位 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '单位 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.orgid.required, type: 'string', message: '单位 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.orgid.required, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
         ],
         orgname: [
             { type: 'string', message: '单位 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '单位 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '单位 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.orgname.required, type: 'string', message: '单位 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.orgname.required, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
         ],
         mdeptid: [
             { type: 'string', message: '主部门 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '主部门 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '主部门 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '主部门 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.mdeptid.required, type: 'string', message: '主部门 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.mdeptid.required, type: 'string', message: '主部门 值不能为空', trigger: 'blur' },
         ],
         pdeptcheck: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.pdeptcheck.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.pdeptcheck.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         mdeptname: [
             { type: 'string', message: '部门 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '部门 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '部门 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.mdeptname.required, type: 'string', message: '部门 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.mdeptname.required, type: 'string', message: '部门 值不能为空', trigger: 'blur' },
         ],
         mdeptcode: [
             { type: 'string', message: '主部门代码 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '主部门代码 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '主部门代码 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '主部门代码 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.mdeptcode.required, type: 'string', message: '主部门代码 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.mdeptcode.required, type: 'string', message: '主部门代码 值不能为空', trigger: 'blur' },
         ],
         orgcode: [
             { type: 'string', message: '单位代码 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '单位代码 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '单位代码 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '单位代码 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.orgcode.required, type: 'string', message: '单位代码 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.orgcode.required, type: 'string', message: '单位代码 值不能为空', trigger: 'blur' },
         ],
         bcode: [
             { type: 'string', message: '业务编码 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '业务编码 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '业务编码 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '业务编码 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.bcode.required, type: 'string', message: '业务编码 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.bcode.required, type: 'string', message: '业务编码 值不能为空', trigger: 'blur' },
         ],
         nickname: [
             { type: 'string', message: '昵称别名 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '昵称别名 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '昵称别名 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '昵称别名 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.nickname.required, type: 'string', message: '昵称别名 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.nickname.required, type: 'string', message: '昵称别名 值不能为空', trigger: 'blur' },
         ],
         sex: [
             { type: 'string', message: '性别 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '性别 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '性别 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '性别 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.sex.required, type: 'string', message: '性别 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.sex.required, type: 'string', message: '性别 值不能为空', trigger: 'blur' },
         ],
         birthday: [
             { type: 'string', message: '出生日期 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '出生日期 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '出生日期 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '出生日期 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.birthday.required, type: 'string', message: '出生日期 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.birthday.required, type: 'string', message: '出生日期 值不能为空', trigger: 'blur' },
         ],
         certcode: [
             { type: 'string', message: '证件号码 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '证件号码 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '证件号码 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '证件号码 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.certcode.required, type: 'string', message: '证件号码 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.certcode.required, type: 'string', message: '证件号码 值不能为空', trigger: 'blur' },
         ],
         phone: [
             { type: 'string', message: '联系方式 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '联系方式 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '联系方式 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '联系方式 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.phone.required, type: 'string', message: '联系方式 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.phone.required, type: 'string', message: '联系方式 值不能为空', trigger: 'blur' },
         ],
         avatar: [
             { type: 'string', message: '社交账号 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '社交账号 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '社交账号 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '社交账号 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.avatar.required, type: 'string', message: '社交账号 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.avatar.required, type: 'string', message: '社交账号 值不能为空', trigger: 'blur' },
         ],
         email: [
             { type: 'string', message: '邮件 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '邮件 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '邮件 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '邮件 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.email.required, type: 'string', message: '邮件 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.email.required, type: 'string', message: '邮件 值不能为空', trigger: 'blur' },
         ],
         ipaddr: [
             { type: 'string', message: 'ip地址 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: 'ip地址 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: 'ip地址 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: 'ip地址 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.ipaddr.required, type: 'string', message: 'ip地址 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.ipaddr.required, type: 'string', message: 'ip地址 值不能为空', trigger: 'blur' },
         ],
         showorder: [
             { type: 'number', message: '排序 值必须为数值类型', trigger: 'change' },
             { type: 'number', message: '排序 值必须为数值类型', trigger: 'blur' },
-            { required: false, type: 'number', message: '排序 值不能为空', trigger: 'change' },
-            { required: false, type: 'number', message: '排序 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.showorder.required, type: 'number', message: '排序 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.showorder.required, type: 'number', message: '排序 值不能为空', trigger: 'blur' },
         ],
         addr: [
             { type: 'string', message: '地址 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '地址 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '地址 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '地址 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.addr.required, type: 'string', message: '地址 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.addr.required, type: 'string', message: '地址 值不能为空', trigger: 'blur' },
         ],
         memo: [
             { type: 'string', message: '备注 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '备注 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '备注 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '备注 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.memo.required, type: 'string', message: '备注 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.memo.required, type: 'string', message: '备注 值不能为空', trigger: 'blur' },
         ],
         theme: [
             { type: 'string', message: '样式 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '样式 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '样式 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '样式 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.theme.required, type: 'string', message: '样式 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.theme.required, type: 'string', message: '样式 值不能为空', trigger: 'blur' },
         ],
         lang: [
             { type: 'string', message: '语言 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '语言 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '语言 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '语言 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.lang.required, type: 'string', message: '语言 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.lang.required, type: 'string', message: '语言 值不能为空', trigger: 'blur' },
         ],
         fontsize: [
             { type: 'string', message: '字号 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '字号 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '字号 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '字号 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.fontsize.required, type: 'string', message: '字号 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.fontsize.required, type: 'string', message: '字号 值不能为空', trigger: 'blur' },
         ],
         reserver: [
             { type: 'string', message: '保留 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '保留 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '保留 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '保留 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.reserver.required, type: 'string', message: '保留 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.reserver.required, type: 'string', message: '保留 值不能为空', trigger: 'blur' },
         ],
         usericon: [
             { type: 'string', message: '照片 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '照片 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '照片 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '照片 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.usericon.required, type: 'string', message: '照片 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.usericon.required, type: 'string', message: '照片 值不能为空', trigger: 'blur' },
         ],
         userid: [
             { type: 'string', message: '用户标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '用户标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '用户标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '用户标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.userid.required, type: 'string', message: '用户标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.userid.required, type: 'string', message: '用户标识 值不能为空', trigger: 'blur' },
         ],
         }
     }
@@ -1063,77 +1072,77 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
 , 
-        srfupdatedate: new FormItemModel({ caption: '最后修改时间', detailType: 'FORMITEM', name: 'srfupdatedate', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfupdatedate: new FormItemModel({ caption: '最后修改时间', detailType: 'FORMITEM', name: 'srfupdatedate', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfkey: new FormItemModel({ caption: '用户标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfkey: new FormItemModel({ caption: '用户标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfmajortext: new FormItemModel({ caption: '姓名', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfmajortext: new FormItemModel({ caption: '姓名', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        usercode: new FormItemModel({ caption: '用户工号', detailType: 'FORMITEM', name: 'usercode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
+        usercode: new FormItemModel({ caption: '用户工号', detailType: 'FORMITEM', name: 'usercode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 1 })
 , 
-        personname: new FormItemModel({ caption: '姓名', detailType: 'FORMITEM', name: 'personname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        personname: new FormItemModel({ caption: '姓名', detailType: 'FORMITEM', name: 'personname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        loginname: new FormItemModel({ caption: '登录名', detailType: 'FORMITEM', name: 'loginname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
+        loginname: new FormItemModel({ caption: '登录名', detailType: 'FORMITEM', name: 'loginname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 1 })
 , 
-        orgid: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
+        orgid: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 1 })
 , 
-        orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
+        orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 1 })
 , 
-        mdeptid: new FormItemModel({ caption: '主部门', detailType: 'FORMITEM', name: 'mdeptid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        mdeptid: new FormItemModel({ caption: '主部门', detailType: 'FORMITEM', name: 'mdeptid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        pdeptcheck: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'pdeptcheck', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        pdeptcheck: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'pdeptcheck', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        mdeptname: new FormItemModel({ caption: '部门', detailType: 'FORMITEM', name: 'mdeptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        mdeptname: new FormItemModel({ caption: '部门', detailType: 'FORMITEM', name: 'mdeptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        mdeptcode: new FormItemModel({ caption: '主部门代码', detailType: 'FORMITEM', name: 'mdeptcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        mdeptcode: new FormItemModel({ caption: '主部门代码', detailType: 'FORMITEM', name: 'mdeptcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        orgcode: new FormItemModel({ caption: '单位代码', detailType: 'FORMITEM', name: 'orgcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
+        orgcode: new FormItemModel({ caption: '单位代码', detailType: 'FORMITEM', name: 'orgcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 1 })
 , 
-        bcode: new FormItemModel({ caption: '业务编码', detailType: 'FORMITEM', name: 'bcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        bcode: new FormItemModel({ caption: '业务编码', detailType: 'FORMITEM', name: 'bcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        nickname: new FormItemModel({ caption: '昵称别名', detailType: 'FORMITEM', name: 'nickname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        nickname: new FormItemModel({ caption: '昵称别名', detailType: 'FORMITEM', name: 'nickname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        sex: new FormItemModel({ caption: '性别', detailType: 'FORMITEM', name: 'sex', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        sex: new FormItemModel({ caption: '性别', detailType: 'FORMITEM', name: 'sex', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        birthday: new FormItemModel({ caption: '出生日期', detailType: 'FORMITEM', name: 'birthday', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        birthday: new FormItemModel({ caption: '出生日期', detailType: 'FORMITEM', name: 'birthday', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        certcode: new FormItemModel({ caption: '证件号码', detailType: 'FORMITEM', name: 'certcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        certcode: new FormItemModel({ caption: '证件号码', detailType: 'FORMITEM', name: 'certcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        phone: new FormItemModel({ caption: '联系方式', detailType: 'FORMITEM', name: 'phone', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        phone: new FormItemModel({ caption: '联系方式', detailType: 'FORMITEM', name: 'phone', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        avatar: new FormItemModel({ caption: '社交账号', detailType: 'FORMITEM', name: 'avatar', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        avatar: new FormItemModel({ caption: '社交账号', detailType: 'FORMITEM', name: 'avatar', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        email: new FormItemModel({ caption: '邮件', detailType: 'FORMITEM', name: 'email', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        email: new FormItemModel({ caption: '邮件', detailType: 'FORMITEM', name: 'email', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        ipaddr: new FormItemModel({ caption: 'ip地址', detailType: 'FORMITEM', name: 'ipaddr', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        ipaddr: new FormItemModel({ caption: 'ip地址', detailType: 'FORMITEM', name: 'ipaddr', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        showorder: new FormItemModel({ caption: '排序', detailType: 'FORMITEM', name: 'showorder', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        showorder: new FormItemModel({ caption: '排序', detailType: 'FORMITEM', name: 'showorder', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        addr: new FormItemModel({ caption: '地址', detailType: 'FORMITEM', name: 'addr', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        addr: new FormItemModel({ caption: '地址', detailType: 'FORMITEM', name: 'addr', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        memo: new FormItemModel({ caption: '备注', detailType: 'FORMITEM', name: 'memo', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        memo: new FormItemModel({ caption: '备注', detailType: 'FORMITEM', name: 'memo', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        theme: new FormItemModel({ caption: '样式', detailType: 'FORMITEM', name: 'theme', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        theme: new FormItemModel({ caption: '样式', detailType: 'FORMITEM', name: 'theme', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        lang: new FormItemModel({ caption: '语言', detailType: 'FORMITEM', name: 'lang', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        lang: new FormItemModel({ caption: '语言', detailType: 'FORMITEM', name: 'lang', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        fontsize: new FormItemModel({ caption: '字号', detailType: 'FORMITEM', name: 'fontsize', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        fontsize: new FormItemModel({ caption: '字号', detailType: 'FORMITEM', name: 'fontsize', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        reserver: new FormItemModel({ caption: '保留', detailType: 'FORMITEM', name: 'reserver', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        reserver: new FormItemModel({ caption: '保留', detailType: 'FORMITEM', name: 'reserver', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        usericon: new FormItemModel({ caption: '照片', detailType: 'FORMITEM', name: 'usericon', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        usericon: new FormItemModel({ caption: '照片', detailType: 'FORMITEM', name: 'usericon', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        userid: new FormItemModel({ caption: '用户标识', detailType: 'FORMITEM', name: 'userid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        userid: new FormItemModel({ caption: '用户标识', detailType: 'FORMITEM', name: 'userid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
     };
 
@@ -1745,6 +1754,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public fillForm(_datas: any = {},action:string): void {
+        this.mixinData = _datas;
         this.ignorefieldvaluechange = true;
         Object.keys(_datas).forEach((name: string) => {
             if (this.data.hasOwnProperty(name)) {

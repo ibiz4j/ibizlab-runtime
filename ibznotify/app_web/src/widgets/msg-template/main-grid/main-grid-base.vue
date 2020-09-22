@@ -137,7 +137,7 @@ import AppCenterService from "@service/app/app-center-service";
 import MsgTemplateService from '@/service/msg-template/msg-template-service';
 import MainService from './main-grid-service';
 import MsgTemplateUIService from '@/uiservice/msg-template/msg-template-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

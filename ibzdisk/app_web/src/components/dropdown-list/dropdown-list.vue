@@ -17,8 +17,9 @@
 
 <script lang="ts">
 import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { Util } from '@/utils';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
 })
@@ -83,6 +84,23 @@ export default class DropDownList extends Vue {
      * @memberof DropDownList
      */
     @Prop() public data?: any;
+
+    /**
+     * 表单状态对象
+     *
+     * @type {Subject<any>}
+     * @memberof AppEmbedPicker
+     */
+    @Prop() public formState!: Subject<any>
+
+    /**
+     * 订阅对象
+     *
+     * @protected
+     * @type {(Subscription | undefined)}
+     * @memberof SelectType
+     */
+    protected formStateEvent: Subscription | undefined;
 
   /**
      * 监听表单数据
@@ -241,6 +259,23 @@ export default class DropDownList extends Vue {
      * @memberof DropDownList
      */
     public created() {
+        if(this.formState) {
+            this.formStateEvent = this.formState.subscribe(({ type, data }) => {
+                if (Object.is('load', type)) {
+                    this.loadData();
+                }
+            });
+        }else{
+            this.loadData();
+        }
+    }
+
+    /**
+     * 加载数据
+     *
+     * @memberof DropDownList
+     */
+    public loadData(){
       if(this.tag && Object.is(this.codelistType,"STATIC")){
           const codelist = this.$store.getters.getCodeList(this.tag);
           if (codelist) {
@@ -371,6 +406,17 @@ export default class DropDownList extends Vue {
                 codeItem.children.push(item);
             }
         })
+    }
+
+    /**
+     * vue 生命周期
+     *
+     * @memberof DropDownList
+     */
+    public destroyed() {
+        if (this.formStateEvent) {
+            this.formStateEvent.unsubscribe();
+        }
     }
 }
 </script>

@@ -412,6 +412,14 @@ export default class MainBase extends Vue implements ControlInterface {
     public oldData: any = {};
 
     /**
+     * 混入表单数据对象
+     *
+     * @type {*}
+     * @memberof MainBase
+     */
+    public mixinData:any = {};
+
+    /**
      * 表单数据对象
      *
      * @type {*}
@@ -478,86 +486,86 @@ export default class MainBase extends Vue implements ControlInterface {
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfkey: [
             { type: 'string', message: '交易标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '交易标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '交易标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '交易标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '交易标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '交易标识 值不能为空', trigger: 'blur' },
         ],
         srfmajortext: [
             { type: 'string', message: '交易名称 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '交易名称 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '交易名称 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '交易名称 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '交易名称 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '交易名称 值不能为空', trigger: 'blur' },
         ],
         srftempmode: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfuf: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfdeid: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfsourcekey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         tradename: [
             { type: 'string', message: '交易名称 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '交易名称 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '交易名称 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '交易名称 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.tradename.required, type: 'string', message: '交易名称 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.tradename.required, type: 'string', message: '交易名称 值不能为空', trigger: 'blur' },
         ],
         outtradeno: [
             { type: 'string', message: '订单号 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '订单号 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '订单号 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '订单号 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.outtradeno.required, type: 'string', message: '订单号 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.outtradeno.required, type: 'string', message: '订单号 值不能为空', trigger: 'blur' },
         ],
         subject: [
             { type: 'string', message: '订单标题 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '订单标题 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '订单标题 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '订单标题 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.subject.required, type: 'string', message: '订单标题 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.subject.required, type: 'string', message: '订单标题 值不能为空', trigger: 'blur' },
         ],
         totalamount: [
             { type: 'string', message: '订单金额 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '订单金额 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '订单金额 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '订单金额 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.totalamount.required, type: 'string', message: '订单金额 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.totalamount.required, type: 'string', message: '订单金额 值不能为空', trigger: 'blur' },
         ],
         accessname: [
             { type: 'string', message: '支付平台 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '支付平台 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '支付平台 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '支付平台 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.accessname.required, type: 'string', message: '支付平台 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.accessname.required, type: 'string', message: '支付平台 值不能为空', trigger: 'blur' },
         ],
         tradeid: [
             { type: 'string', message: '交易标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '交易标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '交易标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '交易标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.tradeid.required, type: 'string', message: '交易标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.tradeid.required, type: 'string', message: '交易标识 值不能为空', trigger: 'blur' },
         ],
         accessid: [
             { type: 'string', message: '支付平台接入标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '支付平台接入标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '支付平台接入标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '支付平台接入标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.accessid.required, type: 'string', message: '支付平台接入标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.accessid.required, type: 'string', message: '支付平台接入标识 值不能为空', trigger: 'blur' },
         ],
         }
     }
@@ -649,33 +657,33 @@ export default class MainBase extends Vue implements ControlInterface {
     public detailsModel: any = {
         formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
 , 
-        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfkey: new FormItemModel({ caption: '交易标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfkey: new FormItemModel({ caption: '交易标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfmajortext: new FormItemModel({ caption: '交易名称', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfmajortext: new FormItemModel({ caption: '交易名称', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        tradename: new FormItemModel({ caption: '交易名称', detailType: 'FORMITEM', name: 'tradename', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        tradename: new FormItemModel({ caption: '交易名称', detailType: 'FORMITEM', name: 'tradename', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        outtradeno: new FormItemModel({ caption: '订单号', detailType: 'FORMITEM', name: 'outtradeno', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        outtradeno: new FormItemModel({ caption: '订单号', detailType: 'FORMITEM', name: 'outtradeno', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        subject: new FormItemModel({ caption: '订单标题', detailType: 'FORMITEM', name: 'subject', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        subject: new FormItemModel({ caption: '订单标题', detailType: 'FORMITEM', name: 'subject', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        totalamount: new FormItemModel({ caption: '订单金额', detailType: 'FORMITEM', name: 'totalamount', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        totalamount: new FormItemModel({ caption: '订单金额', detailType: 'FORMITEM', name: 'totalamount', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        accessname: new FormItemModel({ caption: '支付平台', detailType: 'FORMITEM', name: 'accessname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        accessname: new FormItemModel({ caption: '支付平台', detailType: 'FORMITEM', name: 'accessname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        tradeid: new FormItemModel({ caption: '交易标识', detailType: 'FORMITEM', name: 'tradeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        tradeid: new FormItemModel({ caption: '交易标识', detailType: 'FORMITEM', name: 'tradeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        accessid: new FormItemModel({ caption: '支付平台接入标识', detailType: 'FORMITEM', name: 'accessid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        accessid: new FormItemModel({ caption: '支付平台接入标识', detailType: 'FORMITEM', name: 'accessid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
     };
 
@@ -985,6 +993,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public fillForm(_datas: any = {},action:string): void {
+        this.mixinData = _datas;
         this.ignorefieldvaluechange = true;
         Object.keys(_datas).forEach((name: string) => {
             if (this.data.hasOwnProperty(name)) {

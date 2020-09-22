@@ -19,12 +19,10 @@ import cn.ibizlab.core.ou.domain.SysEmployee;
 import cn.ibizlab.core.ou.filter.SysEmployeeSearchContext;
 
 
-import com.baomidou.mybatisplus.extension.service.IService;
-
 /**
  * 实体[SysEmployee] 服务对象接口
  */
-public interface ISysEmployeeService extends IService<SysEmployee>{
+public interface ISysEmployeeService{
 
     boolean create(SysEmployee et) ;
     @CacheEvict(value="sysemployee",allEntries=true)
@@ -52,23 +50,8 @@ public interface ISysEmployeeService extends IService<SysEmployee>{
     List<SysEmployee> selectByPostid(String postid) ;
     @CacheEvict(value="sysemployee",allEntries=true)
     void removeByPostid(String postid) ;
-    /**
-     *自定义查询SQL
-     * @param sql  select * from table where id =#{et.param}
-     * @param param 参数列表  param.put("param","1");
-     * @return select * from table where id = '1'
-     */
-    List<JSONObject> select(String sql, Map param);
-    /**
-     *自定义SQL
-     * @param sql  update table  set name ='test' where id =#{et.param}
-     * @param param 参数列表  param.put("param","1");
-     * @return     update table  set name ='test' where id = '1'
-     */
-    boolean execute(String sql, Map param);
 
-    List<SysEmployee> getSysemployeeByIds(List<String> ids) ;
-    List<SysEmployee> getSysemployeeByEntities(List<SysEmployee> entities) ;
 }
+
 
 

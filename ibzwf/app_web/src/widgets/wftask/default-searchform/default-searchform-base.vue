@@ -26,6 +26,7 @@
               :data="data" 
               :context="context"
               :viewparams="viewparams"
+              :formState="formState" 
               :localContext ='{ }' 
               :localParam ='{ }' 
               :disabled="detailsModel.n_definitionkey_leftlike.disabled" 
@@ -329,6 +330,25 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_description_like: new FormItemModel({ caption: '事项', detailType: 'FORMITEM', name: 'n_description_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_definitionkey_leftlike: new FormItemModel({ caption: '系统', detailType: 'FORMITEM', name: 'n_definitionkey_leftlike', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_definitionname_like: new FormItemModel({ caption: '流程', detailType: 'FORMITEM', name: 'n_definitionname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_taskname_like: new FormItemModel({ caption: '状态', detailType: 'FORMITEM', name: 'n_taskname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -338,47 +358,28 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_description_like: [
             { type: 'string', message: '事项 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '事项 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '事项 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '事项 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_description_like.required, type: 'string', message: '事项 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_description_like.required, type: 'string', message: '事项 值不能为空', trigger: 'blur' },
         ],
         n_definitionkey_leftlike: [
             { type: 'string', message: '系统 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '系统 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '系统 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '系统 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_definitionkey_leftlike.required, type: 'string', message: '系统 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_definitionkey_leftlike.required, type: 'string', message: '系统 值不能为空', trigger: 'blur' },
         ],
         n_definitionname_like: [
             { type: 'string', message: '流程 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '流程 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '流程 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '流程 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_definitionname_like.required, type: 'string', message: '流程 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_definitionname_like.required, type: 'string', message: '流程 值不能为空', trigger: 'blur' },
         ],
         n_taskname_like: [
             { type: 'string', message: '状态 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '状态 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '状态 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '状态 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_taskname_like.required, type: 'string', message: '状态 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_taskname_like.required, type: 'string', message: '状态 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_description_like: new FormItemModel({ caption: '事项', detailType: 'FORMITEM', name: 'n_description_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_definitionkey_leftlike: new FormItemModel({ caption: '系统', detailType: 'FORMITEM', name: 'n_definitionkey_leftlike', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_definitionname_like: new FormItemModel({ caption: '流程', detailType: 'FORMITEM', name: 'n_definitionname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_taskname_like: new FormItemModel({ caption: '状态', detailType: 'FORMITEM', name: 'n_taskname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_description_like 值

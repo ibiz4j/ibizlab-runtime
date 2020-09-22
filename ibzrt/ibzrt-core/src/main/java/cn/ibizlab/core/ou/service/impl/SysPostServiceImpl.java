@@ -45,9 +45,6 @@ public class SysPostServiceImpl implements ISysPostService {
     @Autowired
     SysPostFeignClient sysPostFeignClient;
 
-    @Autowired
-    @Lazy
-    protected cn.ibizlab.core.ou.service.ISysEmployeeService sysemployeeService;
 
     @Override
     public boolean create(SysPost et) {

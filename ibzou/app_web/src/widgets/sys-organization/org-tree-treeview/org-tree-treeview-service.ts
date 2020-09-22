@@ -2,7 +2,7 @@ import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
 import SysOrganizationService from '@/service/sys-organization/sys-organization-service';
 import OrgTreeModel from './org-tree-treeview-model';
-import CodeListService from '@service/app/codelist-service';
+import CodeListService from "@/codelist/codelist-service";
 import i18n from '@/locale';
 
 

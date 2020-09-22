@@ -308,6 +308,23 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_cname_like: new FormItemModel({ caption: '目录(文本包含(%))', detailType: 'FORMITEM', name: 'n_cname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_val_like: new FormItemModel({ caption: '代码值(文本包含(%))', detailType: 'FORMITEM', name: 'n_val_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_label_like: new FormItemModel({ caption: '名称(文本包含(%))', detailType: 'FORMITEM', name: 'n_label_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -317,39 +334,22 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_cname_like: [
             { type: 'string', message: '目录(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '目录(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '目录(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '目录(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_cname_like.required, type: 'string', message: '目录(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_cname_like.required, type: 'string', message: '目录(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
         n_val_like: [
             { type: 'string', message: '代码值(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '代码值(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '代码值(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '代码值(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_val_like.required, type: 'string', message: '代码值(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_val_like.required, type: 'string', message: '代码值(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
         n_label_like: [
             { type: 'string', message: '名称(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '名称(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '名称(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '名称(文本包含(%)) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_label_like.required, type: 'string', message: '名称(文本包含(%)) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_label_like.required, type: 'string', message: '名称(文本包含(%)) 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_cname_like: new FormItemModel({ caption: '目录(文本包含(%))', detailType: 'FORMITEM', name: 'n_cname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_val_like: new FormItemModel({ caption: '代码值(文本包含(%))', detailType: 'FORMITEM', name: 'n_val_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_label_like: new FormItemModel({ caption: '名称(文本包含(%))', detailType: 'FORMITEM', name: 'n_label_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_cname_like 值

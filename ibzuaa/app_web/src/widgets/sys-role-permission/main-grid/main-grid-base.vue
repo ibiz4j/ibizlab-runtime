@@ -123,7 +123,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysRolePermissionService from '@/service/sys-role-permission/sys-role-permission-service';
 import MainService from './main-grid-service';
 import SysRolePermissionUIService from '@/uiservice/sys-role-permission/sys-role-permission-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

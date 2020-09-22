@@ -241,7 +241,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysDepartmentService from '@/service/sys-department/sys-department-service';
 import MainService from './main-grid-service';
 import SysDepartmentUIService from '@/uiservice/sys-department/sys-department-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

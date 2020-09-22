@@ -18,11 +18,16 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Wrapper;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -124,7 +129,7 @@ public class DiskCoreService {
         return getFile("",fileId,"");
     }
     public File getFile(String folder,String fileId,String authcode) {
-        if(StringUtils.isEmpty(folder))
+        if(StringUtils.isEmpty(folder)||folder.equals("download"))
             folder = "ibizutil";
         if(folder.toLowerCase().startsWith("ibizutil")) {
             String dirpath = this.fileRoot.concat(folder).concat(File.separator).concat(fileId.replace("_", File.separator));
@@ -142,6 +147,18 @@ public class DiskCoreService {
 
     public File getFile(SDFile sdFile) {
         if(!StringUtils.isEmpty(sdFile.getFilePath())){
+            String fileFullPath = this.fileRoot.concat(sdFile.getFilePath());
+            fileFullPath = fileFullPath.replace("\\",File.separator).replace("/",File.separator);
+            File file = new File(fileFullPath);
+            if(file.exists())
+                return file;
+        }
+        throw new InternalServerErrorException("文件未找到");
+    }
+
+    public File getFileById(String fileId) {
+        SDFile sdFile=sdFileService.getById(fileId);
+        if(sdFile!=null&&(!StringUtils.isEmpty(sdFile.getFilePath()))){
             String fileFullPath = this.fileRoot.concat(sdFile.getFilePath());
             fileFullPath = fileFullPath.replace("\\",File.separator).replace("/",File.separator);
             File file = new File(fileFullPath);
@@ -187,6 +204,47 @@ public class DiskCoreService {
             }
         }
         return fileName;
+    }
+
+    public static String getExtensionName(File file) {
+        return getExtensionName(file.getName());
+    }
+
+    public static String getHash256(File file) {
+        String value = "";
+        // 获取hash值
+        InputStream fis = null;
+        try {
+            byte[] buffer = new byte[1024];
+            int numRead;
+            fis = new FileInputStream(file);
+            //如果想使用SHA-1或SHA-256，则传入SHA-1,SHA-256
+            MessageDigest complete = MessageDigest.getInstance("SHA-256");
+            do {
+                //从文件读到buffer
+                numRead = fis.read(buffer);
+                if (numRead > 0) {
+                    //用读到的字节进行MD5的计算，第二个参数是偏移量
+                    complete.update(buffer, 0, numRead);
+                }
+            } while (numRead != -1);
+
+            value = new String(Base64.getEncoder().encode(complete.digest()));
+        } catch (NoSuchAlgorithmException e) {
+
+        }catch (IOException e) {
+
+        }
+        finally {
+            if(fis!=null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+
+                }
+            }
+        }
+        return value;
     }
 
 }

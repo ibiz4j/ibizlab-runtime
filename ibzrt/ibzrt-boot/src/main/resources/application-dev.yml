@@ -48,6 +48,10 @@ zuul:
         path: /sys_deptmembers/**
         serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
         stripPrefix: false
+      sys_emp:
+        path: /sys_emps/**
+        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+        stripPrefix: false
       sys_open_access:
         path: /sys_open_accesses/**
         serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}

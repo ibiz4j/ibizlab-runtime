@@ -393,6 +393,10 @@ export default class MainService extends ControlService {
             }else{
                 if(item && item.prop){
                     requestData[item.prop] = data[item.name];
+                }else{
+                    if(item.dataType && Object.is(item.dataType,"FORMPART")){
+                        Object.assign(requestData,data[item.name]);
+                    }     
                 }
             }
         });
@@ -424,5 +428,41 @@ export default class MainService extends ControlService {
         });
         return itemName.trim();
     }
+
+    /**
+     * 重写处理返回数据
+     *
+     * @param {string} action
+     * @param {*} response
+     * @memberof MainService
+     */
+    public handleResponseData(action: string, data: any = {},isCreate?:boolean,codelistArray?:any){
+        let model: any = this.getMode();
+        if (!model && model.getDataItems instanceof Function) {
+            return data;
+        }
+        let item: any = {};
+        let dataItems: any[] = model.getDataItems();
+        dataItems.forEach(dataitem => {
+            let val = data.hasOwnProperty(dataitem.prop) ? data[dataitem.prop] : null;
+            if (val === null) {
+                val = data.hasOwnProperty(dataitem.name) ? data[dataitem.name] : null;
+            }
+            if((isCreate === undefined || isCreate === null ) && Object.is(dataitem.dataType, 'GUID') && Object.is(dataitem.name, 'srfkey') && (val && !Object.is(val, ''))){
+                isCreate = true;
+            }
+            item[dataitem.name] = val;
+            // 转化代码表
+            if(codelistArray && dataitem.codelist){
+                if(codelistArray.get(dataitem.codelist.tag) && codelistArray.get(dataitem.codelist.tag).get(val)){
+                    item[dataitem.name] = codelistArray.get(dataitem.codelist.tag).get(val);
+                }
+            }
+        });
+        item.srfuf = data.srfuf ? data.srfuf : (isCreate ? "0" : "1");
+        item = Object.assign(data,item);
+        return item;
+    }
+
 
 }

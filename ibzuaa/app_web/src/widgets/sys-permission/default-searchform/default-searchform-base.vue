@@ -263,15 +263,6 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
-     * 属性值规则
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public rules: any = {
-    }
-
-    /**
      * 详情模型集合
      *
      * @type {*}
@@ -281,6 +272,15 @@ export default class DefaultBase extends Vue implements ControlInterface {
         formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
 , 
     };
+    
+    /**
+     * 属性值规则
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public rules: any = {
+    }
 
 
     /**

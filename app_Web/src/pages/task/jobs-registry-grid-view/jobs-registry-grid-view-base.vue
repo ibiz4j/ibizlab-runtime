@@ -158,7 +158,7 @@ import GridViewEngine from '@engine/view/grid-view-engine';
 
 
 import JobsRegistryUIService from '@/uiservice/jobs-registry/jobs-registry-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 
 
 @Component({
@@ -280,7 +280,9 @@ export default class JobsRegistryGridViewBase extends Vue {
             for(let key in this.viewparams){
                 delete this.viewparams[key];
             }
-            Object.assign(this.viewparams, JSON.parse(this.viewparam));
+            if(typeof this.viewparams == 'string') {
+                Object.assign(this.viewparams, JSON.parse(this.viewparam));
+            }
             
         } 
     }
@@ -301,7 +303,7 @@ export default class JobsRegistryGridViewBase extends Vue {
               _this.engine.load();
               
             });
-        } else if(!Object.is(newVal, oldVal) && _this.refresh() && Object.is(_this.$util.typeOf(_this.refresh()), 'function')) {
+        } else if(!Object.is(newVal, oldVal) && _this.refresh && _this.refresh instanceof Function) {
             _this.refresh();
         }
     }
@@ -477,7 +479,9 @@ export default class JobsRegistryGridViewBase extends Vue {
             Object.assign(this.context,this.$store.getters.getAppData().context);
         }
         if (!this.viewDefaultUsage && this.viewdata && !Object.is(this.viewdata, '')) {
-            Object.assign(this.context, JSON.parse(this.viewdata));
+            if(typeof this.viewdata == 'string') {
+                Object.assign(this.context, JSON.parse(this.viewdata));
+            }
             if(this.context && this.context.srfparentdename){
                 Object.assign(this.viewparams,{srfparentdename:this.context.srfparentdename});
             }

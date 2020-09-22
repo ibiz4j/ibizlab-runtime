@@ -16,4 +16,5 @@ export const rootstate: any = {
     viewSplit: {},
     orgDataMap:{},
     depDataMap:{},
+    viewMessage: {},
 }

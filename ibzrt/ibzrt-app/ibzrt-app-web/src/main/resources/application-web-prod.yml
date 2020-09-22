@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 30000
 #Log配置
 logging:
   level:
@@ -41,7 +41,7 @@ zuul:
       stripPrefix: false
     sys_emp:
       path: /sysemployees/**
-      serviceId: ${ibiz.ref.service.ibzrt-api:ibzrt-api}
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
     sys_team:
       path: /systeams/**

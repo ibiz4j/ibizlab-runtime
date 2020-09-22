@@ -234,7 +234,9 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         if(!ObjectUtils.isEmpty(et.getGroupid())){
             cn.ibizlab.core.workflow.domain.WFGroup group=et.getGroup();
             if(ObjectUtils.isEmpty(group)){
-                cn.ibizlab.core.workflow.domain.WFGroup majorEntity=wfgroupService.get(et.getGroupid());
+                cn.ibizlab.core.workflow.domain.WFGroup majorEntity=wfgroupService.getById(et.getGroupid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setGroup(majorEntity);
                 group=majorEntity;
             }
@@ -244,7 +246,9 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         if(!ObjectUtils.isEmpty(et.getUserid())){
             cn.ibizlab.core.workflow.domain.WFUser user=et.getUser();
             if(ObjectUtils.isEmpty(user)){
-                cn.ibizlab.core.workflow.domain.WFUser majorEntity=wfuserService.get(et.getUserid());
+                cn.ibizlab.core.workflow.domain.WFUser majorEntity=wfuserService.getById(et.getUserid());
+                if(ObjectUtils.isEmpty(majorEntity))
+                    return;
                 et.setUser(majorEntity);
                 user=majorEntity;
             }

@@ -17,10 +17,10 @@ export default class DataView9Engine extends DataViewEngine {
      */
     public load(opts: any = {},isnotify:boolean=false): void {
         if(!this.view.isformDruipart){
-            super.load(opts);
+            super.load(opts, isnotify);
         }else{
             if(isnotify){
-                super.load(opts);
+                super.load(opts, isnotify);
             }
         }
     }

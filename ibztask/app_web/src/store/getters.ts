@@ -47,7 +47,13 @@ export const getLocalData = (state: any) => () => {
  * @param state 
  */
 export const getAppData = (state: any) => () => {
-    return state.appdata;
+    let result:any = JSON.parse(JSON.stringify(state.appdata));
+    if(state.localdata && Object.keys(state.localdata).length >0){
+        let copyContext:any = result.context?result.context:{};
+        Object.assign(copyContext,state.localdata);
+        result.context = copyContext;
+    }
+    return result;
 }
 
 /**
@@ -104,4 +110,14 @@ export const getOrgData = (state: any) => (srfkey: string) => {
 export const getDepData = (state: any) => (srfkey: string) => {
   let depData = state.depDataMap[srfkey];
   return depData;
+}
+
+/**
+ * 获取视图信息
+ * 
+ * @param state 
+ */
+export const getViewMessage = (state: any) => (tag: string) => {
+    let id = state.viewMessage[tag];
+    return id;
 }

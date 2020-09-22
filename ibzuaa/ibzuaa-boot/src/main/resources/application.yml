@@ -18,4 +18,4 @@ zuul:
     disk:
       path: /net-disk/**
       serviceId: ${ibiz.ref.service.disk:ibzdisk-api}
-      stripPrefix: true
+      stripPrefix: false

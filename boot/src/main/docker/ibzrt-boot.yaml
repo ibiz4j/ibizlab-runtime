@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   ibzrt-boot:
-    image: ibiz4j/ibizlab-runtime:1.0.22-RC1
+    image: ibiz4j/ibizlab-runtime:1.0.23-RC1
     ports:
       - "10086:10086"
     networks:
@@ -14,7 +14,7 @@ services:
       - SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR=nacos:8848
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_DATASOURCE_URL=jdbc:mysql://ibzrt-db:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false
+      - SPRING_DATASOURCE_URL=jdbc:mysql://ibzrt-db:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false&nullCatalogMeansCurrent=true
       - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver
       - SPRING_REDIS_HOST=ibzrt-redis
       - IBIZ_CACHELEVEL=L2

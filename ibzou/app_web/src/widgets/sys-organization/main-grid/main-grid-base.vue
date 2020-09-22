@@ -193,7 +193,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysOrganizationService from '@/service/sys-organization/sys-organization-service';
 import MainService from './main-grid-service';
 import SysOrganizationUIService from '@/uiservice/sys-organization/sys-organization-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

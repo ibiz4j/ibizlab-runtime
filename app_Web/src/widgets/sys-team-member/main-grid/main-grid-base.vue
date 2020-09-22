@@ -209,7 +209,7 @@ import AppCenterService from "@service/app/app-center-service";
 import SysTeamMemberService from '@/service/sys-team-member/sys-team-member-service';
 import MainService from './main-grid-service';
 import SysTeamMemberUIService from '@/uiservice/sys-team-member/sys-team-member-ui-service';
-import CodeListService from "@service/app/codelist-service";
+import CodeListService from "@/codelist/codelist-service";
 import { FormItemModel } from '@/model/form-detail';
 import { Environment } from '@/environments/environment';
 

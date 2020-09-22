@@ -377,6 +377,14 @@ export default class NewFormBase extends Vue implements ControlInterface {
     public oldData: any = {};
 
     /**
+     * 混入表单数据对象
+     *
+     * @type {*}
+     * @memberof NewFormBase
+     */
+    public mixinData:any = {};
+
+    /**
      * 表单数据对象
      *
      * @type {*}
@@ -445,98 +453,98 @@ export default class NewFormBase extends Vue implements ControlInterface {
         srfupdatedate: [
             { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '最后修改时间 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '最后修改时间 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfupdatedate.required, type: 'string', message: '最后修改时间 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfupdatedate.required, type: 'string', message: '最后修改时间 值不能为空', trigger: 'blur' },
         ],
         srforikey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfkey: [
             { type: 'string', message: '部门标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '部门标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '部门标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '部门标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfkey.required, type: 'string', message: '部门标识 值不能为空', trigger: 'blur' },
         ],
         srfmajortext: [
             { type: 'string', message: '部门名称 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门名称 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '部门名称 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '部门名称 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '部门名称 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '部门名称 值不能为空', trigger: 'blur' },
         ],
         srftempmode: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfuf: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfdeid: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         srfsourcekey: [
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: ' 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
         ],
         deptcode: [
             { type: 'string', message: '部门代码 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门代码 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '部门代码 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '部门代码 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.deptcode.required, type: 'string', message: '部门代码 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.deptcode.required, type: 'string', message: '部门代码 值不能为空', trigger: 'blur' },
         ],
         deptname: [
             { type: 'string', message: '部门名称 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门名称 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '部门名称 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '部门名称 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.deptname.required, type: 'string', message: '部门名称 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.deptname.required, type: 'string', message: '部门名称 值不能为空', trigger: 'blur' },
         ],
         orgid: [
             { type: 'string', message: '单位 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '单位 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '单位 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.orgid.required, type: 'string', message: '单位 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.orgid.required, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
         ],
         orgname: [
             { type: 'string', message: '单位 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '单位 值必须为字符串类型', trigger: 'blur' },
-            { required: true, type: 'string', message: '单位 值不能为空', trigger: 'change' },
-            { required: true, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.orgname.required, type: 'string', message: '单位 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.orgname.required, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
         ],
         pdeptid: [
             { type: 'string', message: '上级部门 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '上级部门 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '上级部门 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '上级部门 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.pdeptid.required, type: 'string', message: '上级部门 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.pdeptid.required, type: 'string', message: '上级部门 值不能为空', trigger: 'blur' },
         ],
         pdeptname: [
             { type: 'string', message: '上级部门 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '上级部门 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '上级部门 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '上级部门 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.pdeptname.required, type: 'string', message: '上级部门 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.pdeptname.required, type: 'string', message: '上级部门 值不能为空', trigger: 'blur' },
         ],
         enable: [
             { type: 'number', message: '逻辑有效 值必须为数值类型', trigger: 'change' },
             { type: 'number', message: '逻辑有效 值必须为数值类型', trigger: 'blur' },
-            { required: false, type: 'number', message: '逻辑有效 值不能为空', trigger: 'change' },
-            { required: false, type: 'number', message: '逻辑有效 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.enable.required, type: 'number', message: '逻辑有效 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.enable.required, type: 'number', message: '逻辑有效 值不能为空', trigger: 'blur' },
         ],
         deptid: [
             { type: 'string', message: '部门标识 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '部门标识 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '部门标识 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '部门标识 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.deptid.required, type: 'string', message: '部门标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.deptid.required, type: 'string', message: '部门标识 值不能为空', trigger: 'blur' },
         ],
         }
     }
@@ -630,37 +638,37 @@ export default class NewFormBase extends Vue implements ControlInterface {
 , 
         formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
 , 
-        srfupdatedate: new FormItemModel({ caption: '最后修改时间', detailType: 'FORMITEM', name: 'srfupdatedate', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfupdatedate: new FormItemModel({ caption: '最后修改时间', detailType: 'FORMITEM', name: 'srfupdatedate', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfkey: new FormItemModel({ caption: '部门标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfkey: new FormItemModel({ caption: '部门标识', detailType: 'FORMITEM', name: 'srfkey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfmajortext: new FormItemModel({ caption: '部门名称', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfmajortext: new FormItemModel({ caption: '部门名称', detailType: 'FORMITEM', name: 'srfmajortext', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srftempmode: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srftempmode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfuf: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfuf', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfdeid: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfdeid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        deptcode: new FormItemModel({ caption: '部门代码', detailType: 'FORMITEM', name: 'deptcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 1 })
+        deptcode: new FormItemModel({ caption: '部门代码', detailType: 'FORMITEM', name: 'deptcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 1 })
 , 
-        deptname: new FormItemModel({ caption: '部门名称', detailType: 'FORMITEM', name: 'deptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        deptname: new FormItemModel({ caption: '部门名称', detailType: 'FORMITEM', name: 'deptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        orgid: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        orgid: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 3 })
 , 
-        pdeptid: new FormItemModel({ caption: '上级部门', detailType: 'FORMITEM', name: 'pdeptid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        pdeptid: new FormItemModel({ caption: '上级部门', detailType: 'FORMITEM', name: 'pdeptid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        pdeptname: new FormItemModel({ caption: '上级部门', detailType: 'FORMITEM', name: 'pdeptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        pdeptname: new FormItemModel({ caption: '上级部门', detailType: 'FORMITEM', name: 'pdeptname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        enable: new FormItemModel({ caption: '逻辑有效', detailType: 'FORMITEM', name: 'enable', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        enable: new FormItemModel({ caption: '逻辑有效', detailType: 'FORMITEM', name: 'enable', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
-        deptid: new FormItemModel({ caption: '部门标识', detailType: 'FORMITEM', name: 'deptid', visible: true, isShowCaption: true, form: this, isControlledContent: false , disabled: false, enableCond: 3 })
+        deptid: new FormItemModel({ caption: '部门标识', detailType: 'FORMITEM', name: 'deptid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
     };
 
@@ -1004,6 +1012,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @memberof NewFormBase
      */
     public fillForm(_datas: any = {},action:string): void {
+        this.mixinData = _datas;
         this.ignorefieldvaluechange = true;
         Object.keys(_datas).forEach((name: string) => {
             if (this.data.hasOwnProperty(name)) {

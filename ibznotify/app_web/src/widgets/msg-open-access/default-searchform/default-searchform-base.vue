@@ -26,6 +26,7 @@
               :data="data" 
               :context="context"
               :viewparams="viewparams"
+              :formState="formState" 
               :localContext ='{ }' 
               :localParam ='{ }' 
               :disabled="detailsModel.n_open_type_eq.disabled" 
@@ -299,6 +300,21 @@ export default class DefaultBase extends Vue implements ControlInterface {
     };
 
     /**
+     * 详情模型集合
+     *
+     * @type {*}
+     * @memberof DefaultBase
+     */
+    public detailsModel: any = {
+        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
+, 
+        n_accessname_like: new FormItemModel({ caption: '开放平台(%)', detailType: 'FORMITEM', name: 'n_accessname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_open_type_eq: new FormItemModel({ caption: '开放平台类型(=)', detailType: 'FORMITEM', name: 'n_open_type_eq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+    };
+    
+    /**
      * 属性值规则
      *
      * @type {*}
@@ -308,31 +324,16 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_accessname_like: [
             { type: 'string', message: '开放平台(%) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '开放平台(%) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '开放平台(%) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '开放平台(%) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_accessname_like.required, type: 'string', message: '开放平台(%) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_accessname_like.required, type: 'string', message: '开放平台(%) 值不能为空', trigger: 'blur' },
         ],
         n_open_type_eq: [
             { type: 'string', message: '开放平台类型(=) 值必须为字符串类型', trigger: 'change' },
             { type: 'string', message: '开放平台类型(=) 值必须为字符串类型', trigger: 'blur' },
-            { required: false, type: 'string', message: '开放平台类型(=) 值不能为空', trigger: 'change' },
-            { required: false, type: 'string', message: '开放平台类型(=) 值不能为空', trigger: 'blur' },
+            { required: this.detailsModel.n_open_type_eq.required, type: 'string', message: '开放平台类型(=) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_open_type_eq.required, type: 'string', message: '开放平台类型(=) 值不能为空', trigger: 'blur' },
         ],
     }
-
-    /**
-     * 详情模型集合
-     *
-     * @type {*}
-     * @memberof DefaultBase
-     */
-    public detailsModel: any = {
-        formpage1: new FormPageModel({ caption: '常规条件', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this })
-, 
-        n_accessname_like: new FormItemModel({ caption: '开放平台(%)', detailType: 'FORMITEM', name: 'n_accessname_like', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-        n_open_type_eq: new FormItemModel({ caption: '开放平台类型(=)', detailType: 'FORMITEM', name: 'n_open_type_eq', visible: true, isShowCaption: true, form: this, disabled: false, enableCond: 3 })
-, 
-    };
 
     /**
      * 监控表单属性 n_accessname_like 值

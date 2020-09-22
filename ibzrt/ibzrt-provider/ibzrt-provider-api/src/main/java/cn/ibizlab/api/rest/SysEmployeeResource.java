@@ -47,7 +47,6 @@ public class SysEmployeeResource {
     @Lazy
     public SysEmployeeMapping sysemployeeMapping;
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Create')")
     @ApiOperation(value = "新建人员", tags = {"人员" },  notes = "新建人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees")
     public ResponseEntity<SysEmployeeDTO> create(@Validated @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -57,7 +56,6 @@ public class SysEmployeeResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Create')")
     @ApiOperation(value = "批量新建人员", tags = {"人员" },  notes = "批量新建人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -66,7 +64,6 @@ public class SysEmployeeResource {
     }
 
     @VersionCheck(entity = "sysemployee" , versionfield = "updatedate")
-    @PreAuthorize("hasPermission(this.sysemployeeService.get(#sysemployee_id),'ibzrt-SysEmployee-Update')")
     @ApiOperation(value = "更新人员", tags = {"人员" },  notes = "更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysemployees/{sysemployee_id}")
     public ResponseEntity<SysEmployeeDTO> update(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -77,7 +74,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.getSysemployeeByEntities(this.sysemployeeMapping.toDomain(#sysemployeedtos)),'ibzrt-SysEmployee-Update')")
     @ApiOperation(value = "批量更新人员", tags = {"人员" },  notes = "批量更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysemployees/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -85,14 +81,12 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.get(#sysemployee_id),'ibzrt-SysEmployee-Remove')")
     @ApiOperation(value = "删除人员", tags = {"人员" },  notes = "删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysemployees/{sysemployee_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("sysemployee_id") String sysemployee_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.remove(sysemployee_id));
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.getSysemployeeByIds(#ids),'ibzrt-SysEmployee-Remove')")
     @ApiOperation(value = "批量删除人员", tags = {"人员" },  notes = "批量删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysemployees/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -100,7 +94,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PostAuthorize("hasPermission(this.sysemployeeMapping.toDomain(returnObject.body),'ibzrt-SysEmployee-Get')")
     @ApiOperation(value = "获取人员", tags = {"人员" },  notes = "获取人员")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysemployees/{sysemployee_id}")
     public ResponseEntity<SysEmployeeDTO> get(@PathVariable("sysemployee_id") String sysemployee_id) {
@@ -121,7 +114,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.checkKey(sysemployeeMapping.toDomain(sysemployeedto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-InitPwd-all')")
     @ApiOperation(value = "初始化密码", tags = {"人员" },  notes = "初始化密码")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/initpwd")
     public ResponseEntity<SysEmployeeDTO> initPwd(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -132,14 +124,12 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "保存人员", tags = {"人员" },  notes = "保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/save")
     public ResponseEntity<Boolean> save(@RequestBody SysEmployeeDTO sysemployeedto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.save(sysemployeeMapping.toDomain(sysemployeedto)));
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "批量保存人员", tags = {"人员" },  notes = "批量保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -147,7 +137,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-searchDefault-all') and hasPermission(#context,'ibzrt-SysEmployee-Get')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"人员" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysemployees/fetchdefault")
 	public ResponseEntity<List<SysEmployeeDTO>> fetchDefault(SysEmployeeSearchContext context) {
@@ -160,7 +149,6 @@ public class SysEmployeeResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-searchDefault-all') and hasPermission(#context,'ibzrt-SysEmployee-Get')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"人员" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysemployees/searchdefault")
 	public ResponseEntity<Page<SysEmployeeDTO>> searchDefault(@RequestBody SysEmployeeSearchContext context) {
@@ -168,7 +156,6 @@ public class SysEmployeeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysemployeeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Create')")
     @ApiOperation(value = "根据部门建立人员", tags = {"人员" },  notes = "根据部门建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees")
     public ResponseEntity<SysEmployeeDTO> createBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -179,7 +166,6 @@ public class SysEmployeeResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Create')")
     @ApiOperation(value = "根据部门批量建立人员", tags = {"人员" },  notes = "根据部门批量建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/batch")
     public ResponseEntity<Boolean> createBatchBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -192,7 +178,6 @@ public class SysEmployeeResource {
     }
 
     @VersionCheck(entity = "sysemployee" , versionfield = "updatedate")
-    @PreAuthorize("hasPermission(this.sysemployeeService.get(#sysemployee_id),'ibzrt-SysEmployee-Update')")
     @ApiOperation(value = "根据部门更新人员", tags = {"人员" },  notes = "根据部门更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<SysEmployeeDTO> updateBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -204,7 +189,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.getSysemployeeByEntities(this.sysemployeeMapping.toDomain(#sysemployeedtos)),'ibzrt-SysEmployee-Update')")
     @ApiOperation(value = "根据部门批量更新人员", tags = {"人员" },  notes = "根据部门批量更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysdepartments/{sysdepartment_id}/sysemployees/batch")
     public ResponseEntity<Boolean> updateBatchBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -216,14 +200,12 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.get(#sysemployee_id),'ibzrt-SysEmployee-Remove')")
     @ApiOperation(value = "根据部门删除人员", tags = {"人员" },  notes = "根据部门删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<Boolean> removeBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.remove(sysemployee_id));
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.getSysemployeeByIds(#ids),'ibzrt-SysEmployee-Remove')")
     @ApiOperation(value = "根据部门批量删除人员", tags = {"人员" },  notes = "根据部门批量删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysdepartments/{sysdepartment_id}/sysemployees/batch")
     public ResponseEntity<Boolean> removeBatchBySysDepartment(@RequestBody List<String> ids) {
@@ -231,7 +213,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PostAuthorize("hasPermission(this.sysemployeeMapping.toDomain(returnObject.body),'ibzrt-SysEmployee-Get')")
     @ApiOperation(value = "根据部门获取人员", tags = {"人员" },  notes = "根据部门获取人员")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<SysEmployeeDTO> getBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
@@ -254,7 +235,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.checkKey(sysemployeeMapping.toDomain(sysemployeedto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-InitPwd-all')")
     @ApiOperation(value = "根据部门人员", tags = {"人员" },  notes = "根据部门人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/initpwd")
     public ResponseEntity<SysEmployeeDTO> initPwdBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -265,7 +245,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据部门保存人员", tags = {"人员" },  notes = "根据部门保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/save")
     public ResponseEntity<Boolean> saveBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -274,7 +253,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.save(domain));
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据部门批量保存人员", tags = {"人员" },  notes = "根据部门批量保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -286,7 +264,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-searchDefault-all') and hasPermission(#context,'ibzrt-SysEmployee-Get')")
 	@ApiOperation(value = "根据部门获取DEFAULT", tags = {"人员" } ,notes = "根据部门获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysdepartments/{sysdepartment_id}/sysemployees/fetchdefault")
 	public ResponseEntity<List<SysEmployeeDTO>> fetchSysEmployeeDefaultBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id,SysEmployeeSearchContext context) {
@@ -300,7 +277,6 @@ public class SysEmployeeResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-searchDefault-all') and hasPermission(#context,'ibzrt-SysEmployee-Get')")
 	@ApiOperation(value = "根据部门查询DEFAULT", tags = {"人员" } ,notes = "根据部门查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysdepartments/{sysdepartment_id}/sysemployees/searchdefault")
 	public ResponseEntity<Page<SysEmployeeDTO>> searchSysEmployeeDefaultBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeSearchContext context) {
@@ -309,7 +285,6 @@ public class SysEmployeeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysemployeeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Create')")
     @ApiOperation(value = "根据单位机构建立人员", tags = {"人员" },  notes = "根据单位机构建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees")
     public ResponseEntity<SysEmployeeDTO> createBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -320,7 +295,6 @@ public class SysEmployeeResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Create')")
     @ApiOperation(value = "根据单位机构批量建立人员", tags = {"人员" },  notes = "根据单位机构批量建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/batch")
     public ResponseEntity<Boolean> createBatchBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -333,7 +307,6 @@ public class SysEmployeeResource {
     }
 
     @VersionCheck(entity = "sysemployee" , versionfield = "updatedate")
-    @PreAuthorize("hasPermission(this.sysemployeeService.get(#sysemployee_id),'ibzrt-SysEmployee-Update')")
     @ApiOperation(value = "根据单位机构更新人员", tags = {"人员" },  notes = "根据单位机构更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<SysEmployeeDTO> updateBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -345,7 +318,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.getSysemployeeByEntities(this.sysemployeeMapping.toDomain(#sysemployeedtos)),'ibzrt-SysEmployee-Update')")
     @ApiOperation(value = "根据单位机构批量更新人员", tags = {"人员" },  notes = "根据单位机构批量更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysorganizations/{sysorganization_id}/sysemployees/batch")
     public ResponseEntity<Boolean> updateBatchBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -357,14 +329,12 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.get(#sysemployee_id),'ibzrt-SysEmployee-Remove')")
     @ApiOperation(value = "根据单位机构删除人员", tags = {"人员" },  notes = "根据单位机构删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<Boolean> removeBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.remove(sysemployee_id));
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.getSysemployeeByIds(#ids),'ibzrt-SysEmployee-Remove')")
     @ApiOperation(value = "根据单位机构批量删除人员", tags = {"人员" },  notes = "根据单位机构批量删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysemployees/batch")
     public ResponseEntity<Boolean> removeBatchBySysOrganization(@RequestBody List<String> ids) {
@@ -372,7 +342,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PostAuthorize("hasPermission(this.sysemployeeMapping.toDomain(returnObject.body),'ibzrt-SysEmployee-Get')")
     @ApiOperation(value = "根据单位机构获取人员", tags = {"人员" },  notes = "根据单位机构获取人员")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<SysEmployeeDTO> getBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id) {
@@ -395,7 +364,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.checkKey(sysemployeeMapping.toDomain(sysemployeedto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-InitPwd-all')")
     @ApiOperation(value = "根据单位机构人员", tags = {"人员" },  notes = "根据单位机构人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/initpwd")
     public ResponseEntity<SysEmployeeDTO> initPwdBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -406,7 +374,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构保存人员", tags = {"人员" },  notes = "根据单位机构保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/save")
     public ResponseEntity<Boolean> saveBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -415,7 +382,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.save(domain));
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构批量保存人员", tags = {"人员" },  notes = "根据单位机构批量保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -427,7 +393,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-searchDefault-all') and hasPermission(#context,'ibzrt-SysEmployee-Get')")
 	@ApiOperation(value = "根据单位机构获取DEFAULT", tags = {"人员" } ,notes = "根据单位机构获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysorganizations/{sysorganization_id}/sysemployees/fetchdefault")
 	public ResponseEntity<List<SysEmployeeDTO>> fetchSysEmployeeDefaultBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id,SysEmployeeSearchContext context) {
@@ -441,7 +406,6 @@ public class SysEmployeeResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-searchDefault-all') and hasPermission(#context,'ibzrt-SysEmployee-Get')")
 	@ApiOperation(value = "根据单位机构查询DEFAULT", tags = {"人员" } ,notes = "根据单位机构查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysorganizations/{sysorganization_id}/sysemployees/searchdefault")
 	public ResponseEntity<Page<SysEmployeeDTO>> searchSysEmployeeDefaultBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody SysEmployeeSearchContext context) {
@@ -450,7 +414,6 @@ public class SysEmployeeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysemployeeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Create')")
     @ApiOperation(value = "根据单位机构部门建立人员", tags = {"人员" },  notes = "根据单位机构部门建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees")
     public ResponseEntity<SysEmployeeDTO> createBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -461,7 +424,6 @@ public class SysEmployeeResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Create')")
     @ApiOperation(value = "根据单位机构部门批量建立人员", tags = {"人员" },  notes = "根据单位机构部门批量建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/batch")
     public ResponseEntity<Boolean> createBatchBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -474,7 +436,6 @@ public class SysEmployeeResource {
     }
 
     @VersionCheck(entity = "sysemployee" , versionfield = "updatedate")
-    @PreAuthorize("hasPermission(this.sysemployeeService.get(#sysemployee_id),'ibzrt-SysEmployee-Update')")
     @ApiOperation(value = "根据单位机构部门更新人员", tags = {"人员" },  notes = "根据单位机构部门更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<SysEmployeeDTO> updateBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -486,7 +447,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.getSysemployeeByEntities(this.sysemployeeMapping.toDomain(#sysemployeedtos)),'ibzrt-SysEmployee-Update')")
     @ApiOperation(value = "根据单位机构部门批量更新人员", tags = {"人员" },  notes = "根据单位机构部门批量更新人员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/batch")
     public ResponseEntity<Boolean> updateBatchBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -498,14 +458,12 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.get(#sysemployee_id),'ibzrt-SysEmployee-Remove')")
     @ApiOperation(value = "根据单位机构部门删除人员", tags = {"人员" },  notes = "根据单位机构部门删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<Boolean> removeBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.remove(sysemployee_id));
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeService.getSysemployeeByIds(#ids),'ibzrt-SysEmployee-Remove')")
     @ApiOperation(value = "根据单位机构部门批量删除人员", tags = {"人员" },  notes = "根据单位机构部门批量删除人员")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/batch")
     public ResponseEntity<Boolean> removeBatchBySysOrganizationSysDepartment(@RequestBody List<String> ids) {
@@ -513,7 +471,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PostAuthorize("hasPermission(this.sysemployeeMapping.toDomain(returnObject.body),'ibzrt-SysEmployee-Get')")
     @ApiOperation(value = "根据单位机构部门获取人员", tags = {"人员" },  notes = "根据单位机构部门获取人员")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}")
     public ResponseEntity<SysEmployeeDTO> getBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
@@ -536,7 +493,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.checkKey(sysemployeeMapping.toDomain(sysemployeedto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-InitPwd-all')")
     @ApiOperation(value = "根据单位机构部门人员", tags = {"人员" },  notes = "根据单位机构部门人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/initpwd")
     public ResponseEntity<SysEmployeeDTO> initPwdBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -547,7 +503,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构部门保存人员", tags = {"人员" },  notes = "根据单位机构部门保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/save")
     public ResponseEntity<Boolean> saveBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {
@@ -556,7 +511,6 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.save(domain));
     }
 
-    @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构部门批量保存人员", tags = {"人员" },  notes = "根据单位机构部门批量保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
@@ -568,7 +522,6 @@ public class SysEmployeeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-searchDefault-all') and hasPermission(#context,'ibzrt-SysEmployee-Get')")
 	@ApiOperation(value = "根据单位机构部门获取DEFAULT", tags = {"人员" } ,notes = "根据单位机构部门获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/fetchdefault")
 	public ResponseEntity<List<SysEmployeeDTO>> fetchSysEmployeeDefaultBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id,SysEmployeeSearchContext context) {
@@ -582,7 +535,6 @@ public class SysEmployeeResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-searchDefault-all') and hasPermission(#context,'ibzrt-SysEmployee-Get')")
 	@ApiOperation(value = "根据单位机构部门查询DEFAULT", tags = {"人员" } ,notes = "根据单位机构部门查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/searchdefault")
 	public ResponseEntity<Page<SysEmployeeDTO>> searchSysEmployeeDefaultBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeSearchContext context) {
