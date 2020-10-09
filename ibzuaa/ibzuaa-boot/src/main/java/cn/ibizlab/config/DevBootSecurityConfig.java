@@ -120,6 +120,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/uaa/queryQQUserByCode").permitAll()
                        .antMatchers("/uaa/bindQQtoRegister").permitAll()
                        .antMatchers("/uaa/publickey").permitAll()
+                       .antMatchers("/uaa/dingtalk/jsapi/sign").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();

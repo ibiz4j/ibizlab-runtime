@@ -3,6 +3,8 @@
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="sys_role_permissionpickupgridview"></app-studioaction>
     <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :bordered="false">
         <div class='content-container pickup-grid-view'>
+        <div class='view-top-messages'>
+        </div>
             <view_searchform 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
@@ -40,6 +42,8 @@
                 @load="grid_load($event)"  
                 @closeview="closeView($event)">
             </view_grid>
+        <div class='view-bottom-messages'>
+        </div>
         </div>
     </card>
 </div>

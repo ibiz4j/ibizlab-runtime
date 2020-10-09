@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.alibaba.fastjson.annotation.JSONField;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -116,6 +118,15 @@ public class MsgOpenAccessDTO extends DTOBase implements Serializable {
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
     private String redirectUri;
 
+    /**
+     * 属性 [AGENT_ID]
+     *
+     */
+    @JSONField(name = "agent_id")
+    @JsonProperty("agent_id")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long agentId;
+
 
     /**
      * 设置 [ACCESSNAME]
@@ -187,6 +198,14 @@ public class MsgOpenAccessDTO extends DTOBase implements Serializable {
     public void setRedirectUri(String  redirectUri){
         this.redirectUri = redirectUri ;
         this.modify("redirect_uri",redirectUri);
+    }
+
+    /**
+     * 设置 [AGENT_ID]
+     */
+    public void setAgentId(Long  agentId){
+        this.agentId = agentId ;
+        this.modify("agent_id",agentId);
     }
 
 

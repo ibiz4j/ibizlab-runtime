@@ -79,6 +79,9 @@ export default class TreeExpView extends ViewEngine {
      */
     public treeExpBarEvent(eventName: string, args: any): void {
         if (Object.is(eventName, 'load')) {
+            if(this.treeExpBar && this.treeExpBar.calcNavigationToolbarState && this.treeExpBar.calcNavigationToolbarState instanceof Function){
+                this.treeExpBar.calcNavigationToolbarState();
+            }
             this.view.$emit('viewload', args);
         }
         if (Object.is(eventName, 'selectionchange')) {

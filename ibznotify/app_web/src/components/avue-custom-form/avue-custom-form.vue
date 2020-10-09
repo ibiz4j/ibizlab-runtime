@@ -20,10 +20,10 @@ export default class AvueCustomForm extends Vue {
   /**
    * 编辑器参数传入组件配置
    *
-   * @type {any}
+   * @type {*}
    * @memberof AvueCustomForm
    */
-  @Prop() public options?: any;
+  public options: any;
 
   /**
    * 是否需要转换为string类型
@@ -47,7 +47,7 @@ export default class AvueCustomForm extends Vue {
    * @type {any}
    * @memberof AvueCustomForm
    */
-  @Model('change') public value: any;
+  @Model("change") public value: any;
 
   /**
    * 是否将表单数据通过组件配置带入组件中
@@ -58,12 +58,21 @@ export default class AvueCustomForm extends Vue {
   @Prop() public isFormData?: boolean;
 
   /**
-   * 表单数据
+   * 是否为子表单
    *
-   * @type {any}
+   * @type {boolean}
    * @memberof AvueCustomForm
    */
-  @Prop() public formData: any;
+  @Prop() public isSubForm?: boolean;
+
+  /**
+   * 表单数据
+   *
+   * @type {*}
+   * @memberof AvueCustomForm
+   */
+  @Prop()
+  public formData?: any;
 
   /**
    * 表单状态
@@ -81,10 +90,12 @@ export default class AvueCustomForm extends Vue {
    */
   get formVal() {
     let obj: any = {};
-      if (this.value) {
-        if (this.isParseString) obj = JSON.parse(this.value);
-        else obj = this.value;
-      }
+    if (this.value) {
+      if (this.isParseString) obj = JSON.parse(this.value);
+      else obj = this.value;
+      if (this.isSubForm && obj instanceof Array)
+        obj = this.loadSubFormData(obj);
+    }
     return obj;
   }
 
@@ -110,7 +121,7 @@ export default class AvueCustomForm extends Vue {
   /**
    * 当前组件配置设置属性
    *
-   * @type {any}
+   * @type {*}
    * @memberof AvueCustomForm
    */
   public formOption: any = null;
@@ -118,7 +129,7 @@ export default class AvueCustomForm extends Vue {
   /**
    * avue-form默认配置
    *
-   * @type {any}
+   * @type {*}
    * @memberof AvueCustomForm
    */
   public defaultOptions: any = {
@@ -185,22 +196,26 @@ export default class AvueCustomForm extends Vue {
    *
    * @memberof AvueCustomForm
    */
-  public load() {
+  public async load() {
     let that: any = this;
     if (!this.options && this.options == null) {
       if (this.url && this.options == null) {
         const get: Promise<any> = this.$http.get(this.url);
-        get.then((response: any) => {
+        await get.then((response: any) => {
           if (response && response.data) {
-            that.formOption = response.data;
-            if (this.isFormData) that.getFormData();
+            let options: any = response.data;
+            this.transitionDicUrlCondition(options);
+            that.formOption = options;
+            if (that.isFormData) that.getFormData();
           }
         });
       } else {
+        this.transitionDicUrlCondition(this.defaultOptions);
         this.formOption = this.defaultOptions;
         if (this.isFormData) that.getFormData();
       }
     } else {
+      this.transitionDicUrlCondition(this.options);
       this.formOption = this.options;
       if (this.isFormData) that.getFormData();
     }
@@ -239,8 +254,67 @@ export default class AvueCustomForm extends Vue {
    * @memberof AvueCustomForm
    */
   public setValue(value: any) {
+    if (this.isSubForm) value = this.getSubFormData(value);
     if (this.isParseString) this.$emit("change", JSON.stringify(value));
     else this.$emit("change", value);
+  }
+
+  /**
+   * 提取第一个属性值
+   *
+   * @memberof AvueCustomForm
+   * @return {Array<any>}
+   */
+  public getSubFormData(value: any): Array<any> {
+    let arr: Array<any> = [];
+    for (let val in value) {
+      arr = value[val];
+      break;
+    }
+    return arr;
+  }
+
+  /**
+   * 加载子表单值
+   *
+   * @memberof AvueCustomForm
+   * @return {*}
+   */
+  public loadSubFormData(arr: Array<any>): any {
+    let value: any = {};
+    value[this.formOption.column[0].prop] = arr;
+    return value;
+  }
+
+  /**
+   * 配置的下拉列表转换符号支持动态配置
+   *
+   * @memberof AvueCustomForm
+   * @param {*}
+   */
+  public transitionDicUrlCondition(options: any) {
+    let that: any = this;
+    let recursive: any = function (obj: any) {
+      if (obj.column && obj.column.length > 0) {
+        obj.column.forEach((col: any) => {
+          if (col.dicUrl && col.dicUrl.indexOf("$") > 0) {
+            let g = /\${[^+]+}/;
+            let dicGroup = col.dicUrl.match(g);
+            dicGroup.forEach((dic: any) => {
+              col.dicUrl = col.dicUrl.replace(
+                dic,
+                that.formData[dic.substring(2, dic.length - 1)]
+              );
+            });
+          }
+          if (col.children) recursive(col.children);
+          if (col.group) recursive(col.group);
+        });
+      }
+      if (obj.children) recursive(obj.children);
+      if (obj.group) recursive(obj.group);
+    };
+    recursive(options);
   }
 
   /**
@@ -249,9 +323,9 @@ export default class AvueCustomForm extends Vue {
    * @type {Subject<any>}
    * @memberof AvueCustomForm
    */
-  public destroy(){
-    if(this.formStateEvent){
-        this.formStateEvent.unsubscribe();
+  public destroy() {
+    if (this.formStateEvent) {
+      this.formStateEvent.unsubscribe();
     }
   }
 }

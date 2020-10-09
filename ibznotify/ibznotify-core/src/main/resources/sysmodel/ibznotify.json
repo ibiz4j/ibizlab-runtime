@@ -350,14 +350,27 @@
     "data_length":500,
     "key_field":0,
     "major_field":0
+    },
+    {
+    "fieldname":"AGENT_ID" ,
+    "codename":"Agent_id",
+    "field_logic_name":"AGENT_ID",
+    "entity_name":"MsgOpenAccess",
+    "field_type":"BIGINT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"BIGINT",
+    "data_length":20,
+    "key_field":0,
+    "major_field":0
     }
     ],
     "subEntitys":[
     {"name":"DER1N_MSG_TEMPLATE_MSG_OPEN_ACCESS_ACCESSID",
      "relation_type":"DER1N",
      "code_name":"OpenAccess",
-     "entity_name":"MSG_OPEN_ACCESS",
-     "ref_entity_name":"MSG_TEMPLATE"
+     "entity_name":"MSG_TEMPLATE",
+     "ref_entity_name":"MSG_OPEN_ACCESS"
     }
     ],
     "parentEntitys":[
@@ -510,8 +523,8 @@
     {"name":"DER1N_MSG_TEMPLATE_MSG_OPEN_ACCESS_ACCESSID",
      "relation_type":"DER1N",
      "code_name":"OpenAccess",
-     "entity_name":"MSG_OPEN_ACCESS",
-     "ref_entity_name":"MSG_TEMPLATE"
+     "entity_name":"MSG_TEMPLATE",
+     "ref_entity_name":"MSG_OPEN_ACCESS"
     }
     ]
  }

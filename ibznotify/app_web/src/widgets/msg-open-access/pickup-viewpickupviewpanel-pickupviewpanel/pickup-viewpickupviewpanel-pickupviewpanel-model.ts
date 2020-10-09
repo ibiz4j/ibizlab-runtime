@@ -45,6 +45,9 @@ export default class PickupViewpickupviewpanelModel {
       {
         name: 'redirect_uri',
       },
+      {
+        name: 'agent_id',
+      },
     ]
   }
 

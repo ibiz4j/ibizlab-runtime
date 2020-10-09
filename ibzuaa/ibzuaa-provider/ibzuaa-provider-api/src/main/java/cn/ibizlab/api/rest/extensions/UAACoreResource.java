@@ -157,4 +157,14 @@ public class UAACoreResource {
 
         return ResponseEntity.status(HttpStatus.OK).body(jo);
     }
+
+    /**
+     * 获取钉钉jsApi签名
+     * @param openAccessId
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/uaa/dingtalk/jsapi/sign")
+    public ResponseEntity<JSONObject> getDingTalkJSSign(@Validated @NotBlank(message = "openAccessId不允许为空")@RequestParam ("openaccessid") String openAccessId,@NotBlank(message = "url不允许为空") @RequestParam ("url")String url){
+        return ResponseEntity.status(HttpStatus.OK).body(uaaCoreService.getDingTalkJSSign(openAccessId,url));
+    }
 }

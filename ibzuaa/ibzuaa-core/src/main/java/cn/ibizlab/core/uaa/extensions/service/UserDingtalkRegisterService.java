@@ -11,35 +11,19 @@ import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.nacos.client.identify.Base64;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
-import com.dingtalk.api.request.*;
-import com.dingtalk.api.response.*;
+import com.dingtalk.api.request.OapiSnsGetuserinfoBycodeRequest;
+import com.dingtalk.api.request.OapiUserGetuserinfoRequest;
+import com.dingtalk.api.response.OapiSnsGetuserinfoBycodeResponse;
+import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
 import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
-import java.sql.Wrapper;
-import java.util.*;
 
 /**
  * 实体[IBZUSER] 钉钉用户注册接口实现
@@ -57,42 +41,9 @@ public class UserDingtalkRegisterService {
     @Autowired
     private ISysUserAuthService sysUserAuthService;
 
-
-//    private long lastRefreshTime=System.currentTimeMillis()-7200001;
-//    private String accessToken="";
-//    public boolean isExpire()
-//    {
-//        if(System.currentTimeMillis()<(lastRefreshTime+7200000))
-//        {
-//            System.currentTimeMillis();
-//            return false;
-//        }
-//        return true;
-//    }
-
-
-    public synchronized String getAccessToken(String appKey,String appSecret)
-    {
-        if (isExpire(appKey)) {
-            DefaultDingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/gettoken");
-            OapiGettokenRequest request = new OapiGettokenRequest();
-            request.setAppkey(appKey);
-            request.setAppsecret(appSecret);
-            request.setHttpMethod("GET");
-            try {
-                OapiGettokenResponse response = client.execute(request);
-                if (response.getErrcode() != 0 || StringUtils.isEmpty(response.getAccessToken()))
-                    throw new BadRequestAlertException("获取access_token失败", "UserDingtalkRegisterService", response.getErrmsg());
-//                lastRefreshTime = System.currentTimeMillis();
-//                accessToken = response.getAccessToken();
-                setTokenInfo(appKey, response.getAccessToken(), System.currentTimeMillis());
-            } catch (ApiException e) {
-                e.printStackTrace();
-                throw new InternalServerErrorException("获取access_token失败");
-            }
-        }
-        return getToken(appKey);
-    }
+    @Autowired
+    @Lazy
+    DingTalkTokenService dingTalkTokenService;
 
     @Autowired
     private ISysOpenAccessService sysOpenAccessService;
@@ -110,23 +61,10 @@ public class UserDingtalkRegisterService {
         if((sysOpenAccess==null|| (sysOpenAccess.getDisabled()!=null && sysOpenAccess.getDisabled()==1))&&throwEx)
             throw new BadRequestAlertException("获取接入配置失败","UserDingtalkRegisterService","");
 
-        try {
-            // 可能抛出异常，但暂时不进行处理
-            String accessToken = getAccessToken(sysOpenAccess.getAccessKey(),sysOpenAccess.getSecretKey());
-            if(!accessToken.equals(sysOpenAccess.getAccessToken()))
-            {
-                sysOpenAccess.setAccessToken(accessToken);
-                sysOpenAccess.setExpiresTime(new Timestamp(getLastRefreshTime(sysOpenAccess.getAccessKey())));
-                sysOpenAccessService.update(sysOpenAccess);
-            }
-        }catch (Exception e) {
-
-        }
-
+        String accessToken =dingTalkTokenService.getAccessToken(sysOpenAccess.getAccessKey(),sysOpenAccess.getSecretKey());
+        sysOpenAccess.setAccessToken(accessToken);
         return sysOpenAccess;
     }
-
-
 
     public AuthenticationUser getUserByToken(String id,String requestAuthCode)
     {
@@ -169,7 +107,6 @@ public class UserDingtalkRegisterService {
 
         return null;
     }
-
 
     /**
      * 钉钉服务端通过临时授权码code获取授权用户的个人信息
@@ -222,77 +159,4 @@ public class UserDingtalkRegisterService {
 
         return returnObj;
     }
-
-    private static Map<String,TokenInfo> tokenMapping = new HashMap<>();
-
-
-    /**
-     * 适配当UAA接入多个钉钉应用的情况。
-     *
-     * @param appkey 钉钉appkey
-     * @return
-     */
-    public boolean isExpire(String appkey) {
-        if (!tokenMapping.containsKey(appkey))
-            return true;
-
-        TokenInfo accessTokenInfo = tokenMapping.get(appkey);
-
-        if (accessTokenInfo == null)
-            return true;
-
-        String accessToken = accessTokenInfo.accessToken;
-        Long refreshtime = accessTokenInfo.lastRefreshTime;
-
-
-        if (StringUtils.isEmpty(accessToken) || refreshtime == null)
-            return true;
-
-        if (System.currentTimeMillis() < refreshtime + 7100000) {
-            System.currentTimeMillis();
-            return false;
-        }
-        return true;
-    }
-
-    private void setTokenInfo(String appkey, String token, Long refreshTime) {
-        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(refreshTime))
-            return;
-
-        if (!tokenMapping.containsKey(appkey)) {
-            tokenMapping.put(appkey, new TokenInfo());
-        }
-
-        TokenInfo tokenInfo = tokenMapping.get(appkey);
-        tokenInfo.accessToken = token;
-        tokenInfo.lastRefreshTime = refreshTime;
-
-    }
-
-    private String getToken(String appkey){
-        if (!StringUtils.isEmpty(appkey)){
-            TokenInfo tokenInfo = tokenMapping.get(appkey);
-            if (tokenInfo != null)
-                return tokenMapping.get(appkey).accessToken;
-        }
-        return null;
-    }
-    /**
-     * 钉钉默认超时时间为2小时（7200秒），防止程序卡点，换成7100秒（100秒预留）
-     */
-    private Long getLastRefreshTime(String appkey){
-        if (!StringUtils.isEmpty(appkey)){
-            TokenInfo tokenInfo = tokenMapping.get(appkey);
-            if (tokenInfo != null){
-                return tokenInfo.lastRefreshTime;
-            }
-        }
-        return System.currentTimeMillis()-7100001;
-    }
-
-    class TokenInfo{
-        String accessToken;
-        Long lastRefreshTime;
-    }
-
 }

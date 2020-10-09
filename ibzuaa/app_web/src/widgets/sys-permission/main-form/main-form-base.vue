@@ -2,8 +2,7 @@
     <i-form :model="this.data" class='app-form' ref='form'  id='syspermission_main' style="">
     <input style="display:none;" />
     <row >
-            
-<i-col v-show="detailsModel.sys_permissionname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+            <i-col v-show="detailsModel.sys_permissionname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_permissionname' :itemRules="this.rules().sys_permissionname" class='' :caption="$t('entities.syspermission.main_form.details.sys_permissionname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_permissionname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box 
     v-model="data.sys_permissionname"  

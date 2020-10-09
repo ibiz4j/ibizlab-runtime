@@ -154,7 +154,8 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
 
                        .antMatchers("/net-disk/download/**").permitAll()
                        .antMatchers("/net-disk/**view/**").permitAll()
-                       .antMatchers("/jobs-api").permitAll();
+                       .antMatchers("/jobs-api").permitAll()
+                       .antMatchers("/uaa/dingtalk/jsapi/sign").permitAll();
 
 
         for (String excludePattern : excludesPattern) {

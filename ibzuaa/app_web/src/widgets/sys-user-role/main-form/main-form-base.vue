@@ -2,8 +2,7 @@
     <i-form :model="this.data" class='app-form' ref='form'  id='sysuserrole_main' style="">
     <input style="display:none;" />
     <row >
-            
-<i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+            <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysuserrole.main_form.details.group1')" :isShowCaption="true" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.sys_roleid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
@@ -42,6 +41,7 @@
   :localParam ='{ }' 
   :disabled="detailsModel.sys_rolename.disabled"
   name='sys_rolename'
+  
   deMajorField='rolename'
   deKeyField='sysrole'
   :service="service"
@@ -69,6 +69,7 @@
   :localParam ='{ }' 
   :disabled="detailsModel.sys_username.disabled"
   name='sys_username'
+  
   deMajorField='personname'
   deKeyField='sysuser'
   :service="service"

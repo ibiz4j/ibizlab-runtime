@@ -1,6 +1,7 @@
 package cn.ibizlab.core.extensions.service;
 
 import cn.ibizlab.core.extensions.domain.Template;
+import cn.ibizlab.core.extensions.helper.DingTalkHelper;
 import cn.ibizlab.core.notify.domain.MsgBody;
 import cn.ibizlab.core.notify.domain.MsgOpenAccess;
 import cn.ibizlab.core.notify.domain.MsgTemplate;
@@ -26,13 +27,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiGettokenRequest;
-import com.dingtalk.api.request.OapiMessageCorpconversationAsyncsendV2Request;
-import com.dingtalk.api.request.OapiWorkrecordAddRequest;
-import com.dingtalk.api.request.OapiWorkrecordUpdateRequest;
 import com.dingtalk.api.response.OapiGettokenResponse;
-import com.dingtalk.api.response.OapiMessageCorpconversationAsyncsendV2Response;
 import com.dingtalk.api.response.OapiWorkrecordAddResponse;
-import com.dingtalk.api.response.OapiWorkrecordUpdateResponse;
 import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +40,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
-
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -237,10 +232,10 @@ public class NotifyCoreService {
             dingTalkMsgService(msg);
         }
         for(MsgBody msg : dingtalk_link){
-            dingtalkLinkMsgService(msg);
+            dingTalkLinkMsgService(msg);
         }
         for(MsgBody msg : dingtalk_workRecord){
-            dingtalkWorkRecordService(msg);
+            dingTalkWorkRecordService(msg);
         }
     }
 
@@ -248,22 +243,81 @@ public class NotifyCoreService {
      * 发送钉钉消息
      * @param msg
      */
-    @SneakyThrows
-    private boolean dingTalkMsgService(MsgBody msg){
-        String msgUsers=getMsgUsers(msg);
-        MsgTemplate template=templateService.getById(msg.getTemplateId());
-        MsgOpenAccess openAccess =template.getOpenaccess();
-        OapiMessageCorpconversationAsyncsendV2Request req = new OapiMessageCorpconversationAsyncsendV2Request();
-        req.setAgentId(Long.parseLong(template.getTemplateId()));
-        req.setUseridList(msgUsers);
-        OapiMessageCorpconversationAsyncsendV2Request.Msg dingtalkMsg = new OapiMessageCorpconversationAsyncsendV2Request.Msg();
-        dingtalkMsg.setMsgtype("text");
-        OapiMessageCorpconversationAsyncsendV2Request.Text obj2 = new OapiMessageCorpconversationAsyncsendV2Request.Text();
-        obj2.setContent(StringUtils.isEmpty(msg.getContent())?template.getContent():msg.getContent());
-        dingtalkMsg.setText(obj2);
-        req.setMsg(dingtalkMsg);
-        OapiMessageCorpconversationAsyncsendV2Response rsp = sendMsgClient.execute(req, openAccess.getAccessToken());
-        saveCallResult(msg,rsp.getBody());
+    private void dingTalkMsgService(MsgBody msg){
+        try {
+            String msgUsers=getMsgUsers(msg);
+            MsgTemplate template=templateService.getById(msg.getTemplateId());
+            MsgOpenAccess openAccess =template.getOpenaccess();
+            String result = DingTalkHelper.sendWorkNotifyMsg(openAccess.getAgentId(),msgUsers,msg.getContent(),openAccess.getAccessToken());
+            saveCallResult(msg,result);
+        } catch (Exception e) {
+            log.error("发送[{}]消息失败，失败原因为：[{}]",msg.getMsgId(),e);
+            saveErrorResult(msg,e.getMessage());
+        }
+    }
+
+    /**
+     * 发送钉钉链接消息
+     * @return
+     */
+    public void dingTalkLinkMsgService(MsgBody msg){
+        try {
+            String msgUsers=getMsgUsers(msg);
+            MsgTemplate template=getTempLate(msg.getTemplateId());
+            MsgOpenAccess openAccess =getOpenAccess(template.getAccessId());
+            String result =DingTalkHelper.sendLinkMsg(openAccess.getAgentId(),msgUsers,msg.getSubject(),msg.getContent(),msg.getMsgLink(),msg.getMsgLink(),openAccess.getAccessToken());
+            saveCallResult(msg,result);
+        } catch (Exception e) {
+            log.error("发送[{}]消息失败，失败原因为：[{}]",msg.getMsgId(),e);
+            saveErrorResult(msg,e.getMessage());
+        }
+    }
+
+    /**
+     * 发送钉钉待办
+     * @param msg
+     */
+    public void dingTalkWorkRecordService(MsgBody msg){
+        try {
+            String msgUser=getMsgUsers(msg);
+            MsgTemplate template=getTempLate(msg.getTemplateId());
+            MsgOpenAccess openAccess =getOpenAccess(template.getAccessId());
+            OapiWorkrecordAddResponse rsp=DingTalkHelper.createWorkRecord(msgUser,msg.getSubject(),msg.getContent(),msg.getMsgLink(),msg.getMsgLinkPc(),openAccess.getAccessToken());
+            if(rsp.isSuccess()){
+                msg.setUserData(rsp.getRecordId());
+            }
+            saveCallResult(msg,rsp.getBody());
+        } catch (Exception e) {
+            log.error("创建[{}]工作待办失败，失败原因为：[{}]",msg.getMsgId(),e);
+            saveErrorResult(msg,e.getMessage());
+        }
+    }
+
+    /**
+     * 完成钉钉待办
+     * @param msgId
+     * @return
+     */
+    public boolean finishDingTalkWorkRecord(String msgId){
+        String result;
+        MsgBody msg=null;
+        try {
+            msg=msgBodyService.getById(msgId);
+            if(msg==null){
+                throw new BadRequestAlertException(String.format("无法获取到[%s]待办信息",msgId),"","");
+            }
+            String msgUser=getMsgUsers(msg);
+            MsgTemplate template=getTempLate(msg.getTemplateId());
+            MsgOpenAccess openAccess =getOpenAccess(template.getAccessId());
+            result = DingTalkHelper.finishWorkRecord(msgUser,msg.getUserData(),openAccess.getAccessToken());
+        } catch (Exception e) {
+            result=String.format("完成[{}]工作待办失败，失败原因为：[{}]",msgId,e);
+            log.error(result);
+        }
+        if(msg!=null){
+            msg.setUserData2(result);
+            msgBodyService.update(msg);
+        }
         return true;
     }
 
@@ -353,65 +407,6 @@ public class NotifyCoreService {
     }
 
     /**
-     * 发送钉钉链接消息
-     * @return
-     */
-    @SneakyThrows
-    public Long dingtalkLinkMsgService(MsgBody msg){
-        String msgUsers=getMsgUsers(msg);
-        MsgTemplate template=templateService.getById(msg.getTemplateId());
-        if(template==null){
-            throw new BadRequestAlertException(String.format("发送链接消息失败，无法获取到[%s]对应的rt模板",msg.getTemplateId()),"","");
-        }
-        MsgOpenAccess openAccess =template.getOpenaccess();
-        if (openAccess == null){
-            openAccess = openAccessService.get(template.getAccessId());
-        }
-        OapiMessageCorpconversationAsyncsendV2Request req = new OapiMessageCorpconversationAsyncsendV2Request();
-        req.setAgentId(Long.parseLong(template.getTemplateId()));
-        req.setUseridList(msgUsers);
-        OapiMessageCorpconversationAsyncsendV2Request.Msg dingtalkMsg = new OapiMessageCorpconversationAsyncsendV2Request.Msg();
-        dingtalkMsg.setMsgtype("link");
-        dingtalkMsg.setLink(new OapiMessageCorpconversationAsyncsendV2Request.Link());
-        dingtalkMsg.getLink().setTitle(StringUtils.isEmpty(msg.getSubject())?template.getTemplateName():msg.getSubject());
-        dingtalkMsg.getLink().setText(StringUtils.isEmpty(msg.getContent())?template.getContent():msg.getContent());
-        dingtalkMsg.getLink().setMessageUrl(StringUtils.isEmpty(msg.getMsgLink())?template.getTemplateUrl():msg.getMsgLink());
-        dingtalkMsg.getLink().setPicUrl("test");
-        req.setMsg(dingtalkMsg);
-        OapiMessageCorpconversationAsyncsendV2Response rsp = sendMsgClient.execute(req, openAccess.getAccessToken());
-        saveCallResult(msg,rsp.getBody());
-        return rsp.getTaskId();
-    }
-
-    /**
-     * 发送钉钉待办
-     * @param msg
-     */
-    @SneakyThrows
-    public void dingtalkWorkRecordService(MsgBody msg){
-        String msgUsers=getMsgUsers(msg);
-        OapiWorkrecordAddRequest req = new OapiWorkrecordAddRequest();
-        MsgTemplate template=templateService.getById(msg.getTemplateId());
-        MsgOpenAccess openAccess =template.getOpenaccess();
-        req.setUserid(msgUsers);
-        req.setCreateTime(new Date().getTime());
-        req.setTitle(StringUtils.isEmpty(msg.getSubject())?template.getTemplateName():msg.getSubject());
-        req.setUrl(StringUtils.isEmpty(msg.getMsgLink())?template.getTemplateUrl():msg.getMsgLink());
-        req.setPcUrl(StringUtils.isEmpty(msg.getMsgLinkPc())?template.getTemplateUrl():msg.getMsgLinkPc());
-        List<OapiWorkrecordAddRequest.FormItemVo> list2 = new ArrayList<>();
-        OapiWorkrecordAddRequest.FormItemVo obj3 = new OapiWorkrecordAddRequest.FormItemVo();
-        list2.add(obj3);
-        obj3.setTitle(StringUtils.isEmpty(msg.getSubject())?template.getTemplateName():msg.getSubject());
-        obj3.setContent(StringUtils.isEmpty(msg.getContent())?template.getContent():msg.getContent());
-        req.setFormItemList(list2);
-        OapiWorkrecordAddResponse rsp = createWorkRecordClient.execute(req, openAccess.getAccessToken());
-        if(rsp.isSuccess()){
-            msg.setUserData(rsp.getRecordId());
-        }
-        saveCallResult(msg,rsp.getBody());
-    }
-
-    /**
      * 存储消息进消息表
      * @param msg
      * @return
@@ -421,7 +416,7 @@ public class NotifyCoreService {
         String userIds=msg.getToUsers();
         List<MsgBody> msgList=new ArrayList<>();
         for(int msgType:getMsgType(msg.getMsgType())){
-            MsgTemplate msgTemplate =getMsgTempLate(templateId);
+            MsgTemplate msgTemplate =getTempLate(templateId);
             msg.setMsgName(msg.getSubject());
             msg.setTemplateId(msgTemplate.getTid());
             msg.setToUsers(userIds);
@@ -440,7 +435,7 @@ public class NotifyCoreService {
      */
     @SneakyThrows
     public boolean sendDingTalkLinkMsg(MsgBody msg){
-        getMsgTempLate(msg.getTemplateId());
+        getTempLate(msg.getTemplateId());
         msg.setMsgName(msg.getSubject());
         msg.setMsgType(65);
         return msgBodyService.create(msg);
@@ -455,7 +450,7 @@ public class NotifyCoreService {
     public String createDingTalkWorkRecord(MsgBody msg){
         if(StringUtils.isEmpty(msg.getToUsers()))
             throw new BadRequestAlertException("无法获取到用户信息","","");
-        getMsgTempLate(msg.getTemplateId());
+        getTempLate(msg.getTemplateId());
         msg.setMsgName(msg.getSubject());
         msg.setMsgType(66);
         msg.setMsgId(String.valueOf(msg.getDefaultKey(true)));
@@ -496,32 +491,6 @@ public class NotifyCoreService {
                 templateService.createBatch(newTempList);
         }
         return true;
-    }
-
-    /**
-     * 完成钉钉待办
-     * @param msgId
-     * @return
-     */
-    @SneakyThrows
-    public boolean finishDingTalkWorkRecord(String msgId){
-        if(StringUtils.isEmpty(msgId)){
-            throw new BadRequestAlertException("无法获取到消息标识","","");
-        }
-        MsgBody msg=msgBodyService.getById(msgId);
-        if(msg==null){
-            throw new BadRequestAlertException("无法获取消息","","");
-        }
-        String msgUsers=getMsgUsers(msg);
-        MsgTemplate template=templateService.getById(msg.getTemplateId());
-        MsgOpenAccess openAccess =template.getOpenaccess();
-        OapiWorkrecordUpdateRequest req = new OapiWorkrecordUpdateRequest();
-        req.setUserid(msgUsers);
-        req.setRecordId(msg.getUserData());
-        OapiWorkrecordUpdateResponse rsp = finishWorkRecordClient.execute(req, openAccess.getAccessToken());
-        msg.setUserData2(rsp.getBody());
-        msgBodyService.update(msg);
-        return rsp.getResult();
     }
 
     /**
@@ -621,20 +590,15 @@ public class NotifyCoreService {
     }
 
     /**
-     * 获取消息模板
-     * @param templateId
-     * @return
+     * 存储错误信息
+     * @param msg
+     * @param errInfo
      */
-    private MsgTemplate getMsgTempLate(String templateId){
-        MsgTemplate msgTemplate=templateService.getById(templateId);
-        if(msgTemplate==null){
-            throw new BadRequestAlertException(String.format("发送消息失败，无法获取到[%s]对应的rt模板",templateId),"","");
-        }
-        String openAccessId=msgTemplate.getAccessId();
-        if(StringUtils.isEmpty(openAccessId)){
-            throw new BadRequestAlertException(String.format("发送消息失败，无法获取到消息模板[%s]对应的开放平台[%s]",templateId,openAccessId),"","");
-        }
-        return msgTemplate;
+    private void saveErrorResult(MsgBody msg,String errInfo){
+        msg.setIsError(1);
+        msg.setErrorInfo(errInfo);
+        msg.setIsSend(1);
+        msgBodyService.update(msg);
     }
 
     /**
@@ -650,6 +614,32 @@ public class NotifyCoreService {
             }
         }
         return useMsg;
+    }
+
+    /**
+     * 获取消息模板
+     * @param templateId
+     * @return
+     */
+    private MsgTemplate getTempLate(String templateId){
+        MsgTemplate template=templateService.getById(templateId);
+        if(template==null){
+            throw new BadRequestAlertException(String.format("发送链接消息失败，无法获取到[%s]对应的rt模板",templateId),"","");
+        }
+        return template;
+    }
+
+    /**
+     * 获取开放平台
+     * @param openAccessId
+     * @return
+     */
+    private MsgOpenAccess getOpenAccess(String openAccessId){
+        MsgOpenAccess openAccess =openAccessService.getById(openAccessId);
+        if (openAccess == null){
+            throw new BadRequestAlertException(String.format("发送链接消息失败，无法获取到[%s]对应的开放平台",openAccessId),"","");
+        }
+        return openAccess;
     }
 
 }

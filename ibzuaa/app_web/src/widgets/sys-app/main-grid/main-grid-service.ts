@@ -108,6 +108,7 @@ export default class MainService extends ControlService {
     @Errorlog
     public add(action: string, context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         const {data:Data,context:Context} = this.handleRequestDataWithUpdate(action,context,data,true);
+        Object.assign(Data,{id: data.appid, srffrontuf: '1'});
         return new Promise((resolve: any, reject: any) => {
             const _appEntityService: any = this.appEntityService;
             let result: Promise<any>;
@@ -274,8 +275,6 @@ export default class MainService extends ControlService {
                 //处理返回数据，补充判断标识
                 if(response.data){
                     Object.assign(response.data,{srfuf:'0'});
-                    //仿真主键数据
-                    response.data.id = Util.createUUID();
                 }
                 this.handleResponse(action, response, true);
                 resolve(response);

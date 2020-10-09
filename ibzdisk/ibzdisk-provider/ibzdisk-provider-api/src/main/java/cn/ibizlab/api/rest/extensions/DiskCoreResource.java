@@ -136,7 +136,7 @@ public class DiskCoreResource
 	private String previewPath;
 
 	@GetMapping(value = "net-disk/preview/{folder}/{id}/{name}.{ext}")
-	public ResponseEntity preview(@PathVariable("folder") String folder, @PathVariable("id") String id,
+	public ResponseEntity<String> preview(@PathVariable("folder") String folder, @PathVariable("id") String id,
 								  @PathVariable("name") String name, @PathVariable("ext") String ext,
 								  @RequestHeader(value = "authcode",required = false) String authcode,
 								  @RequestParam(value = "authcode",required = false) String checkcode, HttpServletRequest request){
@@ -151,14 +151,14 @@ public class DiskCoreResource
 		redirectUrl=redirectUrl.concat("/net-disk/openview/")
 				.concat(folder).concat("/").concat(id).concat("/").concat(name).concat(".").concat(ext).concat("?authcode=").concat(StringUtils.isEmpty(authcode)?checkcode:authcode);
 		redirectUrl=previewPath.concat("").concat(encodeURIComponent(redirectUrl));
-		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, redirectUrl).build();
+		return ResponseEntity.status(HttpStatus.OK).body(redirectUrl);
 	}
 
 	@Value("${ibiz.file.proxy.ocrpath:http://101.132.236.47:58114/ocr/view?url=}")
 	private String ocrPath;
 
 	@GetMapping(value = "net-disk/ocrview/{folder}/{id}/{name}.{ext}")
-	public ResponseEntity ocrview(@PathVariable("folder") String folder, @PathVariable("id") String id,
+	public ResponseEntity<String> ocrview(@PathVariable("folder") String folder, @PathVariable("id") String id,
 								  @PathVariable("name") String name, @PathVariable("ext") String ext,
 								  @RequestHeader(value = "authcode",required = false) String authcode,
 								  @RequestParam(value = "authcode",required = false) String checkcode, HttpServletRequest request){
@@ -175,14 +175,14 @@ public class DiskCoreResource
 		redirectUrl=redirectUrl.concat("/net-disk/openview/")
 				.concat(folder).concat("/").concat(id).concat("/").concat(name).concat(".").concat(ext).concat("?authcode=").concat(StringUtils.isEmpty(authcode)?checkcode:authcode);
 		redirectUrl=ocrPath.concat("").concat(encodeURIComponent(redirectUrl));
-		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, redirectUrl).build();
+		return ResponseEntity.status(HttpStatus.OK).body(redirectUrl);
 	}
 
 	@Value("${ibiz.file.proxy.editpath:http://172.16.180.233:39980/loleaflet/dist/loleaflet.html?file_path=}")
 	private String editPath;
 
 	@GetMapping(value = {"net-disk/editview/{folder}/{id}/{name}.{ext}","net-disk/edit/{folder}/{id}/{name}.{ext}"})
-	public ResponseEntity editview(@PathVariable("folder") String folder, @PathVariable("id") String id,
+	public ResponseEntity<String> editview(@PathVariable("folder") String folder, @PathVariable("id") String id,
 								  @PathVariable("name") String name, @PathVariable("ext") String ext,
 								  @RequestHeader(value = "authcode",required = false) String authcode,
 								  @RequestParam(value = "authcode",required = false) String checkcode, HttpServletRequest request){
@@ -199,7 +199,7 @@ public class DiskCoreResource
 		redirectUrl=redirectUrl.concat("/net-disk/wopiview/")
 				.concat(folder).concat("/").concat(id).concat("/").concat(encodeURIComponent(name)).concat(".").concat(ext);
 		redirectUrl=editPath.concat("").concat(redirectUrl);
-		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, redirectUrl).build();
+		return ResponseEntity.status(HttpStatus.OK).body(redirectUrl);
 	}
 
 	@GetMapping(value = "net-disk/wopiview/{folder}/{id}/{name}.{ext}")

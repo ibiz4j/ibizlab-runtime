@@ -3,6 +3,8 @@
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="sys_rolempickupview"></app-studioaction>
     <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :padding="0" :bordered="false">
         <div class="content-container pickup-view">
+        <div class='view-top-messages'>
+        </div>
             <div class="translate-contant">
                 <div class="center" :style="{width : !isShowButton ? '100%' : ''}">
     <view_pickupviewpanel 
@@ -57,6 +59,8 @@
                     <i-button @click="onClickCancel">{{this.containerModel.view_cancelbtn.text}}</i-button>
                 </row>
             </card>
+        <div class='view-bottom-messages'>
+        </div>
         </div>
     </card>
 </div>

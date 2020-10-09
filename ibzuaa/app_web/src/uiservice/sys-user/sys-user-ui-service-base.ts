@@ -89,13 +89,13 @@ export default class SysUserUIServiceBase extends UIService {
      * @memberof  SysUserUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set(':',{viewname:'gridview',srfappde:'sysusers'});
-        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'sysusers'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysusers'});
-        this.allViewMap.set(':',{viewname:'editview2',srfappde:'sysusers'});
-        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysusers'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysusers'});
-        this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'sysusers'});
+        this.allViewMap.set(':',{viewname:'gridview',srfappde:'sysusers',component:'sys-user-grid-view'});
+        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'sysusers',component:'sys-usermpickup-view'});
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysusers',component:'sys-userpickup-view'});
+        this.allViewMap.set(':',{viewname:'editview2',srfappde:'sysusers',component:'sys-useredit-view2'});
+        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysusers',component:'sys-userpickup-grid-view'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysusers',component:'sys-user-edit-view'});
+        this.allViewMap.set('REDIRECTVIEW:',{viewname:'redirectview',srfappde:'sysusers',component:'sys-userredirect-view'});
     }
 
     /**
@@ -208,13 +208,13 @@ export default class SysUserUIServiceBase extends UIService {
             }
         })
         for (let i = 0; i <= 1; i++) {
-            let strTag:string = (curData[this.mainStateFields[0]])?(i == 0) ? `${curData[this.mainStateFields[0]]}` : "":"";
+            let strTag:string = (curData[this.mainStateFields[0]] != null && curData[this.mainStateFields[0]] !== "")?(i == 0) ? `${curData[this.mainStateFields[0]]}` : "":"";
             if (this.mainStateFields.length >= 2) {
                 for (let j = 0; j <= 1; j++) {
-                    let strTag2:string = (curData[this.mainStateFields[1]])?`${strTag}__${(j == 0) ? `${curData[this.mainStateFields[1]]}` : ""}`:strTag;
+                    let strTag2:string = (curData[this.mainStateFields[1]] != null && curData[this.mainStateFields[1]] !== "")?`${strTag}__${(j == 0) ? `${curData[this.mainStateFields[1]]}` : ""}`:strTag;
                     if (this.mainStateFields.length >= 3) {
                         for (let k = 0; k <= 1; k++) {
-                            let strTag3:string = (curData[this.mainStateFields[2]])?`${strTag2}__${(k == 0) ? `${curData[this.mainStateFields[2]]}` : ""}`:strTag2;
+                            let strTag3:string = (curData[this.mainStateFields[2]] != null && curData[this.mainStateFields[2]] !== "")?`${strTag2}__${(k == 0) ? `${curData[this.mainStateFields[2]]}` : ""}`:strTag2;
                             // 判断是否存在
                             return this.allDeMainStateMap.get(strTag3);
                         }

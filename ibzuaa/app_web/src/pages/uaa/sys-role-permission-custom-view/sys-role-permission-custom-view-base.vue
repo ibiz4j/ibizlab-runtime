@@ -8,6 +8,10 @@
 </div>
 
         <div class="content-container">
+            <div class='view-top-messages'>
+            </div>
+            <div class='view-bottom-messages'>
+            </div>
         </div>
     </card>
 </div>

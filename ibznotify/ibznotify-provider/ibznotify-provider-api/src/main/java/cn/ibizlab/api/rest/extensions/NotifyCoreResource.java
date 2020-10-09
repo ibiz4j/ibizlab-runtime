@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.constraints.NotNull;
 
 @RestController
 public class NotifyCoreResource {
@@ -61,7 +62,7 @@ public class NotifyCoreResource {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST,value = "/notify/dingtalk/finishworkrecord/{msgid}")
-    public ResponseEntity<Boolean> finishDingTalkWorkRecord(@PathVariable("msgid") String msgId){
+    public ResponseEntity<Boolean> finishDingTalkWorkRecord(@Validated @NotNull @PathVariable("msgid") String msgId){
         return ResponseEntity.status(HttpStatus.OK).body(notifyCoreService.finishDingTalkWorkRecord(msgId));
     }
 

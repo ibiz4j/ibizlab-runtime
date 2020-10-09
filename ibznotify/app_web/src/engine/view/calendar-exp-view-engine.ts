@@ -81,6 +81,9 @@ export default class CalendarExpViewEngine extends ViewEngine {
             this.view.$emit('viewload', args);
         }
         if (Object.is(eventName, 'selectionchange')) {
+            if(this.calendarExpBar && this.calendarExpBar.calcNavigationToolbarState && this.calendarExpBar.calcNavigationToolbarState instanceof Function){
+                this.calendarExpBar.calcNavigationToolbarState();
+            }
             this.view.$emit('viewdataschange', args);
         }
         if (Object.is(eventName, 'activated')) {

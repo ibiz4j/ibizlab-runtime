@@ -2,8 +2,8 @@
 <div class="view-container deeditview2 sys-useredit-view2">
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="sys_usereditview2"></app-studioaction>
     <card class='view-card  ' :dis-hover="true" :bordered="false">
-
-
+        <div class='view-top-messages'>
+        </div>
 <div slot='title' class="header-container">
     <span class='caption-info'>{{$t(model.srfCaption)}}</span>
     <template v-if="Object.is(this.selection.id, 'form')">
@@ -39,10 +39,7 @@
     </div>
       </template>
 </div>
-    
         <div class="content-container edit-view2">
-        <div class='view-top-messages'>
-        </div>
             <view_drbar 
             :viewState="viewState"
             loadAction='get'  
@@ -77,8 +74,8 @@
             @closeview="closeView($event)">
         </view_form>
         </view_drbar>
-        <div class='view-bottom-messages'>
         </div>
+        <div class='view-bottom-messages'>
         </div>
     </card>
 </div>
@@ -287,15 +284,15 @@ export default class SYS_USEREditView2Base extends Vue {
      * @memberof SYS_USEREditView2
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem3: { name: 'tbitem3', actiontarget: 'NONE', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
-        tbitem5: { name: 'tbitem5', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
+        tbitem5: { name: 'tbitem5', actiontarget: 'NONE', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
 
         tbitem6: {  name: 'tbitem6', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem12: { name: 'tbitem12', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        tbitem12: { name: 'tbitem12', actiontarget: 'NONE', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
         tbitem13: {  name: 'tbitem13', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem14: { name: 'tbitem14', actiontarget: 'NONE', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
     };
 

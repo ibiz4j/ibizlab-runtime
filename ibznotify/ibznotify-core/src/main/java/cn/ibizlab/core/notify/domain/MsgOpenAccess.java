@@ -122,6 +122,14 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @JSONField(name = "redirect_uri")
     @JsonProperty("redirect_uri")
     private String redirectUri;
+    /**
+     * AGENT_ID
+     */
+    @DEField(name = "agent_id")
+    @TableField(value = "agent_id")
+    @JSONField(name = "agent_id")
+    @JsonProperty("agent_id")
+    private Long agentId;
 
 
 
@@ -205,6 +213,14 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     public void setRedirectUri(String redirectUri){
         this.redirectUri = redirectUri ;
         this.modify("redirect_uri",redirectUri);
+    }
+
+    /**
+     * 设置 [AGENT_ID]
+     */
+    public void setAgentId(Long agentId){
+        this.agentId = agentId ;
+        this.modify("agent_id",agentId);
     }
 
 

@@ -2,8 +2,7 @@
     <i-form :model="this.data" class='app-form' ref='form'  id='sysuser_main' style="">
     <input style="display:none;" />
     <row >
-            
-<i-col v-show="detailsModel.userid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+            <i-col v-show="detailsModel.userid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='userid' :itemRules="this.rules().userid" class='' :caption="$t('entities.sysuser.main_form.details.userid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.userid.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box 
     v-model="data.userid"  

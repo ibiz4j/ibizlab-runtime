@@ -139,8 +139,8 @@
     {"name":"DER1N_SYS_APP_SYS_PSSYSTEM_PSSYSTEMID",
      "relation_type":"DER1N",
      "code_name":"System",
-     "entity_name":"SYS_PSSYSTEM",
-     "ref_entity_name":"SYS_APP"
+     "entity_name":"SYS_APP",
+     "ref_entity_name":"SYS_PSSYSTEM"
     }
     ]
  }
@@ -415,6 +415,19 @@
     "data_length":500,
     "key_field":0,
     "major_field":0
+    },
+    {
+    "fieldname":"AGENT_ID" ,
+    "codename":"Agent_id",
+    "field_logic_name":"AGENT_ID",
+    "entity_name":"SysOpenAccess",
+    "field_type":"BIGINT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"BIGINT",
+    "data_length":20,
+    "key_field":0,
+    "major_field":0
     }
     ],
     "subEntitys":[
@@ -513,8 +526,8 @@
     {"name":"DER1N_SYS_APP_SYS_PSSYSTEM_PSSYSTEMID",
      "relation_type":"DER1N",
      "code_name":"System",
-     "entity_name":"SYS_PSSYSTEM",
-     "ref_entity_name":"SYS_APP"
+     "entity_name":"SYS_APP",
+     "ref_entity_name":"SYS_PSSYSTEM"
     }
     ],
     "parentEntitys":[
@@ -628,8 +641,8 @@
     {"name":"DER1N_SYS_ROLE_PERMISSION_SYS_PERMISSION_SYS_PERMISSIONID",
      "relation_type":"DER1N",
      "code_name":"Permission",
-     "entity_name":"SYS_PERMISSION",
-     "ref_entity_name":"SYS_ROLE_PERMISSION"
+     "entity_name":"SYS_ROLE_PERMISSION",
+     "ref_entity_name":"SYS_PERMISSION"
     }
     ],
     "parentEntitys":[
@@ -780,8 +793,8 @@
     {"name":"DER1N_SYS_ROLE_PERMISSION_SYS_ROLE_SYS_ROLEID",
      "relation_type":"DER1N",
      "code_name":"Role",
-     "entity_name":"SYS_ROLE",
-     "ref_entity_name":"SYS_ROLE_PERMISSION"
+     "entity_name":"SYS_ROLE_PERMISSION",
+     "ref_entity_name":"SYS_ROLE"
     },
     {"name":"DER1N_SYS_ROLE_SYS_ROLE_PROLEID",
      "relation_type":"DER1N",
@@ -792,8 +805,8 @@
     {"name":"DER1N_SYS_USER_ROLE_SYS_ROLE_SYS_ROLEID",
      "relation_type":"DER1N",
      "code_name":"Role",
-     "entity_name":"SYS_ROLE",
-     "ref_entity_name":"SYS_USER_ROLE"
+     "entity_name":"SYS_USER_ROLE",
+     "ref_entity_name":"SYS_ROLE"
     }
     ],
     "parentEntitys":[
@@ -966,14 +979,14 @@
     {"name":"DER1N_SYS_ROLE_PERMISSION_SYS_PERMISSION_SYS_PERMISSIONID",
      "relation_type":"DER1N",
      "code_name":"Permission",
-     "entity_name":"SYS_PERMISSION",
-     "ref_entity_name":"SYS_ROLE_PERMISSION"
+     "entity_name":"SYS_ROLE_PERMISSION",
+     "ref_entity_name":"SYS_PERMISSION"
     },
     {"name":"DER1N_SYS_ROLE_PERMISSION_SYS_ROLE_SYS_ROLEID",
      "relation_type":"DER1N",
      "code_name":"Role",
-     "entity_name":"SYS_ROLE",
-     "ref_entity_name":"SYS_ROLE_PERMISSION"
+     "entity_name":"SYS_ROLE_PERMISSION",
+     "ref_entity_name":"SYS_ROLE"
     }
     ]
  }
@@ -1408,14 +1421,14 @@
     {"name":"DER1N_SYS_USER_AUTH_SYS_USER_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"SYS_USER",
-     "ref_entity_name":"SYS_USER_AUTH"
+     "entity_name":"SYS_USER_AUTH",
+     "ref_entity_name":"SYS_USER"
     },
     {"name":"DER1N_SYS_USER_ROLE_SYS_USER_SYS_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"SYS_USER",
-     "ref_entity_name":"SYS_USER_ROLE"
+     "entity_name":"SYS_USER_ROLE",
+     "ref_entity_name":"SYS_USER"
     }
     ],
     "parentEntitys":[
@@ -1526,8 +1539,8 @@
     {"name":"DER1N_SYS_USER_AUTH_SYS_USER_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"SYS_USER",
-     "ref_entity_name":"SYS_USER_AUTH"
+     "entity_name":"SYS_USER_AUTH",
+     "ref_entity_name":"SYS_USER"
     }
     ]
  }
@@ -1710,14 +1723,14 @@
     {"name":"DER1N_SYS_USER_ROLE_SYS_ROLE_SYS_ROLEID",
      "relation_type":"DER1N",
      "code_name":"Role",
-     "entity_name":"SYS_ROLE",
-     "ref_entity_name":"SYS_USER_ROLE"
+     "entity_name":"SYS_USER_ROLE",
+     "ref_entity_name":"SYS_ROLE"
     },
     {"name":"DER1N_SYS_USER_ROLE_SYS_USER_SYS_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"SYS_USER",
-     "ref_entity_name":"SYS_USER_ROLE"
+     "entity_name":"SYS_USER_ROLE",
+     "ref_entity_name":"SYS_USER"
     }
     ]
  }

@@ -4,11 +4,14 @@ package cn.ibizlab.core.uaa.extensions.service;
 import cn.ibizlab.core.uaa.domain.*;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionNode;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
+import cn.ibizlab.core.uaa.extensions.helper.DingTalkHelper;
 import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
 import cn.ibizlab.core.uaa.service.ISysRoleService;
 import cn.ibizlab.core.uaa.service.ISysUserRoleService;
+import cn.ibizlab.util.errors.BadRequestAlertException;
+import com.alibaba.fastjson.JSONObject;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -20,16 +23,18 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
+import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.ObjectUtils;
-
-import java.io.*;
+import org.springframework.util.StringUtils;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.*;
 
 @Service
@@ -51,6 +56,14 @@ public class UAACoreService {
     @Autowired
     @Lazy
     private ISysRoleService sysRoleService;
+
+    @Autowired
+    @Lazy
+    private UserDingtalkRegisterService userDingtalkRegisterService;
+
+    @Autowired
+    @Lazy
+    private DingTalkTokenService dingTalkTokenService;
 
     public Map<String,List<PermissionNode>> getPermissionTree()
     {
@@ -290,6 +303,31 @@ public class UAACoreService {
         return key;
     }
 
+    /**
+     * 获取钉钉jsApi签名
+     * @param openAccessId
+     * @return
+     */
+    public JSONObject getDingTalkJSSign(String openAccessId,String url){
+        JSONObject sign=new JSONObject();
+        SysOpenAccess openAccess = userDingtalkRegisterService.getOpenAccess(openAccessId);
+        if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
+            throw new BadRequestAlertException("未找到配置", "UAACoreService", "getOpenAccess");
 
+        String ticket=dingTalkTokenService.getJSTicket(openAccess.getAccessKey(),openAccess.getSecretKey());
+        if(StringUtils.isEmpty(ticket)){
+            throw new BadRequestAlertException("获取ticket失败","UAACoreService","getJSTicket");
+        }
+        String nonceStr=(new AlternativeJdkIdGenerator()).generateId().toString().replace("-", "");
+        Long timeStamp=System.currentTimeMillis();
+        String strSign = DingTalkHelper.sign(ticket, nonceStr,timeStamp , url);
+        sign.put("url",url);
+        sign.put("nonceStr",nonceStr);
+        sign.put("agentId",openAccess.getAgentId());
+        sign.put("timeStamp",timeStamp);
+        sign.put("corpId",openAccess.getRegionId());
+        sign.put("signature",strSign);
+        return sign;
+    }
 
 }
