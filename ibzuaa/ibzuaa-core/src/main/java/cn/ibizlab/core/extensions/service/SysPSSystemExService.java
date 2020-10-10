@@ -67,6 +67,10 @@ public class SysPSSystemExService extends SysPSSystemServiceImpl {
             return system;
 
         Map<String, SysApp> oldApps = new HashMap<>();
+        Map<String, SysApp> newApps = new HashMap<>();
+        if(system.getApps()!=null)
+            system.getApps().forEach(app->newApps.put(app.getId(),app));
+
         List<SysApp> newList=new ArrayList<>();
         SysPSSystem old = this.getById(system.getPssystemid());
         if(old!=null&&old.getApps()!=null)
@@ -74,10 +78,30 @@ public class SysPSSystemExService extends SysPSSystemServiceImpl {
 
 
         system.getSysstructure().getSysApps(true).forEach(appNode -> {
-            if(oldApps.containsKey(appNode.getId()))
-                newList.add(oldApps.get(appNode.getId()));
+            if(oldApps.containsKey(appNode.getId())) {
+                SysApp sysApp=oldApps.get(appNode.getId());
+                if(newApps.containsKey(appNode.getId()))
+                {
+                    SysApp newApp=newApps.get(appNode.getId());
+                    sysApp.setAddr(newApp.getAddr());
+                    sysApp.setIcon(newApp.getIcon());
+                    sysApp.setFullname(newApp.getFullname());
+                    sysApp.setType(newApp.getType());
+                    sysApp.setGroup(newApp.getGroup());
+                }
+                newList.add(sysApp);
+            }
             else {
                 appNode.setVisabled(1);
+                if(newApps.containsKey(appNode.getId()))
+                {
+                    SysApp newApp=newApps.get(appNode.getId());
+                    appNode.setAddr(newApp.getAddr());
+                    appNode.setIcon(newApp.getIcon());
+                    appNode.setFullname(newApp.getFullname());
+                    appNode.setType(newApp.getType());
+                    appNode.setGroup(newApp.getGroup());
+                }
                 newList.add(appNode);
             }
         });
