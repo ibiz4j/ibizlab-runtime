@@ -27,6 +27,20 @@ import cn.ibizlab.core.ou.domain.SysEmployee;
 @Data
 public class SysEmployeeSearchContext extends QueryWrapperContext<SysEmployee> {
 
+	private String n_username_in;//[用户全局名]
+	public void setN_username_in(String n_username_in) {
+        this.n_username_in = n_username_in;
+        if(!ObjectUtils.isEmpty(this.n_username_in)){
+			this.getSearchCond().in("username",this.n_username_in.split(";"));
+        }
+    }
+	private String n_username_notin;//[用户全局名]
+	public void setN_username_notin(String n_username_notin) {
+        this.n_username_notin = n_username_notin;
+        if(!ObjectUtils.isEmpty(this.n_username_notin)){
+			this.getSearchCond().notIn("username",this.n_username_notin.split(";"));
+        }
+    }
 	private String n_personname_like;//[姓名]
 	public void setN_personname_like(String n_personname_like) {
         this.n_personname_like = n_personname_like;

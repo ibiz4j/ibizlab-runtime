@@ -252,8 +252,8 @@
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_DEPT_DEPTID",
      "relation_type":"DER1N",
      "code_name":"Dept",
-     "entity_name":"SYS_DEPT",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_DEPT"
     },
     {"name":"DER1N_SYS_DEPT_SYS_DEPT_PDEPTID",
      "relation_type":"DER1N",
@@ -264,8 +264,8 @@
     {"name":"DER1N_SYS_EMP_SYS_DEPT_MDEPTID",
      "relation_type":"DER1N",
      "code_name":"MainDept",
-     "entity_name":"SYS_DEPT",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_DEPT"
     }
     ],
     "parentEntitys":[
@@ -278,8 +278,8 @@
     {"name":"DER1N_SYS_DEPT_SYS_ORG_ORGID",
      "relation_type":"DER1N",
      "code_name":"Org",
-     "entity_name":"SYS_ORG",
-     "ref_entity_name":"SYS_DEPT"
+     "entity_name":"SYS_DEPT",
+     "ref_entity_name":"SYS_ORG"
     }
     ]
  }
@@ -444,20 +444,20 @@
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_DEPT_DEPTID",
      "relation_type":"DER1N",
      "code_name":"Dept",
-     "entity_name":"SYS_DEPT",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_DEPT"
     },
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_EMP_USERID",
      "relation_type":"DER1N",
      "code_name":"Emp",
-     "entity_name":"SYS_EMP",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_EMP"
     },
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_POST"
     }
     ]
  }
@@ -980,34 +980,34 @@
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_EMP_USERID",
      "relation_type":"DER1N",
      "code_name":"Emp",
-     "entity_name":"SYS_EMP",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_EMP"
     },
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_EMP_USERID",
      "relation_type":"DER1N",
      "code_name":"Emp",
-     "entity_name":"SYS_EMP",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_EMP"
     }
     ],
     "parentEntitys":[
     {"name":"DER1N_SYS_EMP_SYS_DEPT_MDEPTID",
      "relation_type":"DER1N",
      "code_name":"MainDept",
-     "entity_name":"SYS_DEPT",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_DEPT"
     },
     {"name":"DER1N_SYS_EMP_SYS_ORG_ORGID",
      "relation_type":"DER1N",
      "code_name":"Org",
-     "entity_name":"SYS_ORG",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_ORG"
     },
     {"name":"DER1N_SYS_EMP_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_POST"
     }
     ]
  }
@@ -1189,14 +1189,14 @@
     {"name":"DER1N_SYS_DEPT_SYS_ORG_ORGID",
      "relation_type":"DER1N",
      "code_name":"Org",
-     "entity_name":"SYS_ORG",
-     "ref_entity_name":"SYS_DEPT"
+     "entity_name":"SYS_DEPT",
+     "ref_entity_name":"SYS_ORG"
     },
     {"name":"DER1N_SYS_EMP_SYS_ORG_ORGID",
      "relation_type":"DER1N",
      "code_name":"Org",
-     "entity_name":"SYS_ORG",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_ORG"
     },
     {"name":"DER1N_SYS_ORG_SYS_ORG_PORGID",
      "relation_type":"DER1N",
@@ -1293,20 +1293,20 @@
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_POST"
     },
     {"name":"DER1N_SYS_EMP_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_POST"
     },
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_POST"
     }
     ],
     "parentEntitys":[
@@ -1378,8 +1378,8 @@
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_TEAM_TEAMID",
      "relation_type":"DER1N",
      "code_name":"Team",
-     "entity_name":"SYS_TEAM",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_TEAM"
     }
     ],
     "parentEntitys":[
@@ -1531,20 +1531,20 @@
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_EMP_USERID",
      "relation_type":"DER1N",
      "code_name":"Emp",
-     "entity_name":"SYS_EMP",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_EMP"
     },
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_POST"
     },
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_TEAM_TEAMID",
      "relation_type":"DER1N",
      "code_name":"Team",
-     "entity_name":"SYS_TEAM",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_TEAM"
     }
     ]
  }

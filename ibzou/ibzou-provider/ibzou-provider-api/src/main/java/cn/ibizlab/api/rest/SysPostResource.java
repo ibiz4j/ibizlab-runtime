@@ -156,5 +156,7 @@ public class SysPostResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(syspostMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

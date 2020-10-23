@@ -2,8 +2,7 @@
     <i-form :model="this.data" class='app-form' ref='form'  id='sysdepartment_newform' style="">
     <input style="display:none;" />
     <row >
-            
-<i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+            <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysdepartment.newform_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.deptcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
@@ -199,6 +198,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
             })
         }
     }
+
 
 
     /**
@@ -450,101 +450,21 @@ export default class NewFormBase extends Vue implements ControlInterface {
      */
     public rules() :any {
     return {
-        srfupdatedate: [
-            { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '最后修改时间 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfupdatedate.required, type: 'string', message: '最后修改时间 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfupdatedate.required, type: 'string', message: '最后修改时间 值不能为空', trigger: 'blur' },
-        ],
-        srforikey: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfkey: [
-            { type: 'string', message: '部门标识 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '部门标识 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfkey.required, type: 'string', message: '部门标识 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfkey.required, type: 'string', message: '部门标识 值不能为空', trigger: 'blur' },
-        ],
-        srfmajortext: [
-            { type: 'string', message: '部门名称 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '部门名称 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '部门名称 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '部门名称 值不能为空', trigger: 'blur' },
-        ],
-        srftempmode: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfuf: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfdeid: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfsourcekey: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
         deptcode: [
-            { type: 'string', message: '部门代码 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '部门代码 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.deptcode.required, type: 'string', message: '部门代码 值不能为空', trigger: 'change' },
             { required: this.detailsModel.deptcode.required, type: 'string', message: '部门代码 值不能为空', trigger: 'blur' },
         ],
         deptname: [
-            { type: 'string', message: '部门名称 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '部门名称 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.deptname.required, type: 'string', message: '部门名称 值不能为空', trigger: 'change' },
             { required: this.detailsModel.deptname.required, type: 'string', message: '部门名称 值不能为空', trigger: 'blur' },
         ],
-        orgid: [
-            { type: 'string', message: '单位 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '单位 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.orgid.required, type: 'string', message: '单位 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.orgid.required, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
-        ],
         orgname: [
-            { type: 'string', message: '单位 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '单位 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.orgname.required, type: 'string', message: '单位 值不能为空', trigger: 'change' },
             { required: this.detailsModel.orgname.required, type: 'string', message: '单位 值不能为空', trigger: 'blur' },
         ],
-        pdeptid: [
-            { type: 'string', message: '上级部门 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '上级部门 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.pdeptid.required, type: 'string', message: '上级部门 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.pdeptid.required, type: 'string', message: '上级部门 值不能为空', trigger: 'blur' },
-        ],
         pdeptname: [
-            { type: 'string', message: '上级部门 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '上级部门 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.pdeptname.required, type: 'string', message: '上级部门 值不能为空', trigger: 'change' },
             { required: this.detailsModel.pdeptname.required, type: 'string', message: '上级部门 值不能为空', trigger: 'blur' },
-        ],
-        enable: [
-            { type: 'number', message: '逻辑有效 值必须为数值类型', trigger: 'change' },
-            { type: 'number', message: '逻辑有效 值必须为数值类型', trigger: 'blur' },
-            { required: this.detailsModel.enable.required, type: 'number', message: '逻辑有效 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.enable.required, type: 'number', message: '逻辑有效 值不能为空', trigger: 'blur' },
-        ],
-        deptid: [
-            { type: 'string', message: '部门标识 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '部门标识 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.deptid.required, type: 'string', message: '部门标识 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.deptid.required, type: 'string', message: '部门标识 值不能为空', trigger: 'blur' },
         ],
         }
     }
@@ -582,32 +502,38 @@ export default class NewFormBase extends Vue implements ControlInterface {
                 falg.isPast = val;
             }
         }
-        rule[name].forEach((item:any) => {
+        for(let i=0;i<rule[name].length;i++){
+            let item:any = rule[name][i];
             let dataValue = item.deName?this.data[this.service.getItemNameByDeName(item.deName)]:"";
             // 常规规则
             if(item.type == 'SIMPLE'){
                 startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.data,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 数值范围
             if(item.type == 'VALUERANGE2'){
                 startOp( !this.$verify.checkFieldValueRangeRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 正则式
             if (item.type == "REGEX") {
                 startOp(!this.$verify.checkFieldRegExRule(dataValue,item.regExCode,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 长度
             if (item.type == "STRINGLENGTH") {
                 startOp(!this.$verify.checkFieldStringLengthRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 系统值规则
             if(item.type == "SYSVALUERULE") {
                 startOp(!this.$verify.checkFieldSysValueRule(dataValue,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 分组
             if(item.type == 'GROUP'){
@@ -615,9 +541,9 @@ export default class NewFormBase extends Vue implements ControlInterface {
                 if(item.isNotMode){
                    falg.isPast = !falg.isPast;
                 }
-            }
-            
-        });
+                if(!falg.isPast) return falg;
+            }   
+        }
         if(!falg.hasOwnProperty("isPast")){
             falg.isPast = true;
         }
@@ -1301,12 +1227,12 @@ export default class NewFormBase extends Vue implements ControlInterface {
     /**
      * 部件刷新
      *
-     * @param {any[]} args
+     * @param {any} args
      * @memberof NewFormBase
      */
-    public refresh(args: any[]): void {
+    public refresh(args?: any): void {
         let arg: any = {};
-        Object.assign(arg,args[0]);
+        Object.assign(arg,args?args[0]:{});
         if (this.data.srfkey && !Object.is(this.data.srfkey, '')) {
             Object.assign(arg, { srfkey: this.data.srfkey });
             this.load(arg);

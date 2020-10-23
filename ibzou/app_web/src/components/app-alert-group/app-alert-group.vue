@@ -4,7 +4,11 @@
             <app-alert
                 :key="index"
                 :tag="item.tag"
-                :position="item.position"/>   
+                :context="context"
+                :viewparam="viewparam" 
+                :position="item.position"
+                :infoGroup="infoGroup"
+                :viewname="viewname"/>   
         </template>
     </div>
 
@@ -33,12 +37,37 @@ export default class AppAlertGroup extends Vue {
     @Prop() infoGroup: any;
 
     /**
+     * 应用上下文
+     * 
+     * @type {any}
+     * @memberof AppAlertGroup
+     */
+    @Prop() context: any;
+
+    /**
+     * 视图参数
+     * 
+     * @type {any}
+     * @memberof AppAlertGroup
+     */
+    @Prop() viewparam: any;
+
+
+    /**
      * 视图消息组显示位置
      * 
      * @type {any}
      * @memberof AppAlertGroup
      */
     @Prop() position: any;
+
+    /**
+     * 视图名称
+     * 
+     * @type {any}
+     * @memberof AppAlertGroup
+     */
+    @Prop() viewname: any;
 
     /**
      * 当前位置视图消息集合

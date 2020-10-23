@@ -228,9 +228,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
         if(!ObjectUtils.isEmpty(et.getMdeptid())){
             cn.ibizlab.core.ou.domain.SysDepartment maindept=et.getMaindept();
             if(ObjectUtils.isEmpty(maindept)){
-                cn.ibizlab.core.ou.domain.SysDepartment majorEntity=sysdepartmentService.getById(et.getMdeptid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysDepartment majorEntity=sysdepartmentService.get(et.getMdeptid());
                 et.setMaindept(majorEntity);
                 maindept=majorEntity;
             }
@@ -241,9 +239,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
         if(!ObjectUtils.isEmpty(et.getOrgid())){
             cn.ibizlab.core.ou.domain.SysOrganization org=et.getOrg();
             if(ObjectUtils.isEmpty(org)){
-                cn.ibizlab.core.ou.domain.SysOrganization majorEntity=sysorganizationService.getById(et.getOrgid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysOrganization majorEntity=sysorganizationService.get(et.getOrgid());
                 et.setOrg(majorEntity);
                 org=majorEntity;
             }
@@ -254,9 +250,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
         if(!ObjectUtils.isEmpty(et.getPostid())){
             cn.ibizlab.core.ou.domain.SysPost post=et.getPost();
             if(ObjectUtils.isEmpty(post)){
-                cn.ibizlab.core.ou.domain.SysPost majorEntity=syspostService.getById(et.getPostid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysPost majorEntity=syspostService.get(et.getPostid());
                 et.setPost(majorEntity);
                 post=majorEntity;
             }
@@ -311,6 +305,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
         else
            return entities;
     }
+
 
 
 }

@@ -38,7 +38,7 @@ public class SimpleFileService implements FileService {
             FileCopyUtils.copy(multipartFile.getInputStream(),Files.newOutputStream(file.toPath()));
             item=new FileItem(fileid,fileName,fileid,fileName,(int)multipartFile.getSize(),extname);
         } catch (IOException e) {
-            throw new InternalServerErrorException("文件上传失败");
+            throw new InternalServerErrorException("文件上传失败，"+e);
         }
         return item;
     }

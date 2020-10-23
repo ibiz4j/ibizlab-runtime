@@ -89,12 +89,12 @@ export default class SysOrganizationUIServiceBase extends UIService {
      * @memberof  SysOrganizationUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysorganizations'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysorganizations'});
-        this.allViewMap.set(':',{viewname:'treeexpview',srfappde:'sysorganizations'});
-        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sysorganizations'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysorganizations'});
-        this.allViewMap.set(':',{viewname:'optionview',srfappde:'sysorganizations'});
+        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysorganizations',component:'sys-organization-pickup-grid-view'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysorganizations',component:'sys-organization-edit-view'});
+        this.allViewMap.set(':',{viewname:'treeexpview',srfappde:'sysorganizations',component:'sys-organization-tree-exp-view'});
+        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sysorganizations',component:'sys-organization-grid-view'});
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysorganizations',component:'sys-organization-pickup-view'});
+        this.allViewMap.set(':',{viewname:'optionview',srfappde:'sysorganizations',component:'sys-organization-option-view'});
     }
 
     /**
@@ -323,17 +323,17 @@ export default class SysOrganizationUIServiceBase extends UIService {
 
         this.mainStateFields.forEach((singleMainField:any) =>{
             if(!(singleMainField in curData)){
-                console.warn(`当前数据对象不包含属性${singleMainField}，可能会发生错误`);
+                console.warn(`当前数据对象不包含属性「${singleMainField}」，根据「${singleMainField}」属性进行的主状态计算默认为空值`);
             }
         })
         for (let i = 0; i <= 1; i++) {
-            let strTag:string = (curData[this.mainStateFields[0]])?(i == 0) ? `${curData[this.mainStateFields[0]]}` : "":"";
+            let strTag:string = (curData[this.mainStateFields[0]] != null && curData[this.mainStateFields[0]] !== "")?(i == 0) ? `${curData[this.mainStateFields[0]]}` : "":"";
             if (this.mainStateFields.length >= 2) {
                 for (let j = 0; j <= 1; j++) {
-                    let strTag2:string = (curData[this.mainStateFields[1]])?`${strTag}__${(j == 0) ? `${curData[this.mainStateFields[1]]}` : ""}`:strTag;
+                    let strTag2:string = (curData[this.mainStateFields[1]] != null && curData[this.mainStateFields[1]] !== "")?`${strTag}__${(j == 0) ? `${curData[this.mainStateFields[1]]}` : ""}`:strTag;
                     if (this.mainStateFields.length >= 3) {
                         for (let k = 0; k <= 1; k++) {
-                            let strTag3:string = (curData[this.mainStateFields[2]])?`${strTag2}__${(k == 0) ? `${curData[this.mainStateFields[2]]}` : ""}`:strTag2;
+                            let strTag3:string = (curData[this.mainStateFields[2]] != null && curData[this.mainStateFields[2]] !== "")?`${strTag2}__${(k == 0) ? `${curData[this.mainStateFields[2]]}` : ""}`:strTag2;
                             // 判断是否存在
                             return this.allDeMainStateMap.get(strTag3);
                         }

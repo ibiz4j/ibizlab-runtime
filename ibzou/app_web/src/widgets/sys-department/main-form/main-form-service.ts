@@ -51,6 +51,14 @@ export default class MainService extends ControlService {
     public sysorganizationService: SysOrganizationService = new SysOrganizationService();
 
     /**
+     * 远端数据
+     *
+     * @type {*}
+     * @memberof MainService
+     */
+    private remoteCopyData:any = {};
+
+    /**
      * 处理数据
      *
      * @private
@@ -286,6 +294,7 @@ export default class MainService extends ControlService {
                 result = this.appEntityService.Get(Context,Data, isloading);
             }
             result.then((response) => {
+                this.setRemoteCopyData(response);
                 this.handleResponse(action, response);
                 resolve(response);
             }).catch(response => {
@@ -320,6 +329,7 @@ export default class MainService extends ControlService {
                 result = this.appEntityService.GetDraft(Context,Data, isloading);
             }
             result.then((response) => {
+                this.setRemoteCopyData(response);
                 response.data.deptid = PrimaryKey;
                 this.handleResponse(action, response, true);
                 resolve(response);
@@ -454,5 +464,24 @@ export default class MainService extends ControlService {
         return item;
     }
 
+    /**
+     * 设置远端数据
+     * 
+     * @param result 远端请求结果 
+     * @memberof MainService
+     */
+    public setRemoteCopyData(result:any){
+        if (result && result.status === 200) {
+            this.remoteCopyData = Util.deepCopy(result.data);
+        }
+    }
 
+    /**
+     * 获取远端数据
+     * 
+     * @memberof MainService
+     */
+    public getRemoteCopyData(){
+        return this.remoteCopyData;
+    }
 }

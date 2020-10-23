@@ -198,9 +198,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
         if(!ObjectUtils.isEmpty(et.getParentorgid())){
             cn.ibizlab.core.ou.domain.SysOrganization parentorg=et.getParentorg();
             if(ObjectUtils.isEmpty(parentorg)){
-                cn.ibizlab.core.ou.domain.SysOrganization majorEntity=sysorganizationService.getById(et.getParentorgid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysOrganization majorEntity=sysorganizationService.get(et.getParentorgid());
                 et.setParentorg(majorEntity);
                 parentorg=majorEntity;
             }
@@ -254,6 +252,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
         else
            return entities;
     }
+
 
 
 }

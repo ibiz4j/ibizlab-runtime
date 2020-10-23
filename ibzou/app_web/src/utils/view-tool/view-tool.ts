@@ -260,7 +260,7 @@ export class ViewTool {
             const _item = ActionModel[key];
             if(_item && _item['dataaccaction'] && UIService){
                 let dataActionResult:any;
-                if(Object.is(_item['actiontarget'],"NONE")){
+                if(Object.is(_item['actiontarget'],"NONE") || Object.is(_item['actiontarget'],"")){
                     dataActionResult = UIService.getResourceOPPrivs(_item['dataaccaction']);
                 }else{
                     if(data && Object.keys(data).length >0){

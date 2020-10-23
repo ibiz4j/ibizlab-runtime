@@ -157,6 +157,8 @@ public class SysDepartmentResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysdepartmentMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
     @PreAuthorize("hasPermission(this.sysdepartmentMapping.toDomain(#sysdepartmentdto),'ibzou-SysDepartment-Create')")
     @ApiOperation(value = "根据单位机构建立部门", tags = {"部门" },  notes = "根据单位机构建立部门")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments")

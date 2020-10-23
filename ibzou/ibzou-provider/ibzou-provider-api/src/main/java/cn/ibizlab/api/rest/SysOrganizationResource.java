@@ -157,5 +157,7 @@ public class SysOrganizationResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysorganizationMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

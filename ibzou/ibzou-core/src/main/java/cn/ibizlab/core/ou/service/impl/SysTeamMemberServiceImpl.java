@@ -215,9 +215,7 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
         if(!ObjectUtils.isEmpty(et.getUserid())){
             cn.ibizlab.core.ou.domain.SysEmployee emp=et.getEmp();
             if(ObjectUtils.isEmpty(emp)){
-                cn.ibizlab.core.ou.domain.SysEmployee majorEntity=sysemployeeService.getById(et.getUserid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysEmployee majorEntity=sysemployeeService.get(et.getUserid());
                 et.setEmp(majorEntity);
                 emp=majorEntity;
             }
@@ -227,9 +225,7 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
         if(!ObjectUtils.isEmpty(et.getPostid())){
             cn.ibizlab.core.ou.domain.SysPost post=et.getPost();
             if(ObjectUtils.isEmpty(post)){
-                cn.ibizlab.core.ou.domain.SysPost majorEntity=syspostService.getById(et.getPostid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysPost majorEntity=syspostService.get(et.getPostid());
                 et.setPost(majorEntity);
                 post=majorEntity;
             }
@@ -239,9 +235,7 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
         if(!ObjectUtils.isEmpty(et.getTeamid())){
             cn.ibizlab.core.ou.domain.SysTeam team=et.getTeam();
             if(ObjectUtils.isEmpty(team)){
-                cn.ibizlab.core.ou.domain.SysTeam majorEntity=systeamService.getById(et.getTeamid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysTeam majorEntity=systeamService.get(et.getTeamid());
                 et.setTeam(majorEntity);
                 team=majorEntity;
             }
@@ -275,6 +269,7 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

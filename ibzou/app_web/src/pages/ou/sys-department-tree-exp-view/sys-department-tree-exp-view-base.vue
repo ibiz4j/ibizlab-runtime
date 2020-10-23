@@ -6,9 +6,11 @@
         <span class='caption-info'>{{$t(model.srfCaption)}}</span>
         </div>
 
-        <div class='content-container'>
             <div class='view-top-messages'>
             </div>
+        <div class='content-container'>
+        <div class='view-body-messages'>
+        </div>
             <view_treeexpbar 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
@@ -23,9 +25,9 @@
                 @load="treeexpbar_load($event)"  
                 @closeview="closeView($event)">
             </view_treeexpbar>
+        </div>
             <div class='view-bottom-messages'>
             </div>
-        </div>
     </card>
 </div>
 </template>
@@ -269,6 +271,23 @@ export default class SysDepartmentTreeExpViewBase extends Vue {
     public serviceStateEvent: Subscription | undefined;
 
     /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SysDepartmentTreeExpViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SysDepartmentTreeExpViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -481,6 +500,16 @@ export default class SysDepartmentTreeExpViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -650,6 +679,9 @@ export default class SysDepartmentTreeExpViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
     

@@ -239,9 +239,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         if(!ObjectUtils.isEmpty(et.getParentdeptid())){
             cn.ibizlab.core.ou.domain.SysDepartment parentdept=et.getParentdept();
             if(ObjectUtils.isEmpty(parentdept)){
-                cn.ibizlab.core.ou.domain.SysDepartment majorEntity=sysdepartmentService.getById(et.getParentdeptid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysDepartment majorEntity=sysdepartmentService.get(et.getParentdeptid());
                 et.setParentdept(majorEntity);
                 parentdept=majorEntity;
             }
@@ -251,9 +249,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         if(!ObjectUtils.isEmpty(et.getOrgid())){
             cn.ibizlab.core.ou.domain.SysOrganization org=et.getOrg();
             if(ObjectUtils.isEmpty(org)){
-                cn.ibizlab.core.ou.domain.SysOrganization majorEntity=sysorganizationService.getById(et.getOrgid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.ou.domain.SysOrganization majorEntity=sysorganizationService.get(et.getOrgid());
                 et.setOrg(majorEntity);
                 org=majorEntity;
             }
@@ -307,6 +303,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         else
            return entities;
     }
+
 
 
 }
