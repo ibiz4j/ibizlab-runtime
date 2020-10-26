@@ -43,6 +43,39 @@ export default class AppAlert extends Vue {
      * @memberof AppAlert
      */
     @Prop() position: any;
+
+    /**
+     * 应用上下文
+     * 
+     * @type {any}
+     * @memberof AppAlert
+     */
+    @Prop() context: any;
+
+    /**
+     * 视图参数
+     * 
+     * @type {any}
+     * @memberof AppAlert
+     */
+    @Prop() viewparam: any;
+
+
+    /**
+     * 视图消息组tag
+     * 
+     * @type {any}
+     * @memberof AppAlert
+     */
+    @Prop() infoGroup!: any;
+
+    /**
+     * 视图名称
+     * 
+     * @type {any}
+     * @memberof AppAlert
+     */
+    @Prop() viewname!: any;
     
     /**
      * 视图消息对象
@@ -79,7 +112,7 @@ export default class AppAlert extends Vue {
      * @memberof AppAlert
      */
     public async getData() {
-        let response: any = await this.viewMessageService.getViewMessageByTag(this.tag, null, null)
+        let response: any = await this.viewMessageService.getViewMessageByTag(this.tag, this.context, this.viewparam);
         if(response && response.length > 0) {
             response.forEach((item: any) => {
                 let tempData: any = JSON.parse(JSON.stringify(item));
@@ -118,7 +151,8 @@ export default class AppAlert extends Vue {
         data.showState = true; 
         if(data.closeMode || data.closeMode == 0) {
             if(data.closeMode == 1) {
-                const id = this.$store.getters.getViewMessage(data.codename);
+                const tag = this.viewname + '_' + this.infoGroup + '_' + data.codename;
+                const id = localStorage.getItem(tag);
                 if(id) {
                     data.showState = false;
                     flag = false;
@@ -182,14 +216,14 @@ export default class AppAlert extends Vue {
             let tempArr: any[] = data.customClass.toString().split(',');
             if(tempArr && tempArr.length > 0) {
                 if(Object.is("1", tempArr[1])) {
-                    const args = { tag: tempArr[0], id: data.customClass };
-                    this.$store.commit('addViewMessage', args);
+                    const tag = this.viewname + '_' + this.infoGroup + '_' + tempArr[0];
+                    localStorage.setItem(tag, data.customClass);
                 }
             } 
         }
         if(data.closeMode && data.closeMode == 1) {
-            const args = {tag: data.codename, id: data.id};
-            this.$store.commit('addViewMessage', args);
+            const tag = this.viewname + '_' + this.infoGroup + '_' + data.codename;
+            localStorage.setItem(tag,data.id);
         }
     }
 

@@ -68,6 +68,8 @@
         <!-- 自定义弹框 -->
         <div class="dialogDiv">
             <el-dialog
+                    :title="dialogTitle"
+                    center
                     width="70%"
                     top="5vh"
                     :visible="showDialog"
@@ -76,7 +78,7 @@
                     :before-close="dialogClose"
                     :modal-append-to-body="false">
                 <div style="height: 100%;">
-                    <iframe id="wps_npIframe" :src="iframeUrl" frameborder="0" width="100%"></iframe>
+                    <iframe id="fileIframe" :src="iframeUrl" frameborder="0" width="100%"></iframe>
                 </div>
             </el-dialog>
         </div>
@@ -91,14 +93,6 @@
 
     @Component({})
     export default class DiskFileUpload extends Vue {
-
-        public showDialog = false;
-        public iframeUrl: any = '';
-
-        public dialogClose() {
-            this.showDialog = false;
-            this.iframeUrl = '';
-        }
 
         /**
          * 当前表单对象
@@ -254,13 +248,49 @@
         public isCreate: boolean = true;
 
         /**
+         * 自定义弹框标题
+         *
+         * @type {*}
+         * @memberof DiskFileUpload
+         */
+        public dialogTitle: any = '';
+
+        /**
+         * 是否显示自定义弹框
+         *
+         * @type {boolean}
+         * @memberof DiskFileUpload
+         */
+        public showDialog: boolean = false;
+
+        /**
+         * 嵌入自定义弹框中iframe的url
+         *
+         * @type {*}
+         * @memberof DiskFileUpload
+         */
+        public iframeUrl: any = '';
+
+        /**
+         * 关闭自定义弹框
+         *
+         * @memberof DiskFileUpload
+         */
+        public dialogClose() {
+            this.dialogTitle = '';
+            this.showDialog = false;
+            this.iframeUrl = '';
+            let iframe: any = document.getElementById("fileIframe");
+            iframe.parentNode.removeChild("fileIframe");
+        }
+
+        /**
          * 拼接上传路径
          *
          * @memberof DiskFileUpload
          */
         public getAction() {
-            const uploadUrl = '/net-disk/upload/' + this.getFolder() + '?ownertype=' + this.getOwnertype() + '&ownerid=' + this.getOwnerid();
-            return uploadUrl;
+            return '/net-disk/upload/' + this.getFolder() + '?ownertype=' + this.getOwnertype() + '&ownerid=' + this.getOwnerid();
         }
 
         /**
@@ -269,8 +299,7 @@
          * @memberof DiskFileUpload
          */
         public getFolder() {
-            const folder = typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
-            return folder;
+            return typeof this.folder == "string" ? this.folder : JSON.stringify(this.folder);
         }
 
         /**
@@ -279,8 +308,7 @@
          * @memberof DiskFileUpload
          */
         public getOwnertype() {
-            const ownertype = typeof this.ownertype == "string" ? this.ownertype : JSON.stringify(this.ownertype);
-            return ownertype;
+            return typeof this.ownertype == "string" ? this.ownertype : JSON.stringify(this.ownertype);
         }
 
         /**
@@ -289,12 +317,11 @@
          * @memberof DiskFileUpload
          */
         public getOwnerid() {
-            const ownerid = typeof this.ownerid == "string" ? this.ownerid : JSON.stringify(this.ownerid);
-            return ownerid;
+            return typeof this.ownerid == "string" ? this.ownerid : JSON.stringify(this.ownerid);
         }
 
         /**
-         *
+         * vue创建
          *
          * @memberof DiskFileUpload
          */
@@ -326,7 +353,7 @@
                 if (Object.is($event.type, 'save')) {
                     // 批量更新文件表中的ownerid
                     if (this.isUpdateBatch == true && this.uploadFileList.length > 0) {
-                        this.updateFileBatch(this.uploadFileList, 'update');
+                        this.updateFileBatch(this.uploadFileList);
                     }
                 }
             });
@@ -347,7 +374,7 @@
                     ownertype: this.getOwnertype(),
                     ownerid: this.getOwnerid(),
                 },
-            }).then(response => {
+            }).then((response: any) => {
                 if (!response || response.status != 200) {
                     Message.error(_this.$t('components.diskFileUpload.getFileFailure') + '!');
                     return;
@@ -359,7 +386,7 @@
                         this.uploadFileList.push.apply(this.uploadFileList, files);
                     }
                 }
-            }).catch(error => {
+            }).catch((error: any) => {
                 Message.error(_this.$t('components.diskFileUpload.getFileFailure') + ':' + error);
             });
         }
@@ -380,7 +407,7 @@
             // 拼接url
             const uploadUrl = this.getAction();
             // 发送post请求
-            Axios.post(uploadUrl, formData, {timeout: 2000}).then(response => {
+            Axios.post(uploadUrl, formData, {timeout: 2000}).then((response: any) => {
                 if (!response || response.status != 200) {
                     Message.error(_this.$t('components.diskFileUpload.loadFailure') + '!');
                 }
@@ -398,8 +425,8 @@
                         this.$emit('formitemvaluechange', {name: this.formItemName, value: value});
                     }
                 }
-            }).catch(err => {
-                Message.error(_this.$t('components.diskFileUpload.loadFailure') + ':' + err);
+            }).catch((error: any) => {
+                Message.error(_this.$t('components.diskFileUpload.loadFailure') + ':' + error);
             })
         }
 
@@ -418,10 +445,10 @@
             // 发送get请求
             Axios.get(downloadUrl, {
                 headers: {
-                    'authcode': item.authcode
+                    'authcode': item.authcode,
                 },
                 responseType: 'arraybuffer',
-            }).then(response => {
+            }).then((response: any) => {
                 if (!response || response.status != 200) {
                     Message.error(_this.$t('components.diskFileUpload.downloadFile') + '!');
                     return;
@@ -432,13 +459,17 @@
                     const disposition = response.headers['content-disposition'];
                     const filename = disposition.split('filename=')[1];
                     // 用blob对象获取文件流
-                    var blob = new Blob([response.data], {type: response.headers['content-type']});
-                    // 创建下载链接
+                    let blob = new Blob([response.data], {type: response.headers['content-type']});
+                    // 通过文件流创建下载链接
                     var href = URL.createObjectURL(blob);
                     // 创建一个a元素并设置相关属性
-                    var a = document.createElement('a');
+                    let a = document.createElement('a');
                     a.href = href;
-                    a.download = filename;
+                    if (name) {
+                        a.download = name;
+                    } else {
+                        a.download = filename;
+                    }
                     // 添加a元素到当前网页
                     document.body.appendChild(a);
                     // 触发a元素的点击事件，实现下载
@@ -450,7 +481,7 @@
                 } else {
                     Message.error(_this.$t('components.diskFileUpload.downloadFile1'));
                 }
-            }).catch(error => {
+            }).catch((error: any) => {
                 Message.error(_this.$t('components.diskFileUpload.downloadFile') + ':' + error);
             });
         }
@@ -465,10 +496,20 @@
             // 拼接url
             const id = typeof item.id == "string" ? item.id : JSON.stringify(item.id);
             const name = typeof item.name == "string" ? item.name : JSON.stringify(item.name);
-            const previewUrl = '/net-disk/preview/' + this.getFolder() + '/' + id + '/' + name + '?authcode=' + item.authcode;
-            // 自定义弹框打开url
-            this.showDialog = true;
-            this.iframeUrl = previewUrl;
+            let previewUrl = '/net-disk/preview/' + this.getFolder() + '/' + id + '/' + name + '?authcode=' + item.authcode;
+            Axios.get(previewUrl).then((response: any) => {
+                if (!response || response.status != 200) {
+                    return;
+                }
+                // 返回一个url，通过自定义弹框打开
+                if (response.data) {
+                    this.dialogTitle = name;
+                    this.showDialog = true;
+                    this.iframeUrl = response.data;
+                }
+            }).catch((error: any) => {
+                Message.error(error);
+            });
         }
 
         /**
@@ -482,9 +523,7 @@
             const id = typeof item.id == "string" ? item.id : JSON.stringify(item.id);
             const name = typeof item.name == "string" ? item.name : JSON.stringify(item.name);
             const editUrl = '/net-disk/editview/' + this.getFolder() + '/' + id + '/' + name + '?authcode=' + item.authcode;
-            // 自定义弹框打开url
-           // this.showDialog = true;
-           // this.iframeUrl = editUrl;
+            // TODO:暂时用window.open
             window.open(editUrl);
         }
 
@@ -499,9 +538,19 @@
             const id = typeof item.id == "string" ? item.id : JSON.stringify(item.id);
             const name = typeof item.name == "string" ? item.name : JSON.stringify(item.name);
             const ocrUrl = '/net-disk/ocrview/' + this.getFolder() + '/' + id + '/' + name + '?authcode=' + item.authcode;
-            // 自定义弹框打开url
-            this.showDialog = true;
-            this.iframeUrl = ocrUrl;
+            Axios.get(ocrUrl).then((response: any) => {
+                if (!response || response.status != 200) {
+                    return;
+                }
+                // 返回一个url，通过自定义弹框打开
+                if (response.data) {
+                    this.dialogTitle = name;
+                    this.showDialog = true;
+                    this.iframeUrl = response.data;
+                }
+            }).catch((error: any) => {
+                Message.error(error);
+            });
         }
 
         /**
@@ -522,7 +571,7 @@
                     //　拼接url
                     const deleteUrl = '/net-disk/files/' + item.id;
                     // 发送delete请求
-                    Axios.delete(deleteUrl).then(response => {
+                    Axios.delete(deleteUrl).then((response: any) => {
                         if (!response || response.status != 200) {
                             Message.error(_this.$t('components.diskFileUpload.deleteFileFailure') + '!');
                         }
@@ -533,7 +582,7 @@
                             const value = JSON.stringify(this.uploadFileList);
                             this.$emit('formitemvaluechange', {name: this.formItemName, value: value});
                         }
-                    }).catch(error => {
+                    }).catch((error: any) => {
                         // 提示删除失败
                         Message.error(_this.$t('components.diskFileUpload.deleteFileFailure') + ':' + error);
                     });
@@ -546,7 +595,7 @@
          *
          * @memberof DiskFileUpload
          */
-        public updateFileBatch(files: any, opt: any) {
+        public updateFileBatch(files: any) {
             let _this: any = this;
             // 拼接url
             const updateUrl = '/net-disk/files/' + this.getFolder() + '?ownertype=' + this.getOwnertype() + "&ownerid=" + this.getOwnerid();
@@ -561,12 +610,12 @@
                     "Content-Type": "application/json;charset=UTF-8"
                 },
                 timeout: 2000
-            }).then(response => {
+            }).then((response: any) => {
                 if (!response || response.status != 200) {
                     Message.error(_this.$t('components.diskFileUpload.updateFailure') + '!');
                     return;
                 }
-            }).catch(error => {
+            }).catch((error: any) => {
                 Message.error(_this.$t('components.diskFileUpload.updateFailure') + ':' + error);
             });
         }
@@ -623,11 +672,12 @@
         margin-left: 10px;
     }
 
-    .dialogDiv{
+    .dialogDiv {
         // el-dialog头部
-        .el-dialog__header{
-            height:40px;
+        .el-dialog__header {
+            height: 40px;
         }
+
         // el-dialog面板
         .el-dialog__wrapper {
             height: 90vh;
@@ -643,7 +693,8 @@
         .el-dialog__body {
             height: inherit;
         }
-        #wps_npIframe{
+
+        #fileIframe {
             height: calc(100% - 40px);
         }
     }

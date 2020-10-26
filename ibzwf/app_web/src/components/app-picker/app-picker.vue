@@ -65,7 +65,7 @@ export default class AppPicker extends Vue {
      * 视图上下文
      *
      * @type {*}
-     * @memberof AppFormDRUIPart
+     * @memberof AppPicker
      */
     @Prop() public context!: any;
 
@@ -73,7 +73,7 @@ export default class AppPicker extends Vue {
      * 视图参数
      *
      * @type {*}
-     * @memberof AppFormDRUIPart
+     * @memberof AppPicker
      */
     @Prop() public viewparams!: any;
 
@@ -81,15 +81,23 @@ export default class AppPicker extends Vue {
      * AC参数
      *
      * @type {*}
-     * @memberof AppFormDRUIPart
+     * @memberof AppPicker
      */
     @Prop({default: () => {}}) public acParams?: any;
+
+    /**
+     * 外键值附加数据
+     *
+     * @type {*}
+     * @memberof AppPicker
+     */
+    @Prop() public pickUpData?: string;
 
     /**
      * 表单服务
      *
      * @type {*}
-     * @memberof AppFormDRUIPart
+     * @memberof AppPicker
      */
     @Prop() public service?: any;
 
@@ -97,7 +105,7 @@ export default class AppPicker extends Vue {
      * 应用实体主信息属性名称
      *
      * @type {string}
-     * @memberof AppAutocomplete
+     * @memberof AppPicker
      */
     @Prop({default: 'srfmajortext'}) public deMajorField!: string;
 
@@ -105,7 +113,7 @@ export default class AppPicker extends Vue {
      * 应用实体主键属性名称
      *
      * @type {string}
-     * @memberof AppAutocomplete
+     * @memberof AppPicker
      */
     @Prop({default: 'srfkey'}) public deKeyField!: string;
 
@@ -240,7 +248,7 @@ export default class AppPicker extends Vue {
      * 输入状态
      *
      * @type {boolean}
-     * @memberof AppAutocomplete
+     * @memberof AppPicker
      */
     public inputState: boolean = false;
 
@@ -397,6 +405,7 @@ export default class AppPicker extends Vue {
         if (this.name) {
             this.$emit('formitemvaluechange', { name: this.name, value: item[this.deMajorField] });
         }
+        this.fillPickUpData(item);
     }
 
     /**
@@ -430,6 +439,7 @@ export default class AppPicker extends Vue {
         if (this.name) {
             this.$emit('formitemvaluechange', { name: this.name, value: '' });
         }
+        this.fillPickUpData();
         this.$forceUpdate();
     }
 
@@ -672,6 +682,7 @@ export default class AppPicker extends Vue {
             if (this.name) {
                 this.$emit('formitemvaluechange', { name: this.name, value: item[this.deMajorField]?item[this.deMajorField]:item["srfmajortext"] });
             }
+            this.fillPickUpData(item);
         }
     }
 
@@ -752,7 +763,7 @@ export default class AppPicker extends Vue {
     /**
      * 输入过程中
      *
-     * @memberof AppAutocomplete
+     * @memberof AppPicker
      */
     public onInput($event: any) {
         if (Object.is($event, this.value)) {
@@ -783,6 +794,34 @@ export default class AppPicker extends Vue {
             appPicker.blur();
         }
     }
+
+  /**
+   * 填充外键值附加数据
+   *
+   * @param {item} 数据集
+   * @memberof AppPicker
+   */
+  public fillPickUpData(item?:any){
+    if(this.pickUpData){
+        let pickUpDataArray:Array<any> = this.pickUpData.split(";")
+        if(pickUpDataArray && pickUpDataArray.length >0){
+            for(let i=0;i<pickUpDataArray.length;i++){
+               if(item){
+                    this.$emit("formitemvaluechange", {
+                        name: pickUpDataArray[i],
+                        value: item[pickUpDataArray[i]],
+                    });
+               }else{
+                    this.$emit("formitemvaluechange", {
+                        name: pickUpDataArray[i],
+                        value: "",
+                    });
+               }
+            }
+        }
+    }
+  }
+
     
 
 }

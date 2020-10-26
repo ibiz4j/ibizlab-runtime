@@ -202,9 +202,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         if(!ObjectUtils.isEmpty(et.getRoleid())){
             cn.ibizlab.core.uaa.domain.SysRole role=et.getRole();
             if(ObjectUtils.isEmpty(role)){
-                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.getById(et.getRoleid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.get(et.getRoleid());
                 et.setRole(majorEntity);
                 role=majorEntity;
             }
@@ -214,9 +212,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         if(!ObjectUtils.isEmpty(et.getUserid())){
             cn.ibizlab.core.uaa.domain.SysUser user=et.getUser();
             if(ObjectUtils.isEmpty(user)){
-                cn.ibizlab.core.uaa.domain.SysUser majorEntity=sysuserService.getById(et.getUserid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.uaa.domain.SysUser majorEntity=sysuserService.get(et.getUserid());
                 et.setUser(majorEntity);
                 user=majorEntity;
             }
@@ -253,6 +249,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

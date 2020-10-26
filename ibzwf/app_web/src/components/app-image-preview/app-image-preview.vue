@@ -21,7 +21,7 @@
     </ul>
     <!-- 预览 -->
     <modal v-model="dialogVisible" footer-hide width="auto" class-name='app-image-preview-model'>
-      <el-image src="dialogImageUrl">
+      <el-image :src="dialogImageUrl">
           <div slot='error' class='image-slot'>
               <img src="/assets/img/picture.png">
           </div>

@@ -35,5 +35,7 @@ export const appConfig = {
             label: 'YouYuan',
             value: 'YouYuan',
         },
-    ]
+    ],
+    // 面包屑分隔符
+    breadcrumbSeparator:"/"
 }

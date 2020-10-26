@@ -156,6 +156,8 @@ public class WFMemberResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfmemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
     @PreAuthorize("hasPermission(this.wfmemberMapping.toDomain(#wfmemberdto),'ibzwf-WFMember-Create')")
     @ApiOperation(value = "根据角色/用户组建立成员", tags = {"成员" },  notes = "根据角色/用户组建立成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers")

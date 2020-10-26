@@ -42,6 +42,14 @@ export default class DefaultService extends ControlService {
     }
 
     /**
+     * 远端数据
+     *
+     * @type {*}
+     * @memberof DefaultService
+     */
+    private remoteCopyData:any = {};
+
+    /**
      * 处理数据
      *
      * @private
@@ -274,6 +282,7 @@ export default class DefaultService extends ControlService {
                 result = this.appEntityService.Get(Context,Data, isloading);
             }
             result.then((response) => {
+                this.setRemoteCopyData(response);
                 this.handleResponse(action, response);
                 resolve(response);
             }).catch(response => {
@@ -304,6 +313,7 @@ export default class DefaultService extends ControlService {
                 result = this.appEntityService.GetDraft(Context,Data, isloading);
             }
             result.then((response) => {
+                this.setRemoteCopyData(response);
                 this.handleResponse(action, response, true);
                 resolve(response);
             }).catch(response => {
@@ -437,5 +447,24 @@ export default class DefaultService extends ControlService {
         return item;
     }
 
+    /**
+     * 设置远端数据
+     * 
+     * @param result 远端请求结果 
+     * @memberof DefaultService
+     */
+    public setRemoteCopyData(result:any){
+        if (result && result.status === 200) {
+            this.remoteCopyData = Util.deepCopy(result.data);
+        }
+    }
 
+    /**
+     * 获取远端数据
+     * 
+     * @memberof DefaultService
+     */
+    public getRemoteCopyData(){
+        return this.remoteCopyData;
+    }
 }

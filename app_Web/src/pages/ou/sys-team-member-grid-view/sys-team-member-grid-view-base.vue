@@ -5,9 +5,9 @@
         <div slot='title' class="header-container">
         <span class='caption-info'>{{$t(model.srfCaption)}}</span>
         </div>
-        <div class='content-container'>
             <div class='view-top-messages'>
             </div>
+        <div class='content-container'>
             <div style='margin-bottom: 6px;'>
                 <div class='pull-right'>
                     <div class='toolbar-container'>
@@ -32,7 +32,8 @@
                                 </i-button>
                             <div slot='content'>{{$t('entities.systeammember.gridviewtoolbar_toolbar.deuiaction1.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem8.visabled" :disabled="toolBarModels.tbitem8.disabled" class='' @click="toolbar_click({ tag: 'tbitem8' }, $event)">
                                     <i class='fa fa-remove'></i>
                                     <span class='caption'>{{$t('entities.systeammember.gridviewtoolbar_toolbar.tbitem8.caption')}}</span>
@@ -42,6 +43,8 @@
                     </div>
                 </div>
             </div>
+                    <div class='view-body-messages'>
+                    </div>
             <view_grid 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
@@ -69,9 +72,9 @@
                 @load="grid_load($event)"  
                 @closeview="closeView($event)">
             </view_grid>
+        </div>
             <div class='view-bottom-messages'>
             </div>
-        </div>
     </card>
 </div>
 </template>
@@ -251,6 +254,18 @@ export default class SysTeamMemberGridViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof SysTeamMemberGridViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.grid) {
+            refs.grid.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof SysTeamMemberGridViewBase
@@ -281,14 +296,14 @@ export default class SysTeamMemberGridViewBase extends Vue {
      * @memberof SysTeamMemberGridView
      */
     public toolBarModels: any = {
-        tbitem24: { name: 'tbitem24', caption: '行编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleRowEdit', target: '' } },
+        tbitem24: { name: 'tbitem24', actiontarget: 'NONE', caption: '行编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleRowEdit', target: '' } },
 
-        tbitem25: { name: 'tbitem25', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'NewRow', target: '' } },
+        tbitem25: { name: 'tbitem25', actiontarget: 'NONE', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'NewRow', target: '' } },
 
-        deuiaction1: { name: 'deuiaction1', caption: '保存行', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveRow', target: '' } },
+        deuiaction1: { name: 'deuiaction1', actiontarget: 'NONE', caption: '保存行', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveRow', target: '' } },
 
         tbitem26: {  name: 'tbitem26', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        tbitem8: { name: 'tbitem8', actiontarget: 'NONE', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
     };
 
@@ -343,6 +358,23 @@ export default class SysTeamMemberGridViewBase extends Vue {
     * @memberof SysTeamMemberGridViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SysTeamMemberGridViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SysTeamMemberGridViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -557,6 +589,16 @@ export default class SysTeamMemberGridViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         if(this.formDruipart){
             this.formDruipart.subscribe((res:any) =>{
                 if(Object.is(res.action,'save')){
@@ -1095,6 +1137,9 @@ export default class SysTeamMemberGridViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

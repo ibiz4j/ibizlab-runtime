@@ -54,19 +54,20 @@ public class AuditAspect
             return;
 
         Object serviceParam =args[0];
-        EntityBase entity=(EntityBase)serviceParam;//创建数据
-        Map<String, Audit> auditFields= DEFieldCacheMap.getAuditFields(entity.getClass());
-        if(auditFields.size()==0)//是否有审计属性
-            return;
+        if(serviceParam instanceof EntityBase){
+            EntityBase entity=(EntityBase)serviceParam;//创建数据
+            Map<String, Audit> auditFields= DEFieldCacheMap.getAuditFields(entity.getClass());
+            if(auditFields.size()==0)//是否有审计属性
+                return;
 
-        String idField=DEFieldCacheMap.getDEKeyField(entity.getClass());
-        Object idValue="";
-        if(!StringUtils.isEmpty(idField)){
-            idValue=entity.get(idField);
+            String idField=DEFieldCacheMap.getDEKeyField(entity.getClass());
+            Object idValue="";
+            if(!StringUtils.isEmpty(idField)){
+                idValue=entity.get(idField);
+            }
+            //记录审计日志
+            dataAuditService.createAudit(request,entity,idValue,auditFields);
         }
-        //记录审计日志
-        dataAuditService.createAudit(request,entity,idValue,auditFields);
-        return;
     }
 
     /**
@@ -88,27 +89,30 @@ public class AuditAspect
             return point.proceed();
 
         Object arg=args[0];
-        EntityBase entity= (EntityBase) arg;
-        Map<String, Audit> auditFields= DEFieldCacheMap.getAuditFields(entity.getClass());
+        if(arg instanceof EntityBase){
+            EntityBase entity= (EntityBase) arg;
+            Map<String, Audit> auditFields= DEFieldCacheMap.getAuditFields(entity.getClass());
 
-        //是否有审计属性
-        if(auditFields.size()==0)
-           return point.proceed();
-        String idField=DEFieldCacheMap.getDEKeyField(entity.getClass());
-        Object idValue="";
-        if(!StringUtils.isEmpty(idField)){
-            idValue=entity.get(idField);
+            //是否有审计属性
+            if(auditFields.size()==0)
+                return point.proceed();
+            String idField=DEFieldCacheMap.getDEKeyField(entity.getClass());
+            Object idValue="";
+            if(!StringUtils.isEmpty(idField)){
+                idValue=entity.get(idField);
+            }
+            if(ObjectUtils.isEmpty(idValue))
+                return point.proceed();
+
+            //获取更新前实体
+            EntityBase beforeEntity=getEntity(serviceObj,idValue);
+            //执行更新操作
+            point.proceed();
+            //记录审计日志
+            dataAuditService.updateAudit(request,beforeEntity,serviceObj,idValue,auditFields);
+            return true;
         }
-        if(ObjectUtils.isEmpty(idValue))
-            return point.proceed();
-
-        //获取更新前实体
-        EntityBase beforeEntity=getEntity(serviceObj,idValue);
-        //执行更新操作
-        point.proceed();
-        //记录审计日志
-        dataAuditService.updateAudit(request,beforeEntity,serviceObj,idValue,auditFields);
-        return true;
+        return point.proceed();
     }
 
     /**

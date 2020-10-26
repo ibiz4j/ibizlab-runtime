@@ -156,5 +156,7 @@ public class SysOpenAccessResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysopenaccessMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

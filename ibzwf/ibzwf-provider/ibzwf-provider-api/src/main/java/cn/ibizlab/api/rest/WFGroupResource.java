@@ -156,5 +156,7 @@ public class WFGroupResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfgroupMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

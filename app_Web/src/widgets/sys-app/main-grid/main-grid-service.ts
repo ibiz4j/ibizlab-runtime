@@ -47,7 +47,15 @@ export default class MainService extends ControlService {
      * @type {*}
      * @memberof MainService
      */
-    public copynativeData:any;
+    private copynativeData:any;
+
+    /**
+     * 远端数据
+     *
+     * @type {*}
+     * @memberof MainService
+     */
+    private remoteCopyData:any = {};
 
 
     /**
@@ -108,6 +116,7 @@ export default class MainService extends ControlService {
     @Errorlog
     public add(action: string, context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         const {data:Data,context:Context} = this.handleRequestDataWithUpdate(action,context,data,true);
+        Object.assign(Data,{id: data.appid, srffrontuf: '1'});
         return new Promise((resolve: any, reject: any) => {
             const _appEntityService: any = this.appEntityService;
             let result: Promise<any>;
@@ -239,7 +248,7 @@ export default class MainService extends ControlService {
                 result =_appEntityService.FetchDefault(Context,Data, isloading);
             }
             result.then((response) => {
-                this.copynativeData = Util.deepCopy(response.data);
+                this.setCopynativeData(response.data);
                 this.handleResponse(action, response);
                 resolve(response);
             }).catch(response => {
@@ -274,9 +283,8 @@ export default class MainService extends ControlService {
                 //处理返回数据，补充判断标识
                 if(response.data){
                     Object.assign(response.data,{srfuf:'0'});
-                    //仿真主键数据
-                    response.data.id = Util.createUUID();
                 }
+                this.setRemoteCopyData(response);
                 this.handleResponse(action, response, true);
                 resolve(response);
             }).catch(response => {
@@ -442,5 +450,44 @@ export default class MainService extends ControlService {
             });
         });
     }
-    
+
+    /**
+     * 设置远端数据
+     * 
+     * @param result 远端请求结果 
+     * @memberof MainService
+     */
+    public setRemoteCopyData(result:any){
+        if (result && result.status === 200) {
+            this.remoteCopyData = Util.deepCopy(result.data);
+        }
+    }
+
+    /**
+     * 获取远端数据
+     * 
+     * @memberof MainService
+     */
+    public getRemoteCopyData(){
+        return this.remoteCopyData;
+    }
+
+    /**
+     * 设置备份原生数据
+     * 
+     * @param data 远端请求结果 
+     * @memberof MainService
+     */
+    public setCopynativeData(data:any){
+        this.copynativeData = Util.deepCopy(data);
+    }
+
+    /**
+     * 获取备份原生数据
+     * 
+     * @memberof MainService
+     */
+    public getCopynativeData(){
+        return this.copynativeData;
+    }    
 }

@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.alibaba.fastjson.annotation.JSONField;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -107,6 +109,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "last_time")
     @JsonProperty("last_time")
+    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[上次调度时间]不允许为空!")
     private Long lastTime;
 
@@ -116,6 +119,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "next_time")
     @JsonProperty("next_time")
+    @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[下次调度时间]不允许为空!")
     private Long nextTime;
 

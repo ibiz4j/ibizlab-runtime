@@ -16,8 +16,10 @@
     </div>
 </div>
 
-        <div class="content-container">
         <div class='view-top-messages'>
+        </div>
+        <div class="content-container">
+        <div class='view-body-messages'>
         </div>
         <view_form 
             :viewState="viewState"  
@@ -41,8 +43,8 @@
             @load="form_load($event)"  
             @closeview="closeView($event)">
         </view_form>
-        <div class='view-bottom-messages'>
         </div>
+        <div class='view-bottom-messages'>
         </div>
     </card>
 </div>
@@ -220,6 +222,18 @@ export default class WFREModelEditViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof WFREModelEditViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.form) {
+            refs.form.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof WFREModelEditViewBase
@@ -250,7 +264,7 @@ export default class WFREModelEditViewBase extends Vue {
      * @memberof WFREModelEditView
      */
     public toolBarModels: any = {
-        tbitem1: { name: 'tbitem1', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem1: { name: 'tbitem1', actiontarget: 'NONE', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
     };
 
@@ -299,6 +313,23 @@ export default class WFREModelEditViewBase extends Vue {
     * @memberof WFREModelEditViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof WFREModelEditViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof WFREModelEditViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -513,6 +544,16 @@ export default class WFREModelEditViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -709,6 +750,9 @@ export default class WFREModelEditViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

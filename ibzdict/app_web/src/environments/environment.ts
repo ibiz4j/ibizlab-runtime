@@ -25,6 +25,8 @@ export const Environment = {
     devMode: true,
     // 是否开启权限认证
     enablePermissionValid:false,
+    // 菜单权限模式，可选值：RT(RT模式),RESOURCE(资源模式),MINIX(混合模式),默认MINIX
+    menuPermissionMode:"MINIX",
     // 项目模板地址
     ProjectUrl: "http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7",
     // 打开目标工具，可选参数：sln、mos

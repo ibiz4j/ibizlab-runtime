@@ -194,7 +194,7 @@ export default class ViewEngine {
             const _item = _this.view.toolBarModels[key];
             if(_item && _item['dataaccaction'] && _this.view.appUIService){
                 let dataActionResult:any;
-                if (_item.uiaction && (Object.is(_item.uiaction.target, 'NONE'))){
+                if (_item.uiaction && (Object.is(_item.uiaction.target, "NONE") || Object.is(_item.uiaction.target, ""))){
                     dataActionResult = _this.view.appUIService.getResourceOPPrivs(_item['dataaccaction']);
                 }else{
                     if(data && Object.keys(data).length >0){

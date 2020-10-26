@@ -223,6 +223,7 @@ export default class SDIndexViewBase extends Vue implements ControlInterface {
     }
 
 
+
     /**
      * 获取多项数据
      *

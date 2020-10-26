@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import cn.ibizlab.util.cache.listener.RedisPublisher;
 import cn.ibizlab.util.enums.RedisChannelTopic;
+import org.springframework.util.ObjectUtils;
 
 /**
  * 缓存分层类
@@ -58,11 +59,16 @@ public class LayeringCache extends AbstractValueAdaptingCache {
     @Override
     public ValueWrapper get(Object key) {
         ValueWrapper wrapper = caffeineCache.get(key);
-        log.debug("查询一级缓存 key:{}，value:{}", key,wrapper);
-        if (wrapper == null) {
+        Object value=ObjectUtils.isEmpty(wrapper)?null:wrapper.get();
+        log.debug("查询一级缓存 key:{} ，value:{}", key,value);
+        if (ObjectUtils.isEmpty(value)) {
             wrapper = redisCache.get(key);
-            caffeineCache.put(key, wrapper == null ? null : wrapper.get());
-            log.debug("查询二级缓存,并将数据放到一级缓存。 key:{}", key);
+            value=ObjectUtils.isEmpty(wrapper)?null:wrapper.get();
+            log.debug("查询二级缓存 key:{} ，value:{}", key,value);
+            if(!ObjectUtils.isEmpty(value)){
+                caffeineCache.put(key, value);
+                log.debug("查询二级缓存，并将数据放到一级缓存。 key:{} ，value:{}", key,value);
+            }
         }
         return wrapper;
     }

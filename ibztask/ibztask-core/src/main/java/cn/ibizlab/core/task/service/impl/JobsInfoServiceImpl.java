@@ -165,9 +165,9 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public JobsInfo stop(JobsInfo et) {
-        et.set("Status","1");
         et.set("Next_time","0");
         et.set("Last_time","0");
+        et.set("Status","1");
         update(et);
         return et;
     }
@@ -211,6 +211,7 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

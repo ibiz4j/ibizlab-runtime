@@ -146,6 +146,8 @@ public class SysUserRoleResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
     @ApiOperation(value = "根据系统角色建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色建立用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles")
     public ResponseEntity<SysUserRoleDTO> createBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {

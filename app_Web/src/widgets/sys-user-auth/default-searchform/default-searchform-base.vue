@@ -16,6 +16,7 @@
             :localParam ='{ }' 
             :disabled="detailsModel.n_username_eq.disabled"
             name='n_username_eq'
+            
             deMajorField='personname'
             deKeyField='sysuser'
             :service="service"
@@ -183,6 +184,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
             })
         }
     }
+
 
 
     /**

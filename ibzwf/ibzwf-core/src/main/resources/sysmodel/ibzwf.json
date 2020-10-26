@@ -54,8 +54,8 @@
     {"name":"DER1N_WF_GROUP_MEMBER_WF_GROUP_GROUPID",
      "relation_type":"DER1N",
      "code_name":"Group",
-     "entity_name":"WF_GROUP",
-     "ref_entity_name":"WF_GROUP_MEMBER"
+     "entity_name":"WF_GROUP_MEMBER",
+     "ref_entity_name":"WF_GROUP"
     }
     ],
     "parentEntitys":[
@@ -374,14 +374,14 @@
     {"name":"DER1N_WF_GROUP_MEMBER_WF_GROUP_GROUPID",
      "relation_type":"DER1N",
      "code_name":"Group",
-     "entity_name":"WF_GROUP",
-     "ref_entity_name":"WF_GROUP_MEMBER"
+     "entity_name":"WF_GROUP_MEMBER",
+     "ref_entity_name":"WF_GROUP"
     },
     {"name":"DER1N_WF_GROUP_MEMBER_WF_USER_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"WF_USER",
-     "ref_entity_name":"WF_GROUP_MEMBER"
+     "entity_name":"WF_GROUP_MEMBER",
+     "ref_entity_name":"WF_USER"
     }
     ]
  }
@@ -1254,8 +1254,8 @@
     {"name":"DER1N_WF_GROUP_MEMBER_WF_USER_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"WF_USER",
-     "ref_entity_name":"WF_GROUP_MEMBER"
+     "entity_name":"WF_GROUP_MEMBER",
+     "ref_entity_name":"WF_USER"
     }
     ],
     "parentEntitys":[

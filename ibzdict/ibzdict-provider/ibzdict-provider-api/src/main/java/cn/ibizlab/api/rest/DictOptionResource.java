@@ -157,6 +157,8 @@ public class DictOptionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(dictoptionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictOption-Create-all')")
     @ApiOperation(value = "根据字典建立字典项", tags = {"字典项" },  notes = "根据字典建立字典项")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions")

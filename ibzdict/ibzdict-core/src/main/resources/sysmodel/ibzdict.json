@@ -106,8 +106,8 @@
     {"name":"DER1N_DICT_OPTION_DICT_CATALOG_CID",
      "relation_type":"DER1N",
      "code_name":"Catalog",
-     "entity_name":"DICT_CATALOG",
-     "ref_entity_name":"DICT_OPTION"
+     "entity_name":"DICT_OPTION",
+     "ref_entity_name":"DICT_CATALOG"
     }
     ],
     "parentEntitys":[
@@ -320,8 +320,8 @@
     {"name":"DER1N_DICT_OPTION_DICT_CATALOG_CID",
      "relation_type":"DER1N",
      "code_name":"Catalog",
-     "entity_name":"DICT_CATALOG",
-     "ref_entity_name":"DICT_OPTION"
+     "entity_name":"DICT_OPTION",
+     "ref_entity_name":"DICT_CATALOG"
     }
     ]
  }

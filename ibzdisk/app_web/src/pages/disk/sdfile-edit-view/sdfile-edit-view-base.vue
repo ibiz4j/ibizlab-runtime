@@ -27,28 +27,32 @@
                 </i-button>
             <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem5.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem7.visabled" :disabled="toolBarModels.tbitem7.disabled" class='' @click="toolbar_click({ tag: 'tbitem7' }, $event)">
                     <i class='fa fa-remove'></i>
                     <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem7.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem7.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
                     <i class='fa fa-file-text-o'></i>
                     <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem12.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem12.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
                     <i class='fa fa-copy'></i>
                     <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem14.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem14.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem23.visabled" :disabled="toolBarModels.tbitem23.disabled" class='' @click="toolbar_click({ tag: 'tbitem23' }, $event)">
                     <i class='fa fa-fast-backward'></i>
                     
@@ -76,7 +80,8 @@
                 </i-button>
             <div slot='content'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem26.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem22.visabled" :disabled="toolBarModels.tbitem22.disabled" class='' @click="toolbar_click({ tag: 'tbitem22' }, $event)">
                     <i class='fa fa-question'></i>
                     <span class='caption'>{{$t('entities.sdfile.editviewtoolbar_toolbar.tbitem22.caption')}}</span>
@@ -86,8 +91,10 @@
     </div>
 </div>
 
-        <div class="content-container">
         <div class='view-top-messages'>
+        </div>
+        <div class="content-container">
+        <div class='view-body-messages'>
         </div>
         <view_form 
             :viewState="viewState"  
@@ -111,8 +118,8 @@
             @load="form_load($event)"  
             @closeview="closeView($event)">
         </view_form>
-        <div class='view-bottom-messages'>
         </div>
+        <div class='view-bottom-messages'>
         </div>
     </card>
 </div>
@@ -290,6 +297,18 @@ export default class SDFileEditViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof SDFileEditViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.form) {
+            refs.form.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof SDFileEditViewBase
@@ -320,32 +339,32 @@ export default class SDFileEditViewBase extends Vue {
      * @memberof SDFileEditView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem3: { name: 'tbitem3', actiontarget: 'NONE', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
-        tbitem4: { name: 'tbitem4', caption: '保存并新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndNew', target: '' } },
+        tbitem4: { name: 'tbitem4', actiontarget: 'NONE', caption: '保存并新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndNew', target: '' } },
 
-        tbitem5: { name: 'tbitem5', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
+        tbitem5: { name: 'tbitem5', actiontarget: 'NONE', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
 
         tbitem6: {  name: 'tbitem6', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem7: { name: 'tbitem7', caption: '删除并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'RemoveAndExit', target: 'SINGLEKEY' } },
+        tbitem7: { name: 'tbitem7', actiontarget: 'NONE', caption: '删除并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'RemoveAndExit', target: 'SINGLEKEY' } },
 
         tbitem8: {  name: 'tbitem8', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem12: { name: 'tbitem12', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        tbitem12: { name: 'tbitem12', actiontarget: 'NONE', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
         tbitem13: {  name: 'tbitem13', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem14: { name: 'tbitem14', actiontarget: 'NONE', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
         tbitem16: {  name: 'tbitem16', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem23: { name: 'tbitem23', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'FirstRecord', target: 'SINGLEKEY' } },
+        tbitem23: { name: 'tbitem23', actiontarget: 'NONE', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'FirstRecord', target: 'SINGLEKEY' } },
 
-        tbitem24: { name: 'tbitem24', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'PrevRecord', target: 'SINGLEKEY' } },
+        tbitem24: { name: 'tbitem24', actiontarget: 'NONE', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'PrevRecord', target: 'SINGLEKEY' } },
 
-        tbitem25: { name: 'tbitem25', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'NextRecord', target: 'SINGLEKEY' } },
+        tbitem25: { name: 'tbitem25', actiontarget: 'NONE', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'NextRecord', target: 'SINGLEKEY' } },
 
-        tbitem26: { name: 'tbitem26', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'LastRecord', target: 'SINGLEKEY' } },
+        tbitem26: { name: 'tbitem26', actiontarget: 'NONE', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'LastRecord', target: 'SINGLEKEY' } },
 
         tbitem21: {  name: 'tbitem21', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem22: { name: 'tbitem22', caption: '帮助', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Help', target: '' } },
+        tbitem22: { name: 'tbitem22', actiontarget: 'NONE', caption: '帮助', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Help', target: '' } },
 
     };
 
@@ -393,6 +412,23 @@ export default class SDFileEditViewBase extends Vue {
     * @memberof SDFileEditViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SDFileEditViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SDFileEditViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -607,6 +643,16 @@ export default class SDFileEditViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -1567,6 +1613,9 @@ export default class SDFileEditViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

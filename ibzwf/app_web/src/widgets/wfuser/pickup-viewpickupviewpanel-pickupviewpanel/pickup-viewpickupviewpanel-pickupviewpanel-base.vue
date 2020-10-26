@@ -151,6 +151,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
 
 
 
+
     /**
      * 选中数据字符串
      *

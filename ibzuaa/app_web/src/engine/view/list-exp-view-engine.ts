@@ -78,9 +78,6 @@ export default class ListExpViewEngine extends ViewEngine {
      */
     public listExpBarEvent(eventName: string, args: any): void {
         if (Object.is(eventName, 'load')) {
-            if(this.listExpBar && this.listExpBar.calcNavigationToolbarState && this.listExpBar.calcNavigationToolbarState instanceof Function){
-                this.listExpBar.calcNavigationToolbarState();
-            }
             this.view.$emit('viewload', args);
         }
         if (Object.is(eventName, 'selectionchange')) {

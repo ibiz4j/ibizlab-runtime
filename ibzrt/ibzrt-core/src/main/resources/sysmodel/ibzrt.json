@@ -106,8 +106,8 @@
     {"name":"DER1N_DICT_OPTION_DICT_CATALOG_CID",
      "relation_type":"DER1N",
      "code_name":"Catalog",
-     "entity_name":"DICT_CATALOG",
-     "ref_entity_name":"DICT_OPTION"
+     "entity_name":"DICT_OPTION",
+     "ref_entity_name":"DICT_CATALOG"
     }
     ],
     "parentEntitys":[
@@ -320,8 +320,8 @@
     {"name":"DER1N_DICT_OPTION_DICT_CATALOG_CID",
      "relation_type":"DER1N",
      "code_name":"Catalog",
-     "entity_name":"DICT_CATALOG",
-     "ref_entity_name":"DICT_OPTION"
+     "entity_name":"DICT_OPTION",
+     "ref_entity_name":"DICT_CATALOG"
     }
     ]
  }
@@ -1155,8 +1155,8 @@
     {"name":"DER1N_SYS_APP_SYS_PSSYSTEM_PSSYSTEMID",
      "relation_type":"DER1N",
      "code_name":"System",
-     "entity_name":"SYS_PSSYSTEM",
-     "ref_entity_name":"SYS_APP"
+     "entity_name":"SYS_APP",
+     "ref_entity_name":"SYS_PSSYSTEM"
     }
     ]
  }
@@ -1544,8 +1544,8 @@
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_DEPT_DEPTID",
      "relation_type":"DER1N",
      "code_name":"Dept",
-     "entity_name":"SYS_DEPT",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_DEPT"
     },
     {"name":"DER1N_SYS_DEPT_SYS_DEPT_PDEPTID",
      "relation_type":"DER1N",
@@ -1556,8 +1556,8 @@
     {"name":"DER1N_SYS_EMP_SYS_DEPT_MDEPTID",
      "relation_type":"DER1N",
      "code_name":"MainDept",
-     "entity_name":"SYS_DEPT",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_DEPT"
     }
     ],
     "parentEntitys":[
@@ -1570,8 +1570,8 @@
     {"name":"DER1N_SYS_DEPT_SYS_ORG_ORGID",
      "relation_type":"DER1N",
      "code_name":"Org",
-     "entity_name":"SYS_ORG",
-     "ref_entity_name":"SYS_DEPT"
+     "entity_name":"SYS_DEPT",
+     "ref_entity_name":"SYS_ORG"
     }
     ]
  }
@@ -1736,20 +1736,20 @@
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_DEPT_DEPTID",
      "relation_type":"DER1N",
      "code_name":"Dept",
-     "entity_name":"SYS_DEPT",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_DEPT"
     },
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_EMP_USERID",
      "relation_type":"DER1N",
      "code_name":"Emp",
-     "entity_name":"SYS_EMP",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_EMP"
     },
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_POST"
     }
     ]
  }
@@ -2272,34 +2272,34 @@
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_EMP_USERID",
      "relation_type":"DER1N",
      "code_name":"Emp",
-     "entity_name":"SYS_EMP",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_EMP"
     },
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_EMP_USERID",
      "relation_type":"DER1N",
      "code_name":"Emp",
-     "entity_name":"SYS_EMP",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_EMP"
     }
     ],
     "parentEntitys":[
     {"name":"DER1N_SYS_EMP_SYS_DEPT_MDEPTID",
      "relation_type":"DER1N",
      "code_name":"MainDept",
-     "entity_name":"SYS_DEPT",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_DEPT"
     },
     {"name":"DER1N_SYS_EMP_SYS_ORG_ORGID",
      "relation_type":"DER1N",
      "code_name":"Org",
-     "entity_name":"SYS_ORG",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_ORG"
     },
     {"name":"DER1N_SYS_EMP_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_POST"
     }
     ]
  }
@@ -2626,14 +2626,14 @@
     {"name":"DER1N_SYS_DEPT_SYS_ORG_ORGID",
      "relation_type":"DER1N",
      "code_name":"Org",
-     "entity_name":"SYS_ORG",
-     "ref_entity_name":"SYS_DEPT"
+     "entity_name":"SYS_DEPT",
+     "ref_entity_name":"SYS_ORG"
     },
     {"name":"DER1N_SYS_EMP_SYS_ORG_ORGID",
      "relation_type":"DER1N",
      "code_name":"Org",
-     "entity_name":"SYS_ORG",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_ORG"
     },
     {"name":"DER1N_SYS_ORG_SYS_ORG_PORGID",
      "relation_type":"DER1N",
@@ -2742,8 +2742,8 @@
     {"name":"DER1N_SYS_APP_SYS_PSSYSTEM_PSSYSTEMID",
      "relation_type":"DER1N",
      "code_name":"System",
-     "entity_name":"SYS_PSSYSTEM",
-     "ref_entity_name":"SYS_APP"
+     "entity_name":"SYS_APP",
+     "ref_entity_name":"SYS_PSSYSTEM"
     }
     ],
     "parentEntitys":[
@@ -2857,8 +2857,8 @@
     {"name":"DER1N_SYS_ROLE_PERMISSION_SYS_PERMISSION_SYS_PERMISSIONID",
      "relation_type":"DER1N",
      "code_name":"Permission",
-     "entity_name":"SYS_PERMISSION",
-     "ref_entity_name":"SYS_ROLE_PERMISSION"
+     "entity_name":"SYS_ROLE_PERMISSION",
+     "ref_entity_name":"SYS_PERMISSION"
     }
     ],
     "parentEntitys":[
@@ -2943,20 +2943,20 @@
     {"name":"DER1N_SYS_DEPTMEMBER_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_DEPTMEMBER"
+     "entity_name":"SYS_DEPTMEMBER",
+     "ref_entity_name":"SYS_POST"
     },
     {"name":"DER1N_SYS_EMP_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_EMP"
+     "entity_name":"SYS_EMP",
+     "ref_entity_name":"SYS_POST"
     },
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_POST"
     }
     ],
     "parentEntitys":[
@@ -3077,8 +3077,8 @@
     {"name":"DER1N_SYS_ROLE_PERMISSION_SYS_ROLE_SYS_ROLEID",
      "relation_type":"DER1N",
      "code_name":"Role",
-     "entity_name":"SYS_ROLE",
-     "ref_entity_name":"SYS_ROLE_PERMISSION"
+     "entity_name":"SYS_ROLE_PERMISSION",
+     "ref_entity_name":"SYS_ROLE"
     },
     {"name":"DER1N_SYS_ROLE_SYS_ROLE_PROLEID",
      "relation_type":"DER1N",
@@ -3089,8 +3089,8 @@
     {"name":"DER1N_SYS_USER_ROLE_SYS_ROLE_SYS_ROLEID",
      "relation_type":"DER1N",
      "code_name":"Role",
-     "entity_name":"SYS_ROLE",
-     "ref_entity_name":"SYS_USER_ROLE"
+     "entity_name":"SYS_USER_ROLE",
+     "ref_entity_name":"SYS_ROLE"
     }
     ],
     "parentEntitys":[
@@ -3263,14 +3263,14 @@
     {"name":"DER1N_SYS_ROLE_PERMISSION_SYS_PERMISSION_SYS_PERMISSIONID",
      "relation_type":"DER1N",
      "code_name":"Permission",
-     "entity_name":"SYS_PERMISSION",
-     "ref_entity_name":"SYS_ROLE_PERMISSION"
+     "entity_name":"SYS_ROLE_PERMISSION",
+     "ref_entity_name":"SYS_PERMISSION"
     },
     {"name":"DER1N_SYS_ROLE_PERMISSION_SYS_ROLE_SYS_ROLEID",
      "relation_type":"DER1N",
      "code_name":"Role",
-     "entity_name":"SYS_ROLE",
-     "ref_entity_name":"SYS_ROLE_PERMISSION"
+     "entity_name":"SYS_ROLE_PERMISSION",
+     "ref_entity_name":"SYS_ROLE"
     }
     ]
  }
@@ -3340,8 +3340,8 @@
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_TEAM_TEAMID",
      "relation_type":"DER1N",
      "code_name":"Team",
-     "entity_name":"SYS_TEAM",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_TEAM"
     }
     ],
     "parentEntitys":[
@@ -3493,20 +3493,20 @@
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_EMP_USERID",
      "relation_type":"DER1N",
      "code_name":"Emp",
-     "entity_name":"SYS_EMP",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_EMP"
     },
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_POST_POSTID",
      "relation_type":"DER1N",
      "code_name":"Post",
-     "entity_name":"SYS_POST",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_POST"
     },
     {"name":"DER1N_SYS_TEAMMEMBER_SYS_TEAM_TEAMID",
      "relation_type":"DER1N",
      "code_name":"Team",
-     "entity_name":"SYS_TEAM",
-     "ref_entity_name":"SYS_TEAMMEMBER"
+     "entity_name":"SYS_TEAMMEMBER",
+     "ref_entity_name":"SYS_TEAM"
     }
     ]
  }
@@ -3941,14 +3941,14 @@
     {"name":"DER1N_SYS_USER_AUTH_SYS_USER_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"SYS_USER",
-     "ref_entity_name":"SYS_USER_AUTH"
+     "entity_name":"SYS_USER_AUTH",
+     "ref_entity_name":"SYS_USER"
     },
     {"name":"DER1N_SYS_USER_ROLE_SYS_USER_SYS_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"SYS_USER",
-     "ref_entity_name":"SYS_USER_ROLE"
+     "entity_name":"SYS_USER_ROLE",
+     "ref_entity_name":"SYS_USER"
     }
     ],
     "parentEntitys":[
@@ -4059,8 +4059,8 @@
     {"name":"DER1N_SYS_USER_AUTH_SYS_USER_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"SYS_USER",
-     "ref_entity_name":"SYS_USER_AUTH"
+     "entity_name":"SYS_USER_AUTH",
+     "ref_entity_name":"SYS_USER"
     }
     ]
  }
@@ -4243,14 +4243,14 @@
     {"name":"DER1N_SYS_USER_ROLE_SYS_ROLE_SYS_ROLEID",
      "relation_type":"DER1N",
      "code_name":"Role",
-     "entity_name":"SYS_ROLE",
-     "ref_entity_name":"SYS_USER_ROLE"
+     "entity_name":"SYS_USER_ROLE",
+     "ref_entity_name":"SYS_ROLE"
     },
     {"name":"DER1N_SYS_USER_ROLE_SYS_USER_SYS_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"SYS_USER",
-     "ref_entity_name":"SYS_USER_ROLE"
+     "entity_name":"SYS_USER_ROLE",
+     "ref_entity_name":"SYS_USER"
     }
     ]
  }
@@ -4307,8 +4307,8 @@
     {"name":"DER1N_WF_GROUP_MEMBER_WF_GROUP_GROUPID",
      "relation_type":"DER1N",
      "code_name":"Group",
-     "entity_name":"WF_GROUP",
-     "ref_entity_name":"WF_GROUP_MEMBER"
+     "entity_name":"WF_GROUP_MEMBER",
+     "ref_entity_name":"WF_GROUP"
     }
     ],
     "parentEntitys":[
@@ -4496,14 +4496,14 @@
     {"name":"DER1N_WF_GROUP_MEMBER_WF_GROUP_GROUPID",
      "relation_type":"DER1N",
      "code_name":"Group",
-     "entity_name":"WF_GROUP",
-     "ref_entity_name":"WF_GROUP_MEMBER"
+     "entity_name":"WF_GROUP_MEMBER",
+     "ref_entity_name":"WF_GROUP"
     },
     {"name":"DER1N_WF_GROUP_MEMBER_WF_USER_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"WF_USER",
-     "ref_entity_name":"WF_GROUP_MEMBER"
+     "entity_name":"WF_GROUP_MEMBER",
+     "ref_entity_name":"WF_USER"
     }
     ]
  }
@@ -5351,8 +5351,8 @@
     {"name":"DER1N_WF_GROUP_MEMBER_WF_USER_USERID",
      "relation_type":"DER1N",
      "code_name":"User",
-     "entity_name":"WF_USER",
-     "ref_entity_name":"WF_GROUP_MEMBER"
+     "entity_name":"WF_GROUP_MEMBER",
+     "ref_entity_name":"WF_USER"
     }
     ],
     "parentEntitys":[

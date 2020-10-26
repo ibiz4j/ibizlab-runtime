@@ -78,9 +78,6 @@ export default class GridExpViewEngine extends ViewEngine {
      */
     public gridExpBarEvent(eventName: string, args: any): void {
         if (Object.is(eventName, 'load')) {
-            if(this.gridExpBar && this.gridExpBar.calcNavigationToolbarState && this.gridExpBar.calcNavigationToolbarState instanceof Function){
-                this.gridExpBar.calcNavigationToolbarState();
-            }
             this.view.$emit('viewload', args);
         }
         if (Object.is(eventName, 'selectionchange')) {

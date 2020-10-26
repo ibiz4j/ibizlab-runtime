@@ -156,5 +156,7 @@ public class PayOpenAccessResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(payopenaccessMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

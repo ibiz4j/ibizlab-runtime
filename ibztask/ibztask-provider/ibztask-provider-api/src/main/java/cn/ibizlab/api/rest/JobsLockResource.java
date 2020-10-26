@@ -156,5 +156,7 @@ public class JobsLockResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(jobslockMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

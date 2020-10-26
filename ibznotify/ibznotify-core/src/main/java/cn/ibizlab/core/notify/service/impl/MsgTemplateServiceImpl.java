@@ -189,9 +189,7 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
         if(!ObjectUtils.isEmpty(et.getAccessId())){
             cn.ibizlab.core.notify.domain.MsgOpenAccess openaccess=et.getOpenaccess();
             if(ObjectUtils.isEmpty(openaccess)){
-                cn.ibizlab.core.notify.domain.MsgOpenAccess majorEntity=msgopenaccessService.getById(et.getAccessId());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.notify.domain.MsgOpenAccess majorEntity=msgopenaccessService.get(et.getAccessId());
                 et.setOpenaccess(majorEntity);
                 openaccess=majorEntity;
             }
@@ -226,6 +224,7 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

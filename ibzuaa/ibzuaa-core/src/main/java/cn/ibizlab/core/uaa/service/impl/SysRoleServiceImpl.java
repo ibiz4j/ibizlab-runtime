@@ -194,9 +194,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         if(!ObjectUtils.isEmpty(et.getProleid())){
             cn.ibizlab.core.uaa.domain.SysRole parent=et.getParent();
             if(ObjectUtils.isEmpty(parent)){
-                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.getById(et.getProleid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.uaa.domain.SysRole majorEntity=sysroleService.get(et.getProleid());
                 et.setParent(majorEntity);
                 parent=majorEntity;
             }
@@ -250,6 +248,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         else
            return entities;
     }
+
 
 
 }

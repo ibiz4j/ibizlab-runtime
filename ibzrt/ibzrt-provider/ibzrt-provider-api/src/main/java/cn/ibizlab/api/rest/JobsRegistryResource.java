@@ -145,5 +145,7 @@ public class JobsRegistryResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(jobsregistryMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

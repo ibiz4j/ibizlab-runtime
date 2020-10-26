@@ -18,6 +18,7 @@ import cn.ibizlab.util.domain.EntityBase;
 import cn.ibizlab.util.annotation.DEField;
 import cn.ibizlab.util.enums.DEPredefinedFieldType;
 import cn.ibizlab.util.enums.DEFieldDefaultValueType;
+import cn.ibizlab.util.helper.DataObject;
 import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;

@@ -156,5 +156,7 @@ public class SysAuthLogResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysauthlogMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

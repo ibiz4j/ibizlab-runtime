@@ -230,6 +230,23 @@ export default class SYS_ROLERedirectViewBase extends Vue {
     public serviceStateEvent: Subscription | undefined;
 
     /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SYS_ROLERedirectViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SYS_ROLERedirectViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -442,6 +459,16 @@ export default class SYS_ROLERedirectViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
             this.viewInit();
 
     }
@@ -535,6 +562,9 @@ export default class SYS_ROLERedirectViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
         /**

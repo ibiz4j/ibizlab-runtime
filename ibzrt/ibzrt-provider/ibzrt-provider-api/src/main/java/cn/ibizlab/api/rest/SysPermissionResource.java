@@ -146,5 +146,7 @@ public class SysPermissionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(syspermissionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

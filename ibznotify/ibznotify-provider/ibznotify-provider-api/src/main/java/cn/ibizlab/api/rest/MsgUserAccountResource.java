@@ -156,5 +156,7 @@ public class MsgUserAccountResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(msguseraccountMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

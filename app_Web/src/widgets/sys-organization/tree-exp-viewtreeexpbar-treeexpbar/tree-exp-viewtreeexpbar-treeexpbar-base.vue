@@ -200,6 +200,8 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
     }
 
 
+
+
     /**
      * 打开新建数据视图
      *
@@ -258,6 +260,15 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
      * @memberof TreeExpViewtreeexpbarBase
      */
     public ctrlWidth:number = 220;
+
+    /**
+     * 可搜索字段名称
+     * 
+     * 
+     * @type {(string)}
+     * @memberof TreeExpViewtreeexpbarBase
+     */
+    public placeholder="名称";
 
     /**
      * 过滤值
@@ -337,15 +348,18 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
      */
     public treeexpbar_selectionchange(args: any [], tag?: string, $event2?: any): void {
         if (args.length === 0) {
+            this.calcToolbarItemState(true);
             return ;
         }
         const arg:any = args[0];
         if (!arg.id) {
+            this.calcToolbarItemState(true);
             return;
         }
         const nodetype = arg.id.split(';')[0];
         const refview = this.getExpItemView({ nodetype: nodetype });
         if (!refview) {
+            this.calcToolbarItemState(true);
             return;
         }
         let tempViewparam:any = {};
@@ -389,6 +403,7 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
         this.selection = {};
         Object.assign(this.selection, { view: { viewname: refview.viewname } });
         Object.assign(this.selection,{'viewparam':tempViewparam,'context':tempContext});
+        this.calcToolbarItemState(false);
         this.$forceUpdate();
     }
 
@@ -402,6 +417,7 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
      * @memberof TreeExpViewtreeexpbarBase
      */
     public treeexpbar_load(args: any[], tag?: string, $event2?: any): void {
+        this.calcToolbarItemState(true);
         this.$emit('load',args);
     }
 
@@ -529,6 +545,48 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
      */
     public onViewLoad($event: any): void {
         this.$emit('load', $event);
+    }
+
+    /**
+     * 设置导航区工具栏禁用状态
+     *
+     * @param {boolean} state
+     * @return {*} 
+     * @memberof TreeExpViewtreeexpbarBase
+     */
+    public calcToolbarItemState(state: boolean) {
+        let _this: any = this;
+        const models:any = _this.treeexpviewtreeexpbar_toolbarModels;
+        if (models) {
+            for (const key in models) {
+                if (!models.hasOwnProperty(key)) {
+                    return;
+                }
+                const _item = models[key];
+                if (_item.uiaction && (Object.is(_item.uiaction.target, 'SINGLEKEY') || Object.is(_item.uiaction.target, 'MULTIKEY'))) {
+                    _item.disabled = state;
+                }
+                _item.visabled = true;
+                if (_item.noprivdisplaymode && _item.noprivdisplaymode === 6) {
+                    _item.visabled = false;
+                }
+            }
+            this.calcNavigationToolbarState();
+        }
+    }
+
+    /**
+     * 计算导航工具栏权限状态
+     * 
+     * @memberof TreeExpViewtreeexpbarBase
+     */
+    public calcNavigationToolbarState(){
+        let _this: any = this;
+        // 界面行为
+        if(_this.treeexpviewtreeexpbar_toolbarModels){
+            const curUIService:SysOrganizationUIService  = new SysOrganizationUIService();
+            ViewTool.calcActionItemAuthState({},_this.treeexpviewtreeexpbar_toolbarModels,curUIService);
+        }
     }
     
 }

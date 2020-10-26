@@ -5,9 +5,9 @@
         <div slot='title' class="header-container">
         <span class='caption-info'>{{$t(model.srfCaption)}}</span>
         </div>
-        <div class='content-container'>
             <div class='view-top-messages'>
             </div>
+        <div class='content-container'>
             <div style='margin-bottom: 6px;'>
                 <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="服务名" />
                 <div class='pull-right'>
@@ -26,25 +26,29 @@
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem19.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem6.visabled" :disabled="toolBarModels.tbitem6.disabled" class='' @click="toolbar_click({ tag: 'tbitem6' }, $event)">
                                     <i class='fa fa-copy'></i>
                                     <span class='caption'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem6.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem6.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem9.visabled" :disabled="toolBarModels.tbitem9.disabled" class='' @click="toolbar_click({ tag: 'tbitem9' }, $event)">
                                     <i class='fa fa-remove'></i>
                                     <span class='caption'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem9.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem9.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                             <app-export-excel :item="toolBarModels.tbitem11" :caption="$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem11.caption')" @exportexcel="toolbar_click({ tag: 'tbitem11' }, $event)"></app-export-excel>
                             <div slot='content'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem11.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <dropdown v-show="toolBarModels.tbitem17.visabled" trigger='click'>
+                        <span class='seperator'>|</span>
+                        <dropdown v-show="toolBarModels.tbitem17.visabled" trigger='click'>
                             <tooltip :transfer="true" :max-width="600">
                                     <i-button class=''>
                                         <i class=''></i>
@@ -78,14 +82,16 @@
                                 </dropdown-item>
                             </dropdown-menu>
                         </dropdown>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
                                     <i class='fa fa-filter'></i>
                                     <span class='caption'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem3.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem3.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem5.visabled" :disabled="toolBarModels.tbitem5.disabled" class='' @click="toolbar_click({ tag: 'tbitem5' }, $event)">
                                     <i class='fa fa-question'></i>
                                     <span class='caption'>{{$t('entities.jobsregistry.gridviewtoolbar_toolbar.tbitem5.caption')}}</span>
@@ -111,6 +117,8 @@
                 @load="searchform_load($event)"  
                 @closeview="closeView($event)">
             </view_searchform>
+                    <div class='view-body-messages'>
+                    </div>
             <view_grid 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
@@ -138,9 +146,9 @@
                 @load="grid_load($event)"  
                 @closeview="closeView($event)">
             </view_grid>
+        </div>
             <div class='view-bottom-messages'>
             </div>
-        </div>
     </card>
 </div>
 </template>
@@ -321,6 +329,18 @@ export default class JobsRegistryGridViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof JobsRegistryGridViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.grid) {
+            refs.grid.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof JobsRegistryGridViewBase
@@ -351,31 +371,31 @@ export default class JobsRegistryGridViewBase extends Vue {
      * @memberof JobsRegistryGridView
      */
     public toolBarModels: any = {
-        tbitem26: { name: 'tbitem26', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        tbitem26: { name: 'tbitem26', actiontarget: 'NONE', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
-        tbitem19: { name: 'tbitem19', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        tbitem19: { name: 'tbitem19', actiontarget: 'NONE', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
         tbitem22: {  name: 'tbitem22', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem6: { name: 'tbitem6', actiontarget: 'NONE', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
         tbitem7: {  name: 'tbitem7', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem9: { name: 'tbitem9', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        tbitem9: { name: 'tbitem9', actiontarget: 'NONE', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
         tbitem10: {  name: 'tbitem10', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem11: { name: 'tbitem11', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
+        tbitem11: { name: 'tbitem11', actiontarget: 'NONE', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
 
         tbitem12: {  name: 'tbitem12', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
         tbitem17: { name: 'tbitem17', caption: '其它', disabled: false, type: 'ITEMS', visabled: true, dataaccaction: '', uiaction: { } }, 
- tbitem29: { name: 'tbitem29', caption: '导出数据模型', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportModel', target: '' } },
+ tbitem29: { name: 'tbitem29', actiontarget: 'NONE', caption: '导出数据模型', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportModel', target: '' } },
 
- tbitem30: { name: 'tbitem30', caption: '数据导入', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Import', target: '' } },
+ tbitem30: { name: 'tbitem30', actiontarget: 'NONE', caption: '数据导入', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Import', target: '' } },
 
 
         tbitem2: {  name: 'tbitem2', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem3: { name: 'tbitem3', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
+        tbitem3: { name: 'tbitem3', actiontarget: 'NONE', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
 
         tbitem4: {  name: 'tbitem4', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem5: { name: 'tbitem5', caption: '帮助', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Help', target: '' } },
+        tbitem5: { name: 'tbitem5', actiontarget: 'NONE', caption: '帮助', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Help', target: '' } },
 
     };
 
@@ -431,6 +451,23 @@ export default class JobsRegistryGridViewBase extends Vue {
     * @memberof JobsRegistryGridViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof JobsRegistryGridViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof JobsRegistryGridViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -645,6 +682,16 @@ export default class JobsRegistryGridViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         if(this.formDruipart){
             this.formDruipart.subscribe((res:any) =>{
                 if(Object.is(res.action,'save')){
@@ -1619,6 +1666,9 @@ export default class JobsRegistryGridViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

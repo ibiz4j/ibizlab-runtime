@@ -265,6 +265,7 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
 
+
     /**
      * 代码表服务对象
      *
@@ -578,10 +579,10 @@ export default class MainBase extends Vue implements ControlInterface {
     /**
      * 部件刷新
      *
-     * @param {any[]} args
+     * @param {any} args
      * @memberof MainBase
      */
-    public refresh(args: any[]): void {
+    public refresh(args?: any): void {
         this.load();
     }
 
@@ -815,7 +816,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.totalrow = response.total;
             this.items = JSON.parse(JSON.stringify(data));
             // 清空selections,gridItemsModel
-            this.selections = [];
+            //this.selections = [];
             this.gridItemsModel = [];
             this.items.forEach(()=>{this.gridItemsModel.push(this.getGridRowModel())});
             this.items.forEach((item:any)=>{
@@ -825,8 +826,18 @@ export default class MainBase extends Vue implements ControlInterface {
             // 设置默认选中
             let _this = this;
             setTimeout(() => {
+                //在导航视图中，如已有选中数据，则右侧展开已选中数据的视图，如无选中数据则默认选中第一条
                 if(_this.isSelectFirstDefault){
-                  _this.rowClick(_this.items[0]);
+                    if(_this.selections && _this.selections.length > 0){
+                        _this.selections.forEach((select: any)=>{
+                            const index = _this.items.findIndex((item:any) => Object.is(item.srfkey,select.srfkey));
+                            if(index != -1){
+                                _this.rowClick(_this.items[index]);
+                            }
+                        })
+                    }else{
+                        _this.rowClick(this.items[0]);
+                    }
                 }
                 if(_this.selectedData){
                     const refs: any = _this.$refs;
@@ -1945,6 +1956,33 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public updateDefault(row: any){                    
+    }
+
+    /**
+     * 计算数据对象类型的默认值
+     * @param {string}  action 行为
+     * @param {string}  param 默认值参数
+     * @param {*}  data 当前行数据
+     * @memberof MainBase
+     */
+    public computeDefaultValueWithParam(action:string,param:string,data:any){
+        if(Object.is(action,"UPDATE")){
+            const nativeData:any = this.service.getCopynativeData();
+            if(nativeData && (nativeData instanceof Array) && nativeData.length >0){
+                let targetData:any = nativeData.find((item:any) =>{
+                    return item.id === data.srfkey;
+                })
+                if(targetData){
+                    return targetData[param]?targetData[param]:null;
+                }else{
+                    return null;
+                }
+            }else{
+                return null;
+            }
+        }else{
+           return this.service.getRemoteCopyData()[param]?this.service.getRemoteCopyData()[param]:null;
+        }
     }
 
     /**

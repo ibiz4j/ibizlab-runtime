@@ -20,14 +20,16 @@
                 </i-button>
             <div slot='content'>{{$t('entities.sysrolepermission.editviewtoolbar_toolbar.tbitem5.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
                     <i class='fa fa-file-text-o'></i>
                     <span class='caption'>{{$t('entities.sysrolepermission.editviewtoolbar_toolbar.tbitem12.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.sysrolepermission.editviewtoolbar_toolbar.tbitem12.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
                     <i class='fa fa-copy'></i>
                     <span class='caption'>{{$t('entities.sysrolepermission.editviewtoolbar_toolbar.tbitem14.caption')}}</span>
@@ -37,8 +39,10 @@
     </div>
 </div>
 
-        <div class="content-container">
         <div class='view-top-messages'>
+        </div>
+        <div class="content-container">
+        <div class='view-body-messages'>
         </div>
         <view_form 
             :viewState="viewState"  
@@ -62,8 +66,8 @@
             @load="form_load($event)"  
             @closeview="closeView($event)">
         </view_form>
-        <div class='view-bottom-messages'>
         </div>
+        <div class='view-bottom-messages'>
         </div>
     </card>
 </div>
@@ -241,6 +245,18 @@ export default class SYS_ROLE_PERMISSIONEditViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof SYS_ROLE_PERMISSIONEditViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.form) {
+            refs.form.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof SYS_ROLE_PERMISSIONEditViewBase
@@ -328,6 +344,23 @@ export default class SYS_ROLE_PERMISSIONEditViewBase extends Vue {
     * @memberof SYS_ROLE_PERMISSIONEditViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SYS_ROLE_PERMISSIONEditViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SYS_ROLE_PERMISSIONEditViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -542,6 +575,16 @@ export default class SYS_ROLE_PERMISSIONEditViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -1085,6 +1128,9 @@ export default class SYS_ROLE_PERMISSIONEditViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

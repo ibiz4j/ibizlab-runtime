@@ -78,9 +78,6 @@ export default class DataViewExpViewEngine extends ViewEngine {
      */
     public dataviewExpBarEvent(eventName: string, args: any): void {
         if (Object.is(eventName, 'load')) {
-            if(this.dataviewExpBar && this.dataviewExpBar.calcNavigationToolbarState && this.dataviewExpBar.calcNavigationToolbarState instanceof Function){
-                this.dataviewExpBar.calcNavigationToolbarState();
-            }
             this.view.$emit('viewload', args);
         }
         if (Object.is(eventName, 'selectionchange')) {

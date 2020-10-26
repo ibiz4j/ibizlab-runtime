@@ -151,6 +151,7 @@ export default class MPickupViewpickupviewpanelBase extends Vue implements Contr
 
 
 
+
     /**
      * 选中数据字符串
      *

@@ -37,6 +37,8 @@ export const Environment = {
     SysId: "2AFD15C7-9AE2-4108-BCC4-6AE6F7BC6087",
     // 前端应用标识
     AppId: "d8c7cbb7c727d7e7d1dd239996e9745f",
+    // 菜单权限模式，可选值：RT(RT模式),RESOURCE(资源模式),MINIX(混合模式),默认MINIX
+    menuPermissionMode:"MINIX",
     // 项目发布文件地址
     PublishProjectUrl: 'https://gitee.com/ibizlab/ibizlab-runtime.git',
     // ibiz开放平台地址

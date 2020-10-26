@@ -106,15 +106,17 @@ export default class WFSystemList {
      */
     public doItems(items: any[]): any[] {
         let _items: any[] = [];
-        items.forEach((item: any) => {
-            let itemdata:any = {};
-            Object.assign(itemdata,{id:item.pssystemid});
-            Object.assign(itemdata,{value:item.pssystemid});
-            Object.assign(itemdata,{text:item.pssystemname});
-            Object.assign(itemdata,{label:item.pssystemname});
-            
-            _items.push(itemdata);
-        });
+        if(items && items instanceof Array && items.length >0){
+            items.forEach((item: any) => {
+                let itemdata:any = {};
+                Object.assign(itemdata,{id:item.pssystemid});
+                Object.assign(itemdata,{value:item.pssystemid});
+                Object.assign(itemdata,{text:item.pssystemname});
+                Object.assign(itemdata,{label:item.pssystemname});
+                
+                _items.push(itemdata);
+            });
+        }
         return _items;
     }
 

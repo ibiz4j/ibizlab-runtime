@@ -2,9 +2,9 @@
 <div class='view-container depickupgridview msg-open-access-pickup-grid-view'>
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="msgopenaccesspickupgridview"></app-studioaction>
     <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :bordered="false">
-        <div class='content-container pickup-grid-view'>
         <div class='view-top-messages'>
         </div>
+        <div class='content-container pickup-grid-view'>
             <view_searchform 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
@@ -21,7 +21,7 @@
                 @load="searchform_load($event)"  
                 @closeview="closeView($event)">
             </view_searchform>
-            <view_grid 
+                    <div class='view-body-messages'>                    </div>            <view_grid 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
                 :context="context" 
@@ -42,8 +42,8 @@
                 @load="grid_load($event)"  
                 @closeview="closeView($event)">
             </view_grid>
-        <div class='view-bottom-messages'>
         </div>
+        <div class='view-bottom-messages'>
         </div>
     </card>
 </div>
@@ -221,6 +221,18 @@ export default class MsgOpenAccessPickupGridViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof MsgOpenAccessPickupGridViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.grid) {
+            refs.grid.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof MsgOpenAccessPickupGridViewBase
@@ -288,6 +300,23 @@ export default class MsgOpenAccessPickupGridViewBase extends Vue {
     * @memberof MsgOpenAccessPickupGridViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof MsgOpenAccessPickupGridViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof MsgOpenAccessPickupGridViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -502,6 +531,16 @@ export default class MsgOpenAccessPickupGridViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -678,6 +717,9 @@ export default class MsgOpenAccessPickupGridViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
     /**

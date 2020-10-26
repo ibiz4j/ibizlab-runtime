@@ -145,6 +145,8 @@ public class WFMemberResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfmemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
     @ApiOperation(value = "根据角色/用户组建立成员", tags = {"成员" },  notes = "根据角色/用户组建立成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers")
     public ResponseEntity<WFMemberDTO> createByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {

@@ -34,7 +34,7 @@
           </i-col>
           <i-col v-show="detailsModel.porgname.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='porgname' :itemRules="this.rules.porgname" class='' :caption="$t('entities.sysorganization.default_searchform.details.porgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.porgname.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <app-org-select :data="data" :disabled="detailsModel.porgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'n_porgid_eq','label':'porgname'}" url="/sys_organizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="width:100px;" @select-change="onFormItemValueChange" ></app-org-select>
+              <app-org-select :data="data" :disabled="detailsModel.porgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{'id':'n_porgid_eq','label':'porgname'}" url="/sysorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="width:100px;" @select-change="onFormItemValueChange" ></app-org-select>
           </app-form-item>
           
           </i-col>

@@ -5,9 +5,9 @@
         <div slot='title' class="header-container">
         <span class='caption-info'>{{$t(model.srfCaption)}}</span>
         </div>
-        <div class='content-container'>
             <div class='view-top-messages'>
             </div>
+        <div class='content-container'>
             <div style='margin-bottom: 6px;'>
                 <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="执行器任务HANDLER" />
                 <div class='pull-right'>
@@ -80,6 +80,8 @@
                 @load="searchform_load($event)"  
                 @closeview="closeView($event)">
             </view_searchform>
+                    <div class='view-body-messages'>
+                    </div>
             <view_grid 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
@@ -107,9 +109,9 @@
                 @load="grid_load($event)"  
                 @closeview="closeView($event)">
             </view_grid>
+        </div>
             <div class='view-bottom-messages'>
             </div>
-        </div>
     </card>
 </div>
 </template>
@@ -290,6 +292,18 @@ export default class JobsInfoGridViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof JobsInfoGridViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.grid) {
+            refs.grid.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof JobsInfoGridViewBase
@@ -320,19 +334,19 @@ export default class JobsInfoGridViewBase extends Vue {
      * @memberof JobsInfoGridView
      */
     public toolBarModels: any = {
-        deuiaction1: { name: 'deuiaction1', caption: '启动', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Start', target: 'SINGLEKEY' } },
+        deuiaction1: { name: 'deuiaction1', actiontarget: 'NONE', caption: '启动', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Start', target: 'SINGLEKEY' } },
 
-        deuiaction2: { name: 'deuiaction2', caption: '停止', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Stop', target: 'SINGLEKEY' } },
+        deuiaction2: { name: 'deuiaction2', actiontarget: 'NONE', caption: '停止', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Stop', target: 'SINGLEKEY' } },
 
-        deuiaction3: { name: 'deuiaction3', caption: '执行', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Execute', target: 'SINGLEKEY' } },
+        deuiaction3: { name: 'deuiaction3', actiontarget: 'NONE', caption: '执行', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Execute', target: 'SINGLEKEY' } },
 
-        deuiaction4: { name: 'deuiaction4', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        deuiaction4: { name: 'deuiaction4', actiontarget: 'NONE', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
-        deuiaction5: { name: 'deuiaction5', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        deuiaction5: { name: 'deuiaction5', actiontarget: 'NONE', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
-        deuiaction6: { name: 'deuiaction6', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        deuiaction6: { name: 'deuiaction6', actiontarget: 'NONE', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
-        deuiaction7: { name: 'deuiaction7', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
+        deuiaction7: { name: 'deuiaction7', actiontarget: 'NONE', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
 
     };
 
@@ -388,6 +402,23 @@ export default class JobsInfoGridViewBase extends Vue {
     * @memberof JobsInfoGridViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof JobsInfoGridViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof JobsInfoGridViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -602,6 +633,16 @@ export default class JobsInfoGridViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         if(this.formDruipart){
             this.formDruipart.subscribe((res:any) =>{
                 if(Object.is(res.action,'save')){
@@ -1221,6 +1262,9 @@ export default class JobsInfoGridViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

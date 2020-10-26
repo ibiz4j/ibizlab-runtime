@@ -157,5 +157,7 @@ public class SysRoleResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

@@ -52,13 +52,13 @@
     <row>
         <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules().orgname" class='' :caption="$t('entities.sysemployee.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-org-select :data="data" :disabled="detailsModel.orgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{id:'orgid','label':'orgname','code':'orgcode'}" url="/sys_organizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-org-select>
+    <app-org-select :data="data" :disabled="detailsModel.orgname.disabled" :context="JSON.parse(JSON.stringify(context))" :fillMap="{id:'orgid','label':'orgname','code':'orgcode'}" url="/sysorganizations/alls/suborg/picker" filter="srforgid" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-org-select>
 </app-form-item>
 
 </i-col>
 <i-col v-show="detailsModel.mdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='mdeptname' :itemRules="this.rules().mdeptname" class='' :caption="$t('entities.sysemployee.main_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-department-select :data="data" :disabled="detailsModel.mdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/sys_organizations/${orgid}/sys_departments/picker" filter="orgid"  :fillMap="{id:'mdeptid','label':'mdeptname','code':'mdeptcode','bcode':'bcode'}" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-department-select>
+    <app-department-select :data="data" :disabled="detailsModel.mdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/sysorganizations/${orgid}/sysdepartments/picker" filter="orgid"  :fillMap="{id:'mdeptid','label':'mdeptname','code':'mdeptcode','bcode':'bcode'}" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-department-select>
 </app-form-item>
 
 </i-col>

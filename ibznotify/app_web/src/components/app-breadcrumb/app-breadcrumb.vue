@@ -1,5 +1,5 @@
 <template>
-    <el-breadcrumb class="app-breadcrumb"  separator="/">
+    <el-breadcrumb class="app-breadcrumb"  :separator="separator">
     <transition-group name="breadcrumb">
       <template v-if="Object.is(this.navModel,'route')">
         <el-breadcrumb-item v-for="(item, index) in breadcrumbs"  :key="item.id">
@@ -34,6 +34,7 @@
 import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
 import { RouteRecord, Route } from 'vue-router'
 import { Environment } from "@/environments/environment";
+import { appConfig } from '@/config/appConfig';
 import NavDataService from '@/service/app/navdata-service';
 import {Subscription } from 'rxjs';
 
@@ -47,6 +48,13 @@ export default class Breadcrumb extends Vue {
    * @memberof Breadcrumb
    */
   private breadcrumbs: Array<any> = [];
+
+  /**
+   * 面包屑分隔符
+   *
+   * @memberof Breadcrumb
+   */
+  private separator:string = appConfig.breadcrumbSeparator;
 
   /**
    * 导航服务

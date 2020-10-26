@@ -149,10 +149,11 @@ export default class CodeListService {
                     // 启用缓存
                     if(isEnableCache){
                         const callback:Function = (context:any ={},data:any ={},tag:string,promise:Promise<any>) =>{
+                            const callbackKey:string = `${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`;
                             promise.then((result:any) =>{
                                 if(result.length > 0){
-                                    CodeListService.codelistCached.set(`${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`,{items:result});
-                                    CodeListService.codelistCache.delete(`${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`);
+                                    CodeListService.codelistCached.set(callbackKey,{items:result});
+                                    CodeListService.codelistCache.delete(callbackKey);
                                     return resolve(result);
                                 }else{
                                     return resolve([]);
@@ -162,8 +163,9 @@ export default class CodeListService {
                             })
                         }
                         // 加载完成,从本地缓存获取
-                        if(CodeListService.codelistCached.get(`${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`)){
-                            let items:any = CodeListService.codelistCached.get(`${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`).items;
+                        const key:string = `${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`;
+                        if(CodeListService.codelistCached.get(key)){
+                            let items:any = CodeListService.codelistCached.get(key).items;
                             if(items.length >0){
                                 if(new Date().getTime() <= codelist.getExpirationTime()){
                                     return resolve(items); 
@@ -172,11 +174,11 @@ export default class CodeListService {
                         }
                         if (codelist) {
                             // 加载中，UI又需要数据，解决连续加载同一代码表问题
-                            if(CodeListService.codelistCache.get(`${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`)){
-                                callback(context,data,tag,CodeListService.codelistCache.get(`${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`));
+                            if(CodeListService.codelistCache.get(key)){
+                                callback(context,data,tag,CodeListService.codelistCache.get(key));
                             }else{
                                 let result:Promise<any> = codelist.getItems(context,data,isloading);
-                                CodeListService.codelistCache.set(`${JSON.stringify(context)}-${JSON.stringify(data)}-${tag}`,result);
+                                CodeListService.codelistCache.set(key,result);
                                 codelist.setExpirationTime(new Date().getTime() + cacheTimeout);
                                 callback(context,data,tag,result);
                             }

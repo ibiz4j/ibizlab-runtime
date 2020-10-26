@@ -2,9 +2,9 @@
 <div class='view-container degridview sys-user-role-grid-view'>
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="sysuserrolegridview"></app-studioaction>
     <card class='view-card  view-no-caption'  :dis-hover="true" :bordered="false">
-        <div class='content-container'>
             <div class='view-top-messages'>
             </div>
+        <div class='content-container'>
             <div style='margin-bottom: 6px;'>
                 <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="用户标识" />
                 <div class='pull-right'>
@@ -30,18 +30,21 @@
                                 </i-button>
                             <div slot='content'>{{$t('entities.sysuserrole.gridviewtoolbar_toolbar.tbitem6.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem8.visabled" :disabled="toolBarModels.tbitem8.disabled" class='' @click="toolbar_click({ tag: 'tbitem8' }, $event)">
                                     <i class='fa fa-remove'></i>
                                     <span class='caption'>{{$t('entities.sysuserrole.gridviewtoolbar_toolbar.tbitem8.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.sysuserrole.gridviewtoolbar_toolbar.tbitem8.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                             <app-export-excel :item="toolBarModels.tbitem13" :caption="$t('entities.sysuserrole.gridviewtoolbar_toolbar.tbitem13.caption')" @exportexcel="toolbar_click({ tag: 'tbitem13' }, $event)"></app-export-excel>
                             <div slot='content'>{{$t('entities.sysuserrole.gridviewtoolbar_toolbar.tbitem13.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <dropdown v-show="toolBarModels.tbitem16.visabled" trigger='click'>
+                        <span class='seperator'>|</span>
+                        <dropdown v-show="toolBarModels.tbitem16.visabled" trigger='click'>
                             <tooltip :transfer="true" :max-width="600">
                                     <i-button class=''>
                                         <i class=''></i>
@@ -75,7 +78,8 @@
                                 </dropdown-item>
                             </dropdown-menu>
                         </dropdown>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem19.visabled" :disabled="toolBarModels.tbitem19.disabled" class='' @click="toolbar_click({ tag: 'tbitem19' }, $event)">
                                     <i class='fa fa-filter'></i>
                                     <span class='caption'>{{$t('entities.sysuserrole.gridviewtoolbar_toolbar.tbitem19.caption')}}</span>
@@ -101,6 +105,8 @@
                 @load="searchform_load($event)"  
                 @closeview="closeView($event)">
             </view_searchform>
+                    <div class='view-body-messages'>
+                    </div>
             <view_grid 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
@@ -128,9 +134,9 @@
                 @load="grid_load($event)"  
                 @closeview="closeView($event)">
             </view_grid>
+        </div>
             <div class='view-bottom-messages'>
             </div>
-        </div>
     </card>
 </div>
 </template>
@@ -311,6 +317,18 @@ export default class SysUserRoleGridViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof SysUserRoleGridViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.grid) {
+            refs.grid.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof SysUserRoleGridViewBase
@@ -341,27 +359,27 @@ export default class SysUserRoleGridViewBase extends Vue {
      * @memberof SysUserRoleGridView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
+        tbitem3: { name: 'tbitem3', actiontarget: 'NONE', caption: '新建', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'New', target: '' } },
 
-        tbitem4: { name: 'tbitem4', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
+        tbitem4: { name: 'tbitem4', actiontarget: 'NONE', caption: '编辑', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Edit', target: 'SINGLEKEY' } },
 
-        tbitem6: { name: 'tbitem6', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem6: { name: 'tbitem6', actiontarget: 'NONE', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
         tbitem7: {  name: 'tbitem7', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem8: { name: 'tbitem8', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
+        tbitem8: { name: 'tbitem8', actiontarget: 'NONE', caption: '删除', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Remove', target: 'MULTIKEY' } },
 
         tbitem9: {  name: 'tbitem9', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem13: { name: 'tbitem13', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
+        tbitem13: { name: 'tbitem13', actiontarget: 'NONE', caption: '导出', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportExcel', target: '' }, MaxRowCount: 1000  },
 
         tbitem10: {  name: 'tbitem10', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
         tbitem16: { name: 'tbitem16', caption: '其它', disabled: false, type: 'ITEMS', visabled: true, dataaccaction: '', uiaction: { } }, 
- tbitem21: { name: 'tbitem21', caption: '导出数据模型', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportModel', target: '' } },
+ tbitem21: { name: 'tbitem21', actiontarget: 'NONE', caption: '导出数据模型', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ExportModel', target: '' } },
 
- tbitem23: { name: 'tbitem23', caption: '数据导入', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Import', target: '' } },
+ tbitem23: { name: 'tbitem23', actiontarget: 'NONE', caption: '数据导入', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Import', target: '' } },
 
 
         tbitem17: {  name: 'tbitem17', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem19: { name: 'tbitem19', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
+        tbitem19: { name: 'tbitem19', actiontarget: 'NONE', caption: '过滤', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'ToggleFilter', target: '' } },
 
     };
 
@@ -417,6 +435,23 @@ export default class SysUserRoleGridViewBase extends Vue {
     * @memberof SysUserRoleGridViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SysUserRoleGridViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SysUserRoleGridViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -631,6 +666,16 @@ export default class SysUserRoleGridViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         if(this.formDruipart){
             this.formDruipart.subscribe((res:any) =>{
                 if(Object.is(res.action,'save')){
@@ -1627,6 +1672,9 @@ export default class SysUserRoleGridViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

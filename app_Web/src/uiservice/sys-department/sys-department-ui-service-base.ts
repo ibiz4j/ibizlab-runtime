@@ -89,13 +89,13 @@ export default class SysDepartmentUIServiceBase extends UIService {
      * @memberof  SysDepartmentUIServiceBase
      */  
     public initViewMap(){
-        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysdepartments'});
-        this.allViewMap.set(':',{viewname:'treeexpview',srfappde:'sysdepartments'});
-        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysdepartments'});
-        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sysdepartments'});
-        this.allViewMap.set(':',{viewname:'optionview',srfappde:'sysdepartments'});
-        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysdepartments'});
-        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'sysdepartments'});
+        this.allViewMap.set(':',{viewname:'pickupgridview',srfappde:'sysdepartments',component:'sys-department-pickup-grid-view'});
+        this.allViewMap.set(':',{viewname:'treeexpview',srfappde:'sysdepartments',component:'sys-department-tree-exp-view'});
+        this.allViewMap.set('EDITVIEW:',{viewname:'editview',srfappde:'sysdepartments',component:'sys-department-edit-view'});
+        this.allViewMap.set('MDATAVIEW:',{viewname:'gridview',srfappde:'sysdepartments',component:'sys-department-grid-view'});
+        this.allViewMap.set(':',{viewname:'optionview',srfappde:'sysdepartments',component:'sys-department-option-view'});
+        this.allViewMap.set('PICKUPVIEW:',{viewname:'pickupview',srfappde:'sysdepartments',component:'sys-department-pickup-view'});
+        this.allViewMap.set('MPICKUPVIEW:',{viewname:'mpickupview',srfappde:'sysdepartments',component:'sys-department-mpickup-view'});
     }
 
     /**
@@ -204,17 +204,17 @@ export default class SysDepartmentUIServiceBase extends UIService {
 
         this.mainStateFields.forEach((singleMainField:any) =>{
             if(!(singleMainField in curData)){
-                console.warn(`当前数据对象不包含属性${singleMainField}，可能会发生错误`);
+                console.warn(`当前数据对象不包含属性「${singleMainField}」，根据「${singleMainField}」属性进行的主状态计算默认为空值`);
             }
         })
         for (let i = 0; i <= 1; i++) {
-            let strTag:string = (curData[this.mainStateFields[0]])?(i == 0) ? `${curData[this.mainStateFields[0]]}` : "":"";
+            let strTag:string = (curData[this.mainStateFields[0]] != null && curData[this.mainStateFields[0]] !== "")?(i == 0) ? `${curData[this.mainStateFields[0]]}` : "":"";
             if (this.mainStateFields.length >= 2) {
                 for (let j = 0; j <= 1; j++) {
-                    let strTag2:string = (curData[this.mainStateFields[1]])?`${strTag}__${(j == 0) ? `${curData[this.mainStateFields[1]]}` : ""}`:strTag;
+                    let strTag2:string = (curData[this.mainStateFields[1]] != null && curData[this.mainStateFields[1]] !== "")?`${strTag}__${(j == 0) ? `${curData[this.mainStateFields[1]]}` : ""}`:strTag;
                     if (this.mainStateFields.length >= 3) {
                         for (let k = 0; k <= 1; k++) {
-                            let strTag3:string = (curData[this.mainStateFields[2]])?`${strTag2}__${(k == 0) ? `${curData[this.mainStateFields[2]]}` : ""}`:strTag2;
+                            let strTag3:string = (curData[this.mainStateFields[2]] != null && curData[this.mainStateFields[2]] !== "")?`${strTag2}__${(k == 0) ? `${curData[this.mainStateFields[2]]}` : ""}`:strTag2;
                             // 判断是否存在
                             return this.allDeMainStateMap.get(strTag3);
                         }

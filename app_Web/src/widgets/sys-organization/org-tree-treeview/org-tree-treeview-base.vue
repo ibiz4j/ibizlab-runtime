@@ -189,6 +189,7 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
     }
 
 
+
     /**
      * 获取多项数据
      *
@@ -660,10 +661,10 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
     /**
      * 刷新功能
      *
-     * @param {any[]} args
+     * @param {any} args
      * @memberof OrgTreeBase
      */
-    public refresh(args: any[]): void {
+    public refresh(args?: any): void {
         this.refresh_all();
     }
 
@@ -733,10 +734,15 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
             return;
         }
         let defaultData: any;
-        // 导航中选中第一条配置的默认选中,没有选中第一条
+        //在导航视图中，如已有选中数据，则右侧展开已选中数据的视图，如无选中数据则默认选中第一条
         if(this.isSelectFirstDefault){
             if(this.isSingleSelect){
-                let index = items.findIndex((item: any) => item.selected);
+			    let index: number = -1;
+                if(this.selectedNodes && this.selectedNodes.length > 0){
+                    this.selectedNodes.forEach((select: any) => {
+                        index = items.findIndex((item: any) => Object.is(select.srfkey,item.srfkey));
+                    });
+                }
                 if(index === -1) {
                     if(isRoot){
                         index = 0;

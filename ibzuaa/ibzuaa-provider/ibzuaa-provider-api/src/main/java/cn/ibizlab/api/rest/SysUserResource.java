@@ -156,5 +156,7 @@ public class SysUserResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

@@ -175,5 +175,7 @@ public class JobsInfoResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(jobsinfoMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

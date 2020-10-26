@@ -2,8 +2,7 @@
     <i-form :model="this.data" class='app-form' ref='form'  id='jobsinfo_main' style="">
     <input style="display:none;" />
     <row >
-            
-<i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+            <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.jobsinfo.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.app.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
@@ -349,6 +348,7 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
 
+
     /**
      * 视图默认使用
      *
@@ -604,137 +604,61 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public rules() :any {
     return {
-        srforikey: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfkey: [
-            { type: 'string', message: '主键ID 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '主键ID 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfkey.required, type: 'string', message: '主键ID 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfkey.required, type: 'string', message: '主键ID 值不能为空', trigger: 'blur' },
-        ],
-        srfmajortext: [
-            { type: 'string', message: '执行器任务HANDLER 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '执行器任务HANDLER 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'blur' },
-        ],
-        srftempmode: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfuf: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfdeid: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfsourcekey: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
         app: [
-            { type: 'string', message: '服务名 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '服务名 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.app.required, type: 'string', message: '服务名 值不能为空', trigger: 'change' },
             { required: this.detailsModel.app.required, type: 'string', message: '服务名 值不能为空', trigger: 'blur' },
         ],
         handler: [
-            { type: 'string', message: '执行器任务HANDLER 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '执行器任务HANDLER 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.handler.required, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'change' },
             { required: this.detailsModel.handler.required, type: 'string', message: '执行器任务HANDLER 值不能为空', trigger: 'blur' },
         ],
         cron: [
-            { type: 'string', message: '任务执行CRON 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '任务执行CRON 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.cron.required, type: 'string', message: '任务执行CRON 值不能为空', trigger: 'change' },
             { required: this.detailsModel.cron.required, type: 'string', message: '任务执行CRON 值不能为空', trigger: 'blur' },
         ],
         param: [
-            { type: 'string', message: '执行器任务参数 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '执行器任务参数 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.param.required, type: 'string', message: '执行器任务参数 值不能为空', trigger: 'change' },
             { required: this.detailsModel.param.required, type: 'string', message: '执行器任务参数 值不能为空', trigger: 'blur' },
         ],
         last_time: [
-            { type: 'number', message: '上次调度时间 值必须为数值类型', trigger: 'change' },
-            { type: 'number', message: '上次调度时间 值必须为数值类型', trigger: 'blur' },
             { required: this.detailsModel.last_time.required, type: 'number', message: '上次调度时间 值不能为空', trigger: 'change' },
             { required: this.detailsModel.last_time.required, type: 'number', message: '上次调度时间 值不能为空', trigger: 'blur' },
         ],
         next_time: [
-            { type: 'number', message: '下次调度时间 值必须为数值类型', trigger: 'change' },
-            { type: 'number', message: '下次调度时间 值必须为数值类型', trigger: 'blur' },
             { required: this.detailsModel.next_time.required, type: 'number', message: '下次调度时间 值不能为空', trigger: 'change' },
             { required: this.detailsModel.next_time.required, type: 'number', message: '下次调度时间 值不能为空', trigger: 'blur' },
         ],
         timeout: [
-            { type: 'number', message: '任务执行超时时间（秒） 值必须为数值类型', trigger: 'change' },
-            { type: 'number', message: '任务执行超时时间（秒） 值必须为数值类型', trigger: 'blur' },
             { required: this.detailsModel.timeout.required, type: 'number', message: '任务执行超时时间（秒） 值不能为空', trigger: 'change' },
             { required: this.detailsModel.timeout.required, type: 'number', message: '任务执行超时时间（秒） 值不能为空', trigger: 'blur' },
         ],
         fail_retry_count: [
-            { type: 'number', message: '失败重试次数 值必须为数值类型', trigger: 'change' },
-            { type: 'number', message: '失败重试次数 值必须为数值类型', trigger: 'blur' },
             { required: this.detailsModel.fail_retry_count.required, type: 'number', message: '失败重试次数 值不能为空', trigger: 'change' },
             { required: this.detailsModel.fail_retry_count.required, type: 'number', message: '失败重试次数 值不能为空', trigger: 'blur' },
         ],
         author: [
-            { type: 'string', message: '所有者 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '所有者 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.author.required, type: 'string', message: '所有者 值不能为空', trigger: 'change' },
             { required: this.detailsModel.author.required, type: 'string', message: '所有者 值不能为空', trigger: 'blur' },
         ],
         remark: [
-            { type: 'string', message: '备注 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '备注 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.remark.required, type: 'string', message: '备注 值不能为空', trigger: 'change' },
             { required: this.detailsModel.remark.required, type: 'string', message: '备注 值不能为空', trigger: 'blur' },
         ],
         status: [
-            { type: 'number', message: '状态 值必须为数值类型', trigger: 'change' },
-            { type: 'number', message: '状态 值必须为数值类型', trigger: 'blur' },
             { required: this.detailsModel.status.required, type: 'number', message: '状态 值不能为空', trigger: 'change' },
             { required: this.detailsModel.status.required, type: 'number', message: '状态 值不能为空', trigger: 'blur' },
         ],
         tenant_id: [
-            { type: 'string', message: '租户ID 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '租户ID 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.tenant_id.required, type: 'string', message: '租户ID 值不能为空', trigger: 'change' },
             { required: this.detailsModel.tenant_id.required, type: 'string', message: '租户ID 值不能为空', trigger: 'blur' },
         ],
         create_time: [
-            { type: 'string', message: '创建时间 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '创建时间 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.create_time.required, type: 'string', message: '创建时间 值不能为空', trigger: 'change' },
             { required: this.detailsModel.create_time.required, type: 'string', message: '创建时间 值不能为空', trigger: 'blur' },
         ],
         update_time: [
-            { type: 'string', message: '更新时间 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '更新时间 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.update_time.required, type: 'string', message: '更新时间 值不能为空', trigger: 'change' },
             { required: this.detailsModel.update_time.required, type: 'string', message: '更新时间 值不能为空', trigger: 'blur' },
-        ],
-        id: [
-            { type: 'string', message: '主键ID 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '主键ID 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.id.required, type: 'string', message: '主键ID 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.id.required, type: 'string', message: '主键ID 值不能为空', trigger: 'blur' },
         ],
         }
     }
@@ -772,32 +696,38 @@ export default class MainBase extends Vue implements ControlInterface {
                 falg.isPast = val;
             }
         }
-        rule[name].forEach((item:any) => {
+        for(let i=0;i<rule[name].length;i++){
+            let item:any = rule[name][i];
             let dataValue = item.deName?this.data[this.service.getItemNameByDeName(item.deName)]:"";
             // 常规规则
             if(item.type == 'SIMPLE'){
                 startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.data,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 数值范围
             if(item.type == 'VALUERANGE2'){
                 startOp( !this.$verify.checkFieldValueRangeRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 正则式
             if (item.type == "REGEX") {
                 startOp(!this.$verify.checkFieldRegExRule(dataValue,item.regExCode,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 长度
             if (item.type == "STRINGLENGTH") {
                 startOp(!this.$verify.checkFieldStringLengthRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 系统值规则
             if(item.type == "SYSVALUERULE") {
                 startOp(!this.$verify.checkFieldSysValueRule(dataValue,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 分组
             if(item.type == 'GROUP'){
@@ -805,9 +735,9 @@ export default class MainBase extends Vue implements ControlInterface {
                 if(item.isNotMode){
                    falg.isPast = !falg.isPast;
                 }
-            }
-            
-        });
+                if(!falg.isPast) return falg;
+            }   
+        }
         if(!falg.hasOwnProperty("isPast")){
             falg.isPast = true;
         }
@@ -1574,12 +1504,12 @@ export default class MainBase extends Vue implements ControlInterface {
     /**
      * 部件刷新
      *
-     * @param {any[]} args
+     * @param {any} args
      * @memberof MainBase
      */
-    public refresh(args: any[]): void {
+    public refresh(args?: any): void {
         let arg: any = {};
-        Object.assign(arg,args[0]);
+        Object.assign(arg,args?args[0]:{});
         if (this.data.srfkey && !Object.is(this.data.srfkey, '')) {
             Object.assign(arg, { srfkey: this.data.srfkey });
             this.load(arg);

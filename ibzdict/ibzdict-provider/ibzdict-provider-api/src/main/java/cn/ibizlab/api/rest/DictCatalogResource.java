@@ -157,5 +157,7 @@ public class DictCatalogResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(dictcatalogMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

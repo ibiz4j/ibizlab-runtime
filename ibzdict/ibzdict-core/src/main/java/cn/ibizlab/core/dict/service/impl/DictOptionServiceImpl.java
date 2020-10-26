@@ -189,9 +189,7 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
         if(!ObjectUtils.isEmpty(et.getCatalogId())){
             cn.ibizlab.core.dict.domain.DictCatalog catalog=et.getCatalog();
             if(ObjectUtils.isEmpty(catalog)){
-                cn.ibizlab.core.dict.domain.DictCatalog majorEntity=dictcatalogService.getById(et.getCatalogId());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.dict.domain.DictCatalog majorEntity=dictcatalogService.get(et.getCatalogId());
                 et.setCatalog(majorEntity);
                 catalog=majorEntity;
             }
@@ -225,6 +223,7 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

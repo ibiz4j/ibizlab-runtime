@@ -78,7 +78,11 @@ export default class WizardViewEngine extends ViewEngine {
      */
     public onfinish(args: any): void {
         this.view.$emit('viewdataschange', [args]);
-        this.view.$emit('close', null);
+        if(!this.view.viewDefaultUsage){
+            this.view.$emit('close', null);
+        }else{
+            this.view.$tabPageExp.onClose(this.view.$route.fullPath);
+        }  
     }
 
     /**

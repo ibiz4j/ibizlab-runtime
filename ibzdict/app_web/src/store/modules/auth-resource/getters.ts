@@ -32,23 +32,56 @@ export const getEnablePermissionValid = (state: any) => {
 }
 
 /**
- * 判断指定菜单是否显示
+ * 判断指定菜单是否显示(混合模式)
  * 
  * @param state 
  */
-export const getAuthMenu = (state: any) => (menu:any) =>{
-    // 存在权限
-    let resourceIndex: any;
-    let menuIndex:any;
-    if(state.enablePermissionValid){
-        resourceIndex= state.resourceData.findIndex((resourcetag: any, objIndex: any, objs: any) => {
+export const getAuthMenu = (state: any) => (menu: any) => {
+    if (state.enablePermissionValid) {
+        let resourceIndex: any;
+        let menuIndex: any;
+        resourceIndex = state.resourceData.findIndex((resourcetag: any, objIndex: any, objs: any) => {
             return Object.is(menu.resourcetag, resourcetag);
         })
-        menuIndex= state.menuData.findIndex((menutag: any, objIndex: any, objs: any) => {
+        menuIndex = state.menuData.findIndex((menutag: any, objIndex: any, objs: any) => {
             return Object.is(menu.authtag, menutag);
         })
-        return (resourceIndex !== -1 || menuIndex !== -1)?true:false;
-    }else{
+        return (resourceIndex !== -1 || menuIndex !== -1) ? true : false;
+    } else {
+        return true;
+    }
+}
+
+/**
+ * 判断指定菜单是否显示(资源模式)
+ * 
+ * @param state 
+ */
+export const getAuthMenuWithResource = (state: any) => (menu: any) => {
+    if (state.enablePermissionValid && menu.resourcetag) {
+        let resourceIndex: any;
+        resourceIndex = state.resourceData.findIndex((resourcetag: any, objIndex: any, objs: any) => {
+            return Object.is(menu.resourcetag, resourcetag);
+        })
+        return resourceIndex !== -1 ? true : false;
+    } else {
+        return true;
+    }
+}
+
+/**
+ * 判断指定菜单是否显示(RT模式)
+ * 
+ * @param state 
+ */
+export const getAuthMenuWithRT = (state: any) => (menu: any) => {
+    if (state.enablePermissionValid) {
+        let menuIndex: any;
+        menuIndex = state.menuData.findIndex((menutag: any, objIndex: any, objs: any) => {
+            return Object.is(menu.authtag, menutag);
+        })
+        return menuIndex !== -1 ? true : false;
+    } else {
         return true;
     }
 }

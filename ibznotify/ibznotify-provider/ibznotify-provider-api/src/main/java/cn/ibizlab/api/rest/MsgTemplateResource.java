@@ -156,5 +156,7 @@ public class MsgTemplateResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(msgtemplateMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

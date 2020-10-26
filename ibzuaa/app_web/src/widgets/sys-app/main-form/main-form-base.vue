@@ -272,6 +272,7 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
 
+
     /**
      * 视图默认使用
      *
@@ -521,99 +522,35 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public rules() :any {
     return {
-        srforikey: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srforikey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfkey: [
-            { type: 'string', message: '应用标识 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '应用标识 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfkey.required, type: 'string', message: '应用标识 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfkey.required, type: 'string', message: '应用标识 值不能为空', trigger: 'blur' },
-        ],
-        srfmajortext: [
-            { type: 'string', message: '应用名 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '应用名 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '应用名 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfmajortext.required, type: 'string', message: '应用名 值不能为空', trigger: 'blur' },
-        ],
-        srftempmode: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srftempmode.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfuf: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfuf.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfdeid: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfdeid.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        srfsourcekey: [
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: ' 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.srfsourcekey.required, type: 'string', message: ' 值不能为空', trigger: 'blur' },
-        ],
-        pssystemid: [
-            { type: 'string', message: '系统标识 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '系统标识 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.pssystemid.required, type: 'string', message: '系统标识 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.pssystemid.required, type: 'string', message: '系统标识 值不能为空', trigger: 'blur' },
-        ],
         appid: [
-            { type: 'string', message: '应用标识 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '应用标识 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.appid.required, type: 'string', message: '应用标识 值不能为空', trigger: 'change' },
             { required: this.detailsModel.appid.required, type: 'string', message: '应用标识 值不能为空', trigger: 'blur' },
         ],
         appname: [
-            { type: 'string', message: '应用名 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '应用名 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.appname.required, type: 'string', message: '应用名 值不能为空', trigger: 'change' },
             { required: this.detailsModel.appname.required, type: 'string', message: '应用名 值不能为空', trigger: 'blur' },
         ],
         apptype: [
-            { type: 'string', message: '类型 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '类型 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.apptype.required, type: 'string', message: '类型 值不能为空', trigger: 'change' },
             { required: this.detailsModel.apptype.required, type: 'string', message: '类型 值不能为空', trigger: 'blur' },
         ],
         appgroup: [
-            { type: 'string', message: '分组 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '分组 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.appgroup.required, type: 'string', message: '分组 值不能为空', trigger: 'change' },
             { required: this.detailsModel.appgroup.required, type: 'string', message: '分组 值不能为空', trigger: 'blur' },
         ],
         fullname: [
-            { type: 'string', message: '全称 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '全称 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.fullname.required, type: 'string', message: '全称 值不能为空', trigger: 'change' },
             { required: this.detailsModel.fullname.required, type: 'string', message: '全称 值不能为空', trigger: 'blur' },
         ],
         icon: [
-            { type: 'string', message: '图标 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '图标 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.icon.required, type: 'string', message: '图标 值不能为空', trigger: 'change' },
             { required: this.detailsModel.icon.required, type: 'string', message: '图标 值不能为空', trigger: 'blur' },
         ],
         visabled: [
-            { type: 'number', message: '可见 值必须为数值类型', trigger: 'change' },
-            { type: 'number', message: '可见 值必须为数值类型', trigger: 'blur' },
             { required: this.detailsModel.visabled.required, type: 'number', message: '可见 值不能为空', trigger: 'change' },
             { required: this.detailsModel.visabled.required, type: 'number', message: '可见 值不能为空', trigger: 'blur' },
         ],
         addr: [
-            { type: 'string', message: '地址 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '地址 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.addr.required, type: 'string', message: '地址 值不能为空', trigger: 'change' },
             { required: this.detailsModel.addr.required, type: 'string', message: '地址 值不能为空', trigger: 'blur' },
         ],
@@ -653,32 +590,38 @@ export default class MainBase extends Vue implements ControlInterface {
                 falg.isPast = val;
             }
         }
-        rule[name].forEach((item:any) => {
+        for(let i=0;i<rule[name].length;i++){
+            let item:any = rule[name][i];
             let dataValue = item.deName?this.data[this.service.getItemNameByDeName(item.deName)]:"";
             // 常规规则
             if(item.type == 'SIMPLE'){
                 startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.data,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 数值范围
             if(item.type == 'VALUERANGE2'){
                 startOp( !this.$verify.checkFieldValueRangeRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 正则式
             if (item.type == "REGEX") {
                 startOp(!this.$verify.checkFieldRegExRule(dataValue,item.regExCode,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 长度
             if (item.type == "STRINGLENGTH") {
                 startOp(!this.$verify.checkFieldStringLengthRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 系统值规则
             if(item.type == "SYSVALUERULE") {
                 startOp(!this.$verify.checkFieldSysValueRule(dataValue,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
                 falg.infoMessage = item.ruleInfo;
+                if(!falg.isPast) return falg;
             }
             // 分组
             if(item.type == 'GROUP'){
@@ -686,9 +629,9 @@ export default class MainBase extends Vue implements ControlInterface {
                 if(item.isNotMode){
                    falg.isPast = !falg.isPast;
                 }
-            }
-            
-        });
+                if(!falg.isPast) return falg;
+            }   
+        }
         if(!falg.hasOwnProperty("isPast")){
             falg.isPast = true;
         }
@@ -1365,12 +1308,12 @@ export default class MainBase extends Vue implements ControlInterface {
     /**
      * 部件刷新
      *
-     * @param {any[]} args
+     * @param {any} args
      * @memberof MainBase
      */
-    public refresh(args: any[]): void {
+    public refresh(args?: any): void {
         let arg: any = {};
-        Object.assign(arg,args[0]);
+        Object.assign(arg,args?args[0]:{});
         if (this.data.srfkey && !Object.is(this.data.srfkey, '')) {
             Object.assign(arg, { srfkey: this.data.srfkey });
             this.load(arg);

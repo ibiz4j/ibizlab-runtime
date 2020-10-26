@@ -2,7 +2,11 @@
 <div class="view-container dempickupview sys-department-mpickup-view">
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="sysdepartmentmpickupview"></app-studioaction>
     <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :padding="0" :bordered="false">
+        <div class='view-top-messages'>
+        </div>
         <div class="content-container pickup-view">
+        <div class='view-body-messages'>
+        </div>
             <div class="translate-contant">
                 <div class="center" :style="{width : !isShowButton ? '100%' : ''}">
     <view_pickupviewpanel 
@@ -57,6 +61,8 @@
                     <i-button @click="onClickCancel">{{this.containerModel.view_cancelbtn.text}}</i-button>
                 </row>
             </card>
+        </div>
+        <div class='view-bottom-messages'>
         </div>
     </card>
 </div>
@@ -313,6 +319,23 @@ export default class SysDepartmentMPickupViewBase extends Vue {
     public serviceStateEvent: Subscription | undefined;
 
     /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SysDepartmentMPickupViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SysDepartmentMPickupViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -525,6 +548,16 @@ export default class SysDepartmentMPickupViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -657,6 +690,9 @@ export default class SysDepartmentMPickupViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
     /**

@@ -27,7 +27,8 @@
                 </i-button>
             <div slot='content'>{{$t('entities.wfmember.editviewtoolbar_toolbar.deuiaction2.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
                     <i class='fa fa-copy'></i>
                     <span class='caption'>{{$t('entities.wfmember.editviewtoolbar_toolbar.tbitem14.caption')}}</span>
@@ -37,8 +38,10 @@
     </div>
 </div>
 
-        <div class="content-container">
         <div class='view-top-messages'>
+        </div>
+        <div class="content-container">
+        <div class='view-body-messages'>
         </div>
         <view_form 
             :viewState="viewState"  
@@ -62,8 +65,8 @@
             @load="form_load($event)"  
             @closeview="closeView($event)">
         </view_form>
-        <div class='view-bottom-messages'>
         </div>
+        <div class='view-bottom-messages'>
         </div>
     </card>
 </div>
@@ -241,6 +244,18 @@ export default class WFMemberEditViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof WFMemberEditViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.form) {
+            refs.form.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof WFMemberEditViewBase
@@ -271,14 +286,14 @@ export default class WFMemberEditViewBase extends Vue {
      * @memberof WFMemberEditView
      */
     public toolBarModels: any = {
-        tbitem3: { name: 'tbitem3', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
+        tbitem3: { name: 'tbitem3', actiontarget: 'NONE', caption: '保存', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Save', target: '' } },
 
-        deuiaction1: { name: 'deuiaction1', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
+        deuiaction1: { name: 'deuiaction1', actiontarget: 'NONE', caption: '保存并关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'SaveAndExit', target: '' } },
 
-        deuiaction2: { name: 'deuiaction2', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
+        deuiaction2: { name: 'deuiaction2', actiontarget: 'NONE', caption: '关闭', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Exit', target: '' } },
 
         tbitem6: {  name: 'tbitem6', type: 'SEPERATOR', visabled: true, dataaccaction: '', uiaction: { } },
-        tbitem14: { name: 'tbitem14', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
+        tbitem14: { name: 'tbitem14', actiontarget: 'NONE', caption: '拷贝', disabled: false, type: 'DEUIACTION', visabled: true,noprivdisplaymode:2,dataaccaction: '', uiaction: { tag: 'Copy', target: 'SINGLEKEY' } },
 
     };
 
@@ -327,6 +342,23 @@ export default class WFMemberEditViewBase extends Vue {
     * @memberof WFMemberEditViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof WFMemberEditViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof WFMemberEditViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -541,6 +573,16 @@ export default class WFMemberEditViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -1033,6 +1075,9 @@ export default class WFMemberEditViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

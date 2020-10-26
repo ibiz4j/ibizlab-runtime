@@ -145,5 +145,7 @@ public class SysUserAuthResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserauthMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

@@ -145,5 +145,7 @@ public class SysAppResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysappMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

@@ -145,5 +145,7 @@ public class SysTeamResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(systeamMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

@@ -7,12 +7,14 @@
     <span class='caption-info'>{{$t(model.srfCaption)}}</span>
 </div>
 
-        <div class="content-container">
             <div class='view-top-messages'>
             </div>
+        <div class="content-container">
+        <div class='view-body-messages'>
+        </div>
+        </div>
             <div class='view-bottom-messages'>
             </div>
-        </div>
     </card>
 </div>
 </template>
@@ -239,6 +241,23 @@ export default class SysRolePermissionCustomViewBase extends Vue {
     public serviceStateEvent: Subscription | undefined;
 
     /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SysRolePermissionCustomViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SysRolePermissionCustomViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
+
+    /**
      * 应用上下文
      *
      * @type {*}
@@ -451,6 +470,16 @@ export default class SysRolePermissionCustomViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -543,6 +572,9 @@ export default class SysRolePermissionCustomViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

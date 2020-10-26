@@ -156,5 +156,7 @@ public class PayTradeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(paytradeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

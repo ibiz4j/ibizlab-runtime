@@ -157,5 +157,7 @@ public class SDFileResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sdfileMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

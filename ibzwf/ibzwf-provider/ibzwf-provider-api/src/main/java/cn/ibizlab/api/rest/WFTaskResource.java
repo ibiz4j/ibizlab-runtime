@@ -145,5 +145,7 @@ public class WFTaskResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wftaskMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

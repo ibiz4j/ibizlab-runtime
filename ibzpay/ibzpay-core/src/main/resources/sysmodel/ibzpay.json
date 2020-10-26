@@ -158,8 +158,8 @@
     {"name":"DER1N_PAY_TRADE_PAY_OPEN_ACCESS_ACCESSID",
      "relation_type":"DER1N",
      "code_name":"OpenAccess",
-     "entity_name":"PAY_OPEN_ACCESS",
-     "ref_entity_name":"PAY_TRADE"
+     "entity_name":"PAY_TRADE",
+     "ref_entity_name":"PAY_OPEN_ACCESS"
     }
     ],
     "parentEntitys":[
@@ -327,8 +327,8 @@
     {"name":"DER1N_PAY_TRADE_PAY_OPEN_ACCESS_ACCESSID",
      "relation_type":"DER1N",
      "code_name":"OpenAccess",
-     "entity_name":"PAY_OPEN_ACCESS",
-     "ref_entity_name":"PAY_TRADE"
+     "entity_name":"PAY_TRADE",
+     "ref_entity_name":"PAY_OPEN_ACCESS"
     }
     ]
  }

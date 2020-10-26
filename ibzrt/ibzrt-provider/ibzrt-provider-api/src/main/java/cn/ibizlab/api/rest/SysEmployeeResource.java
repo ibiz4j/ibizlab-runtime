@@ -156,6 +156,8 @@ public class SysEmployeeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysemployeeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
     @ApiOperation(value = "根据部门建立人员", tags = {"人员" },  notes = "根据部门建立人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees")
     public ResponseEntity<SysEmployeeDTO> createBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {

@@ -157,6 +157,8 @@ public class SysRolePermissionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysrolepermissionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Create-all')")
     @ApiOperation(value = "根据权限/资源建立角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源建立角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions")

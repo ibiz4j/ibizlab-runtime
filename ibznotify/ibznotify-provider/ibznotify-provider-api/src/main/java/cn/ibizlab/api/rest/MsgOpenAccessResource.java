@@ -156,5 +156,7 @@ public class MsgOpenAccessResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(msgopenaccessMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

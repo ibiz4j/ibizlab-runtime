@@ -5,9 +5,9 @@
         <div slot='title' class="header-container">
         <span class='caption-info'>{{$t(model.srfCaption)}}</span>
         </div>
-        <div class='content-container'>
             <div class='view-top-messages'>
             </div>
+        <div class='content-container'>
             <div style='margin-bottom: 6px;'>
                 <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="用户姓名" />
                 <div class='pull-right'>
@@ -33,18 +33,21 @@
                                 </i-button>
                             <div slot='content'>{{$t('entities.sysuser.gridviewtoolbar_toolbar.tbitem6.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem8.visabled" :disabled="toolBarModels.tbitem8.disabled" class='' @click="toolbar_click({ tag: 'tbitem8' }, $event)">
                                     <i class='fa fa-remove'></i>
                                     <span class='caption'>{{$t('entities.sysuser.gridviewtoolbar_toolbar.tbitem8.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.sysuser.gridviewtoolbar_toolbar.tbitem8.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                             <app-export-excel :item="toolBarModels.tbitem13" :caption="$t('entities.sysuser.gridviewtoolbar_toolbar.tbitem13.caption')" @exportexcel="toolbar_click({ tag: 'tbitem13' }, $event)"></app-export-excel>
                             <div slot='content'>{{$t('entities.sysuser.gridviewtoolbar_toolbar.tbitem13.tip')}}</div>
                         </tooltip>
-                        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+                        <span class='seperator'>|</span>
+                        <tooltip :transfer="true" :max-width="600">
                                 <i-button v-show="toolBarModels.tbitem19.visabled" :disabled="toolBarModels.tbitem19.disabled" class='' @click="toolbar_click({ tag: 'tbitem19' }, $event)">
                                     <i class='fa fa-filter'></i>
                                     <span class='caption'>{{$t('entities.sysuser.gridviewtoolbar_toolbar.tbitem19.caption')}}</span>
@@ -70,6 +73,8 @@
                 @load="searchform_load($event)"  
                 @closeview="closeView($event)">
             </view_searchform>
+                    <div class='view-body-messages'>
+                    </div>
             <view_grid 
                 :viewState="viewState"  
                 :viewparams="viewparams" 
@@ -97,9 +102,9 @@
                 @load="grid_load($event)"  
                 @closeview="closeView($event)">
             </view_grid>
+        </div>
             <div class='view-bottom-messages'>
             </div>
-        </div>
     </card>
 </div>
 </template>
@@ -280,6 +285,18 @@ export default class SysUserGridViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof SysUserGridViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.grid) {
+            refs.grid.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof SysUserGridViewBase
@@ -379,6 +396,23 @@ export default class SysUserGridViewBase extends Vue {
     * @memberof SysUserGridViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SysUserGridViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SysUserGridViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -593,6 +627,16 @@ export default class SysUserGridViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         if(this.formDruipart){
             this.formDruipart.subscribe((res:any) =>{
                 if(Object.is(res.action,'save')){
@@ -1453,6 +1497,9 @@ export default class SysUserGridViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

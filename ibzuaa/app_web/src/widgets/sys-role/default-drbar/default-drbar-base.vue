@@ -167,6 +167,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
 
 
 
+
     /**
      * 获取多项数据
      *
@@ -265,6 +266,15 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @memberof DefaultBase
      */
     public created(): void {
+        this.afterCreated();
+    }
+
+    /**
+     * 执行created后的逻辑
+     *
+     *  @memberof DefaultBase
+     */    
+    public afterCreated(){
         if (this.viewState) {
             this.viewStateEvent = this.viewState.subscribe(({ tag, action, data }) => {
                 if (!Object.is(tag, this.name)) {
@@ -288,6 +298,15 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @memberof DefaultBase
      */
     public destroyed() {
+        this.afterDestroy();
+    }
+
+    /**
+     * 执行destroyed后的逻辑
+     *
+     * @memberof DefaultBase
+     */
+    public afterDestroy() {
         if (this.viewStateEvent) {
             this.viewStateEvent.unsubscribe();
         }

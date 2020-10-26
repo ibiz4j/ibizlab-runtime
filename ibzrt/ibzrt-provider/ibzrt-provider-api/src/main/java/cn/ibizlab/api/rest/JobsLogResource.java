@@ -145,5 +145,7 @@ public class JobsLogResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(jobslogMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
 }
 

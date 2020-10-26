@@ -22,14 +22,16 @@
                 </i-button>
             <div slot='content'>{{$t('entities.syspermission.editview2toolbar_toolbar.tbitem5.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
                     <i class='fa fa-file-text-o'></i>
                     <span class='caption'>{{$t('entities.syspermission.editview2toolbar_toolbar.tbitem12.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.syspermission.editview2toolbar_toolbar.tbitem12.tip')}}</div>
         </tooltip>
-        <span class='seperator'>|</span>    <tooltip :transfer="true" :max-width="600">
+        <span class='seperator'>|</span>
+        <tooltip :transfer="true" :max-width="600">
                 <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
                     <i class='fa fa-copy'></i>
                     <span class='caption'>{{$t('entities.syspermission.editview2toolbar_toolbar.tbitem14.caption')}}</span>
@@ -40,6 +42,8 @@
       </template>
 </div>
         <div class="content-container edit-view2">
+        <div class='view-body-messages'>
+        </div>
             <view_drbar 
             :viewState="viewState"
             loadAction='get'  
@@ -254,6 +258,18 @@ export default class SYS_PERMISSIONEditView2Base extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof SYS_PERMISSIONEditView2Base
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.form) {
+            refs.form.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof SYS_PERMISSIONEditView2Base
@@ -341,6 +357,23 @@ export default class SYS_PERMISSIONEditView2Base extends Vue {
     * @memberof SYS_PERMISSIONEditView2Base
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof SYS_PERMISSIONEditView2Base
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof SYS_PERMISSIONEditView2Base
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -555,6 +588,16 @@ export default class SYS_PERMISSIONEditView2Base extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -1122,6 +1165,9 @@ export default class SYS_PERMISSIONEditView2Base extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

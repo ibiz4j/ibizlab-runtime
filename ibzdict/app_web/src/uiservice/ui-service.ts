@@ -1,4 +1,5 @@
 import { Store } from 'vuex';
+import AuthService from '@/authservice/auth-service';
 
 /**
  * 界面服务基类
@@ -63,6 +64,9 @@ export default class UIService {
     * @memberof  UIService
     */
    public getResourceOPPrivs(tag:any){
+        if(!this.authService) {
+            this.authService = new AuthService(this.getStore());
+        }
         return this.authService.getResourcePermission(this.authService.sysOPPrivsMap.get(tag))?1:0;
    }
 

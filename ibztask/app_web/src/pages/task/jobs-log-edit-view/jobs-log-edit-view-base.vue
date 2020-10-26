@@ -7,8 +7,10 @@
     <span class='caption-info'>{{$t(model.srfCaption)}}</span>
 </div>
 
-        <div class="content-container">
         <div class='view-top-messages'>
+        </div>
+        <div class="content-container">
+        <div class='view-body-messages'>
         </div>
         <view_form 
             :viewState="viewState"  
@@ -32,8 +34,8 @@
             @load="form_load($event)"  
             @closeview="closeView($event)">
         </view_form>
-        <div class='view-bottom-messages'>
         </div>
+        <div class='view-bottom-messages'>
         </div>
     </card>
 </div>
@@ -210,6 +212,18 @@ export default class JobsLogEditViewBase extends Vue {
     };
 
     /**
+     * 视图刷新
+     *
+     * @param {*} args
+     * @memberof JobsLogEditViewBase
+     */
+    public refresh(args?: any): void {
+        const refs: any = this.$refs;
+        if (refs && refs.form) {
+            refs.form.refresh();
+        }
+    }
+    /**
      *  计数器刷新
      *
      * @memberof JobsLogEditViewBase
@@ -278,6 +292,23 @@ export default class JobsLogEditViewBase extends Vue {
     * @memberof JobsLogEditViewBase
     */
     public serviceStateEvent: Subscription | undefined;
+
+    /**
+     * 门户部件状态对象
+     *
+     * @type {*}
+     * @memberof JobsLogEditViewBase
+     */
+    @Prop() public portletState?: any;
+
+   /**
+   * 门户部件状态事件
+   *
+   * @public
+   * @type {(Subscription | undefined)}
+   * @memberof JobsLogEditViewBase
+   */
+    public portletStateEvent: Subscription | undefined;
 
     /**
      * 应用上下文
@@ -492,6 +523,16 @@ export default class JobsLogEditViewBase extends Vue {
                 }); 
             }
         });
+        if(_this.portletState){
+            _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
+                if(!Object.is(res.name,'calendar-view9')){
+                    return;
+                }
+                if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){
+                    _this.refresh();
+                }
+            })
+        }
         
     }
 
@@ -620,6 +661,9 @@ export default class JobsLogEditViewBase extends Vue {
                     item.destroyCounter();
                 }
             })
+        }
+        if(this.portletStateEvent){
+            this.portletStateEvent.unsubscribe();
         }
     }
 

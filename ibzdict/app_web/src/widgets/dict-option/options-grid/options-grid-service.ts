@@ -48,7 +48,15 @@ export default class OptionsService extends ControlService {
      * @type {*}
      * @memberof OptionsService
      */
-    public copynativeData:any;
+    private copynativeData:any;
+
+    /**
+     * 远端数据
+     *
+     * @type {*}
+     * @memberof OptionsService
+     */
+    private remoteCopyData:any = {};
 
 
     /**
@@ -251,7 +259,7 @@ export default class OptionsService extends ControlService {
                 result =_appEntityService.FetchDefault(Context,Data, isloading);
             }
             result.then((response) => {
-                this.copynativeData = Util.deepCopy(response.data);
+                this.setCopynativeData(response.data);
                 this.handleResponse(action, response);
                 resolve(response);
             }).catch(response => {
@@ -289,6 +297,7 @@ export default class OptionsService extends ControlService {
                     //仿真主键数据
                     response.data.value_key = Util.createUUID();
                 }
+                this.setRemoteCopyData(response);
                 this.handleResponse(action, response, true);
                 resolve(response);
             }).catch(response => {
@@ -454,5 +463,44 @@ export default class OptionsService extends ControlService {
             });
         });
     }
-    
+
+    /**
+     * 设置远端数据
+     * 
+     * @param result 远端请求结果 
+     * @memberof OptionsService
+     */
+    public setRemoteCopyData(result:any){
+        if (result && result.status === 200) {
+            this.remoteCopyData = Util.deepCopy(result.data);
+        }
+    }
+
+    /**
+     * 获取远端数据
+     * 
+     * @memberof OptionsService
+     */
+    public getRemoteCopyData(){
+        return this.remoteCopyData;
+    }
+
+    /**
+     * 设置备份原生数据
+     * 
+     * @param data 远端请求结果 
+     * @memberof OptionsService
+     */
+    public setCopynativeData(data:any){
+        this.copynativeData = Util.deepCopy(data);
+    }
+
+    /**
+     * 获取备份原生数据
+     * 
+     * @memberof OptionsService
+     */
+    public getCopynativeData(){
+        return this.copynativeData;
+    }    
 }

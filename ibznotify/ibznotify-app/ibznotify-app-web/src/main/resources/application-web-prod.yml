@@ -32,7 +32,7 @@ zuul:
       serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     config:
-      path: /config/**
+      path: /configs/**
       serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
     oucore:

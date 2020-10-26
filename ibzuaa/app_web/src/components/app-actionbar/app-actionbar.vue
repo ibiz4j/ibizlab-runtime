@@ -66,7 +66,7 @@ export default class AppActionBar extends Vue {
   public created(){
     if (this.viewState) {
         this.viewStateEvent = this.viewState.subscribe(({ tag, action, data }) => {
-            if (!Object.is(tag, "app-actionbar")) {
+            if (!Object.is(tag, "all-portlet")) {
                 return;
             }
             if(Object.is(action,'loadmodel')){
@@ -107,7 +107,7 @@ export default class AppActionBar extends Vue {
         const _item = ActionModel[key];
         if(_item && _item['dataaccaction'] && UIService){
             let dataActionResult:any;
-            if(Object.is(_item['actiontarget'],"NONE")){
+            if(Object.is(_item['actiontarget'],"NONE") || Object.is(_item['actiontarget'],"")){
                 dataActionResult = UIService.getResourceOPPrivs(_item['dataaccaction']);
             }else{
                 if(data && Object.keys(data).length >0){

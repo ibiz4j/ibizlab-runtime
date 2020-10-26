@@ -47,5 +47,6 @@ public class MsgBodyResource {
     @Lazy
     public MsgBodyMapping msgbodyMapping;
 
+
 }
 

@@ -49,7 +49,7 @@
     </el-upload>
     <!-- 预览 -->
     <modal v-model="dialogVisible" footer-hide class-name='app-image-upload-model'>
-      <el-image src="dialogImageUrl">
+      <el-image :src="dialogImageUrl">
           <div slot='error' class='image-slot'>
               <i class='el-icon-picture-outline'></i>
           </div>

@@ -146,6 +146,8 @@ public class SysRolePermissionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysrolepermissionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
+
     @ApiOperation(value = "根据权限/资源建立角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源建立角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions")
     public ResponseEntity<SysRolePermissionDTO> createBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {

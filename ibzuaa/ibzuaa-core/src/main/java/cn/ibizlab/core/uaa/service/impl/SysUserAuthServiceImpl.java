@@ -189,9 +189,7 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
         if(!ObjectUtils.isEmpty(et.getUserid())){
             cn.ibizlab.core.uaa.domain.SysUser user=et.getUser();
             if(ObjectUtils.isEmpty(user)){
-                cn.ibizlab.core.uaa.domain.SysUser majorEntity=sysuserService.getById(et.getUserid());
-                if(ObjectUtils.isEmpty(majorEntity))
-                    return;
+                cn.ibizlab.core.uaa.domain.SysUser majorEntity=sysuserService.get(et.getUserid());
                 et.setUser(majorEntity);
                 user=majorEntity;
             }
@@ -225,6 +223,7 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 
