@@ -99,7 +99,7 @@
 </template>
 
 <script lang='tsx'>
-    import {Component, Prop, Vue} from 'vue-property-decorator';
+    import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
     import view_pickupviewpanel
         from '@widgets/sys-permission/mpickup-viewpickupviewpanel-pickupviewpanel/mpickup-viewpickupviewpanel-pickupviewpanel.vue';
     import ContextMenuContainer from "@components/context-menu-container/context-menu-container.vue";
@@ -246,6 +246,24 @@
          * @memberof SYS_ROLE_PERMISSIONCustomViewBase
          */
         @Prop() public viewdata!: string;
+
+        @Watch('viewdata')
+        public watchViewData(){
+            if(!this.viewdata||Object.is(this.viewdata,'')){
+                return;
+            }
+            this.parseViewParam();
+            const _this: any = this;
+            // 获取父数据
+            if (_this && _this.viewdata) {
+                _this.parentData = JSON.parse(_this.viewdata);
+            }
+            if (_this.parentData && _this.parentData.sysrole) {
+                // console.log("当前角色id：" + _this.parentData.sysrole);
+                _this.srfparentkey = _this.parentData.sysrole;
+            }
+            this.initTree();
+        }
 
         /**
          * 视图默认使用
@@ -403,17 +421,17 @@
             const secondtag = this.$util.createUUID();
             this.$store.commit('viewaction/createdView', { viewtag: this.viewtag, secondtag: secondtag });
             this.viewtag = secondtag;
-            this.parseViewParam();
+            // this.parseViewParam();
 
             const _this: any = this;
             // 获取父数据
-            if (_this && _this.viewdata) {
-                _this.parentData = JSON.parse(_this.viewdata);
-            }
-            if (_this.parentData && _this.parentData.sysrole) {
-                // console.log("当前角色id：" + _this.parentData.sysrole);
-                _this.srfparentkey = _this.parentData.sysrole;
-            }
+            // if (_this && _this.viewdata) {
+            //     _this.parentData = JSON.parse(_this.viewdata);
+            // }
+            // if (_this.parentData && _this.parentData.sysrole) {
+            //     // console.log("当前角色id：" + _this.parentData.sysrole);
+            //     _this.srfparentkey = _this.parentData.sysrole;
+            // }
             // 监听父页面
             if(this.formDruipart){
                 this.formDruipart.subscribe((res:any) =>{
@@ -444,7 +462,7 @@
          * vue 挂载
          */
         public mounted() {
-            this.initTree();
+            // this.initTree();
         }
 
         /**

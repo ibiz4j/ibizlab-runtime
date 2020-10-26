@@ -38,7 +38,7 @@
 </i-col>
 <i-col v-show="detailsModel.pdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='pdeptname' :itemRules="this.rules().pdeptname" class='' :caption="$t('entities.sysdepartment.main_form.details.pdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.pdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-department-select :data="data" :disabled="detailsModel.pdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/sysorganizations/${orgid}/ibzdepartments/picker" filter="orgid"  :fillMap="{'id':'pdeptid','label':'pdeptname'}" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-department-select>
+    <app-department-select :data="data" :disabled="detailsModel.pdeptname.disabled" :context="JSON.parse(JSON.stringify(context))" url="/sysorganizations/${orgid}/sysdepartments/picker" filter="orgid"  :fillMap="{'id':'pdeptid','label':'pdeptname'}" :multiple="false" style="" @select-change="onFormItemValueChange" ></app-department-select>
 </app-form-item>
 
 </i-col>
@@ -91,7 +91,7 @@
   name="leadername"
   :value='data.leadername'
   valueitem="leaderid"
-  url="/sysorganizations/${selected-orgid}/ibzemployees/picker"
+  url="/sysorganizations/${selected-orgid}/sysemployees/picker"
   
   :multiple="true"
   filter="orgid"
