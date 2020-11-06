@@ -135,6 +135,14 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
         context.setN_mdeptid_eq(deptid);
         return sysEmployeeFeignClient.searchDefault(context).getContent();
     }
+    @Override
+    public void resetByMdeptid(String deptid) {
+    }
+
+    @Override
+    public void resetByMdeptid(Collection<String> ids) {
+    }
+
 
     @Override
     public void removeByMdeptid(String deptid) {
@@ -153,6 +161,14 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
         context.setN_orgid_eq(orgid);
         return sysEmployeeFeignClient.searchDefault(context).getContent();
     }
+    @Override
+    public void resetByOrgid(String orgid) {
+    }
+
+    @Override
+    public void resetByOrgid(Collection<String> ids) {
+    }
+
 
     @Override
     public void removeByOrgid(String orgid) {
@@ -192,6 +208,7 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
         Page<SysEmployee> sysEmployees=sysEmployeeFeignClient.searchDefault(context);
         return sysEmployees;
     }
+
 
 
 

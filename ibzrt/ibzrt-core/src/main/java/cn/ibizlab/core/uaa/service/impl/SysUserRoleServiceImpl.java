@@ -128,6 +128,10 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
         context.setN_sys_roleid_eq(roleid);
         return sysUserRoleFeignClient.searchDefault(context).getContent();
     }
+    @Override
+    public void removeByRoleid(Collection<String> ids) {
+    }
+
 
     @Override
     public void removeByRoleid(String roleid) {
@@ -167,6 +171,7 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
         Page<SysUserRole> sysUserRoles=sysUserRoleFeignClient.searchDefault(context);
         return sysUserRoles;
     }
+
 
 
 

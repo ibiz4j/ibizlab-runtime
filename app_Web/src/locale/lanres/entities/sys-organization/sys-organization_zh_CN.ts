@@ -99,6 +99,7 @@ export default {
 			createdate: "创建时间",
 			updatedate: "最后修改时间",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},
@@ -190,6 +191,7 @@ export default {
 		},
 	},
 	orgtree_treeview: {
+		nodata:"",
 		nodes: {
 			root: "默认根节点",
 		},

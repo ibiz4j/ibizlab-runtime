@@ -36,8 +36,8 @@ public interface IDictOptionService{
     boolean save(DictOption et) ;
     void saveBatch(List<DictOption> list) ;
     Page<DictOption> searchDefault(DictOptionSearchContext context) ;
-    List<DictOption> selectByCatalogId(String id) ;
-    void removeByCatalogId(String id) ;
+    List<DictOption> selectByCatalogId(String id);
+    void removeByCatalogId(String id);
 
 }
 

@@ -51,6 +51,7 @@ export default {
 			postname: "岗位名称",
 			memo: "备注",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

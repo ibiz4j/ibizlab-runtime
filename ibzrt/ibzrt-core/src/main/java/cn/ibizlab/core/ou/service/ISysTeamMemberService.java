@@ -36,12 +36,12 @@ public interface ISysTeamMemberService{
     boolean save(SysTeamMember et) ;
     void saveBatch(List<SysTeamMember> list) ;
     Page<SysTeamMember> searchDefault(SysTeamMemberSearchContext context) ;
-    List<SysTeamMember> selectByUserid(String userid) ;
-    void removeByUserid(String userid) ;
-    List<SysTeamMember> selectByPostid(String postid) ;
-    void removeByPostid(String postid) ;
-    List<SysTeamMember> selectByTeamid(String teamid) ;
-    void removeByTeamid(String teamid) ;
+    List<SysTeamMember> selectByUserid(String userid);
+    void removeByUserid(String userid);
+    List<SysTeamMember> selectByPostid(String postid);
+    void removeByPostid(String postid);
+    List<SysTeamMember> selectByTeamid(String teamid);
+    void removeByTeamid(String teamid);
 
 }
 

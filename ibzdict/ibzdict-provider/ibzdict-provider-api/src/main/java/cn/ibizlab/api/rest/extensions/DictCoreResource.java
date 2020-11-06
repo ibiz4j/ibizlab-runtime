@@ -120,5 +120,11 @@ public class DictCoreResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/catalogs/sync")
+    public ResponseEntity<Boolean> syncRuntimeDict(@RequestBody List<DictCatalog> catalogs){
+        dictCoreService.syncRuntimeDict(catalogs);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
 }
 

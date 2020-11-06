@@ -8,6 +8,7 @@ export default {
     postid: "岗位标识",
     postname: "岗位",
     domains: "区属",
+    username: "登录名",
   },
 	views: {
 		gridview: {
@@ -48,6 +49,7 @@ export default {
 			postid: "岗位标识",
 			userid: "用户标识",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.ou.domain.SysPost;
 import cn.ibizlab.core.ou.filter.SysPostSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

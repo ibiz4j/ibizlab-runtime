@@ -99,6 +99,11 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public boolean remove(String key) {
         sysdepartmentService.removeByOrgid(key) ;
+        if(!ObjectUtils.isEmpty(sysdepartmentService.selectByOrgid(key)))
+            throw new BadRequestAlertException("删除数据失败，当前数据存在关系实体[SysDepartment]数据，无法删除!","","");
+        sysemployeeService.resetByOrgid(key);
+        if(!ObjectUtils.isEmpty(sysorganizationService.selectByParentorgid(key)))
+            throw new BadRequestAlertException("删除数据失败，当前数据存在关系实体[SysOrganization]数据，无法删除!","","");
         boolean result=removeById(key);
         return result ;
     }
@@ -106,6 +111,11 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Override
     @Transactional
     public void removeBatch(Collection<String> idList) {
+        if(!ObjectUtils.isEmpty(sysdepartmentService.selectByOrgid(idList)))
+            throw new BadRequestAlertException("删除数据失败，当前数据存在关系实体[SysDepartment]数据，无法删除!","","");
+        sysemployeeService.resetByOrgid(idList);
+        if(!ObjectUtils.isEmpty(sysorganizationService.selectByParentorgid(idList)))
+            throw new BadRequestAlertException("删除数据失败，当前数据存在关系实体[SysOrganization]数据，无法删除!","","");
         removeByIds(idList);
     }
 
@@ -170,6 +180,10 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
 	@Override
     public List<SysOrganization> selectByParentorgid(String orgid) {
         return baseMapper.selectByParentorgid(orgid);
+    }
+    @Override
+    public List<SysOrganization> selectByParentorgid(Collection<String> ids) {
+        return this.list(new QueryWrapper<SysOrganization>().in("orgid",ids));
     }
 
     @Override
@@ -252,6 +266,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
         else
            return entities;
     }
+
 
 
 

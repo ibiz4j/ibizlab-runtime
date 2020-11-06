@@ -128,6 +128,12 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
         context.setN_pdeptid_eq(deptid);
         return sysDepartmentFeignClient.searchDefault(context).getContent();
     }
+    @Override
+    public List<SysDepartment> selectByParentdeptid(Collection<String> ids) {
+        //暂未支持
+        return null;
+    }
+
 
     @Override
     public void removeByParentdeptid(String deptid) {
@@ -146,6 +152,12 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
         context.setN_orgid_eq(orgid);
         return sysDepartmentFeignClient.searchDefault(context).getContent();
     }
+    @Override
+    public List<SysDepartment> selectByOrgid(Collection<String> ids) {
+        //暂未支持
+        return null;
+    }
+
 
     @Override
     public void removeByOrgid(String orgid) {
@@ -199,6 +211,7 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
         Page<SysDepartment> sysDepartments=sysDepartmentFeignClient.searchDefault(context);
         return sysDepartments;
     }
+
 
 
 

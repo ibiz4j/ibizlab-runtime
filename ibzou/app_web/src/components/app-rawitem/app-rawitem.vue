@@ -1,16 +1,12 @@
 <template>
-    <div>
-        <span v-if="caption">{{caption}}</span>
-        <div :class="contentStyle" :style="sizeStyle">
-            <template v-if="Object.is(contentType,'RAW')">
-                {{rawContent ? rawContent : ''}}
-            </template>
-            <template v-else-if="Object.is(contentType,'HTML')">
-                {{htmlContent ? htmlContent : ''}}
-            </template>
-            <template v-else-if="Object.is(contentType,'IMAGE')">
-                <i :class="imageClass ? imageClass : ''"></i>
-            </template>
+    <div :style="sizeStyle">
+        <span>{{caption}}</span>
+        <div v-if="Object.is(contentType,'RAW')" :class="contentStyle">
+            <slot></slot>
+        </div>
+        <div v-else-if="Object.is(contentType,'HTML')" :class="contentStyle" v-html="htmlContent" />
+        <div v-else-if="Object.is(contentType,'IMAGE')" :class="contentStyle">
+             <i :class="imageClass ? imageClass : ''"></i>
         </div>
     </div>
 </template>
@@ -22,20 +18,28 @@ import { Component, Vue, Prop, Model, Watch } from "vue-property-decorator";
 export default class AppRawItem extends Vue {
 
     /**
+    * 应用上下文
+    * 
+    * @type {string}
+    * @memberof AppRawItem
+    */
+    @Prop() public context!: any;
+
+    /**
+    * 视图参数
+    * 
+    * @type {string}
+    * @memberof AppRawItem
+    */
+    @Prop() public viewparams!: any;
+
+    /**
     * 内容类型
     * 
     * @type {string}
     * @memberof AppRawItem
     */
     @Prop() public contentType!: string;
-
-    /**
-     * 直接内容
-     * 
-     * @type {strin}
-     * @memberof AppRawItem
-     */
-    @Prop() public rawContent?: string;
 
     /**
      * html内容
@@ -46,7 +50,7 @@ export default class AppRawItem extends Vue {
     @Prop() public htmlContent?: string;
 
     /**
-     * html内容
+     * 图片
      * 
      * @type {strin}
      * @memberof AppRawItem

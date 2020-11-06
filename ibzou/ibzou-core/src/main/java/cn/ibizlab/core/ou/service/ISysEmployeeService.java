@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.ou.domain.SysEmployee;
 import cn.ibizlab.core.ou.filter.SysEmployeeSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -43,15 +42,19 @@ public interface ISysEmployeeService extends IService<SysEmployee>{
     @CacheEvict(value="sysemployee",allEntries=true)
     void saveBatch(List<SysEmployee> list) ;
     Page<SysEmployee> searchDefault(SysEmployeeSearchContext context) ;
-    List<SysEmployee> selectByMdeptid(String deptid) ;
+    List<SysEmployee> selectByMdeptid(String deptid);
+    void resetByMdeptid(String deptid);
+    void resetByMdeptid(Collection<String> ids);
     @CacheEvict(value="sysemployee",allEntries=true)
-    void removeByMdeptid(String deptid) ;
-    List<SysEmployee> selectByOrgid(String orgid) ;
+    void removeByMdeptid(String deptid);
+    List<SysEmployee> selectByOrgid(String orgid);
+    void resetByOrgid(String orgid);
+    void resetByOrgid(Collection<String> ids);
     @CacheEvict(value="sysemployee",allEntries=true)
-    void removeByOrgid(String orgid) ;
-    List<SysEmployee> selectByPostid(String postid) ;
+    void removeByOrgid(String orgid);
+    List<SysEmployee> selectByPostid(String postid);
     @CacheEvict(value="sysemployee",allEntries=true)
-    void removeByPostid(String postid) ;
+    void removeByPostid(String postid);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.sql.Wrapper;
@@ -134,6 +135,24 @@ public class DictCoreService
             }
         }
         return trees;
+    }
+
+    /**
+     * 同步预置代码表
+     * @param catalogs
+     */
+    public void syncRuntimeDict(List<DictCatalog> catalogs){
+        List<DictOption> options=new ArrayList<>();
+        for(DictCatalog catalog : catalogs){
+            if(!ObjectUtils.isEmpty(catalog.getOptions()))
+                options.addAll(catalog.getOptions());
+        }
+        if(catalogs.size()>0){
+            dictCatalogService.saveBatch(catalogs);
+        }
+        if(options.size()>0){
+            optionService.saveBatch(options);
+        }
     }
 
 }

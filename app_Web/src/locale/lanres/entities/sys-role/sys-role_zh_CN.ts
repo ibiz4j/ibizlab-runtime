@@ -63,6 +63,7 @@ export default {
 			memo: "备注",
 			updatedate: "更新时间",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

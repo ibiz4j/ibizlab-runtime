@@ -51,6 +51,7 @@ export default {
 			orgname: "单位",
 			mdeptname: "主部门",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

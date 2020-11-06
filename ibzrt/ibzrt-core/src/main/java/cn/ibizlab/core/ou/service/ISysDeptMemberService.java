@@ -36,12 +36,12 @@ public interface ISysDeptMemberService{
     boolean save(SysDeptMember et) ;
     void saveBatch(List<SysDeptMember> list) ;
     Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context) ;
-    List<SysDeptMember> selectByDeptid(String deptid) ;
-    void removeByDeptid(String deptid) ;
-    List<SysDeptMember> selectByUserid(String userid) ;
-    void removeByUserid(String userid) ;
-    List<SysDeptMember> selectByPostid(String postid) ;
-    void removeByPostid(String postid) ;
+    List<SysDeptMember> selectByDeptid(String deptid);
+    void removeByDeptid(String deptid);
+    List<SysDeptMember> selectByUserid(String userid);
+    void removeByUserid(String userid);
+    List<SysDeptMember> selectByPostid(String postid);
+    void removeByPostid(String postid);
 
 }
 

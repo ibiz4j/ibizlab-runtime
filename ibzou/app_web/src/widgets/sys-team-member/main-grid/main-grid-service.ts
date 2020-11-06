@@ -240,7 +240,7 @@ export default class MainService extends ControlService {
             result.then((response) => {
                 //处理返回数据，补充判断标识
                 if(response.data){
-                    Object.assign(response.data,{srfuf:0});
+                    Object.assign(response.data,{srfuf:'0'});
                 }
                 resolve(response);
             }).catch(response => {
@@ -371,7 +371,7 @@ export default class MainService extends ControlService {
                     requestData[item.prop] = context[item.name];
                 }
             }else{
-                if(item && item.isEditable && item.prop && item.name && (data[item.name] || Object.is(data[item.name],0) || Object.is(data[item.name],"")) ){
+                if(item && item.isEditable && item.prop && item.name && data.hasOwnProperty(item.name)){
                     requestData[item.prop] = data[item.name];
                 }
             }

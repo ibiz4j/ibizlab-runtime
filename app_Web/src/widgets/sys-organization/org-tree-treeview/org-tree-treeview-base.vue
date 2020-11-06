@@ -21,6 +21,7 @@
             @check="onCheck"
             @current-change="selectionChange"
             :filter-node-method="filterNode"
+            :empty-text="$t('entities.sysorganization.orgtree_treeview.nodata')"
             >
                 <template slot-scope="{ node, data }">
                   <context-menu :ref='data.id'  :isBlocked="true" :contextMenuStyle="{width: '100%'}" :data="node" :renderContent="renderContextMenu" @showContext="showContext(data,$event)">

@@ -128,6 +128,10 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
         context.setN_sys_permissionid_eq(permissionid);
         return sysRolePermissionFeignClient.searchDefault(context).getContent();
     }
+    @Override
+    public void removeByPermissionid(Collection<String> ids) {
+    }
+
 
     @Override
     public void removeByPermissionid(String permissionid) {
@@ -146,6 +150,10 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
         context.setN_sys_roleid_eq(roleid);
         return sysRolePermissionFeignClient.searchDefault(context).getContent();
     }
+    @Override
+    public void removeByRoleid(Collection<String> ids) {
+    }
+
 
     @Override
     public void removeByRoleid(String roleid) {
@@ -167,6 +175,7 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
         Page<SysRolePermission> sysRolePermissions=sysRolePermissionFeignClient.searchDefault(context);
         return sysRolePermissions;
     }
+
 
 
 

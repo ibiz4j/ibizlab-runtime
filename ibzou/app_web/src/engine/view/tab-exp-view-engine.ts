@@ -44,4 +44,14 @@ export default class TabExpViewEngine extends ViewEngine {
             this.setViewState2({ tag: _item.name, action: 'load', viewdata: this.view.context });
         });
     }
+
+    /**
+     * 计算按钮状态
+     *
+     * @memberof TabExpViewEngine
+     */
+    public computeToolbarState(state:boolean,data:any){
+        this.calcToolbarItemState(state);
+        this.calcToolbarItemAuthState(data);
+    }
 }

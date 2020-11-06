@@ -21,6 +21,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -34,6 +35,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":2,
     "major_field":0
     },
     {
@@ -47,6 +49,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":3,
     "major_field":1
     },
     {
@@ -65,6 +68,7 @@
     "data_length":100,
     "predefined":"ORGID",
     "key_field":0,
+    "show_order":4,
     "major_field":0
     },
     {
@@ -82,6 +86,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":5,
     "major_field":0
     },
     {
@@ -95,6 +100,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":6,
     "major_field":0
     },
     {
@@ -107,6 +113,7 @@
     "physical_field":1,
     "data_type":"INT",
     "key_field":0,
+    "show_order":7,
     "major_field":0
     },
     {
@@ -120,6 +127,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":8,
     "major_field":0
     },
     {
@@ -132,6 +140,7 @@
     "physical_field":1,
     "data_type":"INT",
     "key_field":0,
+    "show_order":10,
     "major_field":0
     },
     {
@@ -145,6 +154,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":11,
     "major_field":0
     },
     {
@@ -158,6 +168,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":12,
     "major_field":0
     },
     {
@@ -171,6 +182,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":13,
     "major_field":0
     },
     {
@@ -184,6 +196,7 @@
     "data_type":"INT",
     "predefined":"LOGICVALID",
     "key_field":0,
+    "show_order":16,
     "major_field":0
     },
     {
@@ -202,6 +215,7 @@
     "data_length":100,
     "predefined":"ORGNAME",
     "key_field":0,
+    "show_order":16,
     "major_field":0
     },
     {
@@ -219,6 +233,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":17,
     "major_field":0
     },
     {
@@ -232,6 +247,7 @@
     "data_type":"DATETIME",
     "predefined":"CREATEDATE",
     "key_field":0,
+    "show_order":18,
     "major_field":0
     },
     {
@@ -245,6 +261,7 @@
     "data_type":"DATETIME",
     "predefined":"UPDATEDATE",
     "key_field":0,
+    "show_order":19,
     "major_field":0
     }
     ],
@@ -303,6 +320,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -320,6 +338,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":2,
     "major_field":0
     },
     {
@@ -337,6 +356,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":3,
     "major_field":0
     },
     {
@@ -354,6 +374,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":4,
     "major_field":0
     },
     {
@@ -371,6 +392,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":5,
     "major_field":1
     },
     {
@@ -388,6 +410,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":6,
     "major_field":0
     },
     {
@@ -405,6 +428,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":7,
     "major_field":0
     },
     {
@@ -422,6 +446,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":10,
     "major_field":0
     },
     {
@@ -435,6 +460,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":17,
     "major_field":0
     }
     ],
@@ -481,6 +507,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -494,6 +521,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":2,
     "major_field":0
     },
     {
@@ -507,6 +535,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":3,
     "major_field":1
     },
     {
@@ -520,6 +549,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":4,
     "major_field":0
     },
     {
@@ -533,6 +563,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":5,
     "major_field":0
     },
     {
@@ -546,6 +577,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":6,
     "major_field":0
     },
     {
@@ -559,6 +591,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":7,
     "major_field":0
     },
     {
@@ -576,6 +609,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":8,
     "major_field":0
     },
     {
@@ -593,6 +627,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":9,
     "major_field":0
     },
     {
@@ -610,6 +645,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":10,
     "major_field":0
     },
     {
@@ -623,6 +659,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":11,
     "major_field":0
     },
     {
@@ -640,6 +677,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":12,
     "major_field":0
     },
     {
@@ -657,6 +695,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":13,
     "major_field":0
     },
     {
@@ -674,6 +713,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":14,
     "major_field":0
     },
     {
@@ -692,6 +732,7 @@
     "data_length":100,
     "predefined":"ORGID",
     "key_field":0,
+    "show_order":15,
     "major_field":0
     },
     {
@@ -709,6 +750,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":16,
     "major_field":0
     },
     {
@@ -727,6 +769,7 @@
     "data_length":100,
     "predefined":"ORGNAME",
     "key_field":0,
+    "show_order":17,
     "major_field":0
     },
     {
@@ -740,6 +783,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":18,
     "major_field":0
     },
     {
@@ -754,6 +798,7 @@
     "data_type":"VARCHAR",
     "data_length":20,
     "key_field":0,
+    "show_order":19,
     "major_field":0
     },
     {
@@ -767,6 +812,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":19,
     "major_field":0
     },
     {
@@ -780,6 +826,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":20,
     "major_field":0
     },
     {
@@ -792,6 +839,7 @@
     "physical_field":1,
     "data_type":"DATETIME",
     "key_field":0,
+    "show_order":20,
     "major_field":0
     },
     {
@@ -805,6 +853,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":21,
     "major_field":0
     },
     {
@@ -818,6 +867,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":23,
     "major_field":0
     },
     {
@@ -831,6 +881,7 @@
     "data_type":"VARCHAR",
     "data_length":255,
     "key_field":0,
+    "show_order":24,
     "major_field":0
     },
     {
@@ -844,6 +895,7 @@
     "data_type":"VARCHAR",
     "data_length":255,
     "key_field":0,
+    "show_order":25,
     "major_field":0
     },
     {
@@ -857,6 +909,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":26,
     "major_field":0
     },
     {
@@ -870,6 +923,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":27,
     "major_field":0
     },
     {
@@ -883,6 +937,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":28,
     "major_field":0
     },
     {
@@ -896,6 +951,7 @@
     "data_type":"VARCHAR",
     "data_length":10,
     "key_field":0,
+    "show_order":29,
     "major_field":0
     },
     {
@@ -909,6 +965,7 @@
     "data_type":"VARCHAR",
     "data_length":255,
     "key_field":0,
+    "show_order":30,
     "major_field":0
     },
     {
@@ -922,6 +979,7 @@
     "data_type":"VARCHAR",
     "data_length":255,
     "key_field":0,
+    "show_order":31,
     "major_field":0
     },
     {
@@ -934,6 +992,7 @@
     "physical_field":1,
     "data_type":"INT",
     "key_field":0,
+    "show_order":32,
     "major_field":0
     },
     {
@@ -947,6 +1006,7 @@
     "data_type":"INT",
     "predefined":"LOGICVALID",
     "key_field":0,
+    "show_order":56,
     "major_field":0
     },
     {
@@ -960,6 +1020,7 @@
     "data_type":"DATETIME",
     "predefined":"CREATEDATE",
     "key_field":0,
+    "show_order":58,
     "major_field":0
     },
     {
@@ -973,6 +1034,7 @@
     "data_type":"DATETIME",
     "predefined":"UPDATEDATE",
     "key_field":0,
+    "show_order":59,
     "major_field":0
     }
     ],
@@ -1032,6 +1094,7 @@
     "data_length":100,
     "predefined":"ORGID",
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -1045,6 +1108,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":2,
     "major_field":0
     },
     {
@@ -1059,6 +1123,7 @@
     "data_length":100,
     "predefined":"ORGNAME",
     "key_field":0,
+    "show_order":3,
     "major_field":1
     },
     {
@@ -1076,6 +1141,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":5,
     "major_field":0
     },
     {
@@ -1089,6 +1155,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":6,
     "major_field":0
     },
     {
@@ -1101,6 +1168,7 @@
     "physical_field":1,
     "data_type":"INT",
     "key_field":0,
+    "show_order":8,
     "major_field":0
     },
     {
@@ -1113,6 +1181,7 @@
     "physical_field":1,
     "data_type":"INT",
     "key_field":0,
+    "show_order":10,
     "major_field":0
     },
     {
@@ -1130,6 +1199,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":11,
     "major_field":0
     },
     {
@@ -1143,6 +1213,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":12,
     "major_field":0
     },
     {
@@ -1156,6 +1227,7 @@
     "data_type":"INT",
     "predefined":"LOGICVALID",
     "key_field":0,
+    "show_order":16,
     "major_field":0
     },
     {
@@ -1169,6 +1241,7 @@
     "data_type":"DATETIME",
     "predefined":"CREATEDATE",
     "key_field":0,
+    "show_order":18,
     "major_field":0
     },
     {
@@ -1182,6 +1255,7 @@
     "data_type":"DATETIME",
     "predefined":"UPDATEDATE",
     "key_field":0,
+    "show_order":19,
     "major_field":0
     }
     ],
@@ -1234,6 +1308,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -1247,6 +1322,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":2,
     "major_field":0
     },
     {
@@ -1260,6 +1336,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":3,
     "major_field":1
     },
     {
@@ -1273,6 +1350,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":4,
     "major_field":0
     },
     {
@@ -1286,6 +1364,7 @@
     "data_type":"VARCHAR",
     "data_length":2000,
     "key_field":0,
+    "show_order":5,
     "major_field":0
     }
     ],
@@ -1332,6 +1411,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -1345,6 +1425,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":2,
     "major_field":1
     },
     {
@@ -1358,6 +1439,7 @@
     "data_type":"VARCHAR",
     "data_length":2000,
     "key_field":0,
+    "show_order":3,
     "major_field":0
     },
     {
@@ -1371,6 +1453,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":7,
     "major_field":0
     }
     ],
@@ -1405,6 +1488,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -1423,6 +1507,7 @@
     "data_length":100,
     "key_field":0,
     "union_key":"KEY1",
+    "show_order":2,
     "major_field":0
     },
     {
@@ -1440,6 +1525,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":3,
     "major_field":0
     },
     {
@@ -1458,6 +1544,7 @@
     "data_length":100,
     "key_field":0,
     "union_key":"KEY2",
+    "show_order":4,
     "major_field":0
     },
     {
@@ -1475,6 +1562,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":5,
     "major_field":1
     },
     {
@@ -1492,6 +1580,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":6,
     "major_field":0
     },
     {
@@ -1509,6 +1598,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":7,
     "major_field":0
     },
     {
@@ -1522,6 +1612,25 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":8,
+    "major_field":0
+    },
+    {
+    "fieldname":"USERNAME" ,
+    "codename":"UserName",
+    "field_logic_name":"登录名",
+    "entity_name":"SysTeamMember",
+    "ref_de":"SYS_EMP",
+    "ref_field_name":"USERNAME",
+    "relation_name":"DER1N_SYS_TEAMMEMBER_SYS_EMP_USERID",
+    "relation_codename":"Emp",
+    "field_type":"PICKUPDATA",
+    "nullable":1,
+    "physical_field":0,
+    "data_type":"VARCHAR",
+    "data_length":100,
+    "key_field":0,
+    "show_order":1000,
     "major_field":0
     }
     ],

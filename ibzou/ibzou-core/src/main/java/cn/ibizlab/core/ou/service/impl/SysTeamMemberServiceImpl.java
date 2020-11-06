@@ -168,7 +168,6 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     public List<SysTeamMember> selectByUserid(String userid) {
         return baseMapper.selectByUserid(userid);
     }
-
     @Override
     public void removeByUserid(String userid) {
         this.remove(new QueryWrapper<SysTeamMember>().eq("userid",userid));
@@ -178,7 +177,6 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     public List<SysTeamMember> selectByPostid(String postid) {
         return baseMapper.selectByPostid(postid);
     }
-
     @Override
     public void removeByPostid(String postid) {
         this.remove(new QueryWrapper<SysTeamMember>().eq("postid",postid));
@@ -188,7 +186,6 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     public List<SysTeamMember> selectByTeamid(String teamid) {
         return baseMapper.selectByTeamid(teamid);
     }
-
     @Override
     public void removeByTeamid(String teamid) {
         this.remove(new QueryWrapper<SysTeamMember>().eq("teamid",teamid));
@@ -220,6 +217,7 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
                 emp=majorEntity;
             }
             et.setPersonname(emp.getPersonname());
+            et.setUsername(emp.getUsername());
         }
         //实体关系[DER1N_SYS_TEAMMEMBER_SYS_POST_POSTID]
         if(!ObjectUtils.isEmpty(et.getPostid())){
@@ -269,6 +267,7 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

@@ -176,6 +176,7 @@ export default {
 			ipaddr: "ip地址",
 			showorder: "排序",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

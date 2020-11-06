@@ -181,6 +181,15 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     public List<SysEmployee> selectByMdeptid(String deptid) {
         return baseMapper.selectByMdeptid(deptid);
     }
+    @Override
+    public void resetByMdeptid(String deptid) {
+        this.update(new UpdateWrapper<SysEmployee>().set("mdeptid",null).eq("mdeptid",deptid));
+    }
+
+    @Override
+    public void resetByMdeptid(Collection<String> ids) {
+        this.update(new UpdateWrapper<SysEmployee>().set("mdeptid",null).in("mdeptid",ids));
+    }
 
     @Override
     public void removeByMdeptid(String deptid) {
@@ -190,6 +199,15 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
 	@Override
     public List<SysEmployee> selectByOrgid(String orgid) {
         return baseMapper.selectByOrgid(orgid);
+    }
+    @Override
+    public void resetByOrgid(String orgid) {
+        this.update(new UpdateWrapper<SysEmployee>().set("orgid",null).eq("orgid",orgid));
+    }
+
+    @Override
+    public void resetByOrgid(Collection<String> ids) {
+        this.update(new UpdateWrapper<SysEmployee>().set("orgid",null).in("orgid",ids));
     }
 
     @Override
@@ -201,7 +219,6 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     public List<SysEmployee> selectByPostid(String postid) {
         return baseMapper.selectByPostid(postid);
     }
-
     @Override
     public void removeByPostid(String postid) {
         this.remove(new QueryWrapper<SysEmployee>().eq("postid",postid));
@@ -305,6 +322,7 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
         else
            return entities;
     }
+
 
 
 

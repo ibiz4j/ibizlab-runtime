@@ -524,7 +524,7 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
      * @memberof TreeExpViewtreeexpbarBase
      */
     public onDrViewDatasChange($event: any): void {
-        this.viewState.next({ tag: 'treeexpbar_tree', action: 'refresh_current' });
+        this.viewState.next({ tag: 'treeexpbar_tree', action: 'refresh_parent' });
     }
 
     /**

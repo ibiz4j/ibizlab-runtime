@@ -21,6 +21,13 @@ export default class SysEmployeeUIServiceBase extends UIService {
     public isEnableWorkflow:boolean = false;
 
     /**
+     * 是否支持实体主状态
+     * 
+     * @memberof  SysEmployeeUIServiceBase
+     */
+    public isEnableDEMainState:boolean = false;
+
+    /**
      * 当前UI服务对应的数据服务对象
      * 
      * @memberof  SysEmployeeUIServiceBase
@@ -161,15 +168,15 @@ export default class SysEmployeeUIServiceBase extends UIService {
                     return;
                 }
                 actionContext.$Notice.success({ title: '成功', desc: '密码初始化为88888888' });
-
                 const _this: any = actionContext;
                 return response;
             }).catch((response: any) => {
-                if (!response || !response.status || !response.data) {
-                    actionContext.$Notice.error({ title: '错误', desc: '系统异常！' });
+                if (response && response.status && response.data) {
+                    actionContext.$Notice.error({ title: (actionContext.$t('app.commonWords.wrong') as string), desc: response.data.message });
                     return;
                 }
-                if (response.status === 401) {
+                if (!response || !response.status || !response.data) {
+                    actionContext.$Notice.error({ title: (actionContext.$t('app.commonWords.wrong') as string), desc: (actionContext.$t('app.commonWords.sysException') as string) });
                     return;
                 }
                 return response;

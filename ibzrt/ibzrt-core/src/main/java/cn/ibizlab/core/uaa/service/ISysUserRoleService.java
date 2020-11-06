@@ -36,10 +36,11 @@ public interface ISysUserRoleService{
     boolean save(SysUserRole et) ;
     void saveBatch(List<SysUserRole> list) ;
     Page<SysUserRole> searchDefault(SysUserRoleSearchContext context) ;
-    List<SysUserRole> selectByRoleid(String roleid) ;
-    void removeByRoleid(String roleid) ;
-    List<SysUserRole> selectByUserid(String userid) ;
-    void removeByUserid(String userid) ;
+    List<SysUserRole> selectByRoleid(String roleid);
+    void removeByRoleid(Collection<String> ids);
+    void removeByRoleid(String roleid);
+    List<SysUserRole> selectByUserid(String userid);
+    void removeByUserid(String userid);
 
 }
 

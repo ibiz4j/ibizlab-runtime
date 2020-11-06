@@ -100,6 +100,7 @@ export default {
 			createdate: "Print",
 			updatedate: "Actor",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},
@@ -191,6 +192,7 @@ export default {
 		},
 	},
 	orgtree_treeview: {
+		nodata:"",
 		nodes: {
 			root: "默认根节点",
 		},

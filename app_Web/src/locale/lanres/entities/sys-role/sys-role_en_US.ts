@@ -64,6 +64,7 @@ export default {
 			memo: "备注",
 			updatedate: "Upload",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

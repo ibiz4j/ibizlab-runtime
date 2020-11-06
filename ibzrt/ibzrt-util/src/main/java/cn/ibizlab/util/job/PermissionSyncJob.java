@@ -41,6 +41,7 @@ public class PermissionSyncJob implements ApplicationRunner {
     @Lazy
     IBZLiteFeignClient liteFeignClient;
 
+
     @Override
     public void run(ApplicationArguments args) {
         try {
@@ -74,6 +75,7 @@ public class PermissionSyncJob implements ApplicationRunner {
         catch (Exception ex) {
             log.error(String.format("向[lite]同步系统模型失败，请检查[lite]服务是否正常! [%s]",ex));
         }
+
 
 
     }

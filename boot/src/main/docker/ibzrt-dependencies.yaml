@@ -25,27 +25,27 @@ services:
     volumes:
       - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
 
-  prometheus:
-    container_name: prometheus
-    image: prom/prometheus:latest
-    volumes:
-      - ./prometheus/prometheus-standalone.yaml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    depends_on:
-      - nacos
-    restart: on-failure
-    networks:
-      - agent_network
-
-  grafana:
-    container_name: grafana
-    image: grafana/grafana:latest
-    ports:
-      - 3000:3000
-    restart: on-failure
-    networks:
-      - agent_network
+#  prometheus:
+#    container_name: prometheus
+#    image: prom/prometheus:latest
+#    volumes:
+#      - ./prometheus/prometheus-standalone.yaml:/etc/prometheus/prometheus.yml
+#    ports:
+#      - "9090:9090"
+#    depends_on:
+#      - nacos
+#    restart: on-failure
+#    networks:
+#      - agent_network
+#
+#  grafana:
+#    container_name: grafana
+#    image: grafana/grafana:latest
+#    ports:
+#      - 3000:3000
+#    restart: on-failure
+#    networks:
+#      - agent_network
 
 #  mysql_exporter:
 #    container_name: mysql_exporter

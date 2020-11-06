@@ -19,3 +19,5 @@ zuul:
       path: /net-disk/**
       serviceId: ${ibiz.ref.service.disk:ibzdisk-api}
       stripPrefix: false
+  sensitive-headers:
+  - Cookie,Set-Cookie,Authorization

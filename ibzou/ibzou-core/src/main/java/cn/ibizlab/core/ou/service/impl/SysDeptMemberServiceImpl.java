@@ -168,7 +168,6 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     public List<SysDeptMember> selectByDeptid(String deptid) {
         return baseMapper.selectByDeptid(deptid);
     }
-
     @Override
     public void removeByDeptid(String deptid) {
         this.remove(new QueryWrapper<SysDeptMember>().eq("deptid",deptid));
@@ -178,7 +177,6 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     public List<SysDeptMember> selectByUserid(String userid) {
         return baseMapper.selectByUserid(userid);
     }
-
     @Override
     public void removeByUserid(String userid) {
         this.remove(new QueryWrapper<SysDeptMember>().eq("userid",userid));
@@ -188,7 +186,6 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     public List<SysDeptMember> selectByPostid(String postid) {
         return baseMapper.selectByPostid(postid);
     }
-
     @Override
     public void removeByPostid(String postid) {
         this.remove(new QueryWrapper<SysDeptMember>().eq("postid",postid));
@@ -270,6 +267,7 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

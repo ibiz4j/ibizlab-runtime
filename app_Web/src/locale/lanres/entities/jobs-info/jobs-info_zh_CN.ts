@@ -68,6 +68,7 @@ export default {
 			timeout: "任务执行超时时间（秒）",
 			update_time: "更新时间",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

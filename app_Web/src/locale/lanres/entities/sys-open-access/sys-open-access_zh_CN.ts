@@ -54,6 +54,7 @@ export default {
 			region_id: "RegionId",
 			redirect_uri: "RedirectURI",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

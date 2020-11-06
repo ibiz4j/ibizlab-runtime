@@ -42,6 +42,7 @@ export default {
 			teamname: "组名称",
 			memo: "备注",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

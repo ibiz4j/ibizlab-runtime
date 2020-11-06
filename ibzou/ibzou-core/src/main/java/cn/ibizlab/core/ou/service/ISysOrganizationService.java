@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.ou.domain.SysOrganization;
 import cn.ibizlab.core.ou.filter.SysOrganizationSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -42,9 +41,10 @@ public interface ISysOrganizationService extends IService<SysOrganization>{
     @CacheEvict(value="sysorganization",allEntries=true)
     void saveBatch(List<SysOrganization> list) ;
     Page<SysOrganization> searchDefault(SysOrganizationSearchContext context) ;
-    List<SysOrganization> selectByParentorgid(String orgid) ;
+    List<SysOrganization> selectByParentorgid(String orgid);
+    List<SysOrganization> selectByParentorgid(Collection<String> ids);
     @CacheEvict(value="sysorganization",allEntries=true)
-    void removeByParentorgid(String orgid) ;
+    void removeByParentorgid(String orgid);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

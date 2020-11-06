@@ -49,6 +49,7 @@ export default {
 			postid: "岗位标识",
 			userid: "用户标识",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

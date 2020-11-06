@@ -36,10 +36,12 @@ public interface ISysRolePermissionService{
     boolean save(SysRolePermission et) ;
     void saveBatch(List<SysRolePermission> list) ;
     Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context) ;
-    List<SysRolePermission> selectByPermissionid(String permissionid) ;
-    void removeByPermissionid(String permissionid) ;
-    List<SysRolePermission> selectByRoleid(String roleid) ;
-    void removeByRoleid(String roleid) ;
+    List<SysRolePermission> selectByPermissionid(String permissionid);
+    void removeByPermissionid(Collection<String> ids);
+    void removeByPermissionid(String permissionid);
+    List<SysRolePermission> selectByRoleid(String roleid);
+    void removeByRoleid(Collection<String> ids);
+    void removeByRoleid(String roleid);
 
 }
 

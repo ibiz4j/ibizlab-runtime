@@ -54,6 +54,7 @@ export default {
 			modelversion: "模型版本",
 			modelenable: "模型是否启用",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

@@ -36,8 +36,8 @@ public interface ISysUserAuthService{
     boolean save(SysUserAuth et) ;
     void saveBatch(List<SysUserAuth> list) ;
     Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context) ;
-    List<SysUserAuth> selectByUserid(String userid) ;
-    void removeByUserid(String userid) ;
+    List<SysUserAuth> selectByUserid(String userid);
+    void removeByUserid(String userid);
 
 }
 

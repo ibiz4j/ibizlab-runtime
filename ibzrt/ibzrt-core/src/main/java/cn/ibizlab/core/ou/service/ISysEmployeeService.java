@@ -41,15 +41,19 @@ public interface ISysEmployeeService{
     @CacheEvict(value="sysemployee",allEntries=true)
     void saveBatch(List<SysEmployee> list) ;
     Page<SysEmployee> searchDefault(SysEmployeeSearchContext context) ;
-    List<SysEmployee> selectByMdeptid(String deptid) ;
+    List<SysEmployee> selectByMdeptid(String deptid);
+    void resetByMdeptid(String deptid);
+    void resetByMdeptid(Collection<String> ids);
     @CacheEvict(value="sysemployee",allEntries=true)
-    void removeByMdeptid(String deptid) ;
-    List<SysEmployee> selectByOrgid(String orgid) ;
+    void removeByMdeptid(String deptid);
+    List<SysEmployee> selectByOrgid(String orgid);
+    void resetByOrgid(String orgid);
+    void resetByOrgid(Collection<String> ids);
     @CacheEvict(value="sysemployee",allEntries=true)
-    void removeByOrgid(String orgid) ;
-    List<SysEmployee> selectByPostid(String postid) ;
+    void removeByOrgid(String orgid);
+    List<SysEmployee> selectByPostid(String postid);
     @CacheEvict(value="sysemployee",allEntries=true)
-    void removeByPostid(String postid) ;
+    void removeByPostid(String postid);
 
 }
 

@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.ou.domain.SysDepartment;
 import cn.ibizlab.core.ou.filter.SysDepartmentSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -42,12 +41,14 @@ public interface ISysDepartmentService extends IService<SysDepartment>{
     @CacheEvict(value="sysdepartment",allEntries=true)
     void saveBatch(List<SysDepartment> list) ;
     Page<SysDepartment> searchDefault(SysDepartmentSearchContext context) ;
-    List<SysDepartment> selectByParentdeptid(String deptid) ;
+    List<SysDepartment> selectByParentdeptid(String deptid);
+    List<SysDepartment> selectByParentdeptid(Collection<String> ids);
     @CacheEvict(value="sysdepartment",allEntries=true)
-    void removeByParentdeptid(String deptid) ;
-    List<SysDepartment> selectByOrgid(String orgid) ;
+    void removeByParentdeptid(String deptid);
+    List<SysDepartment> selectByOrgid(String orgid);
+    List<SysDepartment> selectByOrgid(Collection<String> ids);
     @CacheEvict(value="sysdepartment",allEntries=true)
-    void removeByOrgid(String orgid) ;
+    void removeByOrgid(String orgid);
     @CacheEvict(value="sysdepartment",allEntries=true)
     void saveByOrgid(String orgid,List<SysDepartment> list) ;
     /**

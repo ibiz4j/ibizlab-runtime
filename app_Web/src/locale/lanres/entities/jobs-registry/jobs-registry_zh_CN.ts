@@ -42,6 +42,7 @@ export default {
 			address: "执行地址",
 			status: "状态",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

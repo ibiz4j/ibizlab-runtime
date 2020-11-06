@@ -100,7 +100,11 @@ public class DictCatalog extends EntityMP implements Serializable {
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
-
+    @JsonIgnore
+    @JSONField(serialize = false)
+    @TableField(exist = false)
+    @JsonProperty("items")
+    private List<DictOption> options;
 
     /**
      * 设置 [代码]

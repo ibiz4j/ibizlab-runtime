@@ -46,6 +46,7 @@ export default {
 			identifier: "认证标识",
 			credential: "凭据",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

@@ -40,9 +40,10 @@ public interface ISysOrganizationService{
     @CacheEvict(value="sysorganization",allEntries=true)
     void saveBatch(List<SysOrganization> list) ;
     Page<SysOrganization> searchDefault(SysOrganizationSearchContext context) ;
-    List<SysOrganization> selectByParentorgid(String orgid) ;
+    List<SysOrganization> selectByParentorgid(String orgid);
+    List<SysOrganization> selectByParentorgid(Collection<String> ids);
     @CacheEvict(value="sysorganization",allEntries=true)
-    void removeByParentorgid(String orgid) ;
+    void removeByParentorgid(String orgid);
 
 }
 

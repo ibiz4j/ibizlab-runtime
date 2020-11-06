@@ -1,7 +1,7 @@
 package cn.ibizlab.util.errors;
 
 
-import org.springframework.dao.ConcurrencyFailureException;
+import org.springframework.dao.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -88,6 +88,15 @@ public class ExceptionTranslator implements ProblemHandling {
             .with("message", ErrorConstants.ERR_CONCURRENCY_FAILURE)
             .build();
         return create(ex, problem, request);
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    public ResponseEntity<Problem> handlerDataAccessFailure(DataAccessException ex, NativeWebRequest request){
+        Problem problem = Problem.builder()
+        .withStatus(Status.INTERNAL_SERVER_ERROR)
+        .with("message", ex.getMessage())
+        .build();
+        return create(ex, problem, request,createFailureAlert(ex.getClass().getSimpleName(), ex.getClass().getSimpleName(), ex.getMessage()));
     }
 
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {

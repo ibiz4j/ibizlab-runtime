@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.ou.domain.SysDeptMember;
 import cn.ibizlab.core.ou.filter.SysDeptMemberSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -38,12 +37,12 @@ public interface ISysDeptMemberService extends IService<SysDeptMember>{
     boolean save(SysDeptMember et) ;
     void saveBatch(List<SysDeptMember> list) ;
     Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context) ;
-    List<SysDeptMember> selectByDeptid(String deptid) ;
-    void removeByDeptid(String deptid) ;
-    List<SysDeptMember> selectByUserid(String userid) ;
-    void removeByUserid(String userid) ;
-    List<SysDeptMember> selectByPostid(String postid) ;
-    void removeByPostid(String postid) ;
+    List<SysDeptMember> selectByDeptid(String deptid);
+    void removeByDeptid(String deptid);
+    List<SysDeptMember> selectByUserid(String userid);
+    void removeByUserid(String userid);
+    List<SysDeptMember> selectByPostid(String postid);
+    void removeByPostid(String postid);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

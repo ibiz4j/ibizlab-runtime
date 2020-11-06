@@ -123,6 +123,7 @@ export default {
 			pdeptid: "上级部门",
 			leaderid: "分管领导标识",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},
@@ -143,6 +144,7 @@ export default {
 			orgid: "单位",
 			pdeptid: "上级部门",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},
@@ -257,6 +259,7 @@ export default {
 		},
 	},
 	depttree_treeview: {
+		nodata:"",
 		nodes: {
 			root: "默认根节点",
 		},

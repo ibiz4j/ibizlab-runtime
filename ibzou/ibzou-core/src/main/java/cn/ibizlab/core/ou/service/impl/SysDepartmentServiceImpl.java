@@ -99,6 +99,9 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Override
     @Transactional
     public boolean remove(String key) {
+        if(!ObjectUtils.isEmpty(sysdepartmentService.selectByParentdeptid(key)))
+            throw new BadRequestAlertException("删除数据失败，当前数据存在关系实体[SysDepartment]数据，无法删除!","","");
+        sysemployeeService.resetByMdeptid(key);
         boolean result=removeById(key);
         return result ;
     }
@@ -106,6 +109,9 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Override
     @Transactional
     public void removeBatch(Collection<String> idList) {
+        if(!ObjectUtils.isEmpty(sysdepartmentService.selectByParentdeptid(idList)))
+            throw new BadRequestAlertException("删除数据失败，当前数据存在关系实体[SysDepartment]数据，无法删除!","","");
+        sysemployeeService.resetByMdeptid(idList);
         removeByIds(idList);
     }
 
@@ -170,6 +176,10 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     public List<SysDepartment> selectByParentdeptid(String deptid) {
         return baseMapper.selectByParentdeptid(deptid);
     }
+    @Override
+    public List<SysDepartment> selectByParentdeptid(Collection<String> ids) {
+        return this.list(new QueryWrapper<SysDepartment>().in("deptid",ids));
+    }
 
     @Override
     public void removeByParentdeptid(String deptid) {
@@ -179,6 +189,10 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
 	@Override
     public List<SysDepartment> selectByOrgid(String orgid) {
         return baseMapper.selectByOrgid(orgid);
+    }
+    @Override
+    public List<SysDepartment> selectByOrgid(Collection<String> ids) {
+        return this.list(new QueryWrapper<SysDepartment>().in("orgid",ids));
     }
 
     @Override
@@ -303,6 +317,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         else
            return entities;
     }
+
 
 
 

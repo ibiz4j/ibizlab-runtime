@@ -128,6 +128,12 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
         context.setN_porgid_eq(orgid);
         return sysOrganizationFeignClient.searchDefault(context).getContent();
     }
+    @Override
+    public List<SysOrganization> selectByParentorgid(Collection<String> ids) {
+        //暂未支持
+        return null;
+    }
+
 
     @Override
     public void removeByParentorgid(String orgid) {
@@ -149,6 +155,7 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
         Page<SysOrganization> sysOrganizations=sysOrganizationFeignClient.searchDefault(context);
         return sysOrganizations;
     }
+
 
 
 
