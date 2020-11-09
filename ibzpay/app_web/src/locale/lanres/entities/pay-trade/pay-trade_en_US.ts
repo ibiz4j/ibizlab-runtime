@@ -51,6 +51,7 @@ export default {
 			totalamount: "订单金额",
 			accessname: "支付平台",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

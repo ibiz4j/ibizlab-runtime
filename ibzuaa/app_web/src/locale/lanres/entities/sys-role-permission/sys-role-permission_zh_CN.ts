@@ -71,6 +71,7 @@ export default {
 			sys_permissionname: "权限名称",
 			updatedate: "更新时间",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

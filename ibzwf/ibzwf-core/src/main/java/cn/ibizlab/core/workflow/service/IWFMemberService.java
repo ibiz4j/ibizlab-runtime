@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.workflow.domain.WFMember;
 import cn.ibizlab.core.workflow.filter.WFMemberSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -38,11 +37,11 @@ public interface IWFMemberService extends IService<WFMember>{
     boolean save(WFMember et) ;
     void saveBatch(List<WFMember> list) ;
     Page<WFMember> searchDefault(WFMemberSearchContext context) ;
-    List<WFMember> selectByGroupid(String id) ;
-    void removeByGroupid(String id) ;
+    List<WFMember> selectByGroupid(String id);
+    void removeByGroupid(String id);
     void saveByGroupid(String id,List<WFMember> list) ;
-    List<WFMember> selectByUserid(String id) ;
-    void removeByUserid(String id) ;
+    List<WFMember> selectByUserid(String id);
+    void removeByUserid(String id);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

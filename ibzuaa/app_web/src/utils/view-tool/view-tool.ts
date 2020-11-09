@@ -258,7 +258,7 @@ export class ViewTool {
                 return result;
             }
             const _item = ActionModel[key];
-            if(_item && _item['dataaccaction'] && UIService){
+            if(_item && _item['dataaccaction'] && UIService && UIService.isEnableDEMainState){
                 let dataActionResult:any;
                 if(Object.is(_item['actiontarget'],"NONE") || Object.is(_item['actiontarget'],"")){
                     dataActionResult = UIService.getResourceOPPrivs(_item['dataaccaction']);

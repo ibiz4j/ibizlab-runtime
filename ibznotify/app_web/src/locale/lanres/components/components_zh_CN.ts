@@ -11,6 +11,10 @@ export default {
         indexPage: '首页',
         continue: '继续浏览',
     },
+    appOrgSector:{
+      successSwitch:'切换成功',
+      errorSwitch:'切换失败',
+    },
     appAutocomplete: {
         error: '错误',
         miss: '缺少参数',

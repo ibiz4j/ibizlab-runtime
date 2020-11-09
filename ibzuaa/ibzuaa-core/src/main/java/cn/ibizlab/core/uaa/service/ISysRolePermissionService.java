@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.uaa.domain.SysRolePermission;
 import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -38,10 +37,12 @@ public interface ISysRolePermissionService extends IService<SysRolePermission>{
     boolean save(SysRolePermission et) ;
     void saveBatch(List<SysRolePermission> list) ;
     Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context) ;
-    List<SysRolePermission> selectByPermissionid(String permissionid) ;
-    void removeByPermissionid(String permissionid) ;
-    List<SysRolePermission> selectByRoleid(String roleid) ;
-    void removeByRoleid(String roleid) ;
+    List<SysRolePermission> selectByPermissionid(String permissionid);
+    void removeByPermissionid(Collection<String> ids);
+    void removeByPermissionid(String permissionid);
+    List<SysRolePermission> selectByRoleid(String roleid);
+    void removeByRoleid(Collection<String> ids);
+    void removeByRoleid(String roleid);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

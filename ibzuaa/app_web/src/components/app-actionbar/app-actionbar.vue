@@ -100,6 +100,8 @@ export default class AppActionBar extends Vue {
    * @memberof AppActionBar
    */
   public calcActionItemAuthState(data:any,ActionModel:any,UIService:any){
+    if(!UIService.isEnableDEMainState)
+      return;    
     for (const key in ActionModel) {
         if (!ActionModel.hasOwnProperty(key)) {
             return;

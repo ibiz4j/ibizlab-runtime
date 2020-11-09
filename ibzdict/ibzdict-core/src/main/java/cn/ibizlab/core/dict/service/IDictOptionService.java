@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.dict.domain.DictOption;
 import cn.ibizlab.core.dict.filter.DictOptionSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -38,8 +37,8 @@ public interface IDictOptionService extends IService<DictOption>{
     boolean save(DictOption et) ;
     void saveBatch(List<DictOption> list) ;
     Page<DictOption> searchDefault(DictOptionSearchContext context) ;
-    List<DictOption> selectByCatalogId(String id) ;
-    void removeByCatalogId(String id) ;
+    List<DictOption> selectByCatalogId(String id);
+    void removeByCatalogId(String id);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

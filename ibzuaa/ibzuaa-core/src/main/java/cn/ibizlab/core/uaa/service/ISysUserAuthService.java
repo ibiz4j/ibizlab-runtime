@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.filter.SysUserAuthSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -38,8 +37,8 @@ public interface ISysUserAuthService extends IService<SysUserAuth>{
     boolean save(SysUserAuth et) ;
     void saveBatch(List<SysUserAuth> list) ;
     Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context) ;
-    List<SysUserAuth> selectByUserid(String userid) ;
-    void removeByUserid(String userid) ;
+    List<SysUserAuth> selectByUserid(String userid);
+    void removeByUserid(String userid);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

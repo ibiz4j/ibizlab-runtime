@@ -162,7 +162,6 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
     public List<SysUserAuth> selectByUserid(String userid) {
         return baseMapper.selectByUserid(userid);
     }
-
     @Override
     public void removeByUserid(String userid) {
         this.remove(new QueryWrapper<SysUserAuth>().eq("userid",userid));
@@ -223,6 +222,7 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

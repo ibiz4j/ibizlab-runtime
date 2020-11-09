@@ -40,7 +40,6 @@ export default {
             show: "Show",
             records: "records",
             totle: "totle",
-            noData: "No data",
             valueVail: "Value cannot be empty",
             group:"Group",
             other:"Other",

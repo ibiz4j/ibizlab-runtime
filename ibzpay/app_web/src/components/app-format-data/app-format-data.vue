@@ -47,7 +47,7 @@ export default class AppFormatData extends Vue {
    * @memberof AppFormatData
    */
   getcurValue(){
-    if(this.data){
+    if(this.data || this.data == 0){
       if(Object.is(this.dataType,"DECIMAL") || Object.is(this.dataType,"FLOAT") || Object.is(this.dataType,"CURRENCY")){
         let number = Number(this.data);
         let precision = Number(this.precision);

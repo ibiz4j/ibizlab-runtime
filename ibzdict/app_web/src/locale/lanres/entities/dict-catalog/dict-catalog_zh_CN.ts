@@ -56,6 +56,7 @@ export default {
 			memo: "备注",
 			updatedate: "最后修改时间",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

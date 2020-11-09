@@ -97,6 +97,7 @@ import AppFormPart from './components/app-form-part/app-form-part.vue'
 import AppAlert from './components/app-alert/app-alert.vue'
 import AppAlertGroup from './components/app-alert-group/app-alert-group.vue'
 import AppRawItem from './components/app-rawitem/app-rawitem.vue'
+import AppImageRomate from './components/app-image-romate/app-image-romate.vue'
 
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
@@ -209,5 +210,6 @@ export const AppComponents = {
         v.component('app-alert', AppAlert);
         v.component('app-alert-group', AppAlertGroup);
         v.component('app-rawitem',AppRawItem);
+        v.component('app-image-romate', AppImageRomate)
     },
 };

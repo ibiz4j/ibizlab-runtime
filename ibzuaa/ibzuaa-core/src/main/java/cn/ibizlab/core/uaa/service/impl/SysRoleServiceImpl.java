@@ -96,6 +96,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     @Transactional
     public boolean remove(String key) {
+        sysrolepermissionService.removeByRoleid(key);
+        sysuserroleService.removeByRoleid(key);
         boolean result=removeById(key);
         return result ;
     }
@@ -103,6 +105,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     @Transactional
     public void removeBatch(Collection<String> idList) {
+        sysrolepermissionService.removeByRoleid(idList);
+        sysuserroleService.removeByRoleid(idList);
         removeByIds(idList);
     }
 
@@ -167,7 +171,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     public List<SysRole> selectByProleid(String roleid) {
         return baseMapper.selectByProleid(roleid);
     }
-
     @Override
     public void removeByProleid(String roleid) {
         this.remove(new QueryWrapper<SysRole>().eq("proleid",roleid));
@@ -248,6 +251,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         else
            return entities;
     }
+
 
 
 

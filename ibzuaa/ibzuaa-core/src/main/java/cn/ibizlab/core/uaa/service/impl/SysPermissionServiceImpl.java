@@ -87,6 +87,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     @Override
     @Transactional
     public boolean remove(String key) {
+        sysrolepermissionService.removeByPermissionid(key);
         boolean result=removeById(key);
         return result ;
     }
@@ -94,6 +95,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     @Override
     @Transactional
     public void removeBatch(Collection<String> idList) {
+        sysrolepermissionService.removeByPermissionid(idList);
         removeByIds(idList);
     }
 
@@ -190,6 +192,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

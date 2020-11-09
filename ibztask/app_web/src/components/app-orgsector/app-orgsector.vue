@@ -22,6 +22,7 @@
   </div>
 </template>
 <script lang = 'ts'>
+import { Http } from '@/utils/http/http';
 import { Vue, Component, Inject } from "vue-property-decorator";
 
 @Component({})
@@ -110,17 +111,33 @@ export default class AppOrgSector extends Vue {
     let item: any = this.selectedOrgArray.find((_item: any) => {
       return _item.srforgsectorid === data;
     });
-    if (item.srforgsectorid && item.srforgsectorname) {
-      this.selectedOrgId = item.srforgsectorid;
-      this.selectedOrgName = item.srforgsectorname;
-      this.reload();
-
-    }
-    this.updateStoreOrgData(item);
+    this.switchDepartment(data).then((response:any) =>{
+        if (response.status == 200) {
+          if (item.srforgsectorid && item.srforgsectorname) {
+            this.selectedOrgId = item.srforgsectorid;
+            this.selectedOrgName = item.srforgsectorname;
+          }
+          this.updateStoreOrgData(item);
+          this.reload();
+        }else{
+          this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data?response.data.message:(this.$t('components.appOrgSector.errorSwitch') as string) });
+        }
+    }).catch((error:any) =>{
+        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('components.appOrgSector.errorSwitch') as string) });
+    })
   }
 
   /**
-   * 更新仓库Org信息
+   * 调用远端切换部门接口
+   *
+   * @memberof AppOrgSector
+   */
+  public async switchDepartment(data:any){
+    return await Http.getInstance().post(`/oumaps/switch`,data,false);
+  }
+
+  /**
+   * 更新仓库部门信息
    *
    * @memberof AppOrgSector
    */

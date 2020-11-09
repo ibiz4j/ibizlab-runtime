@@ -165,7 +165,6 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     public List<WFMember> selectByGroupid(String id) {
         return baseMapper.selectByGroupid(id);
     }
-
     @Override
     public void removeByGroupid(String id) {
         this.remove(new QueryWrapper<WFMember>().eq("groupid",id));
@@ -207,7 +206,6 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     public List<WFMember> selectByUserid(String id) {
         return baseMapper.selectByUserid(id);
     }
-
     @Override
     public void removeByUserid(String id) {
         this.remove(new QueryWrapper<WFMember>().eq("userid",id));
@@ -302,6 +300,7 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         else
            return entities;
     }
+
 
 
 

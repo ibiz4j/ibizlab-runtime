@@ -16,7 +16,7 @@
         @row-dblclick="rowDBLClick($event)"  
         ref='multipleTable' :data="items" :show-header="!isHideHeader">
             <template slot="empty">
-                {{$t('app.gridpage.noData')}} 
+                {{$t('entities.msgopenaccess.main_grid.nodata')}} 
             </template>
             <template v-if="!isSingleSelect">
                 <el-table-column align="center" type='selection' :width="checkboxColWidth"></el-table-column>
@@ -581,6 +581,14 @@ export default class MainBase extends Vue implements ControlInterface {
     public isDisplay:boolean = true;
 
     /**
+     * 表格行编辑项校验错误提示信息
+     *
+     * @type {boolean}
+     * @memberof MainBase
+     */
+    public errorMessages: Array<any> = [];
+
+    /**
      * 部件刷新
      *
      * @param {any} args
@@ -620,6 +628,7 @@ export default class MainBase extends Vue implements ControlInterface {
             show: true,
             unit: 'PX',
             isEnableRowEdit: false,
+            enableCond: 3 ,
         },
         {
             name: 'open_type',
@@ -628,6 +637,7 @@ export default class MainBase extends Vue implements ControlInterface {
             show: true,
             unit: 'PX',
             isEnableRowEdit: false,
+            enableCond: 3 ,
         },
         {
             name: 'access_key',
@@ -636,6 +646,7 @@ export default class MainBase extends Vue implements ControlInterface {
             show: true,
             unit: 'PX',
             isEnableRowEdit: false,
+            enableCond: 3 ,
         },
         {
             name: 'region_id',
@@ -644,6 +655,7 @@ export default class MainBase extends Vue implements ControlInterface {
             show: true,
             unit: 'PX',
             isEnableRowEdit: false,
+            enableCond: 3 ,
         },
     ]
 
@@ -754,6 +766,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public async validateAll(){
+        this.errorMessages = [];
         let validateState = true;
         let index = -1;
         for(let item of this.items){
@@ -762,6 +775,7 @@ export default class MainBase extends Vue implements ControlInterface {
             for(let property of Object.keys(this.rules)){
               if(!await this.validate(property,item,index)){
                 validateState = false;
+                this.errorMessages.push(this.gridItemsModel[index][property].error);
               }
             }
           }
@@ -1090,14 +1104,14 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formatExcelData(filterVal:any, jsonData:any) {
         let codelistColumns:Array<any> = [
-          {
-            name: 'open_type',
-            srfkey: 'OpenAccessType',
-            codelistType : 'STATIC',
-            renderMode: 'other',
-            textSeparator: '、',
-            valueSeparator: ',',
-          },
+            {
+                name: 'open_type',
+                srfkey: 'OpenAccessType',
+                codelistType : 'STATIC',
+                renderMode: 'other',
+                textSeparator: '、',
+                valueSeparator: ',',
+            },
         ];
         let _this = this;
         for (const codelist of codelistColumns) {
@@ -1129,7 +1143,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getCodelistValue(items: any[], value: any, codelist: any,){
-        if(!value){
+        if(!value && value !== 0 && value !== false){
             return this.$t('codelist.'+codelist.srfkey+'.empty');
         }
         if (items) {
@@ -1705,8 +1719,16 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             }
         }
-        if(!await this.validateAll()){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.rulesException') as string) });
+        if (!await this.validateAll()) {
+            if(this.errorMessages && this.errorMessages.length > 0) {
+                let descMessage: string = '';
+                this.errorMessages.forEach((message: any) => {
+                    descMessage = descMessage + '<p>' + message + '<p>';
+                })
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: descMessage });
+            } else {
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.rulesException') as string) });
+            }
             return [];
         }
         let successItems:any = [];
@@ -1846,9 +1868,10 @@ export default class MainBase extends Vue implements ControlInterface {
         if (!mode || (mode && Object.is(mode, ''))) {
             return;
         }
+        let tempContext: any = this.$util.deepCopy(this.context);
         const arg: any = JSON.parse(JSON.stringify(data));
         Object.assign(arg,{viewparams:this.viewparams});
-        const post: Promise<any> = this.service.frontLogic(mode,JSON.parse(JSON.stringify(this.context)),arg, showloading);
+        const post: Promise<any> = this.service.frontLogic(mode,JSON.parse(JSON.stringify(tempContext)),arg, showloading);
         post.then((response: any) => {
             if (!response || response.status !== 200) {
                 this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.gridpage.formitemFailed') as string) });
@@ -2087,6 +2110,24 @@ export default class MainBase extends Vue implements ControlInterface {
             reject(response);
         });
         })
+    }
+
+    /**
+     * 获取表格列禁用状态
+     *
+     * @memberof MainBase
+     */
+    public  getColumnDisabled(data:any,name:string){
+        if(this.allColumns || Array.isArray(this.allColumns)){
+            const curColumn:any = this.allColumns.find((item:any) =>{
+                return item.name === name;
+            })
+            if(curColumn.hasOwnProperty('enableCond')){
+                return data.srfuf == 1 ? (curColumn.enableCond & 2) !== 2 : (curColumn.enableCond & 1) !== 1
+            }else{
+                return false;
+            }
+        }
     }
 
 }

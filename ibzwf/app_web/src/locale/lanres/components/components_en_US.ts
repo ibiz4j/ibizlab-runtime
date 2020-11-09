@@ -11,6 +11,10 @@ export default {
         indexPage: 'home page',
         continue: 'to continue browsing',
     },
+    appOrgSector:{
+      successSwitch:'The switch was successful',
+      errorSwitch:'The switchover failed',
+    },
     appAutocomplete: {
         error: 'Error',
         miss: 'Missing parameter ',

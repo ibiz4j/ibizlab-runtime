@@ -46,7 +46,6 @@ export default {
             show: "显示",
             records: "条",
             totle: "共",
-            noData: "无数据",
             valueVail: "值不能为空",
             group:"分组",
             other:"其他",

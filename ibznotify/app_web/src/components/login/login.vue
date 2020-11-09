@@ -183,6 +183,9 @@ export default class Login extends Vue {
                     localStorage.setItem('token', data.token);
                     this.setCookie('ibzuaa-token',data.token,0);
                 }
+                if(data && data.user){
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                }
                 // 设置cookie,保存账号密码7天
                 this.setCookie("loginname",loginname, 7);
                 // 跳转首页

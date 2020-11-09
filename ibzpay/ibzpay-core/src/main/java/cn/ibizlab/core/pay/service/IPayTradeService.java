@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.pay.domain.PayTrade;
 import cn.ibizlab.core.pay.filter.PayTradeSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -38,8 +37,8 @@ public interface IPayTradeService extends IService<PayTrade>{
     boolean save(PayTrade et) ;
     void saveBatch(List<PayTrade> list) ;
     Page<PayTrade> searchDefault(PayTradeSearchContext context) ;
-    List<PayTrade> selectByAccessId(String id) ;
-    void removeByAccessId(String id) ;
+    List<PayTrade> selectByAccessId(String id);
+    void removeByAccessId(String id);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

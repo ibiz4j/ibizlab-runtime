@@ -58,6 +58,7 @@ export default {
 			fail_retry_count: "失败重试次数",
 			create_time: "创建时间",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

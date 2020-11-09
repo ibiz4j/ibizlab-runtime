@@ -21,6 +21,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -34,6 +35,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":2,
     "major_field":0
     },
     {
@@ -47,6 +49,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":3,
     "major_field":1
     },
     {
@@ -60,6 +63,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":4,
     "major_field":0
     },
     {
@@ -73,6 +77,7 @@
     "data_type":"VARCHAR",
     "data_length":255,
     "key_field":0,
+    "show_order":5,
     "major_field":0
     },
     {
@@ -86,6 +91,7 @@
     "data_type":"INT",
     "predefined":"LOGICVALID",
     "key_field":0,
+    "show_order":7,
     "major_field":0
     },
     {
@@ -99,6 +105,7 @@
     "data_type":"DATETIME",
     "predefined":"UPDATEDATE",
     "key_field":0,
+    "show_order":8,
     "major_field":0
     }
     ],
@@ -133,6 +140,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":1,
+    "show_order":1,
     "major_field":0
     },
     {
@@ -151,6 +159,7 @@
     "data_length":100,
     "key_field":0,
     "union_key":"KEY1",
+    "show_order":2,
     "major_field":0
     },
     {
@@ -168,6 +177,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":3,
     "major_field":0
     },
     {
@@ -182,6 +192,7 @@
     "data_length":40,
     "key_field":0,
     "union_key":"KEY2",
+    "show_order":4,
     "major_field":0
     },
     {
@@ -195,6 +206,7 @@
     "data_type":"VARCHAR",
     "data_length":100,
     "key_field":0,
+    "show_order":5,
     "major_field":1
     },
     {
@@ -208,6 +220,7 @@
     "data_type":"VARCHAR",
     "data_length":40,
     "key_field":0,
+    "show_order":6,
     "major_field":0
     },
     {
@@ -221,6 +234,7 @@
     "data_type":"VARCHAR",
     "data_length":500,
     "key_field":0,
+    "show_order":7,
     "major_field":0
     },
     {
@@ -234,6 +248,7 @@
     "data_type":"VARCHAR",
     "data_length":500,
     "key_field":0,
+    "show_order":8,
     "major_field":0
     },
     {
@@ -247,6 +262,7 @@
     "data_type":"VARCHAR",
     "data_length":255,
     "key_field":0,
+    "show_order":9,
     "major_field":0
     },
     {
@@ -260,6 +276,7 @@
     "physical_field":1,
     "data_type":"INT",
     "key_field":0,
+    "show_order":10,
     "major_field":0
     },
     {
@@ -273,6 +290,7 @@
     "physical_field":1,
     "data_type":"INT",
     "key_field":0,
+    "show_order":11,
     "major_field":0
     },
     {
@@ -285,6 +303,7 @@
     "physical_field":1,
     "data_type":"INT",
     "key_field":0,
+    "show_order":12,
     "major_field":0
     },
     {
@@ -298,6 +317,7 @@
     "data_type":"VARCHAR",
     "data_length":1000,
     "key_field":0,
+    "show_order":13,
     "major_field":0
     },
     {
@@ -311,6 +331,7 @@
     "data_type":"DATETIME",
     "predefined":"UPDATEDATE",
     "key_field":0,
+    "show_order":18,
     "major_field":0
     }
     ],

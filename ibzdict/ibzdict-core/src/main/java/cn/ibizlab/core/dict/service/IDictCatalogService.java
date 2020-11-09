@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.dict.domain.DictCatalog;
 import cn.ibizlab.core.dict.filter.DictCatalogSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

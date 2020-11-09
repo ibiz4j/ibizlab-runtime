@@ -40,6 +40,7 @@ export default {
 			identity_type: "认证类型",
 			identifier: "认证标识",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

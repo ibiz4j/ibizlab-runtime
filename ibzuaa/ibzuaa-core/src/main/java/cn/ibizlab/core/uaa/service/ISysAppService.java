@@ -36,8 +36,8 @@ public interface ISysAppService{
     boolean save(SysApp et) ;
     void saveBatch(List<SysApp> list) ;
     Page<SysApp> searchDefault(SysAppSearchContext context) ;
-    List<SysApp> selectBySystemid(String pssystemid) ;
-    void removeBySystemid(String pssystemid) ;
+    List<SysApp> selectBySystemid(String pssystemid);
+    void removeBySystemid(String pssystemid);
 
 }
 

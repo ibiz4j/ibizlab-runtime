@@ -53,6 +53,7 @@ export default {
 			open_type: "接入平台类型",
 			accessname: "接入平台",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

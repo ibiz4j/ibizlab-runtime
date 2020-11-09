@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.uaa.domain.SysUserRole;
 import cn.ibizlab.core.uaa.filter.SysUserRoleSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -38,10 +37,11 @@ public interface ISysUserRoleService extends IService<SysUserRole>{
     boolean save(SysUserRole et) ;
     void saveBatch(List<SysUserRole> list) ;
     Page<SysUserRole> searchDefault(SysUserRoleSearchContext context) ;
-    List<SysUserRole> selectByRoleid(String roleid) ;
-    void removeByRoleid(String roleid) ;
-    List<SysUserRole> selectByUserid(String userid) ;
-    void removeByUserid(String userid) ;
+    List<SysUserRole> selectByRoleid(String roleid);
+    void removeByRoleid(Collection<String> ids);
+    void removeByRoleid(String roleid);
+    List<SysUserRole> selectByUserid(String userid);
+    void removeByUserid(String userid);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

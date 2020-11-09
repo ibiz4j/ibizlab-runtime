@@ -6,9 +6,9 @@ public class EntityClient extends EntityBase {
 
     @Override
     public void modify(String field,Object val) {
+        getExtensionparams().put("dirtyflagenable",true);
         if(val==null){
             this.getFocusNull().add(field.toLowerCase());
-            getExtensionparams().put("dirtyflagenable",true);
             getExtensionparams().put(field.toLowerCase()+"dirtyflag",true);
         }
         else{

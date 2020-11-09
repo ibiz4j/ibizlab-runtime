@@ -158,6 +158,8 @@ export default class AppFormGroup extends Vue {
      * @memberof AppFormGroup
      */
     public calcActionItemAuthState(data:any,ActionModel:any,UIService:any){
+        if(!UIService.isEnableDEMainState)
+            return;
         for (const key in ActionModel) {
             if (!ActionModel.hasOwnProperty(key)) {
                 return;

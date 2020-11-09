@@ -70,6 +70,7 @@ export default {
 			mdeptname: "主部门",
 			sys_rolename: "角色名称",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

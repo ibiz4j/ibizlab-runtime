@@ -59,6 +59,7 @@ public class AppController {
 			appData.put("enablepermissionvalid",false);
 		else
 			appData.put("enablepermissionvalid",enablePermissionValid);
+		fillAppData(appData);
 		return ResponseEntity.status(HttpStatus.OK).body(appData);
 	}
 
@@ -86,5 +87,13 @@ public class AppController {
 		if(StringUtils.isEmpty(userId))
 			throw new BadRequestAlertException("获取配置失败，参数缺失","IBZConfig",configType);
 		return ResponseEntity.ok(ibzConfigService.getConfig(configType,targetType,userId));
+	}
+
+	/**
+	* 应用参数扩展
+	* @param appData
+	*/
+	protected void fillAppData(JSONObject appData){
+
 	}
 }

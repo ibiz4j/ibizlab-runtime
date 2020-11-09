@@ -4,157 +4,157 @@ server:
 #zuul网关路由设置
 zuul:
   routes:
-      dict_catalog:
-        path: /dict_catalogs/**
-        serviceId: ${ibiz.ref.service.ibzdict-api:ibzdict-api}
-        stripPrefix: false
-      dict_option:
-        path: /dict_options/**
-        serviceId: ${ibiz.ref.service.ibzdict-api:ibzdict-api}
-        stripPrefix: false
-      jobs_info:
-        path: /jobs_infos/**
-        serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-        stripPrefix: false
-      jobs_lock:
-        path: /jobs_locks/**
-        serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-        stripPrefix: false
-      jobs_log:
-        path: /jobs_logs/**
-        serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-        stripPrefix: false
-      jobs_registry:
-        path: /jobs_registries/**
-        serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-        stripPrefix: false
-      sd_file:
-        path: /sd_files/**
-        serviceId: ${ibiz.ref.service.ibzdisk-api:ibzdisk-api}
-        stripPrefix: false
-      sys_app:
-        path: /sys_apps/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_authlog:
-        path: /sys_authlogs/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_dept:
-        path: /sys_depts/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      sys_deptmember:
-        path: /sys_deptmembers/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      sys_emp:
-        path: /sys_emps/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      sys_open_access:
-        path: /sys_open_accesses/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_org:
-        path: /sys_orgs/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      sys_pssystem:
-        path: /sys_pssystems/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_permission:
-        path: /sys_permissions/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_post:
-        path: /sys_posts/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      sys_role:
-        path: /sys_roles/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_role_permission:
-        path: /sys_role_permissions/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_team:
-        path: /sys_teams/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      sys_teammember:
-        path: /sys_teammembers/**
-        serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
-        stripPrefix: false
-      sys_user:
-        path: /sys_users/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_user_auth:
-        path: /sys_user_auths/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      sys_user_role:
-        path: /sys_user_roles/**
-        serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-        stripPrefix: false
-      wf_group:
-        path: /wf_groups/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_group_member:
-        path: /wf_group_members/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_definition:
-        path: /wf_definitions/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_instance:
-        path: /wf_instances/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_definition_node:
-        path: /wf_definition_nodes/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_model:
-        path: /wf_models/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_pssystem:
-        path: /wf_pssystems/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_task:
-        path: /wf_tasks/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_task_way:
-        path: /wf_task_ways/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      wf_user:
-        path: /wf_users/**
-        serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-        stripPrefix: false
-      loginv7:
-        path: /v7/login
-        serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
-        stripPrefix: false
-      changepwd:
-        path: /v7/changepwd
-        serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
-        stripPrefix: false
-      uaa:
-        path: /uaa/**
-        serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
-        stripPrefix: false
-      config:
-        path: /configs/**
-        serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
-        stripPrefix: false
+    dict_catalog:
+      path: /dict_catalogs/**
+      serviceId: ${ibiz.ref.service.ibzdict-api:ibzdict-api}
+      stripPrefix: false
+    dict_option:
+      path: /dict_options/**
+      serviceId: ${ibiz.ref.service.ibzdict-api:ibzdict-api}
+      stripPrefix: false
+    jobs_info:
+      path: /jobs_infos/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    jobs_lock:
+      path: /jobs_locks/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    jobs_log:
+      path: /jobs_logs/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    jobs_registry:
+      path: /jobs_registries/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    sd_file:
+      path: /sd_files/**
+      serviceId: ${ibiz.ref.service.ibzdisk-api:ibzdisk-api}
+      stripPrefix: false
+    sys_app:
+      path: /sys_apps/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_authlog:
+      path: /sys_authlogs/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_dept:
+      path: /sys_depts/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_deptmember:
+      path: /sys_deptmembers/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_emp:
+      path: /sys_emps/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_open_access:
+      path: /sys_open_accesses/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_org:
+      path: /sys_orgs/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_pssystem:
+      path: /sys_pssystems/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_permission:
+      path: /sys_permissions/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_post:
+      path: /sys_posts/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_role:
+      path: /sys_roles/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_role_permission:
+      path: /sys_role_permissions/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_team:
+      path: /sys_teams/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_teammember:
+      path: /sys_teammembers/**
+      serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
+      stripPrefix: false
+    sys_user:
+      path: /sys_users/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_user_auth:
+      path: /sys_user_auths/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    sys_user_role:
+      path: /sys_user_roles/**
+      serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    wf_group:
+      path: /wf_groups/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_group_member:
+      path: /wf_group_members/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_definition:
+      path: /wf_definitions/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_instance:
+      path: /wf_instances/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_definition_node:
+      path: /wf_definition_nodes/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_model:
+      path: /wf_models/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_pssystem:
+      path: /wf_pssystems/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_task:
+      path: /wf_tasks/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_task_way:
+      path: /wf_task_ways/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_user:
+      path: /wf_users/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    loginv7:
+      path: /v7/login
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    changepwd:
+      path: /v7/changepwd
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    uaa:
+      path: /uaa/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    config:
+      path: /configs/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

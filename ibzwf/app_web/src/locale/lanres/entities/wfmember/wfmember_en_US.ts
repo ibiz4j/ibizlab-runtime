@@ -51,6 +51,7 @@ export default {
 			mdeptname: "主部门",
 			groupname: "用户组",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

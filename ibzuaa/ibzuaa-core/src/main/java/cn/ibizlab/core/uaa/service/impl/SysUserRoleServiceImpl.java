@@ -165,6 +165,10 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     public List<SysUserRole> selectByRoleid(String roleid) {
         return baseMapper.selectByRoleid(roleid);
     }
+    @Override
+    public void removeByRoleid(Collection<String> ids) {
+        this.remove(new QueryWrapper<SysUserRole>().in("sys_roleid",ids));
+    }
 
     @Override
     public void removeByRoleid(String roleid) {
@@ -175,7 +179,6 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     public List<SysUserRole> selectByUserid(String userid) {
         return baseMapper.selectByUserid(userid);
     }
-
     @Override
     public void removeByUserid(String userid) {
         this.remove(new QueryWrapper<SysUserRole>().eq("sys_userid",userid));
@@ -249,6 +252,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

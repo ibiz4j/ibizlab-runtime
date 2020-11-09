@@ -61,6 +61,7 @@ export default {
 			sys_permissionid: "资源标识",
 			sys_permissionname: "资源名称",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

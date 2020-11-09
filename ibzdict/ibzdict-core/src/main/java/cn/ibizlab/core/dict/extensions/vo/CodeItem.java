@@ -23,14 +23,14 @@ public class CodeItem
 	private String id;
 	private Object value;
 	private String label;
-	@JSONField(name = "items")
-	@JsonProperty("items")
+	@JsonIgnore
+	@JSONField(serialize = false)
 	private List<CodeItem> children;
 	private String iconClass;
 	private String filter;
 	private Boolean disabled;
-	@JsonIgnore
-	@JSONField(serialize = false)
+	@JSONField(name = "pvalue")
+	@JsonProperty("pvalue")
 	private String parent;
 	private Map<String,Object> extension;
 

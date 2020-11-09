@@ -87,9 +87,9 @@ public class DictCoreService
             );
         });
 
-        List<CodeItem> codeItemTreeList = new ArrayList<CodeItem>();
-        codeItemTreeList = loopCodeItem(list, "");
-        catalog.setOptions(codeItemTreeList);
+//        List<CodeItem> codeItemTreeList = new ArrayList<CodeItem>();
+//        codeItemTreeList = loopCodeItem(list, "");
+        catalog.setOptions(list);
 
         return catalog;
     }

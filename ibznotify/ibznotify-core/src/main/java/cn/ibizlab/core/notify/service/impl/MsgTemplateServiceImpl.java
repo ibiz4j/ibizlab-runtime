@@ -162,7 +162,6 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
     public List<MsgTemplate> selectByAccessId(String id) {
         return baseMapper.selectByAccessId(id);
     }
-
     @Override
     public void removeByAccessId(String id) {
         this.remove(new QueryWrapper<MsgTemplate>().eq("accessid",id));
@@ -224,6 +223,7 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

@@ -60,6 +60,7 @@ export default {
 			orgname: "单位名称",
 			mdeptname: "主部门名称",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

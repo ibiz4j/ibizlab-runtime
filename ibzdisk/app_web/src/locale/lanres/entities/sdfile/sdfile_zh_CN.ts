@@ -52,6 +52,7 @@ export default {
 			createdate: "创建日期",
 			updatedate: "更新时间",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

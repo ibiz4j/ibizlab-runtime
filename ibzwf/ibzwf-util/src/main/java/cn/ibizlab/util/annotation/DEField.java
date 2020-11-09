@@ -2,6 +2,7 @@ package cn.ibizlab.util.annotation;
 
 import cn.ibizlab.util.enums.DEFieldDefaultValueType;
 import cn.ibizlab.util.enums.DEPredefinedFieldType;
+import cn.ibizlab.util.enums.DupCheck;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -66,5 +67,14 @@ public @interface DEField
 	 * @return
 	 */
     String format() default "";
+	/**
+	 * 重复性检查
+	 * @return
+	 */
+	DupCheck dupCheck() default DupCheck.NONE;
+	/**
+	 * 范围属性
+	 */
+	String dupCheckField() default "";
 }
 

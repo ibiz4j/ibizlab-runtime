@@ -76,6 +76,7 @@ export default {
 			updatedate: "更新时间",
 			proleid: "父角色标识",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

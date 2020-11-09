@@ -61,6 +61,7 @@ export default {
 			access_key: "AccessKey(AppId)",
 			region_id: "RegionId（CorpId)",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

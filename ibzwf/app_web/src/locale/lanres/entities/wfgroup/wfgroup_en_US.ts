@@ -52,6 +52,7 @@ export default {
 			groupname: "组名称",
 			groupscope: "范围",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

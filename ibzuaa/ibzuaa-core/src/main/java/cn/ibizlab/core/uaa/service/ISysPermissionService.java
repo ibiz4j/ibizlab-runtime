@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.uaa.domain.SysPermission;
 import cn.ibizlab.core.uaa.filter.SysPermissionSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

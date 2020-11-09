@@ -234,11 +234,11 @@ export default class SysUserRoleEditView2Base extends Vue {
     @Watch('viewdata')
     onViewData(newVal: any, oldVal: any) {
         const _this: any = this;
+        
         if (!Object.is(newVal, oldVal) && _this.engine) {
             this.$nextTick(()=>{
               _this.parseViewParam();
               _this.engine.load();
-              
             });
         } else if(!Object.is(newVal, oldVal) && _this.refresh && _this.refresh instanceof Function) {
             _this.refresh();
@@ -590,7 +590,7 @@ export default class SysUserRoleEditView2Base extends Vue {
         });
         if(_this.portletState){
             _this.portletStateEvent = _this.portletState.subscribe((res:any) =>{
-                if(!Object.is(res.name,'calendar-view9')){
+                if(!Object.is(res.name,'SysUserRoleEditView2')){
                     return;
                 }
                 if(Object.is(res.action,'refresh') && _this.refresh && _this.refresh instanceof Function){

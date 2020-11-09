@@ -101,7 +101,7 @@ public class ExceptionTranslator implements ProblemHandling {
 
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("X-ibz-error", "error." + errorKey);
+        headers.add("X-ibz-error", errorKey);
         headers.add("X-ibz-params", entityName);
         return headers;
     }

@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.notify.domain.MsgTemplate;
 import cn.ibizlab.core.notify.filter.MsgTemplateSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -42,9 +41,9 @@ public interface IMsgTemplateService extends IService<MsgTemplate>{
     @CacheEvict(value="msgtemplate",allEntries=true)
     void saveBatch(List<MsgTemplate> list) ;
     Page<MsgTemplate> searchDefault(MsgTemplateSearchContext context) ;
-    List<MsgTemplate> selectByAccessId(String id) ;
+    List<MsgTemplate> selectByAccessId(String id);
     @CacheEvict(value="msgtemplate",allEntries=true)
-    void removeByAccessId(String id) ;
+    void removeByAccessId(String id);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

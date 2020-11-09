@@ -74,6 +74,7 @@ export default {
 			extension: "扩展",
 			updatedate: "最后修改时间",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},
@@ -92,6 +93,7 @@ export default {
 			expired: "过期/失效",
 			extension: "扩展",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

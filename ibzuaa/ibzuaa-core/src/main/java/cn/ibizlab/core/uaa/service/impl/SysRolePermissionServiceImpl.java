@@ -165,6 +165,10 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     public List<SysRolePermission> selectByPermissionid(String permissionid) {
         return baseMapper.selectByPermissionid(permissionid);
     }
+    @Override
+    public void removeByPermissionid(Collection<String> ids) {
+        this.remove(new QueryWrapper<SysRolePermission>().in("sys_permissionid",ids));
+    }
 
     @Override
     public void removeByPermissionid(String permissionid) {
@@ -174,6 +178,10 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
 	@Override
     public List<SysRolePermission> selectByRoleid(String roleid) {
         return baseMapper.selectByRoleid(roleid);
+    }
+    @Override
+    public void removeByRoleid(Collection<String> ids) {
+        this.remove(new QueryWrapper<SysRolePermission>().in("sys_roleid",ids));
     }
 
     @Override
@@ -248,6 +256,7 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

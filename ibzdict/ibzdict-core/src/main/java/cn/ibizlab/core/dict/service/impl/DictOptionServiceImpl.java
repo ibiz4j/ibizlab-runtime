@@ -162,7 +162,6 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     public List<DictOption> selectByCatalogId(String id) {
         return baseMapper.selectByCatalogId(id);
     }
-
     @Override
     public void removeByCatalogId(String id) {
         this.remove(new QueryWrapper<DictOption>().eq("cid",id));
@@ -223,6 +222,7 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

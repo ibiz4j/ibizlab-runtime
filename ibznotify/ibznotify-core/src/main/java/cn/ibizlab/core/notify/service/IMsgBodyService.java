@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.notify.domain.MsgBody;
 import cn.ibizlab.core.notify.filter.MsgBodySearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

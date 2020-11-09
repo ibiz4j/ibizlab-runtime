@@ -57,6 +57,7 @@ export default {
 			addr: "地址",
 			visabled: "可见",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

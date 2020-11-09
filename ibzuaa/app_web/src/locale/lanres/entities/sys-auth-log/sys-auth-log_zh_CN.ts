@@ -27,6 +27,7 @@ export default {
 			useragent: "客户端",
 			domain: "域",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

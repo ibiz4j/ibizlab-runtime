@@ -44,6 +44,7 @@ public class PermissionSyncJob implements ApplicationRunner {
     @Lazy
     IBZLiteFeignClient liteFeignClient;
 
+
     @Override
     public void run(ApplicationArguments args) {
         try {
@@ -92,5 +93,6 @@ public class PermissionSyncJob implements ApplicationRunner {
         } catch (Exception e) {
             log.error("推送消息模板失败");
         }
+
     }
 }

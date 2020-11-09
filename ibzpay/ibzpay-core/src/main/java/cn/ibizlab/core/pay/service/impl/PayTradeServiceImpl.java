@@ -162,7 +162,6 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     public List<PayTrade> selectByAccessId(String id) {
         return baseMapper.selectByAccessId(id);
     }
-
     @Override
     public void removeByAccessId(String id) {
         this.remove(new QueryWrapper<PayTrade>().eq("accessid",id));
@@ -224,6 +223,7 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
 
 
 

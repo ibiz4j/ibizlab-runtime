@@ -52,6 +52,7 @@ export default {
 			taskdefinitionkey: "TaskDefinitionKey",
 			taskid: "任务标识",
 		},
+		nodata:"",
 		uiactions: {
 		},
 	},

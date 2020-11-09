@@ -21,6 +21,13 @@ export default class PayOpenAccessUIServiceBase extends UIService {
     public isEnableWorkflow:boolean = false;
 
     /**
+     * 是否支持实体主状态
+     * 
+     * @memberof  PayOpenAccessUIServiceBase
+     */
+    public isEnableDEMainState:boolean = false;
+
+    /**
      * 当前UI服务对应的数据服务对象
      * 
      * @memberof  PayOpenAccessUIServiceBase

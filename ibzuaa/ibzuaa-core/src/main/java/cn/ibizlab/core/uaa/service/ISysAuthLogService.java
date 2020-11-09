@@ -18,7 +18,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import cn.ibizlab.core.uaa.domain.SysAuthLog;
 import cn.ibizlab.core.uaa.filter.SysAuthLogSearchContext;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
