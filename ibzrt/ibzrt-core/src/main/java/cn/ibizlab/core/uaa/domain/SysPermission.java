@@ -36,7 +36,7 @@ public class SysPermission extends EntityClient implements Serializable {
     /**
      * 资源标识
      */
-    @DEField(name = "sys_permissionid" , isKeyField=true)
+    @DEField(name = "sys_permissionid" , isKeyField = true)
     @JSONField(name = "permissionid")
     @JsonProperty("permissionid")
     private String permissionid;
@@ -66,7 +66,7 @@ public class SysPermission extends EntityClient implements Serializable {
     /**
      * 逻辑有效
      */
-    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
+    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval = "0")
     @JSONField(name = "enable")
     @JsonProperty("enable")
     private Integer enable;
@@ -75,8 +75,8 @@ public class SysPermission extends EntityClient implements Serializable {
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
 
@@ -84,8 +84,8 @@ public class SysPermission extends EntityClient implements Serializable {
      * 更新时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -96,7 +96,7 @@ public class SysPermission extends EntityClient implements Serializable {
     /**
      * 设置 [资源名称]
      */
-    public void setPermissionname(String permissionname){
+    public void setPermissionname(String permissionname) {
         this.permissionname = permissionname ;
         this.modify("sys_permissionname",permissionname);
     }
@@ -104,7 +104,7 @@ public class SysPermission extends EntityClient implements Serializable {
     /**
      * 设置 [资源类别]
      */
-    public void setPermissiontype(String permissiontype){
+    public void setPermissiontype(String permissiontype) {
         this.permissiontype = permissiontype ;
         this.modify("permissiontype",permissiontype);
     }
@@ -112,7 +112,7 @@ public class SysPermission extends EntityClient implements Serializable {
     /**
      * 设置 [系统]
      */
-    public void setPssystemid(String pssystemid){
+    public void setPssystemid(String pssystemid) {
         this.pssystemid = pssystemid ;
         this.modify("pssystemid",pssystemid);
     }

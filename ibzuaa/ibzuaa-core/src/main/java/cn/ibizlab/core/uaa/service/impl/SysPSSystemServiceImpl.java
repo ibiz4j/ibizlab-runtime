@@ -54,37 +54,39 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     @Override
     @Transactional
     public boolean create(SysPSSystem et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getPssystemid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getPssystemid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<SysPSSystem> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysPSSystem et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("pssystemid",et.getPssystemid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("pssystemid", et.getPssystemid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getPssystemid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getPssystemid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<SysPSSystem> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     @Transactional
     public SysPSSystem get(String key) {
         SysPSSystem et = getById(key);
-        if(et==null){
-            et=new SysPSSystem();
+        if(et == null){
+            et = new SysPSSystem();
             et.setPssystemid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,7 +116,7 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
 
     @Override
     public boolean checkKey(SysPSSystem et) {
-        return (!ObjectUtils.isEmpty(et.getPssystemid()))&&(!Objects.isNull(this.getById(et.getPssystemid())));
+        return (!ObjectUtils.isEmpty(et.getPssystemid())) && (!Objects.isNull(this.getById(et.getPssystemid())));
     }
     @Override
     @Transactional
@@ -126,8 +128,9 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     @Override
     @Transactional
     public boolean save(SysPSSystem et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

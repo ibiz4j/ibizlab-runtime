@@ -9,7 +9,8 @@
     "dev-build": "node --max_old_space_size=8102 ./node_modules/@vue/cli-service/bin/vue-cli-service build --mode development",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "format-code": "prettier-eslint --write \"src/**/*.js\" \"src/**/*.vue\" \"src/**/*.tsx\" \"src/**/*.ts\" \"src/**/*.less\""
   },
   "dependencies": {
     "@fullcalendar/core": "^4.4.0",
@@ -66,5 +67,12 @@
     "script-loader": "^0.7.2",
     "typescript": "~3.5.3",
     "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "gitee",
+      "stylelint-config-prettier"
+    ]
   }
 }

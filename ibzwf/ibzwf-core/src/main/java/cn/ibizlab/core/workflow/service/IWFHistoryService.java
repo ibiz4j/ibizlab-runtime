@@ -22,20 +22,20 @@ import cn.ibizlab.core.workflow.filter.WFHistorySearchContext;
 /**
  * 实体[WFHistory] 服务对象接口
  */
-public interface IWFHistoryService{
+public interface IWFHistoryService {
 
-    boolean create(WFHistory et) ;
-    void createBatch(List<WFHistory> list) ;
-    boolean update(WFHistory et) ;
-    void updateBatch(List<WFHistory> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFHistory get(String key) ;
-    WFHistory getDraft(WFHistory et) ;
-    boolean checkKey(WFHistory et) ;
-    boolean save(WFHistory et) ;
-    void saveBatch(List<WFHistory> list) ;
-    Page<WFHistory> searchDefault(WFHistorySearchContext context) ;
+    boolean create(WFHistory et);
+    void createBatch(List<WFHistory> list);
+    boolean update(WFHistory et);
+    void updateBatch(List<WFHistory> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    WFHistory get(String key);
+    WFHistory getDraft(WFHistory et);
+    boolean checkKey(WFHistory et);
+    boolean save(WFHistory et);
+    void saveBatch(List<WFHistory> list);
+    Page<WFHistory> searchDefault(WFHistorySearchContext context);
 
 }
 

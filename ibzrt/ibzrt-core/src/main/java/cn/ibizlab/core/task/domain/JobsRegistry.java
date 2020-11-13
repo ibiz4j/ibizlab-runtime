@@ -36,7 +36,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
     /**
      * 主键ID
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -66,8 +66,8 @@ public class JobsRegistry extends EntityClient implements Serializable {
      * 更新时间
      */
     @DEField(name = "update_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "update_time" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "update_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("update_time")
     private Timestamp updateTime;
 
@@ -78,7 +78,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
     /**
      * 设置 [服务名]
      */
-    public void setApp(String app){
+    public void setApp(String app) {
         this.app = app ;
         this.modify("app",app);
     }
@@ -86,7 +86,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
     /**
      * 设置 [执行地址]
      */
-    public void setAddress(String address){
+    public void setAddress(String address) {
         this.address = address ;
         this.modify("address",address);
     }
@@ -94,7 +94,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
     /**
      * 设置 [状态]
      */
-    public void setStatus(Integer status){
+    public void setStatus(Integer status) {
         this.status = status ;
         this.modify("status",status);
     }
@@ -102,7 +102,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
     /**
      * 设置 [更新时间]
      */
-    public void setUpdateTime(Timestamp updateTime){
+    public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime ;
         this.modify("update_time",updateTime);
     }
@@ -110,7 +110,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
     /**
      * 格式化日期 [更新时间]
      */
-    public String formatUpdateTime(){
+    public String formatUpdateTime() {
         if (this.updateTime == null) {
             return null;
         }

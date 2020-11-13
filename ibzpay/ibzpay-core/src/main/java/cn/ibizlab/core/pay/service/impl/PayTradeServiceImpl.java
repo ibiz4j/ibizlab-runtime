@@ -42,7 +42,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
 
 /**
- * 实体[支付交易1] 服务对象接口实现
+ * 实体[支付交易] 服务对象接口实现
  */
 @Slf4j
 @Service("PayTradeServiceImpl")
@@ -58,9 +58,10 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     @Transactional
     public boolean create(PayTrade et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getTradeId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getTradeId()), et);
         return true;
     }
 
@@ -75,9 +76,10 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     @Transactional
     public boolean update(PayTrade et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("tradeid",et.getTradeId())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("tradeid", et.getTradeId()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getTradeId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getTradeId()), et);
         return true;
     }
 
@@ -85,13 +87,13 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     @Transactional
     public void updateBatch(List<PayTrade> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -105,11 +107,11 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     @Transactional
     public PayTrade get(String key) {
         PayTrade et = getById(key);
-        if(et==null){
-            et=new PayTrade();
+        if(et == null){
+            et = new PayTrade();
             et.setTradeId(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -122,13 +124,14 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
 
     @Override
     public boolean checkKey(PayTrade et) {
-        return (!ObjectUtils.isEmpty(et.getTradeId()))&&(!Objects.isNull(this.getById(et.getTradeId())));
+        return (!ObjectUtils.isEmpty(et.getTradeId())) && (!Objects.isNull(this.getById(et.getTradeId())));
     }
     @Override
     @Transactional
     public boolean save(PayTrade et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

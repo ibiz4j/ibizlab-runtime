@@ -1,8 +1,67 @@
-!!!!模版产生代码错误:----
-Tip: If the failing expression is known to be legally refer to something that's sometimes null or missing, either specify a default value like myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthesis: (myOptionalVar.foo)!myDefault, (myOptionalVar.foo)??
-----
-
-----
-FTL stack trace ("~" means nesting-related):
-	- Failed at: #assign sysApi = appDataEntity.getPSD...  [in template "CODETEMPL_en_US" at line 37, column 9]
-----
+server:
+  port: 30006
+#Log配置
+logging:
+  level:
+    cn.ibizlab: info
+#zuul网关路由设置
+zuul:
+  routes:
+    sd_file:
+      path: /sdfiles/**
+      serviceId: ${ibiz.ref.service.ibzdisk-api:ibzdisk-api}
+      stripPrefix: false
+    loginv7:
+      path: /v7/login
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    changepwd:
+      path: /v7/changepwd
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    uaa:
+      path: /uaa/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    config:
+      path: /configs/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    oucore:
+      path: /ibzorganizations/**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    oudict:
+      path: /dictionarys/**/Ibzou**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    ou:
+      path: /ibzdepartments/**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    uaadict:
+      path: /dictionarys/**/SysOperator
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    dict:
+      path: /dictionarys/**
+      serviceId: ${ibiz.ref.service.dict:ibzdict-api}
+      stripPrefix: false
+    disk:
+      path: /net-disk/**
+      serviceId: ${ibiz.ref.service.disk:ibzdisk-api}
+      stripPrefix: false
+    ou_sys_org:
+      path: /sysorganizations/**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    ou_sys_dept:
+      path: /sysdepartments/**
+      serviceId: ${ibiz.ref.service.ou:ibzou-api}
+      stripPrefix: false
+    lite-core:
+      path: /lite/**
+      serviceId: ${ibiz.ref.service.lite:ibzlite-api}
+      stripPrefix: false
+  sensitive-headers:
+    - Cookie,Set-Cookie,Authorization

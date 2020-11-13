@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface WFMemberMapper extends BaseMapper<WFMember>{
+public interface WFMemberMapper extends BaseMapper<WFMember> {
 
-    Page<WFMember> searchDefault(IPage page, @Param("srf") WFMemberSearchContext context, @Param("ew") Wrapper<WFMember> wrapper) ;
+    Page<WFMember> searchDefault(IPage page, @Param("srf") WFMemberSearchContext context, @Param("ew") Wrapper<WFMember> wrapper);
     @Override
     WFMember selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface WFMemberMapper extends BaseMapper<WFMember>{
     int update(@Param(Constants.ENTITY) WFMember entity, @Param("ew") Wrapper<WFMember> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL
@@ -62,8 +62,8 @@ public interface WFMemberMapper extends BaseMapper<WFMember>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
-    List<WFMember> selectByGroupid(@Param("id") Serializable id) ;
+    List<WFMember> selectByGroupid(@Param("id") Serializable id);
 
-    List<WFMember> selectByUserid(@Param("id") Serializable id) ;
+    List<WFMember> selectByUserid(@Param("id") Serializable id);
 
 }

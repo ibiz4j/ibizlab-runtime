@@ -23,20 +23,21 @@ public class SimpleFileService implements FileService {
 
     @Override
     public FileItem saveFile(MultipartFile multipartFile) {
-        FileItem item=null;
+        FileItem item = null;
         // 获取文件名
         String fileName = multipartFile.getOriginalFilename();
         // 获取文件后缀
-        String extname="."+getExtensionName(fileName);
+        String extname ="."+getExtensionName(fileName);
         try {
-            String fileid= DigestUtils.md5DigestAsHex(multipartFile.getInputStream());
+            String fileid = DigestUtils.md5DigestAsHex(multipartFile.getInputStream());
             String fileFullPath = this.fileRoot+"ibizutil"+File.separator+fileid+File.separator+fileName;
             File file = new File(fileFullPath);
             File parent = new File(file.getParent());
-            if(!parent.exists())
+            if(!parent.exists()) {
                 parent.mkdirs();
-            FileCopyUtils.copy(multipartFile.getInputStream(),Files.newOutputStream(file.toPath()));
-            item=new FileItem(fileid,fileName,fileid,fileName,(int)multipartFile.getSize(),extname);
+            }
+            FileCopyUtils.copy(multipartFile.getInputStream(), Files.newOutputStream(file.toPath()));
+            item = new FileItem(fileid, fileName, fileid, fileName, (int)multipartFile.getSize(), extname);
         } catch (IOException e) {
             throw new InternalServerErrorException("文件上传失败，"+e);
         }

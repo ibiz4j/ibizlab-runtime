@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[JobsRegistry] 服务对象接口
  */
 @Component
-public class JobsRegistryFallback implements JobsRegistryFeignClient{
+public class JobsRegistryFallback implements JobsRegistryFeignClient {
 
-    public Page<JobsRegistry> select(){
-            return null;
-     }
+    public Page<JobsRegistry> select() {
+        return null;
+    }
 
-    public JobsRegistry create(JobsRegistry jobsregistry){
-            return null;
-     }
-    public Boolean createBatch(List<JobsRegistry> jobsregistries){
-            return false;
-     }
+    public JobsRegistry create(JobsRegistry jobsregistry) {
+        return null;
+    }
+    public Boolean createBatch(List<JobsRegistry> jobsregistries) {
+        return false;
+    }
 
-    public JobsRegistry update(String id, JobsRegistry jobsregistry){
-            return null;
-     }
-    public Boolean updateBatch(List<JobsRegistry> jobsregistries){
-            return false;
-     }
+    public JobsRegistry update(String id, JobsRegistry jobsregistry) {
+        return null;
+    }
+    public Boolean updateBatch(List<JobsRegistry> jobsregistries) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public JobsRegistry get(String id){
-            return null;
-     }
+    public JobsRegistry get(String id) {
+        return null;
+    }
 
 
     public JobsRegistry getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(JobsRegistry jobsregistry){
-            return false;
-     }
+    public Boolean checkKey(JobsRegistry jobsregistry) {
+        return false;
+    }
 
 
-    public Boolean save(JobsRegistry jobsregistry){
-            return false;
-     }
-    public Boolean saveBatch(List<JobsRegistry> jobsregistries){
-            return false;
-     }
+    public Boolean save(JobsRegistry jobsregistry) {
+        return false;
+    }
+    public Boolean saveBatch(List<JobsRegistry> jobsregistries) {
+        return false;
+    }
 
-    public Page<JobsRegistry> searchDefault(JobsRegistrySearchContext context){
-            return null;
-     }
+    public Page<JobsRegistry> searchDefault(JobsRegistrySearchContext context) {
+        return null;
+    }
 
 
 }

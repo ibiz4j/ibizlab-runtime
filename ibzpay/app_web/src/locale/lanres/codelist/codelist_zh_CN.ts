@@ -6,4 +6,9 @@ export default {
         "dingtalk": "钉钉开放平台",
         "empty": "",
     },
+    YesNo: {
+        "1": "是",
+        "0": "否",
+        "empty": "",
+    },
 };

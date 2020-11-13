@@ -23,23 +23,23 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[WFMember] 服务对象接口
  */
-public interface IWFMemberService extends IService<WFMember>{
+public interface IWFMemberService extends IService<WFMember> {
 
-    boolean create(WFMember et) ;
-    void createBatch(List<WFMember> list) ;
-    boolean update(WFMember et) ;
-    void updateBatch(List<WFMember> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFMember get(String key) ;
-    WFMember getDraft(WFMember et) ;
-    boolean checkKey(WFMember et) ;
-    boolean save(WFMember et) ;
-    void saveBatch(List<WFMember> list) ;
-    Page<WFMember> searchDefault(WFMemberSearchContext context) ;
+    boolean create(WFMember et);
+    void createBatch(List<WFMember> list);
+    boolean update(WFMember et);
+    void updateBatch(List<WFMember> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    WFMember get(String key);
+    WFMember getDraft(WFMember et);
+    boolean checkKey(WFMember et);
+    boolean save(WFMember et);
+    void saveBatch(List<WFMember> list);
+    Page<WFMember> searchDefault(WFMemberSearchContext context);
     List<WFMember> selectByGroupid(String id);
     void removeByGroupid(String id);
-    void saveByGroupid(String id,List<WFMember> list) ;
+    void saveByGroupid(String id, List<WFMember> list) ;
     List<WFMember> selectByUserid(String id);
     void removeByUserid(String id);
     /**
@@ -57,8 +57,8 @@ public interface IWFMemberService extends IService<WFMember>{
      */
     boolean execute(String sql, Map param);
 
-    List<WFMember> getWfmemberByIds(List<String> ids) ;
-    List<WFMember> getWfmemberByEntities(List<WFMember> entities) ;
+    List<WFMember> getWfmemberByIds(List<String> ids);
+    List<WFMember> getWfmemberByEntities(List<WFMember> entities);
 }
 
 

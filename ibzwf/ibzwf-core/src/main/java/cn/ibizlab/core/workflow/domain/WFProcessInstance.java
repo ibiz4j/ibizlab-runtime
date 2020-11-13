@@ -39,7 +39,7 @@ public class WFProcessInstance extends EntityBase implements Serializable {
     /**
      * 实例标识
      */
-    @DEField(name = "instanceid" , isKeyField=true)
+    @DEField(name = "instanceid", isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -78,16 +78,16 @@ public class WFProcessInstance extends EntityBase implements Serializable {
     /**
      * 启动时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "startTime" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "startTime", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("startTime")
     private Timestamp starttime;
 
     /**
      * 结束时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "endTime" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "endTime", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("endTime")
     private Timestamp endtime;
 
@@ -111,7 +111,7 @@ public class WFProcessInstance extends EntityBase implements Serializable {
     /**
      * 格式化日期 [启动时间]
      */
-    public String formatStarttime(){
+    public String formatStarttime() {
         if (this.starttime == null) {
             return null;
         }
@@ -121,7 +121,7 @@ public class WFProcessInstance extends EntityBase implements Serializable {
     /**
      * 格式化日期 [结束时间]
      */
-    public String formatEndtime(){
+    public String formatEndtime() {
         if (this.endtime == null) {
             return null;
         }

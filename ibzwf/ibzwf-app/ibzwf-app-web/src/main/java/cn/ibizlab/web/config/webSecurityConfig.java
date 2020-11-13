@@ -53,6 +53,9 @@ public class webSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${ibiz.file.previewpath:ibizutil/preview}")
     private String previewpath;
+    
+    @Value("${ibiz.auth.excludesPattern:}")
+    private String[] excludesPattern;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -116,9 +119,15 @@ public class webSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 文件操作
                 .antMatchers("/"+downloadpath+"/**").permitAll()
                 .antMatchers("/"+uploadpath).permitAll()
-                .antMatchers("/"+previewpath+"/**").permitAll()
-                // 所有请求都需要认证
-                .anyRequest().authenticated()
+                .antMatchers("/"+previewpath+"/**");
+
+        for (String excludePattern : excludesPattern) {
+            authenticationTokenFilter.addExcludePattern(excludePattern);
+            httpSecurity.authorizeRequests().antMatchers(excludePattern).permitAll();
+        }
+
+        // 所有请求都需要认证
+        httpSecurity.authorizeRequests().anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();
 

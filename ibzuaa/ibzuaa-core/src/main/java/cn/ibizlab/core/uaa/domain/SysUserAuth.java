@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZUSERAUTH",resultMap = "SysUserAuthResultMap")
+@TableName(value = "IBZUSERAUTH", resultMap = "SysUserAuthResultMap")
 public class SysUserAuth extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysUserAuth extends EntityMP implements Serializable {
     /**
      * 标识
      */
-    @DEField(name = "authid" , isKeyField=true)
-    @TableId(value= "authid",type=IdType.ASSIGN_UUID)
+    @DEField(name = "authid", isKeyField = true)
+    @TableId(value = "authid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -101,41 +101,41 @@ public class SysUserAuth extends EntityMP implements Serializable {
     /**
      * 设置 [用户标识]
      */
-    public void setUserid(String userid){
-        this.userid = userid ;
-        this.modify("userid",userid);
+    public void setUserid(String userid) {
+        this.userid = userid;
+        this.modify("userid", userid);
     }
 
     /**
      * 设置 [认证类型]
      */
-    public void setIdentityType(String identityType){
-        this.identityType = identityType ;
-        this.modify("identity_type",identityType);
+    public void setIdentityType(String identityType) {
+        this.identityType = identityType;
+        this.modify("identity_type", identityType);
     }
 
     /**
      * 设置 [认证标识]
      */
-    public void setIdentifier(String identifier){
-        this.identifier = identifier ;
-        this.modify("identifier",identifier);
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+        this.modify("identifier", identifier);
     }
 
     /**
      * 设置 [凭据]
      */
-    public void setCredential(String credential){
-        this.credential = credential ;
-        this.modify("credential",credential);
+    public void setCredential(String credential) {
+        this.credential = credential;
+        this.modify("credential", credential);
     }
 
 
     /**
      * 获取 [标识]
      */
-    public String getId(){
-        if(ObjectUtils.isEmpty(id)){
+    public String getId() {
+        if(ObjectUtils.isEmpty(id)) {
             id=(String)getDefaultKey(true);
         }
         return id;
@@ -157,7 +157,7 @@ public class SysUserAuth extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("authid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

@@ -38,18 +38,22 @@ public class AuthPermissionEvaluator implements PermissionEvaluator {
     @Override
     @SneakyThrows
     public boolean hasPermission(Authentication authentication, Object entity, Object action) {
-        if(!enablePermissionValid)
+        if(!enablePermissionValid){
             return true;
+        }
         Object principal = authentication.getPrincipal();
-        if(ObjectUtils.isEmpty(principal))
+        if(ObjectUtils.isEmpty(principal)){
             return false;
+        }
         AuthenticationUser authenticationUser= (AuthenticationUser) authentication.getPrincipal();
-        if(authenticationUser.getSuperuser()==1)
+        if(authenticationUser.getSuperuser()==1){
             return true;
+        }
         String strAction=String.valueOf(action);
         Set<String> userAuthorities = getAuthorities(authentication,strAction);
-        if(userAuthorities.size()==0)
+        if(userAuthorities.size()==0){
             return false;
+        }
         if(isAllData(strAction,userAuthorities)){
             return true;
         }
@@ -102,8 +106,9 @@ public class AuthPermissionEvaluator implements PermissionEvaluator {
      */
     @SneakyThrows
     private void setPermissionCondToSearchContext(EntityBase entity, QueryWrapperContext qc , Set<String> userAuthorities ,AuthenticationUser authenticationUser){
-        if(entity==null)
+        if(entity==null){
             return ;
+        }
         Map<String,String> permissionField=getPermissionField(entity);//获取组织、部门预置属性
         String orgField=permissionField.get("orgfield");
         String orgDeptField=permissionField.get("orgsecfield");
@@ -185,8 +190,9 @@ public class AuthPermissionEvaluator implements PermissionEvaluator {
         Iterator it = authorities.iterator();
         while(it.hasNext()) {
             GrantedAuthority authority = (GrantedAuthority)it.next();
-            if(authority.getAuthority().contains(action))
+            if(authority.getAuthority().contains(action)){
                 userAuthorities.add(authority.getAuthority());
+            }
         }
         return userAuthorities;
     }
@@ -253,23 +259,27 @@ public class AuthPermissionEvaluator implements PermissionEvaluator {
         }
 
         if(action.endsWith("Create") || action.endsWith("Save")){
-            if(!ObjectUtils.isEmpty(orgFieldValue) && !userOrg.contains(orgFieldValue))
+            if(!ObjectUtils.isEmpty(orgFieldValue) && !userOrg.contains(orgFieldValue)){
                 return false;
-            if(!ObjectUtils.isEmpty(orgDeptFieldValue) && !userOrgDept.contains(orgDeptFieldValue))
+            }
+            if(!ObjectUtils.isEmpty(orgDeptFieldValue) && !userOrgDept.contains(orgDeptFieldValue)){
                 return false;
-            if(!ObjectUtils.isEmpty(crateManFieldValue) && !authenticationUser.getUserid().equals(crateManFieldValue))
+            }
+            if(!ObjectUtils.isEmpty(crateManFieldValue) && !authenticationUser.getUserid().equals(crateManFieldValue)){
                 return false;
-
+            }
             return true;
         }
         else{
-            if(!ObjectUtils.isEmpty(orgFieldValue) && userOrg.contains(orgFieldValue))
+            if(!ObjectUtils.isEmpty(orgFieldValue) && userOrg.contains(orgFieldValue)){
                 return true;
-            if(!ObjectUtils.isEmpty(orgDeptFieldValue) && userOrgDept.contains(orgDeptFieldValue))
+            }
+            if(!ObjectUtils.isEmpty(orgDeptFieldValue) && userOrgDept.contains(orgDeptFieldValue)){
                 return true;
-            if(!ObjectUtils.isEmpty(crateManFieldValue) && authenticationUser.getUserid().equals(crateManFieldValue))
+            }
+            if(!ObjectUtils.isEmpty(crateManFieldValue) && authenticationUser.getUserid().equals(crateManFieldValue)){
                 return true;
-
+            }
             return false;
         }
     }
@@ -293,12 +303,18 @@ public class AuthPermissionEvaluator implements PermissionEvaluator {
             String fieldName=entry.getKey();//获取注解字段
             DEField fieldAnnotation=entry.getValue();//获取注解值
             DEPredefinedFieldType prefieldType=fieldAnnotation.preType();
-            if(prefieldType==prefieldType.ORGID)//用户配置系统预置属性-组织机构标识
+            //用户配置系统预置属性-组织机构标识
+            if(prefieldType==prefieldType.ORGID){
                 orgField=fieldName;
-            if(prefieldType==prefieldType.ORGSECTORID)//用户配置系统预置属性-部门标识
+            }
+            //用户配置系统预置属性-部门标识
+            if(prefieldType==prefieldType.ORGSECTORID){
                 orgDeptField=fieldName;
-            if(prefieldType==prefieldType.CREATEMAN)//用户配置系统预置属性-部门标识
+            }
+            //用户配置系统预置属性-部门标识
+            if(prefieldType==prefieldType.CREATEMAN){
                 createManField=fieldName;
+            }
         }
         permissionFiled.put("orgfield",orgField);
         permissionFiled.put("orgsecfield",orgDeptField);

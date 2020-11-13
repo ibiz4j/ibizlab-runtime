@@ -51,7 +51,7 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
         WFTaskWay rt = wFTaskWayFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
         WFTaskWay rt = wFTaskWayFeignClient.update(et.getSequenceflowid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

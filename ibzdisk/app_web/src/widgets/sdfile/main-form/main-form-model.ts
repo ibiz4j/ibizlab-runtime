@@ -125,6 +125,11 @@ export default class MainModel {
         prop: 'id',
         dataType: 'TEXT',
       },
+      {
+        name: 'sdfile',
+        prop: 'id',
+        dataType: 'FONTKEY',
+      },
     ]
   }
 

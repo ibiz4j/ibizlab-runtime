@@ -94,6 +94,7 @@ public class SysOrganizationSearchContext extends QueryWrapperContext<SysOrganiz
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

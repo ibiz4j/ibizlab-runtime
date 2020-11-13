@@ -122,6 +122,7 @@ public class SysEmployeeSearchContext extends QueryWrapperContext<SysEmployee> {
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

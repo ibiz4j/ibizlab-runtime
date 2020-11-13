@@ -14,7 +14,7 @@ import PayOpenAccessService from '@/service/pay-open-access/pay-open-access-serv
 export default class MainService extends ControlService {
 
     /**
-     * 支付交易1服务对象
+     * 支付交易服务对象
      *
      * @type {PayTradeService}
      * @memberof MainService

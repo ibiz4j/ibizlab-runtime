@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysPostMapper extends BaseMapper<SysPost>{
+public interface SysPostMapper extends BaseMapper<SysPost> {
 
-    Page<SysPost> searchDefault(IPage page, @Param("srf") SysPostSearchContext context, @Param("ew") Wrapper<SysPost> wrapper) ;
+    Page<SysPost> searchDefault(IPage page, @Param("srf") SysPostSearchContext context, @Param("ew") Wrapper<SysPost> wrapper);
     @Override
     SysPost selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface SysPostMapper extends BaseMapper<SysPost>{
     int update(@Param(Constants.ENTITY) SysPost entity, @Param("ew") Wrapper<SysPost> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

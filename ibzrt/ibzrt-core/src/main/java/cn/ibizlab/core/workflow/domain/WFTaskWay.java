@@ -36,7 +36,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 路径标识
      */
-    @DEField(name = "wayid" , isKeyField=true)
+    @DEField(name = "wayid" , isKeyField = true)
     @JSONField(name = "sequenceflowid")
     @JsonProperty("sequenceflowid")
     private String sequenceflowid;
@@ -101,7 +101,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 设置 [任务标识]
      */
-    public void setTaskid(String taskid){
+    public void setTaskid(String taskid) {
         this.taskid = taskid ;
         this.modify("taskid",taskid);
     }
@@ -109,7 +109,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 设置 [TaskDefinitionKey]
      */
-    public void setTaskdefinitionkey(String taskdefinitionkey){
+    public void setTaskdefinitionkey(String taskdefinitionkey) {
         this.taskdefinitionkey = taskdefinitionkey ;
         this.modify("taskdefinitionkey",taskdefinitionkey);
     }
@@ -117,7 +117,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 设置 [实例标识]
      */
-    public void setProcessinstanceid(String processinstanceid){
+    public void setProcessinstanceid(String processinstanceid) {
         this.processinstanceid = processinstanceid ;
         this.modify("instanceid",processinstanceid);
     }
@@ -125,7 +125,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 设置 [DefinitionKey]
      */
-    public void setProcessdefinitionkey(String processdefinitionkey){
+    public void setProcessdefinitionkey(String processdefinitionkey) {
         this.processdefinitionkey = processdefinitionkey ;
         this.modify("definitionkey",processdefinitionkey);
     }
@@ -133,7 +133,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 设置 [业务键值]
      */
-    public void setProcessinstancebusinesskey(String processinstancebusinesskey){
+    public void setProcessinstancebusinesskey(String processinstancebusinesskey) {
         this.processinstancebusinesskey = processinstancebusinesskey ;
         this.modify("businesskey",processinstancebusinesskey);
     }
@@ -141,7 +141,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 设置 [引用视图]
      */
-    public void setRefviewkey(String refviewkey){
+    public void setRefviewkey(String refviewkey) {
         this.refviewkey = refviewkey ;
         this.modify("refviewkey",refviewkey);
     }
@@ -149,7 +149,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     /**
      * 设置 [路径标识]
      */
-    public void setSequenceflowname(String sequenceflowname){
+    public void setSequenceflowname(String sequenceflowname) {
         this.sequenceflowname = sequenceflowname ;
         this.modify("wayname",sequenceflowname);
     }

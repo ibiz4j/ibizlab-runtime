@@ -36,7 +36,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 主键ID
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -134,17 +134,17 @@ public class JobsInfo extends EntityClient implements Serializable {
      * 更新时间
      */
     @DEField(name = "update_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "update_time" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "update_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("update_time")
     private Timestamp updateTime;
 
     /**
      * 创建时间
      */
-    @DEField(name = "create_time" , preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "create_time" , format="yyyy-MM-dd HH:mm:ss")
+    @DEField(name = "create_time", preType = DEPredefinedFieldType.CREATEDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "create_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
     private Timestamp createTime;
 
@@ -155,7 +155,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [租户ID]
      */
-    public void setTenantId(String tenantId){
+    public void setTenantId(String tenantId) {
         this.tenantId = tenantId ;
         this.modify("tenant_id",tenantId);
     }
@@ -163,7 +163,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [服务名]
      */
-    public void setApp(String app){
+    public void setApp(String app) {
         this.app = app ;
         this.modify("app",app);
     }
@@ -171,7 +171,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [任务执行CRON]
      */
-    public void setCron(String cron){
+    public void setCron(String cron) {
         this.cron = cron ;
         this.modify("cron",cron);
     }
@@ -179,7 +179,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [执行器任务HANDLER]
      */
-    public void setHandler(String handler){
+    public void setHandler(String handler) {
         this.handler = handler ;
         this.modify("handler",handler);
     }
@@ -187,7 +187,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [执行器任务参数]
      */
-    public void setParam(String param){
+    public void setParam(String param) {
         this.param = param ;
         this.modify("param",param);
     }
@@ -195,7 +195,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [任务执行超时时间（秒）]
      */
-    public void setTimeout(Integer timeout){
+    public void setTimeout(Integer timeout) {
         this.timeout = timeout ;
         this.modify("timeout",timeout);
     }
@@ -203,7 +203,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [失败重试次数]
      */
-    public void setFailRetryCount(Integer failRetryCount){
+    public void setFailRetryCount(Integer failRetryCount) {
         this.failRetryCount = failRetryCount ;
         this.modify("fail_retry_count",failRetryCount);
     }
@@ -211,7 +211,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [上次调度时间]
      */
-    public void setLastTime(Long lastTime){
+    public void setLastTime(Long lastTime) {
         this.lastTime = lastTime ;
         this.modify("last_time",lastTime);
     }
@@ -219,7 +219,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [下次调度时间]
      */
-    public void setNextTime(Long nextTime){
+    public void setNextTime(Long nextTime) {
         this.nextTime = nextTime ;
         this.modify("next_time",nextTime);
     }
@@ -227,7 +227,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [所有者]
      */
-    public void setAuthor(String author){
+    public void setAuthor(String author) {
         this.author = author ;
         this.modify("author",author);
     }
@@ -235,7 +235,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [备注]
      */
-    public void setRemark(String remark){
+    public void setRemark(String remark) {
         this.remark = remark ;
         this.modify("remark",remark);
     }
@@ -243,7 +243,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [状态]
      */
-    public void setStatus(Integer status){
+    public void setStatus(Integer status) {
         this.status = status ;
         this.modify("status",status);
     }
@@ -251,7 +251,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 设置 [更新时间]
      */
-    public void setUpdateTime(Timestamp updateTime){
+    public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime ;
         this.modify("update_time",updateTime);
     }
@@ -259,7 +259,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     /**
      * 格式化日期 [更新时间]
      */
-    public String formatUpdateTime(){
+    public String formatUpdateTime() {
         if (this.updateTime == null) {
             return null;
         }

@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysPermissionMapper extends BaseMapper<SysPermission>{
+public interface SysPermissionMapper extends BaseMapper<SysPermission> {
 
-    Page<SysPermission> searchDefault(IPage page, @Param("srf") SysPermissionSearchContext context, @Param("ew") Wrapper<SysPermission> wrapper) ;
+    Page<SysPermission> searchDefault(IPage page, @Param("srf") SysPermissionSearchContext context, @Param("ew") Wrapper<SysPermission> wrapper);
     @Override
     SysPermission selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface SysPermissionMapper extends BaseMapper<SysPermission>{
     int update(@Param(Constants.ENTITY) SysPermission entity, @Param("ew") Wrapper<SysPermission> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

@@ -7,7 +7,60 @@
         <div class="content-container pickup-view">
         <div class='view-body-messages'>
         </div>
-           
+            <div class="translate-contant">
+                <div class="center" :style="{width : !isShowButton ? '100%' : ''}">
+    <view_pickupviewpanel 
+        :viewState="viewState"  
+        :viewparams="JSON.parse(JSON.stringify(viewparams))" 
+        :context="JSON.parse(JSON.stringify(context))" 
+        :isSingleSelect="isSingleSelect"
+        :selectedData="selectedData"
+        :isShowButton="isShowButton"
+        name="pickupviewpanel"  
+        ref='pickupviewpanel' 
+        @selectionchange="pickupviewpanel_selectionchange($event)"  
+        @activated="pickupviewpanel_activated($event)"  
+        @load="pickupviewpanel_load($event)"  
+        @closeview="closeView($event)">
+    </view_pickupviewpanel>
+                </div>
+                <div v-if="isShowButton" class="translate-buttons">
+                    <div class="buttons">
+                        <i-button type="primary" :title="this.containerModel.view_rightbtn.text"
+                            :disabled="this.containerModel.view_rightbtn.disabled"
+                            @click="onCLickRight">
+                            <i class="el-icon-arrow-right"></i>
+                        </i-button>
+                        <i-button type="primary" :title="this.containerModel.view_leftbtn.text"
+                            :disabled="this.containerModel.view_leftbtn.disabled"
+                            @click="onCLickLeft">
+                            <i class="el-icon-arrow-left"></i>
+                        </i-button>
+                        <i-button type="primary" :title="this.containerModel.view_allrightbtn.text"
+                            @click="onCLickAllRight">
+                            <i class="el-icon-d-arrow-right"></i>
+                        </i-button>
+                        <i-button type="primary" :title="this.containerModel.view_allleftbtn.text"
+                            @click="onCLickAllLeft">
+                            <i class="el-icon-d-arrow-left"></i>
+                        </i-button>
+                    </div>
+                    </div>
+                    <div v-if="isShowButton" class="right">
+                        <div class="mpicker-select">
+                            <div v-for="(item, index) in viewSelections" :key="index" :class="item._select ? 'select' : ''" @click="selectionsClick(item)" @dblclick="selectionsDBLClick(item)">
+                                <span>{{item.srfmajortext}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <card v-if="isShowButton" :dis-hover="true" :bordered="false" class="footer">
+                    <row :style="{ textAlign: 'right' }">
+                        <i-button type="primary"  :disabled="this.viewSelections.length > 0 ? false : true" @click="onClickOk">{{this.containerModel.view_okbtn.text}}</i-button>
+                            &nbsp;&nbsp;
+                        <i-button @click="onClickCancel">{{this.containerModel.view_cancelbtn.text}}</i-button>
+                    </row>
+                </card>   
         </div>
         <div class='view-bottom-messages'>
         </div>
@@ -145,11 +198,11 @@ export default class SysDepartmentMPickupViewBase extends Vue {
     @Watch('viewparam',{immediate: true, deep: true})
     onParamData(newVal: any, oldVal: any) {
         if(newVal){
-            for(let key in this.viewparams){
-                delete this.viewparams[key];
-            }
-            if(typeof this.viewparams == 'string') {
+            this.viewparams = {};
+            if(typeof newVal == 'string') {
                 Object.assign(this.viewparams, JSON.parse(this.viewparam));
+            }else{
+                this.viewparams = Util.deepCopy(this.viewparam);
             }
             if(this.viewparams.selectedData){
                 this.selectedData = JSON.stringify(this.viewparams.selectedData);

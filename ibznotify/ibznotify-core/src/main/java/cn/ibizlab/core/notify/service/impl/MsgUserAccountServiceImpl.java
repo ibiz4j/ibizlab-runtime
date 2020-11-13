@@ -54,9 +54,10 @@ public class MsgUserAccountServiceImpl extends ServiceImpl<MsgUserAccountMapper,
     @Override
     @Transactional
     public boolean create(MsgUserAccount et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
@@ -69,22 +70,23 @@ public class MsgUserAccountServiceImpl extends ServiceImpl<MsgUserAccountMapper,
     @Override
     @Transactional
     public boolean update(MsgUserAccount et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("authid",et.getId())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("authid", et.getId()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<MsgUserAccount> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class MsgUserAccountServiceImpl extends ServiceImpl<MsgUserAccountMapper,
     @Transactional
     public MsgUserAccount get(String key) {
         MsgUserAccount et = getById(key);
-        if(et==null){
-            et=new MsgUserAccount();
+        if(et == null){
+            et = new MsgUserAccount();
             et.setId(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,13 +116,14 @@ public class MsgUserAccountServiceImpl extends ServiceImpl<MsgUserAccountMapper,
 
     @Override
     public boolean checkKey(MsgUserAccount et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+        return (!ObjectUtils.isEmpty(et.getId())) && (!Objects.isNull(this.getById(et.getId())));
     }
     @Override
     @Transactional
     public boolean save(MsgUserAccount et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

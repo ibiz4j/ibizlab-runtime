@@ -36,7 +36,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 标识
      */
-    @DEField(name = "vkey" , isKeyField=true)
+    @DEField(name = "vkey" , isKeyField = true)
     @JSONField(name = "value_key")
     @JsonProperty("value_key")
     private String valueKey;
@@ -91,7 +91,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 栏目样式
      */
-    @DEField(defaultValue = "itemcls" , defaultValueType = DEFieldDefaultValueType.PARAM)
+    @DEField(defaultValue = "itemcls", defaultValueType = DEFieldDefaultValueType.PARAM)
     @JSONField(name = "cls")
     @JsonProperty("cls")
     private String cls;
@@ -138,8 +138,8 @@ public class DictOption extends EntityClient implements Serializable {
      * 最后修改时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -157,7 +157,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [目录代码]
      */
-    public void setCatalogId(String catalogId){
+    public void setCatalogId(String catalogId) {
         this.catalogId = catalogId ;
         this.modify("cid",catalogId);
     }
@@ -165,7 +165,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [目录]
      */
-    public void setCatalogName(String catalogName){
+    public void setCatalogName(String catalogName) {
         this.catalogName = catalogName ;
         this.modify("cname",catalogName);
     }
@@ -173,7 +173,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [代码值]
      */
-    public void setValue(String value){
+    public void setValue(String value) {
         this.value = value ;
         this.modify("val",value);
     }
@@ -181,7 +181,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [名称]
      */
-    public void setLabel(String label){
+    public void setLabel(String label) {
         this.label = label ;
         this.modify("label",label);
     }
@@ -189,7 +189,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [父代码值]
      */
-    public void setParent(String parent){
+    public void setParent(String parent) {
         this.parent = parent ;
         this.modify("pval",parent);
     }
@@ -197,7 +197,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [过滤项]
      */
-    public void setFilter(String filter){
+    public void setFilter(String filter) {
         this.filter = filter ;
         this.modify("vfilter",filter);
     }
@@ -205,7 +205,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [栏目样式]
      */
-    public void setCls(String cls){
+    public void setCls(String cls) {
         this.cls = cls ;
         this.modify("cls",cls);
     }
@@ -213,7 +213,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [图标]
      */
-    public void setIconClass(String iconClass){
+    public void setIconClass(String iconClass) {
         this.iconClass = iconClass ;
         this.modify("iconcls",iconClass);
     }
@@ -221,7 +221,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [是否禁用]
      */
-    public void setDisabled(Integer disabled){
+    public void setDisabled(Integer disabled) {
         this.disabled = disabled ;
         this.modify("disabled",disabled);
     }
@@ -229,7 +229,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [过期/失效]
      */
-    public void setExpired(Integer expired){
+    public void setExpired(Integer expired) {
         this.expired = expired ;
         this.modify("expired",expired);
     }
@@ -237,7 +237,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [排序]
      */
-    public void setShoworder(Integer showorder){
+    public void setShoworder(Integer showorder) {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }
@@ -245,7 +245,7 @@ public class DictOption extends EntityClient implements Serializable {
     /**
      * 设置 [扩展]
      */
-    public void setExtension(String extension){
+    public void setExtension(String extension) {
         this.extension = extension ;
         this.modify("extension",extension);
     }

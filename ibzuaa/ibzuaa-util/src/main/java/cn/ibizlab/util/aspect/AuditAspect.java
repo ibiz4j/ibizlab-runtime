@@ -43,30 +43,31 @@ public class AuditAspect
      */
     @AfterReturning(value = "execution(* cn.ibizlab.core.*.service.*.create(..))")
     @SneakyThrows
-    public void create(JoinPoint point){
-        HttpServletRequest request=null;
-        RequestAttributes requestAttributes= RequestContextHolder.getRequestAttributes();
-        if(requestAttributes!=null){
-            request=((ServletRequestAttributes)requestAttributes).getRequest();
+    public void create(JoinPoint point) {
+        HttpServletRequest request = null;
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if(requestAttributes!=null) {
+            request = ((ServletRequestAttributes)requestAttributes).getRequest();
         }
         Object [] args = point.getArgs();
-        if(ObjectUtils.isEmpty(args) || args.length==0)
+        if(ObjectUtils.isEmpty(args) || args.length==0) {
             return;
-
-        Object serviceParam =args[0];
-        if(serviceParam instanceof EntityBase){
-            EntityBase entity=(EntityBase)serviceParam;//创建数据
-            Map<String, Audit> auditFields= DEFieldCacheMap.getAuditFields(entity.getClass());
-            if(auditFields.size()==0)//是否有审计属性
+        }
+        Object serviceParam = args[0];
+        if(serviceParam instanceof EntityBase) {
+            EntityBase entity = (EntityBase)serviceParam;
+            Map<String, Audit> auditFields = DEFieldCacheMap.getAuditFields(entity.getClass());
+            //是否有审计属性
+            if(auditFields.size()==0) {
                 return;
-
-            String idField=DEFieldCacheMap.getDEKeyField(entity.getClass());
-            Object idValue="";
-            if(!StringUtils.isEmpty(idField)){
+            }
+            String idField = DEFieldCacheMap.getDEKeyField(entity.getClass());
+            Object idValue = "";
+            if(!StringUtils.isEmpty(idField)) {
                 idValue=entity.get(idField);
             }
             //记录审计日志
-            dataAuditService.createAudit(request,entity,idValue,auditFields);
+            dataAuditService.createAudit(request, entity, idValue, auditFields);
         }
     }
 
@@ -77,39 +78,38 @@ public class AuditAspect
      */
     @Around("execution(* cn.ibizlab.core.*.service.*.update(..))")
     public Object update(ProceedingJoinPoint point) throws Throwable {
-        HttpServletRequest request=null;
-        RequestAttributes requestAttributes= RequestContextHolder.getRequestAttributes();
-        if(requestAttributes!=null){
+        HttpServletRequest request = null;
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if(requestAttributes!=null) {
             request=((ServletRequestAttributes)requestAttributes).getRequest();
         }
-        Object serviceObj=point.getTarget();
-        Object args[]=point.getArgs();
-
-        if(ObjectUtils.isEmpty(args) || args.length==0)
+        Object serviceObj = point.getTarget();
+        Object args[] = point.getArgs();
+        if(ObjectUtils.isEmpty(args) || args.length==0) {
             return point.proceed();
-
-        Object arg=args[0];
-        if(arg instanceof EntityBase){
-            EntityBase entity= (EntityBase) arg;
-            Map<String, Audit> auditFields= DEFieldCacheMap.getAuditFields(entity.getClass());
-
+        }
+        Object arg = args[0];
+        if(arg instanceof EntityBase) {
+            EntityBase entity = (EntityBase) arg;
+            Map<String, Audit> auditFields = DEFieldCacheMap.getAuditFields(entity.getClass());
             //是否有审计属性
-            if(auditFields.size()==0)
+            if(auditFields.size()==0) {
                 return point.proceed();
-            String idField=DEFieldCacheMap.getDEKeyField(entity.getClass());
-            Object idValue="";
-            if(!StringUtils.isEmpty(idField)){
-                idValue=entity.get(idField);
             }
-            if(ObjectUtils.isEmpty(idValue))
+            String idField = DEFieldCacheMap.getDEKeyField(entity.getClass());
+            Object idValue = "";
+            if(!StringUtils.isEmpty(idField)){
+                idValue = entity.get(idField);
+            }
+            if(ObjectUtils.isEmpty(idValue)) {
                 return point.proceed();
-
+            }
             //获取更新前实体
-            EntityBase beforeEntity=getEntity(serviceObj,idValue);
+            EntityBase beforeEntity = getEntity(serviceObj, idValue);
             //执行更新操作
             point.proceed();
             //记录审计日志
-            dataAuditService.updateAudit(request,beforeEntity,serviceObj,idValue,auditFields);
+            dataAuditService.updateAudit(request, beforeEntity, serviceObj, idValue, auditFields);
             return true;
         }
         return point.proceed();
@@ -124,28 +124,27 @@ public class AuditAspect
      */
     @Around("execution(* cn.ibizlab.core.*.service.*.remove(..))")
     public Object remove(ProceedingJoinPoint point) throws Throwable {
-        HttpServletRequest request=null;
-        RequestAttributes requestAttributes= RequestContextHolder.getRequestAttributes();
-        if(requestAttributes!=null){
-            request=((ServletRequestAttributes)requestAttributes).getRequest();
+        HttpServletRequest request = null;
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if(requestAttributes!= null) {
+            request = ((ServletRequestAttributes)requestAttributes).getRequest();
         }
-        Object serviceObj=point.getTarget();
-        Object args[]=point.getArgs();
-
-        if(ObjectUtils.isEmpty(args) || args.length==0)
+        Object serviceObj = point.getTarget();
+        Object args[] = point.getArgs();
+        if(ObjectUtils.isEmpty(args) || args.length==0) {
             return point.proceed();
-
-        Object idValue=args[0];
-        EntityBase entity=getEntity(serviceObj,idValue);
-        Map<String, Audit> auditFields= DEFieldCacheMap.getAuditFields(entity.getClass());
-        if(auditFields.size()==0){
+        }
+        Object idValue = args[0];
+        EntityBase entity = getEntity(serviceObj, idValue);
+        Map<String, Audit> auditFields = DEFieldCacheMap.getAuditFields(entity.getClass());
+        if(auditFields.size()==0) {
             return point.proceed();
         }
         else{
             //执行删除操作
             point.proceed();
             //记录审计日志
-            dataAuditService.removeAudit(request,entity,idValue,auditFields);
+            dataAuditService.removeAudit(request, entity, idValue, auditFields);
             return true;
         }
     }
@@ -157,12 +156,12 @@ public class AuditAspect
      * @return
      */
     @SneakyThrows
-    private EntityBase getEntity(Object service, Object id){
-        EntityBase entity=null;
-        if(!ObjectUtils.isEmpty(service)){
+    private EntityBase getEntity(Object service, Object id) {
+        EntityBase entity = null;
+        if(!ObjectUtils.isEmpty(service)) {
             EvaluationContext oldContext = new StandardEvaluationContext();
-            oldContext.setVariable("service",service);
-            oldContext.setVariable("id",id);
+            oldContext.setVariable("service", service);
+            oldContext.setVariable("id", id);
             Expression oldExp = parser.parseExpression("#service.get(#id)");
             return oldExp.getValue(oldContext, EntityBase.class);
         }

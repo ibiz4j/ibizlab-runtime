@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFREModel] 服务对象接口
  */
 @Component
-public class WFREModelFallback implements WFREModelFeignClient{
+public class WFREModelFallback implements WFREModelFeignClient {
 
-    public Page<WFREModel> select(){
-            return null;
-     }
+    public Page<WFREModel> select() {
+        return null;
+    }
 
-    public WFREModel create(WFREModel wfremodel){
-            return null;
-     }
-    public Boolean createBatch(List<WFREModel> wfremodels){
-            return false;
-     }
+    public WFREModel create(WFREModel wfremodel) {
+        return null;
+    }
+    public Boolean createBatch(List<WFREModel> wfremodels) {
+        return false;
+    }
 
-    public WFREModel update(String id, WFREModel wfremodel){
-            return null;
-     }
-    public Boolean updateBatch(List<WFREModel> wfremodels){
-            return false;
-     }
+    public WFREModel update(String id, WFREModel wfremodel) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFREModel> wfremodels) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFREModel get(String id){
-            return null;
-     }
+    public WFREModel get(String id) {
+        return null;
+    }
 
 
     public WFREModel getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFREModel wfremodel){
-            return false;
-     }
+    public Boolean checkKey(WFREModel wfremodel) {
+        return false;
+    }
 
 
-    public Boolean save(WFREModel wfremodel){
-            return false;
-     }
-    public Boolean saveBatch(List<WFREModel> wfremodels){
-            return false;
-     }
+    public Boolean save(WFREModel wfremodel) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFREModel> wfremodels) {
+        return false;
+    }
 
-    public Page<WFREModel> searchDefault(WFREModelSearchContext context){
-            return null;
-     }
+    public Page<WFREModel> searchDefault(WFREModelSearchContext context) {
+        return null;
+    }
 
 
 }

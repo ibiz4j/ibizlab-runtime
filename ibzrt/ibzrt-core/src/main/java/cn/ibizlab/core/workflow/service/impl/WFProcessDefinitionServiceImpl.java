@@ -51,7 +51,7 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
         WFProcessDefinition rt = wFProcessDefinitionFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
         WFProcessDefinition rt = wFProcessDefinitionFeignClient.update(et.getDefinitionkey(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

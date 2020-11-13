@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZROLE_PERMISSION",resultMap = "SysRolePermissionResultMap")
+@TableName(value = "IBZROLE_PERMISSION", resultMap = "SysRolePermissionResultMap")
 public class SysRolePermission extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysRolePermission extends EntityMP implements Serializable {
     /**
      * 角色权限关系表标识
      */
-    @DEField(name = "sys_role_permissionid" , isKeyField=true)
-    @TableId(value= "sys_role_permissionid",type=IdType.ASSIGN_UUID)
+    @DEField(name = "sys_role_permissionid", isKeyField = true)
+    @TableId(value = "sys_role_permissionid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "rolepermissionid")
     @JsonProperty("rolepermissionid")
     private String rolepermissionid;
@@ -99,9 +99,9 @@ public class SysRolePermission extends EntityMP implements Serializable {
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @TableField(value = "createdate" , fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "createdate", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
     /**
@@ -109,8 +109,8 @@ public class SysRolePermission extends EntityMP implements Serializable {
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
     @TableField(value = "updatedate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -135,25 +135,25 @@ public class SysRolePermission extends EntityMP implements Serializable {
     /**
      * 设置 [角色表标识]
      */
-    public void setRoleid(String roleid){
-        this.roleid = roleid ;
-        this.modify("sys_roleid",roleid);
+    public void setRoleid(String roleid) {
+        this.roleid = roleid;
+        this.modify("sys_roleid", roleid);
     }
 
     /**
      * 设置 [权限表标识]
      */
-    public void setPermissionid(String permissionid){
-        this.permissionid = permissionid ;
-        this.modify("sys_permissionid",permissionid);
+    public void setPermissionid(String permissionid) {
+        this.permissionid = permissionid;
+        this.modify("sys_permissionid", permissionid);
     }
 
 
     /**
      * 获取 [角色权限关系表标识]
      */
-    public String getRolepermissionid(){
-        if(ObjectUtils.isEmpty(rolepermissionid)){
+    public String getRolepermissionid() {
+        if(ObjectUtils.isEmpty(rolepermissionid)) {
             rolepermissionid=(String)getDefaultKey(true);
         }
         return rolepermissionid;
@@ -175,7 +175,7 @@ public class SysRolePermission extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("sys_role_permissionid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

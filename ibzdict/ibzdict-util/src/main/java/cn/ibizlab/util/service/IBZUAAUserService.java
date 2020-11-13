@@ -26,10 +26,10 @@ public class IBZUAAUserService implements AuthenticationUserService{
 
 	@Override
 	public AuthenticationUser loadUserByUsername(String username) {
-
 		AuthenticationUser user=uaaFeignClient.loginByUsername(username);
-		if(user==null)
+		if(user==null){
 			throw new BadRequestAlertException("登录失败","IBZUAAUser",username);
+		}
 		return user;
 	}
 
@@ -48,8 +48,9 @@ public class IBZUAAUserService implements AuthenticationUserService{
 		logininfo.setLoginname(loginname);
 		logininfo.setPassword(password);
 		AuthenticationUser user=uaaFeignClient.login(logininfo);
-		if(user==null)
+		if(user==null){
 			throw new BadRequestAlertException("登录失败","IBZUAAUser",username);
+		}
 		return user;
 	}
 

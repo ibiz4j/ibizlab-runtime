@@ -91,6 +91,21 @@ export default class MainModel {
         dataType: 'TEXT',
       },
       {
+        name: 'notify_url',
+        prop: 'notify_url',
+        dataType: 'TEXT',
+      },
+      {
+        name: 'agent_id',
+        prop: 'agent_id',
+        dataType: 'BIGINT',
+      },
+      {
+        name: 'disabled',
+        prop: 'disabled',
+        dataType: 'YESNO',
+      },
+      {
         name: 'accessid',
         prop: 'id',
         dataType: 'TEXT',

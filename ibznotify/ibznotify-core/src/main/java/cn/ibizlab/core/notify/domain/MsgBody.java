@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZMSGBODY",resultMap = "MsgBodyResultMap")
+@TableName(value = "IBZMSGBODY", resultMap = "MsgBodyResultMap")
 public class MsgBody extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,8 +62,8 @@ public class MsgBody extends EntityMP implements Serializable {
     /**
      * 消息标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "msgid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "msgid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "msg_id")
     @JsonProperty("msg_id")
     private String msgId;
@@ -159,113 +159,113 @@ public class MsgBody extends EntityMP implements Serializable {
     /**
      * 设置 [是否出错]
      */
-    public void setIsError(Integer isError){
-        this.isError = isError ;
-        this.modify("iserror",isError);
+    public void setIsError(Integer isError) {
+        this.isError = isError;
+        this.modify("iserror", isError);
     }
 
     /**
      * 设置 [是否发送]
      */
-    public void setIsSend(Integer isSend){
-        this.isSend = isSend ;
-        this.modify("issend",isSend);
+    public void setIsSend(Integer isSend) {
+        this.isSend = isSend;
+        this.modify("issend", isSend);
     }
 
     /**
      * 设置 [目标用户]
      */
-    public void setToUsers(String toUsers){
-        this.toUsers = toUsers ;
-        this.modify("tousers",toUsers);
+    public void setToUsers(String toUsers) {
+        this.toUsers = toUsers;
+        this.modify("tousers", toUsers);
     }
 
     /**
      * 设置 [消息链接]
      */
-    public void setMsgLink(String msgLink){
-        this.msgLink = msgLink ;
-        this.modify("msglink",msgLink);
+    public void setMsgLink(String msgLink) {
+        this.msgLink = msgLink;
+        this.modify("msglink", msgLink);
     }
 
     /**
      * 设置 [消息标题]
      */
-    public void setSubject(String subject){
-        this.subject = subject ;
-        this.modify("subject",subject);
+    public void setSubject(String subject) {
+        this.subject = subject;
+        this.modify("subject", subject);
     }
 
     /**
      * 设置 [消息内容]
      */
-    public void setContent(String content){
-        this.content = content ;
-        this.modify("content",content);
+    public void setContent(String content) {
+        this.content = content;
+        this.modify("content", content);
     }
 
     /**
      * 设置 [消息类型]
      */
-    public void setMsgType(Integer msgType){
-        this.msgType = msgType ;
-        this.modify("msgtype",msgType);
+    public void setMsgType(Integer msgType) {
+        this.msgType = msgType;
+        this.modify("msgtype", msgType);
     }
 
     /**
      * 设置 [消息名称]
      */
-    public void setMsgName(String msgName){
-        this.msgName = msgName ;
-        this.modify("msgname",msgName);
+    public void setMsgName(String msgName) {
+        this.msgName = msgName;
+        this.modify("msgname", msgName);
     }
 
     /**
      * 设置 [消息模板标识]
      */
-    public void setTemplateId(String templateId){
-        this.templateId = templateId ;
-        this.modify("templateid",templateId);
+    public void setTemplateId(String templateId) {
+        this.templateId = templateId;
+        this.modify("templateid", templateId);
     }
 
     /**
      * 设置 [错误信息]
      */
-    public void setErrorInfo(String errorInfo){
-        this.errorInfo = errorInfo ;
-        this.modify("errorinfo",errorInfo);
+    public void setErrorInfo(String errorInfo) {
+        this.errorInfo = errorInfo;
+        this.modify("errorinfo", errorInfo);
     }
 
     /**
      * 设置 [用户数据]
      */
-    public void setUserData(String userData){
-        this.userData = userData ;
-        this.modify("userdata",userData);
+    public void setUserData(String userData) {
+        this.userData = userData;
+        this.modify("userdata", userData);
     }
 
     /**
      * 设置 [消息模板参数]
      */
-    public void setTemplateParams(String templateParams){
-        this.templateParams = templateParams ;
-        this.modify("templparams",templateParams);
+    public void setTemplateParams(String templateParams) {
+        this.templateParams = templateParams;
+        this.modify("templparams", templateParams);
     }
 
     /**
      * 设置 [用户数据2]
      */
-    public void setUserData2(String userData2){
-        this.userData2 = userData2 ;
-        this.modify("userdata2",userData2);
+    public void setUserData2(String userData2) {
+        this.userData2 = userData2;
+        this.modify("userdata2", userData2);
     }
 
     /**
      * 设置 [消息链接(PC)]
      */
-    public void setMsgLinkPc(String msgLinkPc){
-        this.msgLinkPc = msgLinkPc ;
-        this.modify("msglink_pc",msgLinkPc);
+    public void setMsgLinkPc(String msgLinkPc) {
+        this.msgLinkPc = msgLinkPc;
+        this.modify("msglink_pc", msgLinkPc);
     }
 
 
@@ -279,7 +279,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("msgid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

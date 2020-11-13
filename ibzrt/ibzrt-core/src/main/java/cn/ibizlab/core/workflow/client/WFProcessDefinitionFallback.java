@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFProcessDefinition] 服务对象接口
  */
 @Component
-public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClient{
+public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClient {
 
-    public Page<WFProcessDefinition> select(){
-            return null;
-     }
+    public Page<WFProcessDefinition> select() {
+        return null;
+    }
 
-    public WFProcessDefinition create(WFProcessDefinition wfprocessdefinition){
-            return null;
-     }
-    public Boolean createBatch(List<WFProcessDefinition> wfprocessdefinitions){
-            return false;
-     }
+    public WFProcessDefinition create(WFProcessDefinition wfprocessdefinition) {
+        return null;
+    }
+    public Boolean createBatch(List<WFProcessDefinition> wfprocessdefinitions) {
+        return false;
+    }
 
-    public WFProcessDefinition update(String definitionkey, WFProcessDefinition wfprocessdefinition){
-            return null;
-     }
-    public Boolean updateBatch(List<WFProcessDefinition> wfprocessdefinitions){
-            return false;
-     }
+    public WFProcessDefinition update(String definitionkey, WFProcessDefinition wfprocessdefinition) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFProcessDefinition> wfprocessdefinitions) {
+        return false;
+    }
 
 
-    public Boolean remove(String definitionkey){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String definitionkey) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFProcessDefinition get(String definitionkey){
-            return null;
-     }
+    public WFProcessDefinition get(String definitionkey) {
+        return null;
+    }
 
 
     public WFProcessDefinition getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFProcessDefinition wfprocessdefinition){
-            return false;
-     }
+    public Boolean checkKey(WFProcessDefinition wfprocessdefinition) {
+        return false;
+    }
 
 
-    public Boolean save(WFProcessDefinition wfprocessdefinition){
-            return false;
-     }
-    public Boolean saveBatch(List<WFProcessDefinition> wfprocessdefinitions){
-            return false;
-     }
+    public Boolean save(WFProcessDefinition wfprocessdefinition) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFProcessDefinition> wfprocessdefinitions) {
+        return false;
+    }
 
-    public Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context){
-            return null;
-     }
+    public Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context) {
+        return null;
+    }
 
 
 }

@@ -36,7 +36,7 @@ public class WFSystem extends EntityClient implements Serializable {
     /**
      * 系统标识
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
     private String pssystemid;
@@ -55,7 +55,7 @@ public class WFSystem extends EntityClient implements Serializable {
     /**
      * 设置 [系统名称]
      */
-    public void setPssystemname(String pssystemname){
+    public void setPssystemname(String pssystemname) {
         this.pssystemname = pssystemname ;
         this.modify("pssystemname",pssystemname);
     }

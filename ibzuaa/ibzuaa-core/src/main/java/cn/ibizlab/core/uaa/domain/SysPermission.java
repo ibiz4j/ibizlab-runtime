@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZPERMISSION",resultMap = "SysPermissionResultMap")
+@TableName(value = "IBZPERMISSION", resultMap = "SysPermissionResultMap")
 public class SysPermission extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysPermission extends EntityMP implements Serializable {
     /**
      * 资源标识
      */
-    @DEField(name = "sys_permissionid" , isKeyField=true)
-    @TableId(value= "sys_permissionid",type=IdType.ASSIGN_UUID)
+    @DEField(name = "sys_permissionid", isKeyField = true)
+    @TableId(value = "sys_permissionid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "permissionid")
     @JsonProperty("permissionid")
     private String permissionid;
@@ -76,8 +76,8 @@ public class SysPermission extends EntityMP implements Serializable {
     /**
      * 逻辑有效
      */
-    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
-    @TableLogic(value= "1",delval="0")
+    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1", logicdelval = "0")
+    @TableLogic(value = "1", delval = "0")
     @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
@@ -86,9 +86,9 @@ public class SysPermission extends EntityMP implements Serializable {
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @TableField(value = "createdate" , fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "createdate", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
     /**
@@ -96,8 +96,8 @@ public class SysPermission extends EntityMP implements Serializable {
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
     @TableField(value = "updatedate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -106,25 +106,25 @@ public class SysPermission extends EntityMP implements Serializable {
     /**
      * 设置 [资源名称]
      */
-    public void setPermissionname(String permissionname){
-        this.permissionname = permissionname ;
-        this.modify("sys_permissionname",permissionname);
+    public void setPermissionname(String permissionname) {
+        this.permissionname = permissionname;
+        this.modify("sys_permissionname", permissionname);
     }
 
     /**
      * 设置 [资源类别]
      */
-    public void setPermissiontype(String permissiontype){
-        this.permissiontype = permissiontype ;
-        this.modify("permissiontype",permissiontype);
+    public void setPermissiontype(String permissiontype) {
+        this.permissiontype = permissiontype;
+        this.modify("permissiontype", permissiontype);
     }
 
     /**
      * 设置 [系统]
      */
-    public void setPssystemid(String pssystemid){
-        this.pssystemid = pssystemid ;
-        this.modify("pssystemid",pssystemid);
+    public void setPssystemid(String pssystemid) {
+        this.pssystemid = pssystemid;
+        this.modify("pssystemid", pssystemid);
     }
 
 
@@ -138,7 +138,7 @@ public class SysPermission extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("sys_permissionid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

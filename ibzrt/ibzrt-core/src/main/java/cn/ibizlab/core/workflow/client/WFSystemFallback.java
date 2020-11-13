@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFSystem] 服务对象接口
  */
 @Component
-public class WFSystemFallback implements WFSystemFeignClient{
+public class WFSystemFallback implements WFSystemFeignClient {
 
-    public Page<WFSystem> select(){
-            return null;
-     }
+    public Page<WFSystem> select() {
+        return null;
+    }
 
-    public WFSystem create(WFSystem wfsystem){
-            return null;
-     }
-    public Boolean createBatch(List<WFSystem> wfsystems){
-            return false;
-     }
+    public WFSystem create(WFSystem wfsystem) {
+        return null;
+    }
+    public Boolean createBatch(List<WFSystem> wfsystems) {
+        return false;
+    }
 
-    public WFSystem update(String pssystemid, WFSystem wfsystem){
-            return null;
-     }
-    public Boolean updateBatch(List<WFSystem> wfsystems){
-            return false;
-     }
+    public WFSystem update(String pssystemid, WFSystem wfsystem) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFSystem> wfsystems) {
+        return false;
+    }
 
 
-    public Boolean remove(String pssystemid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String pssystemid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFSystem get(String pssystemid){
-            return null;
-     }
+    public WFSystem get(String pssystemid) {
+        return null;
+    }
 
 
     public WFSystem getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFSystem wfsystem){
-            return false;
-     }
+    public Boolean checkKey(WFSystem wfsystem) {
+        return false;
+    }
 
 
-    public Boolean save(WFSystem wfsystem){
-            return false;
-     }
-    public Boolean saveBatch(List<WFSystem> wfsystems){
-            return false;
-     }
+    public Boolean save(WFSystem wfsystem) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFSystem> wfsystems) {
+        return false;
+    }
 
-    public Page<WFSystem> searchDefault(WFSystemSearchContext context){
-            return null;
-     }
+    public Page<WFSystem> searchDefault(WFSystemSearchContext context) {
+        return null;
+    }
 
 
 }

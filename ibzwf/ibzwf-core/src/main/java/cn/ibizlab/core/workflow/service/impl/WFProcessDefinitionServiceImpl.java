@@ -54,37 +54,39 @@ public class WFProcessDefinitionServiceImpl extends ServiceImpl<WFProcessDefinit
     @Override
     @Transactional
     public boolean create(WFProcessDefinition et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getDefinitionkey()),et);
+        }
+        CachedBeanCopier.copy(get(et.getDefinitionkey()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<WFProcessDefinition> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(WFProcessDefinition et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("definitionkey",et.getDefinitionkey())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("definitionkey", et.getDefinitionkey()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getDefinitionkey()),et);
+        }
+        CachedBeanCopier.copy(get(et.getDefinitionkey()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<WFProcessDefinition> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class WFProcessDefinitionServiceImpl extends ServiceImpl<WFProcessDefinit
     @Transactional
     public WFProcessDefinition get(String key) {
         WFProcessDefinition et = getById(key);
-        if(et==null){
-            et=new WFProcessDefinition();
+        if(et == null){
+            et = new WFProcessDefinition();
             et.setDefinitionkey(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,13 +116,14 @@ public class WFProcessDefinitionServiceImpl extends ServiceImpl<WFProcessDefinit
 
     @Override
     public boolean checkKey(WFProcessDefinition et) {
-        return (!ObjectUtils.isEmpty(et.getDefinitionkey()))&&(!Objects.isNull(this.getById(et.getDefinitionkey())));
+        return (!ObjectUtils.isEmpty(et.getDefinitionkey())) && (!Objects.isNull(this.getById(et.getDefinitionkey())));
     }
     @Override
     @Transactional
     public boolean save(WFProcessDefinition et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

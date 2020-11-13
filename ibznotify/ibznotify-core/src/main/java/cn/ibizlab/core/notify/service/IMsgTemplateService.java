@@ -23,26 +23,26 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[MsgTemplate] 服务对象接口
  */
-public interface IMsgTemplateService extends IService<MsgTemplate>{
+public interface IMsgTemplateService extends IService<MsgTemplate> {
 
-    boolean create(MsgTemplate et) ;
-    @CacheEvict(value="msgtemplate",allEntries=true)
-    void createBatch(List<MsgTemplate> list) ;
-    boolean update(MsgTemplate et) ;
-    @CacheEvict(value="msgtemplate",allEntries=true)
-    void updateBatch(List<MsgTemplate> list) ;
-    boolean remove(String key) ;
-    @CacheEvict(value="msgtemplate",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    MsgTemplate get(String key) ;
-    MsgTemplate getDraft(MsgTemplate et) ;
-    boolean checkKey(MsgTemplate et) ;
-    boolean save(MsgTemplate et) ;
-    @CacheEvict(value="msgtemplate",allEntries=true)
-    void saveBatch(List<MsgTemplate> list) ;
-    Page<MsgTemplate> searchDefault(MsgTemplateSearchContext context) ;
+    boolean create(MsgTemplate et);
+    @CacheEvict(value = "msgtemplate", allEntries = true)
+    void createBatch(List<MsgTemplate> list);
+    boolean update(MsgTemplate et);
+    @CacheEvict(value = "msgtemplate", allEntries = true)
+    void updateBatch(List<MsgTemplate> list);
+    boolean remove(String key);
+    @CacheEvict(value = "msgtemplate", allEntries = true)
+    void removeBatch(Collection<String> idList);
+    MsgTemplate get(String key);
+    MsgTemplate getDraft(MsgTemplate et);
+    boolean checkKey(MsgTemplate et);
+    boolean save(MsgTemplate et);
+    @CacheEvict(value = "msgtemplate",allEntries = true)
+    void saveBatch(List<MsgTemplate> list);
+    Page<MsgTemplate> searchDefault(MsgTemplateSearchContext context);
     List<MsgTemplate> selectByAccessId(String id);
-    @CacheEvict(value="msgtemplate",allEntries=true)
+    @CacheEvict(value = "msgtemplate", allEntries = true)
     void removeByAccessId(String id);
     /**
      *自定义查询SQL

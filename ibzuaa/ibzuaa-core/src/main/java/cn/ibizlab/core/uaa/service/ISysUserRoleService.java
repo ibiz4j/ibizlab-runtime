@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysUserRole] 服务对象接口
  */
-public interface ISysUserRoleService extends IService<SysUserRole>{
+public interface ISysUserRoleService extends IService<SysUserRole> {
 
-    boolean create(SysUserRole et) ;
-    void createBatch(List<SysUserRole> list) ;
-    boolean update(SysUserRole et) ;
-    void updateBatch(List<SysUserRole> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysUserRole get(String key) ;
-    SysUserRole getDraft(SysUserRole et) ;
-    boolean checkKey(SysUserRole et) ;
-    boolean save(SysUserRole et) ;
-    void saveBatch(List<SysUserRole> list) ;
-    Page<SysUserRole> searchDefault(SysUserRoleSearchContext context) ;
+    boolean create(SysUserRole et);
+    void createBatch(List<SysUserRole> list);
+    boolean update(SysUserRole et);
+    void updateBatch(List<SysUserRole> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysUserRole get(String key);
+    SysUserRole getDraft(SysUserRole et);
+    boolean checkKey(SysUserRole et);
+    boolean save(SysUserRole et);
+    void saveBatch(List<SysUserRole> list);
+    Page<SysUserRole> searchDefault(SysUserRoleSearchContext context);
     List<SysUserRole> selectByRoleid(String roleid);
     void removeByRoleid(Collection<String> ids);
     void removeByRoleid(String roleid);

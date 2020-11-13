@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysUserAuthMapper extends BaseMapper<SysUserAuth>{
+public interface SysUserAuthMapper extends BaseMapper<SysUserAuth> {
 
-    Page<SysUserAuth> searchDefault(IPage page, @Param("srf") SysUserAuthSearchContext context, @Param("ew") Wrapper<SysUserAuth> wrapper) ;
+    Page<SysUserAuth> searchDefault(IPage page, @Param("srf") SysUserAuthSearchContext context, @Param("ew") Wrapper<SysUserAuth> wrapper);
     @Override
     SysUserAuth selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface SysUserAuthMapper extends BaseMapper<SysUserAuth>{
     int update(@Param(Constants.ENTITY) SysUserAuth entity, @Param("ew") Wrapper<SysUserAuth> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL
@@ -62,6 +62,6 @@ public interface SysUserAuthMapper extends BaseMapper<SysUserAuth>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
-    List<SysUserAuth> selectByUserid(@Param("userid") Serializable userid) ;
+    List<SysUserAuth> selectByUserid(@Param("userid") Serializable userid);
 
 }

@@ -23,23 +23,23 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[JobsInfo] 服务对象接口
  */
-public interface IJobsInfoService extends IService<JobsInfo>{
+public interface IJobsInfoService extends IService<JobsInfo> {
 
-    boolean create(JobsInfo et) ;
-    void createBatch(List<JobsInfo> list) ;
-    boolean update(JobsInfo et) ;
-    void updateBatch(List<JobsInfo> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    JobsInfo get(String key) ;
-    JobsInfo getDraft(JobsInfo et) ;
-    boolean checkKey(JobsInfo et) ;
-    JobsInfo execute(JobsInfo et) ;
-    boolean save(JobsInfo et) ;
-    void saveBatch(List<JobsInfo> list) ;
-    JobsInfo start(JobsInfo et) ;
-    JobsInfo stop(JobsInfo et) ;
-    Page<JobsInfo> searchDefault(JobsInfoSearchContext context) ;
+    boolean create(JobsInfo et);
+    void createBatch(List<JobsInfo> list);
+    boolean update(JobsInfo et);
+    void updateBatch(List<JobsInfo> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    JobsInfo get(String key);
+    JobsInfo getDraft(JobsInfo et);
+    boolean checkKey(JobsInfo et);
+    JobsInfo execute(JobsInfo et);
+    boolean save(JobsInfo et);
+    void saveBatch(List<JobsInfo> list);
+    JobsInfo start(JobsInfo et);
+    JobsInfo stop(JobsInfo et);
+    Page<JobsInfo> searchDefault(JobsInfoSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

@@ -80,6 +80,7 @@ public class WFMemberSearchContext extends QueryWrapperContext<WFMember> {
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

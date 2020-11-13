@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysUserAuth] 服务对象接口
  */
-public interface ISysUserAuthService extends IService<SysUserAuth>{
+public interface ISysUserAuthService extends IService<SysUserAuth> {
 
-    boolean create(SysUserAuth et) ;
-    void createBatch(List<SysUserAuth> list) ;
-    boolean update(SysUserAuth et) ;
-    void updateBatch(List<SysUserAuth> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysUserAuth get(String key) ;
-    SysUserAuth getDraft(SysUserAuth et) ;
-    boolean checkKey(SysUserAuth et) ;
-    boolean save(SysUserAuth et) ;
-    void saveBatch(List<SysUserAuth> list) ;
-    Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context) ;
+    boolean create(SysUserAuth et);
+    void createBatch(List<SysUserAuth> list);
+    boolean update(SysUserAuth et);
+    void updateBatch(List<SysUserAuth> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysUserAuth get(String key);
+    SysUserAuth getDraft(SysUserAuth et);
+    boolean checkKey(SysUserAuth et);
+    boolean save(SysUserAuth et);
+    void saveBatch(List<SysUserAuth> list);
+    Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context);
     List<SysUserAuth> selectByUserid(String userid);
     void removeByUserid(String userid);
     /**

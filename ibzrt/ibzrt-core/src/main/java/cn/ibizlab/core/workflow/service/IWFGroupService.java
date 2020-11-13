@@ -22,20 +22,20 @@ import cn.ibizlab.core.workflow.filter.WFGroupSearchContext;
 /**
  * 实体[WFGroup] 服务对象接口
  */
-public interface IWFGroupService{
+public interface IWFGroupService {
 
-    boolean create(WFGroup et) ;
-    void createBatch(List<WFGroup> list) ;
-    boolean update(WFGroup et) ;
-    void updateBatch(List<WFGroup> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFGroup get(String key) ;
-    WFGroup getDraft(WFGroup et) ;
-    boolean checkKey(WFGroup et) ;
-    boolean save(WFGroup et) ;
-    void saveBatch(List<WFGroup> list) ;
-    Page<WFGroup> searchDefault(WFGroupSearchContext context) ;
+    boolean create(WFGroup et);
+    void createBatch(List<WFGroup> list);
+    boolean update(WFGroup et);
+    void updateBatch(List<WFGroup> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    WFGroup get(String key);
+    WFGroup getDraft(WFGroup et);
+    boolean checkKey(WFGroup et);
+    boolean save(WFGroup et);
+    void saveBatch(List<WFGroup> list);
+    Page<WFGroup> searchDefault(WFGroupSearchContext context);
 
 }
 

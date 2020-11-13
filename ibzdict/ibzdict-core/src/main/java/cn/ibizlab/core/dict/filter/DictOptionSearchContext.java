@@ -73,6 +73,7 @@ public class DictOptionSearchContext extends QueryWrapperContext<DictOption> {
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

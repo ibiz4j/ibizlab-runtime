@@ -61,9 +61,10 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Transactional
     public boolean create(SysRolePermission et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getRolepermissionid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getRolepermissionid()), et);
         return true;
     }
 
@@ -78,9 +79,10 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Transactional
     public boolean update(SysRolePermission et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_role_permissionid",et.getRolepermissionid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("sys_role_permissionid", et.getRolepermissionid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getRolepermissionid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getRolepermissionid()), et);
         return true;
     }
 
@@ -88,13 +90,13 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Transactional
     public void updateBatch(List<SysRolePermission> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -108,11 +110,11 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Transactional
     public SysRolePermission get(String key) {
         SysRolePermission et = getById(key);
-        if(et==null){
-            et=new SysRolePermission();
+        if(et == null){
+            et = new SysRolePermission();
             et.setRolepermissionid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -125,13 +127,14 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
 
     @Override
     public boolean checkKey(SysRolePermission et) {
-        return (!ObjectUtils.isEmpty(et.getRolepermissionid()))&&(!Objects.isNull(this.getById(et.getRolepermissionid())));
+        return (!ObjectUtils.isEmpty(et.getRolepermissionid())) && (!Objects.isNull(this.getById(et.getRolepermissionid())));
     }
     @Override
     @Transactional
     public boolean save(SysRolePermission et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

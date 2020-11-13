@@ -11,6 +11,8 @@ export default {
     expires_time: "管理账号token过期时间",
     disabled: "是否禁用",
     redirect_uri: "RedirectURI",
+    notify_url: "NotifyUrl",
+    agent_id: "AGENT_ID",
   },
 	views: {
 		gridview: {
@@ -39,6 +41,10 @@ export default {
 			secret_key: "SecretKey(AppSecret)", 
 			redirect_uri: "RedirectURI", 
 			region_id: "RegionId", 
+			access_token: "管理账号token", 
+			expires_time: "管理账号token过期时间", 
+			notify_url: "NotifyUrl", 
+			agent_id: "AGENT_ID", 
 			disabled: "是否禁用", 
 			accessid: "开放平台接入标识", 
 		},

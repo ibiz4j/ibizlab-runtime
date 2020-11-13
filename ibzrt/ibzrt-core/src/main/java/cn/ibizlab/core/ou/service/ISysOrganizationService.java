@@ -22,27 +22,27 @@ import cn.ibizlab.core.ou.filter.SysOrganizationSearchContext;
 /**
  * 实体[SysOrganization] 服务对象接口
  */
-public interface ISysOrganizationService{
+public interface ISysOrganizationService {
 
-    boolean create(SysOrganization et) ;
-    @CacheEvict(value="sysorganization",allEntries=true)
-    void createBatch(List<SysOrganization> list) ;
-    boolean update(SysOrganization et) ;
-    @CacheEvict(value="sysorganization",allEntries=true)
-    void updateBatch(List<SysOrganization> list) ;
-    boolean remove(String key) ;
-    @CacheEvict(value="sysorganization",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    SysOrganization get(String key) ;
-    SysOrganization getDraft(SysOrganization et) ;
-    boolean checkKey(SysOrganization et) ;
-    boolean save(SysOrganization et) ;
-    @CacheEvict(value="sysorganization",allEntries=true)
-    void saveBatch(List<SysOrganization> list) ;
-    Page<SysOrganization> searchDefault(SysOrganizationSearchContext context) ;
+    boolean create(SysOrganization et);
+    @CacheEvict(value = "sysorganization", allEntries = true)
+    void createBatch(List<SysOrganization> list);
+    boolean update(SysOrganization et);
+    @CacheEvict(value = "sysorganization", allEntries = true)
+    void updateBatch(List<SysOrganization> list);
+    boolean remove(String key);
+    @CacheEvict(value = "sysorganization", allEntries = true)
+    void removeBatch(Collection<String> idList);
+    SysOrganization get(String key);
+    SysOrganization getDraft(SysOrganization et);
+    boolean checkKey(SysOrganization et);
+    boolean save(SysOrganization et);
+    @CacheEvict(value = "sysorganization",allEntries = true)
+    void saveBatch(List<SysOrganization> list);
+    Page<SysOrganization> searchDefault(SysOrganizationSearchContext context);
     List<SysOrganization> selectByParentorgid(String orgid);
     List<SysOrganization> selectByParentorgid(Collection<String> ids);
-    @CacheEvict(value="sysorganization",allEntries=true)
+    @CacheEvict(value = "sysorganization", allEntries = true)
     void removeByParentorgid(String orgid);
 
 }

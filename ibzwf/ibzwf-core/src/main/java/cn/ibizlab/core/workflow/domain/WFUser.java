@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZUSER",resultMap = "WFUserResultMap")
+@TableName(value = "IBZUSER", resultMap = "WFUserResultMap")
 public class WFUser extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class WFUser extends EntityMP implements Serializable {
     /**
      * 用户标识
      */
-    @DEField(name = "userid" , isKeyField=true)
-    @TableId(value= "userid",type=IdType.ASSIGN_UUID)
+    @DEField(name = "userid", isKeyField = true)
+    @TableId(value = "userid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -124,57 +124,57 @@ public class WFUser extends EntityMP implements Serializable {
     /**
      * 设置 [用户全局名]
      */
-    public void setFirstname(String firstname){
-        this.firstname = firstname ;
-        this.modify("username",firstname);
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+        this.modify("username", firstname);
     }
 
     /**
      * 设置 [用户名称]
      */
-    public void setDisplayname(String displayname){
-        this.displayname = displayname ;
-        this.modify("personname",displayname);
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
+        this.modify("personname", displayname);
     }
 
     /**
      * 设置 [主部门]
      */
-    public void setMdeptid(String mdeptid){
-        this.mdeptid = mdeptid ;
-        this.modify("mdeptid",mdeptid);
+    public void setMdeptid(String mdeptid) {
+        this.mdeptid = mdeptid;
+        this.modify("mdeptid", mdeptid);
     }
 
     /**
      * 设置 [主部门代码]
      */
-    public void setMdeptcode(String mdeptcode){
-        this.mdeptcode = mdeptcode ;
-        this.modify("mdeptcode",mdeptcode);
+    public void setMdeptcode(String mdeptcode) {
+        this.mdeptcode = mdeptcode;
+        this.modify("mdeptcode", mdeptcode);
     }
 
     /**
      * 设置 [主部门名称]
      */
-    public void setMdeptname(String mdeptname){
-        this.mdeptname = mdeptname ;
-        this.modify("mdeptname",mdeptname);
+    public void setMdeptname(String mdeptname) {
+        this.mdeptname = mdeptname;
+        this.modify("mdeptname", mdeptname);
     }
 
     /**
      * 设置 [业务编码]
      */
-    public void setBcode(String bcode){
-        this.bcode = bcode ;
-        this.modify("bcode",bcode);
+    public void setBcode(String bcode) {
+        this.bcode = bcode;
+        this.modify("bcode", bcode);
     }
 
     /**
      * 设置 [单位代码]
      */
-    public void setOrgcode(String orgcode){
-        this.orgcode = orgcode ;
-        this.modify("orgcode",orgcode);
+    public void setOrgcode(String orgcode) {
+        this.orgcode = orgcode;
+        this.modify("orgcode", orgcode);
     }
 
 
@@ -188,7 +188,7 @@ public class WFUser extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("userid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

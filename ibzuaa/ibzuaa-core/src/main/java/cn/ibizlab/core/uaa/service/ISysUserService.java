@@ -23,24 +23,24 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysUser] 服务对象接口
  */
-public interface ISysUserService extends IService<SysUser>{
+public interface ISysUserService extends IService<SysUser> {
 
-    boolean create(SysUser et) ;
-    @CacheEvict(value="sysuser",allEntries=true)
-    void createBatch(List<SysUser> list) ;
-    boolean update(SysUser et) ;
-    @CacheEvict(value="sysuser",allEntries=true)
-    void updateBatch(List<SysUser> list) ;
-    boolean remove(String key) ;
-    @CacheEvict(value="sysuser",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    SysUser get(String key) ;
-    SysUser getDraft(SysUser et) ;
-    boolean checkKey(SysUser et) ;
-    boolean save(SysUser et) ;
-    @CacheEvict(value="sysuser",allEntries=true)
-    void saveBatch(List<SysUser> list) ;
-    Page<SysUser> searchDefault(SysUserSearchContext context) ;
+    boolean create(SysUser et);
+    @CacheEvict(value = "sysuser", allEntries = true)
+    void createBatch(List<SysUser> list);
+    boolean update(SysUser et);
+    @CacheEvict(value = "sysuser", allEntries = true)
+    void updateBatch(List<SysUser> list);
+    boolean remove(String key);
+    @CacheEvict(value = "sysuser", allEntries = true)
+    void removeBatch(Collection<String> idList);
+    SysUser get(String key);
+    SysUser getDraft(SysUser et);
+    boolean checkKey(SysUser et);
+    boolean save(SysUser et);
+    @CacheEvict(value = "sysuser",allEntries = true)
+    void saveBatch(List<SysUser> list);
+    Page<SysUser> searchDefault(SysUserSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}
@@ -56,8 +56,8 @@ public interface ISysUserService extends IService<SysUser>{
      */
     boolean execute(String sql, Map param);
 
-    List<SysUser> getSysuserByIds(List<String> ids) ;
-    List<SysUser> getSysuserByEntities(List<SysUser> entities) ;
+    List<SysUser> getSysuserByIds(List<String> ids);
+    List<SysUser> getSysuserByEntities(List<SysUser> entities);
 }
 
 

@@ -22,20 +22,20 @@ import cn.ibizlab.core.workflow.filter.WFProcessInstanceSearchContext;
 /**
  * 实体[WFProcessInstance] 服务对象接口
  */
-public interface IWFProcessInstanceService{
+public interface IWFProcessInstanceService {
 
-    boolean create(WFProcessInstance et) ;
-    void createBatch(List<WFProcessInstance> list) ;
-    boolean update(WFProcessInstance et) ;
-    void updateBatch(List<WFProcessInstance> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFProcessInstance get(String key) ;
-    WFProcessInstance getDraft(WFProcessInstance et) ;
-    boolean checkKey(WFProcessInstance et) ;
-    boolean save(WFProcessInstance et) ;
-    void saveBatch(List<WFProcessInstance> list) ;
-    Page<WFProcessInstance> searchDefault(WFProcessInstanceSearchContext context) ;
+    boolean create(WFProcessInstance et);
+    void createBatch(List<WFProcessInstance> list);
+    boolean update(WFProcessInstance et);
+    void updateBatch(List<WFProcessInstance> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    WFProcessInstance get(String key);
+    WFProcessInstance getDraft(WFProcessInstance et);
+    boolean checkKey(WFProcessInstance et);
+    boolean save(WFProcessInstance et);
+    void saveBatch(List<WFProcessInstance> list);
+    Page<WFProcessInstance> searchDefault(WFProcessInstanceSearchContext context);
 
 }
 

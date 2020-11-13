@@ -23,24 +23,24 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysOpenAccess] 服务对象接口
  */
-public interface ISysOpenAccessService extends IService<SysOpenAccess>{
+public interface ISysOpenAccessService extends IService<SysOpenAccess> {
 
-    boolean create(SysOpenAccess et) ;
-    @CacheEvict(value="sysopenaccess",allEntries=true)
-    void createBatch(List<SysOpenAccess> list) ;
-    boolean update(SysOpenAccess et) ;
-    @CacheEvict(value="sysopenaccess",allEntries=true)
-    void updateBatch(List<SysOpenAccess> list) ;
-    boolean remove(String key) ;
-    @CacheEvict(value="sysopenaccess",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    SysOpenAccess get(String key) ;
-    SysOpenAccess getDraft(SysOpenAccess et) ;
-    boolean checkKey(SysOpenAccess et) ;
-    boolean save(SysOpenAccess et) ;
-    @CacheEvict(value="sysopenaccess",allEntries=true)
-    void saveBatch(List<SysOpenAccess> list) ;
-    Page<SysOpenAccess> searchDefault(SysOpenAccessSearchContext context) ;
+    boolean create(SysOpenAccess et);
+    @CacheEvict(value = "sysopenaccess", allEntries = true)
+    void createBatch(List<SysOpenAccess> list);
+    boolean update(SysOpenAccess et);
+    @CacheEvict(value = "sysopenaccess", allEntries = true)
+    void updateBatch(List<SysOpenAccess> list);
+    boolean remove(String key);
+    @CacheEvict(value = "sysopenaccess", allEntries = true)
+    void removeBatch(Collection<String> idList);
+    SysOpenAccess get(String key);
+    SysOpenAccess getDraft(SysOpenAccess et);
+    boolean checkKey(SysOpenAccess et);
+    boolean save(SysOpenAccess et);
+    @CacheEvict(value = "sysopenaccess",allEntries = true)
+    void saveBatch(List<SysOpenAccess> list);
+    Page<SysOpenAccess> searchDefault(SysOpenAccessSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

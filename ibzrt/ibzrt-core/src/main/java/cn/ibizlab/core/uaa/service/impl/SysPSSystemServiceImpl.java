@@ -51,7 +51,7 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
         SysPSSystem rt = sysPSSystemFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
         SysPSSystem rt = sysPSSystemFeignClient.update(et.getPssystemid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

@@ -36,7 +36,7 @@ public class WFREModel extends EntityClient implements Serializable {
     /**
      * ID
      */
-    @DEField(name = "modelid" , isKeyField=true)
+    @DEField(name = "modelid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -63,7 +63,7 @@ public class WFREModel extends EntityClient implements Serializable {
     /**
      * 设置 [名称]
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name ;
         this.modify("modelname",name);
     }
@@ -71,7 +71,7 @@ public class WFREModel extends EntityClient implements Serializable {
     /**
      * 设置 [BPMN]
      */
-    public void setBpmnfile(String bpmnfile){
+    public void setBpmnfile(String bpmnfile) {
         this.bpmnfile = bpmnfile ;
         this.modify("bpmnfile",bpmnfile);
     }

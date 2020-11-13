@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFGroup] 服务对象接口
  */
 @Component
-public class WFGroupFallback implements WFGroupFeignClient{
+public class WFGroupFallback implements WFGroupFeignClient {
 
-    public Page<WFGroup> select(){
-            return null;
-     }
+    public Page<WFGroup> select() {
+        return null;
+    }
 
-    public WFGroup create(WFGroup wfgroup){
-            return null;
-     }
-    public Boolean createBatch(List<WFGroup> wfgroups){
-            return false;
-     }
+    public WFGroup create(WFGroup wfgroup) {
+        return null;
+    }
+    public Boolean createBatch(List<WFGroup> wfgroups) {
+        return false;
+    }
 
-    public WFGroup update(String id, WFGroup wfgroup){
-            return null;
-     }
-    public Boolean updateBatch(List<WFGroup> wfgroups){
-            return false;
-     }
+    public WFGroup update(String id, WFGroup wfgroup) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFGroup> wfgroups) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFGroup get(String id){
-            return null;
-     }
+    public WFGroup get(String id) {
+        return null;
+    }
 
 
     public WFGroup getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFGroup wfgroup){
-            return false;
-     }
+    public Boolean checkKey(WFGroup wfgroup) {
+        return false;
+    }
 
 
-    public Boolean save(WFGroup wfgroup){
-            return false;
-     }
-    public Boolean saveBatch(List<WFGroup> wfgroups){
-            return false;
-     }
+    public Boolean save(WFGroup wfgroup) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFGroup> wfgroups) {
+        return false;
+    }
 
-    public Page<WFGroup> searchDefault(WFGroupSearchContext context){
-            return null;
-     }
+    public Page<WFGroup> searchDefault(WFGroupSearchContext context) {
+        return null;
+    }
 
 
 }

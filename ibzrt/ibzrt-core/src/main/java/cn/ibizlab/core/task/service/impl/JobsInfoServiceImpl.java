@@ -51,7 +51,7 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
         JobsInfo rt = jobsInfoFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
         JobsInfo rt = jobsInfoFeignClient.update(et.getId(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

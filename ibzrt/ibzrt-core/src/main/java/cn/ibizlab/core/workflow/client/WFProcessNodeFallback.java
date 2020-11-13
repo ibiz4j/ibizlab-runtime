@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFProcessNode] 服务对象接口
  */
 @Component
-public class WFProcessNodeFallback implements WFProcessNodeFeignClient{
+public class WFProcessNodeFallback implements WFProcessNodeFeignClient {
 
-    public Page<WFProcessNode> select(){
-            return null;
-     }
+    public Page<WFProcessNode> select() {
+        return null;
+    }
 
-    public WFProcessNode create(WFProcessNode wfprocessnode){
-            return null;
-     }
-    public Boolean createBatch(List<WFProcessNode> wfprocessnodes){
-            return false;
-     }
+    public WFProcessNode create(WFProcessNode wfprocessnode) {
+        return null;
+    }
+    public Boolean createBatch(List<WFProcessNode> wfprocessnodes) {
+        return false;
+    }
 
-    public WFProcessNode update(String usertaskid, WFProcessNode wfprocessnode){
-            return null;
-     }
-    public Boolean updateBatch(List<WFProcessNode> wfprocessnodes){
-            return false;
-     }
+    public WFProcessNode update(String usertaskid, WFProcessNode wfprocessnode) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFProcessNode> wfprocessnodes) {
+        return false;
+    }
 
 
-    public Boolean remove(String usertaskid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String usertaskid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFProcessNode get(String usertaskid){
-            return null;
-     }
+    public WFProcessNode get(String usertaskid) {
+        return null;
+    }
 
 
     public WFProcessNode getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFProcessNode wfprocessnode){
-            return false;
-     }
+    public Boolean checkKey(WFProcessNode wfprocessnode) {
+        return false;
+    }
 
 
-    public Boolean save(WFProcessNode wfprocessnode){
-            return false;
-     }
-    public Boolean saveBatch(List<WFProcessNode> wfprocessnodes){
-            return false;
-     }
+    public Boolean save(WFProcessNode wfprocessnode) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFProcessNode> wfprocessnodes) {
+        return false;
+    }
 
-    public Page<WFProcessNode> searchDefault(WFProcessNodeSearchContext context){
-            return null;
-     }
+    public Page<WFProcessNode> searchDefault(WFProcessNodeSearchContext context) {
+        return null;
+    }
 
 
 }

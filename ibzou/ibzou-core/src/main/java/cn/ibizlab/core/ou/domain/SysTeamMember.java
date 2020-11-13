@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZTEAMMEMBER",resultMap = "SysTeamMemberResultMap")
+@TableName(value = "IBZTEAMMEMBER", resultMap = "SysTeamMemberResultMap")
 public class SysTeamMember extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysTeamMember extends EntityMP implements Serializable {
     /**
      * 组成员标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "teammemberid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "teammemberid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "teammemberid")
     @JsonProperty("teammemberid")
     private String teammemberid;
@@ -137,41 +137,41 @@ public class SysTeamMember extends EntityMP implements Serializable {
     /**
      * 设置 [组标识]
      */
-    public void setTeamid(String teamid){
-        this.teamid = teamid ;
-        this.modify("teamid",teamid);
+    public void setTeamid(String teamid) {
+        this.teamid = teamid;
+        this.modify("teamid", teamid);
     }
 
     /**
      * 设置 [用户标识]
      */
-    public void setUserid(String userid){
-        this.userid = userid ;
-        this.modify("userid",userid);
+    public void setUserid(String userid) {
+        this.userid = userid;
+        this.modify("userid", userid);
     }
 
     /**
      * 设置 [岗位标识]
      */
-    public void setPostid(String postid){
-        this.postid = postid ;
-        this.modify("postid",postid);
+    public void setPostid(String postid) {
+        this.postid = postid;
+        this.modify("postid", postid);
     }
 
     /**
      * 设置 [区属]
      */
-    public void setDomains(String domains){
-        this.domains = domains ;
-        this.modify("domains",domains);
+    public void setDomains(String domains) {
+        this.domains = domains;
+        this.modify("domains", domains);
     }
 
 
     /**
      * 获取 [组成员标识]
      */
-    public String getTeammemberid(){
-        if(ObjectUtils.isEmpty(teammemberid)){
+    public String getTeammemberid() {
+        if(ObjectUtils.isEmpty(teammemberid)) {
             teammemberid=(String)getDefaultKey(true);
         }
         return teammemberid;
@@ -193,7 +193,7 @@ public class SysTeamMember extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("teammemberid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

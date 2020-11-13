@@ -51,7 +51,7 @@ public class WFTaskServiceImpl implements IWFTaskService {
         WFTask rt = wFTaskFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class WFTaskServiceImpl implements IWFTaskService {
         WFTask rt = wFTaskFeignClient.update(et.getId(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

@@ -17,31 +17,31 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface WFProcessDefinitionMapper extends BaseMapper<WFProcessDefinition>{
+public interface WFProcessDefinitionMapper extends BaseMapper<WFProcessDefinition> {
 
-    Page<WFProcessDefinition> searchDefault(IPage page, @Param("srf") WFProcessDefinitionSearchContext context, @Param("ew") Wrapper<WFProcessDefinition> wrapper) ;
+    Page<WFProcessDefinition> searchDefault(IPage page, @Param("srf") WFProcessDefinitionSearchContext context, @Param("ew") Wrapper<WFProcessDefinition> wrapper);
     @Override
-    @Cacheable( value="wfprocessdefinition",key = "'row:'+#p0")
+    @Cacheable(value ="wfprocessdefinition", key = "'row:'+#p0")
     WFProcessDefinition selectById(Serializable id);
     @Override
-    @CacheEvict( value="wfprocessdefinition",key = "'row:'+#p0.definitionkey")
+    @CacheEvict(value ="wfprocessdefinition", key = "'row:'+#p0.definitionkey")
     int insert(WFProcessDefinition entity);
     @Override
-    @CacheEvict( value="wfprocessdefinition",key = "'row:'+#p0.definitionkey")
+    @CacheEvict(value ="wfprocessdefinition", key = "'row:'+#p0.definitionkey")
     int updateById(@Param(Constants.ENTITY) WFProcessDefinition entity);
     @Override
-    @CacheEvict(value="wfprocessdefinition",key = "'row:'+#p0.definitionkey")
+    @CacheEvict(value ="wfprocessdefinition", key = "'row:'+#p0.definitionkey")
     int update(@Param(Constants.ENTITY) WFProcessDefinition entity, @Param("ew") Wrapper<WFProcessDefinition> updateWrapper);
     @Override
-    @CacheEvict( value="wfprocessdefinition",key = "'row:'+#p0")
+    @CacheEvict(value ="wfprocessdefinition", key = "'row:'+#p0")
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

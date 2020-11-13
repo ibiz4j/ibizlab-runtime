@@ -63,37 +63,39 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     @Override
     @Transactional
     public boolean create(SysPost et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getPostid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getPostid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<SysPost> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysPost et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("postid",et.getPostid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("postid", et.getPostid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getPostid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getPostid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<SysPost> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -107,11 +109,11 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     @Transactional
     public SysPost get(String key) {
         SysPost et = getById(key);
-        if(et==null){
-            et=new SysPost();
+        if(et == null){
+            et = new SysPost();
             et.setPostid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -123,13 +125,14 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
     @Override
     public boolean checkKey(SysPost et) {
-        return (!ObjectUtils.isEmpty(et.getPostid()))&&(!Objects.isNull(this.getById(et.getPostid())));
+        return (!ObjectUtils.isEmpty(et.getPostid())) && (!Objects.isNull(this.getById(et.getPostid())));
     }
     @Override
     @Transactional
     public boolean save(SysPost et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

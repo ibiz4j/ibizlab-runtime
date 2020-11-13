@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[WFUser] 服务对象接口
  */
-public interface IWFUserService extends IService<WFUser>{
+public interface IWFUserService extends IService<WFUser> {
 
-    boolean create(WFUser et) ;
-    void createBatch(List<WFUser> list) ;
-    boolean update(WFUser et) ;
-    void updateBatch(List<WFUser> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFUser get(String key) ;
-    WFUser getDraft(WFUser et) ;
-    boolean checkKey(WFUser et) ;
-    boolean save(WFUser et) ;
-    void saveBatch(List<WFUser> list) ;
-    Page<WFUser> searchDefault(WFUserSearchContext context) ;
+    boolean create(WFUser et);
+    void createBatch(List<WFUser> list);
+    boolean update(WFUser et);
+    void updateBatch(List<WFUser> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    WFUser get(String key);
+    WFUser getDraft(WFUser et);
+    boolean checkKey(WFUser et);
+    boolean save(WFUser et);
+    void saveBatch(List<WFUser> list);
+    Page<WFUser> searchDefault(WFUserSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}
@@ -52,8 +52,8 @@ public interface IWFUserService extends IService<WFUser>{
      */
     boolean execute(String sql, Map param);
 
-    List<WFUser> getWfuserByIds(List<String> ids) ;
-    List<WFUser> getWfuserByEntities(List<WFUser> entities) ;
+    List<WFUser> getWfuserByIds(List<String> ids);
+    List<WFUser> getWfuserByEntities(List<WFUser> entities);
 }
 
 

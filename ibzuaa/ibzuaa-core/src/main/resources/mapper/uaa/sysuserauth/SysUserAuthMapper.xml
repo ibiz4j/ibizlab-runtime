@@ -11,7 +11,7 @@
         <![CDATA[select t1.* from (SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID, t11.USERNAME FROM IBZUSERAUTH t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  ) t1 where authid=#{id}]]>
     </select>
 	<select id="selectById"  resultMap="SysUserAuthResultMap" databaseId="postgresql">
-        <![CDATA[select t1.* from (SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  ) t1 where authid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID, t11.USERNAME FROM IBZUSERAUTH t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  ) t1 where authid=#{id}]]>
     </select>
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
@@ -54,7 +54,7 @@
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
-		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  
+		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID, t11.USERNAME FROM IBZUSERAUTH t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  
 			]]>
     </sql>
     <!--数据查询[View]-->
@@ -69,7 +69,7 @@
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="postgresql">
-		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID FROM IBZUSERAUTH t1  
+		<![CDATA[ SELECT t1.AUTHID, t1.CREDENTIAL, t1.IDENTIFIER, t1.IDENTITY_TYPE, t1.USERID, t11.USERNAME FROM IBZUSERAUTH t1  LEFT JOIN IBZUSER t11 ON t1.USERID = t11.USERID  
 			]]>
     </sql>
 </mapper>

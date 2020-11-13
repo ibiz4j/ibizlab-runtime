@@ -51,7 +51,7 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
         SysOrganization rt = sysOrganizationFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
         SysOrganization rt = sysOrganizationFeignClient.update(et.getOrgid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

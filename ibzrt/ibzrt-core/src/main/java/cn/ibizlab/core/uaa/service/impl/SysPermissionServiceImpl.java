@@ -51,7 +51,7 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
         SysPermission rt = sysPermissionFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
         SysPermission rt = sysPermissionFeignClient.update(et.getPermissionid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

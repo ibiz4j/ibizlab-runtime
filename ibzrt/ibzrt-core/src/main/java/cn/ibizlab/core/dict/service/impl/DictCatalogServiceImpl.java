@@ -51,7 +51,7 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
         DictCatalog rt = dictCatalogFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
         DictCatalog rt = dictCatalogFeignClient.update(et.getId(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

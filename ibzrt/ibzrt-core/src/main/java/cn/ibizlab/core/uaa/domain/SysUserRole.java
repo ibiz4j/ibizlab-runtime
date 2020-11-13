@@ -36,7 +36,7 @@ public class SysUserRole extends EntityClient implements Serializable {
     /**
      * 用户角色关系标识
      */
-    @DEField(name = "sys_user_roleid" , isKeyField=true)
+    @DEField(name = "sys_user_roleid" , isKeyField = true)
     @JSONField(name = "userroleid")
     @JsonProperty("userroleid")
     private String userroleid;
@@ -96,8 +96,8 @@ public class SysUserRole extends EntityClient implements Serializable {
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
 
@@ -105,8 +105,8 @@ public class SysUserRole extends EntityClient implements Serializable {
      * 更新时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -131,7 +131,7 @@ public class SysUserRole extends EntityClient implements Serializable {
     /**
      * 设置 [角色标识]
      */
-    public void setRoleid(String roleid){
+    public void setRoleid(String roleid) {
         this.roleid = roleid ;
         this.modify("sys_roleid",roleid);
     }
@@ -139,7 +139,7 @@ public class SysUserRole extends EntityClient implements Serializable {
     /**
      * 设置 [用户标识]
      */
-    public void setUserid(String userid){
+    public void setUserid(String userid) {
         this.userid = userid ;
         this.modify("sys_userid",userid);
     }

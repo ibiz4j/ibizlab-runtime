@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZDICTOPTION",resultMap = "DictOptionResultMap")
+@TableName(value = "IBZDICTOPTION", resultMap = "DictOptionResultMap")
 public class DictOption extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class DictOption extends EntityMP implements Serializable {
     /**
      * 标识
      */
-    @DEField(name = "vkey" , isKeyField=true)
-    @TableId(value= "vkey",type=IdType.ASSIGN_UUID)
+    @DEField(name = "vkey", isKeyField = true)
+    @TableId(value = "vkey", type = IdType.ASSIGN_UUID)
     @JSONField(name = "value_key")
     @JsonProperty("value_key")
     private String valueKey;
@@ -101,7 +101,7 @@ public class DictOption extends EntityMP implements Serializable {
     /**
      * 栏目样式
      */
-    @DEField(defaultValue = "itemcls" , defaultValueType = DEFieldDefaultValueType.PARAM)
+    @DEField(defaultValue = "itemcls", defaultValueType = DEFieldDefaultValueType.PARAM)
     @TableField(value = "cls")
     @JSONField(name = "cls")
     @JsonProperty("cls")
@@ -149,8 +149,8 @@ public class DictOption extends EntityMP implements Serializable {
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
     @TableField(value = "updatedate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -167,105 +167,105 @@ public class DictOption extends EntityMP implements Serializable {
     /**
      * 设置 [目录代码]
      */
-    public void setCatalogId(String catalogId){
-        this.catalogId = catalogId ;
-        this.modify("cid",catalogId);
+    public void setCatalogId(String catalogId) {
+        this.catalogId = catalogId;
+        this.modify("cid", catalogId);
     }
 
     /**
      * 设置 [目录]
      */
-    public void setCatalogName(String catalogName){
-        this.catalogName = catalogName ;
-        this.modify("cname",catalogName);
+    public void setCatalogName(String catalogName) {
+        this.catalogName = catalogName;
+        this.modify("cname", catalogName);
     }
 
     /**
      * 设置 [代码值]
      */
-    public void setValue(String value){
-        this.value = value ;
-        this.modify("val",value);
+    public void setValue(String value) {
+        this.value = value;
+        this.modify("val", value);
     }
 
     /**
      * 设置 [名称]
      */
-    public void setLabel(String label){
-        this.label = label ;
-        this.modify("label",label);
+    public void setLabel(String label) {
+        this.label = label;
+        this.modify("label", label);
     }
 
     /**
      * 设置 [父代码值]
      */
-    public void setParent(String parent){
-        this.parent = parent ;
-        this.modify("pval",parent);
+    public void setParent(String parent) {
+        this.parent = parent;
+        this.modify("pval", parent);
     }
 
     /**
      * 设置 [过滤项]
      */
-    public void setFilter(String filter){
-        this.filter = filter ;
-        this.modify("vfilter",filter);
+    public void setFilter(String filter) {
+        this.filter = filter;
+        this.modify("vfilter", filter);
     }
 
     /**
      * 设置 [栏目样式]
      */
-    public void setCls(String cls){
-        this.cls = cls ;
-        this.modify("cls",cls);
+    public void setCls(String cls) {
+        this.cls = cls;
+        this.modify("cls", cls);
     }
 
     /**
      * 设置 [图标]
      */
-    public void setIconClass(String iconClass){
-        this.iconClass = iconClass ;
-        this.modify("iconcls",iconClass);
+    public void setIconClass(String iconClass) {
+        this.iconClass = iconClass;
+        this.modify("iconcls", iconClass);
     }
 
     /**
      * 设置 [是否禁用]
      */
-    public void setDisabled(Integer disabled){
-        this.disabled = disabled ;
-        this.modify("disabled",disabled);
+    public void setDisabled(Integer disabled) {
+        this.disabled = disabled;
+        this.modify("disabled", disabled);
     }
 
     /**
      * 设置 [过期/失效]
      */
-    public void setExpired(Integer expired){
-        this.expired = expired ;
-        this.modify("expired",expired);
+    public void setExpired(Integer expired) {
+        this.expired = expired;
+        this.modify("expired", expired);
     }
 
     /**
      * 设置 [排序]
      */
-    public void setShoworder(Integer showorder){
-        this.showorder = showorder ;
-        this.modify("showorder",showorder);
+    public void setShoworder(Integer showorder) {
+        this.showorder = showorder;
+        this.modify("showorder", showorder);
     }
 
     /**
      * 设置 [扩展]
      */
-    public void setExtension(String extension){
-        this.extension = extension ;
-        this.modify("extension",extension);
+    public void setExtension(String extension) {
+        this.extension = extension;
+        this.modify("extension", extension);
     }
 
 
     /**
      * 获取 [标识]
      */
-    public String getValueKey(){
-        if(ObjectUtils.isEmpty(valueKey)){
+    public String getValueKey() {
+        if(ObjectUtils.isEmpty(valueKey)) {
             valueKey=(String)getDefaultKey(true);
         }
         return valueKey;
@@ -287,7 +287,7 @@ public class DictOption extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("vkey");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

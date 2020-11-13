@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZAUTHLOG",resultMap = "SysAuthLogResultMap")
+@TableName(value = "IBZAUTHLOG", resultMap = "SysAuthLogResultMap")
 public class SysAuthLog extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysAuthLog extends EntityMP implements Serializable {
     /**
      * 标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "logid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "logid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "logid")
     @JsonProperty("logid")
     private String logid;
@@ -76,9 +76,9 @@ public class SysAuthLog extends EntityMP implements Serializable {
      * 认证时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @TableField(value = "authtime" , fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "authtime" , format="yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "authtime", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "authtime", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("authtime")
     private Timestamp authtime;
     /**
@@ -115,57 +115,57 @@ public class SysAuthLog extends EntityMP implements Serializable {
     /**
      * 设置 [用户全局名]
      */
-    public void setUsername(String username){
-        this.username = username ;
-        this.modify("username",username);
+    public void setUsername(String username) {
+        this.username = username;
+        this.modify("username", username);
     }
 
     /**
      * 设置 [用户名称]
      */
-    public void setPersonname(String personname){
-        this.personname = personname ;
-        this.modify("personname",personname);
+    public void setPersonname(String personname) {
+        this.personname = personname;
+        this.modify("personname", personname);
     }
 
     /**
      * 设置 [域]
      */
-    public void setDomain(String domain){
-        this.domain = domain ;
-        this.modify("domain",domain);
+    public void setDomain(String domain) {
+        this.domain = domain;
+        this.modify("domain", domain);
     }
 
     /**
      * 设置 [IP地址]
      */
-    public void setIpaddr(String ipaddr){
-        this.ipaddr = ipaddr ;
-        this.modify("ipaddr",ipaddr);
+    public void setIpaddr(String ipaddr) {
+        this.ipaddr = ipaddr;
+        this.modify("ipaddr", ipaddr);
     }
 
     /**
      * 设置 [MAC地址]
      */
-    public void setMacaddr(String macaddr){
-        this.macaddr = macaddr ;
-        this.modify("macaddr",macaddr);
+    public void setMacaddr(String macaddr) {
+        this.macaddr = macaddr;
+        this.modify("macaddr", macaddr);
     }
 
     /**
      * 设置 [客户端]
      */
-    public void setUseragent(String useragent){
-        this.useragent = useragent ;
-        this.modify("useragent",useragent);
+    public void setUseragent(String useragent) {
+        this.useragent = useragent;
+        this.modify("useragent", useragent);
     }
 
     /**
      * 设置 [认证结果]
      */
-    public void setAuthcode(String authcode){
-        this.authcode = authcode ;
-        this.modify("authcode",authcode);
+    public void setAuthcode(String authcode) {
+        this.authcode = authcode;
+        this.modify("authcode", authcode);
     }
 
 
@@ -179,7 +179,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("logid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

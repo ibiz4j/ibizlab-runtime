@@ -127,6 +127,15 @@ public class PayOpenAccessDTO extends DTOBase implements Serializable {
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
     private String notifyUrl;
 
+    /**
+     * 属性 [AGENT_ID]
+     *
+     */
+    @JSONField(name = "agent_id")
+    @JsonProperty("agent_id")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long agentId;
+
 
     /**
      * 设置 [ACCESSNAME]
@@ -206,6 +215,14 @@ public class PayOpenAccessDTO extends DTOBase implements Serializable {
     public void setNotifyUrl(String  notifyUrl){
         this.notifyUrl = notifyUrl ;
         this.modify("notify_url",notifyUrl);
+    }
+
+    /**
+     * 设置 [AGENT_ID]
+     */
+    public void setAgentId(Long  agentId){
+        this.agentId = agentId ;
+        this.modify("agent_id",agentId);
     }
 
 

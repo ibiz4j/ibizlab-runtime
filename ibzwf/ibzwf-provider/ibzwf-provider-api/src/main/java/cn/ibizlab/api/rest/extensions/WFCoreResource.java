@@ -14,8 +14,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,13 +31,20 @@ import java.util.Map;
 @RequestMapping("")
 public class WFCoreResource
 {
+	/**
+	 * 流程PC表单标记
+	 */
+	private static final  String formTag="process-form";
+	/**
+	 * 流程移动端表单标记
+	 */
+	private static final  String mobFormTag="process-mobform";
 
     @Autowired
     private WFCoreService wfCoreService;
 
 	@Autowired
 	private IWFTaskService taskService;
-
 
     @ApiOperation(value = "getWFProcessDefinition", tags = {"WFProcessDefinition" },  notes = "根据系统实体查找当前适配的工作流模型")
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/process-definitions")
@@ -65,7 +75,8 @@ public class WFCoreResource
 	public ResponseEntity<List<WFTaskWay>> getwflink(@PathVariable("system") String system,@PathVariable("appname") String appname,
 			@PathVariable("entity") String entity,
 			@PathVariable("businessKey") String businessKey,@PathVariable("taskDefinitionKey") String taskDefinitionKey) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getWFLink(system,appname,entity,businessKey,taskDefinitionKey));
+		List<WFTaskWay> taskWays=wfCoreService.getWFLink(system,appname,entity,businessKey,taskDefinitionKey);
+		return ResponseEntity.status(HttpStatus.OK).headers(getHeader()).body(taskWays);
 	}
 
 	@ApiOperation(value = "getWayByProcessDefinitionKey", tags = {"WFStepWay" },  notes = "根据流程和当前步骤获取操作路径")
@@ -73,7 +84,8 @@ public class WFCoreResource
 	public ResponseEntity<List<WFTaskWay>> getWayByDefKey(@PathVariable("system") String system,@PathVariable("appname") String appname,
 													 @PathVariable("entity") String entity,
 													 @PathVariable("processDefinitionKey") String processDefinitionKey,@PathVariable("taskDefinitionKey") String taskDefinitionKey) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getWFLinkByStep(system,appname,entity,processDefinitionKey,taskDefinitionKey));
+		List<WFTaskWay> taskWays=wfCoreService.getWFLinkByStep(system,appname,entity,processDefinitionKey,taskDefinitionKey);
+		return ResponseEntity.status(HttpStatus.OK).headers(getHeader()).body(taskWays);
 	}
 
 	@ApiOperation(value = "getWayByTaskId", tags = {"WFTaskWay" },  notes = "根据业务主键和当前步骤获取操作路径")
@@ -81,7 +93,8 @@ public class WFCoreResource
 	public ResponseEntity<List<WFTaskWay>> gettasklink(@PathVariable("system") String system,@PathVariable("appname") String appname,
 			@PathVariable("entity") String entity,
 			@PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getTaskLink(system,appname,entity,businessKey,taskId));
+		List<WFTaskWay> taskWays=wfCoreService.getTaskLink(system,appname,entity,businessKey,taskId);
+		return ResponseEntity.status(HttpStatus.OK).headers(getHeader()).body(taskWays);
 	}
 
     @ApiOperation(value = "getWFHistory", tags = {"getWFHistory" },  notes = "根据业务主键获取审批意见记录")
@@ -192,6 +205,25 @@ public class WFCoreResource
     @RequestMapping(method = RequestMethod.POST, value = "/deploybpmn")
 	public ResponseEntity<Boolean> deployBpmnFile(@RequestBody List<Map<String,Object>> bpmnfiles){
 		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.wfdeploybpmns(bpmnfiles));
+	}
+
+	/**
+	 * 将流程表单设置到响应头中
+	 */
+	private HttpHeaders getHeader() {
+		Object objReq= RequestContextHolder.currentRequestAttributes();
+		HttpHeaders headers=new HttpHeaders();
+		if(!ObjectUtils.isEmpty(objReq) && objReq instanceof ServletRequestAttributes){
+			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+			HttpServletRequest req = attr.getRequest();
+			Object form=req.getAttribute(formTag);
+			Object mobForm=req.getAttribute(mobFormTag);
+			if(!ObjectUtils.isEmpty(form))
+				headers.set(formTag,String.valueOf(form));
+			if(!ObjectUtils.isEmpty(mobForm))
+				headers.set(mobFormTag,String.valueOf(mobForm));
+		}
+		return headers;
 	}
 
 }

@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZMSGTEMPL",resultMap = "MsgTemplateResultMap")
+@TableName(value = "IBZMSGTEMPL", resultMap = "MsgTemplateResultMap")
 public class MsgTemplate extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class MsgTemplate extends EntityMP implements Serializable {
     /**
      * 模板标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "tid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "tid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "tid")
     @JsonProperty("tid")
     private String tid;
@@ -126,65 +126,65 @@ public class MsgTemplate extends EntityMP implements Serializable {
     /**
      * 设置 [模板标题]
      */
-    public void setTemplateName(String templateName){
-        this.templateName = templateName ;
-        this.modify("template_name",templateName);
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
+        this.modify("template_name", templateName);
     }
 
     /**
      * 设置 [模板类型]
      */
-    public void setTemplateType(String templateType){
-        this.templateType = templateType ;
-        this.modify("template_type",templateType);
+    public void setTemplateType(String templateType) {
+        this.templateType = templateType;
+        this.modify("template_type", templateType);
     }
 
     /**
      * 设置 [模板内容]
      */
-    public void setContent(String content){
-        this.content = content ;
-        this.modify("content",content);
+    public void setContent(String content) {
+        this.content = content;
+        this.modify("content", content);
     }
 
     /**
      * 设置 [模板标识]
      */
-    public void setTemplateId(String templateId){
-        this.templateId = templateId ;
-        this.modify("template_id",templateId);
+    public void setTemplateId(String templateId) {
+        this.templateId = templateId;
+        this.modify("template_id", templateId);
     }
 
     /**
      * 设置 [URL]
      */
-    public void setTemplateUrl(String templateUrl){
-        this.templateUrl = templateUrl ;
-        this.modify("template_url",templateUrl);
+    public void setTemplateUrl(String templateUrl) {
+        this.templateUrl = templateUrl;
+        this.modify("template_url", templateUrl);
     }
 
     /**
      * 设置 [开放平台接入标识]
      */
-    public void setAccessId(String accessId){
-        this.accessId = accessId ;
-        this.modify("accessid",accessId);
+    public void setAccessId(String accessId) {
+        this.accessId = accessId;
+        this.modify("accessid", accessId);
     }
 
     /**
      * 设置 [接入平台]
      */
-    public void setAccessName(String accessName){
-        this.accessName = accessName ;
-        this.modify("accessname",accessName);
+    public void setAccessName(String accessName) {
+        this.accessName = accessName;
+        this.modify("accessname", accessName);
     }
 
     /**
      * 设置 [接入平台类型]
      */
-    public void setOpenType(String openType){
-        this.openType = openType ;
-        this.modify("open_type",openType);
+    public void setOpenType(String openType) {
+        this.openType = openType;
+        this.modify("open_type", openType);
     }
 
 
@@ -198,7 +198,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("tid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

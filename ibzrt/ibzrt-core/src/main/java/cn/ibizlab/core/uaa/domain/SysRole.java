@@ -36,7 +36,7 @@ public class SysRole extends EntityClient implements Serializable {
     /**
      * 角色标识
      */
-    @DEField(name = "sys_roleid" , isKeyField=true)
+    @DEField(name = "sys_roleid" , isKeyField = true)
     @JSONField(name = "roleid")
     @JsonProperty("roleid")
     private String roleid;
@@ -74,8 +74,8 @@ public class SysRole extends EntityClient implements Serializable {
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
 
@@ -83,8 +83,8 @@ public class SysRole extends EntityClient implements Serializable {
      * 更新时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -102,7 +102,7 @@ public class SysRole extends EntityClient implements Serializable {
     /**
      * 设置 [角色名称]
      */
-    public void setRolename(String rolename){
+    public void setRolename(String rolename) {
         this.rolename = rolename ;
         this.modify("sys_rolename",rolename);
     }
@@ -110,7 +110,7 @@ public class SysRole extends EntityClient implements Serializable {
     /**
      * 设置 [备注]
      */
-    public void setMemo(String memo){
+    public void setMemo(String memo) {
         this.memo = memo ;
         this.modify("memo",memo);
     }
@@ -118,7 +118,7 @@ public class SysRole extends EntityClient implements Serializable {
     /**
      * 设置 [父角色标识]
      */
-    public void setProleid(String proleid){
+    public void setProleid(String proleid) {
         this.proleid = proleid ;
         this.modify("proleid",proleid);
     }

@@ -23,24 +23,24 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[WFProcessDefinition] 服务对象接口
  */
-public interface IWFProcessDefinitionService extends IService<WFProcessDefinition>{
+public interface IWFProcessDefinitionService extends IService<WFProcessDefinition> {
 
-    boolean create(WFProcessDefinition et) ;
-    @CacheEvict(value="wfprocessdefinition",allEntries=true)
-    void createBatch(List<WFProcessDefinition> list) ;
-    boolean update(WFProcessDefinition et) ;
-    @CacheEvict(value="wfprocessdefinition",allEntries=true)
-    void updateBatch(List<WFProcessDefinition> list) ;
-    boolean remove(String key) ;
-    @CacheEvict(value="wfprocessdefinition",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    WFProcessDefinition get(String key) ;
-    WFProcessDefinition getDraft(WFProcessDefinition et) ;
-    boolean checkKey(WFProcessDefinition et) ;
-    boolean save(WFProcessDefinition et) ;
-    @CacheEvict(value="wfprocessdefinition",allEntries=true)
-    void saveBatch(List<WFProcessDefinition> list) ;
-    Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context) ;
+    boolean create(WFProcessDefinition et);
+    @CacheEvict(value = "wfprocessdefinition", allEntries = true)
+    void createBatch(List<WFProcessDefinition> list);
+    boolean update(WFProcessDefinition et);
+    @CacheEvict(value = "wfprocessdefinition", allEntries = true)
+    void updateBatch(List<WFProcessDefinition> list);
+    boolean remove(String key);
+    @CacheEvict(value = "wfprocessdefinition", allEntries = true)
+    void removeBatch(Collection<String> idList);
+    WFProcessDefinition get(String key);
+    WFProcessDefinition getDraft(WFProcessDefinition et);
+    boolean checkKey(WFProcessDefinition et);
+    boolean save(WFProcessDefinition et);
+    @CacheEvict(value = "wfprocessdefinition",allEntries = true)
+    void saveBatch(List<WFProcessDefinition> list);
+    Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

@@ -36,7 +36,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 实例标识
      */
-    @DEField(name = "instanceid" , isKeyField=true)
+    @DEField(name = "instanceid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -75,8 +75,8 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 启动时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "starttime" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "starttime" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("starttime")
     private Timestamp starttime;
 
@@ -94,7 +94,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 设置 [实例名称]
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name ;
         this.modify("instancename",name);
     }
@@ -102,7 +102,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 设置 [DefinitionKey]
      */
-    public void setProcessdefinitionkey(String processdefinitionkey){
+    public void setProcessdefinitionkey(String processdefinitionkey) {
         this.processdefinitionkey = processdefinitionkey ;
         this.modify("definitionkey",processdefinitionkey);
     }
@@ -110,7 +110,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 设置 [流程定义名称]
      */
-    public void setProcessdefinitionname(String processdefinitionname){
+    public void setProcessdefinitionname(String processdefinitionname) {
         this.processdefinitionname = processdefinitionname ;
         this.modify("definitionname",processdefinitionname);
     }
@@ -118,7 +118,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 设置 [业务键值]
      */
-    public void setBusinesskey(String businesskey){
+    public void setBusinesskey(String businesskey) {
         this.businesskey = businesskey ;
         this.modify("businesskey",businesskey);
     }
@@ -126,7 +126,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 设置 [启动时间]
      */
-    public void setStarttime(Timestamp starttime){
+    public void setStarttime(Timestamp starttime) {
         this.starttime = starttime ;
         this.modify("starttime",starttime);
     }
@@ -134,7 +134,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 格式化日期 [启动时间]
      */
-    public String formatStarttime(){
+    public String formatStarttime() {
         if (this.starttime == null) {
             return null;
         }
@@ -144,7 +144,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     /**
      * 设置 [属性]
      */
-    public void setStartuserid(String startuserid){
+    public void setStartuserid(String startuserid) {
         this.startuserid = startuserid ;
         this.modify("startuserid",startuserid);
     }

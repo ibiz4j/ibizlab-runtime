@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysTeamMember] 服务对象接口
  */
-public interface ISysTeamMemberService extends IService<SysTeamMember>{
+public interface ISysTeamMemberService extends IService<SysTeamMember> {
 
-    boolean create(SysTeamMember et) ;
-    void createBatch(List<SysTeamMember> list) ;
-    boolean update(SysTeamMember et) ;
-    void updateBatch(List<SysTeamMember> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysTeamMember get(String key) ;
-    SysTeamMember getDraft(SysTeamMember et) ;
-    boolean checkKey(SysTeamMember et) ;
-    boolean save(SysTeamMember et) ;
-    void saveBatch(List<SysTeamMember> list) ;
-    Page<SysTeamMember> searchDefault(SysTeamMemberSearchContext context) ;
+    boolean create(SysTeamMember et);
+    void createBatch(List<SysTeamMember> list);
+    boolean update(SysTeamMember et);
+    void updateBatch(List<SysTeamMember> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysTeamMember get(String key);
+    SysTeamMember getDraft(SysTeamMember et);
+    boolean checkKey(SysTeamMember et);
+    boolean save(SysTeamMember et);
+    void saveBatch(List<SysTeamMember> list);
+    Page<SysTeamMember> searchDefault(SysTeamMemberSearchContext context);
     List<SysTeamMember> selectByUserid(String userid);
     void removeByUserid(String userid);
     List<SysTeamMember> selectByPostid(String postid);

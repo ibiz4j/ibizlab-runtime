@@ -22,20 +22,20 @@ import cn.ibizlab.core.uaa.filter.SysAppSearchContext;
 /**
  * 实体[SysApp] 服务对象接口
  */
-public interface ISysAppService{
+public interface ISysAppService {
 
-    boolean create(SysApp et) ;
-    void createBatch(List<SysApp> list) ;
-    boolean update(SysApp et) ;
-    void updateBatch(List<SysApp> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysApp get(String key) ;
-    SysApp getDraft(SysApp et) ;
-    boolean checkKey(SysApp et) ;
-    boolean save(SysApp et) ;
-    void saveBatch(List<SysApp> list) ;
-    Page<SysApp> searchDefault(SysAppSearchContext context) ;
+    boolean create(SysApp et);
+    void createBatch(List<SysApp> list);
+    boolean update(SysApp et);
+    void updateBatch(List<SysApp> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysApp get(String key);
+    SysApp getDraft(SysApp et);
+    boolean checkKey(SysApp et);
+    boolean save(SysApp et);
+    void saveBatch(List<SysApp> list);
+    Page<SysApp> searchDefault(SysAppSearchContext context);
     List<SysApp> selectBySystemid(String pssystemid);
     void removeBySystemid(String pssystemid);
 

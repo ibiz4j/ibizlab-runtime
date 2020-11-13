@@ -51,7 +51,7 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
         SysDepartment rt = sysDepartmentFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
         SysDepartment rt = sysDepartmentFeignClient.update(et.getDeptid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

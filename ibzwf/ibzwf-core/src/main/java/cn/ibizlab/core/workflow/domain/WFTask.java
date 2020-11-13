@@ -39,7 +39,7 @@ public class WFTask extends EntityBase implements Serializable {
     /**
      * 任务标识
      */
-    @DEField(name = "taskid" , isKeyField=true)
+    @DEField(name = "taskid", isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -93,8 +93,8 @@ public class WFTask extends EntityBase implements Serializable {
     /**
      * 发起时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createTime" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createTime", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createTime")
     private Timestamp createtime;
 
@@ -120,7 +120,7 @@ public class WFTask extends EntityBase implements Serializable {
     /**
      * 格式化日期 [发起时间]
      */
-    public String formatCreatetime(){
+    public String formatCreatetime() {
         if (this.createtime == null) {
             return null;
         }

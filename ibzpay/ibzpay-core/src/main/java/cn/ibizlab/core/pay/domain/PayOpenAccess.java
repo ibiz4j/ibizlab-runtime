@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZOPENACCESS",resultMap = "PayOpenAccessResultMap")
+@TableName(value = "IBZOPENACCESS", resultMap = "PayOpenAccessResultMap")
 public class PayOpenAccess extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class PayOpenAccess extends EntityMP implements Serializable {
     /**
      * 开放平台接入标识
      */
-    @DEField(name = "accessid" , isKeyField=true)
-    @TableId(value= "accessid",type=IdType.ASSIGN_UUID)
+    @DEField(name = "accessid", isKeyField = true)
+    @TableId(value = "accessid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -104,8 +104,8 @@ public class PayOpenAccess extends EntityMP implements Serializable {
      */
     @DEField(name = "expires_time")
     @TableField(value = "expires_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "expires_time" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "expires_time", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("expires_time")
     private Timestamp expiresTime;
     /**
@@ -132,69 +132,77 @@ public class PayOpenAccess extends EntityMP implements Serializable {
     @JSONField(name = "notify_url")
     @JsonProperty("notify_url")
     private String notifyUrl;
+    /**
+     * AGENT_ID
+     */
+    @DEField(name = "agent_id")
+    @TableField(value = "agent_id")
+    @JSONField(name = "agent_id")
+    @JsonProperty("agent_id")
+    private Long agentId;
 
 
 
     /**
      * 设置 [开放平台]
      */
-    public void setName(String name){
-        this.name = name ;
-        this.modify("accessname",name);
+    public void setName(String name) {
+        this.name = name;
+        this.modify("accessname", name);
     }
 
     /**
      * 设置 [开放平台类型]
      */
-    public void setOpenType(String openType){
-        this.openType = openType ;
-        this.modify("open_type",openType);
+    public void setOpenType(String openType) {
+        this.openType = openType;
+        this.modify("open_type", openType);
     }
 
     /**
      * 设置 [AccessKey(AppId)]
      */
-    public void setAccessKey(String accessKey){
-        this.accessKey = accessKey ;
-        this.modify("access_key",accessKey);
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+        this.modify("access_key", accessKey);
     }
 
     /**
      * 设置 [SecretKey(AppSecret)]
      */
-    public void setSecretKey(String secretKey){
-        this.secretKey = secretKey ;
-        this.modify("secret_key",secretKey);
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+        this.modify("secret_key", secretKey);
     }
 
     /**
      * 设置 [RegionId]
      */
-    public void setRegionId(String regionId){
-        this.regionId = regionId ;
-        this.modify("region_id",regionId);
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+        this.modify("region_id", regionId);
     }
 
     /**
      * 设置 [管理账号token]
      */
-    public void setAccessToken(String accessToken){
-        this.accessToken = accessToken ;
-        this.modify("access_token",accessToken);
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+        this.modify("access_token", accessToken);
     }
 
     /**
      * 设置 [管理账号token过期时间]
      */
-    public void setExpiresTime(Timestamp expiresTime){
-        this.expiresTime = expiresTime ;
-        this.modify("expires_time",expiresTime);
+    public void setExpiresTime(Timestamp expiresTime) {
+        this.expiresTime = expiresTime;
+        this.modify("expires_time", expiresTime);
     }
 
     /**
      * 格式化日期 [管理账号token过期时间]
      */
-    public String formatExpiresTime(){
+    public String formatExpiresTime() {
         if (this.expiresTime == null) {
             return null;
         }
@@ -204,25 +212,33 @@ public class PayOpenAccess extends EntityMP implements Serializable {
     /**
      * 设置 [是否禁用]
      */
-    public void setDisabled(Integer disabled){
-        this.disabled = disabled ;
-        this.modify("disabled",disabled);
+    public void setDisabled(Integer disabled) {
+        this.disabled = disabled;
+        this.modify("disabled", disabled);
     }
 
     /**
      * 设置 [RedirectURI]
      */
-    public void setRedirectUri(String redirectUri){
-        this.redirectUri = redirectUri ;
-        this.modify("redirect_uri",redirectUri);
+    public void setRedirectUri(String redirectUri) {
+        this.redirectUri = redirectUri;
+        this.modify("redirect_uri", redirectUri);
     }
 
     /**
      * 设置 [NotifyUrl]
      */
-    public void setNotifyUrl(String notifyUrl){
-        this.notifyUrl = notifyUrl ;
-        this.modify("notify_url",notifyUrl);
+    public void setNotifyUrl(String notifyUrl) {
+        this.notifyUrl = notifyUrl;
+        this.modify("notify_url", notifyUrl);
+    }
+
+    /**
+     * 设置 [AGENT_ID]
+     */
+    public void setAgentId(Long agentId) {
+        this.agentId = agentId;
+        this.modify("agent_id", agentId);
     }
 
 
@@ -236,7 +252,7 @@ public class PayOpenAccess extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("accessid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

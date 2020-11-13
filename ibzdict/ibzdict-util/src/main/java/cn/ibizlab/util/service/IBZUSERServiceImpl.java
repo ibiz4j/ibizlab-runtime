@@ -34,14 +34,18 @@ public class IBZUSERServiceImpl extends ServiceImpl<IBZUSERMapper, IBZUSER> impl
 		String[] data=username.split("[|]");
 		String loginname="";
 		String domains="";
-		if(data.length>0)
+		if(data.length>0){
 			loginname=data[0].trim();
-		if(data.length>1)
+		}
+		if(data.length>1){
 			domains=data[1].trim();
-		if(!StringUtils.isEmpty(loginname))
+		}
+		if(!StringUtils.isEmpty(loginname)){
 			conds.eq("loginname",loginname);
-		if(!StringUtils.isEmpty(domains))
+		}
+		if(!StringUtils.isEmpty(domains)){
 			conds.eq("domains",domains);
+		}
 		IBZUSER user = this.getOne(conds);
 		if (user == null) {
 			throw new UsernameNotFoundException("用户" + username + "未找到");
@@ -55,10 +59,12 @@ public class IBZUSERServiceImpl extends ServiceImpl<IBZUSERMapper, IBZUSER> impl
 	@Override
 	public AuthenticationUser loadUserByLogin(String username, String password){
 		AuthenticationUser authuserdetail = loadUserByUsername(username);
-		if(pwencrymode==1)
+		if(pwencrymode==1){
 			password = DigestUtils.md5DigestAsHex(password.getBytes());
-		else if(pwencrymode==2)
+		}
+		else if(pwencrymode==2){
 			password = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", username, password).getBytes());
+		}
 		if(!authuserdetail.getPassword().equals( password )){
 			throw new BadRequestAlertException("用户名密码错误","IBZUSER",username);
 		}

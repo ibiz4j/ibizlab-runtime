@@ -39,7 +39,7 @@ public class SysApp extends EntityBase implements Serializable {
     /**
      * 应用标识
      */
-    @DEField(name = "appid" , isKeyField=true)
+    @DEField(name = "appid", isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;

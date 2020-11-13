@@ -17,31 +17,31 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysOrganizationMapper extends BaseMapper<SysOrganization>{
+public interface SysOrganizationMapper extends BaseMapper<SysOrganization> {
 
-    Page<SysOrganization> searchDefault(IPage page, @Param("srf") SysOrganizationSearchContext context, @Param("ew") Wrapper<SysOrganization> wrapper) ;
+    Page<SysOrganization> searchDefault(IPage page, @Param("srf") SysOrganizationSearchContext context, @Param("ew") Wrapper<SysOrganization> wrapper);
     @Override
-    @Cacheable( value="sysorganization",key = "'row:'+#p0")
+    @Cacheable(value ="sysorganization", key = "'row:'+#p0")
     SysOrganization selectById(Serializable id);
     @Override
-    @CacheEvict( value="sysorganization",key = "'row:'+#p0.orgid")
+    @CacheEvict(value ="sysorganization", key = "'row:'+#p0.orgid")
     int insert(SysOrganization entity);
     @Override
-    @CacheEvict( value="sysorganization",key = "'row:'+#p0.orgid")
+    @CacheEvict(value ="sysorganization", key = "'row:'+#p0.orgid")
     int updateById(@Param(Constants.ENTITY) SysOrganization entity);
     @Override
-    @CacheEvict(value="sysorganization",key = "'row:'+#p0.orgid")
+    @CacheEvict(value ="sysorganization", key = "'row:'+#p0.orgid")
     int update(@Param(Constants.ENTITY) SysOrganization entity, @Param("ew") Wrapper<SysOrganization> updateWrapper);
     @Override
-    @CacheEvict( value="sysorganization",key = "'row:'+#p0")
+    @CacheEvict(value ="sysorganization", key = "'row:'+#p0")
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL
@@ -67,6 +67,6 @@ public interface SysOrganizationMapper extends BaseMapper<SysOrganization>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
-    List<SysOrganization> selectByParentorgid(@Param("orgid") Serializable orgid) ;
+    List<SysOrganization> selectByParentorgid(@Param("orgid") Serializable orgid);
 
 }

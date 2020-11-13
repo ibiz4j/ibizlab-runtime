@@ -57,37 +57,39 @@ public class SysTeamServiceImpl extends ServiceImpl<SysTeamMapper, SysTeam> impl
     @Override
     @Transactional
     public boolean create(SysTeam et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getTeamid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getTeamid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<SysTeam> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysTeam et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("teamid",et.getTeamid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("teamid", et.getTeamid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getTeamid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getTeamid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<SysTeam> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -101,11 +103,11 @@ public class SysTeamServiceImpl extends ServiceImpl<SysTeamMapper, SysTeam> impl
     @Transactional
     public SysTeam get(String key) {
         SysTeam et = getById(key);
-        if(et==null){
-            et=new SysTeam();
+        if(et == null){
+            et = new SysTeam();
             et.setTeamid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -117,13 +119,14 @@ public class SysTeamServiceImpl extends ServiceImpl<SysTeamMapper, SysTeam> impl
 
     @Override
     public boolean checkKey(SysTeam et) {
-        return (!ObjectUtils.isEmpty(et.getTeamid()))&&(!Objects.isNull(this.getById(et.getTeamid())));
+        return (!ObjectUtils.isEmpty(et.getTeamid())) && (!Objects.isNull(this.getById(et.getTeamid())));
     }
     @Override
     @Transactional
     public boolean save(SysTeam et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

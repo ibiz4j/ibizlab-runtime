@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[SDFile] 服务对象接口
  */
 @Component
-public class SDFileFallback implements SDFileFeignClient{
+public class SDFileFallback implements SDFileFeignClient {
 
-    public Page<SDFile> select(){
-            return null;
-     }
+    public Page<SDFile> select() {
+        return null;
+    }
 
-    public SDFile create(SDFile sdfile){
-            return null;
-     }
-    public Boolean createBatch(List<SDFile> sdfiles){
-            return false;
-     }
+    public SDFile create(SDFile sdfile) {
+        return null;
+    }
+    public Boolean createBatch(List<SDFile> sdfiles) {
+        return false;
+    }
 
-    public SDFile update(String id, SDFile sdfile){
-            return null;
-     }
-    public Boolean updateBatch(List<SDFile> sdfiles){
-            return false;
-     }
+    public SDFile update(String id, SDFile sdfile) {
+        return null;
+    }
+    public Boolean updateBatch(List<SDFile> sdfiles) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public SDFile get(String id){
-            return null;
-     }
+    public SDFile get(String id) {
+        return null;
+    }
 
 
     public SDFile getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(SDFile sdfile){
-            return false;
-     }
+    public Boolean checkKey(SDFile sdfile) {
+        return false;
+    }
 
 
-    public Boolean save(SDFile sdfile){
-            return false;
-     }
-    public Boolean saveBatch(List<SDFile> sdfiles){
-            return false;
-     }
+    public Boolean save(SDFile sdfile) {
+        return false;
+    }
+    public Boolean saveBatch(List<SDFile> sdfiles) {
+        return false;
+    }
 
-    public Page<SDFile> searchDefault(SDFileSearchContext context){
-            return null;
-     }
+    public Page<SDFile> searchDefault(SDFileSearchContext context) {
+        return null;
+    }
 
 
 }

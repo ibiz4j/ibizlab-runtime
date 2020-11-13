@@ -54,37 +54,39 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
     @Override
     @Transactional
     public boolean create(SDFile et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<SDFile> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SDFile et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("fileid",et.getId())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("fileid", et.getId()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<SDFile> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
     @Transactional
     public SDFile get(String key) {
         SDFile et = getById(key);
-        if(et==null){
-            et=new SDFile();
+        if(et == null){
+            et = new SDFile();
             et.setId(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,13 +116,14 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
 
     @Override
     public boolean checkKey(SDFile et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+        return (!ObjectUtils.isEmpty(et.getId())) && (!Objects.isNull(this.getById(et.getId())));
     }
     @Override
     @Transactional
     public boolean save(SDFile et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 
@@ -202,10 +205,12 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
                 ids.add(id);
             }
         }
-        if(ids.size()>0)
-           return this.listByIds(ids);
-        else
-           return entities;
+        if(ids.size()>0) {
+            return this.listByIds(ids);
+        }
+        else {
+            return entities;
+        }
     }
 
 

@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysTeam] 服务对象接口
  */
-public interface ISysTeamService extends IService<SysTeam>{
+public interface ISysTeamService extends IService<SysTeam> {
 
-    boolean create(SysTeam et) ;
-    void createBatch(List<SysTeam> list) ;
-    boolean update(SysTeam et) ;
-    void updateBatch(List<SysTeam> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysTeam get(String key) ;
-    SysTeam getDraft(SysTeam et) ;
-    boolean checkKey(SysTeam et) ;
-    boolean save(SysTeam et) ;
-    void saveBatch(List<SysTeam> list) ;
-    Page<SysTeam> searchDefault(SysTeamSearchContext context) ;
+    boolean create(SysTeam et);
+    void createBatch(List<SysTeam> list);
+    boolean update(SysTeam et);
+    void updateBatch(List<SysTeam> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysTeam get(String key);
+    SysTeam getDraft(SysTeam et);
+    boolean checkKey(SysTeam et);
+    boolean save(SysTeam et);
+    void saveBatch(List<SysTeam> list);
+    Page<SysTeam> searchDefault(SysTeamSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

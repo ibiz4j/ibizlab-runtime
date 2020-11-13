@@ -22,23 +22,23 @@ import cn.ibizlab.core.task.filter.JobsInfoSearchContext;
 /**
  * 实体[JobsInfo] 服务对象接口
  */
-public interface IJobsInfoService{
+public interface IJobsInfoService {
 
-    boolean create(JobsInfo et) ;
-    void createBatch(List<JobsInfo> list) ;
-    boolean update(JobsInfo et) ;
-    void updateBatch(List<JobsInfo> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    JobsInfo get(String key) ;
-    JobsInfo getDraft(JobsInfo et) ;
-    boolean checkKey(JobsInfo et) ;
-    JobsInfo execute(JobsInfo et) ;
-    boolean save(JobsInfo et) ;
-    void saveBatch(List<JobsInfo> list) ;
-    JobsInfo start(JobsInfo et) ;
-    JobsInfo stop(JobsInfo et) ;
-    Page<JobsInfo> searchDefault(JobsInfoSearchContext context) ;
+    boolean create(JobsInfo et);
+    void createBatch(List<JobsInfo> list);
+    boolean update(JobsInfo et);
+    void updateBatch(List<JobsInfo> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    JobsInfo get(String key);
+    JobsInfo getDraft(JobsInfo et);
+    boolean checkKey(JobsInfo et);
+    JobsInfo execute(JobsInfo et);
+    boolean save(JobsInfo et);
+    void saveBatch(List<JobsInfo> list);
+    JobsInfo start(JobsInfo et);
+    JobsInfo stop(JobsInfo et);
+    Page<JobsInfo> searchDefault(JobsInfoSearchContext context);
 
 }
 

@@ -38,6 +38,7 @@ public class SysPostSearchContext extends QueryWrapperContext<SysPost> {
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

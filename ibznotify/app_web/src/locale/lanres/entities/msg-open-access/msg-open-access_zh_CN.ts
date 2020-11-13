@@ -10,6 +10,7 @@ export default {
     expires_time: "管理账号token过期时间",
     disabled: "是否禁用",
     redirect_uri: "RedirectURI",
+    notify_url: "NotifyUrl",
     agent_id: "AGENT_ID",
   },
 	views: {

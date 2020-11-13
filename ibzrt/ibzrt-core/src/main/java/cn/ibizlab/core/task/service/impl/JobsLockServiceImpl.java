@@ -51,7 +51,7 @@ public class JobsLockServiceImpl implements IJobsLockService {
         JobsLock rt = jobsLockFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class JobsLockServiceImpl implements IJobsLockService {
         JobsLock rt = jobsLockFeignClient.update(et.getId(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

@@ -51,7 +51,7 @@ public class DictOptionServiceImpl implements IDictOptionService {
         DictOption rt = dictOptionFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class DictOptionServiceImpl implements IDictOptionService {
         DictOption rt = dictOptionFeignClient.update(et.getValueKey(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

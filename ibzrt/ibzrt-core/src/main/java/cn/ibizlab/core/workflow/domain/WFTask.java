@@ -36,7 +36,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 任务标识
      */
-    @DEField(name = "taskid" , isKeyField=true)
+    @DEField(name = "taskid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -90,8 +90,8 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 发起时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createtime" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createtime" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createtime")
     private Timestamp createtime;
 
@@ -118,7 +118,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [状态]
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name ;
         this.modify("taskname",name);
     }
@@ -126,7 +126,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [DefinitionId]
      */
-    public void setProcessdefinitionid(String processdefinitionid){
+    public void setProcessdefinitionid(String processdefinitionid) {
         this.processdefinitionid = processdefinitionid ;
         this.modify("definitionid",processdefinitionid);
     }
@@ -134,7 +134,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [DefinitionKey]
      */
-    public void setProcessdefinitionkey(String processdefinitionkey){
+    public void setProcessdefinitionkey(String processdefinitionkey) {
         this.processdefinitionkey = processdefinitionkey ;
         this.modify("definitionkey",processdefinitionkey);
     }
@@ -142,7 +142,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [流程]
      */
-    public void setProcessdefinitionname(String processdefinitionname){
+    public void setProcessdefinitionname(String processdefinitionname) {
         this.processdefinitionname = processdefinitionname ;
         this.modify("definitionname",processdefinitionname);
     }
@@ -150,7 +150,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [TaskDefinitionKey]
      */
-    public void setTaskdefinitionkey(String taskdefinitionkey){
+    public void setTaskdefinitionkey(String taskdefinitionkey) {
         this.taskdefinitionkey = taskdefinitionkey ;
         this.modify("taskdefinitionkey",taskdefinitionkey);
     }
@@ -158,7 +158,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [待办事项]
      */
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description ;
         this.modify("description",description);
     }
@@ -166,7 +166,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [发起时间]
      */
-    public void setCreatetime(Timestamp createtime){
+    public void setCreatetime(Timestamp createtime) {
         this.createtime = createtime ;
         this.modify("createtime",createtime);
     }
@@ -174,7 +174,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 格式化日期 [发起时间]
      */
-    public String formatCreatetime(){
+    public String formatCreatetime() {
         if (this.createtime == null) {
             return null;
         }
@@ -184,7 +184,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [实例标识]
      */
-    public void setProcessinstanceid(String processinstanceid){
+    public void setProcessinstanceid(String processinstanceid) {
         this.processinstanceid = processinstanceid ;
         this.modify("instanceid",processinstanceid);
     }
@@ -192,7 +192,7 @@ public class WFTask extends EntityClient implements Serializable {
     /**
      * 设置 [业务键值]
      */
-    public void setProcessinstancebusinesskey(String processinstancebusinesskey){
+    public void setProcessinstancebusinesskey(String processinstancebusinesskey) {
         this.processinstancebusinesskey = processinstancebusinesskey ;
         this.modify("businesskey",processinstancebusinesskey);
     }

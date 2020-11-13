@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFTaskWay] 服务对象接口
  */
 @Component
-public class WFTaskWayFallback implements WFTaskWayFeignClient{
+public class WFTaskWayFallback implements WFTaskWayFeignClient {
 
-    public Page<WFTaskWay> select(){
-            return null;
-     }
+    public Page<WFTaskWay> select() {
+        return null;
+    }
 
-    public WFTaskWay create(WFTaskWay wftaskway){
-            return null;
-     }
-    public Boolean createBatch(List<WFTaskWay> wftaskways){
-            return false;
-     }
+    public WFTaskWay create(WFTaskWay wftaskway) {
+        return null;
+    }
+    public Boolean createBatch(List<WFTaskWay> wftaskways) {
+        return false;
+    }
 
-    public WFTaskWay update(String sequenceflowid, WFTaskWay wftaskway){
-            return null;
-     }
-    public Boolean updateBatch(List<WFTaskWay> wftaskways){
-            return false;
-     }
+    public WFTaskWay update(String sequenceflowid, WFTaskWay wftaskway) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFTaskWay> wftaskways) {
+        return false;
+    }
 
 
-    public Boolean remove(String sequenceflowid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String sequenceflowid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFTaskWay get(String sequenceflowid){
-            return null;
-     }
+    public WFTaskWay get(String sequenceflowid) {
+        return null;
+    }
 
 
     public WFTaskWay getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFTaskWay wftaskway){
-            return false;
-     }
+    public Boolean checkKey(WFTaskWay wftaskway) {
+        return false;
+    }
 
 
-    public Boolean save(WFTaskWay wftaskway){
-            return false;
-     }
-    public Boolean saveBatch(List<WFTaskWay> wftaskways){
-            return false;
-     }
+    public Boolean save(WFTaskWay wftaskway) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFTaskWay> wftaskways) {
+        return false;
+    }
 
-    public Page<WFTaskWay> searchDefault(WFTaskWaySearchContext context){
-            return null;
-     }
+    public Page<WFTaskWay> searchDefault(WFTaskWaySearchContext context) {
+        return null;
+    }
 
 
 }

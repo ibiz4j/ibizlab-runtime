@@ -58,9 +58,10 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
     @Transactional
     public boolean create(MsgTemplate et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getTid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getTid()), et);
         return true;
     }
 
@@ -68,16 +69,17 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
     @Transactional
     public void createBatch(List<MsgTemplate> list) {
         list.forEach(item->fillParentData(item));
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(MsgTemplate et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("tid",et.getTid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("tid", et.getTid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getTid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getTid()), et);
         return true;
     }
 
@@ -85,13 +87,13 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
     @Transactional
     public void updateBatch(List<MsgTemplate> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -105,11 +107,11 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
     @Transactional
     public MsgTemplate get(String key) {
         MsgTemplate et = getById(key);
-        if(et==null){
-            et=new MsgTemplate();
+        if(et == null){
+            et = new MsgTemplate();
             et.setTid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -122,13 +124,14 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
 
     @Override
     public boolean checkKey(MsgTemplate et) {
-        return (!ObjectUtils.isEmpty(et.getTid()))&&(!Objects.isNull(this.getById(et.getTid())));
+        return (!ObjectUtils.isEmpty(et.getTid())) && (!Objects.isNull(this.getById(et.getTid())));
     }
     @Override
     @Transactional
     public boolean save(MsgTemplate et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

@@ -63,10 +63,11 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public boolean create(SysOrganization et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        sysdepartmentService.saveByOrgid(et.getOrgid(),et.getDepts());
-        CachedBeanCopier.copy(get(et.getOrgid()),et);
+        }
+        sysdepartmentService.saveByOrgid(et.getOrgid(), et.getDepts());
+        CachedBeanCopier.copy(get(et.getOrgid()), et);
         return true;
     }
 
@@ -74,17 +75,18 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public void createBatch(List<SysOrganization> list) {
         list.forEach(item->fillParentData(item));
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysOrganization et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("orgid",et.getOrgid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("orgid", et.getOrgid()))) {
             return false;
-        sysdepartmentService.saveByOrgid(et.getOrgid(),et.getDepts());
-        CachedBeanCopier.copy(get(et.getOrgid()),et);
+        }
+        sysdepartmentService.saveByOrgid(et.getOrgid(), et.getDepts());
+        CachedBeanCopier.copy(get(et.getOrgid()), et);
         return true;
     }
 
@@ -92,7 +94,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public void updateBatch(List<SysOrganization> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
@@ -104,7 +106,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
         sysemployeeService.resetByOrgid(key);
         if(!ObjectUtils.isEmpty(sysorganizationService.selectByParentorgid(key)))
             throw new BadRequestAlertException("删除数据失败，当前数据存在关系实体[SysOrganization]数据，无法删除!","","");
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -123,11 +125,11 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public SysOrganization get(String key) {
         SysOrganization et = getById(key);
-        if(et==null){
-            et=new SysOrganization();
+        if(et == null){
+            et = new SysOrganization();
             et.setOrgid(key);
         }
-        else{
+        else {
             et.setDepts(sysdepartmentService.selectByOrgid(key));
         }
         return et;
@@ -141,13 +143,14 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
 
     @Override
     public boolean checkKey(SysOrganization et) {
-        return (!ObjectUtils.isEmpty(et.getOrgid()))&&(!Objects.isNull(this.getById(et.getOrgid())));
+        return (!ObjectUtils.isEmpty(et.getOrgid())) && (!Objects.isNull(this.getById(et.getOrgid())));
     }
     @Override
     @Transactional
     public boolean save(SysOrganization et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 
@@ -261,10 +264,12 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
                 ids.add(id);
             }
         }
-        if(ids.size()>0)
-           return this.listByIds(ids);
-        else
-           return entities;
+        if(ids.size()>0) {
+            return this.listByIds(ids);
+        }
+        else {
+            return entities;
+        }
     }
 
 

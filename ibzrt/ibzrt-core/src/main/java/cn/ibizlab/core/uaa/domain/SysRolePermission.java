@@ -36,7 +36,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
     /**
      * 角色权限关系表标识
      */
-    @DEField(name = "sys_role_permissionid" , isKeyField=true)
+    @DEField(name = "sys_role_permissionid" , isKeyField = true)
     @JSONField(name = "rolepermissionid")
     @JsonProperty("rolepermissionid")
     private String rolepermissionid;
@@ -89,8 +89,8 @@ public class SysRolePermission extends EntityClient implements Serializable {
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
 
@@ -98,8 +98,8 @@ public class SysRolePermission extends EntityClient implements Serializable {
      * 更新时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -124,7 +124,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
     /**
      * 设置 [角色表标识]
      */
-    public void setRoleid(String roleid){
+    public void setRoleid(String roleid) {
         this.roleid = roleid ;
         this.modify("sys_roleid",roleid);
     }
@@ -132,7 +132,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
     /**
      * 设置 [权限表标识]
      */
-    public void setPermissionid(String permissionid){
+    public void setPermissionid(String permissionid) {
         this.permissionid = permissionid ;
         this.modify("sys_permissionid",permissionid);
     }

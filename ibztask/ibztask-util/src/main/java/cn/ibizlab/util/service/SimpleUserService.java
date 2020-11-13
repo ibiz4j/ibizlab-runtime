@@ -19,19 +19,19 @@ import org.springframework.security.core.authority.AuthorityUtils;
 @Primary
 @Service("SimpleUserService")
 @ConditionalOnExpression("(!${ibiz.enablePermissionValid:false})&&'${ibiz.auth.service:IBZUAAUserService}'.equals('SimpleUserService')")
-public class SimpleUserService implements AuthenticationUserService{
+public class SimpleUserService implements AuthenticationUserService {
 
 	@Override
 	public AuthenticationUser loadUserByUsername(String username) {
 		AuthenticationUser user = new AuthenticationUser();
-		String[] data=username.split("[|]");
-		String loginname=username;
-		String domains="";
-		String password="";
+		String[] data = username.split("[|]");
+		String loginname = username;
+		String domains = "";
+		String password = "";
 
 		if(data.length==2) {
-			loginname=data[0].trim();
-			domains=data[1].trim();
+			loginname = data[0].trim();
+			domains = data[1].trim();
 		}
 
 		user.setUserid(username);

@@ -18,8 +18,9 @@ public class RuleUtils
 
 	public static Object getObj(Object object, String members)
 	{
-		if(object==null)
+		if(object==null) {
 			return null;
+		}
 		Object currentObj = object;
 		String[] arrayOfString = members.split("\\.");
 		int i = arrayOfString.length;
@@ -31,20 +32,23 @@ public class RuleUtils
 				if(currentObj instanceof EntityBase)
 				{
 					currentObj=((EntityBase) currentObj).get(methodName);
-					if (currentObj == null)
+					if (currentObj == null) {
 						return null;
+					}
 				}
 				else if(currentObj instanceof JSONObject)
 				{
 					currentObj=((JSONObject) currentObj).get(methodName);
-					if (currentObj == null)
+					if (currentObj == null) {
 						return null;
+					}
 				}
 				else if(currentObj instanceof Map)
 				{
 					currentObj=((Map) currentObj).get(methodName);
-					if (currentObj == null)
+					if (currentObj == null) {
 						return null;
+					}
 				}
 				else
 				{
@@ -60,10 +64,10 @@ public class RuleUtils
 					}
 
 					currentObj = method.invoke(currentObj,  methodName);
-					if (currentObj == null)
+					if (currentObj == null){
 						return null;
+					}
 				}
-
 			}
 			catch (Exception e)
 			{
@@ -77,44 +81,63 @@ public class RuleUtils
 
 	public static boolean test(Object finalObject,String option,Object exp)
 	{
-		if(option.equalsIgnoreCase("eq")||option.equalsIgnoreCase("equal")||option.equalsIgnoreCase("="))
+		if(option.equalsIgnoreCase("eq")||option.equalsIgnoreCase("equal")||option.equalsIgnoreCase("=")){
 			return equal(exp,finalObject);
-		else if (option.equalsIgnoreCase("noteq")||option.equalsIgnoreCase("notequal")||option.equalsIgnoreCase("<>")||option.equalsIgnoreCase("!="))
+		}
+		else if (option.equalsIgnoreCase("noteq")||option.equalsIgnoreCase("notequal")||option.equalsIgnoreCase("<>")||option.equalsIgnoreCase("!=")){
 			return !equal(exp,finalObject);
-		else if (option.equalsIgnoreCase("gt")||option.equalsIgnoreCase(">"))
+		}
+		else if (option.equalsIgnoreCase("gt")||option.equalsIgnoreCase(">")){
 			return gt(exp,finalObject);
-		else if (option.equalsIgnoreCase("lt")||option.equalsIgnoreCase("<"))
+		}
+		else if (option.equalsIgnoreCase("lt")||option.equalsIgnoreCase("<")){
 			return lt(exp,finalObject);
-		else if (option.equalsIgnoreCase("gtandeq")||option.equalsIgnoreCase("ge")||option.equalsIgnoreCase(">="))
+		}
+		else if (option.equalsIgnoreCase("gtandeq")||option.equalsIgnoreCase("ge")||option.equalsIgnoreCase(">=")){
 			return ge(exp,finalObject);
-		else if (option.equalsIgnoreCase("ltandeq")||option.equalsIgnoreCase("le")||option.equalsIgnoreCase("<="))
+		}
+		else if (option.equalsIgnoreCase("ltandeq")||option.equalsIgnoreCase("le")||option.equalsIgnoreCase("<=")){
 			return le(exp,finalObject);
-		else if (option.equalsIgnoreCase("null")||option.equalsIgnoreCase("isnull"))
+		}
+		else if (option.equalsIgnoreCase("null")||option.equalsIgnoreCase("isnull")){
 			return isNull(finalObject);
-		else if (option.equalsIgnoreCase("notnull")||option.equalsIgnoreCase("isnotnull"))
+		}
+		else if (option.equalsIgnoreCase("notnull")||option.equalsIgnoreCase("isnotnull")){
 			return isNotNull(finalObject);
-		else if (option.equalsIgnoreCase("like")||option.equalsIgnoreCase("matchor"))
+		}
+		else if (option.equalsIgnoreCase("like")||option.equalsIgnoreCase("matchor")){
 			return matchor(exp,finalObject);
-		else if (option.equalsIgnoreCase("leftlike")||option.equalsIgnoreCase("startswith")||option.equalsIgnoreCase("begin"))
+		}
+		else if (option.equalsIgnoreCase("leftlike")||option.equalsIgnoreCase("startswith")||option.equalsIgnoreCase("begin")){
 			return leftmatchor(exp,finalObject);
-		else if (option.equalsIgnoreCase("rightlike")||option.equalsIgnoreCase("endswith")||option.equalsIgnoreCase("end"))
+		}
+		else if (option.equalsIgnoreCase("rightlike")||option.equalsIgnoreCase("endswith")||option.equalsIgnoreCase("end")){
 			return rightmatchor(exp,finalObject);
-		else if (option.equalsIgnoreCase("match")||option.equalsIgnoreCase("matchand")||option.equalsIgnoreCase("matches"))
+		}
+		else if (option.equalsIgnoreCase("match")||option.equalsIgnoreCase("matchand")||option.equalsIgnoreCase("matches")){
 			return matchand(exp,finalObject);
-		else if (option.equalsIgnoreCase("in"))
+		}
+		else if (option.equalsIgnoreCase("in")){
 			return in(exp,finalObject);
-		else if (option.equalsIgnoreCase("notin"))
+		}
+		else if (option.equalsIgnoreCase("notin")){
 			return notin(exp,finalObject);
-		else if (option.equalsIgnoreCase("NOTLIKE"))
+		}
+		else if (option.equalsIgnoreCase("NOTLIKE")){
 			return notmatchor(exp,finalObject);
-		else if (option.equalsIgnoreCase("LEFTNOTLIKE"))
+		}
+		else if (option.equalsIgnoreCase("LEFTNOTLIKE")){
 			return !leftmatchor(exp,finalObject);
-		else if (option.equalsIgnoreCase("RIGHTNOTLIKE"))
+		}
+		else if (option.equalsIgnoreCase("RIGHTNOTLIKE")){
 			return !rightmatchor(exp,finalObject);
-		else if (option.equalsIgnoreCase("NOTMATCHES"))
+		}
+		else if (option.equalsIgnoreCase("NOTMATCHES")){
 			return notmatchand(exp,finalObject);
-		else
+		}
+		else{
 			return false;
+		}
 	}
 
 
@@ -125,10 +148,12 @@ public class RuleUtils
 	public static boolean equal(Object exp, Object finalObject)
 	{
 
-		if(exp==null)
+		if(exp==null){
 			return false;
-		if(finalObject ==null)
+		}
+		if(finalObject ==null){
 			return false;
+		}
 
 		if(exp instanceof String && ((String) exp).length()==10 && finalObject instanceof Timestamp)
 		{
@@ -145,10 +170,12 @@ public class RuleUtils
 			return ObjectUtils.nullSafeEquals(tm,finalObject);
 		}
 
-		if(ObjectUtils.nullSafeEquals(exp,finalObject))
+		if(ObjectUtils.nullSafeEquals(exp,finalObject)){
 			return true;
-		if(exp.toString().equalsIgnoreCase(finalObject.toString()))
+		}
+		if(exp.toString().equalsIgnoreCase(finalObject.toString())){
 			return true;
+		}
 		return false;
 	}
 
@@ -158,10 +185,12 @@ public class RuleUtils
 	}
 	public static boolean gt(Object exp, Object finalObject)
 	{
-		if(ObjectUtils.isEmpty(exp))
+		if(ObjectUtils.isEmpty(exp)){
             return false;
-        if(ObjectUtils.isEmpty(finalObject))
+		}
+        if(ObjectUtils.isEmpty(finalObject)){
             return false;
+		}
         try
         {
             if(finalObject instanceof java.sql.Timestamp)
@@ -176,8 +205,9 @@ public class RuleUtils
 				else
 				{
 					tm=DataObject.getTimestampValue(exp,null);
-					if(tm==null)
+					if(tm==null){
 						return false;
+					}
 				}
                 return finalTime.getTime()>tm.getTime();
             }
@@ -209,15 +239,14 @@ public class RuleUtils
             {
                 return finalObject.toString().compareToIgnoreCase(exp.toString())>0;
             }
-            else
+            else{
                 return false;
+			}
         }
         catch(Exception ex)
         {
             return false;
         }
-
-
 	}
 
 	public static boolean lt(Object exp, Object object, String members)
@@ -226,10 +255,12 @@ public class RuleUtils
 	}
 	public static boolean lt(Object exp, Object finalObject)
 	{
-		if(ObjectUtils.isEmpty(exp))
+		if(ObjectUtils.isEmpty(exp)){
             return false;
-        if(ObjectUtils.isEmpty(finalObject))
+		}
+        if(ObjectUtils.isEmpty(finalObject)){
             return false;
+		}
         try
         {
             if(finalObject instanceof java.sql.Timestamp)
@@ -311,8 +342,9 @@ public class RuleUtils
 			return false;
 
 		String tvs=expObj.toString().trim();
-		if(StringUtils.isEmpty(tvs))
+		if(StringUtils.isEmpty(tvs)){
 			return false;
+		}
 
         if (finalObject instanceof Integer)
         {
@@ -352,8 +384,9 @@ public class RuleUtils
 	}
 	public static boolean isNull(Object finalObject)
 	{
-		if(finalObject instanceof String)
+		if(finalObject instanceof String){
 			return StringUtils.isEmpty(finalObject.toString().trim());
+		}
 		return (ObjectUtils.isEmpty(finalObject));
 	}
 
@@ -382,11 +415,13 @@ public class RuleUtils
 	}
 	public static boolean matchor(Object expObj, Object obj)
 	{
-		if(obj==null)
+		if(obj==null){
             return false;
+		}
 		String exp=expObj.toString().trim();
-		if(StringUtils.isEmpty(exp))
+		if(StringUtils.isEmpty(exp)){
 			return false;
+		}
         exp=exp.replace(";", ",");
         exp=exp.replace("；", ",");
         exp=exp.replace("，", ",");
@@ -403,11 +438,13 @@ public class RuleUtils
 
 	public static boolean leftmatchor(Object expObj, Object obj)
 	{
-		if(obj==null)
+		if(obj==null){
             return false;
+		}
 		String exp=expObj.toString().trim();
-		if(StringUtils.isEmpty(exp))
+		if(StringUtils.isEmpty(exp)){
 			return false;
+		}
         exp=exp.replace(";", ",");
         exp=exp.replace("；", ",");
         exp=exp.replace("，", ",");
@@ -416,19 +453,22 @@ public class RuleUtils
 		for(String strExp:arr)
 		{
 			bRt=obj.toString().matches(strExp+"(.*)");
-			if(bRt)
+			if(bRt){
 				return true;
+			}
 		}
 		return bRt;
 	}
 
 	public static boolean rightmatchor(Object expObj, Object obj)
 	{
-		if(obj==null)
+		if(obj==null){
             return false;
+		}
 		String exp=expObj.toString().trim();
-		if(StringUtils.isEmpty(exp))
+		if(StringUtils.isEmpty(exp)){
 			return false;
+		}
         exp=exp.replace(";", ",");
         exp=exp.replace("；", ",");
         exp=exp.replace("，", ",");
@@ -437,8 +477,9 @@ public class RuleUtils
 		for(String strExp:arr)
 		{
 			bRt=obj.toString().matches("(.*)"+strExp);
-			if(bRt)
+			if(bRt){
 				return true;
+			}
 		}
 		return bRt;
 	}
@@ -449,13 +490,16 @@ public class RuleUtils
 	}
 	public static boolean matchand(Object expObj,Object obj)
 	{
-		if(obj==null)
+		if(obj==null){
             return false;
-		if(expObj==null)
+		}
+		if(expObj==null){
 			return false;
+		}
 		String exp=expObj.toString().trim();
-		if(StringUtils.isEmpty(exp))
+		if(StringUtils.isEmpty(exp)){
 			return false;
+		}
 		exp=exp.replace(";", ",");
         exp=exp.replace("；", ",");
         exp=exp.replace("，", ",");
@@ -464,11 +508,13 @@ public class RuleUtils
 		boolean bRt=true;
 		for(String strExp:arr)
 		{
-			if(strExp.trim().length()==0)
+			if(strExp.trim().length()==0){
 				continue;
+			}
 			bRt=(obj.toString()).matches("(.*)"+(strExp)+"(.*)");
-			if(!bRt)
+			if(!bRt){
 				return false;
+			}
 		}
 		return bRt;
 	}
@@ -503,12 +549,14 @@ public class RuleUtils
 		switch (str1.hashCode())
 		{
 		case 105:
-			if (str1.equals("i"))
+			if (str1.equals("i")){
 				i = 0;
+			}
 			break;
 		case 115:
-			if (str1.equals("s"))
+			if (str1.equals("s")){
 				i = 1;
+			}
 		}
 		switch (i)
 		{

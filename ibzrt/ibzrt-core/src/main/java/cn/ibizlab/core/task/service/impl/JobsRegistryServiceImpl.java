@@ -51,7 +51,7 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
         JobsRegistry rt = jobsRegistryFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
         JobsRegistry rt = jobsRegistryFeignClient.update(et.getId(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

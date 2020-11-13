@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[SysDepartment] 服务对象接口
  */
 @Component
-public class SysDepartmentFallback implements SysDepartmentFeignClient{
+public class SysDepartmentFallback implements SysDepartmentFeignClient {
 
-    public Page<SysDepartment> select(){
-            return null;
-     }
+    public Page<SysDepartment> select() {
+        return null;
+    }
 
-    public SysDepartment create(SysDepartment sysdepartment){
-            return null;
-     }
-    public Boolean createBatch(List<SysDepartment> sysdepartments){
-            return false;
-     }
+    public SysDepartment create(SysDepartment sysdepartment) {
+        return null;
+    }
+    public Boolean createBatch(List<SysDepartment> sysdepartments) {
+        return false;
+    }
 
-    public SysDepartment update(String deptid, SysDepartment sysdepartment){
-            return null;
-     }
-    public Boolean updateBatch(List<SysDepartment> sysdepartments){
-            return false;
-     }
+    public SysDepartment update(String deptid, SysDepartment sysdepartment) {
+        return null;
+    }
+    public Boolean updateBatch(List<SysDepartment> sysdepartments) {
+        return false;
+    }
 
 
-    public Boolean remove(String deptid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String deptid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public SysDepartment get(String deptid){
-            return null;
-     }
+    public SysDepartment get(String deptid) {
+        return null;
+    }
 
 
     public SysDepartment getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(SysDepartment sysdepartment){
-            return false;
-     }
+    public Boolean checkKey(SysDepartment sysdepartment) {
+        return false;
+    }
 
 
-    public Boolean save(SysDepartment sysdepartment){
-            return false;
-     }
-    public Boolean saveBatch(List<SysDepartment> sysdepartments){
-            return false;
-     }
+    public Boolean save(SysDepartment sysdepartment) {
+        return false;
+    }
+    public Boolean saveBatch(List<SysDepartment> sysdepartments) {
+        return false;
+    }
 
-    public Page<SysDepartment> searchDefault(SysDepartmentSearchContext context){
-            return null;
-     }
+    public Page<SysDepartment> searchDefault(SysDepartmentSearchContext context) {
+        return null;
+    }
 
 
 }

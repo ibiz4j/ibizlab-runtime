@@ -36,7 +36,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 主键ID
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -106,8 +106,8 @@ public class JobsLog extends EntityClient implements Serializable {
      * 创建时间
      */
     @DEField(name = "create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "create_time" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "create_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
     private Timestamp createTime;
 
@@ -118,7 +118,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [任务ID]
      */
-    public void setJobId(String jobId){
+    public void setJobId(String jobId) {
         this.jobId = jobId ;
         this.modify("job_id",jobId);
     }
@@ -126,7 +126,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [执行地址]
      */
-    public void setAddress(String address){
+    public void setAddress(String address) {
         this.address = address ;
         this.modify("address",address);
     }
@@ -134,7 +134,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [执行器任务HANDLER]
      */
-    public void setHandler(String handler){
+    public void setHandler(String handler) {
         this.handler = handler ;
         this.modify("handler",handler);
     }
@@ -142,7 +142,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [执行器任务参数]
      */
-    public void setParam(String param){
+    public void setParam(String param) {
         this.param = param ;
         this.modify("param",param);
     }
@@ -150,7 +150,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [失败重试次数]
      */
-    public void setFailRetryCount(Integer failRetryCount){
+    public void setFailRetryCount(Integer failRetryCount) {
         this.failRetryCount = failRetryCount ;
         this.modify("fail_retry_count",failRetryCount);
     }
@@ -158,7 +158,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [触发器调度返回码]
      */
-    public void setTriggerCode(Integer triggerCode){
+    public void setTriggerCode(Integer triggerCode) {
         this.triggerCode = triggerCode ;
         this.modify("trigger_code",triggerCode);
     }
@@ -166,7 +166,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [触发器调度类型]
      */
-    public void setTriggerType(String triggerType){
+    public void setTriggerType(String triggerType) {
         this.triggerType = triggerType ;
         this.modify("trigger_type",triggerType);
     }
@@ -174,7 +174,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [触发器调度信息]
      */
-    public void setTriggerMsg(String triggerMsg){
+    public void setTriggerMsg(String triggerMsg) {
         this.triggerMsg = triggerMsg ;
         this.modify("trigger_msg",triggerMsg);
     }
@@ -182,7 +182,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 设置 [创建时间]
      */
-    public void setCreateTime(Timestamp createTime){
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime ;
         this.modify("create_time",createTime);
     }
@@ -190,7 +190,7 @@ public class JobsLog extends EntityClient implements Serializable {
     /**
      * 格式化日期 [创建时间]
      */
-    public String formatCreateTime(){
+    public String formatCreateTime() {
         if (this.createTime == null) {
             return null;
         }

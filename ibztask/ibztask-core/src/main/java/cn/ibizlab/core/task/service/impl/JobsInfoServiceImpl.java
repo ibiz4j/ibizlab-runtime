@@ -54,37 +54,39 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public boolean create(JobsInfo et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<JobsInfo> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(JobsInfo et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("id",et.getId())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("id", et.getId()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<JobsInfo> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Transactional
     public JobsInfo get(String key) {
         JobsInfo et = getById(key);
-        if(et==null){
-            et=new JobsInfo();
+        if(et == null){
+            et = new JobsInfo();
             et.setId(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,7 +116,7 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
 
     @Override
     public boolean checkKey(JobsInfo et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+        return (!ObjectUtils.isEmpty(et.getId())) && (!Objects.isNull(this.getById(et.getId())));
     }
     @Override
     @Transactional
@@ -126,8 +128,9 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public boolean save(JobsInfo et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

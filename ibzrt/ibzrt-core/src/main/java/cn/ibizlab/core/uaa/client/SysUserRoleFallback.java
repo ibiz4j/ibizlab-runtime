@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[SysUserRole] 服务对象接口
  */
 @Component
-public class SysUserRoleFallback implements SysUserRoleFeignClient{
+public class SysUserRoleFallback implements SysUserRoleFeignClient {
 
-    public Page<SysUserRole> select(){
-            return null;
-     }
+    public Page<SysUserRole> select() {
+        return null;
+    }
 
-    public SysUserRole create(SysUserRole sysuserrole){
-            return null;
-     }
-    public Boolean createBatch(List<SysUserRole> sysuserroles){
-            return false;
-     }
+    public SysUserRole create(SysUserRole sysuserrole) {
+        return null;
+    }
+    public Boolean createBatch(List<SysUserRole> sysuserroles) {
+        return false;
+    }
 
-    public SysUserRole update(String userroleid, SysUserRole sysuserrole){
-            return null;
-     }
-    public Boolean updateBatch(List<SysUserRole> sysuserroles){
-            return false;
-     }
+    public SysUserRole update(String userroleid, SysUserRole sysuserrole) {
+        return null;
+    }
+    public Boolean updateBatch(List<SysUserRole> sysuserroles) {
+        return false;
+    }
 
 
-    public Boolean remove(String userroleid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String userroleid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public SysUserRole get(String userroleid){
-            return null;
-     }
+    public SysUserRole get(String userroleid) {
+        return null;
+    }
 
 
     public SysUserRole getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(SysUserRole sysuserrole){
-            return false;
-     }
+    public Boolean checkKey(SysUserRole sysuserrole) {
+        return false;
+    }
 
 
-    public Boolean save(SysUserRole sysuserrole){
-            return false;
-     }
-    public Boolean saveBatch(List<SysUserRole> sysuserroles){
-            return false;
-     }
+    public Boolean save(SysUserRole sysuserrole) {
+        return false;
+    }
+    public Boolean saveBatch(List<SysUserRole> sysuserroles) {
+        return false;
+    }
 
-    public Page<SysUserRole> searchDefault(SysUserRoleSearchContext context){
-            return null;
-     }
+    public Page<SysUserRole> searchDefault(SysUserRoleSearchContext context) {
+        return null;
+    }
 
 
 }

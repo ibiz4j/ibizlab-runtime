@@ -54,37 +54,39 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
     @Override
     @Transactional
     public boolean create(WFSystem et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getPssystemid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getPssystemid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<WFSystem> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(WFSystem et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("pssystemid",et.getPssystemid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("pssystemid", et.getPssystemid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getPssystemid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getPssystemid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<WFSystem> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
     @Transactional
     public WFSystem get(String key) {
         WFSystem et = getById(key);
-        if(et==null){
-            et=new WFSystem();
+        if(et == null){
+            et = new WFSystem();
             et.setPssystemid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,13 +116,14 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
 
     @Override
     public boolean checkKey(WFSystem et) {
-        return (!ObjectUtils.isEmpty(et.getPssystemid()))&&(!Objects.isNull(this.getById(et.getPssystemid())));
+        return (!ObjectUtils.isEmpty(et.getPssystemid())) && (!Objects.isNull(this.getById(et.getPssystemid())));
     }
     @Override
     @Transactional
     public boolean save(WFSystem et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

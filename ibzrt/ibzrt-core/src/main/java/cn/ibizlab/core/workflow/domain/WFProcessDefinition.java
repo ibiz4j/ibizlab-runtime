@@ -36,7 +36,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * DefinitionKey
      */
-    @DEField(defaultValue = "deploykey" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
+    @DEField(defaultValue = "deploykey", defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField = true)
     @JSONField(name = "definitionkey")
     @JsonProperty("definitionkey")
     private String definitionkey;
@@ -111,7 +111,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [流程定义名称]
      */
-    public void setDefinitionname(String definitionname){
+    public void setDefinitionname(String definitionname) {
         this.definitionname = definitionname ;
         this.modify("definitionname",definitionname);
     }
@@ -119,7 +119,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [模型版本]
      */
-    public void setModelversion(Integer modelversion){
+    public void setModelversion(Integer modelversion) {
         this.modelversion = modelversion ;
         this.modify("modelversion",modelversion);
     }
@@ -127,7 +127,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [模型是否启用]
      */
-    public void setModelenable(Integer modelenable){
+    public void setModelenable(Integer modelenable) {
         this.modelenable = modelenable ;
         this.modify("modelenable",modelenable);
     }
@@ -135,7 +135,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [系统标识]
      */
-    public void setPssystemid(String pssystemid){
+    public void setPssystemid(String pssystemid) {
         this.pssystemid = pssystemid ;
         this.modify("pssystemid",pssystemid);
     }
@@ -143,7 +143,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [校验]
      */
-    public void setMd5check(String md5check){
+    public void setMd5check(String md5check) {
         this.md5check = md5check ;
         this.modify("md5check",md5check);
     }
@@ -151,7 +151,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [BPMN]
      */
-    public void setBpmnfile(String bpmnfile){
+    public void setBpmnfile(String bpmnfile) {
         this.bpmnfile = bpmnfile ;
         this.modify("bpmnfile",bpmnfile);
     }
@@ -159,7 +159,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [DeployKey]
      */
-    public void setDeploykey(String deploykey){
+    public void setDeploykey(String deploykey) {
         this.deploykey = deploykey ;
         this.modify("deploykey",deploykey);
     }
@@ -167,7 +167,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [WebServiceIds]
      */
-    public void setWebserviceids(String webserviceids){
+    public void setWebserviceids(String webserviceids) {
         this.webserviceids = webserviceids ;
         this.modify("webserviceids",webserviceids);
     }
@@ -175,7 +175,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     /**
      * 设置 [MobileServiceIds]
      */
-    public void setMobileserviceids(String mobileserviceids){
+    public void setMobileserviceids(String mobileserviceids) {
         this.mobileserviceids = mobileserviceids ;
         this.modify("mobileserviceids",mobileserviceids);
     }

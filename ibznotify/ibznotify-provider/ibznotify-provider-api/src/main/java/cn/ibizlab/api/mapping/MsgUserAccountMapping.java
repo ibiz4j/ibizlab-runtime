@@ -4,11 +4,10 @@ import org.mapstruct.*;
 import cn.ibizlab.core.notify.domain.MsgUserAccount;
 import cn.ibizlab.api.dto.MsgUserAccountDTO;
 import cn.ibizlab.util.domain.MappingBase;
-import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {},implementationName="apiMsgUserAccountMapping",
-    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+@Mapper(componentModel = "spring", uses = {}, implementationName = "apiMsgUserAccountMapping",
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface MsgUserAccountMapping extends MappingBase<MsgUserAccountDTO, MsgUserAccount> {
 
 

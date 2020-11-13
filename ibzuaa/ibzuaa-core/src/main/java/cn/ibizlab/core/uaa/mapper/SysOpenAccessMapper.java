@@ -17,31 +17,31 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysOpenAccessMapper extends BaseMapper<SysOpenAccess>{
+public interface SysOpenAccessMapper extends BaseMapper<SysOpenAccess> {
 
-    Page<SysOpenAccess> searchDefault(IPage page, @Param("srf") SysOpenAccessSearchContext context, @Param("ew") Wrapper<SysOpenAccess> wrapper) ;
+    Page<SysOpenAccess> searchDefault(IPage page, @Param("srf") SysOpenAccessSearchContext context, @Param("ew") Wrapper<SysOpenAccess> wrapper);
     @Override
-    @Cacheable( value="sysopenaccess",key = "'row:'+#p0")
+    @Cacheable(value ="sysopenaccess", key = "'row:'+#p0")
     SysOpenAccess selectById(Serializable id);
     @Override
-    @CacheEvict( value="sysopenaccess",key = "'row:'+#p0.id")
+    @CacheEvict(value ="sysopenaccess", key = "'row:'+#p0.id")
     int insert(SysOpenAccess entity);
     @Override
-    @CacheEvict( value="sysopenaccess",key = "'row:'+#p0.id")
+    @CacheEvict(value ="sysopenaccess", key = "'row:'+#p0.id")
     int updateById(@Param(Constants.ENTITY) SysOpenAccess entity);
     @Override
-    @CacheEvict(value="sysopenaccess",key = "'row:'+#p0.id")
+    @CacheEvict(value ="sysopenaccess", key = "'row:'+#p0.id")
     int update(@Param(Constants.ENTITY) SysOpenAccess entity, @Param("ew") Wrapper<SysOpenAccess> updateWrapper);
     @Override
-    @CacheEvict( value="sysopenaccess",key = "'row:'+#p0")
+    @CacheEvict(value ="sysopenaccess", key = "'row:'+#p0")
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

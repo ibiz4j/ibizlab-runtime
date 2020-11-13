@@ -21,33 +21,39 @@ public class DTOBase implements Serializable {
 
 
     public void modify(String field,Object val) {
-        if(val==null)
+        if(val==null) {
             this.getFocusNull(true).add(field.toLowerCase());
-        else
+        }
+        else {
             this.getFocusNull(true).remove(field.toLowerCase());
+        }
     }
 
 
     public Set<String> getFocusNull() {
-        if(focusNull==null)
+        if(focusNull==null) {
             focusNull=new HashSet<>();
+        }
         if(focusNull.size()>0 && extensionparams.containsKey("dirtyflagenable"))
         {
             Set<String> nocheck=new HashSet<>();
             for(String key:focusNull)
             {
-                if(!extensionparams.containsKey(key+"dirtyflag"))
+                if(!extensionparams.containsKey(key+"dirtyflag")) {
                     nocheck.add(key);
+                }
             }
-            for(String key:nocheck)
+            for(String key:nocheck) {
                 focusNull.remove(key);
+            }
         }
         return focusNull;
     }
 
     private Set<String> getFocusNull(boolean newflag) {
-        if(focusNull==null)
+        if(focusNull==null) {
             focusNull=new HashSet<>();
+        }
         return focusNull;
     }
 

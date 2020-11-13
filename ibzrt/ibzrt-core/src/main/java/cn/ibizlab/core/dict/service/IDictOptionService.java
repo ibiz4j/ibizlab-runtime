@@ -22,20 +22,20 @@ import cn.ibizlab.core.dict.filter.DictOptionSearchContext;
 /**
  * 实体[DictOption] 服务对象接口
  */
-public interface IDictOptionService{
+public interface IDictOptionService {
 
-    boolean create(DictOption et) ;
-    void createBatch(List<DictOption> list) ;
-    boolean update(DictOption et) ;
-    void updateBatch(List<DictOption> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    DictOption get(String key) ;
-    DictOption getDraft(DictOption et) ;
-    boolean checkKey(DictOption et) ;
-    boolean save(DictOption et) ;
-    void saveBatch(List<DictOption> list) ;
-    Page<DictOption> searchDefault(DictOptionSearchContext context) ;
+    boolean create(DictOption et);
+    void createBatch(List<DictOption> list);
+    boolean update(DictOption et);
+    void updateBatch(List<DictOption> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    DictOption get(String key);
+    DictOption getDraft(DictOption et);
+    boolean checkKey(DictOption et);
+    boolean save(DictOption et);
+    void saveBatch(List<DictOption> list);
+    Page<DictOption> searchDefault(DictOptionSearchContext context);
     List<DictOption> selectByCatalogId(String id);
     void removeByCatalogId(String id);
 

@@ -119,6 +119,15 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     private String redirectUri;
 
     /**
+     * 属性 [NOTIFY_URL]
+     *
+     */
+    @JSONField(name = "notify_url")
+    @JsonProperty("notify_url")
+    @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
+    private String notifyUrl;
+
+    /**
      * 属性 [AGENT_ID]
      *
      */
@@ -198,6 +207,14 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     public void setRedirectUri(String  redirectUri){
         this.redirectUri = redirectUri ;
         this.modify("redirect_uri",redirectUri);
+    }
+
+    /**
+     * 设置 [NOTIFY_URL]
+     */
+    public void setNotifyUrl(String  notifyUrl){
+        this.notifyUrl = notifyUrl ;
+        this.modify("notify_url",notifyUrl);
     }
 
     /**

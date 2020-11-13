@@ -37,17 +37,20 @@ public class QueryWrapperContext<T> extends SearchContextBase implements ISearch
         int pageSize=getPageable().getPageSize();
 
         //构造mybatis-plus分页
-        if(StringUtils.isEmpty(currentPage) || StringUtils.isEmpty(pageSize))
+        if(StringUtils.isEmpty(currentPage) || StringUtils.isEmpty(pageSize)) {
             page=new Page(1,Short.MAX_VALUE);
-        else
+        }
+        else {
             page=new Page(currentPage+1,pageSize);
+        }
 
         //构造mybatis-plus排序
         Sort sort = getPageable().getSort();
         Iterator<Sort.Order> it_sort = sort.iterator();
 
-        if(ObjectUtils.isEmpty(it_sort))
+        if(ObjectUtils.isEmpty(it_sort)) {
             return page;
+        }
 
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         Class<T> type = (Class<T>)parameterizedType.getActualTypeArguments()[0];
@@ -95,9 +98,9 @@ public class QueryWrapperContext<T> extends SearchContextBase implements ISearch
      * @return
      */
     private Consumer<QueryWrapper<T>> parseQueryFilter(QueryFilter queryFilter){
-
-        if(queryFilter.any().size()==0  && queryFilter.get$or()==null && queryFilter.get$and()==null)
-             return null;
+        if(queryFilter.any().size()==0  && queryFilter.get$or()==null && queryFilter.get$and()==null) {
+            return null;
+        }
         Consumer<QueryWrapper<T>> consumer = queryWrapper -> {
             Consumer fieldConsumer=parseFieldMap(queryFilter.any());
             Consumer orConsumer=parseOrQueryFilter(queryFilter.get$or());
@@ -121,7 +124,6 @@ public class QueryWrapperContext<T> extends SearchContextBase implements ISearch
      * @return
      */
     private Consumer<QueryWrapper<T>> parseOrQueryFilter(List<QueryFilter> queryFilters) {
-
         if(queryFilters==null || queryFilters.size()==0)
             return null;
             Consumer<QueryWrapper<T>> consumer = queryWrapper -> {
@@ -139,10 +141,10 @@ public class QueryWrapperContext<T> extends SearchContextBase implements ISearch
      * @return
      */
     private Consumer<QueryWrapper<T>> parseAndQueryFilter(List<QueryFilter> queryFilters) {
-
-        if(queryFilters==null || queryFilters.size()==0)
+        if(queryFilters==null || queryFilters.size()==0) {
             return null;
-            Consumer<QueryWrapper<T>> consumer = queryWrapper -> {
+        }
+        Consumer<QueryWrapper<T>> consumer = queryWrapper -> {
             for(QueryFilter queryFilter: queryFilters){
                 Consumer tempQueryWrapper=parseQueryFilter(queryFilter);
                 queryWrapper.and(tempQueryWrapper);
@@ -157,9 +159,9 @@ public class QueryWrapperContext<T> extends SearchContextBase implements ISearch
      * @return
      */
     private Consumer<QueryWrapper<T>> parseFieldMap(Map<String , QueryFilter.SegmentCond> fieldMap) {
-
-        if(fieldMap.size()==0)
+        if(fieldMap.size()==0) {
             return null;
+        }
             Consumer<QueryWrapper<T>> consumer = queryWrapper -> {
         for(Map.Entry<String, QueryFilter.SegmentCond> field: fieldMap.entrySet()){
             String fieldName=field.getKey();

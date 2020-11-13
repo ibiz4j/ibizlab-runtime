@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[PayTrade] 服务对象接口
  */
-public interface IPayTradeService extends IService<PayTrade>{
+public interface IPayTradeService extends IService<PayTrade> {
 
-    boolean create(PayTrade et) ;
-    void createBatch(List<PayTrade> list) ;
-    boolean update(PayTrade et) ;
-    void updateBatch(List<PayTrade> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    PayTrade get(String key) ;
-    PayTrade getDraft(PayTrade et) ;
-    boolean checkKey(PayTrade et) ;
-    boolean save(PayTrade et) ;
-    void saveBatch(List<PayTrade> list) ;
-    Page<PayTrade> searchDefault(PayTradeSearchContext context) ;
+    boolean create(PayTrade et);
+    void createBatch(List<PayTrade> list);
+    boolean update(PayTrade et);
+    void updateBatch(List<PayTrade> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    PayTrade get(String key);
+    PayTrade getDraft(PayTrade et);
+    boolean checkKey(PayTrade et);
+    boolean save(PayTrade et);
+    void saveBatch(List<PayTrade> list);
+    Page<PayTrade> searchDefault(PayTradeSearchContext context);
     List<PayTrade> selectByAccessId(String id);
     void removeByAccessId(String id);
     /**

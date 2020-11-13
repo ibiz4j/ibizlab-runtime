@@ -21,6 +21,7 @@ import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -79,6 +80,9 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                 String wfstatefield="";
                 if(setting.containsKey("wfstatefield"+"_"+entity))
                     wfstatefield=setting.get("wfstatefield"+"_"+entity).toString();
+                String udstateingval="20";
+                if(setting.containsKey("udstateingval"+"_"+entity))
+                    udstateingval=setting.get("udstateingval"+"_"+entity).toString();
                 String wfverfield="";
                 if(setting.containsKey("wfverfield"+"_"+entity))
                     wfverfield=setting.get("wfverfield"+"_"+entity).toString();
@@ -93,6 +97,7 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                 executionEntity.setVariable("wfstepfield",wfstepfield);
                 executionEntity.setVariable("wfinstfield",wfinstfield);
                 executionEntity.setVariable("udstatefield",udstatefield);
+                executionEntity.setVariable("udstateingval",udstateingval);
                 executionEntity.setVariable("wfstatefield",wfstatefield);
                 executionEntity.setVariable("wfverfield",wfverfield);
                 executionEntity.setVariable("majortextfield",majortext_field);
@@ -103,7 +108,7 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                 if(!StringUtils.isEmpty(wfstatefield))
                     callbackArg.put(wfstatefield,1);
                 if(!StringUtils.isEmpty(udstatefield))
-                    callbackArg.put(udstatefield,"20");
+                    callbackArg.put(udstatefield,udstateingval);
                 if((!StringUtils.isEmpty(wfverfield))&&(executionEntity.getVariable("wfversion")!=null))
                     callbackArg.put(wfverfield,Integer.parseInt(executionEntity.getVariable("wfversion").toString()));
 
@@ -151,12 +156,15 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                 String entity=executionEntity.getVariable("entitys").toString();
                 String cloudServiceid=executionEntity.getVariable("cloud-serviceid").toString();
                 String wfstepfield = executionEntity.getVariable("wfstepfield").toString();
+                Object udstateingval = executionEntity.getVariable("udstateingval");
+                if(ObjectUtils.isEmpty(udstateingval))
+                    udstateingval = "20";
                 String udstatefield = executionEntity.getVariable("udstatefield").toString();
                 String wfstate = executionEntity.getVariable("wfstate").toString();
                 Map callbackArg=new LinkedHashMap();
                 if(!StringUtils.isEmpty(wfstate))
                     callbackArg.put(wfstate,2);
-                if(!StringUtils.isEmpty(udstatefield))
+                if(!StringUtils.isEmpty(udstatefield) && "20".equals(udstateingval.toString()))
                     callbackArg.put(udstatefield,"30");
                 if(!StringUtils.isEmpty(wfstepfield))
                     callbackArg.put(wfstepfield,"");

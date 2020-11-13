@@ -41,7 +41,4 @@ public class SearchContextHandlerMethodArgumentResolver implements HandlerMethod
 		String json=objectMapper.writeValueAsString(set);
 		return objectMapper.readValue(json,parameter.getParameterType());
 	}
-
-
-
 }

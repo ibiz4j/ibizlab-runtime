@@ -13,11 +13,11 @@ export default {
   },
 	views: {
 		editview: {
-			caption: "支付交易1",
+			caption: "支付交易",
       		title: "支付交易编辑视图",
 		},
 		gridview: {
-			caption: "支付交易1",
+			caption: "支付交易",
       		title: "支付交易表格视图",
 		},
 	},

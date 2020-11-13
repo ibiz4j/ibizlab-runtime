@@ -66,6 +66,7 @@ public class SysUserSearchContext extends QueryWrapperContext<SysUser> {
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

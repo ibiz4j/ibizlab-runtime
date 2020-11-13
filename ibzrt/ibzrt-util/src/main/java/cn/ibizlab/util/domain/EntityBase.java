@@ -24,8 +24,9 @@ public class EntityBase implements Serializable {
     private Set<String> focusNull;
 
     public Set<String> getFocusNull() {
-        if(focusNull==null)
+        if(focusNull==null) {
             focusNull=new HashSet<>();
+        }
         return focusNull;
     }
 
@@ -50,8 +51,9 @@ public class EntityBase implements Serializable {
 
     private BeanMap getMap()
     {
-        if(map==null)
-            map=BeanMap.create(this);
+        if(map==null) {
+           map=BeanMap.create(this);
+        }
         return  map;
     }
 
@@ -68,16 +70,15 @@ public class EntityBase implements Serializable {
         this.extensionparams = extensionparams;
     }
 
-
-
     public Object get(String field) {
         String fieldRealName=DEFieldCacheMap.getFieldRealName(this.getClass(),field);
-        if(!StringUtils.isEmpty(fieldRealName))
+        if(!StringUtils.isEmpty(fieldRealName)) {
             return getMap().get(fieldRealName);
-        else
+        }
+        else {
             return this.extensionparams.get(field.toLowerCase());
+        }
     }
-
 
     @JsonAnyGetter
     public Map<String , Object> any() {
@@ -89,13 +90,16 @@ public class EntityBase implements Serializable {
         field=field.toLowerCase();
         String fieldRealName=DEFieldCacheMap.getFieldRealName(this.getClass(),field);
         if(!StringUtils.isEmpty(fieldRealName)) {
-            if (value == null)
+            if (value == null) {
                 getMap().put(fieldRealName, null);
-            else
+            }
+            else {
                 getMap().put(fieldRealName, DEFieldCacheMap.fieldValueOf(this.getClass(), fieldRealName, value));
+            }
         }
-        else
+        else {
             this.extensionparams.put(field.toLowerCase(),value);
+        }
     }
 
     /**

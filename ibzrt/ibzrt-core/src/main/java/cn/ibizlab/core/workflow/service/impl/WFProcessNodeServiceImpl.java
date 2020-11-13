@@ -51,7 +51,7 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
         WFProcessNode rt = wFProcessNodeFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
         WFProcessNode rt = wFProcessNodeFeignClient.update(et.getUsertaskid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

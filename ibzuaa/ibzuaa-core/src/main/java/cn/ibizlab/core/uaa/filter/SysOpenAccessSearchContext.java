@@ -45,6 +45,7 @@ public class SysOpenAccessSearchContext extends QueryWrapperContext<SysOpenAcces
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

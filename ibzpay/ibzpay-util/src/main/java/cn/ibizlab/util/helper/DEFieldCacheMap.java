@@ -36,13 +36,16 @@ public class DEFieldCacheMap {
 	 */
 	public static <T> Hashtable<String,Field> getFieldMap(Class<T> clazz) {
 		String className=clazz.getName();
-		if(className.indexOf("_$")>0)
-			className=className.substring(0, className.lastIndexOf("_$"));
-		if(cacheMap.containsKey(className))
-			return cacheMap.get(className);
+		if(className.indexOf("_$")>0) {
+        	className=className.substring(0, className.lastIndexOf("_$"));
+		}
+		if(cacheMap.containsKey(className)) {
+        	return cacheMap.get(className);
+		}
 		synchronized (objLock1) {
-			if(cacheMap.containsKey(className))
-				return cacheMap.get(className);
+			if(cacheMap.containsKey(className)) {
+        	   return cacheMap.get(className);
+			}
 			Hashtable<String,Field> result = new Hashtable<String,Field>();
 			List<Field> list=new ArrayList<Field>();
 			Hashtable<String,String> keys=new Hashtable<String,String>();
@@ -58,8 +61,9 @@ public class DEFieldCacheMap {
 				Audit auditField=field.getAnnotation(Audit.class);
 				if(!ObjectUtils.isEmpty(deField)) {
 					defields.put(field.getName(),deField);
-					if(deField.isKeyField())
-						cacheDEKeyField.put(className,field.getName());
+					if(deField.isKeyField()) {
+            			cacheDEKeyField.put(className,field.getName());
+					}
 				}
 				if(!ObjectUtils.isEmpty(auditField)) {
 					auditfields.put(field.getName(),auditField);
@@ -74,10 +78,12 @@ public class DEFieldCacheMap {
 		}
 	}
 	public static Hashtable<String,Field> getFieldMap(String className) {
-		if(className.indexOf("_$")>0)
-			className=className.substring(0, className.lastIndexOf("_$"));
-		if(cacheMap.containsKey(className))
-			return cacheMap.get(className);
+		if(className.indexOf("_$")>0) {
+            className=className.substring(0, className.lastIndexOf("_$"));
+		}
+		if(cacheMap.containsKey(className)) {
+            return cacheMap.get(className);
+		}
 		Class clazz = null;
 		try {
 			clazz = Class.forName(className);
@@ -96,10 +102,12 @@ public class DEFieldCacheMap {
 	 */
 	public static <T> Hashtable<String,DEField> getDEFields(Class<T> clazz) {
 		String className=clazz.getName();
-		if(className.indexOf("_$")>0)
+		if(className.indexOf("_$")>0) {
 			className=className.substring(0, className.lastIndexOf("_$"));
-		if(cacheDEField.containsKey(className))
+		}
+		if(cacheDEField.containsKey(className)) {
 			return cacheDEField.get(className);
+		}
 		else{
 			DEFieldCacheMap.getFieldMap(className);
 			return cacheDEField.get(className);
@@ -113,10 +121,12 @@ public class DEFieldCacheMap {
 	 */
 	public static <T> Hashtable<String,Audit> getAuditFields(Class<T> clazz) {
 		String className=clazz.getName();
-		if(className.indexOf("_$")>0)
+		if(className.indexOf("_$")>0) {
 			className=className.substring(0, className.lastIndexOf("_$"));
-		if(cacheAuditField.containsKey(className))
+		}
+		if(cacheAuditField.containsKey(className)) {
 			return cacheAuditField.get(className);
+		}
 		else{
 			DEFieldCacheMap.getFieldMap(className);
 			return cacheAuditField.get(className);
@@ -130,10 +140,12 @@ public class DEFieldCacheMap {
 	 */
 	public static <T> String getDEKeyField(Class<T> clazz) {
 		String className=clazz.getName();
-		if(className.indexOf("_$")>0)
+		if(className.indexOf("_$")>0) {
 			className=className.substring(0, className.lastIndexOf("_$"));
-		if(cacheDEKeyField.containsKey(className))
+		}
+		if(cacheDEKeyField.containsKey(className)) {
 			return cacheDEKeyField.get(className);
+		}
 		else{
 			DEFieldCacheMap.getFieldMap(className);
 			return cacheDEKeyField.get(className);
@@ -148,10 +160,12 @@ public class DEFieldCacheMap {
 	 */
 	public static <T> List<Field> getFields(Class<T> clazz) {
 		String className=clazz.getName();
-		if(className.indexOf("_$")>0)
+		if(className.indexOf("_$")>0) {
 			className=className.substring(0, className.lastIndexOf("_$"));
-		if(cacheList.containsKey(className))
+		}
+		if(cacheList.containsKey(className)) {
 			return cacheList.get(className);
+		}
 		else{
 			DEFieldCacheMap.getFieldMap(className);
 			return cacheList.get(className);
@@ -159,10 +173,12 @@ public class DEFieldCacheMap {
 	}
 
 	public static List<Field> getFields(String className) {
-		if(className.indexOf("_$")>0)
+		if(className.indexOf("_$")>0) {
 			className=className.substring(0, className.lastIndexOf("_$"));
-		if(cacheList.containsKey(className))
+		}
+		if(cacheList.containsKey(className)) {
 			return cacheList.get(className);
+		}
 		else{
 			DEFieldCacheMap.getFieldMap(className);
 			return cacheList.get(className);
@@ -176,10 +192,12 @@ public class DEFieldCacheMap {
 	 */
 	public static <T> Hashtable<String,String> getFieldKeys(Class<T> clazz) {
 		String className=clazz.getName();
-		if(className.indexOf("_$")>0)
+		if(className.indexOf("_$")>0) {
 			className=className.substring(0, className.lastIndexOf("_$"));
-		if(cacheKey.containsKey(className))
+		}
+		if(cacheKey.containsKey(className)) {
 			return cacheKey.get(className);
+		}
 		else{
 			DEFieldCacheMap.getFieldMap(className);
 			return cacheKey.get(className);
@@ -189,20 +207,25 @@ public class DEFieldCacheMap {
 	public static <T> String getFieldRealName(Class<T> clazz,String fieldname) {
 		fieldname=fieldname.toLowerCase();
 		Hashtable<String,String> keys=DEFieldCacheMap.getFieldKeys(clazz);
-		if(keys.containsKey(fieldname))
+		if(keys.containsKey(fieldname)) {
 			return keys.get(fieldname);
-		else if(keys.containsKey(fieldname.replace("_","")))
+		}
+		else if(keys.containsKey(fieldname.replace("_",""))) {
 			return keys.get(fieldname.replace("_",""));
-		else
+		}
+		else {
 			return "";
+		}
 	}
 
 	public static <T> Field getField(Class<T> clazz,String fieldname) {
 		String fieldRealName=DEFieldCacheMap.getFieldRealName(clazz,fieldname);
-		if(!StringUtils.isEmpty(fieldRealName))
+		if(!StringUtils.isEmpty(fieldRealName)) {
 			return DEFieldCacheMap.getFieldMap(clazz).get(fieldRealName);
-		else
+		}
+		else {
 			return null;
+		}
 	}
 
 	public static  <T> String getFieldColumnName(Class<T> clazz,String fieldname) {
@@ -226,6 +249,4 @@ public class DEFieldCacheMap {
 		}
 		return resultValue;
 	}
-
-
 }

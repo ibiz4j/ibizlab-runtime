@@ -48,6 +48,9 @@ export default class PickupViewpickupviewpanelModel {
       {
         name: 'notify_url',
       },
+      {
+        name: 'agent_id',
+      },
     ]
   }
 

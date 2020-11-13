@@ -19,30 +19,34 @@ public class DataObject {
     final static public DateFormat dayFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     final static public String getStringValue(Object objValue, String strDefault)  {
-        if (objValue == null) return strDefault;
-        if (objValue instanceof String) return (String) objValue;
+        if (objValue == null) {
+            return strDefault;
+        }
+        if (objValue instanceof String) {
+            return (String) objValue;
+        }
         if (objValue instanceof java.sql.Timestamp||objValue instanceof java.sql.Date||objValue instanceof java.util.Date) {
             String rt=datetimeFormat.format(objValue);
-            if(rt.endsWith(" 00:00:00"))
+            if(rt.endsWith(" 00:00:00")) {
                 rt=dayFormat.format(objValue);
-            else if(rt.endsWith(":00"))
+            }
+            else if(rt.endsWith(":00")) {
                 rt=datetimeFormat2.format(objValue);
+            }
             return rt;
         }
-
         return objValue.toString();
     }
 
-
     public static <T> Object objectValueOf(Class<T> type,Object fieldValue) {
-        if(fieldValue==null)
+        if(fieldValue==null) {
             return null;
+        }
         Object resultValue=fieldValue;
-
         String targetType=type.getSimpleName();
-        if(targetType.equalsIgnoreCase(fieldValue.getClass().getSimpleName()))
+        if(targetType.equalsIgnoreCase(fieldValue.getClass().getSimpleName())){
             return resultValue;
-
+        }
         if(targetType.equals("Boolean")){
             resultValue=getBooleanValue(fieldValue,false);
         }
@@ -79,10 +83,9 @@ public class DataObject {
         else if(targetType.equals("String")) {
             resultValue= getStringValue(fieldValue,null);
         }
-
-        if(resultValue==null)
+        if(resultValue==null) {
             return null;
-
+        }
         return resultValue;
     }
 
@@ -95,8 +98,9 @@ public class DataObject {
         if (objValue == null) {
             return jDefault;
         }
-        if(objValue instanceof JSONObject)
+        if(objValue instanceof JSONObject) {
             return (JSONObject)objValue;
+        }
         String strValue = objValue.toString();
         try {
             return JSONObject.parseObject(strValue);
@@ -111,8 +115,9 @@ public class DataObject {
         if (objValue == null) {
             return jDefault;
         }
-        if(objValue instanceof JSONArray)
+        if(objValue instanceof JSONArray) {
             return (JSONArray)objValue;
+        }
         String strValue = objValue.toString();
         try {
             return JSONArray.parseArray(strValue);
@@ -133,8 +138,9 @@ public class DataObject {
             List<String> chk1=new ArrayList<>();
             for(int i=0;i<arr.size();i++)
             {
-                if(arr.get(i) instanceof  String)
+                if(arr.get(i) instanceof  String) {
                     chk1.add(arr.getString(i));
+                }
             }
             return chk1;
         }
@@ -146,8 +152,9 @@ public class DataObject {
     }
 
     final static public Boolean getBooleanValue(Object objValue,Boolean bDefault)  {
-        if (objValue == null) return bDefault;
-
+        if (objValue == null) {
+            return bDefault;
+        }
         if (objValue instanceof Boolean) {
             return (Boolean) objValue;
         }
@@ -155,20 +162,24 @@ public class DataObject {
     }
 
     final static public char[] getCharacterValue(Object objValue,char[] cDefault)  {
-        if (objValue == null) return cDefault;
+        if (objValue == null) {
+            return cDefault;
+        }
         return objValue.toString().toCharArray();
     }
 
-
     final static public Double getDoubleValue(Object objValue,Double dDefault)  {
-        if (objValue == null) return dDefault;
-
+        if (objValue == null) {
+            return dDefault;
+        }
         if (objValue instanceof Double) {
             return (Double) objValue;
         }
 
         String strValue = objValue.toString();
-        if (StringUtils.isEmpty(strValue)) return null;
+        if (StringUtils.isEmpty(strValue)) {
+            return null;
+        }
         strValue = strValue.replace(",", "");
         return Double.parseDouble(strValue);
     }
@@ -179,8 +190,9 @@ public class DataObject {
             return nDefault;
         }
 
-        if(objValue instanceof Integer)
+        if(objValue instanceof Integer) {
             return (Integer)objValue;
+        }
 
         if (objValue instanceof Double) {
             return ((Double) objValue).intValue();
@@ -191,8 +203,9 @@ public class DataObject {
         }
 
         String strValue = objValue.toString();
-        if(StringUtils.isEmpty(strValue))
+        if(StringUtils.isEmpty(strValue)) {
             return nDefault;
+        }
         strValue = strValue.replace(",", "");
         return Integer.parseInt(strValue);
     }
@@ -204,12 +217,13 @@ public class DataObject {
         }
         try {
 
-            if(objValue instanceof Float)
+            if(objValue instanceof Float) {
                 return (Float)objValue;
-
+            }
             String strValue = objValue.toString();
-            if(StringUtils.isEmpty(strValue))
+            if(StringUtils.isEmpty(strValue)) {
                 return fDefault;
+            }
             strValue = strValue.replace(",", "");
             return Float.parseFloat(strValue);
         } catch (Exception ex) {
@@ -233,8 +247,9 @@ public class DataObject {
                 return BigDecimal.valueOf((Long)objValue);
             }
             String strValue = objValue.toString();
-            if(StringUtils.isEmpty(strValue))
+            if(StringUtils.isEmpty(strValue)) {
                 return fDefault;
+            }
             strValue = strValue.replace(",", "");
             return BigDecimal.valueOf(Double.parseDouble(strValue));
         } catch (Exception ex) {
@@ -253,8 +268,9 @@ public class DataObject {
             }
             else {
                 Long l=getLongValue(objValue,null);
-                if(l!=null)
+                if(l!=null) {
                     return BigInteger.valueOf(l);
+                }
             }
         } catch (Exception ex) {
 
@@ -283,8 +299,9 @@ public class DataObject {
             }
 
             String strValue = objValue.toString();
-            if(StringUtils.isEmpty(strValue))
+            if(StringUtils.isEmpty(strValue)) {
                 return nDefault;
+            }
             strValue = strValue.replace(",", "");
             return Long.parseLong(strValue);
         } catch (Exception ex) {
@@ -294,7 +311,9 @@ public class DataObject {
 
     final static public byte[] getBinaryValue(Object objValue, byte[] def)  {
 
-        if (objValue == null) return def;
+        if (objValue == null) {
+            return def;
+        }
         if(objValue instanceof byte[]){
             return (byte[])objValue;
         }
@@ -312,7 +331,9 @@ public class DataObject {
      * @
      */
     final static public java.sql.Timestamp getTimestampValue(Object objValue,java.sql.Timestamp tDefault) {
-        if (objValue == null) return tDefault;
+        if (objValue == null) {
+            return tDefault;
+        }
 
         if (objValue instanceof java.sql.Timestamp) {
             java.sql.Timestamp ti = (java.sql.Timestamp) objValue;
@@ -332,7 +353,9 @@ public class DataObject {
         if (objValue instanceof String) {
             String strValue = (String) objValue;
             strValue = strValue.trim();
-            if (StringUtils.isEmpty(strValue)) return null;
+            if (StringUtils.isEmpty(strValue)) {
+                return null;
+            }
 
             try {
                 java.util.Date date = parse((String) objValue);
@@ -373,7 +396,9 @@ public class DataObject {
      * @
      */
     public static Object testDateTime(String strInput, TimeZone timeZone)  throws Exception{
-        if (StringUtils.isEmpty(strInput)) return null;
+        if (StringUtils.isEmpty(strInput)) {
+            return null;
+        }
         Date dtDate = parse(strInput, timeZone);
         java.sql.Timestamp retDate = new java.sql.Timestamp(dtDate.getTime());
         return retDate;
@@ -425,8 +450,9 @@ public class DataObject {
         if(strTimeString.indexOf("T")!=-1){
             strPart = strTimeString.split("[T]");
         }
-        else
+        else{
             strPart = strTimeString.split(" ");
+        }
         if (strPart.length == 2) {
             // 两个部分
             String strDate = "";
@@ -589,6 +615,4 @@ public class DataObject {
         return new Timestamp(cl.getTime().getTime());
 
     }
-
-
 }

@@ -161,7 +161,21 @@
     "data_type":"VARCHAR",
     "data_length":500,
     "key_field":0,
-    "show_order":11,
+    "show_order":12,
+    "major_field":0
+    },
+    {
+    "fieldname":"AGENT_ID" ,
+    "codename":"Agent_id",
+    "field_logic_name":"AGENT_ID",
+    "entity_name":"PayOpenAccess",
+    "field_type":"BIGINT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"BIGINT",
+    "data_length":20,
+    "key_field":0,
+    "show_order":13,
     "major_field":0
     }
     ],
@@ -179,7 +193,7 @@
     ,
     {
     "entity_name":"PAY_TRADE",
-    "logic_name":"支付交易1",
+    "logic_name":"支付交易",
     "code_name":"PayTrade",
     "table_name":"IBZPAYTRADE",
     "system_id":"ibzpay",

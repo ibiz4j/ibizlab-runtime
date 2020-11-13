@@ -36,7 +36,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     /**
      * 节点标识
      */
-    @DEField(name = "nodeid" , isKeyField=true)
+    @DEField(name = "nodeid" , isKeyField = true)
     @JSONField(name = "usertaskid")
     @JsonProperty("usertaskid")
     private String usertaskid;
@@ -86,7 +86,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     /**
      * 设置 [节点名称]
      */
-    public void setUsertaskname(String usertaskname){
+    public void setUsertaskname(String usertaskname) {
         this.usertaskname = usertaskname ;
         this.modify("nodename",usertaskname);
     }
@@ -94,7 +94,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     /**
      * 设置 [DefinitionKey]
      */
-    public void setProcessdefinitionkey(String processdefinitionkey){
+    public void setProcessdefinitionkey(String processdefinitionkey) {
         this.processdefinitionkey = processdefinitionkey ;
         this.modify("definitionkey",processdefinitionkey);
     }
@@ -102,7 +102,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     /**
      * 设置 [流程定义名称]
      */
-    public void setProcessdefinitionname(String processdefinitionname){
+    public void setProcessdefinitionname(String processdefinitionname) {
         this.processdefinitionname = processdefinitionname ;
         this.modify("definitionname",processdefinitionname);
     }
@@ -110,7 +110,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     /**
      * 设置 [版本]
      */
-    public void setVersion(Integer version){
+    public void setVersion(Integer version) {
         this.version = version ;
         this.modify("version",version);
     }
@@ -118,7 +118,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     /**
      * 设置 [数量]
      */
-    public void setCnt(Integer cnt){
+    public void setCnt(Integer cnt) {
         this.cnt = cnt ;
         this.modify("cnt",cnt);
     }

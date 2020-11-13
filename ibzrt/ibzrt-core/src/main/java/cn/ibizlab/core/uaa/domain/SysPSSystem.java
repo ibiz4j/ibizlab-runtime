@@ -36,7 +36,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
     /**
      * 系统标识
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
     private String pssystemid;
@@ -76,7 +76,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
     /**
      * 设置 [系统名称]
      */
-    public void setPssystemname(String pssystemname){
+    public void setPssystemname(String pssystemname) {
         this.pssystemname = pssystemname ;
         this.modify("pssystemname",pssystemname);
     }
@@ -84,7 +84,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
     /**
      * 设置 [结构]
      */
-    public void setSysstructure(String sysstructure){
+    public void setSysstructure(String sysstructure) {
         this.sysstructure = sysstructure ;
         this.modify("sysstructure",sysstructure);
     }
@@ -92,7 +92,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
     /**
      * 设置 [校验]
      */
-    public void setMd5check(String md5check){
+    public void setMd5check(String md5check) {
         this.md5check = md5check ;
         this.modify("md5check",md5check);
     }
@@ -100,7 +100,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
     /**
      * 设置 [排序]
      */
-    public void setShoworder(Integer showorder){
+    public void setShoworder(Integer showorder) {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }

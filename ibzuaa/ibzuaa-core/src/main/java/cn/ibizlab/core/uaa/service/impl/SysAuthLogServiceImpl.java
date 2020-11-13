@@ -54,37 +54,39 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
     @Override
     @Transactional
     public boolean create(SysAuthLog et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getLogid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getLogid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<SysAuthLog> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysAuthLog et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("logid",et.getLogid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("logid", et.getLogid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getLogid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getLogid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<SysAuthLog> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
     @Transactional
     public SysAuthLog get(String key) {
         SysAuthLog et = getById(key);
-        if(et==null){
-            et=new SysAuthLog();
+        if(et == null){
+            et = new SysAuthLog();
             et.setLogid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,13 +116,14 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
 
     @Override
     public boolean checkKey(SysAuthLog et) {
-        return (!ObjectUtils.isEmpty(et.getLogid()))&&(!Objects.isNull(this.getById(et.getLogid())));
+        return (!ObjectUtils.isEmpty(et.getLogid())) && (!Objects.isNull(this.getById(et.getLogid())));
     }
     @Override
     @Transactional
     public boolean save(SysAuthLog et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

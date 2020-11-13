@@ -63,8 +63,9 @@ public class QueryFilter {
 
     private Map<String,SegmentCond> getMap()
     {
-        if(map==null)
+        if(map==null) {
             map=new LinkedHashMap<>();
+        }
         return  map;
     }
 
@@ -132,11 +133,12 @@ public class QueryFilter {
     }
 
     private QueryFilter op(String column, SegmentCond segmentCond) {
-
-        if(this.getMap().containsKey(column))
+        if(this.getMap().containsKey(column)) {
             ((SegmentCond)this.getMap().get(column)).getMap().putAll(segmentCond.getMap());
-        else
+        }
+        else {
             this.getMap().put(column,segmentCond);
+        }
         return this;
     }
 
@@ -155,8 +157,9 @@ public class QueryFilter {
 
         private Map<String,Object> getMap()
         {
-            if(map==null)
+            if(map==null) {
                 map=new LinkedHashMap<>();
+            }
             return  map;
         }
 

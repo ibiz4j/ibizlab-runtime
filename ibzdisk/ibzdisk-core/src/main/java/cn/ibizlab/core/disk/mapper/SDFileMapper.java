@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SDFileMapper extends BaseMapper<SDFile>{
+public interface SDFileMapper extends BaseMapper<SDFile> {
 
-    Page<SDFile> searchDefault(IPage page, @Param("srf") SDFileSearchContext context, @Param("ew") Wrapper<SDFile> wrapper) ;
+    Page<SDFile> searchDefault(IPage page, @Param("srf") SDFileSearchContext context, @Param("ew") Wrapper<SDFile> wrapper);
     @Override
     SDFile selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface SDFileMapper extends BaseMapper<SDFile>{
     int update(@Param(Constants.ENTITY) SDFile entity, @Param("ew") Wrapper<SDFile> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

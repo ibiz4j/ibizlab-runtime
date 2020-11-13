@@ -61,9 +61,10 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Transactional
     public boolean create(SysUserRole et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getUserroleid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getUserroleid()), et);
         return true;
     }
 
@@ -78,9 +79,10 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Transactional
     public boolean update(SysUserRole et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_user_roleid",et.getUserroleid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("sys_user_roleid", et.getUserroleid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getUserroleid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getUserroleid()), et);
         return true;
     }
 
@@ -88,13 +90,13 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Transactional
     public void updateBatch(List<SysUserRole> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -108,11 +110,11 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Transactional
     public SysUserRole get(String key) {
         SysUserRole et = getById(key);
-        if(et==null){
-            et=new SysUserRole();
+        if(et == null){
+            et = new SysUserRole();
             et.setUserroleid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -125,13 +127,14 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
 
     @Override
     public boolean checkKey(SysUserRole et) {
-        return (!ObjectUtils.isEmpty(et.getUserroleid()))&&(!Objects.isNull(this.getById(et.getUserroleid())));
+        return (!ObjectUtils.isEmpty(et.getUserroleid())) && (!Objects.isNull(this.getById(et.getUserroleid())));
     }
     @Override
     @Transactional
     public boolean save(SysUserRole et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

@@ -9,7 +9,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     return [status,{
                 "paytradeeditview": {
             "title": "支付交易编辑视图",
-            "caption": "支付交易1",
+            "caption": "支付交易",
             "viewtype": "DEEDITVIEW",
             "viewmodule": "pay",
             "viewname": "PayTradeEditView",
@@ -17,7 +17,7 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
         },
         "paytradegridview": {
             "title": "支付交易表格视图",
-            "caption": "支付交易1",
+            "caption": "支付交易",
             "viewtype": "DEGRIDVIEW",
             "viewmodule": "pay",
             "viewname": "PayTradeGridView",

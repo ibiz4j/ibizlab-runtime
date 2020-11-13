@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface JobsLogMapper extends BaseMapper<JobsLog>{
+public interface JobsLogMapper extends BaseMapper<JobsLog> {
 
-    Page<JobsLog> searchDefault(IPage page, @Param("srf") JobsLogSearchContext context, @Param("ew") Wrapper<JobsLog> wrapper) ;
+    Page<JobsLog> searchDefault(IPage page, @Param("srf") JobsLogSearchContext context, @Param("ew") Wrapper<JobsLog> wrapper);
     @Override
     JobsLog selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface JobsLogMapper extends BaseMapper<JobsLog>{
     int update(@Param(Constants.ENTITY) JobsLog entity, @Param("ew") Wrapper<JobsLog> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

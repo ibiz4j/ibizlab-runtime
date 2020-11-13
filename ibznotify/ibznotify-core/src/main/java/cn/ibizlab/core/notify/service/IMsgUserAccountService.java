@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[MsgUserAccount] 服务对象接口
  */
-public interface IMsgUserAccountService extends IService<MsgUserAccount>{
+public interface IMsgUserAccountService extends IService<MsgUserAccount> {
 
-    boolean create(MsgUserAccount et) ;
-    void createBatch(List<MsgUserAccount> list) ;
-    boolean update(MsgUserAccount et) ;
-    void updateBatch(List<MsgUserAccount> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    MsgUserAccount get(String key) ;
-    MsgUserAccount getDraft(MsgUserAccount et) ;
-    boolean checkKey(MsgUserAccount et) ;
-    boolean save(MsgUserAccount et) ;
-    void saveBatch(List<MsgUserAccount> list) ;
-    Page<MsgUserAccount> searchDefault(MsgUserAccountSearchContext context) ;
+    boolean create(MsgUserAccount et);
+    void createBatch(List<MsgUserAccount> list);
+    boolean update(MsgUserAccount et);
+    void updateBatch(List<MsgUserAccount> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    MsgUserAccount get(String key);
+    MsgUserAccount getDraft(MsgUserAccount et);
+    boolean checkKey(MsgUserAccount et);
+    boolean save(MsgUserAccount et);
+    void saveBatch(List<MsgUserAccount> list);
+    Page<MsgUserAccount> searchDefault(MsgUserAccountSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

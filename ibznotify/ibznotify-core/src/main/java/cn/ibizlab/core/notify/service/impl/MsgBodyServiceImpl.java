@@ -54,37 +54,39 @@ public class MsgBodyServiceImpl extends ServiceImpl<MsgBodyMapper, MsgBody> impl
     @Override
     @Transactional
     public boolean create(MsgBody et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getMsgId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getMsgId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<MsgBody> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(MsgBody et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("msgid",et.getMsgId())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("msgid", et.getMsgId()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getMsgId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getMsgId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<MsgBody> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class MsgBodyServiceImpl extends ServiceImpl<MsgBodyMapper, MsgBody> impl
     @Transactional
     public MsgBody get(String key) {
         MsgBody et = getById(key);
-        if(et==null){
-            et=new MsgBody();
+        if(et == null){
+            et = new MsgBody();
             et.setMsgId(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,13 +116,14 @@ public class MsgBodyServiceImpl extends ServiceImpl<MsgBodyMapper, MsgBody> impl
 
     @Override
     public boolean checkKey(MsgBody et) {
-        return (!ObjectUtils.isEmpty(et.getMsgId()))&&(!Objects.isNull(this.getById(et.getMsgId())));
+        return (!ObjectUtils.isEmpty(et.getMsgId())) && (!Objects.isNull(this.getById(et.getMsgId())));
     }
     @Override
     @Transactional
     public boolean save(MsgBody et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

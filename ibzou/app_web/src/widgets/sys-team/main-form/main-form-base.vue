@@ -1,5 +1,5 @@
 <template>
-    <i-form :model="this.data" class='app-form' ref='form'  id='systeam_main' style="">
+    <i-form :model="this.data" class='app-form' ref='form'  id='systeam_main' style="" @on-validate="formItemValidate">
     <input style="display:none;" />
     <row >
             <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
@@ -234,6 +234,15 @@ export default class MainBase extends Vue implements ControlInterface {
     public navModel!:string;
 
     /**
+     * 主键表单项名称
+     *
+     * @protected
+     * @type {string}
+     * @memberof MainBase
+     */
+    public formKeyItemName: string = '';
+
+    /**
      * 界面UI服务对象
      *
      * @type {SysTeamUIService}
@@ -408,6 +417,35 @@ export default class MainBase extends Vue implements ControlInterface {
     public mixinData:any = {};
 
     /**
+     * 表单项校验错误提示信息
+     * 
+     *  @memberof  MainBase
+     */
+    public errorMessages: Array<any> = [];   
+
+    /**
+     * 设置表单项错误提示信息
+     * 
+     * @param {*} prop 表单项字段名
+     * @param {*} status 校验状态
+     * @param {*} error 错误信息
+     * @memberof MainBase
+     */
+    public formItemValidate(prop: string,status: boolean, error: string){
+        error = error ? error : '';
+        if(this.errorMessages && this.errorMessages.length > 0){
+            const index = this.errorMessages.findIndex((errorMessage:any) => Object.is(errorMessage.prop,prop));
+            if(index != -1){
+                this.errorMessages[index].error = error;
+            }else{
+                this.errorMessages.push({prop: prop,error: error});
+            }
+        }else{
+            this.errorMessages.push({prop: prop,error: error});
+        }
+    }
+
+    /**
      * 表单数据对象
      *
      * @type {*}
@@ -461,6 +499,14 @@ export default class MainBase extends Vue implements ControlInterface {
     public saveState:any ;
 
     /**
+     * 主信息属性映射表单项名称
+     *
+     * @type {string}
+     * @memberof MainBase
+     */
+    public majorMessageField: string = "teamname";
+
+    /**
      * 值规则
      *
      * @type {*}
@@ -504,9 +550,9 @@ export default class MainBase extends Vue implements ControlInterface {
         let startOp = (val:boolean)=>{
             if(falg.isPast){
                 if(opValue){
-                    falg.isPast = falg && val;
+                    falg.isPast = falg.isPast && val;
                 }else{
-                    falg.isPast = falg || val;
+                    falg.isPast = falg.isPast || val;
                 }
             }else{
                 falg.isPast = val;
@@ -515,6 +561,11 @@ export default class MainBase extends Vue implements ControlInterface {
         for(let i=0;i<rule[name].length;i++){
             let item:any = rule[name][i];
             let dataValue = item.deName?this.data[this.service.getItemNameByDeName(item.deName)]:"";
+            item.ruleInfo = item.ruleInfo ? item.ruleInfo : this.$t('app.formpage.valuecheckex');
+            if((dataValue === null || dataValue === undefined || dataValue === "") && (item.type != 'GROUP')){
+                startOp(true);
+                return falg;
+            }
             // 常规规则
             if(item.type == 'SIMPLE'){
                 startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.data,item.isKeyCond));
@@ -547,7 +598,7 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             // 分组
             if(item.type == 'GROUP'){
-                falg = this.verifyDeRules('group',item)
+                falg = this.verifyDeRules('group',item,item.condOP?item.condOP:"AND");
                 if(item.isNotMode){
                    falg.isPast = !falg.isPast;
                 }
@@ -1301,6 +1352,7 @@ export default class MainBase extends Vue implements ControlInterface {
         const arg: any = { ...opt };
         const data = this.getValues();
         Object.assign(arg, data);
+        Object.assign(arg,{srfmajortext:data[this.majorMessageField]});
         const action: any = Object.is(data.srfuf, '1') ? this.updateAction : this.createAction;
         if(!action){
             let actionName:any = Object.is(data.srfuf, '1')?"updateAction":"createAction";
@@ -1326,24 +1378,45 @@ export default class MainBase extends Vue implements ControlInterface {
             });
         }).catch((response: any) => {
             if (response && response.status && response.data) {
-                if(response.data.errorKey && Object.is(response.data.errorKey,"versionCheck")){
-                    this.$Modal.confirm({
-                        title: (this.$t('app.formpage.saveerror') as string),
-                        content: (this.$t('app.formpage.savecontent') as string),
-                        onOk: () => {
-                            this.refresh([]);
-                        },
-                        onCancel: () => { }
-                    });
-                }else{
-                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                    if (response.data.errorKey) {
+                        if(Object.is(response.data.errorKey, "versionCheck")) {
+                            this.$Modal.confirm({
+                                title: (this.$t('app.formpage.saveerror') as string),
+                                content: (this.$t('app.formpage.savecontent') as string),
+                                onOk: () => {
+                                    this.refresh([]);
+                                },
+                                onCancel: () => { }
+                            });
+                        } else if(Object.is(response.data.errorKey, 'DupCheck')) {
+                            let errorProp: string = response.data.message.match(/\[[a-zA-Z]*\]/)[0];
+                            let name: string = this.service.getNameByProp(errorProp.substr(1, errorProp.length-2));
+                            if(name) {
+                                this.$Notice.error({
+                                    title: (this.$t('app.commonWords.createFailed') as string),
+                                    desc: this.detailsModel[name].caption + " : " + arg[name] + (this.$t('app.commonWords.isExist') as string) + '!',
+                                });
+                            } else {
+                                this.$Notice.error({
+                                    title: (this.$t('app.commonWords.createFailed') as string),
+                                    desc: response.data.message?response.data.message:(this.$t('app.commonWords.sysException') as string),
+                                })
+                            }
+                        }else if(Object.is(response.data.errorKey, 'DuplicateKeyException')){
+                            this.$Notice.error({
+                                title: (this.$t('app.commonWords.createFailed') as string),
+                                desc: this.detailsModel[this.formKeyItemName].caption + " : " + arg[this.formKeyItemName] + (this.$t('app.commonWords.isExist') as string) + '!',
+                            });
+                        } else {
+                            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message?response.data.message:(this.$t('app.commonWords.sysException') as string) });
+                        }
+                    } else {
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message?response.data.message:(this.$t('app.commonWords.sysException') as string) });
+                    }
+                    return;
+                } else {
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                 }
-                return;
-            }
-            if (!response || !response.status || !response.data) {
-                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
-                return;
-            }
         });
     }
 
@@ -1360,13 +1433,22 @@ export default class MainBase extends Vue implements ControlInterface {
         return new Promise((resolve: any, reject: any) => {
             showResultInfo = showResultInfo === undefined ? true : false;
             if (!this.formValidateStatus()) {
-                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.formpage.valuecheckex') as string) });
+                if(this.errorMessages && this.errorMessages.length > 0) {
+                    let descMessage: string = '';
+                    this.errorMessages.forEach((message: any) => {
+                        descMessage = descMessage + '<p>' + message.error + '<p>';
+                    })
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: descMessage });
+                } else {
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.formpage.valuecheckex') as string) });
+                }
                 return;
             }
             const arg: any = { ...opt };
             const data = this.getValues();
             Object.assign(arg, this.context);
             Object.assign(arg, data);
+            Object.assign(arg,{srfmajortext:data[this.majorMessageField]});
             if (ifStateNext) {
                 this.drcounter = 1;
                 if(this.drcounter !== 0){
@@ -1407,27 +1489,43 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
                 resolve(response);
             }).catch((response: any) => {
-                if (response && response.status  && response.data) {
-                    if(response.data.errorKey && Object.is(response.data.errorKey,"versionCheck")){
-                        this.$Modal.confirm({
-                            title: (this.$t('app.formpage.saveerror') as string),
-                            content: (this.$t('app.formpage.savecontent') as string),
-                            onOk: () => {
-                                this.refresh([]);
-                            },
-                            onCancel: () => { }
-                        });
-                    }else{
+                if (response && response.status && response.data) {
+                    if (response.data.errorKey) {
+                        if(Object.is(response.data.errorKey, "versionCheck")) {
+                            this.$Modal.confirm({
+                                title: (this.$t('app.formpage.saveerror') as string),
+                                content: (this.$t('app.formpage.savecontent') as string),
+                                onOk: () => {
+                                    this.refresh([]);
+                                },
+                                onCancel: () => { }
+                            });
+                        } else if(Object.is(response.data.errorKey, 'DupCheck')) {
+                            let errorProp: string = response.data.message.match(/\[[a-zA-Z]*\]/)[0];
+                            let name: string = this.service.getNameByProp(errorProp.substr(1, errorProp.length-2));
+                            if(name) {
+                                this.$Notice.error({
+                                    title: (this.$t('app.commonWords.createFailed') as string),
+                                    desc: this.detailsModel[name].caption + " : " + arg[name] + (this.$t('app.commonWords.isExist') as string) + '!',
+                                });
+                            } else {
+                                this.$Notice.error({
+                                    title: (this.$t('app.commonWords.createFailed') as string),
+                                    desc: response.data.message,
+                                })
+                            }
+                        } else {
+                            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
+                        }
+                    } else {
                         this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                         reject(response);
                     }
                     return;
-                }
-                if (!response || !response.status || !response.data) {
+                } else {
                     this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.sysException') as string) });
                     reject(response);
-                    return;
-                }
+                }    
                 reject(response);
             });
         })

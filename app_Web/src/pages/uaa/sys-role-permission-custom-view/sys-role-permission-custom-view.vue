@@ -1,139 +1,69 @@
+
 <template>
-  <div
-    class="view-container dempickupview sys-permissionmpickup-view view-permissionmp-center"
-  >
-    <card
-      class="view-card view-no-caption view-no-toolbar"
-      :dis-hover="true"
-      :padding="0"
-      :bordered="false"
-    >
+  <div class="view-container dempickupview sys-permissionmpickup-view">
+    <card class='view-card view-no-caption  view-no-toolbar' :dis-hover="true" :padding="0" :bordered="false">
       <div class="content-container pickup-view">
         <div class="translate-contant">
           <!--应用菜单-->
-          <div
-            class="center"
-            :style="{
-              width: '33%',
-              border: '1px solid #dcdee2',
-              margin: '0 16px 0 0',
-            }"
-          >
-            <context-menu-container class="design-tree-container">
+          <div class="center" :style="{width : '33%',border:'1px solid #dcdee2', margin: '0 10px 0 0'}">
+            <context-menu-container class='design-tree-container'>
               <div>
-                <div style="margin: 20px 20px 0 20px">
-                  <el-input
-                    size="small"
-                    placeholder="搜索应用菜单..."
-                    v-model="CDtreefilterText"
-                    @input="filterChangeCDtree"
-                  >
+                <!--<div class="text">应用菜单</div>-->
+                <div style="margin: 20px 20px 0 20px;">
+                  <el-input size="small" placeholder="搜索应用菜单..." v-model="CDtreefilterText" @input="filterChangeCDtree">
                     <i slot="prefix" class="el-input__icon el-icon-search"></i>
                   </el-input>
                 </div>
                 <div class="roll">
-                  <el-tree
-                    :filter-node-method="fiterNode"
-                    class="tre"
-                    :data="this.CDdata"
-                    ref="CDtree"
-                    show-checkbox
-                    node-key="id"
-                    :default-expand-all="false"
-                    highlight-current
-                    :default-expanded-keys="this.CDdataexpandedKeys"
-                    :props="this.defaultProps"
-                    @check-change="handleCheckChange"
-                  >
+                  <el-tree :filter-node-method="fiterNode" class="tre" :data="this.CDdata" ref="CDtree" show-checkbox node-key="id" :default-expand-all="false" highlight-current :default-expanded-keys="this.CDdataexpandedKeys" :props="this.defaultProps" @check-change="handleCheckChange">
                   </el-tree>
                 </div>
               </div>
             </context-menu-container>
           </div>
           <!--数据能力-->
-          <div
-            class="center"
-            :style="{
-              width: '33%',
-              border: '1px solid #dcdee2',
-              margin: '0 16px 0 0',
-            }"
-          >
-            <context-menu-container class="design-tree-container">
+          <div class="center" :style="{width : '33%',border:'1px solid #dcdee2', margin: '0 10px 0 0' }">
+            <context-menu-container class='design-tree-container'>
               <div>
-                <div style="margin: 20px 20px 0 20px">
-                  <el-input
-                    size="small"
-                    placeholder="搜索数据能力..."
-                    v-model="QXtreefilterText"
-                    @input="filterChangeQXtree"
-                  >
+                <!--<div class="text">数据能力</div>-->
+                <div style="margin: 20px 20px 0 20px;">
+                  <el-input size="small" placeholder="搜索数据能力..." v-model="QXtreefilterText" @input="filterChangeQXtree">
                     <i slot="prefix" class="el-input__icon el-icon-search"></i>
                   </el-input>
                 </div>
                 <div class="roll">
-                  <el-tree
-                    :filter-node-method="fiterNode"
-                    class="tre"
-                    :data="this.QXdata"
-                    ref="QXtree"
-                    show-checkbox
-                    node-key="id"
-                    :default-expand-all="false"
-                    highlight-current
-                    :default-expanded-keys="this.QXdataexpandedKeys"
-                    :props="this.defaultProps"
-                    @check-change="handleCheckChange"
-                  >
+                  <el-tree :filter-node-method="fiterNode" class="tre" :data="this.QXdata" ref="QXtree" show-checkbox node-key="id" :default-expand-all="false" highlight-current :default-expanded-keys="this.QXdataexpandedKeys" :props="this.defaultProps" @check-change="handleCheckChange">
                   </el-tree>
                 </div>
               </div>
             </context-menu-container>
           </div>
           <!--自定义资源-->
-          <div
-            class="center"
-            :style="{ width: '33%', border: '1px solid #dcdee2' }"
-          >
-            <context-menu-container class="design-tree-container">
+          <div class="center" :style="{width : '33%',border:'1px solid #dcdee2' }">
+            <context-menu-container class='design-tree-container'>
               <div>
-                <div style="margin: 20px 20px 0 20px">
-                  <el-input
-                    size="small"
-                    placeholder="搜索自定义资源..."
-                    v-model="ZYtreefilterText"
-                    @input="filterChangeZYtree"
-                  >
+                <!--<div class="text">自定义资源</div>-->
+                <div style="margin: 20px 20px 0 20px;">
+                  <el-input size="small" placeholder="搜索自定义资源..." v-model="ZYtreefilterText" @input="filterChangeZYtree">
                     <i slot="prefix" class="el-input__icon el-icon-search"></i>
                   </el-input>
                 </div>
                 <div class="roll">
-                  <el-tree
-                    :filter-node-method="fiterNode"
-                    class="tre"
-                    :data="this.ZYdata"
-                    ref="ZYtree"
-                    show-checkbox
-                    node-key="id"
-                    :default-expand-all="false"
-                    highlight-current
-                    :default-expanded-keys="this.ZYdataexpandedKeys"
-                    :props="this.defaultProps"
-                    @check-change="handleCheckChange"
-                  >
+                  <el-tree :filter-node-method="fiterNode" class="tre" :data="this.ZYdata" ref="ZYtree" show-checkbox node-key="id" :default-expand-all="false" highlight-current :default-expanded-keys="this.ZYdataexpandedKeys" :props="this.defaultProps" @check-change="handleCheckChange">
                   </el-tree>
                 </div>
               </div>
             </context-menu-container>
           </div>
         </div>
+
       </div>
     </card>
   </div>
 </template>
 
 <script lang='tsx'>
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import view_pickupviewpanel from "@widgets/sys-permission/mpickup-viewpickupviewpanel-pickupviewpanel/mpickup-viewpickupviewpanel-pickupviewpanel.vue";
 import ContextMenuContainer from "@components/context-menu-container/context-menu-container.vue";
 import { Subject } from "rxjs";
@@ -153,176 +83,84 @@ import { Subject } from "rxjs";
   },
 })
 export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
-  /**
-   * 应用菜单树搜索文本
-   *
-   * @type {string}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  public CDtreefilterText: string = "";
-
-  /**
-   * 数据能力树搜索文本
-   *
-   * @type {string}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  public QXtreefilterText: string = "";
-
-  /**
-   * 自定义资源树搜索文本
-   *
-   * @type {string}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  public ZYtreefilterText: string = "";
+  // 应用菜单树搜索文本
+  public CDtreefilterText: any = "";
+  // 数据能力树搜索文本
+  public QXtreefilterText: any = "";
+  // 自定义资源树搜索文本
+  public ZYtreefilterText: any = "";
 
   /**
    * 过滤节点
-   *
-   * @param {value={string}}
-   * @param {data={*}}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
-  public fiterNode(value: string, data: any) {
+  public fiterNode(value: any, data: any) {
     if (!value) return true;
     return data.label.indexOf(value) !== -1;
   }
-
   /**
-   * 应用菜单树搜索触发
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   *　应用菜单树搜索触发
    */
   public filterChangeCDtree() {
     const CDtree: any = this.$refs.CDtree;
     CDtree.filter(this.CDtreefilterText);
   }
-
   /**
-   * 数据能力树搜索触发
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   *　数据能力树搜索触发
    */
   public filterChangeQXtree() {
     const QXtree: any = this.$refs.QXtree;
     QXtree.filter(this.QXtreefilterText);
   }
-
   /**
-   * 自定义资源树搜素触发
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   *　自定义资源树搜索触发
    */
   public filterChangeZYtree() {
     const ZYtree: any = this.$refs.ZYtree;
     ZYtree.filter(this.ZYtreefilterText);
   }
 
-  /**
-   * 应用菜单数据
-   *
-   * @type {Array<*>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  protected CDdata: Array<any> = [];
-
-  /**
-   * 数据能力数据
-   *
-   * @type {Array<*>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  protected QXdata: Array<any> = [];
-
-  /**
-   * 自定义资源数据
-   *
-   * @type {Array<*>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  protected ZYdata: Array<any> = [];
-
-  /**
-   * 默认选中节点
-   *
-   * @type {Array<*>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  protected defaultCheckedNodes: Array<any> = [];
-
-  /**
-   * 应用菜单数据默认展开节点
-   *
-   * @type {Array<*>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  protected CDdataexpandedKeys: Array<any> = [];
-
-  /**
-   * 数据能力数据默认展开节点
-   *
-   * @type {Array<*>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  protected QXdataexpandedKeys: Array<any> = [];
-
-  /**
-   * 自定义资源数据默认展开节点
-   *
-   * @type {Array<*>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
-   */
-  protected ZYdataexpandedKeys: Array<any> = [];
+  /*应用菜单数据*/
+  protected CDdata: any = [];
+  /*数据能力数据*/
+  protected QXdata: any = [];
+  /*自定义资源数据*/
+  protected ZYdata: any = [];
+  /*默认选中节点*/
+  protected defaultCheckedNodes: any = [];
+  /*应用菜单数据默认展开节点*/
+  protected CDdataexpandedKeys: any = [];
+  /*数据能力数据默认展开节点*/
+  protected QXdataexpandedKeys: any = [];
+  /*自定义资源数据默认展开节点*/
+  protected ZYdataexpandedKeys: any = [];
 
   /**
    * 树显示说明：子树为节点对象的children,节点标签为节点对象的label
-   *
-   * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   protected defaultProps: any = {
     children: "children",
     label: "label",
   };
-
   /**
    * 选中数据
-   *
-   * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   protected selectData: any = {};
-
   /**
    * 初始选中的数据
-   *
-   * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   protected ininselectData: any = {};
 
   /**
    * 视图选中数据
-   *
-   * @type {Array<*>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   public viewSelections: any[] = [];
 
   /**
    * 父数据
-   *
-   * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   protected parentData: any = {};
-
   /**
    * 父数据主键
-   *
-   * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   protected srfparentkey: any;
 
@@ -330,7 +168,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
    * 视图标识
    *
    * @type {string}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public viewtag: string = "e791be173ed0f4bbe9cce942b6edde63";
 
@@ -338,7 +176,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
    * 是否嵌入关系界面
    *
    * @type {boolean}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_USER_ROLEGridViewBase
    */
   @Prop({ default: false }) public isformDruipart?: boolean;
 
@@ -346,7 +184,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
    * 界面关系通讯对象
    *
    * @type {Subject<ViewState>}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_USER_ROLEGridViewBase
    */
   @Prop() public formDruipart?: Subject<ViewState>;
 
@@ -354,7 +192,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
    * 应用上下文
    *
    * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public context: any = {};
 
@@ -362,7 +200,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
    * 视图参数
    *
    * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public viewparams: any = {};
 
@@ -370,15 +208,33 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
    * 传入视图上下文
    *
    * @type {string}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   @Prop() public viewdata!: string;
+
+  @Watch("viewdata")
+  public watchViewData() {
+    if (!this.viewdata || Object.is(this.viewdata, "")) {
+      return;
+    }
+    this.parseViewParam();
+    const _this: any = this;
+    // 获取父数据
+    if (_this && _this.viewdata) {
+      _this.parentData = JSON.parse(_this.viewdata);
+    }
+    if (_this.parentData && _this.parentData.sysrole) {
+      // console.log("当前角色id：" + _this.parentData.sysrole);
+      _this.srfparentkey = _this.parentData.sysrole;
+    }
+    this.initTree();
+  }
 
   /**
    * 视图默认使用
    *
    * @type {boolean}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   @Prop({ default: true }) public viewDefaultUsage!: boolean;
 
@@ -386,14 +242,14 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
    * 自定义视图导航上下文集合
    *
    * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public customViewNavContexts: any = {};
   /**
    * 自定义视图导航参数集合
    *
    * @type {*}
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public customViewParams: any = {};
 
@@ -401,7 +257,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
    * 解析视图参数
    *
    * @public
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public parseViewParam(): void {
     for (let key in this.context) {
@@ -457,7 +313,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
   /**
    * 处理自定义视图数据
    *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public handleCustomViewData() {
     if (Object.keys(this.customViewNavContexts).length > 0) {
@@ -481,7 +337,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
   /**
    * 处理自定义视图数据逻辑
    *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public handleCustomDataLogic(curNavData: any, tempData: any, item: string) {
     // 直接值直接赋值
@@ -535,8 +391,6 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
 
   /**
    * vue 创建
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   public created() {
     this.afterCreated();
@@ -545,7 +399,7 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
   /**
    * 执行created后的逻辑
    *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_USER_ROLEGridViewBase
    */
   public afterCreated() {
     const secondtag = this.$util.createUUID();
@@ -554,32 +408,28 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
       secondtag: secondtag,
     });
     this.viewtag = secondtag;
-    this.parseViewParam();
+    // this.parseViewParam();
 
     const _this: any = this;
     // 获取父数据
-    if (_this && _this.viewdata) {
-      if (typeof _this.viewdata == "string") {
-        _this.parentData = JSON.parse(_this.viewdata);
-      } else {
-        _this.parentData = _this.viewdata;
-      }
-    }
-    if (_this.parentData && _this.parentData.sysrole) {
-      // console.log("当前角色id：" + _this.parentData.sysrole);
-      _this.srfparentkey = _this.parentData.sysrole;
-    }
+    // if (_this && _this.viewdata) {
+    //     _this.parentData = JSON.parse(_this.viewdata);
+    // }
+    // if (_this.parentData && _this.parentData.sysrole) {
+    //     // console.log("当前角色id：" + _this.parentData.sysrole);
+    //     _this.srfparentkey = _this.parentData.sysrole;
+    // }
+
     // 监听父页面
     if (this.formDruipart) {
       this.formDruipart.subscribe((res: any) => {
-        if (Object.is(res.action, "load")) {
-          // 如果是新建角色保存，需要从res中获取父数据主键
-          if (res.data) {
-            let parentData = res.data;
-            this.srfparentkey = parentData.srfparentkey;
-          }
-
-          // 父数据保存时调用当前视图的事件
+        // 如果是新建角色保存，需要从res中获取父数据主键
+        if (!this.srfparentkey && res.data) {
+          let parentData = res.data;
+          this.srfparentkey = parentData.srfparentkey;
+        }
+        // 父页面的保存前,先进行树数据的更新处理
+        if (Object.is(res.action, "save")) {
           if (this.selectData.length > 0) {
             // 选中了数据
             this.onClickOk();
@@ -594,22 +444,18 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
 
   /**
    * vue 挂载
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   public mounted() {
-    this.initTree();
+    // this.initTree();
   }
 
   /**
    * 初始化树
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   private initTree() {
     const _this = this;
     // get全部菜单和数据能力和自定义资源的请求路径
-    const url: string = `sysroles/${_this.srfparentkey}/sysrolepermissions/tree`;
+    const url = `sysroles/` + _this.srfparentkey + `/sysrolepermissions/tree`;
     this.$http
       .get(url)
       .then((response: any) => {
@@ -652,15 +498,15 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
           });
         }
       })
-      .catch((e: any) => {
-        console.error(typeof e == "string" ? e : JSON.stringify(e));
+      .catch((e) => {
+        console.log(e);
       });
   }
 
   /**
-   * vue销毁之前
+   * 销毁之前
    *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * @memberof SYS_ROLE_PERMISSIONCustomViewBase
    */
   public beforeDestroy() {
     // 清空选中数据
@@ -672,10 +518,9 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
 
   /**
    * 处理选中节点
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
    */
   protected handleCheckChange() {
+    // console.log("SYS_PERMISSIONMPickupView执行了handleCheckChange")
     // 获取当前三棵树
     const CDtree: any = this.$refs.CDtree;
     const QXtree: any = this.$refs.QXtree;
@@ -689,9 +534,14 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
   }
 
   /**
-   * 保存角色权限
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * 容器模型
+   */
+  public containerModel: any = {
+    view_okbtn: { name: "okbtn", type: "button", text: "确定", disabled: true },
+  };
+
+  /**
+   * 确定
    */
   public onClickOk(): void {
     // 处理选中的数据
@@ -715,19 +565,23 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
       });
 
       // 保存选中的权限信息
-      let url: string = `/sysroles/${this.srfparentkey}/sysrolepermissions/refreshbatch`;
+      let url =
+        "/sysroles/" + this.srfparentkey + "/sysrolepermissions/refreshbatch";
       this.$http
         .post(url, this.viewSelections)
         .then((response: any) => {
-          if (!(!response || response.status !== 200)) {
-            this.$Notice.error({ title: "错误", desc: response.message });
-            return;
+          if (!response || response.status !== 200) {
+            return this.$Notice.error({
+              title: "错误",
+              desc: response.message,
+            });
+          } else {
+            // 抛出事件,通知父页面进行表单保存
+            return this.$emit("drdatasaved", {});
           }
         })
-        .catch((e: any) => {
-          console.error(
-            "保存角色权限失败：" + typeof e == "string" ? e : JSON.stringify(e)
-          );
+        .catch((e) => {
+          return this.$Notice.error({ title: "错误", desc: e });
         });
     }
     // 清空视图选中数据，避免重复添加
@@ -735,27 +589,29 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
   }
 
   /**
-   * 清除角色权限
-   *
-   * @memberof SYS_ROLE_PERMISSIONCustomView
+   * 清除
    */
   private onClear() {
     // 未选中数据,即没有赋予任何权限，需要清除当前角色的所有权限
     if (this.selectData.length == 0) {
       // 保存选中的权限信息
-      let url: string = `/sysroles/${this.srfparentkey}/sysrolepermissions/refreshbatch`;
+      let url =
+        "/sysroles/" + this.srfparentkey + "/sysrolepermissions/refreshbatch";
       this.$http
         .post(url, [])
         .then((response: any) => {
-          if (!(!response || response.status !== 200)) {
-            this.$Notice.error({ title: "错误", desc: response.message });
-            return;
+          if (!response || response.status !== 200) {
+            return this.$Notice.error({
+              title: "错误",
+              desc: response.message,
+            });
+          } else {
+            // 抛出事件,通知父页面进行表单保存
+            return this.$emit("drdatasaved", {});
           }
         })
-        .catch((e: any) => {
-          console.error(
-            "清除角色权限失败," + typeof e == "string" ? e : JSON.stringify(e)
-          );
+        .catch((e) => {
+          return this.$Notice.error({ title: "错误", desc: e });
         });
     }
   }

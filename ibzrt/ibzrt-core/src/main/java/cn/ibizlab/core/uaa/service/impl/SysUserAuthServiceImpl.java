@@ -51,7 +51,7 @@ public class SysUserAuthServiceImpl implements ISysUserAuthService {
         SysUserAuth rt = sysUserAuthFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysUserAuthServiceImpl implements ISysUserAuthService {
         SysUserAuth rt = sysUserAuthFeignClient.update(et.getId(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

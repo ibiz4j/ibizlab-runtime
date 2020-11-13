@@ -60,37 +60,39 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @Transactional
     public boolean create(SysUser et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getUserid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getUserid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<SysUser> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysUser et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("userid",et.getUserid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("userid", et.getUserid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getUserid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getUserid()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<SysUser> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -104,11 +106,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Transactional
     public SysUser get(String key) {
         SysUser et = getById(key);
-        if(et==null){
-            et=new SysUser();
+        if(et == null){
+            et = new SysUser();
             et.setUserid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -120,13 +122,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Override
     public boolean checkKey(SysUser et) {
-        return (!ObjectUtils.isEmpty(et.getUserid()))&&(!Objects.isNull(this.getById(et.getUserid())));
+        return (!ObjectUtils.isEmpty(et.getUserid())) && (!Objects.isNull(this.getById(et.getUserid())));
     }
     @Override
     @Transactional
     public boolean save(SysUser et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 
@@ -208,10 +211,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 ids.add(id);
             }
         }
-        if(ids.size()>0)
-           return this.listByIds(ids);
-        else
-           return entities;
+        if(ids.size()>0) {
+            return this.listByIds(ids);
+        }
+        else {
+            return entities;
+        }
     }
 
 

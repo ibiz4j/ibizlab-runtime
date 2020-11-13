@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFTask] 服务对象接口
  */
 @Component
-public class WFTaskFallback implements WFTaskFeignClient{
+public class WFTaskFallback implements WFTaskFeignClient {
 
-    public Page<WFTask> select(){
-            return null;
-     }
+    public Page<WFTask> select() {
+        return null;
+    }
 
-    public WFTask create(WFTask wftask){
-            return null;
-     }
-    public Boolean createBatch(List<WFTask> wftasks){
-            return false;
-     }
+    public WFTask create(WFTask wftask) {
+        return null;
+    }
+    public Boolean createBatch(List<WFTask> wftasks) {
+        return false;
+    }
 
-    public WFTask update(String id, WFTask wftask){
-            return null;
-     }
-    public Boolean updateBatch(List<WFTask> wftasks){
-            return false;
-     }
+    public WFTask update(String id, WFTask wftask) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFTask> wftasks) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFTask get(String id){
-            return null;
-     }
+    public WFTask get(String id) {
+        return null;
+    }
 
 
     public WFTask getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFTask wftask){
-            return false;
-     }
+    public Boolean checkKey(WFTask wftask) {
+        return false;
+    }
 
 
-    public Boolean save(WFTask wftask){
-            return false;
-     }
-    public Boolean saveBatch(List<WFTask> wftasks){
-            return false;
-     }
+    public Boolean save(WFTask wftask) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFTask> wftasks) {
+        return false;
+    }
 
-    public Page<WFTask> searchDefault(WFTaskSearchContext context){
-            return null;
-     }
+    public Page<WFTask> searchDefault(WFTaskSearchContext context) {
+        return null;
+    }
 
 
 }

@@ -17,31 +17,31 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface DictCatalogMapper extends BaseMapper<DictCatalog>{
+public interface DictCatalogMapper extends BaseMapper<DictCatalog> {
 
-    Page<DictCatalog> searchDefault(IPage page, @Param("srf") DictCatalogSearchContext context, @Param("ew") Wrapper<DictCatalog> wrapper) ;
+    Page<DictCatalog> searchDefault(IPage page, @Param("srf") DictCatalogSearchContext context, @Param("ew") Wrapper<DictCatalog> wrapper);
     @Override
-    @Cacheable( value="dictcatalog",key = "'row:'+#p0")
+    @Cacheable(value ="dictcatalog", key = "'row:'+#p0")
     DictCatalog selectById(Serializable id);
     @Override
-    @CacheEvict( value="dictcatalog",key = "'row:'+#p0.id")
+    @CacheEvict(value ="dictcatalog", key = "'row:'+#p0.id")
     int insert(DictCatalog entity);
     @Override
-    @CacheEvict( value="dictcatalog",key = "'row:'+#p0.id")
+    @CacheEvict(value ="dictcatalog", key = "'row:'+#p0.id")
     int updateById(@Param(Constants.ENTITY) DictCatalog entity);
     @Override
-    @CacheEvict(value="dictcatalog",key = "'row:'+#p0.id")
+    @CacheEvict(value ="dictcatalog", key = "'row:'+#p0.id")
     int update(@Param(Constants.ENTITY) DictCatalog entity, @Param("ew") Wrapper<DictCatalog> updateWrapper);
     @Override
-    @CacheEvict( value="dictcatalog",key = "'row:'+#p0")
+    @CacheEvict(value ="dictcatalog", key = "'row:'+#p0")
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

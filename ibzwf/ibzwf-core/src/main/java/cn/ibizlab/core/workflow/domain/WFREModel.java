@@ -39,7 +39,7 @@ public class WFREModel extends EntityBase implements Serializable {
     /**
      * ID
      */
-    @DEField(name = "modelid" , isKeyField=true)
+    @DEField(name = "modelid", isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;

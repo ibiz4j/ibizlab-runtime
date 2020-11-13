@@ -36,7 +36,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
     /**
      * 标识
      */
-    @DEField(name = "authid" , isKeyField=true)
+    @DEField(name = "authid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -91,7 +91,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
     /**
      * 设置 [用户标识]
      */
-    public void setUserid(String userid){
+    public void setUserid(String userid) {
         this.userid = userid ;
         this.modify("userid",userid);
     }
@@ -99,7 +99,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
     /**
      * 设置 [认证类型]
      */
-    public void setIdentityType(String identityType){
+    public void setIdentityType(String identityType) {
         this.identityType = identityType ;
         this.modify("identity_type",identityType);
     }
@@ -107,7 +107,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
     /**
      * 设置 [认证标识]
      */
-    public void setIdentifier(String identifier){
+    public void setIdentifier(String identifier) {
         this.identifier = identifier ;
         this.modify("identifier",identifier);
     }
@@ -115,7 +115,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
     /**
      * 设置 [凭据]
      */
-    public void setCredential(String credential){
+    public void setCredential(String credential) {
         this.credential = credential ;
         this.modify("credential",credential);
     }

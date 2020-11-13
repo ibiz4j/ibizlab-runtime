@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZDEPT",resultMap = "SysDepartmentResultMap")
+@TableName(value = "IBZDEPT", resultMap = "SysDepartmentResultMap")
 public class SysDepartment extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysDepartment extends EntityMP implements Serializable {
     /**
      * 部门标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "deptid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "deptid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "deptid")
     @JsonProperty("deptid")
     private String deptid;
@@ -133,8 +133,8 @@ public class SysDepartment extends EntityMP implements Serializable {
     /**
      * 逻辑有效
      */
-    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
-    @TableLogic(value= "1",delval="0")
+    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1", logicdelval = "0")
+    @TableLogic(value = "1", delval = "0")
     @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
@@ -157,9 +157,9 @@ public class SysDepartment extends EntityMP implements Serializable {
      * 创建时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @TableField(value = "createdate" , fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "createdate", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
     /**
@@ -167,8 +167,8 @@ public class SysDepartment extends EntityMP implements Serializable {
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
     @TableField(value = "updatedate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -193,81 +193,81 @@ public class SysDepartment extends EntityMP implements Serializable {
     /**
      * 设置 [部门代码]
      */
-    public void setDeptcode(String deptcode){
-        this.deptcode = deptcode ;
-        this.modify("deptcode",deptcode);
+    public void setDeptcode(String deptcode) {
+        this.deptcode = deptcode;
+        this.modify("deptcode", deptcode);
     }
 
     /**
      * 设置 [部门名称]
      */
-    public void setDeptname(String deptname){
-        this.deptname = deptname ;
-        this.modify("deptname",deptname);
+    public void setDeptname(String deptname) {
+        this.deptname = deptname;
+        this.modify("deptname", deptname);
     }
 
     /**
      * 设置 [上级部门]
      */
-    public void setParentdeptid(String parentdeptid){
-        this.parentdeptid = parentdeptid ;
-        this.modify("pdeptid",parentdeptid);
+    public void setParentdeptid(String parentdeptid) {
+        this.parentdeptid = parentdeptid;
+        this.modify("pdeptid", parentdeptid);
     }
 
     /**
      * 设置 [部门简称]
      */
-    public void setShortname(String shortname){
-        this.shortname = shortname ;
-        this.modify("shortname",shortname);
+    public void setShortname(String shortname) {
+        this.shortname = shortname;
+        this.modify("shortname", shortname);
     }
 
     /**
      * 设置 [部门级别]
      */
-    public void setDeptlevel(Integer deptlevel){
-        this.deptlevel = deptlevel ;
-        this.modify("deptlevel",deptlevel);
+    public void setDeptlevel(Integer deptlevel) {
+        this.deptlevel = deptlevel;
+        this.modify("deptlevel", deptlevel);
     }
 
     /**
      * 设置 [区属]
      */
-    public void setDomains(String domains){
-        this.domains = domains ;
-        this.modify("domains",domains);
+    public void setDomains(String domains) {
+        this.domains = domains;
+        this.modify("domains", domains);
     }
 
     /**
      * 设置 [排序]
      */
-    public void setShoworder(Integer showorder){
-        this.showorder = showorder ;
-        this.modify("showorder",showorder);
+    public void setShoworder(Integer showorder) {
+        this.showorder = showorder;
+        this.modify("showorder", showorder);
     }
 
     /**
      * 设置 [业务编码]
      */
-    public void setBcode(String bcode){
-        this.bcode = bcode ;
-        this.modify("bcode",bcode);
+    public void setBcode(String bcode) {
+        this.bcode = bcode;
+        this.modify("bcode", bcode);
     }
 
     /**
      * 设置 [分管领导标识]
      */
-    public void setLeaderid(String leaderid){
-        this.leaderid = leaderid ;
-        this.modify("leaderid",leaderid);
+    public void setLeaderid(String leaderid) {
+        this.leaderid = leaderid;
+        this.modify("leaderid", leaderid);
     }
 
     /**
      * 设置 [分管领导]
      */
-    public void setLeadername(String leadername){
-        this.leadername = leadername ;
-        this.modify("leadername",leadername);
+    public void setLeadername(String leadername) {
+        this.leadername = leadername;
+        this.modify("leadername", leadername);
     }
 
 
@@ -281,7 +281,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("deptid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

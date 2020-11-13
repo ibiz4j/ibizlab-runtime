@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZWFMEMBER",resultMap = "WFMemberResultMap")
+@TableName(value = "IBZWFMEMBER", resultMap = "WFMemberResultMap")
 public class WFMember extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class WFMember extends EntityMP implements Serializable {
     /**
      * 组成员标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "memberid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "memberid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
     private String memberid;
@@ -136,33 +136,33 @@ public class WFMember extends EntityMP implements Serializable {
     /**
      * 设置 [组成员名称]
      */
-    public void setMembername(String membername){
-        this.membername = membername ;
-        this.modify("membername",membername);
+    public void setMembername(String membername) {
+        this.membername = membername;
+        this.modify("membername", membername);
     }
 
     /**
      * 设置 [组标识]
      */
-    public void setGroupid(String groupid){
-        this.groupid = groupid ;
-        this.modify("groupid",groupid);
+    public void setGroupid(String groupid) {
+        this.groupid = groupid;
+        this.modify("groupid", groupid);
     }
 
     /**
      * 设置 [用户标识]
      */
-    public void setUserid(String userid){
-        this.userid = userid ;
-        this.modify("userid",userid);
+    public void setUserid(String userid) {
+        this.userid = userid;
+        this.modify("userid", userid);
     }
 
 
     /**
      * 获取 [组成员标识]
      */
-    public String getMemberid(){
-        if(ObjectUtils.isEmpty(memberid)){
+    public String getMemberid() {
+        if(ObjectUtils.isEmpty(memberid)) {
             memberid=(String)getDefaultKey(true);
         }
         return memberid;
@@ -184,7 +184,7 @@ public class WFMember extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("memberid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

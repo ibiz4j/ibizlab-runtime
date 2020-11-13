@@ -39,7 +39,7 @@ public class WFHistory extends EntityBase implements Serializable {
     /**
      * 标识
      */
-    @DEField(name = "histid" , isKeyField=true)
+    @DEField(name = "histid", isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -70,8 +70,8 @@ public class WFHistory extends EntityBase implements Serializable {
      * 时间
      */
     @DEField(name = "actiontime")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "time" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "time", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("time")
     private Timestamp time;
 
@@ -112,7 +112,7 @@ public class WFHistory extends EntityBase implements Serializable {
     /**
      * 格式化日期 [时间]
      */
-    public String formatTime(){
+    public String formatTime() {
         if (this.time == null) {
             return null;
         }

@@ -39,7 +39,7 @@ public class WFTaskWay extends EntityBase implements Serializable {
     /**
      * 路径标识
      */
-    @DEField(name = "wayid" , isKeyField=true)
+    @DEField(name = "wayid", isKeyField = true)
     @JSONField(name = "sequenceFlowId")
     @JsonProperty("sequenceFlowId")
     private String sequenceflowid;

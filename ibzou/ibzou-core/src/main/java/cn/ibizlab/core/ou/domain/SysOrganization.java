@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZORG",resultMap = "SysOrganizationResultMap")
+@TableName(value = "IBZORG", resultMap = "SysOrganizationResultMap")
 public class SysOrganization extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysOrganization extends EntityMP implements Serializable {
     /**
      * 单位标识
      */
-    @DEField(defaultValue = "orgcode" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
-    @TableId(value= "orgid",type=IdType.ASSIGN_UUID)
+    @DEField(defaultValue = "orgcode", defaultValueType = DEFieldDefaultValueType.PARAM, isKeyField = true)
+    @TableId(value = "orgid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
     private String orgid;
@@ -112,8 +112,8 @@ public class SysOrganization extends EntityMP implements Serializable {
     /**
      * 逻辑有效
      */
-    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
-    @TableLogic(value= "1",delval="0")
+    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1", logicdelval = "0")
+    @TableLogic(value = "1", delval = "0")
     @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
@@ -122,9 +122,9 @@ public class SysOrganization extends EntityMP implements Serializable {
      * 创建时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @TableField(value = "createdate" , fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "createdate", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
     /**
@@ -132,8 +132,8 @@ public class SysOrganization extends EntityMP implements Serializable {
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
     @TableField(value = "updatedate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -158,49 +158,49 @@ public class SysOrganization extends EntityMP implements Serializable {
     /**
      * 设置 [单位代码]
      */
-    public void setOrgcode(String orgcode){
-        this.orgcode = orgcode ;
-        this.modify("orgcode",orgcode);
+    public void setOrgcode(String orgcode) {
+        this.orgcode = orgcode;
+        this.modify("orgcode", orgcode);
     }
 
     /**
      * 设置 [上级单位]
      */
-    public void setParentorgid(String parentorgid){
-        this.parentorgid = parentorgid ;
-        this.modify("porgid",parentorgid);
+    public void setParentorgid(String parentorgid) {
+        this.parentorgid = parentorgid;
+        this.modify("porgid", parentorgid);
     }
 
     /**
      * 设置 [单位简称]
      */
-    public void setShortname(String shortname){
-        this.shortname = shortname ;
-        this.modify("shortname",shortname);
+    public void setShortname(String shortname) {
+        this.shortname = shortname;
+        this.modify("shortname", shortname);
     }
 
     /**
      * 设置 [单位级别]
      */
-    public void setOrglevel(Integer orglevel){
-        this.orglevel = orglevel ;
-        this.modify("orglevel",orglevel);
+    public void setOrglevel(Integer orglevel) {
+        this.orglevel = orglevel;
+        this.modify("orglevel", orglevel);
     }
 
     /**
      * 设置 [排序]
      */
-    public void setShoworder(Integer showorder){
-        this.showorder = showorder ;
-        this.modify("showorder",showorder);
+    public void setShoworder(Integer showorder) {
+        this.showorder = showorder;
+        this.modify("showorder", showorder);
     }
 
     /**
      * 设置 [区属]
      */
-    public void setDomains(String domains){
-        this.domains = domains ;
-        this.modify("domains",domains);
+    public void setDomains(String domains) {
+        this.domains = domains;
+        this.modify("domains", domains);
     }
 
 
@@ -214,7 +214,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("orgid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

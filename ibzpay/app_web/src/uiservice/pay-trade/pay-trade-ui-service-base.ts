@@ -6,7 +6,7 @@ import PayTradeService from '@/service/pay-trade/pay-trade-service';
 import PayTradeAuthService from '@/authservice/pay-trade/pay-trade-auth-service';
 
 /**
- * 支付交易1UI服务对象基类
+ * 支付交易UI服务对象基类
  *
  * @export
  * @class PayTradeUIServiceBase

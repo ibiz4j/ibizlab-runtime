@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[JobsLock] 服务对象接口
  */
-public interface IJobsLockService extends IService<JobsLock>{
+public interface IJobsLockService extends IService<JobsLock> {
 
-    boolean create(JobsLock et) ;
-    void createBatch(List<JobsLock> list) ;
-    boolean update(JobsLock et) ;
-    void updateBatch(List<JobsLock> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    JobsLock get(String key) ;
-    JobsLock getDraft(JobsLock et) ;
-    boolean checkKey(JobsLock et) ;
-    boolean save(JobsLock et) ;
-    void saveBatch(List<JobsLock> list) ;
-    Page<JobsLock> searchDefault(JobsLockSearchContext context) ;
+    boolean create(JobsLock et);
+    void createBatch(List<JobsLock> list);
+    boolean update(JobsLock et);
+    void updateBatch(List<JobsLock> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    JobsLock get(String key);
+    JobsLock getDraft(JobsLock et);
+    boolean checkKey(JobsLock et);
+    boolean save(JobsLock et);
+    void saveBatch(List<JobsLock> list);
+    Page<JobsLock> searchDefault(JobsLockSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

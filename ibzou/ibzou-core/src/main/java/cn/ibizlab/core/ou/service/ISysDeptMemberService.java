@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysDeptMember] 服务对象接口
  */
-public interface ISysDeptMemberService extends IService<SysDeptMember>{
+public interface ISysDeptMemberService extends IService<SysDeptMember> {
 
-    boolean create(SysDeptMember et) ;
-    void createBatch(List<SysDeptMember> list) ;
-    boolean update(SysDeptMember et) ;
-    void updateBatch(List<SysDeptMember> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysDeptMember get(String key) ;
-    SysDeptMember getDraft(SysDeptMember et) ;
-    boolean checkKey(SysDeptMember et) ;
-    boolean save(SysDeptMember et) ;
-    void saveBatch(List<SysDeptMember> list) ;
-    Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context) ;
+    boolean create(SysDeptMember et);
+    void createBatch(List<SysDeptMember> list);
+    boolean update(SysDeptMember et);
+    void updateBatch(List<SysDeptMember> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysDeptMember get(String key);
+    SysDeptMember getDraft(SysDeptMember et);
+    boolean checkKey(SysDeptMember et);
+    boolean save(SysDeptMember et);
+    void saveBatch(List<SysDeptMember> list);
+    Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context);
     List<SysDeptMember> selectByDeptid(String deptid);
     void removeByDeptid(String deptid);
     List<SysDeptMember> selectByUserid(String userid);

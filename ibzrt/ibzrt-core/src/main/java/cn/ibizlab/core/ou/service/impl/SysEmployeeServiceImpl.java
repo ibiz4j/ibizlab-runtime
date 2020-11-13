@@ -51,7 +51,7 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
         SysEmployee rt = sysEmployeeFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
         SysEmployee rt = sysEmployeeFeignClient.update(et.getUserid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

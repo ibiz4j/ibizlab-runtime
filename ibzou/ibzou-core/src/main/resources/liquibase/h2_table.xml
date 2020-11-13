@@ -204,7 +204,7 @@
 
 
     <!--输出实体[SYS_TEAMMEMBER]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_teammember-25-7">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_teammember-27-7">
         <createTable tableName="IBZTEAMMEMBER">
                 <column name="TEAMMEMBERID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_TEAMMEMBER_TEAMMEMBERID"/>
@@ -254,13 +254,13 @@
         <!--输出实体[SYS_POST]外键关系 -->
         <!--输出实体[SYS_TEAM]外键关系 -->
         <!--输出实体[SYS_TEAMMEMBER]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-25-17">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-27-17">
        <addForeignKeyConstraint baseColumnNames="USERID" baseTableName="IBZTEAMMEMBER" constraintName="DER1N_SYS_TEAMMEMBER_SYS_EMP_U" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="USERID" referencedTableName="IBZEMP" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-25-18">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-27-18">
        <addForeignKeyConstraint baseColumnNames="POSTID" baseTableName="IBZTEAMMEMBER" constraintName="DER1N_SYS_TEAMMEMBER_SYS_POST_" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="POSTID" referencedTableName="IBZPOST" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-25-19">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-27-19">
        <addForeignKeyConstraint baseColumnNames="TEAMID" baseTableName="IBZTEAMMEMBER" constraintName="DER1N_SYS_TEAMMEMBER_SYS_TEAM_" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="TEAMID" referencedTableName="IBZTEAM" validate="true"/>
     </changeSet>
 

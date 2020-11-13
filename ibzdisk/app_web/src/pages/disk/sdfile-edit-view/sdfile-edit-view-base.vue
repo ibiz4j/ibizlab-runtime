@@ -103,11 +103,11 @@
             :autosave="false" 
             :viewtag="viewtag"
             :showBusyIndicator="true"
-            updateAction=""
-            removeAction=""
-            loaddraftAction=""
-            loadAction=""
-            createAction=""
+            updateAction="Update"
+            removeAction="Remove"
+            loaddraftAction="GetDraft"
+            loadAction="Get"
+            createAction="Create"
             WFSubmitAction=""
             WFStartAction=""
             style='' 
@@ -254,11 +254,11 @@ export default class SDFileEditViewBase extends Vue {
     @Watch('viewparam',{immediate: true, deep: true})
     onParamData(newVal: any, oldVal: any) {
         if(newVal){
-            for(let key in this.viewparams){
-                delete this.viewparams[key];
-            }
-            if(typeof this.viewparams == 'string') {
+            this.viewparams = {};
+            if(typeof newVal == 'string') {
                 Object.assign(this.viewparams, JSON.parse(this.viewparam));
+            }else{
+                this.viewparams = Util.deepCopy(this.viewparam);
             }
             
         } 
@@ -392,6 +392,7 @@ export default class SDFileEditViewBase extends Vue {
             form: this.$refs.form,
             p2k: '0',
             keyPSDEField: 'sdfile',
+            majorPSDEField: 'name',
             isLoadDefault: true,
         });
     }

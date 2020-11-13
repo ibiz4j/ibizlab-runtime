@@ -42,13 +42,15 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      */
     @Scheduled(fixedRate = 10000)
     public void saveAudit() {
-        if(cacheMap.size()>0){
+        if(cacheMap.size()>0) {
             log.info(String.format("正在保存审计数据，当前审计集合数量为[%s]",cacheMap.size()));
             List temp=new ArrayList();
-            if(cacheMap.size()<500)
+            if(cacheMap.size()<500) {
               temp.addAll(cacheMap);
-            else
+            }
+            else {
               temp.addAll(cacheMap.subList(0,500));
+            }
             this.saveBatch(temp);
             cacheMap.removeAll(temp);
             log.info(String.format("保存完成，当前审计集合数量为[%s]",cacheMap.size()));
@@ -64,16 +66,17 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      */
     @Override
     public void createAudit(HttpServletRequest request, EntityBase entity, Object idValue, Map<String, Audit> auditFields) {
-        IBZDataAudit dataAudit =new IBZDataAudit();
+        IBZDataAudit dataAudit = new IBZDataAudit();
         dataAudit.setOppersonid(AuthenticationUser.getAuthenticationUser().getUserid());
         dataAudit.setOppersonname(String.format("%s[%s]",AuthenticationUser.getAuthenticationUser().getPersonname(),AuthenticationUser.getAuthenticationUser().getOrgname()));
         dataAudit.setAudittype("CREATE");
         dataAudit.setAuditobject(entity.getClass().getSimpleName());
         dataAudit.setAuditobjectdata(idValue);
         dataAudit.setOptime(new Timestamp(new Date().getTime()));
-        if(request!=null)
+        if(request != null) {
             dataAudit.setIpaddress(getIpAddress(request, AuthenticationUser.getAuthenticationUser()));
-        dataAudit.setAuditinfo(getAuditInfo(entity,auditFields));
+        }
+        dataAudit.setAuditinfo(getAuditInfo(entity, auditFields));
         dataAudit.setIsdatachanged(1);
         cacheMap.add(dataAudit);
     }
@@ -87,24 +90,26 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      * @param auditFields
      */
     @SneakyThrows
-    public void updateAudit(HttpServletRequest request, EntityBase beforeEntity, Object serviceObj, Object idValue, Map<String, Audit> auditFields){
+    public void updateAudit(HttpServletRequest request, EntityBase beforeEntity, Object serviceObj, Object idValue, Map<String, Audit> auditFields) {
         //获取更新后的实体
-        EntityBase afterEntity=getEntity(serviceObj,idValue);
+        EntityBase afterEntity = getEntity(serviceObj, idValue);
         //获取更新后的审计内容
-        String auditInfo=getUpdateAuditInfo(beforeEntity,afterEntity,auditFields);//比较更新前后差异内容
-        int isDataChanged=1;
-        if(StringUtils.isEmpty(auditInfo))//审计内容是否发生变化
-            isDataChanged=0;
-
-        IBZDataAudit dataAudit =new IBZDataAudit();
+        String auditInfo = getUpdateAuditInfo(beforeEntity, afterEntity, auditFields);//比较更新前后差异内容
+        int isDataChanged = 1;
+        //审计内容是否发生变化
+        if(StringUtils.isEmpty(auditInfo)) {
+            isDataChanged = 0;
+        }
+        IBZDataAudit dataAudit = new IBZDataAudit();
         dataAudit.setOppersonid(AuthenticationUser.getAuthenticationUser().getUserid());
-        dataAudit.setOppersonname(String.format("%s[%s]",AuthenticationUser.getAuthenticationUser().getPersonname(),AuthenticationUser.getAuthenticationUser().getOrgname()));
+        dataAudit.setOppersonname(String.format("%s[%s]", AuthenticationUser.getAuthenticationUser().getPersonname(), AuthenticationUser.getAuthenticationUser().getOrgname()));
         dataAudit.setAudittype("UPDATE");
         dataAudit.setAuditobject(afterEntity.getClass().getSimpleName());
         dataAudit.setAuditobjectdata(idValue);
         dataAudit.setOptime(new Timestamp(new Date().getTime()));
-        if(request!=null)
+        if(request!=null) {
             dataAudit.setIpaddress(getIpAddress(request, AuthenticationUser.getAuthenticationUser()));
+        }
         dataAudit.setAuditinfo(auditInfo);
         dataAudit.setIsdatachanged(isDataChanged);
         cacheMap.add(dataAudit);
@@ -117,53 +122,55 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      * @param idValue
      * @param auditFields
      */
-    public void removeAudit(HttpServletRequest request,EntityBase entity,Object idValue,Map<String, Audit> auditFields){
-        IBZDataAudit dataAudit =new IBZDataAudit();
+    public void removeAudit(HttpServletRequest request, EntityBase entity, Object idValue, Map<String, Audit> auditFields) {
+        IBZDataAudit dataAudit = new IBZDataAudit();
         dataAudit.setOppersonid(AuthenticationUser.getAuthenticationUser().getUserid());
-        dataAudit.setOppersonname(String.format("%s[%s]",AuthenticationUser.getAuthenticationUser().getPersonname(),AuthenticationUser.getAuthenticationUser().getOrgname()));
+        dataAudit.setOppersonname(String.format("%s[%s]", AuthenticationUser.getAuthenticationUser().getPersonname(), AuthenticationUser.getAuthenticationUser().getOrgname()));
         dataAudit.setAudittype("REMOVE");
         dataAudit.setAuditobject(entity.getClass().getSimpleName());
         dataAudit.setAuditobjectdata(idValue);
         dataAudit.setOptime(new Timestamp(new Date().getTime()));
-        if(request!=null)
+        if(request!=null) {
             dataAudit.setIpaddress(getIpAddress(request, AuthenticationUser.getAuthenticationUser()));
-        dataAudit.setAuditinfo(getAuditInfo(entity,auditFields));
+        }
+        dataAudit.setAuditinfo(getAuditInfo(entity, auditFields));
         dataAudit.setIsdatachanged(1);
         cacheMap.add(dataAudit);
     }
 
-    private String getAuditInfo(EntityBase entity, Map<String, Audit> auditFields){
-        String auditResult="";
-        if(auditFields.size()==0)
+    private String getAuditInfo(EntityBase entity, Map<String, Audit> auditFields) {
+        String auditResult = "";
+        if(auditFields.size() == 0) {
             return auditResult;
-
-        Map<String, DEField> deFields= DEFieldCacheMap.getDEFields(entity.getClass());
-        if(deFields.size()==0)
+        }
+        Map<String, DEField> deFields = DEFieldCacheMap.getDEFields(entity.getClass());
+        if(deFields.size() == 0) {
             return auditResult;
-
-        JSONArray auditFieldArray=new JSONArray();
+        }
+        JSONArray auditFieldArray = new JSONArray();
         for (Map.Entry<String, Audit> auditField : auditFields.entrySet()) {
-            Object objFieldName=auditField.getKey();
-            String fieldName=String.valueOf(objFieldName);
-            DEField deField=null;
-            if(deFields.containsKey(fieldName)){
-                deField= deFields.get(fieldName);
+            Object objFieldName = auditField.getKey();
+            String fieldName = String.valueOf(objFieldName);
+            DEField deField = null;
+            if(deFields.containsKey(fieldName)) {
+                deField = deFields.get(fieldName);
             }
-            if(ObjectUtils.isEmpty(deField))
+            if(ObjectUtils.isEmpty(deField)) {
                 continue;
-            Object value=dataTransfer(entity.get(fieldName),deField.fieldType(),deField.format());
-            if(!StringUtils.isEmpty(value)){
-                JSONObject auditFieldObj=new JSONObject();
-                auditFieldObj.put("field",deField.value());
-                auditFieldObj.put("value",value);
-                if(!StringUtils.isEmpty(deField.dict())){
-                    auditFieldObj.put("dict",deField.dict());
+            }
+            Object value = dataTransfer(entity.get(fieldName), deField.fieldType(), deField.format());
+            if(!StringUtils.isEmpty(value)) {
+                JSONObject auditFieldObj = new JSONObject();
+                auditFieldObj.put("field", deField.value());
+                auditFieldObj.put("value", value);
+                if(!StringUtils.isEmpty(deField.dict())) {
+                    auditFieldObj.put("dict", deField.dict());
                 }
                 auditFieldArray.add(auditFieldObj);
             }
         }
-        if(auditFieldArray.size()>0){
-            auditResult=auditFieldArray.toString();
+        if(auditFieldArray.size()>0) {
+            auditResult = auditFieldArray.toString();
         }
         return auditResult;
     }
@@ -176,41 +183,44 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      * @return
      */
     private String getUpdateAuditInfo(EntityBase oldData, EntityBase newData, Map<String, Audit> auditFields){
-        String auditResult="";
-        JSONArray auditFieldArray=new JSONArray();
-        if(auditFields.size()==0)
+        String auditResult = "";
+        JSONArray auditFieldArray = new JSONArray();
+        if(auditFields.size() == 0) {
             return auditResult;
+        }
 
-        Map<String, DEField> deFields= DEFieldCacheMap.getDEFields(oldData.getClass());
-        if(deFields.size()==0)
+        Map<String, DEField> deFields = DEFieldCacheMap.getDEFields(oldData.getClass());
+        if(deFields.size() == 0){
             return auditResult;
+        }
 
         for (Map.Entry<String, Audit> auditField : auditFields.entrySet()) {
-            Object objFieldName=auditField.getKey();//获取注解字段
-            String fieldName=String.valueOf(objFieldName); //属性名称
-            DEField deField=null;
-            if(deFields.containsKey(fieldName)){
-                deField= deFields.get(fieldName);
+            Object objFieldName = auditField.getKey();//获取注解字段
+            String fieldName = String.valueOf(objFieldName); //属性名称
+            DEField deField = null;
+            if(deFields.containsKey(fieldName)) {
+                deField = deFields.get(fieldName);
             }
-            if(ObjectUtils.isEmpty(deField))
+            if(ObjectUtils.isEmpty(deField)) {
                 continue;
-            Object oldValue=oldData.get(fieldName);//老属性值
-            Object newValue=newData.get(fieldName);//新属性值
-            if(!compare(oldValue,newValue)){
-                oldValue=dataTransfer(oldValue,deField.fieldType(),deField.format());//属性值转换
-                newValue=dataTransfer(newValue,deField.fieldType(),deField.format());//属性值转换
-                JSONObject auditFieldObj=new JSONObject();
-                auditFieldObj.put("field",deField.value());
-                auditFieldObj.put("beforevalue",oldValue);
-                auditFieldObj.put("value",newValue);
-                if(!StringUtils.isEmpty(deField.dict())){
-                    auditFieldObj.put("dict",deField.dict());
+            }
+            Object oldValue = oldData.get(fieldName);//老属性值
+            Object newValue = newData.get(fieldName);//新属性值
+            if(!compare(oldValue, newValue)) {
+                oldValue = dataTransfer(oldValue, deField.fieldType(), deField.format());//属性值转换
+                newValue = dataTransfer(newValue, deField.fieldType(), deField.format());//属性值转换
+                JSONObject auditFieldObj = new JSONObject();
+                auditFieldObj.put("field", deField.value());
+                auditFieldObj.put("beforevalue", oldValue);
+                auditFieldObj.put("value", newValue);
+                if(!StringUtils.isEmpty(deField.dict())) {
+                    auditFieldObj.put("dict", deField.dict());
                 }
                 auditFieldArray.add(auditFieldObj);
             }
         }
-        if(auditFieldArray.size()>0){
-            auditResult=auditFieldArray.toString();
+        if(auditFieldArray.size()>0) {
+            auditResult = auditFieldArray.toString();
         }
         return auditResult;
     }
@@ -222,15 +232,16 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      * @param strFormat   转换字段格式化文本
      * @return
      */
-    private String dataTransfer(Object value,String dataType, String strFormat){
-        if(value==null)
+    private String dataTransfer(Object value, String dataType, String strFormat) {
+        if(value==null) {
             return "";
+        }
         String transResult=value.toString();
-        if((dataType.equals("DATE") || dataType.equals("DATETIME") || dataType.equals("TIME")) && (!StringUtils.isEmpty(strFormat))){  //时间类型转换
-            Timestamp timestamp =(Timestamp)value;
-            Date date =timestamp;
-            SimpleDateFormat format =new SimpleDateFormat(strFormat);
-            transResult=format.format(date);
+        if((dataType.equals("DATE") || dataType.equals("DATETIME") || dataType.equals("TIME")) && (!StringUtils.isEmpty(strFormat))) {  //时间类型转换
+            Timestamp timestamp = (Timestamp)value;
+            Date date = timestamp;
+            SimpleDateFormat format = new SimpleDateFormat(strFormat);
+            transResult = format.format(date);
         }
         return transResult;
     }
@@ -241,11 +252,13 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      * @param targetObj 比较目标对象
      * @return
      */
-    private boolean compare(Object sourceObj,Object targetObj){
-        if(sourceObj==null && targetObj==null)
+    private boolean compare(Object sourceObj, Object targetObj) {
+        if(sourceObj == null && targetObj == null) {
             return true;
-        if(sourceObj==null && targetObj!=null)
+        }
+        if(sourceObj == null && targetObj != null) {
             return false;
+        }
         return sourceObj.equals(targetObj);
     }
 
@@ -256,9 +269,9 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      * @return
      */
     @SneakyThrows
-    private EntityBase getEntity(Object service, Object id){
-        EntityBase entity=null;
-        if(!ObjectUtils.isEmpty(service)){
+    private EntityBase getEntity(Object service, Object id) {
+        EntityBase entity = null;
+        if(!ObjectUtils.isEmpty(service)) {
             EvaluationContext oldContext = new StandardEvaluationContext();
             oldContext.setVariable("service",service);
             oldContext.setVariable("id",id);
@@ -275,14 +288,15 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
      */
     public String getIpAddress(HttpServletRequest request, AuthenticationUser authenticationUser) {
         //客户端有提交ip，以提交的ip为准
-        if(authenticationUser != null && !StringUtils.isEmpty(authenticationUser.getAddr())){
+        if(authenticationUser != null && !StringUtils.isEmpty(authenticationUser.getAddr())) {
             return authenticationUser.getAddr();
         }
-        if(request == null)
+        if(request == null) {
             return "";
+        }
         String Xip = request.getHeader("X-Real-IP");
         String XFor = request.getHeader("X-Forwarded-For");
-        if(!StringUtils.isEmpty(XFor) && !"unKnown".equalsIgnoreCase(XFor)){
+        if(!StringUtils.isEmpty(XFor) && !"unKnown".equalsIgnoreCase(XFor)) {
             //多次反向代理后会有多个ip值，第一个ip才是真实ip
             int index = XFor.indexOf(",");
             if(index != -1){
@@ -292,7 +306,7 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
             }
         }
         XFor = Xip;
-        if(!StringUtils.isEmpty(XFor) && !"unKnown".equalsIgnoreCase(XFor)){
+        if(!StringUtils.isEmpty(XFor) && !"unKnown".equalsIgnoreCase(XFor)) {
             return XFor;
         }
         if (StringUtils.isEmpty(XFor) || "unknown".equalsIgnoreCase(XFor)) {

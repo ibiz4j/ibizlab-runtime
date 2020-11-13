@@ -1,7 +1,7 @@
 import AuthService from '../auth-service';
 
 /**
- * 支付交易1权限服务对象基类
+ * 支付交易权限服务对象基类
  *
  * @export
  * @class PayTradeAuthServiceBase

@@ -42,10 +42,12 @@ public class AppController {
 				while(it.hasNext()) {
 					GrantedAuthority authority = (GrantedAuthority)it.next();
 					String strAuthority=authority.getAuthority();
-					if(strAuthority.startsWith("UNIRES_"+systemId))
+					if(strAuthority.startsWith("UNIRES_"+systemId)) {
 						uniRes.add(strAuthority.substring(systemId.length()+8));
-					else if(strAuthority.startsWith("APPMENU_"+systemId))
+                	}
+					else if(strAuthority.startsWith("APPMENU_"+systemId)){
 						appMenu.add(strAuthority.substring(systemId.length()+9));
+					}
 				}
 		}
 		Map<String,Object> context = new HashMap<>();
@@ -55,10 +57,12 @@ public class AppController {
 		appData.put("unires",uniRes);
     	appData.put("appmenu",appMenu);
 		appData.put("enablepermissionvalid",enablePermissionValid);
-		if(curUser.getSuperuser()==1)
+		if(curUser.getSuperuser()==1){
 			appData.put("enablepermissionvalid",false);
-		else
+		}
+		else{
 			appData.put("enablepermissionvalid",enablePermissionValid);
+		}
 		fillAppData(appData);
 		return ResponseEntity.status(HttpStatus.OK).body(appData);
 	}
@@ -76,16 +80,18 @@ public class AppController {
 	@RequestMapping(method = RequestMethod.PUT, value = "/configs/{configType}/{targetType}")
 	public ResponseEntity<Boolean> saveConfig(@PathVariable("configType") String configType, @PathVariable("targetType") String targetType, @RequestBody JSONObject config) {
 		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
-		if(StringUtils.isEmpty(userId))
+		if(StringUtils.isEmpty(userId)){
 			throw new BadRequestAlertException("保存配置失败，参数缺失","IBZConfig",configType);
+		}
 		return ResponseEntity.ok(ibzConfigService.saveConfig(configType,targetType,userId,config));
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/configs/{configType}/{targetType}")
 	public ResponseEntity<JSONObject> getConfig(@PathVariable("configType") String configType, @PathVariable("targetType") String targetType) {
 		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
-		if(StringUtils.isEmpty(userId))
+		if(StringUtils.isEmpty(userId)){
 			throw new BadRequestAlertException("获取配置失败，参数缺失","IBZConfig",configType);
+		}
 		return ResponseEntity.ok(ibzConfigService.getConfig(configType,targetType,userId));
 	}
 

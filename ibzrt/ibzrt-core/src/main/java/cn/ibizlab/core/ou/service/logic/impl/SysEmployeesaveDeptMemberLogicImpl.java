@@ -21,7 +21,7 @@ import cn.ibizlab.core.ou.domain.SysEmployee;
  */
 @Slf4j
 @Service
-public class SysEmployeesaveDeptMemberLogicImpl implements ISysEmployeesaveDeptMemberLogic{
+public class SysEmployeesaveDeptMemberLogicImpl implements ISysEmployeesaveDeptMemberLogic {
 
     @Autowired
     private KieContainer kieContainer;
@@ -41,26 +41,28 @@ public class SysEmployeesaveDeptMemberLogicImpl implements ISysEmployeesaveDeptM
         return this.iBzSysDefaultService;
     }
 
-    public void execute(SysEmployee et){
+    @Override
+    public void execute(SysEmployee et) {
 
           KieSession kieSession = null;
         try{
-           kieSession=kieContainer.newKieSession();
+           kieSession = kieContainer.newKieSession();
            kieSession.insert(et); 
-           kieSession.setGlobal("sysemployeesavedeptmemberdefault",et);
-           cn.ibizlab.core.ou.domain.SysDeptMember  sysemployeesavedeptmembermember =new cn.ibizlab.core.ou.domain.SysDeptMember();
+           kieSession.setGlobal("sysemployeesavedeptmemberdefault", et);
+           cn.ibizlab.core.ou.domain.SysDeptMember sysemployeesavedeptmembermember = new cn.ibizlab.core.ou.domain.SysDeptMember();
            kieSession.insert(sysemployeesavedeptmembermember); 
-           kieSession.setGlobal("sysemployeesavedeptmembermember",sysemployeesavedeptmembermember);
-           kieSession.setGlobal("sysdeptmemberservice",sysdeptmemberservice);
-           kieSession.setGlobal("iBzSysSysemployeeDefaultService",iBzSysDefaultService);
+           kieSession.setGlobal("sysemployeesavedeptmembermember", sysemployeesavedeptmembermember);
+           kieSession.setGlobal("sysdeptmemberservice", sysdeptmemberservice);
+           kieSession.setGlobal("iBzSysSysemployeeDefaultService", iBzSysDefaultService);
            kieSession.setGlobal("curuser", cn.ibizlab.util.security.AuthenticationUser.getAuthenticationUser());
            kieSession.startProcess("cn.ibizlab.core.ou.service.logic.sysemployeesavedeptmember");
 
-        }catch(Exception e){
+        }catch(Exception e) {
             throw new RuntimeException("执行[保存人事关系]处理逻辑发生异常"+e);
         }finally {
-            if(kieSession!=null)
-            kieSession.destroy();
+            if(kieSession!=null) {
+                kieSession.destroy();
+            }
         }
     }
 

@@ -310,4 +310,23 @@ export default class ControlService {
             }
         })
     }
+
+    /**
+     * 根据后台标识获取数据标识名称
+     * 
+     * @param prop 后台标识
+     * @memberof ControlService
+     */
+    public getNameByProp(prop: any) {
+        let model: any = this.getMode();
+        if(!model || !prop) {
+            return false;
+        }
+        let dataItems: any[] = model.getDataItems();
+        prop = prop.replace(/([A-Z])/g,"_$1").toLowerCase();
+        let data: any = dataItems.find((item:any) => {
+            return Object.is(prop, item.prop);
+        });
+        return data.name;
+    }
 }

@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZWFGROUP",resultMap = "WFGroupResultMap")
+@TableName(value = "IBZWFGROUP", resultMap = "WFGroupResultMap")
 public class WFGroup extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class WFGroup extends EntityMP implements Serializable {
     /**
      * 组标识
      */
-    @DEField(name = "groupid" , isKeyField=true)
-    @TableId(value= "groupid",type=IdType.ASSIGN_UUID)
+    @DEField(name = "groupid", isKeyField = true)
+    @TableId(value = "groupid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -80,17 +80,17 @@ public class WFGroup extends EntityMP implements Serializable {
     /**
      * 设置 [组名称]
      */
-    public void setName(String name){
-        this.name = name ;
-        this.modify("groupname",name);
+    public void setName(String name) {
+        this.name = name;
+        this.modify("groupname", name);
     }
 
     /**
      * 设置 [范围]
      */
-    public void setGroupscope(String groupscope){
-        this.groupscope = groupscope ;
-        this.modify("groupscope",groupscope);
+    public void setGroupscope(String groupscope) {
+        this.groupscope = groupscope;
+        this.modify("groupscope", groupscope);
     }
 
 
@@ -104,7 +104,7 @@ public class WFGroup extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("groupid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

@@ -51,7 +51,7 @@ public class SysDeptMemberServiceImpl implements ISysDeptMemberService {
         SysDeptMember rt = sysDeptMemberFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysDeptMemberServiceImpl implements ISysDeptMemberService {
         SysDeptMember rt = sysDeptMemberFeignClient.update(et.getMemberid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

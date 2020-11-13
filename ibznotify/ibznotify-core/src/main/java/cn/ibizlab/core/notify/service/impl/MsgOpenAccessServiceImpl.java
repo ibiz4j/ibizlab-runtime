@@ -57,37 +57,39 @@ public class MsgOpenAccessServiceImpl extends ServiceImpl<MsgOpenAccessMapper, M
     @Override
     @Transactional
     public boolean create(MsgOpenAccess et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<MsgOpenAccess> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(MsgOpenAccess et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("accessid",et.getId())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("accessid", et.getId()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<MsgOpenAccess> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -101,11 +103,11 @@ public class MsgOpenAccessServiceImpl extends ServiceImpl<MsgOpenAccessMapper, M
     @Transactional
     public MsgOpenAccess get(String key) {
         MsgOpenAccess et = getById(key);
-        if(et==null){
-            et=new MsgOpenAccess();
+        if(et == null){
+            et = new MsgOpenAccess();
             et.setId(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -117,13 +119,14 @@ public class MsgOpenAccessServiceImpl extends ServiceImpl<MsgOpenAccessMapper, M
 
     @Override
     public boolean checkKey(MsgOpenAccess et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+        return (!ObjectUtils.isEmpty(et.getId())) && (!Objects.isNull(this.getById(et.getId())));
     }
     @Override
     @Transactional
     public boolean save(MsgOpenAccess et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

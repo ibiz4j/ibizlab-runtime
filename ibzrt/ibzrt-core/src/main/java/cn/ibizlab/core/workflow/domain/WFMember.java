@@ -36,7 +36,7 @@ public class WFMember extends EntityClient implements Serializable {
     /**
      * 组成员标识
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
     private String memberid;
@@ -125,7 +125,7 @@ public class WFMember extends EntityClient implements Serializable {
     /**
      * 设置 [组成员名称]
      */
-    public void setMembername(String membername){
+    public void setMembername(String membername) {
         this.membername = membername ;
         this.modify("membername",membername);
     }
@@ -133,7 +133,7 @@ public class WFMember extends EntityClient implements Serializable {
     /**
      * 设置 [组标识]
      */
-    public void setGroupid(String groupid){
+    public void setGroupid(String groupid) {
         this.groupid = groupid ;
         this.modify("groupid",groupid);
     }
@@ -141,7 +141,7 @@ public class WFMember extends EntityClient implements Serializable {
     /**
      * 设置 [用户标识]
      */
-    public void setUserid(String userid){
+    public void setUserid(String userid) {
         this.userid = userid ;
         this.modify("userid",userid);
     }

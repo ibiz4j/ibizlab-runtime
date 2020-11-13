@@ -51,7 +51,7 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
         SysUserRole rt = sysUserRoleFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
         SysUserRole rt = sysUserRoleFeignClient.update(et.getUserroleid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

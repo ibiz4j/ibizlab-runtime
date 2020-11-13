@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[SysOrganization] 服务对象接口
  */
 @Component
-public class SysOrganizationFallback implements SysOrganizationFeignClient{
+public class SysOrganizationFallback implements SysOrganizationFeignClient {
 
-    public Page<SysOrganization> select(){
-            return null;
-     }
+    public Page<SysOrganization> select() {
+        return null;
+    }
 
-    public SysOrganization create(SysOrganization sysorganization){
-            return null;
-     }
-    public Boolean createBatch(List<SysOrganization> sysorganizations){
-            return false;
-     }
+    public SysOrganization create(SysOrganization sysorganization) {
+        return null;
+    }
+    public Boolean createBatch(List<SysOrganization> sysorganizations) {
+        return false;
+    }
 
-    public SysOrganization update(String orgid, SysOrganization sysorganization){
-            return null;
-     }
-    public Boolean updateBatch(List<SysOrganization> sysorganizations){
-            return false;
-     }
+    public SysOrganization update(String orgid, SysOrganization sysorganization) {
+        return null;
+    }
+    public Boolean updateBatch(List<SysOrganization> sysorganizations) {
+        return false;
+    }
 
 
-    public Boolean remove(String orgid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String orgid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public SysOrganization get(String orgid){
-            return null;
-     }
+    public SysOrganization get(String orgid) {
+        return null;
+    }
 
 
     public SysOrganization getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(SysOrganization sysorganization){
-            return false;
-     }
+    public Boolean checkKey(SysOrganization sysorganization) {
+        return false;
+    }
 
 
-    public Boolean save(SysOrganization sysorganization){
-            return false;
-     }
-    public Boolean saveBatch(List<SysOrganization> sysorganizations){
-            return false;
-     }
+    public Boolean save(SysOrganization sysorganization) {
+        return false;
+    }
+    public Boolean saveBatch(List<SysOrganization> sysorganizations) {
+        return false;
+    }
 
-    public Page<SysOrganization> searchDefault(SysOrganizationSearchContext context){
-            return null;
-     }
+    public Page<SysOrganization> searchDefault(SysOrganizationSearchContext context) {
+        return null;
+    }
 
 
 }

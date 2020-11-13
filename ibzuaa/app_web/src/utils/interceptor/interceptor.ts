@@ -109,7 +109,13 @@ export class Interceptors {
             error = error ? error : { response: {} };
             let { response: res } = error;
             let { data: _data } = res;
-
+            // 处理异常
+            if(res.headers && res.headers['x-ibz-error']){
+                res.data.errorKey = res.headers['x-ibz-error'];
+            }
+            if(res.headers && res.headers['x-ibz-params']){
+                res.data.entityName = res.headers['x-ibz-params'];
+            }
             if (res.status === 401) {
                 this.doNoLogin(_data.data);
             }

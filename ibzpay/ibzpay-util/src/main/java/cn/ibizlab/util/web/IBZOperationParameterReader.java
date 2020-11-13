@@ -49,19 +49,19 @@ public class IBZOperationParameterReader implements OperationBuilderPlugin {
   public IBZOperationParameterReader(
       ModelAttributeParameterExpander expander,
       EnumTypeDeterminer enumTypeDeterminer) {
-    this.expander = expander;
-    this.enumTypeDeterminer = enumTypeDeterminer;
+      this.expander = expander;
+      this.enumTypeDeterminer = enumTypeDeterminer;
   }
 
   @Override
   public void apply(OperationContext context) {
-    context.operationBuilder().parameters(context.getGlobalOperationParameters());
-    context.operationBuilder().parameters(readParameters(context));
+     context.operationBuilder().parameters(context.getGlobalOperationParameters());
+     context.operationBuilder().parameters(readParameters(context));
   }
 
   @Override
   public boolean supports(DocumentationType delimiter) {
-    return true;
+     return true;
   }
 
   private List<Parameter> readParameters(final OperationContext context) {

@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZPOST",resultMap = "SysPostResultMap")
+@TableName(value = "IBZPOST", resultMap = "SysPostResultMap")
 public class SysPost extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysPost extends EntityMP implements Serializable {
     /**
      * 岗位标识
      */
-    @DEField(defaultValue = "postcode" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
-    @TableId(value= "postid",type=IdType.ASSIGN_UUID)
+    @DEField(defaultValue = "postcode", defaultValueType = DEFieldDefaultValueType.PARAM, isKeyField = true)
+    @TableId(value = "postid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "postid")
     @JsonProperty("postid")
     private String postid;
@@ -85,33 +85,33 @@ public class SysPost extends EntityMP implements Serializable {
     /**
      * 设置 [岗位编码]
      */
-    public void setPostcode(String postcode){
-        this.postcode = postcode ;
-        this.modify("postcode",postcode);
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+        this.modify("postcode", postcode);
     }
 
     /**
      * 设置 [岗位名称]
      */
-    public void setPostname(String postname){
-        this.postname = postname ;
-        this.modify("postname",postname);
+    public void setPostname(String postname) {
+        this.postname = postname;
+        this.modify("postname", postname);
     }
 
     /**
      * 设置 [区属]
      */
-    public void setDomains(String domains){
-        this.domains = domains ;
-        this.modify("domains",domains);
+    public void setDomains(String domains) {
+        this.domains = domains;
+        this.modify("domains", domains);
     }
 
     /**
      * 设置 [备注]
      */
-    public void setMemo(String memo){
-        this.memo = memo ;
-        this.modify("memo",memo);
+    public void setMemo(String memo) {
+        this.memo = memo;
+        this.modify("memo", memo);
     }
 
 
@@ -125,7 +125,7 @@ public class SysPost extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("postid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

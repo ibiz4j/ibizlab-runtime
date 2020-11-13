@@ -36,7 +36,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 标识
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "logid")
     @JsonProperty("logid")
     private String logid;
@@ -66,8 +66,8 @@ public class SysAuthLog extends EntityClient implements Serializable {
      * 认证时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "authtime" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "authtime" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("authtime")
     private Timestamp authtime;
 
@@ -106,7 +106,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 设置 [用户全局名]
      */
-    public void setUsername(String username){
+    public void setUsername(String username) {
         this.username = username ;
         this.modify("username",username);
     }
@@ -114,7 +114,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 设置 [用户名称]
      */
-    public void setPersonname(String personname){
+    public void setPersonname(String personname) {
         this.personname = personname ;
         this.modify("personname",personname);
     }
@@ -122,7 +122,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 设置 [域]
      */
-    public void setDomain(String domain){
+    public void setDomain(String domain) {
         this.domain = domain ;
         this.modify("domain",domain);
     }
@@ -130,7 +130,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 设置 [IP地址]
      */
-    public void setIpaddr(String ipaddr){
+    public void setIpaddr(String ipaddr) {
         this.ipaddr = ipaddr ;
         this.modify("ipaddr",ipaddr);
     }
@@ -138,7 +138,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 设置 [MAC地址]
      */
-    public void setMacaddr(String macaddr){
+    public void setMacaddr(String macaddr) {
         this.macaddr = macaddr ;
         this.modify("macaddr",macaddr);
     }
@@ -146,7 +146,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 设置 [客户端]
      */
-    public void setUseragent(String useragent){
+    public void setUseragent(String useragent) {
         this.useragent = useragent ;
         this.modify("useragent",useragent);
     }
@@ -154,7 +154,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 设置 [认证结果]
      */
-    public void setAuthcode(String authcode){
+    public void setAuthcode(String authcode) {
         this.authcode = authcode ;
         this.modify("authcode",authcode);
     }

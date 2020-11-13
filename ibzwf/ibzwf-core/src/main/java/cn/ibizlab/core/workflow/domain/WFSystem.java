@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZPSSYSTEM",resultMap = "WFSystemResultMap")
+@TableName(value = "IBZPSSYSTEM", resultMap = "WFSystemResultMap")
 public class WFSystem extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class WFSystem extends EntityMP implements Serializable {
     /**
      * 系统标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "pssystemid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "pssystemid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
     private String pssystemid;
@@ -64,9 +64,9 @@ public class WFSystem extends EntityMP implements Serializable {
     /**
      * 设置 [系统名称]
      */
-    public void setPssystemname(String pssystemname){
-        this.pssystemname = pssystemname ;
-        this.modify("pssystemname",pssystemname);
+    public void setPssystemname(String pssystemname) {
+        this.pssystemname = pssystemname;
+        this.modify("pssystemname", pssystemname);
     }
 
 
@@ -80,7 +80,7 @@ public class WFSystem extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("pssystemid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

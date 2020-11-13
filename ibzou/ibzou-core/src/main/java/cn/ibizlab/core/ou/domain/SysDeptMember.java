@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZDEPTMEMBER",resultMap = "SysDeptMemberResultMap")
+@TableName(value = "IBZDEPTMEMBER", resultMap = "SysDeptMemberResultMap")
 public class SysDeptMember extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysDeptMember extends EntityMP implements Serializable {
     /**
      * 标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "memberid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "memberid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
     private String memberid;
@@ -137,33 +137,33 @@ public class SysDeptMember extends EntityMP implements Serializable {
     /**
      * 设置 [部门标识]
      */
-    public void setDeptid(String deptid){
-        this.deptid = deptid ;
-        this.modify("deptid",deptid);
+    public void setDeptid(String deptid) {
+        this.deptid = deptid;
+        this.modify("deptid", deptid);
     }
 
     /**
      * 设置 [用户标识]
      */
-    public void setUserid(String userid){
-        this.userid = userid ;
-        this.modify("userid",userid);
+    public void setUserid(String userid) {
+        this.userid = userid;
+        this.modify("userid", userid);
     }
 
     /**
      * 设置 [岗位标识]
      */
-    public void setPostid(String postid){
-        this.postid = postid ;
-        this.modify("postid",postid);
+    public void setPostid(String postid) {
+        this.postid = postid;
+        this.modify("postid", postid);
     }
 
     /**
      * 设置 [区属]
      */
-    public void setDomains(String domains){
-        this.domains = domains ;
-        this.modify("domains",domains);
+    public void setDomains(String domains) {
+        this.domains = domains;
+        this.modify("domains", domains);
     }
 
 
@@ -177,7 +177,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("memberid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

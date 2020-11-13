@@ -22,20 +22,20 @@ import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
 /**
  * 实体[SysRolePermission] 服务对象接口
  */
-public interface ISysRolePermissionService{
+public interface ISysRolePermissionService {
 
-    boolean create(SysRolePermission et) ;
-    void createBatch(List<SysRolePermission> list) ;
-    boolean update(SysRolePermission et) ;
-    void updateBatch(List<SysRolePermission> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysRolePermission get(String key) ;
-    SysRolePermission getDraft(SysRolePermission et) ;
-    boolean checkKey(SysRolePermission et) ;
-    boolean save(SysRolePermission et) ;
-    void saveBatch(List<SysRolePermission> list) ;
-    Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context) ;
+    boolean create(SysRolePermission et);
+    void createBatch(List<SysRolePermission> list);
+    boolean update(SysRolePermission et);
+    void updateBatch(List<SysRolePermission> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysRolePermission get(String key);
+    SysRolePermission getDraft(SysRolePermission et);
+    boolean checkKey(SysRolePermission et);
+    boolean save(SysRolePermission et);
+    void saveBatch(List<SysRolePermission> list);
+    Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context);
     List<SysRolePermission> selectByPermissionid(String permissionid);
     void removeByPermissionid(Collection<String> ids);
     void removeByPermissionid(String permissionid);

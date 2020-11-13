@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SDFile] 服务对象接口
  */
-public interface ISDFileService extends IService<SDFile>{
+public interface ISDFileService extends IService<SDFile> {
 
-    boolean create(SDFile et) ;
-    void createBatch(List<SDFile> list) ;
-    boolean update(SDFile et) ;
-    void updateBatch(List<SDFile> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SDFile get(String key) ;
-    SDFile getDraft(SDFile et) ;
-    boolean checkKey(SDFile et) ;
-    boolean save(SDFile et) ;
-    void saveBatch(List<SDFile> list) ;
-    Page<SDFile> searchDefault(SDFileSearchContext context) ;
+    boolean create(SDFile et);
+    void createBatch(List<SDFile> list);
+    boolean update(SDFile et);
+    void updateBatch(List<SDFile> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SDFile get(String key);
+    SDFile getDraft(SDFile et);
+    boolean checkKey(SDFile et);
+    boolean save(SDFile et);
+    void saveBatch(List<SDFile> list);
+    Page<SDFile> searchDefault(SDFileSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}
@@ -52,8 +52,8 @@ public interface ISDFileService extends IService<SDFile>{
      */
     boolean execute(String sql, Map param);
 
-    List<SDFile> getSdfileByIds(List<String> ids) ;
-    List<SDFile> getSdfileByEntities(List<SDFile> entities) ;
+    List<SDFile> getSdfileByIds(List<String> ids);
+    List<SDFile> getSdfileByEntities(List<SDFile> entities);
 }
 
 

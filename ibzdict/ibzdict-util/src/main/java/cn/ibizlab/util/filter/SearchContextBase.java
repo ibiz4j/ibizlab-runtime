@@ -98,10 +98,12 @@ public class SearchContextBase implements ISearchContext{
      * @return
      */
     public Pageable getPageable() {
-       if(ObjectUtils.isEmpty(pageSort))
-         return PageRequest.of(page,size);
-      else
-         return PageRequest.of(page,size,pageSort);
+      if(ObjectUtils.isEmpty(pageSort)) {
+            return PageRequest.of(page,size);
+      }
+      else {
+        return PageRequest.of(page,size,pageSort);
+      }
     }
 
     /**

@@ -36,7 +36,7 @@ public class SysOrganization extends EntityClient implements Serializable {
     /**
      * 单位标识
      */
-    @DEField(defaultValue = "orgcode" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
+    @DEField(defaultValue = "orgcode", defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField = true)
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
     private String orgid;
@@ -102,7 +102,7 @@ public class SysOrganization extends EntityClient implements Serializable {
     /**
      * 逻辑有效
      */
-    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
+    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval = "0")
     @JSONField(name = "enable")
     @JsonProperty("enable")
     private Integer enable;
@@ -111,8 +111,8 @@ public class SysOrganization extends EntityClient implements Serializable {
      * 创建时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
 
@@ -120,8 +120,8 @@ public class SysOrganization extends EntityClient implements Serializable {
      * 最后修改时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -146,7 +146,7 @@ public class SysOrganization extends EntityClient implements Serializable {
     /**
      * 设置 [单位代码]
      */
-    public void setOrgcode(String orgcode){
+    public void setOrgcode(String orgcode) {
         this.orgcode = orgcode ;
         this.modify("orgcode",orgcode);
     }
@@ -154,7 +154,7 @@ public class SysOrganization extends EntityClient implements Serializable {
     /**
      * 设置 [上级单位]
      */
-    public void setParentorgid(String parentorgid){
+    public void setParentorgid(String parentorgid) {
         this.parentorgid = parentorgid ;
         this.modify("porgid",parentorgid);
     }
@@ -162,7 +162,7 @@ public class SysOrganization extends EntityClient implements Serializable {
     /**
      * 设置 [单位简称]
      */
-    public void setShortname(String shortname){
+    public void setShortname(String shortname) {
         this.shortname = shortname ;
         this.modify("shortname",shortname);
     }
@@ -170,7 +170,7 @@ public class SysOrganization extends EntityClient implements Serializable {
     /**
      * 设置 [单位级别]
      */
-    public void setOrglevel(Integer orglevel){
+    public void setOrglevel(Integer orglevel) {
         this.orglevel = orglevel ;
         this.modify("orglevel",orglevel);
     }
@@ -178,7 +178,7 @@ public class SysOrganization extends EntityClient implements Serializable {
     /**
      * 设置 [排序]
      */
-    public void setShoworder(Integer showorder){
+    public void setShoworder(Integer showorder) {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }
@@ -186,7 +186,7 @@ public class SysOrganization extends EntityClient implements Serializable {
     /**
      * 设置 [区属]
      */
-    public void setDomains(String domains){
+    public void setDomains(String domains) {
         this.domains = domains ;
         this.modify("domains",domains);
     }

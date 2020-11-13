@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysTeamMapper extends BaseMapper<SysTeam>{
+public interface SysTeamMapper extends BaseMapper<SysTeam> {
 
-    Page<SysTeam> searchDefault(IPage page, @Param("srf") SysTeamSearchContext context, @Param("ew") Wrapper<SysTeam> wrapper) ;
+    Page<SysTeam> searchDefault(IPage page, @Param("srf") SysTeamSearchContext context, @Param("ew") Wrapper<SysTeam> wrapper);
     @Override
     SysTeam selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface SysTeamMapper extends BaseMapper<SysTeam>{
     int update(@Param(Constants.ENTITY) SysTeam entity, @Param("ew") Wrapper<SysTeam> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

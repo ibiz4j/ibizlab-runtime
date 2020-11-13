@@ -22,20 +22,20 @@ import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
 /**
  * 实体[WFTask] 服务对象接口
  */
-public interface IWFTaskService{
+public interface IWFTaskService {
 
-    boolean create(WFTask et) ;
-    void createBatch(List<WFTask> list) ;
-    boolean update(WFTask et) ;
-    void updateBatch(List<WFTask> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFTask get(String key) ;
-    WFTask getDraft(WFTask et) ;
-    boolean checkKey(WFTask et) ;
-    boolean save(WFTask et) ;
-    void saveBatch(List<WFTask> list) ;
-    Page<WFTask> searchDefault(WFTaskSearchContext context) ;
+    boolean create(WFTask et);
+    void createBatch(List<WFTask> list);
+    boolean update(WFTask et);
+    void updateBatch(List<WFTask> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    WFTask get(String key);
+    WFTask getDraft(WFTask et);
+    boolean checkKey(WFTask et);
+    boolean save(WFTask et);
+    void saveBatch(List<WFTask> list);
+    Page<WFTask> searchDefault(WFTaskSearchContext context);
 
 }
 

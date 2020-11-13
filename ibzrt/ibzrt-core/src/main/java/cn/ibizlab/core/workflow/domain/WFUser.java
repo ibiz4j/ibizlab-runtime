@@ -36,7 +36,7 @@ public class WFUser extends EntityClient implements Serializable {
     /**
      * 用户标识
      */
-    @DEField(name = "userid" , isKeyField=true)
+    @DEField(name = "userid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -115,7 +115,7 @@ public class WFUser extends EntityClient implements Serializable {
     /**
      * 设置 [用户全局名]
      */
-    public void setFirstname(String firstname){
+    public void setFirstname(String firstname) {
         this.firstname = firstname ;
         this.modify("username",firstname);
     }
@@ -123,7 +123,7 @@ public class WFUser extends EntityClient implements Serializable {
     /**
      * 设置 [用户名称]
      */
-    public void setDisplayname(String displayname){
+    public void setDisplayname(String displayname) {
         this.displayname = displayname ;
         this.modify("personname",displayname);
     }
@@ -131,7 +131,7 @@ public class WFUser extends EntityClient implements Serializable {
     /**
      * 设置 [主部门]
      */
-    public void setMdeptid(String mdeptid){
+    public void setMdeptid(String mdeptid) {
         this.mdeptid = mdeptid ;
         this.modify("mdeptid",mdeptid);
     }
@@ -139,7 +139,7 @@ public class WFUser extends EntityClient implements Serializable {
     /**
      * 设置 [主部门代码]
      */
-    public void setMdeptcode(String mdeptcode){
+    public void setMdeptcode(String mdeptcode) {
         this.mdeptcode = mdeptcode ;
         this.modify("mdeptcode",mdeptcode);
     }
@@ -147,7 +147,7 @@ public class WFUser extends EntityClient implements Serializable {
     /**
      * 设置 [主部门名称]
      */
-    public void setMdeptname(String mdeptname){
+    public void setMdeptname(String mdeptname) {
         this.mdeptname = mdeptname ;
         this.modify("mdeptname",mdeptname);
     }
@@ -155,7 +155,7 @@ public class WFUser extends EntityClient implements Serializable {
     /**
      * 设置 [业务编码]
      */
-    public void setBcode(String bcode){
+    public void setBcode(String bcode) {
         this.bcode = bcode ;
         this.modify("bcode",bcode);
     }
@@ -163,7 +163,7 @@ public class WFUser extends EntityClient implements Serializable {
     /**
      * 设置 [单位代码]
      */
-    public void setOrgcode(String orgcode){
+    public void setOrgcode(String orgcode) {
         this.orgcode = orgcode ;
         this.modify("orgcode",orgcode);
     }

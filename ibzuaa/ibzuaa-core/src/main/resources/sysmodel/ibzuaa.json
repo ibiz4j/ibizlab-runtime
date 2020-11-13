@@ -445,6 +445,20 @@
     "major_field":0
     },
     {
+    "fieldname":"NOTIFY_URL" ,
+    "codename":"Notify_url",
+    "field_logic_name":"NotifyUrl",
+    "entity_name":"SysOpenAccess",
+    "field_type":"TEXT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"VARCHAR",
+    "data_length":500,
+    "key_field":0,
+    "show_order":12,
+    "major_field":0
+    },
+    {
     "fieldname":"AGENT_ID" ,
     "codename":"Agent_id",
     "field_logic_name":"AGENT_ID",
@@ -455,7 +469,7 @@
     "data_type":"BIGINT",
     "data_length":20,
     "key_field":0,
-    "show_order":1000,
+    "show_order":13,
     "major_field":0
     }
     ],

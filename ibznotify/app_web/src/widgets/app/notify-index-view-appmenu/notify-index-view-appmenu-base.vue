@@ -655,9 +655,17 @@ export default class NotifyIndexViewBase extends Vue implements ControlInterface
                     item.items.map((singleItem:any) =>{
                         if(!singleItem.hidden){
                             item.hidden = false;
+                        }else{
+                            if(singleItem.items && singleItem.items.length >0){
+                                singleItem.items.map((grandsonItem:any) =>{
+                                    if(!grandsonItem.hidden){
+                                        item.hidden = false;
+                                    }
+                                })
+                            }
                         }
-                        if(singleItem.items && singleItem.items.length >0){
-                            this.computeParentMenus(singleItem.items);
+                        if(item.items && item.items.length >0){
+                            this.computeParentMenus(item.items);
                         }
                     })
                 }

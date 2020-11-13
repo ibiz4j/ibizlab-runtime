@@ -17,65 +17,65 @@ import org.springframework.stereotype.Component;
  * 实体[SysPSSystem] 服务对象接口
  */
 @Component
-public class SysPSSystemFallback implements SysPSSystemFeignClient{
+public class SysPSSystemFallback implements SysPSSystemFeignClient {
 
-    public Page<SysPSSystem> select(){
-            return null;
-     }
+    public Page<SysPSSystem> select() {
+        return null;
+    }
 
-    public SysPSSystem create(SysPSSystem syspssystem){
-            return null;
-     }
-    public Boolean createBatch(List<SysPSSystem> syspssystems){
-            return false;
-     }
+    public SysPSSystem create(SysPSSystem syspssystem) {
+        return null;
+    }
+    public Boolean createBatch(List<SysPSSystem> syspssystems) {
+        return false;
+    }
 
-    public SysPSSystem update(String pssystemid, SysPSSystem syspssystem){
-            return null;
-     }
-    public Boolean updateBatch(List<SysPSSystem> syspssystems){
-            return false;
-     }
+    public SysPSSystem update(String pssystemid, SysPSSystem syspssystem) {
+        return null;
+    }
+    public Boolean updateBatch(List<SysPSSystem> syspssystems) {
+        return false;
+    }
 
 
-    public Boolean remove(String pssystemid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String pssystemid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public SysPSSystem get(String pssystemid){
-            return null;
-     }
+    public SysPSSystem get(String pssystemid) {
+        return null;
+    }
 
 
     public SysPSSystem getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(SysPSSystem syspssystem){
-            return false;
-     }
+    public Boolean checkKey(SysPSSystem syspssystem) {
+        return false;
+    }
 
 
-    public Boolean save(SysPSSystem syspssystem){
-            return false;
-     }
-    public Boolean saveBatch(List<SysPSSystem> syspssystems){
-            return false;
-     }
+    public Boolean save(SysPSSystem syspssystem) {
+        return false;
+    }
+    public Boolean saveBatch(List<SysPSSystem> syspssystems) {
+        return false;
+    }
 
-    public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context){
-            return null;
-     }
+    public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) {
+        return null;
+    }
 
 
-    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context){
-            return null;
-     }
+    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
+        return null;
+    }
 
 
 }

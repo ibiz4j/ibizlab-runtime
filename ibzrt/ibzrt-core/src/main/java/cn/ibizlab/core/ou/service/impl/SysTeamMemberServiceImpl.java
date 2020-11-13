@@ -51,7 +51,7 @@ public class SysTeamMemberServiceImpl implements ISysTeamMemberService {
         SysTeamMember rt = sysTeamMemberFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysTeamMemberServiceImpl implements ISysTeamMemberService {
         SysTeamMember rt = sysTeamMemberFeignClient.update(et.getTeammemberid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

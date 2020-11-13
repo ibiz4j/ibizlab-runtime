@@ -33,6 +33,11 @@ export default class MainModel {
           isEditable:true
         },
         {
+          name: 'username',
+          prop: 'username',
+          dataType: 'PICKUPDATA',
+        },
+        {
           name: 'teamid',
           prop: 'teamid',
           dataType: 'PICKUP',

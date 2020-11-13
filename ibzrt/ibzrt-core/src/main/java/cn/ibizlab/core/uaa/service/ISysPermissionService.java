@@ -22,20 +22,20 @@ import cn.ibizlab.core.uaa.filter.SysPermissionSearchContext;
 /**
  * 实体[SysPermission] 服务对象接口
  */
-public interface ISysPermissionService{
+public interface ISysPermissionService {
 
-    boolean create(SysPermission et) ;
-    void createBatch(List<SysPermission> list) ;
-    boolean update(SysPermission et) ;
-    void updateBatch(List<SysPermission> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysPermission get(String key) ;
-    SysPermission getDraft(SysPermission et) ;
-    boolean checkKey(SysPermission et) ;
-    boolean save(SysPermission et) ;
-    void saveBatch(List<SysPermission> list) ;
-    Page<SysPermission> searchDefault(SysPermissionSearchContext context) ;
+    boolean create(SysPermission et);
+    void createBatch(List<SysPermission> list);
+    boolean update(SysPermission et);
+    void updateBatch(List<SysPermission> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysPermission get(String key);
+    SysPermission getDraft(SysPermission et);
+    boolean checkKey(SysPermission et);
+    boolean save(SysPermission et);
+    void saveBatch(List<SysPermission> list);
+    Page<SysPermission> searchDefault(SysPermissionSearchContext context);
 
 }
 

@@ -22,21 +22,21 @@ import cn.ibizlab.core.uaa.filter.SysPSSystemSearchContext;
 /**
  * 实体[SysPSSystem] 服务对象接口
  */
-public interface ISysPSSystemService{
+public interface ISysPSSystemService {
 
-    boolean create(SysPSSystem et) ;
-    void createBatch(List<SysPSSystem> list) ;
-    boolean update(SysPSSystem et) ;
-    void updateBatch(List<SysPSSystem> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysPSSystem get(String key) ;
-    SysPSSystem getDraft(SysPSSystem et) ;
-    boolean checkKey(SysPSSystem et) ;
-    boolean save(SysPSSystem et) ;
-    void saveBatch(List<SysPSSystem> list) ;
-    Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) ;
-    Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) ;
+    boolean create(SysPSSystem et);
+    void createBatch(List<SysPSSystem> list);
+    boolean update(SysPSSystem et);
+    void updateBatch(List<SysPSSystem> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysPSSystem get(String key);
+    SysPSSystem getDraft(SysPSSystem et);
+    boolean checkKey(SysPSSystem et);
+    boolean save(SysPSSystem et);
+    void saveBatch(List<SysPSSystem> list);
+    Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context);
+    Page<SysPSSystem> searchPick(SysPSSystemSearchContext context);
 
 }
 

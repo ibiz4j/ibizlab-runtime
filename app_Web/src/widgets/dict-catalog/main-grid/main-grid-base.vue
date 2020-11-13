@@ -265,7 +265,6 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
 
-
     /**
      * 代码表服务对象
      *
@@ -273,6 +272,14 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */  
     public codeListService:CodeListService = new CodeListService({ $store: this.$store });
+
+    /**
+     * 主信息表格列
+     *
+     * @type {string}
+     * @memberof MainBase
+     */  
+    public majorInfoColName:string = "cname";
 
     /**
      * 界面UI服务对象
@@ -774,16 +781,18 @@ export default class MainBase extends Vue implements ControlInterface {
         this.errorMessages = [];
         let validateState = true;
         let index = -1;
-        for(let item of this.items){
-          index++;
-          if(item.rowDataState === "create" || item.rowDataState === "update"){
-            for(let property of Object.keys(this.rules)){
-              if(!await this.validate(property,item,index)){
-                validateState = false;
-                this.errorMessages.push(this.gridItemsModel[index][property].error);
-              }
+        for (let item of this.items) {
+            let tempMessage: string = '';
+            index++;
+            if (item.rowDataState === "create" || item.rowDataState === "update") {
+                for (let property of Object.keys(this.rules)) {
+                    if (!await this.validate(property, item, index)) {
+                        validateState = false;
+                        tempMessage = tempMessage + '<p>' + this.gridItemsModel[index][property].error + '<p>';
+                    }
+                }
             }
-          }
+            this.errorMessages.push(tempMessage);
         }
         return validateState;
     }
@@ -908,7 +917,7 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         let dataInfo = '';
         _datas.forEach((record: any, index: number) => {
-            let srfmajortext = record.name;
+            let srfmajortext = record.cname;
             if (index < 5) {
                 if (!Object.is(dataInfo, '')) {
                     dataInfo += '、';
@@ -920,9 +929,9 @@ export default class MainBase extends Vue implements ControlInterface {
         });
 
         if (_datas.length < 5) {
-            dataInfo = dataInfo + ' '+(this.$t('app.gridpage.totle') as string) + _datas.length + (this.$t('app.gridpage.records') as string)+(this.$t('app.gridpage.data') as string);
+            dataInfo = dataInfo + ' ' + (this.$t('app.gridpage.totle') as string) + _datas.length + (this.$t('app.gridpage.records') as string) + (this.$t('app.gridpage.data') as string);
         } else {
-            dataInfo = dataInfo + '...' + ' '+(this.$t('app.gridpage.totle') as string) + _datas.length + (this.$t('app.gridpage.desc2') as string);
+            dataInfo = ' ... ' + (this.$t('app.gridpage.totle') as string) + _datas.length + (this.$t('app.gridpage.records') as string) + (this.$t('app.gridpage.data') as string);
         }
 
         const removeData = () => {
@@ -1226,7 +1235,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     return;
                 }
                 if (Object.is('load', action)) {
-                    this.load(data);
+                    this.load(data,true);
                 }
                 if (Object.is('remove', action)) {
                     this.remove(data);
@@ -1719,11 +1728,7 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         if (!await this.validateAll()) {
             if(this.errorMessages && this.errorMessages.length > 0) {
-                let descMessage: string = '';
-                this.errorMessages.forEach((message: any) => {
-                    descMessage = descMessage + '<p>' + message + '<p>';
-                })
-                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: descMessage });
+                this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: this.errorMessages[0] });
             } else {
                 this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: (this.$t('app.commonWords.rulesException') as string) });
             }
@@ -1764,10 +1769,40 @@ export default class MainBase extends Vue implements ControlInterface {
         if(errorItems.length === 0 && successItems.length >0 && !this.isformDruipart){
             this.$Notice.success({ title: '', desc: (this.$t('app.commonWords.saveSuccess') as string) });
         }else{
-          errorItems.forEach((item:any,index:number)=>{
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: errorMessage[index].data.message });
-            console.error(errorMessage[index]);
-          });
+            errorItems.forEach((item: any, index: number) => {
+                if(errorMessage[index] && errorMessage[index].data) {
+                    if(Object.is(errorMessage[index].data.errorKey, 'DupCheck')) {
+                        let errorProp: string = errorMessage[index].data.message.match(/\[[a-zA-Z]*\]/)[0];
+                        let name: string = errorProp ? this.service.getNameByProp(errorProp.substr(1, errorProp.length-2)) : '';
+                        if(name) {
+                            let desc: any = this.allColumns.find((column: any) =>{
+                                return Object.is(column.name, name);
+                            });
+                            this.$Notice.error({
+                                title: (this.$t('app.commonWords.createFailed') as string),
+                                desc: (desc ? desc.label : '') + " : " + item[name] + (this.$t('app.commonWords.isExist') as string) + '!',
+                            });
+                        } else {
+                            this.$Notice.error({
+                                title: (this.$t('app.commonWords.createFailed') as string),
+                                desc: errorMessage[index].data.message?errorMessage[index].data.message:(this.$t('app.commonWords.sysException') as string),
+                            });
+                        }
+                    } else if(Object.is(errorMessage[index].data.errorKey, 'DuplicateKeyException')){
+                        this.$Notice.error({
+                            title: (this.$t('app.commonWords.saveFailed') as string),
+                            desc: errorMessage[index].data.message?errorMessage[index].data.message:(this.$t('app.commonWords.sysException') as string),
+                        });
+                    }else {
+                        this.$Notice.error({
+                            title: (this.$t('app.commonWords.saveFailed') as string),
+                            desc: errorMessage[index].data.message?errorMessage[index].data.message:(this.$t('app.commonWords.sysException') as string),
+                        });
+                    }
+                } else {
+                    this.$Notice.error({ title: (this.$t('app.commonWords.saveFailed') as string), desc: (item[this.majorInfoColName]?item[this.majorInfoColName]:"") + (this.$t('app.commonWords.saveFailed') as string) + '!' });
+                }
+            });
         }
         return successItems;
     }
@@ -2025,15 +2060,19 @@ export default class MainBase extends Vue implements ControlInterface {
         let startOp = (val:boolean)=>{
             if(falg.isPast){
                 if(opValue){
-                    falg.isPast = falg && val;
+                    falg.isPast = falg.isPast && val;
                 }else{
-                    falg.isPast = falg || val;
+                    falg.isPast = falg.isPast || val;
                 }
             }else{
                 falg.isPast = val;
             }
         }
         rule[name].forEach((item:any) => {
+            if((value === null || value === undefined || value === "") && (item.type != 'GROUP')){
+                startOp(true);
+                return falg;
+            }
             // 常规规则
             if(item.type == 'SIMPLE'){
                 startOp(!this.$verify.checkFieldSimpleRule(value,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.curEditRowData,item.isKeyCond));
@@ -2056,7 +2095,7 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             // 分组
             if(item.type == 'GROUP'){
-                falg = this.verifyDeRules('group',item,"AND",value)
+                falg = this.verifyDeRules('group',item,item.condOP?item.condOP:"AND",value)
                 if(item.isNotMode){
                    falg.isPast = !falg.isPast;
                 }

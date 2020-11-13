@@ -44,9 +44,9 @@ public class QueryBuildContext extends SearchContextBase implements ISearchConte
      */
     private QueryBuilder parseQueryFilter(QueryFilter queryFilter){
 
-        if( ObjectUtils.isEmpty(queryFilter.get$and())  &&   ObjectUtils.isEmpty(queryFilter.get$or()) &&  ObjectUtils.isEmpty(queryFilter.any()))
+        if(ObjectUtils.isEmpty(queryFilter.get$and()) && ObjectUtils.isEmpty(queryFilter.get$or()) && ObjectUtils.isEmpty(queryFilter.any())) {
             return null;
-
+        }
         QueryBuilder rsBuilder=QueryBuilder.start();
         QueryBuilder fieldBuilder=parseFieldMap(queryFilter.any());
         QueryBuilder orBuilder=parseOrQueryFilter(queryFilter.get$or());
@@ -107,8 +107,9 @@ public class QueryBuildContext extends SearchContextBase implements ISearchConte
      * @return
      */
     private QueryBuilder parseFieldMap(Map<String , QueryFilter.SegmentCond> fieldMap) {
-        if(fieldMap.size()==0)
+        if(fieldMap.size()==0) {
             return null;
+        }
         QueryBuilder fieldBuilders=QueryBuilder.start();
         for(Map.Entry<String, QueryFilter.SegmentCond> entry: fieldMap.entrySet()){
             getSegmentCondSql(entry.getKey(),entry.getValue(),fieldBuilders);

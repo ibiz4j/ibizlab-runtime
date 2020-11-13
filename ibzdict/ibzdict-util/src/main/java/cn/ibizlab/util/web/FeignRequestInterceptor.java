@@ -29,8 +29,9 @@ public class FeignRequestInterceptor implements RequestInterceptor {
             if (headerNames != null) {
                 while (headerNames.hasMoreElements()) {
                     String name = headerNames.nextElement();
-                    if(name.equalsIgnoreCase("transfer-encoding"))
+                    if(name.equalsIgnoreCase("transfer-encoding")){
                         continue;
+                    }
                     String values = request.getHeader(name);
                     requestTemplate.header(name, values);
                 }

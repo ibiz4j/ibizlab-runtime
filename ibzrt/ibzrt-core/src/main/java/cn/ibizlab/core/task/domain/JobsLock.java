@@ -36,7 +36,7 @@ public class JobsLock extends EntityClient implements Serializable {
     /**
      * 主键ID
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -59,8 +59,8 @@ public class JobsLock extends EntityClient implements Serializable {
      * 创建时间
      */
     @DEField(name = "create_time")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "create_time" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "create_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
     private Timestamp createTime;
 
@@ -71,7 +71,7 @@ public class JobsLock extends EntityClient implements Serializable {
     /**
      * 设置 [名称]
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name ;
         this.modify("name",name);
     }
@@ -79,7 +79,7 @@ public class JobsLock extends EntityClient implements Serializable {
     /**
      * 设置 [持有者]
      */
-    public void setOwner(String owner){
+    public void setOwner(String owner) {
         this.owner = owner ;
         this.modify("owner",owner);
     }
@@ -87,7 +87,7 @@ public class JobsLock extends EntityClient implements Serializable {
     /**
      * 设置 [创建时间]
      */
-    public void setCreateTime(Timestamp createTime){
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime ;
         this.modify("create_time",createTime);
     }
@@ -95,7 +95,7 @@ public class JobsLock extends EntityClient implements Serializable {
     /**
      * 格式化日期 [创建时间]
      */
-    public String formatCreateTime(){
+    public String formatCreateTime() {
         if (this.createTime == null) {
             return null;
         }

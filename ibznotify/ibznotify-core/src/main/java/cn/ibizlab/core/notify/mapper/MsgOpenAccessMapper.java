@@ -17,31 +17,31 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface MsgOpenAccessMapper extends BaseMapper<MsgOpenAccess>{
+public interface MsgOpenAccessMapper extends BaseMapper<MsgOpenAccess> {
 
-    Page<MsgOpenAccess> searchDefault(IPage page, @Param("srf") MsgOpenAccessSearchContext context, @Param("ew") Wrapper<MsgOpenAccess> wrapper) ;
+    Page<MsgOpenAccess> searchDefault(IPage page, @Param("srf") MsgOpenAccessSearchContext context, @Param("ew") Wrapper<MsgOpenAccess> wrapper);
     @Override
-    @Cacheable( value="msgopenaccess",key = "'row:'+#p0")
+    @Cacheable(value ="msgopenaccess", key = "'row:'+#p0")
     MsgOpenAccess selectById(Serializable id);
     @Override
-    @CacheEvict( value="msgopenaccess",key = "'row:'+#p0.id")
+    @CacheEvict(value ="msgopenaccess", key = "'row:'+#p0.id")
     int insert(MsgOpenAccess entity);
     @Override
-    @CacheEvict( value="msgopenaccess",key = "'row:'+#p0.id")
+    @CacheEvict(value ="msgopenaccess", key = "'row:'+#p0.id")
     int updateById(@Param(Constants.ENTITY) MsgOpenAccess entity);
     @Override
-    @CacheEvict(value="msgopenaccess",key = "'row:'+#p0.id")
+    @CacheEvict(value ="msgopenaccess", key = "'row:'+#p0.id")
     int update(@Param(Constants.ENTITY) MsgOpenAccess entity, @Param("ew") Wrapper<MsgOpenAccess> updateWrapper);
     @Override
-    @CacheEvict( value="msgopenaccess",key = "'row:'+#p0")
+    @CacheEvict(value ="msgopenaccess", key = "'row:'+#p0")
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

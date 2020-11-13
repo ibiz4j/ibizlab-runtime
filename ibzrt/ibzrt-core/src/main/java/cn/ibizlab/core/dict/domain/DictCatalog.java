@@ -36,7 +36,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     /**
      * 标识
      */
-    @DEField(defaultValue = "code" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
+    @DEField(defaultValue = "code", defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -75,7 +75,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     /**
      * 是否有效
      */
-    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
+    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval = "0")
     @JSONField(name = "enable")
     @JsonProperty("enable")
     private Integer enable;
@@ -84,8 +84,8 @@ public class DictCatalog extends EntityClient implements Serializable {
      * 最后修改时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -96,7 +96,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     /**
      * 设置 [代码]
      */
-    public void setCode(String code){
+    public void setCode(String code) {
         this.code = code ;
         this.modify("ccode",code);
     }
@@ -104,7 +104,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     /**
      * 设置 [名称]
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name ;
         this.modify("cname",name);
     }
@@ -112,7 +112,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     /**
      * 设置 [分组]
      */
-    public void setGroup(String group){
+    public void setGroup(String group) {
         this.group = group ;
         this.modify("cgroup",group);
     }
@@ -120,7 +120,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     /**
      * 设置 [备注]
      */
-    public void setMemo(String memo){
+    public void setMemo(String memo) {
         this.memo = memo ;
         this.modify("memo",memo);
     }

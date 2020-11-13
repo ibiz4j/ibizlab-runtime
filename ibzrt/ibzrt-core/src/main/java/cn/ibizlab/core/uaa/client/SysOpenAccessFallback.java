@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[SysOpenAccess] 服务对象接口
  */
 @Component
-public class SysOpenAccessFallback implements SysOpenAccessFeignClient{
+public class SysOpenAccessFallback implements SysOpenAccessFeignClient {
 
-    public Page<SysOpenAccess> select(){
-            return null;
-     }
+    public Page<SysOpenAccess> select() {
+        return null;
+    }
 
-    public SysOpenAccess create(SysOpenAccess sysopenaccess){
-            return null;
-     }
-    public Boolean createBatch(List<SysOpenAccess> sysopenaccesses){
-            return false;
-     }
+    public SysOpenAccess create(SysOpenAccess sysopenaccess) {
+        return null;
+    }
+    public Boolean createBatch(List<SysOpenAccess> sysopenaccesses) {
+        return false;
+    }
 
-    public SysOpenAccess update(String id, SysOpenAccess sysopenaccess){
-            return null;
-     }
-    public Boolean updateBatch(List<SysOpenAccess> sysopenaccesses){
-            return false;
-     }
+    public SysOpenAccess update(String id, SysOpenAccess sysopenaccess) {
+        return null;
+    }
+    public Boolean updateBatch(List<SysOpenAccess> sysopenaccesses) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public SysOpenAccess get(String id){
-            return null;
-     }
+    public SysOpenAccess get(String id) {
+        return null;
+    }
 
 
     public SysOpenAccess getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(SysOpenAccess sysopenaccess){
-            return false;
-     }
+    public Boolean checkKey(SysOpenAccess sysopenaccess) {
+        return false;
+    }
 
 
-    public Boolean save(SysOpenAccess sysopenaccess){
-            return false;
-     }
-    public Boolean saveBatch(List<SysOpenAccess> sysopenaccesses){
-            return false;
-     }
+    public Boolean save(SysOpenAccess sysopenaccess) {
+        return false;
+    }
+    public Boolean saveBatch(List<SysOpenAccess> sysopenaccesses) {
+        return false;
+    }
 
-    public Page<SysOpenAccess> searchDefault(SysOpenAccessSearchContext context){
-            return null;
-     }
+    public Page<SysOpenAccess> searchDefault(SysOpenAccessSearchContext context) {
+        return null;
+    }
 
 
 }

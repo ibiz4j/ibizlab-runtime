@@ -56,5 +56,5 @@ public class AuthenticationController
             authuserdetail= userDetailsService.loadUserByUsername(userDetails.getUsername());
         }
             return ResponseEntity.ok().body(authuserdetail);
-        }
+    }
 }

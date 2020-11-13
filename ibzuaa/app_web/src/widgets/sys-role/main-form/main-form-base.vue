@@ -94,7 +94,7 @@
     :localParam ='{}'
     parameterName='sysrole'
     parentName="SysRole"  
-    refviewtype='DECUSTOMVIEW' 
+    refviewtype='DEMEDITVIEW9'
     refreshitems='' 
     :ignorefieldvaluechange="ignorefieldvaluechange"
     viewname='sys-role-permission-custom-view'

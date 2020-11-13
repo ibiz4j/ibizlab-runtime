@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[MsgBody] 服务对象接口
  */
-public interface IMsgBodyService extends IService<MsgBody>{
+public interface IMsgBodyService extends IService<MsgBody> {
 
-    boolean create(MsgBody et) ;
-    void createBatch(List<MsgBody> list) ;
-    boolean update(MsgBody et) ;
-    void updateBatch(List<MsgBody> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    MsgBody get(String key) ;
-    MsgBody getDraft(MsgBody et) ;
-    boolean checkKey(MsgBody et) ;
-    boolean save(MsgBody et) ;
-    void saveBatch(List<MsgBody> list) ;
-    Page<MsgBody> searchDefault(MsgBodySearchContext context) ;
+    boolean create(MsgBody et);
+    void createBatch(List<MsgBody> list);
+    boolean update(MsgBody et);
+    void updateBatch(List<MsgBody> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    MsgBody get(String key);
+    MsgBody getDraft(MsgBody et);
+    boolean checkKey(MsgBody et);
+    boolean save(MsgBody et);
+    void saveBatch(List<MsgBody> list);
+    Page<MsgBody> searchDefault(MsgBodySearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

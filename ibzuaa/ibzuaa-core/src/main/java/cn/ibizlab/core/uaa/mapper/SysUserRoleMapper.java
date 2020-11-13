@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysUserRoleMapper extends BaseMapper<SysUserRole>{
+public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 
-    Page<SysUserRole> searchDefault(IPage page, @Param("srf") SysUserRoleSearchContext context, @Param("ew") Wrapper<SysUserRole> wrapper) ;
+    Page<SysUserRole> searchDefault(IPage page, @Param("srf") SysUserRoleSearchContext context, @Param("ew") Wrapper<SysUserRole> wrapper);
     @Override
     SysUserRole selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRole>{
     int update(@Param(Constants.ENTITY) SysUserRole entity, @Param("ew") Wrapper<SysUserRole> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL
@@ -62,8 +62,8 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRole>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
-    List<SysUserRole> selectByRoleid(@Param("roleid") Serializable roleid) ;
+    List<SysUserRole> selectByRoleid(@Param("roleid") Serializable roleid);
 
-    List<SysUserRole> selectByUserid(@Param("userid") Serializable userid) ;
+    List<SysUserRole> selectByUserid(@Param("userid") Serializable userid);
 
 }

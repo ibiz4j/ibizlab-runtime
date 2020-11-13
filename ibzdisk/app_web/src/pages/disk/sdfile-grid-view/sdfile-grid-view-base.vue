@@ -9,7 +9,7 @@
             </div>
         <div class='content-container'>
             <div style='margin-bottom: 6px;'>
-                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="" />
+                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="名称" />
                 <div class='pull-right'>
                     <div class='toolbar-container'>
                         <tooltip :transfer="true" :max-width="600">
@@ -105,8 +105,8 @@
                 :context="context" 
                 :showBusyIndicator="true"
                 v-show="isExpandSearchForm"
-                loaddraftAction=""
-                loadAction=""
+                loaddraftAction="FilterGetDraft"
+                loadAction="FilterGet"
             
                 name="searchform"  
                 ref='searchform' 
@@ -128,11 +128,11 @@
                 :isformDruipart="isformDruipart"
                 @save="onSave"
                 updateAction=""
-                removeAction=""
+                removeAction="Remove"
                 loaddraftAction=""
                 loadAction=""
                 createAction=""
-                fetchAction=""
+                fetchAction="FetchDefault"
                 :newdata="newdata"
                 :opendata="opendata"
                 name="grid"  
@@ -283,11 +283,11 @@ export default class SDFileGridViewBase extends Vue {
     @Watch('viewparam',{immediate: true, deep: true})
     onParamData(newVal: any, oldVal: any) {
         if(newVal){
-            for(let key in this.viewparams){
-                delete this.viewparams[key];
-            }
-            if(typeof this.viewparams == 'string') {
+            this.viewparams = {};
+            if(typeof newVal == 'string') {
                 Object.assign(this.viewparams, JSON.parse(this.viewparam));
+            }else{
+                this.viewparams = Util.deepCopy(this.viewparam);
             }
             
         } 
@@ -426,6 +426,7 @@ export default class SDFileGridViewBase extends Vue {
             grid: this.$refs.grid,
             searchform: this.$refs.searchform,
             keyPSDEField: 'sdfile',
+            majorPSDEField: 'name',
             isLoadDefault: true,
         });
     }

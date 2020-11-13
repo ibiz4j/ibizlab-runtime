@@ -60,6 +60,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -232,9 +233,10 @@ public class WFCoreService
 	public List<WFTaskWay> getWFLinkByStep(String system,String appname,
 									 String entity, String processDefinitionKey,String taskDefinitionKey) {
 		List<WFTaskWay> taskWays=new ArrayList<>();
-
 		if((!StringUtils.isEmpty(processDefinitionKey))&&(!StringUtils.isEmpty(taskDefinitionKey))) {
 			UserTask userTask = wfModelService.getModelStepByKey(processDefinitionKey).get(taskDefinitionKey);
+			//设置流程表单
+			setProcessForm(userTask);
 			if(userTask!=null&&userTask.getOutgoingFlows()!=null) {
 				for(SequenceFlow sequenceFlow:userTask.getOutgoingFlows()) {
 					WFTaskWay way=new WFTaskWay();
@@ -242,6 +244,8 @@ public class WFCoreService
 					way.setSequenceflowname(sequenceFlow.getName());
 					way.setProcessdefinitionkey(processDefinitionKey);
 					way.setTaskdefinitionkey(taskDefinitionKey);
+					//设置流程交互表单
+					setTaskWayForm(sequenceFlow,way);
 					taskWays.add(way);
 				}
 			}
@@ -397,6 +401,8 @@ public class WFCoreService
 		Task task=list.get(0);
 		if((!StringUtils.isEmpty(task.getProcessDefinitionId()))&&(!StringUtils.isEmpty(task.getTaskDefinitionKey()))) {
 			UserTask userTask = wfModelService.getModelStepById(task.getProcessDefinitionId()).get(task.getTaskDefinitionKey());
+			//设置流程表单
+			setProcessForm(userTask);
 			if(userTask!=null&&userTask.getOutgoingFlows()!=null) {
 				for(SequenceFlow sequenceFlow:userTask.getOutgoingFlows()) {
 					WFTaskWay way=new WFTaskWay();
@@ -408,6 +414,8 @@ public class WFCoreService
 					way.setProcessinstanceid(task.getProcessInstanceId());
 					way.setTaskdefinitionkey(task.getTaskDefinitionKey());
 					way.setProcessinstancebusinesskey(processInstanceBusinessKey);
+					//设置流程交互表单
+					setTaskWayForm(sequenceFlow,way);
 					taskWays.add(way);
 				}
 			}
@@ -428,6 +436,8 @@ public class WFCoreService
 		Task task=list.get(0);
 		if((!StringUtils.isEmpty(task.getProcessDefinitionId()))&&(!StringUtils.isEmpty(task.getTaskDefinitionKey()))) {
 			UserTask userTask = wfModelService.getModelStepById(task.getProcessDefinitionId()).get(task.getTaskDefinitionKey());
+			//设置流程表单
+			setProcessForm(userTask);
 			if(userTask!=null&&userTask.getOutgoingFlows()!=null) {
 				for(SequenceFlow sequenceFlow:userTask.getOutgoingFlows()) {
 					WFTaskWay way=new WFTaskWay();
@@ -439,6 +449,8 @@ public class WFCoreService
 					way.setProcessinstanceid(task.getProcessInstanceId());
 					way.setTaskdefinitionkey(task.getTaskDefinitionKey());
 					way.setProcessinstancebusinesskey(processInstanceBusinessKey);
+					//设置流程交互表单
+					setTaskWayForm(sequenceFlow,way);
 					taskWays.add(way);
 				}
 			}
@@ -1154,6 +1166,60 @@ public class WFCoreService
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	/**
+	 * 设置流程表单
+	 * @param sequenceFlow
+	 * @param way
+	 */
+	private void setTaskWayForm(SequenceFlow sequenceFlow,WFTaskWay way){
+		if(!ObjectUtils.isEmpty(sequenceFlow.getExtensionElements())){
+			List<ExtensionElement> formProps=sequenceFlow.getExtensionElements().get("form");
+			if(!ObjectUtils.isEmpty(formProps)){
+				for(ExtensionElement prop : formProps){
+					if(!ObjectUtils.isEmpty(prop.getAttributes())){
+						for(String attribute : prop.getAttributes().keySet()){
+							List<ExtensionAttribute> attributes=prop.getAttributes().get(attribute);
+							if(!ObjectUtils.isEmpty(attributes)){
+								for(ExtensionAttribute param:attributes){
+									way.set(param.getName(),param.getValue());
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * 将流程表单设置到请求头中
+	 * @param userTask
+	 */
+	private void setProcessForm(UserTask userTask){
+		Object objReq=RequestContextHolder.currentRequestAttributes();
+		if(!ObjectUtils.isEmpty(objReq) && objReq instanceof  ServletRequestAttributes){
+			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+			HttpServletRequest req = attr.getRequest();
+			if(!ObjectUtils.isEmpty(userTask) && !ObjectUtils.isEmpty(userTask.getExtensionElements())){
+				List<ExtensionElement> formProps=userTask.getExtensionElements().get("form");
+				if(!ObjectUtils.isEmpty(formProps)){
+					for(ExtensionElement prop : formProps){
+						if(!ObjectUtils.isEmpty(prop.getAttributes())){
+							for(String attribute : prop.getAttributes().keySet()){
+								List<ExtensionAttribute> attributes=prop.getAttributes().get(attribute);
+								if(!ObjectUtils.isEmpty(attributes)){
+									for(ExtensionAttribute param:attributes){
+										req.setAttribute(param.getName(),param.getValue());
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

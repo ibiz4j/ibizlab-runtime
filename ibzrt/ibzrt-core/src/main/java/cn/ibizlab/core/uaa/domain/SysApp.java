@@ -36,7 +36,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 应用标识
      */
-    @DEField(name = "appid" , isKeyField=true)
+    @DEField(name = "appid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -115,7 +115,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 设置 [应用名]
      */
-    public void setLabel(String label){
+    public void setLabel(String label) {
         this.label = label ;
         this.modify("appname",label);
     }
@@ -123,7 +123,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 设置 [系统标识]
      */
-    public void setSystemid(String systemid){
+    public void setSystemid(String systemid) {
         this.systemid = systemid ;
         this.modify("pssystemid",systemid);
     }
@@ -131,7 +131,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 设置 [全称]
      */
-    public void setFullname(String fullname){
+    public void setFullname(String fullname) {
         this.fullname = fullname ;
         this.modify("fullname",fullname);
     }
@@ -139,7 +139,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 设置 [类型]
      */
-    public void setType(String type){
+    public void setType(String type) {
         this.type = type ;
         this.modify("apptype",type);
     }
@@ -147,7 +147,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 设置 [分组]
      */
-    public void setGroup(String group){
+    public void setGroup(String group) {
         this.group = group ;
         this.modify("appgroup",group);
     }
@@ -155,7 +155,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 设置 [图标]
      */
-    public void setIcon(String icon){
+    public void setIcon(String icon) {
         this.icon = icon ;
         this.modify("icon",icon);
     }
@@ -163,7 +163,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 设置 [可见]
      */
-    public void setVisabled(Integer visabled){
+    public void setVisabled(Integer visabled) {
         this.visabled = visabled ;
         this.modify("visabled",visabled);
     }
@@ -171,7 +171,7 @@ public class SysApp extends EntityClient implements Serializable {
     /**
      * 设置 [地址]
      */
-    public void setAddr(String addr){
+    public void setAddr(String addr) {
         this.addr = addr ;
         this.modify("addr",addr);
     }

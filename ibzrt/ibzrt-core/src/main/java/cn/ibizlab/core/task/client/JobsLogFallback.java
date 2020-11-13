@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[JobsLog] 服务对象接口
  */
 @Component
-public class JobsLogFallback implements JobsLogFeignClient{
+public class JobsLogFallback implements JobsLogFeignClient {
 
-    public Page<JobsLog> select(){
-            return null;
-     }
+    public Page<JobsLog> select() {
+        return null;
+    }
 
-    public JobsLog create(JobsLog jobslog){
-            return null;
-     }
-    public Boolean createBatch(List<JobsLog> jobslogs){
-            return false;
-     }
+    public JobsLog create(JobsLog jobslog) {
+        return null;
+    }
+    public Boolean createBatch(List<JobsLog> jobslogs) {
+        return false;
+    }
 
-    public JobsLog update(String id, JobsLog jobslog){
-            return null;
-     }
-    public Boolean updateBatch(List<JobsLog> jobslogs){
-            return false;
-     }
+    public JobsLog update(String id, JobsLog jobslog) {
+        return null;
+    }
+    public Boolean updateBatch(List<JobsLog> jobslogs) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public JobsLog get(String id){
-            return null;
-     }
+    public JobsLog get(String id) {
+        return null;
+    }
 
 
     public JobsLog getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(JobsLog jobslog){
-            return false;
-     }
+    public Boolean checkKey(JobsLog jobslog) {
+        return false;
+    }
 
 
-    public Boolean save(JobsLog jobslog){
-            return false;
-     }
-    public Boolean saveBatch(List<JobsLog> jobslogs){
-            return false;
-     }
+    public Boolean save(JobsLog jobslog) {
+        return false;
+    }
+    public Boolean saveBatch(List<JobsLog> jobslogs) {
+        return false;
+    }
 
-    public Page<JobsLog> searchDefault(JobsLogSearchContext context){
-            return null;
-     }
+    public Page<JobsLog> searchDefault(JobsLogSearchContext context) {
+        return null;
+    }
 
 
 }

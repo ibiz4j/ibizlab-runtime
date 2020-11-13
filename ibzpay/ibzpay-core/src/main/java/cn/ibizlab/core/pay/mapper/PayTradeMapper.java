@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface PayTradeMapper extends BaseMapper<PayTrade>{
+public interface PayTradeMapper extends BaseMapper<PayTrade> {
 
-    Page<PayTrade> searchDefault(IPage page, @Param("srf") PayTradeSearchContext context, @Param("ew") Wrapper<PayTrade> wrapper) ;
+    Page<PayTrade> searchDefault(IPage page, @Param("srf") PayTradeSearchContext context, @Param("ew") Wrapper<PayTrade> wrapper);
     @Override
     PayTrade selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface PayTradeMapper extends BaseMapper<PayTrade>{
     int update(@Param(Constants.ENTITY) PayTrade entity, @Param("ew") Wrapper<PayTrade> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL
@@ -62,6 +62,6 @@ public interface PayTradeMapper extends BaseMapper<PayTrade>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
-    List<PayTrade> selectByAccessId(@Param("id") Serializable id) ;
+    List<PayTrade> selectByAccessId(@Param("id") Serializable id);
 
 }

@@ -79,29 +79,31 @@ public class DEFieldDefaultValueAspect
         Object[] args = joinPoint.getArgs();
         if (args.length > 0) {
             Object obj = args[0];
-            String actionName=joinPoint.getSignature().getName();
+            String actionName = joinPoint.getSignature().getName();
             if(obj instanceof EntityBase) {
                 Map<String, DEField> deFields = DEFieldCacheMap.getDEFields(obj.getClass());
                 AuthenticationUser curUser = AuthenticationUser.getAuthenticationUser();
-                String keyField=DEFieldCacheMap.getDEKeyField(obj.getClass());
-                if(StringUtils.isEmpty(keyField))
+                String keyField = DEFieldCacheMap.getDEKeyField(obj.getClass());
+                if(StringUtils.isEmpty(keyField)) {
                     return true;
-                fillDEField((EntityBase)obj, deFields,actionName,curUser,keyField);
+                }
+                fillDEField((EntityBase)obj, deFields, actionName, curUser, keyField);
             }
             else if (obj instanceof List) {
                 Map<String, DEField> deFields = null;
                 AuthenticationUser curUser = null;
                 String keyField = "";
-                for(Object item:(List)obj) {
+                for(Object item : (List)obj) {
                     if(item instanceof EntityBase) {
-                        if(deFields==null) {
+                        if(deFields == null) {
                             deFields = DEFieldCacheMap.getDEFields(item.getClass());
                             curUser = AuthenticationUser.getAuthenticationUser();
-                            keyField=DEFieldCacheMap.getDEKeyField(item.getClass());
-                            if(StringUtils.isEmpty(keyField))
+                            keyField = DEFieldCacheMap.getDEKeyField(item.getClass());
+                            if(StringUtils.isEmpty(keyField)) {
                                 return true;
+                            }
                         }
-                        fillDEField((EntityBase)item, deFields,actionName,curUser,keyField);
+                        fillDEField((EntityBase)item, deFields, actionName, curUser, keyField);
                     }
                 }
             }
@@ -115,15 +117,15 @@ public class DEFieldDefaultValueAspect
      * 填充系统预置属性
      * @param et   当前实体对象
      */
-    private void fillDEField(EntityBase et, Map<String, DEField> deFields, String actionName,AuthenticationUser curUser,String keyField) throws Exception {
-        if(deFields.size()==0)
-            return ;
-
-        if(actionName.toLowerCase().startsWith("save")) {
-            if(ObjectUtils.isEmpty(et.get(keyField)))
-                actionName="create";
+    private void fillDEField(EntityBase et, Map<String, DEField> deFields, String actionName, AuthenticationUser curUser, String keyField) throws Exception {
+        if(deFields.size()==0) {
+            return;
         }
-
+        if(actionName.toLowerCase().startsWith("save")) {
+            if(ObjectUtils.isEmpty(et.get(keyField))) {
+                actionName="create";
+            }
+        }
         for (Map.Entry<String, DEField> entry : deFields.entrySet()) {
             String fieldname=entry.getKey();
             //获取注解
@@ -136,12 +138,12 @@ public class DEFieldDefaultValueAspect
             DEPredefinedFieldType predefinedFieldType = fieldAnnotation.preType();
 
             //填充系统默认值
-            if(actionName.toLowerCase().startsWith("create") && ( deFieldType!= DEFieldDefaultValueType.NONE  ||  (!StringUtils.isEmpty(deFieldDefaultValue)) )){
+            if(actionName.toLowerCase().startsWith("create") && (deFieldType!= DEFieldDefaultValueType.NONE  ||  (!StringUtils.isEmpty(deFieldDefaultValue)))) {
                 fillFieldDefaultValue(fieldname,  deFieldType,  deFieldDefaultValue,  et , curUser) ;
             }
             //填充系统预置属性
-            if(predefinedFieldType != DEPredefinedFieldType.NONE){
-                fillPreFieldValue( fieldname, predefinedFieldType , et ,actionName ,fieldAnnotation.logicval(),curUser);
+            if(predefinedFieldType != DEPredefinedFieldType.NONE) {
+                fillPreFieldValue(fieldname, predefinedFieldType , et ,actionName ,fieldAnnotation.logicval(),curUser);
             }
         }
     }
@@ -154,17 +156,17 @@ public class DEFieldDefaultValueAspect
      * @param et 当前实体对象
      * @throws Exception
      */
-    private void fillFieldDefaultValue(String fieldname , DEFieldDefaultValueType deFieldType,String deFieldDefaultValue,EntityBase et ,AuthenticationUser curUser) throws Exception {
+    private void fillFieldDefaultValue(String fieldname, DEFieldDefaultValueType deFieldType, String deFieldDefaultValue, EntityBase et , AuthenticationUser curUser) throws Exception {
         Object fieldValue = et.get(fieldname);
-        if(org.springframework.util.ObjectUtils.isEmpty(fieldValue)){
+        if(org.springframework.util.ObjectUtils.isEmpty(fieldValue)) {
             //填充直接值及其余默认值类型
-            if( (deFieldType== DEFieldDefaultValueType.NONE && !StringUtils.isEmpty(deFieldDefaultValue))   || (deFieldType != DEFieldDefaultValueType.NONE) ){
-                switch(deFieldType){
+            if( (deFieldType== DEFieldDefaultValueType.NONE && !StringUtils.isEmpty(deFieldDefaultValue)) || (deFieldType != DEFieldDefaultValueType.NONE)) {
+                switch(deFieldType) {
                     case SESSION:
-                        if(!StringUtils.isEmpty(deFieldDefaultValue)){
+                        if(!StringUtils.isEmpty(deFieldDefaultValue)) {
                             Object sessionFieldValue = curUser.getSessionParams().get(deFieldDefaultValue.toLowerCase());
-                            if(!ObjectUtils.isEmpty(sessionFieldValue)){
-                                et.set(fieldname,sessionFieldValue);
+                            if(!ObjectUtils.isEmpty(sessionFieldValue)) {
+                                et.set(fieldname, sessionFieldValue);
                             }
                         }
                         break;
@@ -172,91 +174,95 @@ public class DEFieldDefaultValueAspect
                         //暂未实现
                         break;
                     case UNIQUEID:
-                        et.set(fieldname,(new AlternativeJdkIdGenerator()).generateId().toString().replace("-", ""));
+                        et.set(fieldname, (new AlternativeJdkIdGenerator()).generateId().toString().replace("-", ""));
                         break;
                     case CONTEXT:
-                        if(!StringUtils.isEmpty(deFieldDefaultValue)){
+                        if(!StringUtils.isEmpty(deFieldDefaultValue)) {
                             Object paramFieldValue=et.get(deFieldDefaultValue);
-                            if(!ObjectUtils.isEmpty(paramFieldValue)){
-                                et.set(fieldname,paramFieldValue);
+                            if(!ObjectUtils.isEmpty(paramFieldValue)) {
+                                et.set(fieldname, paramFieldValue);
                             }
                         }
                         break;
                     case PARAM:
-                        if(!StringUtils.isEmpty(deFieldDefaultValue)){
+                        if(!StringUtils.isEmpty(deFieldDefaultValue)) {
                             Object paramFieldValue=et.get(deFieldDefaultValue);
-                            if(!ObjectUtils.isEmpty(paramFieldValue)){
-                                et.set(fieldname,paramFieldValue);
+                            if(!ObjectUtils.isEmpty(paramFieldValue)) {
+                                et.set(fieldname, paramFieldValue);
                             }
                         }
                         break;
                     case OPERATOR:
-                        et.set(fieldname,curUser.getUserid());
+                        et.set(fieldname, curUser.getUserid());
                         break;
                     case OPERATORNAME:
-                        et.set(fieldname,curUser.getPersonname());
+                        et.set(fieldname, curUser.getPersonname());
                         break;
                     case CURTIME:
-                        et.set(fieldname,new Timestamp(new Date().getTime()));
+                        et.set(fieldname, new Timestamp(new Date().getTime()));
                         break;
                     case APPDATA:
                         //暂未实现
                         break;
                     case NONE:
-                        et.set(fieldname,deFieldDefaultValue);
+                        et.set(fieldname, deFieldDefaultValue);
                         break;
                 }
             }
         }
     }
 
-    private void fillPreFieldValue(String fieldname ,  DEPredefinedFieldType preFieldType ,EntityBase et , String actionName,String logicValue ,AuthenticationUser curUser) throws Exception {
+    private void fillPreFieldValue(String fieldname, DEPredefinedFieldType preFieldType, EntityBase et, String actionName, String logicValue, AuthenticationUser curUser) throws Exception {
         Object fieldValue = et.get(fieldname);
         //为预置属性进行赋值
-        if( actionName.toLowerCase().startsWith("create") ||
+        if(actionName.toLowerCase().startsWith("create") ||
                 preFieldType== DEPredefinedFieldType.UPDATEDATE|| preFieldType== DEPredefinedFieldType.UPDATEMAN||
-                preFieldType== DEPredefinedFieldType.UPDATEMANNAME){
+                preFieldType== DEPredefinedFieldType.UPDATEMANNAME) {
 
-            switch(preFieldType){//根据注解给预置属性填充值
+            switch(preFieldType) {
                 case CREATEMAN:
-                    et.set(fieldname,curUser.getUserid());
+                    et.set(fieldname, curUser.getUserid());
                     break;
                 case CREATEMANNAME:
-                    et.set(fieldname,curUser.getPersonname());
+                    et.set(fieldname, curUser.getPersonname());
                     break;
                 case UPDATEMAN:
-                    et.set(fieldname,curUser.getUserid());
+                    et.set(fieldname, curUser.getUserid());
                     break;
                 case UPDATEMANNAME:
-                    et.set(fieldname,curUser.getPersonname());
+                    et.set(fieldname, curUser.getPersonname());
                     break;
                 case CREATEDATE:
-                    et.set(fieldname,new Timestamp(new Date().getTime()));
+                    et.set(fieldname, new Timestamp(new Date().getTime()));
                     break;
                 case UPDATEDATE:
-                    et.set(fieldname,new Timestamp(new Date().getTime()));
+                    et.set(fieldname, new Timestamp(new Date().getTime()));
                     break;
                 case ORGID:
-                    if(org.springframework.util.StringUtils.isEmpty(fieldValue))
-                        et.set(fieldname,curUser.getOrgid());
+                    if(org.springframework.util.StringUtils.isEmpty(fieldValue)) {
+                        et.set(fieldname, curUser.getOrgid());
+                    }
                     break;
                 case ORGNAME:
-                    if(org.springframework.util.StringUtils.isEmpty(fieldValue))
-                        et.set(fieldname,curUser.getOrgname());
+                    if(org.springframework.util.StringUtils.isEmpty(fieldValue)) {
+                        et.set(fieldname, curUser.getOrgname());
+                    }
                     break;
                 case ORGSECTORID:
-                    if(org.springframework.util.StringUtils.isEmpty(fieldValue))
-                        et.set(fieldname,curUser.getMdeptid());
+                    if(org.springframework.util.StringUtils.isEmpty(fieldValue)) {
+                        et.set(fieldname, curUser.getMdeptid());
+                    }
                     break;
                 case ORGSECTORNAME:
-                    if(org.springframework.util.StringUtils.isEmpty(fieldValue))
-                        et.set(fieldname,curUser.getMdeptname());
+                    if(org.springframework.util.StringUtils.isEmpty(fieldValue)) {
+                        et.set(fieldname, curUser.getMdeptname());
+                    }
                     break;
                 case LOGICVALID:
-                    if(StringUtils.isEmpty(logicValue)){
+                    if(StringUtils.isEmpty(logicValue)) {
                         logicValue="1";
                     }
-                    et.set(fieldname,logicValue);
+                    et.set(fieldname, logicValue);
                     break;
             }
         }

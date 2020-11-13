@@ -36,7 +36,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 标识
      */
-    @DEField(name = "fileid" , isKeyField=true)
+    @DEField(name = "fileid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -117,8 +117,8 @@ public class SDFile extends EntityClient implements Serializable {
      * 创建日期
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
 
@@ -134,8 +134,8 @@ public class SDFile extends EntityClient implements Serializable {
      * 更新时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -146,7 +146,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [名称]
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name ;
         this.modify("filename",name);
     }
@@ -154,7 +154,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [路径]
      */
-    public void setFilepath(String filepath){
+    public void setFilepath(String filepath) {
         this.filepath = filepath ;
         this.modify("filepath",filepath);
     }
@@ -162,7 +162,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [特定目录]
      */
-    public void setFolder(String folder){
+    public void setFolder(String folder) {
         this.folder = folder ;
         this.modify("folder",folder);
     }
@@ -170,7 +170,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [文件大小]
      */
-    public void setFilesize(Integer filesize){
+    public void setFilesize(Integer filesize) {
         this.filesize = filesize ;
         this.modify("filesize",filesize);
     }
@@ -178,7 +178,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [扩展名]
      */
-    public void setFileext(String fileext){
+    public void setFileext(String fileext) {
         this.fileext = fileext ;
         this.modify("fileext",fileext);
     }
@@ -186,7 +186,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [所属类型]
      */
-    public void setOwnertype(String ownertype){
+    public void setOwnertype(String ownertype) {
         this.ownertype = ownertype ;
         this.modify("ownertype",ownertype);
     }
@@ -194,7 +194,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [所属主体]
      */
-    public void setOwnerid(String ownerid){
+    public void setOwnerid(String ownerid) {
         this.ownerid = ownerid ;
         this.modify("ownerid",ownerid);
     }
@@ -202,7 +202,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [备注]
      */
-    public void setMemo(String memo){
+    public void setMemo(String memo) {
         this.memo = memo ;
         this.modify("memo",memo);
     }
@@ -210,7 +210,7 @@ public class SDFile extends EntityClient implements Serializable {
     /**
      * 设置 [签名]
      */
-    public void setDigestcode(String digestcode){
+    public void setDigestcode(String digestcode) {
         this.digestcode = digestcode ;
         this.modify("digestcode",digestcode);
     }

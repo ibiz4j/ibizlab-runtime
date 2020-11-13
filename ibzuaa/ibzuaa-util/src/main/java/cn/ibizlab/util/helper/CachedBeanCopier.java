@@ -13,8 +13,9 @@ public class CachedBeanCopier {
     }
 
     public static void copy(Object srcObj, Object destObj,boolean useConverter) {
-        if(srcObj==null||destObj==null)
+        if(srcObj==null||destObj==null) {
             return;
+        }
         getCopier(srcObj,destObj,useConverter).copy(srcObj, destObj, null);
     }
 
@@ -29,6 +30,4 @@ public class CachedBeanCopier {
         }
         return copier;
     }
-
-
 }

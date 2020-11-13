@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[SysUserAuth] 服务对象接口
  */
 @Component
-public class SysUserAuthFallback implements SysUserAuthFeignClient{
+public class SysUserAuthFallback implements SysUserAuthFeignClient {
 
-    public Page<SysUserAuth> select(){
-            return null;
-     }
+    public Page<SysUserAuth> select() {
+        return null;
+    }
 
-    public SysUserAuth create(SysUserAuth sysuserauth){
-            return null;
-     }
-    public Boolean createBatch(List<SysUserAuth> sysuserauths){
-            return false;
-     }
+    public SysUserAuth create(SysUserAuth sysuserauth) {
+        return null;
+    }
+    public Boolean createBatch(List<SysUserAuth> sysuserauths) {
+        return false;
+    }
 
-    public SysUserAuth update(String id, SysUserAuth sysuserauth){
-            return null;
-     }
-    public Boolean updateBatch(List<SysUserAuth> sysuserauths){
-            return false;
-     }
+    public SysUserAuth update(String id, SysUserAuth sysuserauth) {
+        return null;
+    }
+    public Boolean updateBatch(List<SysUserAuth> sysuserauths) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public SysUserAuth get(String id){
-            return null;
-     }
+    public SysUserAuth get(String id) {
+        return null;
+    }
 
 
     public SysUserAuth getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(SysUserAuth sysuserauth){
-            return false;
-     }
+    public Boolean checkKey(SysUserAuth sysuserauth) {
+        return false;
+    }
 
 
-    public Boolean save(SysUserAuth sysuserauth){
-            return false;
-     }
-    public Boolean saveBatch(List<SysUserAuth> sysuserauths){
-            return false;
-     }
+    public Boolean save(SysUserAuth sysuserauth) {
+        return false;
+    }
+    public Boolean saveBatch(List<SysUserAuth> sysuserauths) {
+        return false;
+    }
 
-    public Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context){
-            return null;
-     }
+    public Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context) {
+        return null;
+    }
 
 
 }

@@ -22,20 +22,20 @@ import cn.ibizlab.core.uaa.filter.SysAuthLogSearchContext;
 /**
  * 实体[SysAuthLog] 服务对象接口
  */
-public interface ISysAuthLogService{
+public interface ISysAuthLogService {
 
-    boolean create(SysAuthLog et) ;
-    void createBatch(List<SysAuthLog> list) ;
-    boolean update(SysAuthLog et) ;
-    void updateBatch(List<SysAuthLog> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysAuthLog get(String key) ;
-    SysAuthLog getDraft(SysAuthLog et) ;
-    boolean checkKey(SysAuthLog et) ;
-    boolean save(SysAuthLog et) ;
-    void saveBatch(List<SysAuthLog> list) ;
-    Page<SysAuthLog> searchDefault(SysAuthLogSearchContext context) ;
+    boolean create(SysAuthLog et);
+    void createBatch(List<SysAuthLog> list);
+    boolean update(SysAuthLog et);
+    void updateBatch(List<SysAuthLog> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysAuthLog get(String key);
+    SysAuthLog getDraft(SysAuthLog et);
+    boolean checkKey(SysAuthLog et);
+    boolean save(SysAuthLog et);
+    void saveBatch(List<SysAuthLog> list);
+    Page<SysAuthLog> searchDefault(SysAuthLogSearchContext context);
 
 }
 

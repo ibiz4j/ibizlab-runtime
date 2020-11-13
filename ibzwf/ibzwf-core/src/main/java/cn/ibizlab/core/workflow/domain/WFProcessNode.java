@@ -39,7 +39,7 @@ public class WFProcessNode extends EntityBase implements Serializable {
     /**
      * 节点标识
      */
-    @DEField(name = "nodeid" , isKeyField=true)
+    @DEField(name = "nodeid", isKeyField = true)
     @JSONField(name = "userTaskId")
     @JsonProperty("userTaskId")
     private String usertaskid;

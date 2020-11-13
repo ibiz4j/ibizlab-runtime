@@ -167,11 +167,11 @@ export default class TaskIndexViewBase extends Vue {
     @Watch('viewparam',{immediate: true, deep: true})
     onParamData(newVal: any, oldVal: any) {
         if(newVal){
-            for(let key in this.viewparams){
-                delete this.viewparams[key];
-            }
-            if(typeof this.viewparams == 'string') {
+            this.viewparams = {};
+            if(typeof newVal == 'string') {
                 Object.assign(this.viewparams, JSON.parse(this.viewparam));
+            }else{
+                this.viewparams = Util.deepCopy(this.viewparam);
             }
             
         } 

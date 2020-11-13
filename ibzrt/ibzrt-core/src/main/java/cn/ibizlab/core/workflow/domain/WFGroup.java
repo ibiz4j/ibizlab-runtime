@@ -36,7 +36,7 @@ public class WFGroup extends EntityClient implements Serializable {
     /**
      * 组标识
      */
-    @DEField(name = "groupid" , isKeyField=true)
+    @DEField(name = "groupid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
     private String id;
@@ -70,7 +70,7 @@ public class WFGroup extends EntityClient implements Serializable {
     /**
      * 设置 [组名称]
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name ;
         this.modify("groupname",name);
     }
@@ -78,7 +78,7 @@ public class WFGroup extends EntityClient implements Serializable {
     /**
      * 设置 [范围]
      */
-    public void setGroupscope(String groupscope){
+    public void setGroupscope(String groupscope) {
         this.groupscope = groupscope ;
         this.modify("groupscope",groupscope);
     }

@@ -17,72 +17,72 @@ import org.springframework.stereotype.Component;
  * 实体[JobsInfo] 服务对象接口
  */
 @Component
-public class JobsInfoFallback implements JobsInfoFeignClient{
+public class JobsInfoFallback implements JobsInfoFeignClient {
 
-    public Page<JobsInfo> select(){
-            return null;
-     }
+    public Page<JobsInfo> select() {
+        return null;
+    }
 
-    public JobsInfo create(JobsInfo jobsinfo){
-            return null;
-     }
-    public Boolean createBatch(List<JobsInfo> jobsinfos){
-            return false;
-     }
+    public JobsInfo create(JobsInfo jobsinfo) {
+        return null;
+    }
+    public Boolean createBatch(List<JobsInfo> jobsinfos) {
+        return false;
+    }
 
-    public JobsInfo update(String id, JobsInfo jobsinfo){
-            return null;
-     }
-    public Boolean updateBatch(List<JobsInfo> jobsinfos){
-            return false;
-     }
+    public JobsInfo update(String id, JobsInfo jobsinfo) {
+        return null;
+    }
+    public Boolean updateBatch(List<JobsInfo> jobsinfos) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public JobsInfo get(String id){
-            return null;
-     }
+    public JobsInfo get(String id) {
+        return null;
+    }
 
 
     public JobsInfo getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(JobsInfo jobsinfo){
-            return false;
-     }
+    public Boolean checkKey(JobsInfo jobsinfo) {
+        return false;
+    }
 
 
-    public JobsInfo execute( String id, JobsInfo jobsinfo){
-            return null;
-     }
+    public JobsInfo execute( String id, JobsInfo jobsinfo) {
+        return null;
+    }
 
-    public Boolean save(JobsInfo jobsinfo){
-            return false;
-     }
-    public Boolean saveBatch(List<JobsInfo> jobsinfos){
-            return false;
-     }
+    public Boolean save(JobsInfo jobsinfo) {
+        return false;
+    }
+    public Boolean saveBatch(List<JobsInfo> jobsinfos) {
+        return false;
+    }
 
-    public JobsInfo start( String id, JobsInfo jobsinfo){
-            return null;
-     }
+    public JobsInfo start( String id, JobsInfo jobsinfo) {
+        return null;
+    }
 
-    public JobsInfo stop( String id, JobsInfo jobsinfo){
-            return null;
-     }
+    public JobsInfo stop( String id, JobsInfo jobsinfo) {
+        return null;
+    }
 
-    public Page<JobsInfo> searchDefault(JobsInfoSearchContext context){
-            return null;
-     }
+    public Page<JobsInfo> searchDefault(JobsInfoSearchContext context) {
+        return null;
+    }
 
 
 }

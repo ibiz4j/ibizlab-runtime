@@ -36,7 +36,7 @@ public class SysPost extends EntityClient implements Serializable {
     /**
      * 岗位标识
      */
-    @DEField(defaultValue = "postcode" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
+    @DEField(defaultValue = "postcode", defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField = true)
     @JSONField(name = "postid")
     @JsonProperty("postid")
     private String postid;
@@ -76,7 +76,7 @@ public class SysPost extends EntityClient implements Serializable {
     /**
      * 设置 [岗位编码]
      */
-    public void setPostcode(String postcode){
+    public void setPostcode(String postcode) {
         this.postcode = postcode ;
         this.modify("postcode",postcode);
     }
@@ -84,7 +84,7 @@ public class SysPost extends EntityClient implements Serializable {
     /**
      * 设置 [岗位名称]
      */
-    public void setPostname(String postname){
+    public void setPostname(String postname) {
         this.postname = postname ;
         this.modify("postname",postname);
     }
@@ -92,7 +92,7 @@ public class SysPost extends EntityClient implements Serializable {
     /**
      * 设置 [区属]
      */
-    public void setDomains(String domains){
+    public void setDomains(String domains) {
         this.domains = domains ;
         this.modify("domains",domains);
     }
@@ -100,7 +100,7 @@ public class SysPost extends EntityClient implements Serializable {
     /**
      * 设置 [备注]
      */
-    public void setMemo(String memo){
+    public void setMemo(String memo) {
         this.memo = memo ;
         this.modify("memo",memo);
     }

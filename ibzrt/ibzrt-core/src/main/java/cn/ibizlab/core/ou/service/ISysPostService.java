@@ -22,20 +22,20 @@ import cn.ibizlab.core.ou.filter.SysPostSearchContext;
 /**
  * 实体[SysPost] 服务对象接口
  */
-public interface ISysPostService{
+public interface ISysPostService {
 
-    boolean create(SysPost et) ;
-    void createBatch(List<SysPost> list) ;
-    boolean update(SysPost et) ;
-    void updateBatch(List<SysPost> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    SysPost get(String key) ;
-    SysPost getDraft(SysPost et) ;
-    boolean checkKey(SysPost et) ;
-    boolean save(SysPost et) ;
-    void saveBatch(List<SysPost> list) ;
-    Page<SysPost> searchDefault(SysPostSearchContext context) ;
+    boolean create(SysPost et);
+    void createBatch(List<SysPost> list);
+    boolean update(SysPost et);
+    void updateBatch(List<SysPost> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    SysPost get(String key);
+    SysPost getDraft(SysPost et);
+    boolean checkKey(SysPost et);
+    boolean save(SysPost et);
+    void saveBatch(List<SysPost> list);
+    Page<SysPost> searchDefault(SysPostSearchContext context);
 
 }
 

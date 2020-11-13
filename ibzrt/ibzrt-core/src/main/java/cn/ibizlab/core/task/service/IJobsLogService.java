@@ -22,20 +22,20 @@ import cn.ibizlab.core.task.filter.JobsLogSearchContext;
 /**
  * 实体[JobsLog] 服务对象接口
  */
-public interface IJobsLogService{
+public interface IJobsLogService {
 
-    boolean create(JobsLog et) ;
-    void createBatch(List<JobsLog> list) ;
-    boolean update(JobsLog et) ;
-    void updateBatch(List<JobsLog> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    JobsLog get(String key) ;
-    JobsLog getDraft(JobsLog et) ;
-    boolean checkKey(JobsLog et) ;
-    boolean save(JobsLog et) ;
-    void saveBatch(List<JobsLog> list) ;
-    Page<JobsLog> searchDefault(JobsLogSearchContext context) ;
+    boolean create(JobsLog et);
+    void createBatch(List<JobsLog> list);
+    boolean update(JobsLog et);
+    void updateBatch(List<JobsLog> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    JobsLog get(String key);
+    JobsLog getDraft(JobsLog et);
+    boolean checkKey(JobsLog et);
+    boolean save(JobsLog et);
+    void saveBatch(List<JobsLog> list);
+    Page<JobsLog> searchDefault(JobsLogSearchContext context);
 
 }
 

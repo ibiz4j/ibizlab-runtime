@@ -54,37 +54,39 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
     @Override
     @Transactional
     public boolean create(JobsLog et) {
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void createBatch(List<JobsLog> list) {
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(JobsLog et) {
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("id",et.getId())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("id", et.getId()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
     @Override
     @Transactional
     public void updateBatch(List<JobsLog> list) {
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -98,11 +100,11 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
     @Transactional
     public JobsLog get(String key) {
         JobsLog et = getById(key);
-        if(et==null){
-            et=new JobsLog();
+        if(et == null){
+            et = new JobsLog();
             et.setId(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -114,13 +116,14 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
 
     @Override
     public boolean checkKey(JobsLog et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+        return (!ObjectUtils.isEmpty(et.getId())) && (!Objects.isNull(this.getById(et.getId())));
     }
     @Override
     @Transactional
     public boolean save(JobsLog et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

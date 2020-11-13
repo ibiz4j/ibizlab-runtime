@@ -38,7 +38,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZROLE",resultMap = "SysRoleResultMap")
+@TableName(value = "IBZROLE", resultMap = "SysRoleResultMap")
 public class SysRole extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,8 +46,8 @@ public class SysRole extends EntityMP implements Serializable {
     /**
      * 角色标识
      */
-    @DEField(name = "sys_roleid" , isKeyField=true)
-    @TableId(value= "sys_roleid",type=IdType.ASSIGN_UUID)
+    @DEField(name = "sys_roleid", isKeyField = true)
+    @TableId(value = "sys_roleid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "roleid")
     @JsonProperty("roleid")
     private String roleid;
@@ -84,9 +84,9 @@ public class SysRole extends EntityMP implements Serializable {
      * 建立时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @TableField(value = "createdate" , fill = FieldFill.INSERT)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "createdate", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
     /**
@@ -94,15 +94,15 @@ public class SysRole extends EntityMP implements Serializable {
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
     @TableField(value = "updatedate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
     /**
      * 建立人
      */
     @DEField(preType = DEPredefinedFieldType.CREATEMAN)
-    @TableField(value = "createman" , fill = FieldFill.INSERT)
+    @TableField(value = "createman", fill = FieldFill.INSERT)
     @JSONField(name = "createman")
     @JsonProperty("createman")
     private String createman;
@@ -128,25 +128,25 @@ public class SysRole extends EntityMP implements Serializable {
     /**
      * 设置 [角色名称]
      */
-    public void setRolename(String rolename){
-        this.rolename = rolename ;
-        this.modify("sys_rolename",rolename);
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
+        this.modify("sys_rolename", rolename);
     }
 
     /**
      * 设置 [备注]
      */
-    public void setMemo(String memo){
-        this.memo = memo ;
-        this.modify("memo",memo);
+    public void setMemo(String memo) {
+        this.memo = memo;
+        this.modify("memo", memo);
     }
 
     /**
      * 设置 [父角色标识]
      */
-    public void setProleid(String proleid){
-        this.proleid = proleid ;
-        this.modify("proleid",proleid);
+    public void setProleid(String proleid) {
+        this.proleid = proleid;
+        this.modify("proleid", proleid);
     }
 
 
@@ -160,7 +160,7 @@ public class SysRole extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("sys_roleid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

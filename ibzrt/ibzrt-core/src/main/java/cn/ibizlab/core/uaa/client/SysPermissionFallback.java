@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[SysPermission] 服务对象接口
  */
 @Component
-public class SysPermissionFallback implements SysPermissionFeignClient{
+public class SysPermissionFallback implements SysPermissionFeignClient {
 
-    public Page<SysPermission> select(){
-            return null;
-     }
+    public Page<SysPermission> select() {
+        return null;
+    }
 
-    public SysPermission create(SysPermission syspermission){
-            return null;
-     }
-    public Boolean createBatch(List<SysPermission> syspermissions){
-            return false;
-     }
+    public SysPermission create(SysPermission syspermission) {
+        return null;
+    }
+    public Boolean createBatch(List<SysPermission> syspermissions) {
+        return false;
+    }
 
-    public SysPermission update(String permissionid, SysPermission syspermission){
-            return null;
-     }
-    public Boolean updateBatch(List<SysPermission> syspermissions){
-            return false;
-     }
+    public SysPermission update(String permissionid, SysPermission syspermission) {
+        return null;
+    }
+    public Boolean updateBatch(List<SysPermission> syspermissions) {
+        return false;
+    }
 
 
-    public Boolean remove(String permissionid){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String permissionid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public SysPermission get(String permissionid){
-            return null;
-     }
+    public SysPermission get(String permissionid) {
+        return null;
+    }
 
 
     public SysPermission getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(SysPermission syspermission){
-            return false;
-     }
+    public Boolean checkKey(SysPermission syspermission) {
+        return false;
+    }
 
 
-    public Boolean save(SysPermission syspermission){
-            return false;
-     }
-    public Boolean saveBatch(List<SysPermission> syspermissions){
-            return false;
-     }
+    public Boolean save(SysPermission syspermission) {
+        return false;
+    }
+    public Boolean saveBatch(List<SysPermission> syspermissions) {
+        return false;
+    }
 
-    public Page<SysPermission> searchDefault(SysPermissionSearchContext context){
-            return null;
-     }
+    public Page<SysPermission> searchDefault(SysPermissionSearchContext context) {
+        return null;
+    }
 
 
 }

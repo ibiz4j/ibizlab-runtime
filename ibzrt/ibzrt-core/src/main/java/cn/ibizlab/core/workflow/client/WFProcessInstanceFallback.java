@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFProcessInstance] 服务对象接口
  */
 @Component
-public class WFProcessInstanceFallback implements WFProcessInstanceFeignClient{
+public class WFProcessInstanceFallback implements WFProcessInstanceFeignClient {
 
-    public Page<WFProcessInstance> select(){
-            return null;
-     }
+    public Page<WFProcessInstance> select() {
+        return null;
+    }
 
-    public WFProcessInstance create(WFProcessInstance wfprocessinstance){
-            return null;
-     }
-    public Boolean createBatch(List<WFProcessInstance> wfprocessinstances){
-            return false;
-     }
+    public WFProcessInstance create(WFProcessInstance wfprocessinstance) {
+        return null;
+    }
+    public Boolean createBatch(List<WFProcessInstance> wfprocessinstances) {
+        return false;
+    }
 
-    public WFProcessInstance update(String id, WFProcessInstance wfprocessinstance){
-            return null;
-     }
-    public Boolean updateBatch(List<WFProcessInstance> wfprocessinstances){
-            return false;
-     }
+    public WFProcessInstance update(String id, WFProcessInstance wfprocessinstance) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFProcessInstance> wfprocessinstances) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFProcessInstance get(String id){
-            return null;
-     }
+    public WFProcessInstance get(String id) {
+        return null;
+    }
 
 
     public WFProcessInstance getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFProcessInstance wfprocessinstance){
-            return false;
-     }
+    public Boolean checkKey(WFProcessInstance wfprocessinstance) {
+        return false;
+    }
 
 
-    public Boolean save(WFProcessInstance wfprocessinstance){
-            return false;
-     }
-    public Boolean saveBatch(List<WFProcessInstance> wfprocessinstances){
-            return false;
-     }
+    public Boolean save(WFProcessInstance wfprocessinstance) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFProcessInstance> wfprocessinstances) {
+        return false;
+    }
 
-    public Page<WFProcessInstance> searchDefault(WFProcessInstanceSearchContext context){
-            return null;
-     }
+    public Page<WFProcessInstance> searchDefault(WFProcessInstanceSearchContext context) {
+        return null;
+    }
 
 
 }

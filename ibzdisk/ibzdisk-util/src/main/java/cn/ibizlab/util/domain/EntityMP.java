@@ -5,24 +5,25 @@ import org.springframework.util.StringUtils;
 
 public class EntityMP extends EntityBase {
 
-
-
     public UpdateWrapper getUpdateWrapper(boolean clean) {
         UpdateWrapper wrapper=new UpdateWrapper();
         for(String nullField:getFocusNull()) {
             wrapper.set(nullField,null);
         }
-        if(clean)
+        if(clean) {
             getFocusNull().clear();
+        }
         return  wrapper;
     }
 
     @Override
     public void modify(String field,Object val) {
-        if(val==null)
+        if(val==null) {
             this.getFocusNull().add(field.toLowerCase());
-        else
+        }
+        else {
             this.getFocusNull().remove(field.toLowerCase());
+        }
     }
 
     @Override
@@ -33,6 +34,5 @@ public class EntityMP extends EntityBase {
             getFocusNull().remove(resetField);
         }
     }
-
 }
 

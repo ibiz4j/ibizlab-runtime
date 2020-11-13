@@ -77,6 +77,7 @@ public class SysRoleSearchContext extends QueryWrapperContext<SysRole> {
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

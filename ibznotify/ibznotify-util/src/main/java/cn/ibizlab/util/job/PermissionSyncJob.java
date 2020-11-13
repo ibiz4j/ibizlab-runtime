@@ -46,14 +46,14 @@ public class PermissionSyncJob implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         try {
             Thread.sleep(10000);
-            InputStream permission= this.getClass().getResourceAsStream("/permission/systemResource.json"); //获取当前系统所有实体资源能力
+            InputStream permission = this.getClass().getResourceAsStream("/permission/systemResource.json"); //获取当前系统所有实体资源能力
             String permissionResult = IOUtils.toString(permission,"UTF-8");
             JSONObject system= new JSONObject();
             system.put("pssystemid",systemId);
             system.put("pssystemname",systemName);
             system.put("sysstructure",JSONObject.parseObject(permissionResult));
             system.put("md5check",DigestUtils.md5DigestAsHex(permissionResult.getBytes()));
-            if(client.syncSysAuthority(system)){
+            if(client.syncSysAuthority(system)) {
                 log.info("向[UAA]同步系统资源成功");
             }else{
                 log.error("向[UAA]同步系统资源失败");
@@ -64,9 +64,9 @@ public class PermissionSyncJob implements ApplicationRunner {
         }
 
         try {
-            InputStream sysModel= this.getClass().getResourceAsStream("/sysmodel/ibznotify.json"); //获取当前系统所有实体资源能力
+            InputStream sysModel = this.getClass().getResourceAsStream("/sysmodel/ibznotify.json"); //获取当前系统所有实体资源能力
             String strSysModel = IOUtils.toString(sysModel,"UTF-8");
-            if(liteFeignClient.syncSysModel(JSONObject.parseObject(strSysModel))){
+            if(liteFeignClient.syncSysModel(JSONObject.parseObject(strSysModel))) {
                 log.info("向[lite]同步系统模型成功");
             }else{
                 log.error("向[lite]同步系统模型失败");

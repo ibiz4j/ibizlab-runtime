@@ -64,9 +64,10 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Transactional
     public boolean create(SysTeamMember et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getTeammemberid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getTeammemberid()), et);
         return true;
     }
 
@@ -81,9 +82,10 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Transactional
     public boolean update(SysTeamMember et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("teammemberid",et.getTeammemberid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("teammemberid", et.getTeammemberid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getTeammemberid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getTeammemberid()), et);
         return true;
     }
 
@@ -91,13 +93,13 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Transactional
     public void updateBatch(List<SysTeamMember> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -111,11 +113,11 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Transactional
     public SysTeamMember get(String key) {
         SysTeamMember et = getById(key);
-        if(et==null){
-            et=new SysTeamMember();
+        if(et == null){
+            et = new SysTeamMember();
             et.setTeammemberid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -128,13 +130,14 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
 
     @Override
     public boolean checkKey(SysTeamMember et) {
-        return (!ObjectUtils.isEmpty(et.getTeammemberid()))&&(!Objects.isNull(this.getById(et.getTeammemberid())));
+        return (!ObjectUtils.isEmpty(et.getTeammemberid())) && (!Objects.isNull(this.getById(et.getTeammemberid())));
     }
     @Override
     @Transactional
     public boolean save(SysTeamMember et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

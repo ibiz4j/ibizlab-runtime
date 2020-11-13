@@ -66,9 +66,10 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Transactional
     public boolean create(SysDepartment et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getDeptid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getDeptid()), et);
         return true;
     }
 
@@ -76,16 +77,17 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Transactional
     public void createBatch(List<SysDepartment> list) {
         list.forEach(item->fillParentData(item));
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysDepartment et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("deptid",et.getDeptid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("deptid", et.getDeptid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getDeptid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getDeptid()), et);
         return true;
     }
 
@@ -93,7 +95,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Transactional
     public void updateBatch(List<SysDepartment> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
@@ -102,7 +104,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         if(!ObjectUtils.isEmpty(sysdepartmentService.selectByParentdeptid(key)))
             throw new BadRequestAlertException("删除数据失败，当前数据存在关系实体[SysDepartment]数据，无法删除!","","");
         sysemployeeService.resetByMdeptid(key);
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -119,11 +121,11 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Transactional
     public SysDepartment get(String key) {
         SysDepartment et = getById(key);
-        if(et==null){
-            et=new SysDepartment();
+        if(et == null){
+            et = new SysDepartment();
             et.setDeptid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -136,13 +138,14 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
 
     @Override
     public boolean checkKey(SysDepartment et) {
-        return (!ObjectUtils.isEmpty(et.getDeptid()))&&(!Objects.isNull(this.getById(et.getDeptid())));
+        return (!ObjectUtils.isEmpty(et.getDeptid())) && (!Objects.isNull(this.getById(et.getDeptid())));
     }
     @Override
     @Transactional
     public boolean save(SysDepartment et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 
@@ -312,10 +315,12 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
                 ids.add(id);
             }
         }
-        if(ids.size()>0)
-           return this.listByIds(ids);
-        else
-           return entities;
+        if(ids.size()>0) {
+            return this.listByIds(ids);
+        }
+        else {
+            return entities;
+        }
     }
 
 

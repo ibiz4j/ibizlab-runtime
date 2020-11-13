@@ -36,7 +36,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 部门标识
      */
-    @DEField(isKeyField=true)
+    @DEField(isKeyField = true)
     @JSONField(name = "deptid")
     @JsonProperty("deptid")
     private String deptid;
@@ -123,7 +123,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 逻辑有效
      */
-    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
+    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval = "0")
     @JSONField(name = "enable")
     @JsonProperty("enable")
     private Integer enable;
@@ -146,8 +146,8 @@ public class SysDepartment extends EntityClient implements Serializable {
      * 创建时间
      */
     @DEField(preType = DEPredefinedFieldType.CREATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
     private Timestamp createdate;
 
@@ -155,8 +155,8 @@ public class SysDepartment extends EntityClient implements Serializable {
      * 最后修改时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
@@ -181,7 +181,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [部门代码]
      */
-    public void setDeptcode(String deptcode){
+    public void setDeptcode(String deptcode) {
         this.deptcode = deptcode ;
         this.modify("deptcode",deptcode);
     }
@@ -189,7 +189,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [部门名称]
      */
-    public void setDeptname(String deptname){
+    public void setDeptname(String deptname) {
         this.deptname = deptname ;
         this.modify("deptname",deptname);
     }
@@ -197,7 +197,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [上级部门]
      */
-    public void setParentdeptid(String parentdeptid){
+    public void setParentdeptid(String parentdeptid) {
         this.parentdeptid = parentdeptid ;
         this.modify("pdeptid",parentdeptid);
     }
@@ -205,7 +205,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [部门简称]
      */
-    public void setShortname(String shortname){
+    public void setShortname(String shortname) {
         this.shortname = shortname ;
         this.modify("shortname",shortname);
     }
@@ -213,7 +213,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [部门级别]
      */
-    public void setDeptlevel(Integer deptlevel){
+    public void setDeptlevel(Integer deptlevel) {
         this.deptlevel = deptlevel ;
         this.modify("deptlevel",deptlevel);
     }
@@ -221,7 +221,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [区属]
      */
-    public void setDomains(String domains){
+    public void setDomains(String domains) {
         this.domains = domains ;
         this.modify("domains",domains);
     }
@@ -229,7 +229,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [排序]
      */
-    public void setShoworder(Integer showorder){
+    public void setShoworder(Integer showorder) {
         this.showorder = showorder ;
         this.modify("showorder",showorder);
     }
@@ -237,7 +237,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [业务编码]
      */
-    public void setBcode(String bcode){
+    public void setBcode(String bcode) {
         this.bcode = bcode ;
         this.modify("bcode",bcode);
     }
@@ -245,7 +245,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [分管领导标识]
      */
-    public void setLeaderid(String leaderid){
+    public void setLeaderid(String leaderid) {
         this.leaderid = leaderid ;
         this.modify("leaderid",leaderid);
     }
@@ -253,7 +253,7 @@ public class SysDepartment extends EntityClient implements Serializable {
     /**
      * 设置 [分管领导]
      */
-    public void setLeadername(String leadername){
+    public void setLeadername(String leadername) {
         this.leadername = leadername ;
         this.modify("leadername",leadername);
     }

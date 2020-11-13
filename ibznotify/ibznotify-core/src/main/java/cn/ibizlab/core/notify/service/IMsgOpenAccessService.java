@@ -23,24 +23,24 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[MsgOpenAccess] 服务对象接口
  */
-public interface IMsgOpenAccessService extends IService<MsgOpenAccess>{
+public interface IMsgOpenAccessService extends IService<MsgOpenAccess> {
 
-    boolean create(MsgOpenAccess et) ;
-    @CacheEvict(value="msgopenaccess",allEntries=true)
-    void createBatch(List<MsgOpenAccess> list) ;
-    boolean update(MsgOpenAccess et) ;
-    @CacheEvict(value="msgopenaccess",allEntries=true)
-    void updateBatch(List<MsgOpenAccess> list) ;
-    boolean remove(String key) ;
-    @CacheEvict(value="msgopenaccess",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    MsgOpenAccess get(String key) ;
-    MsgOpenAccess getDraft(MsgOpenAccess et) ;
-    boolean checkKey(MsgOpenAccess et) ;
-    boolean save(MsgOpenAccess et) ;
-    @CacheEvict(value="msgopenaccess",allEntries=true)
-    void saveBatch(List<MsgOpenAccess> list) ;
-    Page<MsgOpenAccess> searchDefault(MsgOpenAccessSearchContext context) ;
+    boolean create(MsgOpenAccess et);
+    @CacheEvict(value = "msgopenaccess", allEntries = true)
+    void createBatch(List<MsgOpenAccess> list);
+    boolean update(MsgOpenAccess et);
+    @CacheEvict(value = "msgopenaccess", allEntries = true)
+    void updateBatch(List<MsgOpenAccess> list);
+    boolean remove(String key);
+    @CacheEvict(value = "msgopenaccess", allEntries = true)
+    void removeBatch(Collection<String> idList);
+    MsgOpenAccess get(String key);
+    MsgOpenAccess getDraft(MsgOpenAccess et);
+    boolean checkKey(MsgOpenAccess et);
+    boolean save(MsgOpenAccess et);
+    @CacheEvict(value = "msgopenaccess",allEntries = true)
+    void saveBatch(List<MsgOpenAccess> list);
+    Page<MsgOpenAccess> searchDefault(MsgOpenAccessSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

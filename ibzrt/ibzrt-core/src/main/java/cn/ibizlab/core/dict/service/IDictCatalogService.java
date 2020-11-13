@@ -22,20 +22,20 @@ import cn.ibizlab.core.dict.filter.DictCatalogSearchContext;
 /**
  * 实体[DictCatalog] 服务对象接口
  */
-public interface IDictCatalogService{
+public interface IDictCatalogService {
 
-    boolean create(DictCatalog et) ;
-    void createBatch(List<DictCatalog> list) ;
-    boolean update(DictCatalog et) ;
-    void updateBatch(List<DictCatalog> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    DictCatalog get(String key) ;
-    DictCatalog getDraft(DictCatalog et) ;
-    boolean checkKey(DictCatalog et) ;
-    boolean save(DictCatalog et) ;
-    void saveBatch(List<DictCatalog> list) ;
-    Page<DictCatalog> searchDefault(DictCatalogSearchContext context) ;
+    boolean create(DictCatalog et);
+    void createBatch(List<DictCatalog> list);
+    boolean update(DictCatalog et);
+    void updateBatch(List<DictCatalog> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    DictCatalog get(String key);
+    DictCatalog getDraft(DictCatalog et);
+    boolean checkKey(DictCatalog et);
+    boolean save(DictCatalog et);
+    void saveBatch(List<DictCatalog> list);
+    Page<DictCatalog> searchDefault(DictCatalogSearchContext context);
 
 }
 

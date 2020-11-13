@@ -38,6 +38,7 @@ public class WFUserSearchContext extends QueryWrapperContext<WFUser> {
     /**
 	 * 启用快速搜索
 	 */
+    @Override
 	public void setQuery(String query)
 	{
 		 this.query=query;

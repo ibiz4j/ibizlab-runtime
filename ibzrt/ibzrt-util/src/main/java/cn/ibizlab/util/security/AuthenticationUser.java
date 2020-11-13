@@ -260,10 +260,12 @@ public class AuthenticationUser implements UserDetails
 		return this.sessionParams;
     }
     private Map<String, Object> getUserSessionParam() {
-		if(userSessionParam!=null)
+		if(userSessionParam!=null){
 			return userSessionParam;
-		else
+		}
+		else{
 			return new HashMap<>();
+		}
     }
 
 	public void setOrgInfo(Map<String, Set<String>> orgInfo) {

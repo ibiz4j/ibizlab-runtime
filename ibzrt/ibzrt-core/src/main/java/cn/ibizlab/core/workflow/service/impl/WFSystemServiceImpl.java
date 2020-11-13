@@ -51,7 +51,7 @@ public class WFSystemServiceImpl implements IWFSystemService {
         WFSystem rt = wFSystemFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class WFSystemServiceImpl implements IWFSystemService {
         WFSystem rt = wFSystemFeignClient.update(et.getPssystemid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

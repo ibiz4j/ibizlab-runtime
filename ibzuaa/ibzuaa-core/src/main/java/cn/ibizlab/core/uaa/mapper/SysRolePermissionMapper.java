@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysRolePermissionMapper extends BaseMapper<SysRolePermission>{
+public interface SysRolePermissionMapper extends BaseMapper<SysRolePermission> {
 
-    Page<SysRolePermission> searchDefault(IPage page, @Param("srf") SysRolePermissionSearchContext context, @Param("ew") Wrapper<SysRolePermission> wrapper) ;
+    Page<SysRolePermission> searchDefault(IPage page, @Param("srf") SysRolePermissionSearchContext context, @Param("ew") Wrapper<SysRolePermission> wrapper);
     @Override
     SysRolePermission selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface SysRolePermissionMapper extends BaseMapper<SysRolePermission>{
     int update(@Param(Constants.ENTITY) SysRolePermission entity, @Param("ew") Wrapper<SysRolePermission> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL
@@ -62,8 +62,8 @@ public interface SysRolePermissionMapper extends BaseMapper<SysRolePermission>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
-    List<SysRolePermission> selectByPermissionid(@Param("permissionid") Serializable permissionid) ;
+    List<SysRolePermission> selectByPermissionid(@Param("permissionid") Serializable permissionid);
 
-    List<SysRolePermission> selectByRoleid(@Param("roleid") Serializable roleid) ;
+    List<SysRolePermission> selectByRoleid(@Param("roleid") Serializable roleid);
 
 }

@@ -51,7 +51,7 @@ public class SysAppServiceImpl implements ISysAppService {
         SysApp rt = sysAppFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class SysAppServiceImpl implements ISysAppService {
         SysApp rt = sysAppFeignClient.update(et.getId(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

@@ -9,6 +9,7 @@ export default {
     postid: "岗位标识",
     postname: "岗位",
     domains: "区属",
+    username: "登录名",
   },
 	views: {
 		gridview: {
@@ -45,6 +46,7 @@ export default {
 	main_grid: {
 		columns: {
 			personname: "姓名",
+			username: "登录名",
 			postname: "岗位",
 			userid: "用户标识",
 			postid: "岗位标识",

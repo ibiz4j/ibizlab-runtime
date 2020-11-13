@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[JobsLock] 服务对象接口
  */
 @Component
-public class JobsLockFallback implements JobsLockFeignClient{
+public class JobsLockFallback implements JobsLockFeignClient {
 
-    public Page<JobsLock> select(){
-            return null;
-     }
+    public Page<JobsLock> select() {
+        return null;
+    }
 
-    public JobsLock create(JobsLock jobslock){
-            return null;
-     }
-    public Boolean createBatch(List<JobsLock> jobslocks){
-            return false;
-     }
+    public JobsLock create(JobsLock jobslock) {
+        return null;
+    }
+    public Boolean createBatch(List<JobsLock> jobslocks) {
+        return false;
+    }
 
-    public JobsLock update(String id, JobsLock jobslock){
-            return null;
-     }
-    public Boolean updateBatch(List<JobsLock> jobslocks){
-            return false;
-     }
+    public JobsLock update(String id, JobsLock jobslock) {
+        return null;
+    }
+    public Boolean updateBatch(List<JobsLock> jobslocks) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public JobsLock get(String id){
-            return null;
-     }
+    public JobsLock get(String id) {
+        return null;
+    }
 
 
     public JobsLock getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(JobsLock jobslock){
-            return false;
-     }
+    public Boolean checkKey(JobsLock jobslock) {
+        return false;
+    }
 
 
-    public Boolean save(JobsLock jobslock){
-            return false;
-     }
-    public Boolean saveBatch(List<JobsLock> jobslocks){
-            return false;
-     }
+    public Boolean save(JobsLock jobslock) {
+        return false;
+    }
+    public Boolean saveBatch(List<JobsLock> jobslocks) {
+        return false;
+    }
 
-    public Page<JobsLock> searchDefault(JobsLockSearchContext context){
-            return null;
-     }
+    public Page<JobsLock> searchDefault(JobsLockSearchContext context) {
+        return null;
+    }
 
 
 }

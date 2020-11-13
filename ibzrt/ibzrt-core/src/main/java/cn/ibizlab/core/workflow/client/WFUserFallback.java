@@ -17,60 +17,60 @@ import org.springframework.stereotype.Component;
  * 实体[WFUser] 服务对象接口
  */
 @Component
-public class WFUserFallback implements WFUserFeignClient{
+public class WFUserFallback implements WFUserFeignClient {
 
-    public Page<WFUser> select(){
-            return null;
-     }
+    public Page<WFUser> select() {
+        return null;
+    }
 
-    public WFUser create(WFUser wfuser){
-            return null;
-     }
-    public Boolean createBatch(List<WFUser> wfusers){
-            return false;
-     }
+    public WFUser create(WFUser wfuser) {
+        return null;
+    }
+    public Boolean createBatch(List<WFUser> wfusers) {
+        return false;
+    }
 
-    public WFUser update(String id, WFUser wfuser){
-            return null;
-     }
-    public Boolean updateBatch(List<WFUser> wfusers){
-            return false;
-     }
+    public WFUser update(String id, WFUser wfuser) {
+        return null;
+    }
+    public Boolean updateBatch(List<WFUser> wfusers) {
+        return false;
+    }
 
 
-    public Boolean remove(String id){
-            return false;
-     }
-    public Boolean removeBatch(Collection<String> idList){
-            return false;
-     }
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
+        return false;
+    }
 
-    public WFUser get(String id){
-            return null;
-     }
+    public WFUser get(String id) {
+        return null;
+    }
 
 
     public WFUser getDraft(){
-            return null;
+        return null;
     }
 
 
 
-    public Boolean checkKey(WFUser wfuser){
-            return false;
-     }
+    public Boolean checkKey(WFUser wfuser) {
+        return false;
+    }
 
 
-    public Boolean save(WFUser wfuser){
-            return false;
-     }
-    public Boolean saveBatch(List<WFUser> wfusers){
-            return false;
-     }
+    public Boolean save(WFUser wfuser) {
+        return false;
+    }
+    public Boolean saveBatch(List<WFUser> wfusers) {
+        return false;
+    }
 
-    public Page<WFUser> searchDefault(WFUserSearchContext context){
-            return null;
-     }
+    public Page<WFUser> searchDefault(WFUserSearchContext context) {
+        return null;
+    }
 
 
 }

@@ -22,26 +22,26 @@ import cn.ibizlab.core.uaa.filter.SysRoleSearchContext;
 /**
  * 实体[SysRole] 服务对象接口
  */
-public interface ISysRoleService{
+public interface ISysRoleService {
 
-    boolean create(SysRole et) ;
-    @CacheEvict(value="sysrole",allEntries=true)
-    void createBatch(List<SysRole> list) ;
-    boolean update(SysRole et) ;
-    @CacheEvict(value="sysrole",allEntries=true)
-    void updateBatch(List<SysRole> list) ;
-    boolean remove(String key) ;
-    @CacheEvict(value="sysrole",allEntries=true)
-    void removeBatch(Collection<String> idList) ;
-    SysRole get(String key) ;
-    SysRole getDraft(SysRole et) ;
-    boolean checkKey(SysRole et) ;
-    boolean save(SysRole et) ;
-    @CacheEvict(value="sysrole",allEntries=true)
-    void saveBatch(List<SysRole> list) ;
-    Page<SysRole> searchDefault(SysRoleSearchContext context) ;
+    boolean create(SysRole et);
+    @CacheEvict(value = "sysrole", allEntries = true)
+    void createBatch(List<SysRole> list);
+    boolean update(SysRole et);
+    @CacheEvict(value = "sysrole", allEntries = true)
+    void updateBatch(List<SysRole> list);
+    boolean remove(String key);
+    @CacheEvict(value = "sysrole", allEntries = true)
+    void removeBatch(Collection<String> idList);
+    SysRole get(String key);
+    SysRole getDraft(SysRole et);
+    boolean checkKey(SysRole et);
+    boolean save(SysRole et);
+    @CacheEvict(value = "sysrole",allEntries = true)
+    void saveBatch(List<SysRole> list);
+    Page<SysRole> searchDefault(SysRoleSearchContext context);
     List<SysRole> selectByProleid(String roleid);
-    @CacheEvict(value="sysrole",allEntries=true)
+    @CacheEvict(value = "sysrole", allEntries = true)
     void removeByProleid(String roleid);
 
 }

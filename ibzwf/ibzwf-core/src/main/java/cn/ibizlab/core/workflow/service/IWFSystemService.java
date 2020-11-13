@@ -23,20 +23,20 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[WFSystem] 服务对象接口
  */
-public interface IWFSystemService extends IService<WFSystem>{
+public interface IWFSystemService extends IService<WFSystem> {
 
-    boolean create(WFSystem et) ;
-    void createBatch(List<WFSystem> list) ;
-    boolean update(WFSystem et) ;
-    void updateBatch(List<WFSystem> list) ;
-    boolean remove(String key) ;
-    void removeBatch(Collection<String> idList) ;
-    WFSystem get(String key) ;
-    WFSystem getDraft(WFSystem et) ;
-    boolean checkKey(WFSystem et) ;
-    boolean save(WFSystem et) ;
-    void saveBatch(List<WFSystem> list) ;
-    Page<WFSystem> searchDefault(WFSystemSearchContext context) ;
+    boolean create(WFSystem et);
+    void createBatch(List<WFSystem> list);
+    boolean update(WFSystem et);
+    void updateBatch(List<WFSystem> list);
+    boolean remove(String key);
+    void removeBatch(Collection<String> idList);
+    WFSystem get(String key);
+    WFSystem getDraft(WFSystem et);
+    boolean checkKey(WFSystem et);
+    boolean save(WFSystem et);
+    void saveBatch(List<WFSystem> list);
+    Page<WFSystem> searchDefault(WFSystemSearchContext context);
     /**
      *自定义查询SQL
      * @param sql  select * from table where id =#{et.param}

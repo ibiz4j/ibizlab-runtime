@@ -51,7 +51,7 @@ public class WFMemberServiceImpl implements IWFMemberService {
         WFMember rt = wFMemberFeignClient.create(et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class WFMemberServiceImpl implements IWFMemberService {
         WFMember rt = wFMemberFeignClient.update(et.getMemberid(),et);
         if(rt==null)
             return false;
-        CachedBeanCopier.copy(rt,et);
+        CachedBeanCopier.copy(rt, et);
         return true;
 
     }

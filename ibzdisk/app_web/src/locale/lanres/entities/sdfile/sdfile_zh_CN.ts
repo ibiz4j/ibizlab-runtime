@@ -1,4 +1,20 @@
 export default {
+  fields: {
+    id: "标识",
+    name: "名称",
+    file_path: "路径",
+    folder: "特定目录",
+    file_size: "文件大小",
+    extension: "扩展名",
+    owner_type: "所属类型",
+    owner_id: "所属主体",
+    memo: "备注",
+    digest_code: "签名",
+    createman: "创建人",
+    createdate: "创建日期",
+    updateman: "更新人",
+    updatedate: "更新时间",
+  },
 	views: {
 		editview: {
 			caption: "文件",

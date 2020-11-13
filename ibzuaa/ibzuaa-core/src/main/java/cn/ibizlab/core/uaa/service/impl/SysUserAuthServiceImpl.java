@@ -58,9 +58,10 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
     @Transactional
     public boolean create(SysUserAuth et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
@@ -75,9 +76,10 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
     @Transactional
     public boolean update(SysUserAuth et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("authid",et.getId())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("authid", et.getId()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getId()),et);
+        }
+        CachedBeanCopier.copy(get(et.getId()), et);
         return true;
     }
 
@@ -85,13 +87,13 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
     @Transactional
     public void updateBatch(List<SysUserAuth> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -105,11 +107,11 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
     @Transactional
     public SysUserAuth get(String key) {
         SysUserAuth et = getById(key);
-        if(et==null){
-            et=new SysUserAuth();
+        if(et == null){
+            et = new SysUserAuth();
             et.setId(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -122,13 +124,14 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
 
     @Override
     public boolean checkKey(SysUserAuth et) {
-        return (!ObjectUtils.isEmpty(et.getId()))&&(!Objects.isNull(this.getById(et.getId())));
+        return (!ObjectUtils.isEmpty(et.getId())) && (!Objects.isNull(this.getById(et.getId())));
     }
     @Override
     @Transactional
     public boolean save(SysUserAuth et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

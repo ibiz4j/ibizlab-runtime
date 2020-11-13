@@ -61,9 +61,10 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Transactional
     public boolean create(WFMember et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getMemberid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getMemberid()), et);
         return true;
     }
 
@@ -78,9 +79,10 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Transactional
     public boolean update(WFMember et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("memberid",et.getMemberid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("memberid", et.getMemberid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getMemberid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getMemberid()), et);
         return true;
     }
 
@@ -88,13 +90,13 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Transactional
     public void updateBatch(List<WFMember> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -108,11 +110,11 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Transactional
     public WFMember get(String key) {
         WFMember et = getById(key);
-        if(et==null){
-            et=new WFMember();
+        if(et == null){
+            et = new WFMember();
             et.setMemberid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -125,13 +127,14 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
 
     @Override
     public boolean checkKey(WFMember et) {
-        return (!ObjectUtils.isEmpty(et.getMemberid()))&&(!Objects.isNull(this.getById(et.getMemberid())));
+        return (!ObjectUtils.isEmpty(et.getMemberid())) && (!Objects.isNull(this.getById(et.getMemberid())));
     }
     @Override
     @Transactional
     public boolean save(WFMember et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 
@@ -295,10 +298,12 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
                 ids.add(id);
             }
         }
-        if(ids.size()>0)
-           return this.listByIds(ids);
-        else
-           return entities;
+        if(ids.size()>0) {
+            return this.listByIds(ids);
+        }
+        else {
+            return entities;
+        }
     }
 
 

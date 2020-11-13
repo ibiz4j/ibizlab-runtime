@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface SysTeamMemberMapper extends BaseMapper<SysTeamMember>{
+public interface SysTeamMemberMapper extends BaseMapper<SysTeamMember> {
 
-    Page<SysTeamMember> searchDefault(IPage page, @Param("srf") SysTeamMemberSearchContext context, @Param("ew") Wrapper<SysTeamMember> wrapper) ;
+    Page<SysTeamMember> searchDefault(IPage page, @Param("srf") SysTeamMemberSearchContext context, @Param("ew") Wrapper<SysTeamMember> wrapper);
     @Override
     SysTeamMember selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface SysTeamMemberMapper extends BaseMapper<SysTeamMember>{
     int update(@Param(Constants.ENTITY) SysTeamMember entity, @Param("ew") Wrapper<SysTeamMember> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL
@@ -62,10 +62,10 @@ public interface SysTeamMemberMapper extends BaseMapper<SysTeamMember>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
-    List<SysTeamMember> selectByUserid(@Param("userid") Serializable userid) ;
+    List<SysTeamMember> selectByUserid(@Param("userid") Serializable userid);
 
-    List<SysTeamMember> selectByPostid(@Param("postid") Serializable postid) ;
+    List<SysTeamMember> selectByPostid(@Param("postid") Serializable postid);
 
-    List<SysTeamMember> selectByTeamid(@Param("teamid") Serializable teamid) ;
+    List<SysTeamMember> selectByTeamid(@Param("teamid") Serializable teamid);
 
 }

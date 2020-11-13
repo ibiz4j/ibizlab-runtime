@@ -63,9 +63,10 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional
     public boolean create(SysRole et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getRoleid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getRoleid()), et);
         return true;
     }
 
@@ -73,16 +74,17 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional
     public void createBatch(List<SysRole> list) {
         list.forEach(item->fillParentData(item));
-        this.saveBatch(list,batchSize);
+        this.saveBatch(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean update(SysRole et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("sys_roleid",et.getRoleid())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("sys_roleid", et.getRoleid()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getRoleid()),et);
+        }
+        CachedBeanCopier.copy(get(et.getRoleid()), et);
         return true;
     }
 
@@ -90,7 +92,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional
     public void updateBatch(List<SysRole> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
@@ -98,7 +100,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     public boolean remove(String key) {
         sysrolepermissionService.removeByRoleid(key);
         sysuserroleService.removeByRoleid(key);
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -114,11 +116,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional
     public SysRole get(String key) {
         SysRole et = getById(key);
-        if(et==null){
-            et=new SysRole();
+        if(et == null){
+            et = new SysRole();
             et.setRoleid(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -131,13 +133,14 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     @Override
     public boolean checkKey(SysRole et) {
-        return (!ObjectUtils.isEmpty(et.getRoleid()))&&(!Objects.isNull(this.getById(et.getRoleid())));
+        return (!ObjectUtils.isEmpty(et.getRoleid())) && (!Objects.isNull(this.getById(et.getRoleid())));
     }
     @Override
     @Transactional
     public boolean save(SysRole et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 
@@ -246,10 +249,12 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
                 ids.add(id);
             }
         }
-        if(ids.size()>0)
-           return this.listByIds(ids);
-        else
-           return entities;
+        if(ids.size()>0) {
+            return this.listByIds(ids);
+        }
+        else {
+            return entities;
+        }
     }
 
 

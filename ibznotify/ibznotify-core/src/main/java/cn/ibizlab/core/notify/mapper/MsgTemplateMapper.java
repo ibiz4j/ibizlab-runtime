@@ -17,31 +17,31 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface MsgTemplateMapper extends BaseMapper<MsgTemplate>{
+public interface MsgTemplateMapper extends BaseMapper<MsgTemplate> {
 
-    Page<MsgTemplate> searchDefault(IPage page, @Param("srf") MsgTemplateSearchContext context, @Param("ew") Wrapper<MsgTemplate> wrapper) ;
+    Page<MsgTemplate> searchDefault(IPage page, @Param("srf") MsgTemplateSearchContext context, @Param("ew") Wrapper<MsgTemplate> wrapper);
     @Override
-    @Cacheable( value="msgtemplate",key = "'row:'+#p0")
+    @Cacheable(value ="msgtemplate", key = "'row:'+#p0")
     MsgTemplate selectById(Serializable id);
     @Override
-    @CacheEvict( value="msgtemplate",key = "'row:'+#p0.tid")
+    @CacheEvict(value ="msgtemplate", key = "'row:'+#p0.tid")
     int insert(MsgTemplate entity);
     @Override
-    @CacheEvict( value="msgtemplate",key = "'row:'+#p0.tid")
+    @CacheEvict(value ="msgtemplate", key = "'row:'+#p0.tid")
     int updateById(@Param(Constants.ENTITY) MsgTemplate entity);
     @Override
-    @CacheEvict(value="msgtemplate",key = "'row:'+#p0.tid")
+    @CacheEvict(value ="msgtemplate", key = "'row:'+#p0.tid")
     int update(@Param(Constants.ENTITY) MsgTemplate entity, @Param("ew") Wrapper<MsgTemplate> updateWrapper);
     @Override
-    @CacheEvict( value="msgtemplate",key = "'row:'+#p0")
+    @CacheEvict(value ="msgtemplate", key = "'row:'+#p0")
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL
@@ -67,6 +67,6 @@ public interface MsgTemplateMapper extends BaseMapper<MsgTemplate>{
     @Delete("${sql}")
     boolean deleteBySQL(@Param("sql") String sql, @Param("et")Map param);
 
-    List<MsgTemplate> selectByAccessId(@Param("id") Serializable id) ;
+    List<MsgTemplate> selectByAccessId(@Param("id") Serializable id);
 
 }

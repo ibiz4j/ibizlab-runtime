@@ -58,9 +58,10 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     @Transactional
     public boolean create(DictOption et) {
         fillParentData(et);
-        if(!this.retBool(this.baseMapper.insert(et)))
+        if(!this.retBool(this.baseMapper.insert(et))) {
             return false;
-        CachedBeanCopier.copy(get(et.getValueKey()),et);
+        }
+        CachedBeanCopier.copy(get(et.getValueKey()), et);
         return true;
     }
 
@@ -75,9 +76,10 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     @Transactional
     public boolean update(DictOption et) {
         fillParentData(et);
-         if(!update(et,(Wrapper) et.getUpdateWrapper(true).eq("vkey",et.getValueKey())))
+        if(!update(et, (Wrapper) et.getUpdateWrapper(true).eq("vkey", et.getValueKey()))) {
             return false;
-        CachedBeanCopier.copy(get(et.getValueKey()),et);
+        }
+        CachedBeanCopier.copy(get(et.getValueKey()), et);
         return true;
     }
 
@@ -85,13 +87,13 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     @Transactional
     public void updateBatch(List<DictOption> list) {
         list.forEach(item->fillParentData(item));
-        updateBatchById(list,batchSize);
+        updateBatchById(list, batchSize);
     }
 
     @Override
     @Transactional
     public boolean remove(String key) {
-        boolean result=removeById(key);
+        boolean result = removeById(key);
         return result ;
     }
 
@@ -105,11 +107,11 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     @Transactional
     public DictOption get(String key) {
         DictOption et = getById(key);
-        if(et==null){
-            et=new DictOption();
+        if(et == null){
+            et = new DictOption();
             et.setValueKey(key);
         }
-        else{
+        else {
         }
         return et;
     }
@@ -122,13 +124,14 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
 
     @Override
     public boolean checkKey(DictOption et) {
-        return (!ObjectUtils.isEmpty(et.getValueKey()))&&(!Objects.isNull(this.getById(et.getValueKey())));
+        return (!ObjectUtils.isEmpty(et.getValueKey())) && (!Objects.isNull(this.getById(et.getValueKey())));
     }
     @Override
     @Transactional
     public boolean save(DictOption et) {
-        if(!saveOrUpdate(et))
+        if(!saveOrUpdate(et)) {
             return false;
+        }
         return true;
     }
 

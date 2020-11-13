@@ -4,11 +4,10 @@ import org.mapstruct.*;
 import cn.ibizlab.core.notify.domain.MsgOpenAccess;
 import cn.ibizlab.api.dto.MsgOpenAccessDTO;
 import cn.ibizlab.util.domain.MappingBase;
-import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {},implementationName="apiMsgOpenAccessMapping",
-    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+@Mapper(componentModel = "spring", uses = {}, implementationName = "apiMsgOpenAccessMapping",
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface MsgOpenAccessMapping extends MappingBase<MsgOpenAccessDTO, MsgOpenAccess> {
 
 

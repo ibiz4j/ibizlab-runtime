@@ -17,9 +17,9 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
-public interface WFUserMapper extends BaseMapper<WFUser>{
+public interface WFUserMapper extends BaseMapper<WFUser> {
 
-    Page<WFUser> searchDefault(IPage page, @Param("srf") WFUserSearchContext context, @Param("ew") Wrapper<WFUser> wrapper) ;
+    Page<WFUser> searchDefault(IPage page, @Param("srf") WFUserSearchContext context, @Param("ew") Wrapper<WFUser> wrapper);
     @Override
     WFUser selectById(Serializable id);
     @Override
@@ -30,13 +30,13 @@ public interface WFUserMapper extends BaseMapper<WFUser>{
     int update(@Param(Constants.ENTITY) WFUser entity, @Param("ew") Wrapper<WFUser> updateWrapper);
     @Override
     int deleteById(Serializable id);
-     /**
-      * 自定义查询SQL
-      * @param sql
-      * @return
-      */
-     @Select("${sql}")
-     List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
+    /**
+    * 自定义查询SQL
+    * @param sql
+    * @return
+    */
+    @Select("${sql}")
+    List<JSONObject> selectBySQL(@Param("sql") String sql, @Param("et")Map param);
 
     /**
     * 自定义更新SQL

@@ -32,13 +32,13 @@ import cn.ibizlab.util.domain.EntityMP;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 
 /**
- * 实体[支付交易1]
+ * 实体[支付交易]
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZPAYTRADE",resultMap = "PayTradeResultMap")
+@TableName(value = "IBZPAYTRADE", resultMap = "PayTradeResultMap")
 public class PayTrade extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,8 +88,8 @@ public class PayTrade extends EntityMP implements Serializable {
     /**
      * 交易标识
      */
-    @DEField(isKeyField=true)
-    @TableId(value= "tradeid",type=IdType.ASSIGN_UUID)
+    @DEField(isKeyField = true)
+    @TableId(value = "tradeid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "trade_id")
     @JsonProperty("trade_id")
     private String tradeId;
@@ -128,81 +128,81 @@ public class PayTrade extends EntityMP implements Serializable {
     /**
      * 设置 [订单标题]
      */
-    public void setSubject(String subject){
-        this.subject = subject ;
-        this.modify("subject",subject);
+    public void setSubject(String subject) {
+        this.subject = subject;
+        this.modify("subject", subject);
     }
 
     /**
      * 设置 [订单金额]
      */
-    public void setTotalAmount(String totalAmount){
-        this.totalAmount = totalAmount ;
-        this.modify("totalamount",totalAmount);
+    public void setTotalAmount(String totalAmount) {
+        this.totalAmount = totalAmount;
+        this.modify("totalamount", totalAmount);
     }
 
     /**
      * 设置 [交易名称]
      */
-    public void setTradeName(String tradeName){
-        this.tradeName = tradeName ;
-        this.modify("tradename",tradeName);
+    public void setTradeName(String tradeName) {
+        this.tradeName = tradeName;
+        this.modify("tradename", tradeName);
     }
 
     /**
      * 设置 [支付类型]
      */
-    public void setTradeType(String tradeType){
-        this.tradeType = tradeType ;
-        this.modify("tradetype",tradeType);
+    public void setTradeType(String tradeType) {
+        this.tradeType = tradeType;
+        this.modify("tradetype", tradeType);
     }
 
     /**
      * 设置 [支付状态]
      */
-    public void setTradeStatus(String tradeStatus){
-        this.tradeStatus = tradeStatus ;
-        this.modify("tradestatus",tradeStatus);
+    public void setTradeStatus(String tradeStatus) {
+        this.tradeStatus = tradeStatus;
+        this.modify("tradestatus", tradeStatus);
     }
 
     /**
      * 设置 [订单号]
      */
-    public void setOutTradeNo(String outTradeNo){
-        this.outTradeNo = outTradeNo ;
-        this.modify("outtradeno",outTradeNo);
+    public void setOutTradeNo(String outTradeNo) {
+        this.outTradeNo = outTradeNo;
+        this.modify("outtradeno", outTradeNo);
     }
 
     /**
      * 设置 [AccessKey(AppId)]
      */
-    public void setAppId(String appId){
-        this.appId = appId ;
-        this.modify("appid",appId);
+    public void setAppId(String appId) {
+        this.appId = appId;
+        this.modify("appid", appId);
     }
 
     /**
      * 设置 [支付平台]
      */
-    public void setAccessName(String accessName){
-        this.accessName = accessName ;
-        this.modify("accessname",accessName);
+    public void setAccessName(String accessName) {
+        this.accessName = accessName;
+        this.modify("accessname", accessName);
     }
 
     /**
      * 设置 [支付平台接入标识]
      */
-    public void setAccessId(String accessId){
-        this.accessId = accessId ;
-        this.modify("accessid",accessId);
+    public void setAccessId(String accessId) {
+        this.accessId = accessId;
+        this.modify("accessid", accessId);
     }
 
 
     /**
      * 获取 [交易标识]
      */
-    public String getTradeId(){
-        if(ObjectUtils.isEmpty(tradeId)){
+    public String getTradeId() {
+        if(ObjectUtils.isEmpty(tradeId)) {
             tradeId=(String)getDefaultKey(true);
         }
         return tradeId;
@@ -224,7 +224,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("tradeid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 
