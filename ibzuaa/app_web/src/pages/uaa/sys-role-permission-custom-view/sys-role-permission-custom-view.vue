@@ -543,14 +543,15 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
   /**
    * 确定
    */
-  public onClickOk(): void {
+  public onClickOk() {
     // 处理选中的数据
     if (this.selectData && this.selectData.length > 0) {
       // 判断选中的数据和初始数据
       if (
         JSON.stringify(this.selectData) == JSON.stringify(this.ininselectData)
       ) {
-        return;
+        // 抛出事件,通知父页面进行表单保存
+        return this.$emit("drdatasaved", {});
       }
       this.selectData.forEach((item: any) => {
         let _itemTemp: any = JSON.parse(JSON.stringify(item));
@@ -613,6 +614,9 @@ export default class SYS_ROLE_PERMISSIONCustomView extends Vue {
         .catch((e) => {
           return this.$Notice.error({ title: "错误", desc: e });
         });
+    } else {
+      // 抛出事件,通知父页面进行表单保存
+      return this.$emit("drdatasaved", {});
     }
   }
 }

@@ -135,15 +135,15 @@ export default {
 			caption: "Save",
 			tip: "Save",
 		},
-		deuiaction1: {
-			caption: "Save And Close",
-			tip: "Save And Close Window",
+		tbitem6: {
+			caption: "-",
+			tip: "",
 		},
 		deuiaction2: {
 			caption: "关闭",
 			tip: "关闭",
 		},
-		tbitem6: {
+		tbitem11: {
 			caption: "-",
 			tip: "",
 		},

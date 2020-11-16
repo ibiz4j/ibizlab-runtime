@@ -183,7 +183,6 @@ public class UAACoreService {
         SysRole role = sysRoleService.getById(roleid);
 
         Set<String> delIds=new HashSet<String>();
-        List<SysRolePermission> _update=new ArrayList<SysRolePermission>();
         List<SysRolePermission> _create=new ArrayList<SysRolePermission>();
         for(SysRolePermission before:rolePermissionService.selectByRoleid(roleid)){
             delIds.add(before.getRolepermissionid());
@@ -201,13 +200,10 @@ public class UAACoreService {
                 sub.setRolepermissionid((String)sub.getDefaultKey(true));
             if(delIds.contains(sub.getRolepermissionid())) {
                 delIds.remove(sub.getRolepermissionid());
-                _update.add(sub);
             }
             else
                 _create.add(sub);
         }
-        if(_update.size()>0)
-            rolePermissionService.updateBatch(_update);
         if(_create.size()>0)
             rolePermissionService.createBatch(_create);
         if(delIds.size()>0)
