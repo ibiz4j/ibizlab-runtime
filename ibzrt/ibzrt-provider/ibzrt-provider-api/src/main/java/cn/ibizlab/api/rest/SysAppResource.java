@@ -47,6 +47,7 @@ public class SysAppResource {
     @Lazy
     public SysAppMapping sysappMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Create-all')")
     @ApiOperation(value = "新建应用", tags = {"应用" },  notes = "新建应用")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysapps")
     public ResponseEntity<SysAppDTO> create(@Validated @RequestBody SysAppDTO sysappdto) {
@@ -56,6 +57,7 @@ public class SysAppResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Create-all')")
     @ApiOperation(value = "批量新建应用", tags = {"应用" },  notes = "批量新建应用")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysAppDTO> sysappdtos) {
@@ -63,6 +65,7 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Update-all')")
     @ApiOperation(value = "更新应用", tags = {"应用" },  notes = "更新应用")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysapps/{sysapp_id}")
     public ResponseEntity<SysAppDTO> update(@PathVariable("sysapp_id") String sysapp_id, @RequestBody SysAppDTO sysappdto) {
@@ -73,6 +76,7 @@ public class SysAppResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Update-all')")
     @ApiOperation(value = "批量更新应用", tags = {"应用" },  notes = "批量更新应用")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysapps/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysAppDTO> sysappdtos) {
@@ -80,12 +84,14 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Remove-all')")
     @ApiOperation(value = "删除应用", tags = {"应用" },  notes = "删除应用")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysapps/{sysapp_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("sysapp_id") String sysapp_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysappService.remove(sysapp_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Remove-all')")
     @ApiOperation(value = "批量删除应用", tags = {"应用" },  notes = "批量删除应用")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysapps/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Get-all')")
     @ApiOperation(value = "获取应用", tags = {"应用" },  notes = "获取应用")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysapps/{sysapp_id}")
     public ResponseEntity<SysAppDTO> get(@PathVariable("sysapp_id") String sysapp_id) {
@@ -113,12 +120,14 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysappService.checkKey(sysappMapping.toDomain(sysappdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Save-all')")
     @ApiOperation(value = "保存应用", tags = {"应用" },  notes = "保存应用")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/save")
     public ResponseEntity<Boolean> save(@RequestBody SysAppDTO sysappdto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysappService.save(sysappMapping.toDomain(sysappdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Save-all')")
     @ApiOperation(value = "批量保存应用", tags = {"应用" },  notes = "批量保存应用")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysAppDTO> sysappdtos) {
@@ -126,6 +135,7 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"应用" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysapps/fetchdefault")
 	public ResponseEntity<List<SysAppDTO>> fetchDefault(SysAppSearchContext context) {
@@ -138,6 +148,7 @@ public class SysAppResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"应用" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysapps/searchdefault")
 	public ResponseEntity<Page<SysAppDTO>> searchDefault(@RequestBody SysAppSearchContext context) {

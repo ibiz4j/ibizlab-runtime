@@ -9,53 +9,53 @@
             </div>
         <div class='content-container'>
             <div style='margin-bottom: 6px;'>
-                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="执行器任务HANDLER" />
+                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;padding-left: 24px' placeholder="执行器任务HANDLER" />
                 <div class='pull-right'>
                     <div class='toolbar-container'>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
+                                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
                                     <i class='fa fa-play'></i>
                                     <span class='caption'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction1.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction1.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.deuiaction2.visabled" :disabled="toolBarModels.deuiaction2.disabled" class='' @click="toolbar_click({ tag: 'deuiaction2' }, $event)">
+                                <i-button v-show="toolBarModels.deuiaction2.visabled" :disabled="toolBarModels.deuiaction2.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction2' }, $event)">
                                     <i class='fa fa-stop'></i>
                                     <span class='caption'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction2.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction2.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.deuiaction3.visabled" :disabled="toolBarModels.deuiaction3.disabled" class='' @click="toolbar_click({ tag: 'deuiaction3' }, $event)">
+                                <i-button v-show="toolBarModels.deuiaction3.visabled" :disabled="toolBarModels.deuiaction3.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction3' }, $event)">
                                     <i class='fa fa-flash'></i>
                                     <span class='caption'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction3.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction3.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.deuiaction4.visabled" :disabled="toolBarModels.deuiaction4.disabled" class='' @click="toolbar_click({ tag: 'deuiaction4' }, $event)">
+                                <i-button v-show="toolBarModels.deuiaction4.visabled" :disabled="toolBarModels.deuiaction4.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction4' }, $event)">
                                     <i class='fa fa-file-text-o'></i>
                                     <span class='caption'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction4.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction4.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.deuiaction5.visabled" :disabled="toolBarModels.deuiaction5.disabled" class='' @click="toolbar_click({ tag: 'deuiaction5' }, $event)">
+                                <i-button v-show="toolBarModels.deuiaction5.visabled" :disabled="toolBarModels.deuiaction5.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction5' }, $event)">
                                     <i class='fa fa-edit'></i>
                                     <span class='caption'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction5.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction5.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.deuiaction6.visabled" :disabled="toolBarModels.deuiaction6.disabled" class='' @click="toolbar_click({ tag: 'deuiaction6' }, $event)">
+                                <i-button v-show="toolBarModels.deuiaction6.visabled" :disabled="toolBarModels.deuiaction6.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction6' }, $event)">
                                     <i class='fa fa-remove'></i>
                                     <span class='caption'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction6.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction6.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.deuiaction7.visabled" :disabled="toolBarModels.deuiaction7.disabled" class='' @click="toolbar_click({ tag: 'deuiaction7' }, $event)">
+                                <i-button v-show="toolBarModels.deuiaction7.visabled" :disabled="toolBarModels.deuiaction7.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction7' }, $event)">
                                     <i class='fa fa-filter'></i>
                                     <span class='caption'>{{$t('entities.jobsinfo.gridviewtoolbar_toolbar.deuiaction7.caption')}}</span>
                                 </i-button>

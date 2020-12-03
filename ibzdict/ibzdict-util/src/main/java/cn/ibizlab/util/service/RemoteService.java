@@ -49,19 +49,19 @@ public class RemoteService {
      */
     public interface RemoteFeignClient {
         @RequestMapping(method = RequestMethod.POST, value = "/{path}")
-        JSONObject post( @PathVariable("path") String path, @RequestHeader("Authorization") String token,@RequestBody Map  param);
+        JSONObject post( @PathVariable("path") String path, @RequestHeader("Authorization") String token, @RequestBody Map param);
 
         @RequestMapping(method = RequestMethod.GET, value = "/{path}")
-        JSONObject request( @PathVariable("path") String path, @RequestHeader("Authorization") String token,Map  param);
+        JSONObject request( @PathVariable("path") String path, @RequestHeader("Authorization") String token, Map param);
 
         @RequestMapping(method = RequestMethod.GET, value = "/{path}")
         JSONObject get( @PathVariable("path") String path, @RequestHeader("Authorization") String token);
 
         @RequestMapping(method = RequestMethod.PUT, value = "/{path}")
-        JSONObject put( @PathVariable("path") String path, @RequestHeader("Authorization") String token,@RequestBody Map  param);
+        JSONObject put( @PathVariable("path") String path, @RequestHeader("Authorization") String token,@RequestBody Map param);
 
         @RequestMapping(method = RequestMethod.DELETE, value = "/{path}")
-        JSONObject delete( @PathVariable("path") String path, @RequestHeader("Authorization") String token);
+        JSONObject delete(@PathVariable("path") String path, @RequestHeader("Authorization") String token);
     }
 
     /**
@@ -115,6 +115,4 @@ public class RemoteService {
         final HttpMessageConverters httpMessageConverters = new HttpMessageConverters(jsonConverter);
         return () -> httpMessageConverters;
     }
-
-
 }

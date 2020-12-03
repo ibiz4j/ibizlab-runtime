@@ -18,7 +18,7 @@ public class JobsInfoExService extends JobsInfoServiceImpl {
 
 
     /**
-     * 自定义行为[Execute]用户扩展
+     * [Execute:执行] 行为扩展
      * @param et
      * @return
      */

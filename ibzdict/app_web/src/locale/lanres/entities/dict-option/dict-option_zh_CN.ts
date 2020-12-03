@@ -14,6 +14,7 @@ export default {
     showorder: "排序",
     extension: "扩展",
     updatedate: "最后修改时间",
+    createdate: "创建时间",
   },
 	views: {
 		editview: {

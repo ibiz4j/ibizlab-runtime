@@ -65,7 +65,7 @@ public class DictCatalogSearchContext extends QueryWrapperContext<DictCatalog> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("cname", query)   
+                     wrapper.like("cname", query)
             );
 		 }
 	}

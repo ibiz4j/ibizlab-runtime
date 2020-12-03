@@ -86,7 +86,7 @@ public class WFMemberSearchContext extends QueryWrapperContext<WFMember> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("membername", query)   
+                     wrapper.like("membername", query)
             );
 		 }
 	}

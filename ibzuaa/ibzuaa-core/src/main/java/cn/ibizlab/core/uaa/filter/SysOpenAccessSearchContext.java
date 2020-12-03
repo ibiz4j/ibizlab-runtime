@@ -51,7 +51,7 @@ public class SysOpenAccessSearchContext extends QueryWrapperContext<SysOpenAcces
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("accessname", query)   
+                     wrapper.like("accessname", query)
             );
 		 }
 	}

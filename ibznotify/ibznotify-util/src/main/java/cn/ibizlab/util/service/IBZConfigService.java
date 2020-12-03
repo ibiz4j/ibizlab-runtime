@@ -26,39 +26,39 @@ public class IBZConfigService extends ServiceImpl<IBZConfigMapper, IBZConfig> im
     @Value("${ibiz.admin.userid:0100}")
     private String adminuserid;
 
-    @Cacheable( value="ibzrt_configs",key = "'cfgid:'+#p0+'||'+#p1+'||'+#p2")
+    @Cacheable(value="ibzrt_configs",key = "'cfgid:'+#p0+'||'+#p1+'||'+#p2")
     public JSONObject getConfig(String cfgType,String targetType,String userId)
     {
-        if(StringUtils.isEmpty(userId)||StringUtils.isEmpty(cfgType)||StringUtils.isEmpty(targetType)){
+        if(StringUtils.isEmpty(userId) || StringUtils.isEmpty(cfgType) || StringUtils.isEmpty(targetType)) {
             throw new BadRequestAlertException("获取配置失败，参数缺失","IBZConfig",cfgType);
         }
-        IBZConfig config=this.getOne(Wrappers.query(IBZConfig.builder().systemId(systemId).cfgType(cfgType).targetType(targetType).userId(userId).build()),false);
-        if(config==null) {
-            config=this.getOne(Wrappers.query(IBZConfig.builder().systemId(systemId).cfgType(cfgType).targetType(targetType).userId(adminuserid).build()),false);
-            if(config==null) {
+        IBZConfig config = this.getOne(Wrappers.query(IBZConfig.builder().systemId(systemId).cfgType(cfgType).targetType(targetType).userId(userId).build()), false);
+        if(config == null) {
+            config = this.getOne(Wrappers.query(IBZConfig.builder().systemId(systemId).cfgType(cfgType).targetType(targetType).userId(adminuserid).build()), false);
+            if(config == null) {
                 return new JSONObject();
             }
         }
         return JSON.parseObject(config.getCfg());
     }
 
-    @CacheEvict( value="ibzrt_configs",key = "'cfgid:'+#p0+'||'+#p1+'||'+#p2")
-    public boolean saveConfig(String cfgType,String targetType,String userId,JSONObject config)
+    @CacheEvict(value="ibzrt_configs", key = "'cfgid:'+#p0+'||'+#p1+'||'+#p2")
+    public boolean saveConfig(String cfgType, String targetType, String userId, JSONObject config)
     {
-        if(StringUtils.isEmpty(userId)||StringUtils.isEmpty(cfgType)||StringUtils.isEmpty(targetType)){
+        if(StringUtils.isEmpty(userId) || StringUtils.isEmpty(cfgType) || StringUtils.isEmpty(targetType)) {
             throw new BadRequestAlertException("保存配置失败，参数缺失","IBZConfig",cfgType);
         }
-        String cfg="{}";
-        if(config!=null){
-            cfg=JSONObject.toJSONString(config);
+        String cfg = "{}";
+        if(config != null) {
+            cfg = JSONObject.toJSONString(config);
         }
         return this.saveOrUpdate(IBZConfig.builder().systemId(systemId).cfgType(cfgType).targetType(targetType).userId(userId).cfg(cfg).updateDate(DataObject.getNow()).build());
     }
 
-    @CacheEvict( value="ibzrt_configs",key = "'cfgid:'+#p0+'||'+#p1+'||'+#p2")
-    public void resetConfig(String cfgType,String targetType,String userId)
+    @CacheEvict(value = "ibzrt_configs", key = "'cfgid:'+#p0+'||'+#p1+'||'+#p2")
+    public void resetConfig(String cfgType, String targetType, String userId)
     {
-        if(StringUtils.isEmpty(userId)||StringUtils.isEmpty(cfgType)||StringUtils.isEmpty(targetType)){
+        if(StringUtils.isEmpty(userId) || StringUtils.isEmpty(cfgType) || StringUtils.isEmpty(targetType)) {
             throw new BadRequestAlertException("重置配置失败，参数缺失","IBZConfig",cfgType);
         }
         this.remove(Wrappers.query(IBZConfig.builder().systemId(systemId).cfgType(cfgType).targetType(targetType).userId(userId).build()));

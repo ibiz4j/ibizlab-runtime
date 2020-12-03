@@ -484,4 +484,38 @@ export default class SysTeamMemberServiceBase extends EntityService {
         let res:any = Http.getInstance().get(`/systeammembers/fetchdefault`,tempData,isloading);
         return res;
     }
+
+    /**
+     * searchDefault接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysTeamMemberServiceBase
+     */
+    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysorganization && context.sysdepartment && context.sysemployee && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/searchdefault`,tempData,isloading);
+        }
+        if(context.sysorganization && context.sysemployee && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/searchdefault`,tempData,isloading);
+        }
+        if(context.sysdepartment && context.sysemployee && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/searchdefault`,tempData,isloading);
+        }
+        if(context.systeam && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/systeams/${context.systeam}/systeammembers/searchdefault`,tempData,isloading);
+        }
+        if(context.sysemployee && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysemployees/${context.sysemployee}/systeammembers/searchdefault`,tempData,isloading);
+        }
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/systeammembers/searchdefault`,tempData,isloading);
+    }
 }

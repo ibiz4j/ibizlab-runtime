@@ -111,3 +111,9 @@ export default class AppAlertGroup extends Vue {
     }
 }
 </script>
+
+<style lang="less">
+.view-body-messages {
+    margin-bottom: 6px;
+}
+</style>

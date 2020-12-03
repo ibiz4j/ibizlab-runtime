@@ -9,7 +9,7 @@
             </div>
         <div class='content-container'>
             <div style='margin-bottom: 6px;'>
-                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="用户全局名" />
+                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;padding-left: 24px' placeholder="用户全局名" />
                 <div class='pull-right'>
                 </div>
             </div>

@@ -7,21 +7,21 @@
     <span class='caption-info'>{{$t(model.srfCaption)}}</span>
     <div class='toolbar-container'>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
+                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem3' }, $event)">
                     <i class='fa fa-save'></i>
                     <span class='caption'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem3.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem3.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' @click="toolbar_click({ tag: 'tbitem4' }, $event)">
+                <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem4' }, $event)">
                     <i class='sx-tb-saveandnew'></i>
                     <span class='caption'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem4.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem4.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem5.visabled" :disabled="toolBarModels.tbitem5.disabled" class='' @click="toolbar_click({ tag: 'tbitem5' }, $event)">
+                <i-button v-show="toolBarModels.tbitem5.visabled" :disabled="toolBarModels.tbitem5.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem5' }, $event)">
                     <i class='sx-tb-saveandclose'></i>
                     <span class='caption'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem5.caption')}}</span>
                 </i-button>
@@ -29,7 +29,7 @@
         </tooltip>
         <span class='seperator'>|</span>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem7.visabled" :disabled="toolBarModels.tbitem7.disabled" class='' @click="toolbar_click({ tag: 'tbitem7' }, $event)">
+                <i-button v-show="toolBarModels.tbitem7.visabled" :disabled="toolBarModels.tbitem7.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem7' }, $event)">
                     <i class='fa fa-remove'></i>
                     <span class='caption'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem7.caption')}}</span>
                 </i-button>
@@ -37,7 +37,7 @@
         </tooltip>
         <span class='seperator'>|</span>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' @click="toolbar_click({ tag: 'tbitem12' }, $event)">
+                <i-button v-show="toolBarModels.tbitem12.visabled" :disabled="toolBarModels.tbitem12.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem12' }, $event)">
                     <i class='fa fa-file-text-o'></i>
                     <span class='caption'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem12.caption')}}</span>
                 </i-button>
@@ -45,7 +45,7 @@
         </tooltip>
         <span class='seperator'>|</span>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
+                <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem14' }, $event)">
                     <i class='fa fa-copy'></i>
                     <span class='caption'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem14.caption')}}</span>
                 </i-button>
@@ -53,28 +53,28 @@
         </tooltip>
         <span class='seperator'>|</span>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem23.visabled" :disabled="toolBarModels.tbitem23.disabled" class='' @click="toolbar_click({ tag: 'tbitem23' }, $event)">
+                <i-button v-show="toolBarModels.tbitem23.visabled" :disabled="toolBarModels.tbitem23.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem23' }, $event)">
                     <i class='fa fa-fast-backward'></i>
                     
                 </i-button>
             <div slot='content'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem23.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem24.visabled" :disabled="toolBarModels.tbitem24.disabled" class='' @click="toolbar_click({ tag: 'tbitem24' }, $event)">
+                <i-button v-show="toolBarModels.tbitem24.visabled" :disabled="toolBarModels.tbitem24.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem24' }, $event)">
                     <i class='fa fa-step-backward'></i>
                     
                 </i-button>
             <div slot='content'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem24.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem25.visabled" :disabled="toolBarModels.tbitem25.disabled" class='' @click="toolbar_click({ tag: 'tbitem25' }, $event)">
+                <i-button v-show="toolBarModels.tbitem25.visabled" :disabled="toolBarModels.tbitem25.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem25' }, $event)">
                     <i class='fa fa-step-forward'></i>
                     
                 </i-button>
             <div slot='content'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem25.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem26.visabled" :disabled="toolBarModels.tbitem26.disabled" class='' @click="toolbar_click({ tag: 'tbitem26' }, $event)">
+                <i-button v-show="toolBarModels.tbitem26.visabled" :disabled="toolBarModels.tbitem26.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem26' }, $event)">
                     <i class='fa fa-fast-forward'></i>
                     
                 </i-button>
@@ -82,7 +82,7 @@
         </tooltip>
         <span class='seperator'>|</span>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem22.visabled" :disabled="toolBarModels.tbitem22.disabled" class='' @click="toolbar_click({ tag: 'tbitem22' }, $event)">
+                <i-button v-show="toolBarModels.tbitem22.visabled" :disabled="toolBarModels.tbitem22.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem22' }, $event)">
                     <i class='fa fa-question'></i>
                     <span class='caption'>{{$t('entities.paytrade.editviewtoolbar_toolbar.tbitem22.caption')}}</span>
                 </i-button>

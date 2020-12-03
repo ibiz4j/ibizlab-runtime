@@ -72,7 +72,7 @@ public class SysUserSearchContext extends QueryWrapperContext<SysUser> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("personname", query)   
+                     wrapper.like("personname", query)
             );
 		 }
 	}

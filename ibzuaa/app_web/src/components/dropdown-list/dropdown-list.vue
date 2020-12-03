@@ -265,9 +265,8 @@ export default class DropDownList extends Vue {
                     this.loadData();
                 }
             });
-        }else{
-            this.loadData();
         }
+        this.loadData();
     }
 
     /**

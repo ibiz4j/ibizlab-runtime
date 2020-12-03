@@ -304,4 +304,26 @@ export default class WFMemberServiceBase extends EntityService {
         let res:any = Http.getInstance().get(`/wfmembers/fetchdefault`,tempData,isloading);
         return res;
     }
+
+    /**
+     * searchDefault接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFMemberServiceBase
+     */
+    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.wfuser && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/searchdefault`,tempData,isloading);
+        }
+        if(context.wfgroup && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/searchdefault`,tempData,isloading);
+        }
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/wfmembers/searchdefault`,tempData,isloading);
+    }
 }

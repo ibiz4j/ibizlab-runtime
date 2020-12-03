@@ -31,7 +31,7 @@ public class SysRoleSearchContext extends QueryWrapperContext<SysRole> {
 	public void setN_sys_rolename_isnotnull(String n_sys_rolename_isnotnull) {
         this.n_sys_rolename_isnotnull = n_sys_rolename_isnotnull;
         if(!ObjectUtils.isEmpty(this.n_sys_rolename_isnotnull)){
-			if(this.n_sys_rolename_isnotnull.toString().equals("1")){
+			if(this.n_sys_rolename_isnotnull.equals("1")){
 				this.getSearchCond().isNotNull("sys_rolename");
 			}
         }
@@ -40,7 +40,7 @@ public class SysRoleSearchContext extends QueryWrapperContext<SysRole> {
 	public void setN_sys_rolename_isnull(String n_sys_rolename_isnull) {
         this.n_sys_rolename_isnull = n_sys_rolename_isnull;
         if(!ObjectUtils.isEmpty(this.n_sys_rolename_isnull)){
-			if(this.n_sys_rolename_isnull.toString().equals("1")){
+			if(this.n_sys_rolename_isnull.equals("1")){
 				this.getSearchCond().isNull("sys_rolename");
 			}
         }
@@ -83,7 +83,7 @@ public class SysRoleSearchContext extends QueryWrapperContext<SysRole> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("sys_rolename", query)   
+                     wrapper.like("sys_rolename", query)
             );
 		 }
 	}

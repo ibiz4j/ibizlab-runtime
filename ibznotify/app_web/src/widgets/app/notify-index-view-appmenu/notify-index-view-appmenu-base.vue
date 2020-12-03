@@ -154,7 +154,7 @@ export default class NotifyIndexViewBase extends Vue implements ControlInterface
      * @type {*}
      * @memberof NotifyIndexViewBase
      */
-    @Prop() public context: any;
+    @Prop() public context!: any;
 
     /**
      * 视图参数
@@ -162,7 +162,7 @@ export default class NotifyIndexViewBase extends Vue implements ControlInterface
      * @type {*}
      * @memberof NotifyIndexViewBase
      */
-    @Prop() public viewparams: any;
+    @Prop() public viewparams!: any;
 
     /**
      * 视图状态事件

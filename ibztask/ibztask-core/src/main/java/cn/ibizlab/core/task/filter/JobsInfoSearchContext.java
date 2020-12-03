@@ -58,7 +58,7 @@ public class JobsInfoSearchContext extends QueryWrapperContext<JobsInfo> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("handler", query)   
+                     wrapper.like("handler", query)
             );
 		 }
 	}

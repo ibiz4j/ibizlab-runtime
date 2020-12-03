@@ -10,6 +10,7 @@ import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
 import cn.ibizlab.core.uaa.service.ISysRoleService;
 import cn.ibizlab.core.uaa.service.ISysUserRoleService;
+import cn.ibizlab.util.domain.Token;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import com.alibaba.fastjson.JSONObject;
 import lombok.SneakyThrows;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.context.annotation.Lazy;
@@ -324,6 +326,29 @@ public class UAACoreService {
         sign.put("corpId",openAccess.getRegionId());
         sign.put("signature",strSign);
         return sign;
+    }
+
+    @CachePut(value = "ibzuaa_refreshtoken", key = "'token:'+#p0")
+    public Token setToken(String oldToken, String newToken) {
+        Token tok = new Token(newToken, oldToken, new Date());
+        return tok;
+    }
+
+    @Cacheable(value = "ibzuaa_refreshtoken", key = "'token:'+#p0")
+    public Token getToken(String oldToken) {
+        return null;
+    }
+
+    @CacheEvict(value = "ibzuaa_refreshtoken", key = "'token:'+#p0")
+    public Token resetToken(String token) {
+        return null;
+    }
+
+    public boolean isExpired(Token tok,Long expiration){
+        if (System.currentTimeMillis() - tok.getDate().getTime() >= (expiration/4)) {
+            return true;
+        }
+        return false;
     }
 
 }

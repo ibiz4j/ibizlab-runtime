@@ -257,7 +257,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    @Prop() public context: any;
+    @Prop() public context!: any;
 
     /**
      * 视图参数
@@ -265,7 +265,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    @Prop() public viewparams: any;
+    @Prop() public viewparams!: any;
 
     /**
      * 视图状态事件
@@ -800,12 +800,44 @@ export default class MainBase extends Vue implements ControlInterface {
     public groupAppField:string ="";
 
     /**
+     * 分组属性代码表标识
+     *
+     * @type {string}
+     * @memberof MainBase
+     */
+    public groupAppFieldCodelistTag:string ="";
+
+    /**
+     * 分组属性代码表类型
+     * 
+     * @type {string}
+     * @memberof MainBase
+     */
+    public groupAppFieldCodelistType: string = "";
+
+    /**
      * 分组模式
      *
      * @type {string}
      * @memberof MainBase
      */
     public groupMode:string ="NONE";
+
+    /**
+     * 分组代码表标识
+     * 
+     * @type {string}
+     * @memberof MainBase
+     */
+    public codelistTag: string = "";
+
+    /**
+     * 分组代码表类型
+     * 
+     * @type {string}
+     * @memberof MainBase
+     */
+    public codelistType: string = "";
 
     /**
      * 获取界面行为权限状态
@@ -1076,7 +1108,6 @@ export default class MainBase extends Vue implements ControlInterface {
                         this.$Notice.success({ title: '', desc: (this.$t('app.gridpage.delSuccess') as string) });
                     }
                     //删除items中已删除的项
-                    console.log(this.items);
                     _datas.forEach((data: any) => {
                         this.items.some((item:any,index:number)=>{
                             if(Object.is(item.srfkey,data.srfkey)){
@@ -1423,7 +1454,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public rowDBLClick($event: any): void {
         // 分组行跳过
-        if($event && $event.children && $event.children.length >0){
+        if($event && $event.children){
             return;
         }
         if (!$event || this.actualIsOpenEdit || Object.is(this.gridRowActiveMode,0)) {
@@ -1449,11 +1480,131 @@ export default class MainBase extends Vue implements ControlInterface {
     */
     public arraySpanMethod({row, column, rowIndex, columnIndex} : any) {
         let allColumns:Array<any> = ['personname','username','postname','postid','userid'];
-        if(row && row.children && row.children.length>0) {
+        if(row && row.children) {
             if(columnIndex == (this.isSingleSelect ? 0:1)) {
                 return [1, allColumns.length+1];
             } else if(columnIndex > (this.isSingleSelect ? 0:1)) {
                 return [0,0];
+            }
+        }
+    }
+
+	/**
+     * 分组方法
+     * 
+     * @memberof MainBase
+     */
+    public group(){
+        if(Object.is(this.groupMode,"AUTO")){
+            this.drawGroup();
+        }else if(Object.is(this.groupMode,"CODELIST")){
+            this.drawCodelistGroup();
+        }
+    }
+
+    /**
+     * 获取表格分组相关代码表
+     * 
+     * @param {string}  codelistType 代码表类型
+     * @param {string}  codelistTag 代码表标识
+     * @memberof MainBase
+     */
+    public getGroupCodelist(codelistType: string,codelistTag:string){
+        let codelist: Array<any> = [];
+        // 动态代码表
+        if (Object.is(codelistType, "DYNAMIC")) {
+            this.codeListService.getItems(codelistTag).then((res: any)=>{
+                codelist = res;
+            }).catch((error: any) => {
+                
+            });
+        // 静态代码表
+        } else if(Object.is(codelistType, "STATIC")){
+            codelist = this.$store.getters.getCodeListItems(codelistTag);
+        }
+        return codelist;
+    }
+    /**
+     * 根据分组代码表绘制分组列表
+     * 
+     * @memberof MainBase
+     */
+    public drawCodelistGroup(){
+        if(!this.isEnableGroup) return;
+        // 分组
+        let allGroup: Array<any> = [];
+        let allGroupField: Array<any> =[];
+        let groupTree:Array<any> = [];
+        allGroup = this.getGroupCodelist(this.codelistType,this.codelistTag);
+        allGroupField = this.getGroupCodelist(this.groupAppFieldCodelistType,this.groupAppFieldCodelistTag);
+        if(allGroup.length == 0){
+            console.warn("分组数据无效");
+        }
+        allGroup.forEach((group: any,i: number)=>{
+            let children:Array<any> = [];
+            this.items.forEach((item: any,j: number)=>{
+                if(allGroupField && allGroupField.length > 0){
+                    const arr:Array<any> = allGroupField.filter((field:any)=>{return field.value == item[this.groupAppField]});
+                    if(Object.is(group.label,arr[0].label)){
+                        item.groupById = Number((i+1) * 100 + (j+1) * 1);
+                        item.group = '';
+                        children.push(item);
+                    }
+                }else if(Object.is(group.label,item[this.groupAppField])){
+                    item.groupById = Number((i+1) * 100 + (j+1) * 1);
+                    item.group = '';
+                    children.push(item);
+                }
+            });
+            const tree: any ={
+                groupById: Number((i+1)*100),
+                group: group.label,
+                personname:'',
+                username:'',
+                postname:'',
+                postid:'',
+                userid:'',
+                children: children
+            }
+            groupTree.push(tree);
+        });
+        let child:Array<any> = [];
+        this.items.forEach((item: any,index: number)=>{
+            let i: number = 0;
+            if(allGroupField && allGroupField.length > 0){
+                const arr:Array<any> = allGroupField.filter((field:any)=>{return field.value == item[this.groupAppField]});
+                i = allGroup.findIndex((group: any)=>Object.is(group.label,arr[0].label));
+            }else{
+                i = allGroup.findIndex((group: any)=>Object.is(group.label,item[this.groupAppField]));
+            }
+            if(i < 0){
+                item.groupById = Number((allGroup.length+1) * 100 + (index+1) * 1);
+                item.group = '';
+                child.push(item);
+            }
+            if(i < 0){
+                item.groupById = Number((allGroup.length+1) * 100 + (index+1) * 1);
+                item.group = '';
+                child.push(item);
+            }
+        })
+        const Tree: any = {
+            groupById: Number((allGroup.length+1)*100),
+            group: this.$t('app.gridpage.other'),
+            personname:'',
+            username:'',
+            postname:'',
+            postid:'',
+            userid:'',
+            children: child
+        }
+        if(child && child.length > 0){
+            groupTree.push(Tree);
+        }
+        this.items = groupTree;
+        if(this.actualIsOpenEdit) {
+            for(let i = 0; i < this.items.length; i++) {
+                this.gridItemsModel.push(this.getGridRowModel());
             }
         }
     }
@@ -1467,9 +1618,16 @@ export default class MainBase extends Vue implements ControlInterface {
         if(!this.isEnableGroup) return;
         // 分组
         let allGroup: Array<any> = [];
+        let allGroupField: Array<any> =[];
+        allGroupField = this.getGroupCodelist(this.groupAppFieldCodelistType,this.groupAppFieldCodelistTag);
         this.items.forEach((item: any)=>{
             if(item.hasOwnProperty(this.groupAppField)){
-                allGroup.push(item[this.groupAppField]);
+                if(allGroupField && allGroupField.length > 0){
+                    const arr:Array<any> = allGroupField.filter((field:any)=>{return field.value == item[this.groupAppField]});
+                    allGroup.push(arr[0].label);
+                }else{
+                    allGroup.push(item[this.groupAppField]);
+                }
             }
         });
         let groupTree:Array<any> = [];
@@ -1481,15 +1639,22 @@ export default class MainBase extends Vue implements ControlInterface {
         allGroup.forEach((group: any, groupIndex: number)=>{
             let children:Array<any> = [];
             this.items.forEach((item: any,itemIndex: number)=>{
-                if(Object.is(group,item[this.groupAppField])){
-                    item.groupById = Number((groupIndex+1) * 10 + (itemIndex+1) * 1);
+                if(allGroupField && allGroupField.length > 0){
+                    const arr:Array<any> = allGroupField.filter((field:any)=>{return field.value == item[this.groupAppField]});
+                    if(Object.is(group,arr[0].label)){
+                        item.groupById = Number((groupIndex+1) * 100 + (itemIndex+1) * 1);
+                        item.group = '';
+                        children.push(item);
+                    }
+                }else if(Object.is(group,item[this.groupAppField])){
+                    item.groupById = Number((groupIndex+1) * 100 + (itemIndex+1) * 1);
                     item.group = '';
                     children.push(item);
                 }
             });
             group = group ? group : this.$t('app.gridpage.other');
             const tree: any ={
-                groupById: Number((groupIndex+1)*10),
+                groupById: Number((groupIndex+1)*100),
                 group: group,
                 personname:'',
                 username:'',
@@ -1615,7 +1780,7 @@ export default class MainBase extends Vue implements ControlInterface {
             let flag: boolean = true;
             if(selection && selection.length === this.items.length) {
                 selection.forEach((element: any) => {
-                    if(element.children && element.children.length > 0) {
+                    if(element.children) {
                         this.toggleSelection(element.children, flag);
                         element.children.forEach((children: any) => {
                             this.selections.push(children);
@@ -1649,7 +1814,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public rowClick($event: any, ifAlways: boolean = false): void {
         // 分组行跳过
-        if($event && $event.children && $event.children.length >0){
+        if($event && $event.children){
             return;
         }
         if (!ifAlways && (!$event || this.actualIsOpenEdit)) {
@@ -1890,7 +2055,7 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         this.$emit('save', successItems);
         this.refresh([]);
-        if(errorItems.length === 0 && successItems.length >0 && !this.isformDruipart){
+        if(errorItems.length === 0 && successItems.length > 0){
             this.$Notice.success({ title: '', desc: (this.$t('app.commonWords.saveSuccess') as string) });
         }else{
             errorItems.forEach((item: any, index: number) => {
@@ -1956,9 +2121,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.createDefault(data);
             data.rowDataState = "create";
-            let tempItems: any[] = [];
-            tempItems.push(data);
-            _this.items = tempItems.concat(_this.items);
+            this.items.splice(0,0,data);
             _this.gridItemsModel.push(_this.getGridRowModel());
         }).catch((response: any) => {
             if (response && response.status === 401) {
@@ -2003,11 +2166,12 @@ export default class MainBase extends Vue implements ControlInterface {
     public gridEditItemChange(row: any, property: string, value: any, rowIndex: number){
         row.rowDataState = row.rowDataState ? row.rowDataState : "update" ;
         if(Object.is(row.rowDataState,"update")){
-            if(!value && this.defaultUpdateItems.includes(property)){
+            if(this.defaultUpdateItems.includes(property)){
                 row.hasUpdated = true;
             }
         }
         this.curEditRowData = row;
+        this.resetGridData(row, property, rowIndex);
         this.validate(property,row,rowIndex);
     }
 
@@ -2192,30 +2356,47 @@ export default class MainBase extends Vue implements ControlInterface {
                 falg.isPast = val;
             }
         }
-        rule[name].forEach((item:any) => {
+        for(let i=0; i < rule[name].length; i++) {
+            let item: any = rule[name][i];
             if((value === null || value === undefined || value === "") && (item.type != 'GROUP')){
                 startOp(true);
                 return falg;
             }
-            // 常规规则
-            if(item.type == 'SIMPLE'){
-                startOp(!this.$verify.checkFieldSimpleRule(value,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.curEditRowData,item.isKeyCond));
-            }
-            // 数值范围
-            if(item.type == 'VALUERANGE2'){
-                startOp( !this.$verify.checkFieldValueRangeRule(value,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
-            }
-            // 正则式
-            if (item.type == "REGEX") {
-                startOp(!this.$verify.checkFieldRegExRule(value,item.regExCode,item.ruleInfo,item.isKeyCond));
-            }
-            // 长度
-            if (item.type == "STRINGLENGTH") {
-                startOp(!this.$verify.checkFieldStringLengthRule(value,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
-            }
-            // 系统值规则
-            if(item.type == "SYSVALUERULE") {
-                startOp(!this.$verify.checkFieldSysValueRule(value,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
+            try {
+                // 常规规则
+               if(item.type == 'SIMPLE'){
+                    startOp(!this.$verify.checkFieldSimpleRule(value,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.curEditRowData,item.isKeyCond));
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+                // 数值范围
+                if(item.type == 'VALUERANGE2'){
+                    startOp( !this.$verify.checkFieldValueRangeRule(value,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+                // 正则式
+                if (item.type == "REGEX") {
+                    startOp(!this.$verify.checkFieldRegExRule(value,item.regExCode,item.ruleInfo,item.isKeyCond));
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+                // 长度
+                if (item.type == "STRINGLENGTH") {
+                    startOp(!this.$verify.checkFieldStringLengthRule(value,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+                // 系统值规则
+                if(item.type == "SYSVALUERULE") {
+                    startOp(!this.$verify.checkFieldSysValueRule(value,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+            } catch(error) {
+                falg.infoMessage = item.ruleInfo;
+                startOp(false);
+                if(!falg.isPast) return falg;
             }
             // 分组
             if(item.type == 'GROUP'){
@@ -2225,11 +2406,11 @@ export default class MainBase extends Vue implements ControlInterface {
                 }
             }
             
-        });
+        };
         if(!falg.hasOwnProperty("isPast")){
             falg.isPast = true;
         }
-        if(!value){
+        if(!value && value != 0){
            falg.isPast = true;
         }
         return falg;
@@ -2288,6 +2469,19 @@ export default class MainBase extends Vue implements ControlInterface {
             }else{
                 return false;
             }
+        }
+    }
+
+    /**
+     * 重置表格项值
+     *
+     * @param {*} row 当前行
+     * @param {string} property 属性名
+     * @param {number} rowIndex 行下标
+     * @memberof MainBase
+     */
+    public resetGridData(row: any, property: string, rowIndex: number) {
+        if(this.actualIsOpenEdit) {
         }
     }
 

@@ -375,5 +375,19 @@ export default {
       false: 'False',
       deleteImageFailure:'Image deletion failed',
       updateFailure: 'Batch update file failed',
-    }
+    },
+    appMapPosition: {
+      submit: 'Submit',
+      title: 'Please select address'
+    },
+    appSortBar: {
+      title: 'Sort'
+    },
+    appAfterTime:{
+      minutesAgo: 'minutes ago',
+      hoursAgo: 'hours ago',
+      dayAgo: 'days ago',
+      monthsAgo: 'months ago',
+      yearsAgo: 'years ago'
+  }
 };

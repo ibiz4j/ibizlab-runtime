@@ -25,8 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SpringBootApplication(exclude = {
 })
 @ComponentScan(basePackages = {"cn.ibizlab"}
-//        ,excludeFilters={
-//                @ComponentScan.Filter(type= org.springframework.context.annotation.FilterType.REGEX,pattern="cn.ibizlab.xxx.rest.xxx"),
+//        ,excludeFilters = {
+//                @ComponentScan.Filter(type= org.springframework.context.annotation.FilterType.REGEX, pattern="cn.ibizlab.xxx.rest.xxx"),
 //        }
 )
 @Import({
@@ -34,13 +34,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 })
 @EnableAsync
 @EnableScheduling
-public class DevBootApplication extends WebMvcConfigurerAdapter{
+public class DevBootApplication extends WebMvcConfigurerAdapter {
 
     @Autowired
     SearchContextHandlerMethodArgumentResolver resolver;
 
     public static void main(String[] args) {
-        SpringApplication.run(DevBootApplication.class,args);
+        SpringApplication.run(DevBootApplication.class, args);
     }
 
     @Override

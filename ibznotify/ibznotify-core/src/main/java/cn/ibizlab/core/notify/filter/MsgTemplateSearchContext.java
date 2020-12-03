@@ -65,7 +65,7 @@ public class MsgTemplateSearchContext extends QueryWrapperContext<MsgTemplate> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("template_name", query)   
+                     wrapper.like("template_name", query)
             );
 		 }
 	}

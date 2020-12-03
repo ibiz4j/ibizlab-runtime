@@ -47,6 +47,7 @@ public class JobsLockResource {
     @Lazy
     public JobsLockMapping jobslockMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Create-all')")
     @ApiOperation(value = "新建任务锁", tags = {"任务锁" },  notes = "新建任务锁")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks")
     public ResponseEntity<JobsLockDTO> create(@Validated @RequestBody JobsLockDTO jobslockdto) {
@@ -56,6 +57,7 @@ public class JobsLockResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Create-all')")
     @ApiOperation(value = "批量新建任务锁", tags = {"任务锁" },  notes = "批量新建任务锁")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<JobsLockDTO> jobslockdtos) {
@@ -63,6 +65,7 @@ public class JobsLockResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Update-all')")
     @ApiOperation(value = "更新任务锁", tags = {"任务锁" },  notes = "更新任务锁")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/{jobslock_id}")
     public ResponseEntity<JobsLockDTO> update(@PathVariable("jobslock_id") String jobslock_id, @RequestBody JobsLockDTO jobslockdto) {
@@ -73,6 +76,7 @@ public class JobsLockResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Update-all')")
     @ApiOperation(value = "批量更新任务锁", tags = {"任务锁" },  notes = "批量更新任务锁")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<JobsLockDTO> jobslockdtos) {
@@ -80,12 +84,14 @@ public class JobsLockResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Remove-all')")
     @ApiOperation(value = "删除任务锁", tags = {"任务锁" },  notes = "删除任务锁")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslocks/{jobslock_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("jobslock_id") String jobslock_id) {
          return ResponseEntity.status(HttpStatus.OK).body(jobslockService.remove(jobslock_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Remove-all')")
     @ApiOperation(value = "批量删除任务锁", tags = {"任务锁" },  notes = "批量删除任务锁")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslocks/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class JobsLockResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Get-all')")
     @ApiOperation(value = "获取任务锁", tags = {"任务锁" },  notes = "获取任务锁")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobslocks/{jobslock_id}")
     public ResponseEntity<JobsLockDTO> get(@PathVariable("jobslock_id") String jobslock_id) {
@@ -113,12 +120,14 @@ public class JobsLockResource {
         return  ResponseEntity.status(HttpStatus.OK).body(jobslockService.checkKey(jobslockMapping.toDomain(jobslockdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Save-all')")
     @ApiOperation(value = "保存任务锁", tags = {"任务锁" },  notes = "保存任务锁")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
     public ResponseEntity<Boolean> save(@RequestBody JobsLockDTO jobslockdto) {
         return ResponseEntity.status(HttpStatus.OK).body(jobslockService.save(jobslockMapping.toDomain(jobslockdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-Save-all')")
     @ApiOperation(value = "批量保存任务锁", tags = {"任务锁" },  notes = "批量保存任务锁")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<JobsLockDTO> jobslockdtos) {
@@ -126,6 +135,7 @@ public class JobsLockResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务锁" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobslocks/fetchdefault")
 	public ResponseEntity<List<JobsLockDTO>> fetchDefault(JobsLockSearchContext context) {
@@ -138,6 +148,7 @@ public class JobsLockResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLock-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务锁" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobslocks/searchdefault")
 	public ResponseEntity<Page<JobsLockDTO>> searchDefault(@RequestBody JobsLockSearchContext context) {

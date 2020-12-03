@@ -185,4 +185,18 @@ export default class WFGroupServiceBase extends EntityService {
         let res:any = Http.getInstance().get(`/wfgroups/fetchdefault`,tempData,isloading);
         return res;
     }
+
+    /**
+     * searchDefault接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFGroupServiceBase
+     */
+    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/wfgroups/searchdefault`,tempData,isloading);
+    }
 }

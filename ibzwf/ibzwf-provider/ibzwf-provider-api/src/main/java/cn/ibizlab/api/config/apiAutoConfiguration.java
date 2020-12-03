@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Import;
 @ConditionalOnClass(apiRestConfiguration.class)
 @ConditionalOnWebApplication
 @EnableConfigurationProperties(apiServiceProperties.class)
-public class apiAutoConfiguration implements ApplicationContextAware{
+public class apiAutoConfiguration implements ApplicationContextAware {
 
 	protected ApplicationContext applicationContext;
 

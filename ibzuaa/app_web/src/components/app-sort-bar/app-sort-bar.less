@@ -1,0 +1,84 @@
+.app-sort-bar{
+    padding: 6px 8px;
+    .ivu-row-flex.page-sort-bar{
+      width: 100%;
+      height: 30px;
+      position: relative;
+      .ivu-col{
+          border-radius: 2px;
+        user-select: none;
+        text-align: center;
+        margin: 0px 16px;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 4px;
+        background-color: #FFF;
+        border: 1px solid #CCC;
+        margin-left: -1px;
+        .sort-field-text{
+          margin-left: 7px;
+        }
+        .caret-wrapper{
+          width: 15px;
+          display: inline-block;
+          position: relative;
+          top: 4px;
+          padding-bottom: 2px;
+          .ivu-icon{
+            display: block;
+            line-height: 0.5;
+            color: #c5c8ce;
+          }
+        }
+      }
+      // 悬浮样式
+      .ivu-col:hover{
+          border:1px solid #82bff7;
+          position:relative;
+          z-index:2;
+          .sort-field-text{
+            color: #82bff7;
+          }
+      }
+      // 选中样式
+      .sort-ascending, .sort-descending{
+          border:1px solid #82bff7;
+          position:relative;
+          z-index:2;
+        .sort-field-text{
+            color:#82bff7;
+            font-weight: 800;
+        }
+      }
+      .sort-ascending .caret-wrapper .ivu-icon.ivu-icon-md-arrow-dropup,
+      .sort-descending .caret-wrapper .ivu-icon.ivu-icon-md-arrow-dropdown{
+          color: #82bff7;
+      }
+        
+      .issort {
+        position: absolute;
+        cursor: pointer;
+        top: 4px;
+        right: 10px;
+      }
+    }
+  }
+  .slide-in(@x-begin,@x-end,@c-begin,@c-end,@name){
+    @keyframes @name{
+      from {
+        transform: translateX(@x-begin);
+        background-color: @c-begin;
+      }
+      to {
+        transform: translateX(@x-end);
+        background-color: @c-end;
+      }
+    }
+  }
+  .slide-in(1670px,0px,#fff,#EEF2F5,fadein);
+  .animation(@animation-name,@animation-duration,@animation-timing-function,@animation-delay,@play-state){
+    animation: @arguments;
+  };
+  .open-bar {
+    .animation(fadein,0.7s,linear,0s,forwards);
+  };

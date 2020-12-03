@@ -258,7 +258,8 @@ export class Util {
      */
     public static srfFilePath2(name: string): string {
         if (!name || (name && Object.is(name, ''))) {
-            throw new Error('名称异常');
+            console.error("名称异常")
+            return '';
         }
         name = name.replace(/[_]/g, '-');
         let state: number = 0;
@@ -426,5 +427,40 @@ export class Util {
         const schema = new Schema({ [property]: rule })
         // 校验返回Promise
         return schema.validate({ [property]: value })
+    }
+
+
+    /**
+     * 设置cookie
+     * 
+     * @memberof Util
+     */
+    public static setCookie(name: any, value: any, day: any) {
+        if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+            let curDate = new Date();
+            let curTamp = curDate.getTime();
+            let curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
+            let passedTamp = curTamp - curWeeHours;
+            let leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
+            let leftTime = new Date();
+            leftTime.setTime(leftTamp + curTamp);
+            document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
+        } else {
+            document.cookie = name + "=" + escape(value);
+        }
+    }
+
+    /**
+     * 获取cookie
+     * 
+     * @memberof Util
+     */
+    public static getCookie(name: any): any {
+            let arr;
+            let reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
     }
 }

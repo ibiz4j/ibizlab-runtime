@@ -304,4 +304,26 @@ export default class SysUserRoleServiceBase extends EntityService {
         let res:any = Http.getInstance().get(`/sysuserroles/fetchdefault`,tempData,isloading);
         return res;
     }
+
+    /**
+     * searchDefault接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysUserRoleServiceBase
+     */
+    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysuser && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysusers/${context.sysuser}/sysuserroles/searchdefault`,tempData,isloading);
+        }
+        if(context.sysrole && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysroles/${context.sysrole}/sysuserroles/searchdefault`,tempData,isloading);
+        }
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/sysuserroles/searchdefault`,tempData,isloading);
+    }
 }

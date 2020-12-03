@@ -47,6 +47,7 @@ public class JobsLogResource {
     @Lazy
     public JobsLogMapping jobslogMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Create-all')")
     @ApiOperation(value = "新建任务调度日志", tags = {"任务调度日志" },  notes = "新建任务调度日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs")
     public ResponseEntity<JobsLogDTO> create(@Validated @RequestBody JobsLogDTO jobslogdto) {
@@ -56,6 +57,7 @@ public class JobsLogResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Create-all')")
     @ApiOperation(value = "批量新建任务调度日志", tags = {"任务调度日志" },  notes = "批量新建任务调度日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
@@ -63,6 +65,7 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Update-all')")
     @ApiOperation(value = "更新任务调度日志", tags = {"任务调度日志" },  notes = "更新任务调度日志")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/{jobslog_id}")
     public ResponseEntity<JobsLogDTO> update(@PathVariable("jobslog_id") String jobslog_id, @RequestBody JobsLogDTO jobslogdto) {
@@ -73,6 +76,7 @@ public class JobsLogResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Update-all')")
     @ApiOperation(value = "批量更新任务调度日志", tags = {"任务调度日志" },  notes = "批量更新任务调度日志")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
@@ -80,12 +84,14 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Remove-all')")
     @ApiOperation(value = "删除任务调度日志", tags = {"任务调度日志" },  notes = "删除任务调度日志")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/{jobslog_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("jobslog_id") String jobslog_id) {
          return ResponseEntity.status(HttpStatus.OK).body(jobslogService.remove(jobslog_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Remove-all')")
     @ApiOperation(value = "批量删除任务调度日志", tags = {"任务调度日志" },  notes = "批量删除任务调度日志")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Get-all')")
     @ApiOperation(value = "获取任务调度日志", tags = {"任务调度日志" },  notes = "获取任务调度日志")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/{jobslog_id}")
     public ResponseEntity<JobsLogDTO> get(@PathVariable("jobslog_id") String jobslog_id) {
@@ -113,12 +120,14 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(jobslogService.checkKey(jobslogMapping.toDomain(jobslogdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Save-all')")
     @ApiOperation(value = "保存任务调度日志", tags = {"任务调度日志" },  notes = "保存任务调度日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/save")
     public ResponseEntity<Boolean> save(@RequestBody JobsLogDTO jobslogdto) {
         return ResponseEntity.status(HttpStatus.OK).body(jobslogService.save(jobslogMapping.toDomain(jobslogdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Save-all')")
     @ApiOperation(value = "批量保存任务调度日志", tags = {"任务调度日志" },  notes = "批量保存任务调度日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<JobsLogDTO> jobslogdtos) {
@@ -126,6 +135,7 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务调度日志" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobslogs/fetchdefault")
 	public ResponseEntity<List<JobsLogDTO>> fetchDefault(JobsLogSearchContext context) {
@@ -138,6 +148,7 @@ public class JobsLogResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务调度日志" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobslogs/searchdefault")
 	public ResponseEntity<Page<JobsLogDTO>> searchDefault(@RequestBody JobsLogSearchContext context) {

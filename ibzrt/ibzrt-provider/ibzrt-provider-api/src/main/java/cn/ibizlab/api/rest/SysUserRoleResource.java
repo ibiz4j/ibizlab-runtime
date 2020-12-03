@@ -47,6 +47,7 @@ public class SysUserRoleResource {
     @Lazy
     public SysUserRoleMapping sysuserroleMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Create-all')")
     @ApiOperation(value = "新建用户角色关系", tags = {"用户角色关系" },  notes = "新建用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles")
     public ResponseEntity<SysUserRoleDTO> create(@Validated @RequestBody SysUserRoleDTO sysuserroledto) {
@@ -56,6 +57,7 @@ public class SysUserRoleResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Create-all')")
     @ApiOperation(value = "批量新建用户角色关系", tags = {"用户角色关系" },  notes = "批量新建用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -64,6 +66,7 @@ public class SysUserRoleResource {
     }
 
     @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Update-all')")
     @ApiOperation(value = "更新用户角色关系", tags = {"用户角色关系" },  notes = "更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> update(@PathVariable("sysuserrole_id") String sysuserrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
@@ -74,6 +77,7 @@ public class SysUserRoleResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Update-all')")
     @ApiOperation(value = "批量更新用户角色关系", tags = {"用户角色关系" },  notes = "批量更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -81,12 +85,14 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Remove-all')")
     @ApiOperation(value = "删除用户角色关系", tags = {"用户角色关系" },  notes = "删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("sysuserrole_id") String sysuserrole_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.remove(sysuserrole_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Remove-all')")
     @ApiOperation(value = "批量删除用户角色关系", tags = {"用户角色关系" },  notes = "批量删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserroles/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -94,6 +100,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Get-all')")
     @ApiOperation(value = "获取用户角色关系", tags = {"用户角色关系" },  notes = "获取用户角色关系")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> get(@PathVariable("sysuserrole_id") String sysuserrole_id) {
@@ -114,12 +121,14 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Save-all')")
     @ApiOperation(value = "保存用户角色关系", tags = {"用户角色关系" },  notes = "保存用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/save")
     public ResponseEntity<Boolean> save(@RequestBody SysUserRoleDTO sysuserroledto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.save(sysuserroleMapping.toDomain(sysuserroledto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Save-all')")
     @ApiOperation(value = "批量保存用户角色关系", tags = {"用户角色关系" },  notes = "批量保存用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -127,6 +136,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"用户角色关系" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchDefault(SysUserRoleSearchContext context) {
@@ -139,6 +149,7 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"用户角色关系" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchDefault(@RequestBody SysUserRoleSearchContext context) {
@@ -148,6 +159,7 @@ public class SysUserRoleResource {
 	}
 
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Create-all')")
     @ApiOperation(value = "根据系统角色建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色建立用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles")
     public ResponseEntity<SysUserRoleDTO> createBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
@@ -158,6 +170,7 @@ public class SysUserRoleResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Create-all')")
     @ApiOperation(value = "根据系统角色批量建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色批量建立用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles/batch")
     public ResponseEntity<Boolean> createBatchBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -170,6 +183,7 @@ public class SysUserRoleResource {
     }
 
     @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Update-all')")
     @ApiOperation(value = "根据系统角色更新用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{sysrole_id}/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> updateBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysuserrole_id") String sysuserrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
@@ -181,6 +195,7 @@ public class SysUserRoleResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Update-all')")
     @ApiOperation(value = "根据系统角色批量更新用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色批量更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{sysrole_id}/sysuserroles/batch")
     public ResponseEntity<Boolean> updateBatchBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -192,12 +207,14 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Remove-all')")
     @ApiOperation(value = "根据系统角色删除用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<Boolean> removeBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysuserrole_id") String sysuserrole_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.remove(sysuserrole_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Remove-all')")
     @ApiOperation(value = "根据系统角色批量删除用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色批量删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}/sysuserroles/batch")
     public ResponseEntity<Boolean> removeBatchBySysRole(@RequestBody List<String> ids) {
@@ -205,6 +222,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Get-all')")
     @ApiOperation(value = "根据系统角色获取用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色获取用户角色关系")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> getBySysRole(@PathVariable("sysrole_id") String sysrole_id, @PathVariable("sysuserrole_id") String sysuserrole_id) {
@@ -227,6 +245,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Save-all')")
     @ApiOperation(value = "根据系统角色保存用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色保存用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles/save")
     public ResponseEntity<Boolean> saveBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
@@ -235,6 +254,7 @@ public class SysUserRoleResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.save(domain));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Save-all')")
     @ApiOperation(value = "根据系统角色批量保存用户角色关系", tags = {"用户角色关系" },  notes = "根据系统角色批量保存用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysuserroles/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -246,6 +266,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统角色获取DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统角色获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysroles/{sysrole_id}/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchSysUserRoleDefaultBySysRole(@PathVariable("sysrole_id") String sysrole_id,SysUserRoleSearchContext context) {
@@ -259,6 +280,7 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统角色查询DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统角色查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysroles/{sysrole_id}/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchSysUserRoleDefaultBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysUserRoleSearchContext context) {
@@ -267,6 +289,7 @@ public class SysUserRoleResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Create-all')")
     @ApiOperation(value = "根据系统用户建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户建立用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles")
     public ResponseEntity<SysUserRoleDTO> createBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleDTO sysuserroledto) {
@@ -277,6 +300,7 @@ public class SysUserRoleResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Create-all')")
     @ApiOperation(value = "根据系统用户批量建立用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户批量建立用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles/batch")
     public ResponseEntity<Boolean> createBatchBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -289,6 +313,7 @@ public class SysUserRoleResource {
     }
 
     @VersionCheck(entity = "sysuserrole" , versionfield = "updatedate")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Update-all')")
     @ApiOperation(value = "根据系统用户更新用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> updateBySysUser(@PathVariable("sysuser_id") String sysuser_id, @PathVariable("sysuserrole_id") String sysuserrole_id, @RequestBody SysUserRoleDTO sysuserroledto) {
@@ -300,6 +325,7 @@ public class SysUserRoleResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Update-all')")
     @ApiOperation(value = "根据系统用户批量更新用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户批量更新用户角色关系")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}/sysuserroles/batch")
     public ResponseEntity<Boolean> updateBatchBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -311,12 +337,14 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Remove-all')")
     @ApiOperation(value = "根据系统用户删除用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<Boolean> removeBySysUser(@PathVariable("sysuser_id") String sysuser_id, @PathVariable("sysuserrole_id") String sysuserrole_id) {
 		return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.remove(sysuserrole_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Remove-all')")
     @ApiOperation(value = "根据系统用户批量删除用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户批量删除用户角色关系")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}/sysuserroles/batch")
     public ResponseEntity<Boolean> removeBatchBySysUser(@RequestBody List<String> ids) {
@@ -324,6 +352,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Get-all')")
     @ApiOperation(value = "根据系统用户获取用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户获取用户角色关系")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}/sysuserroles/{sysuserrole_id}")
     public ResponseEntity<SysUserRoleDTO> getBySysUser(@PathVariable("sysuser_id") String sysuser_id, @PathVariable("sysuserrole_id") String sysuserrole_id) {
@@ -346,6 +375,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.checkKey(sysuserroleMapping.toDomain(sysuserroledto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Save-all')")
     @ApiOperation(value = "根据系统用户保存用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户保存用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles/save")
     public ResponseEntity<Boolean> saveBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleDTO sysuserroledto) {
@@ -354,6 +384,7 @@ public class SysUserRoleResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserroleService.save(domain));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Save-all')")
     @ApiOperation(value = "根据系统用户批量保存用户角色关系", tags = {"用户角色关系" },  notes = "根据系统用户批量保存用户角色关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/sysuserroles/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody List<SysUserRoleDTO> sysuserroledtos) {
@@ -365,6 +396,7 @@ public class SysUserRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统用户获取DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统用户获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysusers/{sysuser_id}/sysuserroles/fetchdefault")
 	public ResponseEntity<List<SysUserRoleDTO>> fetchSysUserRoleDefaultBySysUser(@PathVariable("sysuser_id") String sysuser_id,SysUserRoleSearchContext context) {
@@ -378,6 +410,7 @@ public class SysUserRoleResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-searchDefault-all')")
 	@ApiOperation(value = "根据系统用户查询DEFAULT", tags = {"用户角色关系" } ,notes = "根据系统用户查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysusers/{sysuser_id}/sysuserroles/searchdefault")
 	public ResponseEntity<Page<SysUserRoleDTO>> searchSysUserRoleDefaultBySysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserRoleSearchContext context) {

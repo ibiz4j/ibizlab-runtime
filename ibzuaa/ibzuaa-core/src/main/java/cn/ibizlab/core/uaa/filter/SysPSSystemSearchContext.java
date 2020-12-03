@@ -44,7 +44,7 @@ public class SysPSSystemSearchContext extends QueryWrapperContext<SysPSSystem> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("pssystemname", query)   
+                     wrapper.like("pssystemname", query)
             );
 		 }
 	}

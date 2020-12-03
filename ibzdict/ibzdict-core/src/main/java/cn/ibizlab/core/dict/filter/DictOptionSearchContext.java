@@ -79,7 +79,7 @@ public class DictOptionSearchContext extends QueryWrapperContext<DictOption> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("label", query)   
+                     wrapper.like("label", query)
             );
 		 }
 	}

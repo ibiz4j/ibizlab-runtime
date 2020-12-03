@@ -11,9 +11,9 @@ import java.util.Map;
  */
 public interface IBZDataAuditService {
     @Async("asyncExecutor")
-    void createAudit(HttpServletRequest request,EntityBase entity,Object idValue,Map<String, Audit> auditFields);
+    void createAudit(HttpServletRequest request, EntityBase entity, Object idValue, Map<String, Audit> auditFields);
     @Async("asyncExecutor")
     void updateAudit(HttpServletRequest request, EntityBase beforeEntity, Object serviceObj, Object idValue, Map<String, Audit> auditFields);
     @Async("asyncExecutor")
-    void removeAudit(HttpServletRequest request,EntityBase entity,Object idValue,Map<String, Audit> auditFields);
+    void removeAudit(HttpServletRequest request, EntityBase entity, Object idValue, Map<String, Audit> auditFields);
 }

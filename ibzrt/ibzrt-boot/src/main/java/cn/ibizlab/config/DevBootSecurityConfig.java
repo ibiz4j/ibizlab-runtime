@@ -110,9 +110,9 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/**"
                 ).permitAll()
                     //放行登录请求
-                   .antMatchers( HttpMethod.POST,"/"+loginPath).permitAll()
+                   .antMatchers( HttpMethod.POST, "/"+loginPath).permitAll()
                     //放行注销请求
-                    .antMatchers( HttpMethod.GET,"/"+logoutPath).permitAll()
+                    .antMatchers( HttpMethod.GET, "/"+logoutPath).permitAll()
                     // 文件操作
                    .antMatchers("/"+downloadpath+"/**").permitAll()
                    .antMatchers("/"+uploadpath).permitAll()

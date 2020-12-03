@@ -51,7 +51,7 @@ public class JobsRegistrySearchContext extends QueryWrapperContext<JobsRegistry>
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("app", query)   
+                     wrapper.like("app", query)
             );
 		 }
 	}

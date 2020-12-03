@@ -407,4 +407,30 @@ export default class SysEmployeeServiceBase extends EntityService {
         let res:any = Http.getInstance().get(`/sysemployees/fetchdefault`,tempData,isloading);
         return res;
     }
+
+    /**
+     * searchDefault接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysEmployeeServiceBase
+     */
+    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysorganization && context.sysdepartment && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/searchdefault`,tempData,isloading);
+        }
+        if(context.sysorganization && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysemployees/searchdefault`,tempData,isloading);
+        }
+        if(context.sysdepartment && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysemployees/searchdefault`,tempData,isloading);
+        }
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/sysemployees/searchdefault`,tempData,isloading);
+    }
 }

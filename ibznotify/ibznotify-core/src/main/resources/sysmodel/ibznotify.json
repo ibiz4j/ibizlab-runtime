@@ -9,6 +9,8 @@
     "table_name":"IBZMSGBODY",
     "system_id":"ibznotify",
     "system_name":"ibznotify",
+    "module_id":"notify",
+    "module_name":"notify",
     "fields":[
     {
     "fieldname":"ISERROR" ,
@@ -235,6 +237,8 @@
     "table_name":"IBZOPENACCESS",
     "system_id":"ibznotify",
     "system_name":"ibznotify",
+    "module_id":"notify",
+    "module_name":"notify",
     "fields":[
     {
     "fieldname":"ACCESSID" ,
@@ -424,6 +428,8 @@
     "table_name":"IBZMSGTEMPL",
     "system_id":"ibznotify",
     "system_name":"ibznotify",
+    "module_id":"notify",
+    "module_name":"notify",
     "fields":[
     {
     "fieldname":"TID" ,
@@ -585,6 +591,8 @@
     "table_name":"IBZUSERAUTH",
     "system_id":"ibznotify",
     "system_name":"ibznotify",
+    "module_id":"notify",
+    "module_name":"notify",
     "fields":[
     {
     "fieldname":"AUTHID" ,

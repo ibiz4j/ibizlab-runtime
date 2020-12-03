@@ -100,7 +100,7 @@ public class SysDepartmentSearchContext extends QueryWrapperContext<SysDepartmen
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("deptname", query)   
+                     wrapper.like("deptname", query)
             );
 		 }
 	}

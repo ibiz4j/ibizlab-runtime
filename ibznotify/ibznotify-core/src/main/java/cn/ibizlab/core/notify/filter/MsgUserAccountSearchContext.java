@@ -44,7 +44,7 @@ public class MsgUserAccountSearchContext extends QueryWrapperContext<MsgUserAcco
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("identifier", query)   
+                     wrapper.like("identifier", query)
             );
 		 }
 	}

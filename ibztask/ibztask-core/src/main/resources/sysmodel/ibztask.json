@@ -9,6 +9,8 @@
     "table_name":"JOBS_INFO",
     "system_id":"ibztask",
     "system_name":"ibztask",
+    "module_id":"task",
+    "module_name":"task",
     "fields":[
     {
     "fieldname":"ID" ,
@@ -229,6 +231,8 @@
     "table_name":"JOBS_LOCK",
     "system_id":"ibztask",
     "system_name":"ibztask",
+    "module_id":"task",
+    "module_name":"task",
     "fields":[
     {
     "fieldname":"ID" ,
@@ -299,6 +303,8 @@
     "table_name":"JOBS_LOG",
     "system_id":"ibztask",
     "system_name":"ibztask",
+    "module_id":"task",
+    "module_name":"task",
     "fields":[
     {
     "fieldname":"ID" ,
@@ -451,6 +457,8 @@
     "table_name":"JOBS_REGISTRY",
     "system_id":"ibztask",
     "system_name":"ibztask",
+    "module_id":"task",
+    "module_name":"task",
     "fields":[
     {
     "fieldname":"ID" ,

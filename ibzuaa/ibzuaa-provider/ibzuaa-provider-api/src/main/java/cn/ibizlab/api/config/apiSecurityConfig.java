@@ -110,7 +110,10 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/fonts/**",
                         "/**/js/**",
                         "/**/img/**",
-                        "/"
+                        "/",
+                        "webjars/**",
+                        "/swagger-resources/**",
+                        "/v2/**"
                 ).permitAll()
                 //放行登录请求
                 .antMatchers( HttpMethod.POST,"/"+loginPath).permitAll()
@@ -142,7 +145,8 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                .antMatchers("/uaa/getQQAppId").permitAll()
                .antMatchers("/uaa/queryQQUserByCode").permitAll()
                .antMatchers("/uaa/bindQQtoRegister").permitAll()
-               .antMatchers("/uaa/dingtalk/jsapi/sign").permitAll();
+               .antMatchers("/uaa/dingtalk/jsapi/sign").permitAll()
+               .antMatchers("/uaa/refreshToken").permitAll();
 
         if (StringUtils.isNotBlank(excludesPattern)) {
             for (String excludePattern : excludesPattern.split("\\s*,\\s*")) {

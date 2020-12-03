@@ -29,10 +29,10 @@ export class MenuIcon extends Vue {
     public render(): any {
         if (this.item) {
             if (this.item.iconcls) {
-                return <i class={this.item.iconcls} />
+                return <i class={[this.item.iconcls, 'menu-icon']} />
             }
             if (this.item.icon) {
-                return <img src={this.item.icon} />
+                return <img class="menu-icon" src={this.item.icon} />
             }
         }
         return <span />

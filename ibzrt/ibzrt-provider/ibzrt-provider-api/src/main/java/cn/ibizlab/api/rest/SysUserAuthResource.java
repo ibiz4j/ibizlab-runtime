@@ -47,6 +47,7 @@ public class SysUserAuthResource {
     @Lazy
     public SysUserAuthMapping sysuserauthMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Create-all')")
     @ApiOperation(value = "新建账号绑定", tags = {"账号绑定" },  notes = "新建账号绑定")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths")
     public ResponseEntity<SysUserAuthDTO> create(@Validated @RequestBody SysUserAuthDTO sysuserauthdto) {
@@ -56,6 +57,7 @@ public class SysUserAuthResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Create-all')")
     @ApiOperation(value = "批量新建账号绑定", tags = {"账号绑定" },  notes = "批量新建账号绑定")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysUserAuthDTO> sysuserauthdtos) {
@@ -63,6 +65,7 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Update-all')")
     @ApiOperation(value = "更新账号绑定", tags = {"账号绑定" },  notes = "更新账号绑定")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysuserauths/{sysuserauth_id}")
     public ResponseEntity<SysUserAuthDTO> update(@PathVariable("sysuserauth_id") String sysuserauth_id, @RequestBody SysUserAuthDTO sysuserauthdto) {
@@ -73,6 +76,7 @@ public class SysUserAuthResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Update-all')")
     @ApiOperation(value = "批量更新账号绑定", tags = {"账号绑定" },  notes = "批量更新账号绑定")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysuserauths/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysUserAuthDTO> sysuserauthdtos) {
@@ -80,12 +84,14 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Remove-all')")
     @ApiOperation(value = "删除账号绑定", tags = {"账号绑定" },  notes = "删除账号绑定")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserauths/{sysuserauth_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("sysuserauth_id") String sysuserauth_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.remove(sysuserauth_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Remove-all')")
     @ApiOperation(value = "批量删除账号绑定", tags = {"账号绑定" },  notes = "批量删除账号绑定")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserauths/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Get-all')")
     @ApiOperation(value = "获取账号绑定", tags = {"账号绑定" },  notes = "获取账号绑定")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/{sysuserauth_id}")
     public ResponseEntity<SysUserAuthDTO> get(@PathVariable("sysuserauth_id") String sysuserauth_id) {
@@ -113,12 +120,14 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.checkKey(sysuserauthMapping.toDomain(sysuserauthdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Save-all')")
     @ApiOperation(value = "保存账号绑定", tags = {"账号绑定" },  notes = "保存账号绑定")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/save")
     public ResponseEntity<Boolean> save(@RequestBody SysUserAuthDTO sysuserauthdto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.save(sysuserauthMapping.toDomain(sysuserauthdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Save-all')")
     @ApiOperation(value = "批量保存账号绑定", tags = {"账号绑定" },  notes = "批量保存账号绑定")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysUserAuthDTO> sysuserauthdtos) {
@@ -126,6 +135,7 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"账号绑定" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysuserauths/fetchdefault")
 	public ResponseEntity<List<SysUserAuthDTO>> fetchDefault(SysUserAuthSearchContext context) {
@@ -138,6 +148,7 @@ public class SysUserAuthResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"账号绑定" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysuserauths/searchdefault")
 	public ResponseEntity<Page<SysUserAuthDTO>> searchDefault(@RequestBody SysUserAuthSearchContext context) {

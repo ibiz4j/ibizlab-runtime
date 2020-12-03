@@ -304,4 +304,26 @@ export default class SysRolePermissionServiceBase extends EntityService {
         let res:any = Http.getInstance().get(`/sysrolepermissions/fetchdefault`,tempData,isloading);
         return res;
     }
+
+    /**
+     * searchDefault接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRolePermissionServiceBase
+     */
+    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysrole && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysroles/${context.sysrole}/sysrolepermissions/searchdefault`,tempData,isloading);
+        }
+        if(context.syspermission && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/syspermissions/${context.syspermission}/sysrolepermissions/searchdefault`,tempData,isloading);
+        }
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/sysrolepermissions/searchdefault`,tempData,isloading);
+    }
 }

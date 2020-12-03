@@ -1,0 +1,54 @@
+.app-map-position {
+    .map-modal {
+        .el-dialog {
+            margin-top: 60px !important;
+            width: 90%;
+            .el-dialog__header {
+                padding: 10px 0px 10px 40px;
+            }
+            .el-dialog__body {
+                padding: 6px 10px;
+                .search-toolbar {
+                    display: flex;
+                    #map__result {
+                        position: absolute;
+                        z-index: 20;
+                        right: 10px;
+                        top: 110px;
+                    }
+                    .el-vue-search-box-container {
+                        border: 1px solid #DCDFE6;
+                        height: 40px;
+                        margin-right: 20px;
+                    }
+                }
+            }
+
+            .amap-marker-content {
+                img {
+                    width: 25px;
+                    height: 34px;
+                }
+                .input-map__marker {
+                    position: absolute;
+                    top: -28px;
+                    right: -160px;
+                    color: #fff;
+                    padding: 0px 10px;
+                    -webkit-box-shadow: 1px 1px 1px rgba(10,10,10,.2);
+                    box-shadow: 1px 1px 1px rgba(10,10,10,.2);
+                    white-space: nowrap;
+                    font-size: 12px;
+                    font-family: "";
+                    background-color: #25a5f7;
+                    border-radius: 3px;
+                }
+            }
+        }
+        .el-vue-amap-container {
+            padding-top: 20px;
+            height: 640px;
+        }
+    }
+
+}

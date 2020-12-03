@@ -51,7 +51,7 @@ public class WFProcessDefinitionSearchContext extends QueryWrapperContext<WFProc
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("definitionname", query)   
+                     wrapper.like("definitionname", query)
             );
 		 }
 	}

@@ -6,7 +6,8 @@
         <div class='app-picker'>
             <el-autocomplete class='text-value' :value-key="deMajorField" :disabled="disabled" v-model="curvalue" size='small'
                 :trigger-on-focus="true" :fetch-suggestions="(query, callback) => { this.onSearch(query, callback, true) }" @select="onACSelect"
-                @input="onInput" @blur="onBlur" style='width:100%;'>
+                @input="onInput" @blur="onBlur" style='width:100%;'
+                :placeholder="placeholder">
                 <template v-slot:default="{item}">
                     <!-- <template v-if="item.isNew">
                         <div v-if="linkview" @click="newAndEdit">{{$t('components.appPicker.newAndEdit')}}</div>
@@ -26,7 +27,7 @@
     </div>
     <div v-else-if="Object.is(editortype, 'pickup-no-ac')" class='app-picker'>
         <div class='app-picker'>
-            <el-input class='text-value' :value="curvalue" readonly size='small' :disabled="disabled">
+            <el-input class='text-value' :placeholder="placeholder" :value="curvalue" readonly size='small' :disabled="disabled">
                 <template slot='suffix'>
                     <i v-if="curvalue && !disabled" class='el-icon-circle-close' @click="onClear"></i>
                     <i class='el-icon-search' @click="openView"></i>
@@ -38,7 +39,8 @@
     <div v-else-if="Object.is(editortype, 'dropdown')" class='app-picker'>
         <el-select ref="appPicker" remote :remote-method="(query) => this.onSearch(query, null, true)" :value="refvalue" size='small' filterable
             @change="onSelect" :disabled="disabled" style='width:100%;' clearable popper-class="app-picker-dropdown"
-            @clear="onClear" @visible-change="onSelectOpen">
+            @clear="onClear" @visible-change="onSelectOpen"
+            :placeholder="placeholder">
             <template v-if="items">
                 <template v-for="_item in items">
                     <el-option  v-if="!_item.tag" :key="_item[deKeyField]" :value="_item[deKeyField]" :label="_item[deMajorField]" :disabled="_item.disabled"></el-option>
@@ -223,6 +225,14 @@ export default class AppPicker extends Vue {
     @Model('change') public value?: any;
 
     /**
+     * 占位提示
+     * 
+     * @type {*}
+     * @memberof AppPicker
+     */
+    @Prop() public placeholder?: string;
+
+    /**
      * 当前值
      *
      * @type {string}
@@ -258,7 +268,7 @@ export default class AppPicker extends Vue {
      * @type {string}
      * @memberof AppPicker
      */
-    public selectValue = this.value;
+    public selectValue = null;
 
     /**
      * 下拉列表节点元素
@@ -291,6 +301,7 @@ export default class AppPicker extends Vue {
     @Watch('value',{immediate:true})
     public onValueChange(newVal: any, oldVal: any) {
         this.curvalue = newVal;
+		this.selectValue = newVal;
         if (Object.is(this.editortype, 'dropdown') && this.valueitem) {
             const value = this.data[this.valueitem];
             const index = this.items.findIndex((item: any) => Object.is(item.value, value));
@@ -421,7 +432,6 @@ export default class AppPicker extends Vue {
      * @param item 
      */
     public onACSelect(item: any): void {
-        this.selectValue = item[this.deMajorField];
         if (this.valueitem) {
             this.$emit('formitemvaluechange', { name: this.valueitem, value: item[this.deKeyField] });
         }

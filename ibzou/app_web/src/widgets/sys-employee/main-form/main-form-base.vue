@@ -118,7 +118,7 @@
 </i-col>
 <i-col v-show="detailsModel.birthday.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='birthday' :itemRules="this.rules().birthday" class='' :caption="$t('entities.sysemployee.main_form.details.birthday')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.birthday.error" :isEmptyCaption="false" labelPos="LEFT">
-    <date-picker type="date" :transfer="true" format="yyyy-MM-dd" placeholder="请选择时间..." :value="data.birthday" :disabled="detailsModel.birthday.disabled" style="min-width: 150px; width:100px;" @on-change="(val1, val2) => { this.data.birthday = val1 }"></date-picker>
+    <date-picker type="date" :transfer="true" format="yyyy-MM-dd"  :value="data.birthday" :disabled="detailsModel.birthday.disabled" style="min-width: 150px; width:100px;" @on-change="(val1, val2) => { this.data.birthday = val1 }"></date-picker>
 
 </app-form-item>
 
@@ -390,7 +390,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    @Prop() public context: any;
+    @Prop() public context!: any;
 
     /**
      * 视图参数
@@ -398,7 +398,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    @Prop() public viewparams: any;
+    @Prop() public viewparams!: any;
 
     /**
      * 视图状态事件
@@ -506,6 +506,14 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public formKeyItemName: string = '';
+
+    /**
+     * 是否自动加载
+     *
+     * @type {boolean}
+     * @memberof MainBase
+     */
+    @Prop({default:false}) public isautoload?:boolean;
 
     /**
      * 界面UI服务对象
@@ -936,34 +944,40 @@ export default class MainBase extends Vue implements ControlInterface {
                 startOp(true);
                 return falg;
             }
-            // 常规规则
-            if(item.type == 'SIMPLE'){
-                startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.data,item.isKeyCond));
+           try {
+                // 常规规则
+                if(item.type == 'SIMPLE'){
+                    startOp(!this.$verify.checkFieldSimpleRule(dataValue,item.condOP,item.paramValue,item.ruleInfo,item.paramType,this.data,item.isKeyCond));
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+                // 数值范围
+                if(item.type == 'VALUERANGE2'){
+                    startOp( !this.$verify.checkFieldValueRangeRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+                // 正则式
+                if (item.type == "REGEX") {
+                    startOp(!this.$verify.checkFieldRegExRule(dataValue,item.regExCode,item.ruleInfo,item.isKeyCond));
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+                // 长度
+                if (item.type == "STRINGLENGTH") {
+                    startOp(!this.$verify.checkFieldStringLengthRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+                // 系统值规则
+                if(item.type == "SYSVALUERULE") {
+                    startOp(!this.$verify.checkFieldSysValueRule(dataValue,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
+                    falg.infoMessage = item.ruleInfo;
+                    if(!falg.isPast) return falg;
+                }
+            } catch(error) {
                 falg.infoMessage = item.ruleInfo;
-                if(!falg.isPast) return falg;
-            }
-            // 数值范围
-            if(item.type == 'VALUERANGE2'){
-                startOp( !this.$verify.checkFieldValueRangeRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond));
-                falg.infoMessage = item.ruleInfo;
-                if(!falg.isPast) return falg;
-            }
-            // 正则式
-            if (item.type == "REGEX") {
-                startOp(!this.$verify.checkFieldRegExRule(dataValue,item.regExCode,item.ruleInfo,item.isKeyCond));
-                falg.infoMessage = item.ruleInfo;
-                if(!falg.isPast) return falg;
-            }
-            // 长度
-            if (item.type == "STRINGLENGTH") {
-                startOp(!this.$verify.checkFieldStringLengthRule(dataValue,item.minValue,item.isIncludeMinValue,item.maxValue,item.isIncludeMaxValue,item.ruleInfo,item.isKeyCond)); 
-                falg.infoMessage = item.ruleInfo;
-                if(!falg.isPast) return falg;
-            }
-            // 系统值规则
-            if(item.type == "SYSVALUERULE") {
-                startOp(!this.$verify.checkFieldSysValueRule(dataValue,item.sysRule.regExCode,item.ruleInfo,item.isKeyCond));
-                falg.infoMessage = item.ruleInfo;
+                startOp(false);
                 if(!falg.isPast) return falg;
             }
             // 分组
@@ -978,7 +992,7 @@ export default class MainBase extends Vue implements ControlInterface {
         if(!falg.hasOwnProperty("isPast")){
             falg.isPast = true;
         }
-        if(!this.data[name]){
+        if(!this.data[name] && this.data[name] != 0){
            falg.isPast = true;
         }
         return falg;
@@ -1887,6 +1901,9 @@ export default class MainBase extends Vue implements ControlInterface {
      *  @memberof MainBase
      */    
     public afterCreated(){
+        if(this.isautoload){
+            this.autoLoad({srfkey:this.context.documentcenter});
+        }
         if (this.viewState) {
             this.viewStateEvent = this.viewState.subscribe(({ tag, action, data }) => {
                 if (!Object.is(tag, this.name)) {
@@ -2713,6 +2730,17 @@ export default class MainBase extends Vue implements ControlInterface {
         }
     }
 
+
+    /**
+     * 面板数据变化处理事件
+     * @param {any} item 当前列数据
+     * @param {any} $event 面板事件数据
+     *
+     * @memberof MainBase
+     */
+    public onPanelDataChange(item:any,$event:any) {
+        Object.assign(item, $event, {rowDataState:'update'});
+    }
     
 }
 </script>

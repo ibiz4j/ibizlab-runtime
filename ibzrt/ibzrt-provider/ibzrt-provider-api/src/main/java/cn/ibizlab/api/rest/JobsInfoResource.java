@@ -47,6 +47,7 @@ public class JobsInfoResource {
     @Lazy
     public JobsInfoMapping jobsinfoMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Create-all')")
     @ApiOperation(value = "新建任务信息", tags = {"任务信息" },  notes = "新建任务信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos")
     public ResponseEntity<JobsInfoDTO> create(@Validated @RequestBody JobsInfoDTO jobsinfodto) {
@@ -56,6 +57,7 @@ public class JobsInfoResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Create-all')")
     @ApiOperation(value = "批量新建任务信息", tags = {"任务信息" },  notes = "批量新建任务信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<JobsInfoDTO> jobsinfodtos) {
@@ -63,6 +65,7 @@ public class JobsInfoResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Update-all')")
     @ApiOperation(value = "更新任务信息", tags = {"任务信息" },  notes = "更新任务信息")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/{jobsinfo_id}")
     public ResponseEntity<JobsInfoDTO> update(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
@@ -73,6 +76,7 @@ public class JobsInfoResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Update-all')")
     @ApiOperation(value = "批量更新任务信息", tags = {"任务信息" },  notes = "批量更新任务信息")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<JobsInfoDTO> jobsinfodtos) {
@@ -80,12 +84,14 @@ public class JobsInfoResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Remove-all')")
     @ApiOperation(value = "删除任务信息", tags = {"任务信息" },  notes = "删除任务信息")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsinfos/{jobsinfo_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("jobsinfo_id") String jobsinfo_id) {
          return ResponseEntity.status(HttpStatus.OK).body(jobsinfoService.remove(jobsinfo_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Remove-all')")
     @ApiOperation(value = "批量删除任务信息", tags = {"任务信息" },  notes = "批量删除任务信息")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsinfos/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class JobsInfoResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Get-all')")
     @ApiOperation(value = "获取任务信息", tags = {"任务信息" },  notes = "获取任务信息")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/{jobsinfo_id}")
     public ResponseEntity<JobsInfoDTO> get(@PathVariable("jobsinfo_id") String jobsinfo_id) {
@@ -113,6 +120,7 @@ public class JobsInfoResource {
         return  ResponseEntity.status(HttpStatus.OK).body(jobsinfoService.checkKey(jobsinfoMapping.toDomain(jobsinfodto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Execute-all')")
     @ApiOperation(value = "执行", tags = {"任务信息" },  notes = "执行")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/execute")
     public ResponseEntity<JobsInfoDTO> execute(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
@@ -123,12 +131,14 @@ public class JobsInfoResource {
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Save-all')")
     @ApiOperation(value = "保存任务信息", tags = {"任务信息" },  notes = "保存任务信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/save")
     public ResponseEntity<Boolean> save(@RequestBody JobsInfoDTO jobsinfodto) {
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfoService.save(jobsinfoMapping.toDomain(jobsinfodto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Save-all')")
     @ApiOperation(value = "批量保存任务信息", tags = {"任务信息" },  notes = "批量保存任务信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<JobsInfoDTO> jobsinfodtos) {
@@ -136,6 +146,7 @@ public class JobsInfoResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Start-all')")
     @ApiOperation(value = "开始", tags = {"任务信息" },  notes = "开始")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/start")
     public ResponseEntity<JobsInfoDTO> start(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
@@ -146,6 +157,7 @@ public class JobsInfoResource {
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Stop-all')")
     @ApiOperation(value = "停止", tags = {"任务信息" },  notes = "停止")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/stop")
     public ResponseEntity<JobsInfoDTO> stop(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
@@ -156,6 +168,7 @@ public class JobsInfoResource {
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务信息" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobsinfos/fetchdefault")
 	public ResponseEntity<List<JobsInfoDTO>> fetchDefault(JobsInfoSearchContext context) {
@@ -168,6 +181,7 @@ public class JobsInfoResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务信息" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobsinfos/searchdefault")
 	public ResponseEntity<Page<JobsInfoDTO>> searchDefault(@RequestBody JobsInfoSearchContext context) {

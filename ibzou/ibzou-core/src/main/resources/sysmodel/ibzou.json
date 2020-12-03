@@ -9,6 +9,8 @@
     "table_name":"IBZDEPT",
     "system_id":"ibzou",
     "system_name":"ibzou",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"DEPTID" ,
@@ -308,6 +310,8 @@
     "table_name":"IBZDEPTMEMBER",
     "system_id":"ibzou",
     "system_name":"ibzou",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"MEMBERID" ,
@@ -495,6 +499,8 @@
     "table_name":"IBZEMP",
     "system_id":"ibzou",
     "system_name":"ibzou",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"USERID" ,
@@ -1081,6 +1087,8 @@
     "table_name":"IBZORG",
     "system_id":"ibzou",
     "system_name":"ibzou",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"ORGID" ,
@@ -1296,6 +1304,8 @@
     "table_name":"IBZPOST",
     "system_id":"ibzou",
     "system_name":"ibzou",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"POSTID" ,
@@ -1399,6 +1409,8 @@
     "table_name":"IBZTEAM",
     "system_id":"ibzou",
     "system_name":"ibzou",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"TEAMID" ,
@@ -1476,6 +1488,8 @@
     "table_name":"IBZTEAMMEMBER",
     "system_id":"ibzou",
     "system_name":"ibzou",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"TEAMMEMBERID" ,

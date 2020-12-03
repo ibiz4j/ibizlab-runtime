@@ -21,7 +21,7 @@
                 class="editor"
                 :style="slotstyle"
             >
-                <form-item :prop="name" :error="error" :required="required" :rules="rules">
+                <form-item :prop="name" :error="error"  :rules="rules">
                     <slot></slot>
                 </form-item>
             </div>
@@ -31,14 +31,24 @@
                 :class="labelclasses"
             >
                 <span v-if="required" style="color:red;">* </span>
-                {{this.isEmptyCaption ? '' : this.caption}}
+                    <span v-if="!isEmptyCaption">
+                        <el-tooltip v-if="isShowTip" placement="top" effect="light">
+                            <span v-html="caption"></span>
+                            <template >
+                                <span slot="content" v-html="caption" ></span>
+                            </template>
+                        </el-tooltip>
+                        <template v-if="!isShowTip">
+                            <span v-html="caption" ></span>
+                        </template>
+                    </span>
             </span>
             <div
                 v-if="Object.is(this.labelPos,'TOP') || Object.is(this.labelPos,'LEFT') || Object.is(this.labelPos,'RIGHT')"
                 class="editor"
                 :style="slotstyle"
             >
-                <form-item :prop="name" :error="error" :required="required" :rules="rules">
+                <form-item :prop="name" :error="error"  :rules="rules">
                     <slot></slot>
                 </form-item>
             </div>
@@ -135,6 +145,14 @@ export default class AppFormItem extends Vue {
    * @memberof AppFormItem
    */
   @Prop() public itemRules!: any;
+
+
+  /**
+  * 是否显示表单项Label提示
+  *
+  * @memberof AppFormItem
+  */
+  public isShowTip:boolean = false;
 
   /**
    * 值规则数组
@@ -266,7 +284,21 @@ export default class AppFormItem extends Vue {
         });
       } catch (error) {}
     }
+    this.getShowTip();
   }
+
+
+  /**
+  * 计算是否显示表单项Label提示
+  *
+  * @memberof AppFormItem
+  */
+  public getShowTip(){
+      if(this.caption && ((this.caption.length)*14) > this.labelWidth ){
+          this.isShowTip = true;
+      }
+  } 
+
 }
 </script>
 <style lang='less'>

@@ -92,7 +92,7 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof OrgTreeBase
      */
-    @Prop() public context: any;
+    @Prop() public context!: any;
 
     /**
      * 视图参数
@@ -100,7 +100,7 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof OrgTreeBase
      */
-    @Prop() public viewparams: any;
+    @Prop() public viewparams!: any;
 
     /**
      * 视图状态事件
@@ -273,7 +273,7 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
      * @type {string}
      * @memberof OrgTreeBase
      */
-    @Prop() public selectedData?: string;
+    @Prop() public selectedData!: string;
 
     /**
      * 选中值变化

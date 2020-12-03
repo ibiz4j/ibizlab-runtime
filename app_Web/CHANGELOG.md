@@ -1,3 +1,151 @@
+## v7.0.0-alpha.22 [2020-11-22]
+
+### Bug修复
+
+修复表单项值校验错误信息提示问题 [7dcad593](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/7dcad593036a9c6ea0612bdbf2e99fc1bee20062)
+
+修复表单新建和更新默认值问题 [426f7930](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/426f793037ca228e3ae2b6449df9c10359d4844a)
+
+修复表格新建更新默认值问题 [73a7f288](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/73a7f288493f8606a3bcf3a697c68c86171d12f2)、[daac8796](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/daac8796532556617979fbfa91dc78033cc31215)
+
+修复搜索表单新建默认值问题 [940c4e6b](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/940c4e6b854f7f32de41656535c329da683ca631)
+
+修复图表加载逻辑问题 [b35ee838](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/b35ee83875787b3edb1df20c92c932b55972e092)
+
+修复应用菜单计算权限异常问题 [c3335e88](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/c3335e8858ec1137ca65d35114f3a060ae56e2ba)
+
+修复表单数据对象报错问题 [5722dbb4](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/5722dbb48122dbc60c8904b634995c906d10a456)
+
+修复主信息属性映射表单项名称报错问题 [1a948e6d](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/1a948e6d52cf133dae90990cd3c2b0262559fd60)、[b2f366a0](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/b2f366a05fbf2b1ed00d199ad0856a0ac7099809)、[81f9ddee](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/81f9ddee9a859451ed860d155e2ea7d265ee3457)
+
+修复表格分页加载未重置当前页为第一页问题 [8cc91599](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/8cc91599c6ef83e3a1e387d2d8f8857443452af9)
+
+修复图表无数据刷新问题 [485463d8](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/485463d8a13522d87a240eea01faa35da3ae3e1b)
+
+修复多数据选择视图未引入选择视图面板问题 [ed3130dd](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/ed3130dd859417e3659be3ba8af914e3d8622612)
+
+修复视图viewparams为字符串时处理逻辑异常问题 [55d26f5f](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/55d26f5f6729e3bb3ef5211d0459a8503ac3250f)
+
+修复看板视图整合参数问题 [9e4828f1](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/9e4828f1d3be520dfe2c53d4938f13bf569a0d06)
+
+修复表格排序属性异常问题 [5e746632](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/5e7466326a19a411662e10f959d946152eee511c)
+
+修复实体处理逻辑异常问题 [29e2e495](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/29e2e4959afc5a1fcf36e374dd357212fe86f382)
+
+### 功能新增及优化
+
+#### 模板
+
+新增图表视图添加快速分组代码表和快速搜索栏 [b3305963](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/b33059638134e4245aab6c6498a721c87aa8ad61)、[99711fd0](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/99711fd0d50384e03645ff0948d551d5a9b63691)
+
+新增标签(地址栏插件)  [22271ea9](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/22271ea9e5d636dbbc3850511cdce36089bc7dfa)、[a348ff6b](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/a348ff6b11b4348cf191a59b422e85e8f67d304e)
+
+新增复合表单项值规则 [0b838bdf](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/0b838bdf805fd48e2c898fc63a296cd4b01151dc)、[a88f78dd](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/a88f78dda0ff2c3bacf58c4bb04cb1ede539792a)
+
+新增表单按钮无图标使用界面行为图标逻辑 [a214c5b8](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/a214c5b88bf0bb1d669b468991180ddfc4b7e4f8)、[90cbf4b8](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/90cbf4b8c3474922e6b065ba70e3138191491947)
+
+新增列表部件操作列界面行为支持 [4a2664b1](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/4a2664b1525f8850cc5c39a541c7bc907a6d81b8)、[0586ad9d](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/0586ad9d1534caa06eaecb3484c73f7dc9f0fdfa)、[63dc0dab](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/63dc0dabb1adcf0a56ebe9d97f9bb1ece562fad6)、[6ee19a63](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/6ee19a63f87346f7edd0fc1c7d95ce4b212357f7)
+
+新增数据视图部件操作列界面行为支持 [ef18acdf](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/ef18acdf5b10264fd40fa43a3375aeec2830c71b)、[218333d5](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/218333d54e596ed97b62027bd35340b96e35b5f5)
+
+新增关系界面表格保存提示内容显示 [50b9a9f7](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/50b9a9f7925359aa84e23ffa27bf0d7a9a527cbd)
+
+新增列表批操作工具栏和快速工具栏支持 [ddb1d067](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/ddb1d067b299cab6eab9c049940da5623bd42298)、[d56c3d79](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/d56c3d79747baac4e6d0aa1501873a4680dd1291)
+
+新增数据视图批操作工具栏和快速工具栏支持 [aba0f9e0](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/aba0f9e00e50f18b804297bb3a440812d8a32f23)、[9f8fdce8](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/9f8fdce8e73e02b223524812ced0300282429072)、[ef753f43](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/ef753f43754c5ff29b0ee2f1f9986b5bbd44cac1)、[dac712a2](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/dac712a2a2c84653deaab1cdfb0680d2b555a43f)、[6e2bccea](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/6e2bccea860951bb1ea85b2a1be8280189eaca31)、[974aadd1](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/974aadd1fe47768d33a7e508d81323be9c6cd7fd)
+
+新增工作流动态操作视图支持 [065a8dce](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/065a8dce5550b051245793e58af5bc5484464e07)、[6f9a0ee3](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/6f9a0ee3536f4e5cb6d32bcdc79a4c9aec1afd9e)、[5fd6366d](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/5fd6366d50dde1fe2e8168e23bfb6d6964792ca0)、[a40bf66b](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/a40bf66b9066197c9a2757e66a45f00e3e3eacb5)、[0cdd5713](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/0cdd571311b0f4d379977d836d6ca7c1f287c55c)、[21264471](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/21264471b30b713bdc873ca87d66ae5979b39ef8)、[bc85a97b](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/bc85a97bdeb18bdc70c0f71ccc9f29e1448b5399)、[fcea460c](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/fcea460ce3c320c0c02556cf4cb997d5b36a64f2)、[729bc0a6](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/729bc0a680203e81dc3e6118ebfe72bc40784c63)、[b1a569ac](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/b1a569acf82aa3e777cfa6d596615c6048c2f980)、[81857c4a](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/81857c4ac443137a49649023dfc1ac9f7136c10e)
+
+新增表格（透视表）插件 [4f57e1ba](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/4f57e1baad8881fb3a069fb293044b16daa08e44)
+
+新增看板视图支持看板展开与收缩 [104bde80](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/104bde80f844cf4f985e76d234095c9857d4ea59)
+
+新增数据服务查询数据集(post方式)方法 [c2fe9f3b](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/c2fe9f3bf8bedd12255650b3969817123b6701de)
+
+新增代码表服务图标属性 [20c54b64](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/20c54b6409d5e3343a74c84ef7241f868d7ddae9)
+
+新增实体地图视图及地图部件 [9943b1c0](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/9943b1c01f1146b95dd45464a2896b03c85783e8)
+
+新增实体地图视图（部件视图） [f3887778](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/f3887778d471cbec33eddf56756e2d4d07a1818f)
+
+新增地图定位组件 [84297814](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/842978148e116dfef3b044cfcce934f5468d16d5)、[fd2ae711](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/fd2ae71184646ad13a5d5a2ac50701bbdc7cd0f5)、[9742d2a0](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/9742d2a0f2210fd4a5e73e2254985cfc21065761)
+
+优化前台调用界面行为关闭编辑或弹出视图逻辑 [8d191a79](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/8d191a790a52ed46985e1f8faf8de8266cfa08d8)
+
+优化表单保存提示信息 [93cdc68b](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/93cdc68bc84486c2a4df70ab144eeadae78ab1a3)
+
+优化表格值规则校验 [e3bf8fd1](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/e3bf8fd10f52ff1d3d1746cc675780a9e1d8f0ce)、[a6544f41](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/a6544f41e7e547d9b18893d2b990e0e7ea04458e)、[92f12d80](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/92f12d801cc4e540c7b1034782faed5b6459132c)
+
+优化表单值规则校验 [e100c8eb](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/e100c8eb79eb3d0d9646d93b929698d159a43200)、[5ed59675](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/5ed59675e2a8c515054804d9e40a4de83ff30bf7)、[19d639ee](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/19d639ee7e18e04d678898f8e499b61b18812cb7)
+
+优化表格、表单属性值规则校验异常捕获逻辑 [8f78ffad](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/8f78ffadaa42c2ca1ecb3fac94022df7b6f795a8)、[2cbedd77](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/2cbedd7759be86933b3136ec2d43df4f0b959a2d)、[5f719edd](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/5f719edd3bfce6abff63ba229fc79abaaa5714d7)、[53b99003](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/53b99003e1bfa941d0175ed263825490eacb5b80)
+
+优化直接内容项html类型 [c9712800](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/c9712800819554064b8aace92306e74a4cd41c30)
+
+优化表单、表格提示信息内容 [cfefe47d](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/cfefe47df2321cbdc5c9149d709e3de6ae3af153)、[6a908895](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/6a908895a4cad9af3b6d2baa8f0b342c06a45ea5)、[ff815b76](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/ff815b766207692483420b3fb3fdc48e1af1a716)
+
+优化表格删除提示信息内容 [3dc02183](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/3dc021833cac72e7e37c963c0f46ed7fa9d3b97c)
+
+优化编辑器占位提示 [60e296d9](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/60e296d94d1c331ff1f6d4c920ea7b929de36e2a)、[3128fdbf](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/3128fdbf55e7dfbb5f6b9438137ef87d549743e8)
+
+优化列表部件数据分组逻辑 [c8a74e10](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/c8a74e10c6f3fa4b15dba8141c4f52509b1ee5eb)、[55a3fb4b](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/55a3fb4b649c50a645670ab8dda7d8aad7fea802)
+
+优化表格部件数据分组逻辑 [75624d3e](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/75624d3e042a7a15d55568ae92c1578948ad1b13)、[7873329d](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/7873329de8c3f0805d1b72945b43b14220f61bc7)、[982a2c2b](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/982a2c2b48fe71c326b68d7020c22a4daebb4a89)、[276f90d3](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/276f90d3b2bd6cc18899cadec9d11fc2e8236433)、[d6377294](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/d63772945d4db25f2a743d355e1b648992cf0048)、[d326d83a](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/d326d83a2030aa17a04aa2e482b44acf4973e5ad)、[b8ad5bfd](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/b8ad5bfde4fdfc13765a2e25d48a7583b0dcad1a)、[641a67f4](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/641a67f4183997c45dfe3b4775cd1b75b315b195)、[8db35ec3](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/8db35ec34c00a47d67f7f864461e8b005988e597)、[faecb1cc](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/faecb1cc20142420a79a57f9cef5b71053a1d98d)
+
+优化实体工作流动态导航表格视图逻辑 [909f0cd4](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/909f0cd48133b974f2a8d634a252f0dd7248ea5c)、[1e9a4fe9](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/1e9a4fe92e64a86aea9b730da8f9b7a72ee0ee11)、[899e6882](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/899e68821c06e2d584c5b03304ca11d6d6edbc6b)、[64d99a8c](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/64d99a8ceb2c942dbf9c1e6089718d2c53bffc86)、[729bc0a6](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/729bc0a680203e81dc3e6118ebfe72bc40784c63)、[e57c1f14](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/e57c1f141e256f4813c347197461bccaad9c1194)、[bd46e456](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/bd46e4565331e8bb4757514d80b17615186db1d5)、[f3e4468a](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/f3e4468af140170e4dd7c5f5882ff0bcc9621b81)
+
+优化实体工作流动态编辑视图逻辑 [909f0cd4](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/909f0cd48133b974f2a8d634a252f0dd7248ea5c)、[1e9a4fe9](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/1e9a4fe92e64a86aea9b730da8f9b7a72ee0ee11)、[899e6882](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/899e68821c06e2d584c5b03304ca11d6d6edbc6b)、[e89a302d](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/e89a302d477433808d61b4cf7ec4f62455a8aeb7)、[91feb5aa](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/91feb5aabcef545b20bc3de935dcb0cd2f92f1f7)、[9c892670](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/9c8926700f7c6526bafd9a84ea00c861f731f521)、[ff0c64f1](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/ff0c64f19a075d13f2258c80fcc19dec77c4ac7f)、[729bc0a6](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/729bc0a680203e81dc3e6118ebfe72bc40784c63)、[bd46e456](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/bd46e4565331e8bb4757514d80b17615186db1d5)、[f3e4468a](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/f3e4468af140170e4dd7c5f5882ff0bcc9621b81)
+
+优化面板标签代码表发布值分隔符 [6a0029df](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/6a0029dfcd0d5970114d0040d1712775105ec4f3)
+
+优化数据图表部件增加高度发布逻辑 [aca0084a](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/aca0084a00011cec55096984293425de4fdef57e)
+
+优化数据看板部件逻辑 [160dedcd](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/160dedcdd4c66e25bc83abebf3e471beebefa857)、[d005eeba](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/d005eeba57c974063a1df0cca914d2c7b012d470)、[d10cf154](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/d10cf154f0887dcd011cdd99f711bdcc98e64205)
+
+优化评分器编辑器支持代码表逻辑 [e2f0d18f](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/e2f0d18f5820a7acbf198635de190843da91467a)
+
+优化看板视图部件嵌入面板数据处理 [b07ba68c](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7/commit/b07ba68c5d1f1823fce2e52d985cbcc3a7fb85c4)
+
+#### 基础文件
+
+修复图表视图、图表部件视图获取快速分组和搜索栏参数及样式 [cc9ec9d8](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/cc9ec9d88483c7f14ccd519897778635b9385b14)
+
+修复工具栏按钮异常问题 [f66edc45](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/f66edc45e909ec0d1fbb47861c8ea336819ce0aa)
+
+修复修复下拉列表框不加载数据异常 [503581d7](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/503581d771cbb628a5cfb170bb10e68808cbaf5b)
+
+修复关系界面内嵌视图出现不加载的情况 [c1d6db61](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/c1d6db6130ff6a5768f9d982e75949cde86307f0)
+
+新增部件服务增加根据后台标识获取前台数据标识名称能力 [a07d7088](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/a07d70887e5044f415a29d92f136ef910231a2dd)
+
+新增图标绘制组件 [3a160350](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/3a1603502740cde5ee12051bd2ee3c76abe2b554)、[9653dd15](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/9653dd15cdef7b97ce0c022d78c6236d3bf9d8fe)
+
+新增响应头错误状态汇总 [3cb2a17f](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/3cb2a17f78d262efab0914a3d025de29e36d5641)
+
+新增透视表表格插件 [dbebc115](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/dbebc115cfa9d90cca2518db27646c935fc5c11c)
+
+新增代码表获取代码表项能力 [06c53dca](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/06c53dca2963165c8593cf2b7f2ba6f9e0f13f0c)、[f856c55f](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/f856c55f6983bfab490848dfefed0a8ca29bac9b)
+
+新增实体地图视图引擎 [5ccb40ba](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/5ccb40ba780548f7758e0cf4027fb8a16affc56d)
+
+新增实体地图视图（部件视图）引擎 [da07aede](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/da07aede9151f474740da1cabcaa10e8bc1b3749)
+
+新增地图定位组件 [b76bf4ba](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/b76bf4ba09630d477e1a75637a76b39974b8ff2f)、[19c862e7](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/19c862e71eabdf4e10a56118ea32c3f23793e68b)、[1683f20e](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/1683f20e070d0f2a1c738929ca4eb018d61eaea0)
+
+优化数据选择下拉时清空旧数据 [a42584a4](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/a42584a4235a0beb0d155b47890e5e685d9eb5ac)
+
+优化视图消息样式 [22406733](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/22406733fecb566929770e688e5d06fa7b6ed5d1)
+
+优化代码表组件增加图片识别 [853d4ad4](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/853d4ad406a35cfb013dbc18188aeb45d148b8b6)、[bc879205](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/bc879205eb35dba743974a9af189de0292dd4979)
+
+优化工作流动态编辑视图加载逻辑 [19760cf6](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/19760cf6f32f9bb47aa75ffe13ca5db8639cc250)
+
+优化引用avue.min.js的文件路径 [e4a9d11d](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/e4a9d11db906cc8e18a0f290cb66fd2c3fc277a1)
+
+优化评分器编辑器支持代码表逻辑 [28721171](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/28721171ffa8d5adae6d9b567838041e320c5767)、[453c1e6c](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/453c1e6c79b31a49d189c40a4537a60fa0dd0023)
+
+优化表单项label长度过长显示异常和支持label显示html [fc754a29](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/fc754a294d553d70d4e634df940069012a16a7e1)、[ed804eb6](http://demo.ibizlab.cn/ibizr7pfstdtempl/ibizvuer7res/commit/ed804eb6b5bccab109b92edd5419310363bc0b68)
+
 ## v7.0.0-alpha.21 [2020-10-31]
 
 ### Bug修复

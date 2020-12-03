@@ -44,7 +44,7 @@ public class JobsLockSearchContext extends QueryWrapperContext<JobsLock> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("name", query)   
+                     wrapper.like("name", query)
             );
 		 }
 	}

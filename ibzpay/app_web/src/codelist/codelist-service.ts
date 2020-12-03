@@ -70,6 +70,30 @@ export default class CodeListService {
     }
 
     /**
+     * 获取代码表数据
+     *
+     * @param {string} tag 代码表标识
+     * @param {*} context 
+     * @param {*} data
+     * @param {boolean} isloading
+     * @returns {Promise<any[]>}
+     * @memberof CodeListService
+     */
+    public async getDataItems(codelist:any,context?:any, data?: any, isloading?: boolean){
+        let dataItems:Array<any> = [];
+        try{
+            if(codelist.tag && Object.is(codelist.type,"STATIC")){
+                dataItems = await this.getStaticItems(codelist.tag);
+            }else{
+                dataItems = await this.getItems(codelist.tag,codelist.context,codelist.viewparam,codelist.isloading);
+            }
+        }catch(error){
+            console.warn("代码表加载异常" + error);
+        }
+        return dataItems;
+    }
+
+    /**
      * 获取静态代码表
      *
      * @param {string} tag 代码表标识

@@ -58,7 +58,7 @@ public class SysUserAuthSearchContext extends QueryWrapperContext<SysUserAuth> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("username", query)   
+                     wrapper.like("username", query)
             );
 		 }
 	}

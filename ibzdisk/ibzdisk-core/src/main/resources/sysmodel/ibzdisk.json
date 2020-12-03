@@ -9,6 +9,8 @@
     "table_name":"IBZFILE",
     "system_id":"ibzdisk",
     "system_name":"ibzdisk",
+    "module_id":"disk",
+    "module_name":"disk",
     "fields":[
     {
     "fieldname":"FILEID" ,

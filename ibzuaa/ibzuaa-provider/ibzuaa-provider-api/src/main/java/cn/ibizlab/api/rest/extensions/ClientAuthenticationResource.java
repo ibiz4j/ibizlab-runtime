@@ -2,32 +2,32 @@
 package cn.ibizlab.api.rest.extensions;
 
 import cn.ibizlab.core.uaa.domain.SysUser;
-import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
 import cn.ibizlab.core.uaa.service.ISysUserService;
-import cn.ibizlab.util.domain.IBZUSER;
+import cn.ibizlab.util.domain.Token;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.security.*;
 import cn.ibizlab.util.service.AuthenticationUserService;
-import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
  * 客户端登录认证
  */
+@Slf4j
 @RestController
 @RequestMapping("/")
 @ConditionalOnExpression("'${spring.application.name:ibzuaa-api}'.startsWith('ibzuaa')")
@@ -56,6 +56,7 @@ public class ClientAuthenticationResource
     @Autowired
     private ISysUserService userService;;
 
+
     @Value("${ibiz.auth.pwencrymode:0}")
     private int pwencrymode;
 
@@ -72,6 +73,46 @@ public class ClientAuthenticationResource
         user2.setPermissionList(null);
         // 返回 token
         return ResponseEntity.ok().body(new AuthenticationInfo(token,user2));
+    }
+
+    /**
+     * token续期
+     * @param oldToken 业务系统即将到期的token
+     * @return 新token
+     */
+    @PostMapping(value = "uaa/refreshToken")
+    public String refreshToken(@Validated @RequestBody @NotNull(message = "token不能为空") String oldToken) {
+        String username = null;
+        String newToken = null;
+        try {
+            username = jwtTokenUtil.getUsernameFromToken(oldToken);
+        } catch (ExpiredJwtException e) {
+            log.error(e.getMessage());
+        }
+        if (!StringUtils.isEmpty(username)) {
+            AuthenticationUser user = userDetailsService.loadUserByUsername(username);
+            if (jwtTokenUtil.validateToken(oldToken, user)) {
+                // 将新token存入缓存，在固定周期内调用接口将返回同一token
+                Token tok = uaaCoreService.getToken(oldToken);
+                if (ObjectUtils.isEmpty(tok)) {
+                    newToken = jwtTokenUtil.generateToken(user);
+                    uaaCoreService.setToken(oldToken, newToken);
+                } else {
+                    // 判断缓存中的token是否到期，到期将返回新token
+                    if (uaaCoreService.isExpired(tok, expiration)) {
+                        newToken = jwtTokenUtil.generateToken(user);
+                        uaaCoreService.setToken(oldToken, newToken);
+                    }else{
+                        newToken = tok.getNewToken();
+                    }
+                }
+            }
+        }
+        if (StringUtils.isEmpty(newToken)) {
+            throw new BadRequestAlertException("获取token失败", "", "refreshToken");
+        } else {
+            return newToken;
+        }
     }
 
     @PostMapping(value = "v7/changepwd")

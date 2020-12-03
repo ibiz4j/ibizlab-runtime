@@ -9,6 +9,8 @@
     "table_name":"IBZWFGROUP",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"GROUPID" ,
@@ -72,6 +74,8 @@
     "table_name":"IBZWFHISTORY",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"HISTID" ,
@@ -212,6 +216,8 @@
     "table_name":"IBZWFMEMBER",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"MEMBERID" ,
@@ -415,6 +421,8 @@
     "table_name":"IBZWFDEFINITION",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"DEFINITIONKEY" ,
@@ -569,6 +577,8 @@
     "table_name":"IBZWFINSTANCE",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"INSTANCEID" ,
@@ -708,6 +718,8 @@
     "table_name":"IBZWFNODE",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"NODEID" ,
@@ -805,6 +817,8 @@
     "table_name":"IBZWFMODEL",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"MODELID" ,
@@ -862,6 +876,8 @@
     "table_name":"IBZPSSYSTEM",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"PSSYSTEMID" ,
@@ -905,6 +921,8 @@
     "table_name":"IBZTASK",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"TASKID" ,
@@ -1059,6 +1077,8 @@
     "table_name":"IBZWFTASKWAY",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"WAYID" ,
@@ -1186,6 +1206,8 @@
     "table_name":"IBZUSER",
     "system_id":"ibzwf",
     "system_name":"ibzwf",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"USERID" ,

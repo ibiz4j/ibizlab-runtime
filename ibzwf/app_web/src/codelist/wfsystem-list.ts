@@ -114,6 +114,8 @@ export default class WFSystemList {
                 Object.assign(itemdata,{text:item.pssystemname});
                 Object.assign(itemdata,{label:item.pssystemname});
                 
+                
+                
                 _items.push(itemdata);
             });
         }

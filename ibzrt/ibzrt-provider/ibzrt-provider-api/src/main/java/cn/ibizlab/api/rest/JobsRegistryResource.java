@@ -47,6 +47,7 @@ public class JobsRegistryResource {
     @Lazy
     public JobsRegistryMapping jobsregistryMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Create-all')")
     @ApiOperation(value = "新建任务注册信息", tags = {"任务注册信息" },  notes = "新建任务注册信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsregistries")
     public ResponseEntity<JobsRegistryDTO> create(@Validated @RequestBody JobsRegistryDTO jobsregistrydto) {
@@ -56,6 +57,7 @@ public class JobsRegistryResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Create-all')")
     @ApiOperation(value = "批量新建任务注册信息", tags = {"任务注册信息" },  notes = "批量新建任务注册信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<JobsRegistryDTO> jobsregistrydtos) {
@@ -63,6 +65,7 @@ public class JobsRegistryResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Update-all')")
     @ApiOperation(value = "更新任务注册信息", tags = {"任务注册信息" },  notes = "更新任务注册信息")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobsregistries/{jobsregistry_id}")
     public ResponseEntity<JobsRegistryDTO> update(@PathVariable("jobsregistry_id") String jobsregistry_id, @RequestBody JobsRegistryDTO jobsregistrydto) {
@@ -73,6 +76,7 @@ public class JobsRegistryResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Update-all')")
     @ApiOperation(value = "批量更新任务注册信息", tags = {"任务注册信息" },  notes = "批量更新任务注册信息")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobsregistries/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<JobsRegistryDTO> jobsregistrydtos) {
@@ -80,12 +84,14 @@ public class JobsRegistryResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Remove-all')")
     @ApiOperation(value = "删除任务注册信息", tags = {"任务注册信息" },  notes = "删除任务注册信息")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/{jobsregistry_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("jobsregistry_id") String jobsregistry_id) {
          return ResponseEntity.status(HttpStatus.OK).body(jobsregistryService.remove(jobsregistry_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Remove-all')")
     @ApiOperation(value = "批量删除任务注册信息", tags = {"任务注册信息" },  notes = "批量删除任务注册信息")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class JobsRegistryResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Get-all')")
     @ApiOperation(value = "获取任务注册信息", tags = {"任务注册信息" },  notes = "获取任务注册信息")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/{jobsregistry_id}")
     public ResponseEntity<JobsRegistryDTO> get(@PathVariable("jobsregistry_id") String jobsregistry_id) {
@@ -113,12 +120,14 @@ public class JobsRegistryResource {
         return  ResponseEntity.status(HttpStatus.OK).body(jobsregistryService.checkKey(jobsregistryMapping.toDomain(jobsregistrydto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Save-all')")
     @ApiOperation(value = "保存任务注册信息", tags = {"任务注册信息" },  notes = "保存任务注册信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/save")
     public ResponseEntity<Boolean> save(@RequestBody JobsRegistryDTO jobsregistrydto) {
         return ResponseEntity.status(HttpStatus.OK).body(jobsregistryService.save(jobsregistryMapping.toDomain(jobsregistrydto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-Save-all')")
     @ApiOperation(value = "批量保存任务注册信息", tags = {"任务注册信息" },  notes = "批量保存任务注册信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<JobsRegistryDTO> jobsregistrydtos) {
@@ -126,6 +135,7 @@ public class JobsRegistryResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"任务注册信息" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/jobsregistries/fetchdefault")
 	public ResponseEntity<List<JobsRegistryDTO>> fetchDefault(JobsRegistrySearchContext context) {
@@ -138,6 +148,7 @@ public class JobsRegistryResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsRegistry-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"任务注册信息" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/jobsregistries/searchdefault")
 	public ResponseEntity<Page<JobsRegistryDTO>> searchDefault(@RequestBody JobsRegistrySearchContext context) {

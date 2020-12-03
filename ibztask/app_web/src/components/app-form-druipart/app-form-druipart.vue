@@ -1,6 +1,7 @@
 <template>
  <div class='form-druipart'>
     <component 
+      ref="appFormDruipart"
       :is="viewname" 
       class="viewcontainer2" 
       :viewdata ="viewdata"
@@ -179,6 +180,14 @@ export default class AppFormDRUIPart extends Vue {
     private formStateEvent: Unsubscribable | undefined;
 
     /**
+     * 定时器实例
+     *
+     * @type {[any]}
+     * @memberof AppFormDRUIPart
+     */
+    protected timer?: any;
+
+    /**
      * 监控值
      *
      * @param {*} newVal
@@ -308,9 +317,41 @@ export default class AppFormDRUIPart extends Vue {
         }
         if(!this.isForbidLoad){
             setTimeout(() => {
-                this.formDruipart.next({action:'load',data:{srfparentdename:this.parentName,srfparentkey:_paramitem}});
+                this.partViewEvent('load',{data:{srfparentdename:this.parentName,srfparentkey:_paramitem}},0);
             }, 0);
         }
+    }
+
+    /**
+     * 向关系视图发送事件，采用轮询模式。避免异步视图出现加载慢情况
+     *
+     * @param {*} action 触发行为
+     * @param {*} data 数据
+     * @param {*} count 轮询计数
+     * @memberof AppFormDRUIPart
+     */
+    protected partViewEvent(action: string, data: any, count: number = 0): void {
+        if (count > 100) {
+            return;
+        }
+        const clearResource:Function = () =>{
+            if(this.timer !== undefined){
+                clearTimeout(this.timer);
+                this.timer = undefined;  
+            }          
+        }
+        if (count === 0) {
+            clearResource();
+        }
+        if (this.$refs.appFormDruipart) {
+            this.formDruipart.next({ action: action, data });
+            clearResource();
+            return;
+        }
+        this.timer = setTimeout(() => {
+            count++;
+            this.partViewEvent(action, data, count);
+        }, 30);
     }
 
     /**

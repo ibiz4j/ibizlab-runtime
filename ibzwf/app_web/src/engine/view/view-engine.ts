@@ -197,7 +197,13 @@ export default class ViewEngine {
             if(_item && _item['dataaccaction'] && _this.view.appUIService){
                 let dataActionResult:any;
                 if (_item.uiaction && (Object.is(_item.uiaction.target, "NONE") || Object.is(_item.uiaction.target, ""))){
-                    dataActionResult = _this.view.appUIService.getResourceOPPrivs(_item['dataaccaction']);
+                    if(Object.is(_item.uiaction.target, "") && Object.is(_item.uiaction.tag, "Save")){
+                        if(data && Object.keys(data).length >0){
+                            dataActionResult= _this.view.appUIService.getAllOPPrivs(data)[_item['dataaccaction']];       
+                        }
+                    }else{
+                        dataActionResult = _this.view.appUIService.getResourceOPPrivs(_item['dataaccaction']);
+                    }
                 }else{
                     if(data && Object.keys(data).length >0){
                         dataActionResult= _this.view.appUIService.getAllOPPrivs(data)[_item['dataaccaction']];       

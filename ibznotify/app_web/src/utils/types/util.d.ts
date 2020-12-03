@@ -153,7 +153,7 @@ export declare interface Util {
      * @returns {string}
      * @memberof Util
      */
-    dateFormat(date: any,fmt?: string):string
+    dateFormat(date: any,fmt?: string):string;
 
     /**
      * 表单项校验
@@ -164,7 +164,21 @@ export declare interface Util {
      * @returns {Promise}
      * @memberof Util
      */
-    validateItem(property: string, data:any, rules:any): Promise<any>
+    validateItem(property: string, data:any, rules:any): Promise<any>;
+
+    /**
+     * 设置cookie
+     * 
+     * @memberof Util
+     */
+    setCookie(name: any, value: any, day: any):void;
+
+    /**
+     * 获取cookie
+     * 
+     * @memberof Util
+     */
+    getCookie(name: any): any;    
 }
 
 declare module "vue/types/vue" {

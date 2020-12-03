@@ -55,14 +55,14 @@
           </i-col>
           <i-col v-show="detailsModel.n_authtime_gtandeq.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_authtime_gtandeq' :itemRules="this.rules.n_authtime_gtandeq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authtime_gtandeq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authtime_gtandeq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_gtandeq" :disabled="detailsModel.n_authtime_gtandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_gtandeq = val1 }"></date-picker>
+              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss"  :value="data.n_authtime_gtandeq" :disabled="detailsModel.n_authtime_gtandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_gtandeq = val1 }"></date-picker>
           
           </app-form-item>
           
           </i-col>
           <i-col v-show="detailsModel.n_authtime_ltandeq.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
               <app-form-item name='n_authtime_ltandeq' :itemRules="this.rules.n_authtime_ltandeq" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_authtime_ltandeq')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_authtime_ltandeq.error" :isEmptyCaption="false" labelPos="LEFT"> 
-              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss" placeholder="请选择时间..." :value="data.n_authtime_ltandeq" :disabled="detailsModel.n_authtime_ltandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_ltandeq = val1 }"></date-picker>
+              <date-picker type="datetime" :transfer="true" format="yyyy-MM-dd HH:mm:ss"  :value="data.n_authtime_ltandeq" :disabled="detailsModel.n_authtime_ltandeq.disabled" style="min-width: 150px; " @on-change="(val1, val2) => { this.data.n_authtime_ltandeq = val1 }"></date-picker>
           
           </app-form-item>
           
@@ -137,7 +137,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof DefaultBase
      */
-    @Prop() public context: any;
+    @Prop() public context!: any;
 
     /**
      * 视图参数
@@ -145,7 +145,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof DefaultBase
      */
-    @Prop() public viewparams: any;
+    @Prop() public viewparams!: any;
 
     /**
      * 视图状态事件

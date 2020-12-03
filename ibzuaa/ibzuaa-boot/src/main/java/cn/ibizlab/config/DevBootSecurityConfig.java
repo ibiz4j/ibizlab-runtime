@@ -94,7 +94,10 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/fonts/**",
                         "/**/js/**",
                         "/**/img/**",
-                        "/"
+                        "/",
+                        "webjars/**",
+                        "/swagger-resources/**",
+                        "/v2/**"
                 ).permitAll()
                        .antMatchers("/uaa/permission/**").permitAll()
                     //放行登录请求
@@ -121,6 +124,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/uaa/bindQQtoRegister").permitAll()
                        .antMatchers("/uaa/publickey").permitAll()
                        .antMatchers("/uaa/dingtalk/jsapi/sign").permitAll()
+                       .antMatchers("/uaa/refreshToken").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();

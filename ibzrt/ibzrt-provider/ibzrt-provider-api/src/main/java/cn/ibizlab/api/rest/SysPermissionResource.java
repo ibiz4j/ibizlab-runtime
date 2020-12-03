@@ -47,6 +47,7 @@ public class SysPermissionResource {
     @Lazy
     public SysPermissionMapping syspermissionMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Create-all')")
     @ApiOperation(value = "新建权限/资源", tags = {"权限/资源" },  notes = "新建权限/资源")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
     public ResponseEntity<SysPermissionDTO> create(@Validated @RequestBody SysPermissionDTO syspermissiondto) {
@@ -56,6 +57,7 @@ public class SysPermissionResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Create-all')")
     @ApiOperation(value = "批量新建权限/资源", tags = {"权限/资源" },  notes = "批量新建权限/资源")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysPermissionDTO> syspermissiondtos) {
@@ -64,6 +66,7 @@ public class SysPermissionResource {
     }
 
     @VersionCheck(entity = "syspermission" , versionfield = "updatedate")
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Update-all')")
     @ApiOperation(value = "更新权限/资源", tags = {"权限/资源" },  notes = "更新权限/资源")
 	@RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/{syspermission_id}")
     public ResponseEntity<SysPermissionDTO> update(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysPermissionDTO syspermissiondto) {
@@ -74,6 +77,7 @@ public class SysPermissionResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Update-all')")
     @ApiOperation(value = "批量更新权限/资源", tags = {"权限/资源" },  notes = "批量更新权限/资源")
 	@RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysPermissionDTO> syspermissiondtos) {
@@ -81,12 +85,14 @@ public class SysPermissionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Remove-all')")
     @ApiOperation(value = "删除权限/资源", tags = {"权限/资源" },  notes = "删除权限/资源")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{syspermission_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("syspermission_id") String syspermission_id) {
          return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.remove(syspermission_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Remove-all')")
     @ApiOperation(value = "批量删除权限/资源", tags = {"权限/资源" },  notes = "批量删除权限/资源")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -94,6 +100,7 @@ public class SysPermissionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Get-all')")
     @ApiOperation(value = "获取权限/资源", tags = {"权限/资源" },  notes = "获取权限/资源")
 	@RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{syspermission_id}")
     public ResponseEntity<SysPermissionDTO> get(@PathVariable("syspermission_id") String syspermission_id) {
@@ -114,12 +121,14 @@ public class SysPermissionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(syspermissionService.checkKey(syspermissionMapping.toDomain(syspermissiondto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Save-all')")
     @ApiOperation(value = "保存权限/资源", tags = {"权限/资源" },  notes = "保存权限/资源")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
     public ResponseEntity<Boolean> save(@RequestBody SysPermissionDTO syspermissiondto) {
         return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.save(syspermissionMapping.toDomain(syspermissiondto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Save-all')")
     @ApiOperation(value = "批量保存权限/资源", tags = {"权限/资源" },  notes = "批量保存权限/资源")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysPermissionDTO> syspermissiondtos) {
@@ -127,6 +136,7 @@ public class SysPermissionResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"权限/资源" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/syspermissions/fetchdefault")
 	public ResponseEntity<List<SysPermissionDTO>> fetchDefault(SysPermissionSearchContext context) {
@@ -139,6 +149,7 @@ public class SysPermissionResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"权限/资源" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/syspermissions/searchdefault")
 	public ResponseEntity<Page<SysPermissionDTO>> searchDefault(@RequestBody SysPermissionSearchContext context) {

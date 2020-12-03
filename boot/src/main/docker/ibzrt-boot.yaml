@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   ibzrt-boot:
-    image: ibiz4j/ibizlab-runtime:1.0.29-RC1
+    image: ibiz4j/ibizlab-runtime:latest
     ports:
       - "10086:10086"
     networks:
@@ -22,7 +22,7 @@ services:
       - IBZ_SLEEP=30
       - IBIZ_SLEEP=30
       - JAVA_OPTS=-Xms256m -Xmx1024m
-    deploy:
+    deploy:materialized view
       mode: replicated
       replicas: 1
 

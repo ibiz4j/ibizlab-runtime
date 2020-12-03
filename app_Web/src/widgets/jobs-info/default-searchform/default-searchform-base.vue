@@ -109,7 +109,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof DefaultBase
      */
-    @Prop() public context: any;
+    @Prop() public context!: any;
 
     /**
      * 视图参数
@@ -117,7 +117,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof DefaultBase
      */
-    @Prop() public viewparams: any;
+    @Prop() public viewparams!: any;
 
     /**
      * 视图状态事件

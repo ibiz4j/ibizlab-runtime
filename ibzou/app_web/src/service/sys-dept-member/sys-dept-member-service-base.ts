@@ -544,4 +544,42 @@ export default class SysDeptMemberServiceBase extends EntityService {
         let res:any = Http.getInstance().get(`/sysdeptmembers/fetchdefault`,tempData,isloading);
         return res;
     }
+
+    /**
+     * searchDefault接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysDeptMemberServiceBase
+     */
+    public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysorganization && context.sysdepartment && context.sysemployee && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/sysdeptmembers/searchdefault`,tempData,isloading);
+        }
+        if(context.sysorganization && context.sysemployee && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/sysdeptmembers/searchdefault`,tempData,isloading);
+        }
+        if(context.sysorganization && context.sysdepartment && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysdeptmembers/searchdefault`,tempData,isloading);
+        }
+        if(context.sysdepartment && context.sysemployee && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/sysdeptmembers/searchdefault`,tempData,isloading);
+        }
+        if(context.sysemployee && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysemployees/${context.sysemployee}/sysdeptmembers/searchdefault`,tempData,isloading);
+        }
+        if(context.sysdepartment && true){
+            let tempData:any = JSON.parse(JSON.stringify(data));
+            return await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysdeptmembers/searchdefault`,tempData,isloading);
+        }
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/sysdeptmembers/searchdefault`,tempData,isloading);
+    }
 }

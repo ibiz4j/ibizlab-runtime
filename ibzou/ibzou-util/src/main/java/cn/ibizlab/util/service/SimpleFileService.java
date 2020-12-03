@@ -27,7 +27,7 @@ public class SimpleFileService implements FileService {
         // 获取文件名
         String fileName = multipartFile.getOriginalFilename();
         // 获取文件后缀
-        String extname ="."+getExtensionName(fileName);
+        String extname = "."+getExtensionName(fileName);
         try {
             String fileid = DigestUtils.md5DigestAsHex(multipartFile.getInputStream());
             String fileFullPath = this.fileRoot+"ibizutil"+File.separator+fileid+File.separator+fileName;

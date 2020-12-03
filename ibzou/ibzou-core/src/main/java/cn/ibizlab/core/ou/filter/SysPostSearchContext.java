@@ -44,7 +44,7 @@ public class SysPostSearchContext extends QueryWrapperContext<SysPost> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("postname", query)   
+                     wrapper.like("postname", query)
             );
 		 }
 	}

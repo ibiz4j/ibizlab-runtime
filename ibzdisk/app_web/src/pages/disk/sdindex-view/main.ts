@@ -15,6 +15,15 @@ import 'view-design/dist/styles/iview.css';
 import 'ibiz-vue-lib/lib/ibiz-vue-lib.css';
 import '@/styles/default.less';
 
+import VueAMap from 'vue-amap';
+Vue.use(VueAMap);
+
+VueAMap.initAMapApiLoader({
+  key: '6ab2751103aea67e817c90a5528181b5',
+  plugin: ["AMap.Geolocation","AMap.PlaceSearch","AMap.Geocoder", "AMap.Autocomplete"],
+  uiVersion: '1.1'
+});
+
 // 模拟数据
 if (process.env.NODE_ENV === 'development') {
   require('@/mock');

@@ -18,13 +18,15 @@ export default class WFDynaEditViewEngine extends EditViewEngine {
     }
     
     /**
-     * 表单加载完成
+     * 引擎加载
      *
-     * @param {*} args
+     * @param {*} [opts={}]
      * @memberof WFDynaEditViewEngine
      */
-    public onFormLoad(arg: any): void {
-        super.onFormLoad(arg);
-        this.view.getWFLinkModel();
+    public load(opts: any = {}): void {
+        if(this.view.getWFLinkModel && this.view.getWFLinkModel instanceof Function){
+            this.view.getWFLinkModel();
+        }
     }
+
 }

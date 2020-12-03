@@ -68,7 +68,7 @@ public class SimpleAuditService extends ServiceImpl<IBZDataAuditMapper, IBZDataA
     public void createAudit(HttpServletRequest request, EntityBase entity, Object idValue, Map<String, Audit> auditFields) {
         IBZDataAudit dataAudit = new IBZDataAudit();
         dataAudit.setOppersonid(AuthenticationUser.getAuthenticationUser().getUserid());
-        dataAudit.setOppersonname(String.format("%s[%s]",AuthenticationUser.getAuthenticationUser().getPersonname(),AuthenticationUser.getAuthenticationUser().getOrgname()));
+        dataAudit.setOppersonname(String.format("%s[%s]", AuthenticationUser.getAuthenticationUser().getPersonname(), AuthenticationUser.getAuthenticationUser().getOrgname()));
         dataAudit.setAudittype("CREATE");
         dataAudit.setAuditobject(entity.getClass().getSimpleName());
         dataAudit.setAuditobjectdata(idValue);

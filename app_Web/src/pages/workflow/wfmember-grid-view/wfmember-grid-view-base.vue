@@ -9,25 +9,25 @@
             </div>
         <div class='content-container'>
             <div style='margin-bottom: 6px;'>
-                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="组成员名称" />
+                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;padding-left: 24px' placeholder="组成员名称" />
                 <div class='pull-right'>
                     <div class='toolbar-container'>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem3' }, $event)">
                                     <i class='fa fa-file-text-o'></i>
                                     <span class='caption'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem3.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem3.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' @click="toolbar_click({ tag: 'tbitem4' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem4' }, $event)">
                                     <i class='fa fa-edit'></i>
                                     <span class='caption'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem4.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem4.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem6.visabled" :disabled="toolBarModels.tbitem6.disabled" class='' @click="toolbar_click({ tag: 'tbitem6' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem6.visabled" :disabled="toolBarModels.tbitem6.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem6' }, $event)">
                                     <i class='fa fa-copy'></i>
                                     <span class='caption'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem6.caption')}}</span>
                                 </i-button>
@@ -35,7 +35,7 @@
                         </tooltip>
                         <span class='seperator'>|</span>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem8.visabled" :disabled="toolBarModels.tbitem8.disabled" class='' @click="toolbar_click({ tag: 'tbitem8' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem8.visabled" :disabled="toolBarModels.tbitem8.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem8' }, $event)">
                                     <i class='fa fa-remove'></i>
                                     <span class='caption'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem8.caption')}}</span>
                                 </i-button>
@@ -59,7 +59,7 @@
                             <dropdown-menu slot='list'>
                                 <dropdown-item>
                                     <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem21.visabled" :disabled="toolBarModels.tbitem21.disabled" class='' @click="toolbar_click({ tag: 'tbitem21' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem21.visabled" :disabled="toolBarModels.tbitem21.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem21' }, $event)">
                                     <i class='fa fa-download'></i>
                                     <span class='caption'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem21.caption')}}</span>
                                 </i-button>
@@ -70,7 +70,7 @@
                                 </dropdown-item>
                                 <dropdown-item>
                                     <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem23.visabled" :disabled="toolBarModels.tbitem23.disabled" class='' @click="toolbar_click({ tag: 'tbitem23' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem23.visabled" :disabled="toolBarModels.tbitem23.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem23' }, $event)">
                                     <i class='fa fa-upload'></i>
                                     <span class='caption'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem23.caption')}}</span>
                                 </i-button>
@@ -83,7 +83,7 @@
                         </dropdown>
                         <span class='seperator'>|</span>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem19.visabled" :disabled="toolBarModels.tbitem19.disabled" class='' @click="toolbar_click({ tag: 'tbitem19' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem19.visabled" :disabled="toolBarModels.tbitem19.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem19' }, $event)">
                                     <i class='fa fa-filter'></i>
                                     <span class='caption'>{{$t('entities.wfmember.gridviewtoolbar_toolbar.tbitem19.caption')}}</span>
                                 </i-button>

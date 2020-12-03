@@ -6,11 +6,11 @@
             </div>
         <div class='content-container'>
             <div style='margin-bottom: 6px;'>
-                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;' placeholder="部门名称" />
+                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;padding-left: 24px' placeholder="部门名称" />
                 <div class='pull-right'>
                     <div class='toolbar-container'>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem1_opennewcreateview.visabled" :disabled="toolBarModels.tbitem1_opennewcreateview.disabled" class='' @click="toolbar_click({ tag: 'tbitem1_opennewcreateview' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem1_opennewcreateview.visabled" :disabled="toolBarModels.tbitem1_opennewcreateview.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem1_opennewcreateview' }, $event)">
                                     <i class='fa fa-file-text-o'></i>
                                     <span class='caption'>{{$t('entities.sysdepartment.gridviewtoolbar_toolbar.tbitem1_opennewcreateview.caption')}}</span>
                                 </i-button>
@@ -18,21 +18,21 @@
                         </tooltip>
                         <span class='seperator'>|</span>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
+                                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
                                     <i class='fa fa-file-text-o'></i>
                                     <span class='caption'>{{$t('entities.sysdepartment.gridviewtoolbar_toolbar.deuiaction1.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.sysdepartment.gridviewtoolbar_toolbar.deuiaction1.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' @click="toolbar_click({ tag: 'tbitem4' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem4.visabled" :disabled="toolBarModels.tbitem4.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem4' }, $event)">
                                     <i class='fa fa-edit'></i>
                                     <span class='caption'>{{$t('entities.sysdepartment.gridviewtoolbar_toolbar.tbitem4.caption')}}</span>
                                 </i-button>
                             <div slot='content'>{{$t('entities.sysdepartment.gridviewtoolbar_toolbar.tbitem4.tip')}}</div>
                         </tooltip>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem6.visabled" :disabled="toolBarModels.tbitem6.disabled" class='' @click="toolbar_click({ tag: 'tbitem6' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem6.visabled" :disabled="toolBarModels.tbitem6.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem6' }, $event)">
                                     <i class='fa fa-copy'></i>
                                     <span class='caption'>{{$t('entities.sysdepartment.gridviewtoolbar_toolbar.tbitem6.caption')}}</span>
                                 </i-button>
@@ -40,7 +40,7 @@
                         </tooltip>
                         <span class='seperator'>|</span>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem8.visabled" :disabled="toolBarModels.tbitem8.disabled" class='' @click="toolbar_click({ tag: 'tbitem8' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem8.visabled" :disabled="toolBarModels.tbitem8.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem8' }, $event)">
                                     <i class='fa fa-remove'></i>
                                     <span class='caption'>{{$t('entities.sysdepartment.gridviewtoolbar_toolbar.tbitem8.caption')}}</span>
                                 </i-button>
@@ -53,7 +53,7 @@
                         </tooltip>
                         <span class='seperator'>|</span>
                         <tooltip :transfer="true" :max-width="600">
-                                <i-button v-show="toolBarModels.tbitem19.visabled" :disabled="toolBarModels.tbitem19.disabled" class='' @click="toolbar_click({ tag: 'tbitem19' }, $event)">
+                                <i-button v-show="toolBarModels.tbitem19.visabled" :disabled="toolBarModels.tbitem19.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem19' }, $event)">
                                     <i class='fa fa-filter'></i>
                                     <span class='caption'>{{$t('entities.sysdepartment.gridviewtoolbar_toolbar.tbitem19.caption')}}</span>
                                 </i-button>

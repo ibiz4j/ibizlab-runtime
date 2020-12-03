@@ -1,15 +1,19 @@
 package cn.ibizlab.util.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.alibaba.fastjson.annotation.JSONField;
+import lombok.Data;
+import cn.ibizlab.util.helper.DEFieldCacheMap;
+import org.springframework.cglib.beans.BeanMap;
+import org.springframework.data.annotation.Transient;
+import org.springframework.util.StringUtils;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import lombok.Data;
 
 @Data
 public class DTOBase implements Serializable {
@@ -73,9 +77,44 @@ public class DTOBase implements Serializable {
         return extensionparams;
     }
 
+    @JsonIgnore
+    @JSONField(serialize = false)
+    @Transient
+    private BeanMap map;
+
+    private BeanMap getMap()
+    {
+        if(map==null) {
+            map=BeanMap.create(this);
+        }
+        return  map;
+    }
+
+    public Object get(String field) {
+        String fieldRealName= DEFieldCacheMap.getFieldRealName(this.getClass(),field);
+        if(!StringUtils.isEmpty(fieldRealName)) {
+            return getMap().get(fieldRealName);
+        }
+        else {
+            return this.extensionparams.get(field.toLowerCase());
+        }
+    }
+
     @JsonAnySetter
-    public void set(String name, Object value) {
-        extensionparams.put(name.toLowerCase(), value);
+    public void set(String field, Object value) {
+        field=field.toLowerCase();
+        String fieldRealName=DEFieldCacheMap.getFieldRealName(this.getClass(),field);
+        if(!StringUtils.isEmpty(fieldRealName)) {
+            if (value == null) {
+                getMap().put(fieldRealName, null);
+            }
+            else {
+                getMap().put(fieldRealName, DEFieldCacheMap.fieldValueOf(this.getClass(), fieldRealName, value));
+            }
+        }
+        else {
+            this.extensionparams.put(field.toLowerCase(),value);
+        }
     }
 }
 

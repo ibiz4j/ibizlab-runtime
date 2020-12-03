@@ -22,7 +22,7 @@ public class SysEmployeeExService extends SysEmployeeServiceImpl {
     }
 
     /**
-     * 自定义行为[InitPwd]用户扩展
+     * [InitPwd:初始化密码] 行为扩展
      * @param et
      * @return
      */

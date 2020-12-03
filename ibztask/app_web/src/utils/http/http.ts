@@ -2,6 +2,8 @@ import axios from 'axios';
 import { Loading } from 'element-ui';
 import { ElLoadingComponent } from 'element-ui/types/loading';
 import qs from 'qs';
+import { Subject } from 'rxjs';
+
 /**
  * Http net 对象
  * 调用 getInstance() 获取实例
@@ -9,20 +11,6 @@ import qs from 'qs';
  * @class Http
  */
 export class Http {
-
-    /**
-     * 获取 Http 单例对象
-     *
-     * @static
-     * @returns {Http}
-     * @memberof Http
-     */
-    public static getInstance(): Http {
-        if (!Http.Http) {
-            Http.Http = new Http();
-        }
-        return this.Http;
-    }
 
     /**
      * 单例变量声明
@@ -41,6 +29,28 @@ export class Http {
      * @memberof Http
      */
     private loadingCount: number = 0;
+
+    /**
+     * 数据传递对象
+     *
+     * @type {Subject}
+     * @memberof Http
+     */
+    private subject:Subject<any> = new Subject<any>();
+
+    /**
+     * 获取 Http 单例对象
+     *
+     * @static
+     * @returns {Http}
+     * @memberof Http
+     */
+    public static getInstance(): Http {
+        if (!Http.Http) {
+            Http.Http = new Http();
+        }
+        return this.Http;
+    }
 
     /**
      * load状态管理器
@@ -227,6 +237,7 @@ export class Http {
                 body: true,
                 fullscreen: true,
             });
+            this.notifyLoadState(true);
         }
         this.loadingCount++;
     }
@@ -244,6 +255,7 @@ export class Http {
         setTimeout(() => {
             if (this.loadingCount === 0) {
                 this.elLoadingComponent.close();
+                this.notifyLoadState(false);
             }
         }, 500);
     }
@@ -263,6 +275,26 @@ export class Http {
             delete data.srfsessionid;
         }
         return data;
+    }
+
+    /**
+     * 获取通知对象
+     * 
+     * @public
+     * @memberof Http
+     */
+    public  getNotifyObject(){
+        return this.subject;
+    }
+
+    /**
+     * 通知loadding状态
+     * 
+     * @private
+     * @memberof Http
+     */
+    private notifyLoadState(loadingState:boolean){
+        this.subject.next({action:'setloadstate',state:loadingState});
     }
 
 }

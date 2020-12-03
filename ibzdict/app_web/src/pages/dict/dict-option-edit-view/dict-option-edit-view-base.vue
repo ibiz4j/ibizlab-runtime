@@ -7,14 +7,14 @@
     <span class='caption-info'>{{$t(model.srfCaption)}}</span>
     <div class='toolbar-container'>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem1.visabled" :disabled="toolBarModels.tbitem1.disabled" class='' @click="toolbar_click({ tag: 'tbitem1' }, $event)">
+                <i-button v-show="toolBarModels.tbitem1.visabled" :disabled="toolBarModels.tbitem1.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem1' }, $event)">
                     <i class='sx-tb-saveandclose'></i>
                     <span class='caption'>{{$t('entities.dictoption.editviewtoolbar_toolbar.tbitem1.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.dictoption.editviewtoolbar_toolbar.tbitem1.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem2.visabled" :disabled="toolBarModels.tbitem2.disabled" class='' @click="toolbar_click({ tag: 'tbitem2' }, $event)">
+                <i-button v-show="toolBarModels.tbitem2.visabled" :disabled="toolBarModels.tbitem2.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem2' }, $event)">
                     <i class='fa fa-sign-out'></i>
                     <span class='caption'>{{$t('entities.dictoption.editviewtoolbar_toolbar.tbitem2.caption')}}</span>
                 </i-button>

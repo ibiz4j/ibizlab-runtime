@@ -9,6 +9,8 @@
     "table_name":"IBZDICTCATALOG",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"dict",
+    "module_name":"dict",
     "fields":[
     {
     "fieldname":"CID" ,
@@ -128,6 +130,8 @@
     "table_name":"IBZDICTOPTION",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"dict",
+    "module_name":"dict",
     "fields":[
     {
     "fieldname":"VKEY" ,
@@ -354,6 +358,8 @@
     "table_name":"JOBS_INFO",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"task",
+    "module_name":"task",
     "fields":[
     {
     "fieldname":"ID" ,
@@ -574,6 +580,8 @@
     "table_name":"JOBS_LOCK",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"task",
+    "module_name":"task",
     "fields":[
     {
     "fieldname":"ID" ,
@@ -644,6 +652,8 @@
     "table_name":"JOBS_LOG",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"task",
+    "module_name":"task",
     "fields":[
     {
     "fieldname":"ID" ,
@@ -796,6 +806,8 @@
     "table_name":"JOBS_REGISTRY",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"task",
+    "module_name":"task",
     "fields":[
     {
     "fieldname":"ID" ,
@@ -880,6 +892,8 @@
     "table_name":"IBZFILE",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"disk",
+    "module_name":"disk",
     "fields":[
     {
     "fieldname":"FILEID" ,
@@ -1094,6 +1108,8 @@
     "table_name":"IBZAPP",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"APPID" ,
@@ -1246,6 +1262,8 @@
     "table_name":"IBZAUTHLOG",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"LOGID" ,
@@ -1388,6 +1406,8 @@
     "table_name":"IBZDEPT",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"DEPTID" ,
@@ -1687,6 +1707,8 @@
     "table_name":"IBZDEPTMEMBER",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"MEMBERID" ,
@@ -1874,6 +1896,8 @@
     "table_name":"IBZEMP",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"USERID" ,
@@ -2460,6 +2484,8 @@
     "table_name":"IBZOPENACCESS",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"ACCESSID" ,
@@ -2643,6 +2669,8 @@
     "table_name":"IBZORG",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"ORGID" ,
@@ -2858,6 +2886,8 @@
     "table_name":"IBZPSSYSTEM",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"PSSYSTEMID" ,
@@ -2962,6 +2992,8 @@
     "table_name":"IBZPERMISSION",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"SYS_PERMISSIONID" ,
@@ -3084,6 +3116,8 @@
     "table_name":"IBZPOST",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"POSTID" ,
@@ -3187,6 +3221,8 @@
     "table_name":"IBZROLE",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"SYS_ROLEID" ,
@@ -3334,6 +3370,8 @@
     "table_name":"IBZROLE_PERMISSION",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"SYS_ROLE_PERMISSIONID" ,
@@ -3515,6 +3553,8 @@
     "table_name":"IBZTEAM",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"TEAMID" ,
@@ -3592,6 +3632,8 @@
     "table_name":"IBZTEAMMEMBER",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"ou",
+    "module_name":"ou",
     "fields":[
     {
     "fieldname":"TEAMMEMBERID" ,
@@ -3781,6 +3823,8 @@
     "table_name":"IBZUSER",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"USERID" ,
@@ -4257,6 +4301,8 @@
     "table_name":"IBZUSERAUTH",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"AUTHID" ,
@@ -4373,6 +4419,8 @@
     "table_name":"IBZUSER_ROLE",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"uaa",
+    "module_name":"uaa",
     "fields":[
     {
     "fieldname":"SYS_USER_ROLEID" ,
@@ -4573,6 +4621,8 @@
     "table_name":"IBZWFGROUP",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"GROUPID" ,
@@ -4636,6 +4686,8 @@
     "table_name":"IBZWFMEMBER",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"MEMBERID" ,
@@ -4839,6 +4891,8 @@
     "table_name":"IBZWFDEFINITION",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"DEFINITIONKEY" ,
@@ -4993,6 +5047,8 @@
     "table_name":"IBZWFINSTANCE",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"INSTANCEID" ,
@@ -5105,6 +5161,8 @@
     "table_name":"IBZWFNODE",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"NODEID" ,
@@ -5202,6 +5260,8 @@
     "table_name":"IBZWFMODEL",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"MODELID" ,
@@ -5259,6 +5319,8 @@
     "table_name":"IBZPSSYSTEM",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"PSSYSTEMID" ,
@@ -5302,6 +5364,8 @@
     "table_name":"IBZTASK",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"TASKID" ,
@@ -5456,6 +5520,8 @@
     "table_name":"IBZWFTASKWAY",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"WAYID" ,
@@ -5583,6 +5649,8 @@
     "table_name":"IBZUSER",
     "system_id":"ibzrt",
     "system_name":"ibzrt",
+    "module_id":"workflow",
+    "module_name":"workflow",
     "fields":[
     {
     "fieldname":"USERID" ,

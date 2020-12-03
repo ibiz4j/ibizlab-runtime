@@ -99,6 +99,14 @@ import AppAlertGroup from './components/app-alert-group/app-alert-group.vue'
 import AppRawItem from './components/app-rawitem/app-rawitem.vue'
 import AppImageRomate from './components/app-image-romate/app-image-romate.vue'
 import { MenuIcon } from './components/menu-icon/menu-icon'
+import AppVuePivottable from './components/app-vue-pivottable/app-vue-pivottable.vue';
+import AppMapPosition from './components/app-map-position/app-map-position.vue';
+import AppSortBar from './components/app-sort-bar/app-sort-bar.vue';
+import AppAfterTime from './components/app-after-time/app-after-time.vue';
+import AppInputIp from './components/app-input-ip/app-input-ip.vue';
+import Loadding  from  './directive/loadding/loadding';
+import AppColorSpan  from  './components/app-color-span/app-color-span.vue';
+import AppColorPicker from  './components/app-color-picker/app-color-picker.vue';
 
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
@@ -213,5 +221,13 @@ export const AppComponents = {
         v.component('app-rawitem',AppRawItem);
         v.component('app-image-romate', AppImageRomate);
         v.component('menu-icon', MenuIcon);
+        v.component('app-vue-pivottable', AppVuePivottable);
+        v.component('app-map-position', AppMapPosition);
+        v.component('app-sort-bar', AppSortBar);
+        v.component('app-after-time', AppAfterTime);
+        v.component('app-input-ip', AppInputIp);
+        v.directive('loading',Loadding);
+        v.component('app-color-span', AppColorSpan);
+        v.component('app-color-picker', AppColorPicker);
     },
 };

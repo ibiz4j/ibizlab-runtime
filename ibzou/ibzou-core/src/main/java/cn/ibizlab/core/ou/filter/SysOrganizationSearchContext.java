@@ -100,7 +100,7 @@ public class SysOrganizationSearchContext extends QueryWrapperContext<SysOrganiz
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("orgname", query)   
+                     wrapper.like("orgname", query)
             );
 		 }
 	}

@@ -5,13 +5,13 @@
 
     <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
 	<select id="selectById"  resultMap="DictCatalogResultMap" databaseId="mysql">
-        <![CDATA[select t1.* from (SELECT t1.`CCODE`, t1.`CGROUP`, t1.`CID`, t1.`CNAME`, t1.`ENABLE`, t1.`MEMO`, t1.`UPDATEDATE` FROM `IBZDICTCATALOG` t1  ) t1 where cid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.`CCODE`, t1.`CGROUP`, t1.`CID`, t1.`CNAME`, t1.`CREATEDATE`, t1.`ENABLE`, t1.`MEMO`, t1.`UPDATEDATE` FROM `IBZDICTCATALOG` t1  ) t1 where cid=#{id}]]>
     </select>
 	<select id="selectById"  resultMap="DictCatalogResultMap" databaseId="oracle">
-        <![CDATA[select t1.* from (SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  ) t1 where cid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.CREATEDATE, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  ) t1 where cid=#{id}]]>
     </select>
 	<select id="selectById"  resultMap="DictCatalogResultMap" databaseId="postgresql">
-        <![CDATA[select t1.* from (SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  ) t1 where cid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.CREATEDATE, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  ) t1 where cid=#{id}]]>
     </select>
 
     <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
@@ -36,37 +36,37 @@
 
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-		<![CDATA[ SELECT t1.`CCODE`, t1.`CGROUP`, t1.`CID`, t1.`CNAME`, t1.`ENABLE`, t1.`MEMO`, t1.`UPDATEDATE` FROM `IBZDICTCATALOG` t1  
+		<![CDATA[ SELECT t1.`CCODE`, t1.`CGROUP`, t1.`CID`, t1.`CNAME`, t1.`CREATEDATE`, t1.`ENABLE`, t1.`MEMO`, t1.`UPDATEDATE` FROM `IBZDICTCATALOG` t1  
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="oracle">
-		<![CDATA[ SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  
+		<![CDATA[ SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.CREATEDATE, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
-		<![CDATA[ SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  
+		<![CDATA[ SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.CREATEDATE, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
-		<![CDATA[ SELECT t1.`CCODE`, t1.`CGROUP`, t1.`CID`, t1.`CNAME`, t1.`ENABLE`, t1.`MEMO`, t1.`UPDATEDATE` FROM `IBZDICTCATALOG` t1  
+		<![CDATA[ SELECT t1.`CCODE`, t1.`CGROUP`, t1.`CID`, t1.`CNAME`, t1.`CREATEDATE`, t1.`ENABLE`, t1.`MEMO`, t1.`UPDATEDATE` FROM `IBZDICTCATALOG` t1  
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="oracle">
-		<![CDATA[ SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  
+		<![CDATA[ SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.CREATEDATE, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="postgresql">
-		<![CDATA[ SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  
+		<![CDATA[ SELECT t1.CCODE, t1.CGROUP, t1.CID, t1.CNAME, t1.CREATEDATE, t1.ENABLE, t1.MEMO, t1.UPDATEDATE FROM IBZDICTCATALOG t1  
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>

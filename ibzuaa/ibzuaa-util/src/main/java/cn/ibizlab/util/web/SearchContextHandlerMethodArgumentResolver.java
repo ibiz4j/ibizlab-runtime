@@ -31,14 +31,14 @@ public class SearchContextHandlerMethodArgumentResolver implements HandlerMethod
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 								  NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		Map<String, String[]> params = webRequest.getParameterMap();
-		LinkedHashMap<String,Object> set=new LinkedHashMap<>();
+		LinkedHashMap<String,Object> set = new LinkedHashMap<>();
 		for (String key : params.keySet()) {
 			set.put(key,params.get(key)[0]);
 		}
 		if((!set.containsKey("size")) ){
-			set.put("size",pageLimit);
+			set.put("size", pageLimit);
 		}
-		String json=objectMapper.writeValueAsString(set);
-		return objectMapper.readValue(json,parameter.getParameterType());
+		String json = objectMapper.writeValueAsString(set);
+		return objectMapper.readValue(json, parameter.getParameterType());
 	}
 }

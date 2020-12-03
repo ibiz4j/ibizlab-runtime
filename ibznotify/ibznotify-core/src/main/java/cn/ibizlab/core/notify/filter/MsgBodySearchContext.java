@@ -51,7 +51,7 @@ public class MsgBodySearchContext extends QueryWrapperContext<MsgBody> {
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("msgname", query)   
+                     wrapper.like("msgname", query)
             );
 		 }
 	}

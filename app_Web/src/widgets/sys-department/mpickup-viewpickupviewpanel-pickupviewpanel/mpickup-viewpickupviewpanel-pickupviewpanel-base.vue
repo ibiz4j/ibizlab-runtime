@@ -60,7 +60,7 @@ export default class MPickupViewpickupviewpanelBase extends Vue implements Contr
      * @type {*}
      * @memberof MPickupViewpickupviewpanelBase
      */
-    @Prop() public context: any;
+    @Prop() public context!: any;
 
     /**
      * 视图参数
@@ -68,7 +68,7 @@ export default class MPickupViewpickupviewpanelBase extends Vue implements Contr
      * @type {*}
      * @memberof MPickupViewpickupviewpanelBase
      */
-    @Prop() public viewparams: any;
+    @Prop() public viewparams!: any;
 
     /**
      * 视图状态事件

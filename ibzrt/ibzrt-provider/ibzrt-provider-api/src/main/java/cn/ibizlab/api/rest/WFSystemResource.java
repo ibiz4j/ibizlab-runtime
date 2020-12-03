@@ -47,6 +47,7 @@ public class WFSystemResource {
     @Lazy
     public WFSystemMapping wfsystemMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Create-all')")
     @ApiOperation(value = "新建系统", tags = {"系统" },  notes = "新建系统")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems")
     public ResponseEntity<WFSystemDTO> create(@Validated @RequestBody WFSystemDTO wfsystemdto) {
@@ -56,6 +57,7 @@ public class WFSystemResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Create-all')")
     @ApiOperation(value = "批量新建系统", tags = {"系统" },  notes = "批量新建系统")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
@@ -63,6 +65,7 @@ public class WFSystemResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Update-all')")
     @ApiOperation(value = "更新系统", tags = {"系统" },  notes = "更新系统")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{wfsystem_id}")
     public ResponseEntity<WFSystemDTO> update(@PathVariable("wfsystem_id") String wfsystem_id, @RequestBody WFSystemDTO wfsystemdto) {
@@ -73,6 +76,7 @@ public class WFSystemResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Update-all')")
     @ApiOperation(value = "批量更新系统", tags = {"系统" },  notes = "批量更新系统")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
@@ -80,12 +84,14 @@ public class WFSystemResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Remove-all')")
     @ApiOperation(value = "删除系统", tags = {"系统" },  notes = "删除系统")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/{wfsystem_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("wfsystem_id") String wfsystem_id) {
          return ResponseEntity.status(HttpStatus.OK).body(wfsystemService.remove(wfsystem_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Remove-all')")
     @ApiOperation(value = "批量删除系统", tags = {"系统" },  notes = "批量删除系统")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class WFSystemResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Get-all')")
     @ApiOperation(value = "获取系统", tags = {"系统" },  notes = "获取系统")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfsystems/{wfsystem_id}")
     public ResponseEntity<WFSystemDTO> get(@PathVariable("wfsystem_id") String wfsystem_id) {
@@ -113,12 +120,14 @@ public class WFSystemResource {
         return  ResponseEntity.status(HttpStatus.OK).body(wfsystemService.checkKey(wfsystemMapping.toDomain(wfsystemdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Save-all')")
     @ApiOperation(value = "保存系统", tags = {"系统" },  notes = "保存系统")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
     public ResponseEntity<Boolean> save(@RequestBody WFSystemDTO wfsystemdto) {
         return ResponseEntity.status(HttpStatus.OK).body(wfsystemService.save(wfsystemMapping.toDomain(wfsystemdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Save-all')")
     @ApiOperation(value = "批量保存系统", tags = {"系统" },  notes = "批量保存系统")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFSystemDTO> wfsystemdtos) {
@@ -126,6 +135,7 @@ public class WFSystemResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"系统" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfsystems/fetchdefault")
 	public ResponseEntity<List<WFSystemDTO>> fetchDefault(WFSystemSearchContext context) {
@@ -138,6 +148,7 @@ public class WFSystemResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"系统" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfsystems/searchdefault")
 	public ResponseEntity<Page<WFSystemDTO>> searchDefault(@RequestBody WFSystemSearchContext context) {

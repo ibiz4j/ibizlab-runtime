@@ -112,10 +112,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/svg/**",
                         "/"
                 ).permitAll()
-                //放行登录请求
-                .antMatchers( HttpMethod.POST,"/"+loginPath).permitAll()
-                //放行注销请求
-                .antMatchers( HttpMethod.GET,"/"+logoutPath).permitAll()
+                // 放行登录请求
+                .antMatchers( HttpMethod.POST, "/"+loginPath).permitAll()
+                // 放行注销请求
+                .antMatchers( HttpMethod.GET, "/"+logoutPath).permitAll()
                 // 文件操作
                 .antMatchers("/"+downloadpath+"/**").permitAll()
                 .antMatchers("/"+uploadpath).permitAll()

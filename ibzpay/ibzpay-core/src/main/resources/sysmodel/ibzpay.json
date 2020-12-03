@@ -9,6 +9,8 @@
     "table_name":"IBZOPENACCESS",
     "system_id":"ibzpay",
     "system_name":"ibzpay",
+    "module_id":"pay",
+    "module_name":"pay",
     "fields":[
     {
     "fieldname":"ACCESSID" ,
@@ -198,6 +200,8 @@
     "table_name":"IBZPAYTRADE",
     "system_id":"ibzpay",
     "system_name":"ibzpay",
+    "module_id":"pay",
+    "module_name":"pay",
     "fields":[
     {
     "fieldname":"SUBJECT" ,

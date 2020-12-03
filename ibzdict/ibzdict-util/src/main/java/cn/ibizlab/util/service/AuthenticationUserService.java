@@ -15,12 +15,12 @@ public interface AuthenticationUserService extends UserDetailsService {
 
 
     @Override
-    @Cacheable( value="ibzuaa_users",key = "'getByUsername:'+#p0")
+    @Cacheable( value="ibzuaa_users", key = "'getByUsername:'+#p0")
     AuthenticationUser loadUserByUsername(String username);
 
-    @Cacheable( value="ibzuaa_users",key = "'getByUsername:'+#p0")
+    @Cacheable( value="ibzuaa_users", key = "'getByUsername:'+#p0")
     AuthenticationUser loadUserByLogin(String username,String password);
 
-    @CacheEvict( value="ibzuaa_users",key = "'getByUsername:'+#p0")
+    @CacheEvict( value="ibzuaa_users", key = "'getByUsername:'+#p0")
     void resetByUsername(String username);
 }

@@ -41,11 +41,25 @@ public class SysRolePermissionSearchContext extends QueryWrapperContext<SysRoleP
             this.getSearchCond().eq("sys_rolename", n_sys_rolename_eq);
         }
     }
+	private String n_sys_rolename_in;//[角色名称]
+	public void setN_sys_rolename_in(String n_sys_rolename_in) {
+        this.n_sys_rolename_in = n_sys_rolename_in;
+        if(!ObjectUtils.isEmpty(this.n_sys_rolename_in)){
+			this.getSearchCond().in("sys_rolename",this.n_sys_rolename_in.split(";"));
+        }
+    }
 	private String n_sys_rolename_like;//[角色名称]
 	public void setN_sys_rolename_like(String n_sys_rolename_like) {
         this.n_sys_rolename_like = n_sys_rolename_like;
         if(!ObjectUtils.isEmpty(this.n_sys_rolename_like)){
             this.getSearchCond().like("sys_rolename", n_sys_rolename_like);
+        }
+    }
+	private String n_sys_rolename_notin;//[角色名称]
+	public void setN_sys_rolename_notin(String n_sys_rolename_notin) {
+        this.n_sys_rolename_notin = n_sys_rolename_notin;
+        if(!ObjectUtils.isEmpty(this.n_sys_rolename_notin)){
+			this.getSearchCond().notIn("sys_rolename",this.n_sys_rolename_notin.split(";"));
         }
     }
 	private String n_sys_permissionid_eq;//[权限表标识]
@@ -79,7 +93,7 @@ public class SysRolePermissionSearchContext extends QueryWrapperContext<SysRoleP
 		 this.query=query;
 		 if(!StringUtils.isEmpty(query)){
             this.getSearchCond().and( wrapper ->
-                     wrapper.like("sys_permissionid", query)   
+                     wrapper.like("sys_permissionid", query)
             );
 		 }
 	}

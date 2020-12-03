@@ -9,6 +9,8 @@
     "table_name":"IBZDICTCATALOG",
     "system_id":"ibzdict",
     "system_name":"ibzdict",
+    "module_id":"dict",
+    "module_name":"dict",
     "fields":[
     {
     "fieldname":"CID" ,
@@ -107,6 +109,20 @@
     "key_field":0,
     "show_order":8,
     "major_field":0
+    },
+    {
+    "fieldname":"CREATEDATE" ,
+    "codename":"CreateDate",
+    "field_logic_name":"创建时间",
+    "entity_name":"DictCatalog",
+    "field_type":"DATETIME",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"DATETIME",
+    "predefined":"CREATEDATE",
+    "key_field":0,
+    "show_order":9,
+    "major_field":0
     }
     ],
     "subEntitys":[
@@ -128,6 +144,8 @@
     "table_name":"IBZDICTOPTION",
     "system_id":"ibzdict",
     "system_name":"ibzdict",
+    "module_id":"dict",
+    "module_name":"dict",
     "fields":[
     {
     "fieldname":"VKEY" ,
@@ -332,6 +350,20 @@
     "predefined":"UPDATEDATE",
     "key_field":0,
     "show_order":18,
+    "major_field":0
+    },
+    {
+    "fieldname":"CREATEDATE" ,
+    "codename":"CreateDate",
+    "field_logic_name":"创建时间",
+    "entity_name":"DictOption",
+    "field_type":"DATETIME",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"DATETIME",
+    "predefined":"CREATEDATE",
+    "key_field":0,
+    "show_order":19,
     "major_field":0
     }
     ],

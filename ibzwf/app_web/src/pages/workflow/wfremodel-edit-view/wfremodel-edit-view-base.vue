@@ -7,7 +7,7 @@
     <span class='caption-info'>{{$t(model.srfCaption)}}</span>
     <div class='toolbar-container'>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem1.visabled" :disabled="toolBarModels.tbitem1.disabled" class='' @click="toolbar_click({ tag: 'tbitem1' }, $event)">
+                <i-button v-show="toolBarModels.tbitem1.visabled" :disabled="toolBarModels.tbitem1.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem1' }, $event)">
                     <i class='fa fa-save'></i>
                     <span class='caption'>{{$t('entities.wfremodel.editviewtoolbar_toolbar.tbitem1.caption')}}</span>
                 </i-button>

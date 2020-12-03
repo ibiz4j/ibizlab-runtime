@@ -7,6 +7,7 @@ export default {
     memo: "备注",
     enable: "是否有效",
     updatedate: "最后修改时间",
+    createdate: "创建时间",
   },
 	views: {
 		gridview: {

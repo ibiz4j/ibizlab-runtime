@@ -7,21 +7,21 @@
     <span class='caption-info'>{{$t(model.srfCaption)}}</span>
     <div class='toolbar-container'>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
+                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem3' }, $event)">
                     <i class='fa fa-save'></i>
                     <span class='caption'>{{$t('entities.systeam.editviewtoolbar_toolbar.tbitem3.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.systeam.editviewtoolbar_toolbar.tbitem3.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
+                <i-button v-show="toolBarModels.deuiaction1.visabled" :disabled="toolBarModels.deuiaction1.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction1' }, $event)">
                     <i class='sx-tb-saveandclose'></i>
                     <span class='caption'>{{$t('entities.systeam.editviewtoolbar_toolbar.deuiaction1.caption')}}</span>
                 </i-button>
             <div slot='content'>{{$t('entities.systeam.editviewtoolbar_toolbar.deuiaction1.tip')}}</div>
         </tooltip>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.deuiaction2.visabled" :disabled="toolBarModels.deuiaction2.disabled" class='' @click="toolbar_click({ tag: 'deuiaction2' }, $event)">
+                <i-button v-show="toolBarModels.deuiaction2.visabled" :disabled="toolBarModels.deuiaction2.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'deuiaction2' }, $event)">
                     <i class='fa fa-sign-out'></i>
                     <span class='caption'>{{$t('entities.systeam.editviewtoolbar_toolbar.deuiaction2.caption')}}</span>
                 </i-button>
@@ -29,7 +29,7 @@
         </tooltip>
         <span class='seperator'>|</span>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
+                <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem14' }, $event)">
                     <i class='fa fa-copy'></i>
                     <span class='caption'>{{$t('entities.systeam.editviewtoolbar_toolbar.tbitem14.caption')}}</span>
                 </i-button>

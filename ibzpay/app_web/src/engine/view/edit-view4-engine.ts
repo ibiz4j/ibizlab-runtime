@@ -91,7 +91,7 @@ export default class EditView4Engine extends EditViewEngine {
         super.onFormLoad(arg);
         if (this.getDrTab()) {
             const tag = this.getDrTab().name;
-            this.setViewState2({ tag: tag, action: 'state', viewdata: this.view.viewparams });
+            this.setViewState2({ tag: tag, action: 'state', viewdata: arg });
         }
     }
 
@@ -105,7 +105,7 @@ export default class EditView4Engine extends EditViewEngine {
         super.onFormSave(arg);
         if (this.getDrTab()) {
             const tag = this.getDrTab().name;
-            this.setViewState2({ tag: tag, action: 'state', viewdata: this.view.viewparams });
+            this.setViewState2({ tag: tag, action: 'state', viewdata: arg });
         }
     }
 

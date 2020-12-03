@@ -376,5 +376,19 @@ export default {
       false: '取消',
       deleteImageFailure:'删除图片失败',
       updateFailure: '批量更新文件失败',
-    }
+    },
+    appMapPosition: {
+      submit: '确认',
+      title: '请选择地址'
+    },
+    appSortBar: {
+      title: '排序'
+    },
+    appAfterTime:{
+      minutesAgo: '分钟前',
+      hoursAgo: '小时前',
+      dayAgo: '天前',
+      monthsAgo: '月前',
+      yearsAgo: '年前'
+  }
 };

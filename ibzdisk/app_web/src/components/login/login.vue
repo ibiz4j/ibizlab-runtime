@@ -74,7 +74,7 @@
 <script lang="ts">
 import {Vue, Component, Watch} from 'vue-property-decorator';
 import {Environment} from '@/environments/environment';
-//import Divider from "ibiz-vue-lib/lib/ibiz-vue-lib.common";
+import { Util } from '@/utils';
 
 @Component({
     components: {}
@@ -141,7 +141,7 @@ export default class Login extends Vue {
     }
 
     public mounted() {
-        this.getCookie("loginname");
+        Util.getCookie("loginname");
     }
 
     /**
@@ -181,13 +181,13 @@ export default class Login extends Vue {
                 const data = response.data;
                 if (data && data.token) {
                     localStorage.setItem('token', data.token);
-                    this.setCookie('ibzuaa-token',data.token,0);
+                    Util.setCookie('ibzuaa-token',data.token,0);
                 }
                 if(data && data.user){
                     localStorage.setItem('user', JSON.stringify(data.user));
                 }
                 // 设置cookie,保存账号密码7天
-                this.setCookie("loginname",loginname, 7);
+                Util.setCookie("loginname",loginname, 7);
                 // 跳转首页
                 const url: any = this.$route.query.redirect ? this.$route.query.redirect : '*';
                 this.$router.push({path: url});
@@ -221,40 +221,6 @@ export default class Login extends Vue {
     public goReset(): void {
         const _this = this;
         _this.form={loginname: 'ibzadmin', password: '123456'}
-    }
-
-    /**
-     * 设置cookie
-     * 
-     * @memberof Login
-     */
-    public setCookie(name: any, value: any, day: any) {
-            if (day !== 0) { //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
-                let curDate = new Date();
-                let curTamp = curDate.getTime();
-                let curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
-                let passedTamp = curTamp - curWeeHours;
-                let leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
-                let leftTime = new Date();
-                leftTime.setTime(leftTamp + curTamp);
-                document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toUTCString();
-            } else {
-                document.cookie = name + "=" + escape(value);
-            }
-    }
-
-    /**
-     * 获取cookie
-     * 
-     * @memberof Login
-     */
-    public getCookie(name: any): any {
-            let arr;
-            let reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-            if (arr = document.cookie.match(reg))
-                return unescape(arr[2]);
-            else
-                return null;
     }
 
     /**

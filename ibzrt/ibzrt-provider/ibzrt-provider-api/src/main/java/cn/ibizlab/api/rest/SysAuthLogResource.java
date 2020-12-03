@@ -47,6 +47,7 @@ public class SysAuthLogResource {
     @Lazy
     public SysAuthLogMapping sysauthlogMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Create-all')")
     @ApiOperation(value = "新建认证日志", tags = {"认证日志" },  notes = "新建认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
     public ResponseEntity<SysAuthLogDTO> create(@Validated @RequestBody SysAuthLogDTO sysauthlogdto) {
@@ -56,6 +57,7 @@ public class SysAuthLogResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Create-all')")
     @ApiOperation(value = "批量新建认证日志", tags = {"认证日志" },  notes = "批量新建认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysAuthLogDTO> sysauthlogdtos) {
@@ -63,6 +65,7 @@ public class SysAuthLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Update-all')")
     @ApiOperation(value = "更新认证日志", tags = {"认证日志" },  notes = "更新认证日志")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysauthlogs/{sysauthlog_id}")
     public ResponseEntity<SysAuthLogDTO> update(@PathVariable("sysauthlog_id") String sysauthlog_id, @RequestBody SysAuthLogDTO sysauthlogdto) {
@@ -73,6 +76,7 @@ public class SysAuthLogResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Update-all')")
     @ApiOperation(value = "批量更新认证日志", tags = {"认证日志" },  notes = "批量更新认证日志")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysauthlogs/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysAuthLogDTO> sysauthlogdtos) {
@@ -80,12 +84,14 @@ public class SysAuthLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Remove-all')")
     @ApiOperation(value = "删除认证日志", tags = {"认证日志" },  notes = "删除认证日志")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysauthlogs/{sysauthlog_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("sysauthlog_id") String sysauthlog_id) {
          return ResponseEntity.status(HttpStatus.OK).body(sysauthlogService.remove(sysauthlog_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Remove-all')")
     @ApiOperation(value = "批量删除认证日志", tags = {"认证日志" },  notes = "批量删除认证日志")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/sysauthlogs/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class SysAuthLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Get-all')")
     @ApiOperation(value = "获取认证日志", tags = {"认证日志" },  notes = "获取认证日志")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/{sysauthlog_id}")
     public ResponseEntity<SysAuthLogDTO> get(@PathVariable("sysauthlog_id") String sysauthlog_id) {
@@ -113,12 +120,14 @@ public class SysAuthLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysauthlogService.checkKey(sysauthlogMapping.toDomain(sysauthlogdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Save-all')")
     @ApiOperation(value = "保存认证日志", tags = {"认证日志" },  notes = "保存认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/save")
     public ResponseEntity<Boolean> save(@RequestBody SysAuthLogDTO sysauthlogdto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysauthlogService.save(sysauthlogMapping.toDomain(sysauthlogdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Save-all')")
     @ApiOperation(value = "批量保存认证日志", tags = {"认证日志" },  notes = "批量保存认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysAuthLogDTO> sysauthlogdtos) {
@@ -126,6 +135,7 @@ public class SysAuthLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"认证日志" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysauthlogs/fetchdefault")
 	public ResponseEntity<List<SysAuthLogDTO>> fetchDefault(SysAuthLogSearchContext context) {
@@ -138,6 +148,7 @@ public class SysAuthLogResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"认证日志" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysauthlogs/searchdefault")
 	public ResponseEntity<Page<SysAuthLogDTO>> searchDefault(@RequestBody SysAuthLogSearchContext context) {

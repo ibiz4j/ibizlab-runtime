@@ -7,7 +7,7 @@
     <span class='caption-info'>{{$t(model.srfCaption)}}</span>
     <div class='toolbar-container'>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' @click="toolbar_click({ tag: 'tbitem3' }, $event)">
+                <i-button v-show="toolBarModels.tbitem3.visabled" :disabled="toolBarModels.tbitem3.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem3' }, $event)">
                     <i class='fa fa-save'></i>
                     <span class='caption'>{{$t('entities.sysdepartment.editviewtoolbar_toolbar.tbitem3.caption')}}</span>
                 </i-button>
@@ -15,7 +15,7 @@
         </tooltip>
         <span class='seperator'>|</span>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem7.visabled" :disabled="toolBarModels.tbitem7.disabled" class='' @click="toolbar_click({ tag: 'tbitem7' }, $event)">
+                <i-button v-show="toolBarModels.tbitem7.visabled" :disabled="toolBarModels.tbitem7.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem7' }, $event)">
                     <i class='fa fa-remove'></i>
                     <span class='caption'>{{$t('entities.sysdepartment.editviewtoolbar_toolbar.tbitem7.caption')}}</span>
                 </i-button>
@@ -23,7 +23,7 @@
         </tooltip>
         <span class='seperator'>|</span>
         <tooltip :transfer="true" :max-width="600">
-                <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' @click="toolbar_click({ tag: 'tbitem14' }, $event)">
+                <i-button v-show="toolBarModels.tbitem14.visabled" :disabled="toolBarModels.tbitem14.disabled" class='' v-loading:i-button @click="toolbar_click({ tag: 'tbitem14' }, $event)">
                     <i class='fa fa-copy'></i>
                     <span class='caption'>{{$t('entities.sysdepartment.editviewtoolbar_toolbar.tbitem14.caption')}}</span>
                 </i-button>

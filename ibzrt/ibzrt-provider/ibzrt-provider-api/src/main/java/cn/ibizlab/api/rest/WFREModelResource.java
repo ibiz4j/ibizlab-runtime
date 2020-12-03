@@ -47,6 +47,7 @@ public class WFREModelResource {
     @Lazy
     public WFREModelMapping wfremodelMapping;
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Create-all')")
     @ApiOperation(value = "新建流程模型", tags = {"流程模型" },  notes = "新建流程模型")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels")
     public ResponseEntity<WFREModelDTO> create(@Validated @RequestBody WFREModelDTO wfremodeldto) {
@@ -56,6 +57,7 @@ public class WFREModelResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Create-all')")
     @ApiOperation(value = "批量新建流程模型", tags = {"流程模型" },  notes = "批量新建流程模型")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<WFREModelDTO> wfremodeldtos) {
@@ -63,6 +65,7 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Update-all')")
     @ApiOperation(value = "更新流程模型", tags = {"流程模型" },  notes = "更新流程模型")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/{wfremodel_id}")
     public ResponseEntity<WFREModelDTO> update(@PathVariable("wfremodel_id") String wfremodel_id, @RequestBody WFREModelDTO wfremodeldto) {
@@ -73,6 +76,7 @@ public class WFREModelResource {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Update-all')")
     @ApiOperation(value = "批量更新流程模型", tags = {"流程模型" },  notes = "批量更新流程模型")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<WFREModelDTO> wfremodeldtos) {
@@ -80,12 +84,14 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Remove-all')")
     @ApiOperation(value = "删除流程模型", tags = {"流程模型" },  notes = "删除流程模型")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/{wfremodel_id}")
     public ResponseEntity<Boolean> remove(@PathVariable("wfremodel_id") String wfremodel_id) {
          return ResponseEntity.status(HttpStatus.OK).body(wfremodelService.remove(wfremodel_id));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Remove-all')")
     @ApiOperation(value = "批量删除流程模型", tags = {"流程模型" },  notes = "批量删除流程模型")
 	@RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/batch")
     public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
@@ -93,6 +99,7 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Get-all')")
     @ApiOperation(value = "获取流程模型", tags = {"流程模型" },  notes = "获取流程模型")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{wfremodel_id}")
     public ResponseEntity<WFREModelDTO> get(@PathVariable("wfremodel_id") String wfremodel_id) {
@@ -113,12 +120,14 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(wfremodelService.checkKey(wfremodelMapping.toDomain(wfremodeldto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Save-all')")
     @ApiOperation(value = "保存流程模型", tags = {"流程模型" },  notes = "保存流程模型")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
     public ResponseEntity<Boolean> save(@RequestBody WFREModelDTO wfremodeldto) {
         return ResponseEntity.status(HttpStatus.OK).body(wfremodelService.save(wfremodelMapping.toDomain(wfremodeldto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-Save-all')")
     @ApiOperation(value = "批量保存流程模型", tags = {"流程模型" },  notes = "批量保存流程模型")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFREModelDTO> wfremodeldtos) {
@@ -126,6 +135,7 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"流程模型" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfremodels/fetchdefault")
 	public ResponseEntity<List<WFREModelDTO>> fetchDefault(WFREModelSearchContext context) {
@@ -138,6 +148,7 @@ public class WFREModelResource {
                 .body(list);
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFREModel-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"流程模型" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfremodels/searchdefault")
 	public ResponseEntity<Page<WFREModelDTO>> searchDefault(@RequestBody WFREModelSearchContext context) {
