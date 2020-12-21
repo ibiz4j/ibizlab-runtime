@@ -58,7 +58,7 @@ spring:
           isSyncDBSchema: ${spring.datasource.isSyncDBSchema}
           defaultSchema: ${spring.datasource.defaultSchema}
         db2:
-          username: a_LAB01_846b4aa81
+          username: ${spring.datasource.username}
           password: ${spring.datasource.password}
           url: ${spring.datasource.url}
           driver-class-name: ${spring.datasource.driver-class-name}
