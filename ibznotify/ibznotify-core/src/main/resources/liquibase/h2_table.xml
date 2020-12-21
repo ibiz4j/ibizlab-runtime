@@ -4,7 +4,7 @@
 
 
     <!--输出实体[MSG_BODY]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-msg_body-3-1">
+    <changeSet author="a_A_5d9d78509" id="tab-msg_body-5-1">
         <createTable tableName="IBZMSGBODY">
                 <column name="ISERROR" remarks="" type="INT">
                 </column>
@@ -42,7 +42,7 @@
 
 
     <!--输出实体[MSG_OPEN_ACCESS]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-msg_open_access-6-2">
+    <changeSet author="a_A_5d9d78509" id="tab-msg_open_access-8-2">
         <createTable tableName="IBZOPENACCESS">
                 <column name="ACCESSID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_MSG_OPEN_ACCESS_ACCESSID"/>
@@ -74,7 +74,7 @@
 
 
     <!--输出实体[MSG_TEMPLATE]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-msg_template-1-3">
+    <changeSet author="a_A_5d9d78509" id="tab-msg_template-3-3">
         <createTable tableName="IBZMSGTEMPL">
                 <column name="TID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_MSG_TEMPLATE_TID"/>
@@ -100,7 +100,7 @@
 
 
     <!--输出实体[MSG_USER_ACCOUNT]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-msg_user_account-1-4">
+    <changeSet author="a_A_5d9d78509" id="tab-msg_user_account-3-4">
         <createTable tableName="IBZUSERAUTH">
                 <column name="AUTHID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_MSG_USER_ACCOUNT_AUTHID"/>

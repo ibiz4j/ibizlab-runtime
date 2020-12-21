@@ -1,37 +1,9 @@
+import WFREModel_en_US_Base from './wfremodel_en_US_base';
 
-export default {
-  fields: {
-    id: "ID",
-    name: "名称",
-    bpmnfile: "BPMN",
-  },
-	views: {
-		editview: {
-			caption: "发布新流程",
-      		title: "发布新流程",
-		},
-	},
-	main_form: {
-		details: {
-			group1: "流程模型", 
-			formpage1: "基本信息", 
-			srforikey: "", 
-			srfkey: "ID", 
-			srfmajortext: "名称", 
-			srftempmode: "", 
-			srfuf: "", 
-			srfdeid: "", 
-			srfsourcekey: "", 
-			bpmnfile: "BPMN", 
-			modelid: "ID", 
-		},
-		uiactions: {
-		},
-	},
-	editviewtoolbar_toolbar: {
-		tbitem1: {
-			caption: "Save",
-			tip: "Save",
-		},
-	},
-};
+function getLocaleResource(){
+    const WFREModel_en_US_OwnData = {};
+    const targetData = Object.assign(WFREModel_en_US_Base(), WFREModel_en_US_OwnData);
+    return targetData;
+}
+
+export default getLocaleResource;

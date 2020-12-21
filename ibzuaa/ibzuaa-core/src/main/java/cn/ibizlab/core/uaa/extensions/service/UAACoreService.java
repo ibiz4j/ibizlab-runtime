@@ -12,11 +12,16 @@ import cn.ibizlab.core.uaa.service.ISysRoleService;
 import cn.ibizlab.core.uaa.service.ISysUserRoleService;
 import cn.ibizlab.util.domain.Token;
 import cn.ibizlab.util.errors.BadRequestAlertException;
+import cn.ibizlab.util.security.AuthTokenUtil;
+import cn.ibizlab.util.security.AuthenticationUser;
+import cn.ibizlab.util.service.AuthenticationUserService;
 import com.alibaba.fastjson.JSONObject;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -60,8 +65,17 @@ public class UAACoreService {
     private ISysRoleService sysRoleService;
 
     @Autowired
+    private AuthTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private AuthenticationUserService userDetailsService;
+
+    @Autowired
     @Lazy
     private UserDingtalkRegisterService userDingtalkRegisterService;
+
+    @Value("${ibiz.jwt.expiration:7200000}")
+    private Long expiration;
 
     @Autowired
     @Lazy
@@ -326,6 +340,40 @@ public class UAACoreService {
         sign.put("corpId",openAccess.getRegionId());
         sign.put("signature",strSign);
         return sign;
+    }
+
+    public String refreshToken(String oldToken){
+        String username = null;
+        String newToken = null;
+        try {
+            username = jwtTokenUtil.getUsernameFromToken(oldToken);
+        } catch (ExpiredJwtException e) {
+            log.error(e.getMessage());
+        }
+        if (!StringUtils.isEmpty(username)) {
+            AuthenticationUser user = userDetailsService.loadUserByUsername(username);
+            if (jwtTokenUtil.validateToken(oldToken, user)) {
+                // 将新token存入缓存，在固定周期内调用接口将返回同一token
+                Token tok = getToken(oldToken);
+                if (ObjectUtils.isEmpty(tok)) {
+                    newToken = jwtTokenUtil.generateToken(user);
+                    setToken(oldToken, newToken);
+                } else {
+                    // 判断缓存中的token是否到期，到期将返回新token
+                    if (isExpired(tok, expiration)) {
+                        newToken = jwtTokenUtil.generateToken(user);
+                        setToken(oldToken, newToken);
+                    }else{
+                        newToken = tok.getNewToken();
+                    }
+                }
+            }
+        }
+        if (StringUtils.isEmpty(newToken)) {
+            throw new BadRequestAlertException("获取token失败", "", "refreshToken");
+        } else {
+            return newToken;
+        }
     }
 
     @CachePut(value = "ibzuaa_refreshtoken", key = "'token:'+#p0")

@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface MsgBodyMapper extends BaseMapper<MsgBody> {
 
     Page<MsgBody> searchDefault(IPage page, @Param("srf") MsgBodySearchContext context, @Param("ew") Wrapper<MsgBody> wrapper);

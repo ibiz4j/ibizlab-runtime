@@ -4,7 +4,7 @@
 
 
     <!--输出实体[PAY_OPEN_ACCESS]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-pay_open_access-8-1">
+    <changeSet author="a_A_5d9d78509" id="tab-pay_open_access-10-1">
         <createTable tableName="IBZOPENACCESS">
                 <column name="ACCESSID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_PAY_OPEN_ACCESS_ACCESSID"/>
@@ -36,7 +36,7 @@
 
 
     <!--输出实体[PAY_TRADE]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-pay_trade-8-2">
+    <changeSet author="a_A_5d9d78509" id="tab-pay_trade-10-2">
         <createTable tableName="IBZPAYTRADE">
                 <column name="SUBJECT" remarks="" type="VARCHAR(100)">
                 </column>

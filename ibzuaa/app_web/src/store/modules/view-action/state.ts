@@ -134,6 +134,15 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '33f07a06a447590e710527a19d5f02c7',
+            viewmodule: 'uaa',
+            viewname: 'SysRolePickupGridView_norepeat',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
             viewtag: '349cda61e4dc5e38045ef7c77321d1c7',
             viewmodule: 'uaa',
             viewname: 'SysOpenAccessEditView',
@@ -255,7 +264,7 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '6736591aca71edc23df760e278378566',
-                '26cc2d5c69f1525eaa415b7de1a0d4a6',
+                'ba8e31e716b14bba81cdf1281fc76197',
                 '983f3ae1533a5cd62619dedb79bb4b28',
             ],
         },
@@ -314,7 +323,7 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '6736591aca71edc23df760e278378566',
-                '26cc2d5c69f1525eaa415b7de1a0d4a6',
+                'ba8e31e716b14bba81cdf1281fc76197',
                 '983f3ae1533a5cd62619dedb79bb4b28',
             ],
         },
@@ -365,6 +374,16 @@ export const viewstate: any = {
             refviews: [
                 '26cc2d5c69f1525eaa415b7de1a0d4a6',
                 '53385c6effc6ba778dbccf82286fbe4f',
+            ],
+        },
+        {
+            viewtag: 'ba8e31e716b14bba81cdf1281fc76197',
+            viewmodule: 'uaa',
+            viewname: 'SysRolePickupView_norepeat',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '33f07a06a447590e710527a19d5f02c7',
             ],
         },
         {

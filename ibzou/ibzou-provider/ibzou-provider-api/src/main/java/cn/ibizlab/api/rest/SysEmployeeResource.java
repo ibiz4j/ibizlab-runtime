@@ -131,6 +131,12 @@ public class SysEmployeeResource {
         sysemployeedto = sysemployeeMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysEmployee-InitPwd-all')")
+    @ApiOperation(value = "批量处理[初始化密码]", tags = {"人员" },  notes = "批量处理[初始化密码]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/initpwdbatch")
+    public ResponseEntity<Boolean> initPwdBatch(@RequestBody List<SysEmployeeDTO> sysemployeedtos) {
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.initPwdBatch(sysemployeeMapping.toDomain(sysemployeedtos)));
+    }
 
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzou-SysEmployee-Save')")
     @ApiOperation(value = "保存人员", tags = {"人员" },  notes = "保存人员")
@@ -266,7 +272,11 @@ public class SysEmployeeResource {
         sysemployeedto = sysemployeeMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
-
+    @ApiOperation(value = "批量处理[根据部门人员]", tags = {"人员" },  notes = "批量处理[根据部门人员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/initpwdbatch")
+    public ResponseEntity<Boolean> initPwdBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.initPwdBatch(sysemployeeMapping.toDomain(sysemployeedtos)));
+    }
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzou-SysEmployee-Save')")
     @ApiOperation(value = "根据部门保存人员", tags = {"人员" },  notes = "根据部门保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/save")
@@ -407,7 +417,11 @@ public class SysEmployeeResource {
         sysemployeedto = sysemployeeMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
-
+    @ApiOperation(value = "批量处理[根据单位机构人员]", tags = {"人员" },  notes = "批量处理[根据单位机构人员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/initpwdbatch")
+    public ResponseEntity<Boolean> initPwdBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.initPwdBatch(sysemployeeMapping.toDomain(sysemployeedtos)));
+    }
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzou-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构保存人员", tags = {"人员" },  notes = "根据单位机构保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/save")
@@ -548,7 +562,11 @@ public class SysEmployeeResource {
         sysemployeedto = sysemployeeMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
-
+    @ApiOperation(value = "批量处理[根据单位机构部门人员]", tags = {"人员" },  notes = "批量处理[根据单位机构部门人员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/initpwdbatch")
+    public ResponseEntity<Boolean> initPwdBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.initPwdBatch(sysemployeeMapping.toDomain(sysemployeedtos)));
+    }
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzou-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构部门保存人员", tags = {"人员" },  notes = "根据单位机构部门保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/save")

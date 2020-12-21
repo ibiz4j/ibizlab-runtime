@@ -1394,7 +1394,7 @@ export default class WFGroupGridViewBase extends Vue {
             if (args.length > 0) {
                 Object.assign(data, { wfgroup: args[0].wfgroup })
             }
-            _this.opendata([{ ...data }], params, $event, xData);
+            _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             _this.$Notice.error({ title: '错误', desc: 'opendata 视图处理逻辑不存在，请添加!' });
         }
@@ -1420,7 +1420,7 @@ export default class WFGroupGridViewBase extends Vue {
             if (args.length > 0) {
                 Object.assign(data, { wfgroup: args[0].wfgroup })
             }
-            _this.opendata([{ ...data }], params, $event, xData);
+            _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             _this.$Notice.error({ title: '错误', desc: 'opendata 视图处理逻辑不存在，请添加!' });
         }
@@ -1448,7 +1448,7 @@ export default class WFGroupGridViewBase extends Vue {
             }
             if(!params) params = {};
             Object.assign(params,{copymode:true});
-            _this.opendata([{ ...data }], params, $event, xData);
+            _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});
         }
@@ -1617,8 +1617,8 @@ export default class WFGroupGridViewBase extends Vue {
     public closeView(args: any[]): void {
         let _view: any = this;
         if (_view.viewdata) {
-            _view.$emit('viewdataschange', [args]);
-            _view.$emit('close', [args]);
+            _view.$emit('viewdataschange', Array.isArray(args)?args:[args]);
+            _view.$emit('close', Array.isArray(args)?args:[args]);
         } else if (_view.$tabPageExp) {
             _view.$tabPageExp.onClose(_view.$route.fullPath);
         }

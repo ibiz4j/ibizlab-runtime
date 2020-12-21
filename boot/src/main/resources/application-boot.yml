@@ -25,27 +25,46 @@ spring:
     password: root
     url: jdbc:mysql://127.0.0.1:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false&nullCatalogMeansCurrent=true&useOldAliasMetadataBehavior=true
     driver-class-name: com.mysql.jdbc.Driver
-    filters: stat,wall,log4j2
-    #配置初始化大小/最小/最大
-    initial-size: 1
-    min-idle: 1
-    max-active: 20
-    #获取连接等待超时时间
-    max-wait: 60000
-    #间隔多久进行一次检测，检测需要关闭的空闲连接
-    time-between-eviction-runs-millis: 60000
-    #一个连接在池中最小生存的时间
-    min-evictable-idle-time-millis: 300000
-    validation-query: SELECT 1 FROM DUAL
-    test-while-idle: true
-    test-on-borrow: false
-    test-on-return: false
-    #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
-    pool-prepared-statements: false
-    max-pool-prepared-statement-per-connection-size: 20
     isSyncDBSchema: true
     defaultSchema: a_A_5d9d78509
     conf: classpath:liquibase/master.xml
+    dynamic:
+      druid: #以下是全局默认值，可以全局更改
+        filters: stat,wall,log4j2
+        #配置初始化大小/最小/最大
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        #获取连接等待超时时间
+        max-wait: 60000
+        #间隔多久进行一次检测，检测需要关闭的空闲连接
+        time-between-eviction-runs-millis: 60000
+        #一个连接在池中最小生存的时间
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1 FROM DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 20
+      datasource:
+        master:
+          username: ${spring.datasource.username}
+          password: ${spring.datasource.password}
+          url: ${spring.datasource.url}
+          driver-class-name: ${spring.datasource.driver-class-name}
+          conf: classpath:liquibase/master.xml
+          isSyncDBSchema: ${spring.datasource.isSyncDBSchema}
+          defaultSchema: ${spring.datasource.defaultSchema}
+        db2:
+          username: a_LAB01_846b4aa81
+          password: ${spring.datasource.password}
+          url: ${spring.datasource.url}
+          driver-class-name: ${spring.datasource.driver-class-name}
+          conf: classpath:liquibase/master.xml
+          isSyncDBSchema: ${spring.datasource.isSyncDBSchema}
+          defaultSchema: ${spring.datasource.defaultSchema}
 
 #Mybatis-plus配置
 mybatis-plus:

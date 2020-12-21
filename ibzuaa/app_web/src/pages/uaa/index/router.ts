@@ -308,6 +308,34 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-user-rolegrid-view/sys-user-rolegrid-view.vue'),
                 },
                 {
+                    path: 'sysroles/:sysrole?/pickupgridview_norepeat/:pickupgridview_norepeat?',
+                    meta: {
+                        caption: 'entities.sysrole.views.pickupgridview_norepeat.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'pickupgridview_norepeat', parameterName: 'pickupgridview_norepeat' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-role-pickup-grid-view-norepeat/sys-role-pickup-grid-view-norepeat.vue'),
+                },
+                {
+                    path: 'sysroles/:sysrole?/pickupview_norepeat/:pickupview_norepeat?',
+                    meta: {
+                        caption: 'entities.sysrole.views.pickupview_norepeat.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'pickupview_norepeat', parameterName: 'pickupview_norepeat' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-role-pickup-view-norepeat/sys-role-pickup-view-norepeat.vue'),
+                },
+                {
                     path: 'sysroles/:sysrole?/pickupview/:pickupview?',
                     meta: {
                         caption: 'entities.sysrole.views.pickupview.caption',
@@ -560,6 +588,19 @@ const router = new Router({
         component: () => import('@pages/uaa/sys-userpickup-view/sys-userpickup-view.vue'),
     },
     {
+        path: '/sysroles/:sysrole?/pickupgridview_norepeat/:pickupgridview_norepeat?',
+        meta: {
+            caption: 'entities.sysrole.views.pickupgridview_norepeat.caption',
+            info:'',
+            parameters: [
+                { pathName: 'sysroles', parameterName: 'sysrole' },
+                { pathName: 'pickupgridview_norepeat', parameterName: 'pickupgridview_norepeat' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-role-pickup-grid-view-norepeat/sys-role-pickup-grid-view-norepeat.vue'),
+    },
+    {
         path: '/sysopenaccesses/:sysopenaccess?/editview/:editview?',
         meta: {
             caption: 'entities.sysopenaccess.views.editview.caption',
@@ -731,6 +772,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/uaa/sys-rolempickup-view/sys-rolempickup-view.vue'),
+    },
+    {
+        path: '/sysroles/:sysrole?/pickupview_norepeat/:pickupview_norepeat?',
+        meta: {
+            caption: 'entities.sysrole.views.pickupview_norepeat.caption',
+            info:'',
+            parameters: [
+                { pathName: 'sysroles', parameterName: 'sysrole' },
+                { pathName: 'pickupview_norepeat', parameterName: 'pickupview_norepeat' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/uaa/sys-role-pickup-view-norepeat/sys-role-pickup-view-norepeat.vue'),
     },
     {
         path: '/sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',

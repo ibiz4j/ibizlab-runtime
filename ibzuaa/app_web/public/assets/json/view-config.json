@@ -103,6 +103,14 @@
         "viewname": "SYS_USERPickupView",
         "viewtag": "32fe9ab4a9e1b8d62b9ee802e4746965"
     },
+    "sysrolepickupgridview_norepeat": {
+        "title": "角色选择表格视图",
+        "caption": "系统角色",
+        "viewtype": "DEPICKUPGRIDVIEW",
+        "viewmodule": "uaa",
+        "viewname": "SysRolePickupGridView_norepeat",
+        "viewtag": "33f07a06a447590e710527a19d5f02c7"
+    },
     "sysopenaccesseditview": {
         "title": "第三方认证平台",
         "caption": "第三方认证平台",
@@ -286,6 +294,14 @@
         "viewmodule": "uaa",
         "viewname": "SYS_ROLE_PERMISSIONEditView",
         "viewtag": "a93a129850b81c3c921aa1911ec9eb8c"
+    },
+    "sysrolepickupview_norepeat": {
+        "title": "角色数据选择视图",
+        "caption": "系统角色",
+        "viewtype": "DEPICKUPVIEW",
+        "viewmodule": "uaa",
+        "viewname": "SysRolePickupView_norepeat",
+        "viewtag": "ba8e31e716b14bba81cdf1281fc76197"
     },
     "sys_permissionredirectview": {
         "title": "权限表数据重定向视图",

@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface SDFileMapper extends BaseMapper<SDFile> {
 
     Page<SDFile> searchDefault(IPage page, @Param("srf") SDFileSearchContext context, @Param("ew") Wrapper<SDFile> wrapper);

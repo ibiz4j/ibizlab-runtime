@@ -13,6 +13,14 @@
     <name>Ibznotify Core</name>
     <description>Ibznotify Core</description>
 
+    <properties>
+        <alibaba-dingtalk.version>1.0.1</alibaba-dingtalk.version>
+        <aliyun-sdk-core.version>4.5.4</aliyun-sdk-core.version>
+        <aliyun-sdk-ecs.version>4.19.6</aliyun-sdk-ecs.version>
+        <aliyun-sdk-dm.version>3.3.1</aliyun-sdk-dm.version>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+    </properties>
+
     <dependencies>
 		<dependency>
 			<groupId>cn.ibizlab</groupId>
@@ -101,28 +109,29 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>alibaba-dingtalk-service-sdk</artifactId>
+            <version>${alibaba-dingtalk.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>${aliyun-sdk-core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-ecs</artifactId>
+            <version>${aliyun-sdk-ecs.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-dm</artifactId>
+            <version>${aliyun-sdk-dm.version}</version>
         </dependency>
 
 
 	</dependencies>
 
-    <properties>
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
-    </properties>
     <profiles>
         <profile>
             <id>diff</id>

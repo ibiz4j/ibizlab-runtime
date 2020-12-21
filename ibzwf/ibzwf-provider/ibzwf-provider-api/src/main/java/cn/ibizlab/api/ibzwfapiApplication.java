@@ -33,6 +33,7 @@ import java.util.List;
 @SpringBootApplication(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
             org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration.class,
+            com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure.class
 })
 @Import({
         org.springframework.cloud.openfeign.FeignClientsConfiguration.class

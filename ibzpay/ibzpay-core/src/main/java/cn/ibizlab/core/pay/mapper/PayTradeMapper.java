@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface PayTradeMapper extends BaseMapper<PayTrade> {
 
     Page<PayTrade> searchDefault(IPage page, @Param("srf") PayTradeSearchContext context, @Param("ew") Wrapper<PayTrade> wrapper);

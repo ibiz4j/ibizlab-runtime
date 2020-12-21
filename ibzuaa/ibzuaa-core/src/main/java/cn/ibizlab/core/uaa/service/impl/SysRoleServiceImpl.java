@@ -137,6 +137,22 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
     @Override
     @Transactional
+    public SysRole noRepeat(SysRole et) {
+        //自定义代码
+        return et;
+    }
+
+    @Override
+    @Transactional
+    public boolean noRepeatBatch(List<SysRole> etList) {
+        for(SysRole et : etList) {
+            noRepeat(et);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
     public boolean save(SysRole et) {
         if(!saveOrUpdate(et)) {
             return false;
@@ -186,6 +202,15 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public Page<SysRole> searchDefault(SysRoleSearchContext context) {
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRole> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+        return new PageImpl<SysRole>(pages.getRecords(), context.getPageable(), pages.getTotal());
+    }
+
+    /**
+     * 查询集合 数据查询
+     */
+    @Override
+    public Page<SysRole> searchNoRepeat(SysRoleSearchContext context) {
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRole> pages=baseMapper.searchNoRepeat(context.getPages(),context,context.getSelectCond());
         return new PageImpl<SysRole>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 

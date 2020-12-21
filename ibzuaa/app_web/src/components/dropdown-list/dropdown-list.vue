@@ -170,10 +170,20 @@ export default class DropDownList extends Vue {
 
     /**
      * 属性类型
-     * @type {string}
+     *
+     * @type {'string' | 'number'}
      * @memberof DropDownList
      */
-    @Prop() public valueType?: string;
+    @Prop({ default: 'string' })
+    public valueType!: 'string' | 'number';
+
+     /**
+     * 选择实际值
+     *
+     * @type {*}
+     * @memberof DropDownList
+     */
+    public value: any = null;
 
     /**
      * 计算属性(当前值)
@@ -186,7 +196,7 @@ export default class DropDownList extends Vue {
             val = tempVal.length >0?tempVal[0].value:null;
         }
         const type: string = this.$util.typeOf(val);
-        val = Object.is(type, 'null') || Object.is(type, 'undefined') ? undefined : val;
+        val = Object.is(type, 'null') || Object.is(type, 'undefined') ? null : val;
         this.$emit('change', val);
     }
 
@@ -204,7 +214,7 @@ export default class DropDownList extends Vue {
             })
             return JSON.stringify([result]);
         }
-        return this.itemValue;
+        return this.value;
     }
 
     /**
@@ -263,10 +273,12 @@ export default class DropDownList extends Vue {
             this.formStateEvent = this.formState.subscribe(({ type, data }) => {
                 if (Object.is('load', type)) {
                     this.loadData();
+                    this.readyValue();
                 }
             });
         }
         this.loadData();
+        this.readyValue();
     }
 
     /**
@@ -297,6 +309,29 @@ export default class DropDownList extends Vue {
               console.log(`----${this.tag}----代码表不存在`);
           });
       }
+    }
+
+    /**
+     * 准备值
+     *
+     * @memberof DropDownList
+     */
+    public readyValue() {
+        if (this.itemValue == null) {
+            this.value = null;
+            return;
+        }
+        if (this.$util.typeOf(this.itemValue) === this.valueType) {
+            this.value = this.itemValue;
+        } else if (this.valueType === 'number') {
+            if (this.itemValue.indexOf('.') === -1) {
+                this.value = parseInt(this.itemValue);
+            } else {
+                this.value = parseFloat(this.itemValue);
+            }
+        } else {
+            this.value = this.itemValue.toString();
+        }
     }
     
     /**
@@ -331,32 +366,29 @@ export default class DropDownList extends Vue {
      * @memberof DropDownList
      */
     public formatCodeList(items: Array<any>){
-        let matching: boolean = true;
+        let matching: boolean = false;
         this.items = [];
         try{
-            if(this.valueType){
-                items.forEach((item: any)=>{
-                    const type = this.$util.typeOf(item.value);
-                    if(type != this.valueType){
-                        matching = false;
-                        if(type == 'number'){
-                            item.value = item.value.toString();
+            items.forEach((item: any)=>{
+                const type = this.$util.typeOf(item.value);
+                if(type != this.valueType){
+                    matching = true;
+                    if(type === 'number'){
+                        item.value = item.value.toString();
+                    }else{
+                        if(item.value.indexOf('.') == -1){
+                            item.value = parseInt(item.value);
                         }else{
-                            if(item.value.indexOf('.') == -1){
-                                item.value = parseInt(item.value);
-                            }else{
-                                item.value = parseFloat(item.value);
-                            }
+                            item.value = parseFloat(item.value);
                         }
                     }
-                    this.items.push(item);
-                });
-                if(!matching){
-                    console.warn(`代码表 ${ this.tag } 值类型和属性类型不匹配，已自动强制转换，请修正代码表值类型和属性类型匹配`);
                 }
-            }else{
-                this.items = items;
+                this.items.push(item);
+            });
+            if(matching){
+                console.warn(`代码表 ${ this.tag } 值类型和属性类型不匹配，已自动强制转换，请修正代码表值类型和属性类型匹配`);
             }
+            
         }catch(error){
             console.warn('代码表值类型和属性类型不匹配，自动强制转换异常，请修正代码表值类型和属性类型匹配');
         }

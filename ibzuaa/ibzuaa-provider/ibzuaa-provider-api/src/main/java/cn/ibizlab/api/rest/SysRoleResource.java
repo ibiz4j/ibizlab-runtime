@@ -121,6 +121,23 @@ public class SysRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysroleService.checkKey(sysroleMapping.toDomain(sysroledto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-NoRepeat-all')")
+    @ApiOperation(value = "角色去重查询", tags = {"系统角色" },  notes = "角色去重查询")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/norepeat")
+    public ResponseEntity<SysRoleDTO> noRepeat(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRoleDTO sysroledto) {
+        SysRole domain = sysroleMapping.toDomain(sysroledto);
+        domain.setRoleid(sysrole_id);
+        domain = sysroleService.noRepeat(domain);
+        sysroledto = sysroleMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysroledto);
+    }
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-NoRepeat-all')")
+    @ApiOperation(value = "批量处理[角色去重查询]", tags = {"系统角色" },  notes = "批量处理[角色去重查询]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/norepeatbatch")
+    public ResponseEntity<Boolean> noRepeatBatch(@RequestBody List<SysRoleDTO> sysroledtos) {
+        return ResponseEntity.status(HttpStatus.OK).body(sysroleService.noRepeatBatch(sysroleMapping.toDomain(sysroledtos)));
+    }
+
     @PreAuthorize("hasPermission(this.sysroleMapping.toDomain(#sysroledto),'ibzuaa-SysRole-Save')")
     @ApiOperation(value = "保存系统角色", tags = {"系统角色" },  notes = "保存系统角色")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
@@ -154,6 +171,28 @@ public class SysRoleResource {
     @RequestMapping(method= RequestMethod.POST , value="/sysroles/searchdefault")
 	public ResponseEntity<Page<SysRoleDTO>> searchDefault(@RequestBody SysRoleSearchContext context) {
         Page<SysRole> domains = sysroleService.searchDefault(context) ;
+	    return ResponseEntity.status(HttpStatus.OK)
+                .body(new PageImpl(sysroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
+	}
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-searchNoRepeat-all') and hasPermission(#context,'ibzuaa-SysRole-Get')")
+	@ApiOperation(value = "获取数据查询", tags = {"系统角色" } ,notes = "获取数据查询")
+    @RequestMapping(method= RequestMethod.GET , value="/sysroles/fetchnorepeat")
+	public ResponseEntity<List<SysRoleDTO>> fetchNoRepeat(SysRoleSearchContext context) {
+        Page<SysRole> domains = sysroleService.searchNoRepeat(context) ;
+        List<SysRoleDTO> list = sysroleMapping.toDto(domains.getContent());
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+                .header("x-total", String.valueOf(domains.getTotalElements()))
+                .body(list);
+	}
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-searchNoRepeat-all') and hasPermission(#context,'ibzuaa-SysRole-Get')")
+	@ApiOperation(value = "查询数据查询", tags = {"系统角色" } ,notes = "查询数据查询")
+    @RequestMapping(method= RequestMethod.POST , value="/sysroles/searchnorepeat")
+	public ResponseEntity<Page<SysRoleDTO>> searchNoRepeat(@RequestBody SysRoleSearchContext context) {
+        Page<SysRole> domains = sysroleService.searchNoRepeat(context) ;
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}

@@ -147,6 +147,15 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
 
     @Override
     @Transactional
+    public boolean initPwdBatch(List<SysEmployee> etList) {
+        for(SysEmployee et : etList) {
+            initPwd(et);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
     public boolean save(SysEmployee et) {
         if(!saveOrUpdate(et)) {
             return false;

@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @EnableTransactionManagement
 @EnableFeignClients(basePackages = {"cn.ibizlab" })
 @SpringBootApplication(exclude = {
+            com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure.class
 })
 @ComponentScan(basePackages = {"cn.ibizlab"}
 //        ,excludeFilters = {

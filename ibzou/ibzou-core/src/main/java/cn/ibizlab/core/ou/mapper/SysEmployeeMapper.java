@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface SysEmployeeMapper extends BaseMapper<SysEmployee> {
 
     Page<SysEmployee> searchDefault(IPage page, @Param("srf") SysEmployeeSearchContext context, @Param("ew") Wrapper<SysEmployee> wrapper);

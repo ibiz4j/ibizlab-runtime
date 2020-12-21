@@ -1,8 +1,9 @@
-export default {
-  fields: {
-    id: "主键ID",
-    name: "名称",
-    owner: "持有者",
-    create_time: "创建时间",
-  },
-};
+import JobsLock_zh_CN_Base from './jobs-lock_zh_CN_base';
+
+function getLocaleResource(){
+    const JobsLock_zh_CN_OwnData = {};
+    const targetData = Object.assign(JobsLock_zh_CN_Base(), JobsLock_zh_CN_OwnData);
+    return targetData;
+}
+
+export default getLocaleResource;

@@ -114,6 +114,15 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
 
     @Override
     @Transactional
+    public boolean initPwdBatch(List<SysEmployee> etList) {
+        for(SysEmployee et : etList) {
+            initPwd(et);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
     public boolean save(SysEmployee et) {
         if(et.getUserid()==null) et.setUserid((String)et.getDefaultKey(true));
         if(!sysEmployeeFeignClient.save(et))

@@ -452,7 +452,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */  
-    public ActionModel:any ={
+    public actionModel:any ={
     };
 
     /**
@@ -948,7 +948,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public getActionState(data:any){
-        let tempActionModel:any = JSON.parse(JSON.stringify(this.ActionModel));
+        let tempActionModel:any = JSON.parse(JSON.stringify(this.actionModel));
         let targetData:any = this.transformData(data);
         ViewTool.calcActionItemAuthState(targetData,tempActionModel,this.appUIService);
         return tempActionModel;
@@ -981,8 +981,10 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public deRules:any = {
-    };
+    public deRules(){
+        return {
+        };
+    }
 
     /**
      * 值规则集合
@@ -990,47 +992,49 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public rules: any = {
-        icon: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '图标 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '图标 值不能为空', trigger: 'blur' },
-        ],
-        visabled: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '可见 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '可见 值不能为空', trigger: 'blur' },
-        ],
-        appname: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用名 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用名 值不能为空', trigger: 'blur' },
-        ],
-        appid: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用标识 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用标识 值不能为空', trigger: 'blur' },
-        ],
-        pssystemid: [
-             { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '系统标识 值不能为空', trigger: 'change' },
-            { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '系统标识 值不能为空', trigger: 'blur' },
-        ],
-        addr: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '地址 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '地址 值不能为空', trigger: 'blur' },
-        ],
-        apptype: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '类型 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '类型 值不能为空', trigger: 'blur' },
-        ],
-        srfkey: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用标识 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '应用标识 值不能为空', trigger: 'blur' },
-        ],
-        fullname: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '全称 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '全称 值不能为空', trigger: 'blur' },
-        ],
-        appgroup: [
-             { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '分组 值不能为空', trigger: 'change' },
-            { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: '分组 值不能为空', trigger: 'blur' },
-        ],
+    public rules(){
+        return {
+            icon: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.icon')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.icon')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            visabled: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.visabled')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.visabled')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            appname: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            appid: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            pssystemid: [
+                { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.pssystemid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.pssystemid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            addr: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.addr')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.addr')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            apptype: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.apptype')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.apptype')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            srfkey: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.srfkey')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.srfkey')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            fullname: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.fullname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.fullname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            appgroup: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appgroup')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appgroup')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+        }
     }
 
     /**
@@ -1045,7 +1049,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public validate(property:string, data:any, rowIndex:number):Promise<any>{
         return new Promise((resolve, reject) => {
-            this.$util.validateItem(property,data,this.rules).then(()=>{
+            this.$util.validateItem(property,data,this.rules()).then(()=>{
                 this.gridItemsModel[rowIndex][property].setError(null);
                 resolve(true);
             }).catch(({ errors, fields }) => {
@@ -1069,7 +1073,7 @@ export default class MainBase extends Vue implements ControlInterface {
             let tempMessage: string = '';
             index++;
             if (item.rowDataState === "create" || item.rowDataState === "update") {
-                for (let property of Object.keys(this.rules)) {
+                for (let property of Object.keys(this.rules())) {
                     if (!await this.validate(property, item, index)) {
                         validateState = false;
                         tempMessage = tempMessage + '<p>' + this.gridItemsModel[index][property].error + '<p>';
@@ -1105,6 +1109,11 @@ export default class MainBase extends Vue implements ControlInterface {
             const sort: string = this.minorSortPSDEF+","+this.minorSortDir;
             Object.assign(page, { sort: sort });
         }
+        //清空selections
+        if(this.selections && this.selections.length > 0) {
+            this.selections = [];
+            this.$emit('selectionchange', this.selections);
+        }
         Object.assign(arg, page);
         const parentdata: any = {};
         this.$emit('beforeload', parentdata);
@@ -1124,7 +1133,7 @@ export default class MainBase extends Vue implements ControlInterface {
             this.totalrow = response.total;
             this.items = JSON.parse(JSON.stringify(data));
             // 清空selections,gridItemsModel
-            //this.selections = [];
+            // this.selections = [];
             this.gridItemsModel = [];
             this.items.forEach(()=>{this.gridItemsModel.push(this.getGridRowModel())});
             this.items.forEach((item:any)=>{
@@ -1668,6 +1677,7 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         return codelist;
     }
+
     /**
      * 根据分组代码表绘制分组列表
      * 
@@ -1688,13 +1698,12 @@ export default class MainBase extends Vue implements ControlInterface {
             let children:Array<any> = [];
             this.items.forEach((item: any,j: number)=>{
                 if(allGroupField && allGroupField.length > 0){
-                    const arr:Array<any> = allGroupField.filter((field:any)=>{return field.value == item[this.groupAppField]});
-                    if(Object.is(group.label,arr[0].label)){
+                    if(Object.is(group.label,item[this.groupAppField])){
                         item.groupById = Number((i+1) * 100 + (j+1) * 1);
                         item.group = '';
                         children.push(item);
                     }
-                }else if(Object.is(group.label,item[this.groupAppField])){
+                }else if(Object.is(group.value,item[this.groupAppField])){
                     item.groupById = Number((i+1) * 100 + (j+1) * 1);
                     item.group = '';
                     children.push(item);
@@ -1720,10 +1729,9 @@ export default class MainBase extends Vue implements ControlInterface {
         this.items.forEach((item: any,index: number)=>{
             let i: number = 0;
             if(allGroupField && allGroupField.length > 0){
-                const arr:Array<any> = allGroupField.filter((field:any)=>{return field.value == item[this.groupAppField]});
-                i = allGroup.findIndex((group: any)=>Object.is(group.label,arr[0].label));
-            }else{
                 i = allGroup.findIndex((group: any)=>Object.is(group.label,item[this.groupAppField]));
+            }else{
+                i = allGroup.findIndex((group: any)=>Object.is(group.value,item[this.groupAppField]));
             }
             if(i < 0){
                 item.groupById = Number((allGroup.length+1) * 100 + (index+1) * 1);
@@ -1770,16 +1778,9 @@ export default class MainBase extends Vue implements ControlInterface {
         if(!this.isEnableGroup) return;
         // 分组
         let allGroup: Array<any> = [];
-        let allGroupField: Array<any> =[];
-        allGroupField = this.getGroupCodelist(this.groupAppFieldCodelistType,this.groupAppFieldCodelistTag);
         this.items.forEach((item: any)=>{
             if(item.hasOwnProperty(this.groupAppField)){
-                if(allGroupField && allGroupField.length > 0){
-                    const arr:Array<any> = allGroupField.filter((field:any)=>{return field.value == item[this.groupAppField]});
-                    allGroup.push(arr[0].label);
-                }else{
-                    allGroup.push(item[this.groupAppField]);
-                }
+                allGroup.push(item[this.groupAppField]);
             }
         });
         let groupTree:Array<any> = [];
@@ -1791,14 +1792,7 @@ export default class MainBase extends Vue implements ControlInterface {
         allGroup.forEach((group: any, groupIndex: number)=>{
             let children:Array<any> = [];
             this.items.forEach((item: any,itemIndex: number)=>{
-                if(allGroupField && allGroupField.length > 0){
-                    const arr:Array<any> = allGroupField.filter((field:any)=>{return field.value == item[this.groupAppField]});
-                    if(Object.is(group,arr[0].label)){
-                        item.groupById = Number((groupIndex+1) * 100 + (itemIndex+1) * 1);
-                        item.group = '';
-                        children.push(item);
-                    }
-                }else if(Object.is(group,item[this.groupAppField])){
+                if(Object.is(group,item[this.groupAppField])){
                     item.groupById = Number((groupIndex+1) * 100 + (itemIndex+1) * 1);
                     item.group = '';
                     children.push(item);
@@ -2502,7 +2496,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string }} { name }
      * @memberof MainBase
      */
-    public verifyDeRules(name:string,rule:any = this.deRules,op:string = "AND",value:any) :{isPast:boolean}{
+    public verifyDeRules(name:string,rule:any = this.deRules(),op:string = "AND",value:any) :{isPast:boolean}{
         let falg:any = {};
         if(!rule || !rule[name]){
             return falg;

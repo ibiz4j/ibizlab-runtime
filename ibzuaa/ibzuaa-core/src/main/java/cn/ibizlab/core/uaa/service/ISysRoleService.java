@@ -37,10 +37,13 @@ public interface ISysRoleService extends IService<SysRole> {
     SysRole get(String key);
     SysRole getDraft(SysRole et);
     boolean checkKey(SysRole et);
+    SysRole noRepeat(SysRole et);
+    boolean noRepeatBatch(List<SysRole> etList);
     boolean save(SysRole et);
     @CacheEvict(value = "sysrole",allEntries = true)
     void saveBatch(List<SysRole> list);
     Page<SysRole> searchDefault(SysRoleSearchContext context);
+    Page<SysRole> searchNoRepeat(SysRoleSearchContext context);
     List<SysRole> selectByProleid(String roleid);
     @CacheEvict(value = "sysrole", allEntries = true)
     void removeByProleid(String roleid);

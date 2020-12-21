@@ -29,6 +29,7 @@ import java.util.List;
 @MapperScan("cn.ibizlab.*.mapper")
 @SpringBootApplication(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
+            com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure.class
 })
 public class webApplication extends WebMvcConfigurerAdapter {
 

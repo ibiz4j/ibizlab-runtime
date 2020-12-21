@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface WFGroupMapper extends BaseMapper<WFGroup> {
 
     Page<WFGroup> searchDefault(IPage page, @Param("srf") WFGroupSearchContext context, @Param("ew") Wrapper<WFGroup> wrapper);

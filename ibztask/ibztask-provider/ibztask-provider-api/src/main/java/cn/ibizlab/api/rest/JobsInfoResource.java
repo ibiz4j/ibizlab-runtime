@@ -130,6 +130,12 @@ public class JobsInfoResource {
         jobsinfodto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(jobsinfodto);
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Execute-all')")
+    @ApiOperation(value = "批量处理[执行]", tags = {"任务信息" },  notes = "批量处理[执行]")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/executebatch")
+    public ResponseEntity<Boolean> executeBatch(@RequestBody List<JobsInfoDTO> jobsinfodtos) {
+        return ResponseEntity.status(HttpStatus.OK).body(jobsinfoService.executeBatch(jobsinfoMapping.toDomain(jobsinfodtos)));
+    }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsInfo-Save-all')")
     @ApiOperation(value = "保存任务信息", tags = {"任务信息" },  notes = "保存任务信息")

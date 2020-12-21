@@ -114,6 +114,15 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
 
     @Override
     @Transactional
+    public boolean executeBatch(List<JobsInfo> etList) {
+        for(JobsInfo et : etList) {
+            execute(et);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
     public boolean save(JobsInfo et) {
         if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
         if(!jobsInfoFeignClient.save(et))

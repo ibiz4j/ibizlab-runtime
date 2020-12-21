@@ -2,6 +2,7 @@
 package cn.ibizlab.rest;
 
 import cn.ibizlab.core.uaa.domain.SysUser;
+import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
 import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
@@ -10,8 +11,8 @@ import cn.ibizlab.util.security.AuthenticationInfo;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.security.AuthorizationLogin;
 import cn.ibizlab.util.service.AuthenticationUserService;
-import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +24,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.constraints.NotNull;
 
+@Slf4j
 @RestController
 @RequestMapping("/")
 public class AuthenticationResource
@@ -39,6 +42,9 @@ public class AuthenticationResource
     private AuthenticationUserService userDetailsService;
 
     @Autowired
+    private UAACoreService uaaCoreService;
+
+    @Autowired
     private ISysUserService userService;
 
     @Value("${ibiz.auth.pwencrymode:0}")
@@ -52,6 +58,17 @@ public class AuthenticationResource
         final String token = jwtTokenUtil.generateToken(user);
         // 返回 token
         return ResponseEntity.ok().body(new AuthenticationInfo(token,user));
+    }
+
+    /**
+     * token续期
+     * @param oldToken 业务系统即将到期的token
+     * @return 新token
+     */
+    @PostMapping(value = "uaa/refreshToken")
+    public ResponseEntity<String> refreshToken(@Validated @RequestBody @NotNull(message = "token不能为空") String oldToken) {
+        return ResponseEntity.ok().body(uaaCoreService.refreshToken(oldToken));
+
     }
 
     @PostMapping(value = "v7/changepwd")

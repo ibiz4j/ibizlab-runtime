@@ -38,6 +38,7 @@ public interface ISysEmployeeService extends IService<SysEmployee> {
     SysEmployee getDraft(SysEmployee et);
     boolean checkKey(SysEmployee et);
     SysEmployee initPwd(SysEmployee et);
+    boolean initPwdBatch(List<SysEmployee> etList);
     boolean save(SysEmployee et);
     @CacheEvict(value = "sysemployee",allEntries = true)
     void saveBatch(List<SysEmployee> list);

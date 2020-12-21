@@ -127,6 +127,15 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
 
     @Override
     @Transactional
+    public boolean prepareAppsBatch(List<SysPSSystem> etList) {
+        for(SysPSSystem et : etList) {
+            prepareApps(et);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
     public boolean save(SysPSSystem et) {
         if(!saveOrUpdate(et)) {
             return false;
@@ -162,6 +171,15 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     public SysPSSystem syncPermission(SysPSSystem et) {
         //自定义代码
         return et;
+    }
+
+    @Override
+    @Transactional
+    public boolean syncPermissionBatch(List<SysPSSystem> etList) {
+        for(SysPSSystem et : etList) {
+            syncPermission(et);
+        }
+        return true;
     }
 
 

@@ -35,6 +35,7 @@ public interface IJobsInfoService extends IService<JobsInfo> {
     JobsInfo getDraft(JobsInfo et);
     boolean checkKey(JobsInfo et);
     JobsInfo execute(JobsInfo et);
+    boolean executeBatch(List<JobsInfo> etList);
     boolean save(JobsInfo et);
     void saveBatch(List<JobsInfo> list);
     JobsInfo start(JobsInfo et);

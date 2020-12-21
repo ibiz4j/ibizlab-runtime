@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface SysRolePermissionMapper extends BaseMapper<SysRolePermission> {
 
     Page<SysRolePermission> searchDefault(IPage page, @Param("srf") SysRolePermissionSearchContext context, @Param("ew") Wrapper<SysRolePermission> wrapper);

@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface MsgTemplateMapper extends BaseMapper<MsgTemplate> {
 
     Page<MsgTemplate> searchDefault(IPage page, @Param("srf") MsgTemplateSearchContext context, @Param("ew") Wrapper<MsgTemplate> wrapper);

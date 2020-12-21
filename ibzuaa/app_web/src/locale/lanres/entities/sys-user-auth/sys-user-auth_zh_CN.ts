@@ -1,10 +1,9 @@
-export default {
-  fields: {
-    id: "标识",
-    userid: "用户标识",
-    identity_type: "认证类型",
-    identifier: "认证标识",
-    credential: "凭据",
-    username: "人员",
-  },
-};
+import SysUserAuth_zh_CN_Base from './sys-user-auth_zh_CN_base';
+
+function getLocaleResource(){
+    const SysUserAuth_zh_CN_OwnData = {};
+    const targetData = Object.assign(SysUserAuth_zh_CN_Base(), SysUserAuth_zh_CN_OwnData);
+    return targetData;
+}
+
+export default getLocaleResource;

@@ -669,6 +669,7 @@ export default class MainBase extends Vue implements ControlInterface {
         cron: [
             { required: this.detailsModel.cron.required, type: 'string', message: '任务执行CRON 值不能为空', trigger: 'change' },
             { required: this.detailsModel.cron.required, type: 'string', message: '任务执行CRON 值不能为空', trigger: 'blur' },
+            { pattern: /^[A-Z0-9-/\,?:*# ]+$/, message: '请输入CRON表达式允许的合法符号', trigger: 'change' },
         ],
         param: [
             { required: this.detailsModel.param.required, type: 'string', message: '执行器任务参数 值不能为空', trigger: 'change' },
@@ -723,8 +724,10 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof MainBase
      */
-    public deRules:any = {
-    };
+    public deRules(){
+        return {
+        }
+    }
 
     /**
      * 校验属性值规则
@@ -733,7 +736,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @param {{ name: string }} { name }
      * @memberof MainBase
      */
-    public verifyDeRules(name:string,rule:any = this.deRules,op:string = "AND") :{isPast:boolean,infoMessage:string}{
+    public verifyDeRules(name:string,rule:any = this.deRules(),op:string = "AND") :{isPast:boolean,infoMessage:string}{
         let falg:any = {infoMessage:""};
         if(!rule[name]){
             return falg;
@@ -1485,7 +1488,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */    
     public afterCreated(){
         if(this.isautoload){
-            this.autoLoad({srfkey:this.context.documentcenter});
+            this.autoLoad({srfkey:this.context.jobsinfo});
         }
         if (this.viewState) {
             this.viewStateEvent = this.viewState.subscribe(({ tag, action, data }) => {

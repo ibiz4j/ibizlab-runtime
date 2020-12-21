@@ -35,9 +35,11 @@ public interface ISysPSSystemService extends IService<SysPSSystem> {
     SysPSSystem getDraft(SysPSSystem et);
     boolean checkKey(SysPSSystem et);
     SysPSSystem prepareApps(SysPSSystem et);
+    boolean prepareAppsBatch(List<SysPSSystem> etList);
     boolean save(SysPSSystem et);
     void saveBatch(List<SysPSSystem> list);
     SysPSSystem syncPermission(SysPSSystem et);
+    boolean syncPermissionBatch(List<SysPSSystem> etList);
     Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context);
     Page<SysPSSystem> searchPick(SysPSSystemSearchContext context);
     /**

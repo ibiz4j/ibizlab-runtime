@@ -127,6 +127,15 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
 
     @Override
     @Transactional
+    public boolean executeBatch(List<JobsInfo> etList) {
+        for(JobsInfo et : etList) {
+            execute(et);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
     public boolean save(JobsInfo et) {
         if(!saveOrUpdate(et)) {
             return false;
@@ -160,17 +169,17 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Override
     @Transactional
     public JobsInfo start(JobsInfo et) {
-        et.set("Last_time","0");
         et.set("Status","0");
+        et.set("Last_time","0");
         update(et);
         return et;
     }
     @Override
     @Transactional
     public JobsInfo stop(JobsInfo et) {
+        et.set("Next_time","0");
         et.set("Last_time","0");
         et.set("Status","1");
-        et.set("Next_time","0");
         update(et);
         return et;
     }

@@ -618,8 +618,8 @@ export default class SysEmployeeOptionViewBase extends Vue {
     public closeView(args: any[]): void {
         let _view: any = this;
         if (_view.viewdata) {
-            _view.$emit('viewdataschange', [args]);
-            _view.$emit('close', [args]);
+            _view.$emit('viewdataschange', Array.isArray(args)?args:[args]);
+            _view.$emit('close', Array.isArray(args)?args:[args]);
         } else if (_view.$tabPageExp) {
             _view.$tabPageExp.onClose(_view.$route.fullPath);
         }

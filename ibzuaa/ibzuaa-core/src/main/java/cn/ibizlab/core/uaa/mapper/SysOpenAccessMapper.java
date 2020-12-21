@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface SysOpenAccessMapper extends BaseMapper<SysOpenAccess> {
 
     Page<SysOpenAccess> searchDefault(IPage page, @Param("srf") SysOpenAccessSearchContext context, @Param("ew") Wrapper<SysOpenAccess> wrapper);

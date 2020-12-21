@@ -27,6 +27,13 @@ import cn.ibizlab.core.uaa.domain.SysRole;
 @Data
 public class SysRoleSearchContext extends QueryWrapperContext<SysRole> {
 
+	private String n_sys_roleid_notin;//[角色标识]
+	public void setN_sys_roleid_notin(String n_sys_roleid_notin) {
+        this.n_sys_roleid_notin = n_sys_roleid_notin;
+        if(!ObjectUtils.isEmpty(this.n_sys_roleid_notin)){
+			this.getSearchCond().notIn("sys_roleid",this.n_sys_roleid_notin.split(";"));
+        }
+    }
 	private String n_sys_rolename_isnotnull;//[角色名称]
 	public void setN_sys_rolename_isnotnull(String n_sys_rolename_isnotnull) {
         this.n_sys_rolename_isnotnull = n_sys_rolename_isnotnull;

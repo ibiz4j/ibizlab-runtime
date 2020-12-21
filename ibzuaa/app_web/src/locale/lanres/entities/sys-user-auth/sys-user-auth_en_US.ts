@@ -1,11 +1,9 @@
+import SysUserAuth_en_US_Base from './sys-user-auth_en_US_base';
 
-export default {
-  fields: {
-    id: "标识",
-    userid: "用户标识",
-    identity_type: "认证类型",
-    identifier: "认证标识",
-    credential: "凭据",
-    username: "人员",
-  },
-};
+function getLocaleResource(){
+    const SysUserAuth_en_US_OwnData = {};
+    const targetData = Object.assign(SysUserAuth_en_US_Base(), SysUserAuth_en_US_OwnData);
+    return targetData;
+}
+
+export default getLocaleResource;

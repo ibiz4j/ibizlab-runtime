@@ -37,7 +37,7 @@ export declare interface AppPopover {
      * @param {number} [height]
      * @memberof AppPopover
      */
-    openPopover(event: MouseEvent, content: (h: CreateElement) => any, title?: string, position?: PopperJs.Placement, isAutoClose?: boolean, width?: number, height?: number): void;
+    openPopover(event: MouseEvent, content: (h: CreateElement) => any, position?: PopperJs.Placement, isAutoClose?: boolean, width?: number, height?: number): void;
     /**
      * 销毁popper(带回填数据)
      *

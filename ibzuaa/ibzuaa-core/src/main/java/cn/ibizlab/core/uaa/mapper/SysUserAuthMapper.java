@@ -17,6 +17,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface SysUserAuthMapper extends BaseMapper<SysUserAuth> {
 
     Page<SysUserAuth> searchDefault(IPage page, @Param("srf") SysUserAuthSearchContext context, @Param("ew") Wrapper<SysUserAuth> wrapper);

@@ -108,6 +108,7 @@ import Loadding  from  './directive/loadding/loadding';
 import AppColorSpan  from  './components/app-color-span/app-color-span.vue';
 import AppColorPicker from  './components/app-color-picker/app-color-picker.vue';
 
+
 // 全局挂载UI实体服务注册中心
 window['uiServiceRegister'] = uiServiceRegister;
 // 全局挂载实体权限服务注册中心

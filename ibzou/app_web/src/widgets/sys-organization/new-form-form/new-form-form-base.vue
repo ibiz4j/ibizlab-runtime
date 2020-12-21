@@ -517,8 +517,10 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @type {*}
      * @memberof NewFormBase
      */
-    public deRules:any = {
-    };
+    public deRules(){
+        return {
+        }
+    }
 
     /**
      * 校验属性值规则
@@ -527,7 +529,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @param {{ name: string }} { name }
      * @memberof NewFormBase
      */
-    public verifyDeRules(name:string,rule:any = this.deRules,op:string = "AND") :{isPast:boolean,infoMessage:string}{
+    public verifyDeRules(name:string,rule:any = this.deRules(),op:string = "AND") :{isPast:boolean,infoMessage:string}{
         let falg:any = {infoMessage:""};
         if(!rule[name]){
             return falg;
@@ -1159,7 +1161,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      */    
     public afterCreated(){
         if(this.isautoload){
-            this.autoLoad({srfkey:this.context.documentcenter});
+            this.autoLoad({srfkey:this.context.sysorganization});
         }
         if (this.viewState) {
             this.viewStateEvent = this.viewState.subscribe(({ tag, action, data }) => {

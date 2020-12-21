@@ -42,6 +42,15 @@
          <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
      </select>
 
+    <!--数据集合[NoRepeat]-->
+	 <select id="searchNoRepeat"  parameterType="cn.ibizlab.core.uaa.filter.SysRoleSearchContext"  resultMap="SysRoleResultMap">
+         select t1.* from (
+                <include refid="NoRepeat" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
 		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`CREATEMAN`, t1.`MEMO`, t1.`PROLEID`, t11.`SYS_ROLENAME` AS `PROLENAME`, t1.`SYS_ROLEID`, t1.`SYS_ROLENAME`, t1.`UPDATEDATE`, t1.`UPDATEMAN` FROM `IBZROLE` t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
@@ -54,6 +63,21 @@
     </sql>
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+			]]>
+    </sql>
+    <!--数据查询[NoRepeat]-->
+    <sql id="NoRepeat" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`CREATEMAN`, t1.`MEMO`, t1.`PROLEID`, t11.`SYS_ROLENAME` AS `PROLENAME`, t1.`SYS_ROLEID`, t1.`SYS_ROLENAME`, t1.`UPDATEDATE`, t1.`UPDATEMAN` FROM `IBZROLE` t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+			]]>
+    </sql>
+    <!--数据查询[NoRepeat]-->
+    <sql id="NoRepeat" databaseId="oracle">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
+			]]>
+    </sql>
+    <!--数据查询[NoRepeat]-->
+    <sql id="NoRepeat" databaseId="postgresql">
 		<![CDATA[ SELECT t1.CREATEDATE, t1.CREATEMAN, t1.MEMO, t1.PROLEID, t11.SYS_ROLENAME AS PROLENAME, t1.SYS_ROLEID, t1.SYS_ROLENAME, t1.UPDATEDATE, t1.UPDATEMAN FROM IBZROLE t1  LEFT JOIN IBZROLE t11 ON t1.PROLEID = t11.SYS_ROLEID  
 			]]>
     </sql>

@@ -17,9 +17,11 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.alibaba.fastjson.JSONObject;
 
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
     Page<SysRole> searchDefault(IPage page, @Param("srf") SysRoleSearchContext context, @Param("ew") Wrapper<SysRole> wrapper);
+    Page<SysRole> searchNoRepeat(IPage page, @Param("srf") SysRoleSearchContext context, @Param("ew") Wrapper<SysRole> wrapper);
     @Override
     @Cacheable(value ="sysrole", key = "'row:'+#p0")
     SysRole selectById(Serializable id);

@@ -40,9 +40,6 @@ public class ClientAuthenticationResource
     @Value("${ibiz.auth.cookie.domain:}")
     private String cookiedomain;
 
-    @Value("${ibiz.jwt.expiration:7200000}")
-    private Long expiration;
-
     @Autowired
     private AuthTokenUtil jwtTokenUtil;
 
@@ -81,38 +78,9 @@ public class ClientAuthenticationResource
      * @return 新token
      */
     @PostMapping(value = "uaa/refreshToken")
-    public String refreshToken(@Validated @RequestBody @NotNull(message = "token不能为空") String oldToken) {
-        String username = null;
-        String newToken = null;
-        try {
-            username = jwtTokenUtil.getUsernameFromToken(oldToken);
-        } catch (ExpiredJwtException e) {
-            log.error(e.getMessage());
-        }
-        if (!StringUtils.isEmpty(username)) {
-            AuthenticationUser user = userDetailsService.loadUserByUsername(username);
-            if (jwtTokenUtil.validateToken(oldToken, user)) {
-                // 将新token存入缓存，在固定周期内调用接口将返回同一token
-                Token tok = uaaCoreService.getToken(oldToken);
-                if (ObjectUtils.isEmpty(tok)) {
-                    newToken = jwtTokenUtil.generateToken(user);
-                    uaaCoreService.setToken(oldToken, newToken);
-                } else {
-                    // 判断缓存中的token是否到期，到期将返回新token
-                    if (uaaCoreService.isExpired(tok, expiration)) {
-                        newToken = jwtTokenUtil.generateToken(user);
-                        uaaCoreService.setToken(oldToken, newToken);
-                    }else{
-                        newToken = tok.getNewToken();
-                    }
-                }
-            }
-        }
-        if (StringUtils.isEmpty(newToken)) {
-            throw new BadRequestAlertException("获取token失败", "", "refreshToken");
-        } else {
-            return newToken;
-        }
+    public ResponseEntity<String> refreshToken(@Validated @RequestBody @NotNull(message = "token不能为空") String oldToken) {
+        return ResponseEntity.ok().body(uaaCoreService.refreshToken(oldToken));
+
     }
 
     @PostMapping(value = "v7/changepwd")

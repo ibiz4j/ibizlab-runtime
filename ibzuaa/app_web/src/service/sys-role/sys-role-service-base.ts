@@ -156,6 +156,34 @@ export default class SysRoleServiceBase extends EntityService {
     }
 
     /**
+     * NoRepeat接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRoleServiceBase
+     */
+    public async NoRepeat(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().post(`/sysroles/${context.sysrole}/norepeat`,data,isloading);
+            return res;
+    }
+
+    /**
+     * NoRepeatBatch接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRoleServiceBase
+     */
+    public async NoRepeatBatch(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/sysrole/norepeatbatch`,tempData,isloading);
+    }
+
+    /**
      * Save接口方法
      *
      * @param {*} [context={}]
@@ -199,5 +227,34 @@ export default class SysRoleServiceBase extends EntityService {
     public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
         return await Http.getInstance().post(`/sysroles/searchdefault`,tempData,isloading);
+    }
+
+    /**
+     * FetchNoRepeat接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRoleServiceBase
+     */
+    public async FetchNoRepeat(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        let res:any = Http.getInstance().get(`/sysroles/fetchnorepeat`,tempData,isloading);
+        return res;
+    }
+
+    /**
+     * searchNoRepeat接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysRoleServiceBase
+     */
+    public async searchNoRepeat(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/sysroles/searchnorepeat`,tempData,isloading);
     }
 }

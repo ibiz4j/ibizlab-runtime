@@ -1,7 +1,9 @@
+import WFSystem_en_US_Base from './wfsystem_en_US_base';
 
-export default {
-  fields: {
-    pssystemid: "系统标识",
-    pssystemname: "系统名称",
-  },
-};
+function getLocaleResource(){
+    const WFSystem_en_US_OwnData = {};
+    const targetData = Object.assign(WFSystem_en_US_Base(), WFSystem_en_US_OwnData);
+    return targetData;
+}
+
+export default getLocaleResource;

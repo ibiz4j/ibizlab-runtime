@@ -3,7 +3,7 @@
         <span v-if="color" :style="{ color:textColor }">{{ text ? text : '---' }}</span>
         <template v-else>
             <template v-if="dataValue && dataValue.length > 0">
-                <span v-for="(textItem,index) of dataValue" :key="index" class="text-color" :style="{ backgroundColor:textItem.color }">
+                <span v-for="(textItem,index) of dataValue" :key="index" class="text-color" :style="{ backgroundColor: textItem.color, borderColor: textItem.color}">
                 {{ textItem.srfmajortext ? textItem.srfmajortext : '---'}}
                 </span>
             </template>
@@ -58,7 +58,7 @@ export default class AppColorSpan extends Vue {
      * @type {any}
      * @memberof AppColorSpan
      */
-    @Prop() public localContext!: any;
+    @Prop() public localContext?: any;
 
     /**
      * 局部导航参数
@@ -66,7 +66,7 @@ export default class AppColorSpan extends Vue {
      * @type {any}
      * @memberof AppColorSpan
      */
-    @Prop() public localParam!: any;
+    @Prop() public localParam?: any;
 
     /**
      * 视图上下文
@@ -74,7 +74,7 @@ export default class AppColorSpan extends Vue {
      * @type {*}
      * @memberof AppColorSpan
      */
-    @Prop() public context!: any;
+    @Prop() public context?: any;
 
     /**
      * 视图参数
@@ -82,8 +82,7 @@ export default class AppColorSpan extends Vue {
      * @type {*}
      * @memberof AppColorSpan
      */
-    @Prop() public viewparams!: any;
-
+    @Prop() public viewparams?: any;
 
     /**
      * 颜色标识
@@ -91,8 +90,7 @@ export default class AppColorSpan extends Vue {
      * @type {*}
      * @memberof AppColorSpan
      */
-    @Prop() color:any;
-
+    @Prop() color?:any;
 
     /**
      * 颜色
@@ -156,8 +154,10 @@ export default class AppColorSpan extends Vue {
 
 <style lang="less">
     .text-color{
-        padding: 2px;
-        margin: 6px;
-        border-radius: 4px;
+        padding: 2px 8px;
+        margin: 6px 6px 6px 0px;
+        border-radius: 12px;
+        font-size: 13px;
+        border: 2px solid rgb(170, 167, 167);
     }
 </style>

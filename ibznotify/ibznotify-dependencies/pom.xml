@@ -25,7 +25,7 @@
         <spring-cloud-openfeign.version>2.2.1.RELEASE</spring-cloud-openfeign.version>
 
         <!--  Alibaba Druid  -->
-        <alibaba-druid.version>1.1.16</alibaba-druid.version>
+        <alibaba-druid.version>1.1.21</alibaba-druid.version>
 
         <!--  Mybatis Plus -->
         <mybatis-plus.version>3.3.1</mybatis-plus.version>
@@ -86,13 +86,9 @@
         <!-- 阿里seata分布式事务 -->
         <alibaba-seata.version>1.3.0</alibaba-seata.version>
 
-        <oracle.version>11.2.0.3</oracle.version>
+        <oracle.version>19.8.0.0</oracle.version>
         <postgresql.version>42.2.6</postgresql.version>
 
-        <alibaba-dingtalk.version>1.0.1</alibaba-dingtalk.version>
-        <aliyun-sdk-core.version>4.5.4</aliyun-sdk-core.version>
-        <aliyun-sdk-ecs.version>4.19.6</aliyun-sdk-ecs.version>
-        <aliyun-sdk-dm.version>3.3.1</aliyun-sdk-dm.version>
     </properties>
 
     <dependencyManagement>
@@ -237,12 +233,6 @@
                 <version>${jsonwebtoken-jjwt.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${alibaba-druid.version}</version>
-            </dependency>
-
              <dependency>
                 <groupId>org.zalando</groupId>
                 <artifactId>problem-spring-web</artifactId>
@@ -272,29 +262,6 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>jobs-spring-boot-starter</artifactId>
                 <version>${baomidou-jobs.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>alibaba-dingtalk-service-sdk</artifactId>
-                <version>${alibaba-dingtalk.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-core</artifactId>
-                <version>${aliyun-sdk-core.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-ecs</artifactId>
-                <version>${aliyun-sdk-ecs.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-dm</artifactId>
-                <version>${aliyun-sdk-dm.version}</version>
             </dependency>
 
         </dependencies>
@@ -360,8 +327,13 @@
 
         <!--  Oracle驱动包 -->
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.nls</groupId>
+            <artifactId>orai18n</artifactId>
             <version>${oracle.version}</version>
         </dependency>
         <!--  PostgreSQL驱动包 -->
@@ -375,6 +347,15 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+        <!--  mp动态数据源 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+        </dependency>
+
+
+
     </dependencies>
 
 </project>
