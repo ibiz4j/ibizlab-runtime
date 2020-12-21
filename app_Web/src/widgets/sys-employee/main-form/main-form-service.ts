@@ -4,6 +4,7 @@ import SysEmployeeService from '@/service/sys-employee/sys-employee-service';
 import MainModel from './main-form-model';
 import SysOrganizationService from '@/service/sys-organization/sys-organization-service';
 import SysDepartmentService from '@/service/sys-department/sys-department-service';
+import SysPostService from '@/service/sys-post/sys-post-service';
 
 
 /**
@@ -60,6 +61,14 @@ export default class MainService extends ControlService {
     public sysdepartmentService: SysDepartmentService = new SysDepartmentService();
 
     /**
+     * 岗位服务对象
+     *
+     * @type {SysPostService}
+     * @memberof MainService
+     */
+    public syspostService: SysPostService = new SysPostService();
+
+    /**
      * 远端数据
      *
      * @type {*}
@@ -113,6 +122,9 @@ export default class MainService extends ControlService {
         }
         if (Object.is(serviceName, 'SysDepartmentService') && Object.is(interfaceName, 'FetchDefault')) {
             return this.doItems(this.sysdepartmentService.FetchDefault(JSON.parse(JSON.stringify(context)),data, isloading), 'deptid', 'sysdepartment');
+        }
+        if (Object.is(serviceName, 'SysPostService') && Object.is(interfaceName, 'FetchDefault')) {
+            return this.doItems(this.syspostService.FetchDefault(JSON.parse(JSON.stringify(context)),data, isloading), 'postid', 'syspost');
         }
 
         return Promise.reject([])

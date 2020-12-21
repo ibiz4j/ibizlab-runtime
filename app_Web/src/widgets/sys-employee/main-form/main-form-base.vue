@@ -81,6 +81,44 @@
 </app-form-item>
 
 </i-col>
+<i-col v-show="detailsModel.postname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='postname' :itemRules="this.rules().postname" class='' :caption="$t('entities.sysemployee.main_form.details.postname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.postname.error" :isEmptyCaption="false" labelPos="LEFT">
+    
+<app-picker 
+  :formState="formState"
+  :data="data"
+  :context="context"
+  :viewparams="viewparams"
+  :localContext ='{ }' 
+  :localParam ='{ }' 
+  :disabled="detailsModel.postname.disabled"
+  name='postname'
+  
+  deMajorField='postname'
+  deKeyField='syspost'
+  :service="service"
+  :acParams="{ serviceName: 'SysPostService', interfaceName: 'FetchDefault'}"
+  valueitem='postid' 
+  :value="data.postname" 
+  editortype="" 
+  :pickupView="{ viewname: 'sys-post-pickup-view', title: $t('entities.syspost.views.pickupview.title'), deResParameters: [], parameters: [{ pathName: 'sysposts', parameterName: 'syspost' }, { pathName: 'pickupview', parameterName: 'pickupview' } ], placement:'' }"
+  style=""  
+  @formitemvaluechange="onFormItemValueChange">
+</app-picker>
+
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.postcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='postcode' :itemRules="this.rules().postcode" class='' :caption="$t('entities.sysemployee.main_form.details.postcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.postcode.error" :isEmptyCaption="false" labelPos="LEFT">
+    
+<app-span name='postcode' :value="data.postcode" dataType="PICKUPDATA"     :precision="0"
+:data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
+</app-span>
+
+</app-form-item>
+
+</i-col>
 <i-col v-show="detailsModel.nickname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='nickname' :itemRules="this.rules().nickname" class='' :caption="$t('entities.sysemployee.main_form.details.nickname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.nickname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box 
@@ -744,6 +782,9 @@ export default class MainBase extends Vue implements ControlInterface {
         mdeptcode: null,
         orgcode: null,
         bcode: null,
+        postname: null,
+        postcode: null,
+        postid: null,
         nickname: null,
         sex: null,
         birthday: null,
@@ -835,6 +876,14 @@ export default class MainBase extends Vue implements ControlInterface {
         bcode: [
             { required: this.detailsModel.bcode.required, type: 'string', message: '业务编码 值不能为空', trigger: 'change' },
             { required: this.detailsModel.bcode.required, type: 'string', message: '业务编码 值不能为空', trigger: 'blur' },
+        ],
+        postname: [
+            { required: this.detailsModel.postname.required, type: 'string', message: '岗位名称 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.postname.required, type: 'string', message: '岗位名称 值不能为空', trigger: 'blur' },
+        ],
+        postcode: [
+            { required: this.detailsModel.postcode.required, type: 'string', message: '岗位代码 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.postcode.required, type: 'string', message: '岗位代码 值不能为空', trigger: 'blur' },
         ],
         nickname: [
             { required: this.detailsModel.nickname.required, type: 'string', message: '昵称别名 值不能为空', trigger: 'change' },
@@ -1054,6 +1103,12 @@ export default class MainBase extends Vue implements ControlInterface {
         orgcode: new FormItemModel({ caption: '单位代码', detailType: 'FORMITEM', name: 'orgcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 1 })
 , 
         bcode: new FormItemModel({ caption: '业务编码', detailType: 'FORMITEM', name: 'bcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
+, 
+        postname: new FormItemModel({ caption: '岗位名称', detailType: 'FORMITEM', name: 'postname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
+, 
+        postcode: new FormItemModel({ caption: '岗位代码', detailType: 'FORMITEM', name: 'postcode', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
+, 
+        postid: new FormItemModel({ caption: '岗位标识', detailType: 'FORMITEM', name: 'postid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
         nickname: new FormItemModel({ caption: '昵称别名', detailType: 'FORMITEM', name: 'nickname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
@@ -1317,6 +1372,42 @@ export default class MainBase extends Vue implements ControlInterface {
     @Watch('data.bcode')
     onBcodeChange(newVal: any, oldVal: any) {
         this.formDataChange({ name: 'bcode', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 postname 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.postname')
+    onPostnameChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'postname', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 postcode 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.postcode')
+    onPostcodeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'postcode', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 postid 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.postid')
+    onPostidChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'postid', newVal: newVal, oldVal: oldVal });
     }
 
     /**
@@ -1617,6 +1708,9 @@ export default class MainBase extends Vue implements ControlInterface {
             }
             this.detailsModel.mdeptname.setDisabled(!ret);
         }
+
+
+
 
 
 

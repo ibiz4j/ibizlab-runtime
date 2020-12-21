@@ -94,7 +94,7 @@
                 </el-table-column>
             </template>
             <template v-if="getColumnState('mdeptname')">
-                <el-table-column show-overflow-tooltip :prop="'mdeptname'" :label="$t('entities.sysemployee.main_grid.columns.mdeptname')" :width="150"  :align="'left'" :sortable="'custom'">
+                <el-table-column show-overflow-tooltip :prop="'mdeptname'" :label="$t('entities.sysemployee.main_grid.columns.mdeptname')" :width="200"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
                       <span class="column-header ">
                         {{$t('entities.sysemployee.main_grid.columns.mdeptname')}}
@@ -102,6 +102,30 @@
                     </template>
                     <template v-slot="{row,column,$index}">
                         <span>{{row.mdeptname}}</span>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('postcode')">
+                <el-table-column show-overflow-tooltip :prop="'postcode'" :label="$t('entities.sysemployee.main_grid.columns.postcode')" :width="200"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysemployee.main_grid.columns.postcode')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.postcode}}</span>
+                    </template>
+                </el-table-column>
+            </template>
+            <template v-if="getColumnState('postname')">
+                <el-table-column show-overflow-tooltip :prop="'postname'" :label="$t('entities.sysemployee.main_grid.columns.postname')" :width="200"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysemployee.main_grid.columns.postname')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.postname}}</span>
                     </template>
                 </el-table-column>
             </template>
@@ -758,6 +782,24 @@ export default class MainBase extends Vue implements ControlInterface {
             langtag: 'entities.sysemployee.main_grid.columns.mdeptname',
             show: true,
             unit: 'px',
+            isEnableRowEdit: false,
+            enableCond: 3 ,
+        },
+        {
+            name: 'postcode',
+            label: '岗位代码',
+            langtag: 'entities.sysemployee.main_grid.columns.postcode',
+            show: true,
+            unit: 'PX',
+            isEnableRowEdit: false,
+            enableCond: 3 ,
+        },
+        {
+            name: 'postname',
+            label: '岗位名称',
+            langtag: 'entities.sysemployee.main_grid.columns.postname',
+            show: true,
+            unit: 'PX',
             isEnableRowEdit: false,
             enableCond: 3 ,
         },
@@ -1500,7 +1542,7 @@ export default class MainBase extends Vue implements ControlInterface {
     * @memberof MainBase
     */
     public arraySpanMethod({row, column, rowIndex, columnIndex} : any) {
-        let allColumns:Array<any> = ['usercode','personname','loginname','orgcode','orgname','mdeptcode','mdeptname','sex','phone','ipaddr','showorder'];
+        let allColumns:Array<any> = ['usercode','personname','loginname','orgcode','orgname','mdeptcode','mdeptname','postcode','postname','sex','phone','ipaddr','showorder'];
         if(row && row.children) {
             if(columnIndex == (this.isSingleSelect ? 0:1)) {
                 return [1, allColumns.length+1];
@@ -1587,6 +1629,8 @@ export default class MainBase extends Vue implements ControlInterface {
                 orgname:'',
                 mdeptcode:'',
                 mdeptname:'',
+                postcode:'',
+                postname:'',
                 sex:'',
                 phone:'',
                 ipaddr:'',
@@ -1624,6 +1668,8 @@ export default class MainBase extends Vue implements ControlInterface {
             orgname:'',
             mdeptcode:'',
             mdeptname:'',
+            postcode:'',
+            postname:'',
             sex:'',
             phone:'',
             ipaddr:'',
@@ -1681,6 +1727,8 @@ export default class MainBase extends Vue implements ControlInterface {
                 orgname:'',
                 mdeptcode:'',
                 mdeptname:'',
+                postcode:'',
+                postname:'',
                 sex:'',
                 phone:'',
                 ipaddr:'',

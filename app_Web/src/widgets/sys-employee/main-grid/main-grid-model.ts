@@ -52,9 +52,19 @@ export default class MainModel {
           dataType: 'PICKUPDATA',
         },
         {
+          name: 'postname',
+          prop: 'postname',
+          dataType: 'PICKUPTEXT',
+        },
+        {
           name: 'mdeptname',
           prop: 'mdeptname',
           dataType: 'PICKUPTEXT',
+        },
+        {
+          name: 'postcode',
+          prop: 'postcode',
+          dataType: 'PICKUPDATA',
         },
         {
           name: 'srfmajortext',
@@ -129,6 +139,11 @@ export default class MainModel {
       {
         name: 'n_mdeptname_like',
         prop: 'n_mdeptname_like',
+        dataType: 'QUERYPARAM'
+      },
+      {
+        name: 'n_postname_like',
+        prop: 'n_postname_like',
         dataType: 'QUERYPARAM'
       },
 

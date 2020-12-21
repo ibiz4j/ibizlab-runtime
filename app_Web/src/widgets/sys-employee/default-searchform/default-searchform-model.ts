@@ -40,6 +40,11 @@ export default class DefaultModel {
         prop: 'mdeptname',
         dataType: 'PICKUPTEXT',
       },
+      {
+        name: 'n_postname_like',
+        prop: 'postname',
+        dataType: 'PICKUPTEXT',
+      },
     ]
   }
 

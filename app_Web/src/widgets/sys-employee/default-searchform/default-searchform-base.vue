@@ -4,7 +4,7 @@
   <row>
     <i-col span="20" class="form-content">
       <row>
-                    <i-col v-show="detailsModel.n_usercode_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+                    <i-col v-show="detailsModel.n_usercode_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 6, offset: 0 }" :xl="{ span: 6, offset: 0 }">
               <app-form-item name='n_usercode_like' :itemRules="this.rules.n_usercode_like" class='' :caption="$t('entities.sysemployee.default_searchform.details.n_usercode_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_usercode_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box 
               v-model="data.n_usercode_like"  
@@ -18,7 +18,7 @@
           </app-form-item>
           
           </i-col>
-          <i-col v-show="detailsModel.n_personname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+          <i-col v-show="detailsModel.n_personname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 6, offset: 0 }" :xl="{ span: 6, offset: 0 }">
               <app-form-item name='n_personname_like' :itemRules="this.rules.n_personname_like" class='' :caption="$t('entities.sysemployee.default_searchform.details.n_personname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_personname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box 
               v-model="data.n_personname_like"  
@@ -32,13 +32,27 @@
           </app-form-item>
           
           </i-col>
-          <i-col v-show="detailsModel.n_mdeptname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 12, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+          <i-col v-show="detailsModel.n_mdeptname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 6, offset: 0 }" :xl="{ span: 6, offset: 0 }">
               <app-form-item name='n_mdeptname_like' :itemRules="this.rules.n_mdeptname_like" class='' :caption="$t('entities.sysemployee.default_searchform.details.n_mdeptname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_mdeptname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box 
               v-model="data.n_mdeptname_like"  
               @enter="onEnter($event)"  
                 
               :disabled="detailsModel.n_mdeptname_like.disabled" 
+              type='text' 
+              style="">
+          </input-box>
+          
+          </app-form-item>
+          
+          </i-col>
+          <i-col v-show="detailsModel.n_postname_like.visible" :style="{}"  :sm="{ span: 12, offset: 0 }" :md="{ span: 12, offset: 0 }" :lg="{ span: 6, offset: 0 }" :xl="{ span: 6, offset: 0 }">
+              <app-form-item name='n_postname_like' :itemRules="this.rules.n_postname_like" class='' :caption="$t('entities.sysemployee.default_searchform.details.n_postname_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_postname_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
+              <input-box 
+              v-model="data.n_postname_like"  
+              @enter="onEnter($event)"  
+                
+              :disabled="detailsModel.n_postname_like.disabled" 
               type='text' 
               style="">
           </input-box>
@@ -306,6 +320,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_usercode_like: null,
         n_personname_like: null,
         n_mdeptname_like: null,
+        n_postname_like: null,
     };
 
     /**
@@ -322,6 +337,8 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_personname_like: new FormItemModel({ caption: '姓名', detailType: 'FORMITEM', name: 'n_personname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
 , 
         n_mdeptname_like: new FormItemModel({ caption: '部门', detailType: 'FORMITEM', name: 'n_mdeptname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+, 
+        n_postname_like: new FormItemModel({ caption: '岗位', detailType: 'FORMITEM', name: 'n_postname_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
 , 
     };
     
@@ -349,6 +366,12 @@ export default class DefaultBase extends Vue implements ControlInterface {
             { type: 'string', message: '部门 值必须为字符串类型', trigger: 'blur' },
             { required: this.detailsModel.n_mdeptname_like.required, type: 'string', message: '部门 值不能为空', trigger: 'change' },
             { required: this.detailsModel.n_mdeptname_like.required, type: 'string', message: '部门 值不能为空', trigger: 'blur' },
+        ],
+        n_postname_like: [
+            { type: 'string', message: '岗位 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '岗位 值必须为字符串类型', trigger: 'blur' },
+            { required: this.detailsModel.n_postname_like.required, type: 'string', message: '岗位 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_postname_like.required, type: 'string', message: '岗位 值不能为空', trigger: 'blur' },
         ],
     }
 
@@ -388,6 +411,18 @@ export default class DefaultBase extends Vue implements ControlInterface {
         this.formDataChange({ name: 'n_mdeptname_like', newVal: newVal, oldVal: oldVal });
     }
 
+    /**
+     * 监控表单属性 n_postname_like 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof DefaultBase
+     */
+    @Watch('data.n_postname_like')
+    onN_postname_likeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_postname_like', newVal: newVal, oldVal: oldVal });
+    }
+
 
     /**
      * 重置表单项值
@@ -408,6 +443,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      */
     public formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }): void {
                 
+
 
 
 

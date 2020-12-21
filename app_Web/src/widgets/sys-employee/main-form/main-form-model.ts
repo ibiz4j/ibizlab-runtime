@@ -109,6 +109,21 @@ export default class MainModel {
         dataType: 'TEXT',
       },
       {
+        name: 'postname',
+        prop: 'postname',
+        dataType: 'PICKUPTEXT',
+      },
+      {
+        name: 'postcode',
+        prop: 'postcode',
+        dataType: 'PICKUPDATA',
+      },
+      {
+        name: 'postid',
+        prop: 'postid',
+        dataType: 'PICKUP',
+      },
+      {
         name: 'nickname',
         prop: 'nickname',
         dataType: 'TEXT',
