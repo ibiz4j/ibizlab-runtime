@@ -54,6 +54,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Autowired
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysUserRoleService sysuserroleService;
+    @Autowired
+    @Lazy
+    ISysUserService proxyService;
 
     protected int batchSize = 500;
 
@@ -139,21 +142,49 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<SysUser> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysUser> create = new ArrayList<>();
+        List<SysUser> update = new ArrayList<>();
+        for (SysUser et : list) {
+            if (ObjectUtils.isEmpty(et.getUserid()) || ObjectUtils.isEmpty(getById(et.getUserid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<SysUser> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysUser> create = new ArrayList<>();
+        List<SysUser> update = new ArrayList<>();
+        for (SysUser et : list) {
+            if (ObjectUtils.isEmpty(et.getUserid()) || ObjectUtils.isEmpty(getById(et.getUserid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

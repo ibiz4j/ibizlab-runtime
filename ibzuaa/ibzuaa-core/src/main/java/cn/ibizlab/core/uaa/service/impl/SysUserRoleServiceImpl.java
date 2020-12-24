@@ -54,6 +54,9 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Autowired
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysUserService sysuserService;
+    @Autowired
+    @Lazy
+    ISysUserRoleService proxyService;
 
     protected int batchSize = 500;
 
@@ -144,7 +147,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -152,7 +155,21 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Transactional
     public boolean saveBatch(Collection<SysUserRole> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysUserRole> create = new ArrayList<>();
+        List<SysUserRole> update = new ArrayList<>();
+        for (SysUserRole et : list) {
+            if (ObjectUtils.isEmpty(et.getUserroleid()) || ObjectUtils.isEmpty(getById(et.getUserroleid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -160,7 +177,21 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Transactional
     public void saveBatch(List<SysUserRole> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysUserRole> create = new ArrayList<>();
+        List<SysUserRole> update = new ArrayList<>();
+        for (SysUserRole et : list) {
+            if (ObjectUtils.isEmpty(et.getUserroleid()) || ObjectUtils.isEmpty(getById(et.getUserroleid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

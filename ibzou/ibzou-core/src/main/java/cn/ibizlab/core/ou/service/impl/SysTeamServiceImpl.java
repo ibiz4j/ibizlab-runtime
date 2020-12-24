@@ -51,6 +51,9 @@ public class SysTeamServiceImpl extends ServiceImpl<SysTeamMapper, SysTeam> impl
     @Autowired
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysTeamMemberService systeammemberService;
+    @Autowired
+    @Lazy
+    ISysTeamService proxyService;
 
     protected int batchSize = 500;
 
@@ -136,21 +139,49 @@ public class SysTeamServiceImpl extends ServiceImpl<SysTeamMapper, SysTeam> impl
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<SysTeam> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysTeam> create = new ArrayList<>();
+        List<SysTeam> update = new ArrayList<>();
+        for (SysTeam et : list) {
+            if (ObjectUtils.isEmpty(et.getTeamid()) || ObjectUtils.isEmpty(getById(et.getTeamid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<SysTeam> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysTeam> create = new ArrayList<>();
+        List<SysTeam> update = new ArrayList<>();
+        for (SysTeam et : list) {
+            if (ObjectUtils.isEmpty(et.getTeamid()) || ObjectUtils.isEmpty(getById(et.getTeamid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

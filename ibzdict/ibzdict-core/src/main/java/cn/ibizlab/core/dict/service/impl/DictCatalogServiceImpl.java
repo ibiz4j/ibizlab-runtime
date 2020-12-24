@@ -51,6 +51,9 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
     @Autowired
     @Lazy
     protected cn.ibizlab.core.dict.service.IDictOptionService dictoptionService;
+    @Autowired
+    @Lazy
+    IDictCatalogService proxyService;
 
     protected int batchSize = 500;
 
@@ -136,21 +139,49 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<DictCatalog> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<DictCatalog> create = new ArrayList<>();
+        List<DictCatalog> update = new ArrayList<>();
+        for (DictCatalog et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<DictCatalog> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<DictCatalog> create = new ArrayList<>();
+        List<DictCatalog> update = new ArrayList<>();
+        for (DictCatalog et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

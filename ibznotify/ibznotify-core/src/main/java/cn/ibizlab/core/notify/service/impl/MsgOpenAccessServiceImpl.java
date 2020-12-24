@@ -51,6 +51,9 @@ public class MsgOpenAccessServiceImpl extends ServiceImpl<MsgOpenAccessMapper, M
     @Autowired
     @Lazy
     protected cn.ibizlab.core.notify.service.IMsgTemplateService msgtemplateService;
+    @Autowired
+    @Lazy
+    IMsgOpenAccessService proxyService;
 
     protected int batchSize = 500;
 
@@ -136,21 +139,49 @@ public class MsgOpenAccessServiceImpl extends ServiceImpl<MsgOpenAccessMapper, M
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<MsgOpenAccess> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<MsgOpenAccess> create = new ArrayList<>();
+        List<MsgOpenAccess> update = new ArrayList<>();
+        for (MsgOpenAccess et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<MsgOpenAccess> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<MsgOpenAccess> create = new ArrayList<>();
+        List<MsgOpenAccess> update = new ArrayList<>();
+        for (MsgOpenAccess et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

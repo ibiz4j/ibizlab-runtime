@@ -51,6 +51,9 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     @Autowired
     @Lazy
     protected cn.ibizlab.core.pay.service.IPayOpenAccessService payopenaccessService;
+    @Autowired
+    @Lazy
+    IPayTradeService proxyService;
 
     protected int batchSize = 500;
 
@@ -141,7 +144,7 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -149,7 +152,21 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     @Transactional
     public boolean saveBatch(Collection<PayTrade> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<PayTrade> create = new ArrayList<>();
+        List<PayTrade> update = new ArrayList<>();
+        for (PayTrade et : list) {
+            if (ObjectUtils.isEmpty(et.getTradeId()) || ObjectUtils.isEmpty(getById(et.getTradeId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -157,7 +174,21 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     @Transactional
     public void saveBatch(List<PayTrade> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<PayTrade> create = new ArrayList<>();
+        List<PayTrade> update = new ArrayList<>();
+        for (PayTrade et : list) {
+            if (ObjectUtils.isEmpty(et.getTradeId()) || ObjectUtils.isEmpty(getById(et.getTradeId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

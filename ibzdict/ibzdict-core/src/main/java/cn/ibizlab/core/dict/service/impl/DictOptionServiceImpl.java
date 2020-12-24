@@ -51,6 +51,9 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     @Autowired
     @Lazy
     protected cn.ibizlab.core.dict.service.IDictCatalogService dictcatalogService;
+    @Autowired
+    @Lazy
+    IDictOptionService proxyService;
 
     protected int batchSize = 500;
 
@@ -141,7 +144,7 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -149,7 +152,21 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     @Transactional
     public boolean saveBatch(Collection<DictOption> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<DictOption> create = new ArrayList<>();
+        List<DictOption> update = new ArrayList<>();
+        for (DictOption et : list) {
+            if (ObjectUtils.isEmpty(et.getValueKey()) || ObjectUtils.isEmpty(getById(et.getValueKey()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -157,7 +174,21 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     @Transactional
     public void saveBatch(List<DictOption> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<DictOption> create = new ArrayList<>();
+        List<DictOption> update = new ArrayList<>();
+        for (DictOption et : list) {
+            if (ObjectUtils.isEmpty(et.getValueKey()) || ObjectUtils.isEmpty(getById(et.getValueKey()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

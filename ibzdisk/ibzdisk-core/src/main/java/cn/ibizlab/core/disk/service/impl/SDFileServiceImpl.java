@@ -48,6 +48,9 @@ import org.springframework.util.StringUtils;
 @Service("SDFileServiceImpl")
 public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> implements ISDFileService {
 
+    @Autowired
+    @Lazy
+    ISDFileService proxyService;
 
     protected int batchSize = 500;
 
@@ -133,21 +136,49 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<SDFile> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SDFile> create = new ArrayList<>();
+        List<SDFile> update = new ArrayList<>();
+        for (SDFile et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<SDFile> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SDFile> create = new ArrayList<>();
+        List<SDFile> update = new ArrayList<>();
+        for (SDFile et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

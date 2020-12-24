@@ -54,6 +54,9 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Autowired
     @Lazy
     protected cn.ibizlab.core.workflow.service.IWFUserService wfuserService;
+    @Autowired
+    @Lazy
+    IWFMemberService proxyService;
 
     protected int batchSize = 500;
 
@@ -144,7 +147,7 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -152,7 +155,21 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Transactional
     public boolean saveBatch(Collection<WFMember> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<WFMember> create = new ArrayList<>();
+        List<WFMember> update = new ArrayList<>();
+        for (WFMember et : list) {
+            if (ObjectUtils.isEmpty(et.getMemberid()) || ObjectUtils.isEmpty(getById(et.getMemberid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -160,7 +177,21 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Transactional
     public void saveBatch(List<WFMember> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<WFMember> create = new ArrayList<>();
+        List<WFMember> update = new ArrayList<>();
+        for (WFMember et : list) {
+            if (ObjectUtils.isEmpty(et.getMemberid()) || ObjectUtils.isEmpty(getById(et.getMemberid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 
@@ -173,9 +204,6 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
         this.remove(new QueryWrapper<WFMember>().eq("groupid",id));
     }
 
-    @Autowired
-    @Lazy
-    IWFMemberService proxyService;
 	@Override
     public void saveByGroupid(String id,List<WFMember> list) {
         if(list==null)

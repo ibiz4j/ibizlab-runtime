@@ -51,6 +51,9 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
     @Autowired
     @Lazy
     protected cn.ibizlab.core.pay.service.IPayTradeService paytradeService;
+    @Autowired
+    @Lazy
+    IPayOpenAccessService proxyService;
 
     protected int batchSize = 500;
 
@@ -136,21 +139,49 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<PayOpenAccess> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<PayOpenAccess> create = new ArrayList<>();
+        List<PayOpenAccess> update = new ArrayList<>();
+        for (PayOpenAccess et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<PayOpenAccess> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<PayOpenAccess> create = new ArrayList<>();
+        List<PayOpenAccess> update = new ArrayList<>();
+        for (PayOpenAccess et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

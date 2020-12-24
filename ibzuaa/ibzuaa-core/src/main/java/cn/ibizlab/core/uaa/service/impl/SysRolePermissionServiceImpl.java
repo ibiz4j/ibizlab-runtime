@@ -54,6 +54,9 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Autowired
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysRoleService sysroleService;
+    @Autowired
+    @Lazy
+    ISysRolePermissionService proxyService;
 
     protected int batchSize = 500;
 
@@ -144,7 +147,7 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -152,7 +155,21 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Transactional
     public boolean saveBatch(Collection<SysRolePermission> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysRolePermission> create = new ArrayList<>();
+        List<SysRolePermission> update = new ArrayList<>();
+        for (SysRolePermission et : list) {
+            if (ObjectUtils.isEmpty(et.getRolepermissionid()) || ObjectUtils.isEmpty(getById(et.getRolepermissionid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -160,7 +177,21 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Transactional
     public void saveBatch(List<SysRolePermission> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysRolePermission> create = new ArrayList<>();
+        List<SysRolePermission> update = new ArrayList<>();
+        for (SysRolePermission et : list) {
+            if (ObjectUtils.isEmpty(et.getRolepermissionid()) || ObjectUtils.isEmpty(getById(et.getRolepermissionid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

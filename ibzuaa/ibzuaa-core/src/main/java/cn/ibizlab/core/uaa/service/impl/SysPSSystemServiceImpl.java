@@ -48,6 +48,9 @@ import org.springframework.util.StringUtils;
 @Service("SysPSSystemServiceImpl")
 public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPSSystem> implements ISysPSSystemService {
 
+    @Autowired
+    @Lazy
+    ISysPSSystemService proxyService;
 
     protected int batchSize = 500;
 
@@ -149,21 +152,49 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<SysPSSystem> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysPSSystem> create = new ArrayList<>();
+        List<SysPSSystem> update = new ArrayList<>();
+        for (SysPSSystem et : list) {
+            if (ObjectUtils.isEmpty(et.getPssystemid()) || ObjectUtils.isEmpty(getById(et.getPssystemid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<SysPSSystem> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysPSSystem> create = new ArrayList<>();
+        List<SysPSSystem> update = new ArrayList<>();
+        for (SysPSSystem et : list) {
+            if (ObjectUtils.isEmpty(et.getPssystemid()) || ObjectUtils.isEmpty(getById(et.getPssystemid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
     @Override

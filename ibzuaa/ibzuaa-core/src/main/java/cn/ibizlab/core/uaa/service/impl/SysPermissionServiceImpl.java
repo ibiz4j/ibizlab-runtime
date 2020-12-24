@@ -51,6 +51,9 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     @Autowired
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysRolePermissionService sysrolepermissionService;
+    @Autowired
+    @Lazy
+    ISysPermissionService proxyService;
 
     protected int batchSize = 500;
 
@@ -138,21 +141,49 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<SysPermission> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysPermission> create = new ArrayList<>();
+        List<SysPermission> update = new ArrayList<>();
+        for (SysPermission et : list) {
+            if (ObjectUtils.isEmpty(et.getPermissionid()) || ObjectUtils.isEmpty(getById(et.getPermissionid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<SysPermission> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysPermission> create = new ArrayList<>();
+        List<SysPermission> update = new ArrayList<>();
+        for (SysPermission et : list) {
+            if (ObjectUtils.isEmpty(et.getPermissionid()) || ObjectUtils.isEmpty(getById(et.getPermissionid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

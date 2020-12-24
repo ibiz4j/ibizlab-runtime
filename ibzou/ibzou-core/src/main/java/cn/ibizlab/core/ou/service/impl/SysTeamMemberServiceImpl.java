@@ -57,6 +57,9 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Autowired
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysTeamService systeamService;
+    @Autowired
+    @Lazy
+    ISysTeamMemberService proxyService;
 
     protected int batchSize = 500;
 
@@ -147,7 +150,7 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -155,7 +158,21 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Transactional
     public boolean saveBatch(Collection<SysTeamMember> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysTeamMember> create = new ArrayList<>();
+        List<SysTeamMember> update = new ArrayList<>();
+        for (SysTeamMember et : list) {
+            if (ObjectUtils.isEmpty(et.getTeammemberid()) || ObjectUtils.isEmpty(getById(et.getTeammemberid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -163,7 +180,21 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Transactional
     public void saveBatch(List<SysTeamMember> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysTeamMember> create = new ArrayList<>();
+        List<SysTeamMember> update = new ArrayList<>();
+        for (SysTeamMember et : list) {
+            if (ObjectUtils.isEmpty(et.getTeammemberid()) || ObjectUtils.isEmpty(getById(et.getTeammemberid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

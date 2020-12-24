@@ -56,6 +56,9 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     protected cn.ibizlab.core.ou.service.ISysEmployeeService sysemployeeService;
 
     protected cn.ibizlab.core.ou.service.ISysOrganizationService sysorganizationService = this;
+    @Autowired
+    @Lazy
+    ISysOrganizationService proxyService;
 
     protected int batchSize = 500;
 
@@ -160,7 +163,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -168,7 +171,21 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public boolean saveBatch(Collection<SysOrganization> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysOrganization> create = new ArrayList<>();
+        List<SysOrganization> update = new ArrayList<>();
+        for (SysOrganization et : list) {
+            if (ObjectUtils.isEmpty(et.getOrgid()) || ObjectUtils.isEmpty(getById(et.getOrgid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -176,7 +193,21 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public void saveBatch(List<SysOrganization> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysOrganization> create = new ArrayList<>();
+        List<SysOrganization> update = new ArrayList<>();
+        for (SysOrganization et : list) {
+            if (ObjectUtils.isEmpty(et.getOrgid()) || ObjectUtils.isEmpty(getById(et.getOrgid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

@@ -57,6 +57,9 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Autowired
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysPostService syspostService;
+    @Autowired
+    @Lazy
+    ISysDeptMemberService proxyService;
 
     protected int batchSize = 500;
 
@@ -147,7 +150,7 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -155,7 +158,21 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Transactional
     public boolean saveBatch(Collection<SysDeptMember> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysDeptMember> create = new ArrayList<>();
+        List<SysDeptMember> update = new ArrayList<>();
+        for (SysDeptMember et : list) {
+            if (ObjectUtils.isEmpty(et.getMemberid()) || ObjectUtils.isEmpty(getById(et.getMemberid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -163,7 +180,21 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Transactional
     public void saveBatch(List<SysDeptMember> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysDeptMember> create = new ArrayList<>();
+        List<SysDeptMember> update = new ArrayList<>();
+        for (SysDeptMember et : list) {
+            if (ObjectUtils.isEmpty(et.getMemberid()) || ObjectUtils.isEmpty(getById(et.getMemberid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

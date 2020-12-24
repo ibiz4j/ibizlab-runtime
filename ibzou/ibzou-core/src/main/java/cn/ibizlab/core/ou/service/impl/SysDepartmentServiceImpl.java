@@ -59,6 +59,9 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Autowired
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysOrganizationService sysorganizationService;
+    @Autowired
+    @Lazy
+    ISysDepartmentService proxyService;
 
     protected int batchSize = 500;
 
@@ -155,7 +158,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
@@ -163,7 +166,21 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Transactional
     public boolean saveBatch(Collection<SysDepartment> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysDepartment> create = new ArrayList<>();
+        List<SysDepartment> update = new ArrayList<>();
+        for (SysDepartment et : list) {
+            if (ObjectUtils.isEmpty(et.getDeptid()) || ObjectUtils.isEmpty(getById(et.getDeptid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
@@ -171,7 +188,21 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Transactional
     public void saveBatch(List<SysDepartment> list) {
         list.forEach(item->fillParentData(item));
-        saveOrUpdateBatch(list,batchSize);
+        List<SysDepartment> create = new ArrayList<>();
+        List<SysDepartment> update = new ArrayList<>();
+        for (SysDepartment et : list) {
+            if (ObjectUtils.isEmpty(et.getDeptid()) || ObjectUtils.isEmpty(getById(et.getDeptid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 
@@ -203,9 +234,6 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         this.remove(new QueryWrapper<SysDepartment>().eq("orgid",orgid));
     }
 
-    @Autowired
-    @Lazy
-    ISysDepartmentService proxyService;
 	@Override
     public void saveByOrgid(String orgid,List<SysDepartment> list) {
         if(list==null)

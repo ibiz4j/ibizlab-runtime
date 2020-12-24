@@ -48,6 +48,9 @@ import org.springframework.util.StringUtils;
 @Service("SysOpenAccessServiceImpl")
 public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, SysOpenAccess> implements ISysOpenAccessService {
 
+    @Autowired
+    @Lazy
+    ISysOpenAccessService proxyService;
 
     protected int batchSize = 500;
 
@@ -133,21 +136,49 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<SysOpenAccess> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysOpenAccess> create = new ArrayList<>();
+        List<SysOpenAccess> update = new ArrayList<>();
+        for (SysOpenAccess et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<SysOpenAccess> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysOpenAccess> create = new ArrayList<>();
+        List<SysOpenAccess> update = new ArrayList<>();
+        for (SysOpenAccess et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

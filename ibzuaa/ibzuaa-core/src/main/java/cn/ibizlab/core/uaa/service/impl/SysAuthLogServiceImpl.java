@@ -48,6 +48,9 @@ import org.springframework.util.StringUtils;
 @Service("SysAuthLogServiceImpl")
 public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuthLog> implements ISysAuthLogService {
 
+    @Autowired
+    @Lazy
+    ISysAuthLogService proxyService;
 
     protected int batchSize = 500;
 
@@ -133,21 +136,49 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<SysAuthLog> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysAuthLog> create = new ArrayList<>();
+        List<SysAuthLog> update = new ArrayList<>();
+        for (SysAuthLog et : list) {
+            if (ObjectUtils.isEmpty(et.getLogid()) || ObjectUtils.isEmpty(getById(et.getLogid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<SysAuthLog> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<SysAuthLog> create = new ArrayList<>();
+        List<SysAuthLog> update = new ArrayList<>();
+        for (SysAuthLog et : list) {
+            if (ObjectUtils.isEmpty(et.getLogid()) || ObjectUtils.isEmpty(getById(et.getLogid()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 

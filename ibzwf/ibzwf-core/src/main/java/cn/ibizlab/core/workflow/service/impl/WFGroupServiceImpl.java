@@ -51,6 +51,9 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     @Autowired
     @Lazy
     protected cn.ibizlab.core.workflow.service.IWFMemberService wfmemberService;
+    @Autowired
+    @Lazy
+    IWFGroupService proxyService;
 
     protected int batchSize = 500;
 
@@ -140,21 +143,49 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? this.update(et) : this.create(et);
+            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
         }
     }
 
     @Override
     @Transactional
     public boolean saveBatch(Collection<WFGroup> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<WFGroup> create = new ArrayList<>();
+        List<WFGroup> update = new ArrayList<>();
+        for (WFGroup et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
         return true;
     }
 
     @Override
     @Transactional
     public void saveBatch(List<WFGroup> list) {
-        saveOrUpdateBatch(list,batchSize);
+        List<WFGroup> create = new ArrayList<>();
+        List<WFGroup> update = new ArrayList<>();
+        for (WFGroup et : list) {
+            if (ObjectUtils.isEmpty(et.getId()) || ObjectUtils.isEmpty(getById(et.getId()))) {
+                create.add(et);
+            } else {
+                update.add(et);
+            }
+        }
+        if (create.size() > 0) {
+            proxyService.createBatch(create);
+        }
+        if (update.size() > 0) {
+            proxyService.updateBatch(update);
+        }
     }
 
 
