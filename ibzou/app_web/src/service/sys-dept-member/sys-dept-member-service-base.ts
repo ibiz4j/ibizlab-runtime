@@ -501,6 +501,62 @@ export default class SysDeptMemberServiceBase extends EntityService {
     }
 
     /**
+     * SaveDeptMember接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysDeptMemberServiceBase
+     */
+    public async SaveDeptMember(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysorganization && context.sysdepartment && context.sysemployee && context.sysdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/sysdeptmembers/${context.sysdeptmember}/savedeptmember`,data,isloading);
+            
+            return res;
+        }
+        if(context.sysorganization && context.sysemployee && context.sysdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/sysdeptmembers/${context.sysdeptmember}/savedeptmember`,data,isloading);
+            
+            return res;
+        }
+        if(context.sysorganization && context.sysdepartment && context.sysdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysdeptmembers/${context.sysdeptmember}/savedeptmember`,data,isloading);
+            
+            return res;
+        }
+        if(context.sysdepartment && context.sysemployee && context.sysdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/sysdeptmembers/${context.sysdeptmember}/savedeptmember`,data,isloading);
+            
+            return res;
+        }
+        if(context.sysemployee && context.sysdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysemployees/${context.sysemployee}/sysdeptmembers/${context.sysdeptmember}/savedeptmember`,data,isloading);
+            
+            return res;
+        }
+        if(context.sysdepartment && context.sysdeptmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysdeptmembers/${context.sysdeptmember}/savedeptmember`,data,isloading);
+            
+            return res;
+        }
+            let res:any = Http.getInstance().post(`/sysdeptmembers/${context.sysdeptmember}/savedeptmember`,data,isloading);
+            return res;
+    }
+
+    /**
      * FetchDefault接口方法
      *
      * @param {*} [context={}]

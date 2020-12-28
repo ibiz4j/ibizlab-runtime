@@ -120,6 +120,17 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysuserService.checkKey(sysuserMapping.toDomain(sysuserdto)));
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-DeleteSysUser-all')")
+    @ApiOperation(value = "删除用户信息", tags = {"系统用户" },  notes = "删除用户信息")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/deletesysuser")
+    public ResponseEntity<SysUserDTO> deleteSysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserDTO sysuserdto) {
+        SysUser domain = sysuserMapping.toDomain(sysuserdto);
+        domain.setUserid(sysuser_id);
+        domain = sysuserService.deleteSysUser(domain);
+        sysuserdto = sysuserMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserdto);
+    }
+
     @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdto),'ibzuaa-SysUser-Save')")
     @ApiOperation(value = "保存系统用户", tags = {"系统用户" },  notes = "保存系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
@@ -133,6 +144,17 @@ public class SysUserResource {
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
         sysuserService.saveBatch(sysuserMapping.toDomain(sysuserdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-SaveSysUser-all')")
+    @ApiOperation(value = "保存用户信息", tags = {"系统用户" },  notes = "保存用户信息")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/{sysuser_id}/savesysuser")
+    public ResponseEntity<SysUserDTO> saveSysUser(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserDTO sysuserdto) {
+        SysUser domain = sysuserMapping.toDomain(sysuserdto);
+        domain.setUserid(sysuser_id);
+        domain = sysuserService.saveSysUser(domain);
+        sysuserdto = sysuserMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserdto);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-searchDefault-all') and hasPermission(#context,'ibzuaa-SysUser-Get')")

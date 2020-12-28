@@ -1,0 +1,31 @@
+package cn.ibizlab.uaa.logic.sysuserlogic.deletesysuser;
+import java.util.Map;
+import java.util.HashMap;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
+import cn.ibizlab.util.errors.BadRequestAlertException;
+global cn.ibizlab.core.uaa.domain.SysUser sysuserdeletesysuserdefault;
+global cn.ibizlab.core.uaa.service.ISysUserService sysuserservice;
+global cn.ibizlab.core.uaa.service.ISysUserService iBzSysSysuserDefaultService;
+global cn.ibizlab.util.security.AuthenticationUser curuser;
+
+
+no-loop
+
+//逻辑处理节点[同步删除用户]
+rule "deaction1"
+ruleflow-group "sysuserdeletesysuserdeaction1"
+    when
+    then
+    sysuserservice.remove(sysuserdeletesysuserdefault.getUserid());
+    update(sysuserdeletesysuserdefault);//更新fact中变量值
+    end
+
+//逻辑处理节点[开始]
+rule "begin"
+ruleflow-group "sysuserdeletesysuserbegin"
+    when
+    then
+    end
+

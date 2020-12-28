@@ -76,6 +76,13 @@ public class SysEmployeeSearchContext extends QueryWrapperContext<SysEmployee> {
             this.getSearchCond().eq("mdeptid", n_mdeptid_eq);
         }
     }
+	private String n_mdeptid_in;//[主部门]
+	public void setN_mdeptid_in(String n_mdeptid_in) {
+        this.n_mdeptid_in = n_mdeptid_in;
+        if(!ObjectUtils.isEmpty(this.n_mdeptid_in)){
+			this.getSearchCond().in("mdeptid",this.n_mdeptid_in.split(";"));
+        }
+    }
 	private String n_mdeptname_like;//[主部门名称]
 	public void setN_mdeptname_like(String n_mdeptname_like) {
         this.n_mdeptname_like = n_mdeptname_like;
@@ -97,6 +104,13 @@ public class SysEmployeeSearchContext extends QueryWrapperContext<SysEmployee> {
             this.getSearchCond().eq("postid", n_postid_eq);
         }
     }
+	private String n_postid_in;//[岗位标识]
+	public void setN_postid_in(String n_postid_in) {
+        this.n_postid_in = n_postid_in;
+        if(!ObjectUtils.isEmpty(this.n_postid_in)){
+			this.getSearchCond().in("postid",this.n_postid_in.split(";"));
+        }
+    }
 	private String n_postname_eq;//[岗位名称]
 	public void setN_postname_eq(String n_postname_eq) {
         this.n_postname_eq = n_postname_eq;
@@ -116,6 +130,13 @@ public class SysEmployeeSearchContext extends QueryWrapperContext<SysEmployee> {
         this.n_orgid_eq = n_orgid_eq;
         if(!ObjectUtils.isEmpty(this.n_orgid_eq)){
             this.getSearchCond().eq("orgid", n_orgid_eq);
+        }
+    }
+	private String n_orgid_in;//[单位]
+	public void setN_orgid_in(String n_orgid_in) {
+        this.n_orgid_in = n_orgid_in;
+        if(!ObjectUtils.isEmpty(this.n_orgid_in)){
+			this.getSearchCond().in("orgid",this.n_orgid_in.split(";"));
         }
     }
 	private String n_orgcode_leftlike;//[单位代码]

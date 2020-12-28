@@ -6,16 +6,15 @@ import cn.ibizlab.core.uaa.extensions.domain.PermissionNode;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
 import cn.ibizlab.core.uaa.extensions.helper.DingTalkHelper;
 import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
-import cn.ibizlab.core.uaa.service.ISysPSSystemService;
-import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
-import cn.ibizlab.core.uaa.service.ISysRoleService;
-import cn.ibizlab.core.uaa.service.ISysUserRoleService;
+import cn.ibizlab.core.uaa.filter.SysUserSearchContext;
+import cn.ibizlab.core.uaa.service.*;
 import cn.ibizlab.util.domain.Token;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.security.AuthTokenUtil;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +26,8 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,7 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.sql.Wrapper;
 import java.util.*;
 
 @Service
@@ -397,6 +399,38 @@ public class UAACoreService {
             return true;
         }
         return false;
+    }
+
+
+    @Autowired
+    private ISysUserService userService;;
+
+    @Cacheable( value="ibzuaa-model",key = "'catalog:SysOperator'")
+    public JSONObject getOptions(String catalog) {
+        return getOptions(catalog,null);
+    }
+
+    public JSONObject getOptions(String catalog, SysUserSearchContext context) {
+        JSONObject jo = new JSONObject();
+        jo.put("srfkey", catalog);
+        jo.put("emptytext", "");
+        List<JSONObject> list = new ArrayList<>();
+
+        userService.list(context==null? Wrappers.query():context.getSelectCond()).forEach(item -> {
+            JSONObject option = new JSONObject();
+            option.put("id", item.getUserid());
+            option.put("value", item.getUserid());
+            option.put("label", item.getPersonname());
+            option.put("text", item.getPersonname());
+            option.put("code", item.getUsercode());
+            option.put("name", item.getUsername());
+            option.put("filter",item.getOrgid());
+            list.add(option);
+        });
+
+        jo.put("items",list);
+
+        return jo;
     }
 
 }

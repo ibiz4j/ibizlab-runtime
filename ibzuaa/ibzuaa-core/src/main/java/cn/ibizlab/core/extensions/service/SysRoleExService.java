@@ -2,7 +2,7 @@ package cn.ibizlab.core.extensions.service;
 
 import cn.ibizlab.core.uaa.filter.SysRoleSearchContext;
 import cn.ibizlab.core.uaa.service.impl.SysRoleServiceImpl;
-import liquibase.pro.packaged.S;
+import com.alibaba.fastjson.JSONObject;
 import liquibase.util.StringUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -53,25 +53,35 @@ public class SysRoleExService extends SysRoleServiceImpl {
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRole> pages = baseMapper.searchNoRepeat(context.getPages(),context,context.getSelectCond());
 
         if(!ObjectUtils.isEmpty(sysRoleId)){
-            List<SysRole> childRole = new ArrayList<>();
-            List<SysRole> grandSonRole = new ArrayList<>();
-            findSRelation(childRole,pages.getRecords(),sysRoleId);
-            grandSonRole.addAll(childRole);
-            for (SysRole sr : grandSonRole){
-                findSRelation(childRole,pages.getRecords(),sr.getRoleid());
+            List<SysRole> childRoles = new ArrayList<>();
+            List<SysRole> grandSonRoles = new ArrayList<>();
+            findSRelation(childRoles,pages.getRecords(),sysRoleId);
+            if(!ObjectUtils.isEmpty(childRoles)){
+                List<SysRole> childRoleTemps = new ArrayList<>(childRoles);
+                for (SysRole sr : childRoleTemps){
+                    findSRelation(childRoles,pages.getRecords(),sr.getRoleid());
+                }
+            }else{
+                List<JSONObject> sysRoles =  baseMapper.selectBySQL("select sys_roleId,proleId from ibzRole where proleId is not null",new HashMap());
+                findGSRelation(grandSonRoles,sysRoles,sysRoleId);
+                List<SysRole> grandSonRoleTemps = new ArrayList<>(grandSonRoles);
+                for (SysRole sr : grandSonRoleTemps){
+                    findSRelation(grandSonRoles,pages.getRecords(),sr.getRoleid());
+                }
+                newResult.addAll(grandSonRoles);
             }
-            newResult.addAll(childRole);
-            newResult.addAll(findPRelation(sysRoleId,new ArrayList<>()));
+            newResult.addAll(childRoles);
+            newResult.addAll(Objects.requireNonNull(findPRelation(sysRoleId, new ArrayList<>())));
             newResult = newResult.stream().distinct().collect(Collectors.toList());
         }
-        for (int i = 0 ;i < newResult.size();i++){
-            for (int j = 0;j < pages.getRecords().size();j++){
-                if(pages.getRecords().get(j).getRoleid().equals(newResult.get(i).getRoleid())){
+        for (SysRole sysRole : newResult) {
+            for (int j = 0; j < pages.getRecords().size(); j++) {
+                if (pages.getRecords().get(j).getRoleid().equals(sysRole.getRoleid())) {
                     pages.getRecords().remove(j);
                 }
             }
         }
-        return new PageImpl<>(pages.getRecords(), context.getPageable(), pages.getTotal() - newResult.size());
+        return new PageImpl<>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
     /**
@@ -110,5 +120,32 @@ public class SysRoleExService extends SysRoleServiceImpl {
                 }
             }
         }
+
+    /**
+     * 递归获取子节点下的子节点
+     * @param grandSonRole 返回的结果
+     * @param objectsList  数据库查询出来的所有角色集合
+     * @param pId      父id
+     */
+    private void findGSRelation(List<SysRole> grandSonRole,List<JSONObject> objectsList, String pId) {
+        List<SysRole> sysRoles = new ArrayList<>();
+        SysRole sysRole;
+
+        for (JSONObject jsonObject : objectsList) {
+            sysRole = new SysRole();
+            sysRole.setRoleid(jsonObject.get("sys_roleId").toString());
+            sysRole.setProleid(jsonObject.get("proleId") == null ? "" : jsonObject.get("proleId").toString());
+            sysRoles.add(sysRole);
+        }
+
+        for (SysRole role : sysRoles) {
+            if (!StringUtils.isEmpty(role.getProleid())) {
+                if (role.getProleid().equals(pId)) {
+                    findGSRelation(grandSonRole,objectsList,role.getRoleid());
+                    grandSonRole.add(role);
+                }
+            }
+        }
     }
+}
 

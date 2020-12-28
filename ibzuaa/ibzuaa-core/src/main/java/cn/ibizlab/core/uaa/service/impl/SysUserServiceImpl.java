@@ -54,6 +54,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Autowired
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysUserRoleService sysuserroleService;
+
+    @Autowired
+    @Lazy
+    protected cn.ibizlab.core.uaa.service.logic.ISysUserdeleteSysUserLogic deletesysuserLogic;
+
+    @Autowired
+    @Lazy
+    protected cn.ibizlab.core.uaa.service.logic.ISysUsersaveSysUserLogic savesysuserLogic;
     @Autowired
     @Lazy
     ISysUserService proxyService;
@@ -129,6 +137,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
     @Override
     @Transactional
+    public SysUser deleteSysUser(SysUser et) {
+        deletesysuserLogic.execute(et);
+         return et ;
+    }
+
+    @Override
+    @Transactional
     public boolean save(SysUser et) {
         if(!saveOrUpdate(et)) {
             return false;
@@ -185,6 +200,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (update.size() > 0) {
             proxyService.updateBatch(update);
         }
+    }
+
+    @Override
+    @Transactional
+    public SysUser saveSysUser(SysUser et) {
+        savesysuserLogic.execute(et);
+         return et ;
     }
 
 

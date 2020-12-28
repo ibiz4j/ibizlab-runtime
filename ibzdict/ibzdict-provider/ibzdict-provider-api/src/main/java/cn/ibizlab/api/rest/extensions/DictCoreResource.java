@@ -10,6 +10,7 @@ import cn.ibizlab.core.dict.extensions.vo.CodeItem;
 import cn.ibizlab.core.dict.extensions.vo.CodeList;
 import cn.ibizlab.core.dict.extensions.vo.Option;
 import cn.ibizlab.core.dict.filter.DictCatalogSearchContext;
+import cn.ibizlab.core.dict.filter.DictOptionSearchContext;
 import cn.ibizlab.core.dict.service.IDictCatalogService;
 import cn.ibizlab.core.dict.service.IDictOptionService;
 import cn.ibizlab.util.annotation.VersionCheck;
@@ -55,57 +56,91 @@ public class DictCoreResource {
     @Lazy
     private DictCoreService dictCoreService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/{code}")
-    public ResponseEntity<Catalog> getCatalogs(@PathVariable("code") String code) {
-        Catalog catalog = dictCoreService.getDictCatalog(code);
+    @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/catalogs/{code}")
+    public ResponseEntity<Catalog> getCatalogs(@PathVariable("code") String code,DictOptionSearchContext context) {
+        Catalog catalog = null;
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            catalog = dictCoreService.getDictCatalog(code);
+        else
+            catalog = dictCoreService.getDictCatalog(code,context);
         return ResponseEntity.status(HttpStatus.OK).body(catalog);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/{code}/options")
-    public ResponseEntity<List<Option>> getOptions(@PathVariable("code") String code) {
-        Catalog catalog = dictCoreService.getDictCatalog(code);
+    @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/catalogs/{code}/options")
+    public ResponseEntity<List<Option>> getOptions(@PathVariable("code") String code,DictOptionSearchContext context) {
+        Catalog catalog = null;
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            catalog = dictCoreService.getDictCatalog(code);
+        else
+            catalog = dictCoreService.getDictCatalog(code,context);
         return ResponseEntity.status(HttpStatus.OK).body(catalog.getOptions());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/catalogs/{code}/options")
-    public ResponseEntity<List<Option>> getOptions(@PathVariable("code") String code,@RequestBody List<String> values) {
-        List<Option> list = new ArrayList<>();
-        optionService.list(Wrappers.<DictOption>lambdaQuery().eq(DictOption::getCatalog,code).in(DictOption::getValue,values).orderByAsc(DictOption::getShoworder)).forEach(item ->
-                {
-                    Map<String,Object> extension = new HashMap<>();
-                    if(!StringUtils.isEmpty(item.getExtension()))
-                        extension = JSONObject.parseObject(item.getExtension(),Map.class);
-                    list.add(new Option().setValue(item.getValue()).setId(item.getValue())
-                            .setDisabled(((item.getDisabled()!=null && item.getDisabled()==1)||(item.getExpired()!=null && item.getExpired()==1))?true:false)
-                            .setFilter(item.getFilter()).setIconClass(item.getIconClass()).setLabel(item.getLabel()).setParent(item.getParent()).setExtension(extension)
-                    );
-                }
-        );
-        return ResponseEntity.status(HttpStatus.OK).body(list);
-    }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/{code}")
-    public ResponseEntity<CodeList> getCodeList(@PathVariable("code") String code) {
-        CodeList catalog = dictCoreService.getCodeListCatalog(code);
+
+    @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/codelist/{code}")
+    public ResponseEntity<CodeList> getCodeList(@PathVariable("code") String code,DictOptionSearchContext context) {
+        CodeList catalog = null;
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            catalog = dictCoreService.getCodeListCatalog(code);
+        else
+            catalog = dictCoreService.getCodeListCatalog(code,context);
         return ResponseEntity.status(HttpStatus.OK).body(catalog);
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/codelist/{code}/items")
-    public ResponseEntity<List<CodeItem>> getCodeItems(@PathVariable("code") String code, @RequestBody List<String> values) {
-        List<CodeItem> list = new ArrayList<>();
-        optionService.list(Wrappers.<DictOption>lambdaQuery().eq(DictOption::getCatalog,code).in(DictOption::getValue,values).orderByAsc(DictOption::getShoworder)).forEach(item ->
-                {
-                    Map<String,Object> extension = new HashMap<>();
-                    if(!StringUtils.isEmpty(item.getExtension()))
-                        extension = JSONObject.parseObject(item.getExtension(),Map.class);
-                    list.add(new CodeItem().setValue(item.getValue()).setId(item.getValue())
-                            .setDisabled(((item.getDisabled()!=null && item.getDisabled()==1)||(item.getExpired()!=null && item.getExpired()==1))?true:false)
-                            .setFilter(item.getFilter()).setIconClass(item.getIconClass()).setLabel(item.getLabel()).setParent(item.getParent()).setExtension(extension)
-                    );
-                }
-        );
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+    @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/codelist/{code}/items")
+    public ResponseEntity<List<CodeItem>> getCodeItems(@PathVariable("code") String code,DictOptionSearchContext context) {
+        CodeList catalog = null;
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            catalog = dictCoreService.getCodeListCatalog(code);
+        else
+            catalog = dictCoreService.getCodeListCatalog(code,context);
+        return ResponseEntity.status(HttpStatus.OK).body(catalog.getOptions());
+    }
+
+
+    @RequestMapping(method = {RequestMethod.POST}, value = "/dictionarys/catalogs/{code}")
+    public ResponseEntity<Catalog> catalogs(@PathVariable("code") String code, @RequestBody(required = false) DictOptionSearchContext context) {
+        Catalog catalog = null;
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            catalog = dictCoreService.getDictCatalog(code);
+        else
+            catalog = dictCoreService.getDictCatalog(code,context);
+        return ResponseEntity.status(HttpStatus.OK).body(catalog);
+    }
+
+    @RequestMapping(method = {RequestMethod.POST}, value = "/dictionarys/catalogs/{code}/options")
+    public ResponseEntity<List<Option>> options(@PathVariable("code") String code,@RequestBody(required = false) DictOptionSearchContext context) {
+        Catalog catalog = null;
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            catalog = dictCoreService.getDictCatalog(code);
+        else
+            catalog = dictCoreService.getDictCatalog(code,context);
+        return ResponseEntity.status(HttpStatus.OK).body(catalog.getOptions());
+    }
+
+
+
+    @RequestMapping(method = {RequestMethod.POST}, value = "/dictionarys/codelist/{code}")
+    public ResponseEntity<CodeList> codeList(@PathVariable("code") String code,@RequestBody(required = false) DictOptionSearchContext context) {
+        CodeList catalog = null;
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            catalog = dictCoreService.getCodeListCatalog(code);
+        else
+            catalog = dictCoreService.getCodeListCatalog(code,context);
+        return ResponseEntity.status(HttpStatus.OK).body(catalog);
+    }
+
+
+    @RequestMapping(method = {RequestMethod.POST}, value = "/dictionarys/codelist/{code}/items")
+    public ResponseEntity<List<CodeItem>> codeItems(@PathVariable("code") String code, @RequestBody(required = false) DictOptionSearchContext context) {
+        CodeList catalog = null;
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            catalog = dictCoreService.getCodeListCatalog(code);
+        else
+            catalog = dictCoreService.getCodeListCatalog(code,context);
+        return ResponseEntity.status(HttpStatus.OK).body(catalog.getOptions());
     }
 
 

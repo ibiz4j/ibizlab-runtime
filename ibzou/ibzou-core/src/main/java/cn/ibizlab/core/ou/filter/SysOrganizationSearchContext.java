@@ -27,6 +27,13 @@ import cn.ibizlab.core.ou.domain.SysOrganization;
 @Data
 public class SysOrganizationSearchContext extends QueryWrapperContext<SysOrganization> {
 
+	private String n_orgid_in;//[单位标识]
+	public void setN_orgid_in(String n_orgid_in) {
+        this.n_orgid_in = n_orgid_in;
+        if(!ObjectUtils.isEmpty(this.n_orgid_in)){
+			this.getSearchCond().in("orgid",this.n_orgid_in.split(";"));
+        }
+    }
 	private String n_orgid_like;//[单位标识]
 	public void setN_orgid_like(String n_orgid_like) {
         this.n_orgid_like = n_orgid_like;
@@ -41,6 +48,13 @@ public class SysOrganizationSearchContext extends QueryWrapperContext<SysOrganiz
             this.getSearchCond().likeRight("orgcode", n_orgcode_leftlike);
         }
     }
+	private String n_orgcode_like;//[单位代码]
+	public void setN_orgcode_like(String n_orgcode_like) {
+        this.n_orgcode_like = n_orgcode_like;
+        if(!ObjectUtils.isEmpty(this.n_orgcode_like)){
+            this.getSearchCond().like("orgcode", n_orgcode_like);
+        }
+    }
 	private String n_orgname_like;//[名称]
 	public void setN_orgname_like(String n_orgname_like) {
         this.n_orgname_like = n_orgname_like;
@@ -53,6 +67,22 @@ public class SysOrganizationSearchContext extends QueryWrapperContext<SysOrganiz
         this.n_porgid_eq = n_porgid_eq;
         if(!ObjectUtils.isEmpty(this.n_porgid_eq)){
             this.getSearchCond().eq("porgid", n_porgid_eq);
+        }
+    }
+	private String n_porgid_in;//[上级单位]
+	public void setN_porgid_in(String n_porgid_in) {
+        this.n_porgid_in = n_porgid_in;
+        if(!ObjectUtils.isEmpty(this.n_porgid_in)){
+			this.getSearchCond().in("porgid",this.n_porgid_in.split(";"));
+        }
+    }
+	private String n_porgid_isnull;//[上级单位]
+	public void setN_porgid_isnull(String n_porgid_isnull) {
+        this.n_porgid_isnull = n_porgid_isnull;
+        if(!ObjectUtils.isEmpty(this.n_porgid_isnull)){
+			if(this.n_porgid_isnull.equals("1")){
+				this.getSearchCond().isNull("porgid");
+			}
         }
     }
 	private String n_shortname_like;//[单位简称]

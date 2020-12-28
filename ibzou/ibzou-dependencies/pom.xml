@@ -85,6 +85,7 @@
 
         <oracle.version>19.8.0.0</oracle.version>
         <postgresql.version>42.2.6</postgresql.version>
+        <rocketmq.version>4.7.0</rocketmq.version>
 
     </properties>
 
@@ -261,6 +262,7 @@
                 <version>${baomidou-jobs.version}</version>
             </dependency>
 
+
         </dependencies>
     </dependencyManagement>
 
@@ -344,13 +346,16 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
         <!--  mp动态数据源 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>${rocketmq.version}</version>
+        </dependency>
 
 
     </dependencies>

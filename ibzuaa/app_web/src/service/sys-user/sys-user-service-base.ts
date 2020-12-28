@@ -155,6 +155,20 @@ export default class SysUserServiceBase extends EntityService {
     }
 
     /**
+     * DeleteSysUser接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysUserServiceBase
+     */
+    public async DeleteSysUser(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().post(`/sysusers/${context.sysuser}/deletesysuser`,data,isloading);
+            return res;
+    }
+
+    /**
      * Save接口方法
      *
      * @param {*} [context={}]
@@ -168,6 +182,20 @@ export default class SysUserServiceBase extends EntityService {
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysusers/${context.sysuser}/save`,data,isloading);
             
+            return res;
+    }
+
+    /**
+     * SaveSysUser接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysUserServiceBase
+     */
+    public async SaveSysUser(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().post(`/sysusers/${context.sysuser}/savesysuser`,data,isloading);
             return res;
     }
 

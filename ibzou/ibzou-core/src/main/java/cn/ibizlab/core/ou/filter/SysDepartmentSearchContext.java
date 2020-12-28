@@ -27,6 +27,13 @@ import cn.ibizlab.core.ou.domain.SysDepartment;
 @Data
 public class SysDepartmentSearchContext extends QueryWrapperContext<SysDepartment> {
 
+	private String n_deptid_in;//[部门标识]
+	public void setN_deptid_in(String n_deptid_in) {
+        this.n_deptid_in = n_deptid_in;
+        if(!ObjectUtils.isEmpty(this.n_deptid_in)){
+			this.getSearchCond().in("deptid",this.n_deptid_in.split(";"));
+        }
+    }
 	private String n_deptcode_like;//[部门代码]
 	public void setN_deptcode_like(String n_deptcode_like) {
         this.n_deptcode_like = n_deptcode_like;
@@ -48,11 +55,34 @@ public class SysDepartmentSearchContext extends QueryWrapperContext<SysDepartmen
             this.getSearchCond().eq("orgid", n_orgid_eq);
         }
     }
+	private String n_orgid_in;//[单位]
+	public void setN_orgid_in(String n_orgid_in) {
+        this.n_orgid_in = n_orgid_in;
+        if(!ObjectUtils.isEmpty(this.n_orgid_in)){
+			this.getSearchCond().in("orgid",this.n_orgid_in.split(";"));
+        }
+    }
 	private String n_pdeptid_eq;//[上级部门]
 	public void setN_pdeptid_eq(String n_pdeptid_eq) {
         this.n_pdeptid_eq = n_pdeptid_eq;
         if(!ObjectUtils.isEmpty(this.n_pdeptid_eq)){
             this.getSearchCond().eq("pdeptid", n_pdeptid_eq);
+        }
+    }
+	private String n_pdeptid_in;//[上级部门]
+	public void setN_pdeptid_in(String n_pdeptid_in) {
+        this.n_pdeptid_in = n_pdeptid_in;
+        if(!ObjectUtils.isEmpty(this.n_pdeptid_in)){
+			this.getSearchCond().in("pdeptid",this.n_pdeptid_in.split(";"));
+        }
+    }
+	private String n_pdeptid_isnull;//[上级部门]
+	public void setN_pdeptid_isnull(String n_pdeptid_isnull) {
+        this.n_pdeptid_isnull = n_pdeptid_isnull;
+        if(!ObjectUtils.isEmpty(this.n_pdeptid_isnull)){
+			if(this.n_pdeptid_isnull.equals("1")){
+				this.getSearchCond().isNull("pdeptid");
+			}
         }
     }
 	private String n_bcode_like;//[业务编码]

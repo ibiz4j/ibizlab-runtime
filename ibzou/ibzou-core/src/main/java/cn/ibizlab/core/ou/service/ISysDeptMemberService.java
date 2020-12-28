@@ -36,6 +36,7 @@ public interface ISysDeptMemberService extends IService<SysDeptMember> {
     boolean checkKey(SysDeptMember et);
     boolean save(SysDeptMember et);
     void saveBatch(List<SysDeptMember> list);
+    SysDeptMember saveDeptMember(SysDeptMember et);
     Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context);
     List<SysDeptMember> selectByDeptid(String deptid);
     void removeByDeptid(String deptid);

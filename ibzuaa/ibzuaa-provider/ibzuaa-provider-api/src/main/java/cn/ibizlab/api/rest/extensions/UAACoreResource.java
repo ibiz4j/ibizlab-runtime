@@ -11,10 +11,12 @@ import cn.ibizlab.core.uaa.extensions.domain.PermissionNode;
 import cn.ibizlab.core.uaa.extensions.domain.SysStructure;
 import cn.ibizlab.core.uaa.extensions.service.SysAppService;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
+import cn.ibizlab.core.uaa.filter.SysUserSearchContext;
 import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
 import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.security.AuthenticationUser;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.ApiOperation;
@@ -123,39 +125,24 @@ public class UAACoreResource {
 	}
 
 
-    @Cacheable( value="ibzuaa-model",key = "'catalog:SysOperator'")
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/SysOperator")
+
+    @RequestMapping(method = {RequestMethod.GET}, value = {"/dictionarys/catalogs/SysOperator","/dictionarys/codelist/SysOperator"})
     public ResponseEntity<JSONObject> getCatalog() {
-        return getOptions("SysOperator");
+        return getOptions("SysOperator",new SysUserSearchContext());
     }
 
-    @Cacheable( value="ibzuaa-model",key = "'codelist:SysOperator'")
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/SysOperator")
-    public ResponseEntity<JSONObject> getCodeList() {
-        return getOptions("SysOperator");
+
+    @RequestMapping(method = {RequestMethod.POST}, value = {"/dictionarys/catalogs/SysOperator","/dictionarys/codelist/SysOperator"})
+    public ResponseEntity<JSONObject> getCatalog(@RequestBody(required = false) SysUserSearchContext context) {
+        return getOptions("SysOperator",context);
     }
 
-    @Autowired
-    private ISysUserService userService;;
 
-    public ResponseEntity<JSONObject> getOptions(String catalog) {
-        JSONObject jo = new JSONObject();
-        jo.put("srfkey", catalog);
-        jo.put("emptytext", "");
-        List<JSONObject> list = new ArrayList<>();
-
-        userService.list().forEach(item -> {
-            JSONObject option = new JSONObject();
-            option.put("id", item.getUserid());
-            option.put("value", item.getUserid());
-            option.put("label", item.getUsername());
-            option.put("text", item.getUsername());
-            list.add(option);
-        });
-
-        jo.put("items",list);
-
-        return ResponseEntity.status(HttpStatus.OK).body(jo);
+    public ResponseEntity<JSONObject> getOptions(String catalog,SysUserSearchContext context) {
+        if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
+            return ResponseEntity.status(HttpStatus.OK).body(uaaCoreService.getOptions(catalog));
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(uaaCoreService.getOptions(catalog,context));
     }
 
     /**

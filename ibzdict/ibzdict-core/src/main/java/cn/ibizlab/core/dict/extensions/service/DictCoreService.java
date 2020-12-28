@@ -6,6 +6,7 @@ import cn.ibizlab.core.dict.extensions.vo.Catalog;
 import cn.ibizlab.core.dict.extensions.vo.CodeItem;
 import cn.ibizlab.core.dict.extensions.vo.CodeList;
 import cn.ibizlab.core.dict.extensions.vo.Option;
+import cn.ibizlab.core.dict.filter.DictOptionSearchContext;
 import cn.ibizlab.core.dict.service.IDictCatalogService;
 import cn.ibizlab.core.dict.service.IDictOptionService;
 import com.alibaba.fastjson.JSONObject;
@@ -36,7 +37,10 @@ public class DictCoreService
     private IDictOptionService optionService;
 
     @Cacheable( value="dictcatalog",key = "'dict:'+#p0")
-    public Catalog getDictCatalog(String code)
+    public Catalog getDictCatalog(String code){
+        return getDictCatalog(code,new DictOptionSearchContext());
+    }
+    public Catalog getDictCatalog(String code, DictOptionSearchContext context)
     {
         Catalog catalog = new Catalog();
         DictCatalog dictCatalog = dictCatalogService.getOne(Wrappers.<DictCatalog>query().eq("ccode",code));
@@ -44,7 +48,7 @@ public class DictCoreService
 
 
         List<Option> list = new ArrayList<>();
-        optionService.list(Wrappers.<DictOption>query().eq("cid",dictCatalog.getId()).orderByAsc("showorder")).forEach(item->{
+        optionService.list(context.getSelectCond().eq("cid",dictCatalog.getId()).orderByAsc("showorder")).forEach(item->{
             Map<String,Object> extension = new HashMap<>();
             if(!StringUtils.isEmpty(item.getExtension()))
                 extension = JSONObject.parseObject(item.getExtension(),Map.class);
@@ -69,7 +73,10 @@ public class DictCoreService
 
 
     @Cacheable( value="dictcatalog",key = "'codelist:'+#p0")
-    public CodeList getCodeListCatalog(String code)
+    public CodeList getCodeListCatalog(String code){
+        return getCodeListCatalog(code,new DictOptionSearchContext());
+    }
+    public CodeList getCodeListCatalog(String code, DictOptionSearchContext context)
     {
         CodeList catalog = new CodeList();
         DictCatalog dictCatalog = dictCatalogService.getOne(Wrappers.<DictCatalog>query().eq("ccode",code));
@@ -77,7 +84,7 @@ public class DictCoreService
 
 
         List<CodeItem> list = new ArrayList<>();
-        optionService.list(Wrappers.<DictOption>query().eq("cid",dictCatalog.getId()).orderByAsc("showorder")).forEach(item->{
+        optionService.list(context.getSelectCond().eq("cid",dictCatalog.getId()).orderByAsc("showorder")).forEach(item->{
             Map<String,Object> extension = new HashMap<>();
             if(!StringUtils.isEmpty(item.getExtension()))
                 extension = JSONObject.parseObject(item.getExtension(),Map.class);

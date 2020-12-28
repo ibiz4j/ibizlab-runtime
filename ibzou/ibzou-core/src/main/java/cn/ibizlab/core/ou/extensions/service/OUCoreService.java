@@ -7,11 +7,23 @@ import cn.ibizlab.core.ou.extensions.domain.*;
 import cn.ibizlab.core.ou.extensions.mapping.SysDept2NodeMapping;
 import cn.ibizlab.core.ou.extensions.mapping.SysEmp2NodeMapping;
 import cn.ibizlab.core.ou.extensions.mapping.SysOrg2NodeMapping;
+import cn.ibizlab.core.ou.filter.SysDepartmentSearchContext;
+import cn.ibizlab.core.ou.filter.SysEmployeeSearchContext;
+import cn.ibizlab.core.ou.filter.SysOrganizationSearchContext;
+import cn.ibizlab.core.ou.service.ISysDepartmentService;
 import cn.ibizlab.core.ou.service.ISysEmployeeService;
+import cn.ibizlab.core.ou.service.ISysOrganizationService;
+import cn.ibizlab.util.filter.QueryWrapperContext;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -331,6 +343,72 @@ public class OUCoreService
 			list.add(child);
 			loopdept(child,store,list);
 		}
+	}
+
+	@Autowired
+	private ISysOrganizationService iibzOrganizationService;
+
+	@Autowired
+	private ISysDepartmentService iibzDepartmentService;
+
+	@Cacheable( value="ibzou-model",key = "'catalog:'+#p0")
+	public JSONObject getItems(String catalog) {
+		return getItems(catalog,null);
+	}
+	public JSONObject getItems(String catalog, QueryWrapperContext context) {
+		JSONObject jo=new JSONObject();
+		jo.put("srfkey",catalog);
+		jo.put("emptytext","");
+		List<JSONObject> list=new ArrayList<>();
+
+		if("IbzouOrg".equalsIgnoreCase(catalog))
+		{
+			QueryWrapper<SysOrganization> queryWrapper = context==null? Wrappers.query():context.getSelectCond();
+			queryWrapper.orderByAsc("showorder");
+			iibzOrganizationService.list(queryWrapper).forEach(item -> {
+				JSONObject option=new JSONObject();
+				option.put("id",item.getOrgid());
+				option.put("value",item.getOrgid());
+				option.put("label",item.getOrgname());
+				option.put("text",item.getOrgname());
+				list.add(option);
+			});
+		}
+		else if("IbzouDept".equalsIgnoreCase(catalog)||"IbzouOrgSector".equalsIgnoreCase(catalog))
+		{
+			QueryWrapper<SysDepartment> queryWrapper = context==null? Wrappers.query():context.getSelectCond();
+			queryWrapper.orderByAsc("showorder");
+			iibzDepartmentService.list(queryWrapper).forEach(item -> {
+				JSONObject option=new JSONObject();
+				option.put("id",item.getDeptid());
+				option.put("value",item.getDeptid());
+				option.put("label",item.getDeptname());
+				option.put("text",item.getDeptname());
+				option.put("filter",item.getOrgid());
+				list.add(option);
+			});
+		}
+		else if("IbzouUser".equalsIgnoreCase(catalog)||"IbzouOperator".equalsIgnoreCase(catalog)||"IbzouEmp".equalsIgnoreCase(catalog)||"IbzouPerson".equalsIgnoreCase(catalog))
+		{
+			QueryWrapper<SysEmployee> queryWrapper = context==null? Wrappers.query():context.getSelectCond();
+			queryWrapper.orderByAsc("showorder");
+			iibzEmployeeService.list(queryWrapper).forEach(item -> {
+				JSONObject option=new JSONObject();
+				option.put("id",item.getUserid());
+				option.put("value",item.getUserid());
+				option.put("label",item.getPersonname());
+				option.put("text",item.getPersonname());
+				option.put("code", item.getUsercode());
+				option.put("name", item.getUsername());
+				option.put("filter",item.getOrgid());
+				list.add(option);
+			});
+		}
+
+
+		jo.put("items",list);
+
+		return jo;
 	}
 
 }

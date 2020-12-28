@@ -1207,6 +1207,206 @@ mock.onPost(new RegExp(/^\/sysdeptmembers\/?([a-zA-Z0-9\-\;]{0,35})\/save$/)).re
     return [status, data];
 });
 
+    
+// SaveDeptMember
+mock.onPost(new RegExp(/^\/sysorganizations\/([a-zA-Z0-9\-\;]{1,35})\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/)).reply((config: any) => {
+    console.groupCollapsed("实体:sysdeptmember 方法: SaveDeptMember");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }
+    const paramArray:Array<any> = ['orgid','deptid','userid','memberid'];
+    const matchArray:any = new RegExp(/^\/sysorganizations\/([a-zA-Z0-9\-\;]{1,35})\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table({});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, {}];
+});
+
+    
+// SaveDeptMember
+mock.onPost(new RegExp(/^\/sysorganizations\/([a-zA-Z0-9\-\;]{1,35})\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/)).reply((config: any) => {
+    console.groupCollapsed("实体:sysdeptmember 方法: SaveDeptMember");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }
+    const paramArray:Array<any> = ['orgid','userid','memberid'];
+    const matchArray:any = new RegExp(/^\/sysorganizations\/([a-zA-Z0-9\-\;]{1,35})\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table({});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, {}];
+});
+
+    
+// SaveDeptMember
+mock.onPost(new RegExp(/^\/sysorganizations\/([a-zA-Z0-9\-\;]{1,35})\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/)).reply((config: any) => {
+    console.groupCollapsed("实体:sysdeptmember 方法: SaveDeptMember");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }
+    const paramArray:Array<any> = ['orgid','deptid','memberid'];
+    const matchArray:any = new RegExp(/^\/sysorganizations\/([a-zA-Z0-9\-\;]{1,35})\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table({});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, {}];
+});
+
+    
+// SaveDeptMember
+mock.onPost(new RegExp(/^\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/)).reply((config: any) => {
+    console.groupCollapsed("实体:sysdeptmember 方法: SaveDeptMember");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }
+    const paramArray:Array<any> = ['deptid','userid','memberid'];
+    const matchArray:any = new RegExp(/^\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table({});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, {}];
+});
+
+    
+// SaveDeptMember
+mock.onPost(new RegExp(/^\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/)).reply((config: any) => {
+    console.groupCollapsed("实体:sysdeptmember 方法: SaveDeptMember");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }
+    const paramArray:Array<any> = ['userid','memberid'];
+    const matchArray:any = new RegExp(/^\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table({});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, {}];
+});
+
+    
+// SaveDeptMember
+mock.onPost(new RegExp(/^\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/)).reply((config: any) => {
+    console.groupCollapsed("实体:sysdeptmember 方法: SaveDeptMember");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }
+    const paramArray:Array<any> = ['deptid','memberid'];
+    const matchArray:any = new RegExp(/^\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table({});
+    console.groupEnd();
+    console.groupEnd();
+    return [status, {}];
+});
+        
+// SaveDeptMember
+mock.onPost(new RegExp(/^\/sysdeptmembers\/?([a-zA-Z0-9\-\;]{0,35})\/savedeptmember$/)).reply((config: any) => {
+    console.groupCollapsed("实体:sysdeptmember 方法: SaveDeptMember");
+    console.table({url:config.url, method: config.method, data:config.data});
+    let status = MockAdapter.mockStatus(config);
+    if (status !== 200) {
+        return [status, null];
+    }    
+    const paramArray:Array<any> = ['memberid'];
+    const matchArray:any = new RegExp(/^\/sysdeptmembers\/([a-zA-Z0-9\-\;]{1,35})\/savedeptmember$/).exec(config.url);
+    let tempValue: any = {};
+    if(matchArray && matchArray.length >1 && paramArray && paramArray.length >0){
+        paramArray.forEach((item: any, index: number) => {
+            Object.defineProperty(tempValue, item, {
+                enumerable: true,
+                value: matchArray[index + 1]
+            });
+        });
+    }
+    //let items = mockDatas ? mockDatas : [];
+    //let _items = items.find((item: any) => Object.is(item.memberid, tempValue.memberid));
+      let data = JSON.parse(config.data);
+    mockDatas.forEach((item)=>{
+        if(item['memberid'] == tempValue['memberid'] ){
+            for(let value in data){
+              if(item.hasOwnProperty(value)){
+                  item[value] = data[value];
+              }
+            }
+        }
+    })
+    console.groupCollapsed("response数据  status: "+status+" data: ");
+    console.table(data);
+    console.groupEnd();
+    console.groupEnd();
+    return [status, data];
+});
+
 
 // FetchDefault
 mock.onGet(new RegExp(/^\/sysorganizations\/([a-zA-Z0-9\-\;]{1,35})\/sysdepartments\/([a-zA-Z0-9\-\;]{1,35})\/sysemployees\/([a-zA-Z0-9\-\;]{1,35})\/sysdeptmembers\/fetchdefault$/)).reply((config: any) => {

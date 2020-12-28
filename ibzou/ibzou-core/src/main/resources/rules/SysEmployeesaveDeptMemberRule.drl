@@ -37,6 +37,7 @@ ruleflow-group "sysemployeesavedeptmemberprepareparam1"
     when
     then
     sysemployeesavedeptmembermember.set("deptid",sysemployeesavedeptmemberdefault.get("mdeptid"));
+    sysemployeesavedeptmembermember.set("postid",sysemployeesavedeptmemberdefault.get("postid"));
     sysemployeesavedeptmembermember.set("userid",sysemployeesavedeptmemberdefault.get("userid"));
     update(sysemployeesavedeptmemberdefault);//更新fact中变量值
     update(sysemployeesavedeptmembermember);//更新fact中变量值

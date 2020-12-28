@@ -5,11 +5,22 @@ import cn.ibizlab.core.ou.domain.SysEmployee;
 import cn.ibizlab.core.ou.domain.SysOrganization;
 import cn.ibizlab.core.ou.extensions.domain.*;
 import cn.ibizlab.core.ou.extensions.service.OUCoreService;
+import cn.ibizlab.core.ou.filter.SysDepartmentSearchContext;
+import cn.ibizlab.core.ou.filter.SysEmployeeSearchContext;
+import cn.ibizlab.core.ou.filter.SysOrganizationSearchContext;
 import cn.ibizlab.core.ou.service.ISysDepartmentService;
 import cn.ibizlab.core.ou.service.ISysEmployeeService;
 import cn.ibizlab.core.ou.service.ISysOrganizationService;
+import cn.ibizlab.util.domain.DTOBase;
+import cn.ibizlab.util.domain.EntityBase;
+import cn.ibizlab.util.filter.QueryWrapperContext;
+import cn.ibizlab.util.filter.SearchContextBase;
+import cn.ibizlab.util.helper.DataObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -187,99 +198,57 @@ public class OUCoreResource
 
 
 
-    @Cacheable( value="ibzou-model",key = "'catalog:'+#p0")
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/Ibzou{catalog}")
-    public ResponseEntity<JSONObject> getCatalog(@PathVariable("catalog") String catalog) {
-        return ResponseEntity.status(HttpStatus.OK).body(getItems("Ibzou"+catalog));
+    @RequestMapping(method = {RequestMethod.GET}, value = {"/dictionarys/catalogs/Ibzou{catalog}","/dictionarys/codelist/Ibzou{catalog}"})
+    public ResponseEntity<JSONObject> getCodeList(@PathVariable("catalog") String catalog, SearchContextBase context) {
+        return ResponseEntity.status(HttpStatus.OK).body(getItems("Ibzou"+catalog,context));
     }
 
-    @Cacheable( value="ibzou-model",key = "'codelist:'+#p0")
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/Ibzou{catalog}")
-    public ResponseEntity<JSONObject> getCodeList(@PathVariable("catalog") String catalog) {
-        return ResponseEntity.status(HttpStatus.OK).body(getItems("Ibzou"+catalog));
+
+    @RequestMapping(method = {RequestMethod.GET}, value = {"/dictionarys/catalogs/Ibzou{code}/options","/dictionarys/codelist/Ibzou{code}/items"})
+    public ResponseEntity<List> getCodeItems(@PathVariable("code") String code, SearchContextBase context) {
+        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code,context).get("items"));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/catalogs/Ibzou{code}/options")
-    public ResponseEntity<List> getOptions(@PathVariable("code") String code) {
-        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code).get("items"));
+
+    @RequestMapping(method = {RequestMethod.POST}, value = {"/dictionarys/catalogs/Ibzou{catalog}","/dictionarys/codelist/Ibzou{catalog}"})
+    public ResponseEntity<JSONObject> codeList(@PathVariable("catalog") String catalog,@RequestBody(required = false) SearchContextBase context) {
+        return ResponseEntity.status(HttpStatus.OK).body(getItems("Ibzou"+catalog,context));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictionarys/codelist/Ibzou{code}/items")
-    public ResponseEntity<List> getCodeItems(@PathVariable("code") String code) {
-        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code).get("items"));
+
+    @RequestMapping(method = {RequestMethod.POST}, value = {"/dictionarys/catalogs/Ibzou{code}/options","/dictionarys/codelist/Ibzou{code}/items"})
+    public ResponseEntity<List> codeItems(@PathVariable("code") String code,@RequestBody(required = false) SearchContextBase context) {
+        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code,context).get("items"));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/catalogs/Ibzou{code}/options")
-    public ResponseEntity<List> getOptions(@PathVariable("code") String code,@RequestBody List<String> values) {
-        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code,values).get("items"));
-    }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/codelist/Ibzou{code}/items")
-    public ResponseEntity<List> getCodeItems(@PathVariable("code") String code, @RequestBody List<String> values) {
-        return ResponseEntity.status(HttpStatus.OK).body((List) getItems("Ibzou"+code,values).get("items"));
-    }
+    public JSONObject getItems(String catalog, SearchContextBase context) {
 
-    public JSONObject getItems(String catalog) {
-        return getItems(catalog,null);
-    }
-    public JSONObject getItems(String catalog,List<String> values) {
-        JSONObject jo=new JSONObject();
-        jo.put("srfkey",catalog);
-        jo.put("emptytext","");
-        List<JSONObject> list=new ArrayList<>();
-
+        QueryWrapperContext searchContext=null;
         if("IbzouOrg".equalsIgnoreCase(catalog))
         {
-            LambdaQueryWrapper<SysOrganization> queryWrapper = Wrappers.<SysOrganization>lambdaQuery();
-            if(!ObjectUtils.isEmpty(values))
-                queryWrapper.in(SysOrganization::getOrgid,values);
-            queryWrapper.orderByAsc(SysOrganization::getShoworder);
-            iibzOrganizationService.list(queryWrapper).forEach(item -> {
-                JSONObject option=new JSONObject();
-                option.put("id",item.getOrgid());
-                option.put("value",item.getOrgid());
-                option.put("label",item.getOrgname());
-                option.put("text",item.getOrgname());
-                list.add(option);
-            });
+            if(context!=null)
+                searchContext=JSON.toJavaObject((JSONObject)JSON.toJSON(context.getParams()),SysOrganizationSearchContext.class);
+
         }
         else if("IbzouDept".equalsIgnoreCase(catalog)||"IbzouOrgSector".equalsIgnoreCase(catalog))
         {
-            LambdaQueryWrapper<SysDepartment> queryWrapper = Wrappers.<SysDepartment>lambdaQuery();
-            if(!ObjectUtils.isEmpty(values))
-                queryWrapper.in(SysDepartment::getDeptid,values);
-            queryWrapper.orderByAsc(SysDepartment::getShoworder);
-            iibzDepartmentService.list(queryWrapper).forEach(item -> {
-                JSONObject option=new JSONObject();
-                option.put("id",item.getDeptid());
-                option.put("value",item.getDeptid());
-                option.put("label",item.getDeptname());
-                option.put("text",item.getDeptname());
-                list.add(option);
-            });
+            if(context!=null)
+                searchContext=JSON.toJavaObject((JSONObject)JSON.toJSON(context),SysDepartmentSearchContext.class);
         }
         else if("IbzouUser".equalsIgnoreCase(catalog)||"IbzouOperator".equalsIgnoreCase(catalog)||"IbzouEmp".equalsIgnoreCase(catalog)||"IbzouPerson".equalsIgnoreCase(catalog))
         {
-            LambdaQueryWrapper<SysEmployee> queryWrapper = Wrappers.<SysEmployee>lambdaQuery();
-            if(!ObjectUtils.isEmpty(values))
-                queryWrapper.in(SysEmployee::getUserid,values);
-            queryWrapper.orderByAsc(SysEmployee::getShoworder);
-            iibzEmployeeService.list(queryWrapper).forEach(item -> {
-                JSONObject option=new JSONObject();
-                option.put("id",item.getUserid());
-                option.put("value",item.getUserid());
-                option.put("label",item.getPersonname());
-                option.put("text",item.getPersonname());
-                list.add(option);
-            });
+            if(context!=null)
+                searchContext=JSON.toJavaObject((JSONObject)JSON.toJSON(context),SysEmployeeSearchContext.class);
         }
 
+        if(searchContext==null||StringUtils.isEmpty(searchContext.getSelectCond().getSqlSegment()))
+            return ouCoreService.getItems(catalog);
+        else
+            return ouCoreService.getItems(catalog,searchContext);
 
-        jo.put("items",list);
 
-        return jo;
     }
-
 
 
 }

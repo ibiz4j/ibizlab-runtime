@@ -66,6 +66,9 @@ public class SysEmp2UserAspect
     @Value("${ibiz.auth.defaultpasswd:123456}")
     private String defaultPasswd;
 
+    @Value("${rocketmq.producer.isOnOff:off}")
+    private String isOnOff;
+
     @Before(value = "execution(* cn.ibizlab.core.ou.service.ISysEmployeeService.getDraft*(..))")
     public void BeforeGetDraft(JoinPoint point) throws Exception {
         Object[] args = point.getArgs();
@@ -326,11 +329,12 @@ public class SysEmp2UserAspect
             if(obj instanceof SysEmployee)
             {
                 SysEmployee employee = (SysEmployee)obj;
-                IBZUSER ibzuser=ibzEmp2UserMapping.toDto(employee);
-                if(ibzuser.getLoginname().equalsIgnoreCase("ibzadmin"))
-                    ibzuser.setSuperuser(1);
-                ibzuserService.saveOrUpdate(ibzuser);
-
+                if (!"on".equalsIgnoreCase(isOnOff)) {
+                    IBZUSER ibzuser = ibzEmp2UserMapping.toDto(employee);
+                    if (ibzuser.getLoginname().equalsIgnoreCase("ibzadmin"))
+                        ibzuser.setSuperuser(1);
+                    ibzuserService.saveOrUpdate(ibzuser);
+                }
                 if((!StringUtils.isEmpty(employee.getMdeptid()))&&(!StringUtils.isEmpty(employee.getUserid()))) {
                     String memberid = DigestUtils.md5DigestAsHex(String.format("%s||%s", employee.getMdeptid(), employee.getUserid()).getBytes());
                     SysDeptMember sysDeptMember = new SysDeptMember();
@@ -350,8 +354,9 @@ public class SysEmp2UserAspect
             else if (obj instanceof List)
             {
                 List<SysEmployee> list = (List<SysEmployee>) obj;
-                ibzuserService.saveOrUpdateBatch(ibzEmp2UserMapping.toDto(list));
-
+                if (!"on".equalsIgnoreCase(isOnOff)) {
+                    ibzuserService.saveOrUpdateBatch(ibzEmp2UserMapping.toDto(list));
+                }
                 List<SysDeptMember> mebs = (List<SysDeptMember>) obj;
 
                 list.forEach( item ->{

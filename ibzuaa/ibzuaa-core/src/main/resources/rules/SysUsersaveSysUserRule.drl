@@ -1,0 +1,49 @@
+package cn.ibizlab.uaa.logic.sysuserlogic.savesysuser;
+import java.util.Map;
+import java.util.HashMap;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
+import cn.ibizlab.util.errors.BadRequestAlertException;
+global cn.ibizlab.core.uaa.domain.SysUser sysusersavesysuserdefault;
+global cn.ibizlab.core.uaa.service.ISysUserService sysuserservice;
+global cn.ibizlab.core.uaa.service.ISysUserService iBzSysSysuserDefaultService;
+global cn.ibizlab.util.security.AuthenticationUser curuser;
+
+
+no-loop
+
+//逻辑处理节点[设置用户为管理员]
+rule "prepareparam1"
+ruleflow-group "sysusersavesysuserprepareparam1"
+    when
+    then
+    sysusersavesysuserdefault.set("superuser","1");
+    update(sysusersavesysuserdefault);//更新fact中变量值
+    end
+
+//逻辑处理节点[保存用户]
+rule "deaction1"
+ruleflow-group "sysusersavesysuserdeaction1"
+    when
+    then
+    sysuserservice.save(sysusersavesysuserdefault);
+    update(sysusersavesysuserdefault);//更新fact中变量值
+    end
+
+//逻辑处理节点[开始]
+rule "begin"
+ruleflow-group "sysusersavesysuserbegin"
+    when
+    then
+    end
+
+//逻辑处理节点[保存用户]
+rule "deaction2"
+ruleflow-group "sysusersavesysuserdeaction2"
+    when
+    then
+    sysuserservice.save(sysusersavesysuserdefault);
+    update(sysusersavesysuserdefault);//更新fact中变量值
+    end
+

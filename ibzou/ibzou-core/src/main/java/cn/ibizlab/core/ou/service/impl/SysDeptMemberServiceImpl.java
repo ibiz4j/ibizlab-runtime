@@ -57,6 +57,10 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Autowired
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysPostService syspostService;
+
+    @Autowired
+    @Lazy
+    protected cn.ibizlab.core.ou.service.logic.ISysDeptMembersaveDeptMemberLogic savedeptmemberLogic;
     @Autowired
     @Lazy
     ISysDeptMemberService proxyService;
@@ -195,6 +199,13 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
         if (update.size() > 0) {
             proxyService.updateBatch(update);
         }
+    }
+
+    @Override
+    @Transactional
+    public SysDeptMember saveDeptMember(SysDeptMember et) {
+        savedeptmemberLogic.execute(et);
+         return et ;
     }
 
 
