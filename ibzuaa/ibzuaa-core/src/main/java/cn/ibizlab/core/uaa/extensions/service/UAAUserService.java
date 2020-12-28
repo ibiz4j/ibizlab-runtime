@@ -1,27 +1,23 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
+import cn.ibizlab.core.uaa.domain.SysUser;
+import cn.ibizlab.core.uaa.service.impl.SysUserServiceImpl;
 import cn.ibizlab.util.client.IBZOUFeignClient;
 import cn.ibizlab.util.service.AuthenticationUserService;
-import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import cn.ibizlab.util.mapper.IBZUSERMapper;
-import cn.ibizlab.util.domain.IBZUSER;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -32,7 +28,7 @@ import java.util.Set;
  * 实体[IBZUSER] 服务对象接口实现
  */
 @Service("UAAUserService")
-public class UAAUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> implements IBZUSERService, AuthenticationUserService {
+public class UAAUserService extends SysUserServiceImpl implements AuthenticationUserService {
 
 	@Value("${ibiz.auth.pwencrymode:0}")
 	private int pwencrymode;
@@ -41,7 +37,7 @@ public class UAAUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> implemen
 	public AuthenticationUser loadUserByUsername(String username) {
 		if(StringUtils.isEmpty(username))
 			throw new UsernameNotFoundException("用户名为空");
-		QueryWrapper<IBZUSER> conds=new QueryWrapper<IBZUSER>();
+		QueryWrapper<SysUser> conds=new QueryWrapper<SysUser>();
 		String[] data=username.split("[|]");
 		String loginname="";
 		String domains="";
@@ -53,7 +49,7 @@ public class UAAUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> implemen
 			conds.eq("loginname",loginname);
 		if(!StringUtils.isEmpty(domains))
 			conds.eq("domains",domains);
-		IBZUSER user = this.getOne(conds);
+		SysUser user = this.getOne(conds);
 		if (user == null) {
 			throw new UsernameNotFoundException("用户" + username + "未找到");
 		}
@@ -89,7 +85,7 @@ public class UAAUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> implemen
 
 	}
 
-	public  AuthenticationUser createUserDetails(IBZUSER user) {
+	public  AuthenticationUser createUserDetails(SysUser user) {
 		AuthenticationUser userdatail = new AuthenticationUser();
 		CachedBeanCopier.copy(user,userdatail);
 		if(userdatail.getSuperuser()==1){

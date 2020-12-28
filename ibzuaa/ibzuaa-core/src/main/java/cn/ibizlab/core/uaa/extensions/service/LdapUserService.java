@@ -1,22 +1,18 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
+import cn.ibizlab.core.uaa.domain.SysUser;
+import cn.ibizlab.core.uaa.service.impl.SysUserServiceImpl;
 import cn.ibizlab.util.client.IBZOUFeignClient;
-import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
-import cn.ibizlab.util.mapper.IBZUSERMapper;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.AuthenticationUserService;
-import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.ldap.core.LdapTemplate;
@@ -26,7 +22,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
@@ -40,7 +35,7 @@ import java.util.*;
 @Slf4j
 @Service("LdapUserService")
 @ConditionalOnExpression("'${ibiz.auth.service:SimpleUserService}'.equals('LdapUserService')")
-public class LdapUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> implements IBZUSERService, AuthenticationUserService {
+public class LdapUserService extends SysUserServiceImpl implements AuthenticationUserService {
 
     @Value("${ibiz.auth.pwencrymode:0}")
     private int pwencrymode;
@@ -51,7 +46,7 @@ public class LdapUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> impleme
     public AuthenticationUser loadUserByUsername(String username) {
         if (StringUtils.isEmpty(username))
             throw new UsernameNotFoundException("用户名为空");
-        QueryWrapper<IBZUSER> conds = new QueryWrapper<IBZUSER>();
+        QueryWrapper<SysUser> conds = new QueryWrapper<SysUser>();
         String[] data = username.split("[|]");
         String loginname = "";
         String domains = "";
@@ -63,7 +58,7 @@ public class LdapUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> impleme
             conds.eq("loginname", loginname);
         if (!StringUtils.isEmpty(domains))
             conds.eq("domains", domains);
-        IBZUSER user = this.getOne(conds);
+        SysUser user = this.getOne(conds);
         if (user == null) {
             throw new UsernameNotFoundException("用户" + username + "未找到");
         } else {
@@ -136,7 +131,7 @@ public class LdapUserService extends ServiceImpl<IBZUSERMapper, IBZUSER> impleme
 
     }
 
-    public AuthenticationUser createUserDetails(IBZUSER user) {
+    public AuthenticationUser createUserDetails(SysUser user) {
         AuthenticationUser userdatail = new AuthenticationUser();
         CachedBeanCopier.copy(user, userdatail);
         if (userdatail.getSuperuser() == 1) {
