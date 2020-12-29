@@ -1,6 +1,7 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
 
+import cn.ibizlab.core.extensions.service.SysRoleExService;
 import cn.ibizlab.core.uaa.domain.*;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionNode;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
@@ -64,7 +65,7 @@ public class UAACoreService {
 
     @Autowired
     @Lazy
-    private ISysRoleService sysRoleService;
+    private SysRoleExService sysRoleService;
 
     @Autowired
     private AuthTokenUtil jwtTokenUtil;
@@ -159,22 +160,27 @@ public class UAACoreService {
 
         Set<String> roleIds = new HashSet<>();
         List<SysUserRole> userRoles =userRoleService.selectByUserid(userId);
-        if(userRoles.size()==0)
+        if(userRoles.size()==0) {
+            roleIds.add("ROLE_USERS");
             return roleIds;
+        }
 
         Map<String,SysRole> roleMap=new HashMap();
-        List<SysRole> roles=sysRoleService.list();
+        List<SysRole> roles=sysRoleService.getAllSysRoles();
         for(SysRole role: roles){
             roleMap.put(role.getRoleid(),role);
         }
-        if(roleMap.size()==0)
+        if(roleMap.size()==0){
+            roleIds.add("ROLE_USERS");
             return roleIds;
+        }
 
         for(SysUserRole userRole : userRoles){
             String strRoleId=userRole.getRoleid();
             setRoles(strRoleId,roleMap,roleIds);
         }
 
+        roleIds.add("ROLE_USERS");
         return roleIds;
     }
 

@@ -30,6 +30,56 @@ public class SysRoleExService extends SysRoleServiceImpl {
         return com.baomidou.mybatisplus.core.toolkit.ReflectionKit.getSuperClassGenericType(this.getClass().getSuperclass(), 1);
     }
 
+    private List<SysRole> allSysRoles;
+
+    public synchronized List<SysRole> getAllSysRoles()
+    {
+        if(allSysRoles==null) {
+            List<SysRole> sysRoles = this.list();
+            Boolean bBaseUsers=false;
+            for (SysRole role:sysRoles)
+                if(role.getRoleid().equalsIgnoreCase("ROLE_USERS")) {
+                    bBaseUsers = true;
+                    break;
+                }
+            if(!bBaseUsers)
+            {
+                SysRole role=new SysRole();
+                role.setRoleid("ROLE_USERS");
+                role.setRolename("普通用户（默认基础功能）");
+                role.setMemo("系统保留基础角色，所有用户均属于此角色，无需手工分配到用户");
+                this.create(role);
+                sysRoles.add(role);
+            }
+            allSysRoles=sysRoles;
+        }
+        return allSysRoles;
+    }
+
+    @Override
+    public boolean create(SysRole et) {
+        allSysRoles=null;
+        return super.create(et);
+    }
+
+    @Override
+    public void createBatch(List<SysRole> list) {
+        allSysRoles=null;
+        super.createBatch(list);
+    }
+
+    @Override
+    public boolean update(SysRole et) {
+        allSysRoles=null;
+        return super.update(et);
+    }
+
+    @Override
+    public void updateBatch(List<SysRole> list) {
+        allSysRoles=null;
+        super.updateBatch(list);
+    }
+
     /**
      * [NoRepeat:角色去重查询] 行为扩展：去除父子关系
      * @param et
