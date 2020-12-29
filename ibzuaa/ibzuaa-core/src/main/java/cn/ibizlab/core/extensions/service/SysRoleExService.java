@@ -7,6 +7,8 @@ import liquibase.util.StringUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import cn.ibizlab.core.uaa.domain.SysRole;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
@@ -30,53 +32,50 @@ public class SysRoleExService extends SysRoleServiceImpl {
         return com.baomidou.mybatisplus.core.toolkit.ReflectionKit.getSuperClassGenericType(this.getClass().getSuperclass(), 1);
     }
 
-    private List<SysRole> allSysRoles;
 
+    @Cacheable(value ="sysrole", key = "'alls'")
     public synchronized List<SysRole> getAllSysRoles()
     {
-        if(allSysRoles==null) {
-            List<SysRole> sysRoles = this.list();
-            Boolean bBaseUsers=false;
-            for (SysRole role:sysRoles)
-                if(role.getRoleid().equalsIgnoreCase("ROLE_USERS")) {
-                    bBaseUsers = true;
-                    break;
-                }
-            if(!bBaseUsers)
-            {
-                SysRole role=new SysRole();
-                role.setRoleid("ROLE_USERS");
-                role.setRolename("普通用户（默认基础功能）");
-                role.setMemo("系统保留基础角色，所有用户均属于此角色，无需手工分配到用户");
-                this.create(role);
-                sysRoles.add(role);
+        List<SysRole> sysRoles = this.list();
+        Boolean bBaseUsers=false;
+        for (SysRole role:sysRoles)
+            if(role.getRoleid().equalsIgnoreCase("ROLE_USERS")) {
+                bBaseUsers = true;
+                break;
             }
-            allSysRoles=sysRoles;
+        if(!bBaseUsers)
+        {
+            SysRole role=new SysRole();
+            role.setRoleid("ROLE_USERS");
+            role.setRolename("普通用户（默认基础功能）");
+            role.setMemo("系统保留基础角色，所有用户均属于此角色，无需手工分配到用户");
+            this.create(role);
+            sysRoles.add(role);
         }
-        return allSysRoles;
+        return sysRoles;
     }
 
     @Override
+    @CacheEvict(value ="sysrole",  key = "'alls'")
     public boolean create(SysRole et) {
-        allSysRoles=null;
         return super.create(et);
     }
 
     @Override
+    @CacheEvict(value ="sysrole",  key = "'alls'")
     public void createBatch(List<SysRole> list) {
-        allSysRoles=null;
         super.createBatch(list);
     }
 
     @Override
+    @CacheEvict(value ="sysrole",  key = "'alls'")
     public boolean update(SysRole et) {
-        allSysRoles=null;
         return super.update(et);
     }
 
     @Override
+    @CacheEvict(value ="sysrole",  key = "'alls'")
     public void updateBatch(List<SysRole> list) {
-        allSysRoles=null;
         super.updateBatch(list);
     }
 
