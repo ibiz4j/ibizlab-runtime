@@ -51,6 +51,9 @@ export default class OrgTreeModel {
       {
         name: 'updatedate',
       },
+      {
+        name: 'isvalid',
+      },
     ]
   }
 

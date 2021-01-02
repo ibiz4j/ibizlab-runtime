@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysDepartment] 服务对象接口
  */
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface ISysDepartmentService extends IService<SysDepartment> {
 
     boolean create(SysDepartment et);

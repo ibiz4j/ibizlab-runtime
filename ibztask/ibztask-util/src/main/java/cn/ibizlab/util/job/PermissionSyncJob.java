@@ -13,6 +13,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.DigestUtils;
 import java.io.InputStream;
 import java.util.*;
@@ -25,58 +26,55 @@ import java.util.*;
 @ConditionalOnProperty( name = "ibiz.enablePermissionValid", havingValue = "true")
 public class PermissionSyncJob implements ApplicationRunner {
 
-    @Autowired
-    @Lazy
-    private IBZUAAFeignClient client;
-
     @Value("${ibiz.systemid:ibztask}")
     private String systemId;
     
     @Value("${ibiz.systemname:ibztask}")
     private String systemName;
 
-
+    @Autowired
+    @Lazy
+    private IBZUAAFeignClient uaaClient;
 
     @Autowired
     @Lazy
-    IBZLiteFeignClient liteFeignClient;
-
+    IBZLiteFeignClient liteClient;
 
     @Override
     public void run(ApplicationArguments args) {
         try {
             Thread.sleep(10000);
-            InputStream permission = this.getClass().getResourceAsStream("/permission/systemResource.json"); //获取当前系统所有实体资源能力
-            String permissionResult = IOUtils.toString(permission,"UTF-8");
-            JSONObject system= new JSONObject();
-            system.put("pssystemid",systemId);
-            system.put("pssystemname",systemName);
-            system.put("sysstructure",JSONObject.parseObject(permissionResult));
-            system.put("md5check",DigestUtils.md5DigestAsHex(permissionResult.getBytes()));
-            if(client.syncSysAuthority(system)) {
-                log.info("向[UAA]同步系统资源成功");
-            }else{
-                log.error("向[UAA]同步系统资源失败");
+            InputStream permission = this.getClass().getResourceAsStream("/permission/systemResource.json"); //权限资源
+            if (!ObjectUtils.isEmpty(permission)) {
+                String strPermission = IOUtils.toString(permission, "UTF-8");
+                JSONObject system = new JSONObject() {{
+                    put("pssystemid", systemId);
+                    put("pssystemname", systemName);
+                    put("sysstructure", JSONObject.parseObject(strPermission));
+                    put("md5check", DigestUtils.md5DigestAsHex(strPermission.getBytes()));
+                }};
+                if (uaaClient.syncSysAuthority(system)) {
+                    log.info("向[uaa]同步系统资源成功");
+                } else {
+                    log.error("向[uaa]同步系统资源失败");
+                }
             }
-        }
-        catch (Exception ex) {
-            log.error(String.format("向[UAA]同步系统资源失败，请检查[UAA]服务是否正常! [%s]",ex));
+        } catch (Exception ex) {
+            log.error("向[uaa]同步系统资源失败，请检查[uaa]服务是否正常运行! {}", ex.getMessage());
         }
 
         try {
-            InputStream sysModel = this.getClass().getResourceAsStream("/sysmodel/ibztask.json"); //获取当前系统所有实体资源能力
-            String strSysModel = IOUtils.toString(sysModel,"UTF-8");
-            if(liteFeignClient.syncSysModel(JSONObject.parseObject(strSysModel))) {
-                log.info("向[lite]同步系统模型成功");
-            }else{
-                log.error("向[lite]同步系统模型失败");
+            InputStream model = this.getClass().getResourceAsStream("/sysmodel/ibztask.json"); //系统模型
+            if (!ObjectUtils.isEmpty(model)) {
+                String strModel = IOUtils.toString(model, "UTF-8");
+                if (liteClient.syncSysModel(JSONObject.parseObject(strModel))) {
+                    log.info("向[lite]同步模型成功");
+                } else {
+                    log.error("向[lite]同步模型失败");
+                }
             }
+        } catch (Exception ex) {
+            log.error("向[lite]同步系统模型失败，请检查[lite]服务是否正常运行! {}", ex.getMessage());
         }
-        catch (Exception ex) {
-            log.error(String.format("向[lite]同步系统模型失败，请检查[lite]服务是否正常! [%s]",ex));
-        }
-
-
-
     }
 }

@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[WFMember] 服务对象接口
  */
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface IWFMemberService extends IService<WFMember> {
 
     boolean create(WFMember et);

@@ -66,6 +66,9 @@ export default class TreeExpViewtreeexpbarModel {
       {
         name: 'updatedate',
       },
+      {
+        name: 'isvalid',
+      },
     ]
   }
 

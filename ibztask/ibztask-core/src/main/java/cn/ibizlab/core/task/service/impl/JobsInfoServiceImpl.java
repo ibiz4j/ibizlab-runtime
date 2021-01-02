@@ -48,9 +48,6 @@ import org.springframework.util.StringUtils;
 @Service("JobsInfoServiceImpl")
 public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> implements IJobsInfoService {
 
-    @Autowired
-    @Lazy
-    IJobsInfoService proxyService;
 
     protected int batchSize = 500;
 
@@ -152,7 +149,7 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
+            return checkKey(et) ? getProxyService().update(et) : getProxyService().create(et);
         }
     }
 
@@ -169,10 +166,10 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
         return true;
     }
@@ -190,10 +187,10 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
     }
 
@@ -259,6 +256,10 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
 
 
 
+
+    public IJobsInfoService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 }
 
 

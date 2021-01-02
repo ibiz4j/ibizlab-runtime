@@ -160,6 +160,14 @@ public class SysDepartment extends EntityClient implements Serializable {
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
+    /**
+     * 启用标识
+     */
+    @DEField(defaultValue = "1")
+    @JSONField(name = "isvalid")
+    @JsonProperty("isvalid")
+    private Integer isvalid;
+
 
     /**
      * 
@@ -256,6 +264,14 @@ public class SysDepartment extends EntityClient implements Serializable {
     public void setLeadername(String leadername) {
         this.leadername = leadername ;
         this.modify("leadername",leadername);
+    }
+
+    /**
+     * 设置 [启用标识]
+     */
+    public void setIsvalid(Integer isvalid) {
+        this.isvalid = isvalid ;
+        this.modify("isvalid",isvalid);
     }
 
     /**

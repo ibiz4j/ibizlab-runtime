@@ -261,6 +261,7 @@
                 <version>${baomidou-jobs.version}</version>
             </dependency>
 
+
         </dependencies>
     </dependencyManagement>
 
@@ -344,13 +345,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
         <!--  mp动态数据源 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
         </dependency>
-
 
 
     </dependencies>

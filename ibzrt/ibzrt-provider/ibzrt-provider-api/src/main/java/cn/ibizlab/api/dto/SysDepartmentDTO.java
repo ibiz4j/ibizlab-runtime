@@ -181,6 +181,14 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
+    /**
+     * 属性 [ISVALID]
+     *
+     */
+    @JSONField(name = "isvalid")
+    @JsonProperty("isvalid")
+    private Integer isvalid;
+
 
     /**
      * 设置 [DEPTCODE]
@@ -260,6 +268,14 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     public void setLeadername(String  leadername){
         this.leadername = leadername ;
         this.modify("leadername",leadername);
+    }
+
+    /**
+     * 设置 [ISVALID]
+     */
+    public void setIsvalid(Integer  isvalid){
+        this.isvalid = isvalid ;
+        this.modify("isvalid",isvalid);
     }
 
 

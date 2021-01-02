@@ -78,6 +78,27 @@
 </app-form-item>
 
 </i-col>
+<i-col v-show="detailsModel.isvalid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='isvalid' :itemRules="this.rules().isvalid" class='' :caption="$t('entities.sysorganization.main_form.details.isvalid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.isvalid.error" :isEmptyCaption="false" labelPos="LEFT">
+    
+ <dropdown-list 
+  v-model="data.isvalid" 
+  :data="data" 
+  :context="context"
+  :viewparams="viewparams"
+  :localContext ='{ }' 
+  :localParam ='{ }' 
+  :disabled="detailsModel.isvalid.disabled" 
+  valueType="number"
+  style="width:100px;width: 100px;" 
+  tag='YesNo' 
+  codelistType='STATIC'
+  placeholder='请选择...'>
+ </dropdown-list>
+
+</app-form-item>
+
+</i-col>
 <i-col v-show="detailsModel.createdate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='createdate' :itemRules="this.rules().createdate" class='' :caption="$t('entities.sysorganization.main_form.details.createdate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.createdate.error" :isEmptyCaption="false" labelPos="LEFT">
     
@@ -501,6 +522,7 @@ export default class MainBase extends Vue implements ControlInterface {
         shortname: null,
         showorder: null,
         porgid: null,
+        isvalid: null,
         createdate: null,
         updatedate: null,
         sysorganization:null,
@@ -577,6 +599,10 @@ export default class MainBase extends Vue implements ControlInterface {
         showorder: [
             { required: this.detailsModel.showorder.required, type: 'number', message: '排序 值不能为空', trigger: 'change' },
             { required: this.detailsModel.showorder.required, type: 'number', message: '排序 值不能为空', trigger: 'blur' },
+        ],
+        isvalid: [
+            { required: this.detailsModel.isvalid.required, type: 'number', message: '启用 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.isvalid.required, type: 'number', message: '启用 值不能为空', trigger: 'blur' },
         ],
         createdate: [
             { required: this.detailsModel.createdate.required, type: 'string', message: '创建时间 值不能为空', trigger: 'change' },
@@ -726,6 +752,8 @@ export default class MainBase extends Vue implements ControlInterface {
         showorder: new FormItemModel({ caption: '排序', detailType: 'FORMITEM', name: 'showorder', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
         porgid: new FormItemModel({ caption: '上级单位', detailType: 'FORMITEM', name: 'porgid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
+, 
+        isvalid: new FormItemModel({ caption: '启用', detailType: 'FORMITEM', name: 'isvalid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
         createdate: new FormItemModel({ caption: '创建时间', detailType: 'FORMITEM', name: 'createdate', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
@@ -926,6 +954,18 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 isvalid 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.isvalid')
+    onIsvalidChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'isvalid', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 createdate 值
      *
      * @param {*} newVal
@@ -1003,6 +1043,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
+
 
 
 

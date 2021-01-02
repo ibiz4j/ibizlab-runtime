@@ -59,9 +59,6 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Autowired
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysOrganizationService sysorganizationService;
-    @Autowired
-    @Lazy
-    ISysDepartmentService proxyService;
 
     protected int batchSize = 500;
 
@@ -158,7 +155,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
+            return checkKey(et) ? getProxyService().update(et) : getProxyService().create(et);
         }
     }
 
@@ -176,10 +173,10 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
         return true;
     }
@@ -198,10 +195,10 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
     }
 
@@ -234,6 +231,9 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
         this.remove(new QueryWrapper<SysDepartment>().eq("orgid",orgid));
     }
 
+    public ISysDepartmentService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 	@Override
     public void saveByOrgid(String orgid,List<SysDepartment> list) {
         if(list==null)
@@ -256,11 +256,11 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
                 _create.add(sub);
         }
         if(_update.size()>0)
-            proxyService.updateBatch(_update);
+            getProxyService().updateBatch(_update);
         if(_create.size()>0)
-            proxyService.createBatch(_create);
+            getProxyService().createBatch(_create);
         if(delIds.size()>0)
-            proxyService.removeBatch(delIds);
+            getProxyService().removeBatch(delIds);
 	}
 
 
@@ -350,6 +350,7 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
             return entities;
         }
     }
+
 
 
 

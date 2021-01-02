@@ -66,6 +66,9 @@ export default class MPickupViewpickupviewpanelModel {
       {
         name: 'updatedate',
       },
+      {
+        name: 'isvalid',
+      },
     ]
   }
 

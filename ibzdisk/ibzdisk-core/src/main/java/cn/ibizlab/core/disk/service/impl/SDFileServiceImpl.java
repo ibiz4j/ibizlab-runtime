@@ -48,9 +48,6 @@ import org.springframework.util.StringUtils;
 @Service("SDFileServiceImpl")
 public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> implements ISDFileService {
 
-    @Autowired
-    @Lazy
-    ISDFileService proxyService;
 
     protected int batchSize = 500;
 
@@ -136,7 +133,7 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
+            return checkKey(et) ? getProxyService().update(et) : getProxyService().create(et);
         }
     }
 
@@ -153,10 +150,10 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
         return true;
     }
@@ -174,10 +171,10 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
     }
 
@@ -247,6 +244,10 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
 
 
 
+
+    public ISDFileService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 }
 
 

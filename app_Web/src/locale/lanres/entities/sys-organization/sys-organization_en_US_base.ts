@@ -15,6 +15,7 @@ function getLocaleResourceBase(){
 		enable: commonLogic.appcommonhandle("the workflow instance current processing step is invalid",null),
 		createdate: commonLogic.appcommonhandle("Print",null),
 		updatedate: commonLogic.appcommonhandle("Actor",null),
+		isvalid: commonLogic.appcommonhandle("启用标识",null),
 	},
 		views: {
 			pickupgridview: {
@@ -61,6 +62,7 @@ function getLocaleResourceBase(){
 				shortname: commonLogic.appcommonhandle("Cancel",null), 
 				showorder: commonLogic.appcommonhandle("排序",null), 
 				porgid: commonLogic.appcommonhandle("上级单位",null), 
+				isvalid: commonLogic.appcommonhandle("启用",null), 
 				createdate: commonLogic.appcommonhandle("Print",null), 
 				updatedate: commonLogic.appcommonhandle("Actor",null), 
 			},
@@ -98,6 +100,7 @@ function getLocaleResourceBase(){
 				shortname: commonLogic.appcommonhandle("Cancel",null),
 				porgname: commonLogic.appcommonhandle("上级单位",null),
 				porgid: commonLogic.appcommonhandle("上级单位",null),
+				isvalid: commonLogic.appcommonhandle("启用",null),
 				showorder: commonLogic.appcommonhandle("排序",null),
 				createdate: commonLogic.appcommonhandle("Print",null),
 				updatedate: commonLogic.appcommonhandle("Actor",null),

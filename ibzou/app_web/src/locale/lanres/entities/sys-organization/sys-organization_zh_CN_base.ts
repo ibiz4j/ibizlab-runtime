@@ -15,6 +15,7 @@ function getLocaleResourceBase(){
 		enable: commonLogic.appcommonhandle("逻辑有效",null),
 		createdate: commonLogic.appcommonhandle("创建时间",null),
 		updatedate: commonLogic.appcommonhandle("最后修改时间",null),
+		isvalid: commonLogic.appcommonhandle("启用标志",null),
 	},
 		views: {
 			pickupgridview: {
@@ -60,6 +61,7 @@ function getLocaleResourceBase(){
 				orglevel: commonLogic.appcommonhandle("单位级别",null), 
 				shortname: commonLogic.appcommonhandle("单位简称",null), 
 				showorder: commonLogic.appcommonhandle("排序",null), 
+				isvalid: commonLogic.appcommonhandle("启用",null), 
 				porgid: commonLogic.appcommonhandle("上级单位",null), 
 				createdate: commonLogic.appcommonhandle("创建时间",null), 
 				updatedate: commonLogic.appcommonhandle("最后修改时间",null), 

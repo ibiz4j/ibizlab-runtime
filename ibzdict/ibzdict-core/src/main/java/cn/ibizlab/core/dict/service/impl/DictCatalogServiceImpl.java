@@ -51,9 +51,6 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
     @Autowired
     @Lazy
     protected cn.ibizlab.core.dict.service.IDictOptionService dictoptionService;
-    @Autowired
-    @Lazy
-    IDictCatalogService proxyService;
 
     protected int batchSize = 500;
 
@@ -139,7 +136,7 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
+            return checkKey(et) ? getProxyService().update(et) : getProxyService().create(et);
         }
     }
 
@@ -156,10 +153,10 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
         return true;
     }
@@ -177,10 +174,10 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
     }
 
@@ -229,6 +226,10 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
 
 
 
+
+    public IDictCatalogService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 }
 
 

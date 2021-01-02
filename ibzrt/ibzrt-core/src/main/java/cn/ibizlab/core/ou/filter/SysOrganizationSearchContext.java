@@ -43,6 +43,8 @@ public class SysOrganizationSearchContext extends SearchContextBase {
 
 	private String n_porgname_like;//[上级单位]
 
+	private Integer n_isvalid_eq;//[启用标识]
+
 }
 
 

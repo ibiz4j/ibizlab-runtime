@@ -51,9 +51,6 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
     @Autowired
     @Lazy
     protected cn.ibizlab.core.pay.service.IPayTradeService paytradeService;
-    @Autowired
-    @Lazy
-    IPayOpenAccessService proxyService;
 
     protected int batchSize = 500;
 
@@ -139,7 +136,7 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
+            return checkKey(et) ? getProxyService().update(et) : getProxyService().create(et);
         }
     }
 
@@ -156,10 +153,10 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
         return true;
     }
@@ -177,10 +174,10 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
     }
 
@@ -229,6 +226,10 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
 
 
 
+
+    public IPayOpenAccessService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 }
 
 

@@ -121,6 +121,11 @@ export default class MainModel {
         dataType: 'INT',
       },
       {
+        name: 'isvalid',
+        prop: 'isvalid',
+        dataType: 'YESNO',
+      },
+      {
         name: 'createdate',
         prop: 'createdate',
         dataType: 'DATETIME',

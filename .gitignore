@@ -15,3 +15,5 @@
 *.jar
 *.log
 *yarn.lock
+*.tmp
+.DS_Store

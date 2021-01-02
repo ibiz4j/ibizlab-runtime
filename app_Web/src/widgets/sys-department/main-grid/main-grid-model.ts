@@ -68,6 +68,11 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
+          name: 'isvalid',
+          prop: 'isvalid',
+          dataType: 'YESNO',
+        },
+        {
           name: 'pdeptid',
           prop: 'parentdeptid',
           dataType: 'PICKUP',

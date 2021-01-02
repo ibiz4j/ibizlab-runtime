@@ -52,15 +52,20 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
+          name: 'srfdataaccaction',
+          prop: 'orgid',
+          dataType: 'TEXT',
+        },
+        {
           name: 'srfkey',
           prop: 'orgid',
           dataType: 'TEXT',
           isEditable:true
         },
         {
-          name: 'srfdataaccaction',
-          prop: 'orgid',
-          dataType: 'TEXT',
+          name: 'isvalid',
+          prop: 'isvalid',
+          dataType: 'YESNO',
         },
         {
           name: 'orgcode',

@@ -125,6 +125,14 @@ public class SysOrganization extends EntityClient implements Serializable {
     @JsonProperty("updatedate")
     private Timestamp updatedate;
 
+    /**
+     * 启用标识
+     */
+    @DEField(defaultValue = "1")
+    @JSONField(name = "isvalid")
+    @JsonProperty("isvalid")
+    private Integer isvalid;
+
 
     /**
      * 
@@ -189,6 +197,14 @@ public class SysOrganization extends EntityClient implements Serializable {
     public void setDomains(String domains) {
         this.domains = domains ;
         this.modify("domains",domains);
+    }
+
+    /**
+     * 设置 [启用标识]
+     */
+    public void setIsvalid(Integer isvalid) {
+        this.isvalid = isvalid ;
+        this.modify("isvalid",isvalid);
     }
 
     /**

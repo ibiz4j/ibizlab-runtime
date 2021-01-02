@@ -91,6 +91,11 @@ export default class MainModel {
         dataType: 'INT',
       },
       {
+        name: 'isvalid',
+        prop: 'isvalid',
+        dataType: 'YESNO',
+      },
+      {
         name: 'porgid',
         prop: 'parentorgid',
         dataType: 'PICKUP',

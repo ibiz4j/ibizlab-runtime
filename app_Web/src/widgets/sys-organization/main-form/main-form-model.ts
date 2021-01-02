@@ -96,6 +96,11 @@ export default class MainModel {
         dataType: 'PICKUP',
       },
       {
+        name: 'isvalid',
+        prop: 'isvalid',
+        dataType: 'YESNO',
+      },
+      {
         name: 'createdate',
         prop: 'createdate',
         dataType: 'DATETIME',

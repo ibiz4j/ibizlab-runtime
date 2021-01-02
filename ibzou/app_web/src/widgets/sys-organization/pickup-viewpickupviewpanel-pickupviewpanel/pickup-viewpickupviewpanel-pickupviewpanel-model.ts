@@ -51,6 +51,9 @@ export default class PickupViewpickupviewpanelModel {
       {
         name: 'updatedate',
       },
+      {
+        name: 'isvalid',
+      },
     ]
   }
 

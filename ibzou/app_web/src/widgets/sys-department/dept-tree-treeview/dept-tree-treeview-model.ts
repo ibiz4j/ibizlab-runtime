@@ -66,6 +66,9 @@ export default class DeptTreeModel {
       {
         name: 'updatedate',
       },
+      {
+        name: 'isvalid',
+      },
     ]
   }
 

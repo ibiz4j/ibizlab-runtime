@@ -169,9 +169,9 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
             this.removeBatch(delIds);
     }
 
-    @Autowired
-    @Lazy
-    ISysDepartmentService proxyService;
+    public ISysDepartmentService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 	@Override
     public void saveByOrgid(String orgid,List<SysDepartment> list) {
         if(list==null)
@@ -194,11 +194,11 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
                 _create.add(sub);
         }
         if(_update.size()>0)
-            proxyService.updateBatch(_update);
+            getProxyService().updateBatch(_update);
         if(_create.size()>0)
-            proxyService.createBatch(_create);
+            getProxyService().createBatch(_create);
         if(delIds.size()>0)
-            proxyService.removeBatch(delIds);
+            getProxyService().removeBatch(delIds);
 	}
 
 

@@ -136,6 +136,14 @@ public class SysOrganization extends EntityMP implements Serializable {
     @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
     private Timestamp updatedate;
+    /**
+     * 启用标志
+     */
+    @DEField(defaultValue = "1")
+    @TableField(value = "isvalid")
+    @JSONField(name = "isvalid")
+    @JsonProperty("isvalid")
+    private Integer isvalid;
 
     /**
      * 
@@ -201,6 +209,14 @@ public class SysOrganization extends EntityMP implements Serializable {
     public void setDomains(String domains) {
         this.domains = domains;
         this.modify("domains", domains);
+    }
+
+    /**
+     * 设置 [启用标志]
+     */
+    public void setIsvalid(Integer isvalid) {
+        this.isvalid = isvalid;
+        this.modify("isvalid", isvalid);
     }
 
 

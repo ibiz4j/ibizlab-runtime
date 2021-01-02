@@ -20,6 +20,7 @@ function getLocaleResourceBase(){
 		parentdeptname: commonLogic.appcommonhandle("上级部门",null),
 		createdate: commonLogic.appcommonhandle("创建时间",null),
 		updatedate: commonLogic.appcommonhandle("最后修改时间",null),
+		isvalid: commonLogic.appcommonhandle("启用标志",null),
 	},
 		views: {
 			pickupgridview: {
@@ -79,6 +80,7 @@ function getLocaleResourceBase(){
 				leaderid: commonLogic.appcommonhandle("分管领导标识",null), 
 				leadername: commonLogic.appcommonhandle("分管领导",null), 
 				showorder: commonLogic.appcommonhandle("排序",null), 
+				isvalid: commonLogic.appcommonhandle("启用",null), 
 				createdate: commonLogic.appcommonhandle("创建时间",null), 
 				updatedate: commonLogic.appcommonhandle("最后修改时间",null), 
 			},

@@ -51,9 +51,6 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
     @Autowired
     @Lazy
     protected cn.ibizlab.core.workflow.service.IWFMemberService wfmemberService;
-    @Autowired
-    @Lazy
-    IWFUserService proxyService;
 
     protected int batchSize = 500;
 
@@ -139,7 +136,7 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
+            return checkKey(et) ? getProxyService().update(et) : getProxyService().create(et);
         }
     }
 
@@ -156,10 +153,10 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
         return true;
     }
@@ -177,10 +174,10 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
     }
 
@@ -250,6 +247,10 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
 
 
 
+
+    public IWFUserService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 }
 
 

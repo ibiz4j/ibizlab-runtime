@@ -56,9 +56,6 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     protected cn.ibizlab.core.ou.service.ISysEmployeeService sysemployeeService;
 
     protected cn.ibizlab.core.ou.service.ISysOrganizationService sysorganizationService = this;
-    @Autowired
-    @Lazy
-    ISysOrganizationService proxyService;
 
     protected int batchSize = 500;
 
@@ -163,7 +160,7 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
+            return checkKey(et) ? getProxyService().update(et) : getProxyService().create(et);
         }
     }
 
@@ -181,10 +178,10 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
         return true;
     }
@@ -203,10 +200,10 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
     }
 
@@ -306,6 +303,10 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
 
 
 
+
+    public ISysOrganizationService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 }
 
 

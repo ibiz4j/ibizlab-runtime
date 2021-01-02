@@ -57,9 +57,6 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Autowired
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysTeamService systeamService;
-    @Autowired
-    @Lazy
-    ISysTeamMemberService proxyService;
 
     protected int batchSize = 500;
 
@@ -150,7 +147,7 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
         if (null == et) {
             return false;
         } else {
-            return checkKey(et) ? proxyService.update(et) : proxyService.create(et);
+            return checkKey(et) ? getProxyService().update(et) : getProxyService().create(et);
         }
     }
 
@@ -168,10 +165,10 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
         return true;
     }
@@ -190,10 +187,10 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
             }
         }
         if (create.size() > 0) {
-            proxyService.createBatch(create);
+            getProxyService().createBatch(create);
         }
         if (update.size() > 0) {
-            proxyService.updateBatch(update);
+            getProxyService().updateBatch(update);
         }
     }
 
@@ -306,6 +303,10 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
 
 
 
+
+    public ISysTeamMemberService getProxyService() {
+        return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
+    }
 }
 
 

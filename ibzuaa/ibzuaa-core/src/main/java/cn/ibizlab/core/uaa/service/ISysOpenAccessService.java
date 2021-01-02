@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 实体[SysOpenAccess] 服务对象接口
  */
+@com.baomidou.dynamic.datasource.annotation.DS("db2")
 public interface ISysOpenAccessService extends IService<SysOpenAccess> {
 
     boolean create(SysOpenAccess et);

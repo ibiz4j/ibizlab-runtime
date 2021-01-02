@@ -120,6 +120,13 @@ public class SysDepartmentSearchContext extends QueryWrapperContext<SysDepartmen
             this.getSearchCond().like("pdeptname", n_pdeptname_like);
         }
     }
+	private Integer n_isvalid_eq;//[启用标志]
+	public void setN_isvalid_eq(Integer n_isvalid_eq) {
+        this.n_isvalid_eq = n_isvalid_eq;
+        if(!ObjectUtils.isEmpty(this.n_isvalid_eq)){
+            this.getSearchCond().eq("isvalid", n_isvalid_eq);
+        }
+    }
 
     /**
 	 * 启用快速搜索

@@ -43,6 +43,8 @@ public class SysDepartmentSearchContext extends SearchContextBase {
 
 	private String n_pdeptname_like;//[上级部门]
 
+	private Integer n_isvalid_eq;//[启用标识]
+
 }
 
 

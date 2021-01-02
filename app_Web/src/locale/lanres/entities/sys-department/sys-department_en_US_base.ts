@@ -20,6 +20,7 @@ function getLocaleResourceBase(){
 		parentdeptname: commonLogic.appcommonhandle("上级部门",null),
 		createdate: commonLogic.appcommonhandle("{0}[{1}] relational data [{2}] cannot be deleted!",null),
 		updatedate: commonLogic.appcommonhandle("The [{0}] value is not a character type",null),
+		isvalid: commonLogic.appcommonhandle("启用标识",null),
 	},
 		views: {
 			pickupgridview: {
@@ -75,6 +76,7 @@ function getLocaleResourceBase(){
 				leaderid: commonLogic.appcommonhandle("分管领导标识",null), 
 				leadername: commonLogic.appcommonhandle("分管领导",null), 
 				showorder: commonLogic.appcommonhandle("排序",null), 
+				isvalid: commonLogic.appcommonhandle("启用",null), 
 				createdate: commonLogic.appcommonhandle("{0}[{1}] relational data [{2}] cannot be deleted!",null), 
 				updatedate: commonLogic.appcommonhandle("The [{0}] value is not a character type",null), 
 			},
@@ -115,6 +117,7 @@ function getLocaleResourceBase(){
 				shortname: commonLogic.appcommonhandle("Others",null),
 				bcode: commonLogic.appcommonhandle("Condition",null),
 				leadername: commonLogic.appcommonhandle("分管领导",null),
+				isvalid: commonLogic.appcommonhandle("启用",null),
 				showorder: commonLogic.appcommonhandle("排序",null),
 				createdate: commonLogic.appcommonhandle("{0}[{1}] relational data [{2}] cannot be deleted!",null),
 				updatedate: commonLogic.appcommonhandle("The [{0}] value is not a character type",null),

@@ -105,6 +105,20 @@
                     </template>
                 </el-table-column>
             </template>
+            <template v-if="getColumnState('isvalid')">
+                <el-table-column show-overflow-tooltip :prop="'isvalid'" :label="$t('entities.sysorganization.main_grid.columns.isvalid')" :width="100"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.sysorganization.main_grid.columns.isvalid')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <template >
+            <codelist :value="row.isvalid" tag='YesNo' codelistType='STATIC' ></codelist>
+                        </template>
+                    </template>
+                </el-table-column>
+            </template>
             <template v-if="getColumnState('showorder')">
                 <el-table-column show-overflow-tooltip :prop="'showorder'" :label="$t('entities.sysorganization.main_grid.columns.showorder')" :width="150"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
@@ -762,6 +776,15 @@ export default class MainBase extends Vue implements ControlInterface {
             enableCond: 3 ,
         },
         {
+            name: 'isvalid',
+            label: '启用',
+            langtag: 'entities.sysorganization.main_grid.columns.isvalid',
+            show: true,
+            unit: 'PX',
+            isEnableRowEdit: false,
+            enableCond: 3 ,
+        },
+        {
             name: 'showorder',
             label: '排序',
             langtag: 'entities.sysorganization.main_grid.columns.showorder',
@@ -1277,6 +1300,14 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formatExcelData(filterVal:any, jsonData:any) {
         let codelistColumns:Array<any> = [
+            {
+                name: 'isvalid',
+                srfkey: 'YesNo',
+                codelistType : 'STATIC',
+                renderMode: 'other',
+                textSeparator: '、',
+                valueSeparator: ',',
+            },
         ];
         let _this = this;
         for (const codelist of codelistColumns) {
@@ -1483,7 +1514,7 @@ export default class MainBase extends Vue implements ControlInterface {
     * @memberof MainBase
     */
     public arraySpanMethod({row, column, rowIndex, columnIndex} : any) {
-        let allColumns:Array<any> = ['orgid','orgcode','orgname','orglevel','shortname','porgname','porgid','showorder','createdate','updatedate'];
+        let allColumns:Array<any> = ['orgid','orgcode','orgname','orglevel','shortname','porgname','porgid','isvalid','showorder','createdate','updatedate'];
         if(row && row.children) {
             if(columnIndex == (this.isSingleSelect ? 0:1)) {
                 return [1, allColumns.length+1];
@@ -1570,6 +1601,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 shortname:'',
                 porgname:'',
                 porgid:'',
+                isvalid:'',
                 showorder:'',
                 createdate:'',
                 updatedate:'',
@@ -1606,6 +1638,7 @@ export default class MainBase extends Vue implements ControlInterface {
             shortname:'',
             porgname:'',
             porgid:'',
+            isvalid:'',
             showorder:'',
             createdate:'',
             updatedate:'',
@@ -1662,6 +1695,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 shortname:'',
                 porgname:'',
                 porgid:'',
+                isvalid:'',
                 showorder:'',
                 createdate:'',
                 updatedate:'',

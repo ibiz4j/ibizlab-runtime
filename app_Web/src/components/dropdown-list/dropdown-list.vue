@@ -61,6 +61,24 @@ export default class DropDownList extends Vue {
      */
     @Model('change') readonly itemValue!: any;
 
+        /**
+     * 监控值变化，根据属性类型强制转换
+     *
+     * @memberof DropDownList
+     */
+    @Watch('itemValue')
+    public valueWatch() {
+        try {
+            this.readyValue();
+            // 代码表集合中不存在改选项，重新准备集合
+            if (this.value && !this.items.find((item: any) => Object.is(this.value, item.value))) {
+                this.loadData();
+            }
+        } catch (error) {
+            console.log('下拉列表，值转换失败');
+        }
+    }
+
     /**
      * 代码表标识
      *
@@ -273,12 +291,10 @@ export default class DropDownList extends Vue {
             this.formStateEvent = this.formState.subscribe(({ type, data }) => {
                 if (Object.is('load', type)) {
                     this.loadData();
-                    this.readyValue();
                 }
             });
         }
         this.loadData();
-        this.readyValue();
     }
 
     /**
@@ -321,6 +337,7 @@ export default class DropDownList extends Vue {
             this.value = null;
             return;
         }
+        
         if (this.$util.typeOf(this.itemValue) === this.valueType) {
             this.value = this.itemValue;
         } else if (this.valueType === 'number') {
