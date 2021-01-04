@@ -82,26 +82,26 @@ public class SysPSSystemAspect
 
 
 
-    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.createBatch(..))")
-    public void create(JoinPoint point) throws Exception {
-        savePermission(point);
-    }
-    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.updateBatch(..))")
-    public void update(JoinPoint point) throws Exception {
-        savePermission(point);
-    }
-    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.saveBatch(..))")
-    public void save(JoinPoint point) throws Exception {
-        savePermission(point);
-    }
-    private void savePermission(JoinPoint point)
-    {
-        Object[] args = point.getArgs();
-        if (args.length > 0) {
-            Object obj = args[0];
-            if (obj instanceof List)
-                ((List<SysPSSystem>) obj).forEach(system -> sysPSSystemService.syncPermission(system));
-        }
-    }
+//    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.createBatch(..))")
+//    public void create(JoinPoint point) throws Exception {
+//        savePermission(point);
+//    }
+//    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.updateBatch(..))")
+//    public void update(JoinPoint point) throws Exception {
+//        savePermission(point);
+//    }
+//    @After(value = "execution(* cn.ibizlab.core.uaa.service.ISysPSSystemService.saveBatch(..))")
+//    public void save(JoinPoint point) throws Exception {
+//        savePermission(point);
+//    }
+//    private void savePermission(JoinPoint point)
+//    {
+//        Object[] args = point.getArgs();
+//        if (args.length > 0) {
+//            Object obj = args[0];
+//            if (obj instanceof List)
+//                ((List<SysPSSystem>) obj).forEach(system -> sysPSSystemService.syncPermission(system));
+//        }
+//    }
 
 }

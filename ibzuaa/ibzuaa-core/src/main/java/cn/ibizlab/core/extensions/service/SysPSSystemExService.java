@@ -6,6 +6,7 @@ import cn.ibizlab.core.uaa.domain.SysPermission;
 import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
 import cn.ibizlab.core.uaa.service.ISysPermissionService;
 import cn.ibizlab.core.uaa.service.impl.SysPSSystemServiceImpl;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,6 +122,7 @@ public class SysPSSystemExService extends SysPSSystemServiceImpl {
      */
     @Override
     @Transactional
+    @DS("db2")
     public SysPSSystem syncPermission(SysPSSystem system)
     {
         if(StringUtils.isEmpty(system.getPssystemid())||system.getSysstructure()==null)
@@ -154,6 +156,14 @@ public class SysPSSystemExService extends SysPSSystemServiceImpl {
             sysPermissionService.saveBatch(list);
 
         return system;
+    }
+
+
+    @Override
+    @Transactional
+    @DS("db2")
+    public boolean syncPermissionBatch(List<SysPSSystem> etList) {
+        return super.syncPermissionBatch(etList);
     }
 
     private String getIds(Set<String> newIds) {
