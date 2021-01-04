@@ -39,7 +39,7 @@ public class SysPSSystemExService extends SysPSSystemServiceImpl {
         prepareApps(et);
         if(!super.create(et))
             return false;
-        syncPermission(et);
+//        syncPermission(et);
         return true;
     }
 
@@ -50,8 +50,8 @@ public class SysPSSystemExService extends SysPSSystemServiceImpl {
         prepareApps(et);
         if(!super.update(et))
             return false;
-        if(ignoreSyncPermission==null||ignoreSyncPermission.equals(false))
-            syncPermission(et);
+//        if(ignoreSyncPermission==null||ignoreSyncPermission.equals(false))
+//            syncPermission(et);
         return true;
     }
 

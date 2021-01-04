@@ -111,7 +111,11 @@ public class SysPSSystemResource {
             log.warn(String.format("[%s]系统资源没有变化，忽略本次同步请求:",syspssystemdto.getPssystemid()));
             return ResponseEntity.status(HttpStatus.OK).body(true);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(syspssystemService.save(syspssystemMapping.toDomain(syspssystemdto)));
+        SysPSSystem domain=syspssystemMapping.toDomain(syspssystemdto);
+        boolean ret = (system==null)?syspssystemService.create(domain):syspssystemService.update(domain);
+        if(ret)
+            syspssystemService.syncPermission(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(ret);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysPSSystem-Save-all')")

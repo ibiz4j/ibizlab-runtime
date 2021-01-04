@@ -180,7 +180,6 @@ public class SysAppService extends SysAppServiceImpl
                     break;
                 }
             }
-            sysPSSystem.set("ignoreSyncPermission",true);
             if(bchange)
                 sysPSSystemService.update(sysPSSystem);
         }
