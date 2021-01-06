@@ -21,7 +21,7 @@
     "vuedraggable": "^2.23.2",
     "async-validator": "^3.3.0",
     "@popperjs/core": "^2.4.3",
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "core-js": "^3.4.4",
     "echarts": "^4.6.0",
     "element-ui": "^2.13.0",
