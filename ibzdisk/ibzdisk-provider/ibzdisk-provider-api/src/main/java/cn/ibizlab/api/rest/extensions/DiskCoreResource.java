@@ -149,7 +149,7 @@ public class DiskCoreResource
 		if(request.getServerPort()!=80&&request.getServerPort()!=443)
 			redirectUrl=redirectUrl.concat(":").concat(request.getServerPort()+"");
 		redirectUrl=redirectUrl.concat("/net-disk/openview/")
-				.concat(folder).concat("/").concat(id).concat("/").concat(name).concat(".").concat(ext).concat("?authcode=").concat(StringUtils.isEmpty(authcode)?checkcode:authcode);
+				.concat(folder).concat("/").concat(id).concat("/").concat(name).concat(".").concat(ext).concat("?authcode=").concat(StringUtils.isEmpty(authcode)?checkcode:authcode).concat("&fullfilename=").concat(id).concat(".").concat(ext);
 		redirectUrl=previewPath.concat("").concat(encodeURIComponent(redirectUrl));
 		return ResponseEntity.status(HttpStatus.OK).body(redirectUrl);
 	}
