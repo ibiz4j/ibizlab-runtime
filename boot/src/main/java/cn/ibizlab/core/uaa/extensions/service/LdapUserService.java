@@ -136,6 +136,7 @@ public class LdapUserService extends SysUserServiceImpl implements  Authenticati
     public AuthenticationUser createUserDetails(SysUser user) {
         AuthenticationUser userdatail = new AuthenticationUser();
         CachedBeanCopier.copy(user, userdatail);
+        userdatail.setSuperuser(user.getSuperuser()==null?0:user.getSuperuser());
         if (userdatail.getSuperuser() == 1) {
             userdatail.setAuthorities(AuthorityUtils.createAuthorityList("ROLE_SUPERADMIN"));
         }

@@ -89,7 +89,7 @@ public class UserService extends SysUserServiceImpl implements   AuthenticationU
 	public  AuthenticationUser createUserDetails(SysUser user) {
 		AuthenticationUser userdatail = new AuthenticationUser();
 		CachedBeanCopier.copy(user,userdatail);
-		userdatail.setSuperuser(user.getSuperuser());
+		userdatail.setSuperuser(user.getSuperuser()==null?0:user.getSuperuser());
 		if(userdatail.getSuperuser()==1){
 			userdatail.setAuthorities(AuthorityUtils.createAuthorityList("ROLE_SUPERADMIN"));
 		}
