@@ -1,5 +1,6 @@
 import jobslog_zh_CN from '@locale/lanres/entities/jobs-log/jobs-log_zh_CN';
 import sysrolepermission_zh_CN from '@locale/lanres/entities/sys-role-permission/sys-role-permission_zh_CN';
+import msguseraccount_zh_CN from '@locale/lanres/entities/msg-user-account/msg-user-account_zh_CN';
 import sysuser_zh_CN from '@locale/lanres/entities/sys-user/sys-user_zh_CN';
 import sysauthlog_zh_CN from '@locale/lanres/entities/sys-auth-log/sys-auth-log_zh_CN';
 import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
@@ -7,8 +8,11 @@ import syspost_zh_CN from '@locale/lanres/entities/sys-post/sys-post_zh_CN';
 import sysuserauth_zh_CN from '@locale/lanres/entities/sys-user-auth/sys-user-auth_zh_CN';
 import sysdepartment_zh_CN from '@locale/lanres/entities/sys-department/sys-department_zh_CN';
 import sysemployee_zh_CN from '@locale/lanres/entities/sys-employee/sys-employee_zh_CN';
+import paytrade_zh_CN from '@locale/lanres/entities/pay-trade/pay-trade_zh_CN';
+import msgtemplate_zh_CN from '@locale/lanres/entities/msg-template/msg-template_zh_CN';
 import systeam_zh_CN from '@locale/lanres/entities/sys-team/sys-team_zh_CN';
 import wfuser_zh_CN from '@locale/lanres/entities/wfuser/wfuser_zh_CN';
+import payopenaccess_zh_CN from '@locale/lanres/entities/pay-open-access/pay-open-access_zh_CN';
 import sysorganization_zh_CN from '@locale/lanres/entities/sys-organization/sys-organization_zh_CN';
 import jobsregistry_zh_CN from '@locale/lanres/entities/jobs-registry/jobs-registry_zh_CN';
 import sysopenaccess_zh_CN from '@locale/lanres/entities/sys-open-access/sys-open-access_zh_CN';
@@ -20,6 +24,7 @@ import sysuserrole_zh_CN from '@locale/lanres/entities/sys-user-role/sys-user-ro
 import wfprocessdefinition_zh_CN from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_zh_CN';
 import sysrole_zh_CN from '@locale/lanres/entities/sys-role/sys-role_zh_CN';
 import syspermission_zh_CN from '@locale/lanres/entities/sys-permission/sys-permission_zh_CN';
+import msgopenaccess_zh_CN from '@locale/lanres/entities/msg-open-access/msg-open-access_zh_CN';
 import systeammember_zh_CN from '@locale/lanres/entities/sys-team-member/sys-team-member_zh_CN';
 import sysdeptmember_zh_CN from '@locale/lanres/entities/sys-dept-member/sys-dept-member_zh_CN';
 import dictoption_zh_CN from '@locale/lanres/entities/dict-option/dict-option_zh_CN';
@@ -175,6 +180,13 @@ function getAppLocale(){
                     menuitem18: commonLogic.appcommonhandle("字典管理",null),
                     menuitem19: commonLogic.appcommonhandle("目录",null),
                     menuitem20: commonLogic.appcommonhandle("字典项",null),
+                    menuitem24: commonLogic.appcommonhandle("消息通知",null),
+                    menuitem25: commonLogic.appcommonhandle("第三方平台",null),
+                    menuitem26: commonLogic.appcommonhandle("消息模板",null),
+                    menuitem27: commonLogic.appcommonhandle("消息账户",null),
+                    menuitem28: commonLogic.appcommonhandle("支付管理",null),
+                    menuitem29: commonLogic.appcommonhandle("支付交易",null),
+                    menuitem30: commonLogic.appcommonhandle("支付平台",null),
                 },
             },
             formpage:{
@@ -271,6 +283,7 @@ function getAppLocale(){
         entities: {
             jobslog: jobslog_zh_CN(),
             sysrolepermission: sysrolepermission_zh_CN(),
+            msguseraccount: msguseraccount_zh_CN(),
             sysuser: sysuser_zh_CN(),
             sysauthlog: sysauthlog_zh_CN(),
             wfmember: wfmember_zh_CN(),
@@ -278,8 +291,11 @@ function getAppLocale(){
             sysuserauth: sysuserauth_zh_CN(),
             sysdepartment: sysdepartment_zh_CN(),
             sysemployee: sysemployee_zh_CN(),
+            paytrade: paytrade_zh_CN(),
+            msgtemplate: msgtemplate_zh_CN(),
             systeam: systeam_zh_CN(),
             wfuser: wfuser_zh_CN(),
+            payopenaccess: payopenaccess_zh_CN(),
             sysorganization: sysorganization_zh_CN(),
             jobsregistry: jobsregistry_zh_CN(),
             sysopenaccess: sysopenaccess_zh_CN(),
@@ -291,6 +307,7 @@ function getAppLocale(){
             wfprocessdefinition: wfprocessdefinition_zh_CN(),
             sysrole: sysrole_zh_CN(),
             syspermission: syspermission_zh_CN(),
+            msgopenaccess: msgopenaccess_zh_CN(),
             systeammember: systeammember_zh_CN(),
             sysdeptmember: sysdeptmember_zh_CN(),
             dictoption: dictoption_zh_CN(),

@@ -50,7 +50,7 @@ public class SysUserFallback implements SysUserFeignClient {
     }
 
 
-    public SysUser getDraft(){
+    public SysUser getDraft(SysUser entity){
         return null;
     }
 

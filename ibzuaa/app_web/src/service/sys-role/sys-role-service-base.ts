@@ -180,7 +180,7 @@ export default class SysRoleServiceBase extends EntityService {
      */
     public async NoRepeatBatch(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return await Http.getInstance().post(`/sysrole/norepeatbatch`,tempData,isloading);
+        return await Http.getInstance().post(`/sysroles/norepeatbatch`,tempData,isloading);
     }
 
     /**

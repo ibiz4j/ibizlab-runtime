@@ -49,7 +49,7 @@ public interface WFTaskFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wftasks/getdraft")
-    WFTask getDraft();
+    WFTask getDraft(WFTask entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wftasks/checkkey")

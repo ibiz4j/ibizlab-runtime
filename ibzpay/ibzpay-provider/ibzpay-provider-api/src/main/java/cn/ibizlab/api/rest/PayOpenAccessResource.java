@@ -110,8 +110,9 @@ public class PayOpenAccessResource {
 
     @ApiOperation(value = "获取支付平台草稿", tags = {"支付平台" },  notes = "获取支付平台草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/getdraft")
-    public ResponseEntity<PayOpenAccessDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(payopenaccessMapping.toDto(payopenaccessService.getDraft(new PayOpenAccess())));
+    public ResponseEntity<PayOpenAccessDTO> getDraft(PayOpenAccessDTO dto) {
+        PayOpenAccess domain = payopenaccessMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(payopenaccessMapping.toDto(payopenaccessService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查支付平台", tags = {"支付平台" },  notes = "检查支付平台")
@@ -156,6 +157,7 @@ public class PayOpenAccessResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(payopenaccessMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

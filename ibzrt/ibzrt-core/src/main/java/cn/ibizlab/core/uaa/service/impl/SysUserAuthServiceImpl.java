@@ -97,7 +97,7 @@ public class SysUserAuthServiceImpl implements ISysUserAuthService {
 
     @Override
     public SysUserAuth getDraft(SysUserAuth et) {
-        et=sysUserAuthFeignClient.getDraft();
+        et=sysUserAuthFeignClient.getDraft(et);
         return et;
     }
 
@@ -149,9 +149,6 @@ public class SysUserAuthServiceImpl implements ISysUserAuthService {
         Page<SysUserAuth> sysUserAuths=sysUserAuthFeignClient.searchDefault(context);
         return sysUserAuths;
     }
-
-
-
 
 }
 

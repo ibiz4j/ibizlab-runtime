@@ -111,8 +111,9 @@ public class DictOptionResource {
 
     @ApiOperation(value = "获取字典项草稿", tags = {"字典项" },  notes = "获取字典项草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
-    public ResponseEntity<DictOptionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(new DictOption())));
+    public ResponseEntity<DictOptionDTO> getDraft(DictOptionDTO dto) {
+        DictOption domain = dictoptionMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查字典项", tags = {"字典项" },  notes = "检查字典项")
@@ -157,6 +158,7 @@ public class DictOptionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(dictoptionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-Create-all')")
@@ -233,8 +235,8 @@ public class DictOptionResource {
 
     @ApiOperation(value = "根据字典获取字典项草稿", tags = {"字典项" },  notes = "根据字典获取字典项草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/getdraft")
-    public ResponseEntity<DictOptionDTO> getDraftByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id) {
-        DictOption domain = new DictOption();
+    public ResponseEntity<DictOptionDTO> getDraftByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, DictOptionDTO dto) {
+        DictOption domain = dictoptionMapping.toDomain(dto);
         domain.setCatalogId(dictcatalog_id);
         return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(dictoptionService.getDraft(domain)));
     }

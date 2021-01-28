@@ -110,8 +110,9 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "获取组成员草稿", tags = {"组成员" },  notes = "获取组成员草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(new SysTeamMember())));
+    public ResponseEntity<SysTeamMemberDTO> getDraft(SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查组成员", tags = {"组成员" },  notes = "检查组成员")
@@ -120,14 +121,12 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "保存组成员", tags = {"组成员" },  notes = "保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/systeammembers/save")
     public ResponseEntity<Boolean> save(@RequestBody SysTeamMemberDTO systeammemberdto) {
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.save(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "批量保存组成员", tags = {"组成员" },  notes = "批量保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/systeammembers/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysTeamMemberDTO> systeammemberdtos) {
@@ -156,6 +155,7 @@ public class SysTeamMemberResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(systeammemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Create-all')")
@@ -231,8 +231,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据人员获取组成员草稿", tags = {"组成员" },  notes = "根据人员获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/{sysemployee_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -243,7 +243,6 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据人员保存组成员", tags = {"组成员" },  notes = "根据人员保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/systeammembers/save")
     public ResponseEntity<Boolean> saveBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
@@ -252,7 +251,6 @@ public class SysTeamMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据人员批量保存组成员", tags = {"组成员" },  notes = "根据人员批量保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/systeammembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysTeamMemberDTO> systeammemberdtos) {
@@ -360,8 +358,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据组获取组成员草稿", tags = {"组成员" },  notes = "根据组获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/systeams/{systeam_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysTeam(@PathVariable("systeam_id") String systeam_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysTeam(@PathVariable("systeam_id") String systeam_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setTeamid(systeam_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -372,7 +370,6 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据组保存组成员", tags = {"组成员" },  notes = "根据组保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/systeams/{systeam_id}/systeammembers/save")
     public ResponseEntity<Boolean> saveBySysTeam(@PathVariable("systeam_id") String systeam_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
@@ -381,7 +378,6 @@ public class SysTeamMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据组批量保存组成员", tags = {"组成员" },  notes = "根据组批量保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/systeams/{systeam_id}/systeammembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysTeam(@PathVariable("systeam_id") String systeam_id, @RequestBody List<SysTeamMemberDTO> systeammemberdtos) {
@@ -489,8 +485,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据部门人员获取组成员草稿", tags = {"组成员" },  notes = "根据部门人员获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -501,7 +497,6 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据部门人员保存组成员", tags = {"组成员" },  notes = "根据部门人员保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/save")
     public ResponseEntity<Boolean> saveBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
@@ -510,7 +505,6 @@ public class SysTeamMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据部门人员批量保存组成员", tags = {"组成员" },  notes = "根据部门人员批量保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysTeamMemberDTO> systeammemberdtos) {
@@ -618,8 +612,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据单位机构人员获取组成员草稿", tags = {"组成员" },  notes = "根据单位机构人员获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -630,7 +624,6 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据单位机构人员保存组成员", tags = {"组成员" },  notes = "根据单位机构人员保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/save")
     public ResponseEntity<Boolean> saveBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
@@ -639,7 +632,6 @@ public class SysTeamMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据单位机构人员批量保存组成员", tags = {"组成员" },  notes = "根据单位机构人员批量保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysTeamMemberDTO> systeammemberdtos) {
@@ -747,8 +739,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据单位机构部门人员获取组成员草稿", tags = {"组成员" },  notes = "根据单位机构部门人员获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -759,7 +751,6 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据单位机构部门人员保存组成员", tags = {"组成员" },  notes = "根据单位机构部门人员保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/save")
     public ResponseEntity<Boolean> saveBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
@@ -768,7 +759,6 @@ public class SysTeamMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeamMember-Save-all')")
     @ApiOperation(value = "根据单位机构部门人员批量保存组成员", tags = {"组成员" },  notes = "根据单位机构部门人员批量保存组成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysTeamMemberDTO> systeammemberdtos) {

@@ -50,7 +50,7 @@ public class SysPermissionFallback implements SysPermissionFeignClient {
     }
 
 
-    public SysPermission getDraft(){
+    public SysPermission getDraft(SysPermission entity){
         return null;
     }
 

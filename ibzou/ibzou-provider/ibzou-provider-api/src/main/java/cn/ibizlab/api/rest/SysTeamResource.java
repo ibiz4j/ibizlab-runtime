@@ -110,8 +110,9 @@ public class SysTeamResource {
 
     @ApiOperation(value = "获取组草稿", tags = {"组" },  notes = "获取组草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/systeams/getdraft")
-    public ResponseEntity<SysTeamDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(systeamMapping.toDto(systeamService.getDraft(new SysTeam())));
+    public ResponseEntity<SysTeamDTO> getDraft(SysTeamDTO dto) {
+        SysTeam domain = systeamMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(systeamMapping.toDto(systeamService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查组", tags = {"组" },  notes = "检查组")
@@ -120,14 +121,12 @@ public class SysTeamResource {
         return  ResponseEntity.status(HttpStatus.OK).body(systeamService.checkKey(systeamMapping.toDomain(systeamdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeam-Save-all')")
     @ApiOperation(value = "保存组", tags = {"组" },  notes = "保存组")
 	@RequestMapping(method = RequestMethod.POST, value = "/systeams/save")
     public ResponseEntity<Boolean> save(@RequestBody SysTeamDTO systeamdto) {
         return ResponseEntity.status(HttpStatus.OK).body(systeamService.save(systeamMapping.toDomain(systeamdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeam-Save-all')")
     @ApiOperation(value = "批量保存组", tags = {"组" },  notes = "批量保存组")
 	@RequestMapping(method = RequestMethod.POST, value = "/systeams/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysTeamDTO> systeamdtos) {
@@ -135,7 +134,6 @@ public class SysTeamResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeam-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"组" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/systeams/fetchdefault")
 	public ResponseEntity<List<SysTeamDTO>> fetchDefault(SysTeamSearchContext context) {
@@ -148,7 +146,6 @@ public class SysTeamResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysTeam-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"组" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/systeams/searchdefault")
 	public ResponseEntity<Page<SysTeamDTO>> searchDefault(@RequestBody SysTeamSearchContext context) {
@@ -156,6 +153,7 @@ public class SysTeamResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(systeamMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

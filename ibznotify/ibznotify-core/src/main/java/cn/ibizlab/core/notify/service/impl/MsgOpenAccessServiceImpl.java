@@ -224,9 +224,6 @@ public class MsgOpenAccessServiceImpl extends ServiceImpl<MsgOpenAccessMapper, M
 
 
 
-
-
-
     public IMsgOpenAccessService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

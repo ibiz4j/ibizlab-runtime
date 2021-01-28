@@ -50,7 +50,7 @@ public class WFMemberFallback implements WFMemberFeignClient {
     }
 
 
-    public WFMember getDraft(){
+    public WFMember getDraft(WFMember entity){
         return null;
     }
 

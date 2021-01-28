@@ -819,7 +819,7 @@ export default class SysRoleEditViewBase extends Vue {
                 Object.assign(data, { sysrole: args[0].sysrole });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

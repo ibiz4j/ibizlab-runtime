@@ -4,12 +4,31 @@
 export const viewstate: any = {
     appviews: [
         {
+            viewtag: '05c6db43c9d5946f3f6da2d2b122fcdb',
+            viewmodule: 'notify',
+            viewname: 'MsgOpenAccessPickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
             viewtag: '06dc389605323456129e342bbdfbbd16',
             viewmodule: 'ou',
             viewname: 'SysDepartmentPickupGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
+            ],
+        },
+        {
+            viewtag: '089cc88e549cef536c3380ccb1ce465f',
+            viewmodule: 'pay',
+            viewname: 'PayTradeEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'f3bb55ce97b7b94c99782d0cea879eaa',
             ],
         },
         {
@@ -52,6 +71,16 @@ export const viewstate: any = {
                 '84e5a5b589b434dfdc60a3d0ad087d37',
                 '6e1b35989dd6470b5c890369ab87b545',
                 '90a777962337daaf4cffd846eecb1f0f',
+            ],
+        },
+        {
+            viewtag: '13944c37e6cb87c6aca28dec7b31892e',
+            viewmodule: 'notify',
+            viewname: 'MsgOpenAccessGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '6a6e3d13c769ee31fe6ec9cc5508324f',
             ],
         },
         {
@@ -115,6 +144,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '1f1889a2c3e7f49d9221021499a0f78a',
+            viewmodule: 'pay',
+            viewname: 'PayTradeGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '089cc88e549cef536c3380ccb1ce465f',
+            ],
+        },
+        {
             viewtag: '1f8cf7e78d6d88588d1d568d1866cc77',
             viewmodule: 'uaa',
             viewname: 'SysUserMPickupView',
@@ -171,6 +210,26 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '349cda61e4dc5e38045ef7c77321d1c7',
+            ],
+        },
+        {
+            viewtag: '2ac24526f9a5f79abb2b9d474e57be0a',
+            viewmodule: 'notify',
+            viewname: 'MsgTemplateGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '30868cf27f47d5ec65261c8b6d5c18a1',
+            ],
+        },
+        {
+            viewtag: '30868cf27f47d5ec65261c8b6d5c18a1',
+            viewmodule: 'notify',
+            viewname: 'MsgTemplateEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '5fd5a34016a13395007d949d732cb30d',
             ],
         },
         {
@@ -261,6 +320,15 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '4c01113024cb96ba2f6deaa33773f0aa',
+            viewmodule: 'notify',
+            viewname: 'MsgUserAccountEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
             viewtag: '523b25cb9c95d2ef731c39ca24cfe98a',
             viewmodule: 'ou',
             viewname: 'SysDeptMemberGridView',
@@ -311,6 +379,26 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '89ff98e46167a4688e63362931496818',
+            ],
+        },
+        {
+            viewtag: '5fd5a34016a13395007d949d732cb30d',
+            viewmodule: 'notify',
+            viewname: 'MsgOpenAccessPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '05c6db43c9d5946f3f6da2d2b122fcdb',
+            ],
+        },
+        {
+            viewtag: '60fe0b9b8535b02baf1a02d5f56c5a9c',
+            viewmodule: 'pay',
+            viewname: 'PayOpenAccessGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'f5f50734bb86ba01097a7cb19b63d36c',
             ],
         },
         {
@@ -379,6 +467,15 @@ export const viewstate: any = {
             viewtag: '6869875c7409bd1dddd3d0fc62c502db',
             viewmodule: 'uaa',
             viewname: 'SysUserPickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: '6a6e3d13c769ee31fe6ec9cc5508324f',
+            viewmodule: 'notify',
+            viewname: 'MsgOpenAccessEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -506,6 +603,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: 'a186d7dee3d83d5f95c27142bece5df6',
+            viewmodule: 'notify',
+            viewname: 'MsgUserAccountGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '4c01113024cb96ba2f6deaa33773f0aa',
+            ],
+        },
+        {
             viewtag: 'a1f8d44a9d7be49687062c63434b0f3f',
             viewmodule: 'uaa',
             viewname: 'SysRoleMPickupView',
@@ -589,6 +696,15 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: 'b1fe00a9dfb2160b1589b4e1e2b1d2fc',
+            viewmodule: 'pay',
+            viewname: 'PayOpenAccessPickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
             viewtag: 'b23a721ca159ac2490b768d795e85d17',
             viewmodule: 'workflow',
             viewname: 'WFGroupEditView',
@@ -625,10 +741,12 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
+                '13944c37e6cb87c6aca28dec7b31892e',
                 '3fc39744066bd5343be378ec5703f556',
                 '5856bfb8b576cc2ee743801b23e58299',
                 '0f73ceaa7ce0ec11d9b6aaf27e05ad4f',
                 '255944d6d1a575d0eda2b68bc19314f3',
+                '2ac24526f9a5f79abb2b9d474e57be0a',
                 'fd7c41ae2348a07694aa65a26bca0df5',
                 'a26ed59459b6d3b6f7ff36ad38b06c1b',
                 'e4856779577562e9880855e6c66d63e5',
@@ -637,6 +755,9 @@ export const viewstate: any = {
                 'd356c19266944e00bc8ebc1bbd85ca7c',
                 '5c403d904f82265cde504f205e98f95e',
                 '1ef170b14b7a70f4609a9f13692d1414',
+                '60fe0b9b8535b02baf1a02d5f56c5a9c',
+                'a186d7dee3d83d5f95c27142bece5df6',
+                '1f1889a2c3e7f49d9221021499a0f78a',
                 '67b4d1e928a08679ce63051ccc88da9c',
                 '13c174556f45e9b10b66dc51834a6ab5',
                 'f498dfb24e88df7c70a5c09ecb587647',
@@ -736,6 +857,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: 'f3bb55ce97b7b94c99782d0cea879eaa',
+            viewmodule: 'pay',
+            viewname: 'PayOpenAccessPickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'b1fe00a9dfb2160b1589b4e1e2b1d2fc',
+            ],
+        },
+        {
             viewtag: 'f498dfb24e88df7c70a5c09ecb587647',
             viewmodule: 'workflow',
             viewname: 'WFGroupGridView',
@@ -743,6 +874,15 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 'b23a721ca159ac2490b768d795e85d17',
+            ],
+        },
+        {
+            viewtag: 'f5f50734bb86ba01097a7cb19b63d36c',
+            viewmodule: 'pay',
+            viewname: 'PayOpenAccessEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
         {

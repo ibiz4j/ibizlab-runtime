@@ -110,8 +110,9 @@ public class JobsRegistryResource {
 
     @ApiOperation(value = "获取任务注册信息草稿", tags = {"任务注册信息" },  notes = "获取任务注册信息草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/getdraft")
-    public ResponseEntity<JobsRegistryDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(jobsregistryMapping.toDto(jobsregistryService.getDraft(new JobsRegistry())));
+    public ResponseEntity<JobsRegistryDTO> getDraft(JobsRegistryDTO dto) {
+        JobsRegistry domain = jobsregistryMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(jobsregistryMapping.toDto(jobsregistryService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查任务注册信息", tags = {"任务注册信息" },  notes = "检查任务注册信息")
@@ -156,6 +157,7 @@ public class JobsRegistryResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(jobsregistryMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

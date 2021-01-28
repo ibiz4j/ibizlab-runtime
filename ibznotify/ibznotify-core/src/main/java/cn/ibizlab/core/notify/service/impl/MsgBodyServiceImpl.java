@@ -221,9 +221,6 @@ public class MsgBodyServiceImpl extends ServiceImpl<MsgBodyMapper, MsgBody> impl
 
 
 
-
-
-
     public IMsgBodyService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

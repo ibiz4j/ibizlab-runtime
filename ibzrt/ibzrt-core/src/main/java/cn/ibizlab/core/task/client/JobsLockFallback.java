@@ -50,7 +50,7 @@ public class JobsLockFallback implements JobsLockFeignClient {
     }
 
 
-    public JobsLock getDraft(){
+    public JobsLock getDraft(JobsLock entity){
         return null;
     }
 

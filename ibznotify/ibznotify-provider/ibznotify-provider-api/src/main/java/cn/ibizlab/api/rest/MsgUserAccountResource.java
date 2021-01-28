@@ -110,8 +110,9 @@ public class MsgUserAccountResource {
 
     @ApiOperation(value = "获取绑定消息账号草稿", tags = {"绑定消息账号" },  notes = "获取绑定消息账号草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/msguseraccounts/getdraft")
-    public ResponseEntity<MsgUserAccountDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(msguseraccountMapping.toDto(msguseraccountService.getDraft(new MsgUserAccount())));
+    public ResponseEntity<MsgUserAccountDTO> getDraft(MsgUserAccountDTO dto) {
+        MsgUserAccount domain = msguseraccountMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(msguseraccountMapping.toDto(msguseraccountService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查绑定消息账号", tags = {"绑定消息账号" },  notes = "检查绑定消息账号")
@@ -120,14 +121,12 @@ public class MsgUserAccountResource {
         return  ResponseEntity.status(HttpStatus.OK).body(msguseraccountService.checkKey(msguseraccountMapping.toDomain(msguseraccountdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Save-all')")
     @ApiOperation(value = "保存绑定消息账号", tags = {"绑定消息账号" },  notes = "保存绑定消息账号")
 	@RequestMapping(method = RequestMethod.POST, value = "/msguseraccounts/save")
     public ResponseEntity<Boolean> save(@RequestBody MsgUserAccountDTO msguseraccountdto) {
         return ResponseEntity.status(HttpStatus.OK).body(msguseraccountService.save(msguseraccountMapping.toDomain(msguseraccountdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Save-all')")
     @ApiOperation(value = "批量保存绑定消息账号", tags = {"绑定消息账号" },  notes = "批量保存绑定消息账号")
 	@RequestMapping(method = RequestMethod.POST, value = "/msguseraccounts/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<MsgUserAccountDTO> msguseraccountdtos) {
@@ -135,7 +134,6 @@ public class MsgUserAccountResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"绑定消息账号" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/msguseraccounts/fetchdefault")
 	public ResponseEntity<List<MsgUserAccountDTO>> fetchDefault(MsgUserAccountSearchContext context) {
@@ -148,7 +146,6 @@ public class MsgUserAccountResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"绑定消息账号" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/msguseraccounts/searchdefault")
 	public ResponseEntity<Page<MsgUserAccountDTO>> searchDefault(@RequestBody MsgUserAccountSearchContext context) {
@@ -156,6 +153,7 @@ public class MsgUserAccountResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(msguseraccountMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

@@ -10,12 +10,19 @@
   </dropdown>
 </template>
 <script lang = 'ts'>
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Inject } from 'vue-property-decorator';
 
 import { localList } from '@locale/local-list';
 
 @Component({})
 export default class AppLang extends Vue {
+
+    /**
+     * 注入刷新行为
+     * 
+     * @memberof AppLang
+     */
+    @Inject() reload: any;
 
     /**
      * 本地语言资源
@@ -55,6 +62,7 @@ export default class AppLang extends Vue {
         const local: any = this.localList.find((_local: any) => Object.is(_local.type, $evnet));
         this.title = local.name;
         localStorage.setItem('local', $evnet);
+        this.reload();
     }
 
 }

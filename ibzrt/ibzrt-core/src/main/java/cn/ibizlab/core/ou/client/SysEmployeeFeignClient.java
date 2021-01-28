@@ -49,7 +49,7 @@ public interface SysEmployeeFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/getdraft")
-    SysEmployee getDraft();
+    SysEmployee getDraft(SysEmployee entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysemployees/checkkey")

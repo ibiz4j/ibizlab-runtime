@@ -1,5 +1,6 @@
 package cn.ibizlab.api.rest.extensions;
 
+import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.extensions.service.UserRegisterService;
 import cn.ibizlab.util.domain.IBZUSER;
 import com.alibaba.fastjson.JSONObject;
@@ -18,7 +19,7 @@ public class UserRegisterResource {
     private UserRegisterService userRegisterService;
 
     @PostMapping(value = "/uaa/register")
-    public ResponseEntity<JSONObject> register(@RequestBody IBZUSER ibzuser) {
+    public ResponseEntity<JSONObject> register(@RequestBody SysUser ibzuser) {
 
         JSONObject object = new JSONObject();
         // 响应结果

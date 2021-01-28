@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ibznotify-app-web
+  labels:
+    app: ibznotify-app-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibznotify-app-web
+  template:
+    metadata:
+      labels:
+        app: ibznotify-app-web
+    spec:
+      imagePullSecrets:
+      - name: aly-shanghai
+      containers:
+      - name: ibznotify-app-web
+        image: registry.cn-shanghai.aliyuncs.com/ibizsys/ibznotify-app-web:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /app/file
+      volumes:      
+      - name: data
+        persistentVolumeClaim:
+          claimName: demo-date-pvc-nfs
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ibznotify-app-web
+  labels:
+    app: ibznotify-app-web
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 8080
+    protocol: TCP
+  selector:
+    app: ibznotify-app-web
+

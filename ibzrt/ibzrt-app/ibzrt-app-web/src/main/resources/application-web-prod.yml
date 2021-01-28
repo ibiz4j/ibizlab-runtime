@@ -15,6 +15,10 @@ zuul:
       path: /sysrolepermissions/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
       stripPrefix: false
+    msg_user_account:
+      path: /msguseraccounts/**
+      serviceId: ${ibiz.ref.service.ibznotify-api:ibznotify-api}
+      stripPrefix: false
     sys_user:
       path: /sysusers/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
@@ -43,6 +47,14 @@ zuul:
       path: /sysemployees/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
+    pay_trade:
+      path: /paytrades/**
+      serviceId: ${ibiz.ref.service.ibzpay-api:ibzpay-api}
+      stripPrefix: false
+    msg_template:
+      path: /msgtemplates/**
+      serviceId: ${ibiz.ref.service.ibznotify-api:ibznotify-api}
+      stripPrefix: false
     sys_team:
       path: /systeams/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
@@ -50,6 +62,10 @@ zuul:
     wf_user:
       path: /wfusers/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    pay_open_access:
+      path: /payopenaccesses/**
+      serviceId: ${ibiz.ref.service.ibzpay-api:ibzpay-api}
       stripPrefix: false
     sys_org:
       path: /sysorganizations/**
@@ -94,6 +110,10 @@ zuul:
     sys_permission:
       path: /syspermissions/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
+      stripPrefix: false
+    msg_open_access:
+      path: /msgopenaccesses/**
+      serviceId: ${ibiz.ref.service.ibznotify-api:ibznotify-api}
       stripPrefix: false
     sys_teammember:
       path: /systeammembers/**

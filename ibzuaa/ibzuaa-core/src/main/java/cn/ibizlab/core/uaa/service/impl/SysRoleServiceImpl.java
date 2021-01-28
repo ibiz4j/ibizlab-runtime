@@ -311,9 +311,6 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     }
 
 
-
-
-
     public ISysRoleService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

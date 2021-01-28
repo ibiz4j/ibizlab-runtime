@@ -50,7 +50,7 @@ public class DictOptionFallback implements DictOptionFeignClient {
     }
 
 
-    public DictOption getDraft(){
+    public DictOption getDraft(DictOption entity){
         return null;
     }
 

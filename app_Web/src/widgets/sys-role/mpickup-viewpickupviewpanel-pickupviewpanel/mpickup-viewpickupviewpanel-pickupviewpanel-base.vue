@@ -25,7 +25,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysRoleService from '@/service/sys-role/sys-role-service';
+import SysRoleEntityService from '@/service/sys-role/sys-role-service';
 import MPickupViewpickupviewpanelService from './mpickup-viewpickupviewpanel-pickupviewpanel-service';
 import SysRoleUIService from '@/uiservice/sys-role/sys-role-ui-service';
 import MPickupViewpickupviewpanelModel from './mpickup-viewpickupviewpanel-pickupviewpanel-model';
@@ -105,7 +105,7 @@ export default class MPickupViewpickupviewpanelBase extends Vue implements Contr
      * @type {SysRoleService}
      * @memberof MPickupViewpickupviewpanelBase
      */
-    public appEntityService: SysRoleService = new SysRoleService({ $store: this.$store });
+    public appEntityService: SysRoleEntityService = new SysRoleEntityService({ $store: this.$store });
     
 
 

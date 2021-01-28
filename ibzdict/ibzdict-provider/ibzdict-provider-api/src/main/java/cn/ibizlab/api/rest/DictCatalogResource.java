@@ -111,8 +111,9 @@ public class DictCatalogResource {
 
     @ApiOperation(value = "获取字典草稿", tags = {"字典" },  notes = "获取字典草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/getdraft")
-    public ResponseEntity<DictCatalogDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(dictcatalogMapping.toDto(dictcatalogService.getDraft(new DictCatalog())));
+    public ResponseEntity<DictCatalogDTO> getDraft(DictCatalogDTO dto) {
+        DictCatalog domain = dictcatalogMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(dictcatalogMapping.toDto(dictcatalogService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查字典", tags = {"字典" },  notes = "检查字典")
@@ -136,7 +137,6 @@ public class DictCatalogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"字典" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/dictcatalogs/fetchdefault")
 	public ResponseEntity<List<DictCatalogDTO>> fetchDefault(DictCatalogSearchContext context) {
@@ -149,7 +149,6 @@ public class DictCatalogResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"字典" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/dictcatalogs/searchdefault")
 	public ResponseEntity<Page<DictCatalogDTO>> searchDefault(@RequestBody DictCatalogSearchContext context) {
@@ -157,6 +156,7 @@ public class DictCatalogResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(dictcatalogMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

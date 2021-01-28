@@ -256,9 +256,6 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
 
 
 
-
-
-
     public IDictOptionService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

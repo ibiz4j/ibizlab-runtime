@@ -1395,7 +1395,7 @@ export default class MsgOpenAccessEditViewBase extends Vue {
                 Object.assign(data, { msgopenaccess: args[0].msgopenaccess });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

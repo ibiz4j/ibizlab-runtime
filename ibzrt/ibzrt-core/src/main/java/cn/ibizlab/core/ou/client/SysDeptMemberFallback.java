@@ -50,7 +50,7 @@ public class SysDeptMemberFallback implements SysDeptMemberFeignClient {
     }
 
 
-    public SysDeptMember getDraft(){
+    public SysDeptMember getDraft(SysDeptMember entity){
         return null;
     }
 

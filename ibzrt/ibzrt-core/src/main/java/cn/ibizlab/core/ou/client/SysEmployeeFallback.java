@@ -50,7 +50,7 @@ public class SysEmployeeFallback implements SysEmployeeFeignClient {
     }
 
 
-    public SysEmployee getDraft(){
+    public SysEmployee getDraft(SysEmployee entity){
         return null;
     }
 

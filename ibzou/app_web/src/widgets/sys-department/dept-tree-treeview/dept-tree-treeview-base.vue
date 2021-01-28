@@ -56,7 +56,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysDepartmentService from '@/service/sys-department/sys-department-service';
+import SysDepartmentEntityService from '@/service/sys-department/sys-department-service';
 import DeptTreeService from './dept-tree-treeview-service';
 import SysDepartmentUIService from '@/uiservice/sys-department/sys-department-ui-service';
 import { Environment } from '@/environments/environment';
@@ -145,7 +145,7 @@ export default class DeptTreeBase extends Vue implements ControlInterface {
      * @type {SysDepartmentService}
      * @memberof DeptTreeBase
      */
-    public appEntityService: SysDepartmentService = new SysDepartmentService({ $store: this.$store });
+    public appEntityService: SysDepartmentEntityService = new SysDepartmentEntityService({ $store: this.$store });
     
 
 

@@ -97,7 +97,7 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
 
     @Override
     public JobsRegistry getDraft(JobsRegistry et) {
-        et=jobsRegistryFeignClient.getDraft();
+        et=jobsRegistryFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
         Page<JobsRegistry> jobsRegistrys=jobsRegistryFeignClient.searchDefault(context);
         return jobsRegistrys;
     }
-
-
-
 
 }
 

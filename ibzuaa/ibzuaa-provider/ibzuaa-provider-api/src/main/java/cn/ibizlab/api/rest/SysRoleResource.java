@@ -111,8 +111,9 @@ public class SysRoleResource {
 
     @ApiOperation(value = "获取系统角色草稿", tags = {"系统角色" },  notes = "获取系统角色草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/getdraft")
-    public ResponseEntity<SysRoleDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysroleMapping.toDto(sysroleService.getDraft(new SysRole())));
+    public ResponseEntity<SysRoleDTO> getDraft(SysRoleDTO dto) {
+        SysRole domain = sysroleMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysroleMapping.toDto(sysroleService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查系统角色", tags = {"系统角色" },  notes = "检查系统角色")
@@ -133,9 +134,11 @@ public class SysRoleResource {
     }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-NoRepeat-all')")
     @ApiOperation(value = "批量处理[角色去重查询]", tags = {"系统角色" },  notes = "批量处理[角色去重查询]")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/norepeatbatch")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/norepeatbatch")
     public ResponseEntity<Boolean> noRepeatBatch(@RequestBody List<SysRoleDTO> sysroledtos) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysroleService.noRepeatBatch(sysroleMapping.toDomain(sysroledtos)));
+        List<SysRole> domains = sysroleMapping.toDomain(sysroledtos);
+        boolean result = sysroleService.noRepeatBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @PreAuthorize("hasPermission(this.sysroleMapping.toDomain(#sysroledto),'ibzuaa-SysRole-Save')")
@@ -153,7 +156,6 @@ public class SysRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-searchDefault-all') and hasPermission(#context,'ibzuaa-SysRole-Get')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"系统角色" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysroles/fetchdefault")
 	public ResponseEntity<List<SysRoleDTO>> fetchDefault(SysRoleSearchContext context) {
@@ -166,7 +168,6 @@ public class SysRoleResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-searchDefault-all') and hasPermission(#context,'ibzuaa-SysRole-Get')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"系统角色" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysroles/searchdefault")
 	public ResponseEntity<Page<SysRoleDTO>> searchDefault(@RequestBody SysRoleSearchContext context) {
@@ -196,6 +197,7 @@ public class SysRoleResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

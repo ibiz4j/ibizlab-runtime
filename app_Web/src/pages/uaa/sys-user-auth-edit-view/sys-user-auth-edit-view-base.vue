@@ -1014,7 +1014,7 @@ export default class SysUserAuthEditViewBase extends Vue {
                 Object.assign(data, { sysuserauth: args[0].sysuserauth });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

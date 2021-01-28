@@ -2,7 +2,21 @@ import commonLogic from '@/locale/logic/common/common-logic';
 
 function getLocaleResourceBase(){
   const data:any = {
-      OpenAccessType: {
+      TemplateType: {
+          "aliyun-sms": commonLogic.appcommonhandle("阿里云短信",null),
+          "aliyun-email": commonLogic.appcommonhandle("阿里云邮件",null),
+          "wechat-msg": commonLogic.appcommonhandle("微信消息",null),
+          "dingtalk-msg": commonLogic.appcommonhandle("钉钉通知",null),
+          "empty": commonLogic.appcommonhandle("",null),
+      },
+      UaaOpenAccessType: {
+          "aliyun": commonLogic.appcommonhandle("阿里云",null),
+          "wechat": commonLogic.appcommonhandle("微信开放平台",null),
+          "qq": commonLogic.appcommonhandle("QQ互联",null),
+          "dingtalk": commonLogic.appcommonhandle("钉钉开放平台",null),
+          "empty": commonLogic.appcommonhandle("",null),
+      },
+      PayOpenAccessType: {
           "aliyun": commonLogic.appcommonhandle("阿里云",null),
           "wechat": commonLogic.appcommonhandle("微信开放平台",null),
           "qq": commonLogic.appcommonhandle("QQ互联",null),
@@ -23,6 +37,13 @@ function getLocaleResourceBase(){
       CodeListJobStatus: {
           "0": commonLogic.appcommonhandle("ENABLED",null),
           "1": commonLogic.appcommonhandle("DISABLED",null),
+          "empty": commonLogic.appcommonhandle("",null),
+      },
+      NotifyOpenAccessType: {
+          "aliyun": commonLogic.appcommonhandle("阿里云",null),
+          "wechat": commonLogic.appcommonhandle("微信开放平台",null),
+          "qq": commonLogic.appcommonhandle("QQ互联",null),
+          "dingtalk": commonLogic.appcommonhandle("钉钉开放平台",null),
           "empty": commonLogic.appcommonhandle("",null),
       },
       CLAuthCode: {

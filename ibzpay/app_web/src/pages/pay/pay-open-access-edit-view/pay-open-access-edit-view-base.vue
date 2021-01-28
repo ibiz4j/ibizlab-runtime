@@ -1395,7 +1395,7 @@ export default class PayOpenAccessEditViewBase extends Vue {
                 Object.assign(data, { payopenaccess: args[0].payopenaccess });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

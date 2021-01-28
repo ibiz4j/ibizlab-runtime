@@ -50,7 +50,7 @@ public class WFProcessInstanceFallback implements WFProcessInstanceFeignClient {
     }
 
 
-    public WFProcessInstance getDraft(){
+    public WFProcessInstance getDraft(WFProcessInstance entity){
         return null;
     }
 

@@ -97,7 +97,7 @@ public class WFSystemServiceImpl implements IWFSystemService {
 
     @Override
     public WFSystem getDraft(WFSystem et) {
-        et=wFSystemFeignClient.getDraft();
+        et=wFSystemFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFSystemServiceImpl implements IWFSystemService {
         Page<WFSystem> wFSystems=wFSystemFeignClient.searchDefault(context);
         return wFSystems;
     }
-
-
-
 
 }
 

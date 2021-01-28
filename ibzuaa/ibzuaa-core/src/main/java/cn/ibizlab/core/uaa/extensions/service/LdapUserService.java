@@ -1,6 +1,8 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
 import cn.ibizlab.core.uaa.domain.SysUser;
+import cn.ibizlab.core.uaa.mapper.SysUserMapper;
+import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.core.uaa.service.impl.SysUserServiceImpl;
 import cn.ibizlab.util.client.IBZOUFeignClient;
 import cn.ibizlab.util.errors.BadRequestAlertException;
@@ -9,6 +11,7 @@ import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +38,11 @@ import java.util.*;
 @Slf4j
 @Service("LdapUserService")
 @ConditionalOnExpression("'${ibiz.auth.service:SimpleUserService}'.equals('LdapUserService')")
-public class LdapUserService extends SysUserServiceImpl implements AuthenticationUserService {
+public class LdapUserService implements AuthenticationUserService {
+
+
+    @Autowired
+    private ISysUserService sysUserService;
 
     @Value("${ibiz.auth.pwencrymode:0}")
     private int pwencrymode;
@@ -58,7 +65,7 @@ public class LdapUserService extends SysUserServiceImpl implements Authenticatio
             conds.eq("loginname", loginname);
         if (!StringUtils.isEmpty(domains))
             conds.eq("domains", domains);
-        SysUser user = this.getOne(conds);
+        SysUser user = sysUserService.getOne(conds);
         if (user == null) {
             throw new UsernameNotFoundException("用户" + username + "未找到");
         } else {

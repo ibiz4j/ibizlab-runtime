@@ -891,7 +891,7 @@ export default class SysDeptMemberGridViewBase extends Vue {
             'resAppKey':'userid'},
             {view:{viewname:'sys-department-mpickup-view',height: 0,width: 0,title: '部门数据多项选择视图'},
             res:['SysDepartment'],
-            'resAppKey':'userid'}
+            'resAppKey':'deptid'}
         ];
         if(batchAddPSAppViews.length == 0 || !this.context.srfparentdename){
             this.$Notice.warning({ title: '错误', desc: '批量添加需添加N:N关系' });

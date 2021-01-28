@@ -41,6 +41,7 @@ export class AuthServiceRegister {
     protected init(): void {
                 this.allAuthService.set('jobslog', () => import('@/authservice/jobs-log/jobs-log-auth-service'));
         this.allAuthService.set('sysrolepermission', () => import('@/authservice/sys-role-permission/sys-role-permission-auth-service'));
+        this.allAuthService.set('msguseraccount', () => import('@/authservice/msg-user-account/msg-user-account-auth-service'));
         this.allAuthService.set('sysuser', () => import('@/authservice/sys-user/sys-user-auth-service'));
         this.allAuthService.set('sysauthlog', () => import('@/authservice/sys-auth-log/sys-auth-log-auth-service'));
         this.allAuthService.set('wfmember', () => import('@/authservice/wfmember/wfmember-auth-service'));
@@ -48,8 +49,11 @@ export class AuthServiceRegister {
         this.allAuthService.set('sysuserauth', () => import('@/authservice/sys-user-auth/sys-user-auth-auth-service'));
         this.allAuthService.set('sysdepartment', () => import('@/authservice/sys-department/sys-department-auth-service'));
         this.allAuthService.set('sysemployee', () => import('@/authservice/sys-employee/sys-employee-auth-service'));
+        this.allAuthService.set('paytrade', () => import('@/authservice/pay-trade/pay-trade-auth-service'));
+        this.allAuthService.set('msgtemplate', () => import('@/authservice/msg-template/msg-template-auth-service'));
         this.allAuthService.set('systeam', () => import('@/authservice/sys-team/sys-team-auth-service'));
         this.allAuthService.set('wfuser', () => import('@/authservice/wfuser/wfuser-auth-service'));
+        this.allAuthService.set('payopenaccess', () => import('@/authservice/pay-open-access/pay-open-access-auth-service'));
         this.allAuthService.set('sysorganization', () => import('@/authservice/sys-organization/sys-organization-auth-service'));
         this.allAuthService.set('jobsregistry', () => import('@/authservice/jobs-registry/jobs-registry-auth-service'));
         this.allAuthService.set('sysopenaccess', () => import('@/authservice/sys-open-access/sys-open-access-auth-service'));
@@ -61,6 +65,7 @@ export class AuthServiceRegister {
         this.allAuthService.set('wfprocessdefinition', () => import('@/authservice/wfprocess-definition/wfprocess-definition-auth-service'));
         this.allAuthService.set('sysrole', () => import('@/authservice/sys-role/sys-role-auth-service'));
         this.allAuthService.set('syspermission', () => import('@/authservice/sys-permission/sys-permission-auth-service'));
+        this.allAuthService.set('msgopenaccess', () => import('@/authservice/msg-open-access/msg-open-access-auth-service'));
         this.allAuthService.set('systeammember', () => import('@/authservice/sys-team-member/sys-team-member-auth-service'));
         this.allAuthService.set('sysdeptmember', () => import('@/authservice/sys-dept-member/sys-dept-member-auth-service'));
         this.allAuthService.set('dictoption', () => import('@/authservice/dict-option/dict-option-auth-service'));

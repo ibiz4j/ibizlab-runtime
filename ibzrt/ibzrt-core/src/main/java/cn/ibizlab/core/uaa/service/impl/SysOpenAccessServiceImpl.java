@@ -97,7 +97,7 @@ public class SysOpenAccessServiceImpl implements ISysOpenAccessService {
 
     @Override
     public SysOpenAccess getDraft(SysOpenAccess et) {
-        et=sysOpenAccessFeignClient.getDraft();
+        et=sysOpenAccessFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class SysOpenAccessServiceImpl implements ISysOpenAccessService {
         Page<SysOpenAccess> sysOpenAccesss=sysOpenAccessFeignClient.searchDefault(context);
         return sysOpenAccesss;
     }
-
-
-
 
 }
 

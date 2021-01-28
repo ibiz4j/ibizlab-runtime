@@ -49,7 +49,7 @@ public interface DictOptionFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
-    DictOption getDraft();
+    DictOption getDraft(DictOption entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/checkkey")

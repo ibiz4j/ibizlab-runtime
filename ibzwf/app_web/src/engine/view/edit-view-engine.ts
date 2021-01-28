@@ -101,7 +101,7 @@ export default class EditViewEngine extends ViewEngine {
      * @memberof EditViewEngine
      */
     public onFormLoad(arg: any): void {
-        this.view.model.dataInfo = Object.is(arg.srfuf, '1') ? (this.majorPSDEField?arg[this.majorPSDEField]:arg.srfmajortext) : this.view.$t('app.local.new');
+        this.view.model.dataInfo = Object.is(arg.srfuf, '1') ? (this.majorPSDEField?arg[this.majorPSDEField]:arg.srfmajortext) : 'app.local.new';
 
         this.setTabCaption(this.view.model.dataInfo,Object.is(arg.srfuf, '0'));
         const newdata: boolean = !Object.is(arg.srfuf, '1');
@@ -116,7 +116,7 @@ export default class EditViewEngine extends ViewEngine {
      * @memberof EditViewEngine
      */
     public onFormSave(arg: any): void {
-        this.view.model.dataInfo = Object.is(arg.srfuf, '1') ? (this.majorPSDEField?arg[this.majorPSDEField]:arg.srfmajortext) : this.view.$t('app.local.new');
+        this.view.model.dataInfo = Object.is(arg.srfuf, '1') ? (this.majorPSDEField?arg[this.majorPSDEField]:arg.srfmajortext) : 'app.local.new';
 
         this.setTabCaption(this.view.model.dataInfo,Object.is(arg.srfuf, '0'));
         const newdata: boolean = !Object.is(arg.srfuf, '1');
@@ -200,12 +200,12 @@ export default class EditViewEngine extends ViewEngine {
             }
             // 解决表格视图标题问题
             if(this.view.$tabPageExp && this.view.viewDefaultUsage){
-                this.view.$tabPageExp.setCurPageCaption(this.view.$t(viewdata.srfCaption), this.view.$t(viewdata.srfCaption), info);
+                this.view.$tabPageExp.setCurPageCaption(this.view.$t(viewdata.srfCaption), viewdata.srfCaption, info);
             }
             if(this.view.$route){
                 this.view.$route.meta.info = info;
             }
-            this.view.model.srfCaption = `${this.view.$t(viewdata.srfCaption)}-${viewdata.dataInfo}`;
+            this.view.model.srfCaption = `${this.view.$t(viewdata.srfCaption)}-${this.view.$t(viewdata.dataInfo)}`;
             this.view.initNavDataWithRoute(null,isNew);
         }
     }

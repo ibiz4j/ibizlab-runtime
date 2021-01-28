@@ -221,9 +221,6 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
 
 
 
-
-
-
     public ISysAuthLogService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

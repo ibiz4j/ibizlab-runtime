@@ -110,8 +110,9 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "获取部门成员草稿", tags = {"部门成员" },  notes = "获取部门成员草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysdeptmembers/getdraft")
-    public ResponseEntity<SysDeptMemberDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(sysdeptmemberService.getDraft(new SysDeptMember())));
+    public ResponseEntity<SysDeptMemberDTO> getDraft(SysDeptMemberDTO dto) {
+        SysDeptMember domain = sysdeptmemberMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(sysdeptmemberService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查部门成员", tags = {"部门成员" },  notes = "检查部门成员")
@@ -120,14 +121,12 @@ public class SysDeptMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.checkKey(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "保存部门成员", tags = {"部门成员" },  notes = "保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdeptmembers/save")
     public ResponseEntity<Boolean> save(@RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "批量保存部门成员", tags = {"部门成员" },  notes = "批量保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdeptmembers/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
@@ -169,12 +168,13 @@ public class SysDeptMemberResource {
 	}
 
 
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Create-all')")
     @ApiOperation(value = "根据部门建立部门成员", tags = {"部门成员" },  notes = "根据部门建立部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysdeptmembers")
     public ResponseEntity<SysDeptMemberDTO> createBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
-        domain.setUserid(sysdepartment_id);
+        domain.setDeptid(sysdepartment_id);
 		sysdeptmemberService.create(domain);
         SysDeptMemberDTO dto = sysdeptmemberMapping.toDto(domain);
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
@@ -186,7 +186,7 @@ public class SysDeptMemberResource {
     public ResponseEntity<Boolean> createBatchBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
         List<SysDeptMember> domainlist=sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
         for(SysDeptMember domain:domainlist){
-            domain.setUserid(sysdepartment_id);
+            domain.setDeptid(sysdepartment_id);
         }
         sysdeptmemberService.createBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
@@ -197,7 +197,7 @@ public class SysDeptMemberResource {
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysdepartments/{sysdepartment_id}/sysdeptmembers/{sysdeptmember_id}")
     public ResponseEntity<SysDeptMemberDTO> updateBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysdeptmember_id") String sysdeptmember_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
-        domain.setUserid(sysdepartment_id);
+        domain.setDeptid(sysdepartment_id);
         domain.setMemberid(sysdeptmember_id);
 		sysdeptmemberService.update(domain);
         SysDeptMemberDTO dto = sysdeptmemberMapping.toDto(domain);
@@ -210,7 +210,7 @@ public class SysDeptMemberResource {
     public ResponseEntity<Boolean> updateBatchBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
         List<SysDeptMember> domainlist=sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
         for(SysDeptMember domain:domainlist){
-            domain.setUserid(sysdepartment_id);
+            domain.setDeptid(sysdepartment_id);
         }
         sysdeptmemberService.updateBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
@@ -242,9 +242,9 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据部门获取部门成员草稿", tags = {"部门成员" },  notes = "根据部门获取部门成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/{sysdepartment_id}/sysdeptmembers/getdraft")
-    public ResponseEntity<SysDeptMemberDTO> getDraftBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id) {
-        SysDeptMember domain = new SysDeptMember();
-        domain.setUserid(sysdepartment_id);
+    public ResponseEntity<SysDeptMemberDTO> getDraftBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, SysDeptMemberDTO dto) {
+        SysDeptMember domain = sysdeptmemberMapping.toDomain(dto);
+        domain.setDeptid(sysdepartment_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(sysdeptmemberService.getDraft(domain)));
     }
 
@@ -254,22 +254,20 @@ public class SysDeptMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.checkKey(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据部门保存部门成员", tags = {"部门成员" },  notes = "根据部门保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysdeptmembers/save")
     public ResponseEntity<Boolean> saveBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
-        domain.setUserid(sysdepartment_id);
+        domain.setDeptid(sysdepartment_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据部门批量保存部门成员", tags = {"部门成员" },  notes = "根据部门批量保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysdeptmembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
         List<SysDeptMember> domainlist=sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
         for(SysDeptMember domain:domainlist){
-             domain.setUserid(sysdepartment_id);
+             domain.setDeptid(sysdepartment_id);
         }
         sysdeptmemberService.saveBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
@@ -280,7 +278,7 @@ public class SysDeptMemberResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysdeptmembers/{sysdeptmember_id}/savedeptmember")
     public ResponseEntity<SysDeptMemberDTO> saveDeptMemberBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysdeptmember_id") String sysdeptmember_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
-        domain.setUserid(sysdepartment_id);
+        domain.setDeptid(sysdepartment_id);
         domain = sysdeptmemberService.saveDeptMember(domain) ;
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
@@ -289,7 +287,7 @@ public class SysDeptMemberResource {
 	@ApiOperation(value = "根据部门获取DEFAULT", tags = {"部门成员" } ,notes = "根据部门获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysdepartments/{sysdepartment_id}/sysdeptmembers/fetchdefault")
 	public ResponseEntity<List<SysDeptMemberDTO>> fetchSysDeptMemberDefaultBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id,SysDeptMemberSearchContext context) {
-        context.setN_userid_eq(sysdepartment_id);
+        context.setN_deptid_eq(sysdepartment_id);
         Page<SysDeptMember> domains = sysdeptmemberService.searchDefault(context) ;
         List<SysDeptMemberDTO> list = sysdeptmemberMapping.toDto(domains.getContent());
 	    return ResponseEntity.status(HttpStatus.OK)
@@ -303,7 +301,7 @@ public class SysDeptMemberResource {
 	@ApiOperation(value = "根据部门查询DEFAULT", tags = {"部门成员" } ,notes = "根据部门查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysdepartments/{sysdepartment_id}/sysdeptmembers/searchdefault")
 	public ResponseEntity<Page<SysDeptMemberDTO>> searchSysDeptMemberDefaultBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberSearchContext context) {
-        context.setN_userid_eq(sysdepartment_id);
+        context.setN_deptid_eq(sysdepartment_id);
         Page<SysDeptMember> domains = sysdeptmemberService.searchDefault(context) ;
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysdeptmemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
@@ -381,8 +379,8 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据人员获取部门成员草稿", tags = {"部门成员" },  notes = "根据人员获取部门成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/{sysemployee_id}/sysdeptmembers/getdraft")
-    public ResponseEntity<SysDeptMemberDTO> getDraftBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id) {
-        SysDeptMember domain = new SysDeptMember();
+    public ResponseEntity<SysDeptMemberDTO> getDraftBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, SysDeptMemberDTO dto) {
+        SysDeptMember domain = sysdeptmemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(sysdeptmemberService.getDraft(domain)));
     }
@@ -393,7 +391,6 @@ public class SysDeptMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.checkKey(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据人员保存部门成员", tags = {"部门成员" },  notes = "根据人员保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/sysdeptmembers/save")
     public ResponseEntity<Boolean> saveBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
@@ -402,7 +399,6 @@ public class SysDeptMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据人员批量保存部门成员", tags = {"部门成员" },  notes = "根据人员批量保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/sysdeptmembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
@@ -520,8 +516,8 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据部门人员获取部门成员草稿", tags = {"部门成员" },  notes = "根据部门人员获取部门成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/getdraft")
-    public ResponseEntity<SysDeptMemberDTO> getDraftBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysDeptMember domain = new SysDeptMember();
+    public ResponseEntity<SysDeptMemberDTO> getDraftBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, SysDeptMemberDTO dto) {
+        SysDeptMember domain = sysdeptmemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(sysdeptmemberService.getDraft(domain)));
     }
@@ -532,7 +528,6 @@ public class SysDeptMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.checkKey(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据部门人员保存部门成员", tags = {"部门成员" },  notes = "根据部门人员保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/save")
     public ResponseEntity<Boolean> saveBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
@@ -541,7 +536,6 @@ public class SysDeptMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据部门人员批量保存部门成员", tags = {"部门成员" },  notes = "根据部门人员批量保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
@@ -591,7 +585,7 @@ public class SysDeptMemberResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers")
     public ResponseEntity<SysDeptMemberDTO> createBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
-        domain.setUserid(sysdepartment_id);
+        domain.setDeptid(sysdepartment_id);
 		sysdeptmemberService.create(domain);
         SysDeptMemberDTO dto = sysdeptmemberMapping.toDto(domain);
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
@@ -603,7 +597,7 @@ public class SysDeptMemberResource {
     public ResponseEntity<Boolean> createBatchBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
         List<SysDeptMember> domainlist=sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
         for(SysDeptMember domain:domainlist){
-            domain.setUserid(sysdepartment_id);
+            domain.setDeptid(sysdepartment_id);
         }
         sysdeptmemberService.createBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
@@ -614,7 +608,7 @@ public class SysDeptMemberResource {
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/{sysdeptmember_id}")
     public ResponseEntity<SysDeptMemberDTO> updateBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysdeptmember_id") String sysdeptmember_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
-        domain.setUserid(sysdepartment_id);
+        domain.setDeptid(sysdepartment_id);
         domain.setMemberid(sysdeptmember_id);
 		sysdeptmemberService.update(domain);
         SysDeptMemberDTO dto = sysdeptmemberMapping.toDto(domain);
@@ -627,7 +621,7 @@ public class SysDeptMemberResource {
     public ResponseEntity<Boolean> updateBatchBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
         List<SysDeptMember> domainlist=sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
         for(SysDeptMember domain:domainlist){
-            domain.setUserid(sysdepartment_id);
+            domain.setDeptid(sysdepartment_id);
         }
         sysdeptmemberService.updateBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
@@ -659,9 +653,9 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据单位机构部门获取部门成员草稿", tags = {"部门成员" },  notes = "根据单位机构部门获取部门成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/getdraft")
-    public ResponseEntity<SysDeptMemberDTO> getDraftBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id) {
-        SysDeptMember domain = new SysDeptMember();
-        domain.setUserid(sysdepartment_id);
+    public ResponseEntity<SysDeptMemberDTO> getDraftBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, SysDeptMemberDTO dto) {
+        SysDeptMember domain = sysdeptmemberMapping.toDomain(dto);
+        domain.setDeptid(sysdepartment_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(sysdeptmemberService.getDraft(domain)));
     }
 
@@ -671,22 +665,20 @@ public class SysDeptMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.checkKey(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据单位机构部门保存部门成员", tags = {"部门成员" },  notes = "根据单位机构部门保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/save")
     public ResponseEntity<Boolean> saveBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
-        domain.setUserid(sysdepartment_id);
+        domain.setDeptid(sysdepartment_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据单位机构部门批量保存部门成员", tags = {"部门成员" },  notes = "根据单位机构部门批量保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
         List<SysDeptMember> domainlist=sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
         for(SysDeptMember domain:domainlist){
-             domain.setUserid(sysdepartment_id);
+             domain.setDeptid(sysdepartment_id);
         }
         sysdeptmemberService.saveBatch(domainlist);
         return  ResponseEntity.status(HttpStatus.OK).body(true);
@@ -697,7 +689,7 @@ public class SysDeptMemberResource {
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/{sysdeptmember_id}/savedeptmember")
     public ResponseEntity<SysDeptMemberDTO> saveDeptMemberBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysdeptmember_id") String sysdeptmember_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
-        domain.setUserid(sysdepartment_id);
+        domain.setDeptid(sysdepartment_id);
         domain = sysdeptmemberService.saveDeptMember(domain) ;
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
@@ -706,7 +698,7 @@ public class SysDeptMemberResource {
 	@ApiOperation(value = "根据单位机构部门获取DEFAULT", tags = {"部门成员" } ,notes = "根据单位机构部门获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/fetchdefault")
 	public ResponseEntity<List<SysDeptMemberDTO>> fetchSysDeptMemberDefaultBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id,SysDeptMemberSearchContext context) {
-        context.setN_userid_eq(sysdepartment_id);
+        context.setN_deptid_eq(sysdepartment_id);
         Page<SysDeptMember> domains = sysdeptmemberService.searchDefault(context) ;
         List<SysDeptMemberDTO> list = sysdeptmemberMapping.toDto(domains.getContent());
 	    return ResponseEntity.status(HttpStatus.OK)
@@ -720,7 +712,7 @@ public class SysDeptMemberResource {
 	@ApiOperation(value = "根据单位机构部门查询DEFAULT", tags = {"部门成员" } ,notes = "根据单位机构部门查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/searchdefault")
 	public ResponseEntity<Page<SysDeptMemberDTO>> searchSysDeptMemberDefaultBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberSearchContext context) {
-        context.setN_userid_eq(sysdepartment_id);
+        context.setN_deptid_eq(sysdepartment_id);
         Page<SysDeptMember> domains = sysdeptmemberService.searchDefault(context) ;
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysdeptmemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
@@ -798,8 +790,8 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据单位机构人员获取部门成员草稿", tags = {"部门成员" },  notes = "根据单位机构人员获取部门成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/sysdeptmembers/getdraft")
-    public ResponseEntity<SysDeptMemberDTO> getDraftBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysDeptMember domain = new SysDeptMember();
+    public ResponseEntity<SysDeptMemberDTO> getDraftBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, SysDeptMemberDTO dto) {
+        SysDeptMember domain = sysdeptmemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(sysdeptmemberService.getDraft(domain)));
     }
@@ -810,7 +802,6 @@ public class SysDeptMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.checkKey(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据单位机构人员保存部门成员", tags = {"部门成员" },  notes = "根据单位机构人员保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/sysdeptmembers/save")
     public ResponseEntity<Boolean> saveBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
@@ -819,7 +810,6 @@ public class SysDeptMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据单位机构人员批量保存部门成员", tags = {"部门成员" },  notes = "根据单位机构人员批量保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/sysdeptmembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
@@ -937,8 +927,8 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据单位机构部门人员获取部门成员草稿", tags = {"部门成员" },  notes = "根据单位机构部门人员获取部门成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/getdraft")
-    public ResponseEntity<SysDeptMemberDTO> getDraftBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysDeptMember domain = new SysDeptMember();
+    public ResponseEntity<SysDeptMemberDTO> getDraftBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, SysDeptMemberDTO dto) {
+        SysDeptMember domain = sysdeptmemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(sysdeptmemberService.getDraft(domain)));
     }
@@ -949,7 +939,6 @@ public class SysDeptMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.checkKey(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据单位机构部门人员保存部门成员", tags = {"部门成员" },  notes = "根据单位机构部门人员保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/save")
     public ResponseEntity<Boolean> saveBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
@@ -958,7 +947,6 @@ public class SysDeptMemberResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-Save-all')")
     @ApiOperation(value = "根据单位机构部门人员批量保存部门成员", tags = {"部门成员" },  notes = "根据单位机构部门人员批量保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/savebatch")
     public ResponseEntity<Boolean> saveBatchBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {

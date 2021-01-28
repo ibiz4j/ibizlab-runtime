@@ -25,7 +25,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import DictCatalogService from '@/service/dict-catalog/dict-catalog-service';
+import DictCatalogEntityService from '@/service/dict-catalog/dict-catalog-service';
 import PickupViewpickupviewpanelService from './pickup-viewpickupviewpanel-pickupviewpanel-service';
 import DictCatalogUIService from '@/uiservice/dict-catalog/dict-catalog-ui-service';
 import PickupViewpickupviewpanelModel from './pickup-viewpickupviewpanel-pickupviewpanel-model';
@@ -105,7 +105,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * @type {DictCatalogService}
      * @memberof PickupViewpickupviewpanelBase
      */
-    public appEntityService: DictCatalogService = new DictCatalogService({ $store: this.$store });
+    public appEntityService: DictCatalogEntityService = new DictCatalogEntityService({ $store: this.$store });
     
 
 

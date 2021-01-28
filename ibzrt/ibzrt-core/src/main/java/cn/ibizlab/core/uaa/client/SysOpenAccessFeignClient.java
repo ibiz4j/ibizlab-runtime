@@ -49,7 +49,7 @@ public interface SysOpenAccessFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/getdraft")
-    SysOpenAccess getDraft();
+    SysOpenAccess getDraft(SysOpenAccess entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/checkkey")

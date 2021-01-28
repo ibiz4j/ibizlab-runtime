@@ -33,7 +33,7 @@
                         :file-list="uploadFileList"
                         :show-file-list="false"
                         :http-request="customUploadFile">
-                    <el-button type="primary" size="small" icon="el-icon-upload">
+                    <el-button type="primary" size="small" icon="el-icon-upload" :disabled="disabled">
                         {{$t('components.diskFileUpload.clickUpload')}}
                     </el-button>
                 </el-upload>

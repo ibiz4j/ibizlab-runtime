@@ -25,7 +25,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysUserRoleService from '@/service/sys-user-role/sys-user-role-service';
+import SysUserRoleEntityService from '@/service/sys-user-role/sys-user-role-service';
 import PickupViewpickupviewpanelService from './pickup-viewpickupviewpanel-pickupviewpanel-service';
 import SysUserRoleUIService from '@/uiservice/sys-user-role/sys-user-role-ui-service';
 import PickupViewpickupviewpanelModel from './pickup-viewpickupviewpanel-pickupviewpanel-model';
@@ -105,7 +105,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * @type {SysUserRoleService}
      * @memberof PickupViewpickupviewpanelBase
      */
-    public appEntityService: SysUserRoleService = new SysUserRoleService({ $store: this.$store });
+    public appEntityService: SysUserRoleEntityService = new SysUserRoleEntityService({ $store: this.$store });
     
 
 

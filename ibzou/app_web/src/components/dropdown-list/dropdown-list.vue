@@ -9,7 +9,7 @@
         :filterable="filterable"
         @on-open-change="onClick"
         :placeholder="placeholder?placeholder:$t('components.dropDownList.placeholder')">
-        <i-option v-for="(item, index) in items" :key="index" :class="item.class" :value="item.value">{{($t('codelist.'+tag+'.'+item.value)!== ('codelist.'+tag+'.'+item.value))?$t('codelist.'+tag+'.'+item.value) : item.text}}</i-option>
+        <i-option v-for="(item, index) in items" :key="index" :disabled="item.disabled" :class="item.class" :value="item.value">{{($t('codelist.'+tag+'.'+item.value)!== ('codelist.'+tag+'.'+item.value))?$t('codelist.'+tag+'.'+item.value) : item.text}}</i-option>
         </i-select>
         <ibiz-select-tree v-if="hasChildren" class="tree-dropdown-list" :disabled="disabled" :NodesData="items" v-model="currentVal" :multiple="false"></ibiz-select-tree>
     </div>
@@ -62,6 +62,24 @@ export default class DropDownList extends Vue {
     @Model('change') readonly itemValue!: any;
 
     /**
+     * 监控值变化，根据属性类型强制转换
+     *
+     * @memberof DropDownList
+     */
+    @Watch('itemValue')
+    public valueWatch() {
+        try {
+            this.readyValue();
+            // 代码表集合中不存在改选项，重新准备集合
+            if (this.value && !this.items.find((item: any) => Object.is(this.value, item.value))) {
+                this.loadData();
+            }
+        } catch (error) {
+            console.log('下拉列表，值转换失败');
+        }
+    }
+
+    /**
      * 代码表标识
      *
      * @type {string}
@@ -102,7 +120,7 @@ export default class DropDownList extends Vue {
      */
     protected formStateEvent: Subscription | undefined;
 
-  /**
+    /**
      * 监听表单数据
      *
      * @memberof DropDownList

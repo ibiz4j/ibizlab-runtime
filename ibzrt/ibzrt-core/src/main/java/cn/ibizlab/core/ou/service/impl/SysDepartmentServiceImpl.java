@@ -97,7 +97,7 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
 
     @Override
     public SysDepartment getDraft(SysDepartment et) {
-        et=sysDepartmentFeignClient.getDraft();
+        et=sysDepartmentFeignClient.getDraft(et);
         return et;
     }
 
@@ -211,9 +211,6 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
         Page<SysDepartment> sysDepartments=sysDepartmentFeignClient.searchDefault(context);
         return sysDepartments;
     }
-
-
-
 
 }
 

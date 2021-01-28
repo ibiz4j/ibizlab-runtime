@@ -221,9 +221,6 @@ public class JobsRegistryServiceImpl extends ServiceImpl<JobsRegistryMapper, Job
 
 
 
-
-
-
     public IJobsRegistryService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

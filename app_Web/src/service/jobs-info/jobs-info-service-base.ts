@@ -178,7 +178,7 @@ export default class JobsInfoServiceBase extends EntityService {
      */
     public async ExecuteBatch(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return await Http.getInstance().post(`/jobsinfo/executebatch`,tempData,isloading);
+        return await Http.getInstance().post(`/jobsinfos/executebatch`,tempData,isloading);
     }
 
     /**

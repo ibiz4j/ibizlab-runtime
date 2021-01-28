@@ -41,6 +41,7 @@ export class UIServiceRegister {
     protected init(): void {
                 this.allUIService.set('jobslog', () => import('@/uiservice/jobs-log/jobs-log-ui-service'));
         this.allUIService.set('sysrolepermission', () => import('@/uiservice/sys-role-permission/sys-role-permission-ui-service'));
+        this.allUIService.set('msguseraccount', () => import('@/uiservice/msg-user-account/msg-user-account-ui-service'));
         this.allUIService.set('sysuser', () => import('@/uiservice/sys-user/sys-user-ui-service'));
         this.allUIService.set('sysauthlog', () => import('@/uiservice/sys-auth-log/sys-auth-log-ui-service'));
         this.allUIService.set('wfmember', () => import('@/uiservice/wfmember/wfmember-ui-service'));
@@ -48,8 +49,11 @@ export class UIServiceRegister {
         this.allUIService.set('sysuserauth', () => import('@/uiservice/sys-user-auth/sys-user-auth-ui-service'));
         this.allUIService.set('sysdepartment', () => import('@/uiservice/sys-department/sys-department-ui-service'));
         this.allUIService.set('sysemployee', () => import('@/uiservice/sys-employee/sys-employee-ui-service'));
+        this.allUIService.set('paytrade', () => import('@/uiservice/pay-trade/pay-trade-ui-service'));
+        this.allUIService.set('msgtemplate', () => import('@/uiservice/msg-template/msg-template-ui-service'));
         this.allUIService.set('systeam', () => import('@/uiservice/sys-team/sys-team-ui-service'));
         this.allUIService.set('wfuser', () => import('@/uiservice/wfuser/wfuser-ui-service'));
+        this.allUIService.set('payopenaccess', () => import('@/uiservice/pay-open-access/pay-open-access-ui-service'));
         this.allUIService.set('sysorganization', () => import('@/uiservice/sys-organization/sys-organization-ui-service'));
         this.allUIService.set('jobsregistry', () => import('@/uiservice/jobs-registry/jobs-registry-ui-service'));
         this.allUIService.set('sysopenaccess', () => import('@/uiservice/sys-open-access/sys-open-access-ui-service'));
@@ -61,6 +65,7 @@ export class UIServiceRegister {
         this.allUIService.set('wfprocessdefinition', () => import('@/uiservice/wfprocess-definition/wfprocess-definition-ui-service'));
         this.allUIService.set('sysrole', () => import('@/uiservice/sys-role/sys-role-ui-service'));
         this.allUIService.set('syspermission', () => import('@/uiservice/sys-permission/sys-permission-ui-service'));
+        this.allUIService.set('msgopenaccess', () => import('@/uiservice/msg-open-access/msg-open-access-ui-service'));
         this.allUIService.set('systeammember', () => import('@/uiservice/sys-team-member/sys-team-member-ui-service'));
         this.allUIService.set('sysdeptmember', () => import('@/uiservice/sys-dept-member/sys-dept-member-ui-service'));
         this.allUIService.set('dictoption', () => import('@/uiservice/dict-option/dict-option-ui-service'));

@@ -49,7 +49,7 @@ public interface JobsLockFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/getdraft")
-    JobsLock getDraft();
+    JobsLock getDraft(JobsLock entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/checkkey")

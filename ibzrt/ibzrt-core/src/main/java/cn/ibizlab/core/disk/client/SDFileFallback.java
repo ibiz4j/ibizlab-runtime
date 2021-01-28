@@ -50,7 +50,7 @@ public class SDFileFallback implements SDFileFeignClient {
     }
 
 
-    public SDFile getDraft(){
+    public SDFile getDraft(SDFile entity){
         return null;
     }
 

@@ -97,7 +97,7 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
 
     @Override
     public SysOrganization getDraft(SysOrganization et) {
-        et=sysOrganizationFeignClient.getDraft();
+        et=sysOrganizationFeignClient.getDraft(et);
         return et;
     }
 
@@ -155,9 +155,6 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
         Page<SysOrganization> sysOrganizations=sysOrganizationFeignClient.searchDefault(context);
         return sysOrganizations;
     }
-
-
-
 
 }
 

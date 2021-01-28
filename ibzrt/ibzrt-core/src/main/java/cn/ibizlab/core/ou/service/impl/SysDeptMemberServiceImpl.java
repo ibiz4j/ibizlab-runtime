@@ -97,7 +97,7 @@ public class SysDeptMemberServiceImpl implements ISysDeptMemberService {
 
     @Override
     public SysDeptMember getDraft(SysDeptMember et) {
-        et=sysDeptMemberFeignClient.getDraft();
+        et=sysDeptMemberFeignClient.getDraft(et);
         return et;
     }
 
@@ -185,9 +185,6 @@ public class SysDeptMemberServiceImpl implements ISysDeptMemberService {
         Page<SysDeptMember> sysDeptMembers=sysDeptMemberFeignClient.searchDefault(context);
         return sysDeptMembers;
     }
-
-
-
 
 }
 

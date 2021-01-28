@@ -3,7 +3,7 @@
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="paytradegridview"></app-studioaction>
     <card class='view-card '  :dis-hover="true" :bordered="false">
         <div slot='title' class="header-container">
-        <span class='caption-info'>{{$t(model.srfCaption)}}</span>
+        <span class='caption-info' :title="$t(model.srfCaption)">{{$t(model.srfCaption)}}</span>
         </div>
             <div class='view-top-messages'>
             </div>
@@ -1272,16 +1272,28 @@ export default class PayTradeGridViewBase extends Vue {
         const deResParameters: any[] = [];
         const parameters: any[] = [
             { pathName: 'paytrades', parameterName: 'paytrade' },
-            { pathName: 'editview', parameterName: 'editview' },
         ];
         const _this: any = this;
-        const openIndexViewTab = (data: any) => {
-            const _data: any = { w: (new Date().getTime()) };
-            Object.assign(_data, data);
-            const routePath = this.$viewTool.buildUpRoutePath(this.$route, tempContext, deResParameters, parameters, args, _data);
-            this.$router.push(routePath);
+        const openDrawer = (view: any, data: any) => {
+            let container: Subject<any> = this.$appdrawer.openDrawer(view, tempContext, data);
+            container.subscribe((result: any) => {
+                if (!result || !Object.is(result.ret, 'OK')) {
+                    return;
+                }
+                if (!xData || !(xData.refresh instanceof Function)) {
+                    return;
+                }
+                xData.refresh(result.datas);
+            });
         }
-        openIndexViewTab(data);
+        const view: any = {
+            viewname: 'pay-trade-edit-view', 
+            height: 0, 
+            width: 0,  
+            title: this.$t('entities.paytrade.views.editview.title'),
+            placement: 'DRAWER_RIGHT',
+        };
+        openDrawer(view, data);
     }
 
 
@@ -1313,17 +1325,31 @@ export default class PayTradeGridViewBase extends Vue {
         const deResParameters: any[] = [];
         const parameters: any[] = [
             { pathName: 'paytrades', parameterName: 'paytrade' },
-            { pathName: 'editview', parameterName: 'editview' },
         ];
         const _this: any = this;
         if(fullargs && fullargs.copymode){
             Object.assign(data,{copymode:true});
         }
-        const openIndexViewTab = (data: any) => {
-            const routePath = this.$viewTool.buildUpRoutePath(this.$route, tempContext, deResParameters, parameters, args, data);
-            this.$router.push(routePath);
+        const openDrawer = (view: any, data: any) => {
+            let container: Subject<any> = this.$appdrawer.openDrawer(view, tempContext, data);
+            container.subscribe((result: any) => {
+                if (!result || !Object.is(result.ret, 'OK')) {
+                    return;
+                }
+                if (!xData || !(xData.refresh instanceof Function)) {
+                    return;
+                }
+                xData.refresh(result.datas);
+            });
         }
-        openIndexViewTab(data);
+        const view: any = {
+            viewname: 'pay-trade-edit-view', 
+            height: 0, 
+            width: 0,  
+            title: this.$t('entities.paytrade.views.editview.title'),
+            placement: 'DRAWER_RIGHT',
+        };
+        openDrawer(view, data);
     }
 
 
@@ -1421,7 +1447,7 @@ export default class PayTradeGridViewBase extends Vue {
                 Object.assign(data, { paytrade: args[0].paytrade });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

@@ -230,9 +230,6 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
 
 
 
-
-
-
     public ISysPostService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

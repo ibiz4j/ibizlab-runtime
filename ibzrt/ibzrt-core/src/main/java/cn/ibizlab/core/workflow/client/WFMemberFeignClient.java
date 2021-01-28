@@ -49,7 +49,7 @@ public interface WFMemberFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/getdraft")
-    WFMember getDraft();
+    WFMember getDraft(WFMember entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/checkkey")

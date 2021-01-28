@@ -111,8 +111,9 @@ public class SysRoleResource {
 
     @ApiOperation(value = "获取系统角色草稿", tags = {"系统角色" },  notes = "获取系统角色草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/getdraft")
-    public ResponseEntity<SysRoleDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysroleMapping.toDto(sysroleService.getDraft(new SysRole())));
+    public ResponseEntity<SysRoleDTO> getDraft(SysRoleDTO dto) {
+        SysRole domain = sysroleMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysroleMapping.toDto(sysroleService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查系统角色", tags = {"系统角色" },  notes = "检查系统角色")
@@ -157,6 +158,7 @@ public class SysRoleResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

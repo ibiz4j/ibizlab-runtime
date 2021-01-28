@@ -124,6 +124,7 @@ public class RedisCacheConfig {
         container.setConnectionFactory(redisConnectionFactory);
         container.addMessageListener(messageListener, RedisChannelTopic.REDIS_CACHE_DELETE_TOPIC.getChannelTopic());
         container.addMessageListener(messageListener, RedisChannelTopic.REDIS_CACHE_CLEAR_TOPIC.getChannelTopic());
+        container.addMessageListener(messageListener, RedisChannelTopic.REDIS_CACHE_DYNAMICMODEL_TOPIC.getChannelTopic());
         return container;
     }
 }

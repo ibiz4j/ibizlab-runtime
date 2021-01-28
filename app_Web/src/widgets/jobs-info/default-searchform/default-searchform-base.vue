@@ -73,7 +73,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import JobsInfoService from '@/service/jobs-info/jobs-info-service';
+import JobsInfoEntityService from '@/service/jobs-info/jobs-info-service';
 import DefaultService from './default-searchform-service';
 import JobsInfoUIService from '@/uiservice/jobs-info/jobs-info-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -162,7 +162,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {JobsInfoService}
      * @memberof DefaultBase
      */
-    public appEntityService: JobsInfoService = new JobsInfoService({ $store: this.$store });
+    public appEntityService: JobsInfoEntityService = new JobsInfoEntityService({ $store: this.$store });
     
 
 

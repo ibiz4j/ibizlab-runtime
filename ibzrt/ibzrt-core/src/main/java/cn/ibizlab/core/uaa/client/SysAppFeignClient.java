@@ -49,7 +49,7 @@ public interface SysAppFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysapps/getdraft")
-    SysApp getDraft();
+    SysApp getDraft(SysApp entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysapps/checkkey")

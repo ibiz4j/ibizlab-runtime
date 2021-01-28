@@ -16,7 +16,7 @@ const messages = {
 
 // 自动根据浏览器系统语言设置语言
 const navLang = localStorage.getItem('local') || navigator.language;
-const localLang = (navLang === 'zh-CN' || (navLang === 'en-US' && messages.hasOwnProperty('en-US'))) ? navLang : false;
+const localLang = (navLang === 'zh-CN' || (navLang === 'en-US' && messages.hasOwnProperty('en-US')) || (navLang === 'ti-US' && messages.hasOwnProperty('ti-US'))) ? navLang : false;
 let lang: string = localLang || 'zh-CN';
 
 vueApp.config.lang = lang

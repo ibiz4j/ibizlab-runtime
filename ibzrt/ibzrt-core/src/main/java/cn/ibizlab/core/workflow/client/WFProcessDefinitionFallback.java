@@ -50,7 +50,7 @@ public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClie
     }
 
 
-    public WFProcessDefinition getDraft(){
+    public WFProcessDefinition getDraft(WFProcessDefinition entity){
         return null;
     }
 

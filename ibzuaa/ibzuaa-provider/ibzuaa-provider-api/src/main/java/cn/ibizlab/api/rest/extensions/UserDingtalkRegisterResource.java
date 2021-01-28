@@ -1,6 +1,7 @@
 package cn.ibizlab.api.rest.extensions;
 
 import cn.ibizlab.core.uaa.domain.SysOpenAccess;
+import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.extensions.service.UserDingtalkRegisterService;
 import cn.ibizlab.core.uaa.extensions.service.UserRegisterService;
@@ -32,8 +33,6 @@ public class UserDingtalkRegisterResource {
     private UserDingtalkRegisterService userDingtalkRegisterService;
     @Autowired
     private UserRegisterService userRegisterService;
-    @Autowired
-    private IBZUSERService ibzuserService;
     @Autowired
     private ISysUserAuthService sysUserAuthService;
     @Autowired
@@ -127,24 +126,24 @@ public class UserDingtalkRegisterResource {
             throw new BadRequestAlertException("钉钉信息openid为空", "UserDingtalkRegisterResource", "");
 
         // 钉钉用户注册
-        IBZUSER ibzuser = new IBZUSER();
-        ibzuser.setPassword(password);
-        ibzuser.setLoginname(loginname);
-        ibzuser.setPersonname(StringUtils.isEmpty(personname)?nickname:personname);
-        ibzuser.setNickname(nickname);
-        ibzuser.setPhone(phone);
-        ibzuser.setEmail(email);
-        ibzuser.setDomains(domains);
+        SysUser sysUser = new SysUser();
+        sysUser.setPassword(password);
+        sysUser.setLoginname(loginname);
+        sysUser.setPersonname(StringUtils.isEmpty(personname)?nickname:personname);
+        sysUser.setNickname(nickname);
+        sysUser.setPhone(phone);
+        sysUser.setEmail(email);
+        sysUser.setDomains(domains);
 
         SysUserAuth userAuth = new SysUserAuth();
         userAuth.setIdentifier(openid);
         userAuth.setIdentityType("dingtalk");
 
-        userRegisterService.toRegister(ibzuser,userAuth);
+        userRegisterService.toRegister(sysUser,userAuth);
 
         //　生成登录token信息
-        userDetailsService.resetByUsername(ibzuser.getLoginname()+(StringUtils.isEmpty(ibzuser.getDomains())?"":("|"+ibzuser.getDomains())));
-        AuthenticationUser user = userDetailsService.loadUserByUsername(ibzuser.getLoginname()+(StringUtils.isEmpty(ibzuser.getDomains())?"":("|"+ibzuser.getDomains())));
+        userDetailsService.resetByUsername(sysUser.getLoginname()+(StringUtils.isEmpty(sysUser.getDomains())?"":("|"+sysUser.getDomains())));
+        AuthenticationUser user = userDetailsService.loadUserByUsername(sysUser.getLoginname()+(StringUtils.isEmpty(sysUser.getDomains())?"":("|"+sysUser.getDomains())));
         final String token = jwtTokenUtil.generateToken(user);
         AuthenticationUser user2 = new AuthenticationUser();
         CachedBeanCopier.copy(user, user2);

@@ -6,7 +6,8 @@ import org.springframework.data.redis.listener.ChannelTopic;
  */
 public enum RedisChannelTopic {
     REDIS_CACHE_DELETE_TOPIC("redis:cache:delete:topic1", "删除redis缓存消息频道"),
-    REDIS_CACHE_CLEAR_TOPIC("redis:cache:clear:topic2", "清空redis缓存消息频道");
+    REDIS_CACHE_CLEAR_TOPIC("redis:cache:clear:topic2", "清空redis缓存消息频道"),
+    REDIS_CACHE_DYNAMICMODEL_TOPIC("redis:cache:dynamicmodel:topic3", "动态模型频道");
 
     String channelTopic;
     String label;

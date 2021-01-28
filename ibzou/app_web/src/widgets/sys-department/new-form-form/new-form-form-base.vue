@@ -64,7 +64,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysDepartmentService from '@/service/sys-department/sys-department-service';
+import SysDepartmentEntityService from '@/service/sys-department/sys-department-service';
 import NewFormService from './new-form-form-service';
 import SysDepartmentUIService from '@/uiservice/sys-department/sys-department-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -155,7 +155,7 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * @type {SysDepartmentService}
      * @memberof NewFormBase
      */
-    public appEntityService: SysDepartmentService = new SysDepartmentService({ $store: this.$store });
+    public appEntityService: SysDepartmentEntityService = new SysDepartmentEntityService({ $store: this.$store });
     
 
 
@@ -406,7 +406,16 @@ export default class NewFormBase extends Vue implements ControlInterface {
      * 
      *  @memberof  NewFormBase
      */
-    public errorMessages: Array<any> = [];   
+    public errorMessages: Array<any> = []; 
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof NewFormBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 设置表单项错误提示信息
@@ -1282,6 +1291,9 @@ export default class NewFormBase extends Vue implements ControlInterface {
         }
         if (this.dataChangEvent) {
             this.dataChangEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 

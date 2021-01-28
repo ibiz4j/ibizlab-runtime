@@ -85,7 +85,6 @@
 
         <oracle.version>19.8.0.0</oracle.version>
         <postgresql.version>42.2.6</postgresql.version>
-
     </properties>
 
     <dependencyManagement>

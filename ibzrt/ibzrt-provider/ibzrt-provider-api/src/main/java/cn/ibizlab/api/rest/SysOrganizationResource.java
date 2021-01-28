@@ -111,8 +111,9 @@ public class SysOrganizationResource {
 
     @ApiOperation(value = "获取单位机构草稿", tags = {"单位机构" },  notes = "获取单位机构草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/getdraft")
-    public ResponseEntity<SysOrganizationDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysorganizationMapping.toDto(sysorganizationService.getDraft(new SysOrganization())));
+    public ResponseEntity<SysOrganizationDTO> getDraft(SysOrganizationDTO dto) {
+        SysOrganization domain = sysorganizationMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysorganizationMapping.toDto(sysorganizationService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查单位机构", tags = {"单位机构" },  notes = "检查单位机构")
@@ -157,6 +158,7 @@ public class SysOrganizationResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysorganizationMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

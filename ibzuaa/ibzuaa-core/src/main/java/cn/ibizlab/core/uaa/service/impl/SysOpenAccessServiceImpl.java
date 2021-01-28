@@ -221,9 +221,6 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
 
 
 
-
-
-
     public ISysOpenAccessService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

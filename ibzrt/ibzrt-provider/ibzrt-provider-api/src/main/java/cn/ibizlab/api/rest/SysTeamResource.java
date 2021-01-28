@@ -110,8 +110,9 @@ public class SysTeamResource {
 
     @ApiOperation(value = "获取组草稿", tags = {"组" },  notes = "获取组草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/systeams/getdraft")
-    public ResponseEntity<SysTeamDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(systeamMapping.toDto(systeamService.getDraft(new SysTeam())));
+    public ResponseEntity<SysTeamDTO> getDraft(SysTeamDTO dto) {
+        SysTeam domain = systeamMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(systeamMapping.toDto(systeamService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查组", tags = {"组" },  notes = "检查组")
@@ -156,6 +157,7 @@ public class SysTeamResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(systeamMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

@@ -50,7 +50,7 @@ public class WFREModelFallback implements WFREModelFeignClient {
     }
 
 
-    public WFREModel getDraft(){
+    public WFREModel getDraft(WFREModel entity){
         return null;
     }
 

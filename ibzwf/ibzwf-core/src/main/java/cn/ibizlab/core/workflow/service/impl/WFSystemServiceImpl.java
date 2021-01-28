@@ -221,9 +221,6 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
 
 
 
-
-
-
     public IWFSystemService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

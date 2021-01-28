@@ -87,7 +87,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysTeamService from '@/service/sys-team/sys-team-service';
+import SysTeamEntityService from '@/service/sys-team/sys-team-service';
 import MainService from './main-form-service';
 import SysTeamUIService from '@/uiservice/sys-team/sys-team-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -178,7 +178,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {SysTeamService}
      * @memberof MainBase
      */
-    public appEntityService: SysTeamService = new SysTeamService({ $store: this.$store });
+    public appEntityService: SysTeamEntityService = new SysTeamEntityService({ $store: this.$store });
     
 
 
@@ -429,7 +429,16 @@ export default class MainBase extends Vue implements ControlInterface {
      * 
      *  @memberof  MainBase
      */
-    public errorMessages: Array<any> = [];   
+    public errorMessages: Array<any> = []; 
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 设置表单项错误提示信息
@@ -1216,6 +1225,9 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         if (this.dataChangEvent) {
             this.dataChangEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 

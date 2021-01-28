@@ -1488,7 +1488,7 @@ export default class SysEmployeeGridViewBase extends Vue {
                 Object.assign(data, { sysemployee: args[0].sysemployee });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

@@ -34,7 +34,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysUserService from '@/service/sys-user/sys-user-service';
+import SysUserEntityService from '@/service/sys-user/sys-user-service';
 import DefaultService from './default-drbar-service';
 import SysUserUIService from '@/uiservice/sys-user/sys-user-ui-service';
 
@@ -121,7 +121,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {SysUserService}
      * @memberof DefaultBase
      */
-    public appEntityService: SysUserService = new SysUserService({ $store: this.$store });
+    public appEntityService: SysUserEntityService = new SysUserEntityService({ $store: this.$store });
     
 
 

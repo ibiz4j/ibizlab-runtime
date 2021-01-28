@@ -224,9 +224,6 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
 
 
 
-
-
-
     public IPayOpenAccessService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

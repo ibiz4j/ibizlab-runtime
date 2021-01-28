@@ -8,7 +8,8 @@
       :collapse="isCollapse"
       @select="select"
       :default-active="defaultActive">
-        <template v-if="Object.is(mode,'horizontal')">
+      
+      <template v-if="Object.is(mode,'horizontal')">
             <template v-for="item0 in menus">
                 <template v-if="item0.items && Array.isArray(item0.items) && item0.items.length > 0">
                     <el-submenu v-show="!item0.hidden" :index="item0.name" :popper-class="popperClass" :key="item0.id" :class="item0.textcls">
@@ -104,9 +105,10 @@
                         </el-menu-item>
                     </template>
                 </template>
-            </template>   
+            </template>  
         </template> 
         <app-menu-item v-else :isCollapse="isCollapse" :menus="menus" :ctrlName="'index'" :isFirst="true" :counterdata="counterdata" :popper-class="popperClass"></app-menu-item>
+   
     </el-menu>
 </div>
 </template>
@@ -515,6 +517,9 @@ export default class IndexBase extends Vue implements ControlInterface {
                 navDataService.removeNavData(this.viewtag);
             }
             switch (item.appfunctag) {
+                case 'AppFunc6': 
+                    this.clickAppFunc6(item);
+                    return;
                 case 'Auto9': 
                     this.clickAuto9(item);
                     return;
@@ -524,14 +529,14 @@ export default class IndexBase extends Vue implements ControlInterface {
                 case 'Auto3': 
                     this.clickAuto3(item);
                     return;
-                case 'AppFunc2': 
-                    this.clickAppFunc2(item);
-                    return;
                 case 'Auto5': 
                     this.clickAuto5(item);
                     return;
                 case 'Auto14': 
                     this.clickAuto14(item);
+                    return;
+                case 'AppFunc4': 
+                    this.clickAppFunc4(item);
                     return;
                 case 'Auto16': 
                     this.clickAuto16(item);
@@ -542,17 +547,26 @@ export default class IndexBase extends Vue implements ControlInterface {
                 case 'Auto10': 
                     this.clickAuto10(item);
                     return;
-                case 'AppFunc': 
-                    this.clickAppFunc(item);
+                case 'AppFunc7': 
+                    this.clickAppFunc7(item);
                     return;
                 case 'Auto15': 
                     this.clickAuto15(item);
                     return;
+                case 'AppFunc2': 
+                    this.clickAppFunc2(item);
+                    return;
                 case 'Auto6': 
                     this.clickAuto6(item);
                     return;
+                case 'AppFunc3': 
+                    this.clickAppFunc3(item);
+                    return;
                 case 'Auto8': 
                     this.clickAuto8(item);
+                    return;
+                case 'AppFunc5': 
+                    this.clickAppFunc5(item);
                     return;
                 case 'Auto11': 
                     this.clickAuto11(item);
@@ -562,6 +576,9 @@ export default class IndexBase extends Vue implements ControlInterface {
                     return;
                 case 'Auto7': 
                     this.clickAuto7(item);
+                    return;
+                case 'AppFunc': 
+                    this.clickAppFunc(item);
                     return;
                 case 'Auto1': 
                     this.clickAuto1(item);
@@ -575,6 +592,29 @@ export default class IndexBase extends Vue implements ControlInterface {
         }
     }
 
+    
+    /**
+     * 支付交易TradeGridView表格视图
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAppFunc6(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'paytrades', parameterName: 'paytrade' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
     
     /**
      * 组管理
@@ -646,29 +686,6 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 账户绑定
-     *
-     * @param {*} [item={}]
-     * @memberof Index
-     */
-    public clickAppFunc2(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'sysuserauths', parameterName: 'sysuserauth' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
      * 用户角色
      *
      * @param {*} [item={}]
@@ -703,6 +720,29 @@ export default class IndexBase extends Vue implements ControlInterface {
         const deResParameters: any[] = [];
         const parameters: any[] = [
             { pathName: 'jobslogs', parameterName: 'jobslog' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 消息模板TemplateGridView表格视图
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAppFunc4(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'msgtemplates', parameterName: 'msgtemplate' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -784,17 +824,17 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
-     * 第三方认证平台
+     * 支付平台OpenAccessGridView表格视图
      *
      * @param {*} [item={}]
      * @memberof Index
      */
-    public clickAppFunc(item: any = {}) {
+    public clickAppFunc7(item: any = {}) {
         const viewparam: any = {};
         Object.assign(viewparam, {});
         const deResParameters: any[] = [];
         const parameters: any[] = [
-            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+            { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -830,6 +870,29 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
+     * 账户绑定
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAppFunc2(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysuserauths', parameterName: 'sysuserauth' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
      * 认证日志
      *
      * @param {*} [item={}]
@@ -853,6 +916,29 @@ export default class IndexBase extends Vue implements ControlInterface {
     }
     
     /**
+     * 消息通知OpenAccess表格视图
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAppFunc3(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
      * 流程定义
      *
      * @param {*} [item={}]
@@ -864,6 +950,29 @@ export default class IndexBase extends Vue implements ControlInterface {
         const deResParameters: any[] = [];
         const parameters: any[] = [
             { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 消息账户UserAccountGridView表格视图
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAppFunc5(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'msguseraccounts', parameterName: 'msguseraccount' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
@@ -934,6 +1043,29 @@ export default class IndexBase extends Vue implements ControlInterface {
         const parameters: any[] = [
             { pathName: 'wfremodels', parameterName: 'wfremodel' },
             { pathName: 'editview', parameterName: 'editview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
+    
+    /**
+     * 第三方认证平台
+     *
+     * @param {*} [item={}]
+     * @memberof Index
+     */
+    public clickAppFunc(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'sysopenaccesses', parameterName: 'sysopenaccess' },
+            { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
         if(Object.is(this.$route.fullPath,path)){

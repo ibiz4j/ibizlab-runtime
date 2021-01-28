@@ -34,7 +34,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysRoleService from '@/service/sys-role/sys-role-service';
+import SysRoleEntityService from '@/service/sys-role/sys-role-service';
 import DefaultService from './default-drbar-service';
 import SysRoleUIService from '@/uiservice/sys-role/sys-role-ui-service';
 
@@ -121,7 +121,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {SysRoleService}
      * @memberof DefaultBase
      */
-    public appEntityService: SysRoleService = new SysRoleService({ $store: this.$store });
+    public appEntityService: SysRoleEntityService = new SysRoleEntityService({ $store: this.$store });
     
 
 

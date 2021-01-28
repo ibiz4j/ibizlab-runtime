@@ -958,7 +958,7 @@ export default class SysTeamEditViewBase extends Vue {
                 Object.assign(data, { systeam: args[0].systeam });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

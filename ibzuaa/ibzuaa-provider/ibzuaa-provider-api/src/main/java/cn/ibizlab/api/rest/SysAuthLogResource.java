@@ -110,8 +110,9 @@ public class SysAuthLogResource {
 
     @ApiOperation(value = "获取认证日志草稿", tags = {"认证日志" },  notes = "获取认证日志草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/getdraft")
-    public ResponseEntity<SysAuthLogDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysauthlogMapping.toDto(sysauthlogService.getDraft(new SysAuthLog())));
+    public ResponseEntity<SysAuthLogDTO> getDraft(SysAuthLogDTO dto) {
+        SysAuthLog domain = sysauthlogMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysauthlogMapping.toDto(sysauthlogService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查认证日志", tags = {"认证日志" },  notes = "检查认证日志")
@@ -156,6 +157,7 @@ public class SysAuthLogResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysauthlogMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

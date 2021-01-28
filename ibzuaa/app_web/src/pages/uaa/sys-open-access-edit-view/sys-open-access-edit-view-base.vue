@@ -1049,7 +1049,7 @@ export default class SysOpenAccessEditViewBase extends Vue {
                 Object.assign(data, { sysopenaccess: args[0].sysopenaccess });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

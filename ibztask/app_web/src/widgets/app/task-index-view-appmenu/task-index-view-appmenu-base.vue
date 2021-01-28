@@ -8,7 +8,8 @@
       :collapse="isCollapse"
       @select="select"
       :default-active="defaultActive">
-        <template v-if="Object.is(mode,'horizontal')">
+      
+      <template v-if="Object.is(mode,'horizontal')">
             <template v-for="item0 in menus">
                 <template v-if="item0.items && Array.isArray(item0.items) && item0.items.length > 0">
                     <el-submenu v-show="!item0.hidden" :index="item0.name" :popper-class="popperClass" :key="item0.id" :class="item0.textcls">
@@ -104,9 +105,10 @@
                         </el-menu-item>
                     </template>
                 </template>
-            </template>   
+            </template>  
         </template> 
         <app-menu-item v-else :isCollapse="isCollapse" :menus="menus" :ctrlName="'taskindexview'" :isFirst="true" :counterdata="counterdata" :popper-class="popperClass"></app-menu-item>
+   
     </el-menu>
 </div>
 </template>

@@ -1,15 +1,15 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
 import cn.ibizlab.core.uaa.domain.SysOpenAccess;
+import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
-import cn.ibizlab.util.domain.IBZUSER;
+import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.errors.InternalServerErrorException;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.AuthenticationUserService;
-import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.dingtalk.api.DefaultDingTalkClient;
@@ -33,7 +33,7 @@ import org.springframework.util.StringUtils;
 public class UserDingtalkRegisterService {
 
     @Autowired
-    private IBZUSERService ibzuserService;
+    private ISysUserService sysUserService;
 
     @Autowired
     private AuthenticationUserService authenticationUserService;
@@ -88,7 +88,7 @@ public class UserDingtalkRegisterService {
         String userId = response.getUserid();
 
         //先按userid或者username查
-        IBZUSER user = ibzuserService.getOne(Wrappers.<IBZUSER>lambdaQuery().eq(IBZUSER::getUserid,userId).or().eq(IBZUSER::getUsername,userId),false);
+        SysUser user = sysUserService.getOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserid,userId).or().eq(SysUser::getUsername,userId),false);
 
         if(user==null)
         {
@@ -96,7 +96,7 @@ public class UserDingtalkRegisterService {
             SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"dingtalk").eq(SysUserAuth::getIdentifier, userId),false);
             // 该钉钉用户注册过账号，登录系统
             if (userAuth!=null) {
-                user = ibzuserService.getById(userAuth.getUserid());
+                user = sysUserService.getById(userAuth.getUserid());
                 if(user==null)
                     throw new BadRequestAlertException("未找到"+userId+"对应系统用户","UserDingtalkRegisterService","");
 
@@ -138,12 +138,12 @@ public class UserDingtalkRegisterService {
                     .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, response.getUserInfo().getOpenid()).or().eq(SysUserAuth::getIdentifier, response.getUserInfo().getUnionid())
                     ),false);
 
-            IBZUSER user = null;
+            SysUser user = null;
             // 该钉钉用户注册过账号，登录系统
             if (userAuth!=null) {
-                user = ibzuserService.getById(userAuth.getUserid());
+                user = sysUserService.getById(userAuth.getUserid());
                 if (user == null)
-                    user = ibzuserService.getOne(Wrappers.<IBZUSER>lambdaQuery().eq(IBZUSER::getUserid,response.getUserInfo().getOpenid()).or().eq(IBZUSER::getUsername,response.getUserInfo().getOpenid()),false);
+                    user = sysUserService.getOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserid,response.getUserInfo().getOpenid()).or().eq(SysUser::getUsername,response.getUserInfo().getOpenid()),false);
 
                 if(user!=null)
                 {

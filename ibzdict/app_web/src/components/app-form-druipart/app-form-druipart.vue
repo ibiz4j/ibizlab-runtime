@@ -482,7 +482,7 @@ export default class AppFormDRUIPart extends Vue {
      * @public
      * @memberof AppFormDRUIPart
      */
-    public viewdataschange(){
+    public viewdataschange($event:any){
         console.log((this.$t('components.appFormDRUIPart.change1') as string));
     }
 

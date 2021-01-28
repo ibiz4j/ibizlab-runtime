@@ -49,7 +49,7 @@ public interface SysTeamFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/systeams/getdraft")
-    SysTeam getDraft();
+    SysTeam getDraft(SysTeam entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/systeams/checkkey")

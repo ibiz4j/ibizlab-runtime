@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="app-menus">
     <template v-for="(item,index) in menus">
       <card :bordered="false" dis-hover v-if="item.items && Array.isArray(item.items)" :key="index">
@@ -12,8 +12,8 @@
           <span class="line"></span>
         </p>
         <p style=" display: 'flex' ">
-          <app-quick-menus :menus="item.items" :ctrlName = "ctrlName"></app-quick-menus>
-        </p>
+          <app-quick-menus :menus="item.items" :ctrlName="ctrlName"></app-quick-menus>
+          </p>
       </card>
       <card
         :key="index"
@@ -43,12 +43,12 @@
     </template>
   </div>
 </template>
-
 <script lang='ts'>
 import { Component, Vue, Prop, Model, Watch } from "vue-property-decorator";
 
 @Component({})
 export default class AppQuickMenus extends Vue {
+
   /**
    * 菜单数据
    *
@@ -58,7 +58,7 @@ export default class AppQuickMenus extends Vue {
   @Prop({ default: [] }) public menus!: any;
 
   /**
-   * 部件名称
+   *  部件名称
    * 
    * @type {String}
    * @memberof AppQuickMenus

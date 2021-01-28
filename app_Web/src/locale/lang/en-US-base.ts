@@ -1,5 +1,6 @@
 import jobslog_en_US from '@locale/lanres/entities/jobs-log/jobs-log_en_US';
 import sysrolepermission_en_US from '@locale/lanres/entities/sys-role-permission/sys-role-permission_en_US';
+import msguseraccount_en_US from '@locale/lanres/entities/msg-user-account/msg-user-account_en_US';
 import sysuser_en_US from '@locale/lanres/entities/sys-user/sys-user_en_US';
 import sysauthlog_en_US from '@locale/lanres/entities/sys-auth-log/sys-auth-log_en_US';
 import wfmember_en_US from '@locale/lanres/entities/wfmember/wfmember_en_US';
@@ -7,8 +8,11 @@ import syspost_en_US from '@locale/lanres/entities/sys-post/sys-post_en_US';
 import sysuserauth_en_US from '@locale/lanres/entities/sys-user-auth/sys-user-auth_en_US';
 import sysdepartment_en_US from '@locale/lanres/entities/sys-department/sys-department_en_US';
 import sysemployee_en_US from '@locale/lanres/entities/sys-employee/sys-employee_en_US';
+import paytrade_en_US from '@locale/lanres/entities/pay-trade/pay-trade_en_US';
+import msgtemplate_en_US from '@locale/lanres/entities/msg-template/msg-template_en_US';
 import systeam_en_US from '@locale/lanres/entities/sys-team/sys-team_en_US';
 import wfuser_en_US from '@locale/lanres/entities/wfuser/wfuser_en_US';
+import payopenaccess_en_US from '@locale/lanres/entities/pay-open-access/pay-open-access_en_US';
 import sysorganization_en_US from '@locale/lanres/entities/sys-organization/sys-organization_en_US';
 import jobsregistry_en_US from '@locale/lanres/entities/jobs-registry/jobs-registry_en_US';
 import sysopenaccess_en_US from '@locale/lanres/entities/sys-open-access/sys-open-access_en_US';
@@ -20,6 +24,7 @@ import sysuserrole_en_US from '@locale/lanres/entities/sys-user-role/sys-user-ro
 import wfprocessdefinition_en_US from '@locale/lanres/entities/wfprocess-definition/wfprocess-definition_en_US';
 import sysrole_en_US from '@locale/lanres/entities/sys-role/sys-role_en_US';
 import syspermission_en_US from '@locale/lanres/entities/sys-permission/sys-permission_en_US';
+import msgopenaccess_en_US from '@locale/lanres/entities/msg-open-access/msg-open-access_en_US';
 import systeammember_en_US from '@locale/lanres/entities/sys-team-member/sys-team-member_en_US';
 import sysdeptmember_en_US from '@locale/lanres/entities/sys-dept-member/sys-dept-member_en_US';
 import dictoption_en_US from '@locale/lanres/entities/dict-option/dict-option_en_US';
@@ -175,6 +180,13 @@ function getAppLocale(){
                     menuitem18: commonLogic.appcommonhandle("字典管理",null),
                     menuitem19: commonLogic.appcommonhandle("目录",null),
                     menuitem20: commonLogic.appcommonhandle("字典项",null),
+                    menuitem24: commonLogic.appcommonhandle("消息通知",null),
+                    menuitem25: commonLogic.appcommonhandle("第三方平台",null),
+                    menuitem26: commonLogic.appcommonhandle("消息模板",null),
+                    menuitem27: commonLogic.appcommonhandle("消息账户",null),
+                    menuitem28: commonLogic.appcommonhandle("支付管理",null),
+                    menuitem29: commonLogic.appcommonhandle("支付交易",null),
+                    menuitem30: commonLogic.appcommonhandle("支付平台",null),
                 },
             },
             formpage:{
@@ -272,6 +284,7 @@ function getAppLocale(){
         entities: {
             jobslog: jobslog_en_US(),
             sysrolepermission: sysrolepermission_en_US(),
+            msguseraccount: msguseraccount_en_US(),
             sysuser: sysuser_en_US(),
             sysauthlog: sysauthlog_en_US(),
             wfmember: wfmember_en_US(),
@@ -279,8 +292,11 @@ function getAppLocale(){
             sysuserauth: sysuserauth_en_US(),
             sysdepartment: sysdepartment_en_US(),
             sysemployee: sysemployee_en_US(),
+            paytrade: paytrade_en_US(),
+            msgtemplate: msgtemplate_en_US(),
             systeam: systeam_en_US(),
             wfuser: wfuser_en_US(),
+            payopenaccess: payopenaccess_en_US(),
             sysorganization: sysorganization_en_US(),
             jobsregistry: jobsregistry_en_US(),
             sysopenaccess: sysopenaccess_en_US(),
@@ -292,6 +308,7 @@ function getAppLocale(){
             wfprocessdefinition: wfprocessdefinition_en_US(),
             sysrole: sysrole_en_US(),
             syspermission: syspermission_en_US(),
+            msgopenaccess: msgopenaccess_en_US(),
             systeammember: systeammember_en_US(),
             sysdeptmember: sysdeptmember_en_US(),
             dictoption: dictoption_en_US(),

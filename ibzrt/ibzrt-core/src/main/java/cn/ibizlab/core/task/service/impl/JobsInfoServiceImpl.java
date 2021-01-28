@@ -97,7 +97,7 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
 
     @Override
     public JobsInfo getDraft(JobsInfo et) {
-        et=jobsInfoFeignClient.getDraft();
+        et=jobsInfoFeignClient.getDraft(et);
         return et;
     }
 
@@ -157,9 +157,6 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
         Page<JobsInfo> jobsInfos=jobsInfoFeignClient.searchDefault(context);
         return jobsInfos;
     }
-
-
-
 
 }
 

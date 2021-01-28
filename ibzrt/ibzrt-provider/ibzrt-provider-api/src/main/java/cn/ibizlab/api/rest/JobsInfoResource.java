@@ -110,8 +110,9 @@ public class JobsInfoResource {
 
     @ApiOperation(value = "获取任务信息草稿", tags = {"任务信息" },  notes = "获取任务信息草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/getdraft")
-    public ResponseEntity<JobsInfoDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(jobsinfoMapping.toDto(jobsinfoService.getDraft(new JobsInfo())));
+    public ResponseEntity<JobsInfoDTO> getDraft(JobsInfoDTO dto) {
+        JobsInfo domain = jobsinfoMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(jobsinfoMapping.toDto(jobsinfoService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查任务信息", tags = {"任务信息" },  notes = "检查任务信息")
@@ -132,9 +133,11 @@ public class JobsInfoResource {
     }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Execute-all')")
     @ApiOperation(value = "批量处理[执行]", tags = {"任务信息" },  notes = "批量处理[执行]")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{jobsinfo_id}/executebatch")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/executebatch")
     public ResponseEntity<Boolean> executeBatch(@RequestBody List<JobsInfoDTO> jobsinfodtos) {
-        return ResponseEntity.status(HttpStatus.OK).body(jobsinfoService.executeBatch(jobsinfoMapping.toDomain(jobsinfodtos)));
+        List<JobsInfo> domains = jobsinfoMapping.toDomain(jobsinfodtos);
+        boolean result = jobsinfoService.executeBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Save-all')")
@@ -195,6 +198,7 @@ public class JobsInfoResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(jobsinfoMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

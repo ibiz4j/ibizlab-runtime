@@ -8,7 +8,10 @@ import cn.ibizlab.core.uaa.extensions.domain.PermissionType;
 import cn.ibizlab.core.uaa.extensions.helper.DingTalkHelper;
 import cn.ibizlab.core.uaa.filter.SysRolePermissionSearchContext;
 import cn.ibizlab.core.uaa.filter.SysUserSearchContext;
-import cn.ibizlab.core.uaa.service.*;
+import cn.ibizlab.core.uaa.service.ISysPSSystemService;
+import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
+import cn.ibizlab.core.uaa.service.ISysUserRoleService;
+import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.domain.Token;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.security.AuthTokenUtil;
@@ -27,8 +30,6 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,7 @@ import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -44,7 +46,6 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.sql.Wrapper;
 import java.util.*;
 
 @Service
@@ -409,7 +410,7 @@ public class UAACoreService {
 
 
     @Autowired
-    private ISysUserService userService;;
+    private ISysUserService userService;
 
     @Cacheable( value="ibzuaa-model",key = "'catalog:SysOperator'")
     public JSONObject getOptions(String catalog) {

@@ -28,6 +28,30 @@ zuul:
       path: /jobs_registries/**
       serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
       stripPrefix: false
+    msg_body:
+      path: /msg_bodies/**
+      serviceId: ${ibiz.ref.service.ibznotify-api:ibznotify-api}
+      stripPrefix: false
+    msg_open_access:
+      path: /msg_open_accesses/**
+      serviceId: ${ibiz.ref.service.ibznotify-api:ibznotify-api}
+      stripPrefix: false
+    msg_template:
+      path: /msg_templates/**
+      serviceId: ${ibiz.ref.service.ibznotify-api:ibznotify-api}
+      stripPrefix: false
+    msg_user_account:
+      path: /msg_user_accounts/**
+      serviceId: ${ibiz.ref.service.ibznotify-api:ibznotify-api}
+      stripPrefix: false
+    pay_open_access:
+      path: /pay_open_accesses/**
+      serviceId: ${ibiz.ref.service.ibzpay-api:ibzpay-api}
+      stripPrefix: false
+    pay_trade:
+      path: /pay_trades/**
+      serviceId: ${ibiz.ref.service.ibzpay-api:ibzpay-api}
+      stripPrefix: false
     sd_file:
       path: /sd_files/**
       serviceId: ${ibiz.ref.service.ibzdisk-api:ibzdisk-api}

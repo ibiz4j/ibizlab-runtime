@@ -48,5 +48,6 @@ public class MsgBodyResource {
     public MsgBodyMapping msgbodyMapping;
 
 
+
 }
 

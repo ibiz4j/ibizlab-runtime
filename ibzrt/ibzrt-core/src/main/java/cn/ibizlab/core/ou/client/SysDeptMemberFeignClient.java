@@ -49,7 +49,7 @@ public interface SysDeptMemberFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysdeptmembers/getdraft")
-    SysDeptMember getDraft();
+    SysDeptMember getDraft(SysDeptMember entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysdeptmembers/checkkey")

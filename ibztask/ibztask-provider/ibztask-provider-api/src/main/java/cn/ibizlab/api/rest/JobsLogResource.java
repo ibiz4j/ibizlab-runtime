@@ -110,8 +110,9 @@ public class JobsLogResource {
 
     @ApiOperation(value = "获取任务调度日志草稿", tags = {"任务调度日志" },  notes = "获取任务调度日志草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/getdraft")
-    public ResponseEntity<JobsLogDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(jobslogMapping.toDto(jobslogService.getDraft(new JobsLog())));
+    public ResponseEntity<JobsLogDTO> getDraft(JobsLogDTO dto) {
+        JobsLog domain = jobslogMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(jobslogMapping.toDto(jobslogService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查任务调度日志", tags = {"任务调度日志" },  notes = "检查任务调度日志")
@@ -156,6 +157,7 @@ public class JobsLogResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(jobslogMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

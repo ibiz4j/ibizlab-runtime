@@ -97,7 +97,7 @@ public class WFGroupServiceImpl implements IWFGroupService {
 
     @Override
     public WFGroup getDraft(WFGroup et) {
-        et=wFGroupFeignClient.getDraft();
+        et=wFGroupFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFGroupServiceImpl implements IWFGroupService {
         Page<WFGroup> wFGroups=wFGroupFeignClient.searchDefault(context);
         return wFGroups;
     }
-
-
-
 
 }
 

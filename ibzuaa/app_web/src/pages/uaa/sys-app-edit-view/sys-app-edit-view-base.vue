@@ -1049,7 +1049,7 @@ export default class SysAppEditViewBase extends Vue {
                 Object.assign(data, { sysapp: args[0].sysapp });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

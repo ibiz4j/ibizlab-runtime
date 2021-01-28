@@ -50,7 +50,7 @@ public class SysAuthLogFallback implements SysAuthLogFeignClient {
     }
 
 
-    public SysAuthLog getDraft(){
+    public SysAuthLog getDraft(SysAuthLog entity){
         return null;
     }
 

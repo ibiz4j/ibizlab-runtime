@@ -52,6 +52,54 @@
     "datascope":[{"id":"all","name":"全部数据"}]
     }
     ,    {
+    "dename":"MsgBody",
+    "delogicname":"消息",
+    "sysmoudle":{"id":"NOTIFY","name":"notify"},
+    "dedataset":[{"id":"Default" , "name":"数据集"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+    }
+    ,    {
+    "dename":"MsgOpenAccess",
+    "delogicname":"接入开放平台",
+    "sysmoudle":{"id":"NOTIFY","name":"notify"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+    }
+    ,    {
+    "dename":"MsgTemplate",
+    "delogicname":"消息模板",
+    "sysmoudle":{"id":"NOTIFY","name":"notify"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+    }
+    ,    {
+    "dename":"MsgUserAccount",
+    "delogicname":"绑定消息账号",
+    "sysmoudle":{"id":"NOTIFY","name":"notify"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+    }
+    ,    {
+    "dename":"PayOpenAccess",
+    "delogicname":"支付平台",
+    "sysmoudle":{"id":"PAY","name":"pay"},
+    "dedataset":[{"id":"Default" , "name":"数据集"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+    }
+    ,    {
+    "dename":"PayTrade",
+    "delogicname":"支付交易",
+    "sysmoudle":{"id":"PAY","name":"pay"},
+    "dedataset":[{"id":"Default" , "name":"数据集"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+    }
+    ,    {
     "dename":"SysApp",
     "delogicname":"应用",
     "sysmoudle":{"id":"UAA","name":"uaa"},
@@ -233,7 +281,7 @@
             {
                "appid":"Web",
                "appname":"ibizlab-runtime",
-               "appmenu":[{"menuid":"Index", "menuname":"Index", "menuitem":[{ "id":"menuitem7" , "name":"单位人事" , "items":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" },{ "id":"menuitem12" , "name":"岗位管理" },{ "id":"menuitem13" , "name":"组管理" }]},{ "id":"menuitem8" , "name":"系统权限" , "items":[{ "id":"menuitem4" , "name":"用户角色" },{ "id":"menuitem9" , "name":"认证日志" },{ "id":"menuitem21" , "name":"接入应用" },{ "id":"menuitem22" , "name":"第三方认证" },{ "id":"menuitem23" , "name":"账户绑定" }]},{ "id":"menuitem10" , "name":"流程管理" , "items":[{ "id":"menuitem6" , "name":"流程定义" },{ "id":"menuitem5" , "name":"流程角色" },{ "id":"menuitem11" , "name":"发布新流程" }]},{ "id":"menuitem14" , "name":"任务管理" , "items":[{ "id":"menuitem15" , "name":"注册" },{ "id":"menuitem16" , "name":"任务" },{ "id":"menuitem17" , "name":"日志" }]},{ "id":"menuitem18" , "name":"字典管理" , "items":[{ "id":"menuitem19" , "name":"目录" },{ "id":"menuitem20" , "name":"字典项" }]}] }]
+               "appmenu":[{"menuid":"Index", "menuname":"Index", "menuitem":[{ "id":"menuitem7" , "name":"单位人事" , "items":[{ "id":"menuitem1" , "name":"单位管理" },{ "id":"menuitem2" , "name":"部门管理" },{ "id":"menuitem3" , "name":"人员管理" },{ "id":"menuitem12" , "name":"岗位管理" },{ "id":"menuitem13" , "name":"组管理" }]},{ "id":"menuitem8" , "name":"系统权限" , "items":[{ "id":"menuitem4" , "name":"用户角色" },{ "id":"menuitem9" , "name":"认证日志" },{ "id":"menuitem21" , "name":"接入应用" },{ "id":"menuitem22" , "name":"第三方认证" },{ "id":"menuitem23" , "name":"账户绑定" }]},{ "id":"menuitem10" , "name":"流程管理" , "items":[{ "id":"menuitem6" , "name":"流程定义" },{ "id":"menuitem5" , "name":"流程角色" },{ "id":"menuitem11" , "name":"发布新流程" }]},{ "id":"menuitem14" , "name":"任务管理" , "items":[{ "id":"menuitem15" , "name":"注册" },{ "id":"menuitem16" , "name":"任务" },{ "id":"menuitem17" , "name":"日志" }]},{ "id":"menuitem18" , "name":"字典管理" , "items":[{ "id":"menuitem19" , "name":"目录" },{ "id":"menuitem20" , "name":"字典项" }]},{ "id":"menuitem24" , "name":"消息通知" , "items":[{ "id":"menuitem25" , "name":"第三方平台" },{ "id":"menuitem26" , "name":"消息模板" },{ "id":"menuitem27" , "name":"消息账户" }]},{ "id":"menuitem28" , "name":"支付管理" , "items":[{ "id":"menuitem29" , "name":"支付交易" },{ "id":"menuitem30" , "name":"支付平台" }]}] }]
             }
             ]
     }

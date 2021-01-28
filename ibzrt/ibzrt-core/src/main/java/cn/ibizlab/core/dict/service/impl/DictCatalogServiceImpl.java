@@ -97,7 +97,7 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
 
     @Override
     public DictCatalog getDraft(DictCatalog et) {
-        et=dictCatalogFeignClient.getDraft();
+        et=dictCatalogFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
         Page<DictCatalog> dictCatalogs=dictCatalogFeignClient.searchDefault(context);
         return dictCatalogs;
     }
-
-
-
 
 }
 

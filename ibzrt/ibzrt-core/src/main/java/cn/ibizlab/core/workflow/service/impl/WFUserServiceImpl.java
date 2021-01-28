@@ -97,7 +97,7 @@ public class WFUserServiceImpl implements IWFUserService {
 
     @Override
     public WFUser getDraft(WFUser et) {
-        et=wFUserFeignClient.getDraft();
+        et=wFUserFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFUserServiceImpl implements IWFUserService {
         Page<WFUser> wFUsers=wFUserFeignClient.searchDefault(context);
         return wFUsers;
     }
-
-
-
 
 }
 

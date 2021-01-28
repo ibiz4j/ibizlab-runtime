@@ -110,8 +110,9 @@ public class SysOpenAccessResource {
 
     @ApiOperation(value = "获取第三方认证平台草稿", tags = {"第三方认证平台" },  notes = "获取第三方认证平台草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/getdraft")
-    public ResponseEntity<SysOpenAccessDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysopenaccessMapping.toDto(sysopenaccessService.getDraft(new SysOpenAccess())));
+    public ResponseEntity<SysOpenAccessDTO> getDraft(SysOpenAccessDTO dto) {
+        SysOpenAccess domain = sysopenaccessMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysopenaccessMapping.toDto(sysopenaccessService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查第三方认证平台", tags = {"第三方认证平台" },  notes = "检查第三方认证平台")
@@ -156,6 +157,7 @@ public class SysOpenAccessResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysopenaccessMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

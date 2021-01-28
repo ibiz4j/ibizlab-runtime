@@ -50,7 +50,7 @@ public class WFTaskFallback implements WFTaskFeignClient {
     }
 
 
-    public WFTask getDraft(){
+    public WFTask getDraft(WFTask entity){
         return null;
     }
 

@@ -50,7 +50,7 @@ public class WFGroupFallback implements WFGroupFeignClient {
     }
 
 
-    public WFGroup getDraft(){
+    public WFGroup getDraft(WFGroup entity){
         return null;
     }
 

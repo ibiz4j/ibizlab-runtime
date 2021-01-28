@@ -3,6 +3,8 @@ package cn.ibizlab.util.client;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Map;
 
 @FeignClient(value = "${ibiz.ref.service.lite:ibzlite-api}",contextId = "lite",fallback = IBZLiteFallback.class)
 public interface IBZLiteFeignClient
@@ -14,4 +16,5 @@ public interface IBZLiteFeignClient
 	 */
 	@PostMapping("/lite/syncsysmodel")
 	Boolean syncSysModel(@RequestBody JSONObject system);
+
 }

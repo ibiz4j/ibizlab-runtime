@@ -46,7 +46,7 @@
     :localParam ='{ }' 
     :disabled="detailsModel.identity_type.disabled" 
     valueType="string"
-    tag='OpenAccessType' 
+    tag='UaaOpenAccessType' 
     codelistType='STATIC'
     placeholder='请选择...' style="">
  </dropdown-list>
@@ -101,7 +101,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysUserAuthService from '@/service/sys-user-auth/sys-user-auth-service';
+import SysUserAuthEntityService from '@/service/sys-user-auth/sys-user-auth-service';
 import MainService from './main-form-service';
 import SysUserAuthUIService from '@/uiservice/sys-user-auth/sys-user-auth-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -192,7 +192,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {SysUserAuthService}
      * @memberof MainBase
      */
-    public appEntityService: SysUserAuthService = new SysUserAuthService({ $store: this.$store });
+    public appEntityService: SysUserAuthEntityService = new SysUserAuthEntityService({ $store: this.$store });
     
 
 
@@ -443,7 +443,16 @@ export default class MainBase extends Vue implements ControlInterface {
      * 
      *  @memberof  MainBase
      */
-    public errorMessages: Array<any> = [];   
+    public errorMessages: Array<any> = []; 
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 设置表单项错误提示信息
@@ -1264,6 +1273,9 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         if (this.dataChangEvent) {
             this.dataChangEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 

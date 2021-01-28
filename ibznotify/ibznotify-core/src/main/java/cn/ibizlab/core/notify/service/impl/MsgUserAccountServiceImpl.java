@@ -221,9 +221,6 @@ public class MsgUserAccountServiceImpl extends ServiceImpl<MsgUserAccountMapper,
 
 
 
-
-
-
     public IMsgUserAccountService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

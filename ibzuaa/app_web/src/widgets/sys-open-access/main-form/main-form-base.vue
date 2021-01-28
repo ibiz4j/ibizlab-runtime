@@ -178,7 +178,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysOpenAccessService from '@/service/sys-open-access/sys-open-access-service';
+import SysOpenAccessEntityService from '@/service/sys-open-access/sys-open-access-service';
 import MainService from './main-form-service';
 import SysOpenAccessUIService from '@/uiservice/sys-open-access/sys-open-access-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -269,7 +269,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {SysOpenAccessService}
      * @memberof MainBase
      */
-    public appEntityService: SysOpenAccessService = new SysOpenAccessService({ $store: this.$store });
+    public appEntityService: SysOpenAccessEntityService = new SysOpenAccessEntityService({ $store: this.$store });
     
 
 
@@ -520,7 +520,16 @@ export default class MainBase extends Vue implements ControlInterface {
      * 
      *  @memberof  MainBase
      */
-    public errorMessages: Array<any> = [];   
+    public errorMessages: Array<any> = []; 
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 设置表单项错误提示信息
@@ -1465,6 +1474,9 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         if (this.dataChangEvent) {
             this.dataChangEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 

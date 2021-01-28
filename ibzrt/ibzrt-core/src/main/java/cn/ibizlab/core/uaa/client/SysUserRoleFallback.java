@@ -50,7 +50,7 @@ public class SysUserRoleFallback implements SysUserRoleFeignClient {
     }
 
 
-    public SysUserRole getDraft(){
+    public SysUserRole getDraft(SysUserRole entity){
         return null;
     }
 

@@ -50,7 +50,7 @@ public class JobsLogFallback implements JobsLogFeignClient {
     }
 
 
-    public JobsLog getDraft(){
+    public JobsLog getDraft(JobsLog entity){
         return null;
     }
 

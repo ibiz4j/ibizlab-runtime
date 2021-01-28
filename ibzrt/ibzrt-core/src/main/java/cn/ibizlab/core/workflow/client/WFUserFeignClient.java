@@ -49,7 +49,7 @@ public interface WFUserFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
-    WFUser getDraft();
+    WFUser getDraft(WFUser entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers/checkkey")

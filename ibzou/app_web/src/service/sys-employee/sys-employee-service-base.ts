@@ -352,18 +352,18 @@ export default class SysEmployeeServiceBase extends EntityService {
     public async InitPwdBatch(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysorganization && context.sysdepartment && true){
             let tempData:any = JSON.parse(JSON.stringify(data));
-            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployee/initpwdbatch`,tempData,isloading);
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/initpwdbatch`,tempData,isloading);
         }
         if(context.sysorganization && true){
             let tempData:any = JSON.parse(JSON.stringify(data));
-            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysemployee/initpwdbatch`,tempData,isloading);
+            return await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysemployees/initpwdbatch`,tempData,isloading);
         }
         if(context.sysdepartment && true){
             let tempData:any = JSON.parse(JSON.stringify(data));
-            return await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysemployee/initpwdbatch`,tempData,isloading);
+            return await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysemployees/initpwdbatch`,tempData,isloading);
         }
         let tempData:any = JSON.parse(JSON.stringify(data));
-        return await Http.getInstance().post(`/sysemployee/initpwdbatch`,tempData,isloading);
+        return await Http.getInstance().post(`/sysemployees/initpwdbatch`,tempData,isloading);
     }
 
     /**

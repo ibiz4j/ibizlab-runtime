@@ -50,7 +50,7 @@ public class DictCatalogFallback implements DictCatalogFeignClient {
     }
 
 
-    public DictCatalog getDraft(){
+    public DictCatalog getDraft(DictCatalog entity){
         return null;
     }
 

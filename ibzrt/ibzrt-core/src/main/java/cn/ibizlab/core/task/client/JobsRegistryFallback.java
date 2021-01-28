@@ -50,7 +50,7 @@ public class JobsRegistryFallback implements JobsRegistryFeignClient {
     }
 
 
-    public JobsRegistry getDraft(){
+    public JobsRegistry getDraft(JobsRegistry entity){
         return null;
     }
 

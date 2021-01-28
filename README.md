@@ -7,12 +7,12 @@
 - [x]  ibz-uaa:统一认证授权微服务（支持第三方认证）  
 - [x]  ibz-ou:组织人事管理微服务  
 - [x]  ibz-wf:工作流代理微服务（集成flowable） 
-- [ ]  ibz-disk:分布式存储微服务(集成kkfileview在线预览+collabora-code在线编辑)  
+- [x]  ibz-disk:分布式存储微服务(集成kkfileview在线预览+collabora-code在线编辑)  
 - [x]  ibz-task:任务调度微服务（集成baomidou-jobs）  
 - [x]  ibz-dict:数据字典管理微服务  
-- [ ]  ~~ibz-pay:支付管理微服务~~  
-- [ ]  ~~ibz-notify:通知微服务~~  
-- [ ]  ~~ibz-dst:分布式统计分析微服务（基于Cassandra+drools）~~  
+- [x]  ibz-pay:支付管理微服务  
+- [x]  ibz-notify:通知微服务  
+
 
 
 ### 系统地址
@@ -177,8 +177,3 @@ Boot on port:40003
 Boot on port:30003  
 http://127.0.0.1:30003 
 
-### 开源计划
-* ibz-disk 集成在线预览和编辑  2020年6月底
-* ibz-pay:支付管理微服务  2020年7月
-* ibz-notify:通知微服务  2020年7月
-* ibz-dst:分布式统计分析微服务（集成drools）  2020年8月

@@ -49,7 +49,7 @@ public interface SysPSSystemFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/syspssystems/getdraft")
-    SysPSSystem getDraft();
+    SysPSSystem getDraft(SysPSSystem entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/checkkey")

@@ -301,9 +301,6 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     }
 
 
-
-
-
     public ISysOrganizationService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

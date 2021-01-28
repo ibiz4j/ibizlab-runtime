@@ -110,8 +110,9 @@ public class MsgOpenAccessResource {
 
     @ApiOperation(value = "获取接入开放平台草稿", tags = {"接入开放平台" },  notes = "获取接入开放平台草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/getdraft")
-    public ResponseEntity<MsgOpenAccessDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(msgopenaccessMapping.toDto(msgopenaccessService.getDraft(new MsgOpenAccess())));
+    public ResponseEntity<MsgOpenAccessDTO> getDraft(MsgOpenAccessDTO dto) {
+        MsgOpenAccess domain = msgopenaccessMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(msgopenaccessMapping.toDto(msgopenaccessService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查接入开放平台", tags = {"接入开放平台" },  notes = "检查接入开放平台")
@@ -156,6 +157,7 @@ public class MsgOpenAccessResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(msgopenaccessMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

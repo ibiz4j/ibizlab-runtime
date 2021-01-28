@@ -97,7 +97,7 @@ public class SysTeamMemberServiceImpl implements ISysTeamMemberService {
 
     @Override
     public SysTeamMember getDraft(SysTeamMember et) {
-        et=sysTeamMemberFeignClient.getDraft();
+        et=sysTeamMemberFeignClient.getDraft(et);
         return et;
     }
 
@@ -185,9 +185,6 @@ public class SysTeamMemberServiceImpl implements ISysTeamMemberService {
         Page<SysTeamMember> sysTeamMembers=sysTeamMemberFeignClient.searchDefault(context);
         return sysTeamMembers;
     }
-
-
-
 
 }
 

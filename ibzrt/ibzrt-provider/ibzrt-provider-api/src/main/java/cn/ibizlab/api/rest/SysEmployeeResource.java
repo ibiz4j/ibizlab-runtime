@@ -111,8 +111,9 @@ public class SysEmployeeResource {
 
     @ApiOperation(value = "获取人员草稿", tags = {"人员" },  notes = "获取人员草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysemployees/getdraft")
-    public ResponseEntity<SysEmployeeDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(sysemployeeService.getDraft(new SysEmployee())));
+    public ResponseEntity<SysEmployeeDTO> getDraft(SysEmployeeDTO dto) {
+        SysEmployee domain = sysemployeeMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(sysemployeeService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查人员", tags = {"人员" },  notes = "检查人员")
@@ -133,9 +134,11 @@ public class SysEmployeeResource {
     }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysEmployee-InitPwd-all')")
     @ApiOperation(value = "批量处理[初始化密码]", tags = {"人员" },  notes = "批量处理[初始化密码]")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/initpwdbatch")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/initpwdbatch")
     public ResponseEntity<Boolean> initPwdBatch(@RequestBody List<SysEmployeeDTO> sysemployeedtos) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.initPwdBatch(sysemployeeMapping.toDomain(sysemployeedtos)));
+        List<SysEmployee> domains = sysemployeeMapping.toDomain(sysemployeedtos);
+        boolean result = sysemployeeService.initPwdBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
@@ -174,6 +177,7 @@ public class SysEmployeeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysemployeeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Create')")
@@ -250,8 +254,8 @@ public class SysEmployeeResource {
 
     @ApiOperation(value = "根据部门获取人员草稿", tags = {"人员" },  notes = "根据部门获取人员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/{sysdepartment_id}/sysemployees/getdraft")
-    public ResponseEntity<SysEmployeeDTO> getDraftBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id) {
-        SysEmployee domain = new SysEmployee();
+    public ResponseEntity<SysEmployeeDTO> getDraftBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, SysEmployeeDTO dto) {
+        SysEmployee domain = sysemployeeMapping.toDomain(dto);
         domain.setMdeptid(sysdepartment_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(sysemployeeService.getDraft(domain)));
     }
@@ -273,9 +277,11 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
     @ApiOperation(value = "批量处理[根据部门人员]", tags = {"人员" },  notes = "批量处理[根据部门人员]")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/initpwdbatch")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/initpwdbatch")
     public ResponseEntity<Boolean> initPwdBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.initPwdBatch(sysemployeeMapping.toDomain(sysemployeedtos)));
+        List<SysEmployee> domains = sysemployeeMapping.toDomain(sysemployeedtos);
+        boolean result = sysemployeeService.initPwdBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据部门保存人员", tags = {"人员" },  notes = "根据部门保存人员")
@@ -395,8 +401,8 @@ public class SysEmployeeResource {
 
     @ApiOperation(value = "根据单位机构获取人员草稿", tags = {"人员" },  notes = "根据单位机构获取人员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysemployees/getdraft")
-    public ResponseEntity<SysEmployeeDTO> getDraftBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id) {
-        SysEmployee domain = new SysEmployee();
+    public ResponseEntity<SysEmployeeDTO> getDraftBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, SysEmployeeDTO dto) {
+        SysEmployee domain = sysemployeeMapping.toDomain(dto);
         domain.setOrgid(sysorganization_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(sysemployeeService.getDraft(domain)));
     }
@@ -418,9 +424,11 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
     @ApiOperation(value = "批量处理[根据单位机构人员]", tags = {"人员" },  notes = "批量处理[根据单位机构人员]")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/initpwdbatch")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/initpwdbatch")
     public ResponseEntity<Boolean> initPwdBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.initPwdBatch(sysemployeeMapping.toDomain(sysemployeedtos)));
+        List<SysEmployee> domains = sysemployeeMapping.toDomain(sysemployeedtos);
+        boolean result = sysemployeeService.initPwdBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构保存人员", tags = {"人员" },  notes = "根据单位机构保存人员")
@@ -540,8 +548,8 @@ public class SysEmployeeResource {
 
     @ApiOperation(value = "根据单位机构部门获取人员草稿", tags = {"人员" },  notes = "根据单位机构部门获取人员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/getdraft")
-    public ResponseEntity<SysEmployeeDTO> getDraftBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id) {
-        SysEmployee domain = new SysEmployee();
+    public ResponseEntity<SysEmployeeDTO> getDraftBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, SysEmployeeDTO dto) {
+        SysEmployee domain = sysemployeeMapping.toDomain(dto);
         domain.setMdeptid(sysdepartment_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(sysemployeeService.getDraft(domain)));
     }
@@ -563,9 +571,11 @@ public class SysEmployeeResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysemployeedto);
     }
     @ApiOperation(value = "批量处理[根据单位机构部门人员]", tags = {"人员" },  notes = "批量处理[根据单位机构部门人员]")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/initpwdbatch")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/initpwdbatch")
     public ResponseEntity<Boolean> initPwdBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysEmployeeDTO> sysemployeedtos) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.initPwdBatch(sysemployeeMapping.toDomain(sysemployeedtos)));
+        List<SysEmployee> domains = sysemployeeMapping.toDomain(sysemployeedtos);
+        boolean result = sysemployeeService.initPwdBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构部门保存人员", tags = {"人员" },  notes = "根据单位机构部门保存人员")

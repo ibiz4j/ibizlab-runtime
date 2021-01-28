@@ -1395,7 +1395,7 @@ export default class WFTaskEditViewBase extends Vue {
                 Object.assign(data, { wftask: args[0].wftask });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

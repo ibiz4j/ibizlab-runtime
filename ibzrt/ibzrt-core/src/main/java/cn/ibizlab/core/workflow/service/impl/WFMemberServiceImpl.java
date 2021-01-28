@@ -97,7 +97,7 @@ public class WFMemberServiceImpl implements IWFMemberService {
 
     @Override
     public WFMember getDraft(WFMember et) {
-        et=wFMemberFeignClient.getDraft();
+        et=wFMemberFeignClient.getDraft(et);
         return et;
     }
 
@@ -199,9 +199,6 @@ public class WFMemberServiceImpl implements IWFMemberService {
         Page<WFMember> wFMembers=wFMemberFeignClient.searchDefault(context);
         return wFMembers;
     }
-
-
-
 
 }
 

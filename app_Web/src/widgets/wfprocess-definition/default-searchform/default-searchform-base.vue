@@ -52,7 +52,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import WFProcessDefinitionService from '@/service/wfprocess-definition/wfprocess-definition-service';
+import WFProcessDefinitionEntityService from '@/service/wfprocess-definition/wfprocess-definition-service';
 import DefaultService from './default-searchform-service';
 import WFProcessDefinitionUIService from '@/uiservice/wfprocess-definition/wfprocess-definition-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -141,7 +141,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {WFProcessDefinitionService}
      * @memberof DefaultBase
      */
-    public appEntityService: WFProcessDefinitionService = new WFProcessDefinitionService({ $store: this.$store });
+    public appEntityService: WFProcessDefinitionEntityService = new WFProcessDefinitionEntityService({ $store: this.$store });
     
 
 

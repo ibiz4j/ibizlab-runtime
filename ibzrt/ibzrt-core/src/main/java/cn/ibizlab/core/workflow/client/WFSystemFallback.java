@@ -50,7 +50,7 @@ public class WFSystemFallback implements WFSystemFeignClient {
     }
 
 
-    public WFSystem getDraft(){
+    public WFSystem getDraft(WFSystem entity){
         return null;
     }
 

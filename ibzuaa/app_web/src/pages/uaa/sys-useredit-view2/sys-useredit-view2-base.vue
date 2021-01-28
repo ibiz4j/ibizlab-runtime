@@ -1086,7 +1086,7 @@ export default class SYS_USEREditView2Base extends Vue {
                 Object.assign(data, { sysuser: args[0].sysuser });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

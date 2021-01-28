@@ -52,7 +52,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import MsgTemplateService from '@/service/msg-template/msg-template-service';
+import MsgTemplateEntityService from '@/service/msg-template/msg-template-service';
 import DefaultService from './default-searchform-service';
 import MsgTemplateUIService from '@/uiservice/msg-template/msg-template-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -141,7 +141,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {MsgTemplateService}
      * @memberof DefaultBase
      */
-    public appEntityService: MsgTemplateService = new MsgTemplateService({ $store: this.$store });
+    public appEntityService: MsgTemplateEntityService = new MsgTemplateEntityService({ $store: this.$store });
     
 
 

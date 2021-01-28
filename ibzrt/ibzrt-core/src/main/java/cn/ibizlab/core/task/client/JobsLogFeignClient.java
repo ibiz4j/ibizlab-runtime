@@ -49,7 +49,7 @@ public interface JobsLogFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/jobslogs/getdraft")
-    JobsLog getDraft();
+    JobsLog getDraft(JobsLog entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobslogs/checkkey")

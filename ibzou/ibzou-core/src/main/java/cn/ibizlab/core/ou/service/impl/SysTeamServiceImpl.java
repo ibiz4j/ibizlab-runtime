@@ -224,9 +224,6 @@ public class SysTeamServiceImpl extends ServiceImpl<SysTeamMapper, SysTeam> impl
 
 
 
-
-
-
     public ISysTeamService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

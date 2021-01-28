@@ -121,7 +121,6 @@ public class SysAppServiceImpl implements ISysAppService {
         return new PageImpl<SysApp>(new ArrayList(),context.getPageable(),0);
     }
 
-
 }
 
 

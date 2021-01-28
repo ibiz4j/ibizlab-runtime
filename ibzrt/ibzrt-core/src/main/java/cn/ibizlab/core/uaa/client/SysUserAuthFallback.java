@@ -50,7 +50,7 @@ public class SysUserAuthFallback implements SysUserAuthFeignClient {
     }
 
 
-    public SysUserAuth getDraft(){
+    public SysUserAuth getDraft(SysUserAuth entity){
         return null;
     }
 

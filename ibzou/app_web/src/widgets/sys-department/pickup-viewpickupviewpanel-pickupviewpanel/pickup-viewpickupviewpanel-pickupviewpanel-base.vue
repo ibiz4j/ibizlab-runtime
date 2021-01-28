@@ -25,7 +25,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysDepartmentService from '@/service/sys-department/sys-department-service';
+import SysDepartmentEntityService from '@/service/sys-department/sys-department-service';
 import PickupViewpickupviewpanelService from './pickup-viewpickupviewpanel-pickupviewpanel-service';
 import SysDepartmentUIService from '@/uiservice/sys-department/sys-department-ui-service';
 import PickupViewpickupviewpanelModel from './pickup-viewpickupviewpanel-pickupviewpanel-model';
@@ -105,7 +105,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * @type {SysDepartmentService}
      * @memberof PickupViewpickupviewpanelBase
      */
-    public appEntityService: SysDepartmentService = new SysDepartmentService({ $store: this.$store });
+    public appEntityService: SysDepartmentEntityService = new SysDepartmentEntityService({ $store: this.$store });
     
 
 

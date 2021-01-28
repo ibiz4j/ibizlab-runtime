@@ -293,7 +293,7 @@ public class AuthPermissionEvaluator implements PermissionEvaluator {
 
         Map<String,String> permissionFiled=new HashMap<>();
         String orgField="orgid";  //组织属性
-        String orgDeptField="orgsecid"; //部门属性
+        String orgDeptField="orgsectorid"; //部门属性
         String createManField="createman"; //创建人属性
 
         DEFieldCacheMap.getFieldMap(entityBase.getClass().getName());

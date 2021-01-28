@@ -46,7 +46,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysOrganizationService from '@/service/sys-organization/sys-organization-service';
+import SysOrganizationEntityService from '@/service/sys-organization/sys-organization-service';
 import TreeExpViewtreeexpbarService from './tree-exp-viewtreeexpbar-treeexpbar-service';
 import SysOrganizationUIService from '@/uiservice/sys-organization/sys-organization-ui-service';
 
@@ -133,7 +133,7 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
      * @type {SysOrganizationService}
      * @memberof TreeExpViewtreeexpbarBase
      */
-    public appEntityService: SysOrganizationService = new SysOrganizationService({ $store: this.$store });
+    public appEntityService: SysOrganizationEntityService = new SysOrganizationEntityService({ $store: this.$store });
 
     /**
      * treeexpbar_tree 部件 selectionchange 事件

@@ -245,9 +245,6 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
     }
 
 
-
-
-
     public IWFUserService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

@@ -56,7 +56,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysOrganizationService from '@/service/sys-organization/sys-organization-service';
+import SysOrganizationEntityService from '@/service/sys-organization/sys-organization-service';
 import OrgTreeService from './org-tree-treeview-service';
 import SysOrganizationUIService from '@/uiservice/sys-organization/sys-organization-ui-service';
 import { Environment } from '@/environments/environment';
@@ -145,7 +145,7 @@ export default class OrgTreeBase extends Vue implements ControlInterface {
      * @type {SysOrganizationService}
      * @memberof OrgTreeBase
      */
-    public appEntityService: SysOrganizationService = new SysOrganizationService({ $store: this.$store });
+    public appEntityService: SysOrganizationEntityService = new SysOrganizationEntityService({ $store: this.$store });
     
 
 

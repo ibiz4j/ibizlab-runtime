@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ibzwf-app-web
+  labels:
+    app: ibzwf-app-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibzwf-app-web
+  template:
+    metadata:
+      labels:
+        app: ibzwf-app-web
+    spec:
+      imagePullSecrets:
+      - name: aly-shanghai
+      containers:
+      - name: ibzwf-app-web
+        image: registry.cn-shanghai.aliyuncs.com/ibizsys/ibzwf-app-web:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /app/file
+      volumes:      
+      - name: data
+        persistentVolumeClaim:
+          claimName: demo-date-pvc-nfs
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ibzwf-app-web
+  labels:
+    app: ibzwf-app-web
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 8080
+    protocol: TCP
+  selector:
+    app: ibzwf-app-web
+

@@ -97,7 +97,7 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
 
     @Override
     public WFTaskWay getDraft(WFTaskWay et) {
-        et=wFTaskWayFeignClient.getDraft();
+        et=wFTaskWayFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
         Page<WFTaskWay> wFTaskWays=wFTaskWayFeignClient.searchDefault(context);
         return wFTaskWays;
     }
-
-
-
 
 }
 

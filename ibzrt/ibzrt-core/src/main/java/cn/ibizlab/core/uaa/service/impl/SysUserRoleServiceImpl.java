@@ -97,7 +97,7 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
 
     @Override
     public SysUserRole getDraft(SysUserRole et) {
-        et=sysUserRoleFeignClient.getDraft();
+        et=sysUserRoleFeignClient.getDraft(et);
         return et;
     }
 
@@ -171,9 +171,6 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
         Page<SysUserRole> sysUserRoles=sysUserRoleFeignClient.searchDefault(context);
         return sysUserRoles;
     }
-
-
-
 
 }
 

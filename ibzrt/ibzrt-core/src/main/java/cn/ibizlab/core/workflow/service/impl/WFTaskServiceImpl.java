@@ -97,7 +97,7 @@ public class WFTaskServiceImpl implements IWFTaskService {
 
     @Override
     public WFTask getDraft(WFTask et) {
-        et=wFTaskFeignClient.getDraft();
+        et=wFTaskFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFTaskServiceImpl implements IWFTaskService {
         Page<WFTask> wFTasks=wFTaskFeignClient.searchDefault(context);
         return wFTasks;
     }
-
-
-
 
 }
 

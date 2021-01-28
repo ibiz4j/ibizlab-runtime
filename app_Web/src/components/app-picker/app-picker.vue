@@ -312,7 +312,9 @@ export default class AppPicker extends Vue {
             if (value) {
                 this.items.push({text: newVal, value: value});
             }
-            this.onSearch(newVal, null, false);
+            if(newVal && value){
+                this.onSearch(newVal, null, false);
+            }
         }
     }
 

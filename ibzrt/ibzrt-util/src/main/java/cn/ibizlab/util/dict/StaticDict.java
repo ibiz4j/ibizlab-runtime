@@ -94,6 +94,29 @@ public class StaticDict {
 
 
     /**
+     * 代码表[模板类型]
+     */
+    @Getter
+    public enum TemplateType {
+        ALIYUN_SUB_SMS("aliyun-sms","阿里云短信"),
+        ALIYUN_SUB_EMAIL("aliyun-email","阿里云邮件"),
+        WECHAT_SUB_MSG("wechat-msg","微信消息"),
+        DINGTALK_SUB_MSG("dingtalk-msg","钉钉通知");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        TemplateType(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
      * 代码表[平台内置处理组件类型]
      */
     @Getter
@@ -440,6 +463,29 @@ public class StaticDict {
         private String emptyText="";
 
         CodeList65(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
+     * 代码表[第三方平台]
+     */
+    @Getter
+    public enum PayOpenAccessType {
+        ALIYUN("aliyun","阿里云"),
+        WECHAT("wechat","微信开放平台"),
+        QQ("qq","QQ互联"),
+        DINGTALK("dingtalk","钉钉开放平台");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        PayOpenAccessType(String value , String text) {
             this.value=value;
             this.text = text;
         }
@@ -1011,6 +1057,32 @@ public class StaticDict {
 
 
     /**
+     * 代码表[支付状态]
+     */
+    @Getter
+    public enum TradeStatus {
+        SUCCESS("SUCCESS","支付成功"),
+        REFUND("REFUND","转入退款"),
+        NOTPAY("NOTPAY","未支付"),
+        CLOSED("CLOSED","已关闭"),
+        REVOKED("REVOKED","已撤销"),
+        USERPAYING("USERPAYING","支付中"),
+        PAYERROR("PAYERROR","支付失败");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        TradeStatus(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
      * 代码表[功能类型]
      */
     @Getter
@@ -1464,6 +1536,30 @@ public class StaticDict {
 
 
 
+    /**
+     * 代码表[消息类型]
+     */
+    @Getter
+    public enum MsgType {
+        ITEM_1(1,"系统消息"),
+        ITEM_2(2,"电子邮件"),
+        ITEM_4(4,"手机短信"),
+        ITEM_32(32,"微信"),
+        ITEM_64(64,"钉钉");
+
+        private int value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        MsgType(int value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
 
     /**
      * 代码表[实体数据操作]
@@ -1601,6 +1697,27 @@ public class StaticDict {
         private String emptyText="";
 
         CodeList88(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
+     * 代码表[支付类型]
+     */
+    @Getter
+    public enum TradeType {
+        ALIPAY_SUB_PAGEPAY("alipay-pagepay","阿里网页支付"),
+        WECHAT_SUB_PRECREATE("wechat-precreate","微信扫码支付");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        TradeType(String value , String text) {
             this.value=value;
             this.text = text;
         }
@@ -2258,6 +2375,29 @@ public class StaticDict {
 
 
     /**
+     * 代码表[第三方平台]
+     */
+    @Getter
+    public enum NotifyOpenAccessType {
+        ALIYUN("aliyun","阿里云"),
+        WECHAT("wechat","微信开放平台"),
+        QQ("qq","QQ互联"),
+        DINGTALK("dingtalk","钉钉开放平台");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        NotifyOpenAccessType(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
      * 代码表[性能分析指标]
      */
     @Getter
@@ -2545,7 +2685,7 @@ public class StaticDict {
      * 代码表[第三方平台]
      */
     @Getter
-    public enum OpenAccessType {
+    public enum UaaOpenAccessType {
         ALIYUN("aliyun","阿里云"),
         WECHAT("wechat","微信开放平台"),
         QQ("qq","QQ互联"),
@@ -2557,7 +2697,7 @@ public class StaticDict {
         private String textSeparator="";
         private String emptyText="";
 
-        OpenAccessType(String value , String text) {
+        UaaOpenAccessType(String value , String text) {
             this.value=value;
             this.text = text;
         }

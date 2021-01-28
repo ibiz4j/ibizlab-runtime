@@ -110,8 +110,9 @@ public class SysPostResource {
 
     @ApiOperation(value = "获取岗位草稿", tags = {"岗位" },  notes = "获取岗位草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysposts/getdraft")
-    public ResponseEntity<SysPostDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(syspostMapping.toDto(syspostService.getDraft(new SysPost())));
+    public ResponseEntity<SysPostDTO> getDraft(SysPostDTO dto) {
+        SysPost domain = syspostMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(syspostMapping.toDto(syspostService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查岗位", tags = {"岗位" },  notes = "检查岗位")
@@ -120,14 +121,12 @@ public class SysPostResource {
         return  ResponseEntity.status(HttpStatus.OK).body(syspostService.checkKey(syspostMapping.toDomain(syspostdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysPost-Save-all')")
     @ApiOperation(value = "保存岗位", tags = {"岗位" },  notes = "保存岗位")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysposts/save")
     public ResponseEntity<Boolean> save(@RequestBody SysPostDTO syspostdto) {
         return ResponseEntity.status(HttpStatus.OK).body(syspostService.save(syspostMapping.toDomain(syspostdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysPost-Save-all')")
     @ApiOperation(value = "批量保存岗位", tags = {"岗位" },  notes = "批量保存岗位")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysposts/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysPostDTO> syspostdtos) {
@@ -135,7 +134,6 @@ public class SysPostResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysPost-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"岗位" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysposts/fetchdefault")
 	public ResponseEntity<List<SysPostDTO>> fetchDefault(SysPostSearchContext context) {
@@ -148,7 +146,6 @@ public class SysPostResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysPost-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"岗位" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysposts/searchdefault")
 	public ResponseEntity<Page<SysPostDTO>> searchDefault(@RequestBody SysPostSearchContext context) {
@@ -156,6 +153,7 @@ public class SysPostResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(syspostMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

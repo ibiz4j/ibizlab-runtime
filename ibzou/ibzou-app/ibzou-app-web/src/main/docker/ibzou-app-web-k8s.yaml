@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ibzou-app-web
+  labels:
+    app: ibzou-app-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibzou-app-web
+  template:
+    metadata:
+      labels:
+        app: ibzou-app-web
+    spec:
+      imagePullSecrets:
+      - name: aly-shanghai
+      containers:
+      - name: ibzou-app-web
+        image: registry.cn-shanghai.aliyuncs.com/ibizsys/ibzou-app-web:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /app/file
+      volumes:      
+      - name: data
+        persistentVolumeClaim:
+          claimName: demo-date-pvc-nfs
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ibzou-app-web
+  labels:
+    app: ibzou-app-web
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 8080
+    protocol: TCP
+  selector:
+    app: ibzou-app-web
+

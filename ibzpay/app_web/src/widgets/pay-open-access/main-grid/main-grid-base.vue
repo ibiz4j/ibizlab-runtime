@@ -10,6 +10,7 @@
         :cell-class-name="getCellClassName"
         max-height="items.length > 0 ? 'calc(100%-50px)' : '100%'"
         @row-click="rowClick($event)"  
+        @cell-click="cellClick" 
         @select-all="selectAll($event)"  
         @select="select"  
         @row-class-name="onRowClassName($event)"  
@@ -120,7 +121,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import PayOpenAccessService from '@/service/pay-open-access/pay-open-access-service';
+import PayOpenAccessEntityService from '@/service/pay-open-access/pay-open-access-service';
 import MainService from './main-grid-service';
 import PayOpenAccessUIService from '@/uiservice/pay-open-access/pay-open-access-ui-service';
 import CodeListService from "@/codelist/codelist-service";
@@ -210,7 +211,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {PayOpenAccessService}
      * @memberof MainBase
      */
-    public appEntityService: PayOpenAccessService = new PayOpenAccessService({ $store: this.$store });
+    public appEntityService: PayOpenAccessEntityService = new PayOpenAccessEntityService({ $store: this.$store });
     
 
 
@@ -988,7 +989,8 @@ export default class MainBase extends Vue implements ControlInterface {
                     this.selections = [];
                     resolve(response);
                 }).catch((response: any) => {
-                    if (response && response.status === 401) {
+                    if (response && response.status != 200) {
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.message});
                         return;
                     }
                     if (!response || !response.status || !response.data) {
@@ -1660,6 +1662,17 @@ export default class MainBase extends Vue implements ControlInterface {
         this.$emit('selectionchange', this.selections);
     }
 
+    /**
+     * 单元格单击隐藏提示框
+     *
+     * @memberof MainBase
+     */
+    public cellClick() {
+        let el: any = document.getElementsByClassName('el-tooltip__popper')[0];
+        if (el) {
+            el.style.display = 'none';
+        }
+    }
     
     /**
      * 行单击选中
@@ -1794,6 +1807,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
 	public uiAction(row: any, tag: any, $event: any) {
         // this.rowClick(row, true);
+        this.cellClick();
         $event.stopPropagation();
     }
 

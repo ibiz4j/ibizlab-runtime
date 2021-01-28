@@ -290,9 +290,6 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
 
 
 
-
-
-
     public ISysRolePermissionService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

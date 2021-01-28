@@ -49,7 +49,7 @@ public interface WFProcessInstanceFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfprocessinstances/getdraft")
-    WFProcessInstance getDraft();
+    WFProcessInstance getDraft(WFProcessInstance entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfprocessinstances/checkkey")

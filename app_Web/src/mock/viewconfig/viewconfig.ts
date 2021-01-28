@@ -7,13 +7,29 @@ import Mock from 'mockjs'
 mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status,{
-                "sysdepartmentpickupgridview": {
+                "msgopenaccesspickupgridview": {
+            "title": "接入开放平台选择表格视图",
+            "caption": "接入开放平台",
+            "viewtype": "DEPICKUPGRIDVIEW",
+            "viewmodule": "notify",
+            "viewname": "MsgOpenAccessPickupGridView",
+            "viewtag": "05c6db43c9d5946f3f6da2d2b122fcdb"
+        },
+        "sysdepartmentpickupgridview": {
             "title": "部门选择表格视图",
             "caption": "部门",
             "viewtype": "DEPICKUPGRIDVIEW",
             "viewmodule": "ou",
             "viewname": "SysDepartmentPickupGridView",
             "viewtag": "06dc389605323456129e342bbdfbbd16"
+        },
+        "paytradeeditview": {
+            "title": "支付交易编辑视图",
+            "caption": "支付交易",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "pay",
+            "viewname": "PayTradeEditView",
+            "viewtag": "089cc88e549cef536c3380ccb1ce465f"
         },
         "syspostpickupview": {
             "title": "岗位数据选择视图",
@@ -46,6 +62,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "workflow",
             "viewname": "WFMemberGridView",
             "viewtag": "135872676ba63d430b2f20bd20364286"
+        },
+        "msgopenaccessgridview": {
+            "title": "接入开放平台表格视图",
+            "caption": "接入开放平台",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "notify",
+            "viewname": "MsgOpenAccessGridView",
+            "viewtag": "13944c37e6cb87c6aca28dec7b31892e"
         },
         "sysrolegridview": {
             "title": "用户角色",
@@ -95,6 +119,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SysAppGridView",
             "viewtag": "1ef170b14b7a70f4609a9f13692d1414"
         },
+        "paytradegridview": {
+            "title": "支付交易表格视图",
+            "caption": "支付交易",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "pay",
+            "viewname": "PayTradeGridView",
+            "viewtag": "1f1889a2c3e7f49d9221021499a0f78a"
+        },
         "sysusermpickupview": {
             "title": "用户表数据多项选择视图",
             "caption": "系统用户",
@@ -142,6 +174,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "uaa",
             "viewname": "SysOpenAccessGridView",
             "viewtag": "29ebd67c0eba9fb1464bcd1397112f6f"
+        },
+        "msgtemplategridview": {
+            "title": "消息模板表格视图",
+            "caption": "消息模板",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "notify",
+            "viewname": "MsgTemplateGridView",
+            "viewtag": "2ac24526f9a5f79abb2b9d474e57be0a"
+        },
+        "msgtemplateeditview": {
+            "title": "消息模板编辑视图",
+            "caption": "消息模板",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "notify",
+            "viewname": "MsgTemplateEditView",
+            "viewtag": "30868cf27f47d5ec65261c8b6d5c18a1"
         },
         "sysuserpickupview": {
             "title": "用户表数据选择视图",
@@ -223,6 +271,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "JobsInfoEditView",
             "viewtag": "49b6b437f10c4e73e47d87d5d0f76cfd"
         },
+        "msguseraccounteditview": {
+            "title": "绑定消息账号编辑视图",
+            "caption": "绑定消息账号",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "notify",
+            "viewname": "MsgUserAccountEditView",
+            "viewtag": "4c01113024cb96ba2f6deaa33773f0aa"
+        },
         "sysdeptmembergridview": {
             "title": "部门成员表格视图",
             "caption": "部门成员",
@@ -270,6 +326,22 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "ou",
             "viewname": "SysTeamEditView",
             "viewtag": "5f46660051966f3e0b4c377decd638b1"
+        },
+        "msgopenaccesspickupview": {
+            "title": "接入开放平台数据选择视图",
+            "caption": "接入开放平台",
+            "viewtype": "DEPICKUPVIEW",
+            "viewmodule": "notify",
+            "viewname": "MsgOpenAccessPickupView",
+            "viewtag": "5fd5a34016a13395007d949d732cb30d"
+        },
+        "payopenaccessgridview": {
+            "title": "支付平台表格视图",
+            "caption": "支付平台",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "pay",
+            "viewname": "PayOpenAccessGridView",
+            "viewtag": "60fe0b9b8535b02baf1a02d5f56c5a9c"
         },
         "wfuserpickupview": {
             "title": "用户数据选择视图",
@@ -334,6 +406,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "uaa",
             "viewname": "SysUserPickupGridView",
             "viewtag": "6869875c7409bd1dddd3d0fc62c502db"
+        },
+        "msgopenaccesseditview": {
+            "title": "接入开放平台编辑视图",
+            "caption": "接入开放平台",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "notify",
+            "viewname": "MsgOpenAccessEditView",
+            "viewtag": "6a6e3d13c769ee31fe6ec9cc5508324f"
         },
         "sysroleeditview": {
             "title": "用户角色",
@@ -439,6 +519,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SysRolePermissionCustomView",
             "viewtag": "983f3ae1533a5cd62619dedb79bb4b28"
         },
+        "msguseraccountgridview": {
+            "title": "绑定消息账号表格视图",
+            "caption": "绑定消息账号",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "notify",
+            "viewname": "MsgUserAccountGridView",
+            "viewtag": "a186d7dee3d83d5f95c27142bece5df6"
+        },
         "sysrolempickupview": {
             "title": "角色数据多项选择视图",
             "caption": "系统角色",
@@ -510,6 +598,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "ou",
             "viewname": "SysEmployeeEditView",
             "viewtag": "b1abd7783d9e3b9393630428ebde3a86"
+        },
+        "payopenaccesspickupgridview": {
+            "title": "支付平台选择表格视图",
+            "caption": "支付平台",
+            "viewtype": "DEPICKUPGRIDVIEW",
+            "viewmodule": "pay",
+            "viewname": "PayOpenAccessPickupGridView",
+            "viewtag": "b1fe00a9dfb2160b1589b4e1e2b1d2fc"
         },
         "wfgroupeditview": {
             "title": "流程角色",
@@ -615,6 +711,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SysUserRoleEditView",
             "viewtag": "edde313015e1db7c366028307d88d20c"
         },
+        "payopenaccesspickupview": {
+            "title": "支付平台数据选择视图",
+            "caption": "支付平台",
+            "viewtype": "DEPICKUPVIEW",
+            "viewmodule": "pay",
+            "viewname": "PayOpenAccessPickupView",
+            "viewtag": "f3bb55ce97b7b94c99782d0cea879eaa"
+        },
         "wfgroupgridview": {
             "title": "流程角色",
             "caption": "流程角色",
@@ -622,6 +726,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "workflow",
             "viewname": "WFGroupGridView",
             "viewtag": "f498dfb24e88df7c70a5c09ecb587647"
+        },
+        "payopenaccesseditview": {
+            "title": "支付平台编辑视图",
+            "caption": "支付平台",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "pay",
+            "viewname": "PayOpenAccessEditView",
+            "viewtag": "f5f50734bb86ba01097a7cb19b63d36c"
         },
         "sysuserauthgridview": {
             "title": "账号表格视图",

@@ -25,7 +25,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysRoleService from '@/service/sys-role/sys-role-service';
+import SysRoleEntityService from '@/service/sys-role/sys-role-service';
 import PickupView_norepeatpickupviewpanelService from './pickup-view-norepeatpickupviewpanel-pickupviewpanel-service';
 import SysRoleUIService from '@/uiservice/sys-role/sys-role-ui-service';
 import PickupView_norepeatpickupviewpanelModel from './pickup-view-norepeatpickupviewpanel-pickupviewpanel-model';
@@ -105,7 +105,7 @@ export default class PickupView_norepeatpickupviewpanelBase extends Vue implemen
      * @type {SysRoleService}
      * @memberof PickupView_norepeatpickupviewpanelBase
      */
-    public appEntityService: SysRoleService = new SysRoleService({ $store: this.$store });
+    public appEntityService: SysRoleEntityService = new SysRoleEntityService({ $store: this.$store });
     
 
 

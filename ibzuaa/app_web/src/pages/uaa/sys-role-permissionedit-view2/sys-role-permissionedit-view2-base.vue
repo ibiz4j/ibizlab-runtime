@@ -1086,7 +1086,7 @@ export default class SYS_ROLE_PERMISSIONEditView2Base extends Vue {
                 Object.assign(data, { sysrolepermission: args[0].sysrolepermission });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

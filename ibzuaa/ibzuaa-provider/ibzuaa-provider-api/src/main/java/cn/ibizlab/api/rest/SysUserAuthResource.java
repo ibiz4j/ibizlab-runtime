@@ -110,8 +110,9 @@ public class SysUserAuthResource {
 
     @ApiOperation(value = "获取账号绑定草稿", tags = {"账号绑定" },  notes = "获取账号绑定草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/getdraft")
-    public ResponseEntity<SysUserAuthDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserauthMapping.toDto(sysuserauthService.getDraft(new SysUserAuth())));
+    public ResponseEntity<SysUserAuthDTO> getDraft(SysUserAuthDTO dto) {
+        SysUserAuth domain = sysuserauthMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserauthMapping.toDto(sysuserauthService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查账号绑定", tags = {"账号绑定" },  notes = "检查账号绑定")
@@ -120,14 +121,12 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.checkKey(sysuserauthMapping.toDomain(sysuserauthdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserAuth-Save-all')")
     @ApiOperation(value = "保存账号绑定", tags = {"账号绑定" },  notes = "保存账号绑定")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/save")
     public ResponseEntity<Boolean> save(@RequestBody SysUserAuthDTO sysuserauthdto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.save(sysuserauthMapping.toDomain(sysuserauthdto)));
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserAuth-Save-all')")
     @ApiOperation(value = "批量保存账号绑定", tags = {"账号绑定" },  notes = "批量保存账号绑定")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysUserAuthDTO> sysuserauthdtos) {
@@ -135,7 +134,6 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserAuth-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"账号绑定" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysuserauths/fetchdefault")
 	public ResponseEntity<List<SysUserAuthDTO>> fetchDefault(SysUserAuthSearchContext context) {
@@ -148,7 +146,6 @@ public class SysUserAuthResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUserAuth-searchDefault-all')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"账号绑定" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysuserauths/searchdefault")
 	public ResponseEntity<Page<SysUserAuthDTO>> searchDefault(@RequestBody SysUserAuthSearchContext context) {
@@ -156,6 +153,7 @@ public class SysUserAuthResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserauthMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

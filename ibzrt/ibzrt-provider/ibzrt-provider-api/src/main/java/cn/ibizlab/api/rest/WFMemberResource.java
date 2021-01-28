@@ -110,8 +110,9 @@ public class WFMemberResource {
 
     @ApiOperation(value = "获取成员草稿", tags = {"成员" },  notes = "获取成员草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfmembers/getdraft")
-    public ResponseEntity<WFMemberDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(new WFMember())));
+    public ResponseEntity<WFMemberDTO> getDraft(WFMemberDTO dto) {
+        WFMember domain = wfmemberMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查成员", tags = {"成员" },  notes = "检查成员")
@@ -156,6 +157,7 @@ public class WFMemberResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfmemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
     @PreAuthorize("hasPermission(this.wfmemberMapping.toDomain(#wfmemberdto),'ibzrt-WFMember-Create')")
@@ -231,8 +233,8 @@ public class WFMemberResource {
 
     @ApiOperation(value = "根据角色/用户组获取成员草稿", tags = {"成员" },  notes = "根据角色/用户组获取成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}/wfmembers/getdraft")
-    public ResponseEntity<WFMemberDTO> getDraftByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id) {
-        WFMember domain = new WFMember();
+    public ResponseEntity<WFMemberDTO> getDraftByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, WFMemberDTO dto) {
+        WFMember domain = wfmemberMapping.toDomain(dto);
         domain.setGroupid(wfgroup_id);
         return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
     }
@@ -360,8 +362,8 @@ public class WFMemberResource {
 
     @ApiOperation(value = "根据用户获取成员草稿", tags = {"成员" },  notes = "根据用户获取成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/wfusers/{wfuser_id}/wfmembers/getdraft")
-    public ResponseEntity<WFMemberDTO> getDraftByWFUser(@PathVariable("wfuser_id") String wfuser_id) {
-        WFMember domain = new WFMember();
+    public ResponseEntity<WFMemberDTO> getDraftByWFUser(@PathVariable("wfuser_id") String wfuser_id, WFMemberDTO dto) {
+        WFMember domain = wfmemberMapping.toDomain(dto);
         domain.setUserid(wfuser_id);
         return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
     }

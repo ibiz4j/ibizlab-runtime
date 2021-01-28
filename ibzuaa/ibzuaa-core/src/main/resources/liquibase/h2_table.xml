@@ -106,7 +106,7 @@
 
 
     <!--输出实体[SYS_ROLE]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_role-49-5">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_role-50-5">
         <createTable tableName="IBZROLE">
                 <column name="SYS_ROLEID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_ROLE_SYS_ROLEID"/>
@@ -150,7 +150,7 @@
 
 
     <!--输出实体[SYS_USER_AUTH]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_user_auth-22-7">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_user_auth-24-7">
         <createTable tableName="IBZUSERAUTH">
                 <column name="AUTHID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_USER_AUTH_AUTHID"/>
@@ -168,7 +168,7 @@
 
 
     <!--输出实体[SYS_USER_ROLE]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_user_role-13-8">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_user_role-15-8">
         <createTable tableName="IBZUSER_ROLE">
                 <column name="SYS_USER_ROLEID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_USER_ROLE_SYS_USER_ROLE"/>
@@ -189,13 +189,13 @@
         <!--输出实体[SYS_PSSYSTEM]外键关系 -->
         <!--输出实体[SYS_PERMISSION]外键关系 -->
         <!--输出实体[SYS_ROLE]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_role-49-9">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_role-50-9">
        <addForeignKeyConstraint baseColumnNames="PROLEID" baseTableName="IBZROLE" constraintName="DER1N_SYS_ROLE_SYS_ROLE_PROLEI" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SYS_ROLEID" referencedTableName="IBZROLE" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_ROLE_PERMISSION]外键关系 -->
         <!--输出实体[SYS_USER_AUTH]外键关系 -->
         <!--输出实体[SYS_USER_ROLE]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_user_role-13-10">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_user_role-15-10">
        <addForeignKeyConstraint baseColumnNames="SYS_ROLEID" baseTableName="IBZUSER_ROLE" constraintName="DER1N_SYS_USER_ROLE_SYS_ROLE_S" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="SYS_ROLEID" referencedTableName="IBZROLE" validate="true"/>
     </changeSet>
 

@@ -58,7 +58,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysOrganizationService from '@/service/sys-organization/sys-organization-service';
+import SysOrganizationEntityService from '@/service/sys-organization/sys-organization-service';
 import DefaultService from './default-searchform-service';
 import SysOrganizationUIService from '@/uiservice/sys-organization/sys-organization-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -147,7 +147,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {SysOrganizationService}
      * @memberof DefaultBase
      */
-    public appEntityService: SysOrganizationService = new SysOrganizationService({ $store: this.$store });
+    public appEntityService: SysOrganizationEntityService = new SysOrganizationEntityService({ $store: this.$store });
     
 
 

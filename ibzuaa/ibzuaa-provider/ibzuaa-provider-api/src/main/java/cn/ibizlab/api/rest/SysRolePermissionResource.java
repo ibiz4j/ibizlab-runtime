@@ -111,8 +111,9 @@ public class SysRolePermissionResource {
 
     @ApiOperation(value = "获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "获取角色权限关系草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/getdraft")
-    public ResponseEntity<SysRolePermissionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(new SysRolePermission())));
+    public ResponseEntity<SysRolePermissionDTO> getDraft(SysRolePermissionDTO dto) {
+        SysRolePermission domain = sysrolepermissionMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查角色权限关系", tags = {"角色权限关系" },  notes = "检查角色权限关系")
@@ -157,6 +158,7 @@ public class SysRolePermissionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysrolepermissionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Create-all')")
@@ -233,8 +235,8 @@ public class SysRolePermissionResource {
 
     @ApiOperation(value = "根据权限/资源获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "根据权限/资源获取角色权限关系草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{syspermission_id}/sysrolepermissions/getdraft")
-    public ResponseEntity<SysRolePermissionDTO> getDraftBySysPermission(@PathVariable("syspermission_id") String syspermission_id) {
-        SysRolePermission domain = new SysRolePermission();
+    public ResponseEntity<SysRolePermissionDTO> getDraftBySysPermission(@PathVariable("syspermission_id") String syspermission_id, SysRolePermissionDTO dto) {
+        SysRolePermission domain = sysrolepermissionMapping.toDomain(dto);
         domain.setPermissionid(syspermission_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(domain)));
     }
@@ -363,8 +365,8 @@ public class SysRolePermissionResource {
 
     @ApiOperation(value = "根据系统角色获取角色权限关系草稿", tags = {"角色权限关系" },  notes = "根据系统角色获取角色权限关系草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysrolepermissions/getdraft")
-    public ResponseEntity<SysRolePermissionDTO> getDraftBySysRole(@PathVariable("sysrole_id") String sysrole_id) {
-        SysRolePermission domain = new SysRolePermission();
+    public ResponseEntity<SysRolePermissionDTO> getDraftBySysRole(@PathVariable("sysrole_id") String sysrole_id, SysRolePermissionDTO dto) {
+        SysRolePermission domain = sysrolepermissionMapping.toDomain(dto);
         domain.setRoleid(sysrole_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(sysrolepermissionService.getDraft(domain)));
     }

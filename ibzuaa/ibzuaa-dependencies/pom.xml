@@ -86,7 +86,6 @@
         <oracle.version>19.8.0.0</oracle.version>
         <postgresql.version>42.2.6</postgresql.version>
         <rocketmq.version>4.7.0</rocketmq.version>
-
     </properties>
 
     <dependencyManagement>

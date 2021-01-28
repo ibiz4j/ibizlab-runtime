@@ -111,8 +111,9 @@ public class SysDepartmentResource {
 
     @ApiOperation(value = "获取部门草稿", tags = {"部门" },  notes = "获取部门草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/getdraft")
-    public ResponseEntity<SysDepartmentDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysdepartmentMapping.toDto(sysdepartmentService.getDraft(new SysDepartment())));
+    public ResponseEntity<SysDepartmentDTO> getDraft(SysDepartmentDTO dto) {
+        SysDepartment domain = sysdepartmentMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdepartmentMapping.toDto(sysdepartmentService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查部门", tags = {"部门" },  notes = "检查部门")
@@ -157,6 +158,7 @@ public class SysDepartmentResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysdepartmentMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
     @PreAuthorize("hasPermission(this.sysdepartmentMapping.toDomain(#sysdepartmentdto),'ibzrt-SysDepartment-Create')")
@@ -233,8 +235,8 @@ public class SysDepartmentResource {
 
     @ApiOperation(value = "根据单位机构获取部门草稿", tags = {"部门" },  notes = "根据单位机构获取部门草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/getdraft")
-    public ResponseEntity<SysDepartmentDTO> getDraftBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id) {
-        SysDepartment domain = new SysDepartment();
+    public ResponseEntity<SysDepartmentDTO> getDraftBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, SysDepartmentDTO dto) {
+        SysDepartment domain = sysdepartmentMapping.toDomain(dto);
         domain.setOrgid(sysorganization_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysdepartmentMapping.toDto(sysdepartmentService.getDraft(domain)));
     }

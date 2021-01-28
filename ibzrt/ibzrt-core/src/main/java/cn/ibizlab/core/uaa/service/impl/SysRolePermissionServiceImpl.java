@@ -97,7 +97,7 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
 
     @Override
     public SysRolePermission getDraft(SysRolePermission et) {
-        et=sysRolePermissionFeignClient.getDraft();
+        et=sysRolePermissionFeignClient.getDraft(et);
         return et;
     }
 
@@ -175,9 +175,6 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
         Page<SysRolePermission> sysRolePermissions=sysRolePermissionFeignClient.searchDefault(context);
         return sysRolePermissions;
     }
-
-
-
 
 }
 

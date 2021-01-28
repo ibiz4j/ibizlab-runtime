@@ -49,7 +49,7 @@ public interface DictCatalogFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/getdraft")
-    DictCatalog getDraft();
+    DictCatalog getDraft(DictCatalog entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")

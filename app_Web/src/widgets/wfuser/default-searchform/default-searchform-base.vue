@@ -38,7 +38,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import WFUserService from '@/service/wfuser/wfuser-service';
+import WFUserEntityService from '@/service/wfuser/wfuser-service';
 import DefaultService from './default-searchform-service';
 import WFUserUIService from '@/uiservice/wfuser/wfuser-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -127,7 +127,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {WFUserService}
      * @memberof DefaultBase
      */
-    public appEntityService: WFUserService = new WFUserService({ $store: this.$store });
+    public appEntityService: WFUserEntityService = new WFUserEntityService({ $store: this.$store });
     
 
 

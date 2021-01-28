@@ -97,7 +97,7 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
 
     @Override
     public WFProcessDefinition getDraft(WFProcessDefinition et) {
-        et=wFProcessDefinitionFeignClient.getDraft();
+        et=wFProcessDefinitionFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
         Page<WFProcessDefinition> wFProcessDefinitions=wFProcessDefinitionFeignClient.searchDefault(context);
         return wFProcessDefinitions;
     }
-
-
-
 
 }
 

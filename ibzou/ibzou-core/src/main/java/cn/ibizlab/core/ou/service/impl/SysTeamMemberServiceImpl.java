@@ -301,9 +301,6 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
 
 
 
-
-
-
     public ISysTeamMemberService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

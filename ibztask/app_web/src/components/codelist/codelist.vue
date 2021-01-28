@@ -349,7 +349,7 @@ export default class CodeList extends Vue {
         max-height: 32px;
         padding: 0px 3px;
         > img{
-            max-height: 32px;
+            max-height: 24px;
             width: auto;
             margin-right: 6px;
             border-radius: 50%;

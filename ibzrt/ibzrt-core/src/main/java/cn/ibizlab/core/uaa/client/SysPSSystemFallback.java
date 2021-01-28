@@ -50,7 +50,7 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient {
     }
 
 
-    public SysPSSystem getDraft(){
+    public SysPSSystem getDraft(SysPSSystem entity){
         return null;
     }
 

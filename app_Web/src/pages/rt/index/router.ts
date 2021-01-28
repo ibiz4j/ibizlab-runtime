@@ -36,6 +36,20 @@ const router = new Router({
             component: () => import('@pages/rt/index/index.vue'),
             children: [
                 {
+                    path: 'paytrades/:paytrade?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.paytrade.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'paytrades', parameterName: 'paytrade' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/pay/pay-trade-edit-view/pay-trade-edit-view.vue'),
+                },
+                {
                     path: 'wfgroups/:wfgroup?/pickupview/:pickupview?',
                     meta: {
                         caption: 'entities.wfgroup.views.pickupview.caption',
@@ -62,6 +76,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/uaa/sys-role-mpickup-view/sys-role-mpickup-view.vue'),
+                },
+                {
+                    path: 'msguseraccounts/:msguseraccount?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.msguseraccount.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'msguseraccounts', parameterName: 'msguseraccount' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/notify/msg-user-account-edit-view/msg-user-account-edit-view.vue'),
                 },
                 {
                     path: 'wfusers/:wfuser?/mpickupview/:mpickupview?',
@@ -104,6 +132,34 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/ou/sys-post-grid-view/sys-post-grid-view.vue'),
+                },
+                {
+                    path: 'msgopenaccesses/:msgopenaccess?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.msgopenaccess.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/notify/msg-open-access-edit-view/msg-open-access-edit-view.vue'),
+                },
+                {
+                    path: 'msgtemplates/:msgtemplate?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.msgtemplate.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'msgtemplates', parameterName: 'msgtemplate' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/notify/msg-template-edit-view/msg-template-edit-view.vue'),
                 },
                 {
                     path: 'sysorganizations/:sysorganization?/treeexpview/:treeexpview?',
@@ -205,6 +261,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/ou/sys-department-pickup-view/sys-department-pickup-view.vue'),
+                },
+                {
+                    path: 'paytrades/:paytrade?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.paytrade.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'paytrades', parameterName: 'paytrade' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/pay/pay-trade-grid-view/pay-trade-grid-view.vue'),
                 },
                 {
                     path: 'wfusers/:wfuser?/wfmembers/:wfmember?/editview/:editview?',
@@ -503,6 +573,20 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-department-tree-exp-view/sys-department-tree-exp-view.vue'),
                 },
                 {
+                    path: 'msgtemplates/:msgtemplate?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.msgtemplate.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'msgtemplates', parameterName: 'msgtemplate' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/notify/msg-template-grid-view/msg-template-grid-view.vue'),
+                },
+                {
                     path: 'sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.sysdepartment.views.gridview.caption',
@@ -758,6 +842,20 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-employee-pickup-grid-view/sys-employee-pickup-grid-view.vue'),
                 },
                 {
+                    path: 'payopenaccesses/:payopenaccess?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.payopenaccess.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/pay/pay-open-access-grid-view/pay-open-access-grid-view.vue'),
+                },
+                {
                     path: 'sysroles/:sysrole?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.sysrole.views.gridview.caption',
@@ -962,6 +1060,20 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-employee-grid-view/sys-employee-grid-view.vue'),
                 },
                 {
+                    path: 'msgopenaccesses/:msgopenaccess?/pickupview/:pickupview?',
+                    meta: {
+                        caption: 'entities.msgopenaccess.views.pickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/notify/msg-open-access-pickup-view/msg-open-access-pickup-view.vue'),
+                },
+                {
                     path: 'sysauthlogs/:sysauthlog?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.sysauthlog.views.gridview.caption',
@@ -1134,20 +1246,6 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-employee-pickup-view/sys-employee-pickup-view.vue'),
                 },
                 {
-                    path: 'sysorganizations/:sysorganization?/pickupgridview/:pickupgridview?',
-                    meta: {
-                        caption: 'entities.sysorganization.views.pickupgridview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
-                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/ou/sys-organization-pickup-grid-view/sys-organization-pickup-grid-view.vue'),
-                },
-                {
                     path: 'sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/sysemployees/:sysemployee?/systeammembers/:systeammember?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.systeammember.views.gridview.caption',
@@ -1241,6 +1339,20 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-team-member-grid-view/sys-team-member-grid-view.vue'),
                 },
                 {
+                    path: 'sysorganizations/:sysorganization?/pickupgridview/:pickupgridview?',
+                    meta: {
+                        caption: 'entities.sysorganization.views.pickupgridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysorganizations', parameterName: 'sysorganization' },
+                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/ou/sys-organization-pickup-grid-view/sys-organization-pickup-grid-view.vue'),
+                },
+                {
                     path: 'sysapps/:sysapp?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.sysapp.views.gridview.caption',
@@ -1281,6 +1393,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/task/jobs-info-edit-view/jobs-info-edit-view.vue'),
+                },
+                {
+                    path: 'msguseraccounts/:msguseraccount?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.msguseraccount.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'msguseraccounts', parameterName: 'msguseraccount' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/notify/msg-user-account-grid-view/msg-user-account-grid-view.vue'),
                 },
                 {
                     path: 'sysuserauths/:sysuserauth?/editview/:editview?',
@@ -1324,6 +1450,48 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/dict/dict-option-edit-view/dict-option-edit-view.vue'),
+                },
+                {
+                    path: 'payopenaccesses/:payopenaccess?/pickupgridview/:pickupgridview?',
+                    meta: {
+                        caption: 'entities.payopenaccess.views.pickupgridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
+                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/pay/pay-open-access-pickup-grid-view/pay-open-access-pickup-grid-view.vue'),
+                },
+                {
+                    path: 'msgopenaccesses/:msgopenaccess?/pickupgridview/:pickupgridview?',
+                    meta: {
+                        caption: 'entities.msgopenaccess.views.pickupgridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/notify/msg-open-access-pickup-grid-view/msg-open-access-pickup-grid-view.vue'),
+                },
+                {
+                    path: 'msgopenaccesses/:msgopenaccess?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.msgopenaccess.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/notify/msg-open-access-grid-view/msg-open-access-grid-view.vue'),
                 },
                 {
                     path: 'jobsregistries/:jobsregistry?/gridview/:gridview?',
@@ -1645,6 +1813,20 @@ const router = new Router({
                     component: () => import('@pages/dict/dict-option-grid-edit-view/dict-option-grid-edit-view.vue'),
                 },
                 {
+                    path: 'payopenaccesses/:payopenaccess?/pickupview/:pickupview?',
+                    meta: {
+                        caption: 'entities.payopenaccess.views.pickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/pay/pay-open-access-pickup-view/pay-open-access-pickup-view.vue'),
+                },
+                {
                     path: 'dictcatalogs/:dictcatalog?/pickupgridview/:pickupgridview?',
                     meta: {
                         caption: 'entities.dictcatalog.views.pickupgridview.caption',
@@ -1766,6 +1948,20 @@ const router = new Router({
                     component: () => import('@pages/ou/sys-organization-edit-view/sys-organization-edit-view.vue'),
                 },
                 {
+                    path: 'payopenaccesses/:payopenaccess?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.payopenaccess.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/pay/pay-open-access-edit-view/pay-open-access-edit-view.vue'),
+                },
+                {
                     path: 'sysroles/:sysrole?/pickupview/:pickupview?',
                     meta: {
                         caption: 'entities.sysrole.views.pickupview.caption',
@@ -1882,6 +2078,19 @@ const router = new Router({
             ],
         },
     {
+        path: '/msgopenaccesses/:msgopenaccess?/pickupgridview/:pickupgridview?',
+        meta: {
+            caption: 'entities.msgopenaccess.views.pickupgridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+                { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/notify/msg-open-access-pickup-grid-view/msg-open-access-pickup-grid-view.vue'),
+    },
+    {
         path: '/sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/pickupgridview/:pickupgridview?',
         meta: {
             caption: 'entities.sysdepartment.views.pickupgridview.caption',
@@ -1907,6 +2116,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/ou/sys-department-pickup-grid-view/sys-department-pickup-grid-view.vue'),
+    },
+    {
+        path: '/paytrades/:paytrade?/editview/:editview?',
+        meta: {
+            caption: 'entities.paytrade.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'paytrades', parameterName: 'paytrade' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/pay/pay-trade-edit-view/pay-trade-edit-view.vue'),
     },
     {
         path: '/sysposts/:syspost?/pickupview/:pickupview?',
@@ -2017,6 +2239,19 @@ const router = new Router({
         component: () => import('@pages/workflow/wfmember-grid-view/wfmember-grid-view.vue'),
     },
     {
+        path: '/msgopenaccesses/:msgopenaccess?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.msgopenaccess.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/notify/msg-open-access-grid-view/msg-open-access-grid-view.vue'),
+    },
+    {
         path: '/sysroles/:sysrole?/gridview/:gridview?',
         meta: {
             caption: 'entities.sysrole.views.gridview.caption',
@@ -2123,6 +2358,19 @@ const router = new Router({
         component: () => import('@pages/uaa/sys-app-grid-view/sys-app-grid-view.vue'),
     },
     {
+        path: '/paytrades/:paytrade?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.paytrade.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'paytrades', parameterName: 'paytrade' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/pay/pay-trade-grid-view/pay-trade-grid-view.vue'),
+    },
+    {
         path: '/sysusers/:sysuser?/mpickupview/:mpickupview?',
         meta: {
             caption: 'entities.sysuser.views.mpickupview.caption',
@@ -2213,6 +2461,32 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/uaa/sys-open-access-grid-view/sys-open-access-grid-view.vue'),
+    },
+    {
+        path: '/msgtemplates/:msgtemplate?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.msgtemplate.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'msgtemplates', parameterName: 'msgtemplate' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/notify/msg-template-grid-view/msg-template-grid-view.vue'),
+    },
+    {
+        path: '/msgtemplates/:msgtemplate?/editview/:editview?',
+        meta: {
+            caption: 'entities.msgtemplate.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'msgtemplates', parameterName: 'msgtemplate' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/notify/msg-template-edit-view/msg-template-edit-view.vue'),
     },
     {
         path: '/sysusers/:sysuser?/pickupview/:pickupview?',
@@ -2344,6 +2618,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/task/jobs-info-edit-view/jobs-info-edit-view.vue'),
+    },
+    {
+        path: '/msguseraccounts/:msguseraccount?/editview/:editview?',
+        meta: {
+            caption: 'entities.msguseraccount.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'msguseraccounts', parameterName: 'msguseraccount' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/notify/msg-user-account-edit-view/msg-user-account-edit-view.vue'),
     },
     {
         path: '/sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/sysemployees/:sysemployee?/sysdeptmembers/:sysdeptmember?/gridview/:gridview?',
@@ -2498,6 +2785,32 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/ou/sys-team-edit-view/sys-team-edit-view.vue'),
+    },
+    {
+        path: '/msgopenaccesses/:msgopenaccess?/pickupview/:pickupview?',
+        meta: {
+            caption: 'entities.msgopenaccess.views.pickupview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+                { pathName: 'pickupview', parameterName: 'pickupview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/notify/msg-open-access-pickup-view/msg-open-access-pickup-view.vue'),
+    },
+    {
+        path: '/payopenaccesses/:payopenaccess?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.payopenaccess.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/pay/pay-open-access-grid-view/pay-open-access-grid-view.vue'),
     },
     {
         path: '/wfusers/:wfuser?/pickupview/:pickupview?',
@@ -2660,6 +2973,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/uaa/sys-user-pickup-grid-view/sys-user-pickup-grid-view.vue'),
+    },
+    {
+        path: '/msgopenaccesses/:msgopenaccess?/editview/:editview?',
+        meta: {
+            caption: 'entities.msgopenaccess.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'msgopenaccesses', parameterName: 'msgopenaccess' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/notify/msg-open-access-edit-view/msg-open-access-edit-view.vue'),
     },
     {
         path: '/sysroles/:sysrole?/editview/:editview?',
@@ -2948,6 +3274,19 @@ const router = new Router({
         component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
     },
     {
+        path: '/msguseraccounts/:msguseraccount?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.msguseraccount.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'msguseraccounts', parameterName: 'msguseraccount' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/notify/msg-user-account-grid-view/msg-user-account-grid-view.vue'),
+    },
+    {
         path: '/sysroles/:sysrole?/mpickupview/:mpickupview?',
         meta: {
             caption: 'entities.sysrole.views.mpickupview.caption',
@@ -3179,6 +3518,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/ou/sys-employee-edit-view/sys-employee-edit-view.vue'),
+    },
+    {
+        path: '/payopenaccesses/:payopenaccess?/pickupgridview/:pickupgridview?',
+        meta: {
+            caption: 'entities.payopenaccess.views.pickupgridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
+                { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/pay/pay-open-access-pickup-grid-view/pay-open-access-pickup-grid-view.vue'),
     },
     {
         path: '/wfgroups/:wfgroup?/editview/:editview?',
@@ -3599,6 +3951,19 @@ const router = new Router({
         component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
     },
     {
+        path: '/payopenaccesses/:payopenaccess?/pickupview/:pickupview?',
+        meta: {
+            caption: 'entities.payopenaccess.views.pickupview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
+                { pathName: 'pickupview', parameterName: 'pickupview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/pay/pay-open-access-pickup-view/pay-open-access-pickup-view.vue'),
+    },
+    {
         path: '/wfgroups/:wfgroup?/gridview/:gridview?',
         meta: {
             caption: 'entities.wfgroup.views.gridview.caption',
@@ -3610,6 +3975,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/workflow/wfgroup-grid-view/wfgroup-grid-view.vue'),
+    },
+    {
+        path: '/payopenaccesses/:payopenaccess?/editview/:editview?',
+        meta: {
+            caption: 'entities.payopenaccess.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'payopenaccesses', parameterName: 'payopenaccess' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/pay/pay-open-access-edit-view/pay-open-access-edit-view.vue'),
     },
     {
         path: '/sysuserauths/:sysuserauth?/gridview/:gridview?',

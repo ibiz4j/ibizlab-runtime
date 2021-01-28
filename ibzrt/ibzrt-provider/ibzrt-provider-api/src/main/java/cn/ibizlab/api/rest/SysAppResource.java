@@ -110,8 +110,9 @@ public class SysAppResource {
 
     @ApiOperation(value = "获取应用草稿", tags = {"应用" },  notes = "获取应用草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysapps/getdraft")
-    public ResponseEntity<SysAppDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysappMapping.toDto(sysappService.getDraft(new SysApp())));
+    public ResponseEntity<SysAppDTO> getDraft(SysAppDTO dto) {
+        SysApp domain = sysappMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysappMapping.toDto(sysappService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查应用", tags = {"应用" },  notes = "检查应用")
@@ -156,6 +157,7 @@ public class SysAppResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysappMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

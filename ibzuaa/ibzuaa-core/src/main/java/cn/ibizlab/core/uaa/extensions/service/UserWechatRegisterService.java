@@ -1,27 +1,20 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
 import cn.ibizlab.core.uaa.domain.SysOpenAccess;
+import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
-import cn.ibizlab.util.domain.IBZUSER;
+import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.errors.InternalServerErrorException;
 import cn.ibizlab.util.helper.HttpUtils;
-import cn.ibizlab.util.service.IBZUSERService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.dingtalk.api.DefaultDingTalkClient;
-import com.dingtalk.api.request.OapiSnsGetuserinfoBycodeRequest;
-import com.dingtalk.api.response.OapiSnsGetuserinfoBycodeResponse;
-import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-import java.io.UnsupportedEncodingException;
-import java.sql.Timestamp;
 
 /**
  * 实体[IBZUSER] 微信用户注册接口实现
@@ -31,10 +24,10 @@ import java.sql.Timestamp;
 public class UserWechatRegisterService {
 
     @Autowired
-    private IBZUSERService ibzuserService;
+    private ISysUserService sysUserService;
+
     @Autowired
     private ISysUserAuthService sysUserAuthService;
-
 
     @Autowired
     private ISysOpenAccessService sysOpenAccessService;
@@ -90,12 +83,12 @@ public class UserWechatRegisterService {
                     .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, openid).or().eq(SysUserAuth::getIdentifier, unionid)
                     ),false);
 
-            IBZUSER user = null;
+            SysUser user = null;
             // 该wechat用户注册过账号，登录系统
             if (userAuth!=null) {
-                user = ibzuserService.getById(userAuth.getUserid());
+                user = sysUserService.getById(userAuth.getUserid());
                 if (user == null)
-                    user = ibzuserService.getOne(Wrappers.<IBZUSER>lambdaQuery().eq(IBZUSER::getUserid,openid).or().eq(IBZUSER::getUsername,openid),false);
+                    user = sysUserService.getOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserid,openid).or().eq(SysUser::getUsername,openid),false);
 
                 if(user!=null)
                 {

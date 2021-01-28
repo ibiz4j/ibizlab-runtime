@@ -107,7 +107,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import DictCatalogService from '@/service/dict-catalog/dict-catalog-service';
+import DictCatalogEntityService from '@/service/dict-catalog/dict-catalog-service';
 import MainService from './main-form-service';
 import DictCatalogUIService from '@/uiservice/dict-catalog/dict-catalog-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -198,7 +198,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {DictCatalogService}
      * @memberof MainBase
      */
-    public appEntityService: DictCatalogService = new DictCatalogService({ $store: this.$store });
+    public appEntityService: DictCatalogEntityService = new DictCatalogEntityService({ $store: this.$store });
     
 
 
@@ -449,7 +449,16 @@ export default class MainBase extends Vue implements ControlInterface {
      * 
      *  @memberof  MainBase
      */
-    public errorMessages: Array<any> = [];   
+    public errorMessages: Array<any> = []; 
+
+    /**
+     * 应用状态事件
+     *
+     * @public
+     * @type {(Subscription | undefined)}
+     * @memberof MainBase
+     */
+    public appStateEvent: Subscription | undefined;
 
     /**
      * 设置表单项错误提示信息
@@ -1273,6 +1282,9 @@ export default class MainBase extends Vue implements ControlInterface {
         }
         if (this.dataChangEvent) {
             this.dataChangEvent.unsubscribe();
+        }
+        if(this.appStateEvent){
+            this.appStateEvent.unsubscribe();
         }
     }
 

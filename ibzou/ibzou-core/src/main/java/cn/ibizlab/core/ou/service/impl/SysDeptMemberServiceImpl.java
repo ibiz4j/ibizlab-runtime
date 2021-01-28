@@ -312,9 +312,6 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
 
 
 
-
-
-
     public ISysDeptMemberService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

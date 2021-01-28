@@ -110,8 +110,9 @@ public class JobsLockResource {
 
     @ApiOperation(value = "获取任务锁草稿", tags = {"任务锁" },  notes = "获取任务锁草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/jobslocks/getdraft")
-    public ResponseEntity<JobsLockDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(jobslockMapping.toDto(jobslockService.getDraft(new JobsLock())));
+    public ResponseEntity<JobsLockDTO> getDraft(JobsLockDTO dto) {
+        JobsLock domain = jobslockMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(jobslockMapping.toDto(jobslockService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查任务锁", tags = {"任务锁" },  notes = "检查任务锁")
@@ -156,6 +157,7 @@ public class JobsLockResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(jobslockMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

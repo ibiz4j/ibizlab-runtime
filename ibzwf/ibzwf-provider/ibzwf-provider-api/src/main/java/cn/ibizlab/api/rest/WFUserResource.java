@@ -110,8 +110,9 @@ public class WFUserResource {
 
     @ApiOperation(value = "获取用户草稿", tags = {"用户" },  notes = "获取用户草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
-    public ResponseEntity<WFUserDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfuserMapping.toDto(wfuserService.getDraft(new WFUser())));
+    public ResponseEntity<WFUserDTO> getDraft(WFUserDTO dto) {
+        WFUser domain = wfuserMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(wfuserMapping.toDto(wfuserService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查用户", tags = {"用户" },  notes = "检查用户")
@@ -156,6 +157,7 @@ public class WFUserResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfuserMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

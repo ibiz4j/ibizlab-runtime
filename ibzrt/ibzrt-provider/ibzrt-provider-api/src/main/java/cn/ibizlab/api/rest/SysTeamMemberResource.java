@@ -110,8 +110,9 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "获取组成员草稿", tags = {"组成员" },  notes = "获取组成员草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(new SysTeamMember())));
+    public ResponseEntity<SysTeamMemberDTO> getDraft(SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查组成员", tags = {"组成员" },  notes = "检查组成员")
@@ -156,6 +157,7 @@ public class SysTeamMemberResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(systeammemberMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Create-all')")
@@ -231,8 +233,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据人员获取组成员草稿", tags = {"组成员" },  notes = "根据人员获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/{sysemployee_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -360,8 +362,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据组获取组成员草稿", tags = {"组成员" },  notes = "根据组获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/systeams/{systeam_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysTeam(@PathVariable("systeam_id") String systeam_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysTeam(@PathVariable("systeam_id") String systeam_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setTeamid(systeam_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -489,8 +491,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据部门人员获取组成员草稿", tags = {"组成员" },  notes = "根据部门人员获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -618,8 +620,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据单位机构人员获取组成员草稿", tags = {"组成员" },  notes = "根据单位机构人员获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }
@@ -747,8 +749,8 @@ public class SysTeamMemberResource {
 
     @ApiOperation(value = "根据单位机构部门人员获取组成员草稿", tags = {"组成员" },  notes = "根据单位机构部门人员获取组成员草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/getdraft")
-    public ResponseEntity<SysTeamMemberDTO> getDraftBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id) {
-        SysTeamMember domain = new SysTeamMember();
+    public ResponseEntity<SysTeamMemberDTO> getDraftBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, SysTeamMemberDTO dto) {
+        SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
     }

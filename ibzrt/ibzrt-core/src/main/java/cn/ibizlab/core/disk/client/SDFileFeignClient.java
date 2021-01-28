@@ -49,7 +49,7 @@ public interface SDFileFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sdfiles/getdraft")
-    SDFile getDraft();
+    SDFile getDraft(SDFile entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/checkkey")

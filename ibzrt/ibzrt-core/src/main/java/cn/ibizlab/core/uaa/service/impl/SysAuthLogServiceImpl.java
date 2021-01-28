@@ -97,7 +97,7 @@ public class SysAuthLogServiceImpl implements ISysAuthLogService {
 
     @Override
     public SysAuthLog getDraft(SysAuthLog et) {
-        et=sysAuthLogFeignClient.getDraft();
+        et=sysAuthLogFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class SysAuthLogServiceImpl implements ISysAuthLogService {
         Page<SysAuthLog> sysAuthLogs=sysAuthLogFeignClient.searchDefault(context);
         return sysAuthLogs;
     }
-
-
-
 
 }
 

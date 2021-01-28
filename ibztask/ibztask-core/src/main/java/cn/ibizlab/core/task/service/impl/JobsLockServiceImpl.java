@@ -221,9 +221,6 @@ public class JobsLockServiceImpl extends ServiceImpl<JobsLockMapper, JobsLock> i
 
 
 
-
-
-
     public IJobsLockService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

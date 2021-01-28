@@ -41,6 +41,7 @@ export class EntityServiceRegister {
     protected init(): void {
                 this.allEntityService.set('jobslog', () => import('@/service/jobs-log/jobs-log-service'));
         this.allEntityService.set('sysrolepermission', () => import('@/service/sys-role-permission/sys-role-permission-service'));
+        this.allEntityService.set('msguseraccount', () => import('@/service/msg-user-account/msg-user-account-service'));
         this.allEntityService.set('sysuser', () => import('@/service/sys-user/sys-user-service'));
         this.allEntityService.set('sysauthlog', () => import('@/service/sys-auth-log/sys-auth-log-service'));
         this.allEntityService.set('wfmember', () => import('@/service/wfmember/wfmember-service'));
@@ -48,8 +49,11 @@ export class EntityServiceRegister {
         this.allEntityService.set('sysuserauth', () => import('@/service/sys-user-auth/sys-user-auth-service'));
         this.allEntityService.set('sysdepartment', () => import('@/service/sys-department/sys-department-service'));
         this.allEntityService.set('sysemployee', () => import('@/service/sys-employee/sys-employee-service'));
+        this.allEntityService.set('paytrade', () => import('@/service/pay-trade/pay-trade-service'));
+        this.allEntityService.set('msgtemplate', () => import('@/service/msg-template/msg-template-service'));
         this.allEntityService.set('systeam', () => import('@/service/sys-team/sys-team-service'));
         this.allEntityService.set('wfuser', () => import('@/service/wfuser/wfuser-service'));
+        this.allEntityService.set('payopenaccess', () => import('@/service/pay-open-access/pay-open-access-service'));
         this.allEntityService.set('sysorganization', () => import('@/service/sys-organization/sys-organization-service'));
         this.allEntityService.set('jobsregistry', () => import('@/service/jobs-registry/jobs-registry-service'));
         this.allEntityService.set('sysopenaccess', () => import('@/service/sys-open-access/sys-open-access-service'));
@@ -61,6 +65,7 @@ export class EntityServiceRegister {
         this.allEntityService.set('wfprocessdefinition', () => import('@/service/wfprocess-definition/wfprocess-definition-service'));
         this.allEntityService.set('sysrole', () => import('@/service/sys-role/sys-role-service'));
         this.allEntityService.set('syspermission', () => import('@/service/sys-permission/sys-permission-service'));
+        this.allEntityService.set('msgopenaccess', () => import('@/service/msg-open-access/msg-open-access-service'));
         this.allEntityService.set('systeammember', () => import('@/service/sys-team-member/sys-team-member-service'));
         this.allEntityService.set('sysdeptmember', () => import('@/service/sys-dept-member/sys-dept-member-service'));
         this.allEntityService.set('dictoption', () => import('@/service/dict-option/dict-option-service'));

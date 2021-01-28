@@ -958,7 +958,7 @@ export default class SysDepartmentEditViewBase extends Vue {
                 Object.assign(data, { sysdepartment: args[0].sysdepartment });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

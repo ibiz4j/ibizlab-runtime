@@ -103,8 +103,9 @@ public class WFREModelResource {
 
     @ApiOperation(value = "获取流程模型草稿", tags = {"流程模型" },  notes = "获取流程模型草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfremodels/getdraft")
-    public ResponseEntity<WFREModelDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfremodelMapping.toDto(wfremodelService.getDraft(new WFREModel())));
+    public ResponseEntity<WFREModelDTO> getDraft(WFREModelDTO dto) {
+        WFREModel domain = wfremodelMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(wfremodelMapping.toDto(wfremodelService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查流程模型", tags = {"流程模型" },  notes = "检查流程模型")
@@ -145,6 +146,7 @@ public class WFREModelResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfremodelMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

@@ -31,7 +31,7 @@
               :localParam ='{ }' 
               :disabled="detailsModel.n_open_type_eq.disabled" 
               valueType="string"
-              tag='OpenAccessType' 
+              tag='UaaOpenAccessType' 
               codelistType='STATIC'
               placeholder='请选择...' style="">
            </dropdown-list>
@@ -59,7 +59,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysOpenAccessService from '@/service/sys-open-access/sys-open-access-service';
+import SysOpenAccessEntityService from '@/service/sys-open-access/sys-open-access-service';
 import DefaultService from './default-searchform-service';
 import SysOpenAccessUIService from '@/uiservice/sys-open-access/sys-open-access-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -148,7 +148,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {SysOpenAccessService}
      * @memberof DefaultBase
      */
-    public appEntityService: SysOpenAccessService = new SysOpenAccessService({ $store: this.$store });
+    public appEntityService: SysOpenAccessEntityService = new SysOpenAccessEntityService({ $store: this.$store });
     
 
 

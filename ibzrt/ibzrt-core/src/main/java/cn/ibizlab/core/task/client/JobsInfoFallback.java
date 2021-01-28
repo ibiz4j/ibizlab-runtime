@@ -50,7 +50,7 @@ public class JobsInfoFallback implements JobsInfoFeignClient {
     }
 
 
-    public JobsInfo getDraft(){
+    public JobsInfo getDraft(JobsInfo entity){
         return null;
     }
 

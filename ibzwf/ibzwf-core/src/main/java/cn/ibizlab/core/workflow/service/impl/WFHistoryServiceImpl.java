@@ -106,7 +106,6 @@ public class WFHistoryServiceImpl implements IWFHistoryService {
         return new PageImpl<WFHistory>(new ArrayList(),context.getPageable(),0);
     }
 
-
 }
 
 

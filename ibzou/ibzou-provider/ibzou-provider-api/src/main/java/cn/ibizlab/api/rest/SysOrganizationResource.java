@@ -111,8 +111,9 @@ public class SysOrganizationResource {
 
     @ApiOperation(value = "获取单位机构草稿", tags = {"单位机构" },  notes = "获取单位机构草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/getdraft")
-    public ResponseEntity<SysOrganizationDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysorganizationMapping.toDto(sysorganizationService.getDraft(new SysOrganization())));
+    public ResponseEntity<SysOrganizationDTO> getDraft(SysOrganizationDTO dto) {
+        SysOrganization domain = sysorganizationMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysorganizationMapping.toDto(sysorganizationService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查单位机构", tags = {"单位机构" },  notes = "检查单位机构")
@@ -121,14 +122,12 @@ public class SysOrganizationResource {
         return  ResponseEntity.status(HttpStatus.OK).body(sysorganizationService.checkKey(sysorganizationMapping.toDomain(sysorganizationdto)));
     }
 
-    @PreAuthorize("hasPermission(this.sysorganizationMapping.toDomain(#sysorganizationdto),'ibzou-SysOrganization-Save')")
     @ApiOperation(value = "保存单位机构", tags = {"单位机构" },  notes = "保存单位机构")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/save")
     public ResponseEntity<Boolean> save(@RequestBody SysOrganizationDTO sysorganizationdto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysorganizationService.save(sysorganizationMapping.toDomain(sysorganizationdto)));
     }
 
-    @PreAuthorize("hasPermission(this.sysorganizationMapping.toDomain(#sysorganizationdtos),'ibzou-SysOrganization-Save')")
     @ApiOperation(value = "批量保存单位机构", tags = {"单位机构" },  notes = "批量保存单位机构")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysOrganizationDTO> sysorganizationdtos) {
@@ -136,7 +135,6 @@ public class SysOrganizationResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysOrganization-searchDefault-all') and hasPermission(#context,'ibzou-SysOrganization-Get')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"单位机构" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysorganizations/fetchdefault")
 	public ResponseEntity<List<SysOrganizationDTO>> fetchDefault(SysOrganizationSearchContext context) {
@@ -149,7 +147,6 @@ public class SysOrganizationResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysOrganization-searchDefault-all') and hasPermission(#context,'ibzou-SysOrganization-Get')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"单位机构" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/sysorganizations/searchdefault")
 	public ResponseEntity<Page<SysOrganizationDTO>> searchDefault(@RequestBody SysOrganizationSearchContext context) {
@@ -157,6 +154,7 @@ public class SysOrganizationResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysorganizationMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

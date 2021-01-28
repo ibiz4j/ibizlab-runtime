@@ -24,7 +24,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysPermissionService from '@/service/sys-permission/sys-permission-service';
+import SysPermissionEntityService from '@/service/sys-permission/sys-permission-service';
 import DefaultService from './default-searchform-service';
 import SysPermissionUIService from '@/uiservice/sys-permission/sys-permission-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -113,7 +113,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {SysPermissionService}
      * @memberof DefaultBase
      */
-    public appEntityService: SysPermissionService = new SysPermissionService({ $store: this.$store });
+    public appEntityService: SysPermissionEntityService = new SysPermissionEntityService({ $store: this.$store });
     
 
 

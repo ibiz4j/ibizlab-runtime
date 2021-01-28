@@ -66,7 +66,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import JobsLogService from '@/service/jobs-log/jobs-log-service';
+import JobsLogEntityService from '@/service/jobs-log/jobs-log-service';
 import DefaultService from './default-searchform-service';
 import JobsLogUIService from '@/uiservice/jobs-log/jobs-log-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -155,7 +155,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {JobsLogService}
      * @memberof DefaultBase
      */
-    public appEntityService: JobsLogService = new JobsLogService({ $store: this.$store });
+    public appEntityService: JobsLogEntityService = new JobsLogEntityService({ $store: this.$store });
     
 
 

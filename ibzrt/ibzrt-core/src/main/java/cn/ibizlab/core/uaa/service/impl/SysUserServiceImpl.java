@@ -97,7 +97,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
     @Override
     public SysUser getDraft(SysUser et) {
-        et=sysUserFeignClient.getDraft();
+        et=sysUserFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class SysUserServiceImpl implements ISysUserService {
         Page<SysUser> sysUsers=sysUserFeignClient.searchDefault(context);
         return sysUsers;
     }
-
-
-
 
 }
 

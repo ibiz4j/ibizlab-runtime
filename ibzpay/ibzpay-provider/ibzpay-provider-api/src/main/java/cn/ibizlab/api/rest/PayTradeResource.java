@@ -110,8 +110,9 @@ public class PayTradeResource {
 
     @ApiOperation(value = "获取支付交易草稿", tags = {"支付交易" },  notes = "获取支付交易草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/paytrades/getdraft")
-    public ResponseEntity<PayTradeDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(paytradeMapping.toDto(paytradeService.getDraft(new PayTrade())));
+    public ResponseEntity<PayTradeDTO> getDraft(PayTradeDTO dto) {
+        PayTrade domain = paytradeMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(paytradeMapping.toDto(paytradeService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查支付交易", tags = {"支付交易" },  notes = "检查支付交易")
@@ -156,6 +157,7 @@ public class PayTradeResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(paytradeMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

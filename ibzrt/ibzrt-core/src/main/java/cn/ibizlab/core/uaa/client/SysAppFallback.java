@@ -50,7 +50,7 @@ public class SysAppFallback implements SysAppFeignClient {
     }
 
 
-    public SysApp getDraft(){
+    public SysApp getDraft(SysApp entity){
         return null;
     }
 

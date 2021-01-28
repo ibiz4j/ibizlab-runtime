@@ -97,7 +97,7 @@ public class DictOptionServiceImpl implements IDictOptionService {
 
     @Override
     public DictOption getDraft(DictOption et) {
-        et=dictOptionFeignClient.getDraft();
+        et=dictOptionFeignClient.getDraft(et);
         return et;
     }
 
@@ -149,9 +149,6 @@ public class DictOptionServiceImpl implements IDictOptionService {
         Page<DictOption> dictOptions=dictOptionFeignClient.searchDefault(context);
         return dictOptions;
     }
-
-
-
 
 }
 

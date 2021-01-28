@@ -110,8 +110,9 @@ public class SysUserResource {
 
     @ApiOperation(value = "获取系统用户草稿", tags = {"系统用户" },  notes = "获取系统用户草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/getdraft")
-    public ResponseEntity<SysUserDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserMapping.toDto(sysuserService.getDraft(new SysUser())));
+    public ResponseEntity<SysUserDTO> getDraft(SysUserDTO dto) {
+        SysUser domain = sysuserMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserMapping.toDto(sysuserService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查系统用户", tags = {"系统用户" },  notes = "检查系统用户")
@@ -131,14 +132,12 @@ public class SysUserResource {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserdto);
     }
 
-    @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdto),'ibzuaa-SysUser-Save')")
     @ApiOperation(value = "保存系统用户", tags = {"系统用户" },  notes = "保存系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
     public ResponseEntity<Boolean> save(@RequestBody SysUserDTO sysuserdto) {
         return ResponseEntity.status(HttpStatus.OK).body(sysuserService.save(sysuserMapping.toDomain(sysuserdto)));
     }
 
-    @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdtos),'ibzuaa-SysUser-Save')")
     @ApiOperation(value = "批量保存系统用户", tags = {"系统用户" },  notes = "批量保存系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/savebatch")
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
@@ -178,6 +177,7 @@ public class SysUserResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

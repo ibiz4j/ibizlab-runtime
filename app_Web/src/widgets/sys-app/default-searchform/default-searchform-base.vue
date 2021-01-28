@@ -38,7 +38,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SysAppService from '@/service/sys-app/sys-app-service';
+import SysAppEntityService from '@/service/sys-app/sys-app-service';
 import DefaultService from './default-searchform-service';
 import SysAppUIService from '@/uiservice/sys-app/sys-app-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -127,7 +127,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {SysAppService}
      * @memberof DefaultBase
      */
-    public appEntityService: SysAppService = new SysAppService({ $store: this.$store });
+    public appEntityService: SysAppEntityService = new SysAppEntityService({ $store: this.$store });
     
 
 

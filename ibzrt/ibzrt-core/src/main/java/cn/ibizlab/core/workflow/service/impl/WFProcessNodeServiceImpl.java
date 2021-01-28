@@ -97,7 +97,7 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
 
     @Override
     public WFProcessNode getDraft(WFProcessNode et) {
-        et=wFProcessNodeFeignClient.getDraft();
+        et=wFProcessNodeFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
         Page<WFProcessNode> wFProcessNodes=wFProcessNodeFeignClient.searchDefault(context);
         return wFProcessNodes;
     }
-
-
-
 
 }
 

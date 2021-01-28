@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ibzuaa-provider-api
+  labels:
+    app: ibzuaa-provider-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibzuaa-provider-api
+  template:
+    metadata:
+      labels:
+        app: ibzuaa-provider-api
+    spec:
+      imagePullSecrets:
+      - name: aly-shanghai
+      containers:
+      - name: ibzuaa-provider-api
+        image: registry.cn-shanghai.aliyuncs.com/ibizsys/ibzuaa-provider-api:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
+        volumeMounts:
+        - name: data
+          mountPath: /app/file
+      volumes:      
+      - name: data
+        persistentVolumeClaim:
+          claimName: demo-date-pvc-nfs
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ibzuaa-provider-api
+  labels:
+    app: ibzuaa-provider-api
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 8081
+    targetPort: 8081
+    nodePort: 8081
+    protocol: TCP
+  selector:
+    app: ibzuaa-provider-api
+

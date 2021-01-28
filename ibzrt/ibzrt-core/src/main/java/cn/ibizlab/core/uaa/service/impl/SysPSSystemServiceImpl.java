@@ -97,7 +97,7 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
 
     @Override
     public SysPSSystem getDraft(SysPSSystem et) {
-        et=sysPSSystemFeignClient.getDraft();
+        et=sysPSSystemFeignClient.getDraft(et);
         return et;
     }
 
@@ -140,9 +140,6 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
         Page<SysPSSystem> sysPSSystems=sysPSSystemFeignClient.searchPick(context);
         return sysPSSystems;
     }
-
-
-
 
 }
 

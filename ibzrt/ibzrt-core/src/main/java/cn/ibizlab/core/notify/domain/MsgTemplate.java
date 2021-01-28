@@ -1,0 +1,194 @@
+package cn.ibizlab.core.notify.domain;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.DigestUtils;
+import cn.ibizlab.util.domain.EntityBase;
+import cn.ibizlab.util.annotation.DEField;
+import cn.ibizlab.util.enums.DEPredefinedFieldType;
+import cn.ibizlab.util.enums.DEFieldDefaultValueType;
+import cn.ibizlab.util.helper.DataObject;
+import cn.ibizlab.util.enums.DupCheck;
+import java.io.Serializable;
+import lombok.*;
+import org.springframework.data.annotation.Transient;
+import cn.ibizlab.util.annotation.Audit;
+
+import cn.ibizlab.util.domain.EntityClient;
+
+/**
+ * ServiceApi [消息模板] 对象
+ */
+@Data
+public class MsgTemplate extends EntityClient implements Serializable {
+
+    /**
+     * 模板标识
+     */
+    @DEField(isKeyField = true)
+    @JSONField(name = "tid")
+    @JsonProperty("tid")
+    private String tid;
+
+    /**
+     * 模板标题
+     */
+    @DEField(name = "template_name")
+    @JSONField(name = "template_name")
+    @JsonProperty("template_name")
+    private String templateName;
+
+    /**
+     * 模板类型
+     */
+    @DEField(name = "template_type")
+    @JSONField(name = "template_type")
+    @JsonProperty("template_type")
+    private String templateType;
+
+    /**
+     * 模板内容
+     */
+    @JSONField(name = "content")
+    @JsonProperty("content")
+    private String content;
+
+    /**
+     * 模板标识
+     */
+    @DEField(name = "template_id")
+    @JSONField(name = "template_id")
+    @JsonProperty("template_id")
+    private String templateId;
+
+    /**
+     * URL
+     */
+    @DEField(name = "template_url")
+    @JSONField(name = "template_url")
+    @JsonProperty("template_url")
+    private String templateUrl;
+
+    /**
+     * 开放平台接入标识
+     */
+    @JSONField(name = "access_id")
+    @JsonProperty("access_id")
+    private String accessId;
+
+    /**
+     * 接入平台
+     */
+    @JSONField(name = "access_name")
+    @JsonProperty("access_name")
+    private String accessName;
+
+    /**
+     * 接入平台类型
+     */
+    @DEField(name = "open_type")
+    @JSONField(name = "open_type")
+    @JsonProperty("open_type")
+    private String openType;
+
+
+    /**
+     * 接入平台
+     */
+    @JSONField(name = "openaccess")
+    @JsonProperty("openaccess")
+    private cn.ibizlab.core.notify.domain.MsgOpenAccess openaccess;
+
+
+
+
+    /**
+     * 设置 [模板标题]
+     */
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName ;
+        this.modify("template_name",templateName);
+    }
+
+    /**
+     * 设置 [模板类型]
+     */
+    public void setTemplateType(String templateType) {
+        this.templateType = templateType ;
+        this.modify("template_type",templateType);
+    }
+
+    /**
+     * 设置 [模板内容]
+     */
+    public void setContent(String content) {
+        this.content = content ;
+        this.modify("content",content);
+    }
+
+    /**
+     * 设置 [模板标识]
+     */
+    public void setTemplateId(String templateId) {
+        this.templateId = templateId ;
+        this.modify("template_id",templateId);
+    }
+
+    /**
+     * 设置 [URL]
+     */
+    public void setTemplateUrl(String templateUrl) {
+        this.templateUrl = templateUrl ;
+        this.modify("template_url",templateUrl);
+    }
+
+    /**
+     * 设置 [开放平台接入标识]
+     */
+    public void setAccessId(String accessId) {
+        this.accessId = accessId ;
+        this.modify("accessid",accessId);
+    }
+
+    /**
+     * 设置 [接入平台]
+     */
+    public void setAccessName(String accessName) {
+        this.accessName = accessName ;
+        this.modify("accessname",accessName);
+    }
+
+    /**
+     * 设置 [接入平台类型]
+     */
+    public void setOpenType(String openType) {
+        this.openType = openType ;
+        this.modify("open_type",openType);
+    }
+
+    /**
+     * 复制当前对象数据到目标对象(粘贴重置)
+     * @param targetEntity 目标数据对象
+     * @param bIncEmpty  是否包括空值
+     * @param <T>
+     * @return
+     */
+    @Override
+    public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
+        this.reset("tid");
+        return super.copyTo(targetEntity,bIncEmpty);
+    }
+}
+
+

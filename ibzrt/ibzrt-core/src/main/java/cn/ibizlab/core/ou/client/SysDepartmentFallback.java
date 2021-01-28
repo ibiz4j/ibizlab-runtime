@@ -50,7 +50,7 @@ public class SysDepartmentFallback implements SysDepartmentFeignClient {
     }
 
 
-    public SysDepartment getDraft(){
+    public SysDepartment getDraft(SysDepartment entity){
         return null;
     }
 

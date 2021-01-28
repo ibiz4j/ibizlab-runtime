@@ -97,7 +97,7 @@ public class JobsLogServiceImpl implements IJobsLogService {
 
     @Override
     public JobsLog getDraft(JobsLog et) {
-        et=jobsLogFeignClient.getDraft();
+        et=jobsLogFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class JobsLogServiceImpl implements IJobsLogService {
         Page<JobsLog> jobsLogs=jobsLogFeignClient.searchDefault(context);
         return jobsLogs;
     }
-
-
-
 
 }
 

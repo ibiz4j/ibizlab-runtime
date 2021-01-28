@@ -97,7 +97,7 @@ public class SDFileServiceImpl implements ISDFileService {
 
     @Override
     public SDFile getDraft(SDFile et) {
-        et=sDFileFeignClient.getDraft();
+        et=sDFileFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class SDFileServiceImpl implements ISDFileService {
         Page<SDFile> sDFiles=sDFileFeignClient.searchDefault(context);
         return sDFiles;
     }
-
-
-
 
 }
 

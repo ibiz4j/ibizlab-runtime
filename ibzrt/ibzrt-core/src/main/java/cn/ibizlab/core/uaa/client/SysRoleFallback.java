@@ -50,7 +50,7 @@ public class SysRoleFallback implements SysRoleFeignClient {
     }
 
 
-    public SysRole getDraft(){
+    public SysRole getDraft(SysRole entity){
         return null;
     }
 

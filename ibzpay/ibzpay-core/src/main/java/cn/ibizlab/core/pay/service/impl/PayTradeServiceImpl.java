@@ -257,9 +257,6 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
 
 
 
-
-
-
     public IPayTradeService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

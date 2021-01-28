@@ -106,7 +106,6 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
         return new PageImpl<WFProcessInstance>(new ArrayList(),context.getPageable(),0);
     }
 
-
 }
 
 

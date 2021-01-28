@@ -110,8 +110,9 @@ public class MsgTemplateResource {
 
     @ApiOperation(value = "获取消息模板草稿", tags = {"消息模板" },  notes = "获取消息模板草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/getdraft")
-    public ResponseEntity<MsgTemplateDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(msgtemplateMapping.toDto(msgtemplateService.getDraft(new MsgTemplate())));
+    public ResponseEntity<MsgTemplateDTO> getDraft(MsgTemplateDTO dto) {
+        MsgTemplate domain = msgtemplateMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(msgtemplateMapping.toDto(msgtemplateService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查消息模板", tags = {"消息模板" },  notes = "检查消息模板")
@@ -156,6 +157,7 @@ public class MsgTemplateResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(msgtemplateMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

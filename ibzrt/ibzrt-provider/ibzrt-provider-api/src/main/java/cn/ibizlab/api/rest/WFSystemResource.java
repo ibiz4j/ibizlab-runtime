@@ -110,8 +110,9 @@ public class WFSystemResource {
 
     @ApiOperation(value = "获取系统草稿", tags = {"系统" },  notes = "获取系统草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfsystems/getdraft")
-    public ResponseEntity<WFSystemDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfsystemMapping.toDto(wfsystemService.getDraft(new WFSystem())));
+    public ResponseEntity<WFSystemDTO> getDraft(WFSystemDTO dto) {
+        WFSystem domain = wfsystemMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(wfsystemMapping.toDto(wfsystemService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查系统", tags = {"系统" },  notes = "检查系统")
@@ -156,6 +157,7 @@ public class WFSystemResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfsystemMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

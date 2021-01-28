@@ -49,7 +49,7 @@ public interface WFGroupFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/getdraft")
-    WFGroup getDraft();
+    WFGroup getDraft(WFGroup entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/checkkey")

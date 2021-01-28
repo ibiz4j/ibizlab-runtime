@@ -49,7 +49,7 @@ public interface SysRoleFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysroles/getdraft")
-    SysRole getDraft();
+    SysRole getDraft(SysRole entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysroles/checkkey")

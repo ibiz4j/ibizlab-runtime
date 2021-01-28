@@ -97,7 +97,7 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
 
     @Override
     public SysPermission getDraft(SysPermission et) {
-        et=sysPermissionFeignClient.getDraft();
+        et=sysPermissionFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
         Page<SysPermission> sysPermissions=sysPermissionFeignClient.searchDefault(context);
         return sysPermissions;
     }
-
-
-
 
 }
 

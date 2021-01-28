@@ -221,9 +221,6 @@ public class WFProcessDefinitionServiceImpl extends ServiceImpl<WFProcessDefinit
 
 
 
-
-
-
     public IWFProcessDefinitionService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

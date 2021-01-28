@@ -97,7 +97,7 @@ public class SysAppServiceImpl implements ISysAppService {
 
     @Override
     public SysApp getDraft(SysApp et) {
-        et=sysAppFeignClient.getDraft();
+        et=sysAppFeignClient.getDraft(et);
         return et;
     }
 
@@ -149,9 +149,6 @@ public class SysAppServiceImpl implements ISysAppService {
         Page<SysApp> sysApps=sysAppFeignClient.searchDefault(context);
         return sysApps;
     }
-
-
-
 
 }
 

@@ -49,7 +49,7 @@ public interface SysUserAuthFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/getdraft")
-    SysUserAuth getDraft();
+    SysUserAuth getDraft(SysUserAuth entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/checkkey")

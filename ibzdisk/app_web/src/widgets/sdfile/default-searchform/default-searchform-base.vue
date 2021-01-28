@@ -38,7 +38,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import SDFileService from '@/service/sdfile/sdfile-service';
+import SDFileEntityService from '@/service/sdfile/sdfile-service';
 import DefaultService from './default-searchform-service';
 import SDFileUIService from '@/uiservice/sdfile/sdfile-ui-service';
 import { FormButtonModel, FormPageModel, FormItemModel, FormDRUIPartModel, FormPartModel, FormGroupPanelModel, FormIFrameModel, FormRowItemModel, FormTabPageModel, FormTabPanelModel, FormUserControlModel } from '@/model/form-detail';
@@ -127,7 +127,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
      * @type {SDFileService}
      * @memberof DefaultBase
      */
-    public appEntityService: SDFileService = new SDFileService({ $store: this.$store });
+    public appEntityService: SDFileEntityService = new SDFileEntityService({ $store: this.$store });
     
 
 

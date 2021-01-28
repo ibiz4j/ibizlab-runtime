@@ -49,7 +49,7 @@ public interface SysPermissionFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/getdraft")
-    SysPermission getDraft();
+    SysPermission getDraft(SysPermission entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/checkkey")

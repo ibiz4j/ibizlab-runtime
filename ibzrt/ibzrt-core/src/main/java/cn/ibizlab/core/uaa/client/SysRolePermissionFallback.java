@@ -50,7 +50,7 @@ public class SysRolePermissionFallback implements SysRolePermissionFeignClient {
     }
 
 
-    public SysRolePermission getDraft(){
+    public SysRolePermission getDraft(SysRolePermission entity){
         return null;
     }
 

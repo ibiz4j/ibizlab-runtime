@@ -111,8 +111,9 @@ public class SysUserRoleResource {
 
     @ApiOperation(value = "获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "获取用户角色关系草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/getdraft")
-    public ResponseEntity<SysUserRoleDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(new SysUserRole())));
+    public ResponseEntity<SysUserRoleDTO> getDraft(SysUserRoleDTO dto) {
+        SysUserRole domain = sysuserroleMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查用户角色关系", tags = {"用户角色关系" },  notes = "检查用户角色关系")
@@ -157,6 +158,7 @@ public class SysUserRoleResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserroleMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserRole-Create-all')")
@@ -233,8 +235,8 @@ public class SysUserRoleResource {
 
     @ApiOperation(value = "根据系统角色获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "根据系统角色获取用户角色关系草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}/sysuserroles/getdraft")
-    public ResponseEntity<SysUserRoleDTO> getDraftBySysRole(@PathVariable("sysrole_id") String sysrole_id) {
-        SysUserRole domain = new SysUserRole();
+    public ResponseEntity<SysUserRoleDTO> getDraftBySysRole(@PathVariable("sysrole_id") String sysrole_id, SysUserRoleDTO dto) {
+        SysUserRole domain = sysuserroleMapping.toDomain(dto);
         domain.setRoleid(sysrole_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
     }
@@ -363,8 +365,8 @@ public class SysUserRoleResource {
 
     @ApiOperation(value = "根据系统用户获取用户角色关系草稿", tags = {"用户角色关系" },  notes = "根据系统用户获取用户角色关系草稿")
     @RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}/sysuserroles/getdraft")
-    public ResponseEntity<SysUserRoleDTO> getDraftBySysUser(@PathVariable("sysuser_id") String sysuser_id) {
-        SysUserRole domain = new SysUserRole();
+    public ResponseEntity<SysUserRoleDTO> getDraftBySysUser(@PathVariable("sysuser_id") String sysuser_id, SysUserRoleDTO dto) {
+        SysUserRole domain = sysuserroleMapping.toDomain(dto);
         domain.setUserid(sysuser_id);
         return ResponseEntity.status(HttpStatus.OK).body(sysuserroleMapping.toDto(sysuserroleService.getDraft(domain)));
     }

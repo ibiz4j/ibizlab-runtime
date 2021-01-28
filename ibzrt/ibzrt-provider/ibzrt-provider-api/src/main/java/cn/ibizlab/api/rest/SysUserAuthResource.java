@@ -110,8 +110,9 @@ public class SysUserAuthResource {
 
     @ApiOperation(value = "获取账号绑定草稿", tags = {"账号绑定" },  notes = "获取账号绑定草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/getdraft")
-    public ResponseEntity<SysUserAuthDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserauthMapping.toDto(sysuserauthService.getDraft(new SysUserAuth())));
+    public ResponseEntity<SysUserAuthDTO> getDraft(SysUserAuthDTO dto) {
+        SysUserAuth domain = sysuserauthMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserauthMapping.toDto(sysuserauthService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查账号绑定", tags = {"账号绑定" },  notes = "检查账号绑定")
@@ -156,6 +157,7 @@ public class SysUserAuthResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sysuserauthMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

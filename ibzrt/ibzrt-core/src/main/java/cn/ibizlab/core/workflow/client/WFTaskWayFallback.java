@@ -50,7 +50,7 @@ public class WFTaskWayFallback implements WFTaskWayFeignClient {
     }
 
 
-    public WFTaskWay getDraft(){
+    public WFTaskWay getDraft(WFTaskWay entity){
         return null;
     }
 

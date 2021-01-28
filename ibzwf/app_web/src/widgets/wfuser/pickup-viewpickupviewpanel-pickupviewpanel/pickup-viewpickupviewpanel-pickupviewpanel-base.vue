@@ -25,7 +25,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import WFUserService from '@/service/wfuser/wfuser-service';
+import WFUserEntityService from '@/service/wfuser/wfuser-service';
 import PickupViewpickupviewpanelService from './pickup-viewpickupviewpanel-pickupviewpanel-service';
 import WFUserUIService from '@/uiservice/wfuser/wfuser-ui-service';
 import PickupViewpickupviewpanelModel from './pickup-viewpickupviewpanel-pickupviewpanel-model';
@@ -105,7 +105,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * @type {WFUserService}
      * @memberof PickupViewpickupviewpanelBase
      */
-    public appEntityService: WFUserService = new WFUserService({ $store: this.$store });
+    public appEntityService: WFUserEntityService = new WFUserEntityService({ $store: this.$store });
     
 
 

@@ -3,7 +3,7 @@
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="jobsloggridview"></app-studioaction>
     <card class='view-card '  :dis-hover="true" :bordered="false">
         <div slot='title' class="header-container">
-        <span class='caption-info'>{{$t(model.srfCaption)}}</span>
+        <span class='caption-info' :title="$t(model.srfCaption)">{{$t(model.srfCaption)}}</span>
         </div>
             <div class='view-top-messages'>
             </div>

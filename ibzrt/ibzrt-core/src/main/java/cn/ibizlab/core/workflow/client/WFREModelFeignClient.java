@@ -49,7 +49,7 @@ public interface WFREModelFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/getdraft")
-    WFREModel getDraft();
+    WFREModel getDraft(WFREModel entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/checkkey")

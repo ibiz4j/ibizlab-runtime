@@ -1,12 +1,10 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
+import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
-import cn.ibizlab.util.domain.IBZUSER;
+import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
-import cn.ibizlab.util.helper.CachedBeanCopier;
-import cn.ibizlab.util.service.IBZUSERService;
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
-
-import java.sql.Wrapper;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * 实体[IBZUSER] 用户注册接口实现
@@ -29,7 +21,7 @@ import java.util.UUID;
 public class UserRegisterService {
 
     @Autowired
-    private IBZUSERService ibzuserService;
+    private ISysUserService sysUserService;
 
     @Autowired
     private ISysUserAuthService sysUserAuthService;
@@ -38,12 +30,12 @@ public class UserRegisterService {
     private int pwencrymode;
 
 
-    public IBZUSER toRegister(IBZUSER account)
+    public SysUser toRegister(SysUser account)
     {
         return toRegister(account,null);
     }
 
-    public IBZUSER toRegister(IBZUSER account, SysUserAuth sysUserAuth) {
+    public SysUser toRegister(SysUser account, SysUserAuth sysUserAuth) {
 
         String domains = account.getDomains();
         String loginname = account.getLoginname();
@@ -68,8 +60,8 @@ public class UserRegisterService {
 
         String username = loginname+(StringUtils.isEmpty(domains)?"":("|"+domains));
 
-        IBZUSER existedUser = ibzuserService.getOne(Wrappers.<IBZUSER>lambdaQuery().eq(IBZUSER::getLoginname,loginname)
-                .eq((!StringUtils.isEmpty(domains)),IBZUSER::getDomains,domains),false);
+        SysUser existedUser = sysUserService.getOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getLoginname,loginname)
+                .eq((!StringUtils.isEmpty(domains)),SysUser::getDomains,domains),false);
 
 
         if(existedUser!=null)
@@ -100,7 +92,7 @@ public class UserRegisterService {
                 password = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", username, password).getBytes());
             account.setPassword(password);
             account.setUserid(username);
-            ibzuserService.save(account);
+            sysUserService.save(account);
         }
 
         if(sysUserAuth!=null)

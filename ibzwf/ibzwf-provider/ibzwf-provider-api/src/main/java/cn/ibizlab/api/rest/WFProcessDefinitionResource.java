@@ -110,8 +110,9 @@ public class WFProcessDefinitionResource {
 
     @ApiOperation(value = "获取流程定义草稿", tags = {"流程定义" },  notes = "获取流程定义草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/getdraft")
-    public ResponseEntity<WFProcessDefinitionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionMapping.toDto(wfprocessdefinitionService.getDraft(new WFProcessDefinition())));
+    public ResponseEntity<WFProcessDefinitionDTO> getDraft(WFProcessDefinitionDTO dto) {
+        WFProcessDefinition domain = wfprocessdefinitionMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionMapping.toDto(wfprocessdefinitionService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查流程定义", tags = {"流程定义" },  notes = "检查流程定义")
@@ -156,6 +157,7 @@ public class WFProcessDefinitionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wfprocessdefinitionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

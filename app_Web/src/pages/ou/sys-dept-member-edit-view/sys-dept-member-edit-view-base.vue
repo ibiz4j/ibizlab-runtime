@@ -1014,7 +1014,7 @@ export default class SysDeptMemberEditViewBase extends Vue {
                 Object.assign(data, { sysdeptmember: args[0].sysdeptmember });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

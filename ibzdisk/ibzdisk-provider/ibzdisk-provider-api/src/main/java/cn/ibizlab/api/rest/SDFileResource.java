@@ -111,8 +111,9 @@ public class SDFileResource {
 
     @ApiOperation(value = "获取文件草稿", tags = {"文件" },  notes = "获取文件草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/sdfiles/getdraft")
-    public ResponseEntity<SDFileDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(sdfileMapping.toDto(sdfileService.getDraft(new SDFile())));
+    public ResponseEntity<SDFileDTO> getDraft(SDFileDTO dto) {
+        SDFile domain = sdfileMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sdfileMapping.toDto(sdfileService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查文件", tags = {"文件" },  notes = "检查文件")
@@ -157,6 +158,7 @@ public class SDFileResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(sdfileMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

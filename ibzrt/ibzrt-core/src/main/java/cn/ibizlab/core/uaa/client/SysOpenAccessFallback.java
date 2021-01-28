@@ -50,7 +50,7 @@ public class SysOpenAccessFallback implements SysOpenAccessFeignClient {
     }
 
 
-    public SysOpenAccess getDraft(){
+    public SysOpenAccess getDraft(SysOpenAccess entity){
         return null;
     }
 

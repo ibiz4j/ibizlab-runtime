@@ -5,6 +5,8 @@ import cn.ibizlab.core.ou.extensions.domain.OrgMap;
 import cn.ibizlab.core.ou.extensions.service.OUCoreService;
 import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
+import cn.ibizlab.core.uaa.mapper.SysUserMapper;
+import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.core.uaa.service.impl.SysUserServiceImpl;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import com.alibaba.fastjson.JSONObject;
@@ -12,6 +14,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -27,9 +30,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import java.util.*;
 
 @Primary
-@Service
 @ConditionalOnExpression("'${ibiz.auth.service:UAAUserService}'.equals('UAAUserService')")
-public class UserService extends SysUserServiceImpl implements   AuthenticationUserService {
+public class UserService implements   AuthenticationUserService {
+
+	@Autowired
+	private ISysUserService sysUserService;
 
 	@Value("${ibiz.auth.pwencrymode:0}")
 	private int pwencrymode;
@@ -50,7 +55,7 @@ public class UserService extends SysUserServiceImpl implements   AuthenticationU
 			conds.eq("loginname",loginname);
 		if(!StringUtils.isEmpty(domains))
 			conds.eq("domains",domains);
-		SysUser user = this.getOne(conds);
+		SysUser user = sysUserService.getOne(conds);
 		if (user == null) {
 			throw new UsernameNotFoundException("用户" + username + "未找到");
 		}

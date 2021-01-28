@@ -1014,7 +1014,7 @@ export default class WFMemberEditViewBase extends Vue {
                 Object.assign(data, { wfmember: args[0].wfmember });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

@@ -228,9 +228,6 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
 
 
 
-
-
-
     public IWFGroupService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

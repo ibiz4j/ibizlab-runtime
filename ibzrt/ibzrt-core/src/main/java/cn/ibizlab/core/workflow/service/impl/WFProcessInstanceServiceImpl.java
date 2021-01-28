@@ -97,7 +97,7 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
 
     @Override
     public WFProcessInstance getDraft(WFProcessInstance et) {
-        et=wFProcessInstanceFeignClient.getDraft();
+        et=wFProcessInstanceFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
         Page<WFProcessInstance> wFProcessInstances=wFProcessInstanceFeignClient.searchDefault(context);
         return wFProcessInstances;
     }
-
-
-
 
 }
 

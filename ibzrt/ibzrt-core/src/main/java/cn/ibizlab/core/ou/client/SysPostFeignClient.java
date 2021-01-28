@@ -49,7 +49,7 @@ public interface SysPostFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysposts/getdraft")
-    SysPost getDraft();
+    SysPost getDraft(SysPost entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysposts/checkkey")

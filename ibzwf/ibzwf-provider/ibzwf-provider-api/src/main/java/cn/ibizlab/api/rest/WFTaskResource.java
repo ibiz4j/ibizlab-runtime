@@ -103,8 +103,9 @@ public class WFTaskResource {
 
     @ApiOperation(value = "获取工作流任务草稿", tags = {"工作流任务" },  notes = "获取工作流任务草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/wftasks/getdraft")
-    public ResponseEntity<WFTaskDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(wftaskMapping.toDto(wftaskService.getDraft(new WFTask())));
+    public ResponseEntity<WFTaskDTO> getDraft(WFTaskDTO dto) {
+        WFTask domain = wftaskMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(wftaskMapping.toDto(wftaskService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查工作流任务", tags = {"工作流任务" },  notes = "检查工作流任务")
@@ -145,6 +146,7 @@ public class WFTaskResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wftaskMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

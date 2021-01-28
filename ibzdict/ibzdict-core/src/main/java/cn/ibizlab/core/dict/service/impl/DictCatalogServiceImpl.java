@@ -224,9 +224,6 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
 
 
 
-
-
-
     public IDictCatalogService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

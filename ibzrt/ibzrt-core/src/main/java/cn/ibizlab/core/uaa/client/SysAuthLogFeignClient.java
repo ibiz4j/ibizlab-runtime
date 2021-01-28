@@ -49,7 +49,7 @@ public interface SysAuthLogFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/getdraft")
-    SysAuthLog getDraft();
+    SysAuthLog getDraft(SysAuthLog entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/checkkey")

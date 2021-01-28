@@ -1395,7 +1395,7 @@ export default class WFUserEditViewBase extends Vue {
                 Object.assign(data, { wfuser: args[0].wfuser });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});

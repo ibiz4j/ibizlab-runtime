@@ -50,7 +50,7 @@ public class WFProcessNodeFallback implements WFProcessNodeFeignClient {
     }
 
 
-    public WFProcessNode getDraft(){
+    public WFProcessNode getDraft(WFProcessNode entity){
         return null;
     }
 

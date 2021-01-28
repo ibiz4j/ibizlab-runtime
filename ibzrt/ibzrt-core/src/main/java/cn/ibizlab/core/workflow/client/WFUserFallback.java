@@ -50,7 +50,7 @@ public class WFUserFallback implements WFUserFeignClient {
     }
 
 
-    public WFUser getDraft(){
+    public WFUser getDraft(WFUser entity){
         return null;
     }
 

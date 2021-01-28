@@ -97,7 +97,7 @@ public class WFREModelServiceImpl implements IWFREModelService {
 
     @Override
     public WFREModel getDraft(WFREModel et) {
-        et=wFREModelFeignClient.getDraft();
+        et=wFREModelFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class WFREModelServiceImpl implements IWFREModelService {
         Page<WFREModel> wFREModels=wFREModelFeignClient.searchDefault(context);
         return wFREModels;
     }
-
-
-
 
 }
 

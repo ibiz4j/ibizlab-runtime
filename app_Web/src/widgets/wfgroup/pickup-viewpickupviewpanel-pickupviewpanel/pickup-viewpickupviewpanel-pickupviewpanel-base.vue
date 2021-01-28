@@ -25,7 +25,7 @@ import { ControlInterface } from '@/interface/control';
 import { UIActionTool,Util,ViewTool } from '@/utils';
 import NavDataService from '@/service/app/navdata-service';
 import AppCenterService from "@service/app/app-center-service";
-import WFGroupService from '@/service/wfgroup/wfgroup-service';
+import WFGroupEntityService from '@/service/wfgroup/wfgroup-service';
 import PickupViewpickupviewpanelService from './pickup-viewpickupviewpanel-pickupviewpanel-service';
 import WFGroupUIService from '@/uiservice/wfgroup/wfgroup-ui-service';
 import PickupViewpickupviewpanelModel from './pickup-viewpickupviewpanel-pickupviewpanel-model';
@@ -105,7 +105,7 @@ export default class PickupViewpickupviewpanelBase extends Vue implements Contro
      * @type {WFGroupService}
      * @memberof PickupViewpickupviewpanelBase
      */
-    public appEntityService: WFGroupService = new WFGroupService({ $store: this.$store });
+    public appEntityService: WFGroupEntityService = new WFGroupEntityService({ $store: this.$store });
     
 
 

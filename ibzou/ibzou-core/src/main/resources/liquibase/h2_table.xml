@@ -4,7 +4,7 @@
 
 
     <!--输出实体[SYS_DEPT]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_dept-77-1">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_dept-79-1">
         <createTable tableName="IBZDEPT">
                 <column name="DEPTID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_DEPT_DEPTID"/>
@@ -44,7 +44,7 @@
 
 
     <!--输出实体[SYS_DEPTMEMBER]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_deptmember-34-2">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_deptmember-35-2">
         <createTable tableName="IBZDEPTMEMBER">
                 <column name="MEMBERID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_DEPTMEMBER_MEMBERID"/>
@@ -62,7 +62,7 @@
 
 
     <!--输出实体[SYS_EMP]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_emp-84-3">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_emp-85-3">
         <createTable tableName="IBZEMP">
                 <column name="USERID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_EMP_USERID"/>
@@ -142,7 +142,7 @@
 
 
     <!--输出实体[SYS_ORG]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_org-47-4">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_org-49-4">
         <createTable tableName="IBZORG">
                 <column name="ORGID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_ORG_ORGID"/>
@@ -174,7 +174,7 @@
 
 
     <!--输出实体[SYS_POST]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_post-23-5">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_post-25-5">
         <createTable tableName="IBZPOST">
                 <column name="POSTID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_POST_POSTID"/>
@@ -192,7 +192,7 @@
 
 
     <!--输出实体[SYS_TEAM]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_team-23-6">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_team-25-6">
         <createTable tableName="IBZTEAM">
                 <column name="TEAMID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_TEAM_TEAMID"/>
@@ -208,7 +208,7 @@
 
 
     <!--输出实体[SYS_TEAMMEMBER]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_teammember-29-7">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_teammember-30-7">
         <createTable tableName="IBZTEAMMEMBER">
                 <column name="TEAMMEMBERID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_TEAMMEMBER_TEAMMEMBERID"/>
@@ -225,46 +225,46 @@
     </changeSet>
 
         <!--输出实体[SYS_DEPT]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_dept-77-8">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_dept-79-8">
        <addForeignKeyConstraint baseColumnNames="PDEPTID" baseTableName="IBZDEPT" constraintName="DER1N_SYS_DEPT_SYS_DEPT_PDEPTI" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_dept-77-9">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_dept-79-9">
        <addForeignKeyConstraint baseColumnNames="ORGID" baseTableName="IBZDEPT" constraintName="DER1N_SYS_DEPT_SYS_ORG_ORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_DEPTMEMBER]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_deptmember-34-10">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_deptmember-35-10">
        <addForeignKeyConstraint baseColumnNames="DEPTID" baseTableName="IBZDEPTMEMBER" constraintName="DER1N_SYS_DEPTMEMBER_SYS_DEPT_" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_deptmember-34-11">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_deptmember-35-11">
        <addForeignKeyConstraint baseColumnNames="USERID" baseTableName="IBZDEPTMEMBER" constraintName="DER1N_SYS_DEPTMEMBER_SYS_EMP_U" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="USERID" referencedTableName="IBZEMP" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_deptmember-34-12">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_deptmember-35-12">
        <addForeignKeyConstraint baseColumnNames="POSTID" baseTableName="IBZDEPTMEMBER" constraintName="DER1N_SYS_DEPTMEMBER_SYS_POST_" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="POSTID" referencedTableName="IBZPOST" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_EMP]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_emp-84-13">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_emp-85-13">
        <addForeignKeyConstraint baseColumnNames="MDEPTID" baseTableName="IBZEMP" constraintName="DER1N_SYS_EMP_SYS_DEPT_MDEPTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_emp-84-14">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_emp-85-14">
        <addForeignKeyConstraint baseColumnNames="ORGID" baseTableName="IBZEMP" constraintName="DER1N_SYS_EMP_SYS_ORG_ORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_emp-84-15">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_emp-85-15">
        <addForeignKeyConstraint baseColumnNames="POSTID" baseTableName="IBZEMP" constraintName="DER1N_SYS_EMP_SYS_POST_POSTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="POSTID" referencedTableName="IBZPOST" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_ORG]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_org-47-16">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_org-49-16">
        <addForeignKeyConstraint baseColumnNames="PORGID" baseTableName="IBZORG" constraintName="DER1N_SYS_ORG_SYS_ORG_PORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_POST]外键关系 -->
         <!--输出实体[SYS_TEAM]外键关系 -->
         <!--输出实体[SYS_TEAMMEMBER]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-29-17">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-30-17">
        <addForeignKeyConstraint baseColumnNames="USERID" baseTableName="IBZTEAMMEMBER" constraintName="DER1N_SYS_TEAMMEMBER_SYS_EMP_U" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="USERID" referencedTableName="IBZEMP" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-29-18">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-30-18">
        <addForeignKeyConstraint baseColumnNames="POSTID" baseTableName="IBZTEAMMEMBER" constraintName="DER1N_SYS_TEAMMEMBER_SYS_POST_" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="POSTID" referencedTableName="IBZPOST" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-29-19">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_teammember-30-19">
        <addForeignKeyConstraint baseColumnNames="TEAMID" baseTableName="IBZTEAMMEMBER" constraintName="DER1N_SYS_TEAMMEMBER_SYS_TEAM_" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="TEAMID" referencedTableName="IBZTEAM" validate="true"/>
     </changeSet>
 

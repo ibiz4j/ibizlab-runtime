@@ -111,8 +111,9 @@ public class SysPermissionResource {
 
     @ApiOperation(value = "获取权限/资源草稿", tags = {"权限/资源" },  notes = "获取权限/资源草稿")
 	@RequestMapping(method = RequestMethod.GET, value = "/syspermissions/getdraft")
-    public ResponseEntity<SysPermissionDTO> getDraft() {
-        return ResponseEntity.status(HttpStatus.OK).body(syspermissionMapping.toDto(syspermissionService.getDraft(new SysPermission())));
+    public ResponseEntity<SysPermissionDTO> getDraft(SysPermissionDTO dto) {
+        SysPermission domain = syspermissionMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(syspermissionMapping.toDto(syspermissionService.getDraft(domain)));
     }
 
     @ApiOperation(value = "检查权限/资源", tags = {"权限/资源" },  notes = "检查权限/资源")
@@ -157,6 +158,7 @@ public class SysPermissionResource {
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(syspermissionMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
+
 
 
 }

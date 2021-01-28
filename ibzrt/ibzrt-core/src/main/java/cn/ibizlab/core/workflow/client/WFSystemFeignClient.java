@@ -49,7 +49,7 @@ public interface WFSystemFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wfsystems/getdraft")
-    WFSystem getDraft();
+    WFSystem getDraft(WFSystem entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/checkkey")

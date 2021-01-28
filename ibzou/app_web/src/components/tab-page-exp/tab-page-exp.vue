@@ -68,7 +68,7 @@ export default class TabPageExp extends Vue {
 
   public getCaption(caption: any, info: any): any {
     return info && !Object.is(info, "")
-      ? `${this.$t(caption)} - ${info}`
+      ? `${this.$t(caption)} - ${this.$t(info)}`
       : this.$t(caption);
   }
 

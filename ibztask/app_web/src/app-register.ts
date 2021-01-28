@@ -25,6 +25,7 @@ import AppForm from './components/app-form/app-form.vue'
 import APPAutocomplete from './components/app-autocomplete/app-autocomplete.vue'
 import AppFormDruipart from './components/app-form-druipart/app-form-druipart.vue'
 import DropdownList from './components/dropdown-list/dropdown-list.vue'
+import DropdownListHidden from './components/dropdown-list-hidden/dropdown-list-hidden.vue'
 import UploadFile from './components/upload-file/upload-file.vue'
 import ContextMenuContainer from './components/context-menu-container/context-menu-container.vue'
 import AppCheckboxList from './components/app-checkbox-list/app-checkbox-list.vue'
@@ -45,6 +46,7 @@ import AppFormGroup2 from './components/app-form-group2/app-form-group2.vue'
 import AppFormItem2 from './components/app-form-item2/app-form-item2.vue'
 import CodeList from './components/codelist/codelist.vue'
 import AppQuickMenus from './components/app-quick-menus/app-quick-menus.vue'
+import AppIconMenus from './components/app-icon-menus/app-icon-menus.vue'
 import AppCheckbox from './components/app-checkbox/app-checkbox.vue'
 import AppColumnRender from './components/app-column-render/app-column-render.vue'
 import AppPickerSelectView from './components/app-picker-select-view/app-picker-select-view.vue'
@@ -150,6 +152,7 @@ export const AppComponents = {
         v.component('app-autocomplete', APPAutocomplete);
         v.component('app-form-druipart', AppFormDruipart);
         v.component('dropdown-list', DropdownList);
+        v.component('dropdown-list-hidden', DropdownListHidden);
         v.component('upload-file', UploadFile);
         v.component('context-menu-container', ContextMenuContainer);
         v.component('app-checkbox-list',AppCheckboxList);
@@ -171,6 +174,7 @@ export const AppComponents = {
         v.component('app-form-item2', AppFormItem2);
         v.component('codelist', CodeList);
         v.component('app-quick-menus', AppQuickMenus);
+        v.component('app-icon-menus', AppIconMenus);
         v.component('app-checkbox',AppCheckbox);
         v.component('app-column-render',AppColumnRender);
         v.component('app-picker-select-view',AppPickerSelectView);

@@ -97,7 +97,7 @@ public class JobsLockServiceImpl implements IJobsLockService {
 
     @Override
     public JobsLock getDraft(JobsLock et) {
-        et=jobsLockFeignClient.getDraft();
+        et=jobsLockFeignClient.getDraft(et);
         return et;
     }
 
@@ -131,9 +131,6 @@ public class JobsLockServiceImpl implements IJobsLockService {
         Page<JobsLock> jobsLocks=jobsLockFeignClient.searchDefault(context);
         return jobsLocks;
     }
-
-
-
 
 }
 

@@ -49,7 +49,7 @@ public interface WFTaskWayFeignClient {
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/getdraft")
-    WFTaskWay getDraft();
+    WFTaskWay getDraft(WFTaskWay entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/checkkey")

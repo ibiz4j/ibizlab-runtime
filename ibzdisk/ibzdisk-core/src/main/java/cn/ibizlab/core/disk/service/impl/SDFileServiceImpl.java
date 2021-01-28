@@ -242,9 +242,6 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
     }
 
 
-
-
-
     public ISDFileService getProxyService() {
         return cn.ibizlab.util.security.SpringContextHolder.getBean(this.getClass());
     }

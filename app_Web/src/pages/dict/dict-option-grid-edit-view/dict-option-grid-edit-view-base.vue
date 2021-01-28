@@ -3,7 +3,7 @@
     <app-studioaction :viewTitle="$t(model.srfCaption)" viewName="dictoptiongrideditview"></app-studioaction>
     <card class='view-card '  :dis-hover="true" :bordered="false">
         <div slot='title' class="header-container">
-        <span class='caption-info'>{{$t(model.srfCaption)}}</span>
+        <span class='caption-info' :title="$t(model.srfCaption)">{{$t(model.srfCaption)}}</span>
         </div>
             <div class='view-top-messages'>
             </div>
@@ -1373,7 +1373,7 @@ export default class DictOptionGridEditViewBase extends Vue {
                 Object.assign(data, { dictoption: args[0].dictoption });
             }
             if(!params) params = {};
-            Object.assign(params,{copymode:true});
+            Object.assign(args,{copymode:true});
             _this.opendata([{ ...data }], args, params, $event, xData);
         } else {
             Object.assign(this.viewparams,{copymode:true});
