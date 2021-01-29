@@ -1,4 +1,4 @@
-package cn.ibizlab.core.dict.extensions.vo;
+package cn.ibizlab.util.dict;
 
 
 import com.alibaba.fastjson.annotation.JSONField;

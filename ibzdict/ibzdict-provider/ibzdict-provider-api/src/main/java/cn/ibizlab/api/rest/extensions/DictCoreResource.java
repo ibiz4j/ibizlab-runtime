@@ -5,15 +5,15 @@ import cn.ibizlab.api.mapping.DictCatalogMapping;
 import cn.ibizlab.core.dict.domain.DictCatalog;
 import cn.ibizlab.core.dict.domain.DictOption;
 import cn.ibizlab.core.dict.extensions.service.DictCoreService;
-import cn.ibizlab.core.dict.extensions.vo.Catalog;
-import cn.ibizlab.core.dict.extensions.vo.CodeItem;
-import cn.ibizlab.core.dict.extensions.vo.CodeList;
-import cn.ibizlab.core.dict.extensions.vo.Option;
 import cn.ibizlab.core.dict.filter.DictCatalogSearchContext;
 import cn.ibizlab.core.dict.filter.DictOptionSearchContext;
 import cn.ibizlab.core.dict.service.IDictCatalogService;
 import cn.ibizlab.core.dict.service.IDictOptionService;
 import cn.ibizlab.util.annotation.VersionCheck;
+import cn.ibizlab.util.dict.Catalog;
+import cn.ibizlab.util.dict.CodeItem;
+import cn.ibizlab.util.dict.CodeList;
+import cn.ibizlab.util.dict.Option;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.annotations.Api;
@@ -67,7 +67,7 @@ public class DictCoreResource {
     }
 
     @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/catalogs/{code}/options")
-    public ResponseEntity<List<Option>> getOptions(@PathVariable("code") String code,DictOptionSearchContext context) {
+    public ResponseEntity<List<Option>> getOptions(@PathVariable("code") String code, DictOptionSearchContext context) {
         Catalog catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
             catalog = dictCoreService.getDictCatalog(code);
@@ -90,7 +90,7 @@ public class DictCoreResource {
 
 
     @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/codelist/{code}/items")
-    public ResponseEntity<List<CodeItem>> getCodeItems(@PathVariable("code") String code,DictOptionSearchContext context) {
+    public ResponseEntity<List<CodeItem>> getCodeItems(@PathVariable("code") String code, DictOptionSearchContext context) {
         CodeList catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
             catalog = dictCoreService.getCodeListCatalog(code);
