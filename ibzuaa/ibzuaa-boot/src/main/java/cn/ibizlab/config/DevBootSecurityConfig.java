@@ -125,6 +125,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/uaa/publickey").permitAll()
                        .antMatchers("/uaa/dingtalk/jsapi/sign").permitAll()
                        .antMatchers("/uaa/refreshToken").permitAll()
+                       .antMatchers("/sysauthlogs").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域
                 .and().headers().frameOptions().disable();

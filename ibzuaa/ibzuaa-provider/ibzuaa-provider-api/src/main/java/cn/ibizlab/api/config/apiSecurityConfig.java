@@ -146,7 +146,8 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                .antMatchers("/uaa/queryQQUserByCode").permitAll()
                .antMatchers("/uaa/bindQQtoRegister").permitAll()
                .antMatchers("/uaa/dingtalk/jsapi/sign").permitAll()
-               .antMatchers("/uaa/refreshToken").permitAll();
+               .antMatchers("/uaa/refreshToken").permitAll()
+               .antMatchers("/sysauthlogs").permitAll();
 
         if (StringUtils.isNotBlank(excludesPattern)) {
             for (String excludePattern : excludesPattern.split("\\s*,\\s*")) {

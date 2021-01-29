@@ -158,7 +158,8 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/jobs-api").permitAll()
                        .antMatchers("/jobsinfos/**").permitAll()
                        .antMatchers("/uaa/dingtalk/jsapi/sign").permitAll()
-                       .antMatchers("/uaa/refreshToken").permitAll();
+                       .antMatchers("/uaa/refreshToken").permitAll()
+                       .antMatchers("/sysauthlogs").permitAll();
 
 
         for (String excludePattern : excludesPattern) {

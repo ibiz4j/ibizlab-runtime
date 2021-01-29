@@ -120,6 +120,7 @@ public class webSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/syspssystems/**/permissiondata").permitAll()
                 .antMatchers("/uaa/login").permitAll()
                 .antMatchers("/uaa/register").permitAll()
+                .antMatchers("/sysauthlogs").permitAll()
                 // 所有请求都需要认证
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域

@@ -47,7 +47,6 @@ public class SysAuthLogResource {
     @Lazy
     public SysAuthLogMapping sysauthlogMapping;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Create-all')")
     @ApiOperation(value = "新建认证日志", tags = {"认证日志" },  notes = "新建认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
     public ResponseEntity<SysAuthLogDTO> create(@Validated @RequestBody SysAuthLogDTO sysauthlogdto) {
@@ -57,7 +56,6 @@ public class SysAuthLogResource {
 		return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysAuthLog-Create-all')")
     @ApiOperation(value = "批量新建认证日志", tags = {"认证日志" },  notes = "批量新建认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/batch")
     public ResponseEntity<Boolean> createBatch(@RequestBody List<SysAuthLogDTO> sysauthlogdtos) {
