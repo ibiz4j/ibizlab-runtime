@@ -19,10 +19,9 @@ services:
       - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.jdbc.Driver
       - SPRING_REDIS_HOST=ibzrt-redis
       - IBIZ_CACHELEVEL=L2
-      - IBZ_SLEEP=30
-      - IBIZ_SLEEP=30
+      - IBIZ_SLEEP=5
       - JAVA_OPTS=-Xms256m -Xmx1024m
-    deploy:materialized view
+    deploy:
       mode: replicated
       replicas: 1
 

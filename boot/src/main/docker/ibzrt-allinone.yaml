@@ -17,8 +17,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://ibzrt-db:3306/a_A_5d9d78509?useUnicode=true&characterEncoding=utf8&useSSL=false&nullCatalogMeansCurrent=true&useOldAliasMetadataBehavior=true
       - SPRING_REDIS_HOST=ibzrt-redis
       - IBIZ_CACHELEVEL=L2
-      - IBZ_SLEEP=30
-      - IBIZ_SLEEP=30
+      - IBIZ_SLEEP=15
       - JAVA_OPTS=-Xms256m -Xmx1024m
     depends_on:
       - ibzrt-db
