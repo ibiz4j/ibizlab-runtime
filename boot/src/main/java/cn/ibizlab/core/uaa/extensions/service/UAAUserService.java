@@ -1,4 +1,4 @@
-package cn.ibizlab.service;
+package cn.ibizlab.core.uaa.extensions.service;
 
 import cn.ibizlab.core.ou.extensions.domain.DeptMap;
 import cn.ibizlab.core.ou.extensions.domain.OrgMap;
@@ -30,8 +30,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import java.util.*;
 
 @Primary
+@Service("UAAUserService")
 @ConditionalOnExpression("'${ibiz.auth.service:UAAUserService}'.equals('UAAUserService')")
-public class UserService implements   AuthenticationUserService {
+public class UAAUserService implements   AuthenticationUserService {
 
 	@Autowired
 	private ISysUserService sysUserService;
