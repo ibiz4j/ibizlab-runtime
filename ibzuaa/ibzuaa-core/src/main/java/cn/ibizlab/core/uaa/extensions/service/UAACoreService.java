@@ -126,27 +126,32 @@ public class UAACoreService {
         Set<String> roleIds = getRoleByUserId(userId);
         if(roleIds.size()>0){
             roleIds.forEach(roleid->authorities.add(new SimpleGrantedAuthority("ROLE_"+roleid)));
-            SysRolePermissionSearchContext context = new SysRolePermissionSearchContext();
-            context.getSelectCond().in("sys_roleid",roleIds).eq("permissionenable",1).orderByAsc("permissiontype","sys_permissionid");
-            context.setSize(Integer.MAX_VALUE);
-
+            String ids="";
+            for(String id:roleIds){
+                if(!StringUtils.isEmpty(ids))ids+=",";
+                ids+=("'"+id+"'");
+            }
+            String sql= " SELECT distinct t21.PERMISSIONTYPE, t1.SYS_PERMISSIONID FROM IBZROLE_PERMISSION t1  INNER JOIN IBZPERMISSION t21 ON t1.SYS_PERMISSIONID = t21.SYS_PERMISSIONID and T21.ENABLE=1  where sys_roleid in ("+ids+")" ;
             Set<String> apps=new HashSet<>();
-
-            rolePermissionService.searchDefault(context).forEach(sysRolePermission -> {
-                if(PermissionType.APPMENU.toString().equals(sysRolePermission.getPermissiontype()))
+            rolePermissionService.select(sql,null).forEach(item->{
+                String permissiontype=item.getString("PERMISSIONTYPE");
+                String permissionid=item.getString("SYS_PERMISSIONID");
+                if(StringUtils.isEmpty(permissionid)||StringUtils.isEmpty(permissiontype))return;
+                if(PermissionType.APPMENU.toString().equals(permissiontype))
                 {
                     //补充应用访问权
-                    String appid = sysRolePermission.getPermissionid().split("-")[0].toLowerCase()+"-"+sysRolePermission.getPermissionid().split("-")[1].toLowerCase();
+                    String appid = permissionid.split("-")[0].toLowerCase()+"-"+permissionid.split("-")[1].toLowerCase();
                     if(!apps.contains(appid)){
                         apps.add(appid);
-                        authorities.add(new SimpleGrantedAuthority(sysRolePermission.getPermissiontype()+"_"+appid));
+                        authorities.add(new SimpleGrantedAuthority(permissiontype+"_"+appid));
                     }
                 }
-                if(PermissionType.OPPRIV.toString().equals(sysRolePermission.getPermissiontype()))
-                    authorities.add(new SimpleGrantedAuthority(sysRolePermission.getPermissionid()));
+                if(PermissionType.OPPRIV.toString().equals(permissiontype))
+                    authorities.add(new SimpleGrantedAuthority(permissionid));
                 else
-                    authorities.add(new SimpleGrantedAuthority(sysRolePermission.getPermissiontype()+"_"+sysRolePermission.getPermissionid()));
+                    authorities.add(new SimpleGrantedAuthority(permissiontype+"_"+permissionid));
             });
+
         }
 
         return authorities;

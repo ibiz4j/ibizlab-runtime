@@ -60,14 +60,14 @@ public class LayeringCache extends AbstractValueAdaptingCache {
     public ValueWrapper get(Object key) {
         ValueWrapper wrapper = caffeineCache.get(key);
         Object value= ObjectUtils.isEmpty(wrapper)?null:wrapper.get();
-        log.debug("查询一级缓存 key:{} ，value:{}", key,value);
+        log.debug("查询一级缓存 key:{}", key);
         if (ObjectUtils.isEmpty(value)) {
             wrapper = redisCache.get(key);
             value=ObjectUtils.isEmpty(wrapper)?null:wrapper.get();
-            log.debug("查询二级缓存 key:{} ，value:{}", key,value);
+            log.debug("查询二级缓存 key:{}", key);
             if(!ObjectUtils.isEmpty(value)){
                 caffeineCache.put(key, value);
-                log.debug("查询二级缓存，并将数据放到一级缓存。 key:{} ，value:{}", key,value);
+                log.debug("查询二级缓存，并将数据放到一级缓存。 key:{}", key);
             }
         }
         return wrapper;
