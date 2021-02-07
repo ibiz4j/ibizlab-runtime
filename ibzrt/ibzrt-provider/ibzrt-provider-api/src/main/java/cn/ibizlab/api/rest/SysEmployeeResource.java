@@ -73,7 +73,7 @@ public class SysEmployeeResource {
 		SysEmployee domain  = sysemployeeMapping.toDomain(sysemployeedto);
         domain .setUserid(sysemployee_id);
 		sysemployeeService.update(domain );
-		SysEmployeeDTO dto = sysemployeeMapping.toDto(domain );
+		SysEmployeeDTO dto = sysemployeeMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -144,8 +144,10 @@ public class SysEmployeeResource {
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "保存人员", tags = {"人员" },  notes = "保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysEmployeeDTO sysemployeedto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.save(sysemployeeMapping.toDomain(sysemployeedto)));
+    public ResponseEntity<SysEmployeeDTO> save(@RequestBody SysEmployeeDTO sysemployeedto) {
+        SysEmployee domain = sysemployeeMapping.toDomain(sysemployeedto);
+        sysemployeeService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(domain));
     }
 
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Save')")
@@ -286,10 +288,11 @@ public class SysEmployeeResource {
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据部门保存人员", tags = {"人员" },  notes = "根据部门保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/save")
-    public ResponseEntity<Boolean> saveBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {
+    public ResponseEntity<SysEmployeeDTO> saveBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {
         SysEmployee domain = sysemployeeMapping.toDomain(sysemployeedto);
         domain.setMdeptid(sysdepartment_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.save(domain));
+        sysemployeeService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(domain));
     }
 
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Save')")
@@ -433,10 +436,11 @@ public class SysEmployeeResource {
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构保存人员", tags = {"人员" },  notes = "根据单位机构保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/save")
-    public ResponseEntity<Boolean> saveBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody SysEmployeeDTO sysemployeedto) {
+    public ResponseEntity<SysEmployeeDTO> saveBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody SysEmployeeDTO sysemployeedto) {
         SysEmployee domain = sysemployeeMapping.toDomain(sysemployeedto);
         domain.setOrgid(sysorganization_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.save(domain));
+        sysemployeeService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(domain));
     }
 
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Save')")
@@ -580,10 +584,11 @@ public class SysEmployeeResource {
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedto),'ibzrt-SysEmployee-Save')")
     @ApiOperation(value = "根据单位机构部门保存人员", tags = {"人员" },  notes = "根据单位机构部门保存人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/save")
-    public ResponseEntity<Boolean> saveBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {
+    public ResponseEntity<SysEmployeeDTO> saveBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysEmployeeDTO sysemployeedto) {
         SysEmployee domain = sysemployeeMapping.toDomain(sysemployeedto);
         domain.setMdeptid(sysdepartment_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeService.save(domain));
+        sysemployeeService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysemployeeMapping.toDto(domain));
     }
 
     @PreAuthorize("hasPermission(this.sysemployeeMapping.toDomain(#sysemployeedtos),'ibzrt-SysEmployee-Save')")

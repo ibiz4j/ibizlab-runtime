@@ -4,12 +4,17 @@ import cn.ibizlab.api.dto.MsgBodyDTO;
 import cn.ibizlab.api.mapping.MsgBodyMapping;
 import cn.ibizlab.core.extensions.domain.Template;
 import cn.ibizlab.core.extensions.service.NotifyCoreService;
+import cn.ibizlab.core.notify.domain.MsgBody;
+import cn.ibizlab.core.notify.filter.MsgBodySearchContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 public class NotifyCoreResource {
@@ -66,4 +71,31 @@ public class NotifyCoreResource {
         return ResponseEntity.status(HttpStatus.OK).body(notifyCoreService.finishDingTalkWorkRecord(msgId));
     }
 
+    /**
+     * 全量获取催办消息
+     * @param
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/notify/msgbody/getallbacklogall")
+    public ResponseEntity<List<MsgBodyDTO>> getAllBacklogAll(MsgBodySearchContext context){
+        Page domains = notifyCoreService.getBacklogAllContent(context);
+        List<MsgBodyDTO> list = mapping.toDto(domains.getContent());
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+                .header("x-total", String.valueOf(domains.getTotalElements()))
+                .body(list);
+    }
+
+    /**
+     * 分页获取催办消息
+     * @param
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/notify/msgbody/getbacklogbypage")
+    public ResponseEntity<Page> getBacklogByPage(MsgBodySearchContext context) {
+        Page page = notifyCoreService.getBacklogByPage(context);
+        return ResponseEntity.status(HttpStatus.OK).body(new PageImpl(mapping.toDto(page.getContent()), page.getPageable(), page.getContent().size()));
+
+    }
 }

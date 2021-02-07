@@ -72,7 +72,7 @@ public class SysOpenAccessResource {
 		SysOpenAccess domain  = sysopenaccessMapping.toDomain(sysopenaccessdto);
         domain .setId(sysopenaccess_id);
 		sysopenaccessService.update(domain );
-		SysOpenAccessDTO dto = sysopenaccessMapping.toDto(domain );
+		SysOpenAccessDTO dto = sysopenaccessMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class SysOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysOpenAccess-Save-all')")
     @ApiOperation(value = "保存第三方认证平台", tags = {"第三方认证平台" },  notes = "保存第三方认证平台")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysOpenAccessDTO sysopenaccessdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysopenaccessService.save(sysopenaccessMapping.toDomain(sysopenaccessdto)));
+    public ResponseEntity<SysOpenAccessDTO> save(@RequestBody SysOpenAccessDTO sysopenaccessdto) {
+        SysOpenAccess domain = sysopenaccessMapping.toDomain(sysopenaccessdto);
+        sysopenaccessService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysopenaccessMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysOpenAccess-Save-all')")

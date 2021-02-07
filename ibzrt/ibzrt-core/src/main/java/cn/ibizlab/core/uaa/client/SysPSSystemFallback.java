@@ -61,6 +61,10 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient {
     }
 
 
+    public Object saveEntity(SysPSSystem syspssystem) {
+        return null;
+    }
+
     public Boolean save(SysPSSystem syspssystem) {
         return false;
     }

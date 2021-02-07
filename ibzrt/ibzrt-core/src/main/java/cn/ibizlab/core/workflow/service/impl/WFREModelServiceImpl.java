@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.workflow.client.WFREModelFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[流程模型] 服务对象接口实现
@@ -108,10 +109,23 @@ public class WFREModelServiceImpl implements IWFREModelService {
     @Override
     @Transactional
     public boolean save(WFREModel et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!wFREModelFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = wFREModelFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), WFREModel.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

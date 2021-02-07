@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.uaa.client.SysPSSystemFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[系统] 服务对象接口实现
@@ -108,10 +109,23 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
     @Override
     @Transactional
     public boolean save(SysPSSystem et) {
-        if(et.getPssystemid()==null) et.setPssystemid((String)et.getDefaultKey(true));
-        if(!sysPSSystemFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = sysPSSystemFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), SysPSSystem.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

@@ -61,6 +61,10 @@ public class SysPermissionFallback implements SysPermissionFeignClient {
     }
 
 
+    public Object saveEntity(SysPermission syspermission) {
+        return null;
+    }
+
     public Boolean save(SysPermission syspermission) {
         return false;
     }

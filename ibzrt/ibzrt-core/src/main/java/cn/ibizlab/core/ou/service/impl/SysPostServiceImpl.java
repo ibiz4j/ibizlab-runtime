@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.ou.client.SysPostFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[岗位] 服务对象接口实现
@@ -108,10 +109,23 @@ public class SysPostServiceImpl implements ISysPostService {
     @Override
     @Transactional
     public boolean save(SysPost et) {
-        if(et.getPostid()==null) et.setPostid((String)et.getDefaultKey(true));
-        if(!sysPostFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = sysPostFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), SysPost.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

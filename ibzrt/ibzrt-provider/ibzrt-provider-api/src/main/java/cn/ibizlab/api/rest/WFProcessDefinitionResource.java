@@ -72,7 +72,7 @@ public class WFProcessDefinitionResource {
 		WFProcessDefinition domain  = wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto);
         domain .setDefinitionkey(wfprocessdefinition_id);
 		wfprocessdefinitionService.update(domain );
-		WFProcessDefinitionDTO dto = wfprocessdefinitionMapping.toDto(domain );
+		WFProcessDefinitionDTO dto = wfprocessdefinitionMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class WFProcessDefinitionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFProcessDefinition-Save-all')")
     @ApiOperation(value = "保存流程定义", tags = {"流程定义" },  notes = "保存流程定义")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionService.save(wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto)));
+    public ResponseEntity<WFProcessDefinitionDTO> save(@RequestBody WFProcessDefinitionDTO wfprocessdefinitiondto) {
+        WFProcessDefinition domain = wfprocessdefinitionMapping.toDomain(wfprocessdefinitiondto);
+        wfprocessdefinitionService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wfprocessdefinitionMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFProcessDefinition-Save-all')")

@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.ou.client.SysTeamMemberFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[组成员] 服务对象接口实现
@@ -108,10 +109,23 @@ public class SysTeamMemberServiceImpl implements ISysTeamMemberService {
     @Override
     @Transactional
     public boolean save(SysTeamMember et) {
-        if(et.getTeammemberid()==null) et.setTeammemberid((String)et.getDefaultKey(true));
-        if(!sysTeamMemberFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = sysTeamMemberFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), SysTeamMember.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

@@ -57,7 +57,9 @@ public interface MsgTemplateFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/save")
-    Boolean save(@RequestBody MsgTemplate msgtemplate);
+    Object saveEntity(@RequestBody MsgTemplate msgtemplate);
+
+    default Boolean save(@RequestBody MsgTemplate msgtemplate) { return saveEntity(msgtemplate)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/savebatch")
     Boolean saveBatch(@RequestBody List<MsgTemplate> msgtemplates);

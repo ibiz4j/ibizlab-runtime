@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.ou.client.SysEmployeeFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[人员] 服务对象接口实现
@@ -124,10 +125,23 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
     @Override
     @Transactional
     public boolean save(SysEmployee et) {
-        if(et.getUserid()==null) et.setUserid((String)et.getDefaultKey(true));
-        if(!sysEmployeeFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = sysEmployeeFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), SysEmployee.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.uaa.client.SysUserRoleFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[用户角色关系] 服务对象接口实现
@@ -108,10 +109,23 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
     @Override
     @Transactional
     public boolean save(SysUserRole et) {
-        if(et.getUserroleid()==null) et.setUserroleid((String)et.getDefaultKey(true));
-        if(!sysUserRoleFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = sysUserRoleFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), SysUserRole.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

@@ -57,7 +57,9 @@ public interface SysRolePermissionFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/save")
-    Boolean save(@RequestBody SysRolePermission sysrolepermission);
+    Object saveEntity(@RequestBody SysRolePermission sysrolepermission);
+
+    default Boolean save(@RequestBody SysRolePermission sysrolepermission) { return saveEntity(sysrolepermission)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/savebatch")
     Boolean saveBatch(@RequestBody List<SysRolePermission> sysrolepermissions);

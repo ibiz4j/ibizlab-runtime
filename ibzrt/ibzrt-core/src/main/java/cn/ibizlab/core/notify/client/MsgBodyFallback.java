@@ -61,6 +61,10 @@ public class MsgBodyFallback implements MsgBodyFeignClient {
     }
 
 
+    public Object saveEntity(MsgBody msgbody) {
+        return null;
+    }
+
     public Boolean save(MsgBody msgbody) {
         return false;
     }

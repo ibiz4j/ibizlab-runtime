@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.task.client.JobsLogFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[任务调度日志] 服务对象接口实现
@@ -108,10 +109,23 @@ public class JobsLogServiceImpl implements IJobsLogService {
     @Override
     @Transactional
     public boolean save(JobsLog et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!jobsLogFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = jobsLogFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), JobsLog.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

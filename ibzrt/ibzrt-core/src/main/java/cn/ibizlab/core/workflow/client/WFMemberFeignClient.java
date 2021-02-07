@@ -57,7 +57,9 @@ public interface WFMemberFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
-    Boolean save(@RequestBody WFMember wfmember);
+    Object saveEntity(@RequestBody WFMember wfmember);
+
+    default Boolean save(@RequestBody WFMember wfmember) { return saveEntity(wfmember)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/savebatch")
     Boolean saveBatch(@RequestBody List<WFMember> wfmembers);

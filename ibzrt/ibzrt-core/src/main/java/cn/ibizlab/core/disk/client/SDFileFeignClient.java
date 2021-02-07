@@ -57,7 +57,9 @@ public interface SDFileFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
-    Boolean save(@RequestBody SDFile sdfile);
+    Object saveEntity(@RequestBody SDFile sdfile);
+
+    default Boolean save(@RequestBody SDFile sdfile) { return saveEntity(sdfile)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/savebatch")
     Boolean saveBatch(@RequestBody List<SDFile> sdfiles);

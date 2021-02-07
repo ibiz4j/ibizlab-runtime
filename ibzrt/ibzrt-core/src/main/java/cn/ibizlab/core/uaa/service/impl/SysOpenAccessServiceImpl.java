@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.uaa.client.SysOpenAccessFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[第三方认证平台] 服务对象接口实现
@@ -108,10 +109,23 @@ public class SysOpenAccessServiceImpl implements ISysOpenAccessService {
     @Override
     @Transactional
     public boolean save(SysOpenAccess et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!sysOpenAccessFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = sysOpenAccessFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), SysOpenAccess.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

@@ -72,7 +72,7 @@ public class JobsLogResource {
 		JobsLog domain  = jobslogMapping.toDomain(jobslogdto);
         domain .setId(jobslog_id);
 		jobslogService.update(domain );
-		JobsLogDTO dto = jobslogMapping.toDto(domain );
+		JobsLogDTO dto = jobslogMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class JobsLogResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Save-all')")
     @ApiOperation(value = "保存任务调度日志", tags = {"任务调度日志" },  notes = "保存任务调度日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/save")
-    public ResponseEntity<Boolean> save(@RequestBody JobsLogDTO jobslogdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(jobslogService.save(jobslogMapping.toDomain(jobslogdto)));
+    public ResponseEntity<JobsLogDTO> save(@RequestBody JobsLogDTO jobslogdto) {
+        JobsLog domain = jobslogMapping.toDomain(jobslogdto);
+        jobslogService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(jobslogMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Save-all')")

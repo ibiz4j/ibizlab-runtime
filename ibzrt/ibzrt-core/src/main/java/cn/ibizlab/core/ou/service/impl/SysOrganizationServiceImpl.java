@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.ou.client.SysOrganizationFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[单位机构] 服务对象接口实现
@@ -108,10 +109,23 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
     @Override
     @Transactional
     public boolean save(SysOrganization et) {
-        if(et.getOrgid()==null) et.setOrgid((String)et.getDefaultKey(true));
-        if(!sysOrganizationFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = sysOrganizationFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), SysOrganization.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

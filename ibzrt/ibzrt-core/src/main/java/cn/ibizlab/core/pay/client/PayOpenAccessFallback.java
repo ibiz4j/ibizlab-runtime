@@ -61,6 +61,10 @@ public class PayOpenAccessFallback implements PayOpenAccessFeignClient {
     }
 
 
+    public Object saveEntity(PayOpenAccess payopenaccess) {
+        return null;
+    }
+
     public Boolean save(PayOpenAccess payopenaccess) {
         return false;
     }

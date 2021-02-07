@@ -72,7 +72,7 @@ public class MsgBodyResource {
 		MsgBody domain  = msgbodyMapping.toDomain(msgbodydto);
         domain .setMsgId(msgbody_id);
 		msgbodyService.update(domain );
-		MsgBodyDTO dto = msgbodyMapping.toDto(domain );
+		MsgBodyDTO dto = msgbodyMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class MsgBodyResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Save-all')")
     @ApiOperation(value = "保存消息", tags = {"消息" },  notes = "保存消息")
 	@RequestMapping(method = RequestMethod.POST, value = "/msgbodies/save")
-    public ResponseEntity<Boolean> save(@RequestBody MsgBodyDTO msgbodydto) {
-        return ResponseEntity.status(HttpStatus.OK).body(msgbodyService.save(msgbodyMapping.toDomain(msgbodydto)));
+    public ResponseEntity<MsgBodyDTO> save(@RequestBody MsgBodyDTO msgbodydto) {
+        MsgBody domain = msgbodyMapping.toDomain(msgbodydto);
+        msgbodyService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(msgbodyMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Save-all')")

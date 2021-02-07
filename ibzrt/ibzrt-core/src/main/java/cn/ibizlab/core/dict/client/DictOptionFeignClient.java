@@ -57,7 +57,9 @@ public interface DictOptionFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/save")
-    Boolean save(@RequestBody DictOption dictoption);
+    Object saveEntity(@RequestBody DictOption dictoption);
+
+    default Boolean save(@RequestBody DictOption dictoption) { return saveEntity(dictoption)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/savebatch")
     Boolean saveBatch(@RequestBody List<DictOption> dictoptions);

@@ -72,7 +72,7 @@ public class WFUserResource {
 		WFUser domain  = wfuserMapping.toDomain(wfuserdto);
         domain .setId(wfuser_id);
 		wfuserService.update(domain );
-		WFUserDTO dto = wfuserMapping.toDto(domain );
+		WFUserDTO dto = wfuserMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class WFUserResource {
     @PreAuthorize("hasPermission(this.wfuserMapping.toDomain(#wfuserdto),'ibzwf-WFUser-Save')")
     @ApiOperation(value = "保存用户", tags = {"用户" },  notes = "保存用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFUserDTO wfuserdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfuserService.save(wfuserMapping.toDomain(wfuserdto)));
+    public ResponseEntity<WFUserDTO> save(@RequestBody WFUserDTO wfuserdto) {
+        WFUser domain = wfuserMapping.toDomain(wfuserdto);
+        wfuserService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wfuserMapping.toDto(domain));
     }
 
     @PreAuthorize("hasPermission(this.wfuserMapping.toDomain(#wfuserdtos),'ibzwf-WFUser-Save')")

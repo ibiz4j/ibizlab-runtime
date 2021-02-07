@@ -57,7 +57,9 @@ public interface DictCatalogFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/save")
-    Boolean save(@RequestBody DictCatalog dictcatalog);
+    Object saveEntity(@RequestBody DictCatalog dictcatalog);
+
+    default Boolean save(@RequestBody DictCatalog dictcatalog) { return saveEntity(dictcatalog)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/savebatch")
     Boolean saveBatch(@RequestBody List<DictCatalog> dictcatalogs);

@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.notify.client.MsgBodyFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[消息] 服务对象接口实现
@@ -108,10 +109,23 @@ public class MsgBodyServiceImpl implements IMsgBodyService {
     @Override
     @Transactional
     public boolean save(MsgBody et) {
-        if(et.getMsgId()==null) et.setMsgId((String)et.getDefaultKey(true));
-        if(!msgBodyFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = msgBodyFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), MsgBody.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

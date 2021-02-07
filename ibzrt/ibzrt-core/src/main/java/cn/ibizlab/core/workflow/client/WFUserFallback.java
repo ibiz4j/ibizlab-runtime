@@ -61,6 +61,10 @@ public class WFUserFallback implements WFUserFeignClient {
     }
 
 
+    public Object saveEntity(WFUser wfuser) {
+        return null;
+    }
+
     public Boolean save(WFUser wfuser) {
         return false;
     }

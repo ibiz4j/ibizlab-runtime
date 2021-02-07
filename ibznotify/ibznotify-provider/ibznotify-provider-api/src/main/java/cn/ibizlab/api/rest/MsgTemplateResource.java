@@ -72,7 +72,7 @@ public class MsgTemplateResource {
 		MsgTemplate domain  = msgtemplateMapping.toDomain(msgtemplatedto);
         domain .setTid(msgtemplate_id);
 		msgtemplateService.update(domain );
-		MsgTemplateDTO dto = msgtemplateMapping.toDto(domain );
+		MsgTemplateDTO dto = msgtemplateMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class MsgTemplateResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Save-all')")
     @ApiOperation(value = "保存消息模板", tags = {"消息模板" },  notes = "保存消息模板")
 	@RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/save")
-    public ResponseEntity<Boolean> save(@RequestBody MsgTemplateDTO msgtemplatedto) {
-        return ResponseEntity.status(HttpStatus.OK).body(msgtemplateService.save(msgtemplateMapping.toDomain(msgtemplatedto)));
+    public ResponseEntity<MsgTemplateDTO> save(@RequestBody MsgTemplateDTO msgtemplatedto) {
+        MsgTemplate domain = msgtemplateMapping.toDomain(msgtemplatedto);
+        msgtemplateService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(msgtemplateMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Save-all')")

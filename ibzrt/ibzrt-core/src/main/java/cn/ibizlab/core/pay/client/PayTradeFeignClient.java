@@ -57,7 +57,9 @@ public interface PayTradeFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/paytrades/save")
-    Boolean save(@RequestBody PayTrade paytrade);
+    Object saveEntity(@RequestBody PayTrade paytrade);
+
+    default Boolean save(@RequestBody PayTrade paytrade) { return saveEntity(paytrade)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/paytrades/savebatch")
     Boolean saveBatch(@RequestBody List<PayTrade> paytrades);

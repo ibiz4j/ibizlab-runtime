@@ -57,7 +57,9 @@ public interface SysUserFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
-    Boolean save(@RequestBody SysUser sysuser);
+    Object saveEntity(@RequestBody SysUser sysuser);
+
+    default Boolean save(@RequestBody SysUser sysuser) { return saveEntity(sysuser)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysusers/savebatch")
     Boolean saveBatch(@RequestBody List<SysUser> sysusers);

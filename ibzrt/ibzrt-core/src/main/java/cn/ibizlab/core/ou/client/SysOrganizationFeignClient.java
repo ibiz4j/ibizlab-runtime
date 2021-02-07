@@ -57,7 +57,9 @@ public interface SysOrganizationFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/save")
-    Boolean save(@RequestBody SysOrganization sysorganization);
+    Object saveEntity(@RequestBody SysOrganization sysorganization);
+
+    default Boolean save(@RequestBody SysOrganization sysorganization) { return saveEntity(sysorganization)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/savebatch")
     Boolean saveBatch(@RequestBody List<SysOrganization> sysorganizations);

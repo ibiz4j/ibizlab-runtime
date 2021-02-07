@@ -52,6 +52,7 @@ import CodeListService from "@/codelist/codelist-service";
 import EntityService from '@/service/entity-service';
 import { Vue, Component, Prop, Provide, Emit, Watch } from 'vue-property-decorator';
 import { Environment } from '@/environments/environment';
+import moment from "moment"; 
 
 @Component({
 })
@@ -395,11 +396,11 @@ export default class AppDataUploadView extends Vue {
        let reader = new FileReader();
        reader.onload = (e:any) => {
            let data = e.target.result;
-           this.workBookData = XLSX.read(data, {type: 'binary'});
+           this.workBookData = XLSX.read(data, {type: 'binary',cellDates: true});
            let xlsxData = XLSX.utils.sheet_to_json(this.workBookData.Sheets[this.workBookData.SheetNames[0]]);
            let list1 = this.getFirstRow(this.workBookData);
            xlsxData = this.AddXlsxData(xlsxData, list1);
-           this.importDataArray = JSON.parse(JSON.stringify(xlsxData));
+           this.importDataArray = this.$util.deepCopy(xlsxData);
            (this.$refs.inputUpLoad as any).value = '';
        };
        reader.readAsBinaryString(f);
@@ -505,6 +506,11 @@ export default class AppDataUploadView extends Vue {
         data.forEach((item:any) =>{
             let curObject:any = {};
             Object.keys(item).forEach((ele:any) => {
+                // todo XLSX读取时间为国际时间(东8区)+8H转为标准时间
+                if (item[ele] instanceof Date){
+                    const tempDate:Date = item[ele];
+                    item[ele] = moment(tempDate).add(8, 'h').format("YYYY-MM-DD HH:mm:ss");
+                }
                 if(this.allFieldMap.get(ele).codelist){
                     let codelistTag:string = this.allFieldMap.get(ele).codelist.tag;
                      let codelistIsNumber:boolean = this.allFieldMap.get(ele).codelist.isnumber;

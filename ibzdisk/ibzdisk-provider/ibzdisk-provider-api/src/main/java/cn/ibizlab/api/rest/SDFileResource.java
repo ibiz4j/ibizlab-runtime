@@ -73,7 +73,7 @@ public class SDFileResource {
 		SDFile domain  = sdfileMapping.toDomain(sdfiledto);
         domain .setId(sdfile_id);
 		sdfileService.update(domain );
-		SDFileDTO dto = sdfileMapping.toDto(domain );
+		SDFileDTO dto = sdfileMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -125,8 +125,10 @@ public class SDFileResource {
     @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledto),'ibzdisk-SDFile-Save')")
     @ApiOperation(value = "保存文件", tags = {"文件" },  notes = "保存文件")
 	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
-    public ResponseEntity<Boolean> save(@RequestBody SDFileDTO sdfiledto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sdfileService.save(sdfileMapping.toDomain(sdfiledto)));
+    public ResponseEntity<SDFileDTO> save(@RequestBody SDFileDTO sdfiledto) {
+        SDFile domain = sdfileMapping.toDomain(sdfiledto);
+        sdfileService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sdfileMapping.toDto(domain));
     }
 
     @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledtos),'ibzdisk-SDFile-Save')")

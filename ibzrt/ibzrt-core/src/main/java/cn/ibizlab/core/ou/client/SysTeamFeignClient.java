@@ -57,7 +57,9 @@ public interface SysTeamFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/systeams/save")
-    Boolean save(@RequestBody SysTeam systeam);
+    Object saveEntity(@RequestBody SysTeam systeam);
+
+    default Boolean save(@RequestBody SysTeam systeam) { return saveEntity(systeam)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/systeams/savebatch")
     Boolean saveBatch(@RequestBody List<SysTeam> systeams);

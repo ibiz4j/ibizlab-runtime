@@ -72,7 +72,7 @@ public class SysDeptMemberResource {
 		SysDeptMember domain  = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
         domain .setMemberid(sysdeptmember_id);
 		sysdeptmemberService.update(domain );
-		SysDeptMemberDTO dto = sysdeptmemberMapping.toDto(domain );
+		SysDeptMemberDTO dto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -123,8 +123,10 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "保存部门成员", tags = {"部门成员" },  notes = "保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdeptmembers/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysDeptMemberDTO sysdeptmemberdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(sysdeptmemberMapping.toDomain(sysdeptmemberdto)));
+    public ResponseEntity<SysDeptMemberDTO> save(@RequestBody SysDeptMemberDTO sysdeptmemberdto) {
+        SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
+        sysdeptmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "批量保存部门成员", tags = {"部门成员" },  notes = "批量保存部门成员")
@@ -256,10 +258,11 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据部门保存部门成员", tags = {"部门成员" },  notes = "根据部门保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysdeptmembers/save")
-    public ResponseEntity<Boolean> saveBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
+    public ResponseEntity<SysDeptMemberDTO> saveBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
         domain.setDeptid(sysdepartment_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
+        sysdeptmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据部门批量保存部门成员", tags = {"部门成员" },  notes = "根据部门批量保存部门成员")
@@ -393,10 +396,11 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据人员保存部门成员", tags = {"部门成员" },  notes = "根据人员保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/sysdeptmembers/save")
-    public ResponseEntity<Boolean> saveBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
+    public ResponseEntity<SysDeptMemberDTO> saveBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
         domain.setUserid(sysemployee_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
+        sysdeptmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据人员批量保存部门成员", tags = {"部门成员" },  notes = "根据人员批量保存部门成员")
@@ -530,10 +534,11 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据部门人员保存部门成员", tags = {"部门成员" },  notes = "根据部门人员保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/save")
-    public ResponseEntity<Boolean> saveBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
+    public ResponseEntity<SysDeptMemberDTO> saveBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
         domain.setUserid(sysemployee_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
+        sysdeptmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据部门人员批量保存部门成员", tags = {"部门成员" },  notes = "根据部门人员批量保存部门成员")
@@ -667,10 +672,11 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据单位机构部门保存部门成员", tags = {"部门成员" },  notes = "根据单位机构部门保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/save")
-    public ResponseEntity<Boolean> saveBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
+    public ResponseEntity<SysDeptMemberDTO> saveBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
         domain.setDeptid(sysdepartment_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
+        sysdeptmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据单位机构部门批量保存部门成员", tags = {"部门成员" },  notes = "根据单位机构部门批量保存部门成员")
@@ -804,10 +810,11 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据单位机构人员保存部门成员", tags = {"部门成员" },  notes = "根据单位机构人员保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/sysdeptmembers/save")
-    public ResponseEntity<Boolean> saveBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
+    public ResponseEntity<SysDeptMemberDTO> saveBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
         domain.setUserid(sysemployee_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
+        sysdeptmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据单位机构人员批量保存部门成员", tags = {"部门成员" },  notes = "根据单位机构人员批量保存部门成员")
@@ -941,10 +948,11 @@ public class SysDeptMemberResource {
 
     @ApiOperation(value = "根据单位机构部门人员保存部门成员", tags = {"部门成员" },  notes = "根据单位机构部门人员保存部门成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/save")
-    public ResponseEntity<Boolean> saveBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
+    public ResponseEntity<SysDeptMemberDTO> saveBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysDeptMemberDTO sysdeptmemberdto) {
         SysDeptMember domain = sysdeptmemberMapping.toDomain(sysdeptmemberdto);
         domain.setUserid(sysemployee_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberService.save(domain));
+        sysdeptmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据单位机构部门人员批量保存部门成员", tags = {"部门成员" },  notes = "根据单位机构部门人员批量保存部门成员")

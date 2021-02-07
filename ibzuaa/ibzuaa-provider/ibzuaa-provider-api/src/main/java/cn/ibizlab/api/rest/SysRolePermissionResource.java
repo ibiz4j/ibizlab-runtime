@@ -73,7 +73,7 @@ public class SysRolePermissionResource {
 		SysRolePermission domain  = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
         domain .setRolepermissionid(sysrolepermission_id);
 		sysrolepermissionService.update(domain );
-		SysRolePermissionDTO dto = sysrolepermissionMapping.toDto(domain );
+		SysRolePermissionDTO dto = sysrolepermissionMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -125,8 +125,10 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
     @ApiOperation(value = "保存角色权限关系", tags = {"角色权限关系" },  notes = "保存角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysRolePermissionDTO sysrolepermissiondto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(sysrolepermissionMapping.toDomain(sysrolepermissiondto)));
+    public ResponseEntity<SysRolePermissionDTO> save(@RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+        SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
+        sysrolepermissionService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
@@ -250,10 +252,11 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
     @ApiOperation(value = "根据权限/资源保存角色权限关系", tags = {"角色权限关系" },  notes = "根据权限/资源保存角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/{syspermission_id}/sysrolepermissions/save")
-    public ResponseEntity<Boolean> saveBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+    public ResponseEntity<SysRolePermissionDTO> saveBySysPermission(@PathVariable("syspermission_id") String syspermission_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
         SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
         domain.setPermissionid(syspermission_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(domain));
+        sysrolepermissionService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
@@ -380,10 +383,11 @@ public class SysRolePermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")
     @ApiOperation(value = "根据系统角色保存角色权限关系", tags = {"角色权限关系" },  notes = "根据系统角色保存角色权限关系")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/{sysrole_id}/sysrolepermissions/save")
-    public ResponseEntity<Boolean> saveBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
+    public ResponseEntity<SysRolePermissionDTO> saveBySysRole(@PathVariable("sysrole_id") String sysrole_id, @RequestBody SysRolePermissionDTO sysrolepermissiondto) {
         SysRolePermission domain = sysrolepermissionMapping.toDomain(sysrolepermissiondto);
         domain.setRoleid(sysrole_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionService.save(domain));
+        sysrolepermissionService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysrolepermissionMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRolePermission-Save-all')")

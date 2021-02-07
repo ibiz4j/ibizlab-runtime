@@ -72,7 +72,7 @@ public class MsgOpenAccessResource {
 		MsgOpenAccess domain  = msgopenaccessMapping.toDomain(msgopenaccessdto);
         domain .setId(msgopenaccess_id);
 		msgopenaccessService.update(domain );
-		MsgOpenAccessDTO dto = msgopenaccessMapping.toDto(domain );
+		MsgOpenAccessDTO dto = msgopenaccessMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class MsgOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Save-all')")
     @ApiOperation(value = "保存接入开放平台", tags = {"接入开放平台" },  notes = "保存接入开放平台")
 	@RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/save")
-    public ResponseEntity<Boolean> save(@RequestBody MsgOpenAccessDTO msgopenaccessdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(msgopenaccessService.save(msgopenaccessMapping.toDomain(msgopenaccessdto)));
+    public ResponseEntity<MsgOpenAccessDTO> save(@RequestBody MsgOpenAccessDTO msgopenaccessdto) {
+        MsgOpenAccess domain = msgopenaccessMapping.toDomain(msgopenaccessdto);
+        msgopenaccessService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(msgopenaccessMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Save-all')")

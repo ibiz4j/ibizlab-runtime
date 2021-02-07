@@ -57,7 +57,9 @@ public interface SysPSSystemFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/save")
-    Boolean save(@RequestBody SysPSSystem syspssystem);
+    Object saveEntity(@RequestBody SysPSSystem syspssystem);
+
+    default Boolean save(@RequestBody SysPSSystem syspssystem) { return saveEntity(syspssystem)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/syspssystems/savebatch")
     Boolean saveBatch(@RequestBody List<SysPSSystem> syspssystems);

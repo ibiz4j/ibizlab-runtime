@@ -61,6 +61,10 @@ public class MsgUserAccountFallback implements MsgUserAccountFeignClient {
     }
 
 
+    public Object saveEntity(MsgUserAccount msguseraccount) {
+        return null;
+    }
+
     public Boolean save(MsgUserAccount msguseraccount) {
         return false;
     }

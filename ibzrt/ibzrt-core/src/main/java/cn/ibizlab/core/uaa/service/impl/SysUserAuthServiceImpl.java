@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.uaa.client.SysUserAuthFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[账号绑定] 服务对象接口实现
@@ -108,10 +109,23 @@ public class SysUserAuthServiceImpl implements ISysUserAuthService {
     @Override
     @Transactional
     public boolean save(SysUserAuth et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!sysUserAuthFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = sysUserAuthFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), SysUserAuth.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

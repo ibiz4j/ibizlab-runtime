@@ -45,6 +45,8 @@ export const Environment = {
     ibizlabtUrl: 'https://www.ibizlab.cn',
     // ibiz论坛地址
     ibizbbstUrl: 'https://bbs.ibizlab.cn',
+    // 是否启用工作流
+    workflow: false,
 };
 // 挂载外部配置文件
 if ((window as any).Environment) {

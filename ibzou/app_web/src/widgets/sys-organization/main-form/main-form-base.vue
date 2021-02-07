@@ -102,7 +102,7 @@
 <i-col v-show="detailsModel.createdate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='createdate' :itemRules="this.rules().createdate" class='' :caption="$t('entities.sysorganization.main_form.details.createdate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.createdate.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='createdate' :value="data.createdate" dataType="DATETIME" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS"     :precision="0"
+<app-span name='createdate' :value="data.createdate" dataType="DATETIME" unitName="" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS"     :precision="0"
 :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
 </app-span>
 
@@ -112,7 +112,7 @@
 <i-col v-show="detailsModel.updatedate.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='updatedate' :itemRules="this.rules().updatedate" class='' :caption="$t('entities.sysorganization.main_form.details.updatedate')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.updatedate.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='updatedate' :value="data.updatedate" dataType="DATETIME" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS"     :precision="0"
+<app-span name='updatedate' :value="data.updatedate" dataType="DATETIME" unitName="" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS"     :precision="0"
 :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
 </app-span>
 

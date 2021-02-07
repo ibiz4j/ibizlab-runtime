@@ -61,6 +61,10 @@ public class MsgOpenAccessFallback implements MsgOpenAccessFeignClient {
     }
 
 
+    public Object saveEntity(MsgOpenAccess msgopenaccess) {
+        return null;
+    }
+
     public Boolean save(MsgOpenAccess msgopenaccess) {
         return false;
     }

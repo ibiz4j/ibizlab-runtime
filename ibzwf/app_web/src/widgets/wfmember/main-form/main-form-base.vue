@@ -36,7 +36,7 @@
 <i-col v-show="detailsModel.orgname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='orgname' :itemRules="this.rules().orgname" class='' :caption="$t('entities.wfmember.main_form.details.orgname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.orgname.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='orgname' :value="data.orgname" dataType="PICKUPDATA"     :precision="0"
+<app-span name='orgname' :value="data.orgname" dataType="PICKUPDATA" unitName=""     :precision="0"
 :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
 </app-span>
 
@@ -46,7 +46,7 @@
 <i-col v-show="detailsModel.mdeptname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='mdeptname' :itemRules="this.rules().mdeptname" class='' :caption="$t('entities.wfmember.main_form.details.mdeptname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.mdeptname.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='mdeptname' :value="data.mdeptname" dataType="PICKUPDATA"     :precision="0"
+<app-span name='mdeptname' :value="data.mdeptname" dataType="PICKUPDATA" unitName=""     :precision="0"
 :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
 </app-span>
 

@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.pay.client.PayTradeFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[支付交易] 服务对象接口实现
@@ -108,10 +109,23 @@ public class PayTradeServiceImpl implements IPayTradeService {
     @Override
     @Transactional
     public boolean save(PayTrade et) {
-        if(et.getTradeId()==null) et.setTradeId((String)et.getDefaultKey(true));
-        if(!payTradeFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = payTradeFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), PayTrade.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

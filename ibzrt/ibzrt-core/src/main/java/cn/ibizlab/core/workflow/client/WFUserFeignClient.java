@@ -57,7 +57,9 @@ public interface WFUserFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers/save")
-    Boolean save(@RequestBody WFUser wfuser);
+    Object saveEntity(@RequestBody WFUser wfuser);
+
+    default Boolean save(@RequestBody WFUser wfuser) { return saveEntity(wfuser)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers/savebatch")
     Boolean saveBatch(@RequestBody List<WFUser> wfusers);

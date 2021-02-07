@@ -72,7 +72,7 @@ public class SysPostResource {
 		SysPost domain  = syspostMapping.toDomain(syspostdto);
         domain .setPostid(syspost_id);
 		syspostService.update(domain );
-		SysPostDTO dto = syspostMapping.toDto(domain );
+		SysPostDTO dto = syspostMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class SysPostResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Save-all')")
     @ApiOperation(value = "保存岗位", tags = {"岗位" },  notes = "保存岗位")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysposts/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysPostDTO syspostdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(syspostService.save(syspostMapping.toDomain(syspostdto)));
+    public ResponseEntity<SysPostDTO> save(@RequestBody SysPostDTO syspostdto) {
+        SysPost domain = syspostMapping.toDomain(syspostdto);
+        syspostService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(syspostMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Save-all')")

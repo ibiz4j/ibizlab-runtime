@@ -57,7 +57,9 @@ public interface PayOpenAccessFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/save")
-    Boolean save(@RequestBody PayOpenAccess payopenaccess);
+    Object saveEntity(@RequestBody PayOpenAccess payopenaccess);
+
+    default Boolean save(@RequestBody PayOpenAccess payopenaccess) { return saveEntity(payopenaccess)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/savebatch")
     Boolean saveBatch(@RequestBody List<PayOpenAccess> payopenaccesses);

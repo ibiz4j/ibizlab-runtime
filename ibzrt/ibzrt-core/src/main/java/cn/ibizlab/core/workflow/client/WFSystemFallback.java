@@ -61,6 +61,10 @@ public class WFSystemFallback implements WFSystemFeignClient {
     }
 
 
+    public Object saveEntity(WFSystem wfsystem) {
+        return null;
+    }
+
     public Boolean save(WFSystem wfsystem) {
         return false;
     }

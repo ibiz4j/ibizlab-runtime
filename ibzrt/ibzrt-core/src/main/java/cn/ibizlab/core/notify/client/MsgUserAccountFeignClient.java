@@ -57,7 +57,9 @@ public interface MsgUserAccountFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msguseraccounts/save")
-    Boolean save(@RequestBody MsgUserAccount msguseraccount);
+    Object saveEntity(@RequestBody MsgUserAccount msguseraccount);
+
+    default Boolean save(@RequestBody MsgUserAccount msguseraccount) { return saveEntity(msguseraccount)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/msguseraccounts/savebatch")
     Boolean saveBatch(@RequestBody List<MsgUserAccount> msguseraccounts);

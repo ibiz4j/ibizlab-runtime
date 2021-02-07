@@ -61,6 +61,10 @@ public class DictCatalogFallback implements DictCatalogFeignClient {
     }
 
 
+    public Object saveEntity(DictCatalog dictcatalog) {
+        return null;
+    }
+
     public Boolean save(DictCatalog dictcatalog) {
         return false;
     }

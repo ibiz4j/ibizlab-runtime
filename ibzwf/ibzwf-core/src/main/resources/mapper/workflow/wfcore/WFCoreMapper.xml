@@ -17,6 +17,20 @@
         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
     </select>
 
+    <select id="searchMyTaskByPage"  parameterType="cn.ibizlab.core.workflow.filter.WFTaskSearchContext"  resultType="java.util.Map">
+        select distinct t1.TaskId as Id,USER_ID_ as UserId, t1.DefinitionId as ProcessDefinitionId, t1.DefinitionName as ProcessDefinitionName, t1.DefinitionKey as ProcessDefinitionKey, t1.InstanceId as
+        ProcessInstanceId,
+        t1.TaskName as Name, t1.TaskDefinitionKey, t1.BusinessKey as ProcessInstanceBusinessKey, t1.Description, t1.CreateTime from (
+        select  res.ID_ as TaskId,link.USER_ID_,res.PROC_DEF_ID_ as DefinitionId,arp.NAME_ as DefinitionName,arp.KEY_ as DefinitionKey,
+        res.PROC_INST_ID_ as  InstanceId,res.NAME_ as TaskName,res.TASK_DEF_KEY_ as TaskDefinitionKey,res.CATEGORY_ as BusinessKey,
+        res.DESCRIPTION_ as Description,res.CREATE_TIME_ as CreateTime
+        from ACT_RU_TASK RES inner join act_re_procdef arp on RES.PROC_DEF_ID_ = arp.ID_ left join ACT_RU_IDENTITYLINK link on res.ID_ = LINK.TASK_ID_
+        ) t1
+        <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+        <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+    </select>
+
+
 
     <select  id="searchMyTaskCnt"  parameterType="cn.ibizlab.core.workflow.filter.WFTaskSearchContext"  resultType="cn.ibizlab.core.workflow.domain.WFProcessNode">
         select t.ProcessDefinitionKey,max(t.ProcessDefinitionName) as ProcessDefinitionName,

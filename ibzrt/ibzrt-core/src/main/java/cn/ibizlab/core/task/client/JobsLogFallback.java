@@ -61,6 +61,10 @@ public class JobsLogFallback implements JobsLogFeignClient {
     }
 
 
+    public Object saveEntity(JobsLog jobslog) {
+        return null;
+    }
+
     public Boolean save(JobsLog jobslog) {
         return false;
     }

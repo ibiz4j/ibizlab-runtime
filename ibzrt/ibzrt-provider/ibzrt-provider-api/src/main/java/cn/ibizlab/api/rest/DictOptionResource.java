@@ -73,7 +73,7 @@ public class DictOptionResource {
 		DictOption domain  = dictoptionMapping.toDomain(dictoptiondto);
         domain .setValueKey(dictoption_id);
 		dictoptionService.update(domain );
-		DictOptionDTO dto = dictoptionMapping.toDto(domain );
+		DictOptionDTO dto = dictoptionMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -125,8 +125,10 @@ public class DictOptionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-Save-all')")
     @ApiOperation(value = "保存字典项", tags = {"字典项" },  notes = "保存字典项")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictoptions/save")
-    public ResponseEntity<Boolean> save(@RequestBody DictOptionDTO dictoptiondto) {
-        return ResponseEntity.status(HttpStatus.OK).body(dictoptionService.save(dictoptionMapping.toDomain(dictoptiondto)));
+    public ResponseEntity<DictOptionDTO> save(@RequestBody DictOptionDTO dictoptiondto) {
+        DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
+        dictoptionService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-Save-all')")
@@ -250,10 +252,11 @@ public class DictOptionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-Save-all')")
     @ApiOperation(value = "根据字典保存字典项", tags = {"字典项" },  notes = "根据字典保存字典项")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/{dictcatalog_id}/dictoptions/save")
-    public ResponseEntity<Boolean> saveByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
+    public ResponseEntity<DictOptionDTO> saveByDictCatalog(@PathVariable("dictcatalog_id") String dictcatalog_id, @RequestBody DictOptionDTO dictoptiondto) {
         DictOption domain = dictoptionMapping.toDomain(dictoptiondto);
         domain.setCatalogId(dictcatalog_id);
-        return ResponseEntity.status(HttpStatus.OK).body(dictoptionService.save(domain));
+        dictoptionService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dictoptionMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictOption-Save-all')")

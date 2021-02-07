@@ -55,14 +55,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Lazy
     protected cn.ibizlab.core.uaa.service.ISysUserRoleService sysuserroleService;
 
-    @Autowired
-    @Lazy
-    protected cn.ibizlab.core.uaa.service.logic.ISysUserdeleteSysUserLogic deletesysuserLogic;
-
-    @Autowired
-    @Lazy
-    protected cn.ibizlab.core.uaa.service.logic.ISysUsersaveSysUserLogic savesysuserLogic;
-
     protected int batchSize = 500;
 
     @Override
@@ -135,7 +127,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @Transactional
     public SysUser deleteSysUser(SysUser et) {
-        deletesysuserLogic.execute(et);
          return et ;
     }
 
@@ -202,7 +193,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @Transactional
     public SysUser saveSysUser(SysUser et) {
-        savesysuserLogic.execute(et);
          return et ;
     }
 

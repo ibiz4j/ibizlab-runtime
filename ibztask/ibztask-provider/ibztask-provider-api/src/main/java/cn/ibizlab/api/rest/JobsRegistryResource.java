@@ -72,7 +72,7 @@ public class JobsRegistryResource {
 		JobsRegistry domain  = jobsregistryMapping.toDomain(jobsregistrydto);
         domain .setId(jobsregistry_id);
 		jobsregistryService.update(domain );
-		JobsRegistryDTO dto = jobsregistryMapping.toDto(domain );
+		JobsRegistryDTO dto = jobsregistryMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class JobsRegistryResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Save-all')")
     @ApiOperation(value = "保存任务注册信息", tags = {"任务注册信息" },  notes = "保存任务注册信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/save")
-    public ResponseEntity<Boolean> save(@RequestBody JobsRegistryDTO jobsregistrydto) {
-        return ResponseEntity.status(HttpStatus.OK).body(jobsregistryService.save(jobsregistryMapping.toDomain(jobsregistrydto)));
+    public ResponseEntity<JobsRegistryDTO> save(@RequestBody JobsRegistryDTO jobsregistrydto) {
+        JobsRegistry domain = jobsregistryMapping.toDomain(jobsregistrydto);
+        jobsregistryService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(jobsregistryMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Save-all')")

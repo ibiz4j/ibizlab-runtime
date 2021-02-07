@@ -61,6 +61,10 @@ public class SysRolePermissionFallback implements SysRolePermissionFeignClient {
     }
 
 
+    public Object saveEntity(SysRolePermission sysrolepermission) {
+        return null;
+    }
+
     public Boolean save(SysRolePermission sysrolepermission) {
         return false;
     }

@@ -61,6 +61,10 @@ public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClie
     }
 
 
+    public Object saveEntity(WFProcessDefinition wfprocessdefinition) {
+        return null;
+    }
+
     public Boolean save(WFProcessDefinition wfprocessdefinition) {
         return false;
     }

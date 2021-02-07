@@ -61,6 +61,10 @@ public class SysOpenAccessFallback implements SysOpenAccessFeignClient {
     }
 
 
+    public Object saveEntity(SysOpenAccess sysopenaccess) {
+        return null;
+    }
+
     public Boolean save(SysOpenAccess sysopenaccess) {
         return false;
     }

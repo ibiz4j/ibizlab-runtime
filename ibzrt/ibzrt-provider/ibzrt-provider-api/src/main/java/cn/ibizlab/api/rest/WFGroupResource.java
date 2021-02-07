@@ -72,7 +72,7 @@ public class WFGroupResource {
 		WFGroup domain  = wfgroupMapping.toDomain(wfgroupdto);
         domain .setId(wfgroup_id);
 		wfgroupService.update(domain );
-		WFGroupDTO dto = wfgroupMapping.toDto(domain );
+		WFGroupDTO dto = wfgroupMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class WFGroupResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFGroup-Save-all')")
     @ApiOperation(value = "保存角色/用户组", tags = {"角色/用户组" },  notes = "保存角色/用户组")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFGroupDTO wfgroupdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.save(wfgroupMapping.toDomain(wfgroupdto)));
+    public ResponseEntity<WFGroupDTO> save(@RequestBody WFGroupDTO wfgroupdto) {
+        WFGroup domain = wfgroupMapping.toDomain(wfgroupdto);
+        wfgroupService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wfgroupMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFGroup-Save-all')")

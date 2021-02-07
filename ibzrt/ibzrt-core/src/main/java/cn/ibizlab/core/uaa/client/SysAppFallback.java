@@ -61,6 +61,10 @@ public class SysAppFallback implements SysAppFeignClient {
     }
 
 
+    public Object saveEntity(SysApp sysapp) {
+        return null;
+    }
+
     public Boolean save(SysApp sysapp) {
         return false;
     }

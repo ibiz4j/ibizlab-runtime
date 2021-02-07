@@ -72,7 +72,7 @@ public class SysTeamResource {
 		SysTeam domain  = systeamMapping.toDomain(systeamdto);
         domain .setTeamid(systeam_id);
 		systeamService.update(domain );
-		SysTeamDTO dto = systeamMapping.toDto(domain );
+		SysTeamDTO dto = systeamMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class SysTeamResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeam-Save-all')")
     @ApiOperation(value = "保存组", tags = {"组" },  notes = "保存组")
 	@RequestMapping(method = RequestMethod.POST, value = "/systeams/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysTeamDTO systeamdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(systeamService.save(systeamMapping.toDomain(systeamdto)));
+    public ResponseEntity<SysTeamDTO> save(@RequestBody SysTeamDTO systeamdto) {
+        SysTeam domain = systeamMapping.toDomain(systeamdto);
+        systeamService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(systeamMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeam-Save-all')")

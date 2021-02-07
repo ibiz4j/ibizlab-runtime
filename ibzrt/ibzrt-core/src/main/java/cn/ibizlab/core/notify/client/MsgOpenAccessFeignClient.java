@@ -57,7 +57,9 @@ public interface MsgOpenAccessFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/save")
-    Boolean save(@RequestBody MsgOpenAccess msgopenaccess);
+    Object saveEntity(@RequestBody MsgOpenAccess msgopenaccess);
+
+    default Boolean save(@RequestBody MsgOpenAccess msgopenaccess) { return saveEntity(msgopenaccess)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/savebatch")
     Boolean saveBatch(@RequestBody List<MsgOpenAccess> msgopenaccesses);

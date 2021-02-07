@@ -72,7 +72,7 @@ public class WFMemberResource {
 		WFMember domain  = wfmemberMapping.toDomain(wfmemberdto);
         domain .setMemberid(wfmember_id);
 		wfmemberService.update(domain );
-		WFMemberDTO dto = wfmemberMapping.toDto(domain );
+		WFMemberDTO dto = wfmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -123,8 +123,10 @@ public class WFMemberResource {
 
     @ApiOperation(value = "保存成员", tags = {"成员" },  notes = "保存成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFMemberDTO wfmemberdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(wfmemberMapping.toDomain(wfmemberdto)));
+    public ResponseEntity<WFMemberDTO> save(@RequestBody WFMemberDTO wfmemberdto) {
+        WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
+        wfmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "批量保存成员", tags = {"成员" },  notes = "批量保存成员")
@@ -245,10 +247,11 @@ public class WFMemberResource {
 
     @ApiOperation(value = "根据角色/用户组保存成员", tags = {"成员" },  notes = "根据角色/用户组保存成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/save")
-    public ResponseEntity<Boolean> saveByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
+    public ResponseEntity<WFMemberDTO> saveByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
         WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
         domain.setGroupid(wfgroup_id);
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(domain));
+        wfmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据角色/用户组批量保存成员", tags = {"成员" },  notes = "根据角色/用户组批量保存成员")
@@ -372,10 +375,11 @@ public class WFMemberResource {
 
     @ApiOperation(value = "根据用户保存成员", tags = {"成员" },  notes = "根据用户保存成员")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/save")
-    public ResponseEntity<Boolean> saveByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
+    public ResponseEntity<WFMemberDTO> saveByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
         WFMember domain = wfmemberMapping.toDomain(wfmemberdto);
         domain.setUserid(wfuser_id);
-        return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.save(domain));
+        wfmemberService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据用户批量保存成员", tags = {"成员" },  notes = "根据用户批量保存成员")

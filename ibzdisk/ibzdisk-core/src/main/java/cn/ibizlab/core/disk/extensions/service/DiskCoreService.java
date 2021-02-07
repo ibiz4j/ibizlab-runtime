@@ -205,7 +205,7 @@ public class DiskCoreService {
                 return fileName.substring(dot + 1);
             }
         }
-        return fileName;
+        return "";
     }
 
     public static String getExtensionName(File file) {

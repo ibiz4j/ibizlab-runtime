@@ -72,7 +72,7 @@ public class PayTradeResource {
 		PayTrade domain  = paytradeMapping.toDomain(paytradedto);
         domain .setTradeId(paytrade_id);
 		paytradeService.update(domain );
-		PayTradeDTO dto = paytradeMapping.toDto(domain );
+		PayTradeDTO dto = paytradeMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class PayTradeResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Save-all')")
     @ApiOperation(value = "保存支付交易", tags = {"支付交易" },  notes = "保存支付交易")
 	@RequestMapping(method = RequestMethod.POST, value = "/paytrades/save")
-    public ResponseEntity<Boolean> save(@RequestBody PayTradeDTO paytradedto) {
-        return ResponseEntity.status(HttpStatus.OK).body(paytradeService.save(paytradeMapping.toDomain(paytradedto)));
+    public ResponseEntity<PayTradeDTO> save(@RequestBody PayTradeDTO paytradedto) {
+        PayTrade domain = paytradeMapping.toDomain(paytradedto);
+        paytradeService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(paytradeMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Save-all')")

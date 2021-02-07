@@ -72,7 +72,7 @@ public class SysUserResource {
 		SysUser domain  = sysuserMapping.toDomain(sysuserdto);
         domain .setUserid(sysuser_id);
 		sysuserService.update(domain );
-		SysUserDTO dto = sysuserMapping.toDto(domain );
+		SysUserDTO dto = sysuserMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -134,8 +134,10 @@ public class SysUserResource {
 
     @ApiOperation(value = "保存系统用户", tags = {"系统用户" },  notes = "保存系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysUserDTO sysuserdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserService.save(sysuserMapping.toDomain(sysuserdto)));
+    public ResponseEntity<SysUserDTO> save(@RequestBody SysUserDTO sysuserdto) {
+        SysUser domain = sysuserMapping.toDomain(sysuserdto);
+        sysuserService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserMapping.toDto(domain));
     }
 
     @ApiOperation(value = "批量保存系统用户", tags = {"系统用户" },  notes = "批量保存系统用户")

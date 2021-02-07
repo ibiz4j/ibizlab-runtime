@@ -72,7 +72,7 @@ public class PayOpenAccessResource {
 		PayOpenAccess domain  = payopenaccessMapping.toDomain(payopenaccessdto);
         domain .setId(payopenaccess_id);
 		payopenaccessService.update(domain );
-		PayOpenAccessDTO dto = payopenaccessMapping.toDto(domain );
+		PayOpenAccessDTO dto = payopenaccessMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class PayOpenAccessResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayOpenAccess-Save-all')")
     @ApiOperation(value = "保存支付平台", tags = {"支付平台" },  notes = "保存支付平台")
 	@RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/save")
-    public ResponseEntity<Boolean> save(@RequestBody PayOpenAccessDTO payopenaccessdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(payopenaccessService.save(payopenaccessMapping.toDomain(payopenaccessdto)));
+    public ResponseEntity<PayOpenAccessDTO> save(@RequestBody PayOpenAccessDTO payopenaccessdto) {
+        PayOpenAccess domain = payopenaccessMapping.toDomain(payopenaccessdto);
+        payopenaccessService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(payopenaccessMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayOpenAccess-Save-all')")

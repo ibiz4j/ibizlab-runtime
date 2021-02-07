@@ -61,6 +61,10 @@ public class SysUserFallback implements SysUserFeignClient {
     }
 
 
+    public Object saveEntity(SysUser sysuser) {
+        return null;
+    }
+
     public Boolean save(SysUser sysuser) {
         return false;
     }

@@ -61,6 +61,10 @@ public class WFREModelFallback implements WFREModelFeignClient {
     }
 
 
+    public Object saveEntity(WFREModel wfremodel) {
+        return null;
+    }
+
     public Boolean save(WFREModel wfremodel) {
         return false;
     }

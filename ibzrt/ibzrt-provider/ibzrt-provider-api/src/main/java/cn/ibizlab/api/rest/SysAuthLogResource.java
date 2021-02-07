@@ -72,7 +72,7 @@ public class SysAuthLogResource {
 		SysAuthLog domain  = sysauthlogMapping.toDomain(sysauthlogdto);
         domain .setLogid(sysauthlog_id);
 		sysauthlogService.update(domain );
-		SysAuthLogDTO dto = sysauthlogMapping.toDto(domain );
+		SysAuthLogDTO dto = sysauthlogMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class SysAuthLogResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Save-all')")
     @ApiOperation(value = "保存认证日志", tags = {"认证日志" },  notes = "保存认证日志")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysAuthLogDTO sysauthlogdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysauthlogService.save(sysauthlogMapping.toDomain(sysauthlogdto)));
+    public ResponseEntity<SysAuthLogDTO> save(@RequestBody SysAuthLogDTO sysauthlogdto) {
+        SysAuthLog domain = sysauthlogMapping.toDomain(sysauthlogdto);
+        sysauthlogService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysauthlogMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysAuthLog-Save-all')")

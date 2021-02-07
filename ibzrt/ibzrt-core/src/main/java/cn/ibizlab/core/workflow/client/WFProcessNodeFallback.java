@@ -61,6 +61,10 @@ public class WFProcessNodeFallback implements WFProcessNodeFeignClient {
     }
 
 
+    public Object saveEntity(WFProcessNode wfprocessnode) {
+        return null;
+    }
+
     public Boolean save(WFProcessNode wfprocessnode) {
         return false;
     }

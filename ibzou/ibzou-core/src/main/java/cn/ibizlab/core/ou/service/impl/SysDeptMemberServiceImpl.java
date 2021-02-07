@@ -58,10 +58,6 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Lazy
     protected cn.ibizlab.core.ou.service.ISysPostService syspostService;
 
-    @Autowired
-    @Lazy
-    protected cn.ibizlab.core.ou.service.logic.ISysDeptMembersaveDeptMemberLogic savedeptmemberLogic;
-
     protected int batchSize = 500;
 
     @Override
@@ -201,7 +197,6 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Override
     @Transactional
     public SysDeptMember saveDeptMember(SysDeptMember et) {
-        savedeptmemberLogic.execute(et);
          return et ;
     }
 

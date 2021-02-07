@@ -72,7 +72,7 @@ public class SysUserAuthResource {
 		SysUserAuth domain  = sysuserauthMapping.toDomain(sysuserauthdto);
         domain .setId(sysuserauth_id);
 		sysuserauthService.update(domain );
-		SysUserAuthDTO dto = sysuserauthMapping.toDto(domain );
+		SysUserAuthDTO dto = sysuserauthMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class SysUserAuthResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Save-all')")
     @ApiOperation(value = "保存账号绑定", tags = {"账号绑定" },  notes = "保存账号绑定")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysUserAuthDTO sysuserauthdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.save(sysuserauthMapping.toDomain(sysuserauthdto)));
+    public ResponseEntity<SysUserAuthDTO> save(@RequestBody SysUserAuthDTO sysuserauthdto) {
+        SysUserAuth domain = sysuserauthMapping.toDomain(sysuserauthdto);
+        sysuserauthService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserauthMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Save-all')")

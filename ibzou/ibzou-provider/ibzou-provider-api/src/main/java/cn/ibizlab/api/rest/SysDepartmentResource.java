@@ -73,7 +73,7 @@ public class SysDepartmentResource {
 		SysDepartment domain  = sysdepartmentMapping.toDomain(sysdepartmentdto);
         domain .setDeptid(sysdepartment_id);
 		sysdepartmentService.update(domain );
-		SysDepartmentDTO dto = sysdepartmentMapping.toDto(domain );
+		SysDepartmentDTO dto = sysdepartmentMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class SysDepartmentResource {
 
     @ApiOperation(value = "保存部门", tags = {"部门" },  notes = "保存部门")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysDepartmentDTO sysdepartmentdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysdepartmentService.save(sysdepartmentMapping.toDomain(sysdepartmentdto)));
+    public ResponseEntity<SysDepartmentDTO> save(@RequestBody SysDepartmentDTO sysdepartmentdto) {
+        SysDepartment domain = sysdepartmentMapping.toDomain(sysdepartmentdto);
+        sysdepartmentService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdepartmentMapping.toDto(domain));
     }
 
     @ApiOperation(value = "批量保存部门", tags = {"部门" },  notes = "批量保存部门")
@@ -245,10 +247,11 @@ public class SysDepartmentResource {
 
     @ApiOperation(value = "根据单位机构保存部门", tags = {"部门" },  notes = "根据单位机构保存部门")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/save")
-    public ResponseEntity<Boolean> saveBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody SysDepartmentDTO sysdepartmentdto) {
+    public ResponseEntity<SysDepartmentDTO> saveBySysOrganization(@PathVariable("sysorganization_id") String sysorganization_id, @RequestBody SysDepartmentDTO sysdepartmentdto) {
         SysDepartment domain = sysdepartmentMapping.toDomain(sysdepartmentdto);
         domain.setOrgid(sysorganization_id);
-        return ResponseEntity.status(HttpStatus.OK).body(sysdepartmentService.save(domain));
+        sysdepartmentService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysdepartmentMapping.toDto(domain));
     }
 
     @ApiOperation(value = "根据单位机构批量保存部门", tags = {"部门" },  notes = "根据单位机构批量保存部门")

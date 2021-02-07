@@ -61,6 +61,10 @@ public class WFMemberFallback implements WFMemberFeignClient {
     }
 
 
+    public Object saveEntity(WFMember wfmember) {
+        return null;
+    }
+
     public Boolean save(WFMember wfmember) {
         return false;
     }

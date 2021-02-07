@@ -394,7 +394,9 @@ export default class DropDownList extends Vue {
                     if(type === 'number'){
                         item.value = item.value.toString();
                     }else{
-                        if(item.value.indexOf('.') == -1){
+                        if(type == "null") {
+                            this.valueType == "number" ? item.value = 0 : item.value = '';
+                        }else if(item.value.indexOf('.') == -1){
                             item.value = parseInt(item.value);
                         }else{
                             item.value = parseFloat(item.value);

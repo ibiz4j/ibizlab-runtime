@@ -75,5 +75,9 @@ zuul:
       path: /lite/**
       serviceId: ${ibiz.ref.service.lite:ibzlite-api}
       stripPrefix: false
+    sysauthlog:
+      path: /sysauthlogs
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

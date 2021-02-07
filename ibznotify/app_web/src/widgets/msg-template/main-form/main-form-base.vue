@@ -36,7 +36,7 @@
 <i-col v-show="detailsModel.open_type.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='open_type' :itemRules="this.rules().open_type" class='' :caption="$t('entities.msgtemplate.main_form.details.open_type')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.open_type.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='open_type' :value="data.open_type" dataType="PICKUPDATA"     :precision="0"
+<app-span name='open_type' :value="data.open_type" dataType="PICKUPDATA" unitName=""     :precision="0"
 tag='OpenAccessType' codelistType='STATIC' :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
 </app-span>
 

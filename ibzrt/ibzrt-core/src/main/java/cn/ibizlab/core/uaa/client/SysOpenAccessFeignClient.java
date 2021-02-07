@@ -57,7 +57,9 @@ public interface SysOpenAccessFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/save")
-    Boolean save(@RequestBody SysOpenAccess sysopenaccess);
+    Object saveEntity(@RequestBody SysOpenAccess sysopenaccess);
+
+    default Boolean save(@RequestBody SysOpenAccess sysopenaccess) { return saveEntity(sysopenaccess)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/savebatch")
     Boolean saveBatch(@RequestBody List<SysOpenAccess> sysopenaccesses);

@@ -72,7 +72,7 @@ public class WFSystemResource {
 		WFSystem domain  = wfsystemMapping.toDomain(wfsystemdto);
         domain .setPssystemid(wfsystem_id);
 		wfsystemService.update(domain );
-		WFSystemDTO dto = wfsystemMapping.toDto(domain );
+		WFSystemDTO dto = wfsystemMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class WFSystemResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Save-all')")
     @ApiOperation(value = "保存系统", tags = {"系统" },  notes = "保存系统")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFSystemDTO wfsystemdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfsystemService.save(wfsystemMapping.toDomain(wfsystemdto)));
+    public ResponseEntity<WFSystemDTO> save(@RequestBody WFSystemDTO wfsystemdto) {
+        WFSystem domain = wfsystemMapping.toDomain(wfsystemdto);
+        wfsystemService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wfsystemMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Save-all')")

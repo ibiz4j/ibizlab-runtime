@@ -27,6 +27,20 @@ import cn.ibizlab.core.notify.domain.MsgBody;
 @Data
 public class MsgBodySearchContext extends QueryWrapperContext<MsgBody> {
 
+	private String n_tousers_eq;//[目标用户]
+	public void setN_tousers_eq(String n_tousers_eq) {
+        this.n_tousers_eq = n_tousers_eq;
+        if(!ObjectUtils.isEmpty(this.n_tousers_eq)){
+            this.getSearchCond().eq("tousers", n_tousers_eq);
+        }
+    }
+	private String n_tousers_in;//[目标用户]
+	public void setN_tousers_in(String n_tousers_in) {
+        this.n_tousers_in = n_tousers_in;
+        if(!ObjectUtils.isEmpty(this.n_tousers_in)){
+			this.getSearchCond().in("tousers",this.n_tousers_in.split(";"));
+        }
+    }
 	private Integer n_msgtype_eq;//[消息类型]
 	public void setN_msgtype_eq(Integer n_msgtype_eq) {
         this.n_msgtype_eq = n_msgtype_eq;

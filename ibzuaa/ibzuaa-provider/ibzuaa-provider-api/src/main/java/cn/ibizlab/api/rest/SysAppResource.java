@@ -69,7 +69,7 @@ public class SysAppResource {
 		SysApp domain  = sysappMapping.toDomain(sysappdto);
         domain .setId(sysapp_id);
 		sysappService.update(domain );
-		SysAppDTO dto = sysappMapping.toDto(domain );
+		SysAppDTO dto = sysappMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -116,8 +116,10 @@ public class SysAppResource {
 
     @ApiOperation(value = "保存应用", tags = {"应用" },  notes = "保存应用")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysAppDTO sysappdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysappService.save(sysappMapping.toDomain(sysappdto)));
+    public ResponseEntity<SysAppDTO> save(@RequestBody SysAppDTO sysappdto) {
+        SysApp domain = sysappMapping.toDomain(sysappdto);
+        sysappService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysappMapping.toDto(domain));
     }
 
     @ApiOperation(value = "批量保存应用", tags = {"应用" },  notes = "批量保存应用")

@@ -65,6 +65,10 @@ public class JobsInfoFallback implements JobsInfoFeignClient {
         return null;
     }
 
+    public Object saveEntity(JobsInfo jobsinfo) {
+        return null;
+    }
+
     public Boolean save(JobsInfo jobsinfo) {
         return false;
     }

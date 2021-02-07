@@ -72,7 +72,7 @@ public class JobsInfoResource {
 		JobsInfo domain  = jobsinfoMapping.toDomain(jobsinfodto);
         domain .setId(jobsinfo_id);
 		jobsinfoService.update(domain );
-		JobsInfoDTO dto = jobsinfoMapping.toDto(domain );
+		JobsInfoDTO dto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -142,8 +142,10 @@ public class JobsInfoResource {
 
     @ApiOperation(value = "保存任务信息", tags = {"任务信息" },  notes = "保存任务信息")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/save")
-    public ResponseEntity<Boolean> save(@RequestBody JobsInfoDTO jobsinfodto) {
-        return ResponseEntity.status(HttpStatus.OK).body(jobsinfoService.save(jobsinfoMapping.toDomain(jobsinfodto)));
+    public ResponseEntity<JobsInfoDTO> save(@RequestBody JobsInfoDTO jobsinfodto) {
+        JobsInfo domain = jobsinfoMapping.toDomain(jobsinfodto);
+        jobsinfoService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(jobsinfoMapping.toDto(domain));
     }
 
     @ApiOperation(value = "批量保存任务信息", tags = {"任务信息" },  notes = "批量保存任务信息")

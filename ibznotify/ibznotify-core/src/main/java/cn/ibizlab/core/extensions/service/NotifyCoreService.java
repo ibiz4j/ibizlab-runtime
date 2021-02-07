@@ -6,6 +6,7 @@ import cn.ibizlab.core.notify.domain.MsgBody;
 import cn.ibizlab.core.notify.domain.MsgOpenAccess;
 import cn.ibizlab.core.notify.domain.MsgTemplate;
 import cn.ibizlab.core.notify.domain.MsgUserAccount;
+import cn.ibizlab.core.notify.filter.MsgBodySearchContext;
 import cn.ibizlab.core.notify.service.IMsgBodyService;
 import cn.ibizlab.core.notify.service.IMsgOpenAccessService;
 import cn.ibizlab.core.notify.service.IMsgTemplateService;
@@ -33,15 +34,24 @@ import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
+
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -97,6 +107,7 @@ public class NotifyCoreService {
     private static DingTalkClient createWorkRecordClient;
     private static DingTalkClient finishWorkRecordClient;
     private static DingTalkClient getTokenClient;
+    private Map<String, List<MsgBody>> msgMap = new ConcurrentHashMap<>();
     static {
         getTokenClient = new DefaultDingTalkClient(dingTalkTokenApi);
         sendMsgClient = new DefaultDingTalkClient(dingTalkSendMsgApi);
@@ -642,4 +653,64 @@ public class NotifyCoreService {
         return openAccess;
     }
 
+    /**
+     * 获取某个用户全量存储催办消息
+     * @return
+     */
+    public Page<MsgBody> getBacklogAllContent(MsgBodySearchContext context) {
+        if(ObjectUtils.isEmpty(context)){
+            throw new BadRequestAlertException("无效消息上下文","NotifyCoreService","getBacklogAllContent");
+        }
+        context.setSize(Integer.MAX_VALUE);
+        Page<MsgBody> result = msgBodyService.searchDefault(context);
+        return result;
+    }
+
+    /**
+     * 获取某个用户分页存储催办消息
+     * @return
+     */
+    @Scheduled(fixedRate = 300000)
+    public synchronized void getBacklogPageContent() {
+        msgMap.clear();
+        MsgBodySearchContext context = new MsgBodySearchContext();
+        context.setSize(Integer.MAX_VALUE);
+
+        Page<MsgBody> page = msgBodyService.searchDefault(context);
+        msgMap = page.getContent().stream().collect(Collectors.groupingBy(MsgBody::getToUsers));
+    }
+
+    /**
+     * 缓存某个用户分页催办消息
+     * @return
+     */
+    public Page<MsgBody> getBacklogByPage(MsgBodySearchContext context) {
+        if (ObjectUtils.isEmpty(context)) {
+            throw new BadRequestAlertException("无效消息上下文", "NotifyCoreService", "getBacklogAllContent");
+        }
+        String toUserId = context.getN_tousers_eq();
+        if (!msgMap.containsKey(toUserId)) {
+            return Page.empty();
+        } else {
+
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgBody> pages = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>();
+            int current = context.getPages().getCurrent() < 0 ? 0 : (int) context.getPages().getCurrent();
+            int size = context.getPages().getCurrent() < 0 ? 0 : (int) context.getPages().getSize();
+            List<MsgBody> pageList = new ArrayList<>();
+            List<MsgBody> msgBodyList = msgMap.get(toUserId);
+
+            //计算当前页第一条数据的下标
+            int currId = context.getPages().getCurrent() > 1 ? (current - 1) * size : 0;
+            for (int i = 0; i < size && i < msgBodyList.size() - currId; i++) {
+                pageList.add(msgBodyList.get(currId + i));
+            }
+            pages.setSize(size);
+            pages.setCurrent(current);
+            pages.setTotal(msgMap.get(toUserId).size());
+            pages.setRecords(pageList);
+
+
+            return new PageImpl<>(pages.getRecords(), context.getPageable(), pages.getTotal());
+        }
+    }
 }

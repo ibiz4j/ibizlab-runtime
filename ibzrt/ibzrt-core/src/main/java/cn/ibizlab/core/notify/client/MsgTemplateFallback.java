@@ -61,6 +61,10 @@ public class MsgTemplateFallback implements MsgTemplateFeignClient {
     }
 
 
+    public Object saveEntity(MsgTemplate msgtemplate) {
+        return null;
+    }
+
     public Boolean save(MsgTemplate msgtemplate) {
         return false;
     }

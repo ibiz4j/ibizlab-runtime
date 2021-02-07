@@ -61,6 +61,10 @@ public class SysPostFallback implements SysPostFeignClient {
     }
 
 
+    public Object saveEntity(SysPost syspost) {
+        return null;
+    }
+
     public Boolean save(SysPost syspost) {
         return false;
     }

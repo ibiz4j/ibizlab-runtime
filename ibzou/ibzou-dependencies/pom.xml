@@ -86,6 +86,7 @@
         <oracle.version>19.8.0.0</oracle.version>
         <postgresql.version>42.2.6</postgresql.version>
         <rocketmq.version>4.7.0</rocketmq.version>
+        <flowable-modeler.version>6.4.2</flowable-modeler.version>
     </properties>
 
     <dependencyManagement>
@@ -262,6 +263,16 @@
             </dependency>
 
 
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-json-converter</artifactId>
+                <version>${flowable-modeler.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.flowable</groupId>
+                <artifactId>flowable-ui-modeler-conf</artifactId>
+                <version>${flowable-modeler.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

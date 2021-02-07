@@ -61,6 +61,10 @@ public class WFProcessInstanceFallback implements WFProcessInstanceFeignClient {
     }
 
 
+    public Object saveEntity(WFProcessInstance wfprocessinstance) {
+        return null;
+    }
+
     public Boolean save(WFProcessInstance wfprocessinstance) {
         return false;
     }

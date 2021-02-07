@@ -61,6 +61,10 @@ public class SysTeamFallback implements SysTeamFeignClient {
     }
 
 
+    public Object saveEntity(SysTeam systeam) {
+        return null;
+    }
+
     public Boolean save(SysTeam systeam) {
         return false;
     }

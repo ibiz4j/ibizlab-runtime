@@ -6,13 +6,16 @@ import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
 import cn.ibizlab.core.workflow.mapper.WFCoreMapper;
 import cn.ibizlab.core.workflow.service.IWFGroupService;
 import cn.ibizlab.core.workflow.service.IWFProcessDefinitionService;
+import cn.ibizlab.core.workflow.service.IWFTaskService;
 import cn.ibizlab.core.workflow.service.IWFUserService;
 import cn.ibizlab.util.client.IBZUAAFeignClient;
+import cn.ibizlab.util.domain.MsgBody;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.RuleUtils;
 import cn.ibizlab.util.security.AuthTokenUtil;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.RemoteService;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -57,6 +60,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.DigestUtils;
@@ -72,6 +76,9 @@ import java.io.*;
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 @Service("wfCoreService")
 @Slf4j
@@ -116,6 +123,9 @@ public class WFCoreService
 
 	@Autowired
 	private IBZUAAFeignClient ibzuaaFeignClient;
+
+	private Map<String,List<Map<String,Object>>> taskMap = new ConcurrentHashMap<>();
+
 
 	private AuthenticationContext createAuthenticationContext()
 	{
@@ -229,6 +239,76 @@ public class WFCoreService
 		return new PageImpl<WFTask>(pages.getRecords(), context.getPageable(), pages.getTotal());
 	}
 
+	/**
+	 * 获取所有用户分页存储催办消息
+	 * @return
+	 */
+	@Scheduled(fixedRate = 300000)
+	public synchronized void getBacklogPageContent() {
+		taskMap.clear();
+		List<Map> taskList = wfCoreMapper.searchMyTaskByPage();
+		for (Map map : taskList) {
+			//根据用户id分类
+			String templateCode = (String) map.get("UserId");
+			if (StringUtils.isEmpty(templateCode)){
+				continue;
+			}
+			if(!taskMap.containsKey(templateCode)){
+				List<Map<String,Object>> listMap = new ArrayList<>();
+				listMap.add(map);
+				taskMap.put(templateCode, listMap);
+			} else {
+				List<Map<String,Object>> listMap = taskMap.get(templateCode);
+				listMap.add(map);
+				taskMap.put(templateCode, listMap);
+			}
+		}
+
+	}
+
+	/**
+	 * 缓存某个用户分页催办消息
+	 * @return
+	 */
+	public Page<WFTask> getTaskByPage(WFTaskSearchContext context) {
+		if (ObjectUtils.isEmpty(context)) {
+			throw new BadRequestAlertException("无效消息上下文", "WFCoreService", "getTaskByPage");
+		}
+		String toUserId = context.getSessioncontext().get("srfuserid") == null ? "" : context.getSessioncontext().get("srfuserid").toString();
+		if(StringUtils.isEmpty(toUserId)){
+			throw new BadRequestAlertException("无法获取当前用户", "WFCoreService", "getTaskByPage");
+		}
+		if (!taskMap.containsKey(toUserId)) {
+			return Page.empty();
+		} else {
+
+			com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFTask> pages = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>();
+			int current = context.getPages().getCurrent() < 0 ? 0 : (int) context.getPages().getCurrent();
+			int size = context.getPages().getCurrent() < 0 ? 0 : (int) context.getPages().getSize();
+			List<WFTask> pageList = new ArrayList<>();
+
+			// 用户ID传入，获取任务组
+			List<Map<String,Object>> msgBodyList = taskMap.get(toUserId);
+			List<WFTask> wfTaskList = new ArrayList<>();
+			for (Map<String,Object> map : msgBodyList) {
+				WFTask task = JSONObject.parseObject(JSONObject.toJSONString(map), WFTask.class);
+				wfTaskList.add(task);
+			}
+
+			//计算当前页第一条数据的下标
+			int currId = context.getPages().getCurrent() > 1 ? (current - 1) * size : 0;
+			for (int i = 0; i < size && i < msgBodyList.size() - currId; i++) {
+				pageList.add(wfTaskList.get(currId + i));
+			}
+			pages.setSize(size);
+			pages.setCurrent(current);
+			pages.setTotal(taskMap.get(toUserId).size());
+			pages.setRecords(pageList);
+
+
+			return new PageImpl<>(pages.getRecords(), context.getPageable(), pages.getTotal());
+		}
+	}
 
 	public List<WFTaskWay> getWFLinkByStep(String system,String appname,
 									 String entity, String processDefinitionKey,String taskDefinitionKey) {

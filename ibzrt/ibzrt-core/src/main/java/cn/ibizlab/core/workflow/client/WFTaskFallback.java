@@ -61,6 +61,10 @@ public class WFTaskFallback implements WFTaskFeignClient {
     }
 
 
+    public Object saveEntity(WFTask wftask) {
+        return null;
+    }
+
     public Boolean save(WFTask wftask) {
         return false;
     }

@@ -84,140 +84,142 @@
 </template>
 
 <script lang="ts">
-    import {Vue, Component, Prop, Model, Emit} from "vue-property-decorator";
-    import {Subject} from "rxjs";
-    import {Environment} from '@/environments/environment';
-    import moment from 'moment';
+import {Vue, Component, Prop, Model, Emit} from "vue-property-decorator";
+import {Environment} from '@/environments/environment';
+import moment from 'moment';
 
-    @Component({})
-    export default class AppMessagePopover extends Vue {
+@Component({})
+export default class AppMessagePopover extends Vue {
 
-        // 是否显示小圆点
-        public showIsDot: any = false;
-        // 默认显示的tab页
-        public default_tab_pane: any = "first";
-        // 待办列表
-        public myTasks: any = [];
-        // 待办面板标签
-        public myTasksLabel: any = "待办";
-        //  待办面板显示条数
-        public taskShowCnt:number = 0;
-        // 消息列表
-        public myMsgs: any = [];
-        // 消息面板标签
-        public myMsgsLabel: any = "消息";
-        //  信息面板显示条数
-        public msgShowCnt:number = 0;
+    // 是否显示小圆点
+    public showIsDot: any = false;
+    // 默认显示的tab页
+    public default_tab_pane: any = "first";
+    // 待办列表
+    public myTasks: any = [];
+    // 待办面板标签
+    public myTasksLabel: any = "待办";
+    //  待办面板显示条数
+    public taskShowCnt:number = 0;
+    // 消息列表
+    public myMsgs: any = [];
+    // 消息面板标签
+    public myMsgsLabel: any = "消息";
+    //  信息面板显示条数
+    public msgShowCnt:number = 0;
 
-        /**
-         * vue创建
-         */
-        created(): void {}
+    /**
+     * vue创建
+     */
+    created(): void {}
 
-        /**
-         * vue挂载
-         */
-        mounted(): void {
-            // 首次获取待办列表
+    /**
+     * vue挂载
+     */
+    mounted(): void {
+        if(!Environment.workflow){
+            return;
+        }
+        // 首次获取待办列表
+        this.getMyTasks();
+        // 定时器:每隔１分钟重新获取待办列表
+        const timer = setInterval(()=>{
             this.getMyTasks();
-            // 定时器:每隔１分钟重新获取待办列表
-            const timer = setInterval(()=>{
-                this.getMyTasks();
-            },60000);
-            // 监听定时器,在vue销毁前清除定时器
-            this.$once('hook:beforeDestroy',()=>{
-                // 清除定时器
-                clearInterval(timer);
-            });
-        }
-
-        /**
-         * 获取待办列表
-         */
-        public getMyTasks() {
-            let url: any = '/wfcore/mytasks';
-            this.$http.get(url).then((response: any) => {
-                if (response && response.status == 200) {
-                    const data: any = response.data;
-                    if (data && data.length > 0) {
-                        this.myTasks = data;
-                        this.showIsDot = true;
-                    } else {
-                        this.myTasks = [];
-                    }
-                    // 获取消息列表
-                    this.getMyMsgs();
-                }
-            }).catch((error: any) => {
-                console.warn("加载数据错误");
-            })
-        }
-
-        /**
-         * 获取消息列表
-         */
-        public getMyMsgs(){
-            // TODO:接口获取消息列表，这里用的待办数据
-            this.myMsgs = this.myTasks;
-            if (this.myMsgs.length > 0 && this.myTasks.length == 0) {
-                // 显示小圆点
-                this.showIsDot = true;
-            }
-        }
-
-        /**
-         * 点击标签事件
-         */
-        public handleTag(data: any) {
-            if (!data)  return this.$message.error("未获取到标签内容");
-            // 拼接要打开的窗口地址
-            const baseUrl:any = Environment.BaseUrl;
-            const openUrl:any = baseUrl + `/wfcore/mytasks/${data.processDefinitionKey}/web/${data.processInstanceBusinessKey}/usertasks/${data.taskDefinitionKey}`;
-            // 打开新窗口
-            window.open(openUrl,'_blank');
-        }
-
-        /**
-         * 销毁之前
-         */
-        beforeDestroy(): void {
-            // 清空数据
-            this.showIsDot = false;
-            this.myTasks = [];
-            this.myMsgs = [];
-        }
-
-        /**
-         * 时间格式转换
-         */
-        public formatDate(date: string, format: string) {
-            if(date && format) {
-                return moment(date).format(format);
-            }
-            return date;
-        }
-
-        /**
-         * 加载更多
-         */
-        public showMore(cnt: string) {
-            if(Object.is('taskShowCnt', cnt)) {
-                this.taskShowCnt + 10 < this.myTasks.length ? this.taskShowCnt += 10 : this.taskShowCnt += this.myTasks.length-this.taskShowCnt;
-            }
-            if(Object.is('msgShowCnt', cnt)) {
-                this.msgShowCnt + 10 < this.myMsgs.length ? this.msgShowCnt += 10 : this.msgShowCnt += this.myMsgs.length-this.msgShowCnt;
-            }
-        }
-
-        /**
-         * 弹出框 显示/隐藏 时显示条数初始化
-         */
-        public initTabCnt() {
-            this.taskShowCnt = this.myTasks.length >= 10 ? 10 : this.myTasks.length;
-            this.msgShowCnt = this.myMsgs.length >= 10 ? 10 : this.myMsgs.length;
-        }
-
+        },60000);
+        // 监听定时器,在vue销毁前清除定时器
+        this.$once('hook:beforeDestroy',()=>{
+            // 清除定时器
+            clearInterval(timer);
+        });
     }
+
+    /**
+     * 获取待办列表
+     */
+    public getMyTasks() {
+        let url: any = '/wfcore/mytasks';
+        this.$http.get(url).then((response: any) => {
+            if (response && response.status == 200) {
+                const data: any = response.data;
+                if (data && data.length > 0) {
+                    this.myTasks = data;
+                    this.showIsDot = true;
+                } else {
+                    this.myTasks = [];
+                }
+                // 获取消息列表
+                this.getMyMsgs();
+            }
+        }).catch((error: any) => {
+            console.warn("加载数据错误");
+        })
+    }
+
+    /**
+     * 获取消息列表
+     */
+    public getMyMsgs(){
+        // TODO:接口获取消息列表，这里用的待办数据
+        this.myMsgs = this.myTasks;
+        if (this.myMsgs.length > 0 && this.myTasks.length == 0) {
+            // 显示小圆点
+            this.showIsDot = true;
+        }
+    }
+
+    /**
+     * 点击标签事件
+     */
+    public handleTag(data: any) {
+        if (!data)  return this.$message.error("未获取到标签内容");
+        // 拼接要打开的窗口地址
+        const baseUrl:any = Environment.BaseUrl;
+        const openUrl:any = baseUrl + `/wfcore/mytasks/${data.processDefinitionKey}/web/${data.processInstanceBusinessKey}/usertasks/${data.taskDefinitionKey}`;
+        // 打开新窗口
+        window.open(openUrl,'_blank');
+    }
+
+    /**
+     * 销毁之前
+     */
+    beforeDestroy(): void {
+        // 清空数据
+        this.showIsDot = false;
+        this.myTasks = [];
+        this.myMsgs = [];
+    }
+
+    /**
+     * 时间格式转换
+     */
+    public formatDate(date: string, format: string) {
+        if(date && format) {
+            return moment(date).format(format);
+        }
+        return date;
+    }
+
+    /**
+     * 加载更多
+     */
+    public showMore(cnt: string) {
+        if(Object.is('taskShowCnt', cnt)) {
+            this.taskShowCnt + 10 < this.myTasks.length ? this.taskShowCnt += 10 : this.taskShowCnt += this.myTasks.length-this.taskShowCnt;
+        }
+        if(Object.is('msgShowCnt', cnt)) {
+            this.msgShowCnt + 10 < this.myMsgs.length ? this.msgShowCnt += 10 : this.msgShowCnt += this.myMsgs.length-this.msgShowCnt;
+        }
+    }
+
+    /**
+     * 弹出框 显示/隐藏 时显示条数初始化
+     */
+    public initTabCnt() {
+        this.taskShowCnt = this.myTasks.length >= 10 ? 10 : this.myTasks.length;
+        this.msgShowCnt = this.myMsgs.length >= 10 ? 10 : this.myMsgs.length;
+    }
+
+}
 </script>
 
 <style lang='less'>

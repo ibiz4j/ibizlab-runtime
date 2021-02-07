@@ -57,7 +57,9 @@ public interface WFREModelFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
-    Boolean save(@RequestBody WFREModel wfremodel);
+    Object saveEntity(@RequestBody WFREModel wfremodel);
+
+    default Boolean save(@RequestBody WFREModel wfremodel) { return saveEntity(wfremodel)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/savebatch")
     Boolean saveBatch(@RequestBody List<WFREModel> wfremodels);

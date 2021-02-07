@@ -69,7 +69,7 @@ public class WFREModelResource {
 		WFREModel domain  = wfremodelMapping.toDomain(wfremodeldto);
         domain .setId(wfremodel_id);
 		wfremodelService.update(domain );
-		WFREModelDTO dto = wfremodelMapping.toDto(domain );
+		WFREModelDTO dto = wfremodelMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -116,8 +116,10 @@ public class WFREModelResource {
 
     @ApiOperation(value = "保存流程模型", tags = {"流程模型" },  notes = "保存流程模型")
 	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFREModelDTO wfremodeldto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wfremodelService.save(wfremodelMapping.toDomain(wfremodeldto)));
+    public ResponseEntity<WFREModelDTO> save(@RequestBody WFREModelDTO wfremodeldto) {
+        WFREModel domain = wfremodelMapping.toDomain(wfremodeldto);
+        wfremodelService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wfremodelMapping.toDto(domain));
     }
 
     @ApiOperation(value = "批量保存流程模型", tags = {"流程模型" },  notes = "批量保存流程模型")

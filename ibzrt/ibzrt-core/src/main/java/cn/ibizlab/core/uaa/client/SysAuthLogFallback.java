@@ -61,6 +61,10 @@ public class SysAuthLogFallback implements SysAuthLogFeignClient {
     }
 
 
+    public Object saveEntity(SysAuthLog sysauthlog) {
+        return null;
+    }
+
     public Boolean save(SysAuthLog sysauthlog) {
         return false;
     }

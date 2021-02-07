@@ -61,6 +61,10 @@ public class DictOptionFallback implements DictOptionFeignClient {
     }
 
 
+    public Object saveEntity(DictOption dictoption) {
+        return null;
+    }
+
     public Boolean save(DictOption dictoption) {
         return false;
     }

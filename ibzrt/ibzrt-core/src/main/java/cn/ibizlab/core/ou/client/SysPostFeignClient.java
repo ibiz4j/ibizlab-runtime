@@ -57,7 +57,9 @@ public interface SysPostFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysposts/save")
-    Boolean save(@RequestBody SysPost syspost);
+    Object saveEntity(@RequestBody SysPost syspost);
+
+    default Boolean save(@RequestBody SysPost syspost) { return saveEntity(syspost)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysposts/savebatch")
     Boolean saveBatch(@RequestBody List<SysPost> sysposts);

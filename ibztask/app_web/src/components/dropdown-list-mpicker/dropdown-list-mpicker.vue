@@ -12,8 +12,8 @@
             :filterable="filterable"
             @on-open-change="onClick"
             :placeholder="placeholder?placeholder:$t('components.dropDownListMpicker.placeholder')">
-            <i-option v-for="(item, index) in items" :key="index" :class="item.class" :value="item.value.toString()" :label="item.text">
-            <Checkbox :value = "(currentVal.indexOf(item.value.toString()))==-1?false:true">
+            <i-option v-for="(item, index) in items" :key="index" :class="item.class" :value="item.value ? item.value.toString():''" :label="item.text">
+            <Checkbox :value="(currentVal.indexOf(item.value ? item.value.toString() : '')) == -1 ? false : true">
                 {{Object.is(codelistType,'STATIC') ? $t('codelist.'+tag+'.'+item.value) : item.text}}
             </Checkbox>
             </i-option>

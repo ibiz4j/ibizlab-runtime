@@ -61,6 +61,10 @@ public class WFGroupFallback implements WFGroupFeignClient {
     }
 
 
+    public Object saveEntity(WFGroup wfgroup) {
+        return null;
+    }
+
     public Boolean save(WFGroup wfgroup) {
         return false;
     }

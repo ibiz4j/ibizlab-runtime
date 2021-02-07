@@ -61,6 +61,10 @@ public class WFTaskWayFallback implements WFTaskWayFeignClient {
     }
 
 
+    public Object saveEntity(WFTaskWay wftaskway) {
+        return null;
+    }
+
     public Boolean save(WFTaskWay wftaskway) {
         return false;
     }

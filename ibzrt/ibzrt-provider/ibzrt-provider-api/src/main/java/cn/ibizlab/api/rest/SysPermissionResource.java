@@ -73,7 +73,7 @@ public class SysPermissionResource {
 		SysPermission domain  = syspermissionMapping.toDomain(syspermissiondto);
         domain .setPermissionid(syspermission_id);
 		syspermissionService.update(domain );
-		SysPermissionDTO dto = syspermissionMapping.toDto(domain );
+		SysPermissionDTO dto = syspermissionMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -125,8 +125,10 @@ public class SysPermissionResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Save-all')")
     @ApiOperation(value = "保存权限/资源", tags = {"权限/资源" },  notes = "保存权限/资源")
 	@RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysPermissionDTO syspermissiondto) {
-        return ResponseEntity.status(HttpStatus.OK).body(syspermissionService.save(syspermissionMapping.toDomain(syspermissiondto)));
+    public ResponseEntity<SysPermissionDTO> save(@RequestBody SysPermissionDTO syspermissiondto) {
+        SysPermission domain = syspermissionMapping.toDomain(syspermissiondto);
+        syspermissionService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(syspermissionMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPermission-Save-all')")

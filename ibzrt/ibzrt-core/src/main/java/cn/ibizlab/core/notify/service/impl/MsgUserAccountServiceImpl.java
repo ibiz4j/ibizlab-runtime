@@ -34,6 +34,7 @@ import cn.ibizlab.util.helper.DEFieldCacheMap;
 
 
 import cn.ibizlab.core.notify.client.MsgUserAccountFeignClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 实体[绑定消息账号] 服务对象接口实现
@@ -108,10 +109,23 @@ public class MsgUserAccountServiceImpl implements IMsgUserAccountService {
     @Override
     @Transactional
     public boolean save(MsgUserAccount et) {
-        if(et.getId()==null) et.setId((String)et.getDefaultKey(true));
-        if(!msgUserAccountFeignClient.save(et))
-            return false;
-        return true;
+        boolean result = true;
+        Object rt = msgUserAccountFeignClient.saveEntity(et);
+        if(rt == null)
+          return false;
+        try {
+            if (rt instanceof Map) {
+                ObjectMapper mapper = new ObjectMapper();
+                rt = mapper.readValue(mapper.writeValueAsString(rt), MsgUserAccount.class);
+                if (rt != null) {
+                    CachedBeanCopier.copy(rt, et);
+                }
+            } else if (rt instanceof Boolean) {
+                result = (boolean) rt;
+            }
+        } catch (Exception e) {
+        }
+            return result;
     }
 
     @Override

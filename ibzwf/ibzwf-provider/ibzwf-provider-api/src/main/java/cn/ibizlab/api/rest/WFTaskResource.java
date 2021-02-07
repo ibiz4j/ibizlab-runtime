@@ -69,7 +69,7 @@ public class WFTaskResource {
 		WFTask domain  = wftaskMapping.toDomain(wftaskdto);
         domain .setId(wftask_id);
 		wftaskService.update(domain );
-		WFTaskDTO dto = wftaskMapping.toDto(domain );
+		WFTaskDTO dto = wftaskMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -116,8 +116,10 @@ public class WFTaskResource {
 
     @ApiOperation(value = "保存工作流任务", tags = {"工作流任务" },  notes = "保存工作流任务")
 	@RequestMapping(method = RequestMethod.POST, value = "/wftasks/save")
-    public ResponseEntity<Boolean> save(@RequestBody WFTaskDTO wftaskdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(wftaskService.save(wftaskMapping.toDomain(wftaskdto)));
+    public ResponseEntity<WFTaskDTO> save(@RequestBody WFTaskDTO wftaskdto) {
+        WFTask domain = wftaskMapping.toDomain(wftaskdto);
+        wftaskService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wftaskMapping.toDto(domain));
     }
 
     @ApiOperation(value = "批量保存工作流任务", tags = {"工作流任务" },  notes = "批量保存工作流任务")

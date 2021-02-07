@@ -1,6 +1,8 @@
 package cn.ibizlab.api.rest.extensions;
 
 import cn.ibizlab.api.dto.WFTaskDTO;
+import cn.ibizlab.api.mapping.WFGroupMapping;
+import cn.ibizlab.api.mapping.WFTaskMapping;
 import cn.ibizlab.core.workflow.domain.*;
 import cn.ibizlab.core.workflow.extensions.service.WFCoreService;
 import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
@@ -10,7 +12,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +48,8 @@ public class WFCoreResource
     private WFCoreService wfCoreService;
 
 	@Autowired
-	private IWFTaskService taskService;
+	@Lazy
+	public WFTaskMapping wfTaskMapping;
 
     @ApiOperation(value = "getWFProcessDefinition", tags = {"WFProcessDefinition" },  notes = "根据系统实体查找当前适配的工作流模型")
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/process-definitions")
@@ -189,6 +194,13 @@ public class WFCoreResource
 				.header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
 				.header("x-total", String.valueOf(domains.getTotalElements()))
 				.body(domains.getContent());
+	}
+
+	@ApiOperation(value = "获取我的分页缓存待办", tags = {"工作流任务" } ,notes = "获取我的分页缓存待办")
+	@RequestMapping(method= RequestMethod.GET , value="/mypagetasks")
+	public ResponseEntity<Page<WFTask>> getTaskAll(WFTaskSearchContext context) {
+		Page page = wfCoreService.getTaskByPage(context);
+		return ResponseEntity.status(HttpStatus.OK).body(new PageImpl(wfTaskMapping.toDto(page.getContent()), page.getPageable(), page.getContent().size()));
 	}
 
 	@RequestMapping(value = "/mytasks/{processDefinitionKey}/{type}/{businessKey}/usertasks/{taskDefinitionKey}", method = RequestMethod.GET  )

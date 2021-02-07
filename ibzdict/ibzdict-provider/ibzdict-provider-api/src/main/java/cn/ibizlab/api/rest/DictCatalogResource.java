@@ -73,7 +73,7 @@ public class DictCatalogResource {
 		DictCatalog domain  = dictcatalogMapping.toDomain(dictcatalogdto);
         domain .setId(dictcatalog_id);
 		dictcatalogService.update(domain );
-		DictCatalogDTO dto = dictcatalogMapping.toDto(domain );
+		DictCatalogDTO dto = dictcatalogMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -125,8 +125,10 @@ public class DictCatalogResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Save-all')")
     @ApiOperation(value = "保存字典", tags = {"字典" },  notes = "保存字典")
 	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/save")
-    public ResponseEntity<Boolean> save(@RequestBody DictCatalogDTO dictcatalogdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.save(dictcatalogMapping.toDomain(dictcatalogdto)));
+    public ResponseEntity<DictCatalogDTO> save(@RequestBody DictCatalogDTO dictcatalogdto) {
+        DictCatalog domain = dictcatalogMapping.toDomain(dictcatalogdto);
+        dictcatalogService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dictcatalogMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdict-DictCatalog-Save-all')")

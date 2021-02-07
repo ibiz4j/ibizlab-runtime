@@ -61,6 +61,10 @@ public class SDFileFallback implements SDFileFeignClient {
     }
 
 
+    public Object saveEntity(SDFile sdfile) {
+        return null;
+    }
+
     public Boolean save(SDFile sdfile) {
         return false;
     }

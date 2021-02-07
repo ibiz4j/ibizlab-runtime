@@ -61,6 +61,10 @@ public class SysDeptMemberFallback implements SysDeptMemberFeignClient {
     }
 
 
+    public Object saveEntity(SysDeptMember sysdeptmember) {
+        return null;
+    }
+
     public Boolean save(SysDeptMember sysdeptmember) {
         return false;
     }

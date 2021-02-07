@@ -61,6 +61,10 @@ public class PayTradeFallback implements PayTradeFeignClient {
     }
 
 
+    public Object saveEntity(PayTrade paytrade) {
+        return null;
+    }
+
     public Boolean save(PayTrade paytrade) {
         return false;
     }

@@ -72,7 +72,7 @@ public class JobsLockResource {
 		JobsLock domain  = jobslockMapping.toDomain(jobslockdto);
         domain .setId(jobslock_id);
 		jobslockService.update(domain );
-		JobsLockDTO dto = jobslockMapping.toDto(domain );
+		JobsLockDTO dto = jobslockMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class JobsLockResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Save-all')")
     @ApiOperation(value = "保存任务锁", tags = {"任务锁" },  notes = "保存任务锁")
 	@RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
-    public ResponseEntity<Boolean> save(@RequestBody JobsLockDTO jobslockdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(jobslockService.save(jobslockMapping.toDomain(jobslockdto)));
+    public ResponseEntity<JobsLockDTO> save(@RequestBody JobsLockDTO jobslockdto) {
+        JobsLock domain = jobslockMapping.toDomain(jobslockdto);
+        jobslockService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(jobslockMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsLock-Save-all')")

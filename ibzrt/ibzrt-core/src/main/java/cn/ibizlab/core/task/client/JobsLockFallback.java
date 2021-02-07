@@ -61,6 +61,10 @@ public class JobsLockFallback implements JobsLockFeignClient {
     }
 
 
+    public Object saveEntity(JobsLock jobslock) {
+        return null;
+    }
+
     public Boolean save(JobsLock jobslock) {
         return false;
     }

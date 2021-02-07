@@ -61,6 +61,10 @@ public class JobsRegistryFallback implements JobsRegistryFeignClient {
     }
 
 
+    public Object saveEntity(JobsRegistry jobsregistry) {
+        return null;
+    }
+
     public Boolean save(JobsRegistry jobsregistry) {
         return false;
     }

@@ -61,7 +61,9 @@ public interface JobsInfoFeignClient {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/save")
-    Boolean save(@RequestBody JobsInfo jobsinfo);
+    Object saveEntity(@RequestBody JobsInfo jobsinfo);
+
+    default Boolean save(@RequestBody JobsInfo jobsinfo) { return saveEntity(jobsinfo)!=null; }
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/savebatch")
     Boolean saveBatch(@RequestBody List<JobsInfo> jobsinfos);

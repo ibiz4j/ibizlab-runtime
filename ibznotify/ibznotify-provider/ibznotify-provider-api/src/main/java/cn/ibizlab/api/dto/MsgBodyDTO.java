@@ -149,7 +149,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "user_data2")
     @JsonProperty("user_data2")
-    @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @Size(min = 0, max = 2000, message = "内容长度必须小于等于[2000]")
     private String userData2;
 
     /**

@@ -72,7 +72,7 @@ public class MsgUserAccountResource {
 		MsgUserAccount domain  = msguseraccountMapping.toDomain(msguseraccountdto);
         domain .setId(msguseraccount_id);
 		msguseraccountService.update(domain );
-		MsgUserAccountDTO dto = msguseraccountMapping.toDto(domain );
+		MsgUserAccountDTO dto = msguseraccountMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -124,8 +124,10 @@ public class MsgUserAccountResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgUserAccount-Save-all')")
     @ApiOperation(value = "保存绑定消息账号", tags = {"绑定消息账号" },  notes = "保存绑定消息账号")
 	@RequestMapping(method = RequestMethod.POST, value = "/msguseraccounts/save")
-    public ResponseEntity<Boolean> save(@RequestBody MsgUserAccountDTO msguseraccountdto) {
-        return ResponseEntity.status(HttpStatus.OK).body(msguseraccountService.save(msguseraccountMapping.toDomain(msguseraccountdto)));
+    public ResponseEntity<MsgUserAccountDTO> save(@RequestBody MsgUserAccountDTO msguseraccountdto) {
+        MsgUserAccount domain = msguseraccountMapping.toDomain(msguseraccountdto);
+        msguseraccountService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(msguseraccountMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgUserAccount-Save-all')")

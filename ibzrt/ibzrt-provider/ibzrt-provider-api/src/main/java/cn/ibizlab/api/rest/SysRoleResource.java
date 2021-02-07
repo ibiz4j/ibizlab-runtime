@@ -73,7 +73,7 @@ public class SysRoleResource {
 		SysRole domain  = sysroleMapping.toDomain(sysroledto);
         domain .setRoleid(sysrole_id);
 		sysroleService.update(domain );
-		SysRoleDTO dto = sysroleMapping.toDto(domain );
+		SysRoleDTO dto = sysroleMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
@@ -125,8 +125,10 @@ public class SysRoleResource {
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysRole-Save-all')")
     @ApiOperation(value = "保存系统角色", tags = {"系统角色" },  notes = "保存系统角色")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
-    public ResponseEntity<Boolean> save(@RequestBody SysRoleDTO sysroledto) {
-        return ResponseEntity.status(HttpStatus.OK).body(sysroleService.save(sysroleMapping.toDomain(sysroledto)));
+    public ResponseEntity<SysRoleDTO> save(@RequestBody SysRoleDTO sysroledto) {
+        SysRole domain = sysroleMapping.toDomain(sysroledto);
+        sysroleService.save(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(sysroleMapping.toDto(domain));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysRole-Save-all')")
