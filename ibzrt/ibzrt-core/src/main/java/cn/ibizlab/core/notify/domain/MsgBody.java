@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [消息] 对象
  */
 @Data
+@ApiModel("消息")
 public class MsgBody extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class MsgBody extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "is_error")
     @JsonProperty("is_error")
+    @ApiModelProperty("是否出错")
     private Integer isError;
 
     /**
@@ -47,6 +51,7 @@ public class MsgBody extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "is_send")
     @JsonProperty("is_send")
+    @ApiModelProperty("是否发送")
     private Integer isSend;
 
     /**
@@ -55,6 +60,7 @@ public class MsgBody extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "msg_id")
     @JsonProperty("msg_id")
+    @ApiModelProperty("消息标识")
     private String msgId;
 
     /**
@@ -62,6 +68,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "to_users")
     @JsonProperty("to_users")
+    @ApiModelProperty("目标用户")
     private String toUsers;
 
     /**
@@ -70,6 +77,7 @@ public class MsgBody extends EntityClient implements Serializable {
     @DEField(name = "msglink_pc")
     @JSONField(name = "msg_link_pc")
     @JsonProperty("msg_link_pc")
+    @ApiModelProperty("消息链接(PC)")
     private String msgLinkPc;
 
     /**
@@ -77,6 +85,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "msg_link")
     @JsonProperty("msg_link")
+    @ApiModelProperty("消息链接")
     private String msgLink;
 
     /**
@@ -84,6 +93,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "subject")
     @JsonProperty("subject")
+    @ApiModelProperty("消息标题")
     private String subject;
 
     /**
@@ -91,6 +101,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "content")
     @JsonProperty("content")
+    @ApiModelProperty("消息内容")
     private String content;
 
     /**
@@ -98,6 +109,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "msg_type")
     @JsonProperty("msg_type")
+    @ApiModelProperty("消息类型")
     private Integer msgType;
 
     /**
@@ -105,6 +117,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "msg_name")
     @JsonProperty("msg_name")
+    @ApiModelProperty("消息名称")
     private String msgName;
 
     /**
@@ -112,6 +125,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "template_id")
     @JsonProperty("template_id")
+    @ApiModelProperty("消息模板标识")
     private String templateId;
 
     /**
@@ -119,6 +133,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "error_info")
     @JsonProperty("error_info")
+    @ApiModelProperty("错误信息")
     private String errorInfo;
 
     /**
@@ -126,6 +141,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "user_data")
     @JsonProperty("user_data")
+    @ApiModelProperty("用户数据")
     private String userData;
 
     /**
@@ -133,6 +149,7 @@ public class MsgBody extends EntityClient implements Serializable {
      */
     @JSONField(name = "user_data2")
     @JsonProperty("user_data2")
+    @ApiModelProperty("用户数据2")
     private String userData2;
 
     /**
@@ -141,6 +158,7 @@ public class MsgBody extends EntityClient implements Serializable {
     @DEField(name = "templparams")
     @JSONField(name = "template_params")
     @JsonProperty("template_params")
+    @ApiModelProperty("消息模板参数")
     private String templateParams;
 
 

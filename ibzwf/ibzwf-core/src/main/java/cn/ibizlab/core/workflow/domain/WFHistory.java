@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 /**
@@ -34,6 +36,7 @@ import cn.ibizlab.util.annotation.Audit;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel("历史")
 public class WFHistory extends EntityBase implements Serializable {
 
     /**
@@ -42,6 +45,7 @@ public class WFHistory extends EntityBase implements Serializable {
     @DEField(name = "histid", isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("标识")
     private String id;
 
     /**
@@ -49,6 +53,7 @@ public class WFHistory extends EntityBase implements Serializable {
      */
     @JSONField(name = "author")
     @JsonProperty("author")
+    @ApiModelProperty("操作者标识")
     private String author;
 
     /**
@@ -56,6 +61,7 @@ public class WFHistory extends EntityBase implements Serializable {
      */
     @JSONField(name = "authorName")
     @JsonProperty("authorName")
+    @ApiModelProperty("操作者")
     private String authorname;
 
     /**
@@ -64,6 +70,7 @@ public class WFHistory extends EntityBase implements Serializable {
     @DEField(name = "message")
     @JSONField(name = "fullMessage")
     @JsonProperty("fullMessage")
+    @ApiModelProperty("意见")
     private String fullmessage;
 
     /**
@@ -73,6 +80,7 @@ public class WFHistory extends EntityBase implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "time", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("time")
+    @ApiModelProperty("时间")
     private Timestamp time;
 
     /**
@@ -81,6 +89,7 @@ public class WFHistory extends EntityBase implements Serializable {
     @DEField(name = "actiontype")
     @JSONField(name = "type")
     @JsonProperty("type")
+    @ApiModelProperty("意见类型")
     private String type;
 
     /**
@@ -88,6 +97,7 @@ public class WFHistory extends EntityBase implements Serializable {
      */
     @JSONField(name = "taskId")
     @JsonProperty("taskId")
+    @ApiModelProperty("任务标识")
     private String taskid;
 
     /**
@@ -96,6 +106,7 @@ public class WFHistory extends EntityBase implements Serializable {
     @DEField(name = "instanceid")
     @JSONField(name = "processInstanceId")
     @JsonProperty("processInstanceId")
+    @ApiModelProperty("实例标识")
     private String processinstanceid;
 
     /**
@@ -104,6 +115,7 @@ public class WFHistory extends EntityBase implements Serializable {
     @DEField(name = "businesskey")
     @JSONField(name = "processInstanceBusinessKey")
     @JsonProperty("processInstanceBusinessKey")
+    @ApiModelProperty("业务键值")
     private String processinstancebusinesskey;
 
 

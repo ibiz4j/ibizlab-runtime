@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [岗位] 对象
  */
 @Data
+@ApiModel("岗位")
 public class SysPost extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysPost extends EntityClient implements Serializable {
     @DEField(defaultValue = "postcode", defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField = true)
     @JSONField(name = "postid")
     @JsonProperty("postid")
+    @ApiModelProperty("岗位标识")
     private String postid;
 
     /**
@@ -46,6 +50,7 @@ public class SysPost extends EntityClient implements Serializable {
      */
     @JSONField(name = "postcode")
     @JsonProperty("postcode")
+    @ApiModelProperty("岗位编码")
     private String postcode;
 
     /**
@@ -53,6 +58,7 @@ public class SysPost extends EntityClient implements Serializable {
      */
     @JSONField(name = "postname")
     @JsonProperty("postname")
+    @ApiModelProperty("岗位名称")
     private String postname;
 
     /**
@@ -60,6 +66,7 @@ public class SysPost extends EntityClient implements Serializable {
      */
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
 
     /**
@@ -67,6 +74,7 @@ public class SysPost extends EntityClient implements Serializable {
      */
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
 
 

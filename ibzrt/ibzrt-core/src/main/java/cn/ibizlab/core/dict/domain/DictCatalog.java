@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [字典] 对象
  */
 @Data
+@ApiModel("字典")
 public class DictCatalog extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     @DEField(defaultValue = "code", defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("标识")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     @DEField(name = "ccode")
     @JSONField(name = "code")
     @JsonProperty("code")
+    @ApiModelProperty("代码")
     private String code;
 
     /**
@@ -55,6 +60,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     @DEField(name = "cname")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("名称")
     private String name;
 
     /**
@@ -63,6 +69,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     @DEField(name = "cgroup")
     @JSONField(name = "group")
     @JsonProperty("group")
+    @ApiModelProperty("分组")
     private String group;
 
     /**
@@ -70,6 +77,7 @@ public class DictCatalog extends EntityClient implements Serializable {
      */
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
 
     /**
@@ -78,6 +86,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval = "0")
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("是否有效")
     private Integer enable;
 
     /**
@@ -87,6 +96,7 @@ public class DictCatalog extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
 

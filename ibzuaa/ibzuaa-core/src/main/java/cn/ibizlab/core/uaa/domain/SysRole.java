@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZROLE", resultMap = "SysRoleResultMap")
+@ApiModel("系统角色")
 public class SysRole extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysRole extends EntityMP implements Serializable {
     @TableId(value = "sys_roleid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "roleid")
     @JsonProperty("roleid")
+    @ApiModelProperty("角色标识")
     private String roleid;
     /**
      * 角色名称
@@ -58,6 +62,7 @@ public class SysRole extends EntityMP implements Serializable {
     @TableField(value = "sys_rolename")
     @JSONField(name = "rolename")
     @JsonProperty("rolename")
+    @ApiModelProperty("角色名称")
     private String rolename;
     /**
      * 备注
@@ -65,6 +70,7 @@ public class SysRole extends EntityMP implements Serializable {
     @TableField(value = "memo")
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
     /**
      * 父角色标识
@@ -72,6 +78,7 @@ public class SysRole extends EntityMP implements Serializable {
     @TableField(value = "proleid")
     @JSONField(name = "proleid")
     @JsonProperty("proleid")
+    @ApiModelProperty("父角色标识")
     private String proleid;
     /**
      * 父角色名称
@@ -79,6 +86,7 @@ public class SysRole extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "prolename")
     @JsonProperty("prolename")
+    @ApiModelProperty("父角色名称")
     private String prolename;
     /**
      * 建立时间
@@ -88,6 +96,7 @@ public class SysRole extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("建立时间")
     private Timestamp createdate;
     /**
      * 更新时间
@@ -97,6 +106,7 @@ public class SysRole extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
     /**
      * 建立人
@@ -105,6 +115,7 @@ public class SysRole extends EntityMP implements Serializable {
     @TableField(value = "createman", fill = FieldFill.INSERT)
     @JSONField(name = "createman")
     @JsonProperty("createman")
+    @ApiModelProperty("建立人")
     private String createman;
     /**
      * 更新人
@@ -113,6 +124,7 @@ public class SysRole extends EntityMP implements Serializable {
     @TableField(value = "updateman")
     @JSONField(name = "updateman")
     @JsonProperty("updateman")
+    @ApiModelProperty("更新人")
     private String updateman;
 
     /**

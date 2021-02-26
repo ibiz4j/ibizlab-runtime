@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysOrganizationDTO]
  */
 @Data
+@ApiModel("单位机构")
 public class SysOrganizationDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位标识")
     private String orgid;
 
     /**
@@ -45,6 +49,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位代码")
     private String orgcode;
 
     /**
@@ -54,6 +59,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("名称")
     private String orgname;
 
     /**
@@ -63,6 +69,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JSONField(name = "parentorgid")
     @JsonProperty("parentorgid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("上级单位")
     private String parentorgid;
 
     /**
@@ -72,6 +79,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JSONField(name = "shortname")
     @JsonProperty("shortname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位简称")
     private String shortname;
 
     /**
@@ -80,6 +88,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "orglevel")
     @JsonProperty("orglevel")
+    @ApiModelProperty("单位级别")
     private Integer orglevel;
 
     /**
@@ -88,6 +97,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
 
     /**
@@ -97,6 +107,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JSONField(name = "parentorgname")
     @JsonProperty("parentorgname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("上级单位")
     private String parentorgname;
 
     /**
@@ -106,6 +117,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JSONField(name = "domains")
     @JsonProperty("domains")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("区属")
     private String domains;
 
     /**
@@ -114,6 +126,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
 
     /**
@@ -123,6 +136,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
     private Timestamp createdate;
 
     /**
@@ -132,6 +146,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
     /**
@@ -140,6 +155,7 @@ public class SysOrganizationDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "isvalid")
     @JsonProperty("isvalid")
+    @ApiModelProperty("启用标识")
     private Integer isvalid;
 
 

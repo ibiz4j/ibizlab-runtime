@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZMSGTEMPL", resultMap = "MsgTemplateResultMap")
+@ApiModel("消息模板")
 public class MsgTemplate extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableId(value = "tid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "tid")
     @JsonProperty("tid")
+    @ApiModelProperty("模板标识")
     private String tid;
     /**
      * 模板标题
@@ -58,6 +62,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableField(value = "template_name")
     @JSONField(name = "template_name")
     @JsonProperty("template_name")
+    @ApiModelProperty("模板标题")
     private String templateName;
     /**
      * 模板类型
@@ -66,6 +71,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableField(value = "template_type")
     @JSONField(name = "template_type")
     @JsonProperty("template_type")
+    @ApiModelProperty("模板类型")
     private String templateType;
     /**
      * 模板内容
@@ -73,6 +79,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableField(value = "content")
     @JSONField(name = "content")
     @JsonProperty("content")
+    @ApiModelProperty("模板内容")
     private String content;
     /**
      * 模板标识
@@ -81,6 +88,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableField(value = "template_id")
     @JSONField(name = "template_id")
     @JsonProperty("template_id")
+    @ApiModelProperty("模板标识")
     private String templateId;
     /**
      * URL
@@ -89,6 +97,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableField(value = "template_url")
     @JSONField(name = "template_url")
     @JsonProperty("template_url")
+    @ApiModelProperty("URL")
     private String templateUrl;
     /**
      * 开放平台接入标识
@@ -96,6 +105,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableField(value = "accessid")
     @JSONField(name = "access_id")
     @JsonProperty("access_id")
+    @ApiModelProperty("开放平台接入标识")
     private String accessId;
     /**
      * 接入平台
@@ -103,6 +113,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableField(value = "accessname")
     @JSONField(name = "access_name")
     @JsonProperty("access_name")
+    @ApiModelProperty("接入平台")
     private String accessName;
     /**
      * 接入平台类型
@@ -111,6 +122,7 @@ public class MsgTemplate extends EntityMP implements Serializable {
     @TableField(value = "open_type")
     @JSONField(name = "open_type")
     @JsonProperty("open_type")
+    @ApiModelProperty("接入平台类型")
     private String openType;
 
     /**

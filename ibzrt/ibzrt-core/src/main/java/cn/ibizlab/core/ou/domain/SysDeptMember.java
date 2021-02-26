@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [部门成员] 对象
  */
 @Data
+@ApiModel("部门成员")
 public class SysDeptMember extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
+    @ApiModelProperty("标识")
     private String memberid;
 
     /**
@@ -46,6 +50,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "deptid")
     @JsonProperty("deptid")
+    @ApiModelProperty("部门标识")
     private String deptid;
 
     /**
@@ -53,6 +58,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "deptname")
     @JsonProperty("deptname")
+    @ApiModelProperty("部门名称")
     private String deptname;
 
     /**
@@ -60,6 +66,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
 
     /**
@@ -67,6 +74,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("成员")
     private String personname;
 
     /**
@@ -74,6 +82,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "postid")
     @JsonProperty("postid")
+    @ApiModelProperty("岗位标识")
     private String postid;
 
     /**
@@ -81,6 +90,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "postname")
     @JsonProperty("postname")
+    @ApiModelProperty("岗位名称")
     private String postname;
 
     /**
@@ -88,6 +98,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
+    @ApiModelProperty("业务条线")
     private String bcode;
 
     /**
@@ -95,6 +106,7 @@ public class SysDeptMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
 
 

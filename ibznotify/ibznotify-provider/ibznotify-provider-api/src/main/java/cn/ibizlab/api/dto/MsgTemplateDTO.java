@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[MsgTemplateDTO]
  */
 @Data
+@ApiModel("消息模板")
 public class MsgTemplateDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "tid")
     @JsonProperty("tid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("模板标识")
     private String tid;
 
     /**
@@ -45,6 +49,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "template_name")
     @JsonProperty("template_name")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("模板标题")
     private String templateName;
 
     /**
@@ -54,6 +59,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "template_type")
     @JsonProperty("template_type")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("模板类型")
     private String templateType;
 
     /**
@@ -63,6 +69,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "content")
     @JsonProperty("content")
     @Size(min = 0, max = 4000, message = "内容长度必须小于等于[4000]")
+    @ApiModelProperty("模板内容")
     private String content;
 
     /**
@@ -72,6 +79,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "template_id")
     @JsonProperty("template_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("模板标识")
     private String templateId;
 
     /**
@@ -81,6 +89,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "template_url")
     @JsonProperty("template_url")
     @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
+    @ApiModelProperty("URL")
     private String templateUrl;
 
     /**
@@ -90,6 +99,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "access_id")
     @JsonProperty("access_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("开放平台接入标识")
     private String accessId;
 
     /**
@@ -99,6 +109,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "access_name")
     @JsonProperty("access_name")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("接入平台")
     private String accessName;
 
     /**
@@ -108,6 +119,7 @@ public class MsgTemplateDTO extends DTOBase implements Serializable {
     @JSONField(name = "open_type")
     @JsonProperty("open_type")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("接入平台类型")
     private String openType;
 
 

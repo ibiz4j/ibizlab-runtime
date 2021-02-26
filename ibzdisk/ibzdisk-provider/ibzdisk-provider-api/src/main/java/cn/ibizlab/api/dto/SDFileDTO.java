@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SDFileDTO]
  */
 @Data
+@ApiModel("文件")
 public class SDFileDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("标识")
     private String id;
 
     /**
@@ -45,6 +49,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "name")
     @JsonProperty("name")
     @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @ApiModelProperty("名称")
     private String name;
 
     /**
@@ -54,6 +59,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "file_path")
     @JsonProperty("file_path")
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
+    @ApiModelProperty("路径")
     private String filePath;
 
     /**
@@ -63,6 +69,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "folder")
     @JsonProperty("folder")
     @Size(min = 0, max = 40, message = "内容长度必须小于等于[40]")
+    @ApiModelProperty("特定目录")
     private String folder;
 
     /**
@@ -71,6 +78,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "file_size")
     @JsonProperty("file_size")
+    @ApiModelProperty("文件大小")
     private Integer fileSize;
 
     /**
@@ -80,6 +88,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "extension")
     @JsonProperty("extension")
     @Size(min = 0, max = 20, message = "内容长度必须小于等于[20]")
+    @ApiModelProperty("扩展名")
     private String extension;
 
     /**
@@ -89,6 +98,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "owner_type")
     @JsonProperty("owner_type")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("所属类型")
     private String ownerType;
 
     /**
@@ -98,6 +108,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "owner_id")
     @JsonProperty("owner_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("所属主体")
     private String ownerId;
 
     /**
@@ -107,6 +118,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "memo")
     @JsonProperty("memo")
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
+    @ApiModelProperty("备注")
     private String memo;
 
     /**
@@ -116,6 +128,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "digest_code")
     @JsonProperty("digest_code")
     @Size(min = 0, max = 64, message = "内容长度必须小于等于[64]")
+    @ApiModelProperty("签名")
     private String digestCode;
 
     /**
@@ -125,6 +138,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "createman")
     @JsonProperty("createman")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("创建人")
     private String createman;
 
     /**
@@ -134,6 +148,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建日期")
     private Timestamp createdate;
 
     /**
@@ -143,6 +158,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JSONField(name = "updateman")
     @JsonProperty("updateman")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("更新人")
     private String updateman;
 
     /**
@@ -152,6 +168,7 @@ public class SDFileDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

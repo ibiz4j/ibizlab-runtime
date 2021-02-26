@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [人员] 对象
  */
 @Data
+@ApiModel("人员")
 public class SysEmployee extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysEmployee extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
 
     /**
@@ -46,6 +50,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "username")
     @JsonProperty("username")
+    @ApiModelProperty("用户全局名")
     private String username;
 
     /**
@@ -53,6 +58,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("姓名")
     private String personname;
 
     /**
@@ -60,6 +66,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "usercode")
     @JsonProperty("usercode")
+    @ApiModelProperty("用户工号")
     private String usercode;
 
     /**
@@ -67,6 +74,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "loginname")
     @JsonProperty("loginname")
+    @ApiModelProperty("登录名")
     private String loginname;
 
     /**
@@ -74,6 +82,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "password")
     @JsonProperty("password")
+    @ApiModelProperty("密码")
     private String password;
 
     /**
@@ -81,6 +90,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
 
     /**
@@ -88,6 +98,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
+    @ApiModelProperty("主部门")
     private String mdeptid;
 
     /**
@@ -95,6 +106,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptcode")
     @JsonProperty("mdeptcode")
+    @ApiModelProperty("主部门代码")
     private String mdeptcode;
 
     /**
@@ -102,6 +114,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
+    @ApiModelProperty("主部门名称")
     private String mdeptname;
 
     /**
@@ -109,6 +122,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
+    @ApiModelProperty("业务编码")
     private String bcode;
 
     /**
@@ -116,6 +130,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "postid")
     @JsonProperty("postid")
+    @ApiModelProperty("岗位标识")
     private String postid;
 
     /**
@@ -123,6 +138,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "postcode")
     @JsonProperty("postcode")
+    @ApiModelProperty("岗位代码")
     private String postcode;
 
     /**
@@ -130,6 +146,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "postname")
     @JsonProperty("postname")
+    @ApiModelProperty("岗位名称")
     private String postname;
 
     /**
@@ -138,6 +155,7 @@ public class SysEmployee extends EntityClient implements Serializable {
     @DEField(preType = DEPredefinedFieldType.ORGID)
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @ApiModelProperty("单位")
     private String orgid;
 
     /**
@@ -145,6 +163,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
+    @ApiModelProperty("单位代码")
     private String orgcode;
 
     /**
@@ -153,6 +172,7 @@ public class SysEmployee extends EntityClient implements Serializable {
     @DEField(preType = DEPredefinedFieldType.ORGNAME)
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("单位名称")
     private String orgname;
 
     /**
@@ -160,6 +180,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "nickname")
     @JsonProperty("nickname")
+    @ApiModelProperty("昵称别名")
     private String nickname;
 
     /**
@@ -167,6 +188,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "sex")
     @JsonProperty("sex")
+    @ApiModelProperty("性别")
     private String sex;
 
     /**
@@ -174,6 +196,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "certcode")
     @JsonProperty("certcode")
+    @ApiModelProperty("证件号码")
     private String certcode;
 
     /**
@@ -181,6 +204,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "phone")
     @JsonProperty("phone")
+    @ApiModelProperty("联系方式")
     private String phone;
 
     /**
@@ -189,6 +213,7 @@ public class SysEmployee extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "birthday" , format = "yyyy-MM-dd")
     @JsonProperty("birthday")
+    @ApiModelProperty("出生日期")
     private Timestamp birthday;
 
     /**
@@ -196,6 +221,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "email")
     @JsonProperty("email")
+    @ApiModelProperty("邮件")
     private String email;
 
     /**
@@ -203,6 +229,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "avatar")
     @JsonProperty("avatar")
+    @ApiModelProperty("社交账号")
     private String avatar;
 
     /**
@@ -210,6 +237,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "addr")
     @JsonProperty("addr")
+    @ApiModelProperty("地址")
     private String addr;
 
     /**
@@ -217,6 +245,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "usericon")
     @JsonProperty("usericon")
+    @ApiModelProperty("照片")
     private String usericon;
 
     /**
@@ -224,6 +253,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "ipaddr")
     @JsonProperty("ipaddr")
+    @ApiModelProperty("ip地址")
     private String ipaddr;
 
     /**
@@ -231,6 +261,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "theme")
     @JsonProperty("theme")
+    @ApiModelProperty("样式")
     private String theme;
 
     /**
@@ -238,6 +269,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "lang")
     @JsonProperty("lang")
+    @ApiModelProperty("语言")
     private String lang;
 
     /**
@@ -245,6 +277,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "fontsize")
     @JsonProperty("fontsize")
+    @ApiModelProperty("字号")
     private String fontsize;
 
     /**
@@ -252,6 +285,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
 
     /**
@@ -259,6 +293,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "reserver")
     @JsonProperty("reserver")
+    @ApiModelProperty("保留")
     private String reserver;
 
     /**
@@ -266,6 +301,7 @@ public class SysEmployee extends EntityClient implements Serializable {
      */
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
 
     /**
@@ -274,6 +310,7 @@ public class SysEmployee extends EntityClient implements Serializable {
     @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval = "0")
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
 
     /**
@@ -283,6 +320,7 @@ public class SysEmployee extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
     private Timestamp createdate;
 
     /**
@@ -292,6 +330,7 @@ public class SysEmployee extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
 

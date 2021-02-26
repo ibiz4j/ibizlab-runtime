@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[WFSystemDTO]
  */
 @Data
+@ApiModel("系统")
 public class WFSystemDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class WFSystemDTO extends DTOBase implements Serializable {
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("系统标识")
     private String pssystemid;
 
     /**
@@ -45,6 +49,7 @@ public class WFSystemDTO extends DTOBase implements Serializable {
     @JSONField(name = "pssystemname")
     @JsonProperty("pssystemname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("系统名称")
     private String pssystemname;
 
 

@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [应用] 对象
  */
 @Data
+@ApiModel("应用")
 public class SysApp extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysApp extends EntityClient implements Serializable {
     @DEField(name = "appid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("应用标识")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class SysApp extends EntityClient implements Serializable {
     @DEField(name = "appname")
     @JSONField(name = "label")
     @JsonProperty("label")
+    @ApiModelProperty("应用名")
     private String label;
 
     /**
@@ -55,6 +60,7 @@ public class SysApp extends EntityClient implements Serializable {
     @DEField(name = "pssystemid")
     @JSONField(name = "systemid")
     @JsonProperty("systemid")
+    @ApiModelProperty("系统标识")
     private String systemid;
 
     /**
@@ -62,6 +68,7 @@ public class SysApp extends EntityClient implements Serializable {
      */
     @JSONField(name = "fullname")
     @JsonProperty("fullname")
+    @ApiModelProperty("全称")
     private String fullname;
 
     /**
@@ -70,6 +77,7 @@ public class SysApp extends EntityClient implements Serializable {
     @DEField(name = "apptype")
     @JSONField(name = "type")
     @JsonProperty("type")
+    @ApiModelProperty("类型")
     private String type;
 
     /**
@@ -78,6 +86,7 @@ public class SysApp extends EntityClient implements Serializable {
     @DEField(name = "appgroup")
     @JSONField(name = "group")
     @JsonProperty("group")
+    @ApiModelProperty("分组")
     private String group;
 
     /**
@@ -85,6 +94,7 @@ public class SysApp extends EntityClient implements Serializable {
      */
     @JSONField(name = "icon")
     @JsonProperty("icon")
+    @ApiModelProperty("图标")
     private String icon;
 
     /**
@@ -92,6 +102,7 @@ public class SysApp extends EntityClient implements Serializable {
      */
     @JSONField(name = "visabled")
     @JsonProperty("visabled")
+    @ApiModelProperty("可见")
     private Integer visabled;
 
     /**
@@ -99,6 +110,7 @@ public class SysApp extends EntityClient implements Serializable {
      */
     @JSONField(name = "addr")
     @JsonProperty("addr")
+    @ApiModelProperty("地址")
     private String addr;
 
 

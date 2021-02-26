@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZORG", resultMap = "SysOrganizationResultMap")
+@ApiModel("单位机构")
 public class SysOrganization extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableId(value = "orgid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @ApiModelProperty("单位标识")
     private String orgid;
     /**
      * 单位代码
@@ -57,6 +61,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "orgcode")
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
+    @ApiModelProperty("单位代码")
     private String orgcode;
     /**
      * 名称
@@ -65,6 +70,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "orgname")
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("名称")
     private String orgname;
     /**
      * 上级单位
@@ -73,6 +79,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "porgid")
     @JSONField(name = "parentorgid")
     @JsonProperty("parentorgid")
+    @ApiModelProperty("上级单位")
     private String parentorgid;
     /**
      * 单位简称
@@ -80,6 +87,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "shortname")
     @JSONField(name = "shortname")
     @JsonProperty("shortname")
+    @ApiModelProperty("单位简称")
     private String shortname;
     /**
      * 单位级别
@@ -87,6 +95,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "orglevel")
     @JSONField(name = "orglevel")
     @JsonProperty("orglevel")
+    @ApiModelProperty("单位级别")
     private Integer orglevel;
     /**
      * 排序
@@ -94,6 +103,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "showorder")
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
     /**
      * 上级单位
@@ -101,6 +111,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "parentorgname")
     @JsonProperty("parentorgname")
+    @ApiModelProperty("上级单位")
     private String parentorgname;
     /**
      * 区属
@@ -108,6 +119,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "domains")
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
     /**
      * 逻辑有效
@@ -117,6 +129,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
     /**
      * 创建时间
@@ -126,6 +139,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
     private Timestamp createdate;
     /**
      * 最后修改时间
@@ -135,6 +149,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
     /**
      * 启用标志
@@ -143,6 +158,7 @@ public class SysOrganization extends EntityMP implements Serializable {
     @TableField(value = "isvalid")
     @JSONField(name = "isvalid")
     @JsonProperty("isvalid")
+    @ApiModelProperty("启用标志")
     private Integer isvalid;
 
     /**

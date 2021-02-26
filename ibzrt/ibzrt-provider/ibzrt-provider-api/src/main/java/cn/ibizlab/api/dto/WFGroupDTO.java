@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[WFGroupDTO]
  */
 @Data
+@ApiModel("角色/用户组")
 public class WFGroupDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class WFGroupDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("组标识")
     private String id;
 
     /**
@@ -45,6 +49,7 @@ public class WFGroupDTO extends DTOBase implements Serializable {
     @JSONField(name = "name")
     @JsonProperty("name")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("组名称")
     private String name;
 
     /**
@@ -54,6 +59,7 @@ public class WFGroupDTO extends DTOBase implements Serializable {
     @JSONField(name = "groupscope")
     @JsonProperty("groupscope")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("范围")
     private String groupscope;
 
 

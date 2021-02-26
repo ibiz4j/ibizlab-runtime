@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [用户角色关系] 对象
  */
 @Data
+@ApiModel("用户角色关系")
 public class SysUserRole extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysUserRole extends EntityClient implements Serializable {
     @DEField(name = "sys_user_roleid" , isKeyField = true)
     @JSONField(name = "userroleid")
     @JsonProperty("userroleid")
+    @ApiModelProperty("用户角色关系标识")
     private String userroleid;
 
     /**
@@ -47,6 +51,7 @@ public class SysUserRole extends EntityClient implements Serializable {
     @DEField(name = "sys_roleid")
     @JSONField(name = "roleid")
     @JsonProperty("roleid")
+    @ApiModelProperty("角色标识")
     private String roleid;
 
     /**
@@ -54,6 +59,7 @@ public class SysUserRole extends EntityClient implements Serializable {
      */
     @JSONField(name = "rolename")
     @JsonProperty("rolename")
+    @ApiModelProperty("角色名称")
     private String rolename;
 
     /**
@@ -62,6 +68,7 @@ public class SysUserRole extends EntityClient implements Serializable {
     @DEField(name = "sys_userid")
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
 
     /**
@@ -69,6 +76,7 @@ public class SysUserRole extends EntityClient implements Serializable {
      */
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("用户名称")
     private String personname;
 
     /**
@@ -76,6 +84,7 @@ public class SysUserRole extends EntityClient implements Serializable {
      */
     @JSONField(name = "loginname")
     @JsonProperty("loginname")
+    @ApiModelProperty("登录名")
     private String loginname;
 
     /**
@@ -83,6 +92,7 @@ public class SysUserRole extends EntityClient implements Serializable {
      */
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("单位")
     private String orgname;
 
     /**
@@ -90,6 +100,7 @@ public class SysUserRole extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
+    @ApiModelProperty("主部门")
     private String mdeptname;
 
     /**
@@ -99,6 +110,7 @@ public class SysUserRole extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("建立时间")
     private Timestamp createdate;
 
     /**
@@ -108,6 +120,7 @@ public class SysUserRole extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysPermissionDTO]
  */
 @Data
+@ApiModel("权限/资源")
 public class SysPermissionDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
     @JSONField(name = "permissionid")
     @JsonProperty("permissionid")
     @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @ApiModelProperty("资源标识")
     private String permissionid;
 
     /**
@@ -45,6 +49,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
     @JSONField(name = "permissionname")
     @JsonProperty("permissionname")
     @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @ApiModelProperty("资源名称")
     private String permissionname;
 
     /**
@@ -54,6 +59,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
     @JSONField(name = "permissiontype")
     @JsonProperty("permissiontype")
     @Size(min = 0, max = 60, message = "内容长度必须小于等于[60]")
+    @ApiModelProperty("资源类别")
     private String permissiontype;
 
     /**
@@ -63,6 +69,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("系统")
     private String pssystemid;
 
     /**
@@ -71,6 +78,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
 
     /**
@@ -80,6 +88,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("建立时间")
     private Timestamp createdate;
 
     /**
@@ -89,6 +98,7 @@ public class SysPermissionDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

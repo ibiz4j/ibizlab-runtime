@@ -51,6 +51,13 @@ public class WFCoreResource
 	@Lazy
 	public WFTaskMapping wfTaskMapping;
 
+	@ApiOperation(value = "getWFProcessDefinition", tags = {"WFProcessDefinition" },  notes = "根据系统实体查找当前适配的工作流模型")
+	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{dynainstid}/{entity}/process-definitions")
+	public ResponseEntity<List<WFProcessDefinition>> getDynaWorkflow(@PathVariable("system") String system ,@PathVariable("appname") String appname,@PathVariable("dynainstid") String dynamic,
+																 @PathVariable("entity") String entity) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynamicWorkflow(dynamic,system,appname,entity));
+	}
+
     @ApiOperation(value = "getWFProcessDefinition", tags = {"WFProcessDefinition" },  notes = "根据系统实体查找当前适配的工作流模型")
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/process-definitions")
     public ResponseEntity<List<WFProcessDefinition>> getworkflow(@PathVariable("system") String system,@PathVariable("appname") String appname,
@@ -198,10 +205,14 @@ public class WFCoreResource
 
 	@ApiOperation(value = "获取我的分页缓存待办", tags = {"工作流任务" } ,notes = "获取我的分页缓存待办")
 	@RequestMapping(method= RequestMethod.GET , value="/mypagetasks")
-	public ResponseEntity<Page<WFTask>> getTaskAll(WFTaskSearchContext context) {
-		Page page = wfCoreService.getTaskByPage(context);
-		return ResponseEntity.status(HttpStatus.OK).body(new PageImpl(wfTaskMapping.toDto(page.getContent()), page.getPageable(), page.getContent().size()));
-	}
+	public ResponseEntity<List<WFTask>> getTaskAll(WFTaskSearchContext context) {
+		Page domains = wfCoreService.getTaskByPage(context);
+		return ResponseEntity.status(HttpStatus.OK)
+				.header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+				.header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+				.header("x-total", String.valueOf(domains.getTotalElements()))
+				.body(domains.getContent());
+    }
 
 	@RequestMapping(value = "/mytasks/{processDefinitionKey}/{type}/{businessKey}/usertasks/{taskDefinitionKey}", method = RequestMethod.GET  )
 	public ResponseEntity openTask(@PathVariable("processDefinitionKey") final String processDefinitionKey,@PathVariable("type") final String type,

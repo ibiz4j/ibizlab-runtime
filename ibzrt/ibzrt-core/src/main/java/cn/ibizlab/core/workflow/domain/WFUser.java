@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [用户] 对象
  */
 @Data
+@ApiModel("用户")
 public class WFUser extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class WFUser extends EntityClient implements Serializable {
     @DEField(name = "userid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("用户标识")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class WFUser extends EntityClient implements Serializable {
     @DEField(name = "username")
     @JSONField(name = "firstname")
     @JsonProperty("firstname")
+    @ApiModelProperty("用户全局名")
     private String firstname;
 
     /**
@@ -55,6 +60,7 @@ public class WFUser extends EntityClient implements Serializable {
     @DEField(name = "personname")
     @JSONField(name = "displayname")
     @JsonProperty("displayname")
+    @ApiModelProperty("用户名称")
     private String displayname;
 
     /**
@@ -62,6 +68,7 @@ public class WFUser extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
+    @ApiModelProperty("主部门")
     private String mdeptid;
 
     /**
@@ -69,6 +76,7 @@ public class WFUser extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptcode")
     @JsonProperty("mdeptcode")
+    @ApiModelProperty("主部门代码")
     private String mdeptcode;
 
     /**
@@ -76,6 +84,7 @@ public class WFUser extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
+    @ApiModelProperty("主部门名称")
     private String mdeptname;
 
     /**
@@ -83,6 +92,7 @@ public class WFUser extends EntityClient implements Serializable {
      */
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
+    @ApiModelProperty("业务编码")
     private String bcode;
 
     /**
@@ -91,6 +101,7 @@ public class WFUser extends EntityClient implements Serializable {
     @DEField(preType = DEPredefinedFieldType.ORGID)
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @ApiModelProperty("单位")
     private String orgid;
 
     /**
@@ -98,6 +109,7 @@ public class WFUser extends EntityClient implements Serializable {
      */
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
+    @ApiModelProperty("单位代码")
     private String orgcode;
 
     /**
@@ -106,6 +118,7 @@ public class WFUser extends EntityClient implements Serializable {
     @DEField(preType = DEPredefinedFieldType.ORGNAME)
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("单位名称")
     private String orgname;
 
 

@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [支付交易] 对象
  */
 @Data
+@ApiModel("支付交易")
 public class PayTrade extends EntityClient implements Serializable {
 
     /**
@@ -38,6 +41,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "subject")
     @JsonProperty("subject")
+    @ApiModelProperty("订单标题")
     private String subject;
 
     /**
@@ -45,6 +49,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "total_amount")
     @JsonProperty("total_amount")
+    @ApiModelProperty("订单金额")
     private String totalAmount;
 
     /**
@@ -52,6 +57,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "trade_name")
     @JsonProperty("trade_name")
+    @ApiModelProperty("交易名称")
     private String tradeName;
 
     /**
@@ -59,6 +65,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "trade_type")
     @JsonProperty("trade_type")
+    @ApiModelProperty("支付类型")
     private String tradeType;
 
     /**
@@ -66,6 +73,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "trade_status")
     @JsonProperty("trade_status")
+    @ApiModelProperty("支付状态")
     private String tradeStatus;
 
     /**
@@ -73,6 +81,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "out_trade_no")
     @JsonProperty("out_trade_no")
+    @ApiModelProperty("订单号")
     private String outTradeNo;
 
     /**
@@ -81,6 +90,7 @@ public class PayTrade extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "trade_id")
     @JsonProperty("trade_id")
+    @ApiModelProperty("交易标识")
     private String tradeId;
 
     /**
@@ -88,6 +98,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "app_id")
     @JsonProperty("app_id")
+    @ApiModelProperty("AccessKey(AppId)")
     private String appId;
 
     /**
@@ -95,6 +106,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "access_name")
     @JsonProperty("access_name")
+    @ApiModelProperty("支付平台")
     private String accessName;
 
     /**
@@ -102,6 +114,7 @@ public class PayTrade extends EntityClient implements Serializable {
      */
     @JSONField(name = "access_id")
     @JsonProperty("access_id")
+    @ApiModelProperty("支付平台接入标识")
     private String accessId;
 
 

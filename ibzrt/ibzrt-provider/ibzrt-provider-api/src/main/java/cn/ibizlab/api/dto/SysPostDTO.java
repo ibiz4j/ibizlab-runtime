@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysPostDTO]
  */
 @Data
+@ApiModel("岗位")
 public class SysPostDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysPostDTO extends DTOBase implements Serializable {
     @JSONField(name = "postid")
     @JsonProperty("postid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("岗位标识")
     private String postid;
 
     /**
@@ -46,6 +50,7 @@ public class SysPostDTO extends DTOBase implements Serializable {
     @JsonProperty("postcode")
     @NotBlank(message = "[岗位编码]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("岗位编码")
     private String postcode;
 
     /**
@@ -56,6 +61,7 @@ public class SysPostDTO extends DTOBase implements Serializable {
     @JsonProperty("postname")
     @NotBlank(message = "[岗位名称]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("岗位名称")
     private String postname;
 
     /**
@@ -65,6 +71,7 @@ public class SysPostDTO extends DTOBase implements Serializable {
     @JSONField(name = "domains")
     @JsonProperty("domains")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("区属")
     private String domains;
 
     /**
@@ -74,6 +81,7 @@ public class SysPostDTO extends DTOBase implements Serializable {
     @JSONField(name = "memo")
     @JsonProperty("memo")
     @Size(min = 0, max = 2000, message = "内容长度必须小于等于[2000]")
+    @ApiModelProperty("备注")
     private String memo;
 
 

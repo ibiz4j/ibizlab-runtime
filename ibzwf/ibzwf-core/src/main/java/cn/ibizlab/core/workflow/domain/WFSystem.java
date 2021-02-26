@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZPSSYSTEM", resultMap = "WFSystemResultMap")
+@ApiModel("系统")
 public class WFSystem extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class WFSystem extends EntityMP implements Serializable {
     @TableId(value = "pssystemid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
+    @ApiModelProperty("系统标识")
     private String pssystemid;
     /**
      * 系统名称
@@ -57,6 +61,7 @@ public class WFSystem extends EntityMP implements Serializable {
     @TableField(value = "pssystemname")
     @JSONField(name = "pssystemname")
     @JsonProperty("pssystemname")
+    @ApiModelProperty("系统名称")
     private String pssystemname;
 
 

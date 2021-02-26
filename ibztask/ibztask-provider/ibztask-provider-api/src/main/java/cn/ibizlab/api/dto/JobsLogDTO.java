@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[JobsLogDTO]
  */
 @Data
+@ApiModel("任务调度日志")
 public class JobsLogDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("主键ID")
     private String id;
 
     /**
@@ -46,6 +50,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JsonProperty("job_id")
     @NotBlank(message = "[任务ID]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("任务ID")
     private String jobId;
 
     /**
@@ -55,6 +60,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "address")
     @JsonProperty("address")
     @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
+    @ApiModelProperty("执行地址")
     private String address;
 
     /**
@@ -64,6 +70,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "handler")
     @JsonProperty("handler")
     @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
+    @ApiModelProperty("执行器任务HANDLER")
     private String handler;
 
     /**
@@ -73,6 +80,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "param")
     @JsonProperty("param")
     @Size(min = 0, max = 512, message = "内容长度必须小于等于[512]")
+    @ApiModelProperty("执行器任务参数")
     private String param;
 
     /**
@@ -82,6 +90,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "fail_retry_count")
     @JsonProperty("fail_retry_count")
     @NotNull(message = "[失败重试次数]不允许为空!")
+    @ApiModelProperty("失败重试次数")
     private Integer failRetryCount;
 
     /**
@@ -91,6 +100,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "trigger_code")
     @JsonProperty("trigger_code")
     @NotNull(message = "[触发器调度返回码]不允许为空!")
+    @ApiModelProperty("触发器调度返回码")
     private Integer triggerCode;
 
     /**
@@ -101,6 +111,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JsonProperty("trigger_type")
     @NotBlank(message = "[触发器调度类型]不允许为空!")
     @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
+    @ApiModelProperty("触发器调度类型")
     private String triggerType;
 
     /**
@@ -110,6 +121,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "trigger_msg")
     @JsonProperty("trigger_msg")
     @Size(min = 0, max = 1048576, message = "内容长度必须小于等于[1048576]")
+    @ApiModelProperty("触发器调度信息")
     private String triggerMsg;
 
     /**
@@ -120,6 +132,7 @@ public class JobsLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "create_time" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
     @NotNull(message = "[创建时间]不允许为空!")
+    @ApiModelProperty("创建时间")
     private Timestamp createTime;
 
 

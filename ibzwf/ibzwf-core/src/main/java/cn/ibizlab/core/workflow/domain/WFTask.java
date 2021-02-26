@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 /**
@@ -34,6 +36,7 @@ import cn.ibizlab.util.annotation.Audit;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel("工作流任务")
 public class WFTask extends EntityBase implements Serializable {
 
     /**
@@ -42,6 +45,7 @@ public class WFTask extends EntityBase implements Serializable {
     @DEField(name = "taskid", isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("任务标识")
     private String id;
 
     /**
@@ -50,6 +54,7 @@ public class WFTask extends EntityBase implements Serializable {
     @DEField(name = "taskname")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("状态")
     private String name;
 
     /**
@@ -58,6 +63,7 @@ public class WFTask extends EntityBase implements Serializable {
     @DEField(name = "definitionid")
     @JSONField(name = "processDefinitionId")
     @JsonProperty("processDefinitionId")
+    @ApiModelProperty("DefinitionId")
     private String processdefinitionid;
 
     /**
@@ -66,6 +72,7 @@ public class WFTask extends EntityBase implements Serializable {
     @DEField(name = "definitionkey")
     @JSONField(name = "processDefinitionKey")
     @JsonProperty("processDefinitionKey")
+    @ApiModelProperty("DefinitionKey")
     private String processdefinitionkey;
 
     /**
@@ -74,6 +81,7 @@ public class WFTask extends EntityBase implements Serializable {
     @DEField(name = "definitionname")
     @JSONField(name = "processDefinitionName")
     @JsonProperty("processDefinitionName")
+    @ApiModelProperty("流程")
     private String processdefinitionname;
 
     /**
@@ -81,6 +89,7 @@ public class WFTask extends EntityBase implements Serializable {
      */
     @JSONField(name = "taskDefinitionKey")
     @JsonProperty("taskDefinitionKey")
+    @ApiModelProperty("TaskDefinitionKey")
     private String taskdefinitionkey;
 
     /**
@@ -88,6 +97,7 @@ public class WFTask extends EntityBase implements Serializable {
      */
     @JSONField(name = "description")
     @JsonProperty("description")
+    @ApiModelProperty("待办事项")
     private String description;
 
     /**
@@ -96,6 +106,7 @@ public class WFTask extends EntityBase implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createTime", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createTime")
+    @ApiModelProperty("发起时间")
     private Timestamp createtime;
 
     /**
@@ -104,6 +115,7 @@ public class WFTask extends EntityBase implements Serializable {
     @DEField(name = "instanceid")
     @JSONField(name = "processInstanceId")
     @JsonProperty("processInstanceId")
+    @ApiModelProperty("实例标识")
     private String processinstanceid;
 
     /**
@@ -112,6 +124,7 @@ public class WFTask extends EntityBase implements Serializable {
     @DEField(name = "businesskey")
     @JSONField(name = "processInstanceBusinessKey")
     @JsonProperty("processInstanceBusinessKey")
+    @ApiModelProperty("业务键值")
     private String processinstancebusinesskey;
 
 

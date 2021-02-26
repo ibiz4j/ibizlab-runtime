@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [字典项] 对象
  */
 @Data
+@ApiModel("字典项")
 public class DictOption extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(name = "vkey" , isKeyField = true)
     @JSONField(name = "value_key")
     @JsonProperty("value_key")
+    @ApiModelProperty("标识")
     private String valueKey;
 
     /**
@@ -47,6 +51,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(name = "cid")
     @JSONField(name = "catalog_id")
     @JsonProperty("catalog_id")
+    @ApiModelProperty("目录代码")
     private String catalogId;
 
     /**
@@ -55,6 +60,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(name = "cname")
     @JSONField(name = "catalog_name")
     @JsonProperty("catalog_name")
+    @ApiModelProperty("目录")
     private String catalogName;
 
     /**
@@ -63,6 +69,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(name = "val")
     @JSONField(name = "value")
     @JsonProperty("value")
+    @ApiModelProperty("代码值")
     private String value;
 
     /**
@@ -70,6 +77,7 @@ public class DictOption extends EntityClient implements Serializable {
      */
     @JSONField(name = "label")
     @JsonProperty("label")
+    @ApiModelProperty("名称")
     private String label;
 
     /**
@@ -78,6 +86,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(name = "pval")
     @JSONField(name = "parent")
     @JsonProperty("parent")
+    @ApiModelProperty("父代码值")
     private String parent;
 
     /**
@@ -86,6 +95,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(name = "vfilter")
     @JSONField(name = "filter")
     @JsonProperty("filter")
+    @ApiModelProperty("过滤项")
     private String filter;
 
     /**
@@ -94,6 +104,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(defaultValue = "itemcls", defaultValueType = DEFieldDefaultValueType.PARAM)
     @JSONField(name = "cls")
     @JsonProperty("cls")
+    @ApiModelProperty("栏目样式")
     private String cls;
 
     /**
@@ -102,6 +113,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(name = "iconcls")
     @JSONField(name = "icon_class")
     @JsonProperty("icon_class")
+    @ApiModelProperty("图标")
     private String iconClass;
 
     /**
@@ -110,6 +122,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "disabled")
     @JsonProperty("disabled")
+    @ApiModelProperty("是否禁用")
     private Integer disabled;
 
     /**
@@ -118,6 +131,7 @@ public class DictOption extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "expired")
     @JsonProperty("expired")
+    @ApiModelProperty("过期/失效")
     private Integer expired;
 
     /**
@@ -125,6 +139,7 @@ public class DictOption extends EntityClient implements Serializable {
      */
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
 
     /**
@@ -132,6 +147,7 @@ public class DictOption extends EntityClient implements Serializable {
      */
     @JSONField(name = "extension")
     @JsonProperty("extension")
+    @ApiModelProperty("扩展")
     private String extension;
 
     /**
@@ -141,6 +157,7 @@ public class DictOption extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
 

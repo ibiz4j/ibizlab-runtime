@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZUSER", resultMap = "WFUserResultMap")
+@ApiModel("用户")
 public class WFUser extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableId(value = "userid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("用户标识")
     private String id;
     /**
      * 用户全局名
@@ -58,6 +62,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "username")
     @JSONField(name = "firstname")
     @JsonProperty("firstname")
+    @ApiModelProperty("用户全局名")
     private String firstname;
     /**
      * 用户名称
@@ -66,6 +71,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "personname")
     @JSONField(name = "displayname")
     @JsonProperty("displayname")
+    @ApiModelProperty("用户名称")
     private String displayname;
     /**
      * 主部门
@@ -73,6 +79,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "mdeptid")
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
+    @ApiModelProperty("主部门")
     private String mdeptid;
     /**
      * 主部门代码
@@ -80,6 +87,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "mdeptcode")
     @JSONField(name = "mdeptcode")
     @JsonProperty("mdeptcode")
+    @ApiModelProperty("主部门代码")
     private String mdeptcode;
     /**
      * 主部门名称
@@ -87,6 +95,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "mdeptname")
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
+    @ApiModelProperty("主部门名称")
     private String mdeptname;
     /**
      * 业务编码
@@ -94,6 +103,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "bcode")
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
+    @ApiModelProperty("业务编码")
     private String bcode;
     /**
      * 单位
@@ -102,6 +112,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "orgid")
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @ApiModelProperty("单位")
     private String orgid;
     /**
      * 单位代码
@@ -109,6 +120,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "orgcode")
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
+    @ApiModelProperty("单位代码")
     private String orgcode;
     /**
      * 单位名称
@@ -117,6 +129,7 @@ public class WFUser extends EntityMP implements Serializable {
     @TableField(value = "orgname")
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("单位名称")
     private String orgname;
 
 

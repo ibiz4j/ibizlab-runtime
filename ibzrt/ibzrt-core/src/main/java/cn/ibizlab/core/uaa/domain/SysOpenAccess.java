@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [第三方认证平台] 对象
  */
 @Data
+@ApiModel("第三方认证平台")
 public class SysOpenAccess extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(defaultValue = "open_type", defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("开放平台接入标识")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "accessname")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("开放平台")
     private String name;
 
     /**
@@ -55,6 +60,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "open_type")
     @JSONField(name = "open_type")
     @JsonProperty("open_type")
+    @ApiModelProperty("开放平台类型")
     private String openType;
 
     /**
@@ -63,6 +69,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "access_key")
     @JSONField(name = "access_key")
     @JsonProperty("access_key")
+    @ApiModelProperty("AccessKey(AppId)")
     private String accessKey;
 
     /**
@@ -71,6 +78,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "secret_key")
     @JSONField(name = "secret_key")
     @JsonProperty("secret_key")
+    @ApiModelProperty("SecretKey(AppSecret)")
     private String secretKey;
 
     /**
@@ -79,6 +87,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "region_id")
     @JSONField(name = "region_id")
     @JsonProperty("region_id")
+    @ApiModelProperty("RegionId")
     private String regionId;
 
     /**
@@ -87,6 +96,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "access_token")
     @JSONField(name = "access_token")
     @JsonProperty("access_token")
+    @ApiModelProperty("管理账号token")
     private String accessToken;
 
     /**
@@ -96,6 +106,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "expires_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("expires_time")
+    @ApiModelProperty("管理账号token过期时间")
     private Timestamp expiresTime;
 
     /**
@@ -104,6 +115,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "disabled")
     @JsonProperty("disabled")
+    @ApiModelProperty("是否禁用")
     private Integer disabled;
 
     /**
@@ -112,6 +124,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "redirect_uri")
     @JSONField(name = "redirect_uri")
     @JsonProperty("redirect_uri")
+    @ApiModelProperty("RedirectURI")
     private String redirectUri;
 
     /**
@@ -120,6 +133,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "notify_url")
     @JSONField(name = "notify_url")
     @JsonProperty("notify_url")
+    @ApiModelProperty("NotifyUrl")
     private String notifyUrl;
 
     /**
@@ -128,6 +142,7 @@ public class SysOpenAccess extends EntityClient implements Serializable {
     @DEField(name = "agent_id")
     @JSONField(name = "agent_id")
     @JsonProperty("agent_id")
+    @ApiModelProperty("AGENT_ID")
     private Long agentId;
 
 

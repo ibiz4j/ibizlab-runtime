@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZWFGROUP", resultMap = "WFGroupResultMap")
+@ApiModel("角色/用户组")
 public class WFGroup extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class WFGroup extends EntityMP implements Serializable {
     @TableId(value = "groupid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("组标识")
     private String id;
     /**
      * 组名称
@@ -58,6 +62,7 @@ public class WFGroup extends EntityMP implements Serializable {
     @TableField(value = "groupname")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("组名称")
     private String name;
     /**
      * 范围
@@ -65,6 +70,7 @@ public class WFGroup extends EntityMP implements Serializable {
     @TableField(value = "groupscope")
     @JSONField(name = "groupscope")
     @JsonProperty("groupscope")
+    @ApiModelProperty("范围")
     private String groupscope;
 
 

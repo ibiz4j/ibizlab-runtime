@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysAppDTO]
  */
 @Data
+@ApiModel("应用")
 public class SysAppDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("应用标识")
     private String id;
 
     /**
@@ -45,6 +49,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "label")
     @JsonProperty("label")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("应用名")
     private String label;
 
     /**
@@ -54,6 +59,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "systemid")
     @JsonProperty("systemid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("系统标识")
     private String systemid;
 
     /**
@@ -63,6 +69,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "fullname")
     @JsonProperty("fullname")
     @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @ApiModelProperty("全称")
     private String fullname;
 
     /**
@@ -72,6 +79,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "type")
     @JsonProperty("type")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("类型")
     private String type;
 
     /**
@@ -81,6 +89,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "group")
     @JsonProperty("group")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("分组")
     private String group;
 
     /**
@@ -90,6 +99,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "icon")
     @JsonProperty("icon")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("图标")
     private String icon;
 
     /**
@@ -98,6 +108,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "visabled")
     @JsonProperty("visabled")
+    @ApiModelProperty("可见")
     private Integer visabled;
 
     /**
@@ -107,6 +118,7 @@ public class SysAppDTO extends DTOBase implements Serializable {
     @JSONField(name = "addr")
     @JsonProperty("addr")
     @Size(min = 0, max = 300, message = "内容长度必须小于等于[300]")
+    @ApiModelProperty("地址")
     private String addr;
 
 

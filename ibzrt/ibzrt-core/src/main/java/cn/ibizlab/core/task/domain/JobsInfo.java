@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [任务信息] 对象
  */
 @Data
+@ApiModel("任务信息")
 public class JobsInfo extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("主键ID")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @DEField(name = "tenant_id")
     @JSONField(name = "tenant_id")
     @JsonProperty("tenant_id")
+    @ApiModelProperty("租户ID")
     private String tenantId;
 
     /**
@@ -54,6 +59,7 @@ public class JobsInfo extends EntityClient implements Serializable {
      */
     @JSONField(name = "app")
     @JsonProperty("app")
+    @ApiModelProperty("服务名")
     private String app;
 
     /**
@@ -61,6 +67,7 @@ public class JobsInfo extends EntityClient implements Serializable {
      */
     @JSONField(name = "cron")
     @JsonProperty("cron")
+    @ApiModelProperty("任务执行CRON")
     private String cron;
 
     /**
@@ -68,6 +75,7 @@ public class JobsInfo extends EntityClient implements Serializable {
      */
     @JSONField(name = "handler")
     @JsonProperty("handler")
+    @ApiModelProperty("执行器任务HANDLER")
     private String handler;
 
     /**
@@ -75,6 +83,7 @@ public class JobsInfo extends EntityClient implements Serializable {
      */
     @JSONField(name = "param")
     @JsonProperty("param")
+    @ApiModelProperty("执行器任务参数")
     private String param;
 
     /**
@@ -83,6 +92,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "timeout")
     @JsonProperty("timeout")
+    @ApiModelProperty("任务执行超时时间（秒）")
     private Integer timeout;
 
     /**
@@ -91,6 +101,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "fail_retry_count")
     @JsonProperty("fail_retry_count")
+    @ApiModelProperty("失败重试次数")
     private Integer failRetryCount;
 
     /**
@@ -99,6 +110,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @DEField(name = "last_time")
     @JSONField(name = "last_time")
     @JsonProperty("last_time")
+    @ApiModelProperty("上次调度时间")
     private Long lastTime;
 
     /**
@@ -107,6 +119,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @DEField(name = "next_time")
     @JSONField(name = "next_time")
     @JsonProperty("next_time")
+    @ApiModelProperty("下次调度时间")
     private Long nextTime;
 
     /**
@@ -114,6 +127,7 @@ public class JobsInfo extends EntityClient implements Serializable {
      */
     @JSONField(name = "author")
     @JsonProperty("author")
+    @ApiModelProperty("所有者")
     private String author;
 
     /**
@@ -121,6 +135,7 @@ public class JobsInfo extends EntityClient implements Serializable {
      */
     @JSONField(name = "remark")
     @JsonProperty("remark")
+    @ApiModelProperty("备注")
     private String remark;
 
     /**
@@ -128,6 +143,7 @@ public class JobsInfo extends EntityClient implements Serializable {
      */
     @JSONField(name = "status")
     @JsonProperty("status")
+    @ApiModelProperty("状态")
     private Integer status;
 
     /**
@@ -137,6 +153,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "update_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("update_time")
+    @ApiModelProperty("更新时间")
     private Timestamp updateTime;
 
     /**
@@ -146,6 +163,7 @@ public class JobsInfo extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "create_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
+    @ApiModelProperty("创建时间")
     private Timestamp createTime;
 
 

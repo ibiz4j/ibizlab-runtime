@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZWFMEMBER", resultMap = "WFMemberResultMap")
+@ApiModel("成员")
 public class WFMember extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableId(value = "memberid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
+    @ApiModelProperty("组成员标识")
     private String memberid;
     /**
      * 组成员名称
@@ -57,6 +61,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(value = "membername")
     @JSONField(name = "membername")
     @JsonProperty("membername")
+    @ApiModelProperty("组成员名称")
     private String membername;
     /**
      * 组标识
@@ -64,6 +69,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(value = "groupid")
     @JSONField(name = "groupid")
     @JsonProperty("groupid")
+    @ApiModelProperty("组标识")
     private String groupid;
     /**
      * 用户组
@@ -71,6 +77,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "groupname")
     @JsonProperty("groupname")
+    @ApiModelProperty("用户组")
     private String groupname;
     /**
      * 用户标识
@@ -78,6 +85,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(value = "userid")
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
     /**
      * 用户
@@ -85,6 +93,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("用户")
     private String personname;
     /**
      * 单位
@@ -92,6 +101,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @ApiModelProperty("单位")
     private String orgid;
     /**
      * 单位
@@ -99,6 +109,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("单位")
     private String orgname;
     /**
      * 主部门
@@ -106,6 +117,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
+    @ApiModelProperty("主部门")
     private String mdeptid;
     /**
      * 主部门
@@ -113,6 +125,7 @@ public class WFMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
+    @ApiModelProperty("主部门")
     private String mdeptname;
 
     /**

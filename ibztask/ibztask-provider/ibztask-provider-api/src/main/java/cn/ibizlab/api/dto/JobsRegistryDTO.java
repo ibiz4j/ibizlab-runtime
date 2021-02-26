@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[JobsRegistryDTO]
  */
 @Data
+@ApiModel("任务注册信息")
 public class JobsRegistryDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class JobsRegistryDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("主键ID")
     private String id;
 
     /**
@@ -46,6 +50,7 @@ public class JobsRegistryDTO extends DTOBase implements Serializable {
     @JsonProperty("app")
     @NotBlank(message = "[服务名]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("服务名")
     private String app;
 
     /**
@@ -56,6 +61,7 @@ public class JobsRegistryDTO extends DTOBase implements Serializable {
     @JsonProperty("address")
     @NotBlank(message = "[执行地址]不允许为空!")
     @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
+    @ApiModelProperty("执行地址")
     private String address;
 
     /**
@@ -65,6 +71,7 @@ public class JobsRegistryDTO extends DTOBase implements Serializable {
     @JSONField(name = "status")
     @JsonProperty("status")
     @NotNull(message = "[状态]不允许为空!")
+    @ApiModelProperty("状态")
     private Integer status;
 
     /**
@@ -75,6 +82,7 @@ public class JobsRegistryDTO extends DTOBase implements Serializable {
     @JSONField(name = "update_time" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("update_time")
     @NotNull(message = "[更新时间]不允许为空!")
+    @ApiModelProperty("更新时间")
     private Timestamp updateTime;
 
 

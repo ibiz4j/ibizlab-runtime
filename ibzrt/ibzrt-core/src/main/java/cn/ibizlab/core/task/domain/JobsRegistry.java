@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [任务注册信息] 对象
  */
 @Data
+@ApiModel("任务注册信息")
 public class JobsRegistry extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("主键ID")
     private String id;
 
     /**
@@ -46,6 +50,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
      */
     @JSONField(name = "app")
     @JsonProperty("app")
+    @ApiModelProperty("服务名")
     private String app;
 
     /**
@@ -53,6 +58,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
      */
     @JSONField(name = "address")
     @JsonProperty("address")
+    @ApiModelProperty("执行地址")
     private String address;
 
     /**
@@ -60,6 +66,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
      */
     @JSONField(name = "status")
     @JsonProperty("status")
+    @ApiModelProperty("状态")
     private Integer status;
 
     /**
@@ -69,6 +76,7 @@ public class JobsRegistry extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "update_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("update_time")
+    @ApiModelProperty("更新时间")
     private Timestamp updateTime;
 
 

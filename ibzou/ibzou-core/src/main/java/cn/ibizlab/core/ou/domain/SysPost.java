@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZPOST", resultMap = "SysPostResultMap")
+@ApiModel("岗位")
 public class SysPost extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysPost extends EntityMP implements Serializable {
     @TableId(value = "postid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "postid")
     @JsonProperty("postid")
+    @ApiModelProperty("岗位标识")
     private String postid;
     /**
      * 岗位编码
@@ -57,6 +61,7 @@ public class SysPost extends EntityMP implements Serializable {
     @TableField(value = "postcode")
     @JSONField(name = "postcode")
     @JsonProperty("postcode")
+    @ApiModelProperty("岗位编码")
     private String postcode;
     /**
      * 岗位名称
@@ -64,6 +69,7 @@ public class SysPost extends EntityMP implements Serializable {
     @TableField(value = "postname")
     @JSONField(name = "postname")
     @JsonProperty("postname")
+    @ApiModelProperty("岗位名称")
     private String postname;
     /**
      * 区属
@@ -71,6 +77,7 @@ public class SysPost extends EntityMP implements Serializable {
     @TableField(value = "domains")
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
     /**
      * 备注
@@ -78,6 +85,7 @@ public class SysPost extends EntityMP implements Serializable {
     @TableField(value = "memo")
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
 
 

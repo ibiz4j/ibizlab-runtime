@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZDICTOPTION", resultMap = "DictOptionResultMap")
+@ApiModel("字典项")
 public class DictOption extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableId(value = "vkey", type = IdType.ASSIGN_UUID)
     @JSONField(name = "value_key")
     @JsonProperty("value_key")
+    @ApiModelProperty("标识")
     private String valueKey;
     /**
      * 目录代码
@@ -58,6 +62,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "cid")
     @JSONField(name = "catalog_id")
     @JsonProperty("catalog_id")
+    @ApiModelProperty("目录代码")
     private String catalogId;
     /**
      * 目录
@@ -66,6 +71,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "cname")
     @JSONField(name = "catalog_name")
     @JsonProperty("catalog_name")
+    @ApiModelProperty("目录")
     private String catalogName;
     /**
      * 代码值
@@ -74,6 +80,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "val")
     @JSONField(name = "value")
     @JsonProperty("value")
+    @ApiModelProperty("代码值")
     private String value;
     /**
      * 名称
@@ -81,6 +88,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "label")
     @JSONField(name = "label")
     @JsonProperty("label")
+    @ApiModelProperty("名称")
     private String label;
     /**
      * 父代码值
@@ -89,6 +97,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "pval")
     @JSONField(name = "parent")
     @JsonProperty("parent")
+    @ApiModelProperty("父代码值")
     private String parent;
     /**
      * 过滤项
@@ -97,6 +106,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "vfilter")
     @JSONField(name = "filter")
     @JsonProperty("filter")
+    @ApiModelProperty("过滤项")
     private String filter;
     /**
      * 栏目样式
@@ -105,6 +115,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "cls")
     @JSONField(name = "cls")
     @JsonProperty("cls")
+    @ApiModelProperty("栏目样式")
     private String cls;
     /**
      * 图标
@@ -113,6 +124,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "iconcls")
     @JSONField(name = "icon_class")
     @JsonProperty("icon_class")
+    @ApiModelProperty("图标")
     private String iconClass;
     /**
      * 是否禁用
@@ -121,6 +133,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "disabled")
     @JSONField(name = "disabled")
     @JsonProperty("disabled")
+    @ApiModelProperty("是否禁用")
     private Integer disabled;
     /**
      * 过期/失效
@@ -129,6 +142,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "expired")
     @JSONField(name = "expired")
     @JsonProperty("expired")
+    @ApiModelProperty("过期/失效")
     private Integer expired;
     /**
      * 排序
@@ -136,6 +150,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "showorder")
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
     /**
      * 扩展
@@ -143,6 +158,7 @@ public class DictOption extends EntityMP implements Serializable {
     @TableField(value = "extension")
     @JSONField(name = "extension")
     @JsonProperty("extension")
+    @ApiModelProperty("扩展")
     private String extension;
     /**
      * 最后修改时间
@@ -152,6 +168,7 @@ public class DictOption extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
     /**
      * 创建时间
@@ -161,6 +178,7 @@ public class DictOption extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
     private Timestamp createdate;
 
     /**

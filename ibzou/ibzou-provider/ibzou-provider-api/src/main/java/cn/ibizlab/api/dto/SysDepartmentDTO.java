@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysDepartmentDTO]
  */
 @Data
+@ApiModel("部门")
 public class SysDepartmentDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "deptid")
     @JsonProperty("deptid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("部门标识")
     private String deptid;
 
     /**
@@ -46,6 +50,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JsonProperty("deptcode")
     @NotBlank(message = "[部门代码]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("部门代码")
     private String deptcode;
 
     /**
@@ -56,6 +61,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JsonProperty("deptname")
     @NotBlank(message = "[部门名称]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("部门名称")
     private String deptname;
 
     /**
@@ -65,6 +71,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位")
     private String orgid;
 
     /**
@@ -74,6 +81,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "parentdeptid")
     @JsonProperty("parentdeptid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("上级部门")
     private String parentdeptid;
 
     /**
@@ -83,6 +91,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "shortname")
     @JsonProperty("shortname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("部门简称")
     private String shortname;
 
     /**
@@ -91,6 +100,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "deptlevel")
     @JsonProperty("deptlevel")
+    @ApiModelProperty("部门级别")
     private Integer deptlevel;
 
     /**
@@ -100,6 +110,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "domains")
     @JsonProperty("domains")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("区属")
     private String domains;
 
     /**
@@ -108,6 +119,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
 
     /**
@@ -117,6 +129,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("业务编码")
     private String bcode;
 
     /**
@@ -126,6 +139,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "leaderid")
     @JsonProperty("leaderid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("分管领导标识")
     private String leaderid;
 
     /**
@@ -135,6 +149,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "leadername")
     @JsonProperty("leadername")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("分管领导")
     private String leadername;
 
     /**
@@ -143,6 +158,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
 
     /**
@@ -152,6 +168,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位")
     private String orgname;
 
     /**
@@ -161,6 +178,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JSONField(name = "parentdeptname")
     @JsonProperty("parentdeptname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("上级部门")
     private String parentdeptname;
 
     /**
@@ -170,6 +188,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
     private Timestamp createdate;
 
     /**
@@ -179,6 +198,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
     /**
@@ -187,6 +207,7 @@ public class SysDepartmentDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "isvalid")
     @JsonProperty("isvalid")
+    @ApiModelProperty("启用标志")
     private Integer isvalid;
 
 

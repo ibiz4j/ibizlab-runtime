@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZFILE", resultMap = "SDFileResultMap")
+@ApiModel("文件")
 public class SDFile extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableId(value = "fileid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("标识")
     private String id;
     /**
      * 名称
@@ -58,6 +62,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "filename")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("名称")
     private String name;
     /**
      * 路径
@@ -65,6 +70,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "filepath")
     @JSONField(name = "file_path")
     @JsonProperty("file_path")
+    @ApiModelProperty("路径")
     private String filePath;
     /**
      * 特定目录
@@ -72,6 +78,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "folder")
     @JSONField(name = "folder")
     @JsonProperty("folder")
+    @ApiModelProperty("特定目录")
     private String folder;
     /**
      * 文件大小
@@ -79,6 +86,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "filesize")
     @JSONField(name = "file_size")
     @JsonProperty("file_size")
+    @ApiModelProperty("文件大小")
     private Integer fileSize;
     /**
      * 扩展名
@@ -87,6 +95,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "fileext")
     @JSONField(name = "extension")
     @JsonProperty("extension")
+    @ApiModelProperty("扩展名")
     private String extension;
     /**
      * 所属类型
@@ -94,6 +103,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "ownertype")
     @JSONField(name = "owner_type")
     @JsonProperty("owner_type")
+    @ApiModelProperty("所属类型")
     private String ownerType;
     /**
      * 所属主体
@@ -101,6 +111,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "ownerid")
     @JSONField(name = "owner_id")
     @JsonProperty("owner_id")
+    @ApiModelProperty("所属主体")
     private String ownerId;
     /**
      * 备注
@@ -108,6 +119,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "memo")
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
     /**
      * 签名
@@ -115,6 +127,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "digestcode")
     @JSONField(name = "digest_code")
     @JsonProperty("digest_code")
+    @ApiModelProperty("签名")
     private String digestCode;
     /**
      * 创建人
@@ -123,6 +136,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "createman", fill = FieldFill.INSERT)
     @JSONField(name = "createman")
     @JsonProperty("createman")
+    @ApiModelProperty("创建人")
     private String createman;
     /**
      * 创建日期
@@ -132,6 +146,7 @@ public class SDFile extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建日期")
     private Timestamp createdate;
     /**
      * 更新人
@@ -140,6 +155,7 @@ public class SDFile extends EntityMP implements Serializable {
     @TableField(value = "updateman")
     @JSONField(name = "updateman")
     @JsonProperty("updateman")
+    @ApiModelProperty("更新人")
     private String updateman;
     /**
      * 更新时间
@@ -149,6 +165,7 @@ public class SDFile extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

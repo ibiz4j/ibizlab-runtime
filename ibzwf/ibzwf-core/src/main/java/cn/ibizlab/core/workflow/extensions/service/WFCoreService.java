@@ -1,26 +1,21 @@
 package cn.ibizlab.core.workflow.extensions.service;
 
-import cn.ibizlab.core.workflow.extensions.domain.FlowUser;
 import cn.ibizlab.core.workflow.domain.*;
+import cn.ibizlab.core.workflow.extensions.domain.FlowUser;
 import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
 import cn.ibizlab.core.workflow.mapper.WFCoreMapper;
 import cn.ibizlab.core.workflow.service.IWFGroupService;
 import cn.ibizlab.core.workflow.service.IWFProcessDefinitionService;
-import cn.ibizlab.core.workflow.service.IWFTaskService;
 import cn.ibizlab.core.workflow.service.IWFUserService;
 import cn.ibizlab.util.client.IBZUAAFeignClient;
-import cn.ibizlab.util.domain.MsgBody;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.RuleUtils;
 import cn.ibizlab.util.security.AuthTokenUtil;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.RemoteService;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.flowable.bpmn.BpmnAutoLayout;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
 import org.flowable.bpmn.model.*;
@@ -77,8 +72,6 @@ import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 
 @Service("wfCoreService")
 @Slf4j
@@ -151,6 +144,9 @@ public class WFCoreService
 		return context;
 	}
 
+	public List<WFProcessDefinition> getDynamicWorkflow(String dynamic, String system,String appname,String entity) {
+		return wfModelService.getDynamicWorkflow(dynamic,system,entity);
+	}
 
 
 	public List<WFProcessDefinition> getWorkflow(String system,String appname,String entity) {
@@ -806,6 +802,7 @@ public class WFCoreService
 			curProcess = model.getMainProcess();
 			String bookings="";
 			String refgroups="";
+			String dynainstid = getDynainstId();
 			if(!curProcess.getExtensionElements().containsKey("field"))
 			{
 				log.error(bpmnFileName+"没有实体订阅");
@@ -901,7 +898,12 @@ public class WFCoreService
 			boolean bchange=false;
 			for(String booking:bookings.split(","))
 			{
-				String processDefinitionKey=system+"-"+booking+"-"+params[1];
+				String processDefinitionKey;
+
+				if(!StringUtils.isEmpty(dynainstid))
+					processDefinitionKey="dyna-"+dynainstid+"-"+system+"-"+booking+"-"+params[1];
+				else
+					processDefinitionKey=system+"-"+booking+"-"+params[1];
 				WFProcessDefinition old=iwfProcessDefinitionService.get(processDefinitionKey);
 				WFProcessDefinition wfProcessDefinition=new WFProcessDefinition();
 				wfProcessDefinition.setDefinitionkey(processDefinitionKey);
@@ -1301,5 +1303,24 @@ public class WFCoreService
 				}
 			}
 		}
+	}
+
+	/**
+	 * 获取动态实例标识
+	 * @return
+	 */
+	private String getDynainstId(){
+		String dynainstid = null;
+		if(RequestContextHolder.getRequestAttributes()==null && !(RequestContextHolder.getRequestAttributes() instanceof ServletRequestAttributes)){
+			return null;
+		}
+		ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		if(requestAttributes!=null) {
+			HttpServletRequest request = requestAttributes.getRequest();
+			if(request!=null && !StringUtils.isEmpty(request.getHeader("dynainstid"))){
+				dynainstid= request.getHeader("dynainstid");
+			}
+		}
+		return dynainstid;
 	}
 }

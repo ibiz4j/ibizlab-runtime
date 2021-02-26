@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.ObjectUtils;
 import java.sql.Timestamp;
@@ -229,6 +230,15 @@ public class AuthenticationUser implements UserDetails
 			authuserdetail=new AuthenticationUser();
 		}
 	 	return authuserdetail;
+	}
+
+	public static AuthenticationUser setAuthenticationUser(String userId , String userName) {
+		AuthenticationUser user = new AuthenticationUser();
+		user.setUserid(userId);
+		user.setPersonname(userName);
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		return user;
 	}
 
     public Map <String,Object> getSessionParams()

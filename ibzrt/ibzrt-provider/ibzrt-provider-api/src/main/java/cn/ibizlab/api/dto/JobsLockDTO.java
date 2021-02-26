@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[JobsLockDTO]
  */
 @Data
+@ApiModel("任务锁")
 public class JobsLockDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class JobsLockDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("主键ID")
     private String id;
 
     /**
@@ -46,6 +50,7 @@ public class JobsLockDTO extends DTOBase implements Serializable {
     @JsonProperty("name")
     @NotBlank(message = "[名称]不允许为空!")
     @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
+    @ApiModelProperty("名称")
     private String name;
 
     /**
@@ -56,6 +61,7 @@ public class JobsLockDTO extends DTOBase implements Serializable {
     @JsonProperty("owner")
     @NotBlank(message = "[持有者]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("持有者")
     private String owner;
 
     /**
@@ -66,6 +72,7 @@ public class JobsLockDTO extends DTOBase implements Serializable {
     @JSONField(name = "create_time" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
     @NotNull(message = "[创建时间]不允许为空!")
+    @ApiModelProperty("创建时间")
     private Timestamp createTime;
 
 

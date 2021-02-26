@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 /**
@@ -34,6 +36,7 @@ import cn.ibizlab.util.annotation.Audit;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel("流程定义节点")
 public class WFProcessNode extends EntityBase implements Serializable {
 
     /**
@@ -42,6 +45,7 @@ public class WFProcessNode extends EntityBase implements Serializable {
     @DEField(name = "nodeid", isKeyField = true)
     @JSONField(name = "userTaskId")
     @JsonProperty("userTaskId")
+    @ApiModelProperty("节点标识")
     private String usertaskid;
 
     /**
@@ -50,6 +54,7 @@ public class WFProcessNode extends EntityBase implements Serializable {
     @DEField(name = "nodename")
     @JSONField(name = "userTaskName")
     @JsonProperty("userTaskName")
+    @ApiModelProperty("节点名称")
     private String usertaskname;
 
     /**
@@ -58,6 +63,7 @@ public class WFProcessNode extends EntityBase implements Serializable {
     @DEField(name = "definitionkey")
     @JSONField(name = "processDefinitionKey")
     @JsonProperty("processDefinitionKey")
+    @ApiModelProperty("DefinitionKey")
     private String processdefinitionkey;
 
     /**
@@ -66,6 +72,7 @@ public class WFProcessNode extends EntityBase implements Serializable {
     @DEField(name = "definitionname")
     @JSONField(name = "processDefinitionName")
     @JsonProperty("processDefinitionName")
+    @ApiModelProperty("流程定义名称")
     private String processdefinitionname;
 
     /**
@@ -73,6 +80,7 @@ public class WFProcessNode extends EntityBase implements Serializable {
      */
     @JSONField(name = "version")
     @JsonProperty("version")
+    @ApiModelProperty("版本")
     private Integer version;
 
     /**
@@ -80,6 +88,7 @@ public class WFProcessNode extends EntityBase implements Serializable {
      */
     @JSONField(name = "cnt")
     @JsonProperty("cnt")
+    @ApiModelProperty("数量")
     private Integer cnt;
 
 

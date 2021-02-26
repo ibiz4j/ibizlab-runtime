@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [系统] 对象
  */
 @Data
+@ApiModel("系统")
 public class SysPSSystem extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
+    @ApiModelProperty("系统标识")
     private String pssystemid;
 
     /**
@@ -46,6 +50,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
      */
     @JSONField(name = "pssystemname")
     @JsonProperty("pssystemname")
+    @ApiModelProperty("系统名称")
     private String pssystemname;
 
     /**
@@ -53,6 +58,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
      */
     @JSONField(name = "sysstructure")
     @JsonProperty("sysstructure")
+    @ApiModelProperty("结构")
     private String sysstructure;
 
     /**
@@ -60,6 +66,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
      */
     @JSONField(name = "md5check")
     @JsonProperty("md5check")
+    @ApiModelProperty("校验")
     private String md5check;
 
     /**
@@ -67,6 +74,7 @@ public class SysPSSystem extends EntityClient implements Serializable {
      */
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
 
 

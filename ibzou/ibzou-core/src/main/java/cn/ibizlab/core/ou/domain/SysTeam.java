@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZTEAM", resultMap = "SysTeamResultMap")
+@ApiModel("组")
 public class SysTeam extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysTeam extends EntityMP implements Serializable {
     @TableId(value = "teamid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "teamid")
     @JsonProperty("teamid")
+    @ApiModelProperty("组标识")
     private String teamid;
     /**
      * 组名称
@@ -57,6 +61,7 @@ public class SysTeam extends EntityMP implements Serializable {
     @TableField(value = "teamname")
     @JSONField(name = "teamname")
     @JsonProperty("teamname")
+    @ApiModelProperty("组名称")
     private String teamname;
     /**
      * 备注
@@ -64,6 +69,7 @@ public class SysTeam extends EntityMP implements Serializable {
     @TableField(value = "memo")
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
     /**
      * 区属
@@ -71,6 +77,7 @@ public class SysTeam extends EntityMP implements Serializable {
     @TableField(value = "domains")
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
 
 

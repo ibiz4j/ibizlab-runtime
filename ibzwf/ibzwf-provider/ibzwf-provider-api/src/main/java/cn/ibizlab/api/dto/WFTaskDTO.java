@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[WFTaskDTO]
  */
 @Data
+@ApiModel("工作流任务")
 public class WFTaskDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("任务标识")
     private String id;
 
     /**
@@ -45,6 +49,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "name")
     @JsonProperty("name")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("状态")
     private String name;
 
     /**
@@ -54,6 +59,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "processdefinitionid")
     @JsonProperty("processdefinitionid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("DefinitionId")
     private String processdefinitionid;
 
     /**
@@ -63,6 +69,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "processdefinitionkey")
     @JsonProperty("processdefinitionkey")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("DefinitionKey")
     private String processdefinitionkey;
 
     /**
@@ -72,6 +79,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "processdefinitionname")
     @JsonProperty("processdefinitionname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("流程")
     private String processdefinitionname;
 
     /**
@@ -81,6 +89,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "taskdefinitionkey")
     @JsonProperty("taskdefinitionkey")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("TaskDefinitionKey")
     private String taskdefinitionkey;
 
     /**
@@ -90,6 +99,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "description")
     @JsonProperty("description")
     @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
+    @ApiModelProperty("待办事项")
     private String description;
 
     /**
@@ -99,6 +109,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "createtime" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createtime")
+    @ApiModelProperty("发起时间")
     private Timestamp createtime;
 
     /**
@@ -108,6 +119,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "processinstanceid")
     @JsonProperty("processinstanceid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("实例标识")
     private String processinstanceid;
 
     /**
@@ -117,6 +129,7 @@ public class WFTaskDTO extends DTOBase implements Serializable {
     @JSONField(name = "processinstancebusinesskey")
     @JsonProperty("processinstancebusinesskey")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("业务键值")
     private String processinstancebusinesskey;
 
 

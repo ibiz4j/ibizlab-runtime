@@ -93,9 +93,13 @@ public class NotifyCoreResource {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET,value = "/notify/msgbody/getbacklogbypage")
-    public ResponseEntity<Page> getBacklogByPage(MsgBodySearchContext context) {
-        Page page = notifyCoreService.getBacklogByPage(context);
-        return ResponseEntity.status(HttpStatus.OK).body(new PageImpl(mapping.toDto(page.getContent()), page.getPageable(), page.getContent().size()));
-
+    public ResponseEntity<List<MsgBodyDTO>> getBacklogByPage(MsgBodySearchContext context) {
+        Page domains = notifyCoreService.getBacklogByPage(context);
+        List<MsgBodyDTO> list = mapping.toDto(domains.getContent());
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+                .header("x-total", String.valueOf(domains.getTotalElements()))
+                .body(list);
     }
 }

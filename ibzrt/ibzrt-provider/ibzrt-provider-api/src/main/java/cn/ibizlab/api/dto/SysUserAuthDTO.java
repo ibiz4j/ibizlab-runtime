@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysUserAuthDTO]
  */
 @Data
+@ApiModel("账号绑定")
 public class SysUserAuthDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysUserAuthDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("标识")
     private String id;
 
     /**
@@ -45,6 +49,7 @@ public class SysUserAuthDTO extends DTOBase implements Serializable {
     @JSONField(name = "userid")
     @JsonProperty("userid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户标识")
     private String userid;
 
     /**
@@ -54,6 +59,7 @@ public class SysUserAuthDTO extends DTOBase implements Serializable {
     @JSONField(name = "identity_type")
     @JsonProperty("identity_type")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("认证类型")
     private String identityType;
 
     /**
@@ -63,6 +69,7 @@ public class SysUserAuthDTO extends DTOBase implements Serializable {
     @JSONField(name = "identifier")
     @JsonProperty("identifier")
     @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @ApiModelProperty("认证标识")
     private String identifier;
 
     /**
@@ -72,6 +79,7 @@ public class SysUserAuthDTO extends DTOBase implements Serializable {
     @JSONField(name = "credential")
     @JsonProperty("credential")
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
+    @ApiModelProperty("凭据")
     private String credential;
 
     /**
@@ -81,6 +89,7 @@ public class SysUserAuthDTO extends DTOBase implements Serializable {
     @JSONField(name = "username")
     @JsonProperty("username")
     @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @ApiModelProperty("人员")
     private String username;
 
 

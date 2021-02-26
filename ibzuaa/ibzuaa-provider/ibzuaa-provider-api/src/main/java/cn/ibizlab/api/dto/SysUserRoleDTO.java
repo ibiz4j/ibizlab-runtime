@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysUserRoleDTO]
  */
 @Data
+@ApiModel("用户角色关系")
 public class SysUserRoleDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JSONField(name = "userroleid")
     @JsonProperty("userroleid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户角色关系标识")
     private String userroleid;
 
     /**
@@ -45,6 +49,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JSONField(name = "roleid")
     @JsonProperty("roleid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("角色标识")
     private String roleid;
 
     /**
@@ -54,6 +59,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JSONField(name = "rolename")
     @JsonProperty("rolename")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("角色名称")
     private String rolename;
 
     /**
@@ -63,6 +69,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JSONField(name = "userid")
     @JsonProperty("userid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户标识")
     private String userid;
 
     /**
@@ -72,6 +79,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JSONField(name = "personname")
     @JsonProperty("personname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户名称")
     private String personname;
 
     /**
@@ -81,6 +89,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JSONField(name = "loginname")
     @JsonProperty("loginname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("登录名")
     private String loginname;
 
     /**
@@ -90,6 +99,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位")
     private String orgname;
 
     /**
@@ -99,6 +109,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("主部门")
     private String mdeptname;
 
     /**
@@ -108,6 +119,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("建立时间")
     private Timestamp createdate;
 
     /**
@@ -117,6 +129,7 @@ public class SysUserRoleDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

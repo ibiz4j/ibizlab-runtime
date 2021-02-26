@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[WFProcessDefinitionDTO]
  */
 @Data
+@ApiModel("流程定义")
 public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
     @JSONField(name = "definitionkey")
     @JsonProperty("definitionkey")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("DefinitionKey")
     private String definitionkey;
 
     /**
@@ -45,6 +49,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
     @JSONField(name = "definitionname")
     @JsonProperty("definitionname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("流程定义名称")
     private String definitionname;
 
     /**
@@ -53,6 +58,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "modelversion")
     @JsonProperty("modelversion")
+    @ApiModelProperty("模型版本")
     private Integer modelversion;
 
     /**
@@ -61,6 +67,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "modelenable")
     @JsonProperty("modelenable")
+    @ApiModelProperty("模型是否启用")
     private Integer modelenable;
 
     /**
@@ -70,6 +77,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("系统标识")
     private String pssystemid;
 
     /**
@@ -79,6 +87,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
     @JSONField(name = "md5check")
     @JsonProperty("md5check")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("校验")
     private String md5check;
 
     /**
@@ -88,6 +97,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
     @JSONField(name = "bpmnfile")
     @JsonProperty("bpmnfile")
     @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
+    @ApiModelProperty("BPMN")
     private String bpmnfile;
 
     /**
@@ -97,6 +107,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
     @JSONField(name = "deploykey")
     @JsonProperty("deploykey")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("DeployKey")
     private String deploykey;
 
     /**
@@ -106,6 +117,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
     @JSONField(name = "webserviceids")
     @JsonProperty("webserviceids")
     @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @ApiModelProperty("WebServiceIds")
     private String webserviceids;
 
     /**
@@ -115,6 +127,7 @@ public class WFProcessDefinitionDTO extends DTOBase implements Serializable {
     @JSONField(name = "mobileserviceids")
     @JsonProperty("mobileserviceids")
     @Size(min = 0, max = 200, message = "内容长度必须小于等于[200]")
+    @ApiModelProperty("MobileServiceIds")
     private String mobileserviceids;
 
 

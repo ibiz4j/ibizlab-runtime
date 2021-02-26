@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [流程定义] 对象
  */
 @Data
+@ApiModel("流程定义")
 public class WFProcessDefinition extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
     @DEField(defaultValue = "deploykey", defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField = true)
     @JSONField(name = "definitionkey")
     @JsonProperty("definitionkey")
+    @ApiModelProperty("DefinitionKey")
     private String definitionkey;
 
     /**
@@ -46,6 +50,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "definitionname")
     @JsonProperty("definitionname")
+    @ApiModelProperty("流程定义名称")
     private String definitionname;
 
     /**
@@ -53,6 +58,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "modelversion")
     @JsonProperty("modelversion")
+    @ApiModelProperty("模型版本")
     private Integer modelversion;
 
     /**
@@ -60,6 +66,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "modelenable")
     @JsonProperty("modelenable")
+    @ApiModelProperty("模型是否启用")
     private Integer modelenable;
 
     /**
@@ -67,6 +74,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
+    @ApiModelProperty("系统标识")
     private String pssystemid;
 
     /**
@@ -74,6 +82,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "md5check")
     @JsonProperty("md5check")
+    @ApiModelProperty("校验")
     private String md5check;
 
     /**
@@ -81,6 +90,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "bpmnfile")
     @JsonProperty("bpmnfile")
+    @ApiModelProperty("BPMN")
     private String bpmnfile;
 
     /**
@@ -88,6 +98,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "deploykey")
     @JsonProperty("deploykey")
+    @ApiModelProperty("DeployKey")
     private String deploykey;
 
     /**
@@ -95,6 +106,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "webserviceids")
     @JsonProperty("webserviceids")
+    @ApiModelProperty("WebServiceIds")
     private String webserviceids;
 
     /**
@@ -102,6 +114,7 @@ public class WFProcessDefinition extends EntityClient implements Serializable {
      */
     @JSONField(name = "mobileserviceids")
     @JsonProperty("mobileserviceids")
+    @ApiModelProperty("MobileServiceIds")
     private String mobileserviceids;
 
 

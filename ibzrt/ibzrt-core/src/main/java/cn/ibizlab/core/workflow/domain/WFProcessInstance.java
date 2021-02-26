@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [流程实例] 对象
  */
 @Data
+@ApiModel("流程实例")
 public class WFProcessInstance extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     @DEField(name = "instanceid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("实例标识")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     @DEField(name = "instancename")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("实例名称")
     private String name;
 
     /**
@@ -55,6 +60,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     @DEField(name = "definitionkey")
     @JSONField(name = "processdefinitionkey")
     @JsonProperty("processdefinitionkey")
+    @ApiModelProperty("DefinitionKey")
     private String processdefinitionkey;
 
     /**
@@ -63,6 +69,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     @DEField(name = "definitionname")
     @JSONField(name = "processdefinitionname")
     @JsonProperty("processdefinitionname")
+    @ApiModelProperty("流程定义名称")
     private String processdefinitionname;
 
     /**
@@ -70,6 +77,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
      */
     @JSONField(name = "businesskey")
     @JsonProperty("businesskey")
+    @ApiModelProperty("业务键值")
     private String businesskey;
 
     /**
@@ -78,6 +86,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "starttime" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("starttime")
+    @ApiModelProperty("启动时间")
     private Timestamp starttime;
 
     /**
@@ -85,6 +94,7 @@ public class WFProcessInstance extends EntityClient implements Serializable {
      */
     @JSONField(name = "startuserid")
     @JsonProperty("startuserid")
+    @ApiModelProperty("属性")
     private String startuserid;
 
 

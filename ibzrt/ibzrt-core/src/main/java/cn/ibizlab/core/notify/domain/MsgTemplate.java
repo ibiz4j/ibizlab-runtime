@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [消息模板] 对象
  */
 @Data
+@ApiModel("消息模板")
 public class MsgTemplate extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "tid")
     @JsonProperty("tid")
+    @ApiModelProperty("模板标识")
     private String tid;
 
     /**
@@ -47,6 +51,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
     @DEField(name = "template_name")
     @JSONField(name = "template_name")
     @JsonProperty("template_name")
+    @ApiModelProperty("模板标题")
     private String templateName;
 
     /**
@@ -55,6 +60,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
     @DEField(name = "template_type")
     @JSONField(name = "template_type")
     @JsonProperty("template_type")
+    @ApiModelProperty("模板类型")
     private String templateType;
 
     /**
@@ -62,6 +68,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
      */
     @JSONField(name = "content")
     @JsonProperty("content")
+    @ApiModelProperty("模板内容")
     private String content;
 
     /**
@@ -70,6 +77,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
     @DEField(name = "template_id")
     @JSONField(name = "template_id")
     @JsonProperty("template_id")
+    @ApiModelProperty("模板标识")
     private String templateId;
 
     /**
@@ -78,6 +86,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
     @DEField(name = "template_url")
     @JSONField(name = "template_url")
     @JsonProperty("template_url")
+    @ApiModelProperty("URL")
     private String templateUrl;
 
     /**
@@ -85,6 +94,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
      */
     @JSONField(name = "access_id")
     @JsonProperty("access_id")
+    @ApiModelProperty("开放平台接入标识")
     private String accessId;
 
     /**
@@ -92,6 +102,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
      */
     @JSONField(name = "access_name")
     @JsonProperty("access_name")
+    @ApiModelProperty("接入平台")
     private String accessName;
 
     /**
@@ -100,6 +111,7 @@ public class MsgTemplate extends EntityClient implements Serializable {
     @DEField(name = "open_type")
     @JSONField(name = "open_type")
     @JsonProperty("open_type")
+    @ApiModelProperty("接入平台类型")
     private String openType;
 
 

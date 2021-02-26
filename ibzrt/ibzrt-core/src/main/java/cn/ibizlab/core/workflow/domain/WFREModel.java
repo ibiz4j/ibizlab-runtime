@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [流程模型] 对象
  */
 @Data
+@ApiModel("流程模型")
 public class WFREModel extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class WFREModel extends EntityClient implements Serializable {
     @DEField(name = "modelid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("ID")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class WFREModel extends EntityClient implements Serializable {
     @DEField(name = "modelname")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("名称")
     private String name;
 
     /**
@@ -54,6 +59,7 @@ public class WFREModel extends EntityClient implements Serializable {
      */
     @JSONField(name = "bpmnfile")
     @JsonProperty("bpmnfile")
+    @ApiModelProperty("BPMN")
     private String bpmnfile;
 
 

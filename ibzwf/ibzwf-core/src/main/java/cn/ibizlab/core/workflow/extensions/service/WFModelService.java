@@ -27,6 +27,11 @@ public class WFModelService
 	@Autowired
 	private IWFProcessDefinitionService iwfProcessDefinitionService;
 
+	public List<WFProcessDefinition> getDynamicWorkflow(String dynamic, String system,String entity) {
+		return iwfProcessDefinitionService.list(new QueryWrapper<WFProcessDefinition>().
+				likeRight("definitionkey","dyna-"+dynamic+"-"+system+"-"+entity+"-").eq("modelenable",1).orderByDesc("modelversion"));
+	}
+
 	public List<WFProcessDefinition> getWorkflow(String system,String entity) {
 		return iwfProcessDefinitionService.list(new QueryWrapper<WFProcessDefinition>().
 				likeRight("definitionkey",system+"-"+entity+"-").eq("modelenable",1).orderByDesc("modelversion"));

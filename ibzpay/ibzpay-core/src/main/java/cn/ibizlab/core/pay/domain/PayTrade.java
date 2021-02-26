@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZPAYTRADE", resultMap = "PayTradeResultMap")
+@ApiModel("支付交易")
 public class PayTrade extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +52,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "subject")
     @JSONField(name = "subject")
     @JsonProperty("subject")
+    @ApiModelProperty("订单标题")
     private String subject;
     /**
      * 订单金额
@@ -56,6 +60,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "totalamount")
     @JSONField(name = "total_amount")
     @JsonProperty("total_amount")
+    @ApiModelProperty("订单金额")
     private String totalAmount;
     /**
      * 交易名称
@@ -63,6 +68,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "tradename")
     @JSONField(name = "trade_name")
     @JsonProperty("trade_name")
+    @ApiModelProperty("交易名称")
     private String tradeName;
     /**
      * 支付类型
@@ -70,6 +76,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "tradetype")
     @JSONField(name = "trade_type")
     @JsonProperty("trade_type")
+    @ApiModelProperty("支付类型")
     private String tradeType;
     /**
      * 支付状态
@@ -77,6 +84,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "tradestatus")
     @JSONField(name = "trade_status")
     @JsonProperty("trade_status")
+    @ApiModelProperty("支付状态")
     private String tradeStatus;
     /**
      * 订单号
@@ -84,6 +92,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "outtradeno")
     @JSONField(name = "out_trade_no")
     @JsonProperty("out_trade_no")
+    @ApiModelProperty("订单号")
     private String outTradeNo;
     /**
      * 交易标识
@@ -92,6 +101,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableId(value = "tradeid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "trade_id")
     @JsonProperty("trade_id")
+    @ApiModelProperty("交易标识")
     private String tradeId;
     /**
      * AccessKey(AppId)
@@ -99,6 +109,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "appid")
     @JSONField(name = "app_id")
     @JsonProperty("app_id")
+    @ApiModelProperty("AccessKey(AppId)")
     private String appId;
     /**
      * 支付平台
@@ -106,6 +117,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "accessname")
     @JSONField(name = "access_name")
     @JsonProperty("access_name")
+    @ApiModelProperty("支付平台")
     private String accessName;
     /**
      * 支付平台接入标识
@@ -113,6 +125,7 @@ public class PayTrade extends EntityMP implements Serializable {
     @TableField(value = "accessid")
     @JSONField(name = "access_id")
     @JsonProperty("access_id")
+    @ApiModelProperty("支付平台接入标识")
     private String accessId;
 
     /**

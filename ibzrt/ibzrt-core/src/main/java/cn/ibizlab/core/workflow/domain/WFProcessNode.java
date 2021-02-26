@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [流程定义节点] 对象
  */
 @Data
+@ApiModel("流程定义节点")
 public class WFProcessNode extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     @DEField(name = "nodeid" , isKeyField = true)
     @JSONField(name = "usertaskid")
     @JsonProperty("usertaskid")
+    @ApiModelProperty("节点标识")
     private String usertaskid;
 
     /**
@@ -47,6 +51,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     @DEField(name = "nodename")
     @JSONField(name = "usertaskname")
     @JsonProperty("usertaskname")
+    @ApiModelProperty("节点名称")
     private String usertaskname;
 
     /**
@@ -55,6 +60,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     @DEField(name = "definitionkey")
     @JSONField(name = "processdefinitionkey")
     @JsonProperty("processdefinitionkey")
+    @ApiModelProperty("DefinitionKey")
     private String processdefinitionkey;
 
     /**
@@ -63,6 +69,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
     @DEField(name = "definitionname")
     @JSONField(name = "processdefinitionname")
     @JsonProperty("processdefinitionname")
+    @ApiModelProperty("流程定义名称")
     private String processdefinitionname;
 
     /**
@@ -70,6 +77,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
      */
     @JSONField(name = "version")
     @JsonProperty("version")
+    @ApiModelProperty("版本")
     private Integer version;
 
     /**
@@ -77,6 +85,7 @@ public class WFProcessNode extends EntityClient implements Serializable {
      */
     @JSONField(name = "cnt")
     @JsonProperty("cnt")
+    @ApiModelProperty("数量")
     private Integer cnt;
 
 

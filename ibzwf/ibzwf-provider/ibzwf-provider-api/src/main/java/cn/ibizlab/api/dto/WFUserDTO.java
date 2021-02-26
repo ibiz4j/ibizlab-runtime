@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[WFUserDTO]
  */
 @Data
+@ApiModel("用户")
 public class WFUserDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户标识")
     private String id;
 
     /**
@@ -45,6 +49,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "firstname")
     @JsonProperty("firstname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户全局名")
     private String firstname;
 
     /**
@@ -54,6 +59,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "displayname")
     @JsonProperty("displayname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户名称")
     private String displayname;
 
     /**
@@ -63,6 +69,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("主部门")
     private String mdeptid;
 
     /**
@@ -72,6 +79,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "mdeptcode")
     @JsonProperty("mdeptcode")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("主部门代码")
     private String mdeptcode;
 
     /**
@@ -81,6 +89,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("主部门名称")
     private String mdeptname;
 
     /**
@@ -90,6 +99,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("业务编码")
     private String bcode;
 
     /**
@@ -99,6 +109,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位")
     private String orgid;
 
     /**
@@ -108,6 +119,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位代码")
     private String orgcode;
 
     /**
@@ -117,6 +129,7 @@ public class WFUserDTO extends DTOBase implements Serializable {
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("单位名称")
     private String orgname;
 
 

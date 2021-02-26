@@ -5,6 +5,7 @@ import cn.ibizlab.util.security.AuthorizationLogin;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.util.MultiValueMap;
 import com.alibaba.fastjson.JSONObject;
 
 @FeignClient(value = "${ibiz.ref.service.uaa:ibzuaa-api}",contextId = "uaa",fallback = IBZUAAFallback.class)

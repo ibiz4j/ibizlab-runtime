@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [认证日志] 对象
  */
 @Data
+@ApiModel("认证日志")
 public class SysAuthLog extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "logid")
     @JsonProperty("logid")
+    @ApiModelProperty("标识")
     private String logid;
 
     /**
@@ -46,6 +50,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "username")
     @JsonProperty("username")
+    @ApiModelProperty("用户全局名")
     private String username;
 
     /**
@@ -53,6 +58,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("用户名称")
     private String personname;
 
     /**
@@ -60,6 +66,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "domain")
     @JsonProperty("domain")
+    @ApiModelProperty("域")
     private String domain;
 
     /**
@@ -69,6 +76,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "authtime" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("authtime")
+    @ApiModelProperty("认证时间")
     private Timestamp authtime;
 
     /**
@@ -76,6 +84,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "ipaddr")
     @JsonProperty("ipaddr")
+    @ApiModelProperty("IP地址")
     private String ipaddr;
 
     /**
@@ -83,6 +92,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "macaddr")
     @JsonProperty("macaddr")
+    @ApiModelProperty("MAC地址")
     private String macaddr;
 
     /**
@@ -90,6 +100,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "useragent")
     @JsonProperty("useragent")
+    @ApiModelProperty("客户端")
     private String useragent;
 
     /**
@@ -97,6 +108,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "authcode")
     @JsonProperty("authcode")
+    @ApiModelProperty("认证结果")
     private String authcode;
 
 

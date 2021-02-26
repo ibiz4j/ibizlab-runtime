@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZOPENACCESS", resultMap = "MsgOpenAccessResultMap")
+@ApiModel("接入开放平台")
 public class MsgOpenAccess extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableId(value = "accessid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("开放平台接入标识")
     private String id;
     /**
      * 开放平台
@@ -58,6 +62,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "accessname")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("开放平台")
     private String name;
     /**
      * 开放平台类型
@@ -66,6 +71,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "open_type")
     @JSONField(name = "open_type")
     @JsonProperty("open_type")
+    @ApiModelProperty("开放平台类型")
     private String openType;
     /**
      * AccessKey(AppId)
@@ -74,6 +80,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "access_key")
     @JSONField(name = "access_key")
     @JsonProperty("access_key")
+    @ApiModelProperty("AccessKey(AppId)")
     private String accessKey;
     /**
      * SecretKey(AppSecret)
@@ -82,6 +89,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "secret_key")
     @JSONField(name = "secret_key")
     @JsonProperty("secret_key")
+    @ApiModelProperty("SecretKey(AppSecret)")
     private String secretKey;
     /**
      * RegionId（CorpId)
@@ -90,6 +98,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "region_id")
     @JSONField(name = "region_id")
     @JsonProperty("region_id")
+    @ApiModelProperty("RegionId（CorpId)")
     private String regionId;
     /**
      * 管理账号token
@@ -98,6 +107,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "access_token")
     @JSONField(name = "access_token")
     @JsonProperty("access_token")
+    @ApiModelProperty("管理账号token")
     private String accessToken;
     /**
      * 管理账号token过期时间
@@ -107,6 +117,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "expires_time", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("expires_time")
+    @ApiModelProperty("管理账号token过期时间")
     private Timestamp expiresTime;
     /**
      * 是否禁用
@@ -115,6 +126,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "disabled")
     @JSONField(name = "disabled")
     @JsonProperty("disabled")
+    @ApiModelProperty("是否禁用")
     private Integer disabled;
     /**
      * RedirectURI
@@ -123,6 +135,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "redirect_uri")
     @JSONField(name = "redirect_uri")
     @JsonProperty("redirect_uri")
+    @ApiModelProperty("RedirectURI")
     private String redirectUri;
     /**
      * NotifyUrl
@@ -131,6 +144,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "notify_url")
     @JSONField(name = "notify_url")
     @JsonProperty("notify_url")
+    @ApiModelProperty("NotifyUrl")
     private String notifyUrl;
     /**
      * AGENT_ID
@@ -139,6 +153,7 @@ public class MsgOpenAccess extends EntityMP implements Serializable {
     @TableField(value = "agent_id")
     @JSONField(name = "agent_id")
     @JsonProperty("agent_id")
+    @ApiModelProperty("AGENT_ID")
     private Long agentId;
 
 

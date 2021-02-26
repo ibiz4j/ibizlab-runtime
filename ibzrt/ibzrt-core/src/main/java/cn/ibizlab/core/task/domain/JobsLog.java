@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [任务调度日志] 对象
  */
 @Data
+@ApiModel("任务调度日志")
 public class JobsLog extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class JobsLog extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("主键ID")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class JobsLog extends EntityClient implements Serializable {
     @DEField(name = "job_id")
     @JSONField(name = "job_id")
     @JsonProperty("job_id")
+    @ApiModelProperty("任务ID")
     private String jobId;
 
     /**
@@ -54,6 +59,7 @@ public class JobsLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "address")
     @JsonProperty("address")
+    @ApiModelProperty("执行地址")
     private String address;
 
     /**
@@ -61,6 +67,7 @@ public class JobsLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "handler")
     @JsonProperty("handler")
+    @ApiModelProperty("执行器任务HANDLER")
     private String handler;
 
     /**
@@ -68,6 +75,7 @@ public class JobsLog extends EntityClient implements Serializable {
      */
     @JSONField(name = "param")
     @JsonProperty("param")
+    @ApiModelProperty("执行器任务参数")
     private String param;
 
     /**
@@ -76,6 +84,7 @@ public class JobsLog extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "fail_retry_count")
     @JsonProperty("fail_retry_count")
+    @ApiModelProperty("失败重试次数")
     private Integer failRetryCount;
 
     /**
@@ -84,6 +93,7 @@ public class JobsLog extends EntityClient implements Serializable {
     @DEField(defaultValue = "0")
     @JSONField(name = "trigger_code")
     @JsonProperty("trigger_code")
+    @ApiModelProperty("触发器调度返回码")
     private Integer triggerCode;
 
     /**
@@ -92,6 +102,7 @@ public class JobsLog extends EntityClient implements Serializable {
     @DEField(name = "trigger_type")
     @JSONField(name = "trigger_type")
     @JsonProperty("trigger_type")
+    @ApiModelProperty("触发器调度类型")
     private String triggerType;
 
     /**
@@ -100,6 +111,7 @@ public class JobsLog extends EntityClient implements Serializable {
     @DEField(name = "trigger_msg")
     @JSONField(name = "trigger_msg")
     @JsonProperty("trigger_msg")
+    @ApiModelProperty("触发器调度信息")
     private String triggerMsg;
 
     /**
@@ -109,6 +121,7 @@ public class JobsLog extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "create_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
+    @ApiModelProperty("创建时间")
     private Timestamp createTime;
 
 

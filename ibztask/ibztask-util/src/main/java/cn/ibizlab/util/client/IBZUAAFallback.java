@@ -2,6 +2,7 @@ package cn.ibizlab.util.client;
 
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.security.AuthorizationLogin;
+import org.springframework.util.MultiValueMap;
 import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
 

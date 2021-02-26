@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[MsgBodyDTO]
  */
 @Data
+@ApiModel("消息")
 public class MsgBodyDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +38,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "is_error")
     @JsonProperty("is_error")
+    @ApiModelProperty("是否出错")
     private Integer isError;
 
     /**
@@ -43,6 +47,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "is_send")
     @JsonProperty("is_send")
+    @ApiModelProperty("是否发送")
     private Integer isSend;
 
     /**
@@ -52,6 +57,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "msg_id")
     @JsonProperty("msg_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("消息标识")
     private String msgId;
 
     /**
@@ -61,6 +67,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "to_users")
     @JsonProperty("to_users")
     @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
+    @ApiModelProperty("目标用户")
     private String toUsers;
 
     /**
@@ -70,6 +77,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "msg_link")
     @JsonProperty("msg_link")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("消息链接")
     private String msgLink;
 
     /**
@@ -79,6 +87,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "subject")
     @JsonProperty("subject")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("消息标题")
     private String subject;
 
     /**
@@ -88,6 +97,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "content")
     @JsonProperty("content")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("消息内容")
     private String content;
 
     /**
@@ -96,6 +106,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "msg_type")
     @JsonProperty("msg_type")
+    @ApiModelProperty("消息类型")
     private Integer msgType;
 
     /**
@@ -105,6 +116,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "msg_name")
     @JsonProperty("msg_name")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("消息名称")
     private String msgName;
 
     /**
@@ -114,6 +126,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "template_id")
     @JsonProperty("template_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("消息模板标识")
     private String templateId;
 
     /**
@@ -123,6 +136,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "error_info")
     @JsonProperty("error_info")
     @Size(min = 0, max = 1048576, message = "内容长度必须小于等于[1048576]")
+    @ApiModelProperty("错误信息")
     private String errorInfo;
 
     /**
@@ -132,6 +146,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "user_data")
     @JsonProperty("user_data")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户数据")
     private String userData;
 
     /**
@@ -141,6 +156,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "template_params")
     @JsonProperty("template_params")
     @Size(min = 0, max = 1048576, message = "内容长度必须小于等于[1048576]")
+    @ApiModelProperty("消息模板参数")
     private String templateParams;
 
     /**
@@ -150,6 +166,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "user_data2")
     @JsonProperty("user_data2")
     @Size(min = 0, max = 2000, message = "内容长度必须小于等于[2000]")
+    @ApiModelProperty("用户数据2")
     private String userData2;
 
     /**
@@ -159,6 +176,7 @@ public class MsgBodyDTO extends DTOBase implements Serializable {
     @JSONField(name = "msg_link_pc")
     @JsonProperty("msg_link_pc")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("消息链接(PC)")
     private String msgLinkPc;
 
 

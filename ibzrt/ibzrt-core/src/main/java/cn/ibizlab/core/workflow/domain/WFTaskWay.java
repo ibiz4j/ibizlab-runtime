@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [操作路径] 对象
  */
 @Data
+@ApiModel("操作路径")
 public class WFTaskWay extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     @DEField(name = "wayid" , isKeyField = true)
     @JSONField(name = "sequenceflowid")
     @JsonProperty("sequenceflowid")
+    @ApiModelProperty("路径标识")
     private String sequenceflowid;
 
     /**
@@ -46,6 +50,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
      */
     @JSONField(name = "taskid")
     @JsonProperty("taskid")
+    @ApiModelProperty("任务标识")
     private String taskid;
 
     /**
@@ -53,6 +58,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
      */
     @JSONField(name = "taskdefinitionkey")
     @JsonProperty("taskdefinitionkey")
+    @ApiModelProperty("TaskDefinitionKey")
     private String taskdefinitionkey;
 
     /**
@@ -61,6 +67,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     @DEField(name = "instanceid")
     @JSONField(name = "processinstanceid")
     @JsonProperty("processinstanceid")
+    @ApiModelProperty("实例标识")
     private String processinstanceid;
 
     /**
@@ -69,6 +76,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     @DEField(name = "definitionkey")
     @JSONField(name = "processdefinitionkey")
     @JsonProperty("processdefinitionkey")
+    @ApiModelProperty("DefinitionKey")
     private String processdefinitionkey;
 
     /**
@@ -77,6 +85,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     @DEField(name = "businesskey")
     @JSONField(name = "processinstancebusinesskey")
     @JsonProperty("processinstancebusinesskey")
+    @ApiModelProperty("业务键值")
     private String processinstancebusinesskey;
 
     /**
@@ -84,6 +93,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
      */
     @JSONField(name = "refviewkey")
     @JsonProperty("refviewkey")
+    @ApiModelProperty("引用视图")
     private String refviewkey;
 
     /**
@@ -92,6 +102,7 @@ public class WFTaskWay extends EntityClient implements Serializable {
     @DEField(name = "wayname")
     @JSONField(name = "sequenceflowname")
     @JsonProperty("sequenceflowname")
+    @ApiModelProperty("路径标识")
     private String sequenceflowname;
 
 

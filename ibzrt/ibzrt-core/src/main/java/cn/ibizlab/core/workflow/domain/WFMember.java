@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [成员] 对象
  */
 @Data
+@ApiModel("成员")
 public class WFMember extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class WFMember extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
+    @ApiModelProperty("组成员标识")
     private String memberid;
 
     /**
@@ -46,6 +50,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "membername")
     @JsonProperty("membername")
+    @ApiModelProperty("组成员名称")
     private String membername;
 
     /**
@@ -53,6 +58,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "groupid")
     @JsonProperty("groupid")
+    @ApiModelProperty("组标识")
     private String groupid;
 
     /**
@@ -60,6 +66,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "groupname")
     @JsonProperty("groupname")
+    @ApiModelProperty("用户组")
     private String groupname;
 
     /**
@@ -67,6 +74,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
 
     /**
@@ -74,6 +82,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("用户")
     private String personname;
 
     /**
@@ -81,6 +90,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @ApiModelProperty("单位")
     private String orgid;
 
     /**
@@ -88,6 +98,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("单位")
     private String orgname;
 
     /**
@@ -95,6 +106,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
+    @ApiModelProperty("主部门")
     private String mdeptid;
 
     /**
@@ -102,6 +114,7 @@ public class WFMember extends EntityClient implements Serializable {
      */
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
+    @ApiModelProperty("主部门")
     private String mdeptname;
 
 

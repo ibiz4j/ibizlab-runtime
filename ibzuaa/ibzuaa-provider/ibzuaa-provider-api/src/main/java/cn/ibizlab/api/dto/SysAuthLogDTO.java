@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysAuthLogDTO]
  */
 @Data
+@ApiModel("认证日志")
 public class SysAuthLogDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "logid")
     @JsonProperty("logid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("标识")
     private String logid;
 
     /**
@@ -45,6 +49,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "username")
     @JsonProperty("username")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户全局名")
     private String username;
 
     /**
@@ -54,6 +59,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "personname")
     @JsonProperty("personname")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("用户名称")
     private String personname;
 
     /**
@@ -63,6 +69,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "domain")
     @JsonProperty("domain")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("域")
     private String domain;
 
     /**
@@ -72,6 +79,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "authtime" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("authtime")
+    @ApiModelProperty("认证时间")
     private Timestamp authtime;
 
     /**
@@ -81,6 +89,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "ipaddr")
     @JsonProperty("ipaddr")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("IP地址")
     private String ipaddr;
 
     /**
@@ -90,6 +99,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "macaddr")
     @JsonProperty("macaddr")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("MAC地址")
     private String macaddr;
 
     /**
@@ -99,6 +109,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "useragent")
     @JsonProperty("useragent")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("客户端")
     private String useragent;
 
     /**
@@ -108,6 +119,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     @JSONField(name = "authcode")
     @JsonProperty("authcode")
     @Size(min = 0, max = 15, message = "内容长度必须小于等于[15]")
+    @ApiModelProperty("认证结果")
     private String authcode;
 
 

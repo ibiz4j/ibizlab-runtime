@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZDEPTMEMBER", resultMap = "SysDeptMemberResultMap")
+@ApiModel("部门成员")
 public class SysDeptMember extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableId(value = "memberid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "memberid")
     @JsonProperty("memberid")
+    @ApiModelProperty("标识")
     private String memberid;
     /**
      * 部门标识
@@ -57,6 +61,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableField(value = "deptid")
     @JSONField(name = "deptid")
     @JsonProperty("deptid")
+    @ApiModelProperty("部门标识")
     private String deptid;
     /**
      * 部门名称
@@ -64,6 +69,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "deptname")
     @JsonProperty("deptname")
+    @ApiModelProperty("部门名称")
     private String deptname;
     /**
      * 用户标识
@@ -71,6 +77,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableField(value = "userid")
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
     /**
      * 成员
@@ -78,6 +85,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("成员")
     private String personname;
     /**
      * 岗位标识
@@ -85,6 +93,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableField(value = "postid")
     @JSONField(name = "postid")
     @JsonProperty("postid")
+    @ApiModelProperty("岗位标识")
     private String postid;
     /**
      * 岗位名称
@@ -92,6 +101,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "postname")
     @JsonProperty("postname")
+    @ApiModelProperty("岗位名称")
     private String postname;
     /**
      * 业务条线
@@ -99,6 +109,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
+    @ApiModelProperty("业务条线")
     private String bcode;
     /**
      * 区属
@@ -106,6 +117,7 @@ public class SysDeptMember extends EntityMP implements Serializable {
     @TableField(value = "domains")
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
 
     /**

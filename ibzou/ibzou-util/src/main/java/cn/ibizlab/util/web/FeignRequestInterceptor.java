@@ -4,11 +4,17 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
+import java.util.LinkedHashMap;
 
 /**
  * feign请求拦截器
@@ -19,23 +25,23 @@ public class FeignRequestInterceptor implements RequestInterceptor {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+
     @Override
     public void apply(RequestTemplate requestTemplate) {
-
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if(requestAttributes!=null){
+        if (requestAttributes != null) {
             HttpServletRequest request = requestAttributes.getRequest();
             Enumeration<String> headerNames = request.getHeaderNames();
             if (headerNames != null) {
                 while (headerNames.hasMoreElements()) {
                     String name = headerNames.nextElement();
-                    if(name.equalsIgnoreCase("transfer-encoding")){
+                    if (name.equalsIgnoreCase("transfer-encoding")) {
                         continue;
                     }
                     String values = request.getHeader(name);
                     requestTemplate.header(name, values);
                 }
-                logger.info("feign interceptor header:{}",requestTemplate);
+                logger.info("feign interceptor header:{}", requestTemplate);
             }
         }
     }

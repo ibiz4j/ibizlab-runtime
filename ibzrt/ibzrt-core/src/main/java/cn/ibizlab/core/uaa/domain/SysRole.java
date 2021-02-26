@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [系统角色] 对象
  */
 @Data
+@ApiModel("系统角色")
 public class SysRole extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysRole extends EntityClient implements Serializable {
     @DEField(name = "sys_roleid" , isKeyField = true)
     @JSONField(name = "roleid")
     @JsonProperty("roleid")
+    @ApiModelProperty("角色标识")
     private String roleid;
 
     /**
@@ -47,6 +51,7 @@ public class SysRole extends EntityClient implements Serializable {
     @DEField(name = "sys_rolename")
     @JSONField(name = "rolename")
     @JsonProperty("rolename")
+    @ApiModelProperty("角色名称")
     private String rolename;
 
     /**
@@ -54,6 +59,7 @@ public class SysRole extends EntityClient implements Serializable {
      */
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
 
     /**
@@ -61,6 +67,7 @@ public class SysRole extends EntityClient implements Serializable {
      */
     @JSONField(name = "proleid")
     @JsonProperty("proleid")
+    @ApiModelProperty("父角色标识")
     private String proleid;
 
     /**
@@ -68,6 +75,7 @@ public class SysRole extends EntityClient implements Serializable {
      */
     @JSONField(name = "prolename")
     @JsonProperty("prolename")
+    @ApiModelProperty("父角色名称")
     private String prolename;
 
     /**
@@ -77,6 +85,7 @@ public class SysRole extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("建立时间")
     private Timestamp createdate;
 
     /**
@@ -86,6 +95,7 @@ public class SysRole extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

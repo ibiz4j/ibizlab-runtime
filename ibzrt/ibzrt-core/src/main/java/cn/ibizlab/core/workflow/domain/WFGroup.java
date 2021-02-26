@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [角色/用户组] 对象
  */
 @Data
+@ApiModel("角色/用户组")
 public class WFGroup extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class WFGroup extends EntityClient implements Serializable {
     @DEField(name = "groupid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("组标识")
     private String id;
 
     /**
@@ -47,6 +51,7 @@ public class WFGroup extends EntityClient implements Serializable {
     @DEField(name = "groupname")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("组名称")
     private String name;
 
     /**
@@ -54,6 +59,7 @@ public class WFGroup extends EntityClient implements Serializable {
      */
     @JSONField(name = "groupscope")
     @JsonProperty("groupscope")
+    @ApiModelProperty("范围")
     private String groupscope;
 
 

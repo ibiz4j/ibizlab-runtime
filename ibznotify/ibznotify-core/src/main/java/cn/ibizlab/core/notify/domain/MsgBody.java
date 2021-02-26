@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZMSGBODY", resultMap = "MsgBodyResultMap")
+@ApiModel("消息")
 public class MsgBody extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "iserror")
     @JSONField(name = "is_error")
     @JsonProperty("is_error")
+    @ApiModelProperty("是否出错")
     private Integer isError;
     /**
      * 是否发送
@@ -58,6 +62,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "issend")
     @JSONField(name = "is_send")
     @JsonProperty("is_send")
+    @ApiModelProperty("是否发送")
     private Integer isSend;
     /**
      * 消息标识
@@ -66,6 +71,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableId(value = "msgid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "msg_id")
     @JsonProperty("msg_id")
+    @ApiModelProperty("消息标识")
     private String msgId;
     /**
      * 目标用户
@@ -73,6 +79,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "tousers")
     @JSONField(name = "to_users")
     @JsonProperty("to_users")
+    @ApiModelProperty("目标用户")
     private String toUsers;
     /**
      * 消息链接
@@ -80,6 +87,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "msglink")
     @JSONField(name = "msg_link")
     @JsonProperty("msg_link")
+    @ApiModelProperty("消息链接")
     private String msgLink;
     /**
      * 消息标题
@@ -87,6 +95,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "subject")
     @JSONField(name = "subject")
     @JsonProperty("subject")
+    @ApiModelProperty("消息标题")
     private String subject;
     /**
      * 消息内容
@@ -94,6 +103,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "content")
     @JSONField(name = "content")
     @JsonProperty("content")
+    @ApiModelProperty("消息内容")
     private String content;
     /**
      * 消息类型
@@ -101,6 +111,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "msgtype")
     @JSONField(name = "msg_type")
     @JsonProperty("msg_type")
+    @ApiModelProperty("消息类型")
     private Integer msgType;
     /**
      * 消息名称
@@ -108,6 +119,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "msgname")
     @JSONField(name = "msg_name")
     @JsonProperty("msg_name")
+    @ApiModelProperty("消息名称")
     private String msgName;
     /**
      * 消息模板标识
@@ -115,6 +127,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "templateid")
     @JSONField(name = "template_id")
     @JsonProperty("template_id")
+    @ApiModelProperty("消息模板标识")
     private String templateId;
     /**
      * 错误信息
@@ -122,6 +135,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "errorinfo")
     @JSONField(name = "error_info")
     @JsonProperty("error_info")
+    @ApiModelProperty("错误信息")
     private String errorInfo;
     /**
      * 用户数据
@@ -129,6 +143,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "userdata")
     @JSONField(name = "user_data")
     @JsonProperty("user_data")
+    @ApiModelProperty("用户数据")
     private String userData;
     /**
      * 消息模板参数
@@ -137,6 +152,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "templparams")
     @JSONField(name = "template_params")
     @JsonProperty("template_params")
+    @ApiModelProperty("消息模板参数")
     private String templateParams;
     /**
      * 用户数据2
@@ -144,6 +160,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "userdata2")
     @JSONField(name = "user_data2")
     @JsonProperty("user_data2")
+    @ApiModelProperty("用户数据2")
     private String userData2;
     /**
      * 消息链接(PC)
@@ -152,6 +169,7 @@ public class MsgBody extends EntityMP implements Serializable {
     @TableField(value = "msglink_pc")
     @JSONField(name = "msg_link_pc")
     @JsonProperty("msg_link_pc")
+    @ApiModelProperty("消息链接(PC)")
     private String msgLinkPc;
 
 

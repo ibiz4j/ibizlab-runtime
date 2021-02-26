@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZDEPT", resultMap = "SysDepartmentResultMap")
+@ApiModel("部门")
 public class SysDepartment extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableId(value = "deptid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "deptid")
     @JsonProperty("deptid")
+    @ApiModelProperty("部门标识")
     private String deptid;
     /**
      * 部门代码
@@ -57,6 +61,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "deptcode")
     @JSONField(name = "deptcode")
     @JsonProperty("deptcode")
+    @ApiModelProperty("部门代码")
     private String deptcode;
     /**
      * 部门名称
@@ -64,6 +69,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "deptname")
     @JSONField(name = "deptname")
     @JsonProperty("deptname")
+    @ApiModelProperty("部门名称")
     private String deptname;
     /**
      * 单位
@@ -72,6 +78,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "orgid")
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @ApiModelProperty("单位")
     private String orgid;
     /**
      * 上级部门
@@ -80,6 +87,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "pdeptid")
     @JSONField(name = "parentdeptid")
     @JsonProperty("parentdeptid")
+    @ApiModelProperty("上级部门")
     private String parentdeptid;
     /**
      * 部门简称
@@ -87,6 +95,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "shortname")
     @JSONField(name = "shortname")
     @JsonProperty("shortname")
+    @ApiModelProperty("部门简称")
     private String shortname;
     /**
      * 部门级别
@@ -94,6 +103,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "deptlevel")
     @JSONField(name = "deptlevel")
     @JsonProperty("deptlevel")
+    @ApiModelProperty("部门级别")
     private Integer deptlevel;
     /**
      * 区属
@@ -101,6 +111,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "domains")
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
     /**
      * 排序
@@ -108,6 +119,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "showorder")
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
     /**
      * 业务编码
@@ -115,6 +127,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "bcode")
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
+    @ApiModelProperty("业务编码")
     private String bcode;
     /**
      * 分管领导标识
@@ -122,6 +135,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "leaderid")
     @JSONField(name = "leaderid")
     @JsonProperty("leaderid")
+    @ApiModelProperty("分管领导标识")
     private String leaderid;
     /**
      * 分管领导
@@ -129,6 +143,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "leadername")
     @JSONField(name = "leadername")
     @JsonProperty("leadername")
+    @ApiModelProperty("分管领导")
     private String leadername;
     /**
      * 逻辑有效
@@ -138,6 +153,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
     /**
      * 单位
@@ -145,6 +161,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("单位")
     private String orgname;
     /**
      * 上级部门
@@ -152,6 +169,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(exist = false)
     @JSONField(name = "parentdeptname")
     @JsonProperty("parentdeptname")
+    @ApiModelProperty("上级部门")
     private String parentdeptname;
     /**
      * 创建时间
@@ -161,6 +179,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
     private Timestamp createdate;
     /**
      * 最后修改时间
@@ -170,6 +189,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
     /**
      * 启用标志
@@ -178,6 +198,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     @TableField(value = "isvalid")
     @JSONField(name = "isvalid")
     @JsonProperty("isvalid")
+    @ApiModelProperty("启用标志")
     private Integer isvalid;
 
     /**

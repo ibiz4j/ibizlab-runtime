@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [角色权限关系] 对象
  */
 @Data
+@ApiModel("角色权限关系")
 public class SysRolePermission extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
     @DEField(name = "sys_role_permissionid" , isKeyField = true)
     @JSONField(name = "rolepermissionid")
     @JsonProperty("rolepermissionid")
+    @ApiModelProperty("角色权限关系表标识")
     private String rolepermissionid;
 
     /**
@@ -47,6 +51,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
     @DEField(name = "sys_roleid")
     @JSONField(name = "roleid")
     @JsonProperty("roleid")
+    @ApiModelProperty("角色表标识")
     private String roleid;
 
     /**
@@ -54,6 +59,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
      */
     @JSONField(name = "rolename")
     @JsonProperty("rolename")
+    @ApiModelProperty("角色名称")
     private String rolename;
 
     /**
@@ -62,6 +68,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
     @DEField(name = "sys_permissionid")
     @JSONField(name = "permissionid")
     @JsonProperty("permissionid")
+    @ApiModelProperty("权限表标识")
     private String permissionid;
 
     /**
@@ -69,6 +76,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
      */
     @JSONField(name = "permissionname")
     @JsonProperty("permissionname")
+    @ApiModelProperty("权限名称")
     private String permissionname;
 
     /**
@@ -76,6 +84,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
      */
     @JSONField(name = "permissiontype")
     @JsonProperty("permissiontype")
+    @ApiModelProperty("权限类型")
     private String permissiontype;
 
     /**
@@ -83,6 +92,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
      */
     @JSONField(name = "permissionenable")
     @JsonProperty("permissionenable")
+    @ApiModelProperty("权限类型")
     private Integer permissionenable;
 
     /**
@@ -92,6 +102,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("建立时间")
     private Timestamp createdate;
 
     /**
@@ -101,6 +112,7 @@ public class SysRolePermission extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

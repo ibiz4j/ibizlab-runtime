@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[JobsInfoDTO]
  */
 @Data
+@ApiModel("任务信息")
 public class JobsInfoDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("主键ID")
     private String id;
 
     /**
@@ -45,6 +49,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "tenant_id")
     @JsonProperty("tenant_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("租户ID")
     private String tenantId;
 
     /**
@@ -55,6 +60,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JsonProperty("app")
     @NotBlank(message = "[服务名]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("服务名")
     private String app;
 
     /**
@@ -65,6 +71,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JsonProperty("cron")
     @NotBlank(message = "[任务执行CRON]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("任务执行CRON")
     private String cron;
 
     /**
@@ -74,6 +81,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "handler")
     @JsonProperty("handler")
     @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
+    @ApiModelProperty("执行器任务HANDLER")
     private String handler;
 
     /**
@@ -83,6 +91,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "param")
     @JsonProperty("param")
     @Size(min = 0, max = 512, message = "内容长度必须小于等于[512]")
+    @ApiModelProperty("执行器任务参数")
     private String param;
 
     /**
@@ -92,6 +101,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "timeout")
     @JsonProperty("timeout")
     @NotNull(message = "[任务执行超时时间（秒）]不允许为空!")
+    @ApiModelProperty("任务执行超时时间（秒）")
     private Integer timeout;
 
     /**
@@ -101,6 +111,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "fail_retry_count")
     @JsonProperty("fail_retry_count")
     @NotNull(message = "[失败重试次数]不允许为空!")
+    @ApiModelProperty("失败重试次数")
     private Integer failRetryCount;
 
     /**
@@ -111,6 +122,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JsonProperty("last_time")
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[上次调度时间]不允许为空!")
+    @ApiModelProperty("上次调度时间")
     private Long lastTime;
 
     /**
@@ -121,6 +133,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JsonProperty("next_time")
     @JsonSerialize(using = ToStringSerializer.class)
     @NotNull(message = "[下次调度时间]不允许为空!")
+    @ApiModelProperty("下次调度时间")
     private Long nextTime;
 
     /**
@@ -130,6 +143,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "author")
     @JsonProperty("author")
     @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
+    @ApiModelProperty("所有者")
     private String author;
 
     /**
@@ -139,6 +153,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "remark")
     @JsonProperty("remark")
     @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
+    @ApiModelProperty("备注")
     private String remark;
 
     /**
@@ -148,6 +163,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JSONField(name = "status")
     @JsonProperty("status")
     @NotNull(message = "[状态]不允许为空!")
+    @ApiModelProperty("状态")
     private Integer status;
 
     /**
@@ -157,6 +173,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "update_time" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("update_time")
+    @ApiModelProperty("更新时间")
     private Timestamp updateTime;
 
     /**
@@ -166,6 +183,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "create_time" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
+    @ApiModelProperty("创建时间")
     private Timestamp createTime;
 
 

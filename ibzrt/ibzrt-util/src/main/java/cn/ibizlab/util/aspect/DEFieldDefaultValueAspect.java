@@ -28,6 +28,16 @@ import java.util.Map;
 public class DEFieldDefaultValueAspect
 {
     /**
+     * 操作用户标识
+     */
+    final static String TAG_PERSONID = "SRF_PERSONID";
+
+    /**
+     * 操作用户名称
+     */
+    final static String TAG_PERSONNAME = "SRF_PERSONNAME";
+
+    /**
      * 新建数据切入点
      * @param point
      * @throws Exception
@@ -221,16 +231,16 @@ public class DEFieldDefaultValueAspect
 
             switch(preFieldType) {
                 case CREATEMAN:
-                    et.set(fieldname, curUser.getUserid());
+                    et.set(fieldname, StringUtils.isEmpty(curUser.getUserid()) ? et.get(TAG_PERSONID) : curUser.getUserid());
                     break;
                 case CREATEMANNAME:
-                    et.set(fieldname, curUser.getPersonname());
+                    et.set(fieldname, StringUtils.isEmpty(curUser.getPersonname()) ? et.get(TAG_PERSONNAME) : curUser.getPersonname());
                     break;
                 case UPDATEMAN:
-                    et.set(fieldname, curUser.getUserid());
+                    et.set(fieldname, StringUtils.isEmpty(curUser.getUserid()) ? et.get(TAG_PERSONID) : curUser.getUserid());
                     break;
                 case UPDATEMANNAME:
-                    et.set(fieldname, curUser.getPersonname());
+                    et.set(fieldname, StringUtils.isEmpty(curUser.getPersonname()) ? et.get(TAG_PERSONNAME) : curUser.getPersonname());
                     break;
                 case CREATEDATE:
                     et.set(fieldname, new Timestamp(new Date().getTime()));

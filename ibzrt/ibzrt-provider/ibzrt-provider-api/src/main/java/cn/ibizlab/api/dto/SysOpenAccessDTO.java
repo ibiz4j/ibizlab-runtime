@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysOpenAccessDTO]
  */
 @Data
+@ApiModel("第三方认证平台")
 public class SysOpenAccessDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "id")
     @JsonProperty("id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("开放平台接入标识")
     private String id;
 
     /**
@@ -45,6 +49,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "name")
     @JsonProperty("name")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("开放平台")
     private String name;
 
     /**
@@ -54,6 +59,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "open_type")
     @JsonProperty("open_type")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("开放平台类型")
     private String openType;
 
     /**
@@ -63,6 +69,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "access_key")
     @JsonProperty("access_key")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("AccessKey(AppId)")
     private String accessKey;
 
     /**
@@ -72,6 +79,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "secret_key")
     @JsonProperty("secret_key")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("SecretKey(AppSecret)")
     private String secretKey;
 
     /**
@@ -81,6 +89,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "region_id")
     @JsonProperty("region_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("RegionId")
     private String regionId;
 
     /**
@@ -90,6 +99,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "access_token")
     @JsonProperty("access_token")
     @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
+    @ApiModelProperty("管理账号token")
     private String accessToken;
 
     /**
@@ -99,6 +109,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "expires_time" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("expires_time")
+    @ApiModelProperty("管理账号token过期时间")
     private Timestamp expiresTime;
 
     /**
@@ -107,6 +118,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "disabled")
     @JsonProperty("disabled")
+    @ApiModelProperty("是否禁用")
     private Integer disabled;
 
     /**
@@ -116,6 +128,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "redirect_uri")
     @JsonProperty("redirect_uri")
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
+    @ApiModelProperty("RedirectURI")
     private String redirectUri;
 
     /**
@@ -125,6 +138,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "notify_url")
     @JsonProperty("notify_url")
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
+    @ApiModelProperty("NotifyUrl")
     private String notifyUrl;
 
     /**
@@ -134,6 +148,7 @@ public class SysOpenAccessDTO extends DTOBase implements Serializable {
     @JSONField(name = "agent_id")
     @JsonProperty("agent_id")
     @JsonSerialize(using = ToStringSerializer.class)
+    @ApiModelProperty("AGENT_ID")
     private Long agentId;
 
 

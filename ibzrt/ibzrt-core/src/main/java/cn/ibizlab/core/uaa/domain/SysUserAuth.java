@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [账号绑定] 对象
  */
 @Data
+@ApiModel("账号绑定")
 public class SysUserAuth extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
     @DEField(name = "authid" , isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("标识")
     private String id;
 
     /**
@@ -46,6 +50,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
      */
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
 
     /**
@@ -54,6 +59,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
     @DEField(name = "identity_type")
     @JSONField(name = "identity_type")
     @JsonProperty("identity_type")
+    @ApiModelProperty("认证类型")
     private String identityType;
 
     /**
@@ -61,6 +67,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
      */
     @JSONField(name = "identifier")
     @JsonProperty("identifier")
+    @ApiModelProperty("认证标识")
     private String identifier;
 
     /**
@@ -68,6 +75,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
      */
     @JSONField(name = "credential")
     @JsonProperty("credential")
+    @ApiModelProperty("凭据")
     private String credential;
 
     /**
@@ -75,6 +83,7 @@ public class SysUserAuth extends EntityClient implements Serializable {
      */
     @JSONField(name = "username")
     @JsonProperty("username")
+    @ApiModelProperty("人员")
     private String username;
 
 

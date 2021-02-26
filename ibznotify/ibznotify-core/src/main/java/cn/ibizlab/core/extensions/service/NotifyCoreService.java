@@ -661,6 +661,10 @@ public class NotifyCoreService {
         if(ObjectUtils.isEmpty(context)){
             throw new BadRequestAlertException("无效消息上下文","NotifyCoreService","getBacklogAllContent");
         }
+        if(ObjectUtils.isEmpty(context.getN_tousers_eq())){
+            throw new BadRequestAlertException("无效用户信息","NotifyCoreService","getBacklogAllContent");
+        }
+        context.setN_tousers_eq(context.getN_tousers_eq());
         context.setSize(Integer.MAX_VALUE);
         Page<MsgBody> result = msgBodyService.searchDefault(context);
         return result;

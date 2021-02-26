@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZPERMISSION", resultMap = "SysPermissionResultMap")
+@ApiModel("权限/资源")
 public class SysPermission extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysPermission extends EntityMP implements Serializable {
     @TableId(value = "sys_permissionid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "permissionid")
     @JsonProperty("permissionid")
+    @ApiModelProperty("资源标识")
     private String permissionid;
     /**
      * 资源名称
@@ -58,6 +62,7 @@ public class SysPermission extends EntityMP implements Serializable {
     @TableField(value = "sys_permissionname")
     @JSONField(name = "permissionname")
     @JsonProperty("permissionname")
+    @ApiModelProperty("资源名称")
     private String permissionname;
     /**
      * 资源类别
@@ -65,6 +70,7 @@ public class SysPermission extends EntityMP implements Serializable {
     @TableField(value = "permissiontype")
     @JSONField(name = "permissiontype")
     @JsonProperty("permissiontype")
+    @ApiModelProperty("资源类别")
     private String permissiontype;
     /**
      * 系统
@@ -72,6 +78,7 @@ public class SysPermission extends EntityMP implements Serializable {
     @TableField(value = "pssystemid")
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
+    @ApiModelProperty("系统")
     private String pssystemid;
     /**
      * 逻辑有效
@@ -81,6 +88,7 @@ public class SysPermission extends EntityMP implements Serializable {
     @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
     /**
      * 建立时间
@@ -90,6 +98,7 @@ public class SysPermission extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("建立时间")
     private Timestamp createdate;
     /**
      * 更新时间
@@ -99,6 +108,7 @@ public class SysPermission extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

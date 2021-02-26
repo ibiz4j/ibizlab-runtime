@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZEMP", resultMap = "SysEmployeeResultMap")
+@ApiModel("人员")
 public class SysEmployee extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableId(value = "userid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
     /**
      * 用户全局名
@@ -57,6 +61,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "username")
     @JSONField(name = "username")
     @JsonProperty("username")
+    @ApiModelProperty("用户全局名")
     private String username;
     /**
      * 姓名
@@ -64,6 +69,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "personname")
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("姓名")
     private String personname;
     /**
      * 用户工号
@@ -71,6 +77,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "usercode")
     @JSONField(name = "usercode")
     @JsonProperty("usercode")
+    @ApiModelProperty("用户工号")
     private String usercode;
     /**
      * 登录名
@@ -78,6 +85,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "loginname")
     @JSONField(name = "loginname")
     @JsonProperty("loginname")
+    @ApiModelProperty("登录名")
     private String loginname;
     /**
      * 密码
@@ -85,6 +93,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "password")
     @JSONField(name = "password")
     @JsonProperty("password")
+    @ApiModelProperty("密码")
     private String password;
     /**
      * 区属
@@ -92,6 +101,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "domains")
     @JSONField(name = "domains")
     @JsonProperty("domains")
+    @ApiModelProperty("区属")
     private String domains;
     /**
      * 主部门
@@ -99,6 +109,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "mdeptid")
     @JSONField(name = "mdeptid")
     @JsonProperty("mdeptid")
+    @ApiModelProperty("主部门")
     private String mdeptid;
     /**
      * 主部门代码
@@ -106,6 +117,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "mdeptcode")
     @JSONField(name = "mdeptcode")
     @JsonProperty("mdeptcode")
+    @ApiModelProperty("主部门代码")
     private String mdeptcode;
     /**
      * 主部门名称
@@ -113,6 +125,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "mdeptname")
     @JSONField(name = "mdeptname")
     @JsonProperty("mdeptname")
+    @ApiModelProperty("主部门名称")
     private String mdeptname;
     /**
      * 业务编码
@@ -120,6 +133,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "bcode")
     @JSONField(name = "bcode")
     @JsonProperty("bcode")
+    @ApiModelProperty("业务编码")
     private String bcode;
     /**
      * 岗位标识
@@ -127,6 +141,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "postid")
     @JSONField(name = "postid")
     @JsonProperty("postid")
+    @ApiModelProperty("岗位标识")
     private String postid;
     /**
      * 岗位代码
@@ -134,6 +149,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "postcode")
     @JSONField(name = "postcode")
     @JsonProperty("postcode")
+    @ApiModelProperty("岗位代码")
     private String postcode;
     /**
      * 岗位名称
@@ -141,6 +157,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "postname")
     @JSONField(name = "postname")
     @JsonProperty("postname")
+    @ApiModelProperty("岗位名称")
     private String postname;
     /**
      * 单位
@@ -149,6 +166,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "orgid")
     @JSONField(name = "orgid")
     @JsonProperty("orgid")
+    @ApiModelProperty("单位")
     private String orgid;
     /**
      * 单位代码
@@ -156,6 +174,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "orgcode")
     @JSONField(name = "orgcode")
     @JsonProperty("orgcode")
+    @ApiModelProperty("单位代码")
     private String orgcode;
     /**
      * 单位名称
@@ -164,6 +183,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "orgname")
     @JSONField(name = "orgname")
     @JsonProperty("orgname")
+    @ApiModelProperty("单位名称")
     private String orgname;
     /**
      * 昵称别名
@@ -171,6 +191,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "nickname")
     @JSONField(name = "nickname")
     @JsonProperty("nickname")
+    @ApiModelProperty("昵称别名")
     private String nickname;
     /**
      * 性别
@@ -178,6 +199,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "sex")
     @JSONField(name = "sex")
     @JsonProperty("sex")
+    @ApiModelProperty("性别")
     private String sex;
     /**
      * 证件号码
@@ -185,6 +207,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "certcode")
     @JSONField(name = "certcode")
     @JsonProperty("certcode")
+    @ApiModelProperty("证件号码")
     private String certcode;
     /**
      * 联系方式
@@ -192,6 +215,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "phone")
     @JSONField(name = "phone")
     @JsonProperty("phone")
+    @ApiModelProperty("联系方式")
     private String phone;
     /**
      * 出生日期
@@ -200,6 +224,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "birthday", format = "yyyy-MM-dd")
     @JsonProperty("birthday")
+    @ApiModelProperty("出生日期")
     private Timestamp birthday;
     /**
      * 邮件
@@ -207,6 +232,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "email")
     @JSONField(name = "email")
     @JsonProperty("email")
+    @ApiModelProperty("邮件")
     private String email;
     /**
      * 社交账号
@@ -214,6 +240,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "avatar")
     @JSONField(name = "avatar")
     @JsonProperty("avatar")
+    @ApiModelProperty("社交账号")
     private String avatar;
     /**
      * 地址
@@ -221,6 +248,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "addr")
     @JSONField(name = "addr")
     @JsonProperty("addr")
+    @ApiModelProperty("地址")
     private String addr;
     /**
      * 照片
@@ -228,6 +256,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "usericon")
     @JSONField(name = "usericon")
     @JsonProperty("usericon")
+    @ApiModelProperty("照片")
     private String usericon;
     /**
      * ip地址
@@ -235,6 +264,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "ipaddr")
     @JSONField(name = "ipaddr")
     @JsonProperty("ipaddr")
+    @ApiModelProperty("ip地址")
     private String ipaddr;
     /**
      * 样式
@@ -242,6 +272,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "theme")
     @JSONField(name = "theme")
     @JsonProperty("theme")
+    @ApiModelProperty("样式")
     private String theme;
     /**
      * 语言
@@ -249,6 +280,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "lang")
     @JSONField(name = "lang")
     @JsonProperty("lang")
+    @ApiModelProperty("语言")
     private String lang;
     /**
      * 字号
@@ -256,6 +288,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "fontsize")
     @JSONField(name = "fontsize")
     @JsonProperty("fontsize")
+    @ApiModelProperty("字号")
     private String fontsize;
     /**
      * 备注
@@ -263,6 +296,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "memo")
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
     /**
      * 保留
@@ -270,6 +304,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "reserver")
     @JSONField(name = "reserver")
     @JsonProperty("reserver")
+    @ApiModelProperty("保留")
     private String reserver;
     /**
      * 排序
@@ -277,6 +312,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "showorder")
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
     /**
      * 逻辑有效
@@ -286,6 +322,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
     /**
      * 创建时间
@@ -295,6 +332,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
     private Timestamp createdate;
     /**
      * 最后修改时间
@@ -304,6 +342,7 @@ public class SysEmployee extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
     /**

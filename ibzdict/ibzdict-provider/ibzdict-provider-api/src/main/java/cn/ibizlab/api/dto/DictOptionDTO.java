@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[DictOptionDTO]
  */
 @Data
+@ApiModel("字典项")
 public class DictOptionDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JSONField(name = "value_key")
     @JsonProperty("value_key")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("标识")
     private String valueKey;
 
     /**
@@ -46,6 +50,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JsonProperty("catalog_id")
     @NotBlank(message = "[目录代码]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("目录代码")
     private String catalogId;
 
     /**
@@ -56,6 +61,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JsonProperty("catalog_name")
     @NotBlank(message = "[目录]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("目录")
     private String catalogName;
 
     /**
@@ -66,6 +72,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JsonProperty("value")
     @NotBlank(message = "[代码值]不允许为空!")
     @Size(min = 0, max = 40, message = "内容长度必须小于等于[40]")
+    @ApiModelProperty("代码值")
     private String value;
 
     /**
@@ -76,6 +83,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JsonProperty("label")
     @NotBlank(message = "[名称]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("名称")
     private String label;
 
     /**
@@ -85,6 +93,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JSONField(name = "parent")
     @JsonProperty("parent")
     @Size(min = 0, max = 40, message = "内容长度必须小于等于[40]")
+    @ApiModelProperty("父代码值")
     private String parent;
 
     /**
@@ -94,6 +103,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JSONField(name = "filter")
     @JsonProperty("filter")
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
+    @ApiModelProperty("过滤项")
     private String filter;
 
     /**
@@ -103,6 +113,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JSONField(name = "cls")
     @JsonProperty("cls")
     @Size(min = 0, max = 500, message = "内容长度必须小于等于[500]")
+    @ApiModelProperty("栏目样式")
     private String cls;
 
     /**
@@ -112,6 +123,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JSONField(name = "icon_class")
     @JsonProperty("icon_class")
     @Size(min = 0, max = 255, message = "内容长度必须小于等于[255]")
+    @ApiModelProperty("图标")
     private String iconClass;
 
     /**
@@ -120,6 +132,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "disabled")
     @JsonProperty("disabled")
+    @ApiModelProperty("是否禁用")
     private Integer disabled;
 
     /**
@@ -128,6 +141,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "expired")
     @JsonProperty("expired")
+    @ApiModelProperty("过期/失效")
     private Integer expired;
 
     /**
@@ -136,6 +150,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "showorder")
     @JsonProperty("showorder")
+    @ApiModelProperty("排序")
     private Integer showorder;
 
     /**
@@ -145,6 +160,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JSONField(name = "extension")
     @JsonProperty("extension")
     @Size(min = 0, max = 1000, message = "内容长度必须小于等于[1000]")
+    @ApiModelProperty("扩展")
     private String extension;
 
     /**
@@ -154,6 +170,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
     /**
@@ -163,6 +180,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
     @JSONField(name = "createdate" , format="yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
     private Timestamp createdate;
 
 

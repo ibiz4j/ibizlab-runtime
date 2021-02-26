@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[SysTeamDTO]
  */
 @Data
+@ApiModel("组")
 public class SysTeamDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class SysTeamDTO extends DTOBase implements Serializable {
     @JSONField(name = "teamid")
     @JsonProperty("teamid")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("组标识")
     private String teamid;
 
     /**
@@ -46,6 +50,7 @@ public class SysTeamDTO extends DTOBase implements Serializable {
     @JsonProperty("teamname")
     @NotBlank(message = "[组名称]不允许为空!")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("组名称")
     private String teamname;
 
     /**
@@ -55,6 +60,7 @@ public class SysTeamDTO extends DTOBase implements Serializable {
     @JSONField(name = "memo")
     @JsonProperty("memo")
     @Size(min = 0, max = 2000, message = "内容长度必须小于等于[2000]")
+    @ApiModelProperty("备注")
     private String memo;
 
     /**
@@ -64,6 +70,7 @@ public class SysTeamDTO extends DTOBase implements Serializable {
     @JSONField(name = "domains")
     @JsonProperty("domains")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("区属")
     private String domains;
 
 

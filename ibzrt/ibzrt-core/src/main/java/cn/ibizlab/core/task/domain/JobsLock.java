@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [任务锁] 对象
  */
 @Data
+@ApiModel("任务锁")
 public class JobsLock extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class JobsLock extends EntityClient implements Serializable {
     @DEField(isKeyField = true)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("主键ID")
     private String id;
 
     /**
@@ -46,6 +50,7 @@ public class JobsLock extends EntityClient implements Serializable {
      */
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("名称")
     private String name;
 
     /**
@@ -53,6 +58,7 @@ public class JobsLock extends EntityClient implements Serializable {
      */
     @JSONField(name = "owner")
     @JsonProperty("owner")
+    @ApiModelProperty("持有者")
     private String owner;
 
     /**
@@ -62,6 +68,7 @@ public class JobsLock extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "create_time" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("create_time")
+    @ApiModelProperty("创建时间")
     private Timestamp createTime;
 
 

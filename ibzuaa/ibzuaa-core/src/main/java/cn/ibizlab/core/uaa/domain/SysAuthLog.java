@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZAUTHLOG", resultMap = "SysAuthLogResultMap")
+@ApiModel("认证日志")
 public class SysAuthLog extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @TableId(value = "logid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "logid")
     @JsonProperty("logid")
+    @ApiModelProperty("标识")
     private String logid;
     /**
      * 用户全局名
@@ -57,6 +61,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @TableField(value = "username")
     @JSONField(name = "username")
     @JsonProperty("username")
+    @ApiModelProperty("用户全局名")
     private String username;
     /**
      * 用户名称
@@ -64,6 +69,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @TableField(value = "personname")
     @JSONField(name = "personname")
     @JsonProperty("personname")
+    @ApiModelProperty("用户名称")
     private String personname;
     /**
      * 域
@@ -71,6 +77,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @TableField(value = "domain")
     @JSONField(name = "domain")
     @JsonProperty("domain")
+    @ApiModelProperty("域")
     private String domain;
     /**
      * 认证时间
@@ -80,6 +87,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "authtime", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("authtime")
+    @ApiModelProperty("认证时间")
     private Timestamp authtime;
     /**
      * IP地址
@@ -87,6 +95,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @TableField(value = "ipaddr")
     @JSONField(name = "ipaddr")
     @JsonProperty("ipaddr")
+    @ApiModelProperty("IP地址")
     private String ipaddr;
     /**
      * MAC地址
@@ -94,6 +103,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @TableField(value = "macaddr")
     @JSONField(name = "macaddr")
     @JsonProperty("macaddr")
+    @ApiModelProperty("MAC地址")
     private String macaddr;
     /**
      * 客户端
@@ -101,6 +111,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @TableField(value = "useragent")
     @JSONField(name = "useragent")
     @JsonProperty("useragent")
+    @ApiModelProperty("客户端")
     private String useragent;
     /**
      * 认证结果
@@ -108,6 +119,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
     @TableField(value = "authcode")
     @JSONField(name = "authcode")
     @JsonProperty("authcode")
+    @ApiModelProperty("认证结果")
     private String authcode;
 
 

@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import cn.ibizlab.util.domain.EntityClient;
 
@@ -31,6 +33,7 @@ import cn.ibizlab.util.domain.EntityClient;
  * ServiceApi [权限/资源] 对象
  */
 @Data
+@ApiModel("权限/资源")
 public class SysPermission extends EntityClient implements Serializable {
 
     /**
@@ -39,6 +42,7 @@ public class SysPermission extends EntityClient implements Serializable {
     @DEField(name = "sys_permissionid" , isKeyField = true)
     @JSONField(name = "permissionid")
     @JsonProperty("permissionid")
+    @ApiModelProperty("资源标识")
     private String permissionid;
 
     /**
@@ -47,6 +51,7 @@ public class SysPermission extends EntityClient implements Serializable {
     @DEField(name = "sys_permissionname")
     @JSONField(name = "permissionname")
     @JsonProperty("permissionname")
+    @ApiModelProperty("资源名称")
     private String permissionname;
 
     /**
@@ -54,6 +59,7 @@ public class SysPermission extends EntityClient implements Serializable {
      */
     @JSONField(name = "permissiontype")
     @JsonProperty("permissiontype")
+    @ApiModelProperty("资源类别")
     private String permissiontype;
 
     /**
@@ -61,6 +67,7 @@ public class SysPermission extends EntityClient implements Serializable {
      */
     @JSONField(name = "pssystemid")
     @JsonProperty("pssystemid")
+    @ApiModelProperty("系统")
     private String pssystemid;
 
     /**
@@ -69,6 +76,7 @@ public class SysPermission extends EntityClient implements Serializable {
     @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval = "0")
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("逻辑有效")
     private Integer enable;
 
     /**
@@ -78,6 +86,7 @@ public class SysPermission extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "createdate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("createdate")
+    @ApiModelProperty("建立时间")
     private Timestamp createdate;
 
     /**
@@ -87,6 +96,7 @@ public class SysPermission extends EntityClient implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     @JSONField(name = "updatedate" , format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("更新时间")
     private Timestamp updatedate;
 
 

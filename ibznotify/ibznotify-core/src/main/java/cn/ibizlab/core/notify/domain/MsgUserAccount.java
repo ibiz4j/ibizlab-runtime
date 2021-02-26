@@ -24,6 +24,8 @@ import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -39,6 +41,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
 @TableName(value = "IBZUSERAUTH", resultMap = "MsgUserAccountResultMap")
+@ApiModel("绑定消息账号")
 public class MsgUserAccount extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +53,7 @@ public class MsgUserAccount extends EntityMP implements Serializable {
     @TableId(value = "authid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("标识")
     private String id;
     /**
      * 用户标识
@@ -57,6 +61,7 @@ public class MsgUserAccount extends EntityMP implements Serializable {
     @TableField(value = "userid")
     @JSONField(name = "userid")
     @JsonProperty("userid")
+    @ApiModelProperty("用户标识")
     private String userid;
     /**
      * 认证类型
@@ -65,6 +70,7 @@ public class MsgUserAccount extends EntityMP implements Serializable {
     @TableField(value = "identity_type")
     @JSONField(name = "identity_type")
     @JsonProperty("identity_type")
+    @ApiModelProperty("认证类型")
     private String identityType;
     /**
      * 认证标识
@@ -72,6 +78,7 @@ public class MsgUserAccount extends EntityMP implements Serializable {
     @TableField(value = "identifier")
     @JSONField(name = "identifier")
     @JsonProperty("identifier")
+    @ApiModelProperty("认证标识")
     private String identifier;
     /**
      * 凭据
@@ -79,6 +86,7 @@ public class MsgUserAccount extends EntityMP implements Serializable {
     @TableField(value = "credential")
     @JSONField(name = "credential")
     @JsonProperty("credential")
+    @ApiModelProperty("凭据")
     private String credential;
 
 

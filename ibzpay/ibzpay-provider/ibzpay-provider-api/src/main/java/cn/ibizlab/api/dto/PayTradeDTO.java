@@ -20,11 +20,14 @@ import javax.validation.constraints.Size;
 import cn.ibizlab.util.domain.DTOBase;
 import cn.ibizlab.util.domain.DTOClient;
 import lombok.Data;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 服务DTO对象[PayTradeDTO]
  */
 @Data
+@ApiModel("支付交易")
 public class PayTradeDTO extends DTOBase implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +39,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "subject")
     @JsonProperty("subject")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("订单标题")
     private String subject;
 
     /**
@@ -45,6 +49,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "total_amount")
     @JsonProperty("total_amount")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("订单金额")
     private String totalAmount;
 
     /**
@@ -54,6 +59,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "trade_name")
     @JsonProperty("trade_name")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("交易名称")
     private String tradeName;
 
     /**
@@ -63,6 +69,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "trade_type")
     @JsonProperty("trade_type")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("支付类型")
     private String tradeType;
 
     /**
@@ -72,6 +79,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "trade_status")
     @JsonProperty("trade_status")
     @Size(min = 0, max = 60, message = "内容长度必须小于等于[60]")
+    @ApiModelProperty("支付状态")
     private String tradeStatus;
 
     /**
@@ -81,6 +89,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "out_trade_no")
     @JsonProperty("out_trade_no")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("订单号")
     private String outTradeNo;
 
     /**
@@ -90,6 +99,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "trade_id")
     @JsonProperty("trade_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("交易标识")
     private String tradeId;
 
     /**
@@ -99,6 +109,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "app_id")
     @JsonProperty("app_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("AccessKey(AppId)")
     private String appId;
 
     /**
@@ -108,6 +119,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "access_name")
     @JsonProperty("access_name")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("支付平台")
     private String accessName;
 
     /**
@@ -117,6 +129,7 @@ public class PayTradeDTO extends DTOBase implements Serializable {
     @JSONField(name = "access_id")
     @JsonProperty("access_id")
     @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @ApiModelProperty("支付平台接入标识")
     private String accessId;
 
 
