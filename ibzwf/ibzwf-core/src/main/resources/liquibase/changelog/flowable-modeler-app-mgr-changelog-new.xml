@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="CURRENT_TIMESTAMP" dbms="mysql,h2"/>
     <property name="now" value="current_timestamp" dbms="postgresql"/>
     <property name="now" value="sysdate" dbms="oracle"/>
 
-	<changeSet id="1561433044785-1" author="flowable">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="ACT_DE_DATABASECHANGELOG"/>
+    <property name="ACT_DE_DATABASECHANGELOG" value="act_de_databasechangelog" dbms="mysql,h2,postgresql"/>
+    <property name="ACT_DE_DATABASECHANGELOG" value="ACT_DE_DATABASECHANGELOG" dbms="oracle"/>
+
+    <changeSet id="1561433044786-1" author="flowable">
+        <preConditions onFail="MARK_RAN"  >
+            <not >
+                <tableExists tableName="${ACT_DE_DATABASECHANGELOG}" />
             </not>
         </preConditions>
+
         <!-- model -->
-		<createTable tableName="ACT_DE_DATABASECHANGELOG">
-			<column name="id" type="varchar(255)">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
-			<column name="author" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="filename" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="dateexecuted" type="datetime(6)" defaultValueDate="${now}">
-				<constraints nullable="false" />
-			</column>
-			<column name="orderexecuted" type="int">
-				<constraints nullable="false" />
-			</column>
-			<column name="exectype" type="varchar(10)">
-				<constraints nullable="false" />
-			</column>
-			<column name="md5sum" type="varchar(35)">
+        <createTable tableName="ACT_DE_DATABASECHANGELOG">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="author" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="filename" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="dateexecuted" type="datetime(6)" >
                 <constraints nullable="true" />
-			</column>
-			<column name="description" type="varchar(255)">
+            </column>
+            <column name="orderexecuted" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="exectype" type="varchar(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="md5sum" type="varchar(35)">
                 <constraints nullable="true" />
-			</column>
-			<column name="comments" type="varchar(255)">
+            </column>
+            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
-			</column>
-			<column name="tag" type="varchar(255)">
+            </column>
+            <column name="comments" type="varchar(255)">
                 <constraints nullable="true" />
-			</column>
-			<column name="liquibase" type="varchar(20)">
+            </column>
+            <column name="tag" type="varchar(255)">
                 <constraints nullable="true" />
-			</column>
-			<column name="contexts" type="varchar(255)">
+            </column>
+            <column name="liquibase" type="varchar(20)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contexts" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="labels" type="varchar(255)">
@@ -58,7 +62,7 @@
             <column name="deployment_id" type="varchar(10)">
                 <constraints nullable="true" />
             </column>
-		</createTable>
+        </createTable>
 
 
         <!-- Model history -->
@@ -77,12 +81,13 @@
             </column>
         </createTable>
 
-			
 
-        <insert tableName="ACT_DE_DATABASECHANGELOG">
+
+        <insert tableName="ACT_DE_DATABASECHANGELOG" >
             <column name="ID" value="1"/>
             <column name="AUTHOR" value="flowable"/>
             <column name="FILENAME" value="META-INF/liquibase/flowable-modeler-app-db-changelog.xml"/>
+            <column name="DATEEXECUTED" valueDate="2019-10-23T20:40:17"/>
             <column name="ORDEREXECUTED" value="1"/>
             <column name="EXECTYPE" value="EXECUTED"/>
             <column name="MD5SUM" value="8:e70d1d9d3899a734296b2514ccc71501"/>
@@ -94,10 +99,11 @@
             <column name="LABELS"/>
             <column name="DEPLOYMENT_ID" value="9219494793"/>
         </insert>
-        <insert tableName="ACT_DE_DATABASECHANGELOG">
+        <insert tableName="ACT_DE_DATABASECHANGELOG" >
             <column name="ID" value="3"/>
             <column name="AUTHOR" value="flowable"/>
             <column name="FILENAME" value="META-INF/liquibase/flowable-modeler-app-db-changelog.xml"/>
+            <column name="DATEEXECUTED" valueDate="2019-10-23T20:40:17"/>
             <column name="ORDEREXECUTED" value="2"/>
             <column name="EXECTYPE" value="EXECUTED"/>
             <column name="MD5SUM" value="8:3a9143bef2e45f2316231cc1369138b6"/>
@@ -109,9 +115,15 @@
             <column name="LABELS"/>
             <column name="DEPLOYMENT_ID" value="9219494793"/>
         </insert>
-        <insert tableName="ACT_DE_DATABASECHANGELOGLOCK">
+        <insert tableName="ACT_DE_DATABASECHANGELOGLOCK" dbms="mysql,h2,oracle">
             <column name="ID" value="1"/>
             <column name="LOCKED" valueBoolean="false"/>
+            <column name="LOCKGRANTED"/>
+            <column name="LOCKEDBY"/>
+        </insert>
+        <insert tableName="ACT_DE_DATABASECHANGELOGLOCK" dbms="postgresql">
+            <column name="ID" value="1"/>
+            <column name="LOCKED" value="0"/>
             <column name="LOCKGRANTED"/>
             <column name="LOCKEDBY"/>
         </insert>
