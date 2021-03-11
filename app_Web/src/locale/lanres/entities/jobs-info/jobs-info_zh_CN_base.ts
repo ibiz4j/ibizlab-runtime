@@ -62,6 +62,7 @@ function getLocaleResourceBase(){
 		main_grid: {
 			columns: {
 				id: commonLogic.appcommonhandle("主键ID",null),
+				remark: commonLogic.appcommonhandle("备注",null),
 				app: commonLogic.appcommonhandle("服务名",null),
 				handler: commonLogic.appcommonhandle("执行器任务HANDLER",null),
 				cron: commonLogic.appcommonhandle("任务执行CRON",null),

@@ -112,7 +112,7 @@
 <i-col v-show="detailsModel.postcode.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='postcode' :itemRules="this.rules().postcode" class='' :caption="$t('entities.sysemployee.main_form.details.postcode')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.postcode.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='postcode' :value="data.postcode" dataType="PICKUPDATA"     :precision="0"
+<app-span name='postcode' :value="data.postcode" dataType="PICKUPDATA" unitName=""     :precision="0"
 :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
 </app-span>
 

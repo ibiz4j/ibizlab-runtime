@@ -22,7 +22,7 @@
 <i-col v-show="detailsModel.sys_user_roleid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='sys_user_roleid' :itemRules="this.rules().sys_user_roleid" class='' :caption="$t('entities.sysuserrole.main_form.details.sys_user_roleid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.sys_user_roleid.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='sys_user_roleid' :value="data.sys_user_roleid" dataType="GUID"     :precision="0"
+<app-span name='sys_user_roleid' :value="data.sys_user_roleid" dataType="GUID" unitName=""     :precision="0"
 :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
 </app-span>
 

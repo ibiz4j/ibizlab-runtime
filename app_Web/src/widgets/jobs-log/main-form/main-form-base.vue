@@ -106,7 +106,7 @@
 <i-col v-show="detailsModel.create_time.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='create_time' :itemRules="this.rules().create_time" class='' :caption="$t('entities.jobslog.main_form.details.create_time')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.create_time.error" :isEmptyCaption="false" labelPos="LEFT">
     
-<app-span name='create_time' :value="data.create_time" dataType="DATETIME" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS"     :precision="0"
+<app-span name='create_time' :value="data.create_time" dataType="DATETIME" unitName="" valueFormat="%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS"     :precision="0"
 :data="data" :context="context" :viewparams="viewparams" :localContext ='{ }'  :localParam ='{ }'  style="">  
 </app-span>
 
