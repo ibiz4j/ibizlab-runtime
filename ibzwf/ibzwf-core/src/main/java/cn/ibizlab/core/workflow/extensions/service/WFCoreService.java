@@ -122,11 +122,11 @@ public class WFCoreService
 
 	private AuthenticationContext createAuthenticationContext()
 	{
-        UserIdAuthenticationContext context=new UserIdAuthenticationContext();
+		UserIdAuthenticationContext context=new UserIdAuthenticationContext();
 		AuthenticationUser user=AuthenticationUser.getAuthenticationUser();
-        FlowUser principal=new FlowUser();
-        principal.setUser(user);
-        String token="";
+		FlowUser principal=new FlowUser();
+		principal.setUser(user);
+		String token="";
 		ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		if(requestAttributes!=null) {
 			HttpServletRequest request = requestAttributes.getRequest();
@@ -139,8 +139,8 @@ public class WFCoreService
 			token="Bearer "+jwtTokenUtil.generateToken(user);
 		}
 
-        principal.setToken(token);
-        context.setPrincipal((Principal) principal);
+		principal.setToken(token);
+		context.setPrincipal((Principal) principal);
 		return context;
 	}
 
@@ -156,6 +156,13 @@ public class WFCoreService
 	public List<String> getWorkflowKey(String system,String appname,String entity) {
 		List<String> definitionKeys=new ArrayList<>();
 		for(WFProcessDefinition wfdef:wfModelService.getWorkflow(system,entity))
+			definitionKeys.add(wfdef.getDefinitionkey());
+		return definitionKeys;
+	}
+
+	public List<String> getDynaWorkflowKey(String dynainstid,String system,String appname,String entity) {
+		List<String> definitionKeys=new ArrayList<>();
+		for(WFProcessDefinition wfdef:wfModelService.getDynamicWorkflow(dynainstid,system,entity))
 			definitionKeys.add(wfdef.getDefinitionkey());
 		return definitionKeys;
 	}
@@ -307,7 +314,7 @@ public class WFCoreService
 	}
 
 	public List<WFTaskWay> getWFLinkByStep(String system,String appname,
-									 String entity, String processDefinitionKey,String taskDefinitionKey) {
+										   String entity, String processDefinitionKey,String taskDefinitionKey) {
 		List<WFTaskWay> taskWays=new ArrayList<>();
 		if((!StringUtils.isEmpty(processDefinitionKey))&&(!StringUtils.isEmpty(taskDefinitionKey))) {
 			UserTask userTask = wfModelService.getModelStepByKey(processDefinitionKey).get(taskDefinitionKey);
@@ -383,6 +390,37 @@ public class WFCoreService
 		return "";
 	}
 
+	public Map<String, Map<String,Object>> getDynaBusinessKeys(String system, String appname, String entity, String dynainstid, String userId) {
+		Map<String, Map<String,Object>> businessKeys = new HashMap<>();
+		if(StringUtils.isEmpty(userId))
+			userId=AuthenticationUser.getAuthenticationUser().getUserid();
+		if(StringUtils.isEmpty(userId) && StringUtils.isEmpty(dynainstid))
+			return businessKeys;
+
+		WFTaskSearchContext context =new WFTaskSearchContext();
+		List<String> keys = this.getDynaWorkflowKey(dynainstid,system,appname,entity);
+		if(ObjectUtils.isEmpty(keys)){
+			return businessKeys;
+		}
+		context.getSearchCond().in("DefinitionKey",keys);
+		Page<WFTask> tasks = searchMyTask(context);
+		if(!ObjectUtils.isEmpty(tasks)){
+			for(WFTask task:tasks.getContent()) {
+				Object key=task.getProcessinstancebusinesskey();
+				if(key!=null) {
+					String str=key.toString();
+					if(str.indexOf(":k-")>0)
+						str=str.split(":k-")[1];
+					Map<String,Object> params = new HashMap();
+					params.put("srfprocessdefinitionkey",task.getProcessdefinitionkey());
+					params.put("srftaskdefinitionkey",task.getTaskdefinitionkey());
+					businessKeys.put(str,params);
+				}
+			}
+		}
+		return businessKeys;
+	}
+
 	public List<String> getBusinessKeys(String system,String appname, String entity,String processDefinitionKey,String taskDefinitionKey,String userId)
 	{
 		List<String> businessKeys = new ArrayList<>();
@@ -413,7 +451,7 @@ public class WFCoreService
 	}
 
 	public WFProcessInstance wfStart(String system,String appname,
-			String entity,String businessKey,WFProcessInstance instance) {
+									 String entity,String businessKey,WFProcessInstance instance) {
 		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
 		if(StringUtils.isEmpty(userId))
 			throw new BadRequestAlertException("未传入当前用户",entity,businessKey);
@@ -448,7 +486,7 @@ public class WFCoreService
 		variables.put("wfversion",version);
 		//根据流程定义启动流程
 		Authentication.setAuthenticatedUserId(userId);
-        Authentication.setAuthenticationContext(createAuthenticationContext());
+		Authentication.setAuthenticationContext(createAuthenticationContext());
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processDefinitionKey,processInstanceBusinessKey, variables);//流程定时标识、业务标识、变量
 		instance.setBusinesskey(processInstanceBusinessKey);
 		instance.setId(processInstance.getId());
@@ -462,7 +500,7 @@ public class WFCoreService
 	}
 
 	public List<WFTaskWay> getWFLink(String system,String appname,
-			String entity, String businessKey,String taskDefinitionKey) {
+									 String entity, String businessKey,String taskDefinitionKey) {
 		List<WFTaskWay> taskWays=new ArrayList<>();
 		String processInstanceBusinessKey=system+":"+entity+":k-"+businessKey;
 		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
@@ -535,7 +573,7 @@ public class WFCoreService
 	}
 
 	public WFProcessInstance wfsubmit(String system,String appname,
-			String entity,String businessKey,String taskId,WFTaskWay taskWay) {
+									  String entity,String businessKey,String taskId,WFTaskWay taskWay) {
 
 		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
 		if(StringUtils.isEmpty(userId))
@@ -565,7 +603,7 @@ public class WFCoreService
 
 		//根据流程定义启动流程
 		Authentication.setAuthenticatedUserId(userId);
-        Authentication.setAuthenticationContext(createAuthenticationContext());
+		Authentication.setAuthenticationContext(createAuthenticationContext());
 
 		taskService.complete(taskId, variables,transientVariables);
 		WFProcessInstance instance = new WFProcessInstance();
@@ -574,7 +612,7 @@ public class WFCoreService
 	}
 
 	public WFProcessInstance getWFHistory(String system,String appname,
-										String entity,String businessKey,String processInstanceId)
+										  String entity,String businessKey,String processInstanceId)
 	{
 		WFProcessInstance wfProcessInstance=new WFProcessInstance();
 		String processInstanceBusinessKey=system+":"+entity+":k-"+businessKey;
@@ -737,22 +775,22 @@ public class WFCoreService
 	public synchronized boolean wfdeploybpmns(List bpmnfiles){
 		if(bpmnfiles.size()>0){
 			bpmnfiles.forEach(item->{
-					Map<String,Object> bpmnfile= (Map) item;
-					for (Map.Entry<String,Object> entry : bpmnfile.entrySet()) {
-						InputStream in = null;
-						try {
-							in = new ByteArrayInputStream(String.valueOf(entry.getValue()).getBytes());
-							wfdeploy(entry.getKey(), getBpmnFile(in),new WFREModel());
-						} catch (Exception e) {}
-						finally {
-							if(in!=null) {
-								try {
-									in.close();
-								} catch (IOException e) {}
+						Map<String,Object> bpmnfile= (Map) item;
+						for (Map.Entry<String,Object> entry : bpmnfile.entrySet()) {
+							InputStream in = null;
+							try {
+								in = new ByteArrayInputStream(String.valueOf(entry.getValue()).getBytes());
+								wfdeploy(entry.getKey(), getBpmnFile(in),new WFREModel());
+							} catch (Exception e) {}
+							finally {
+								if(in!=null) {
+									try {
+										in.close();
+									} catch (IOException e) {}
+								}
 							}
 						}
 					}
-				}
 			);
 		}
 		return true;
@@ -899,7 +937,6 @@ public class WFCoreService
 			for(String booking:bookings.split(","))
 			{
 				String processDefinitionKey;
-
 				if(!StringUtils.isEmpty(dynainstid))
 					processDefinitionKey="dyna-"+dynainstid+"-"+system+"-"+booking+"-"+params[1];
 				else
@@ -987,7 +1024,7 @@ public class WFCoreService
 					try
 					{
 						if(is!=null)
-						is.close();
+							is.close();
 					}catch (Exception exis){}
 					try
 					{
@@ -1092,7 +1129,7 @@ public class WFCoreService
 		{
 			ServiceTask task=(ServiceTask)delegateExecution.getCurrentFlowElement();
 			//HashMap curUser=(HashMap)delegateExecution.getVariable("curuser");
-            FlowUser curUser=FlowUser.getCurUser();
+			FlowUser curUser=FlowUser.getCurUser();
 			String businessKey=(String)delegateExecution.getVariable("businessKey");
 			String cloudServiceId=(String)delegateExecution.getVariable("cloud-serviceid");
 			Map entity=(Map) activedata;
@@ -1231,7 +1268,6 @@ public class WFCoreService
 				}
 			}
 		}
-
 		return strUsers;
 	}
 

@@ -4,7 +4,7 @@
 
 
     <!--输出实体[JOBS_INFO]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-jobs_info-4-1">
+    <changeSet author="a_A_5d9d78509" id="tab-jobs_info-5-1">
         <createTable tableName="JOBS_INFO">
                 <column name="ID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_JOBS_INFO_ID"/>

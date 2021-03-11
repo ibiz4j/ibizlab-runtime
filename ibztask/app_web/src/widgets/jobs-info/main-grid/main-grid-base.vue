@@ -34,6 +34,18 @@
                     </template>
                 </el-table-column>
             </template>
+            <template v-if="getColumnState('remark')">
+                <el-table-column show-overflow-tooltip :prop="'remark'" :label="$t('entities.jobsinfo.main_grid.columns.remark')" :width="250"  :align="'left'" :sortable="'custom'">
+                    <template v-slot:header="{column}">
+                      <span class="column-header ">
+                        {{$t('entities.jobsinfo.main_grid.columns.remark')}}
+                      </span>
+                    </template>
+                    <template v-slot="{row,column,$index}">
+                        <span>{{row.remark}}</span>
+                    </template>
+                </el-table-column>
+            </template>
             <template v-if="getColumnState('app')">
                 <el-table-column show-overflow-tooltip :prop="'app'" :label="$t('entities.jobsinfo.main_grid.columns.app')" :width="200"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
@@ -693,6 +705,15 @@ export default class MainBase extends Vue implements ControlInterface {
             name: 'id',
             label: '主键ID',
             langtag: 'entities.jobsinfo.main_grid.columns.id',
+            show: true,
+            unit: 'PX',
+            isEnableRowEdit: false,
+            enableCond: 3 ,
+        },
+        {
+            name: 'remark',
+            label: '备注',
+            langtag: 'entities.jobsinfo.main_grid.columns.remark',
             show: true,
             unit: 'PX',
             isEnableRowEdit: false,
@@ -1474,7 +1495,7 @@ export default class MainBase extends Vue implements ControlInterface {
     * @memberof MainBase
     */
     public arraySpanMethod({row, column, rowIndex, columnIndex} : any) {
-        let allColumns:Array<any> = ['id','app','handler','cron','last_time','next_time','status','timeout','update_time'];
+        let allColumns:Array<any> = ['id','remark','app','handler','cron','last_time','next_time','status','timeout','update_time'];
         if(row && row.children) {
             if(columnIndex == (this.isSingleSelect ? 0:1)) {
                 return [1, allColumns.length+1];
@@ -1555,6 +1576,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 groupById: Number((i+1)*100),
                 group: group.label,
                 id:'',
+                remark:'',
                 app:'',
                 handler:'',
                 cron:'',
@@ -1590,6 +1612,7 @@ export default class MainBase extends Vue implements ControlInterface {
             groupById: Number((allGroup.length+1)*100),
             group: this.$t('app.gridpage.other'),
             id:'',
+            remark:'',
             app:'',
             handler:'',
             cron:'',
@@ -1645,6 +1668,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 groupById: Number((groupIndex+1)*100),
                 group: group,
                 id:'',
+                remark:'',
                 app:'',
                 handler:'',
                 cron:'',

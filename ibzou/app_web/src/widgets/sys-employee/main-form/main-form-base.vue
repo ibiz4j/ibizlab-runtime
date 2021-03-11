@@ -745,6 +745,7 @@ export default class MainBase extends Vue implements ControlInterface {
         usercode: null,
         personname: null,
         loginname: null,
+        password: null,
         orgid: null,
         orgname: null,
         mdeptid: null,
@@ -1048,6 +1049,8 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         loginname: new FormItemModel({ caption: '登录名', detailType: 'FORMITEM', name: 'loginname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 1 })
 , 
+        password: new FormItemModel({ caption: '密码', detailType: 'FORMITEM', name: 'password', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
+, 
         orgid: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 1 })
 , 
         orgname: new FormItemModel({ caption: '单位', detailType: 'FORMITEM', name: 'orgname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:true, disabled: false, enableCond: 1 })
@@ -1230,6 +1233,18 @@ export default class MainBase extends Vue implements ControlInterface {
     @Watch('data.loginname')
     onLoginnameChange(newVal: any, oldVal: any) {
         this.formDataChange({ name: 'loginname', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 password 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.password')
+    onPasswordChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'password', newVal: newVal, oldVal: oldVal });
     }
 
     /**
@@ -1590,6 +1605,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
+
 
 
 

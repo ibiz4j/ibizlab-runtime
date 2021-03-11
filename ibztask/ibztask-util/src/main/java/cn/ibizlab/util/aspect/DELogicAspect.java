@@ -78,12 +78,14 @@ public class DELogicAspect {
         EntityBase entity = null;
         if ("remove".equalsIgnoreCase(action) || "get".equalsIgnoreCase(action)) {
             entity = getEntity(service.getClass());
-            String id = DEFieldCacheMap.getDEKeyField(entity.getClass());
-            if(StringUtils.isEmpty(id)) {
-                log.debug("无法获取实体主键属性[{}]",entity.getClass().getSimpleName());
-                return point.proceed();
+            if(!ObjectUtils.isEmpty(entity)) {
+                String id = DEFieldCacheMap.getDEKeyField(entity.getClass());
+                if(StringUtils.isEmpty(id)) {
+                    log.debug("无法获取实体主键属性[{}]",entity.getClass().getSimpleName());
+                    return point.proceed();
+                }
+                entity.set(id, arg);
             }
-            entity.set(id, arg);
         } else if (arg instanceof EntityBase) {
             entity = (EntityBase) arg;
         }
@@ -187,7 +189,7 @@ public class DELogicAspect {
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem).buildAll();
         Results results = kieBuilder.getResults();
         if (results.hasMessages(Message.Level.ERROR)) {
-            throw new BadRequestAlertException(String.format("编译实体处理逻辑 [%s] 发生异常, %s", logic.getName(), results.getMessages()), "LogicAspect", "reloadLogic");
+            throw new BadRequestAlertException(String.format("编译实体处理逻辑 [%s] 发生异常, %s", logic.getName(), results.getMessages()), "DELogicAspect", "reloadLogic");
         }
         KieContainer kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
         logic.setContainer(kieContainer);
@@ -290,6 +292,7 @@ public class DELogicAspect {
                 logic.setMd5(getMd5(refFiles));
             }
         } catch (Exception e) {
+            log.error("执行处理逻辑失败"+e);
         } finally {
             try {
                 if (reader != null) {
@@ -299,6 +302,7 @@ public class DELogicAspect {
                     bpmn.close();
                 }
             } catch (Exception e) {
+                log.error("执行处理逻辑失败"+e);
             }
         }
         return logic;
@@ -326,7 +330,8 @@ public class DELogicAspect {
         if(!ObjectUtils.isEmpty(service.getSuperclass()) && !service.getSuperclass().getName().equals(Object.class.getName())) {
             return getEntity(service.getSuperclass());
         }
-        throw new BadRequestAlertException("获取实体信息失败", "DELogicAspect", "getEntity");
+        log.error("获取实体信息失败，未能在[{}]中找到参数为实体类对象的行为，如create.update等",service.getSimpleName());
+        return null;
     }
 
     /**
@@ -347,6 +352,7 @@ public class DELogicAspect {
                         buffer.append(strBpmn);
                     }
                 } catch (Exception e) {
+                    log.error("处理逻辑版本检查失败"+e);
                 } finally {
                     if (bpmnFile != null) {
                         bpmnFile.close();
@@ -359,6 +365,7 @@ public class DELogicAspect {
                 return null;
             }
         } catch (Exception e) {
+            log.error("处理逻辑版本检查失败"+e);
             return null;
         }
     }
@@ -418,6 +425,7 @@ public class DELogicAspect {
                 FileUtils.copyToFile(in, bpmn);
             }
         } catch (IOException e) {
+            log.error("执行处理逻辑失败，无法获取逻辑文件"+e);
         } finally {
             if (in != null) {
                 try {

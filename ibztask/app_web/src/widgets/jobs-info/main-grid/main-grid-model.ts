@@ -27,29 +27,14 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'id',
-          prop: 'id',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'cron',
-          prop: 'cron',
-          dataType: 'TEXT',
-        },
-        {
           name: 'app',
           prop: 'app',
           dataType: 'TEXT',
         },
         {
-          name: 'next_time',
-          prop: 'next_time',
-          dataType: 'BIGINT',
-        },
-        {
-          name: 'update_time',
-          prop: 'update_time',
-          dataType: 'DATETIME',
+          name: 'remark',
+          prop: 'remark',
+          dataType: 'TEXT',
         },
         {
           name: 'status',
@@ -67,15 +52,35 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
+          name: 'srfkey',
+          prop: 'id',
+          dataType: 'TEXT',
+          isEditable:true
+        },
+        {
           name: 'srfdataaccaction',
           prop: 'id',
           dataType: 'TEXT',
         },
         {
-          name: 'srfkey',
+          name: 'id',
           prop: 'id',
           dataType: 'TEXT',
-          isEditable:true
+        },
+        {
+          name: 'cron',
+          prop: 'cron',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'next_time',
+          prop: 'next_time',
+          dataType: 'BIGINT',
+        },
+        {
+          name: 'update_time',
+          prop: 'update_time',
+          dataType: 'DATETIME',
         },
         {
           name: 'timeout',

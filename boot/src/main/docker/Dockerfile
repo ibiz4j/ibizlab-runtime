@@ -6,7 +6,7 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 
 CMD echo "The application will start in ${IBIZ_SLEEP}s..." && \
     sleep ${IBIZ_SLEEP} && \
-    java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /ibizlab-runtime.jar
+    java ${JAVA_OPTS} -Duser.timezone=$TZ -Djava.security.egd=file:/dev/./urandom -jar /ibizlab-runtime.jar
 
 EXPOSE 10086
 

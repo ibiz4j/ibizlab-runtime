@@ -120,6 +120,7 @@ function getLocaleResourceBase(){
 				usercode: commonLogic.appcommonhandle("用户工号",null), 
 				personname: commonLogic.appcommonhandle("姓名",null), 
 				loginname: commonLogic.appcommonhandle("登录名",null), 
+				password: commonLogic.appcommonhandle("密码",null), 
 				orgid: commonLogic.appcommonhandle("单位",null), 
 				orgname: commonLogic.appcommonhandle("单位",null), 
 				mdeptid: commonLogic.appcommonhandle("主部门",null), 

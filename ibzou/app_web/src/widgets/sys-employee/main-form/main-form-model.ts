@@ -71,6 +71,11 @@ export default class MainModel {
         dataType: 'TEXT',
       },
       {
+        name: 'password',
+        prop: 'password',
+        dataType: 'TEXT',
+      },
+      {
         name: 'orgid',
         prop: 'orgid',
         dataType: 'PICKUP',

@@ -84,7 +84,7 @@
 
 
     <!--输出实体[SYS_PERMISSION]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_permission-8-4">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_permission-9-4">
         <createTable tableName="IBZPERMISSION">
                 <column name="SYS_PERMISSIONID" remarks="" type="VARCHAR(200)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_PERMISSION_SYS_PERMISSI"/>

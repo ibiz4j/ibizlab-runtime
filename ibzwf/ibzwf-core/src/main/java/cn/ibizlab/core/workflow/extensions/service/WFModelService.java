@@ -3,14 +3,13 @@ package cn.ibizlab.core.workflow.extensions.service;
 import cn.ibizlab.core.workflow.domain.WFProcessDefinition;
 import cn.ibizlab.core.workflow.service.IWFProcessDefinitionService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.flowable.bpmn.model.ExtensionElement;
-import org.flowable.bpmn.model.FlowElement;
+import org.flowable.bpmn.model.*;
 import org.flowable.bpmn.model.Process;
-import org.flowable.bpmn.model.UserTask;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -28,8 +27,8 @@ public class WFModelService
 	private IWFProcessDefinitionService iwfProcessDefinitionService;
 
 	public List<WFProcessDefinition> getDynamicWorkflow(String dynamic, String system,String entity) {
-		return iwfProcessDefinitionService.list(new QueryWrapper<WFProcessDefinition>().
-				likeRight("definitionkey","dyna-"+dynamic+"-"+system+"-"+entity+"-").eq("modelenable",1).orderByDesc("modelversion"));
+		return process(iwfProcessDefinitionService.list(new QueryWrapper<WFProcessDefinition>().
+				likeRight("definitionkey","dyna-"+dynamic+"-"+system+"-"+entity+"-").eq("modelenable",1).orderByDesc("modelversion")));
 	}
 
 	public List<WFProcessDefinition> getWorkflow(String system,String entity) {
@@ -93,5 +92,33 @@ public class WFModelService
 				setting.put(field.getAttributes().get("name").get(0).getValue(),field.getChildElements().get("string").get(0).getElementText());
 		}
 		return setting;
+	}
+
+	/**
+	 * 设置流程启动视图
+	 * @param defs
+	 * @return
+	 */
+	private List<WFProcessDefinition> process(List<WFProcessDefinition> defs) {
+		for (WFProcessDefinition def : defs) {
+			List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery().processDefinitionKey(def.getDefinitionkey()).orderByProcessDefinitionVersion().desc().list();
+			if (ObjectUtils.isEmpty(processDefinitions))
+				return defs;
+			ProcessDefinition lastestwf = processDefinitions.get(0);
+			for (FlowElement element : repositoryService.getBpmnModel(lastestwf.getId()).getMainProcess().getFlowElements()) {
+				if (element instanceof StartEvent) {
+					if (!ObjectUtils.isEmpty(element) && !ObjectUtils.isEmpty(element.getExtensionElements()) && !ObjectUtils.isEmpty(element.getExtensionElements().get("form"))) {
+						for (ExtensionElement prop : element.getExtensionElements().get("form")) {
+							for (String attribute : prop.getAttributes().keySet()) {
+								for (ExtensionAttribute param : prop.getAttributes().get(attribute)) {
+									def.set(param.getName(), param.getValue());
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return defs;
 	}
 }
