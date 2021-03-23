@@ -232,6 +232,24 @@ public class WFCoreResource
 		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.wfdeploybpmns(bpmnfiles));
 	}
 
+	@ApiOperation(value = "前加签任务", tags = {"工作流前加签任务" } ,notes = "前加签任务")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/beforesign")
+	public ResponseEntity<Boolean> beforeSign(@PathVariable("system") String system,@PathVariable("appname") String appname,
+											  @PathVariable("entity") String entity,
+											  @PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
+											  @RequestBody WFTaskWay taskWay) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.beforeSign(system,appname,entity,businessKey,taskId,taskWay));
+	}
+
+	@ApiOperation(value = "后加签任务", tags = {"工作流后加签任务" },  notes = "前加签任务")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/aftersign")
+	public ResponseEntity<Boolean> afterSign(@PathVariable("system") String system,@PathVariable("appname") String appname,
+											 @PathVariable("entity") String entity,
+											 @PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
+											 @RequestBody WFTaskWay taskWay) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.afterSign(system,appname,entity,businessKey,taskId,taskWay));
+	}
+
 	/**
 	 * 将流程表单设置到响应头中
 	 */

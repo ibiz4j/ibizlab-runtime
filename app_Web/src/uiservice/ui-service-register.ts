@@ -48,6 +48,7 @@ export class UIServiceRegister {
         this.allUIService.set('syspost', () => import('@/uiservice/sys-post/sys-post-ui-service'));
         this.allUIService.set('sysuserauth', () => import('@/uiservice/sys-user-auth/sys-user-auth-ui-service'));
         this.allUIService.set('sysdepartment', () => import('@/uiservice/sys-department/sys-department-ui-service'));
+        this.allUIService.set('metadynamicmodel', () => import('@/uiservice/meta-dynamic-model/meta-dynamic-model-ui-service'));
         this.allUIService.set('sysemployee', () => import('@/uiservice/sys-employee/sys-employee-ui-service'));
         this.allUIService.set('paytrade', () => import('@/uiservice/pay-trade/pay-trade-ui-service'));
         this.allUIService.set('msgtemplate', () => import('@/uiservice/msg-template/msg-template-ui-service'));

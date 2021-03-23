@@ -3,6 +3,32 @@
 
 
 
+    <!--输出实体[META_DYNAMICMODEL]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-meta_dynamicmodel-4-1">
+        <createTable tableName="IBZDYNAMICMODEL">
+                <column name="DYNAINSTID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="SYSTEMID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="CONFIGID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_META_DYNAMICMODEL_CONFIGID"/>
+                </column>
+                <column name="CONFIGNAME" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="PDYNAINSTID" remarks="" type="VARCHAR(100)">
+                </column>
+                <column name="MODELFILE" remarks="" type="VARCHAR(1000)">
+                </column>
+                <column name="STATUS" remarks="" type="VARCHAR(60)">
+                </column>
+        </createTable>
+    </changeSet>
 
+
+
+        <!--输出实体[META_DYNAMICMODEL]外键关系 -->
+    <changeSet author="a_A_5d9d78509" id="fk-meta_dynamicmodel-4-2">
+       <addForeignKeyConstraint baseColumnNames="PDYNAINSTID" baseTableName="IBZDYNAMICMODEL" constraintName="DER1N_META_DYNAMICMODEL_META_D" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="CONFIGID" referencedTableName="IBZDYNAMICMODEL" validate="true"/>
+    </changeSet>
 
 </databaseChangeLog>

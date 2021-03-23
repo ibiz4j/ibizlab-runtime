@@ -54,4 +54,13 @@
 
     </select>
 
+
+    <select id="searchUserTask"  parameterType="java.util.Map"  resultType="java.util.Map">
+        select t2.id_ as  id ,t2.execution_id_ as execution from act_ru_identitylink  t1 inner join act_ru_task t2 on t1.task_id_ = t2.id_ where t1.USER_ID_ in
+        <foreach collection="et.userids" item="userid" index="index" open="(" close=")" separator=",">
+            #{userid}
+        </foreach>
+        and t2.PROC_INST_ID_=#{et.processinstanceid}
+    </select>
+
 </mapper>

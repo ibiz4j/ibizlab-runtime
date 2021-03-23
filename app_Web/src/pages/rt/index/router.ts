@@ -277,6 +277,20 @@ const router = new Router({
                     component: () => import('@pages/pay/pay-trade-grid-view/pay-trade-grid-view.vue'),
                 },
                 {
+                    path: 'metadynamicmodels/:metadynamicmodel?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.metadynamicmodel.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/disk/meta-dynamic-model-edit-view/meta-dynamic-model-edit-view.vue'),
+                },
+                {
                     path: 'wfusers/:wfuser?/wfmembers/:wfmember?/editview/:editview?',
                     meta: {
                         caption: 'entities.wfmember.views.editview.caption',
@@ -657,6 +671,34 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/uaa/sys-open-access-grid-view/sys-open-access-grid-view.vue'),
+                },
+                {
+                    path: 'metadynamicmodels/:metadynamicmodel?/dynainsteditview/:dynainsteditview?',
+                    meta: {
+                        caption: 'entities.metadynamicmodel.views.dynainsteditview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                            { pathName: 'dynainsteditview', parameterName: 'dynainsteditview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/disk/meta-dynamicmodeldyna-inst-edit-view/meta-dynamicmodeldyna-inst-edit-view.vue'),
+                },
+                {
+                    path: 'metadynamicmodels/:metadynamicmodel?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.metadynamicmodel.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/disk/meta-dynamic-model-grid-view/meta-dynamic-model-grid-view.vue'),
                 },
                 {
                     path: 'systeams/:systeam?/gridview/:gridview?',
@@ -1976,6 +2018,20 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-role-pickup-view/sys-role-pickup-view.vue'),
                 },
                 {
+                    path: 'metadynamicmodels/:metadynamicmodel?/dynainstgridview/:dynainstgridview?',
+                    meta: {
+                        caption: 'entities.metadynamicmodel.views.dynainstgridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                            { pathName: 'dynainstgridview', parameterName: 'dynainstgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/disk/meta-dynamic-model-dyna-inst-grid-view/meta-dynamic-model-dyna-inst-grid-view.vue'),
+                },
+                {
                     path: 'sysapps/:sysapp?/editview/:editview?',
                     meta: {
                         caption: 'entities.sysapp.views.editview.caption',
@@ -3220,6 +3276,19 @@ const router = new Router({
         component: () => import('@pages/workflow/wfgroup-mpickup-view/wfgroup-mpickup-view.vue'),
     },
     {
+        path: '/metadynamicmodels/:metadynamicmodel?/dynainsteditview/:dynainsteditview?',
+        meta: {
+            caption: 'entities.metadynamicmodel.views.dynainsteditview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                { pathName: 'dynainsteditview', parameterName: 'dynainsteditview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/disk/meta-dynamicmodeldyna-inst-edit-view/meta-dynamicmodeldyna-inst-edit-view.vue'),
+    },
+    {
         path: '/syspermissions/:syspermission?/pickupgridview/:pickupgridview?',
         meta: {
             caption: 'entities.syspermission.views.pickupgridview.caption',
@@ -3449,6 +3518,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/ou/sys-employee-mpickup-view/sys-employee-mpickup-view.vue'),
+    },
+    {
+        path: '/metadynamicmodels/:metadynamicmodel?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.metadynamicmodel.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/disk/meta-dynamic-model-grid-view/meta-dynamic-model-grid-view.vue'),
     },
     {
         path: '/wfgroups/:wfgroup?/pickupview/:pickupview?',
@@ -3774,6 +3856,19 @@ const router = new Router({
         component: () => import('@pages/workflow/wfuser-pickup-grid-view/wfuser-pickup-grid-view.vue'),
     },
     {
+        path: '/metadynamicmodels/:metadynamicmodel?/dynainstgridview/:dynainstgridview?',
+        meta: {
+            caption: 'entities.metadynamicmodel.views.dynainstgridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                { pathName: 'dynainstgridview', parameterName: 'dynainstgridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/disk/meta-dynamic-model-dyna-inst-grid-view/meta-dynamic-model-dyna-inst-grid-view.vue'),
+    },
+    {
         path: '/sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/pickupview/:pickupview?',
         meta: {
             caption: 'entities.sysdepartment.views.pickupview.caption',
@@ -3852,6 +3947,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/task/jobs-info-grid-view/jobs-info-grid-view.vue'),
+    },
+    {
+        path: '/metadynamicmodels/:metadynamicmodel?/editview/:editview?',
+        meta: {
+            caption: 'entities.metadynamicmodel.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/disk/meta-dynamic-model-edit-view/meta-dynamic-model-edit-view.vue'),
     },
     {
         path: '/sysorganizations/:sysorganization?/sysdepartments/:sysdepartment?/sysemployees/:sysemployee?/pickupgridview/:pickupgridview?',

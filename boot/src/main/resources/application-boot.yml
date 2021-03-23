@@ -20,6 +20,12 @@ spring:
         max-wait: 300ms
         max-idle: 16
         min-idle: 8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  resources:
+    static-locations: file:${ibiz.dynamic.publishpath}
   datasource:
     username: root
     password: root
@@ -111,6 +117,8 @@ ribbon:
 ibiz:
   enablePermissionValid: true
   cacheLevel: L2 #(L1)一级本地caffeine缓存;(L2)caffeine缓存+Redis缓存
+  dynamic:
+    publishpath: /app/file/dynamicModel/publicpath
 
 ### jobs
 jobs:

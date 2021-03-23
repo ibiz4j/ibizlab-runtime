@@ -3,6 +3,7 @@ package cn.ibizlab.util.security;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import cn.ibizlab.util.service.AuthenticationUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,7 +27,7 @@ import java.util.*;
 @Component
 public class AuthorizationTokenFilter extends OncePerRequestFilter {
 
-    private final UserDetailsService userDetailsService;
+    private final AuthenticationUserService userDetailsService;
     private final AuthTokenUtil authTokenUtil;
     private final String tokenHeader;
     private Set<String> excludesPattern = new HashSet<String>();
@@ -60,7 +61,6 @@ public class AuthorizationTokenFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-
             if (authTokenUtil.validateToken(authToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

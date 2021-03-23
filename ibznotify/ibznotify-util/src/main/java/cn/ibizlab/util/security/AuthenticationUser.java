@@ -49,6 +49,14 @@ public class AuthenticationUser implements UserDetails
 	 */
 	private String domain;
 	/**
+     * 租户
+     */
+    private String srfdcid;
+    /**
+     * 动态实例标识
+     */
+    private String srfdynainstid;
+	/**
 	 * 部门标识
 	 */
 	private String mdeptid;

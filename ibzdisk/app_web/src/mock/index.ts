@@ -7,4 +7,5 @@ import './login/login';
 import './upload/upload';
 
 // 实体级接口对象
+import './entity/meta-dynamic-models/meta-dynamic-models';
 import './entity/sdfiles/sdfiles';

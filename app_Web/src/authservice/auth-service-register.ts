@@ -48,6 +48,7 @@ export class AuthServiceRegister {
         this.allAuthService.set('syspost', () => import('@/authservice/sys-post/sys-post-auth-service'));
         this.allAuthService.set('sysuserauth', () => import('@/authservice/sys-user-auth/sys-user-auth-auth-service'));
         this.allAuthService.set('sysdepartment', () => import('@/authservice/sys-department/sys-department-auth-service'));
+        this.allAuthService.set('metadynamicmodel', () => import('@/authservice/meta-dynamic-model/meta-dynamic-model-auth-service'));
         this.allAuthService.set('sysemployee', () => import('@/authservice/sys-employee/sys-employee-auth-service'));
         this.allAuthService.set('paytrade', () => import('@/authservice/pay-trade/pay-trade-auth-service'));
         this.allAuthService.set('msgtemplate', () => import('@/authservice/msg-template/msg-template-auth-service'));

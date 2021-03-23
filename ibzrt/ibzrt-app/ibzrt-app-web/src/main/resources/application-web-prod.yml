@@ -43,6 +43,10 @@ zuul:
       path: /sysdepartments/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}
       stripPrefix: false
+    meta_dynamicmodel:
+      path: /metadynamicmodels/**
+      serviceId: ${ibiz.ref.service.ibzdisk-api:ibzdisk-api}
+      stripPrefix: false
     sys_emp:
       path: /sysemployees/**
       serviceId: ${ibiz.ref.service.ibzou-api:ibzou-api}

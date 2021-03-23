@@ -36,6 +36,20 @@ const router = new Router({
             component: () => import('@pages/disk/sdindex-view/sdindex-view.vue'),
             children: [
                 {
+                    path: 'metadynamicmodels/:metadynamicmodel?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.metadynamicmodel.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'sdindexview', parameterName: 'sdindexview' },
+                            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/lite/meta-dynamic-model-edit-view/meta-dynamic-model-edit-view.vue'),
+                },
+                {
                     path: 'sdfiles/:sdfile?/editview/:editview?',
                     meta: {
                         caption: 'entities.sdfile.views.editview.caption',
@@ -48,6 +62,48 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/disk/sdfile-edit-view/sdfile-edit-view.vue'),
+                },
+                {
+                    path: 'metadynamicmodels/:metadynamicmodel?/dynainstgridview/:dynainstgridview?',
+                    meta: {
+                        caption: 'entities.metadynamicmodel.views.dynainstgridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'sdindexview', parameterName: 'sdindexview' },
+                            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                            { pathName: 'dynainstgridview', parameterName: 'dynainstgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/lite/meta-dynamic-model-dyna-inst-grid-view/meta-dynamic-model-dyna-inst-grid-view.vue'),
+                },
+                {
+                    path: 'metadynamicmodels/:metadynamicmodel?/dynainsteditview/:dynainsteditview?',
+                    meta: {
+                        caption: 'entities.metadynamicmodel.views.dynainsteditview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'sdindexview', parameterName: 'sdindexview' },
+                            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                            { pathName: 'dynainsteditview', parameterName: 'dynainsteditview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/lite/meta-dynamic-model-dyna-inst-edit-view/meta-dynamic-model-dyna-inst-edit-view.vue'),
+                },
+                {
+                    path: 'metadynamicmodels/:metadynamicmodel?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.metadynamicmodel.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'sdindexview', parameterName: 'sdindexview' },
+                            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/lite/meta-dynamic-model-grid-view/meta-dynamic-model-grid-view.vue'),
                 },
                 {
                     path: 'sdfiles/:sdfile?/gridview/:gridview?',
@@ -91,6 +147,58 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/disk/sdfile-grid-view/sdfile-grid-view.vue'),
+    },
+    {
+        path: '/metadynamicmodels/:metadynamicmodel?/dynainsteditview/:dynainsteditview?',
+        meta: {
+            caption: 'entities.metadynamicmodel.views.dynainsteditview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                { pathName: 'dynainsteditview', parameterName: 'dynainsteditview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/lite/meta-dynamic-model-dyna-inst-edit-view/meta-dynamic-model-dyna-inst-edit-view.vue'),
+    },
+    {
+        path: '/metadynamicmodels/:metadynamicmodel?/gridview/:gridview?',
+        meta: {
+            caption: 'entities.metadynamicmodel.views.gridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/lite/meta-dynamic-model-grid-view/meta-dynamic-model-grid-view.vue'),
+    },
+    {
+        path: '/metadynamicmodels/:metadynamicmodel?/dynainstgridview/:dynainstgridview?',
+        meta: {
+            caption: 'entities.metadynamicmodel.views.dynainstgridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                { pathName: 'dynainstgridview', parameterName: 'dynainstgridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/lite/meta-dynamic-model-dyna-inst-grid-view/meta-dynamic-model-dyna-inst-grid-view.vue'),
+    },
+    {
+        path: '/metadynamicmodels/:metadynamicmodel?/editview/:editview?',
+        meta: {
+            caption: 'entities.metadynamicmodel.views.editview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+                { pathName: 'editview', parameterName: 'editview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/lite/meta-dynamic-model-edit-view/meta-dynamic-model-edit-view.vue'),
     },
         ...globalRoutes,
         {

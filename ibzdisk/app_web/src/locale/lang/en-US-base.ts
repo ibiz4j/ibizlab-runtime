@@ -1,3 +1,4 @@
+import metadynamicmodel_en_US from '@locale/lanres/entities/meta-dynamic-model/meta-dynamic-model_en_US';
 import sdfile_en_US from '@locale/lanres/entities/sdfile/sdfile_en_US';
 import components_en_US from '@locale/lanres/components/components_en_US';
 import codelist_en_US from '@locale/lanres/codelist/codelist_en_US';
@@ -128,6 +129,7 @@ function getAppLocale(){
             menus: {
                 sdindexview: {
                     menuitem1: commonLogic.appcommonhandle("文件",null),
+                    menuitem2: commonLogic.appcommonhandle("动态模型",null),
                 },
             },
             formpage:{
@@ -223,6 +225,7 @@ function getAppLocale(){
             },
         },
         entities: {
+            metadynamicmodel: metadynamicmodel_en_US(),
             sdfile: sdfile_en_US(),
         },
         components: components_en_US(),

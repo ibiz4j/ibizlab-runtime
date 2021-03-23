@@ -28,6 +28,10 @@ zuul:
       path: /jobs_registries/**
       serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
       stripPrefix: false
+    meta_dynamicmodel:
+      path: /meta_dynamicmodels/**
+      serviceId: ${ibiz.ref.service.ibzdisk-api:ibzdisk-api}
+      stripPrefix: false
     msg_body:
       path: /msg_bodies/**
       serviceId: ${ibiz.ref.service.ibznotify-api:ibznotify-api}

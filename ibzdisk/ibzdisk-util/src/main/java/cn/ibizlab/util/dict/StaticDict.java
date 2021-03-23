@@ -2505,6 +2505,27 @@ public class StaticDict {
 
 
     /**
+     * 代码表[动态模型导入状态]
+     */
+    @Getter
+    public enum DynamicModelStatus {
+        ITEM_0("0","未激活"),
+        ITEM_1("1","已激活");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        DynamicModelStatus(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
      * 代码表[数据同步方向]
      */
     @Getter

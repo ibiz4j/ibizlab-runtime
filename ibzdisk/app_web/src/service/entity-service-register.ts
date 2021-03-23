@@ -39,7 +39,8 @@ export class EntityServiceRegister {
      * @memberof EntityServiceRegister
      */
     protected init(): void {
-                this.allEntityService.set('sdfile', () => import('@/service/sdfile/sdfile-service'));
+                this.allEntityService.set('metadynamicmodel', () => import('@/service/meta-dynamic-model/meta-dynamic-model-service'));
+        this.allEntityService.set('sdfile', () => import('@/service/sdfile/sdfile-service'));
     }
 
     /**

@@ -1,3 +1,4 @@
+import metadynamicmodel_zh_CN from '@locale/lanres/entities/meta-dynamic-model/meta-dynamic-model_zh_CN';
 import sdfile_zh_CN from '@locale/lanres/entities/sdfile/sdfile_zh_CN';
 import components_zh_CN from '@locale/lanres/components/components_zh_CN';
 import codelist_zh_CN from '@locale/lanres/codelist/codelist_zh_CN';
@@ -128,6 +129,7 @@ function getAppLocale(){
             menus: {
                 sdindexview: {
                     menuitem1: commonLogic.appcommonhandle("文件",null),
+                    menuitem2: commonLogic.appcommonhandle("动态模型",null),
                 },
             },
             formpage:{
@@ -222,6 +224,7 @@ function getAppLocale(){
             },
         },
         entities: {
+            metadynamicmodel: metadynamicmodel_zh_CN(),
             sdfile: sdfile_zh_CN(),
         },
         components: components_zh_CN(),

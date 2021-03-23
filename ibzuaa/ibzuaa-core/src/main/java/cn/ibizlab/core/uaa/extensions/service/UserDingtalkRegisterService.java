@@ -61,8 +61,14 @@ public class UserDingtalkRegisterService {
         if((sysOpenAccess==null|| (sysOpenAccess.getDisabled()!=null && sysOpenAccess.getDisabled()==1))&&throwEx)
             throw new BadRequestAlertException("获取接入配置失败","UserDingtalkRegisterService","");
 
-        String accessToken =dingTalkTokenService.getAccessToken(sysOpenAccess.getAccessKey(),sysOpenAccess.getSecretKey());
-        sysOpenAccess.setAccessToken(accessToken);
+        try {
+            String accessToken =dingTalkTokenService.getAccessToken(sysOpenAccess.getAccessKey(),sysOpenAccess.getSecretKey());
+            sysOpenAccess.setAccessToken(accessToken);
+        }
+        catch (Exception ex)
+        {
+
+        }
         return sysOpenAccess;
     }
 
@@ -93,7 +99,11 @@ public class UserDingtalkRegisterService {
         if(user==null)
         {
             //查不到情况下到auth表查真实userId
-            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"dingtalk").eq(SysUserAuth::getIdentifier, userId),false);
+            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,openAccess.getId()).eq(SysUserAuth::getIdentifier, userId),false);
+
+            if(userAuth==null)
+                userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"dingtalk").eq(SysUserAuth::getIdentifier, userId),false);
+
             // 该钉钉用户注册过账号，登录系统
             if (userAuth!=null) {
                 user = sysUserService.getById(userAuth.getUserid());
@@ -115,8 +125,10 @@ public class UserDingtalkRegisterService {
      */
     public JSONObject getUserBySnsToken(String id,String requestAuthCode) {
         JSONObject returnObj = new JSONObject();
+        final String accessid = StringUtils.isEmpty(id)?"dingtalk":id;
+        SysOpenAccess openAccess=sysOpenAccessService.getOne(Wrappers.<SysOpenAccess>lambdaQuery().eq(SysOpenAccess::getOpenType,"dingtalk").
+                and(wrapper -> wrapper.eq(SysOpenAccess::getAccessKey,accessid).or().eq(SysOpenAccess::getId,accessid)),false);
 
-        SysOpenAccess openAccess = getOpenAccess(id);
         if (openAccess==null || (openAccess.getDisabled()!=null && openAccess.getDisabled()==1))
             throw new BadRequestAlertException("未找到配置", "UserDingtalkRegisterService", "");
 
@@ -134,9 +146,14 @@ public class UserDingtalkRegisterService {
             returnObj.put("openid", response.getUserInfo().getOpenid());
             returnObj.put("nickname", response.getUserInfo().getNick());
             returnObj.put("unionid", response.getUserInfo().getUnionid());
-            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"dingtalk")
+            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,openAccess.getId())
                     .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, response.getUserInfo().getOpenid()).or().eq(SysUserAuth::getIdentifier, response.getUserInfo().getUnionid())
                     ),false);
+
+            if(userAuth==null)
+                userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"dingtalk")
+                        .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, response.getUserInfo().getOpenid()).or().eq(SysUserAuth::getIdentifier, response.getUserInfo().getUnionid())
+                        ),false);
 
             SysUser user = null;
             // 该钉钉用户注册过账号，登录系统

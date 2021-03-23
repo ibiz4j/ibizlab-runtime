@@ -109,7 +109,7 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
     @Override
     @Transactional
     public JobsInfo execute(JobsInfo et) {
-        //自定义代码
+        et = jobsInfoFeignClient.execute(et.getId(), et);
         return et;
     }
 

@@ -19,4 +19,5 @@ public interface WFCoreMapper {
 
     List<WFProcessNode> searchMyTaskCnt(@Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
 
+    List<Map> searchUserTask(@Param("et")Map param) ;
 }

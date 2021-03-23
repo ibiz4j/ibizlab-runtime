@@ -35,21 +35,14 @@
 </i-col>
 <i-col v-show="detailsModel.identity_type.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='identity_type' :itemRules="this.rules().identity_type" class='' :caption="$t('entities.sysuserauth.main_form.details.identity_type')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.identity_type.error" :isEmptyCaption="false" labelPos="LEFT">
-    
- <dropdown-list 
-    v-model="data.identity_type" 
-    :data="data" 
-    :context="context"
-    :viewparams="viewparams"
-    :formState="formState" 
-    :localContext ='{ }' 
-    :localParam ='{ }' 
+    <input-box 
+    v-model="data.identity_type"  
+    @enter="onEnter($event)"  
+     unit=""  
     :disabled="detailsModel.identity_type.disabled" 
-    valueType="string"
-    tag='UaaOpenAccessType' 
-    codelistType='STATIC'
-    placeholder='请选择...' style="">
- </dropdown-list>
+    type='text' 
+    style="">
+</input-box>
 
 </app-form-item>
 

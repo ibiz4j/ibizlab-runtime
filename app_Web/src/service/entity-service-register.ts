@@ -48,6 +48,7 @@ export class EntityServiceRegister {
         this.allEntityService.set('syspost', () => import('@/service/sys-post/sys-post-service'));
         this.allEntityService.set('sysuserauth', () => import('@/service/sys-user-auth/sys-user-auth-service'));
         this.allEntityService.set('sysdepartment', () => import('@/service/sys-department/sys-department-service'));
+        this.allEntityService.set('metadynamicmodel', () => import('@/service/meta-dynamic-model/meta-dynamic-model-service'));
         this.allEntityService.set('sysemployee', () => import('@/service/sys-employee/sys-employee-service'));
         this.allEntityService.set('paytrade', () => import('@/service/pay-trade/pay-trade-service'));
         this.allEntityService.set('msgtemplate', () => import('@/service/msg-template/msg-template-service'));

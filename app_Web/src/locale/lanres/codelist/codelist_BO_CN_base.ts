@@ -9,11 +9,14 @@ function getLocaleResourceBase(){
           "dingtalk-msg": commonLogic.appcommonhandle("钉钉通知",null),
           "empty": commonLogic.appcommonhandle("",null)
       },
-      UaaOpenAccessType: {
-          "aliyun": commonLogic.appcommonhandle("阿里云",null),
-          "wechat": commonLogic.appcommonhandle("微信开放平台",null),
-          "qq": commonLogic.appcommonhandle("QQ互联",null),
-          "dingtalk": commonLogic.appcommonhandle("钉钉开放平台",null),
+      DynamicModelStatus: {
+          "0": commonLogic.appcommonhandle("未激活",null),
+          "1": commonLogic.appcommonhandle("已激活",null),
+          "empty": commonLogic.appcommonhandle("",null)
+      },
+      YesNo: {
+          "1": commonLogic.appcommonhandle("是",null),
+          "0": commonLogic.appcommonhandle("否",null),
           "empty": commonLogic.appcommonhandle("",null)
       },
       PayOpenAccessType: {
@@ -21,11 +24,6 @@ function getLocaleResourceBase(){
           "wechat": commonLogic.appcommonhandle("微信开放平台",null),
           "qq": commonLogic.appcommonhandle("QQ互联",null),
           "dingtalk": commonLogic.appcommonhandle("钉钉开放平台",null),
-          "empty": commonLogic.appcommonhandle("",null)
-      },
-      YesNo: {
-          "1": commonLogic.appcommonhandle("是",null),
-          "0": commonLogic.appcommonhandle("否",null),
           "empty": commonLogic.appcommonhandle("",null)
       },
       CLIBZSex: {
@@ -39,13 +37,6 @@ function getLocaleResourceBase(){
           "1": commonLogic.appcommonhandle("DISABLED",null),
           "empty": commonLogic.appcommonhandle("",null)
       },
-      NotifyOpenAccessType: {
-          "aliyun": commonLogic.appcommonhandle("阿里云",null),
-          "wechat": commonLogic.appcommonhandle("微信开放平台",null),
-          "qq": commonLogic.appcommonhandle("QQ互联",null),
-          "dingtalk": commonLogic.appcommonhandle("钉钉开放平台",null),
-          "empty": commonLogic.appcommonhandle("",null)
-      },
       CLAuthCode: {
           "200": commonLogic.appcommonhandle("成功",null),
           "400": commonLogic.appcommonhandle("用户不存在",null),
@@ -57,6 +48,20 @@ function getLocaleResourceBase(){
       AppType: {
           "INNER": commonLogic.appcommonhandle("内置应用",null),
           "THIRD-PARTY": commonLogic.appcommonhandle("第三方应用",null),
+          "empty": commonLogic.appcommonhandle("",null)
+      },
+      NotifyOpenAccessType: {
+          "aliyun": commonLogic.appcommonhandle("阿里云",null),
+          "wechat": commonLogic.appcommonhandle("微信开放平台",null),
+          "qq": commonLogic.appcommonhandle("QQ互联",null),
+          "dingtalk": commonLogic.appcommonhandle("钉钉开放平台",null),
+          "empty": commonLogic.appcommonhandle("",null)
+      },
+      UaaOpenAccessType: {
+          "aliyun": commonLogic.appcommonhandle("阿里云",null),
+          "wechat": commonLogic.appcommonhandle("微信开放平台",null),
+          "qq": commonLogic.appcommonhandle("QQ互联",null),
+          "dingtalk": commonLogic.appcommonhandle("钉钉开放平台",null),
           "empty": commonLogic.appcommonhandle("",null)
       },
   };

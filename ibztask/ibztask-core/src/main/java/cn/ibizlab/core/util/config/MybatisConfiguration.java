@@ -11,6 +11,7 @@ import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Properties;
 
 /**
@@ -19,7 +20,6 @@ import java.util.Properties;
 @Configuration
 @MapperScan(value="cn.ibizlab.core.*.mapper",nameGenerator = UniqueNameGenerator.class)
 public class MybatisConfiguration {
-
     /**
      * mybatis适配多数据库
      * @return
@@ -53,5 +53,6 @@ public class MybatisConfiguration {
         paginationInterceptor.setCountSqlParser(new JsqlParserCountOptimize(true));
         return paginationInterceptor;
     }
+    
 
 }

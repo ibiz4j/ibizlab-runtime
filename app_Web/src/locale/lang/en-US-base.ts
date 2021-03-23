@@ -7,6 +7,7 @@ import wfmember_en_US from '@locale/lanres/entities/wfmember/wfmember_en_US';
 import syspost_en_US from '@locale/lanres/entities/sys-post/sys-post_en_US';
 import sysuserauth_en_US from '@locale/lanres/entities/sys-user-auth/sys-user-auth_en_US';
 import sysdepartment_en_US from '@locale/lanres/entities/sys-department/sys-department_en_US';
+import metadynamicmodel_en_US from '@locale/lanres/entities/meta-dynamic-model/meta-dynamic-model_en_US';
 import sysemployee_en_US from '@locale/lanres/entities/sys-employee/sys-employee_en_US';
 import paytrade_en_US from '@locale/lanres/entities/pay-trade/pay-trade_en_US';
 import msgtemplate_en_US from '@locale/lanres/entities/msg-template/msg-template_en_US';
@@ -187,6 +188,8 @@ function getAppLocale(){
                     menuitem28: commonLogic.appcommonhandle("支付管理",null),
                     menuitem29: commonLogic.appcommonhandle("支付交易",null),
                     menuitem30: commonLogic.appcommonhandle("支付平台",null),
+                    menuitem31: commonLogic.appcommonhandle("存储管理",null),
+                    menuitem32: commonLogic.appcommonhandle("动态模型",null),
                 },
             },
             formpage:{
@@ -291,6 +294,7 @@ function getAppLocale(){
             syspost: syspost_en_US(),
             sysuserauth: sysuserauth_en_US(),
             sysdepartment: sysdepartment_en_US(),
+            metadynamicmodel: metadynamicmodel_en_US(),
             sysemployee: sysemployee_en_US(),
             paytrade: paytrade_en_US(),
             msgtemplate: msgtemplate_en_US(),

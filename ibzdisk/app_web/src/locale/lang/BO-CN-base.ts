@@ -1,3 +1,4 @@
+import metadynamicmodel_BO_CN from '@locale/lanres/entities/meta-dynamic-model/meta-dynamic-model_BO_CN';
 import sdfile_BO_CN from '@locale/lanres/entities/sdfile/sdfile_BO_CN';
 import components_BO_CN from '@locale/lanres/components/components_BO_CN';
 import codelist_BO_CN from '@locale/lanres/codelist/codelist_BO_CN';
@@ -128,6 +129,7 @@ function getAppLocale(){
             menus: {
                 sdindexview: {
                     menuitem1: commonLogic.appcommonhandle("文件",null),
+                    menuitem2: commonLogic.appcommonhandle("动态模型",null),
                 },
             },
             formpage:{
@@ -222,6 +224,7 @@ function getAppLocale(){
             },
         },
         entities: {
+            metadynamicmodel: metadynamicmodel_BO_CN(),
             sdfile: sdfile_BO_CN(),
         },
         components: components_BO_CN(),

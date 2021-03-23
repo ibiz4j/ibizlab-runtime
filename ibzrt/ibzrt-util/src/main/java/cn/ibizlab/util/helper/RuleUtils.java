@@ -1,6 +1,5 @@
 package cn.ibizlab.util.helper;
 
-
 import cn.ibizlab.util.domain.EntityBase;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -312,6 +311,13 @@ public class RuleUtils
 	}
 	public static boolean ge(Object exp, Object finalObject)
 	{
+		if(ObjectUtils.isEmpty(exp)){
+			return false;
+		}
+		if(ObjectUtils.isEmpty(finalObject)){
+			return false;
+		}
+
 		return (!(lt(exp, finalObject)));
 	}
 
@@ -321,6 +327,12 @@ public class RuleUtils
 	}
 	public static boolean le(Object exp, Object finalObject)
 	{
+		if(ObjectUtils.isEmpty(exp)){
+			return false;
+		}
+		if(ObjectUtils.isEmpty(finalObject)){
+			return false;
+		}
 		return (!(gt(exp, finalObject)));
 	}
 
@@ -330,6 +342,15 @@ public class RuleUtils
 	}
 	public static boolean notin(Object expObj, Object finalObject)
 	{
+
+		if (ObjectUtils.isEmpty(finalObject))
+			return true;
+		if (ObjectUtils.isEmpty(expObj))
+			return false;
+		String tvs=expObj.toString().trim();
+		if(StringUtils.isEmpty(tvs)){
+			return false;
+		}
 		return (!in(expObj,finalObject));
 	}
 	public static boolean in(Object expObj, Object object, String members)
@@ -340,7 +361,8 @@ public class RuleUtils
 	{
         if (ObjectUtils.isEmpty(finalObject))
 			return false;
-
+		if (ObjectUtils.isEmpty(expObj))
+			return false;
 		String tvs=expObj.toString().trim();
 		if(StringUtils.isEmpty(tvs)){
 			return false;
@@ -397,6 +419,16 @@ public class RuleUtils
 	}
 	public static boolean notmatchor(Object expObj, Object obj)
 	{
+		if(ObjectUtils.isEmpty(obj)){
+			return true;
+		}
+		if(ObjectUtils.isEmpty(expObj)){
+			return false;
+		}
+		String exp=expObj.toString().trim();
+		if(StringUtils.isEmpty(exp)){
+			return false;
+		}
 		return (!matchor(expObj,obj));
 	}
 
@@ -406,6 +438,16 @@ public class RuleUtils
 	}
 	public static boolean notmatchand(Object expObj, Object finalObject)
 	{
+		if(ObjectUtils.isEmpty(finalObject)){
+			return true;
+		}
+		if(ObjectUtils.isEmpty(expObj)){
+			return false;
+		}
+		String exp=expObj.toString().trim();
+		if(StringUtils.isEmpty(exp)){
+			return false;
+		}
 		return (!matchand(expObj,finalObject));
 	}
 
@@ -415,8 +457,11 @@ public class RuleUtils
 	}
 	public static boolean matchor(Object expObj, Object obj)
 	{
-		if(obj==null){
+		if(ObjectUtils.isEmpty(obj)){
             return false;
+		}
+		if(ObjectUtils.isEmpty(expObj)){
+			return false;
 		}
 		String exp=expObj.toString().trim();
 		if(StringUtils.isEmpty(exp)){
@@ -438,8 +483,11 @@ public class RuleUtils
 
 	public static boolean leftmatchor(Object expObj, Object obj)
 	{
-		if(obj==null){
-            return false;
+		if(ObjectUtils.isEmpty(obj)){
+			return false;
+		}
+		if(ObjectUtils.isEmpty(expObj)){
+			return false;
 		}
 		String exp=expObj.toString().trim();
 		if(StringUtils.isEmpty(exp)){
@@ -462,8 +510,11 @@ public class RuleUtils
 
 	public static boolean rightmatchor(Object expObj, Object obj)
 	{
-		if(obj==null){
-            return false;
+		if(ObjectUtils.isEmpty(obj)){
+			return false;
+		}
+		if(ObjectUtils.isEmpty(expObj)){
+			return false;
 		}
 		String exp=expObj.toString().trim();
 		if(StringUtils.isEmpty(exp)){
@@ -490,10 +541,10 @@ public class RuleUtils
 	}
 	public static boolean matchand(Object expObj,Object obj)
 	{
-		if(obj==null){
-            return false;
+		if(ObjectUtils.isEmpty(obj)){
+			return false;
 		}
-		if(expObj==null){
+		if(ObjectUtils.isEmpty(expObj)){
 			return false;
 		}
 		String exp=expObj.toString().trim();
@@ -579,5 +630,57 @@ public class RuleUtils
 			}
 		}
 		return acts;
+	}
+
+
+	public static boolean inc2s(String tvs, Object finalObject)
+	{
+		if (ObjectUtils.isEmpty(finalObject))
+			return false;
+
+		if(StringUtils.isEmpty(tvs))
+			return false;
+
+		if (finalObject instanceof String)
+		{
+			tvs="s:"+tvs;
+		}
+		else
+			return false;
+
+		List acts = parseTvs(tvs);
+
+
+		for (Iterator localIterator = acts.iterator(); localIterator.hasNext();)
+		{
+			Object act = localIterator.next();
+			if (equal(c2s(act.toString()),c2s(finalObject.toString())))
+				return true;
+		}
+
+		return false;
+	}
+
+	public static String c2s(String str)
+	{
+		if(str==null)
+			return null;
+		if(str.length()<300)
+		{
+			str=str.trim();//１２３４５６７８９０（）【】〔2018〕
+			str=str.replace("１","1").replace("２","2").replace("３","3").replace("４","4").
+					replace("５","5").replace("６","6").replace("７","7")
+					.replace("８","8").replace("９","9").replace("０","0")
+					.replace("（","〔").replace("）","〕")
+					.replace("(","〔").replace(")","〕")
+					.replace("【","〔").replace("】","〕")
+					.replace("[","〔").replace("]","〕");
+		}
+		return str;
+	}
+
+	public static boolean notinc2s(String tvs, Object finalObject)
+	{
+		return (!inc2s(tvs,finalObject));
 	}
 }

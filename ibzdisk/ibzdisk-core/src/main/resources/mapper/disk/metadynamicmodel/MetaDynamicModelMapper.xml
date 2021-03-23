@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper	namespace="cn.ibizlab.core.disk.mapper.MetaDynamicModelMapper">
+
+    <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
+	<select id="selectById"  resultMap="MetaDynamicModelResultMap" databaseId="mysql">
+        <![CDATA[select t1.* from (SELECT t1.`CONFIGID`, t1.`CONFIGNAME`, t1.`DYNAINSTID`, t1.`MODELFILE`, t1.`PDYNAINSTID`, t1.`STATUS`, t1.`SYSTEMID` FROM `IBZDYNAMICMODEL` t1  ) t1 where configid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="MetaDynamicModelResultMap" databaseId="oracle">
+        <![CDATA[select t1.* from (SELECT t1.CONFIGID, t1.CONFIGNAME, t1.DYNAINSTID, t1.MODELFILE, t1.PDYNAINSTID, t1.STATUS, t1.SYSTEMID FROM IBZDYNAMICMODEL t1  ) t1 where configid=#{id}]]>
+    </select>
+	<select id="selectById"  resultMap="MetaDynamicModelResultMap" databaseId="postgresql">
+        <![CDATA[select t1.* from (SELECT t1.CONFIGID, t1.CONFIGNAME, t1.DYNAINSTID, t1.MODELFILE, t1.PDYNAINSTID, t1.STATUS, t1.SYSTEMID FROM IBZDYNAMICMODEL t1  ) t1 where configid=#{id}]]>
+    </select>
+
+    <!--通过mybatis将查询结果注入到entity中,通过配置autoMapping="true"由mybatis自动处理映射关系 -->
+    <resultMap id="MetaDynamicModelResultMap" type="cn.ibizlab.core.disk.domain.MetaDynamicModel" autoMapping="true">
+		<id property="configid" column="configid" /><!--主键字段映射-->
+		<result property="pdynainstid" column="pdynainstid" />
+            
+		
+		<!--通过mybatis自动注入关系属性[主实体]，fetchType="lazy"为懒加载配置 -->
+		<association property="pdynamicinstid" javaType="cn.ibizlab.core.disk.domain.MetaDynamicModel" column="pdynainstid" select="cn.ibizlab.core.disk.mapper.MetaDynamicModelMapper.selectById" fetchType="lazy"></association>
+    </resultMap>
+
+	<!--关系实体暴露select方法供主实体通过外键查询关系实体数据[实体关系名称:DER1N_META_DYNAMICMODEL_META_DYNAMICMODEL_PDYNAINSTID] -->
+	 <select id="selectByPdynainstid" resultMap="MetaDynamicModelResultMap">
+         select t1.* from (
+                <include refid="Default" />
+			 ) t1
+			 where  pdynainstid=#{configid}
+     </select>
+
+    <!--数据集合[Default]-->
+	 <select id="searchDefault"  parameterType="cn.ibizlab.core.disk.filter.MetaDynamicModelSearchContext"  resultMap="MetaDynamicModelResultMap">
+         select t1.* from (
+                <include refid="Default" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据集合[DynaInst]-->
+	 <select id="searchDynaInst"  parameterType="cn.ibizlab.core.disk.filter.MetaDynamicModelSearchContext"  resultMap="MetaDynamicModelResultMap">
+         select t1.* from (
+                <include refid="DynaInst" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CONFIGID`, t1.`CONFIGNAME`, t1.`DYNAINSTID`, t1.`MODELFILE`, t1.`PDYNAINSTID`, t1.`STATUS`, t1.`SYSTEMID` FROM `IBZDYNAMICMODEL` t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="oracle">
+		<![CDATA[ SELECT t1.CONFIGID, t1.CONFIGNAME, t1.DYNAINSTID, t1.MODELFILE, t1.PDYNAINSTID, t1.STATUS, t1.SYSTEMID FROM IBZDYNAMICMODEL t1  
+			]]>
+    </sql>
+    <!--数据查询[Default]-->
+    <sql id="Default" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CONFIGID, t1.CONFIGNAME, t1.DYNAINSTID, t1.MODELFILE, t1.PDYNAINSTID, t1.STATUS, t1.SYSTEMID FROM IBZDYNAMICMODEL t1  
+			]]>
+    </sql>
+    <!--数据查询[DynaInst]-->
+    <sql id="DynaInst" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CONFIGID`, t1.`CONFIGNAME`, t1.`DYNAINSTID`, t1.`MODELFILE`, t1.`PDYNAINSTID`, t1.`STATUS`, t1.`SYSTEMID` FROM `IBZDYNAMICMODEL` t1  
+					 WHERE 	( t1.`PDYNAINSTID` IS NULL )
+			]]>
+    </sql>
+    <!--数据查询[DynaInst]-->
+    <sql id="DynaInst" databaseId="oracle">
+		<![CDATA[ SELECT t1.CONFIGID, t1.CONFIGNAME, t1.DYNAINSTID, t1.MODELFILE, t1.PDYNAINSTID, t1.STATUS, t1.SYSTEMID FROM IBZDYNAMICMODEL t1  
+					 WHERE 	( t1.PDYNAINSTID IS NULL )
+			]]>
+    </sql>
+    <!--数据查询[DynaInst]-->
+    <sql id="DynaInst" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CONFIGID, t1.CONFIGNAME, t1.DYNAINSTID, t1.MODELFILE, t1.PDYNAINSTID, t1.STATUS, t1.SYSTEMID FROM IBZDYNAMICMODEL t1  
+					 WHERE 	( t1.PDYNAINSTID IS NULL )
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CONFIGID`, t1.`CONFIGNAME`, t1.`DYNAINSTID`, t1.`MODELFILE`, t1.`PDYNAINSTID`, t1.`STATUS`, t1.`SYSTEMID` FROM `IBZDYNAMICMODEL` t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="oracle">
+		<![CDATA[ SELECT t1.CONFIGID, t1.CONFIGNAME, t1.DYNAINSTID, t1.MODELFILE, t1.PDYNAINSTID, t1.STATUS, t1.SYSTEMID FROM IBZDYNAMICMODEL t1  
+			]]>
+    </sql>
+    <!--数据查询[View]-->
+    <sql id="View" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CONFIGID, t1.CONFIGNAME, t1.DYNAINSTID, t1.MODELFILE, t1.PDYNAINSTID, t1.STATUS, t1.SYSTEMID FROM IBZDYNAMICMODEL t1  
+			]]>
+    </sql>
+</mapper>
+

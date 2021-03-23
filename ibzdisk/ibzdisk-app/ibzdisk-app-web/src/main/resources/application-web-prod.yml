@@ -7,6 +7,10 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
+    meta_dynamicmodel:
+      path: /metadynamicmodels/**
+      serviceId: ${ibiz.ref.service.ibzdisk-api:ibzdisk-api}
+      stripPrefix: false
     sd_file:
       path: /sdfiles/**
       serviceId: ${ibiz.ref.service.ibzdisk-api:ibzdisk-api}

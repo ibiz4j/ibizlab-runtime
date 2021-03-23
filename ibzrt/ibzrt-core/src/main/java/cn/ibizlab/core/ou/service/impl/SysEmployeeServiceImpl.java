@@ -109,7 +109,7 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
     @Override
     @Transactional
     public SysEmployee initPwd(SysEmployee et) {
-        //自定义代码
+        et = sysEmployeeFeignClient.initPwd(et.getUserid(), et);
         return et;
     }
 

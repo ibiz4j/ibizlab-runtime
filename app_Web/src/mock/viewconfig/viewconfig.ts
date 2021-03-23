@@ -503,6 +503,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "SysOrganizationOptionView",
             "viewtag": "915900ff6a784bf46e91a9a6aec79cf0"
         },
+        "meta_dynamicmodeldynainsteditview": {
+            "title": "动态模型编辑视图",
+            "caption": "动态模型",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "disk",
+            "viewname": "META_DYNAMICMODELDynaInstEditView",
+            "viewtag": "92d51d41db51a671793ee8dc8876f9e9"
+        },
         "syspermissionpickupgridview": {
             "title": "权限表选择表格视图",
             "caption": "权限/资源",
@@ -582,6 +590,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "ou",
             "viewname": "SysEmployeeMPickupView",
             "viewtag": "af7290279f8b7645020401c1beb9269e"
+        },
+        "metadynamicmodelgridview": {
+            "title": "动态模型",
+            "caption": "动态模型",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "disk",
+            "viewname": "MetaDynamicModelGridView",
+            "viewtag": "af9cfc34d957186380a012e322abff0c"
         },
         "wfgrouppickupview": {
             "title": "角色/用户组数据选择视图",
@@ -663,6 +679,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "WFUserPickupGridView",
             "viewtag": "c9c73c8d2e61bd29a304622f3d39b522"
         },
+        "metadynamicmodeldynainstgridview": {
+            "title": "动态模型表格视图",
+            "caption": "动态模型表格视图",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "disk",
+            "viewname": "MetaDynamicModelDynaInstGridView",
+            "viewtag": "cec3236f5a1f742f9b91f313506ccc6c"
+        },
         "sysdepartmentpickupview": {
             "title": "部门选择视图",
             "caption": "部门",
@@ -694,6 +718,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "task",
             "viewname": "JobsInfoGridView",
             "viewtag": "e4856779577562e9880855e6c66d63e5"
+        },
+        "metadynamicmodeleditview": {
+            "title": "动态模型编辑视图",
+            "caption": "动态模型",
+            "viewtype": "DEEDITVIEW",
+            "viewmodule": "disk",
+            "viewname": "MetaDynamicModelEditView",
+            "viewtag": "e8892afaebe9a899e5d528d5b55d3cc5"
         },
         "sysemployeepickupgridview": {
             "title": "人员选择表格视图",

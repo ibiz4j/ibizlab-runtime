@@ -7,6 +7,7 @@ import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
 import syspost_zh_CN from '@locale/lanres/entities/sys-post/sys-post_zh_CN';
 import sysuserauth_zh_CN from '@locale/lanres/entities/sys-user-auth/sys-user-auth_zh_CN';
 import sysdepartment_zh_CN from '@locale/lanres/entities/sys-department/sys-department_zh_CN';
+import metadynamicmodel_zh_CN from '@locale/lanres/entities/meta-dynamic-model/meta-dynamic-model_zh_CN';
 import sysemployee_zh_CN from '@locale/lanres/entities/sys-employee/sys-employee_zh_CN';
 import paytrade_zh_CN from '@locale/lanres/entities/pay-trade/pay-trade_zh_CN';
 import msgtemplate_zh_CN from '@locale/lanres/entities/msg-template/msg-template_zh_CN';
@@ -187,6 +188,8 @@ function getAppLocale(){
                     menuitem28: commonLogic.appcommonhandle("支付管理",null),
                     menuitem29: commonLogic.appcommonhandle("支付交易",null),
                     menuitem30: commonLogic.appcommonhandle("支付平台",null),
+                    menuitem31: commonLogic.appcommonhandle("存储管理",null),
+                    menuitem32: commonLogic.appcommonhandle("动态模型",null),
                 },
             },
             formpage:{
@@ -290,6 +293,7 @@ function getAppLocale(){
             syspost: syspost_zh_CN(),
             sysuserauth: sysuserauth_zh_CN(),
             sysdepartment: sysdepartment_zh_CN(),
+            metadynamicmodel: metadynamicmodel_zh_CN(),
             sysemployee: sysemployee_zh_CN(),
             paytrade: paytrade_zh_CN(),
             msgtemplate: msgtemplate_zh_CN(),

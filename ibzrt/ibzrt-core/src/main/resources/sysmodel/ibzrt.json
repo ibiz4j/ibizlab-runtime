@@ -886,6 +886,138 @@
  }
     ,
     {
+    "entity_name":"META_DYNAMICMODEL",
+    "logic_name":"动态模型",
+    "code_name":"MetaDynamicModel",
+    "table_name":"IBZDYNAMICMODEL",
+    "system_id":"ibzrt",
+    "system_name":"ibzrt",
+    "module_id":"disk",
+    "module_name":"disk",
+    "fields":[
+    {
+    "fieldname":"DYNAINSTID" ,
+    "codename":"Dynainstid",
+    "field_logic_name":"动态实例",
+    "entity_name":"META_DYNAMICMODEL",
+    "field_type":"TEXT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"VARCHAR",
+    "data_length":100,
+    "key_field":0,
+    "show_order":1,
+    "major_field":0
+    },
+    {
+    "fieldname":"SYSTEMID" ,
+    "codename":"System_id",
+    "field_logic_name":"系统",
+    "entity_name":"META_DYNAMICMODEL",
+    "field_type":"TEXT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"VARCHAR",
+    "data_length":100,
+    "key_field":0,
+    "show_order":2,
+    "major_field":0
+    },
+    {
+    "fieldname":"CONFIGID" ,
+    "codename":"Configid",
+    "field_logic_name":"配置标识",
+    "entity_name":"META_DYNAMICMODEL",
+    "field_type":"TEXT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"VARCHAR",
+    "data_length":100,
+    "key_field":1,
+    "show_order":3,
+    "major_field":0
+    },
+    {
+    "fieldname":"CONFIGNAME" ,
+    "codename":"Configname",
+    "field_logic_name":"配置名称",
+    "entity_name":"META_DYNAMICMODEL",
+    "field_type":"TEXT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"VARCHAR",
+    "data_length":100,
+    "key_field":0,
+    "show_order":4,
+    "major_field":1
+    },
+    {
+    "fieldname":"PDYNAINSTID" ,
+    "codename":"Pdynainstid",
+    "field_logic_name":"父实例",
+    "entity_name":"META_DYNAMICMODEL",
+    "ref_de":"META_DYNAMICMODEL",
+    "ref_field_name":"CONFIGID",
+    "relation_name":"DER1N_META_DYNAMICMODEL_META_DYNAMICMODEL_PDYNAINSTID",
+    "relation_codename":"PDynamicInstId",
+    "field_type":"PICKUP",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"VARCHAR",
+    "data_length":100,
+    "key_field":0,
+    "show_order":5,
+    "major_field":0
+    },
+    {
+    "fieldname":"MODELFILE" ,
+    "codename":"Modelfile",
+    "field_logic_name":"文件",
+    "entity_name":"META_DYNAMICMODEL",
+    "field_type":"TEXT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"VARCHAR",
+    "data_length":1000,
+    "key_field":0,
+    "show_order":6,
+    "major_field":0
+    },
+    {
+    "fieldname":"STATUS" ,
+    "codename":"Status",
+    "field_logic_name":"状态",
+    "entity_name":"META_DYNAMICMODEL",
+    "field_type":"SSCODELIST",
+    "dict":"DynamicModelStatus",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"VARCHAR",
+    "data_length":60,
+    "key_field":0,
+    "show_order":7,
+    "major_field":0
+    }
+    ],
+    "subEntitys":[
+    {"name":"DER1N_META_DYNAMICMODEL_META_DYNAMICMODEL_PDYNAINSTID",
+     "relation_type":"DER1N",
+     "code_name":"PDynamicInstId",
+     "entity_name":"META_DYNAMICMODEL",
+     "ref_entity_name":"META_DYNAMICMODEL"
+    }
+    ],
+    "parentEntitys":[
+    {"name":"DER1N_META_DYNAMICMODEL_META_DYNAMICMODEL_PDYNAINSTID",
+     "relation_type":"DER1N",
+     "code_name":"PDynamicInstId",
+     "entity_name":"META_DYNAMICMODEL",
+     "ref_entity_name":"META_DYNAMICMODEL"
+    }
+    ]
+ }
+    ,
+    {
     "entity_name":"MSG_BODY",
     "logic_name":"消息",
     "code_name":"MsgBody",
@@ -5466,7 +5598,7 @@
     "data_type":"VARCHAR",
     "data_length":200,
     "key_field":0,
-    "show_order":1000,
+    "show_order":6,
     "major_field":1
     }
     ],

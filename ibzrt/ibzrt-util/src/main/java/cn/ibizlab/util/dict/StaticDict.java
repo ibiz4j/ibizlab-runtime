@@ -72,6 +72,52 @@ public class StaticDict {
 
 
     /**
+     * 代码表[第三方平台]
+     */
+    @Getter
+    public enum PayOpenAccessType {
+        ALIYUN("aliyun","阿里云"),
+        WECHAT("wechat","微信开放平台"),
+        QQ("qq","QQ互联"),
+        DINGTALK("dingtalk","钉钉开放平台");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        PayOpenAccessType(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
+     * 代码表[第三方平台]
+     */
+    @Getter
+    public enum NotifyOpenAccessType {
+        ALIYUN("aliyun","阿里云"),
+        WECHAT("wechat","微信开放平台"),
+        QQ("qq","QQ互联"),
+        DINGTALK("dingtalk","钉钉开放平台");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        NotifyOpenAccessType(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
      * 代码表[审计行为]
      */
     @Getter
@@ -463,29 +509,6 @@ public class StaticDict {
         private String emptyText="";
 
         CodeList65(String value , String text) {
-            this.value=value;
-            this.text = text;
-        }
-    }
-
-
-    /**
-     * 代码表[第三方平台]
-     */
-    @Getter
-    public enum PayOpenAccessType {
-        ALIYUN("aliyun","阿里云"),
-        WECHAT("wechat","微信开放平台"),
-        QQ("qq","QQ互联"),
-        DINGTALK("dingtalk","钉钉开放平台");
-
-        private String value;
-        private String text;
-        private String valueSeparator="";
-        private String textSeparator="";
-        private String emptyText="";
-
-        PayOpenAccessType(String value , String text) {
             this.value=value;
             this.text = text;
         }
@@ -1492,6 +1515,29 @@ public class StaticDict {
 
 
     /**
+     * 代码表[第三方平台]
+     */
+    @Getter
+    public enum UaaOpenAccessType {
+        ALIYUN("aliyun","阿里云"),
+        WECHAT("wechat","微信开放平台"),
+        QQ("qq","QQ互联"),
+        DINGTALK("dingtalk","钉钉开放平台");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        UaaOpenAccessType(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
      * 代码表[缩略界面类型]
      */
     @Getter
@@ -2375,29 +2421,6 @@ public class StaticDict {
 
 
     /**
-     * 代码表[第三方平台]
-     */
-    @Getter
-    public enum NotifyOpenAccessType {
-        ALIYUN("aliyun","阿里云"),
-        WECHAT("wechat","微信开放平台"),
-        QQ("qq","QQ互联"),
-        DINGTALK("dingtalk","钉钉开放平台");
-
-        private String value;
-        private String text;
-        private String valueSeparator="";
-        private String textSeparator="";
-        private String emptyText="";
-
-        NotifyOpenAccessType(String value , String text) {
-            this.value=value;
-            this.text = text;
-        }
-    }
-
-
-    /**
      * 代码表[性能分析指标]
      */
     @Getter
@@ -2682,29 +2705,6 @@ public class StaticDict {
 
 
     /**
-     * 代码表[第三方平台]
-     */
-    @Getter
-    public enum UaaOpenAccessType {
-        ALIYUN("aliyun","阿里云"),
-        WECHAT("wechat","微信开放平台"),
-        QQ("qq","QQ互联"),
-        DINGTALK("dingtalk","钉钉开放平台");
-
-        private String value;
-        private String text;
-        private String valueSeparator="";
-        private String textSeparator="";
-        private String emptyText="";
-
-        UaaOpenAccessType(String value , String text) {
-            this.value=value;
-            this.text = text;
-        }
-    }
-
-
-    /**
      * 代码表[月（1～31）]
      */
     @Getter
@@ -2797,6 +2797,27 @@ public class StaticDict {
         private String emptyText="";
 
         CodeList106(String value , String text) {
+            this.value=value;
+            this.text = text;
+        }
+    }
+
+
+    /**
+     * 代码表[动态模型导入状态]
+     */
+    @Getter
+    public enum DynamicModelStatus {
+        ITEM_0("0","未激活"),
+        ITEM_1("1","已激活");
+
+        private String value;
+        private String text;
+        private String valueSeparator="";
+        private String textSeparator="";
+        private String emptyText="";
+
+        DynamicModelStatus(String value , String text) {
             this.value=value;
             this.text = text;
         }

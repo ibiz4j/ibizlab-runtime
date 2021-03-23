@@ -25,10 +25,7 @@ import org.flowable.common.engine.api.identity.AuthenticationContext;
 import org.flowable.common.engine.impl.identity.Authentication;
 import org.flowable.common.engine.impl.identity.UserIdAuthenticationContext;
 import org.flowable.editor.language.json.converter.BpmnJsonConverter;
-import org.flowable.engine.HistoryService;
-import org.flowable.engine.RepositoryService;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
+import org.flowable.engine.*;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
@@ -38,9 +35,11 @@ import org.flowable.engine.repository.DeploymentBuilder;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.engine.task.Comment;
 import org.flowable.identitylink.api.IdentityLink;
+import org.flowable.task.api.DelegationState;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.TaskQuery;
 import org.flowable.task.service.impl.persistence.entity.HistoricTaskInstanceEntity;
+import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 import org.flowable.ui.common.security.SecurityUtils;
 import org.flowable.ui.modeler.domain.AbstractModel;
 import org.flowable.ui.modeler.domain.AppModelDefinition;
@@ -53,8 +52,14 @@ import org.flowable.ui.modeler.serviceapi.AppDefinitionService;
 import org.flowable.ui.modeler.serviceapi.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.expression.MapAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -90,6 +95,9 @@ public class WFCoreService
 	@Autowired
 	private RuntimeService runtimeService;
 
+    @Autowired
+    protected ManagementService managementService;
+
 	@Autowired
 	private WFModelService wfModelService;
 
@@ -119,6 +127,7 @@ public class WFCoreService
 
 	private Map<String,List<Map<String,Object>>> taskMap = new ConcurrentHashMap<>();
 
+	private final ExpressionParser parser = new SpelExpressionParser();
 
 	private AuthenticationContext createAuthenticationContext()
 	{
@@ -499,43 +508,43 @@ public class WFCoreService
 		return instance;
 	}
 
-	public List<WFTaskWay> getWFLink(String system,String appname,
-									 String entity, String businessKey,String taskDefinitionKey) {
-		List<WFTaskWay> taskWays=new ArrayList<>();
-		String processInstanceBusinessKey=system+":"+entity+":k-"+businessKey;
-		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
-		if(StringUtils.isEmpty(userId))
-			return taskWays;
-		TaskQuery query=taskService.createTaskQuery().taskCandidateOrAssigned(userId).processInstanceBusinessKey(processInstanceBusinessKey);
-		if(!StringUtils.isEmpty(taskDefinitionKey))
-			query.taskDefinitionKey(taskDefinitionKey);
-		List<Task> list=query.orderByTaskCreateTime().desc().listPage(0,1);
-		if(list.size()==0)
-			return taskWays;
-		Task task=list.get(0);
-		if((!StringUtils.isEmpty(task.getProcessDefinitionId()))&&(!StringUtils.isEmpty(task.getTaskDefinitionKey()))) {
-			UserTask userTask = wfModelService.getModelStepById(task.getProcessDefinitionId()).get(task.getTaskDefinitionKey());
-			//设置流程表单
-			setProcessForm(userTask);
-			if(userTask!=null&&userTask.getOutgoingFlows()!=null) {
-				for(SequenceFlow sequenceFlow:userTask.getOutgoingFlows()) {
-					WFTaskWay way=new WFTaskWay();
-					way.setSequenceflowid(sequenceFlow.getId());
-					way.setSequenceflowname(sequenceFlow.getName());
-					if(task.getProcessDefinitionId().indexOf(":")>0)
-						way.setProcessdefinitionkey(task.getProcessDefinitionId().split(":")[0]);
-					way.setTaskid(task.getId());
-					way.setProcessinstanceid(task.getProcessInstanceId());
-					way.setTaskdefinitionkey(task.getTaskDefinitionKey());
-					way.setProcessinstancebusinesskey(processInstanceBusinessKey);
-					//设置流程交互表单
-					setTaskWayForm(sequenceFlow,way);
-					taskWays.add(way);
-				}
-			}
-		}
-		return taskWays;
-	}
+    public List<WFTaskWay> getWFLink(String system,String appname,
+                                     String entity, String businessKey,String taskDefinitionKey) {
+        List<WFTaskWay> taskWays=new ArrayList<>();
+        String processInstanceBusinessKey=system+":"+entity+":k-"+businessKey;
+        String userId=AuthenticationUser.getAuthenticationUser().getUserid();
+        if(StringUtils.isEmpty(userId))
+            return taskWays;
+        TaskQuery query=taskService.createTaskQuery().taskCandidateOrAssigned(userId).processInstanceBusinessKey(processInstanceBusinessKey);
+        if(!StringUtils.isEmpty(taskDefinitionKey))
+            query.taskDefinitionKey(taskDefinitionKey);
+        List<Task> list=query.orderByTaskCreateTime().desc().listPage(0,1);
+        if(list.size()==0)
+            return taskWays;
+        Task task=list.get(0);
+        if((!StringUtils.isEmpty(task.getProcessDefinitionId()))&&(!StringUtils.isEmpty(task.getTaskDefinitionKey()))) {
+            UserTask userTask = wfModelService.getModelStepById(task.getProcessDefinitionId()).get(task.getTaskDefinitionKey());
+            //设置流程表单
+            setProcessForm(userTask);
+            if(userTask!=null&&userTask.getOutgoingFlows()!=null) {
+                for(SequenceFlow sequenceFlow:userTask.getOutgoingFlows()) {
+                    WFTaskWay way=new WFTaskWay();
+                    way.setSequenceflowid(sequenceFlow.getId());
+                    way.setSequenceflowname(sequenceFlow.getName());
+                    if(task.getProcessDefinitionId().indexOf(":")>0)
+                        way.setProcessdefinitionkey(task.getProcessDefinitionId().split(":")[0]);
+                    way.setTaskid(task.getId());
+                    way.setProcessinstanceid(task.getProcessInstanceId());
+                    way.setTaskdefinitionkey(task.getTaskDefinitionKey());
+                    way.setProcessinstancebusinesskey(processInstanceBusinessKey);
+                    //设置流程交互表单
+                    setTaskWayForm(sequenceFlow,way);
+                    taskWays.add(way);
+                }
+            }
+        }
+        return taskWays;
+    }
 
 	public List<WFTaskWay> getTaskLink(String system,String appname, String entity, String businessKey,String taskId) {
 		List<WFTaskWay> taskWays=new ArrayList<>();
@@ -600,14 +609,28 @@ public class WFCoreService
 		transientVariables.put("activedata",activedata);
 		//transientVariables.put("curuser",getCurUser());
 
-
 		//根据流程定义启动流程
 		Authentication.setAuthenticatedUserId(userId);
 		Authentication.setAuthenticationContext(createAuthenticationContext());
 
-		taskService.complete(taskId, variables,transientVariables);
 		WFProcessInstance instance = new WFProcessInstance();
-		instance.setBusinesskey(processInstanceBusinessKey);
+		Task curTask = taskService.createTaskQuery().taskId(taskId).singleResult();
+
+		//加签任务处理
+		if (curTask != null && DelegationState.PENDING == curTask.getDelegationState()) {
+			if(userId.equals(curTask.getAssignee())){
+				taskService.resolveTask(taskId);
+				//saveTask(curTask);
+			}
+			else{
+				throw new BadRequestAlertException("当前任务正在加签中","","");
+			}
+		}
+		else{
+			//常规任务处理
+			taskService.complete(taskId, variables, transientVariables);
+			instance.setBusinesskey(processInstanceBusinessKey);
+		}
 		return instance;
 	}
 
@@ -1228,16 +1251,21 @@ public class WFCoreService
 				}
 				else
 				{
-					Object activedata=delegateExecution.getVariable("activedata");
-					if(activedata!=null&&activedata instanceof Map) {
-						Map entity = (Map) activedata;
-						if(entity.get(userData2)!=null)
-							userData2=entity.get(userData2).toString();
+					if (delegateExecution == null) {
+						userData2="";
+					} else {
+						Object activedata=delegateExecution.getVariable("activedata");
+						if(activedata!=null&&activedata instanceof Map) {
+							Map entity = (Map) activedata;
+							if(entity.get(userData2)!=null)
+								userData2=entity.get(userData2).toString();
+							else
+								userData2="";
+						}
 						else
 							userData2="";
 					}
-					else
-						userData2="";
+
 				}
 				if(!StringUtils.isEmpty(userData2))
 				{
@@ -1247,10 +1275,6 @@ public class WFCoreService
 						orgid=userData2;
 				}
 			}
-
-
-
-
 			WFGroup group=iwfGroupService.get(groupId);
 			List<WFMember> list=group.getWfmember();
 			if (list!=null)
@@ -1271,6 +1295,158 @@ public class WFCoreService
 		return strUsers;
 	}
 
+
+	/**
+	 * 后加签 （转办-工作转移）
+	 * @param system
+	 * @param appname
+	 * @param entity
+	 * @param businessKey
+	 * @param taskId
+	 * @param taskWay
+	 */
+    public boolean beforeSign(String system, String appname,
+                              String entity, String businessKey, String taskId, WFTaskWay taskWay) {
+		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
+		if (StringUtils.isEmpty(userId))
+			throw new BadRequestAlertException("未传入当前用户", entity, businessKey);
+
+        Object signUsers = taskWay.get("users");
+        if (ObjectUtils.isEmpty(signUsers)) {
+            throw new BadRequestAlertException("未传入加签用户", entity, businessKey);
+        }
+        Task curTask = taskService.createTaskQuery().taskId(taskId).singleResult();
+        if (curTask == null) {
+            throw new BadRequestAlertException(String.format("未能获取到[%s]运行任务", curTask.getId()), "", "");
+        }
+        if (DelegationState.PENDING != curTask.getDelegationState()) {
+            taskService.delegateTask(taskId, String.valueOf(signUsers));
+            //saveTask(curTask);
+        } else {
+            throw new BadRequestAlertException(String.format("任务正在加签中，无法进行二次加签", curTask.getId()), "", "");
+        }
+        return true;
+    }
+
+	/**
+	 * 后加签 （转办）
+	 * @param system
+	 * @param appname
+	 * @param entity
+	 * @param businessKey
+	 * @param taskId
+	 * @param taskWay
+	 */
+	public boolean afterSign(String system,String appname,
+						  String entity,String businessKey,String taskId,WFTaskWay taskWay){
+		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
+		if (StringUtils.isEmpty(userId))
+			throw new BadRequestAlertException("未传入当前用户", entity, businessKey);
+
+		Object signUser = taskWay.get("users");
+		if (ObjectUtils.isEmpty(signUser)) {
+			throw new BadRequestAlertException("未传入转办用户", entity, businessKey);
+		}
+		Task curTask  = taskService.createTaskQuery().taskId(taskId).singleResult();
+		if(curTask == null){
+			throw new BadRequestAlertException(String.format("未能获取到[%s]运行任务", taskId),"","");
+		}
+
+		//转办任务
+		taskService.deleteUserIdentityLink(curTask.getId(),userId,"candidate");
+		taskService.addUserIdentityLink(curTask.getId(), (String) signUser,"candidate");
+
+		//saveTask(curTask);
+		return true;
+	}
+
+	/**
+	 * 返回组成员，用于多实例会签（ wfroleid = groupid +deptid ）
+	 * @param groupIds
+	 * @param delegateExecution
+	 * @return
+	 */
+	public List<WFMember> getGroupUsers2(String groupIds, DelegateExecution delegateExecution)
+	{
+		List<WFMember> users= new ArrayList<>();
+		if(StringUtils.isEmpty(groupIds))
+			return users;
+		String[] groups=groupIds.split(",");
+		for(String groupId:groups)
+		{
+			String userData="";
+			String userData2="";
+			String orgid="";
+			String deptid="";
+			if(groupId.indexOf("|")>0)
+			{
+				String[] arg=groupId.split("[|]");
+				if(arg.length==3)
+				{
+					groupId=arg[0];
+					if(arg[1]!=null)
+						userData=arg[1].toLowerCase();
+					if(arg[2]!=null)
+						userData2=arg[2].toLowerCase();
+				}
+			}
+
+			if((!StringUtils.isEmpty(userData))&&(!StringUtils.isEmpty(userData2)))
+			{
+				if(userData2.indexOf("srf")==0)
+				{
+					FlowUser curUser=FlowUser.getCurUser();
+					if(curUser!=null&&curUser.getUser()!=null)
+					{
+						Object sessionValue=curUser.getUser().getSessionParams().get(userData2);
+						if(sessionValue!=null)
+							userData2=sessionValue.toString();
+						else
+							userData2="";
+					}
+					else
+						userData2="";
+				}
+				else
+				{
+					Object activedata=delegateExecution.getVariable("activedata");
+					if(activedata!=null&&activedata instanceof Map) {
+						Map entity = (Map) activedata;
+						if(entity.get(userData2)!=null)
+							userData2=entity.get(userData2).toString();
+						else
+							userData2="";
+					}
+					else
+						userData2="";
+				}
+				if(!StringUtils.isEmpty(userData2))
+				{
+					if(userData.indexOf("dept")>=0||userData.indexOf("orgsec")>=0)
+						deptid=userData2;
+					else if(userData.indexOf("org")>=0)
+						orgid=userData2;
+				}
+			}
+
+			WFGroup group=iwfGroupService.get(groupId);
+			List<WFMember> list=group.getWfmember();
+			if (list!=null)
+			{
+				for(WFMember member : list)
+				{
+					if((!StringUtils.isEmpty(deptid))&&(!deptid.equals(member.getMdeptid())))
+						continue;
+					if((!StringUtils.isEmpty(orgid))&&(!orgid.equals(member.getOrgid())))
+						continue;
+
+					users.add(member);
+				}
+			}
+		}
+		return users;
+	}
+
 	private  ByteArrayOutputStream getBpmnFile(InputStream input) {
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -1287,59 +1463,87 @@ public class WFCoreService
 		}
 	}
 
-	/**
-	 * 设置流程表单
-	 * @param sequenceFlow
-	 * @param way
-	 */
-	private void setTaskWayForm(SequenceFlow sequenceFlow,WFTaskWay way){
-		if(!ObjectUtils.isEmpty(sequenceFlow.getExtensionElements())){
-			List<ExtensionElement> formProps=sequenceFlow.getExtensionElements().get("form");
-			if(!ObjectUtils.isEmpty(formProps)){
-				for(ExtensionElement prop : formProps){
-					if(!ObjectUtils.isEmpty(prop.getAttributes())){
-						for(String attribute : prop.getAttributes().keySet()){
-							List<ExtensionAttribute> attributes=prop.getAttributes().get(attribute);
-							if(!ObjectUtils.isEmpty(attributes)){
-								for(ExtensionAttribute param:attributes){
-									way.set(param.getName(),param.getValue());
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    /**
+     * 设置流程表单
+     *
+     * @param sequenceFlow
+     * @param way
+     */
+    private void setTaskWayForm(SequenceFlow sequenceFlow, WFTaskWay way) {
+        Map<String,String> attributes = getAllParam(sequenceFlow,"form");
+        if (!ObjectUtils.isEmpty(attributes)) {
+            for (Map.Entry<String,String> entry : attributes.entrySet()) {
+                way.set(entry.getKey(), entry.getValue());
+            }
+        }
+    }
 
-	/**
-	 * 将流程表单设置到请求头中
-	 * @param userTask
-	 */
-	private void setProcessForm(UserTask userTask){
-		Object objReq=RequestContextHolder.currentRequestAttributes();
-		if(!ObjectUtils.isEmpty(objReq) && objReq instanceof  ServletRequestAttributes){
-			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-			HttpServletRequest req = attr.getRequest();
-			if(!ObjectUtils.isEmpty(userTask) && !ObjectUtils.isEmpty(userTask.getExtensionElements())){
-				List<ExtensionElement> formProps=userTask.getExtensionElements().get("form");
-				if(!ObjectUtils.isEmpty(formProps)){
-					for(ExtensionElement prop : formProps){
-						if(!ObjectUtils.isEmpty(prop.getAttributes())){
-							for(String attribute : prop.getAttributes().keySet()){
-								List<ExtensionAttribute> attributes=prop.getAttributes().get(attribute);
-								if(!ObjectUtils.isEmpty(attributes)){
-									for(ExtensionAttribute param:attributes){
-										req.setAttribute(param.getName(),param.getValue());
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+    /**
+     * 将流程表单设置到请求头中
+     *
+     * @param userTask
+     */
+    private void setProcessForm(UserTask userTask) {
+        Object objReq = RequestContextHolder.currentRequestAttributes();
+        if (!ObjectUtils.isEmpty(objReq) && objReq instanceof ServletRequestAttributes) {
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+            HttpServletRequest req = attr.getRequest();
+            Map<String,String> attributes = getAllParam(userTask,"form");
+            if (!ObjectUtils.isEmpty(attributes)) {
+                for (Map.Entry<String,String> entry : attributes.entrySet()) {
+                    req.setAttribute(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取流程节点指定参数
+     * @param element
+     * @param property
+     * @param attribute
+     * @return
+     */
+    public String getParam(FlowElement element, String property, String attribute) {
+        List<ExtensionElement> formProps = element.getExtensionElements().get(property);
+        if (formProps == null) {
+            return null;
+        }
+        for (ExtensionElement prop : formProps) {
+            if (prop.getAttributes() == null)
+                return null;
+            Map<String, List<ExtensionAttribute>> attributes = prop.getAttributes();
+            if (attributes.containsKey(attribute)) {
+                return ObjectUtils.isEmpty(attributes.get(attribute)) ? null : String.valueOf(attributes.get(attribute).get(0).getValue());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取流程节点所有参数
+     * @param element
+     * @param property
+     * @return
+     */
+    public Map<String, String> getAllParam(FlowElement element, String property) {
+        Map<String, String> params = new HashMap();
+        List<ExtensionElement> formProps = element.getExtensionElements().get(property);
+        if (formProps == null) {
+            return null;
+        }
+        for (ExtensionElement prop : formProps) {
+            if (prop.getAttributes() == null)
+                return null;
+            Map<String, List<ExtensionAttribute>> attributes = prop.getAttributes();
+            for (String attribute : attributes.keySet()) {
+                if (!ObjectUtils.isEmpty(attributes.get(attribute))) {
+                    params.put(attribute, attributes.get(attribute).get(0).getValue());
+                }
+            }
+        }
+        return params;
+    }
 
 	/**
 	 * 获取动态实例标识
@@ -1359,4 +1563,235 @@ public class WFCoreService
 		}
 		return dynainstid;
 	}
+
+	/**
+	 * 判断是否退出会签
+	 * @param execution
+	 * @return
+	 */
+	public boolean accessCondition(DelegateExecution execution) {
+		Object allRolesCnt = execution.getVariable("all_roles_cnt");
+		Object completeRolesCnt = execution.getVariable("complete_roles_cnt");
+		Object completeInstance = execution.getVariable("nrOfCompletedInstances");
+		Object allInstance = execution.getVariable("nrOfInstances");
+		Object sequenceFlowId = execution.getVariable("sequenceFlowId");
+		String flowAccessCond = getNextCondition(execution, sequenceFlowId);   // role : any  || all
+		if (!ObjectUtils.isEmpty(allInstance) && !ObjectUtils.isEmpty(completeInstance) && !ObjectUtils.isEmpty(flowAccessCond)) {
+			if("ANY".equalsIgnoreCase(flowAccessCond)){
+				return true;
+			}
+			else if ("ALL|ROLE:ANY".equalsIgnoreCase(flowAccessCond) && allRolesCnt == completeRolesCnt) {
+				return true;
+			}
+			else{
+				return (int) completeInstance / (int) allInstance == 1;
+			}
+		} else {
+			return false;
+		}
+	}
+
+    /**
+     * 获取连接线条件 （all/any/all|role:any）
+     *
+     * @param execution
+     * @param sequenceFlowId
+     * @return
+     */
+    public String getNextCondition(DelegateExecution execution, Object sequenceFlowId) {
+        if (!ObjectUtils.isEmpty(execution.getCurrentFlowElement()) && execution.getCurrentFlowElement() instanceof UserTask) {
+            UserTask userTask = (UserTask) execution.getCurrentFlowElement();
+            for (SequenceFlow flow : userTask.getOutgoingFlows()) {
+                if (sequenceFlowId.equals(flow.getId())) {
+                    return getParam(flow, "form", "nextCondition");
+                }
+            }
+        }
+        return null;
+    }
+
+	/**
+	 * 获取用户所属的工作流角色
+	 * @param userId
+	 * @param execution
+	 * @return
+	 */
+    public Set<String> getRoleByUserId(String userId, DelegateExecution execution) {
+        Set roles = new HashSet();
+        if (!ObjectUtils.isEmpty(userId)) {
+            String candidateUsers = getParam(execution.getCurrentFlowElement(),"form","candidateUsersList");
+            if (!StringUtils.isEmpty(candidateUsers)) {
+                LinkedHashMap executionMap = (LinkedHashMap) execution.getVariable("activedata");
+                String[] groups = candidateUsers.split("\\|\\|");
+                if (groups.length > 0) {
+                    for (String group : groups) {
+                        if (group.contains("activedata")) {
+                            for (String elUserId : group.split("\\|")) {
+                                ExpressionParser parser = new SpelExpressionParser();
+                                StandardEvaluationContext context = new StandardEvaluationContext();
+                                Expression exp = parser.parseExpression(elUserId);
+                                context.addPropertyAccessor(new MapAccessor());
+                                context.setVariable("activedata", executionMap);
+                                String processUserId = exp.getValue(context, String.class);
+                                if (!StringUtils.isEmpty(processUserId) && processUserId.contains(userId)) {
+                                    roles.add(group);
+                                }
+                            }
+                        }
+                        if (group.contains("wfCoreService.getGroupUsers")) {
+                            String exp = group;
+                            EvaluationContext oldContext = new StandardEvaluationContext();
+                            oldContext.setVariable("wfCoreService", this);
+                            oldContext.setVariable("execution", execution);
+                            Expression oldExp = parser.parseExpression(exp);
+                            List<WFMember> users = oldExp.getValue(oldContext, List.class);
+                            if (!StringUtils.isEmpty(users)) {
+                                users.forEach(groupMember -> {
+                                    if (!ObjectUtils.isEmpty(groupMember.getUserid()) && userId.equals(groupMember.getUserid())) {
+                                        String roleId;
+                                        if (!ObjectUtils.isEmpty(groupMember.getMdeptid())) {
+                                            roleId = String.format("%s_%s", groupMember.getGroupid(), groupMember.getMdeptid());
+                                        } else {
+                                            roleId = groupMember.getGroupid();
+                                        }
+                                        roles.add(roleId);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return roles;
+    }
+
+	/**
+	 * 创建任务
+	 * @param sourceTask
+	 * @return
+	 */
+	protected TaskEntity createTask(Task sourceTask) {
+		TaskEntity task = null;
+		if (sourceTask != null) {
+			//1.生成子任务
+			task = (TaskEntity) taskService.newTask();
+			task.setCategory(sourceTask.getCategory());
+			task.setDescription(sourceTask.getDescription());
+			task.setTenantId(sourceTask.getTenantId());
+			task.setAssignee(sourceTask.getAssignee());
+			task.setName(sourceTask.getName());
+			task.setProcessDefinitionId(sourceTask.getProcessDefinitionId());
+			task.setProcessInstanceId(sourceTask.getProcessInstanceId());
+			task.setTaskDefinitionKey(sourceTask.getTaskDefinitionKey());
+			task.setTaskDefinitionId(sourceTask.getTaskDefinitionId());
+			task.setPriority(sourceTask.getPriority());
+			task.setCreateTime(new Date());
+		}
+		return task;
+	}
+
+	/**
+	 * 清除角色中其他成员待办任务
+	 * @param userRoles
+	 * @param execution
+	 */
+	public void deleteRoleTask(Set userRoles, DelegateExecution execution) {
+		Object processInstanceId = execution.getProcessInstanceId();
+		if(ObjectUtils.isEmpty(processInstanceId)){
+			throw new BadRequestAlertException("无法获取流程实例","","");
+		}
+		Set<String> roleUserIds = getUsersByRole(userRoles,execution);
+		if(roleUserIds.size()>0){
+			Map param = new HashMap();
+			param.put("userids",roleUserIds);
+			param.put("processinstanceid",processInstanceId);
+			List<Map> tasks = wfCoreMapper.searchUserTask(param);
+			if(tasks.size()>0){
+				for(Map task : tasks){
+					Object executionId = task.get("execution");
+					if(!StringUtils.isEmpty(executionId)){
+						runtimeService.deleteMultiInstanceExecution(String.valueOf(executionId),false);
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * 获取角色成员
+	 * @param roles
+	 * @param execution
+	 * @return
+	 */
+	public Set<String> getUsersByRole(Set roles, DelegateExecution execution) {
+		Set userIds = new HashSet();
+		if (!ObjectUtils.isEmpty(roles)) {
+            String candidateUsers = getParam(execution.getCurrentFlowElement(),"form","candidateUsersList");
+			if (!StringUtils.isEmpty(candidateUsers)) {
+				LinkedHashMap executionMap = (LinkedHashMap) execution.getVariable("activedata");
+				String[] groups = candidateUsers.split("\\|\\|");
+				if (groups.length > 0) {
+					for (String group : groups) {
+						if (group.contains("activedata") && roles.contains(group)) {
+							for (String elUserId : group.split("\\|")) {
+								ExpressionParser parser = new SpelExpressionParser();
+								StandardEvaluationContext context = new StandardEvaluationContext();
+								Expression exp = parser.parseExpression(elUserId);
+								context.addPropertyAccessor(new MapAccessor());
+								context.setVariable("activedata", executionMap);
+								String processUserId = exp.getValue(context, String.class);
+								if (StringUtils.isEmpty(processUserId)) {
+									userIds.add(processUserId);
+								}
+							}
+						}
+						if (group.contains("wfCoreService.getGroupUsers")) {
+							EvaluationContext oldContext = new StandardEvaluationContext();
+							oldContext.setVariable("wfCoreService", this);
+							oldContext.setVariable("execution", execution);
+							Expression oldExp = parser.parseExpression(group);
+							List<WFMember> users = oldExp.getValue(oldContext, List.class);
+							if (!StringUtils.isEmpty(users)) {
+								users.forEach(groupMember -> {
+									if (!ObjectUtils.isEmpty(groupMember.getUserid())) {
+										String roleId;
+										if (!ObjectUtils.isEmpty(groupMember.getMdeptid())) {
+											roleId = String.format("%s_%s", groupMember.getGroupid(), groupMember.getMdeptid());
+										} else {
+											roleId = groupMember.getGroupid();
+										}
+										if (roles.contains(roleId)) {
+											userIds.add(groupMember.getUserid());
+										}
+									}
+								});
+							}
+						}
+					}
+				}
+			}
+		}
+		return userIds;
+	}
+
+    /**
+     * 审批记录
+     * @param curTask
+     * @return
+     */
+    private Task saveTask(Task curTask){
+        String userId = "0100";
+        if (StringUtils.isEmpty(userId))
+            if (StringUtils.isEmpty(userId))
+                throw new BadRequestAlertException("未传入当前用户", "", "");
+
+        Task signTask = createTask(curTask);
+        signTask.setParentTaskId(curTask.getId());
+        taskService.saveTask(signTask);
+        taskService.addUserIdentityLink(signTask.getId(), userId, "candidate");
+        taskService.complete(signTask.getId());
+        return signTask;
+    }
+
 }

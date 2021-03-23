@@ -54,10 +54,4 @@ public class IBZUAAUserService implements AuthenticationUserService{
 		return user;
 	}
 
-
-	@Override
-	public void resetByUsername(String username) {
-
-	}
-
 }

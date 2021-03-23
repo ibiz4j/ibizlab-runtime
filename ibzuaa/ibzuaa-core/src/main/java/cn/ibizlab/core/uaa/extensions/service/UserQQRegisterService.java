@@ -107,7 +107,10 @@ public class UserQQRegisterService {
                 if (responseObj2.containsKey("openid")) {
                     openid = responseObj2.getString("openid");
                     returnObj.put("openid",openid);
-                    SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"qq").eq(SysUserAuth::getIdentifier, openid),false);
+                    SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,openAccess.getId()).eq(SysUserAuth::getIdentifier, openid),false);
+
+                    if(userAuth==null)
+                        userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"qq").eq(SysUserAuth::getIdentifier, openid),false);
 
                     SysUser user = null;
                     // 该qq用户注册过账号，登录系统

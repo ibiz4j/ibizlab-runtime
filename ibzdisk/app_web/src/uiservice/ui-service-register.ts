@@ -39,7 +39,8 @@ export class UIServiceRegister {
      * @memberof UIServiceRegister
      */
     protected init(): void {
-                this.allUIService.set('sdfile', () => import('@/uiservice/sdfile/sdfile-ui-service'));
+                this.allUIService.set('metadynamicmodel', () => import('@/uiservice/meta-dynamic-model/meta-dynamic-model-ui-service'));
+        this.allUIService.set('sdfile', () => import('@/uiservice/sdfile/sdfile-ui-service'));
     }
 
     /**

@@ -595,6 +595,9 @@ export default class SDIndexViewBase extends Vue implements ControlInterface {
                 navDataService.removeNavData(this.viewtag);
             }
             switch (item.appfunctag) {
+                case 'AppFunc2': 
+                    this.clickAppFunc2(item);
+                    return;
                 case 'Auto1': 
                     this.clickAuto1(item);
                     return;
@@ -604,6 +607,29 @@ export default class SDIndexViewBase extends Vue implements ControlInterface {
         }
     }
 
+    
+    /**
+     * 动态模型表格视图
+     *
+     * @param {*} [item={}]
+     * @memberof SDIndexView
+     */
+    public clickAppFunc2(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'metadynamicmodels', parameterName: 'metadynamicmodel' },
+            { pathName: 'dynainstgridview', parameterName: 'dynainstgridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
     
     /**
      * 文件

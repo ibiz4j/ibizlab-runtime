@@ -16,6 +16,7 @@ import './entity/wfmembers/wfmembers';
 import './entity/sys-posts/sys-posts';
 import './entity/sys-user-auths/sys-user-auths';
 import './entity/sys-departments/sys-departments';
+import './entity/meta-dynamic-models/meta-dynamic-models';
 import './entity/sys-employees/sys-employees';
 import './entity/pay-trades/pay-trades';
 import './entity/msg-templates/msg-templates';

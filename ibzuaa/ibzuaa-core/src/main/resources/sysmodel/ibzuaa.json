@@ -1659,7 +1659,7 @@
     "data_type":"VARCHAR",
     "data_length":200,
     "key_field":0,
-    "show_order":1000,
+    "show_order":6,
     "major_field":1
     }
     ],

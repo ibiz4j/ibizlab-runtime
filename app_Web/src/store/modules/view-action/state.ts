@@ -585,6 +585,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: '92d51d41db51a671793ee8dc8876f9e9',
+            viewmodule: 'disk',
+            viewname: 'META_DYNAMICMODELDynaInstEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'af9cfc34d957186380a012e322abff0c',
+            ],
+        },
+        {
             viewtag: '95d8c933cf4df47634a25d791b3d8564',
             viewmodule: 'uaa',
             viewname: 'SysPermissionPickupGridView',
@@ -673,6 +683,16 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: 'af9cfc34d957186380a012e322abff0c',
+            viewmodule: 'disk',
+            viewname: 'MetaDynamicModelGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'e8892afaebe9a899e5d528d5b55d3cc5',
+            ],
+        },
+        {
             viewtag: 'b05c9353d499f973106e6ed4dde58074',
             viewmodule: 'workflow',
             viewname: 'WFGroupPickupView',
@@ -758,6 +778,7 @@ export const viewstate: any = {
                 '60fe0b9b8535b02baf1a02d5f56c5a9c',
                 'a186d7dee3d83d5f95c27142bece5df6',
                 '1f1889a2c3e7f49d9221021499a0f78a',
+                'cec3236f5a1f742f9b91f313506ccc6c',
                 '67b4d1e928a08679ce63051ccc88da9c',
                 '13c174556f45e9b10b66dc51834a6ab5',
                 'f498dfb24e88df7c70a5c09ecb587647',
@@ -794,6 +815,16 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
+            ],
+        },
+        {
+            viewtag: 'cec3236f5a1f742f9b91f313506ccc6c',
+            viewmodule: 'disk',
+            viewname: 'MetaDynamicModelDynaInstGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '92d51d41db51a671793ee8dc8876f9e9',
             ],
         },
         {
@@ -834,6 +865,15 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 '49b6b437f10c4e73e47d87d5d0f76cfd',
+            ],
+        },
+        {
+            viewtag: 'e8892afaebe9a899e5d528d5b55d3cc5',
+            viewmodule: 'disk',
+            viewname: 'MetaDynamicModelEditView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
             ],
         },
         {

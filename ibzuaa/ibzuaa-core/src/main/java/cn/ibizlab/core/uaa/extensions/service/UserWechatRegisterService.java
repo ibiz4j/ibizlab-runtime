@@ -79,9 +79,14 @@ public class UserWechatRegisterService {
             String unionid = returnObj.getString("unionid");
 
 
-            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"wechat")
+            SysUserAuth userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,openAccess.getId())
                     .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, openid).or().eq(SysUserAuth::getIdentifier, unionid)
                     ),false);
+
+            if(userAuth==null)
+                userAuth = sysUserAuthService.getOne(Wrappers.<SysUserAuth>lambdaQuery().eq(SysUserAuth::getIdentityType,"wechat")
+                        .and(wrapper -> wrapper.eq(SysUserAuth::getIdentifier, openid).or().eq(SysUserAuth::getIdentifier, unionid)
+                        ),false);
 
             SysUser user = null;
             // 该wechat用户注册过账号，登录系统

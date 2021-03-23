@@ -39,7 +39,8 @@ export class AuthServiceRegister {
      * @memberof AuthServiceRegister
      */
     protected init(): void {
-                this.allAuthService.set('sdfile', () => import('@/authservice/sdfile/sdfile-auth-service'));
+                this.allAuthService.set('metadynamicmodel', () => import('@/authservice/meta-dynamic-model/meta-dynamic-model-auth-service'));
+        this.allAuthService.set('sdfile', () => import('@/authservice/sdfile/sdfile-auth-service'));
     }
 
     /**

@@ -26,4 +26,9 @@ public class IBZWFFallback implements IBZWFFeignClient {
     public JSONObject wfstart(String system, String appname, String entity, String businessKey, JSONObject instance) {
         return null;
     }
+
+    @Override
+    public Boolean deployDynaWF(List<Map<String, Object>> bpmnfiles, String dynainstid) {
+        return null;
+    }
 }
