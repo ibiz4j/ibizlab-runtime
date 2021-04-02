@@ -88,8 +88,7 @@ public class MsgOpenAccessServiceImpl implements IMsgOpenAccessService {
     public MsgOpenAccess get(String id) {
 		MsgOpenAccess et=msgOpenAccessFeignClient.get(id);
         if(et==null){
-            et=new MsgOpenAccess();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

@@ -2,6 +2,7 @@ package cn.ibizlab.util.domain;
 
 import lombok.Data;
 import org.flowable.bpmn.model.Process;
+import org.springframework.core.io.Resource;
 import org.kie.api.runtime.KieContainer;
 import java.io.File;
 import java.io.Serializable;
@@ -14,6 +15,6 @@ public class DELogic implements Serializable {
     Process process;
     KieContainer container;
     List<DELogic> refLogic;
-    List<File> refRuleFiles;
+    List<Resource> refRuleFiles;
     String md5;
 }

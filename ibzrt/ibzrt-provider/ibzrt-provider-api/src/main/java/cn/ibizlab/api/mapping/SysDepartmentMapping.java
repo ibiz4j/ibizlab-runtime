@@ -12,4 +12,3 @@ public interface SysDepartmentMapping extends MappingBase<SysDepartmentDTO, SysD
 
 
 }
-

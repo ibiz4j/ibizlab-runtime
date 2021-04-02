@@ -107,9 +107,8 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
     @Transactional
     public PayTrade get(String key) {
         PayTrade et = getById(key);
-        if(et == null){
-            et = new PayTrade();
-            et.setTradeId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

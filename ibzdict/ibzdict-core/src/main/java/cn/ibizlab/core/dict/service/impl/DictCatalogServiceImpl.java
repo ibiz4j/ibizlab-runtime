@@ -103,9 +103,8 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
     @Transactional
     public DictCatalog get(String key) {
         DictCatalog et = getById(key);
-        if(et == null){
-            et = new DictCatalog();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -88,8 +88,7 @@ public class MsgBodyServiceImpl implements IMsgBodyService {
     public MsgBody get(String msg_id) {
 		MsgBody et=msgBodyFeignClient.get(msg_id);
         if(et==null){
-            et=new MsgBody();
-            et.setMsgId(msg_id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), msg_id);
         }
         else{
         }

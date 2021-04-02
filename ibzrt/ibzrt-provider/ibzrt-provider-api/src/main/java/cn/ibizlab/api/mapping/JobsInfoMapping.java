@@ -12,4 +12,3 @@ public interface JobsInfoMapping extends MappingBase<JobsInfoDTO, JobsInfo> {
 
 
 }
-

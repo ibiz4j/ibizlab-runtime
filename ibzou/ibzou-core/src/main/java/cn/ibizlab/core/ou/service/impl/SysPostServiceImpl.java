@@ -109,9 +109,8 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
     @Transactional
     public SysPost get(String key) {
         SysPost et = getById(key);
-        if(et == null){
-            et = new SysPost();
-            et.setPostid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

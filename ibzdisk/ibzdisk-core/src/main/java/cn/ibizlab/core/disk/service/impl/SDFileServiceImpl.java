@@ -100,9 +100,8 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
     @Transactional
     public SDFile get(String key) {
         SDFile et = getById(key);
-        if(et == null){
-            et = new SDFile();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -12,4 +12,3 @@ public interface SysPermissionMapping extends MappingBase<SysPermissionDTO, SysP
 
 
 }
-

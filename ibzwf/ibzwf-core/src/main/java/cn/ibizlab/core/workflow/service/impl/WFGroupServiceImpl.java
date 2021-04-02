@@ -106,9 +106,8 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
     @Transactional
     public WFGroup get(String key) {
         WFGroup et = getById(key);
-        if(et == null){
-            et = new WFGroup();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
             et.setWfmember(wfmemberService.selectByGroupid(key));

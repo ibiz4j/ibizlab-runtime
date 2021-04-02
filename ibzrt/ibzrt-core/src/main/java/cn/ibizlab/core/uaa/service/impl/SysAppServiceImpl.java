@@ -88,8 +88,7 @@ public class SysAppServiceImpl implements ISysAppService {
     public SysApp get(String id) {
 		SysApp et=sysAppFeignClient.get(id);
         if(et==null){
-            et=new SysApp();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

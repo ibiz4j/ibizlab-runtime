@@ -88,8 +88,7 @@ public class SDFileServiceImpl implements ISDFileService {
     public SDFile get(String id) {
 		SDFile et=sDFileFeignClient.get(id);
         if(et==null){
-            et=new SDFile();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

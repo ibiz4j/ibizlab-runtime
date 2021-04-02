@@ -12,4 +12,3 @@ public interface SysUserAuthMapping extends MappingBase<SysUserAuthDTO, SysUserA
 
 
 }
-

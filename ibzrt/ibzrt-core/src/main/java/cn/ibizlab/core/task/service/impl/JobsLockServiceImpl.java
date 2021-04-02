@@ -88,8 +88,7 @@ public class JobsLockServiceImpl implements IJobsLockService {
     public JobsLock get(String id) {
 		JobsLock et=jobsLockFeignClient.get(id);
         if(et==null){
-            et=new JobsLock();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

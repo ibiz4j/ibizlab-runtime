@@ -5,17 +5,16 @@ import cn.ibizlab.core.workflow.extensions.domain.FlowUser;
 import cn.ibizlab.core.workflow.extensions.service.WFCoreService;
 import cn.ibizlab.core.workflow.extensions.service.WFModelService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
-import cn.ibizlab.util.client.IBZNotifyFeignClient;
 import cn.ibizlab.util.service.RemoteService;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.flowable.bpmn.model.ExtensionAttribute;
-import org.flowable.bpmn.model.ExtensionElement;
 import org.flowable.bpmn.model.FormProperty;
 import org.flowable.bpmn.model.UserTask;
-import org.flowable.common.engine.api.delegate.event.*;
+import org.flowable.common.engine.api.delegate.event.AbstractFlowableEventListener;
 import org.flowable.common.engine.api.delegate.event.FlowableEngineEventType;
+import org.flowable.common.engine.api.delegate.event.FlowableEvent;
+import org.flowable.common.engine.api.delegate.event.FlowableEventType;
 import org.flowable.common.engine.impl.event.FlowableEntityEventImpl;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.delegate.DelegateExecution;
@@ -28,10 +27,13 @@ import org.flowable.identitylink.api.IdentityLinkType;
 import org.flowable.identitylink.service.impl.persistence.entity.IdentityLinkEntity;
 import org.flowable.task.api.Task;
 import org.flowable.task.service.impl.persistence.entity.TaskEntity;
+import org.flowable.task.service.impl.persistence.entity.TaskEntityImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.expression.MapAccessor;
-import org.springframework.expression.*;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
@@ -160,10 +162,12 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                                     Expression exp = parser.parseExpression(elUserId);
                                     context.addPropertyAccessor(new MapAccessor());
                                     context.setVariable("activedata",executionMap);
-                                    String userId = exp.getValue(context,String.class);
-                                    if (!StringUtils.isEmpty(userId)) {
-                                        processUserIds.add(userId);  // TODO : 默认为单人，需优化为多人
-                                        processRoles.add(group);
+                                    String userIds = exp.getValue(context,String.class);
+                                    for(String userId: userIds.split(",")){
+                                        if (!StringUtils.isEmpty(userId)) {
+                                            processUserIds.add(userId);
+                                            processRoles.add(group);
+                                        }
                                     }
                                 }
                             }
@@ -283,7 +287,7 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                 }
             }
         }
-        else if(evt instanceof FlowableEntityEventImpl && evt.getType() != null &&  FlowableEngineEventType.PROCESS_COMPLETED == evt.getType() )
+        else if(evt instanceof FlowableEntityEventImpl && evt.getType() != null &&  FlowableEngineEventType.PROCESS_COMPLETED == evt.getType())
         {
             FlowableEntityEventImpl event=((FlowableEntityEventImpl) evt);
             FlowableEventType eventType = event.getType();
@@ -318,6 +322,34 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                 System.out.println("流程结束");
             }
 
+        }
+        else if(evt instanceof FlowableActivityEventImpl  && evt.getType() != null && FlowableEngineEventType.ACTIVITY_COMPLETED == evt.getType()) {
+            FlowableActivityEventImpl event = ((FlowableActivityEventImpl) evt);
+            if (event.getExecution().getCurrentFlowElement() instanceof UserTask) {
+                UserTask task = (UserTask) event.getExecution().getCurrentFlowElement();
+                String procFunc = wfCoreService.getParam(task, "form", "procfunc");
+                if (!StringUtils.isEmpty(procFunc) && procFunc.contains("sendcopy")) {
+                    String sendCopyRoles = wfCoreService.getParam(task, "form", "senduser");
+                    if (StringUtils.isEmpty(sendCopyRoles)) {
+                        throw new BadRequestAlertException("获取节点抄送用户失败", "", "");
+                    }
+                    TaskEntity sendCopyTask = new TaskEntityImpl();
+                    List<Task> sendCopyTasks = taskService.createTaskQuery().processInstanceId(event.getProcessInstanceId()).list();
+                    Set<WFMember> sendCopyUsers = wfCoreService.getGroupUsers2(sendCopyRoles, event.getExecution());
+                    if (sendCopyTasks.size() > 0) {
+                        sendCopyTask = wfCoreService.createTask(sendCopyTasks.get(0));
+                    }
+                    sendCopyTask.setId(UUID.randomUUID().toString().toLowerCase());
+                    sendCopyTask.setScopeType("sendcopy");
+                    taskService.saveTask(sendCopyTask);
+                    // 生成待阅抄送给用户
+                    if(!ObjectUtils.isEmpty(sendCopyUsers)){
+                        for (WFMember user : sendCopyUsers) {
+                            taskService.addUserIdentityLink(sendCopyTask.getId(), user.getUserid(), "sendcopy");
+                        }
+                    }
+                }
+            }
         }
         else if(evt instanceof FlowableActivityEventImpl)
         {

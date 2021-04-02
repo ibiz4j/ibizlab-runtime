@@ -100,9 +100,8 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
     @Transactional
     public WFSystem get(String key) {
         WFSystem et = getById(key);
-        if(et == null){
-            et = new WFSystem();
-            et.setPssystemid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

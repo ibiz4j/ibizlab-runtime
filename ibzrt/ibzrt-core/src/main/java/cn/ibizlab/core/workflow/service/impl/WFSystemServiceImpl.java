@@ -88,8 +88,7 @@ public class WFSystemServiceImpl implements IWFSystemService {
     public WFSystem get(String pssystemid) {
 		WFSystem et=wFSystemFeignClient.get(pssystemid);
         if(et==null){
-            et=new WFSystem();
-            et.setPssystemid(pssystemid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), pssystemid);
         }
         else{
         }

@@ -12,4 +12,3 @@ public interface JobsLockMapping extends MappingBase<JobsLockDTO, JobsLock> {
 
 
 }
-

@@ -88,8 +88,7 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
     public SysDepartment get(String deptid) {
 		SysDepartment et=sysDepartmentFeignClient.get(deptid);
         if(et==null){
-            et=new SysDepartment();
-            et.setDeptid(deptid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), deptid);
         }
         else{
         }

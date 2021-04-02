@@ -12,4 +12,3 @@ public interface WFMemberMapping extends MappingBase<WFMemberDTO, WFMember> {
 
 
 }
-

@@ -88,8 +88,7 @@ public class JobsLogServiceImpl implements IJobsLogService {
     public JobsLog get(String id) {
 		JobsLog et=jobsLogFeignClient.get(id);
         if(et==null){
-            et=new JobsLog();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

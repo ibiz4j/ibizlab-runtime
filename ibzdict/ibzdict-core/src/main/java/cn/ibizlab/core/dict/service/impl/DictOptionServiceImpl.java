@@ -107,9 +107,8 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
     @Transactional
     public DictOption get(String key) {
         DictOption et = getById(key);
-        if(et == null){
-            et = new DictOption();
-            et.setValueKey(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

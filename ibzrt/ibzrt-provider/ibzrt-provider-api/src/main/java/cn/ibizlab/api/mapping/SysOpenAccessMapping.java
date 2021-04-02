@@ -12,4 +12,3 @@ public interface SysOpenAccessMapping extends MappingBase<SysOpenAccessDTO, SysO
 
 
 }
-

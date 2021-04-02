@@ -88,8 +88,7 @@ public class SysOpenAccessServiceImpl implements ISysOpenAccessService {
     public SysOpenAccess get(String id) {
 		SysOpenAccess et=sysOpenAccessFeignClient.get(id);
         if(et==null){
-            et=new SysOpenAccess();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

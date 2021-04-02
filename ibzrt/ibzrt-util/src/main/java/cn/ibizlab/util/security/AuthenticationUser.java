@@ -53,6 +53,11 @@ public class AuthenticationUser implements UserDetails
      */
     private String srfdcid;
     /**
+     * 系统标识
+     */
+    private String srfsystemid;
+	/**
+    /**
      * 动态实例标识
      */
     private String srfdynainstid;
@@ -254,6 +259,8 @@ public class AuthenticationUser implements UserDetails
 		if(this.sessionParams==null)
 		{
 			sessionParams = getUserSessionParam();
+			sessionParams.put("srfsystemid",this.getSrfsystemid());
+			sessionParams.put("srfdynainstid",this.getSrfdynainstid());
 			sessionParams.put("srfpersonid", this.getUserid());
 			sessionParams.put("srfpersonname", this.getPersonname());
 			sessionParams.put("srforgsectorid", this.getMdeptid());

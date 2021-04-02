@@ -76,6 +76,20 @@ public class WFMemberSearchContext extends QueryWrapperContext<WFMember> {
             this.getSearchCond().like("personname", n_personname_like);
         }
     }
+	private String n_orgid_eq;//[单位]
+	public void setN_orgid_eq(String n_orgid_eq) {
+        this.n_orgid_eq = n_orgid_eq;
+        if(!ObjectUtils.isEmpty(this.n_orgid_eq)){
+            this.getSearchCond().eq("orgid", n_orgid_eq);
+        }
+    }
+	private String n_mdeptid_eq;//[主部门]
+	public void setN_mdeptid_eq(String n_mdeptid_eq) {
+        this.n_mdeptid_eq = n_mdeptid_eq;
+        if(!ObjectUtils.isEmpty(this.n_mdeptid_eq)){
+            this.getSearchCond().eq("mdeptid", n_mdeptid_eq);
+        }
+    }
 
     /**
 	 * 启用快速搜索

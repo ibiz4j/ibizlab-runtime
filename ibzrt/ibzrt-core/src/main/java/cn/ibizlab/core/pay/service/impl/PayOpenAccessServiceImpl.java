@@ -88,8 +88,7 @@ public class PayOpenAccessServiceImpl implements IPayOpenAccessService {
     public PayOpenAccess get(String id) {
 		PayOpenAccess et=payOpenAccessFeignClient.get(id);
         if(et==null){
-            et=new PayOpenAccess();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

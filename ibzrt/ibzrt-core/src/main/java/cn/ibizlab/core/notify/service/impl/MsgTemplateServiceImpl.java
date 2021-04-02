@@ -88,8 +88,7 @@ public class MsgTemplateServiceImpl implements IMsgTemplateService {
     public MsgTemplate get(String tid) {
 		MsgTemplate et=msgTemplateFeignClient.get(tid);
         if(et==null){
-            et=new MsgTemplate();
-            et.setTid(tid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), tid);
         }
         else{
         }

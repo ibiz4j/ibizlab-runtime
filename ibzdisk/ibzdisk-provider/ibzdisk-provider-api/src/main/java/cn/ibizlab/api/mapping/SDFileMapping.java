@@ -12,4 +12,3 @@ public interface SDFileMapping extends MappingBase<SDFileDTO, SDFile> {
 
 
 }
-

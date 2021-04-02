@@ -88,8 +88,7 @@ public class WFMemberServiceImpl implements IWFMemberService {
     public WFMember get(String memberid) {
 		WFMember et=wFMemberFeignClient.get(memberid);
         if(et==null){
-            et=new WFMember();
-            et.setMemberid(memberid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), memberid);
         }
         else{
         }

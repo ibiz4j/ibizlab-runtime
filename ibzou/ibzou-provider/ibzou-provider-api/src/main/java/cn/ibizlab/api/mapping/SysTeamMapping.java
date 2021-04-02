@@ -12,4 +12,3 @@ public interface SysTeamMapping extends MappingBase<SysTeamDTO, SysTeam> {
 
 
 }
-

@@ -125,9 +125,8 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Transactional
     public SysOrganization get(String key) {
         SysOrganization et = getById(key);
-        if(et == null){
-            et = new SysOrganization();
-            et.setOrgid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
             et.setDepts(sysdepartmentService.selectByOrgid(key));
@@ -229,6 +228,15 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
     @Override
     public Page<SysOrganization> searchDefault(SysOrganizationSearchContext context) {
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysOrganization> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+        return new PageImpl<SysOrganization>(pages.getRecords(), context.getPageable(), pages.getTotal());
+    }
+
+    /**
+     * 查询集合 顶级单位
+     */
+    @Override
+    public Page<SysOrganization> searchTopOrg(SysOrganizationSearchContext context) {
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysOrganization> pages=baseMapper.searchTopOrg(context.getPages(),context,context.getSelectCond());
         return new PageImpl<SysOrganization>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 

@@ -113,9 +113,8 @@ public class SysTeamMemberServiceImpl extends ServiceImpl<SysTeamMemberMapper, S
     @Transactional
     public SysTeamMember get(String key) {
         SysTeamMember et = getById(key);
-        if(et == null){
-            et = new SysTeamMember();
-            et.setTeammemberid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

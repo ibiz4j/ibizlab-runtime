@@ -100,9 +100,8 @@ public class JobsLockServiceImpl extends ServiceImpl<JobsLockMapper, JobsLock> i
     @Transactional
     public JobsLock get(String key) {
         JobsLock et = getById(key);
-        if(et == null){
-            et = new JobsLock();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

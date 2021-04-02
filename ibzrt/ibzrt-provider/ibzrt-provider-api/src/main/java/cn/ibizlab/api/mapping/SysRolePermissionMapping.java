@@ -12,4 +12,3 @@ public interface SysRolePermissionMapping extends MappingBase<SysRolePermissionD
 
 
 }
-

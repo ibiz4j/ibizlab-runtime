@@ -85,6 +85,13 @@ public class SysDepartmentSearchContext extends QueryWrapperContext<SysDepartmen
 			}
         }
     }
+	private String n_bcode_eq;//[业务编码]
+	public void setN_bcode_eq(String n_bcode_eq) {
+        this.n_bcode_eq = n_bcode_eq;
+        if(!ObjectUtils.isEmpty(this.n_bcode_eq)){
+            this.getSearchCond().eq("bcode", n_bcode_eq);
+        }
+    }
 	private String n_bcode_like;//[业务编码]
 	public void setN_bcode_like(String n_bcode_like) {
         this.n_bcode_like = n_bcode_like;

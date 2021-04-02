@@ -12,4 +12,3 @@ public interface SysAppMapping extends MappingBase<SysAppDTO, SysApp> {
 
 
 }
-

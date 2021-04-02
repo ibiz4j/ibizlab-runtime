@@ -12,4 +12,3 @@ public interface MsgTemplateMapping extends MappingBase<MsgTemplateDTO, MsgTempl
 
 
 }
-

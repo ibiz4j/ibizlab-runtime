@@ -12,4 +12,3 @@ public interface WFUserMapping extends MappingBase<WFUserDTO, WFUser> {
 
 
 }
-

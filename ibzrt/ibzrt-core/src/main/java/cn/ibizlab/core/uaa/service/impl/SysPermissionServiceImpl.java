@@ -88,8 +88,7 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
     public SysPermission get(String permissionid) {
 		SysPermission et=sysPermissionFeignClient.get(permissionid);
         if(et==null){
-            et=new SysPermission();
-            et.setPermissionid(permissionid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), permissionid);
         }
         else{
         }

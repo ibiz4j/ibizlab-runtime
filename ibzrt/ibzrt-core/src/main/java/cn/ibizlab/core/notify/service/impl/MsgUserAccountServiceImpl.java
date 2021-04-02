@@ -88,8 +88,7 @@ public class MsgUserAccountServiceImpl implements IMsgUserAccountService {
     public MsgUserAccount get(String id) {
 		MsgUserAccount et=msgUserAccountFeignClient.get(id);
         if(et==null){
-            et=new MsgUserAccount();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

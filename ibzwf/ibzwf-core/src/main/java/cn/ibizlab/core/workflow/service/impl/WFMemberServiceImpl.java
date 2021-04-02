@@ -110,9 +110,8 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
     @Transactional
     public WFMember get(String key) {
         WFMember et = getById(key);
-        if(et == null){
-            et = new WFMember();
-            et.setMemberid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

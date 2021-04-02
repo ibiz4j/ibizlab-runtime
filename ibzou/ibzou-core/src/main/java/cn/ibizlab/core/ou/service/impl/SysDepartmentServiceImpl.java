@@ -121,9 +121,8 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
     @Transactional
     public SysDepartment get(String key) {
         SysDepartment et = getById(key);
-        if(et == null){
-            et = new SysDepartment();
-            et.setDeptid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

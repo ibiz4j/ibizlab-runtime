@@ -103,9 +103,8 @@ public class MsgOpenAccessServiceImpl extends ServiceImpl<MsgOpenAccessMapper, M
     @Transactional
     public MsgOpenAccess get(String key) {
         MsgOpenAccess et = getById(key);
-        if(et == null){
-            et = new MsgOpenAccess();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

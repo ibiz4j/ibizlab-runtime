@@ -107,9 +107,8 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
     @Transactional
     public MsgTemplate get(String key) {
         MsgTemplate et = getById(key);
-        if(et == null){
-            et = new MsgTemplate();
-            et.setTid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

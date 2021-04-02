@@ -100,9 +100,8 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
     @Transactional
     public SysOpenAccess get(String key) {
         SysOpenAccess et = getById(key);
-        if(et == null){
-            et = new SysOpenAccess();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

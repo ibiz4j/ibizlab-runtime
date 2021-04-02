@@ -88,8 +88,7 @@ public class DictOptionServiceImpl implements IDictOptionService {
     public DictOption get(String value_key) {
 		DictOption et=dictOptionFeignClient.get(value_key);
         if(et==null){
-            et=new DictOption();
-            et.setValueKey(value_key);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), value_key);
         }
         else{
         }

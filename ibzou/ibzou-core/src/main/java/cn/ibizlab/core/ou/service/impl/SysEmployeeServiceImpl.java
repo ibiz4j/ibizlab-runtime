@@ -119,9 +119,8 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
     @Transactional
     public SysEmployee get(String key) {
         SysEmployee et = getById(key);
-        if(et == null){
-            et = new SysEmployee();
-            et.setUserid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

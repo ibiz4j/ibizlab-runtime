@@ -88,8 +88,7 @@ public class SysDeptMemberServiceImpl implements ISysDeptMemberService {
     public SysDeptMember get(String memberid) {
 		SysDeptMember et=sysDeptMemberFeignClient.get(memberid);
         if(et==null){
-            et=new SysDeptMember();
-            et.setMemberid(memberid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), memberid);
         }
         else{
         }

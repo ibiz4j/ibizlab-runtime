@@ -100,9 +100,8 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
     @Transactional
     public SysAuthLog get(String key) {
         SysAuthLog et = getById(key);
-        if(et == null){
-            et = new SysAuthLog();
-            et.setLogid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -88,8 +88,7 @@ public class SysAuthLogServiceImpl implements ISysAuthLogService {
     public SysAuthLog get(String logid) {
 		SysAuthLog et=sysAuthLogFeignClient.get(logid);
         if(et==null){
-            et=new SysAuthLog();
-            et.setLogid(logid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), logid);
         }
         else{
         }

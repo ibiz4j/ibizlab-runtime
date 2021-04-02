@@ -100,9 +100,8 @@ public class MsgUserAccountServiceImpl extends ServiceImpl<MsgUserAccountMapper,
     @Transactional
     public MsgUserAccount get(String key) {
         MsgUserAccount et = getById(key);
-        if(et == null){
-            et = new MsgUserAccount();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -88,8 +88,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     public SysRole get(String roleid) {
 		SysRole et=sysRoleFeignClient.get(roleid);
         if(et==null){
-            et=new SysRole();
-            et.setRoleid(roleid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), roleid);
         }
         else{
         }

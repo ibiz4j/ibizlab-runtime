@@ -12,4 +12,3 @@ public interface WFProcessDefinitionMapping extends MappingBase<WFProcessDefinit
 
 
 }
-

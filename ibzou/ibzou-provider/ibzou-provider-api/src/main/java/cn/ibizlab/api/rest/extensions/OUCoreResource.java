@@ -1,9 +1,8 @@
 package cn.ibizlab.api.rest.extensions;
 
-import cn.ibizlab.core.ou.domain.SysDepartment;
 import cn.ibizlab.core.ou.domain.SysEmployee;
-import cn.ibizlab.core.ou.domain.SysOrganization;
 import cn.ibizlab.core.ou.extensions.domain.*;
+import cn.ibizlab.core.ou.extensions.mapping.SysEmp2NodeMapping;
 import cn.ibizlab.core.ou.extensions.service.OUCoreService;
 import cn.ibizlab.core.ou.filter.SysDepartmentSearchContext;
 import cn.ibizlab.core.ou.filter.SysEmployeeSearchContext;
@@ -11,25 +10,20 @@ import cn.ibizlab.core.ou.filter.SysOrganizationSearchContext;
 import cn.ibizlab.core.ou.service.ISysDepartmentService;
 import cn.ibizlab.core.ou.service.ISysEmployeeService;
 import cn.ibizlab.core.ou.service.ISysOrganizationService;
-import cn.ibizlab.util.domain.DTOBase;
-import cn.ibizlab.util.domain.EntityBase;
 import cn.ibizlab.util.filter.QueryWrapperContext;
 import cn.ibizlab.util.filter.SearchContextBase;
-import cn.ibizlab.util.helper.DataObject;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 public class OUCoreResource
@@ -42,10 +36,11 @@ public class OUCoreResource
     @Autowired
     private ISysEmployeeService iibzEmployeeService;
 
+    @Autowired
+    private SysEmp2NodeMapping emp2NodeMapping;
 
     @Autowired
     private ISysOrganizationService iibzOrganizationService;
-
 
     @Autowired
     private ISysDepartmentService iibzDepartmentService;
@@ -180,6 +175,12 @@ public class OUCoreResource
         return ResponseEntity.ok(list);
     }
 
+    @GetMapping(value={"/sysdepartments/{deptId}/sysemployees/picker"})
+    public ResponseEntity<List<EmpNode>> getDeptEmpPicker(@PathVariable("deptId") String deptId)
+    {
+        List<SysEmployee> list=ouCoreService.getEmpByDept(deptId);
+        return ResponseEntity.ok(emp2NodeMapping.toDto(list));
+    }
 
     private Map<String, Set<String>> getMaps(String orgid,String deptid)
     {

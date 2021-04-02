@@ -12,4 +12,3 @@ public interface SysDeptMemberMapping extends MappingBase<SysDeptMemberDTO, SysD
 
 
 }
-

@@ -12,4 +12,3 @@ public interface SysTeamMemberMapping extends MappingBase<SysTeamMemberDTO, SysT
 
 
 }
-

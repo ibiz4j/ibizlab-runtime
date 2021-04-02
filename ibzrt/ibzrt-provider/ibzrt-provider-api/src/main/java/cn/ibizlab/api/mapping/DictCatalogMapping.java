@@ -12,4 +12,3 @@ public interface DictCatalogMapping extends MappingBase<DictCatalogDTO, DictCata
 
 
 }
-

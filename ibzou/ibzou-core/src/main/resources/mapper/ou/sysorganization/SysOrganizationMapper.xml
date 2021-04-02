@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper	namespace="cn.ibizlab.core.ou.mapper.SysOrganizationMapper">
 
     <!--该方法用于重写mybatis中selectById方法，以实现查询逻辑属性-->
 	<select id="selectById"  resultMap="SysOrganizationResultMap" databaseId="mysql">
-        <![CDATA[select t1.* from (SELECT t1.`CREATEDATE`, t1.`DOMAINS`, t1.`ENABLE`, t1.`ISVALID`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  ) t1 where orgid=#{id}]]>
+        <![CDATA[select t1.* from (SELECT t1.`CREATEDATE`, t1.`DOMAINS`, t1.`ENABLE`, t1.`ISVALID`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN `IBZORG` t11 ON t1.`PORGID` = t11.`ORGID`  ) t1 where orgid=#{id}]]>
     </select>
 	<select id="selectById"  resultMap="SysOrganizationResultMap" databaseId="oracle">
         <![CDATA[select t1.* from (SELECT t1.CREATEDATE, t1.DOMAINS, t1.ENABLE, t1.ISVALID, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  ) t1 where orgid=#{id}]]>
@@ -42,9 +41,18 @@
          <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
      </select>
 
+    <!--数据集合[TopOrg]-->
+	 <select id="searchTopOrg"  parameterType="cn.ibizlab.core.ou.filter.SysOrganizationSearchContext"  resultMap="SysOrganizationResultMap">
+         select t1.* from (
+                <include refid="TopOrg" />
+         )t1
+         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+     </select>
+
     <!--数据查询[Default]-->
     <sql id="Default" databaseId="mysql">
-		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`DOMAINS`, t1.`ENABLE`, t1.`ISVALID`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`DOMAINS`, t1.`ENABLE`, t1.`ISVALID`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN `IBZORG` t11 ON t1.`PORGID` = t11.`ORGID`  
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
@@ -60,9 +68,30 @@
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>
+    <!--数据查询[TopOrg]-->
+    <sql id="TopOrg" databaseId="mysql">
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`DOMAINS`, t1.`ENABLE`, t1.`ISVALID`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN `IBZORG` t11 ON t1.`PORGID` = t11.`ORGID`  
+					 WHERE 	t1.ENABLE = 1
+						 AND ( t1.`PORGID` IS NULL )
+			]]>
+    </sql>
+    <!--数据查询[TopOrg]-->
+    <sql id="TopOrg" databaseId="oracle">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.DOMAINS, t1.ENABLE, t1.ISVALID, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
+					 WHERE 	t1.ENABLE = 1
+						 AND ( t1.PORGID IS NULL )
+			]]>
+    </sql>
+    <!--数据查询[TopOrg]-->
+    <sql id="TopOrg" databaseId="postgresql">
+		<![CDATA[ SELECT t1.CREATEDATE, t1.DOMAINS, t1.ENABLE, t1.ISVALID, t1.ORGCODE, t1.ORGID, t1.ORGLEVEL, t1.ORGNAME, t1.PORGID, t11.ORGNAME AS PORGNAME, t1.SHORTNAME, t1.SHOWORDER, t1.UPDATEDATE FROM IBZORG t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
+					 WHERE 	t1.ENABLE = 1
+						 AND ( t1.PORGID IS NULL )
+			]]>
+    </sql>
     <!--数据查询[View]-->
     <sql id="View" databaseId="mysql">
-		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`DOMAINS`, t1.`ENABLE`, t1.`ISVALID`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN IBZORG t11 ON t1.PORGID = t11.ORGID  
+		<![CDATA[ SELECT t1.`CREATEDATE`, t1.`DOMAINS`, t1.`ENABLE`, t1.`ISVALID`, t1.`ORGCODE`, t1.`ORGID`, t1.`ORGLEVEL`, t1.`ORGNAME`, t1.`PORGID`, t11.`ORGNAME` AS `PORGNAME`, t1.`SHORTNAME`, t1.`SHOWORDER`, t1.`UPDATEDATE` FROM `IBZORG` t1  LEFT JOIN `IBZORG` t11 ON t1.`PORGID` = t11.`ORGID`  
 					 WHERE 	t1.ENABLE = 1
 			]]>
     </sql>

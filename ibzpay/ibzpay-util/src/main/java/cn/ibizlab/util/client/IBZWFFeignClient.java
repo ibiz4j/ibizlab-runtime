@@ -24,4 +24,5 @@ public interface IBZWFFeignClient
 	JSONObject wfstart(@PathVariable("system") String system, @PathVariable("appname") String appname,
 					   @PathVariable("entity") String entity,
 					   @PathVariable("businessKey") String businessKey, @RequestBody JSONObject instance);
+
 }

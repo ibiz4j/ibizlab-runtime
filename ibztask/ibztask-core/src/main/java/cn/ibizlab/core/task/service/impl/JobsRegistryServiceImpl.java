@@ -100,9 +100,8 @@ public class JobsRegistryServiceImpl extends ServiceImpl<JobsRegistryMapper, Job
     @Transactional
     public JobsRegistry get(String key) {
         JobsRegistry et = getById(key);
-        if(et == null){
-            et = new JobsRegistry();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -12,4 +12,3 @@ public interface MetaDynamicModelMapping extends MappingBase<MetaDynamicModelDTO
 
 
 }
-

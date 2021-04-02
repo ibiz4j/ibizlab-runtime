@@ -103,9 +103,8 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
     @Transactional
     public WFUser get(String key) {
         WFUser et = getById(key);
-        if(et == null){
-            et = new WFUser();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -136,7 +136,6 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFMember-searchDefault-all') and hasPermission(#context,'ibzwf-WFMember-Get')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"成员" } ,notes = "获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfmembers/fetchdefault")
 	public ResponseEntity<List<WFMemberDTO>> fetchDefault(WFMemberSearchContext context) {
@@ -149,7 +148,6 @@ public class WFMemberResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFMember-searchDefault-all') and hasPermission(#context,'ibzwf-WFMember-Get')")
 	@ApiOperation(value = "查询DEFAULT", tags = {"成员" } ,notes = "查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfmembers/searchdefault")
 	public ResponseEntity<Page<WFMemberDTO>> searchDefault(@RequestBody WFMemberSearchContext context) {
@@ -265,7 +263,6 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFMember-searchDefault-all') and hasPermission(#context,'ibzwf-WFMember-Get')")
 	@ApiOperation(value = "根据角色/用户组获取DEFAULT", tags = {"成员" } ,notes = "根据角色/用户组获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfgroups/{wfgroup_id}/wfmembers/fetchdefault")
 	public ResponseEntity<List<WFMemberDTO>> fetchWFMemberDefaultByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id,WFMemberSearchContext context) {
@@ -279,7 +276,6 @@ public class WFMemberResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFMember-searchDefault-all') and hasPermission(#context,'ibzwf-WFMember-Get')")
 	@ApiOperation(value = "根据角色/用户组查询DEFAULT", tags = {"成员" } ,notes = "根据角色/用户组查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfgroups/{wfgroup_id}/wfmembers/searchdefault")
 	public ResponseEntity<Page<WFMemberDTO>> searchWFMemberDefaultByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberSearchContext context) {
@@ -393,7 +389,6 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFMember-searchDefault-all') and hasPermission(#context,'ibzwf-WFMember-Get')")
 	@ApiOperation(value = "根据用户获取DEFAULT", tags = {"成员" } ,notes = "根据用户获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/wfusers/{wfuser_id}/wfmembers/fetchdefault")
 	public ResponseEntity<List<WFMemberDTO>> fetchWFMemberDefaultByWFUser(@PathVariable("wfuser_id") String wfuser_id,WFMemberSearchContext context) {
@@ -407,7 +402,6 @@ public class WFMemberResource {
                 .body(list);
 	}
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFMember-searchDefault-all') and hasPermission(#context,'ibzwf-WFMember-Get')")
 	@ApiOperation(value = "根据用户查询DEFAULT", tags = {"成员" } ,notes = "根据用户查询DEFAULT")
     @RequestMapping(method= RequestMethod.POST , value="/wfusers/{wfuser_id}/wfmembers/searchdefault")
 	public ResponseEntity<Page<WFMemberDTO>> searchWFMemberDefaultByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberSearchContext context) {

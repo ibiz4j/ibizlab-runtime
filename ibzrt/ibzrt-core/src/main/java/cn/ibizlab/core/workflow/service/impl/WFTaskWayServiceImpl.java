@@ -88,8 +88,7 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
     public WFTaskWay get(String sequenceflowid) {
 		WFTaskWay et=wFTaskWayFeignClient.get(sequenceflowid);
         if(et==null){
-            et=new WFTaskWay();
-            et.setSequenceflowid(sequenceflowid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), sequenceflowid);
         }
         else{
         }

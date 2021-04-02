@@ -110,9 +110,8 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
     @Transactional
     public SysUserRole get(String key) {
         SysUserRole et = getById(key);
-        if(et == null){
-            et = new SysUserRole();
-            et.setUserroleid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -102,9 +102,8 @@ public class MetaDynamicModelServiceImpl extends ServiceImpl<MetaDynamicModelMap
     @Transactional
     public MetaDynamicModel get(String key) {
         MetaDynamicModel et = getById(key);
-        if(et == null){
-            et = new MetaDynamicModel();
-            et.setConfigid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

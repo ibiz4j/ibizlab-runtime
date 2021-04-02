@@ -88,8 +88,7 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
     public SysUserRole get(String userroleid) {
 		SysUserRole et=sysUserRoleFeignClient.get(userroleid);
         if(et==null){
-            et=new SysUserRole();
-            et.setUserroleid(userroleid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), userroleid);
         }
         else{
         }

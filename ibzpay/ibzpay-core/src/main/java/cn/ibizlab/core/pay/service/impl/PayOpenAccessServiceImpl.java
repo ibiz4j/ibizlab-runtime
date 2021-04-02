@@ -103,9 +103,8 @@ public class PayOpenAccessServiceImpl extends ServiceImpl<PayOpenAccessMapper, P
     @Transactional
     public PayOpenAccess get(String key) {
         PayOpenAccess et = getById(key);
-        if(et == null){
-            et = new PayOpenAccess();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

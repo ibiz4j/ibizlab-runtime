@@ -12,4 +12,3 @@ public interface MsgUserAccountMapping extends MappingBase<MsgUserAccountDTO, Ms
 
 
 }
-

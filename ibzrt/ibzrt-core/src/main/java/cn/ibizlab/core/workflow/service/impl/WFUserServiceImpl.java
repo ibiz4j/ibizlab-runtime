@@ -88,8 +88,7 @@ public class WFUserServiceImpl implements IWFUserService {
     public WFUser get(String id) {
 		WFUser et=wFUserFeignClient.get(id);
         if(et==null){
-            et=new WFUser();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

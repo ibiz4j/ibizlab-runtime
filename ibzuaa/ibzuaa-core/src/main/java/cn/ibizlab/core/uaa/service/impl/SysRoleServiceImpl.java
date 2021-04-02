@@ -116,9 +116,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional
     public SysRole get(String key) {
         SysRole et = getById(key);
-        if(et == null){
-            et = new SysRole();
-            et.setRoleid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

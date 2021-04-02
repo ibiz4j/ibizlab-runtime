@@ -12,4 +12,3 @@ public interface SysUserMapping extends MappingBase<SysUserDTO, SysUser> {
 
 
 }
-

@@ -146,6 +146,14 @@ public class SysDeptMemberResource {
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-SaveDeptMember-all')")
+    @ApiOperation(value = "批量处理[保存部门成员]", tags = {"部门成员" },  notes = "批量处理[保存部门成员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysdeptmembers/savedeptmemberbatch")
+    public ResponseEntity<Boolean> saveDeptMemberBatch(@RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
+        List<SysDeptMember> domains = sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
+        boolean result = sysdeptmemberService.saveDeptMemberBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-searchDefault-all')")
 	@ApiOperation(value = "获取DEFAULT", tags = {"部门成员" } ,notes = "获取DEFAULT")
@@ -286,6 +294,13 @@ public class SysDeptMemberResource {
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
     }
+    @ApiOperation(value = "批量处理[根据部门部门成员]", tags = {"部门成员" },  notes = "批量处理[根据部门部门成员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysdeptmembers/savedeptmemberbatch")
+    public ResponseEntity<Boolean> saveDeptMemberBySysDepartment(@PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
+        List<SysDeptMember> domains = sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
+        boolean result = sysdeptmemberService.saveDeptMemberBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-searchDefault-all')")
 	@ApiOperation(value = "根据部门获取DEFAULT", tags = {"部门成员" } ,notes = "根据部门获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysdepartments/{sysdepartment_id}/sysdeptmembers/fetchdefault")
@@ -423,6 +438,13 @@ public class SysDeptMemberResource {
         domain = sysdeptmemberService.saveDeptMember(domain) ;
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
+    }
+    @ApiOperation(value = "批量处理[根据人员部门成员]", tags = {"部门成员" },  notes = "批量处理[根据人员部门成员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/sysdeptmembers/savedeptmemberbatch")
+    public ResponseEntity<Boolean> saveDeptMemberBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
+        List<SysDeptMember> domains = sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
+        boolean result = sysdeptmemberService.saveDeptMemberBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-searchDefault-all')")
 	@ApiOperation(value = "根据人员获取DEFAULT", tags = {"部门成员" } ,notes = "根据人员获取DEFAULT")
@@ -562,6 +584,13 @@ public class SysDeptMemberResource {
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
     }
+    @ApiOperation(value = "批量处理[根据部门人员部门成员]", tags = {"部门成员" },  notes = "批量处理[根据部门人员部门成员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/savedeptmemberbatch")
+    public ResponseEntity<Boolean> saveDeptMemberBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
+        List<SysDeptMember> domains = sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
+        boolean result = sysdeptmemberService.saveDeptMemberBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-searchDefault-all')")
 	@ApiOperation(value = "根据部门人员获取DEFAULT", tags = {"部门成员" } ,notes = "根据部门人员获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/fetchdefault")
@@ -699,6 +728,13 @@ public class SysDeptMemberResource {
         domain = sysdeptmemberService.saveDeptMember(domain) ;
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
+    }
+    @ApiOperation(value = "批量处理[根据单位机构部门部门成员]", tags = {"部门成员" },  notes = "批量处理[根据单位机构部门部门成员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysdeptmembers/savedeptmemberbatch")
+    public ResponseEntity<Boolean> saveDeptMemberBySysOrganizationSysDepartment(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
+        List<SysDeptMember> domains = sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
+        boolean result = sysdeptmemberService.saveDeptMemberBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构部门获取DEFAULT", tags = {"部门成员" } ,notes = "根据单位机构部门获取DEFAULT")
@@ -838,6 +874,13 @@ public class SysDeptMemberResource {
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
     }
+    @ApiOperation(value = "批量处理[根据单位机构人员部门成员]", tags = {"部门成员" },  notes = "批量处理[根据单位机构人员部门成员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/sysdeptmembers/savedeptmemberbatch")
+    public ResponseEntity<Boolean> saveDeptMemberBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
+        List<SysDeptMember> domains = sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
+        boolean result = sysdeptmemberService.saveDeptMemberBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构人员获取DEFAULT", tags = {"部门成员" } ,notes = "根据单位机构人员获取DEFAULT")
     @RequestMapping(method= RequestMethod.GET , value="/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/sysdeptmembers/fetchdefault")
@@ -975,6 +1018,13 @@ public class SysDeptMemberResource {
         domain = sysdeptmemberService.saveDeptMember(domain) ;
         sysdeptmemberdto = sysdeptmemberMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysdeptmemberdto);
+    }
+    @ApiOperation(value = "批量处理[根据单位机构部门人员部门成员]", tags = {"部门成员" },  notes = "批量处理[根据单位机构部门人员部门成员]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/sysdeptmembers/savedeptmemberbatch")
+    public ResponseEntity<Boolean> saveDeptMemberBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody List<SysDeptMemberDTO> sysdeptmemberdtos) {
+        List<SysDeptMember> domains = sysdeptmemberMapping.toDomain(sysdeptmemberdtos);
+        boolean result = sysdeptmemberService.saveDeptMemberBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysDeptMember-searchDefault-all')")
 	@ApiOperation(value = "根据单位机构部门人员获取DEFAULT", tags = {"部门成员" } ,notes = "根据单位机构部门人员获取DEFAULT")

@@ -106,9 +106,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Transactional
     public SysUser get(String key) {
         SysUser et = getById(key);
-        if(et == null){
-            et = new SysUser();
-            et.setUserid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }
@@ -128,6 +127,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Transactional
     public SysUser deleteSysUser(SysUser et) {
          return et ;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteSysUserBatch(List<SysUser> etList) {
+        for(SysUser et : etList) {
+            deleteSysUser(et);
+        }
+        return true;
     }
 
     @Override
@@ -194,6 +202,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Transactional
     public SysUser saveSysUser(SysUser et) {
          return et ;
+    }
+
+    @Override
+    @Transactional
+    public boolean saveSysUserBatch(List<SysUser> etList) {
+        for(SysUser et : etList) {
+            saveSysUser(et);
+        }
+        return true;
     }
 
 

@@ -12,4 +12,3 @@ public interface SysPSSystemMapping extends MappingBase<SysPSSystemDTO, SysPSSys
 
 
 }
-

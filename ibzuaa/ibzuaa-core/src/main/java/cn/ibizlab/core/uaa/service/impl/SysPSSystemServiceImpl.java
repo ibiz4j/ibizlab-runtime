@@ -100,9 +100,8 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
     @Transactional
     public SysPSSystem get(String key) {
         SysPSSystem et = getById(key);
-        if(et == null){
-            et = new SysPSSystem();
-            et.setPssystemid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -88,8 +88,7 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
     public JobsInfo get(String id) {
 		JobsInfo et=jobsInfoFeignClient.get(id);
         if(et==null){
-            et=new JobsInfo();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

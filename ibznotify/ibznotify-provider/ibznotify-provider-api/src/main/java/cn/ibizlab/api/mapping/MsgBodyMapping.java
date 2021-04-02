@@ -12,4 +12,3 @@ public interface MsgBodyMapping extends MappingBase<MsgBodyDTO, MsgBody> {
 
 
 }
-

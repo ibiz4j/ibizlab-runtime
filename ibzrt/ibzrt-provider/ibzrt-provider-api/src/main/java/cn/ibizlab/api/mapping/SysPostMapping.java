@@ -12,4 +12,3 @@ public interface SysPostMapping extends MappingBase<SysPostDTO, SysPost> {
 
 
 }
-

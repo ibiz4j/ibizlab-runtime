@@ -12,4 +12,3 @@ public interface WFREModelMapping extends MappingBase<WFREModelDTO, WFREModel> {
 
 
 }
-

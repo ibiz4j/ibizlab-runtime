@@ -157,6 +157,28 @@ public class SysOrganizationResource {
                 .body(new PageImpl(sysorganizationMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysOrganization-searchTopOrg-all') and hasPermission(#context,'ibzou-SysOrganization-Get')")
+	@ApiOperation(value = "获取顶级单位", tags = {"单位机构" } ,notes = "获取顶级单位")
+    @RequestMapping(method= RequestMethod.GET , value="/sysorganizations/fetchtoporg")
+	public ResponseEntity<List<SysOrganizationDTO>> fetchTopOrg(SysOrganizationSearchContext context) {
+        Page<SysOrganization> domains = sysorganizationService.searchTopOrg(context) ;
+        List<SysOrganizationDTO> list = sysorganizationMapping.toDto(domains.getContent());
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+                .header("x-total", String.valueOf(domains.getTotalElements()))
+                .body(list);
+	}
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzou-SysOrganization-searchTopOrg-all') and hasPermission(#context,'ibzou-SysOrganization-Get')")
+	@ApiOperation(value = "查询顶级单位", tags = {"单位机构" } ,notes = "查询顶级单位")
+    @RequestMapping(method= RequestMethod.POST , value="/sysorganizations/searchtoporg")
+	public ResponseEntity<Page<SysOrganizationDTO>> searchTopOrg(@RequestBody SysOrganizationSearchContext context) {
+        Page<SysOrganization> domains = sysorganizationService.searchTopOrg(context) ;
+	    return ResponseEntity.status(HttpStatus.OK)
+                .body(new PageImpl(sysorganizationMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
+	}
+
 
 
 }

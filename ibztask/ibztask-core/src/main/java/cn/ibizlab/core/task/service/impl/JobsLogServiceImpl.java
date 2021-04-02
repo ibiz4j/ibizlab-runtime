@@ -100,9 +100,8 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
     @Transactional
     public JobsLog get(String key) {
         JobsLog et = getById(key);
-        if(et == null){
-            et = new JobsLog();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

@@ -88,8 +88,7 @@ public class SysTeamServiceImpl implements ISysTeamService {
     public SysTeam get(String teamid) {
 		SysTeam et=sysTeamFeignClient.get(teamid);
         if(et==null){
-            et=new SysTeam();
-            et.setTeamid(teamid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), teamid);
         }
         else{
         }

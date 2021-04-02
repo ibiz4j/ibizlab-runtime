@@ -131,6 +131,14 @@ public class SysUserResource {
         sysuserdto = sysuserMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysuserdto);
     }
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-DeleteSysUser-all')")
+    @ApiOperation(value = "批量处理[删除用户信息]", tags = {"系统用户" },  notes = "批量处理[删除用户信息]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/deletesysuserbatch")
+    public ResponseEntity<Boolean> deleteSysUserBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
+        List<SysUser> domains = sysuserMapping.toDomain(sysuserdtos);
+        boolean result = sysuserService.deleteSysUserBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 
     @ApiOperation(value = "保存系统用户", tags = {"系统用户" },  notes = "保存系统用户")
 	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/save")
@@ -156,6 +164,14 @@ public class SysUserResource {
         domain = sysuserService.saveSysUser(domain);
         sysuserdto = sysuserMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(sysuserdto);
+    }
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-SaveSysUser-all')")
+    @ApiOperation(value = "批量处理[保存用户信息]", tags = {"系统用户" },  notes = "批量处理[保存用户信息]")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/savesysuserbatch")
+    public ResponseEntity<Boolean> saveSysUserBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
+        List<SysUser> domains = sysuserMapping.toDomain(sysuserdtos);
+        boolean result = sysuserService.saveSysUserBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysUser-searchDefault-all') and hasPermission(#context,'ibzuaa-SysUser-Get')")

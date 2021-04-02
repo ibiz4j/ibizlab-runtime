@@ -88,8 +88,7 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
     public SysOrganization get(String orgid) {
 		SysOrganization et=sysOrganizationFeignClient.get(orgid);
         if(et==null){
-            et=new SysOrganization();
-            et.setOrgid(orgid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), orgid);
         }
         else{
         }

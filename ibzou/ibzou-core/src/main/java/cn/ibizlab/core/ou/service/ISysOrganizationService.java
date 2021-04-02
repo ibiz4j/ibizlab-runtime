@@ -42,6 +42,7 @@ public interface ISysOrganizationService extends IService<SysOrganization> {
     @CacheEvict(value = "sysorganization",allEntries = true)
     void saveBatch(List<SysOrganization> list);
     Page<SysOrganization> searchDefault(SysOrganizationSearchContext context);
+    Page<SysOrganization> searchTopOrg(SysOrganizationSearchContext context);
     List<SysOrganization> selectByParentorgid(String orgid);
     List<SysOrganization> selectByParentorgid(Collection<String> ids);
     @CacheEvict(value = "sysorganization", allEntries = true)

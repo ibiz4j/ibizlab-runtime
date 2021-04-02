@@ -88,8 +88,7 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
     public SysRolePermission get(String rolepermissionid) {
 		SysRolePermission et=sysRolePermissionFeignClient.get(rolepermissionid);
         if(et==null){
-            et=new SysRolePermission();
-            et.setRolepermissionid(rolepermissionid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), rolepermissionid);
         }
         else{
         }

@@ -88,8 +88,7 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
     public SysEmployee get(String userid) {
 		SysEmployee et=sysEmployeeFeignClient.get(userid);
         if(et==null){
-            et=new SysEmployee();
-            et.setUserid(userid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), userid);
         }
         else{
         }

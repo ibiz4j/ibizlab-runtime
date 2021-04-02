@@ -88,8 +88,7 @@ public class DictCatalogServiceImpl implements IDictCatalogService {
     public DictCatalog get(String id) {
 		DictCatalog et=dictCatalogFeignClient.get(id);
         if(et==null){
-            et=new DictCatalog();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

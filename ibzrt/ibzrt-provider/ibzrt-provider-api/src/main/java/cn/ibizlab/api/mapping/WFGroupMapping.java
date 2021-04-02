@@ -12,4 +12,3 @@ public interface WFGroupMapping extends MappingBase<WFGroupDTO, WFGroup> {
 
 
 }
-

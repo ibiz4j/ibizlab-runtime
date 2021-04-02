@@ -12,4 +12,3 @@ public interface JobsLogMapping extends MappingBase<JobsLogDTO, JobsLog> {
 
 
 }
-

@@ -88,8 +88,7 @@ public class SysUserServiceImpl implements ISysUserService {
     public SysUser get(String userid) {
 		SysUser et=sysUserFeignClient.get(userid);
         if(et==null){
-            et=new SysUser();
-            et.setUserid(userid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), userid);
         }
         else{
         }

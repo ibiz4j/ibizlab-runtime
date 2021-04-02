@@ -12,4 +12,3 @@ public interface SysAuthLogMapping extends MappingBase<SysAuthLogDTO, SysAuthLog
 
 
 }
-

@@ -4,7 +4,7 @@
 
 
     <!--输出实体[SYS_DEPT]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_dept-79-1">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_dept-80-1">
         <createTable tableName="IBZDEPT">
                 <column name="DEPTID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_DEPT_DEPTID"/>
@@ -142,7 +142,7 @@
 
 
     <!--输出实体[SYS_ORG]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_org-49-4">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_org-52-4">
         <createTable tableName="IBZORG">
                 <column name="ORGID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_ORG_ORGID"/>
@@ -225,10 +225,10 @@
     </changeSet>
 
         <!--输出实体[SYS_DEPT]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_dept-79-8">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_dept-80-8">
        <addForeignKeyConstraint baseColumnNames="PDEPTID" baseTableName="IBZDEPT" constraintName="DER1N_SYS_DEPT_SYS_DEPT_PDEPTI" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="DEPTID" referencedTableName="IBZDEPT" validate="true"/>
     </changeSet>
-    <changeSet author="a_A_5d9d78509" id="fk-sys_dept-79-9">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_dept-80-9">
        <addForeignKeyConstraint baseColumnNames="ORGID" baseTableName="IBZDEPT" constraintName="DER1N_SYS_DEPT_SYS_ORG_ORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_DEPTMEMBER]外键关系 -->
@@ -252,7 +252,7 @@
        <addForeignKeyConstraint baseColumnNames="POSTID" baseTableName="IBZEMP" constraintName="DER1N_SYS_EMP_SYS_POST_POSTID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="POSTID" referencedTableName="IBZPOST" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_ORG]外键关系 -->
-    <changeSet author="a_A_5d9d78509" id="fk-sys_org-49-16">
+    <changeSet author="a_A_5d9d78509" id="fk-sys_org-52-16">
        <addForeignKeyConstraint baseColumnNames="PORGID" baseTableName="IBZORG" constraintName="DER1N_SYS_ORG_SYS_ORG_PORGID" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="ORGID" referencedTableName="IBZORG" validate="true"/>
     </changeSet>
         <!--输出实体[SYS_POST]外键关系 -->

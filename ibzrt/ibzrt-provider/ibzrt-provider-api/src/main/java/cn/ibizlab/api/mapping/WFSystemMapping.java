@@ -12,4 +12,3 @@ public interface WFSystemMapping extends MappingBase<WFSystemDTO, WFSystem> {
 
 
 }
-

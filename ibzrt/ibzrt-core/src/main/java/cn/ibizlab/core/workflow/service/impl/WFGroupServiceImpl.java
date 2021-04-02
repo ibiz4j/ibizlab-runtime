@@ -88,8 +88,7 @@ public class WFGroupServiceImpl implements IWFGroupService {
     public WFGroup get(String id) {
 		WFGroup et=wFGroupFeignClient.get(id);
         if(et==null){
-            et=new WFGroup();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

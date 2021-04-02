@@ -88,8 +88,7 @@ public class MetaDynamicModelServiceImpl implements IMetaDynamicModelService {
     public MetaDynamicModel get(String configid) {
 		MetaDynamicModel et=metaDynamicModelFeignClient.get(configid);
         if(et==null){
-            et=new MetaDynamicModel();
-            et.setConfigid(configid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), configid);
         }
         else{
         }

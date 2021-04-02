@@ -88,8 +88,7 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     public WFProcessInstance get(String id) {
 		WFProcessInstance et=wFProcessInstanceFeignClient.get(id);
         if(et==null){
-            et=new WFProcessInstance();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

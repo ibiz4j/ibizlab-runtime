@@ -12,4 +12,3 @@ public interface JobsRegistryMapping extends MappingBase<JobsRegistryDTO, JobsRe
 
 
 }
-

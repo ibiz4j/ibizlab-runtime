@@ -12,4 +12,3 @@ public interface MsgOpenAccessMapping extends MappingBase<MsgOpenAccessDTO, MsgO
 
 
 }
-

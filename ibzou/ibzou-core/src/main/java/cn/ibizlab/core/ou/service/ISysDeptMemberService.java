@@ -38,6 +38,7 @@ public interface ISysDeptMemberService extends IService<SysDeptMember> {
     boolean save(SysDeptMember et);
     void saveBatch(List<SysDeptMember> list);
     SysDeptMember saveDeptMember(SysDeptMember et);
+    boolean saveDeptMemberBatch(List<SysDeptMember> etList);
     Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context);
     List<SysDeptMember> selectByDeptid(String deptid);
     void removeByDeptid(String deptid);

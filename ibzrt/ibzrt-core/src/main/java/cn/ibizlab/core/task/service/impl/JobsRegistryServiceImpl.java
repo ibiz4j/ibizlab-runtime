@@ -88,8 +88,7 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
     public JobsRegistry get(String id) {
 		JobsRegistry et=jobsRegistryFeignClient.get(id);
         if(et==null){
-            et=new JobsRegistry();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

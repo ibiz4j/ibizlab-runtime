@@ -88,8 +88,7 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
     public WFProcessDefinition get(String definitionkey) {
 		WFProcessDefinition et=wFProcessDefinitionFeignClient.get(definitionkey);
         if(et==null){
-            et=new WFProcessDefinition();
-            et.setDefinitionkey(definitionkey);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), definitionkey);
         }
         else{
         }

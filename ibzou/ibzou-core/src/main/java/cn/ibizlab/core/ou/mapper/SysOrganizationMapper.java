@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSONObject;
 public interface SysOrganizationMapper extends BaseMapper<SysOrganization> {
 
     Page<SysOrganization> searchDefault(IPage page, @Param("srf") SysOrganizationSearchContext context, @Param("ew") Wrapper<SysOrganization> wrapper);
+    Page<SysOrganization> searchTopOrg(IPage page, @Param("srf") SysOrganizationSearchContext context, @Param("ew") Wrapper<SysOrganization> wrapper);
     @Override
     @Cacheable(value ="sysorganization", key = "'row:'+#p0")
     SysOrganization selectById(Serializable id);

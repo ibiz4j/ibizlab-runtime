@@ -88,8 +88,7 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
     public WFProcessNode get(String usertaskid) {
 		WFProcessNode et=wFProcessNodeFeignClient.get(usertaskid);
         if(et==null){
-            et=new WFProcessNode();
-            et.setUsertaskid(usertaskid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), usertaskid);
         }
         else{
         }

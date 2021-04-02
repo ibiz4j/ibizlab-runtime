@@ -39,10 +39,12 @@ public interface ISysUserService extends IService<SysUser> {
     SysUser getDraft(SysUser et);
     boolean checkKey(SysUser et);
     SysUser deleteSysUser(SysUser et);
+    boolean deleteSysUserBatch(List<SysUser> etList);
     boolean save(SysUser et);
     @CacheEvict(value = "sysuser",allEntries = true)
     void saveBatch(List<SysUser> list);
     SysUser saveSysUser(SysUser et);
+    boolean saveSysUserBatch(List<SysUser> etList);
     Page<SysUser> searchDefault(SysUserSearchContext context);
     /**
      *自定义查询SQL

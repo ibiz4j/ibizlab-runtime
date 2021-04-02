@@ -113,9 +113,8 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Transactional
     public SysDeptMember get(String key) {
         SysDeptMember et = getById(key);
-        if(et == null){
-            et = new SysDeptMember();
-            et.setMemberid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }
@@ -198,6 +197,15 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
     @Transactional
     public SysDeptMember saveDeptMember(SysDeptMember et) {
          return et ;
+    }
+
+    @Override
+    @Transactional
+    public boolean saveDeptMemberBatch(List<SysDeptMember> etList) {
+        for(SysDeptMember et : etList) {
+            saveDeptMember(et);
+        }
+        return true;
     }
 
 

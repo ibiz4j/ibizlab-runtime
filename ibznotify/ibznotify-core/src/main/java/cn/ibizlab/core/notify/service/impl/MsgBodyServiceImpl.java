@@ -100,9 +100,8 @@ public class MsgBodyServiceImpl extends ServiceImpl<MsgBodyMapper, MsgBody> impl
     @Transactional
     public MsgBody get(String key) {
         MsgBody et = getById(key);
-        if(et == null){
-            et = new MsgBody();
-            et.setMsgId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

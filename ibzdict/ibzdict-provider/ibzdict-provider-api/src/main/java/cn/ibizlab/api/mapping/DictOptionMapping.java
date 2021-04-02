@@ -12,4 +12,3 @@ public interface DictOptionMapping extends MappingBase<DictOptionDTO, DictOption
 
 
 }
-

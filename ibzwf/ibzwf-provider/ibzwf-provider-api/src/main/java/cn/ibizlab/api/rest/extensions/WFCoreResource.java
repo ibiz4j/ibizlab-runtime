@@ -4,6 +4,7 @@ import cn.ibizlab.api.mapping.WFTaskMapping;
 import cn.ibizlab.core.workflow.domain.*;
 import cn.ibizlab.core.workflow.extensions.service.WFCoreService;
 import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
+import cn.ibizlab.util.enums.TaskType;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,9 +56,39 @@ public class WFCoreResource
 
 	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据动态实例查询我的待办主键清单")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{dynainstid}/{entity}/tasks")
-	public ResponseEntity<Map<String,Map<String,Object>>> getDynaBusinesskeysByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
+	public ResponseEntity<Map<String,Map<String,Object>>> getTaskByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
 																					  @PathVariable("entity") String entity, @PathVariable("dynainstid") String dynainstid) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId));
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId, TaskType.WORK));
+	}
+
+	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据流程步骤查询我的待阅主键清单")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{dynainstid}/{entity}/tasks/unread")
+	public ResponseEntity<Map<String,Map<String,Object>>> getUnReadTaskByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
+																					  @PathVariable("entity") String entity, @PathVariable("dynainstid") String dynainstid) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId, TaskType.READ));
+	}
+
+	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据流程步骤查询我的已办主键清单")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{dynainstid}/{entity}/tasks/done")
+	public ResponseEntity<Map<String,Map<String,Object>>> getDoneByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
+																					  @PathVariable("entity") String entity, @PathVariable("dynainstid") String dynainstid) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId, TaskType.DONE));
+	}
+
+	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据流程步骤查询我的办结主键清单")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{dynainstid}/{entity}/tasks/finish")
+	public ResponseEntity<Map<String,Map<String,Object>>> getFinishByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
+																					  @PathVariable("entity") String entity, @PathVariable("dynainstid") String dynainstid) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId, TaskType.FINISH));
+	}
+
+	@ApiOperation(value = "标记任务已读", tags = {"工作流标记任务已读" },  notes = "标记任务已读")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/read")
+	public ResponseEntity<Boolean> readTask(@PathVariable("system") String system,@PathVariable("appname") String appname,
+											@PathVariable("entity") String entity,
+											@PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
+											@RequestBody WFTaskWay taskWay) {
+		return ResponseEntity.ok(wfCoreService.readTask(system,appname,entity,businessKey,taskId,taskWay));
 	}
 
 	@ApiOperation(value = "getWFProcessDefinition", tags = {"WFProcessDefinition" },  notes = "根据系统实体查找当前适配的工作流模型")
@@ -131,6 +162,18 @@ public class WFCoreResource
 		WFProcessInstance instance = new WFProcessInstance();
 		return ResponseEntity.ok(wfCoreService.wfsubmit(system,appname,entity,businessKey,taskId,taskWay));
 	}
+
+	@ApiOperation(value = "sendback", tags = {"sendback" },  notes = "流程步骤回退")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/sendback")
+	public ResponseEntity<Boolean> sendback(@PathVariable("taskId") String taskId){
+		return ResponseEntity.ok(wfCoreService.sendBack(taskId));
+	}
+
+//	@ApiOperation(value = "delegatetask", tags = {"delegatetask" },  notes = "委派任务")
+//	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/{delegateuser}/delegate")
+//	public ResponseEntity<Boolean> delegatetask(@PathVariable("taskId") String taskId,@PathVariable("delegateuser") String delegateuser){
+//		return ResponseEntity.ok(wfCoreService.delegateTask(taskId,delegateuser));
+//	}
 
 	//@PreAuthorize("hasPermission(#entity,'WFSTART',this.getEntity())")
 	@ApiOperation(value = "wfsubmitbatch", tags = {"SubmitBatch" },  notes = "批量工作流执行步骤")
@@ -242,7 +285,7 @@ public class WFCoreResource
 	}
 
 	@ApiOperation(value = "后加签任务", tags = {"工作流后加签任务" },  notes = "前加签任务")
-	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/aftersign")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/transfer")
 	public ResponseEntity<Boolean> afterSign(@PathVariable("system") String system,@PathVariable("appname") String appname,
 											 @PathVariable("entity") String entity,
 											 @PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,

@@ -88,8 +88,7 @@ public class WFTaskServiceImpl implements IWFTaskService {
     public WFTask get(String id) {
 		WFTask et=wFTaskFeignClient.get(id);
         if(et==null){
-            et=new WFTask();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

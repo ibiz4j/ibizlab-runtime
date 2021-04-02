@@ -88,8 +88,7 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
     public SysPSSystem get(String pssystemid) {
 		SysPSSystem et=sysPSSystemFeignClient.get(pssystemid);
         if(et==null){
-            et=new SysPSSystem();
-            et.setPssystemid(pssystemid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), pssystemid);
         }
         else{
         }

@@ -12,4 +12,3 @@ public interface SysOrganizationMapping extends MappingBase<SysOrganizationDTO, 
 
 
 }
-

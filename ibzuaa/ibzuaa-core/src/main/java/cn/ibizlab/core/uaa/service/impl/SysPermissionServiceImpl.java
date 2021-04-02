@@ -105,9 +105,8 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
     @Transactional
     public SysPermission get(String key) {
         SysPermission et = getById(key);
-        if(et == null){
-            et = new SysPermission();
-            et.setPermissionid(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

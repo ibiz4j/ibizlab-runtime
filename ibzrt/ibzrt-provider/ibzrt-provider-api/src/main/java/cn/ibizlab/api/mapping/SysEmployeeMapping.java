@@ -12,4 +12,3 @@ public interface SysEmployeeMapping extends MappingBase<SysEmployeeDTO, SysEmplo
 
 
 }
-

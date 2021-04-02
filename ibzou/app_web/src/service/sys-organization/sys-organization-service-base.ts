@@ -200,4 +200,33 @@ export default class SysOrganizationServiceBase extends EntityService {
         let tempData:any = JSON.parse(JSON.stringify(data));
         return await Http.getInstance().post(`/sysorganizations/searchdefault`,tempData,isloading);
     }
+
+    /**
+     * FetchTopOrg接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysOrganizationServiceBase
+     */
+    public async FetchTopOrg(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        let res:any = Http.getInstance().get(`/sysorganizations/fetchtoporg`,tempData,isloading);
+        return res;
+    }
+
+    /**
+     * searchTopOrg接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysOrganizationServiceBase
+     */
+    public async searchTopOrg(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/sysorganizations/searchtoporg`,tempData,isloading);
+    }
 }

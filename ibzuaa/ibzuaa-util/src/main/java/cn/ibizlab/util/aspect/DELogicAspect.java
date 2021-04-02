@@ -1,12 +1,10 @@
 package cn.ibizlab.util.aspect;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import cn.ibizlab.util.domain.DELogic;
 import cn.ibizlab.util.domain.EntityBase;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -22,6 +20,8 @@ import org.kie.api.builder.Results;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.io.ResourceFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
@@ -35,7 +35,6 @@ import org.springframework.util.StringUtils;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -109,7 +108,7 @@ public class DELogicAspect {
      * @param action
      */
     private void executeBeforeLogic(EntityBase entity, String action) {
-        File bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.BEFORE);
+        Resource bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.BEFORE);
         if (bpmnFile != null && bpmnFile.exists() && isValid(bpmnFile, entity, action)) {
             executeLogic(bpmnFile, entity, action);
         }
@@ -122,7 +121,7 @@ public class DELogicAspect {
      * @param action
      */
     private void executeAfterLogic(EntityBase entity, String action) {
-        File bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.AFTER);
+        Resource bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.AFTER);
         if (bpmnFile != null && bpmnFile.exists() && isValid(bpmnFile, entity, action)) {
             executeLogic(bpmnFile, entity, action);
         }
@@ -135,7 +134,7 @@ public class DELogicAspect {
      * @param action
      */
     private void executeLogic(EntityBase entity, String action) {
-        File bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.EXEC);
+        Resource bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.EXEC);
         if (bpmnFile != null && bpmnFile.exists() && isValid(bpmnFile, entity, action)) {
             executeLogic(bpmnFile, entity, action);
         }
@@ -147,32 +146,37 @@ public class DELogicAspect {
      * @param bpmnFile
      * @param entity
      */
-    private void executeLogic(File bpmnFile, Object entity, String action) {
-        log.debug("开始执行实体处理逻辑[{}:{}:{}:本地模式]", entity.getClass().getSimpleName(), action, bpmnFile.getName());
-        String bpmnId = DigestUtils.md5DigestAsHex(bpmnFile.getPath().getBytes());
-        DELogic logic = getDELogic(bpmnFile);
-        if (logic == null) {
-            return;
-        }
-        if (deLogicMap.containsKey(bpmnId) && logic.getMd5().equals(deLogicMap.get(bpmnId).getMd5())) {
-            logic = deLogicMap.get(bpmnId);
-        } else {
-            reloadLogic(logic);
-            deLogicMap.put(bpmnId, logic);
-        }
-        KieContainer container = logic.getContainer();
-        KieSession kieSession = container.getKieBase().newKieSession();
-        Process mainProcess = logic.getProcess();
-        //主流程参数
-        fillGlobalParam(kieSession, mainProcess, entity);
-        //子流程参数
-        if (!ObjectUtils.isEmpty(logic.getRefLogic())) {
-            for (DELogic subLogic : logic.getRefLogic()) {
-                fillGlobalParam(kieSession, subLogic.getProcess(), entity);
+    private void executeLogic(Resource bpmnFile, Object entity, String action) {
+        try {
+            log.debug("开始执行实体处理逻辑[{}:{}:{}:本地模式]", entity.getClass().getSimpleName(), action, bpmnFile.getFilename());
+            String bpmnId = DigestUtils.md5DigestAsHex(bpmnFile.getURL().getPath().getBytes());
+            DELogic logic = getDELogic(bpmnFile);
+            if (logic == null) {
+                return;
             }
+            if (deLogicMap.containsKey(bpmnId) && logic.getMd5().equals(deLogicMap.get(bpmnId).getMd5())) {
+                logic = deLogicMap.get(bpmnId);
+            } else {
+                reloadLogic(logic);
+                deLogicMap.put(bpmnId, logic);
+            }
+            KieContainer container = logic.getContainer();
+            KieSession kieSession = container.getKieBase().newKieSession();
+            Process mainProcess = logic.getProcess();
+            //主流程参数
+            fillGlobalParam(kieSession, mainProcess, entity);
+            //子流程参数
+            if (!ObjectUtils.isEmpty(logic.getRefLogic())) {
+                for (DELogic subLogic : logic.getRefLogic()) {
+                    fillGlobalParam(kieSession, subLogic.getProcess(), entity);
+                }
+            }
+            kieSession.startProcess(mainProcess.getId());
+            log.debug("实体处理逻辑[{}:{}:{}:本地模式]执行结束", entity.getClass().getSimpleName(), action, bpmnFile.getFilename());
+        } catch (IOException e) {
+            log.error("实体处理逻辑[{}:{}:{}:本地模式]发生异常", entity.getClass().getSimpleName(), action, bpmnFile.getFilename());
+            throw new BadRequestAlertException("执行实体处理逻辑发生异常" + e.getMessage(), "DELogicAspect", "executeLogic");
         }
-        kieSession.startProcess(mainProcess.getId());
-        log.debug("实体处理逻辑[{}:{}:{}:本地模式]执行结束", entity.getClass().getSimpleName(), action, bpmnFile.getName());
     }
 
     /**
@@ -180,11 +184,11 @@ public class DELogicAspect {
      *
      * @param logic
      */
-    private void reloadLogic(DELogic logic) {
+    private void reloadLogic(DELogic logic) throws IOException {
         KieServices kieServices = KieServices.get();
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
-        for (File bpmn : logic.getRefRuleFiles()) {
-            kieFileSystem.write(ResourceFactory.newFileResource(bpmn));
+        for (Resource bpmn : logic.getRefRuleFiles()) {
+            kieFileSystem.write(ResourceFactory.newUrlResource(bpmn.getURL()));
         }
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem).buildAll();
         Results results = kieBuilder.getResults();
@@ -239,28 +243,29 @@ public class DELogicAspect {
      * @param bpmnFile
      * @return
      */
-    @SneakyThrows
-    private DELogic getDELogic(File bpmnFile) {
+    private DELogic getDELogic(Resource bpmnFile) {
         DELogic logic = null;
         XMLStreamReader reader = null;
         InputStream bpmn = null;
         try {
             if (bpmnFile.exists()) {
                 XMLInputFactory factory = XMLInputFactory.newInstance();
-                bpmn = new FileInputStream(bpmnFile);
+                bpmn = bpmnFile.getInputStream();
                 reader = factory.createXMLStreamReader(bpmn);
                 BpmnModel model = bpmnXMLConverter.convertToBpmnModel(reader);
                 Process mainProcess = model.getMainProcess();
                 if (mainProcess == null) {
                     return null;
                 }
+                log.debug("正在加载 BPMN:{}", bpmnFile.getURL().getPath());
                 List<DELogic> refLogics = new ArrayList<>();
-                List<File> refFiles = new ArrayList<>();
+                List<Resource> refFiles = new ArrayList<>();
                 //自己 bpmn 及 drl
                 refFiles.add(bpmnFile);
-                File drlFile = getDrl(bpmnFile);
+                Resource drlFile = getDrl(bpmnFile);
                 if (drlFile != null && drlFile.exists()) {
                     refFiles.add(drlFile);
+                    log.debug("正在加载 DRL:{}", drlFile.getURL().getPath());
                 }
                 //子 bpmn 及 drl
                 if (!ObjectUtils.isEmpty(model.getMainProcess()) && !ObjectUtils.isEmpty(model.getMainProcess().getFlowElementMap())) {
@@ -268,11 +273,7 @@ public class DELogicAspect {
                         if (item instanceof CallActivity) {
                             CallActivity subBpmn = (CallActivity) item;
                             String bpmnFileName = subBpmn.getName();
-                            log.debug("正在加载   BPMN:{}", bpmnFileName);
-                            File subBpmnFile = getSubBpmn(bpmnFileName);
-                            if (ObjectUtils.isEmpty(subBpmnFile)) {
-                                log.debug("BPMN:{},缺少文件:{} ", bpmnFileName, subBpmnFile);
-                            }
+                            Resource subBpmnFile = getSubBpmn(bpmnFileName);
                             DELogic refLogic = getDELogic(subBpmnFile);
                             if (refLogic != null) {
                                 refLogics.add(refLogic);
@@ -292,7 +293,7 @@ public class DELogicAspect {
                 logic.setMd5(getMd5(refFiles));
             }
         } catch (Exception e) {
-            log.error("执行处理逻辑失败"+e);
+            log.error("执行处理逻辑失败" + e);
         } finally {
             try {
                 if (reader != null) {
@@ -302,7 +303,7 @@ public class DELogicAspect {
                     bpmn.close();
                 }
             } catch (Exception e) {
-                log.error("执行处理逻辑失败"+e);
+                log.error("执行处理逻辑失败" + e);
             }
         }
         return logic;
@@ -327,10 +328,10 @@ public class DELogicAspect {
                 }
             }
         }
-        if(!ObjectUtils.isEmpty(service.getSuperclass()) && !service.getSuperclass().getName().equals(Object.class.getName())) {
+        if (!ObjectUtils.isEmpty(service.getSuperclass()) && !service.getSuperclass().getName().equals(Object.class.getName())) {
             return getEntity(service.getSuperclass());
         }
-        log.error("获取实体信息失败，未能在[{}]中找到参数为实体类对象的行为，如create.update等",service.getSimpleName());
+        log.error("获取实体信息失败，未能在[{}]中找到参数为实体类对象的行为，如create.update等", service.getSimpleName());
         return null;
     }
 
@@ -340,19 +341,19 @@ public class DELogicAspect {
      * @param subFiles
      * @return
      */
-    private String getMd5(List<File> subFiles) {
+    private String getMd5(List<Resource> subFiles) {
         try {
             StringBuffer buffer = new StringBuffer();
-            for (File file : subFiles) {
+            for (Resource file : subFiles) {
                 InputStream bpmnFile = null;
                 try {
-                    bpmnFile = new FileInputStream(file);
+                    bpmnFile = file.getInputStream();
                     if (!ObjectUtils.isEmpty(bpmnFile)) {
                         String strBpmn = IOUtils.toString(bpmnFile, "UTF-8");
                         buffer.append(strBpmn);
                     }
                 } catch (Exception e) {
-                    log.error("处理逻辑版本检查失败"+e);
+                    log.error("处理逻辑版本检查失败" + e);
                 } finally {
                     if (bpmnFile != null) {
                         bpmnFile.close();
@@ -365,12 +366,12 @@ public class DELogicAspect {
                 return null;
             }
         } catch (Exception e) {
-            log.error("处理逻辑版本检查失败"+e);
+            log.error("处理逻辑版本检查失败" + e);
             return null;
         }
     }
 
-   /**
+    /**
      * 本地逻辑
      *
      * @param entity
@@ -378,10 +379,8 @@ public class DELogicAspect {
      * @param logicExecMode
      * @return
      */
-    private File getLocalModel(String entity, String action, LogicExecMode logicExecMode) {
-        String logicName = String.format("%s.bpmn", logicExecMode.text);
-        String filePath = File.separator + "rules" + File.separator + entity + File.separator + action.toLowerCase() + File.separator + logicName;
-        return getBpmnFile(filePath);
+    private Resource getLocalModel(String entity, String action, LogicExecMode logicExecMode) {
+        return new ClassPathResource("rules" + File.separator + entity + File.separator + action.toLowerCase() + File.separator + logicExecMode.text + ".bpmn");
     }
 
     /**
@@ -390,9 +389,8 @@ public class DELogicAspect {
      * @param logicName
      * @return
      */
-    private File getSubBpmn(String logicName) {
-        String filePath = String.format("/rules/%s", logicName);
-        return getBpmnFile(filePath);
+    private Resource getSubBpmn(String logicName) {
+        return new ClassPathResource(String.format("rules/%s", logicName));
     }
 
     /**
@@ -401,41 +399,10 @@ public class DELogicAspect {
      * @param bpmn
      * @return
      */
-    private File getDrl(File bpmn) {
-        if (bpmn.getPath().endsWith("RuleFlow.bpmn")) {
-            return getBpmnFile(bpmn.getPath().replace("RuleFlow.bpmn", "Rule.drl"));
-        } else {
-            return getBpmnFile(bpmn.getPath().replace(".bpmn", ".drl"));
-        }
-    }
-
-    /**
-     * 获取 bpmn
-     *
-     * @param filePath
-     * @return
-     */
-    private File getBpmnFile(String filePath) {
-        InputStream in = null;
-        File bpmn = null;
-        try {
-            in = this.getClass().getResourceAsStream(filePath.replace("\\", "/"));
-            if (in != null) {
-                bpmn = new File(filePath);
-                FileUtils.copyToFile(in, bpmn);
-            }
-        } catch (IOException e) {
-            log.error("执行处理逻辑失败，无法获取逻辑文件"+e);
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return bpmn;
+    private Resource getDrl(Resource bpmn) {
+        String filePath = ((ClassPathResource) bpmn).getPath();
+        filePath = filePath.endsWith("RuleFlow.bpmn") ? filePath.replace("RuleFlow.bpmn", "Rule.drl") : filePath.replace(".bpmn", ".drl");
+        return new ClassPathResource(filePath);
     }
 
     /**
@@ -446,8 +413,8 @@ public class DELogicAspect {
      * @param action
      * @return
      */
-    private boolean isValid(File bpmn, Object entity, Object action) {
-        String logicId = String.format("%s%s%s", entity.getClass().getSimpleName(), action, bpmn.getName()).toLowerCase();
+    private boolean isValid(Resource bpmn, Object entity, Object action) {
+        String logicId = String.format("%s%s%s", entity.getClass().getSimpleName(), action, bpmn.getFilename()).toLowerCase();
         if (validLogic.containsKey(logicId)) {
             return true;
         } else {

@@ -88,8 +88,7 @@ public class WFREModelServiceImpl implements IWFREModelService {
     public WFREModel get(String id) {
 		WFREModel et=wFREModelFeignClient.get(id);
         if(et==null){
-            et=new WFREModel();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

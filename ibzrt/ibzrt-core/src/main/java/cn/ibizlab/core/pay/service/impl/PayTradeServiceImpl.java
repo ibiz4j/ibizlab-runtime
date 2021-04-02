@@ -88,8 +88,7 @@ public class PayTradeServiceImpl implements IPayTradeService {
     public PayTrade get(String trade_id) {
 		PayTrade et=payTradeFeignClient.get(trade_id);
         if(et==null){
-            et=new PayTrade();
-            et.setTradeId(trade_id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), trade_id);
         }
         else{
         }

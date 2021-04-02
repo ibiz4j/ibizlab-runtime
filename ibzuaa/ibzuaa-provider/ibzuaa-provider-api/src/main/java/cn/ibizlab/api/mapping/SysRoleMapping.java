@@ -12,4 +12,3 @@ public interface SysRoleMapping extends MappingBase<SysRoleDTO, SysRole> {
 
 
 }
-

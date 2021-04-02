@@ -100,9 +100,8 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
     @Transactional
     public JobsInfo get(String key) {
         JobsInfo et = getById(key);
-        if(et == null){
-            et = new JobsInfo();
-            et.setId(key);
+        if (et == null) {
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), key);
         }
         else {
         }

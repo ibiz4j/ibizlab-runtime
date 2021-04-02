@@ -20,4 +20,12 @@ public interface WFCoreMapper {
     List<WFProcessNode> searchMyTaskCnt(@Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
 
     List<Map> searchUserTask(@Param("et")Map param) ;
+
+    Page<WFTask> searchUnReadTask(IPage page, @Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
+
+    Page<WFTask> searchMyDoneTask(IPage page, @Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
+
+    Page<WFTask> searchMyFinishTask(IPage page, @Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
+
+    Object readTask(@Param("et")Map param);
 }

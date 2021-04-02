@@ -88,8 +88,7 @@ public class SysUserAuthServiceImpl implements ISysUserAuthService {
     public SysUserAuth get(String id) {
 		SysUserAuth et=sysUserAuthFeignClient.get(id);
         if(et==null){
-            et=new SysUserAuth();
-            et.setId(id);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), id);
         }
         else{
         }

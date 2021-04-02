@@ -88,8 +88,7 @@ public class SysPostServiceImpl implements ISysPostService {
     public SysPost get(String postid) {
 		SysPost et=sysPostFeignClient.get(postid);
         if(et==null){
-            et=new SysPost();
-            et.setPostid(postid);
+            throw new BadRequestAlertException("数据不存在", this.getClass().getSimpleName(), postid);
         }
         else{
         }
