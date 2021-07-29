@@ -47,6 +47,22 @@ public class WFCoreResource
 	@Lazy
 	public WFTaskMapping wfTaskMapping;
 
+	@ApiOperation(value = "getWFProcessDefinition", tags = {"WFProcessDefinition" },  notes = "根据系统实体查找当前适配的工作流模型")
+	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/process-definitions2")
+	public ResponseEntity<List<WFProcessDefinition>> getDynaWorkflow(@PathVariable("system") String system,@PathVariable("appname") String appname,
+																 @PathVariable("entity") String entity) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynamicWorkflow(system,appname,entity));
+	}
+
+	@ApiOperation(value = "getWFProcessDefinition", tags = {"WFProcessDefinition" },  notes = "根据动态实例查找当前适配的工作流模型")
+	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{insttag}/{insttag2}/{entity}/process-definitions")
+	public ResponseEntity<List<WFProcessDefinition>> getDynaWorkflow2(@PathVariable("system") String system ,@PathVariable("appname") String appname,@PathVariable("insttag") String instTag, @PathVariable("insttag2") String instTag2,
+																	 @PathVariable("entity") String entity) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynamicWorkflow(instTag,instTag2,system,appname,entity));
+	}
+
+
+
 	@ApiOperation(value = "getWFProcessDefinition", tags = {"WFProcessDefinition" },  notes = "根据动态实例查找当前适配的工作流模型")
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{dynainstid}/{entity}/process-definitions")
 	public ResponseEntity<List<WFProcessDefinition>> getDynaWorkflow(@PathVariable("system") String system ,@PathVariable("appname") String appname,@PathVariable("dynainstid") String dynainstid,
@@ -55,32 +71,39 @@ public class WFCoreResource
 	}
 
 	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据动态实例查询我的待办主键清单")
-	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{dynainstid}/{entity}/tasks")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{insttag}/{insttag2}/{entity}/tasks")
 	public ResponseEntity<Map<String,Map<String,Object>>> getTaskByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
-																					  @PathVariable("entity") String entity, @PathVariable("dynainstid") String dynainstid) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId, TaskType.WORK));
+																					  @PathVariable("entity") String entity, @PathVariable("insttag") String instTag , @PathVariable("insttag2") String instTag2) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,instTag,instTag2,userId, TaskType.WORK));
 	}
 
 	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据流程步骤查询我的待阅主键清单")
-	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{dynainstid}/{entity}/tasks/unread")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{insttag}/{insttag2}/{entity}/tasks/unread")
 	public ResponseEntity<Map<String,Map<String,Object>>> getUnReadTaskByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
-																					  @PathVariable("entity") String entity, @PathVariable("dynainstid") String dynainstid) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId, TaskType.READ));
+																					  @PathVariable("entity") String entity, @PathVariable("insttag") String instTag , @PathVariable("insttag2") String instTag2) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,instTag,instTag2,userId, TaskType.READ));
 	}
 
 	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据流程步骤查询我的已办主键清单")
-	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{dynainstid}/{entity}/tasks/done")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{insttag}/{insttag2}/{entity}/tasks/done")
 	public ResponseEntity<Map<String,Map<String,Object>>> getDoneByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
-																					  @PathVariable("entity") String entity, @PathVariable("dynainstid") String dynainstid) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId, TaskType.DONE));
+																					  @PathVariable("entity") String entity, @PathVariable("insttag") String instTag , @PathVariable("insttag2") String instTag2) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,instTag,instTag2,userId, TaskType.DONE));
 	}
 
 	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据流程步骤查询我的办结主键清单")
-	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{dynainstid}/{entity}/tasks/finish")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{insttag}/{insttag2}/{entity}/tasks/finish")
 	public ResponseEntity<Map<String,Map<String,Object>>> getFinishByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
-																					  @PathVariable("entity") String entity, @PathVariable("dynainstid") String dynainstid) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,dynainstid,userId, TaskType.FINISH));
+																					  @PathVariable("entity") String entity, @PathVariable("insttag") String instTag , @PathVariable("insttag2") String instTag2) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,instTag,instTag2,userId, TaskType.FINISH));
 	}
+	@ApiOperation(value = "getBusinessKeys", tags = {"String" },  notes = "根据流程步骤查询我的办结主键清单")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-user-{userId}/{insttag}/{insttag2}/{entity}/tasks/all")
+	public ResponseEntity<Map<String,Map<String,Object>>> getAllByUserId(@PathVariable("system") String system, @PathVariable("userId") String userId,
+																		 @PathVariable("entity") String entity, @PathVariable("insttag") String instTag , @PathVariable("insttag2") String instTag2){
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getDynaBusinessKeys(system,"",entity,instTag,instTag2,userId,TaskType.ALL));
+	}
+
 
 	@ApiOperation(value = "标记任务已读", tags = {"工作流标记任务已读" },  notes = "标记任务已读")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/read")
