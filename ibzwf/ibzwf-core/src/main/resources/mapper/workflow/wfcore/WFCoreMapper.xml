@@ -4,14 +4,36 @@
 <mapper	namespace="cn.ibizlab.core.workflow.mapper.WFCoreMapper">
 
     <select id="searchMyTask"  parameterType="cn.ibizlab.core.workflow.filter.WFTaskSearchContext"  resultType="cn.ibizlab.core.workflow.domain.WFTask">
-        select   t1.TaskId as Id, t1.DefinitionId as ProcessDefinitionId, t1.DefinitionName as ProcessDefinitionName, t1.DefinitionKey as ProcessDefinitionKey, t1.InstanceId as ProcessInstanceId,
-        t1.TaskName as Name, t1.TaskDefinitionKey, t1.BusinessKey as ProcessInstanceBusinessKey, t1.Description, t1.CreateTime from (
-        select res.ID_ as TaskId,res.PROC_DEF_ID_ as DefinitionId,arp.NAME_ as DefinitionName,arp.KEY_ as DefinitionKey,
-        res.PROC_INST_ID_ as  InstanceId,res.NAME_ as TaskName,res.TASK_DEF_KEY_ as TaskDefinitionKey,res.CATEGORY_ as BusinessKey,
-        res.DESCRIPTION_ as Description,res.CREATE_TIME_ as CreateTime
-        from ACT_RU_TASK RES inner join act_re_procdef arp on RES.PROC_DEF_ID_ = arp.ID_
-            where   RES.ASSIGNEE_ = #{srf.sessioncontext.srfuserid}  or  ( RES.ASSIGNEE_ IS NULL  AND
-            exists (select LINK.ID_ from  ACT_RU_IDENTITYLINK LINK where LINK.TASK_ID_ = RES.ID_  and LINK.USER_ID_ = #{srf.sessioncontext.srfuserid})  )
+        SELECT
+        t1.TaskId AS Id,
+        t1.DefinitionId AS ProcessDefinitionId,
+        t1.DefinitionName AS ProcessDefinitionName,
+        t1.DefinitionKey AS ProcessDefinitionKey,
+        t1.InstanceId AS ProcessInstanceId,
+        t1.TaskName AS NAME,
+        t1.TaskDefinitionKey,
+        t1.BusinessKey AS ProcessInstanceBusinessKey,
+        t1.Description,
+        t1.CreateTime
+        FROM
+        (
+        SELECT
+        res.ID_ AS TaskId,
+        res.PROC_DEF_ID_ AS DefinitionId,
+        arp.NAME_ AS DefinitionName,
+        arp.KEY_ AS DefinitionKey,
+        res.PROC_INST_ID_ AS InstanceId,
+        res.NAME_ AS TaskName,
+        res.TASK_DEF_KEY_ AS TaskDefinitionKey,
+        res.CATEGORY_ AS BusinessKey,
+        res.DESCRIPTION_ AS Description,
+        res.CREATE_TIME_ AS CreateTime
+        FROM
+        ACT_RU_TASK RES
+        INNER JOIN act_re_procdef arp ON RES.PROC_DEF_ID_ = arp.ID_
+        WHERE
+        RES.ASSIGNEE_ = #{srf.sessioncontext.srfuserid}  or  ( RES.ASSIGNEE_ IS NULL  AND
+        EXISTS ( SELECT LINK.ID_ FROM ACT_RU_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND LINK.USER_ID_ = #{srf.sessioncontext.srfuserid})  )
         ) t1
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
@@ -113,7 +135,7 @@
                     INNER JOIN ACT_RE_PROCDEF ARP ON RES.PROC_DEF_ID_ = arp.ID_
                 WHERE
                     RES.END_TIME_ IS NOT NULL
-                    OR HPI.END_TIME_ IS NULL
+                    AND HPI.END_TIME_ IS NULL
                     AND RES.ASSIGNEE_ IS NULL
                 AND EXISTS ( SELECT LINK.ID_ FROM ACT_HI_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND ( LINK.USER_ID_ = #{srf.sessioncontext.srfuserid} ) )
                 ) t1
@@ -164,5 +186,50 @@
         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
 
     </select>
+    <select id="searchMyAllTask"  parameterType="cn.ibizlab.core.workflow.filter.WFTaskSearchContext"  resultType="cn.ibizlab.core.workflow.domain.WFTask">
+        <![CDATA[
+        SELECT
+            t1.TaskId AS Id,
+            t1.DefinitionId AS ProcessDefinitionId,
+            t1.DefinitionName AS ProcessDefinitionName,
+            t1.DefinitionKey AS ProcessDefinitionKey,
+            t1.InstanceId AS ProcessInstanceId,
+            t1.TaskName AS NAME,
+            t1.TaskDefinitionKey,
+            t1.BusinessKey AS ProcessInstanceBusinessKey,
+            t1.Description,
+            t1.CreateTime
+        FROM
+            (
+                SELECT
+                    res.ID_ AS TaskId,
+                    res.PROC_DEF_ID_ AS DefinitionId,
+                    arp.NAME_ AS DefinitionName,
+                    arp.KEY_ AS DefinitionKey,
+                    res.PROC_INST_ID_ AS InstanceId,
+                    res.NAME_ AS TaskName,
+                    res.TASK_DEF_KEY_ AS TaskDefinitionKey,
+                    res.CATEGORY_ AS BusinessKey,
+                    res.DESCRIPTION_ AS Description,
+                    res.CREATE_TIME_ AS CreateTime
+                FROM
+                    ACT_RU_TASK RES
+                        INNER JOIN act_re_procdef arp ON RES.PROC_DEF_ID_ = arp.ID_
+                        INNER JOIN ACT_HI_PROCINST HPI ON RES.PROC_INST_ID_ = HPI.ID_
+                        INNER JOIN act_hi_taskinst aht ON RES.ID_ = aht.ID_
 
+                WHERE
+                        (aht.END_TIME_ IS NOT NULL
+                            OR HPI.END_TIME_ IS NULL )
+                        AND RES.ASSIGNEE_ IS NULL
+                        OR RES.ASSIGNEE_ = #{srf.sessioncontext.srfuserid}
+                   OR (
+                        RES.ASSIGNEE_ IS NULL
+                        AND EXISTS ( SELECT LINK.ID_ FROM ACT_RU_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND LINK.USER_ID_ = #{srf.sessioncontext.srfuserid}  )
+                    )
+            ) t1
+        ]]>
+        <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+        <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+    </select>
 </mapper>

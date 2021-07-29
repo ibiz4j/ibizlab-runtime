@@ -19,5 +19,9 @@ public enum TaskType {
     /**
      * 办结
      */
-    FINISH;
+    FINISH,
+    /**
+     * 全部
+     */
+    ALL;
 }

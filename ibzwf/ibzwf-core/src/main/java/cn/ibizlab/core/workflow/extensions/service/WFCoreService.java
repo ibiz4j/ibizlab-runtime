@@ -7,6 +7,7 @@ import cn.ibizlab.core.workflow.mapper.WFCoreMapper;
 import cn.ibizlab.core.workflow.service.IWFGroupService;
 import cn.ibizlab.core.workflow.service.IWFProcessDefinitionService;
 import cn.ibizlab.core.workflow.service.IWFUserService;
+import cn.ibizlab.util.client.IBZRTProxyFeignClient;
 import cn.ibizlab.util.client.IBZUAAFeignClient;
 import cn.ibizlab.util.enums.ProcFunction;
 import cn.ibizlab.util.enums.TaskType;
@@ -24,6 +25,7 @@ import org.flowable.bpmn.model.*;
 import org.flowable.bpmn.model.Process;
 import org.flowable.common.engine.api.history.HistoricData;
 import org.flowable.common.engine.api.identity.AuthenticationContext;
+import org.flowable.common.engine.api.query.QueryProperty;
 import org.flowable.common.engine.impl.identity.Authentication;
 import org.flowable.common.engine.impl.identity.UserIdAuthenticationContext;
 import org.flowable.editor.language.json.converter.BpmnJsonConverter;
@@ -42,6 +44,7 @@ import org.flowable.task.api.DelegationState;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.TaskQuery;
 import org.flowable.task.api.history.HistoricTaskInstance;
+import org.flowable.task.service.impl.TaskQueryProperty;
 import org.flowable.task.service.impl.persistence.entity.HistoricTaskInstanceEntity;
 import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 import org.flowable.task.service.impl.persistence.entity.TaskEntityImpl;
@@ -132,6 +135,9 @@ public class WFCoreService
 	@Autowired
 	private IBZUAAFeignClient ibzuaaFeignClient;
 
+	@Autowired
+	private IBZRTProxyFeignClient rtProxy;
+
 	private Map<String,List<Map<String,Object>>> taskMap = new ConcurrentHashMap<>();
 
 	private final ExpressionParser parser = new SpelExpressionParser();
@@ -164,6 +170,50 @@ public class WFCoreService
 		return wfModelService.getDynamicWorkflow(dynamic,system,entity);
 	}
 
+
+	public List<WFProcessDefinition> getDynamicWorkflow(String system,String appname,String entity) {
+		String dynaModelId = getDynaModelId(null,null);
+		return StringUtils.isEmpty(dynaModelId)? new ArrayList<>() : wfModelService.getDynamicWorkflow(dynaModelId,system,entity);
+	}
+
+
+	private String getDynaModelId(String instTag , String instTag2){
+		String orgId = null;
+		String systemId = null;
+		if(RequestContextHolder.getRequestAttributes()==null && !(RequestContextHolder.getRequestAttributes() instanceof ServletRequestAttributes)){
+			return null;
+		}
+		ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		if(requestAttributes!=null) {
+			HttpServletRequest request = requestAttributes.getRequest();
+			if(request!=null && !StringUtils.isEmpty(request.getHeader("srforgid"))){
+				orgId= request.getHeader("srforgid");
+			}
+			if(request!=null && !StringUtils.isEmpty(request.getHeader("srfsystemid"))){
+				systemId= request.getHeader("srfsystemid");
+			}
+		}
+		if(StringUtils.isEmpty(orgId) || StringUtils.isEmpty(systemId)){
+			throw new BadRequestAlertException("无法获取当前用户组织及系统信息","","");
+		}
+		String dynaModelId = null;
+		if(StringUtils.isEmpty(instTag) && StringUtils.isEmpty(instTag2)){
+			dynaModelId = rtProxy.getDynaModelId(orgId, systemId);
+		}
+		else{
+			dynaModelId = rtProxy.getDynaModelId(instTag, instTag2, orgId, systemId);
+		}
+		if(StringUtils.isEmpty(dynaModelId)){
+			throw new BadRequestAlertException("获取动态模型标识失败","","");
+		}
+		return dynaModelId;
+	}
+
+
+	public List<WFProcessDefinition> getDynamicWorkflow(String instTag,String instTag2, String system,String appname,String entity) {
+		String dynaModelId = getDynaModelId(instTag, instTag2);
+		return StringUtils.isEmpty(dynaModelId)? new ArrayList<>() : wfModelService.getDynamicWorkflow(dynaModelId,system,entity);
+	}
 
 	public List<WFProcessDefinition> getWorkflow(String system,String appname,String entity) {
 		return wfModelService.getWorkflow(system,entity);
@@ -405,16 +455,18 @@ public class WFCoreService
 		return "";
 	}
 
-	public Map<String, Map<String,Object>> getDynaBusinessKeys(String system, String appname, String entity, String dynainstid, String userId , TaskType type) {
+	public Map<String, Map<String,Object>> getDynaBusinessKeys(String system, String appname, String entity,  String instTag , String instTag2, String userId , TaskType type) {
 		Map<String, Map<String,Object>> businessKeys = new HashMap<>();
 		Page<WFTask> tasks;
 		if(StringUtils.isEmpty(userId))
 			userId=AuthenticationUser.getAuthenticationUser().getUserid();
-		if(StringUtils.isEmpty(userId) && StringUtils.isEmpty(dynainstid))
+
+		String dynaModelId = getDynaModelId(instTag,instTag2);
+		if(StringUtils.isEmpty(userId) && StringUtils.isEmpty(dynaModelId))
 			return businessKeys;
 
 		WFTaskSearchContext context =new WFTaskSearchContext();
-		List<String> keys = this.getDynaWorkflowKey(dynainstid,system,appname,entity);
+		List<String> keys = this.getDynaWorkflowKey(dynaModelId,system,appname,entity);
 		if(ObjectUtils.isEmpty(keys)){
 			return businessKeys;
 		}
@@ -426,6 +478,8 @@ public class WFCoreService
 			tasks = searchMyDoneTask(context);
 		else if(TaskType.FINISH == type)
 			tasks = searchMyFinishTask(context);
+		else if(TaskType.ALL==type)
+			tasks = searchMyAllTask(context);
 		else
 			tasks = searchMyTask(context);
 		if(!ObjectUtils.isEmpty(tasks)){
@@ -444,6 +498,12 @@ public class WFCoreService
 			}
 		}
 		return businessKeys;
+	}
+
+	private Page<WFTask> searchMyAllTask(WFTaskSearchContext context) {
+		context.setSort("createtime,desc");
+		com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFTask> pages = wfCoreMapper.searchMyAllTask(context.getPages(),context,context.getSearchCond());
+		return new PageImpl<WFTask>(pages.getRecords(),context.getPageable(),pages.getTotal());
 	}
 
 	private Page<WFTask> searchMyUnreadTask(WFTaskSearchContext context) {
@@ -869,8 +929,13 @@ public class WFCoreService
 				}
 			}
 		}
-		wfProcessInstance.set("userTasks",nodes.values());
-
+		if(!StringUtils.isEmpty(processInstanceId)){
+			wfProcessInstance.set("userTasks",filterTaskMap(nodes,processInstanceId));
+		}else {
+			for (String id : processInstanceIds) {
+				wfProcessInstance.set("userTasks",filterTaskMap(nodes,id));
+			}
+		}
 		if(!StringUtils.isEmpty(wfProcessInstance.getStartuserid()))
 		{
 			wfProcessInstance.setStartusername(wfUserMap.get(wfProcessInstance.getStartuserid()).getDisplayname());
@@ -881,6 +946,30 @@ public class WFCoreService
 
 	}
 
+	/**
+	 * 过滤空的task，并按照开始日期进行排序
+	 * @param map
+	 */
+	public LinkedHashMap filterTaskMap(Map<String,WFProcessNode> map,String processInstanceId){
+		List<HistoricTaskInstance> history = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).orderByHistoricTaskInstanceEndTime().asc().list();
+		LinkedHashMap<String,WFProcessNode> filterMap = new LinkedHashMap<>();
+		if(history.size()>0){
+			history.forEach(historyTask -> {
+				WFProcessNode value = map.get(historyTask.getTaskDefinitionKey());
+				if (ObjectUtils.isEmpty(value) || filterMap.containsKey(historyTask.getTaskDefinitionKey())) {
+					return;
+				}
+				if (ObjectUtils.isEmpty(value.getExtensionparams().get("identitylinks")) && ObjectUtils.isEmpty(value.getExtensionparams().get("comments"))) {
+					return;
+				}
+				filterMap.put(historyTask.getTaskDefinitionKey(), value);
+			});
+			if(filterMap.size() > 0){
+				return filterMap;
+			}
+		}
+		return (LinkedHashMap) map;
+	}
 
 	@Value("${ibiz.filePath:/app/file/}")
 	private String fileRoot;
@@ -1055,6 +1144,8 @@ public class WFCoreService
 				String processDefinitionKey;
 				if(!StringUtils.isEmpty(dynainstid))
 					processDefinitionKey="dyna-"+dynainstid+"-"+system+"-"+booking+"-"+params[1];
+				else if (!StringUtils.isEmpty(bpmnFileName) && bpmnFileName.contains(":") && bpmnFileName.split(":").length==2)
+					processDefinitionKey="dyna-"+bpmnFileName.split(":")[1]+"-"+system+"-"+booking+"-"+params[1];
 				else
 					processDefinitionKey=system+"-"+booking+"-"+params[1];
 
@@ -1971,12 +2062,10 @@ public class WFCoreService
 	 */
 	public boolean delegateTask(String taskId,String delegateUser) {
 
-		TaskEntityImpl currTask = (TaskEntityImpl) taskService.createTaskQuery().taskId(taskId).singleResult();
-		if (currTask != null) {
-			User currUser = SecurityUtils.getCurrentUserObject();
-			// 设置审批人是当前登录人
-			taskService.setAssignee(taskId, currUser.getId());
-			// 执行委派
+		if (taskId != null) {
+			// 委托人是当前用户
+			String userId=AuthenticationUser.getAuthenticationUser().getUserid();
+			taskService.setAssignee(taskId, userId);
 			taskService.delegateTask(taskId,delegateUser);
 			return true;
 		}

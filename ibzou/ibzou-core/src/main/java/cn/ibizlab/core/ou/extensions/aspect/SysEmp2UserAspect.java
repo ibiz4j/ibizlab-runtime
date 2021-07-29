@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -357,7 +358,7 @@ public class SysEmp2UserAspect
                 if (!"on".equalsIgnoreCase(isOnOff)) {
                     ibzuserService.saveOrUpdateBatch(ibzEmp2UserMapping.toDto(list));
                 }
-                List<SysDeptMember> mebs = (List<SysDeptMember>) obj;
+                List<SysDeptMember> mebs = new ArrayList<>();
 
                 list.forEach( item ->{
                     if((!StringUtils.isEmpty(item.getMdeptid()))&&(!StringUtils.isEmpty(item.getUserid()))) {
