@@ -4,14 +4,17 @@ package cn.ibizlab.util.dict;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import liquibase.util.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -39,5 +42,16 @@ public class CodeItem
 	public String getText()
 	{
 		return label;
+	}
+
+	@JsonIgnore
+	@JSONField(serialize = false)
+	public Set<String> getFilterSet()
+	{
+		Set<String> set=new HashSet<>();
+		if(!StringUtils.isEmpty(filter))
+			for(String str:filter.split(";|,"))
+				set.add(str);
+		return set;
 	}
 }

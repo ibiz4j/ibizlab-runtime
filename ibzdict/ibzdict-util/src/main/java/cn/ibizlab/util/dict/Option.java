@@ -3,14 +3,17 @@ package cn.ibizlab.util.dict;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import liquibase.util.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -31,4 +34,14 @@ public class Option
 	private String parent;
 	private Map<String,Object> extension;
 
+	@JsonIgnore
+	@JSONField(serialize = false)
+	public Set<String> getFilterSet()
+	{
+		Set<String> set=new HashSet<>();
+		if(!StringUtils.isEmpty(filter))
+			for(String str:filter.split(";|,"))
+				set.add(str);
+		return set;
+	}
 }

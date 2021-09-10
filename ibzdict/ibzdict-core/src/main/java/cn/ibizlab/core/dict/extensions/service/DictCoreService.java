@@ -22,10 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -70,7 +67,7 @@ public class DictCoreService
                 wrapper.likeRight(DictCatalog::getGroup,context.getN_vfilter_leftlike());
             if(!StringUtils.isEmpty(context.getN_vfilter_eq()))
                 wrapper.eq(DictCatalog::getGroup,context.getN_vfilter_eq());
-            wrapper.orderByAsc(DictCatalog::getGroup,DictCatalog::getCode);
+            wrapper.orderByAsc(DictCatalog::getGroup, DictCatalog::getCode);
 
             dictCatalogService.list(wrapper).forEach(item->{
                 list.add(new Option().setValue(item.getCode()).setId(item.getCode())
@@ -82,24 +79,58 @@ public class DictCoreService
         }
         else
         {
-            DictCatalog dictCatalog = dictCatalogService.getOne(Wrappers.<DictCatalog>query().eq("ccode",code));
-            catalog.setCode(dictCatalog.getCode()).setName(dictCatalog.getName());
+            String codeName=code;
+            String filter="";
+            String subCode="";
+            if(codeName.indexOf(".")>0)
+            {
+                String[] arg= codeName.split("[.]");
+                codeName=arg[0];
+                subCode=arg[1];
+            }
+            if(codeName.indexOf("-")>0)
+            {
+                String[] arg= codeName.split("-");
+                codeName=arg[0];
+                filter=arg[1];
+            }
+            DictCatalog dictCatalog = dictCatalogService.getOne(Wrappers.<DictCatalog>query().eq("ccode",codeName));
+            catalog.setCode(code).setName(dictCatalog.getName());
 
 
-            List<Option> list = new ArrayList<>();
-            optionService.list(context.getSelectCond().eq("cid",dictCatalog.getId()).orderByAsc("showorder")).forEach(item->{
+            Map<String,List<Option>> map = new LinkedHashMap<>();
+            Option subOption=null;
+            for(DictOption item:optionService.list(context.getSelectCond().eq("cid",dictCatalog.getId()).orderByAsc("showorder")))
+            {
                 Map<String,Object> extension = new HashMap<>();
                 if(!StringUtils.isEmpty(item.getExtension()))
                     extension = JSONObject.parseObject(item.getExtension(),Map.class);
-                list.add(new Option().setValue(item.getValue()).setId(item.getValue())
-                        .setDisabled(((item.getDisabled()!=null && item.getDisabled()==1)||(item.getExpired()!=null && item.getExpired()==1))?true:false)
-                        .setFilter(item.getFilter()).setIconClass(item.getIconClass()).setLabel(item.getLabel()).setParent(item.getParent()).setExtension(extension)
-                );
-            });
+                String pid=StringUtils.isEmpty(item.getParent())?"_root":item.getParent();
+                List<Option> list=null;
+                if(!map.containsKey(pid))
+                {
+                    list=new ArrayList<>();
+                    map.put(pid,list);
+                }
+                else
+                    list=map.get(pid);
 
-            List<Option> codeItemTreeList = new ArrayList<Option>();
-            codeItemTreeList = loop(list, "");
-            catalog.setOptions(codeItemTreeList);
+                Option option=new Option().setValue(item.getValue()).setId(item.getValue())
+                        .setDisabled(((item.getDisabled()!=null && item.getDisabled()==1)||(item.getExpired()!=null && item.getExpired()==1))?true:false)
+                        .setFilter(item.getFilter()).setIconClass(item.getIconClass()).setLabel(item.getLabel()).setParent(item.getParent()).setExtension(extension);
+                if(option.getValue().equals(subCode))
+                    subOption=option;
+                if(StringUtils.isEmpty(filter)||option.getFilterSet().contains(filter))
+                    list.add(option);
+            }
+            List<Option> codeItemTreeList = loop(map, (StringUtils.isEmpty(subCode))?"_root":subCode);
+            if(subOption!=null)
+            {
+                subOption.setChildren(codeItemTreeList).setParent("");
+                catalog.getOptions().add(subOption);
+            }
+            else
+                catalog.setOptions(codeItemTreeList);
         }
         return catalog;
     }
@@ -143,7 +174,7 @@ public class DictCoreService
                 wrapper.likeRight(DictCatalog::getGroup,context.getN_vfilter_leftlike());
             if(!StringUtils.isEmpty(context.getN_vfilter_eq()))
                 wrapper.eq(DictCatalog::getGroup,context.getN_vfilter_eq());
-            wrapper.orderByAsc(DictCatalog::getGroup,DictCatalog::getCode);
+            wrapper.orderByAsc(DictCatalog::getGroup, DictCatalog::getCode);
 
             dictCatalogService.list(wrapper).forEach(item->{
                 list.add(new CodeItem().setValue(item.getCode()).setId(item.getCode())
@@ -154,25 +185,67 @@ public class DictCoreService
             catalog.setOptions(list);
         }
         else {
-            DictCatalog dictCatalog = dictCatalogService.getOne(Wrappers.<DictCatalog>query().eq("ccode",code));
-            catalog.setCode(dictCatalog.getCode()).setName(dictCatalog.getName());
+
+            String codeName=code;
+            String filter="";
+            String subCode="";
+            if(codeName.indexOf(".")>0)
+            {
+                String[] arg= codeName.split("[.]");
+                codeName=arg[0];
+                subCode=arg[1];
+            }
+            if(codeName.indexOf("-")>0)
+            {
+                String[] arg= codeName.split("-");
+                codeName=arg[0];
+                filter=arg[1];
+            }
+
+            DictCatalog dictCatalog = dictCatalogService.getOne(Wrappers.<DictCatalog>query().eq("ccode",codeName));
+            catalog.setCode(code).setName(dictCatalog.getName());
 
 
-            List<CodeItem> list = new ArrayList<>();
-            optionService.list(context.getSelectCond().eq("cid",dictCatalog.getId()).orderByAsc("showorder")).forEach(item->{
+            Map<String,List<CodeItem>> map = new LinkedHashMap<>();
+            List<CodeItem> alllist = new ArrayList<>();
+            CodeItem subOption=null;
+            for(DictOption item:optionService.list(context.getSelectCond().eq("cid",dictCatalog.getId()).orderByAsc("showorder"))){
                 Map<String,Object> extension = new HashMap<>();
                 if(!StringUtils.isEmpty(item.getExtension()))
                     extension = JSONObject.parseObject(item.getExtension(),Map.class);
-                list.add(new CodeItem().setValue(item.getValue()).setId(item.getValue())
+                String pid=StringUtils.isEmpty(item.getParent())?"_root":item.getParent();
+                List<CodeItem> list=null;
+                if(!map.containsKey(pid))
+                {
+                    list=new ArrayList<>();
+                    map.put(pid,list);
+                }
+                else
+                    list=map.get(pid);
+
+                CodeItem option=new CodeItem().setValue(item.getValue()).setId(item.getValue())
                         .setDisabled(((item.getDisabled()!=null && item.getDisabled()==1)||(item.getExpired()!=null && item.getExpired()==1))?true:false)
-                        .setFilter(item.getFilter()).setIconClass(item.getIconClass()).setLabel(item.getLabel()).setParent(item.getParent()).setExtension(extension)
-                );
-            });
-            catalog.setOptions(list);
+                        .setFilter(item.getFilter()).setIconClass(item.getIconClass()).setLabel(item.getLabel()).setParent(item.getParent()).setExtension(extension);
+
+                if(option.getValue().equals(subCode))
+                    subOption=option;
+
+                if(StringUtils.isEmpty(filter)||option.getFilterSet().contains(filter))
+                {
+                    alllist.add(option);
+                    list.add(option);
+                }
+
+            }
+            if(subOption!=null)
+            {
+                List<CodeItem> codeItemTreeList = loopItem(map, subCode);
+                codeItemTreeList.add(0,subOption);
+                catalog.setOptions(codeItemTreeList);
+            }
+            else
+                catalog.setOptions(alllist);
         }
-
-
-
         return catalog;
     }
 
@@ -183,14 +256,10 @@ public class DictCoreService
     }
 
 
-    public List<Option> loop(List<Option> listCodeItem, Object parentValue) {
+    public List<Option> loop(Map<String,List<Option>> listCodeItem, Object parentValue) {
         List<Option> trees = new ArrayList<Option>();
-        for (Option codeItem : listCodeItem) {
-            String codeItemParentValue = codeItem.getParent();
-            if (StringUtils.isEmpty(codeItemParentValue)) {
-                codeItemParentValue = "";
-            }
-            if (parentValue.equals(codeItemParentValue)) {
+        if(listCodeItem.containsKey(parentValue)) {
+            for (Option codeItem : listCodeItem.get(parentValue)) {
                 List<Option> childCodeItem = loop(listCodeItem, codeItem.getValue());
                 if (childCodeItem.size() > 0) {
                     codeItem.setChildren(childCodeItem);
@@ -201,19 +270,15 @@ public class DictCoreService
         return trees;
     }
 
-    public List<CodeItem> loopCodeItem(List<CodeItem> listCodeItem, Object parentValue) {
+    public List<CodeItem> loopItem(Map<String,List<CodeItem>> listCodeItem, Object parentValue) {
         List<CodeItem> trees = new ArrayList<CodeItem>();
-        for (CodeItem codeItem : listCodeItem) {
-            String codeItemParentValue = codeItem.getParent();
-            if (StringUtils.isEmpty(codeItemParentValue)) {
-                codeItemParentValue = "";
-            }
-            if (parentValue.equals(codeItemParentValue)) {
-                List<CodeItem> childCodeItem = loopCodeItem(listCodeItem, codeItem.getValue());
-                if (childCodeItem.size() > 0) {
-                    codeItem.setChildren(childCodeItem);
-                }
+        if(listCodeItem.containsKey(parentValue)) {
+            for (CodeItem codeItem : listCodeItem.get(parentValue)) {
                 trees.add(codeItem);
+                List<CodeItem> childCodeItem = loopItem(listCodeItem, codeItem.getValue());
+                if (childCodeItem.size() > 0) {
+                    trees.addAll(childCodeItem);
+                }
             }
         }
         return trees;
