@@ -31,6 +31,8 @@ function getAppLocale(){
                 nomore:"No more",
                 other:"other",
                 valueNotEmpty:"The value cannot be null",
+                createFailed:"Create Failed",
+                isExist:"Exist",
             },
             local:{
                 new: "New",

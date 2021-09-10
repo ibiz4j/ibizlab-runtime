@@ -247,8 +247,8 @@ public class WFMemberServiceImpl extends ServiceImpl<WFMemberMapper, WFMember> i
      */
     @Override
     public Page<WFMember> searchDefault(WFMemberSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFMember> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<WFMember>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFMember> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<WFMember>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

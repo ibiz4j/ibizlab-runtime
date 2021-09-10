@@ -220,8 +220,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public Page<SysUser> searchDefault(SysUserSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysUser> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysUser>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysUser> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysUser>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

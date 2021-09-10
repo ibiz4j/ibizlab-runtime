@@ -32,4 +32,7 @@ public interface WFCoreMapper {
 
     Page<WFTask> searchMyAllTask(IPage page, @Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
 
+    Page<WFTask> searchDoneTask(IPage page, @Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
+
+    Page<WFTask> searchFinishTask(IPage page, @Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
 }

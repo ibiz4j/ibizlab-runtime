@@ -187,8 +187,8 @@ public class DictCatalogServiceImpl extends ServiceImpl<DictCatalogMapper, DictC
      */
     @Override
     public Page<DictCatalog> searchDefault(DictCatalogSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<DictCatalog> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<DictCatalog>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<DictCatalog> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<DictCatalog>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

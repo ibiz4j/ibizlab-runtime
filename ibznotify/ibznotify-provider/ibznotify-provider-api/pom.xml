@@ -73,7 +73,41 @@
                                 </resource>
                             </resources>
                             </configuration>
-                    </plugin>                    
+                    </plugin>   
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId> 
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.0.0</version>          
+                        <executions> 
+                            <execution>      
+                                <id>prepare</id>                                                           
+                                <configuration>
+                                    <executable>cp</executable>
+                                    <arguments>
+                                        <argument>../../${project.artifactId}.jar</argument>
+                                        <argument>${project.basedir}/src/main/docker/</argument>
+                                    </arguments>
+                                </configuration> 
+                            </execution> 
+                            <execution>    
+                                <id>buildpush</id>                                                                         
+                                <configuration>
+                                    <executable>docker</executable>
+                                    <arguments>
+                                        <argument>buildx</argument>
+                                        <argument>build</argument>
+                                        <argument>--platform</argument>
+                                        <argument>linux/amd64,linux/arm64</argument>
+                                        <argument>-t</argument>
+                                        <argument>${docker.image.prefix}/${project.artifactId}:latest</argument>
+                                        <argument>${project.basedir}/src/main/docker</argument>
+                                        <argument>--push</argument>
+                                    </arguments>                                    
+                                </configuration>
+                            </execution>                             
+                        </executions>                              
+                    </plugin>                                          
                 </plugins>
             </build>
         </profile>

@@ -228,8 +228,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      */
     @Override
     public Page<SysRole> searchDefault(SysRoleSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRole> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysRole>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRole> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysRole>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
     /**
@@ -237,8 +237,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      */
     @Override
     public Page<SysRole> searchNoRepeat(SysRoleSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRole> pages=baseMapper.searchNoRepeat(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysRole>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRole> pages=baseMapper.searchNoRepeat(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysRole>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

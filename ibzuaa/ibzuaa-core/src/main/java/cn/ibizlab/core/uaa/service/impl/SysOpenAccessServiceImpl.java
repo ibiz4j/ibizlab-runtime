@@ -184,8 +184,8 @@ public class SysOpenAccessServiceImpl extends ServiceImpl<SysOpenAccessMapper, S
      */
     @Override
     public Page<SysOpenAccess> searchDefault(SysOpenAccessSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysOpenAccess> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysOpenAccess>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysOpenAccess> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysOpenAccess>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

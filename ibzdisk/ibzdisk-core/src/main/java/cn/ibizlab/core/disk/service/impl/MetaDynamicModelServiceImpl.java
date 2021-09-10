@@ -227,8 +227,8 @@ public class MetaDynamicModelServiceImpl extends ServiceImpl<MetaDynamicModelMap
      */
     @Override
     public Page<MetaDynamicModel> searchDefault(MetaDynamicModelSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<MetaDynamicModel> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<MetaDynamicModel>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<MetaDynamicModel> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<MetaDynamicModel>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
     /**
@@ -236,8 +236,8 @@ public class MetaDynamicModelServiceImpl extends ServiceImpl<MetaDynamicModelMap
      */
     @Override
     public Page<MetaDynamicModel> searchDynaInst(MetaDynamicModelSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<MetaDynamicModel> pages=baseMapper.searchDynaInst(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<MetaDynamicModel>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<MetaDynamicModel> pages=baseMapper.searchDynaInst(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<MetaDynamicModel>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

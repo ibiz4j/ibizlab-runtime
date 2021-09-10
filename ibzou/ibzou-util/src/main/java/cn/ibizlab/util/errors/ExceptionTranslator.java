@@ -9,6 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.zalando.problem.DefaultProblem;
 import org.zalando.problem.Problem;
 import org.zalando.problem.ProblemBuilder;
@@ -104,5 +106,32 @@ public class ExceptionTranslator implements ProblemHandling {
         headers.add("X-ibz-error", errorKey);
         headers.add("X-ibz-params", entityName);
         return headers;
+    }
+
+    /**
+    * 上传文件大小超出限制异常
+    */
+    @Value("${spring.servlet.multipart.max-file-size}")
+    private String maxFileSize;
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<Problem> handlerMaxUploadFile(MaxUploadSizeExceededException ex,NativeWebRequest request){
+        Problem problem = Problem.builder()
+        .withStatus(Status.BAD_REQUEST)
+        .withDetail("上传文件不能大于"+maxFileSize)
+        .with("message", "上传文件不能大于"+maxFileSize)
+        .with("exmessage",""+ex.getMessage())
+        .build();
+        return create(ex, problem, request);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Problem> handlerTest(Exception ex,NativeWebRequest request){
+        Problem problem = Problem.builder()
+        .withStatus(Status.INTERNAL_SERVER_ERROR)
+        .withDetail("内部服务器异常")
+        .with("message", "内部服务器异常")
+        .with("exmessage",""+ex.getMessage())
+        .build();
+        return create(ex, problem, request);
     }
 }

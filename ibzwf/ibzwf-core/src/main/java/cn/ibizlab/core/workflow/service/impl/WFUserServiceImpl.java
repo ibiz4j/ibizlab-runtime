@@ -187,8 +187,8 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
      */
     @Override
     public Page<WFUser> searchDefault(WFUserSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFUser> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<WFUser>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFUser> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<WFUser>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

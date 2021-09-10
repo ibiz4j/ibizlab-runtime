@@ -23,7 +23,7 @@
                             <template v-else>
                                 <i class='fa fa-cogs app-menu-icon'></i>
                             </template>
-                            <span class='text' :title="$t('app.menus.ouindexview.' + item0.name)">{{$t('app.menus.ouindexview.' + item0.name)}}</span>
+                            <span class='text' :title="$t('app.menus.ouindexview.' + item0.name.toLowerCase())">{{$t('app.menus.ouindexview.' + item0.name.toLowerCase())}}</span>
                         </template>
                         <template v-for="item1 in item0.items">
                             <template v-if="item1.items && Array.isArray(item1.items) && item1.items.length > 0">
@@ -35,7 +35,7 @@
                                         <template v-else-if="item1.iconcls && item1.iconcls != ''">
                                             <i :class="[item1.iconcls, 'app-menu-icon']"></i>
                                         </template>
-                                        <span class='text' :title="$t('app.menus.ouindexview.' + item1.name)">{{$t('app.menus.ouindexview.' + item1.name)}}</span>
+                                        <span class='text' :title="$t('app.menus.ouindexview.' + item1.name.toLowerCase())">{{$t('app.menus.ouindexview.' + item1.name.toLowerCase())}}</span>
                                     </template>
                                     <template v-for="item2 in item1.items">
                                         <template v-if="item2.type =='MENUITEM'">
@@ -47,7 +47,7 @@
                                                     <i :class="[item2.iconcls, 'app-menu-icon']"></i>
                                                 </template>
                                                 <template slot="title">
-                                                    <span class="text" :title="$t('app.menus.ouindexview.' + item2.name)">{{$t('app.menus.ouindexview.' + item2.name)}}</span>
+                                                    <span class="text" :title="$t('app.menus.ouindexview.' + item2.name.toLowerCase())">{{$t('app.menus.ouindexview.' + item2.name.toLowerCase())}}</span>
                                                     <template v-if="counterdata && counterdata[item2.counterid] && counterdata[item2.counterid] > 0">
                                                         <span class="pull-right">
                                                             <badge :count="counterdata[item2.counterid]" :overflow-count="9999"></badge>
@@ -69,7 +69,7 @@
                                             <i :class="[item1.iconcls, 'app-menu-icon']"></i>
                                         </template>
                                         <template slot="title">
-                                            <span class="text" :title="$t('app.menus.ouindexview.' + item1.name)">{{$t('app.menus.ouindexview.' + item1.name)}} </span>
+                                            <span class="text" :title="$t('app.menus.ouindexview.' + item1.name.toLowerCase())">{{$t('app.menus.ouindexview.' + item1.name.toLowerCase())}} </span>
                                             <template v-if="counterdata && counterdata[item1.counterid] && counterdata[item1.counterid] > 0">
                                                 <span class="pull-right">
                                                     <badge :count="counterdata[item1.counterid]" :overflow-count="9999"></badge>
@@ -95,7 +95,7 @@
                                 <i class='fa fa-cogs app-menu-icon'></i>
                             </template>
                             <template slot="title">
-                                <span class="text" :title="$t('app.menus.ouindexview.' + item0.name)">{{$t('app.menus.ouindexview.' + item0.name)}}</span>
+                                <span class="text" :title="$t('app.menus.ouindexview.' + item0.name.toLowerCase())">{{$t('app.menus.ouindexview.' + item0.name.toLowerCase())}}</span>
                                 <template v-if="counterdata && counterdata[item0.counterid] && counterdata[item0.counterid] > 0">
                                     <span class="pull-right">
                                         <badge :count="counterdata[item0.counterid]" :overflow-count="9999"></badge>

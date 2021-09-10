@@ -65,6 +65,30 @@ public class PayOpenAccessResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-PayOpenAccess-Get-all')")
+    @ApiOperation(value = "获取支付平台", tags = {"支付平台" },  notes = "获取支付平台")
+	@RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/{payopenaccess_id}")
+    public ResponseEntity<PayOpenAccessDTO> get(@PathVariable("payopenaccess_id") String payopenaccess_id) {
+        PayOpenAccess domain = payopenaccessService.get(payopenaccess_id);
+        PayOpenAccessDTO dto = payopenaccessMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-PayOpenAccess-Remove-all')")
+    @ApiOperation(value = "删除支付平台", tags = {"支付平台" },  notes = "删除支付平台")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/payopenaccesses/{payopenaccess_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("payopenaccess_id") String payopenaccess_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(payopenaccessService.remove(payopenaccess_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-PayOpenAccess-Remove-all')")
+    @ApiOperation(value = "批量删除支付平台", tags = {"支付平台" },  notes = "批量删除支付平台")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/payopenaccesses/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        payopenaccessService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-PayOpenAccess-Update-all')")
     @ApiOperation(value = "更新支付平台", tags = {"支付平台" },  notes = "更新支付平台")
 	@RequestMapping(method = RequestMethod.PUT, value = "/payopenaccesses/{payopenaccess_id}")
@@ -84,28 +108,10 @@ public class PayOpenAccessResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-PayOpenAccess-Remove-all')")
-    @ApiOperation(value = "删除支付平台", tags = {"支付平台" },  notes = "删除支付平台")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/payopenaccesses/{payopenaccess_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("payopenaccess_id") String payopenaccess_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(payopenaccessService.remove(payopenaccess_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-PayOpenAccess-Remove-all')")
-    @ApiOperation(value = "批量删除支付平台", tags = {"支付平台" },  notes = "批量删除支付平台")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/payopenaccesses/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        payopenaccessService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-PayOpenAccess-Get-all')")
-    @ApiOperation(value = "获取支付平台", tags = {"支付平台" },  notes = "获取支付平台")
-	@RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/{payopenaccess_id}")
-    public ResponseEntity<PayOpenAccessDTO> get(@PathVariable("payopenaccess_id") String payopenaccess_id) {
-        PayOpenAccess domain = payopenaccessService.get(payopenaccess_id);
-        PayOpenAccessDTO dto = payopenaccessMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查支付平台", tags = {"支付平台" },  notes = "检查支付平台")
+	@RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody PayOpenAccessDTO payopenaccessdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(payopenaccessService.checkKey(payopenaccessMapping.toDomain(payopenaccessdto)));
     }
 
     @ApiOperation(value = "获取支付平台草稿", tags = {"支付平台" },  notes = "获取支付平台草稿")
@@ -113,12 +119,6 @@ public class PayOpenAccessResource {
     public ResponseEntity<PayOpenAccessDTO> getDraft(PayOpenAccessDTO dto) {
         PayOpenAccess domain = payopenaccessMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(payopenaccessMapping.toDto(payopenaccessService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查支付平台", tags = {"支付平台" },  notes = "检查支付平台")
-	@RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody PayOpenAccessDTO payopenaccessdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(payopenaccessService.checkKey(payopenaccessMapping.toDomain(payopenaccessdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-PayOpenAccess-Save-all')")

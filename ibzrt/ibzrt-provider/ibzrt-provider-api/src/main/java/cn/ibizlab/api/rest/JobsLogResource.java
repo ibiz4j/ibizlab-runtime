@@ -65,6 +65,30 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Get-all')")
+    @ApiOperation(value = "获取任务调度日志", tags = {"任务调度日志" },  notes = "获取任务调度日志")
+	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/{jobslog_id}")
+    public ResponseEntity<JobsLogDTO> get(@PathVariable("jobslog_id") String jobslog_id) {
+        JobsLog domain = jobslogService.get(jobslog_id);
+        JobsLogDTO dto = jobslogMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Remove-all')")
+    @ApiOperation(value = "删除任务调度日志", tags = {"任务调度日志" },  notes = "删除任务调度日志")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/{jobslog_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("jobslog_id") String jobslog_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(jobslogService.remove(jobslog_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Remove-all')")
+    @ApiOperation(value = "批量删除任务调度日志", tags = {"任务调度日志" },  notes = "批量删除任务调度日志")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        jobslogService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Update-all')")
     @ApiOperation(value = "更新任务调度日志", tags = {"任务调度日志" },  notes = "更新任务调度日志")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobslogs/{jobslog_id}")
@@ -84,28 +108,10 @@ public class JobsLogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Remove-all')")
-    @ApiOperation(value = "删除任务调度日志", tags = {"任务调度日志" },  notes = "删除任务调度日志")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/{jobslog_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("jobslog_id") String jobslog_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(jobslogService.remove(jobslog_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Remove-all')")
-    @ApiOperation(value = "批量删除任务调度日志", tags = {"任务调度日志" },  notes = "批量删除任务调度日志")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/jobslogs/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        jobslogService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Get-all')")
-    @ApiOperation(value = "获取任务调度日志", tags = {"任务调度日志" },  notes = "获取任务调度日志")
-	@RequestMapping(method = RequestMethod.GET, value = "/jobslogs/{jobslog_id}")
-    public ResponseEntity<JobsLogDTO> get(@PathVariable("jobslog_id") String jobslog_id) {
-        JobsLog domain = jobslogService.get(jobslog_id);
-        JobsLogDTO dto = jobslogMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查任务调度日志", tags = {"任务调度日志" },  notes = "检查任务调度日志")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody JobsLogDTO jobslogdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(jobslogService.checkKey(jobslogMapping.toDomain(jobslogdto)));
     }
 
     @ApiOperation(value = "获取任务调度日志草稿", tags = {"任务调度日志" },  notes = "获取任务调度日志草稿")
@@ -113,12 +119,6 @@ public class JobsLogResource {
     public ResponseEntity<JobsLogDTO> getDraft(JobsLogDTO dto) {
         JobsLog domain = jobslogMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(jobslogMapping.toDto(jobslogService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查任务调度日志", tags = {"任务调度日志" },  notes = "检查任务调度日志")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobslogs/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody JobsLogDTO jobslogdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(jobslogService.checkKey(jobslogMapping.toDomain(jobslogdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsLog-Save-all')")

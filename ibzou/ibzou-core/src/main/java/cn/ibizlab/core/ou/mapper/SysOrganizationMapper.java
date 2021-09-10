@@ -32,7 +32,7 @@ public interface SysOrganizationMapper extends BaseMapper<SysOrganization> {
     @CacheEvict(value ="sysorganization", key = "'row:'+#p0.orgid")
     int updateById(@Param(Constants.ENTITY) SysOrganization entity);
     @Override
-    @CacheEvict(value ="sysorganization", key = "'row:'+#p0.orgid")
+    @CacheEvict(value ="sysorganization", key = "'row:'+#p0.orgid" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) SysOrganization entity, @Param("ew") Wrapper<SysOrganization> updateWrapper);
     @Override
     @CacheEvict(value ="sysorganization", key = "'row:'+#p0")

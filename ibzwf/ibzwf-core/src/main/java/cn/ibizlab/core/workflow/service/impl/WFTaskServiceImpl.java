@@ -12,8 +12,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.math.BigInteger;
 
-import cn.ibizlab.core.workflow.domain.WFSystem;
-import cn.ibizlab.core.workflow.mapper.WFCoreMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
+import org.springframework.beans.factory.annotation.Value;
+import cn.ibizlab.util.errors.BadRequestAlertException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.annotation.Lazy;
 import cn.ibizlab.core.workflow.domain.WFTask;
@@ -94,21 +94,65 @@ public class WFTaskServiceImpl implements IWFTaskService {
     public void saveBatch(List<WFTask> list) {
     }
 
+    @Override
+    @Transactional
+    public WFTask userCustom(WFTask et) {
+        //自定义代码
+        return et;
+    }
+
+    @Override
+    @Transactional
+    public boolean userCustomBatch(List<WFTask> etList) {
+        for(WFTask et : etList) {
+            userCustom(et);
+        }
+        return true;
+    }
 
 
 
-    @Autowired
-    private WFCoreMapper wfCoreMapper;
+
 
     /**
      * 查询集合 DEFAULT
      */
     @Override
     public Page<WFTask> searchDefault(WFTaskSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFTask> pages=wfCoreMapper.searchMyTask(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<WFTask>(pages.getRecords(), context.getPageable(), pages.getTotal());
+        return new PageImpl<WFTask>(new ArrayList(),context.getPageable(),0);
     }
 
+    /**
+     * 查询集合 已办任务
+     */
+    @Override
+    public Page<WFTask> searchDoneTask(WFTaskSearchContext context) {
+        return new PageImpl<WFTask>(new ArrayList(),context.getPageable(),0);
+    }
+
+    /**
+     * 查询集合 办结任务
+     */
+    @Override
+    public Page<WFTask> searchFinishTask(WFTaskSearchContext context) {
+        return new PageImpl<WFTask>(new ArrayList(),context.getPageable(),0);
+    }
+
+    /**
+     * 查询集合 待办任务
+     */
+    @Override
+    public Page<WFTask> searchTodoTask(WFTaskSearchContext context) {
+        return new PageImpl<WFTask>(new ArrayList(),context.getPageable(),0);
+    }
+
+    /**
+     * 查询集合 待阅任务
+     */
+    @Override
+    public Page<WFTask> searchToreadTask(WFTaskSearchContext context) {
+        return new PageImpl<WFTask>(new ArrayList(),context.getPageable(),0);
+    }
 
 }
 

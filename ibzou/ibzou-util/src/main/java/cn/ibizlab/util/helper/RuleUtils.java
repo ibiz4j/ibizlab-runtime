@@ -280,22 +280,26 @@ public class RuleUtils
 				}
                 return finalTime.getTime()<tm.getTime();
             }
-            else if (finalObject instanceof Integer)
-            {
-                return (((Integer) finalObject).intValue() < ((Integer)exp).intValue());
-            }
-            else if (finalObject instanceof Double)
-            {
-                return (((Double) finalObject).doubleValue() < ((Double)exp).doubleValue());
-            }
-            else if (finalObject instanceof Float)
-            {
-                return (((Float) finalObject).floatValue() < ((Float)exp).floatValue());
-            }
-            else if (finalObject instanceof String)
-            {
-                return finalObject.toString().compareToIgnoreCase(exp.toString())<0;
-            }
+			else if (finalObject instanceof Integer)
+			{
+				return Integer.parseInt(finalObject.toString()) < Integer.parseInt(exp.toString());
+			}
+			else if (finalObject instanceof Double)
+			{
+				return Double.parseDouble(finalObject.toString()) < Double.parseDouble(exp.toString());
+			}
+			else if (finalObject instanceof Float)
+			{
+				return Float.parseFloat(finalObject.toString()) < Float.parseFloat(exp.toString());
+			}
+			else if (finalObject instanceof String)
+			{
+				return finalObject.toString().compareToIgnoreCase(exp.toString())<0;
+			}
+			else if (finalObject instanceof Long)
+			{
+				return Long.parseLong(finalObject.toString()) < Long.parseLong(exp.toString());
+			}
             else
                 return false;
         }

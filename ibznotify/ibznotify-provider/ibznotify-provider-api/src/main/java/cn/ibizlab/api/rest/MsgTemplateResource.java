@@ -65,6 +65,30 @@ public class MsgTemplateResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Get-all')")
+    @ApiOperation(value = "获取消息模板", tags = {"消息模板" },  notes = "获取消息模板")
+	@RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/{msgtemplate_id}")
+    public ResponseEntity<MsgTemplateDTO> get(@PathVariable("msgtemplate_id") String msgtemplate_id) {
+        MsgTemplate domain = msgtemplateService.get(msgtemplate_id);
+        MsgTemplateDTO dto = msgtemplateMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Remove-all')")
+    @ApiOperation(value = "删除消息模板", tags = {"消息模板" },  notes = "删除消息模板")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/msgtemplates/{msgtemplate_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("msgtemplate_id") String msgtemplate_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(msgtemplateService.remove(msgtemplate_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Remove-all')")
+    @ApiOperation(value = "批量删除消息模板", tags = {"消息模板" },  notes = "批量删除消息模板")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/msgtemplates/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        msgtemplateService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Update-all')")
     @ApiOperation(value = "更新消息模板", tags = {"消息模板" },  notes = "更新消息模板")
 	@RequestMapping(method = RequestMethod.PUT, value = "/msgtemplates/{msgtemplate_id}")
@@ -84,28 +108,10 @@ public class MsgTemplateResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Remove-all')")
-    @ApiOperation(value = "删除消息模板", tags = {"消息模板" },  notes = "删除消息模板")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/msgtemplates/{msgtemplate_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("msgtemplate_id") String msgtemplate_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(msgtemplateService.remove(msgtemplate_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Remove-all')")
-    @ApiOperation(value = "批量删除消息模板", tags = {"消息模板" },  notes = "批量删除消息模板")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/msgtemplates/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        msgtemplateService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Get-all')")
-    @ApiOperation(value = "获取消息模板", tags = {"消息模板" },  notes = "获取消息模板")
-	@RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/{msgtemplate_id}")
-    public ResponseEntity<MsgTemplateDTO> get(@PathVariable("msgtemplate_id") String msgtemplate_id) {
-        MsgTemplate domain = msgtemplateService.get(msgtemplate_id);
-        MsgTemplateDTO dto = msgtemplateMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查消息模板", tags = {"消息模板" },  notes = "检查消息模板")
+	@RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody MsgTemplateDTO msgtemplatedto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(msgtemplateService.checkKey(msgtemplateMapping.toDomain(msgtemplatedto)));
     }
 
     @ApiOperation(value = "获取消息模板草稿", tags = {"消息模板" },  notes = "获取消息模板草稿")
@@ -113,12 +119,6 @@ public class MsgTemplateResource {
     public ResponseEntity<MsgTemplateDTO> getDraft(MsgTemplateDTO dto) {
         MsgTemplate domain = msgtemplateMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(msgtemplateMapping.toDto(msgtemplateService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查消息模板", tags = {"消息模板" },  notes = "检查消息模板")
-	@RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody MsgTemplateDTO msgtemplatedto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(msgtemplateService.checkKey(msgtemplateMapping.toDomain(msgtemplatedto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgTemplate-Save-all')")

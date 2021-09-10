@@ -843,7 +843,7 @@ export default class SYS_ROLEMPickupViewBase extends Vue {
             }
             if(model.datas.length>0){
                 model.datas.forEach((data:any,index:any)=>{
-                    Object.assign(data,{srfmajortext: data['rolename']});
+                    Object.assign(data,{srfmajortext: data.hasOwnProperty('srfmajortext') ? data['srfmajortext'] : data['rolename']});
                 })
             }
             model.datas.forEach((item: any) => {

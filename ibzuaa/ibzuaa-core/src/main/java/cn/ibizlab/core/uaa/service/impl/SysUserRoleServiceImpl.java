@@ -220,8 +220,8 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
      */
     @Override
     public Page<SysUserRole> searchDefault(SysUserRoleSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysUserRole> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysUserRole>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysUserRole> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysUserRole>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

@@ -232,4 +232,95 @@
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
     </select>
+
+    <select id="searchDoneTask" parameterType="cn.ibizlab.core.workflow.filter.WFTaskSearchContext"  resultType="cn.ibizlab.core.workflow.domain.WFTask">
+        <![CDATA[
+            SELECT
+                T1.TaskId AS Id,
+                T1.DefinitionId AS ProcessDefinitionId,
+                T1.DefinitionName AS ProcessDefinitionName,
+                T1.DefinitionKey AS ProcessDefinitionKey,
+                T1.InstanceId AS ProcessInstanceId,
+                T1.TaskName AS NAME,
+                T1.TaskDefinitionKey,
+                T1.BusinessKey AS ProcessInstanceBusinessKey,
+                T1.Description,
+                T1.CreateTime,
+                T1.BusinessKey2 AS ProcessInstanceBusinessKey2
+            FROM
+                (
+                SELECT DISTINCT
+                    RES.ID_ AS TaskId,
+                    RES.PROC_DEF_ID_ AS DefinitionId,
+                    ARP.NAME_ AS DefinitionName,
+                    ARP.KEY_ AS DefinitionKey,
+                    RES.PROC_INST_ID_ AS InstanceId,
+                    RES.NAME_ AS TaskName,
+                    RES.TASK_DEF_KEY_ AS TaskDefinitionKey,
+                    RES.CATEGORY_ AS BusinessKey,
+                    RES.DESCRIPTION_ AS Description,
+                    RES.START_TIME_ AS CreateTime ,
+                    HPI.BUSINESS_KEY_ AS BusinessKey2
+                FROM
+                    ACT_HI_TASKINST RES
+                    INNER JOIN ACT_HI_PROCINST HPI ON RES.PROC_INST_ID_ = HPI.ID_
+                    INNER JOIN ACT_RE_PROCDEF ARP ON RES.PROC_DEF_ID_ = arp.ID_
+                WHERE
+                    (RES.END_TIME_ IS NOT NULL
+                    AND HPI.END_TIME_ IS NULL
+                    AND RES.ASSIGNEE_ IS NULL
+                AND EXISTS ( SELECT LINK.ID_ FROM ACT_HI_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND ( LINK.USER_ID_ = #{srf.sessioncontext.srfuserid}   ) )
+                ) OR HPI.START_USER_ID_ = #{srf.sessioncontext.srfuserid} ) t1
+         ]]>
+        <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+        <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+
+    </select>
+
+    <select id="searchFinishTask" parameterType="cn.ibizlab.core.workflow.filter.WFTaskSearchContext"  resultType="cn.ibizlab.core.workflow.domain.WFTask">
+        <![CDATA[
+            SELECT
+                T1.TaskId AS Id,
+                T1.DefinitionId AS ProcessDefinitionId,
+                T1.DefinitionName AS ProcessDefinitionName,
+                T1.DefinitionKey AS ProcessDefinitionKey,
+                T1.InstanceId AS ProcessInstanceId,
+                T1.TaskName AS NAME,
+                T1.TaskDefinitionKey,
+                T1.BusinessKey AS ProcessInstanceBusinessKey,
+                T1.Description,
+                T1.CreateTime,
+                T1.BusinessKey2 AS ProcessInstanceBusinessKey2
+            FROM
+                (
+                SELECT DISTINCT
+                    RES.ID_ AS TaskId,
+                    RES.PROC_DEF_ID_ AS DefinitionId,
+                    ARP.NAME_ AS DefinitionName,
+                    ARP.KEY_ AS DefinitionKey,
+                    RES.PROC_INST_ID_ AS InstanceId,
+                    RES.NAME_ AS TaskName,
+                    RES.TASK_DEF_KEY_ AS TaskDefinitionKey,
+                    RES.CATEGORY_ AS BusinessKey,
+                    RES.DESCRIPTION_ AS Description,
+                    RES.START_TIME_ AS CreateTime,
+                    HPI.BUSINESS_KEY_ AS BusinessKey2
+                FROM
+                    ACT_HI_TASKINST RES
+                    INNER JOIN ACT_HI_PROCINST HPI ON RES.PROC_INST_ID_ = HPI.ID_
+                    INNER JOIN ACT_RE_PROCDEF ARP ON RES.PROC_DEF_ID_ = ARP.ID_
+                WHERE
+                    (RES.END_TIME_ IS NOT NULL
+                    AND HPI.END_TIME_ IS NOT NULL
+                    AND RES.ASSIGNEE_ IS NULL
+                AND EXISTS ( SELECT LINK.ID_ FROM ACT_HI_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND ( LINK.USER_ID_ = #{srf.sessioncontext.srfuserid}  ) )
+                 ) OR (HPI.START_USER_ID_ = #{srf.sessioncontext.srfuserid} )
+                AND RES.END_TIME_ IS NOT NULL
+                AND HPI.END_TIME_ IS NOT NULL
+                AND RES.ASSIGNEE_ IS NULL) T1
+         ]]>
+        <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+        <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+
+    </select>
 </mapper>

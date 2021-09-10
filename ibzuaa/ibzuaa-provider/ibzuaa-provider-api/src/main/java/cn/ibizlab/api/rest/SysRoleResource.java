@@ -65,6 +65,30 @@ public class SysRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PostAuthorize("hasPermission(this.sysroleMapping.toDomain(returnObject.body),'ibzuaa-SysRole-Get')")
+    @ApiOperation(value = "获取系统角色", tags = {"系统角色" },  notes = "获取系统角色")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}")
+    public ResponseEntity<SysRoleDTO> get(@PathVariable("sysrole_id") String sysrole_id) {
+        SysRole domain = sysroleService.get(sysrole_id);
+        SysRoleDTO dto = sysroleMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.sysroleService.get(#sysrole_id),'ibzuaa-SysRole-Remove')")
+    @ApiOperation(value = "删除系统角色", tags = {"系统角色" },  notes = "删除系统角色")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("sysrole_id") String sysrole_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sysroleService.remove(sysrole_id));
+    }
+
+    @PreAuthorize("hasPermission(this.sysroleService.getSysroleByIds(#ids),'ibzuaa-SysRole-Remove')")
+    @ApiOperation(value = "批量删除系统角色", tags = {"系统角色" },  notes = "批量删除系统角色")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sysroleService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @VersionCheck(entity = "sysrole" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.sysroleService.get(#sysrole_id),'ibzuaa-SysRole-Update')")
     @ApiOperation(value = "更新系统角色", tags = {"系统角色" },  notes = "更新系统角色")
@@ -85,28 +109,10 @@ public class SysRoleResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sysroleService.get(#sysrole_id),'ibzuaa-SysRole-Remove')")
-    @ApiOperation(value = "删除系统角色", tags = {"系统角色" },  notes = "删除系统角色")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{sysrole_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("sysrole_id") String sysrole_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sysroleService.remove(sysrole_id));
-    }
-
-    @PreAuthorize("hasPermission(this.sysroleService.getSysroleByIds(#ids),'ibzuaa-SysRole-Remove')")
-    @ApiOperation(value = "批量删除系统角色", tags = {"系统角色" },  notes = "批量删除系统角色")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sysroleService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PostAuthorize("hasPermission(this.sysroleMapping.toDomain(returnObject.body),'ibzuaa-SysRole-Get')")
-    @ApiOperation(value = "获取系统角色", tags = {"系统角色" },  notes = "获取系统角色")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysroles/{sysrole_id}")
-    public ResponseEntity<SysRoleDTO> get(@PathVariable("sysrole_id") String sysrole_id) {
-        SysRole domain = sysroleService.get(sysrole_id);
-        SysRoleDTO dto = sysroleMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查系统角色", tags = {"系统角色" },  notes = "检查系统角色")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysRoleDTO sysroledto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysroleService.checkKey(sysroleMapping.toDomain(sysroledto)));
     }
 
     @ApiOperation(value = "获取系统角色草稿", tags = {"系统角色" },  notes = "获取系统角色草稿")
@@ -114,12 +120,6 @@ public class SysRoleResource {
     public ResponseEntity<SysRoleDTO> getDraft(SysRoleDTO dto) {
         SysRole domain = sysroleMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(sysroleMapping.toDto(sysroleService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查系统角色", tags = {"系统角色" },  notes = "检查系统角色")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysroles/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysRoleDTO sysroledto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysroleService.checkKey(sysroleMapping.toDomain(sysroledto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzuaa-SysRole-NoRepeat-all')")

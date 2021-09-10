@@ -65,6 +65,30 @@ public class WFSystemResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Get-all')")
+    @ApiOperation(value = "获取系统", tags = {"系统" },  notes = "获取系统")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfsystems/{wfsystem_id}")
+    public ResponseEntity<WFSystemDTO> get(@PathVariable("wfsystem_id") String wfsystem_id) {
+        WFSystem domain = wfsystemService.get(wfsystem_id);
+        WFSystemDTO dto = wfsystemMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Remove-all')")
+    @ApiOperation(value = "删除系统", tags = {"系统" },  notes = "删除系统")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/{wfsystem_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("wfsystem_id") String wfsystem_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfsystemService.remove(wfsystem_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Remove-all')")
+    @ApiOperation(value = "批量删除系统", tags = {"系统" },  notes = "批量删除系统")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfsystemService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Update-all')")
     @ApiOperation(value = "更新系统", tags = {"系统" },  notes = "更新系统")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{wfsystem_id}")
@@ -84,28 +108,10 @@ public class WFSystemResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Remove-all')")
-    @ApiOperation(value = "删除系统", tags = {"系统" },  notes = "删除系统")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/{wfsystem_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("wfsystem_id") String wfsystem_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfsystemService.remove(wfsystem_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Remove-all')")
-    @ApiOperation(value = "批量删除系统", tags = {"系统" },  notes = "批量删除系统")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfsystemService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Get-all')")
-    @ApiOperation(value = "获取系统", tags = {"系统" },  notes = "获取系统")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfsystems/{wfsystem_id}")
-    public ResponseEntity<WFSystemDTO> get(@PathVariable("wfsystem_id") String wfsystem_id) {
-        WFSystem domain = wfsystemService.get(wfsystem_id);
-        WFSystemDTO dto = wfsystemMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查系统", tags = {"系统" },  notes = "检查系统")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFSystemDTO wfsystemdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfsystemService.checkKey(wfsystemMapping.toDomain(wfsystemdto)));
     }
 
     @ApiOperation(value = "获取系统草稿", tags = {"系统" },  notes = "获取系统草稿")
@@ -113,12 +119,6 @@ public class WFSystemResource {
     public ResponseEntity<WFSystemDTO> getDraft(WFSystemDTO dto) {
         WFSystem domain = wfsystemMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(wfsystemMapping.toDto(wfsystemService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查系统", tags = {"系统" },  notes = "检查系统")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfsystems/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFSystemDTO wfsystemdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfsystemService.checkKey(wfsystemMapping.toDomain(wfsystemdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-WFSystem-Save-all')")

@@ -65,6 +65,30 @@ public class MsgUserAccountResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Get-all')")
+    @ApiOperation(value = "获取绑定消息账号", tags = {"绑定消息账号" },  notes = "获取绑定消息账号")
+	@RequestMapping(method = RequestMethod.GET, value = "/msguseraccounts/{msguseraccount_id}")
+    public ResponseEntity<MsgUserAccountDTO> get(@PathVariable("msguseraccount_id") String msguseraccount_id) {
+        MsgUserAccount domain = msguseraccountService.get(msguseraccount_id);
+        MsgUserAccountDTO dto = msguseraccountMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Remove-all')")
+    @ApiOperation(value = "删除绑定消息账号", tags = {"绑定消息账号" },  notes = "删除绑定消息账号")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/msguseraccounts/{msguseraccount_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("msguseraccount_id") String msguseraccount_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(msguseraccountService.remove(msguseraccount_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Remove-all')")
+    @ApiOperation(value = "批量删除绑定消息账号", tags = {"绑定消息账号" },  notes = "批量删除绑定消息账号")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/msguseraccounts/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        msguseraccountService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Update-all')")
     @ApiOperation(value = "更新绑定消息账号", tags = {"绑定消息账号" },  notes = "更新绑定消息账号")
 	@RequestMapping(method = RequestMethod.PUT, value = "/msguseraccounts/{msguseraccount_id}")
@@ -84,28 +108,10 @@ public class MsgUserAccountResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Remove-all')")
-    @ApiOperation(value = "删除绑定消息账号", tags = {"绑定消息账号" },  notes = "删除绑定消息账号")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/msguseraccounts/{msguseraccount_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("msguseraccount_id") String msguseraccount_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(msguseraccountService.remove(msguseraccount_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Remove-all')")
-    @ApiOperation(value = "批量删除绑定消息账号", tags = {"绑定消息账号" },  notes = "批量删除绑定消息账号")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/msguseraccounts/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        msguseraccountService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgUserAccount-Get-all')")
-    @ApiOperation(value = "获取绑定消息账号", tags = {"绑定消息账号" },  notes = "获取绑定消息账号")
-	@RequestMapping(method = RequestMethod.GET, value = "/msguseraccounts/{msguseraccount_id}")
-    public ResponseEntity<MsgUserAccountDTO> get(@PathVariable("msguseraccount_id") String msguseraccount_id) {
-        MsgUserAccount domain = msguseraccountService.get(msguseraccount_id);
-        MsgUserAccountDTO dto = msguseraccountMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查绑定消息账号", tags = {"绑定消息账号" },  notes = "检查绑定消息账号")
+	@RequestMapping(method = RequestMethod.POST, value = "/msguseraccounts/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody MsgUserAccountDTO msguseraccountdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(msguseraccountService.checkKey(msguseraccountMapping.toDomain(msguseraccountdto)));
     }
 
     @ApiOperation(value = "获取绑定消息账号草稿", tags = {"绑定消息账号" },  notes = "获取绑定消息账号草稿")
@@ -113,12 +119,6 @@ public class MsgUserAccountResource {
     public ResponseEntity<MsgUserAccountDTO> getDraft(MsgUserAccountDTO dto) {
         MsgUserAccount domain = msguseraccountMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(msguseraccountMapping.toDto(msguseraccountService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查绑定消息账号", tags = {"绑定消息账号" },  notes = "检查绑定消息账号")
-	@RequestMapping(method = RequestMethod.POST, value = "/msguseraccounts/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody MsgUserAccountDTO msguseraccountdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(msguseraccountService.checkKey(msguseraccountMapping.toDomain(msguseraccountdto)));
     }
 
     @ApiOperation(value = "保存绑定消息账号", tags = {"绑定消息账号" },  notes = "保存绑定消息账号")

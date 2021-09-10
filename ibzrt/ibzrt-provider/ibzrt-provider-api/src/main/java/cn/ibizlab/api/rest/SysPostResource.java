@@ -65,6 +65,30 @@ public class SysPostResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Get-all')")
+    @ApiOperation(value = "获取岗位", tags = {"岗位" },  notes = "获取岗位")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysposts/{syspost_id}")
+    public ResponseEntity<SysPostDTO> get(@PathVariable("syspost_id") String syspost_id) {
+        SysPost domain = syspostService.get(syspost_id);
+        SysPostDTO dto = syspostMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Remove-all')")
+    @ApiOperation(value = "删除岗位", tags = {"岗位" },  notes = "删除岗位")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysposts/{syspost_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("syspost_id") String syspost_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(syspostService.remove(syspost_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Remove-all')")
+    @ApiOperation(value = "批量删除岗位", tags = {"岗位" },  notes = "批量删除岗位")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysposts/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        syspostService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Update-all')")
     @ApiOperation(value = "更新岗位", tags = {"岗位" },  notes = "更新岗位")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysposts/{syspost_id}")
@@ -84,28 +108,10 @@ public class SysPostResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Remove-all')")
-    @ApiOperation(value = "删除岗位", tags = {"岗位" },  notes = "删除岗位")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysposts/{syspost_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("syspost_id") String syspost_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(syspostService.remove(syspost_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Remove-all')")
-    @ApiOperation(value = "批量删除岗位", tags = {"岗位" },  notes = "批量删除岗位")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysposts/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        syspostService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Get-all')")
-    @ApiOperation(value = "获取岗位", tags = {"岗位" },  notes = "获取岗位")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysposts/{syspost_id}")
-    public ResponseEntity<SysPostDTO> get(@PathVariable("syspost_id") String syspost_id) {
-        SysPost domain = syspostService.get(syspost_id);
-        SysPostDTO dto = syspostMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查岗位", tags = {"岗位" },  notes = "检查岗位")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysposts/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysPostDTO syspostdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(syspostService.checkKey(syspostMapping.toDomain(syspostdto)));
     }
 
     @ApiOperation(value = "获取岗位草稿", tags = {"岗位" },  notes = "获取岗位草稿")
@@ -113,12 +119,6 @@ public class SysPostResource {
     public ResponseEntity<SysPostDTO> getDraft(SysPostDTO dto) {
         SysPost domain = syspostMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(syspostMapping.toDto(syspostService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查岗位", tags = {"岗位" },  notes = "检查岗位")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysposts/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysPostDTO syspostdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(syspostService.checkKey(syspostMapping.toDomain(syspostdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysPost-Save-all')")

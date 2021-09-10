@@ -187,8 +187,8 @@ public class MsgOpenAccessServiceImpl extends ServiceImpl<MsgOpenAccessMapper, M
      */
     @Override
     public Page<MsgOpenAccess> searchDefault(MsgOpenAccessSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgOpenAccess> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<MsgOpenAccess>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgOpenAccess> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<MsgOpenAccess>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

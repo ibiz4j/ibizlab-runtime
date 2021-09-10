@@ -65,6 +65,30 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Get-all')")
+    @ApiOperation(value = "获取应用", tags = {"应用" },  notes = "获取应用")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysapps/{sysapp_id}")
+    public ResponseEntity<SysAppDTO> get(@PathVariable("sysapp_id") String sysapp_id) {
+        SysApp domain = sysappService.get(sysapp_id);
+        SysAppDTO dto = sysappMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Remove-all')")
+    @ApiOperation(value = "删除应用", tags = {"应用" },  notes = "删除应用")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysapps/{sysapp_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("sysapp_id") String sysapp_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sysappService.remove(sysapp_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Remove-all')")
+    @ApiOperation(value = "批量删除应用", tags = {"应用" },  notes = "批量删除应用")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysapps/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sysappService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Update-all')")
     @ApiOperation(value = "更新应用", tags = {"应用" },  notes = "更新应用")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysapps/{sysapp_id}")
@@ -84,28 +108,10 @@ public class SysAppResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Remove-all')")
-    @ApiOperation(value = "删除应用", tags = {"应用" },  notes = "删除应用")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysapps/{sysapp_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("sysapp_id") String sysapp_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sysappService.remove(sysapp_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Remove-all')")
-    @ApiOperation(value = "批量删除应用", tags = {"应用" },  notes = "批量删除应用")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysapps/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sysappService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Get-all')")
-    @ApiOperation(value = "获取应用", tags = {"应用" },  notes = "获取应用")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysapps/{sysapp_id}")
-    public ResponseEntity<SysAppDTO> get(@PathVariable("sysapp_id") String sysapp_id) {
-        SysApp domain = sysappService.get(sysapp_id);
-        SysAppDTO dto = sysappMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查应用", tags = {"应用" },  notes = "检查应用")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysAppDTO sysappdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysappService.checkKey(sysappMapping.toDomain(sysappdto)));
     }
 
     @ApiOperation(value = "获取应用草稿", tags = {"应用" },  notes = "获取应用草稿")
@@ -113,12 +119,6 @@ public class SysAppResource {
     public ResponseEntity<SysAppDTO> getDraft(SysAppDTO dto) {
         SysApp domain = sysappMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(sysappMapping.toDto(sysappService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查应用", tags = {"应用" },  notes = "检查应用")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysapps/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysAppDTO sysappdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysappService.checkKey(sysappMapping.toDomain(sysappdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysApp-Save-all')")

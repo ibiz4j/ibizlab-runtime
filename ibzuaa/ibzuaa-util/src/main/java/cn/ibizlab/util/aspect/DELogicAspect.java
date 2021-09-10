@@ -28,9 +28,11 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.core.annotation.Order;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
@@ -51,6 +53,7 @@ import java.util.concurrent.ConcurrentMap;
 @Aspect
 @Component
 @Slf4j
+@Order(100)
 public class DELogicAspect {
 
     private static BpmnXMLConverter bpmnXMLConverter = new BpmnXMLConverter();
@@ -80,7 +83,7 @@ public class DELogicAspect {
             if(!ObjectUtils.isEmpty(entity)) {
                 String id = DEFieldCacheMap.getDEKeyField(entity.getClass());
                 if(StringUtils.isEmpty(id)) {
-                    log.debug("无法获取实体主键属性[{}]",entity.getClass().getSimpleName());
+                    log.debug("无法获取实体主键属性[{}]",getEntityName(entity));
                     return point.proceed();
                 }
                 entity.set(id, arg);
@@ -102,13 +105,24 @@ public class DELogicAspect {
     }
 
     /**
+     * 判断类是否被代理类代理
+     */
+    private String getEntityName(Object entity){
+        String entityName = entity.getClass().getSimpleName();
+        if(entityName.contains("$$")){
+            entityName = ClassUtils.getUserClass(entity.getClass()).getSimpleName();
+        }
+        return entityName;
+    }
+
+    /**
      * 前附加逻辑
      *
      * @param entity
      * @param action
      */
     private void executeBeforeLogic(EntityBase entity, String action) {
-        Resource bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.BEFORE);
+        Resource bpmnFile = getLocalModel(getEntityName(entity), action, LogicExecMode.BEFORE);
         if (bpmnFile != null && bpmnFile.exists() && isValid(bpmnFile, entity, action)) {
             executeLogic(bpmnFile, entity, action);
         }
@@ -121,7 +135,7 @@ public class DELogicAspect {
      * @param action
      */
     private void executeAfterLogic(EntityBase entity, String action) {
-        Resource bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.AFTER);
+        Resource bpmnFile = getLocalModel(getEntityName(entity), action, LogicExecMode.AFTER);
         if (bpmnFile != null && bpmnFile.exists() && isValid(bpmnFile, entity, action)) {
             executeLogic(bpmnFile, entity, action);
         }
@@ -134,7 +148,7 @@ public class DELogicAspect {
      * @param action
      */
     private void executeLogic(EntityBase entity, String action) {
-        Resource bpmnFile = getLocalModel(entity.getClass().getSimpleName(), action, LogicExecMode.EXEC);
+        Resource bpmnFile = getLocalModel(getEntityName(entity), action, LogicExecMode.EXEC);
         if (bpmnFile != null && bpmnFile.exists() && isValid(bpmnFile, entity, action)) {
             executeLogic(bpmnFile, entity, action);
         }
@@ -148,7 +162,7 @@ public class DELogicAspect {
      */
     private void executeLogic(Resource bpmnFile, Object entity, String action) {
         try {
-            log.debug("开始执行实体处理逻辑[{}:{}:{}:本地模式]", entity.getClass().getSimpleName(), action, bpmnFile.getFilename());
+            log.debug("开始执行实体处理逻辑[{}:{}:{}:本地模式]", getEntityName(entity), action, bpmnFile.getFilename());
             String bpmnId = DigestUtils.md5DigestAsHex(bpmnFile.getURL().getPath().getBytes());
             DELogic logic = getDELogic(bpmnFile);
             if (logic == null) {
@@ -172,9 +186,9 @@ public class DELogicAspect {
                 }
             }
             kieSession.startProcess(mainProcess.getId());
-            log.debug("实体处理逻辑[{}:{}:{}:本地模式]执行结束", entity.getClass().getSimpleName(), action, bpmnFile.getFilename());
-        } catch (IOException e) {
-            log.error("实体处理逻辑[{}:{}:{}:本地模式]发生异常", entity.getClass().getSimpleName(), action, bpmnFile.getFilename());
+            log.debug("实体处理逻辑[{}:{}:{}:本地模式]执行结束", getEntityName(entity), action, bpmnFile.getFilename());
+        } catch (Exception e) {
+            log.error("实体处理逻辑[{}:{}:{}:本地模式]发生异常", getEntityName(entity), action, bpmnFile.getFilename());
             throw new BadRequestAlertException("执行实体处理逻辑发生异常" + e.getMessage(), "DELogicAspect", "executeLogic");
         }
     }
@@ -414,7 +428,7 @@ public class DELogicAspect {
      * @return
      */
     private boolean isValid(Resource bpmn, Object entity, Object action) {
-        String logicId = String.format("%s%s%s", entity.getClass().getSimpleName(), action, bpmn.getFilename()).toLowerCase();
+        String logicId = String.format("%s%s%s", getEntityName(entity), action, bpmn.getFilename()).toLowerCase();
         if (validLogic.containsKey(logicId)) {
             return true;
         } else {

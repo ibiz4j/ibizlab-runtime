@@ -31,7 +31,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
     @CacheEvict(value ="sysuser", key = "'row:'+#p0.userid")
     int updateById(@Param(Constants.ENTITY) SysUser entity);
     @Override
-    @CacheEvict(value ="sysuser", key = "'row:'+#p0.userid")
+    @CacheEvict(value ="sysuser", key = "'row:'+#p0.userid" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) SysUser entity, @Param("ew") Wrapper<SysUser> updateWrapper);
     @Override
     @CacheEvict(value ="sysuser", key = "'row:'+#p0")

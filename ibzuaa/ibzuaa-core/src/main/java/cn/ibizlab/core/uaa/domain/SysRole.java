@@ -111,7 +111,7 @@ public class SysRole extends EntityMP implements Serializable {
     /**
      * 建立人
      */
-    @DEField(preType = DEPredefinedFieldType.CREATEMAN)
+    @DEField(name = "createman", preType = DEPredefinedFieldType.CREATEMAN)
     @TableField(value = "createman", fill = FieldFill.INSERT)
     @JSONField(name = "createman")
     @JsonProperty("createman")

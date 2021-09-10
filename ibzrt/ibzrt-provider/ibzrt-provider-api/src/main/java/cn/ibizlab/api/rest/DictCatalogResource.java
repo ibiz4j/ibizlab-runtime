@@ -65,6 +65,30 @@ public class DictCatalogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-Get-all')")
+    @ApiOperation(value = "获取字典", tags = {"字典" },  notes = "获取字典")
+	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}")
+    public ResponseEntity<DictCatalogDTO> get(@PathVariable("dictcatalog_id") String dictcatalog_id) {
+        DictCatalog domain = dictcatalogService.get(dictcatalog_id);
+        DictCatalogDTO dto = dictcatalogMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-Remove-all')")
+    @ApiOperation(value = "删除字典", tags = {"字典" },  notes = "删除字典")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("dictcatalog_id") String dictcatalog_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.remove(dictcatalog_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-Remove-all')")
+    @ApiOperation(value = "批量删除字典", tags = {"字典" },  notes = "批量删除字典")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        dictcatalogService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @VersionCheck(entity = "dictcatalog" , versionfield = "updatedate")
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-Update-all')")
     @ApiOperation(value = "更新字典", tags = {"字典" },  notes = "更新字典")
@@ -85,28 +109,10 @@ public class DictCatalogResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-Remove-all')")
-    @ApiOperation(value = "删除字典", tags = {"字典" },  notes = "删除字典")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{dictcatalog_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("dictcatalog_id") String dictcatalog_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.remove(dictcatalog_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-Remove-all')")
-    @ApiOperation(value = "批量删除字典", tags = {"字典" },  notes = "批量删除字典")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        dictcatalogService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-Get-all')")
-    @ApiOperation(value = "获取字典", tags = {"字典" },  notes = "获取字典")
-	@RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{dictcatalog_id}")
-    public ResponseEntity<DictCatalogDTO> get(@PathVariable("dictcatalog_id") String dictcatalog_id) {
-        DictCatalog domain = dictcatalogService.get(dictcatalog_id);
-        DictCatalogDTO dto = dictcatalogMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查字典", tags = {"字典" },  notes = "检查字典")
+	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody DictCatalogDTO dictcatalogdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.checkKey(dictcatalogMapping.toDomain(dictcatalogdto)));
     }
 
     @ApiOperation(value = "获取字典草稿", tags = {"字典" },  notes = "获取字典草稿")
@@ -114,12 +120,6 @@ public class DictCatalogResource {
     public ResponseEntity<DictCatalogDTO> getDraft(DictCatalogDTO dto) {
         DictCatalog domain = dictcatalogMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(dictcatalogMapping.toDto(dictcatalogService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查字典", tags = {"字典" },  notes = "检查字典")
-	@RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody DictCatalogDTO dictcatalogdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.checkKey(dictcatalogMapping.toDomain(dictcatalogdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-DictCatalog-Save-all')")

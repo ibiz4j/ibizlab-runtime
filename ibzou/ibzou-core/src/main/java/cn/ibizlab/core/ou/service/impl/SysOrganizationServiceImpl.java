@@ -227,8 +227,8 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
      */
     @Override
     public Page<SysOrganization> searchDefault(SysOrganizationSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysOrganization> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysOrganization>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysOrganization> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysOrganization>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
     /**
@@ -236,8 +236,8 @@ public class SysOrganizationServiceImpl extends ServiceImpl<SysOrganizationMappe
      */
     @Override
     public Page<SysOrganization> searchTopOrg(SysOrganizationSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysOrganization> pages=baseMapper.searchTopOrg(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysOrganization>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysOrganization> pages=baseMapper.searchTopOrg(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysOrganization>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

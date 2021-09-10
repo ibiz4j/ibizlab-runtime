@@ -70,6 +70,15 @@
 
 
     <!--输出实体[WF_PSSYSTEM]数据结构 -->
+    <changeSet author="a_A_5d9d78509" id="tab-wf_pssystem-1-4">
+        <createTable tableName="IBZPSSYSTEM">
+                <column name="PSSYSTEMID" remarks="" type="VARCHAR(100)">
+                    <constraints primaryKey="true" primaryKeyName="PK_WF_PSSYSTEM_PSSYSTEMID"/>
+                </column>
+                <column name="PSSYSTEMNAME" remarks="" type="VARCHAR(100)">
+                </column>
+        </createTable>
+    </changeSet>
 
 
 

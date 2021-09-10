@@ -7,6 +7,22 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
+    loginv7:
+      path: /v7/login
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    changepwd:
+      path: /v7/changepwd
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    uaa:
+      path: /uaa/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    config:
+      path: /configs/**
+      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
     jobs_log:
       path: /jobslogs/**
       serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
@@ -134,22 +150,6 @@ zuul:
     sys_app:
       path: /sysapps/**
       serviceId: ${ibiz.ref.service.ibzuaa-api:ibzuaa-api}
-      stripPrefix: false
-    loginv7:
-      path: /v7/login
-      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
-      stripPrefix: false
-    changepwd:
-      path: /v7/changepwd
-      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
-      stripPrefix: false
-    uaa:
-      path: /uaa/**
-      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
-      stripPrefix: false
-    config:
-      path: /configs/**
-      serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
       stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

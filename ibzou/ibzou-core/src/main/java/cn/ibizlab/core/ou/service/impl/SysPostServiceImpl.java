@@ -193,8 +193,8 @@ public class SysPostServiceImpl extends ServiceImpl<SysPostMapper, SysPost> impl
      */
     @Override
     public Page<SysPost> searchDefault(SysPostSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPost> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysPost>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPost> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysPost>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

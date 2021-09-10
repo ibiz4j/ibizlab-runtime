@@ -10,6 +10,7 @@ function getLocaleResourceBase(){
 		memo: commonLogic.appcommonhandle("备注",null),
 		enable: commonLogic.appcommonhandle("是否有效",null),
 		updatedate: commonLogic.appcommonhandle("最后修改时间",null),
+		ext_params: commonLogic.appcommonhandle("扩展参数",null),
 	},
 		views: {
 			gridview: {

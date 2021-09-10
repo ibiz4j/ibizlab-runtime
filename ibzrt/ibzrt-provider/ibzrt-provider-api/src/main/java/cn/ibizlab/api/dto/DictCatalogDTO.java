@@ -103,6 +103,16 @@ public class DictCatalogDTO extends DTOBase implements Serializable {
     @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
+    /**
+     * 属性 [EXTPARAMS]
+     *
+     */
+    @JSONField(name = "ext_params")
+    @JsonProperty("ext_params")
+    @Size(min = 0, max = 1048576, message = "内容长度必须小于等于[1048576]")
+    @ApiModelProperty("扩展参数")
+    private String extParams;
+
 
     /**
      * 设置 [CCODE]
@@ -134,6 +144,14 @@ public class DictCatalogDTO extends DTOBase implements Serializable {
     public void setMemo(String  memo){
         this.memo = memo ;
         this.modify("memo",memo);
+    }
+
+    /**
+     * 设置 [EXTPARAMS]
+     */
+    public void setExtParams(String  extParams){
+        this.extParams = extParams ;
+        this.modify("extparams",extParams);
     }
 
 

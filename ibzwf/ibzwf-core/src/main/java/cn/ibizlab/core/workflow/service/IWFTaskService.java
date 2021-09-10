@@ -35,7 +35,13 @@ public interface IWFTaskService {
     boolean checkKey(WFTask et);
     boolean save(WFTask et);
     void saveBatch(List<WFTask> list);
+    WFTask userCustom(WFTask et);
+    boolean userCustomBatch(List<WFTask> etList);
     Page<WFTask> searchDefault(WFTaskSearchContext context);
+    Page<WFTask> searchDoneTask(WFTaskSearchContext context);
+    Page<WFTask> searchFinishTask(WFTaskSearchContext context);
+    Page<WFTask> searchTodoTask(WFTaskSearchContext context);
+    Page<WFTask> searchToreadTask(WFTaskSearchContext context);
 
 }
 

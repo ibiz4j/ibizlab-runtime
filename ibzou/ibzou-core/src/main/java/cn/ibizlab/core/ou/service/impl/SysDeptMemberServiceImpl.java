@@ -242,8 +242,8 @@ public class SysDeptMemberServiceImpl extends ServiceImpl<SysDeptMemberMapper, S
      */
     @Override
     public Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysDeptMember> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysDeptMember>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysDeptMember> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysDeptMember>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

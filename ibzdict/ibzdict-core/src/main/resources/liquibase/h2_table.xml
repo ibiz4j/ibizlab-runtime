@@ -4,7 +4,7 @@
 
 
     <!--输出实体[DICT_CATALOG]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-dict_catalog-4-1">
+    <changeSet author="a_A_5d9d78509" id="tab-dict_catalog-7-1">
         <createTable tableName="IBZDICTCATALOG">
                 <column name="CID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_DICT_CATALOG_CID"/>
@@ -22,6 +22,8 @@
                 <column name="UPDATEDATE" remarks="" type="DATETIME">
                 </column>
                 <column name="CREATEDATE" remarks="" type="DATETIME">
+                </column>
+                <column name="EXTPARAMS" remarks="" type="TEXT(1048576)">
                 </column>
         </createTable>
     </changeSet>

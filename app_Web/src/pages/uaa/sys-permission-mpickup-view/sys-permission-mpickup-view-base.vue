@@ -843,7 +843,7 @@ export default class SysPermissionMPickupViewBase extends Vue {
             }
             if(model.datas.length>0){
                 model.datas.forEach((data:any,index:any)=>{
-                    Object.assign(data,{srfmajortext: data['permissionname']});
+                    Object.assign(data,{srfmajortext: data.hasOwnProperty('srfmajortext') ? data['srfmajortext'] : data['permissionname']});
                 })
             }
             model.datas.forEach((item: any) => {

@@ -7,22 +7,6 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
-    jobs_log:
-      path: /jobslogs/**
-      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-      stripPrefix: false
-    jobs_registry:
-      path: /jobsregistries/**
-      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-      stripPrefix: false
-    jobs_info:
-      path: /jobsinfos/**
-      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-      stripPrefix: false
-    jobs_lock:
-      path: /jobslocks/**
-      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
-      stripPrefix: false
     loginv7:
       path: /v7/login
       serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
@@ -78,6 +62,22 @@ zuul:
     sysauthlog:
       path: /sysauthlogs
       serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    jobs_log:
+      path: /jobslogs/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    jobs_registry:
+      path: /jobsregistries/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    jobs_info:
+      path: /jobsinfos/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
+      stripPrefix: false
+    jobs_lock:
+      path: /jobslocks/**
+      serviceId: ${ibiz.ref.service.ibztask-api:ibztask-api}
       stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

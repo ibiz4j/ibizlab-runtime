@@ -268,8 +268,8 @@ public class SysDepartmentServiceImpl extends ServiceImpl<SysDepartmentMapper, S
      */
     @Override
     public Page<SysDepartment> searchDefault(SysDepartmentSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysDepartment> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysDepartment>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysDepartment> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysDepartment>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

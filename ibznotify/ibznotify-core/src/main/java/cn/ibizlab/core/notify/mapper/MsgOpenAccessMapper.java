@@ -31,7 +31,7 @@ public interface MsgOpenAccessMapper extends BaseMapper<MsgOpenAccess> {
     @CacheEvict(value ="msgopenaccess", key = "'row:'+#p0.id")
     int updateById(@Param(Constants.ENTITY) MsgOpenAccess entity);
     @Override
-    @CacheEvict(value ="msgopenaccess", key = "'row:'+#p0.id")
+    @CacheEvict(value ="msgopenaccess", key = "'row:'+#p0.id" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) MsgOpenAccess entity, @Param("ew") Wrapper<MsgOpenAccess> updateWrapper);
     @Override
     @CacheEvict(value ="msgopenaccess", key = "'row:'+#p0")

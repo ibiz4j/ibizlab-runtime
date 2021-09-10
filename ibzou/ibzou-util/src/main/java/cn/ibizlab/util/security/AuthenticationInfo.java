@@ -9,6 +9,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthenticationInfo implements Serializable {
-    private final String token;
-    private final AuthenticationUser user;
+    private String token;
+    private AuthenticationUser user;
+    
+    public AuthenticationInfo() {
+
+    }
 }

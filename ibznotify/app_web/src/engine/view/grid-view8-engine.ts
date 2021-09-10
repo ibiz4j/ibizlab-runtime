@@ -12,14 +12,6 @@ export default class GridView8Engine extends GridViewEngine {
     /**
      * 表格部件
      *
-     * @type {*}
-     * @memberof GridView8Engine
-     */
-    protected grid: any;
-
-    /**
-     * 表格部件
-     *
      * @protected
      * @type {*}
      * @memberof Grid8ViewEngine

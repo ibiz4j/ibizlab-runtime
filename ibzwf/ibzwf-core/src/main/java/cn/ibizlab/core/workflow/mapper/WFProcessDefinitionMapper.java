@@ -30,7 +30,7 @@ public interface WFProcessDefinitionMapper extends BaseMapper<WFProcessDefinitio
     @CacheEvict(value ="wfprocessdefinition", key = "'row:'+#p0.definitionkey")
     int updateById(@Param(Constants.ENTITY) WFProcessDefinition entity);
     @Override
-    @CacheEvict(value ="wfprocessdefinition", key = "'row:'+#p0.definitionkey")
+    @CacheEvict(value ="wfprocessdefinition", key = "'row:'+#p0.definitionkey" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) WFProcessDefinition entity, @Param("ew") Wrapper<WFProcessDefinition> updateWrapper);
     @Override
     @CacheEvict(value ="wfprocessdefinition", key = "'row:'+#p0")

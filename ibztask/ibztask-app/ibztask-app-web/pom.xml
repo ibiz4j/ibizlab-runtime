@@ -77,6 +77,32 @@
                                     <workingDirectory>../../app_web</workingDirectory>
                                 </configuration>
                             </execution>
+                            <execution>      
+                                <id>prepare</id>                                                           
+                                <configuration>
+                                    <executable>cp</executable>
+                                    <arguments>
+                                        <argument>../../${project.artifactId}.jar</argument>
+                                        <argument>${project.basedir}/src/main/docker/</argument>
+                                    </arguments>
+                                </configuration> 
+                            </execution> 
+                            <execution>    
+                                <id>buildpush</id>                                                                         
+                                <configuration>
+                                    <executable>docker</executable>
+                                    <arguments>
+                                        <argument>buildx</argument>
+                                        <argument>build</argument>
+                                        <argument>--platform</argument>
+                                        <argument>linux/amd64,linux/arm64</argument>
+                                        <argument>-t</argument>
+                                        <argument>${docker.image.prefix}/${project.artifactId}:latest</argument>
+                                        <argument>${project.basedir}/src/main/docker</argument>
+                                        <argument>--push</argument>
+                                    </arguments>                                    
+                                </configuration>
+                            </execution>    
                         </executions>
                     </plugin>
 
@@ -114,7 +140,7 @@
                                 </resource>
                             </resources>
                             </configuration>
-                    </plugin>
+                    </plugin>                       
                 </plugins>
             </build>
         </profile>

@@ -191,8 +191,8 @@ public class WFGroupServiceImpl extends ServiceImpl<WFGroupMapper, WFGroup> impl
      */
     @Override
     public Page<WFGroup> searchDefault(WFGroupSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFGroup> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<WFGroup>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFGroup> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<WFGroup>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

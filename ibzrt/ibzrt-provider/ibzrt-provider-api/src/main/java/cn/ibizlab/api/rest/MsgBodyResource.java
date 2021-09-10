@@ -65,6 +65,30 @@ public class MsgBodyResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Get-all')")
+    @ApiOperation(value = "获取消息", tags = {"消息" },  notes = "获取消息")
+	@RequestMapping(method = RequestMethod.GET, value = "/msgbodies/{msgbody_id}")
+    public ResponseEntity<MsgBodyDTO> get(@PathVariable("msgbody_id") String msgbody_id) {
+        MsgBody domain = msgbodyService.get(msgbody_id);
+        MsgBodyDTO dto = msgbodyMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Remove-all')")
+    @ApiOperation(value = "删除消息", tags = {"消息" },  notes = "删除消息")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/msgbodies/{msgbody_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("msgbody_id") String msgbody_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(msgbodyService.remove(msgbody_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Remove-all')")
+    @ApiOperation(value = "批量删除消息", tags = {"消息" },  notes = "批量删除消息")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/msgbodies/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        msgbodyService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Update-all')")
     @ApiOperation(value = "更新消息", tags = {"消息" },  notes = "更新消息")
 	@RequestMapping(method = RequestMethod.PUT, value = "/msgbodies/{msgbody_id}")
@@ -84,28 +108,10 @@ public class MsgBodyResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Remove-all')")
-    @ApiOperation(value = "删除消息", tags = {"消息" },  notes = "删除消息")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/msgbodies/{msgbody_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("msgbody_id") String msgbody_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(msgbodyService.remove(msgbody_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Remove-all')")
-    @ApiOperation(value = "批量删除消息", tags = {"消息" },  notes = "批量删除消息")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/msgbodies/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        msgbodyService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Get-all')")
-    @ApiOperation(value = "获取消息", tags = {"消息" },  notes = "获取消息")
-	@RequestMapping(method = RequestMethod.GET, value = "/msgbodies/{msgbody_id}")
-    public ResponseEntity<MsgBodyDTO> get(@PathVariable("msgbody_id") String msgbody_id) {
-        MsgBody domain = msgbodyService.get(msgbody_id);
-        MsgBodyDTO dto = msgbodyMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查消息", tags = {"消息" },  notes = "检查消息")
+	@RequestMapping(method = RequestMethod.POST, value = "/msgbodies/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody MsgBodyDTO msgbodydto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(msgbodyService.checkKey(msgbodyMapping.toDomain(msgbodydto)));
     }
 
     @ApiOperation(value = "获取消息草稿", tags = {"消息" },  notes = "获取消息草稿")
@@ -113,12 +119,6 @@ public class MsgBodyResource {
     public ResponseEntity<MsgBodyDTO> getDraft(MsgBodyDTO dto) {
         MsgBody domain = msgbodyMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(msgbodyMapping.toDto(msgbodyService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查消息", tags = {"消息" },  notes = "检查消息")
-	@RequestMapping(method = RequestMethod.POST, value = "/msgbodies/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody MsgBodyDTO msgbodydto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(msgbodyService.checkKey(msgbodyMapping.toDomain(msgbodydto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-MsgBody-Save-all')")

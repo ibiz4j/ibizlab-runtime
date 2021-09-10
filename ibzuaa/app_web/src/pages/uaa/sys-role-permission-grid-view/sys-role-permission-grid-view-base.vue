@@ -1144,6 +1144,8 @@ export default class SysRolePermissionGridViewBase extends Vue {
     public newdata(args: any[],fullargs?:any[], params?: any, $event?: any, xData?: any) {
         let localContext:any = null;
         let localViewParam:any =null;
+        let tempContext:any = this.$util.deepCopy(this.context);
+        let data:any = this.$util.deepCopy(args[0]);
         let batchAddPSAppViews:Array<any>=[];
         batchAddPSAppViews=[
             {view:{viewname:'sys-permissionmpickup-view',height: 0,width: 0,title: '权限表数据多项选择视图'},
@@ -1163,7 +1165,7 @@ export default class SysRolePermissionGridViewBase extends Vue {
         let otherViewModel:any = batchAddPSAppViews.find((item:any) =>{
             return (item.res && (item.res[0] == this.context.srfparentdename));
         })
-        let container: Subject<any> = this.$appmodal.openModal(openViewModel.view, JSON.parse(JSON.stringify(this.context)), args[0]);
+        let container: Subject<any> = this.$appmodal.openModal(openViewModel.view, tempContext, data);
         container.subscribe((result: any) => {
             if (!result || !Object.is(result.ret, 'OK')) {
                 return;

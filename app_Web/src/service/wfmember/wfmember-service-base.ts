@@ -39,7 +39,7 @@ export default class WFMemberServiceBase extends EntityService {
 // 实体接口
 
     /**
-     * Select接口方法
+     * CheckKey接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -47,19 +47,22 @@ export default class WFMemberServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof WFMemberServiceBase
      */
-    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
-            let res:any = Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/select`,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
             
             return res;
         }
         if(context.wfgroup && context.wfmember){
-            let res:any = Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/select`,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
             
             return res;
         }
-            let res:any = Http.getInstance().get(`/wfmembers/${context.wfmember}/select`,isloading);
-            
+            let res:any = Http.getInstance().post(`/wfmembers/${context.wfmember}/checkkey`,data,isloading);
             return res;
     }
 
@@ -116,59 +119,6 @@ export default class WFMemberServiceBase extends EntityService {
     }
 
     /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFMemberServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.wfuser && context.wfmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,data,isloading);
-            
-            return res;
-        }
-        if(context.wfgroup && context.wfmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,data,isloading);
-            
-            return res;
-        }
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/wfmembers/${context.wfmember}`,data,isloading);
-            
-            return res;
-    }
-
-    /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof WFMemberServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.wfuser && context.wfmember){
-            let res:any = Http.getInstance().delete(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,isloading);
-            return res;
-        }
-        if(context.wfgroup && context.wfmember){
-            let res:any = Http.getInstance().delete(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,isloading);
-            return res;
-        }
-            let res:any = Http.getInstance().delete(`/wfmembers/${context.wfmember}`,isloading);
-            return res;
-    }
-
-    /**
      * Get接口方法
      *
      * @param {*} [context={}]
@@ -222,7 +172,7 @@ export default class WFMemberServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Remove接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -230,22 +180,16 @@ export default class WFMemberServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof WFMemberServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.wfuser && context.wfmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
-            
+            let res:any = Http.getInstance().delete(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,isloading);
             return res;
         }
         if(context.wfgroup && context.wfmember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/checkkey`,data,isloading);
-            
+            let res:any = Http.getInstance().delete(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,isloading);
             return res;
         }
-            let res:any = Http.getInstance().post(`/wfmembers/${context.wfmember}/checkkey`,data,isloading);
+            let res:any = Http.getInstance().delete(`/wfmembers/${context.wfmember}`,isloading);
             return res;
     }
 
@@ -276,6 +220,37 @@ export default class WFMemberServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/wfmembers/${context.wfmember}/save`,data,isloading);
+            
+            return res;
+    }
+
+    /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFMemberServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.wfuser && context.wfmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}`,data,isloading);
+            
+            return res;
+        }
+        if(context.wfgroup && context.wfmember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}`,data,isloading);
+            
+            return res;
+        }
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/wfmembers/${context.wfmember}`,data,isloading);
             
             return res;
     }
@@ -325,5 +300,30 @@ export default class WFMemberServiceBase extends EntityService {
         }
         let tempData:any = JSON.parse(JSON.stringify(data));
         return await Http.getInstance().post(`/wfmembers/searchdefault`,tempData,isloading);
+    }
+
+    /**
+     * Select接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof WFMemberServiceBase
+     */
+    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.wfuser && context.wfmember){
+            let res:any = Http.getInstance().get(`/wfusers/${context.wfuser}/wfmembers/${context.wfmember}/select`,isloading);
+            
+            return res;
+        }
+        if(context.wfgroup && context.wfmember){
+            let res:any = Http.getInstance().get(`/wfgroups/${context.wfgroup}/wfmembers/${context.wfmember}/select`,isloading);
+            
+            return res;
+        }
+            let res:any = Http.getInstance().get(`/wfmembers/${context.wfmember}/select`,isloading);
+            
+            return res;
     }
 }

@@ -184,8 +184,8 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
      */
     @Override
     public Page<WFSystem> searchDefault(WFSystemSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFSystem> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<WFSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFSystem> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<WFSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

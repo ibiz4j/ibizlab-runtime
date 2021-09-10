@@ -184,8 +184,8 @@ public class MsgUserAccountServiceImpl extends ServiceImpl<MsgUserAccountMapper,
      */
     @Override
     public Page<MsgUserAccount> searchDefault(MsgUserAccountSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgUserAccount> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<MsgUserAccount>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgUserAccount> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<MsgUserAccount>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

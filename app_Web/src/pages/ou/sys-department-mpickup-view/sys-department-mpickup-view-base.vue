@@ -843,7 +843,7 @@ export default class SysDepartmentMPickupViewBase extends Vue {
             }
             if(model.datas.length>0){
                 model.datas.forEach((data:any,index:any)=>{
-                    Object.assign(data,{srfmajortext: data['deptname']});
+                    Object.assign(data,{srfmajortext: data.hasOwnProperty('srfmajortext') ? data['srfmajortext'] : data['deptname']});
                 })
             }
             model.datas.forEach((item: any) => {

@@ -123,6 +123,20 @@
     "key_field":0,
     "show_order":9,
     "major_field":0
+    },
+    {
+    "fieldname":"EXTPARAMS" ,
+    "codename":"Ext_params",
+    "field_logic_name":"扩展参数",
+    "entity_name":"DICT_CATALOG",
+    "field_type":"LONGTEXT",
+    "nullable":1,
+    "physical_field":1,
+    "data_type":"TEXT",
+    "data_length":1048576,
+    "key_field":0,
+    "show_order":20,
+    "major_field":0
     }
     ],
     "subEntitys":[

@@ -36,6 +36,8 @@ function getAppLocale(){
                 nomore:"没有更多了",
                 other:"其他",
                 valueNotEmpty:"值不能为空",
+                createFailed:"创建失败",
+                isExist:"已存在",
             },
             local:{
                 new: "新建",

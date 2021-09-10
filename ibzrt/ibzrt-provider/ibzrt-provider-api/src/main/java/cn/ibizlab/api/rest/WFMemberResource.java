@@ -65,6 +65,30 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PostAuthorize("hasPermission(this.wfmemberMapping.toDomain(returnObject.body),'ibzrt-WFMember-Get')")
+    @ApiOperation(value = "获取成员", tags = {"成员" },  notes = "获取成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfmembers/{wfmember_id}")
+    public ResponseEntity<WFMemberDTO> get(@PathVariable("wfmember_id") String wfmember_id) {
+        WFMember domain = wfmemberService.get(wfmember_id);
+        WFMemberDTO dto = wfmemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Remove')")
+    @ApiOperation(value = "删除成员", tags = {"成员" },  notes = "删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/{wfmember_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("wfmember_id") String wfmember_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
+    }
+
+    @PreAuthorize("hasPermission(this.wfmemberService.getWfmemberByIds(#ids),'ibzrt-WFMember-Remove')")
+    @ApiOperation(value = "批量删除成员", tags = {"成员" },  notes = "批量删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfmemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Update')")
     @ApiOperation(value = "更新成员", tags = {"成员" },  notes = "更新成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfmembers/{wfmember_id}")
@@ -84,28 +108,10 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Remove')")
-    @ApiOperation(value = "删除成员", tags = {"成员" },  notes = "删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/{wfmember_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("wfmember_id") String wfmember_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
-    }
-
-    @PreAuthorize("hasPermission(this.wfmemberService.getWfmemberByIds(#ids),'ibzrt-WFMember-Remove')")
-    @ApiOperation(value = "批量删除成员", tags = {"成员" },  notes = "批量删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfmemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PostAuthorize("hasPermission(this.wfmemberMapping.toDomain(returnObject.body),'ibzrt-WFMember-Get')")
-    @ApiOperation(value = "获取成员", tags = {"成员" },  notes = "获取成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfmembers/{wfmember_id}")
-    public ResponseEntity<WFMemberDTO> get(@PathVariable("wfmember_id") String wfmember_id) {
-        WFMember domain = wfmemberService.get(wfmember_id);
-        WFMemberDTO dto = wfmemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查成员", tags = {"成员" },  notes = "检查成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFMemberDTO wfmemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @ApiOperation(value = "获取成员草稿", tags = {"成员" },  notes = "获取成员草稿")
@@ -113,12 +119,6 @@ public class WFMemberResource {
     public ResponseEntity<WFMemberDTO> getDraft(WFMemberDTO dto) {
         WFMember domain = wfmemberMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查成员", tags = {"成员" },  notes = "检查成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfmembers/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFMemberDTO wfmemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @PreAuthorize("hasPermission(this.wfmemberMapping.toDomain(#wfmemberdto),'ibzrt-WFMember-Save')")
@@ -185,6 +185,30 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PostAuthorize("hasPermission(this.wfmemberMapping.toDomain(returnObject.body),'ibzrt-WFMember-Get')")
+    @ApiOperation(value = "根据角色/用户组获取成员", tags = {"成员" },  notes = "根据角色/用户组获取成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}/wfmembers/{wfmember_id}")
+    public ResponseEntity<WFMemberDTO> getByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @PathVariable("wfmember_id") String wfmember_id) {
+        WFMember domain = wfmemberService.get(wfmember_id);
+        WFMemberDTO dto = wfmemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Remove')")
+    @ApiOperation(value = "根据角色/用户组删除成员", tags = {"成员" },  notes = "根据角色/用户组删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}/wfmembers/{wfmember_id}")
+    public ResponseEntity<Boolean> removeByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @PathVariable("wfmember_id") String wfmember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
+    }
+
+    @PreAuthorize("hasPermission(this.wfmemberService.getWfmemberByIds(#ids),'ibzrt-WFMember-Remove')")
+    @ApiOperation(value = "根据角色/用户组批量删除成员", tags = {"成员" },  notes = "根据角色/用户组批量删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}/wfmembers/batch")
+    public ResponseEntity<Boolean> removeBatchByWFGroup(@RequestBody List<String> ids) {
+        wfmemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Update')")
     @ApiOperation(value = "根据角色/用户组更新成员", tags = {"成员" },  notes = "根据角色/用户组更新成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/{wfgroup_id}/wfmembers/{wfmember_id}")
@@ -209,28 +233,10 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Remove')")
-    @ApiOperation(value = "根据角色/用户组删除成员", tags = {"成员" },  notes = "根据角色/用户组删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}/wfmembers/{wfmember_id}")
-    public ResponseEntity<Boolean> removeByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @PathVariable("wfmember_id") String wfmember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
-    }
-
-    @PreAuthorize("hasPermission(this.wfmemberService.getWfmemberByIds(#ids),'ibzrt-WFMember-Remove')")
-    @ApiOperation(value = "根据角色/用户组批量删除成员", tags = {"成员" },  notes = "根据角色/用户组批量删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}/wfmembers/batch")
-    public ResponseEntity<Boolean> removeBatchByWFGroup(@RequestBody List<String> ids) {
-        wfmemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PostAuthorize("hasPermission(this.wfmemberMapping.toDomain(returnObject.body),'ibzrt-WFMember-Get')")
-    @ApiOperation(value = "根据角色/用户组获取成员", tags = {"成员" },  notes = "根据角色/用户组获取成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}/wfmembers/{wfmember_id}")
-    public ResponseEntity<WFMemberDTO> getByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @PathVariable("wfmember_id") String wfmember_id) {
-        WFMember domain = wfmemberService.get(wfmember_id);
-        WFMemberDTO dto = wfmemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "根据角色/用户组检查成员", tags = {"成员" },  notes = "根据角色/用户组检查成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @ApiOperation(value = "根据角色/用户组获取成员草稿", tags = {"成员" },  notes = "根据角色/用户组获取成员草稿")
@@ -239,12 +245,6 @@ public class WFMemberResource {
         WFMember domain = wfmemberMapping.toDomain(dto);
         domain.setGroupid(wfgroup_id);
         return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据角色/用户组检查成员", tags = {"成员" },  notes = "根据角色/用户组检查成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/{wfgroup_id}/wfmembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyByWFGroup(@PathVariable("wfgroup_id") String wfgroup_id, @RequestBody WFMemberDTO wfmemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @PreAuthorize("hasPermission(this.wfmemberMapping.toDomain(#wfmemberdto),'ibzrt-WFMember-Save')")
@@ -315,6 +315,30 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PostAuthorize("hasPermission(this.wfmemberMapping.toDomain(returnObject.body),'ibzrt-WFMember-Get')")
+    @ApiOperation(value = "根据用户获取成员", tags = {"成员" },  notes = "根据用户获取成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/{wfuser_id}/wfmembers/{wfmember_id}")
+    public ResponseEntity<WFMemberDTO> getByWFUser(@PathVariable("wfuser_id") String wfuser_id, @PathVariable("wfmember_id") String wfmember_id) {
+        WFMember domain = wfmemberService.get(wfmember_id);
+        WFMemberDTO dto = wfmemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Remove')")
+    @ApiOperation(value = "根据用户删除成员", tags = {"成员" },  notes = "根据用户删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}/wfmembers/{wfmember_id}")
+    public ResponseEntity<Boolean> removeByWFUser(@PathVariable("wfuser_id") String wfuser_id, @PathVariable("wfmember_id") String wfmember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
+    }
+
+    @PreAuthorize("hasPermission(this.wfmemberService.getWfmemberByIds(#ids),'ibzrt-WFMember-Remove')")
+    @ApiOperation(value = "根据用户批量删除成员", tags = {"成员" },  notes = "根据用户批量删除成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}/wfmembers/batch")
+    public ResponseEntity<Boolean> removeBatchByWFUser(@RequestBody List<String> ids) {
+        wfmemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Update')")
     @ApiOperation(value = "根据用户更新成员", tags = {"成员" },  notes = "根据用户更新成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfusers/{wfuser_id}/wfmembers/{wfmember_id}")
@@ -339,28 +363,10 @@ public class WFMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.wfmemberService.get(#wfmember_id),'ibzrt-WFMember-Remove')")
-    @ApiOperation(value = "根据用户删除成员", tags = {"成员" },  notes = "根据用户删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}/wfmembers/{wfmember_id}")
-    public ResponseEntity<Boolean> removeByWFUser(@PathVariable("wfuser_id") String wfuser_id, @PathVariable("wfmember_id") String wfmember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfmemberService.remove(wfmember_id));
-    }
-
-    @PreAuthorize("hasPermission(this.wfmemberService.getWfmemberByIds(#ids),'ibzrt-WFMember-Remove')")
-    @ApiOperation(value = "根据用户批量删除成员", tags = {"成员" },  notes = "根据用户批量删除成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}/wfmembers/batch")
-    public ResponseEntity<Boolean> removeBatchByWFUser(@RequestBody List<String> ids) {
-        wfmemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PostAuthorize("hasPermission(this.wfmemberMapping.toDomain(returnObject.body),'ibzrt-WFMember-Get')")
-    @ApiOperation(value = "根据用户获取成员", tags = {"成员" },  notes = "根据用户获取成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/{wfuser_id}/wfmembers/{wfmember_id}")
-    public ResponseEntity<WFMemberDTO> getByWFUser(@PathVariable("wfuser_id") String wfuser_id, @PathVariable("wfmember_id") String wfmember_id) {
-        WFMember domain = wfmemberService.get(wfmember_id);
-        WFMemberDTO dto = wfmemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "根据用户检查成员", tags = {"成员" },  notes = "根据用户检查成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @ApiOperation(value = "根据用户获取成员草稿", tags = {"成员" },  notes = "根据用户获取成员草稿")
@@ -369,12 +375,6 @@ public class WFMemberResource {
         WFMember domain = wfmemberMapping.toDomain(dto);
         domain.setUserid(wfuser_id);
         return ResponseEntity.status(HttpStatus.OK).body(wfmemberMapping.toDto(wfmemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据用户检查成员", tags = {"成员" },  notes = "根据用户检查成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/{wfuser_id}/wfmembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyByWFUser(@PathVariable("wfuser_id") String wfuser_id, @RequestBody WFMemberDTO wfmemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfmemberService.checkKey(wfmemberMapping.toDomain(wfmemberdto)));
     }
 
     @PreAuthorize("hasPermission(this.wfmemberMapping.toDomain(#wfmemberdto),'ibzrt-WFMember-Save')")

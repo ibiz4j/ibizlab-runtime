@@ -39,7 +39,7 @@ export default class SysDepartmentServiceBase extends EntityService {
 // 实体接口
 
     /**
-     * Select接口方法
+     * CheckKey接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -47,14 +47,15 @@ export default class SysDepartmentServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysDepartmentServiceBase
      */
-    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysorganization && context.sysdepartment){
-            let res:any = Http.getInstance().get(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/select`,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/checkkey`,data,isloading);
             
             return res;
         }
-            let res:any = Http.getInstance().get(`/sysdepartments/${context.sysdepartment}/select`,isloading);
-            
+            let res:any = Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/checkkey`,data,isloading);
             return res;
     }
 
@@ -101,48 +102,6 @@ export default class SysDepartmentServiceBase extends EntityService {
     }
 
     /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysDepartmentServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysorganization && context.sysdepartment){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}`,data,isloading);
-            
-            return res;
-        }
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/sysdepartments/${context.sysdepartment}`,data,isloading);
-            
-            return res;
-    }
-
-    /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysDepartmentServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysorganization && context.sysdepartment){
-            let res:any = Http.getInstance().delete(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}`,isloading);
-            return res;
-        }
-            let res:any = Http.getInstance().delete(`/sysdepartments/${context.sysdepartment}`,isloading);
-            return res;
-    }
-
-    /**
      * Get接口方法
      *
      * @param {*} [context={}]
@@ -185,7 +144,7 @@ export default class SysDepartmentServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Remove接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -193,15 +152,12 @@ export default class SysDepartmentServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysDepartmentServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysorganization && context.sysdepartment){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/checkkey`,data,isloading);
-            
+            let res:any = Http.getInstance().delete(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}`,isloading);
             return res;
         }
-            let res:any = Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/checkkey`,data,isloading);
+            let res:any = Http.getInstance().delete(`/sysdepartments/${context.sysdepartment}`,isloading);
             return res;
     }
 
@@ -225,6 +181,30 @@ export default class SysDepartmentServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/save`,data,isloading);
+            
+            return res;
+    }
+
+    /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysDepartmentServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysorganization && context.sysdepartment){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}`,data,isloading);
+            
+            return res;
+        }
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/sysdepartments/${context.sysdepartment}`,data,isloading);
             
             return res;
     }
@@ -265,5 +245,25 @@ export default class SysDepartmentServiceBase extends EntityService {
         }
         let tempData:any = JSON.parse(JSON.stringify(data));
         return await Http.getInstance().post(`/sysdepartments/searchdefault`,tempData,isloading);
+    }
+
+    /**
+     * Select接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysDepartmentServiceBase
+     */
+    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysorganization && context.sysdepartment){
+            let res:any = Http.getInstance().get(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/select`,isloading);
+            
+            return res;
+        }
+            let res:any = Http.getInstance().get(`/sysdepartments/${context.sysdepartment}/select`,isloading);
+            
+            return res;
     }
 }

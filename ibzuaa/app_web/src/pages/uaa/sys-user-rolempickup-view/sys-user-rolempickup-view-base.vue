@@ -843,7 +843,7 @@ export default class SYS_USER_ROLEMPickupViewBase extends Vue {
             }
             if(model.datas.length>0){
                 model.datas.forEach((data:any,index:any)=>{
-                    Object.assign(data,{srfmajortext: data['userid']});
+                    Object.assign(data,{srfmajortext: data.hasOwnProperty('srfmajortext') ? data['srfmajortext'] : data['userid']});
                 })
             }
             model.datas.forEach((item: any) => {

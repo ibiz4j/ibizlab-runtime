@@ -65,6 +65,30 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
+    @ApiOperation(value = "获取组成员", tags = {"组成员" },  notes = "获取组成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/systeammembers/{systeammember_id}")
+    public ResponseEntity<SysTeamMemberDTO> get(@PathVariable("systeammember_id") String systeammember_id) {
+        SysTeamMember domain = systeammemberService.get(systeammember_id);
+        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "删除组成员", tags = {"组成员" },  notes = "删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/systeammembers/{systeammember_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("systeammember_id") String systeammember_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "批量删除组成员", tags = {"组成员" },  notes = "批量删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/systeammembers/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        systeammemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Update-all')")
     @ApiOperation(value = "更新组成员", tags = {"组成员" },  notes = "更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/systeammembers/{systeammember_id}")
@@ -84,28 +108,10 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "删除组成员", tags = {"组成员" },  notes = "删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/systeammembers/{systeammember_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("systeammember_id") String systeammember_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "批量删除组成员", tags = {"组成员" },  notes = "批量删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/systeammembers/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        systeammemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
-    @ApiOperation(value = "获取组成员", tags = {"组成员" },  notes = "获取组成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/systeammembers/{systeammember_id}")
-    public ResponseEntity<SysTeamMemberDTO> get(@PathVariable("systeammember_id") String systeammember_id) {
-        SysTeamMember domain = systeammemberService.get(systeammember_id);
-        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查组成员", tags = {"组成员" },  notes = "检查组成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/systeammembers/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysTeamMemberDTO systeammemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @ApiOperation(value = "获取组成员草稿", tags = {"组成员" },  notes = "获取组成员草稿")
@@ -113,12 +119,6 @@ public class SysTeamMemberResource {
     public ResponseEntity<SysTeamMemberDTO> getDraft(SysTeamMemberDTO dto) {
         SysTeamMember domain = systeammemberMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查组成员", tags = {"组成员" },  notes = "检查组成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/systeammembers/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysTeamMemberDTO systeammemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Save-all')")
@@ -185,6 +185,30 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
+    @ApiOperation(value = "根据人员获取组成员", tags = {"组成员" },  notes = "根据人员获取组成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<SysTeamMemberDTO> getBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
+        SysTeamMember domain = systeammemberService.get(systeammember_id);
+        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据人员删除组成员", tags = {"组成员" },  notes = "根据人员删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<Boolean> removeBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据人员批量删除组成员", tags = {"组成员" },  notes = "根据人员批量删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysemployees/{sysemployee_id}/systeammembers/batch")
+    public ResponseEntity<Boolean> removeBatchBySysEmployee(@RequestBody List<String> ids) {
+        systeammemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Update-all')")
     @ApiOperation(value = "根据人员更新组成员", tags = {"组成员" },  notes = "根据人员更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
@@ -209,28 +233,10 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据人员删除组成员", tags = {"组成员" },  notes = "根据人员删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<Boolean> removeBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据人员批量删除组成员", tags = {"组成员" },  notes = "根据人员批量删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysemployees/{sysemployee_id}/systeammembers/batch")
-    public ResponseEntity<Boolean> removeBatchBySysEmployee(@RequestBody List<String> ids) {
-        systeammemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
-    @ApiOperation(value = "根据人员获取组成员", tags = {"组成员" },  notes = "根据人员获取组成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<SysTeamMemberDTO> getBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
-        SysTeamMember domain = systeammemberService.get(systeammember_id);
-        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "根据人员检查组成员", tags = {"组成员" },  notes = "根据人员检查组成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/systeammembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @ApiOperation(value = "根据人员获取组成员草稿", tags = {"组成员" },  notes = "根据人员获取组成员草稿")
@@ -239,12 +245,6 @@ public class SysTeamMemberResource {
         SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据人员检查组成员", tags = {"组成员" },  notes = "根据人员检查组成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{sysemployee_id}/systeammembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysEmployee(@PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Save-all')")
@@ -315,6 +315,30 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
+    @ApiOperation(value = "根据组获取组成员", tags = {"组成员" },  notes = "根据组获取组成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/systeams/{systeam_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<SysTeamMemberDTO> getBySysTeam(@PathVariable("systeam_id") String systeam_id, @PathVariable("systeammember_id") String systeammember_id) {
+        SysTeamMember domain = systeammemberService.get(systeammember_id);
+        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据组删除组成员", tags = {"组成员" },  notes = "根据组删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/systeams/{systeam_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<Boolean> removeBySysTeam(@PathVariable("systeam_id") String systeam_id, @PathVariable("systeammember_id") String systeammember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据组批量删除组成员", tags = {"组成员" },  notes = "根据组批量删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/systeams/{systeam_id}/systeammembers/batch")
+    public ResponseEntity<Boolean> removeBatchBySysTeam(@RequestBody List<String> ids) {
+        systeammemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Update-all')")
     @ApiOperation(value = "根据组更新组成员", tags = {"组成员" },  notes = "根据组更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/systeams/{systeam_id}/systeammembers/{systeammember_id}")
@@ -339,28 +363,10 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据组删除组成员", tags = {"组成员" },  notes = "根据组删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/systeams/{systeam_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<Boolean> removeBySysTeam(@PathVariable("systeam_id") String systeam_id, @PathVariable("systeammember_id") String systeammember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据组批量删除组成员", tags = {"组成员" },  notes = "根据组批量删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/systeams/{systeam_id}/systeammembers/batch")
-    public ResponseEntity<Boolean> removeBatchBySysTeam(@RequestBody List<String> ids) {
-        systeammemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
-    @ApiOperation(value = "根据组获取组成员", tags = {"组成员" },  notes = "根据组获取组成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/systeams/{systeam_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<SysTeamMemberDTO> getBySysTeam(@PathVariable("systeam_id") String systeam_id, @PathVariable("systeammember_id") String systeammember_id) {
-        SysTeamMember domain = systeammemberService.get(systeammember_id);
-        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "根据组检查组成员", tags = {"组成员" },  notes = "根据组检查组成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/systeams/{systeam_id}/systeammembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysTeam(@PathVariable("systeam_id") String systeam_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @ApiOperation(value = "根据组获取组成员草稿", tags = {"组成员" },  notes = "根据组获取组成员草稿")
@@ -369,12 +375,6 @@ public class SysTeamMemberResource {
         SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setTeamid(systeam_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据组检查组成员", tags = {"组成员" },  notes = "根据组检查组成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/systeams/{systeam_id}/systeammembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysTeam(@PathVariable("systeam_id") String systeam_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Save-all')")
@@ -445,6 +445,30 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
+    @ApiOperation(value = "根据部门人员获取组成员", tags = {"组成员" },  notes = "根据部门人员获取组成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<SysTeamMemberDTO> getBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
+        SysTeamMember domain = systeammemberService.get(systeammember_id);
+        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据部门人员删除组成员", tags = {"组成员" },  notes = "根据部门人员删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<Boolean> removeBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据部门人员批量删除组成员", tags = {"组成员" },  notes = "根据部门人员批量删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/batch")
+    public ResponseEntity<Boolean> removeBatchBySysDepartmentSysEmployee(@RequestBody List<String> ids) {
+        systeammemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Update-all')")
     @ApiOperation(value = "根据部门人员更新组成员", tags = {"组成员" },  notes = "根据部门人员更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
@@ -469,28 +493,10 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据部门人员删除组成员", tags = {"组成员" },  notes = "根据部门人员删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<Boolean> removeBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据部门人员批量删除组成员", tags = {"组成员" },  notes = "根据部门人员批量删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/batch")
-    public ResponseEntity<Boolean> removeBatchBySysDepartmentSysEmployee(@RequestBody List<String> ids) {
-        systeammemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
-    @ApiOperation(value = "根据部门人员获取组成员", tags = {"组成员" },  notes = "根据部门人员获取组成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<SysTeamMemberDTO> getBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
-        SysTeamMember domain = systeammemberService.get(systeammember_id);
-        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "根据部门人员检查组成员", tags = {"组成员" },  notes = "根据部门人员检查组成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @ApiOperation(value = "根据部门人员获取组成员草稿", tags = {"组成员" },  notes = "根据部门人员获取组成员草稿")
@@ -499,12 +505,6 @@ public class SysTeamMemberResource {
         SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据部门人员检查组成员", tags = {"组成员" },  notes = "根据部门人员检查组成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysDepartmentSysEmployee(@PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Save-all')")
@@ -575,6 +575,30 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
+    @ApiOperation(value = "根据单位机构人员获取组成员", tags = {"组成员" },  notes = "根据单位机构人员获取组成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<SysTeamMemberDTO> getBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
+        SysTeamMember domain = systeammemberService.get(systeammember_id);
+        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据单位机构人员删除组成员", tags = {"组成员" },  notes = "根据单位机构人员删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<Boolean> removeBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据单位机构人员批量删除组成员", tags = {"组成员" },  notes = "根据单位机构人员批量删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/batch")
+    public ResponseEntity<Boolean> removeBatchBySysOrganizationSysEmployee(@RequestBody List<String> ids) {
+        systeammemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Update-all')")
     @ApiOperation(value = "根据单位机构人员更新组成员", tags = {"组成员" },  notes = "根据单位机构人员更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
@@ -599,28 +623,10 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据单位机构人员删除组成员", tags = {"组成员" },  notes = "根据单位机构人员删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<Boolean> removeBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据单位机构人员批量删除组成员", tags = {"组成员" },  notes = "根据单位机构人员批量删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/batch")
-    public ResponseEntity<Boolean> removeBatchBySysOrganizationSysEmployee(@RequestBody List<String> ids) {
-        systeammemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
-    @ApiOperation(value = "根据单位机构人员获取组成员", tags = {"组成员" },  notes = "根据单位机构人员获取组成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<SysTeamMemberDTO> getBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
-        SysTeamMember domain = systeammemberService.get(systeammember_id);
-        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "根据单位机构人员检查组成员", tags = {"组成员" },  notes = "根据单位机构人员检查组成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @ApiOperation(value = "根据单位机构人员获取组成员草稿", tags = {"组成员" },  notes = "根据单位机构人员获取组成员草稿")
@@ -629,12 +635,6 @@ public class SysTeamMemberResource {
         SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据单位机构人员检查组成员", tags = {"组成员" },  notes = "根据单位机构人员检查组成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysemployees/{sysemployee_id}/systeammembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysOrganizationSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Save-all')")
@@ -705,6 +705,30 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
+    @ApiOperation(value = "根据单位机构部门人员获取组成员", tags = {"组成员" },  notes = "根据单位机构部门人员获取组成员")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<SysTeamMemberDTO> getBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
+        SysTeamMember domain = systeammemberService.get(systeammember_id);
+        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据单位机构部门人员删除组成员", tags = {"组成员" },  notes = "根据单位机构部门人员删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
+    public ResponseEntity<Boolean> removeBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
+		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
+    @ApiOperation(value = "根据单位机构部门人员批量删除组成员", tags = {"组成员" },  notes = "根据单位机构部门人员批量删除组成员")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/batch")
+    public ResponseEntity<Boolean> removeBatchBySysOrganizationSysDepartmentSysEmployee(@RequestBody List<String> ids) {
+        systeammemberService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Update-all')")
     @ApiOperation(value = "根据单位机构部门人员更新组成员", tags = {"组成员" },  notes = "根据单位机构部门人员更新组成员")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
@@ -729,28 +753,10 @@ public class SysTeamMemberResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据单位机构部门人员删除组成员", tags = {"组成员" },  notes = "根据单位机构部门人员删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<Boolean> removeBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
-		return ResponseEntity.status(HttpStatus.OK).body(systeammemberService.remove(systeammember_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Remove-all')")
-    @ApiOperation(value = "根据单位机构部门人员批量删除组成员", tags = {"组成员" },  notes = "根据单位机构部门人员批量删除组成员")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/batch")
-    public ResponseEntity<Boolean> removeBatchBySysOrganizationSysDepartmentSysEmployee(@RequestBody List<String> ids) {
-        systeammemberService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Get-all')")
-    @ApiOperation(value = "根据单位机构部门人员获取组成员", tags = {"组成员" },  notes = "根据单位机构部门人员获取组成员")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/{systeammember_id}")
-    public ResponseEntity<SysTeamMemberDTO> getBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @PathVariable("systeammember_id") String systeammember_id) {
-        SysTeamMember domain = systeammemberService.get(systeammember_id);
-        SysTeamMemberDTO dto = systeammemberMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "根据单位机构部门人员检查组成员", tags = {"组成员" },  notes = "根据单位机构部门人员检查组成员")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/checkkey")
+    public ResponseEntity<Boolean> checkKeyBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @ApiOperation(value = "根据单位机构部门人员获取组成员草稿", tags = {"组成员" },  notes = "根据单位机构部门人员获取组成员草稿")
@@ -759,12 +765,6 @@ public class SysTeamMemberResource {
         SysTeamMember domain = systeammemberMapping.toDomain(dto);
         domain.setUserid(sysemployee_id);
         return ResponseEntity.status(HttpStatus.OK).body(systeammemberMapping.toDto(systeammemberService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "根据单位机构部门人员检查组成员", tags = {"组成员" },  notes = "根据单位机构部门人员检查组成员")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/{sysorganization_id}/sysdepartments/{sysdepartment_id}/sysemployees/{sysemployee_id}/systeammembers/checkkey")
-    public ResponseEntity<Boolean> checkKeyBySysOrganizationSysDepartmentSysEmployee(@PathVariable("sysorganization_id") String sysorganization_id, @PathVariable("sysdepartment_id") String sysdepartment_id, @PathVariable("sysemployee_id") String sysemployee_id, @RequestBody SysTeamMemberDTO systeammemberdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(systeammemberService.checkKey(systeammemberMapping.toDomain(systeammemberdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysTeamMember-Save-all')")

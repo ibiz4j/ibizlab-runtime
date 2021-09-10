@@ -187,8 +187,8 @@ public class SysTeamServiceImpl extends ServiceImpl<SysTeamMapper, SysTeam> impl
      */
     @Override
     public Page<SysTeam> searchDefault(SysTeamSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysTeam> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysTeam>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysTeam> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysTeam>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

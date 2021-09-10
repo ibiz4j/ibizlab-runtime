@@ -30,7 +30,7 @@ public interface DictCatalogMapper extends BaseMapper<DictCatalog> {
     @CacheEvict(value ="dictcatalog", key = "'row:'+#p0.id")
     int updateById(@Param(Constants.ENTITY) DictCatalog entity);
     @Override
-    @CacheEvict(value ="dictcatalog", key = "'row:'+#p0.id")
+    @CacheEvict(value ="dictcatalog", key = "'row:'+#p0.id" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) DictCatalog entity, @Param("ew") Wrapper<DictCatalog> updateWrapper);
     @Override
     @CacheEvict(value ="dictcatalog", key = "'row:'+#p0")

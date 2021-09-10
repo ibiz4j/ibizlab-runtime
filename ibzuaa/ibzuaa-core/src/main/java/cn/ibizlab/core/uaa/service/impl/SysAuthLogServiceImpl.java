@@ -184,8 +184,8 @@ public class SysAuthLogServiceImpl extends ServiceImpl<SysAuthLogMapper, SysAuth
      */
     @Override
     public Page<SysAuthLog> searchDefault(SysAuthLogSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysAuthLog> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysAuthLog>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysAuthLog> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysAuthLog>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

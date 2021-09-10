@@ -225,8 +225,8 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
      */
     @Override
     public Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRolePermission> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysRolePermission>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysRolePermission> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysRolePermission>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

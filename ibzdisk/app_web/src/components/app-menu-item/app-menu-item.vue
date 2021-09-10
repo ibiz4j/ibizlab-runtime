@@ -13,7 +13,7 @@
                         <template v-else>
                             <i v-if="isFirst" class='fa fa-cogs app-menu-icon'></i>
                         </template>
-                        <span ref="circleText" :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name}`)">{{$t(`app.menus.${ctrlName}.${item.name}`)}}</span>
+                        <span ref="circleText" :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)">{{$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)}}</span>
                     </template>
                     <app-menu-item :isCollapse="isCollapse" :menus="item.items" :ctrlName="ctrlName" :isFirst="false" :counterdata="counterdata" :popper-class="popperClass"></app-menu-item>
                 </el-submenu>
@@ -23,18 +23,18 @@
                     <el-menu-item :class="[{'isFirst' : isFirst},item.textcls]" v-show="!item.hidden" :index="item.name" :key="item.id">
                         <template v-if="item.icon && item.icon != ''">
                             <img :src="item.icon" class='app-menu-icon' />
-                            <span v-if="(isFirst && isCollapse) ? true : false" ref="circleText" :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name}`)">{{$t(`app.menus.${ctrlName}.${item.name}`)}}</span>
+                            <span v-if="(isFirst && isCollapse) ? true : false" ref="circleText" :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)">{{$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)}}</span>
                         </template>
                         <template v-else-if="item.iconcls && item.iconcls != ''">
                             <i :class="[item.iconcls, 'app-menu-icon']"></i>
-                            <span v-if="(isFirst && isCollapse) ? true : false" ref="circleText" :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name}`)">{{$t(`app.menus.${ctrlName}.${item.name}`)}}</span>
+                            <span v-if="(isFirst && isCollapse) ? true : false" ref="circleText" :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)">{{$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)}}</span>
                         </template>
                         <template v-else>
                             <i v-if="isFirst" class='fa fa-cogs app-menu-icon'></i>
-                            <span v-if="(isFirst && isCollapse) ? true : false" ref="circleText" :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name}`)">{{$t(`app.menus.${ctrlName}.${item.name}`)}}</span>
+                            <span v-if="(isFirst && isCollapse) ? true : false" ref="circleText" :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)">{{$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)}}</span>
                         </template>
                         <template slot="title">
-                            <span :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name}`)">{{$t(`app.menus.${ctrlName}.${item.name}`)}}</span>
+                            <span :class="{'app-menu-circle' : appMenuCollapseFlag, 'text' : true}" :title="$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)">{{$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)}}</span>
                             <template v-if="counterdata && counterdata[item.counterid] && counterdata[item.counterid] > 0">
                                 <span class="pull-right">
                                     <badge :count="counterdata[item.counterid]" :overflow-count="9999"></badge>

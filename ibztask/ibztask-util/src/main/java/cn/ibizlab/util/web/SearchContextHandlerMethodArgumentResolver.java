@@ -1,6 +1,7 @@
 package cn.ibizlab.util.web;
 
 import cn.ibizlab.util.filter.SearchContextBase;
+import cn.ibizlab.util.domain.DTOBase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -24,7 +25,7 @@ public class SearchContextHandlerMethodArgumentResolver implements HandlerMethod
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		return SearchContextBase.class.isAssignableFrom(parameter.getParameterType());
+		return SearchContextBase.class.isAssignableFrom(parameter.getParameterType()) || DTOBase.class.isAssignableFrom(parameter.getParameterType());
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class SearchContextHandlerMethodArgumentResolver implements HandlerMethod
 		for (String key : params.keySet()) {
 			set.put(key,params.get(key)[0]);
 		}
-		if((!set.containsKey("size")) ){
+		if(SearchContextBase.class.isAssignableFrom(parameter.getParameterType()) && (!set.containsKey("size"))){
 			set.put("size", pageLimit);
 		}
 		String json = objectMapper.writeValueAsString(set);

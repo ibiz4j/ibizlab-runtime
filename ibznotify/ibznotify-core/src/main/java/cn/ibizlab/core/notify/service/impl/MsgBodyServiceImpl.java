@@ -184,8 +184,8 @@ public class MsgBodyServiceImpl extends ServiceImpl<MsgBodyMapper, MsgBody> impl
      */
     @Override
     public Page<MsgBody> searchDefault(MsgBodySearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgBody> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<MsgBody>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgBody> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<MsgBody>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

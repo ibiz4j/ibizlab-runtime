@@ -39,7 +39,7 @@ export default class SysOrganizationServiceBase extends EntityService {
 // 实体接口
 
     /**
-     * Select接口方法
+     * CheckKey接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -47,9 +47,8 @@ export default class SysOrganizationServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysOrganizationServiceBase
      */
-    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().get(`/sysorganizations/${context.sysorganization}/select`,isloading);
-            
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().post(`/sysorganizations/${context.sysorganization}/checkkey`,data,isloading);
             return res;
     }
 
@@ -77,37 +76,6 @@ export default class SysOrganizationServiceBase extends EntityService {
         this.tempStorage.setItem(tempContext.srfsessionkey+'_sysemployees',JSON.stringify(res.data.sysemployees?res.data.sysemployees:[]));
         
         return res;
-    }
-
-    /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysOrganizationServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/sysorganizations/${context.sysorganization}`,data,isloading);
-            
-            return res;
-    }
-
-    /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysOrganizationServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().delete(`/sysorganizations/${context.sysorganization}`,isloading);
-            return res;
     }
 
     /**
@@ -142,7 +110,7 @@ export default class SysOrganizationServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Remove接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -150,8 +118,8 @@ export default class SysOrganizationServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysOrganizationServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().post(`/sysorganizations/${context.sysorganization}/checkkey`,data,isloading);
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().delete(`/sysorganizations/${context.sysorganization}`,isloading);
             return res;
     }
 
@@ -168,6 +136,23 @@ export default class SysOrganizationServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/sysorganizations/${context.sysorganization}/save`,data,isloading);
+            
+            return res;
+    }
+
+    /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysOrganizationServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/sysorganizations/${context.sysorganization}`,data,isloading);
             
             return res;
     }
@@ -228,5 +213,20 @@ export default class SysOrganizationServiceBase extends EntityService {
     public async searchTopOrg(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
         return await Http.getInstance().post(`/sysorganizations/searchtoporg`,tempData,isloading);
+    }
+
+    /**
+     * Select接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysOrganizationServiceBase
+     */
+    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().get(`/sysorganizations/${context.sysorganization}/select`,isloading);
+            
+            return res;
     }
 }

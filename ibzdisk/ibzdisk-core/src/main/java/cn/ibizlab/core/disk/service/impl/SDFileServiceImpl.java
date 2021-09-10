@@ -184,8 +184,8 @@ public class SDFileServiceImpl extends ServiceImpl<SDFileMapper, SDFile> impleme
      */
     @Override
     public Page<SDFile> searchDefault(SDFileSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SDFile> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SDFile>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SDFile> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SDFile>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

@@ -65,6 +65,30 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PostAuthorize("hasPermission(this.sysuserMapping.toDomain(returnObject.body),'ibzrt-SysUser-Get')")
+    @ApiOperation(value = "获取系统用户", tags = {"系统用户" },  notes = "获取系统用户")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}")
+    public ResponseEntity<SysUserDTO> get(@PathVariable("sysuser_id") String sysuser_id) {
+        SysUser domain = sysuserService.get(sysuser_id);
+        SysUserDTO dto = sysuserMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzrt-SysUser-Remove')")
+    @ApiOperation(value = "删除系统用户", tags = {"系统用户" },  notes = "删除系统用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("sysuser_id") String sysuser_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sysuserService.remove(sysuser_id));
+    }
+
+    @PreAuthorize("hasPermission(this.sysuserService.getSysuserByIds(#ids),'ibzrt-SysUser-Remove')")
+    @ApiOperation(value = "批量删除系统用户", tags = {"系统用户" },  notes = "批量删除系统用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sysuserService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzrt-SysUser-Update')")
     @ApiOperation(value = "更新系统用户", tags = {"系统用户" },  notes = "更新系统用户")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}")
@@ -84,28 +108,10 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzrt-SysUser-Remove')")
-    @ApiOperation(value = "删除系统用户", tags = {"系统用户" },  notes = "删除系统用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/{sysuser_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("sysuser_id") String sysuser_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sysuserService.remove(sysuser_id));
-    }
-
-    @PreAuthorize("hasPermission(this.sysuserService.getSysuserByIds(#ids),'ibzrt-SysUser-Remove')")
-    @ApiOperation(value = "批量删除系统用户", tags = {"系统用户" },  notes = "批量删除系统用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysusers/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sysuserService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PostAuthorize("hasPermission(this.sysuserMapping.toDomain(returnObject.body),'ibzrt-SysUser-Get')")
-    @ApiOperation(value = "获取系统用户", tags = {"系统用户" },  notes = "获取系统用户")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}")
-    public ResponseEntity<SysUserDTO> get(@PathVariable("sysuser_id") String sysuser_id) {
-        SysUser domain = sysuserService.get(sysuser_id);
-        SysUserDTO dto = sysuserMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查系统用户", tags = {"系统用户" },  notes = "检查系统用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysUserDTO sysuserdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysuserService.checkKey(sysuserMapping.toDomain(sysuserdto)));
     }
 
     @ApiOperation(value = "获取系统用户草稿", tags = {"系统用户" },  notes = "获取系统用户草稿")
@@ -113,12 +119,6 @@ public class SysUserResource {
     public ResponseEntity<SysUserDTO> getDraft(SysUserDTO dto) {
         SysUser domain = sysuserMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(sysuserMapping.toDto(sysuserService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查系统用户", tags = {"系统用户" },  notes = "检查系统用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysusers/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysUserDTO sysuserdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysuserService.checkKey(sysuserMapping.toDomain(sysuserdto)));
     }
 
     @PreAuthorize("hasPermission(this.sysuserMapping.toDomain(#sysuserdto),'ibzrt-SysUser-Save')")

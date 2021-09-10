@@ -39,7 +39,7 @@ export default class SysTeamMemberServiceBase extends EntityService {
 // 实体接口
 
     /**
-     * Select接口方法
+     * CheckKey接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -47,34 +47,43 @@ export default class SysTeamMemberServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysTeamMemberServiceBase
      */
-    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysorganization && context.sysdepartment && context.sysemployee && context.systeammember){
-            let res:any = Http.getInstance().get(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/select`,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
             
             return res;
         }
         if(context.sysorganization && context.sysemployee && context.systeammember){
-            let res:any = Http.getInstance().get(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/select`,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
             
             return res;
         }
         if(context.sysdepartment && context.sysemployee && context.systeammember){
-            let res:any = Http.getInstance().get(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/select`,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
             
             return res;
         }
         if(context.systeam && context.systeammember){
-            let res:any = Http.getInstance().get(`/systeams/${context.systeam}/systeammembers/${context.systeammember}/select`,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/systeams/${context.systeam}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
             
             return res;
         }
         if(context.sysemployee && context.systeammember){
-            let res:any = Http.getInstance().get(`/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/select`,isloading);
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().post(`/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
             
             return res;
         }
-            let res:any = Http.getInstance().get(`/systeammembers/${context.systeammember}/select`,isloading);
-            
+            let res:any = Http.getInstance().post(`/systeammembers/${context.systeammember}/checkkey`,data,isloading);
             return res;
     }
 
@@ -173,92 +182,6 @@ export default class SysTeamMemberServiceBase extends EntityService {
     }
 
     /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysTeamMemberServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysorganization && context.sysdepartment && context.sysemployee && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,data,isloading);
-            
-            return res;
-        }
-        if(context.sysorganization && context.sysemployee && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,data,isloading);
-            
-            return res;
-        }
-        if(context.sysdepartment && context.sysemployee && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,data,isloading);
-            
-            return res;
-        }
-        if(context.systeam && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/systeams/${context.systeam}/systeammembers/${context.systeammember}`,data,isloading);
-            
-            return res;
-        }
-        if(context.sysemployee && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().put(`/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,data,isloading);
-            
-            return res;
-        }
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/systeammembers/${context.systeammember}`,data,isloading);
-            
-            return res;
-    }
-
-    /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof SysTeamMemberServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        if(context.sysorganization && context.sysdepartment && context.sysemployee && context.systeammember){
-            let res:any = Http.getInstance().delete(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,isloading);
-            return res;
-        }
-        if(context.sysorganization && context.sysemployee && context.systeammember){
-            let res:any = Http.getInstance().delete(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,isloading);
-            return res;
-        }
-        if(context.sysdepartment && context.sysemployee && context.systeammember){
-            let res:any = Http.getInstance().delete(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,isloading);
-            return res;
-        }
-        if(context.systeam && context.systeammember){
-            let res:any = Http.getInstance().delete(`/systeams/${context.systeam}/systeammembers/${context.systeammember}`,isloading);
-            return res;
-        }
-        if(context.sysemployee && context.systeammember){
-            let res:any = Http.getInstance().delete(`/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,isloading);
-            return res;
-        }
-            let res:any = Http.getInstance().delete(`/systeammembers/${context.systeammember}`,isloading);
-            return res;
-    }
-
-    /**
      * Get接口方法
      *
      * @param {*} [context={}]
@@ -345,7 +268,7 @@ export default class SysTeamMemberServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Remove接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -353,43 +276,28 @@ export default class SysTeamMemberServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof SysTeamMemberServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         if(context.sysorganization && context.sysdepartment && context.sysemployee && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
-            
+            let res:any = Http.getInstance().delete(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,isloading);
             return res;
         }
         if(context.sysorganization && context.sysemployee && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
-            
+            let res:any = Http.getInstance().delete(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,isloading);
             return res;
         }
         if(context.sysdepartment && context.sysemployee && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
-            
+            let res:any = Http.getInstance().delete(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,isloading);
             return res;
         }
         if(context.systeam && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/systeams/${context.systeam}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
-            
+            let res:any = Http.getInstance().delete(`/systeams/${context.systeam}/systeammembers/${context.systeammember}`,isloading);
             return res;
         }
         if(context.sysemployee && context.systeammember){
-            let masterData:any = {};
-            Object.assign(data,masterData);
-            let res:any = await Http.getInstance().post(`/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/checkkey`,data,isloading);
-            
+            let res:any = Http.getInstance().delete(`/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,isloading);
             return res;
         }
-            let res:any = Http.getInstance().post(`/systeammembers/${context.systeammember}/checkkey`,data,isloading);
+            let res:any = Http.getInstance().delete(`/systeammembers/${context.systeammember}`,isloading);
             return res;
     }
 
@@ -441,6 +349,58 @@ export default class SysTeamMemberServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/systeammembers/${context.systeammember}/save`,data,isloading);
+            
+            return res;
+    }
+
+    /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysTeamMemberServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysorganization && context.sysdepartment && context.sysemployee && context.systeammember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,data,isloading);
+            
+            return res;
+        }
+        if(context.sysorganization && context.sysemployee && context.systeammember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,data,isloading);
+            
+            return res;
+        }
+        if(context.sysdepartment && context.sysemployee && context.systeammember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,data,isloading);
+            
+            return res;
+        }
+        if(context.systeam && context.systeammember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/systeams/${context.systeam}/systeammembers/${context.systeammember}`,data,isloading);
+            
+            return res;
+        }
+        if(context.sysemployee && context.systeammember){
+            let masterData:any = {};
+            Object.assign(data,masterData);
+            let res:any = await Http.getInstance().put(`/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}`,data,isloading);
+            
+            return res;
+        }
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/systeammembers/${context.systeammember}`,data,isloading);
             
             return res;
     }
@@ -517,5 +477,45 @@ export default class SysTeamMemberServiceBase extends EntityService {
         }
         let tempData:any = JSON.parse(JSON.stringify(data));
         return await Http.getInstance().post(`/systeammembers/searchdefault`,tempData,isloading);
+    }
+
+    /**
+     * Select接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof SysTeamMemberServiceBase
+     */
+    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        if(context.sysorganization && context.sysdepartment && context.sysemployee && context.systeammember){
+            let res:any = Http.getInstance().get(`/sysorganizations/${context.sysorganization}/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/select`,isloading);
+            
+            return res;
+        }
+        if(context.sysorganization && context.sysemployee && context.systeammember){
+            let res:any = Http.getInstance().get(`/sysorganizations/${context.sysorganization}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/select`,isloading);
+            
+            return res;
+        }
+        if(context.sysdepartment && context.sysemployee && context.systeammember){
+            let res:any = Http.getInstance().get(`/sysdepartments/${context.sysdepartment}/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/select`,isloading);
+            
+            return res;
+        }
+        if(context.systeam && context.systeammember){
+            let res:any = Http.getInstance().get(`/systeams/${context.systeam}/systeammembers/${context.systeammember}/select`,isloading);
+            
+            return res;
+        }
+        if(context.sysemployee && context.systeammember){
+            let res:any = Http.getInstance().get(`/sysemployees/${context.sysemployee}/systeammembers/${context.systeammember}/select`,isloading);
+            
+            return res;
+        }
+            let res:any = Http.getInstance().get(`/systeammembers/${context.systeammember}/select`,isloading);
+            
+            return res;
     }
 }

@@ -43,5 +43,21 @@ public enum DEFieldDefaultValueType {
     /**
      * 默认值
      */
-    NONE
+    NONE,
+    /**
+     * 用户自定义
+     */
+    USER,
+    /**
+     * 用户自定义2
+     */
+    USER2,
+    /**
+     * 用户自定义3
+     */
+    USER3,
+    /**
+     * 用户自定义4
+     */
+    USER4
 }

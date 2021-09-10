@@ -889,8 +889,8 @@ export default class MainBase extends Vue implements ControlInterface {
         const post: Promise<any> = this.service.search(this.fetchAction,JSON.parse(JSON.stringify(this.context)), arg, this.showBusyIndicator);
         post.then((response: any) => {
             if (!response.status || response.status !== 200) {
-                if (response.errorMessage) {
-                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.errorMessage });
+                if (response.data && response.data.message) {
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                 }
                 return;
             }
@@ -940,7 +940,7 @@ export default class MainBase extends Vue implements ControlInterface {
             if (response && response.status === 401) {
                 return;
             }
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.errorMessage });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data && response.data.message ? response.data.message : "" });
         });
     }
 
@@ -1025,7 +1025,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     resolve(response);
                 }).catch((response: any) => {
                     if (response && response.status != 200) {
-                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.message});
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data && response.data.message ? response.data.message : "" });
                         return;
                     }
                     if (!response || !response.status || !response.data) {
@@ -1146,6 +1146,9 @@ export default class MainBase extends Vue implements ControlInterface {
         const parentdata: any = {};
         this.$emit('beforeload', parentdata);
         Object.assign(arg, parentdata);
+        let tempViewParams:any = parentdata.viewparams?parentdata.viewparams:{};
+        Object.assign(tempViewParams,JSON.parse(JSON.stringify(this.viewparams)));
+        Object.assign(arg,{viewparams:tempViewParams});
         const post: Promise<any> = this.service.search(this.fetchAction,JSON.parse(JSON.stringify(this.context)), arg, this.showBusyIndicator);
         post.then((response: any) => {
             if (!response || response.status !== 200) {
@@ -2027,8 +2030,8 @@ export default class MainBase extends Vue implements ControlInterface {
         let post: Promise<any> = this.service.loadDraft(this.loaddraftAction, JSON.parse(JSON.stringify(this.context)), args[0], this.showBusyIndicator);
         post.then((response: any) => {
             if (!response.status || response.status !== 200) {
-                if (response.errorMessage) {
-                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.errorMessage });
+                if (response.data && response.data.message) {
+                    this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: response.data.message });
                 }
                 return;
             }

@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -300,20 +301,22 @@ public class AuthPermissionEvaluator implements PermissionEvaluator {
         Map <String, DEField> preFields= DEFieldCacheMap.getDEFields(entityBase.getClass()); //从缓存中获取当前类预置属性
 
         for (Map.Entry<String,DEField> entry : preFields.entrySet()){
-            String fieldName=entry.getKey();//获取注解字段
             DEField fieldAnnotation=entry.getValue();//获取注解值
+            String fieldName=fieldAnnotation.name();//获取注解字段
             DEPredefinedFieldType prefieldType=fieldAnnotation.preType();
-            //用户配置系统预置属性-组织机构标识
-            if(prefieldType==prefieldType.ORGID){
-                orgField=fieldName;
-            }
-            //用户配置系统预置属性-部门标识
-            if(prefieldType==prefieldType.ORGSECTORID){
-                orgDeptField=fieldName;
-            }
-            //用户配置系统预置属性-部门标识
-            if(prefieldType==prefieldType.CREATEMAN){
-                createManField=fieldName;
+            if(!StringUtils.isEmpty(fieldName)){
+                //用户配置系统预置属性-组织机构标识
+                if(prefieldType==prefieldType.ORGID){
+                    orgField=fieldName;
+                }
+                //用户配置系统预置属性-部门标识
+                if(prefieldType==prefieldType.ORGSECTORID){
+                    orgDeptField=fieldName;
+                }
+                //用户配置系统预置属性-部门标识
+                if(prefieldType==prefieldType.CREATEMAN){
+                    createManField=fieldName;
+                }
             }
         }
         permissionFiled.put("orgfield",orgField);

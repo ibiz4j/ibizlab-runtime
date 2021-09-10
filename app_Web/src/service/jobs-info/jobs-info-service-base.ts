@@ -39,7 +39,7 @@ export default class JobsInfoServiceBase extends EntityService {
 // 实体接口
 
     /**
-     * Select接口方法
+     * CheckKey接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -47,9 +47,8 @@ export default class JobsInfoServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof JobsInfoServiceBase
      */
-    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().get(`/jobsinfos/${context.jobsinfo}/select`,isloading);
-            
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().post(`/jobsinfos/${context.jobsinfo}/checkkey`,data,isloading);
             return res;
     }
 
@@ -78,7 +77,7 @@ export default class JobsInfoServiceBase extends EntityService {
     }
 
     /**
-     * Update接口方法
+     * Execute接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -86,16 +85,13 @@ export default class JobsInfoServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof JobsInfoServiceBase
      */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/jobsinfos/${context.jobsinfo}`,data,isloading);
-            
+    public async Execute(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().post(`/jobsinfos/${context.jobsinfo}/execute`,data,isloading);
             return res;
     }
 
     /**
-     * Remove接口方法
+     * ExecuteBatch接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -103,9 +99,9 @@ export default class JobsInfoServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof JobsInfoServiceBase
      */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().delete(`/jobsinfos/${context.jobsinfo}`,isloading);
-            return res;
+    public async ExecuteBatch(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let tempData:any = JSON.parse(JSON.stringify(data));
+        return await Http.getInstance().post(`/jobsinfos/executebatch`,tempData,isloading);
     }
 
     /**
@@ -140,7 +136,7 @@ export default class JobsInfoServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Remove接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -148,37 +144,9 @@ export default class JobsInfoServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof JobsInfoServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().post(`/jobsinfos/${context.jobsinfo}/checkkey`,data,isloading);
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().delete(`/jobsinfos/${context.jobsinfo}`,isloading);
             return res;
-    }
-
-    /**
-     * Execute接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof JobsInfoServiceBase
-     */
-    public async Execute(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().post(`/jobsinfos/${context.jobsinfo}/execute`,data,isloading);
-            return res;
-    }
-
-    /**
-     * ExecuteBatch接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof JobsInfoServiceBase
-     */
-    public async ExecuteBatch(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let tempData:any = JSON.parse(JSON.stringify(data));
-        return await Http.getInstance().post(`/jobsinfos/executebatch`,tempData,isloading);
     }
 
     /**
@@ -227,6 +195,23 @@ export default class JobsInfoServiceBase extends EntityService {
     }
 
     /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof JobsInfoServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/jobsinfos/${context.jobsinfo}`,data,isloading);
+            
+            return res;
+    }
+
+    /**
      * FetchDefault接口方法
      *
      * @param {*} [context={}]
@@ -253,5 +238,20 @@ export default class JobsInfoServiceBase extends EntityService {
     public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
         return await Http.getInstance().post(`/jobsinfos/searchdefault`,tempData,isloading);
+    }
+
+    /**
+     * Select接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof JobsInfoServiceBase
+     */
+    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().get(`/jobsinfos/${context.jobsinfo}/select`,isloading);
+            
+            return res;
     }
 }

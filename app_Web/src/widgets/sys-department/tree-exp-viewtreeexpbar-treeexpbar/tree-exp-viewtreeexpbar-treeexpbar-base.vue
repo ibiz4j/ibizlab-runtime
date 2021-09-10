@@ -479,7 +479,7 @@ export default class TreeExpViewtreeexpbarBase extends Vue implements ControlInt
             this.split = this.$store.getters.getViewSplit(this.viewUID);
         }else{
             let containerWidth:number = (document.getElementById("treeexpviewtreeexpbar") as any).offsetWidth;
-            if(this.ctrlWidth){
+            if(this.ctrlWidth && containerWidth != 0){
                     this.split = this.ctrlWidth/containerWidth;
             }
             this.$store.commit("setViewSplit",{viewUID:this.viewUID,viewSplit:this.split}); 

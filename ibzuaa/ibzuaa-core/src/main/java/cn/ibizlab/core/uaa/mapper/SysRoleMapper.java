@@ -32,7 +32,7 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
     @CacheEvict(value ="sysrole", key = "'row:'+#p0.roleid")
     int updateById(@Param(Constants.ENTITY) SysRole entity);
     @Override
-    @CacheEvict(value ="sysrole", key = "'row:'+#p0.roleid")
+    @CacheEvict(value ="sysrole", key = "'row:'+#p0.roleid" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) SysRole entity, @Param("ew") Wrapper<SysRole> updateWrapper);
     @Override
     @CacheEvict(value ="sysrole", key = "'row:'+#p0")

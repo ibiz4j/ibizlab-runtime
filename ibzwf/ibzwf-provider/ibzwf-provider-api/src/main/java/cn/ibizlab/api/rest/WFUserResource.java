@@ -65,6 +65,30 @@ public class WFUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PostAuthorize("hasPermission(this.wfuserMapping.toDomain(returnObject.body),'ibzwf-WFUser-Get')")
+    @ApiOperation(value = "获取用户", tags = {"用户" },  notes = "获取用户")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/{wfuser_id}")
+    public ResponseEntity<WFUserDTO> get(@PathVariable("wfuser_id") String wfuser_id) {
+        WFUser domain = wfuserService.get(wfuser_id);
+        WFUserDTO dto = wfuserMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.wfuserService.get(#wfuser_id),'ibzwf-WFUser-Remove')")
+    @ApiOperation(value = "删除用户", tags = {"用户" },  notes = "删除用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("wfuser_id") String wfuser_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfuserService.remove(wfuser_id));
+    }
+
+    @PreAuthorize("hasPermission(this.wfuserService.getWfuserByIds(#ids),'ibzwf-WFUser-Remove')")
+    @ApiOperation(value = "批量删除用户", tags = {"用户" },  notes = "批量删除用户")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfuserService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasPermission(this.wfuserService.get(#wfuser_id),'ibzwf-WFUser-Update')")
     @ApiOperation(value = "更新用户", tags = {"用户" },  notes = "更新用户")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfusers/{wfuser_id}")
@@ -84,28 +108,10 @@ public class WFUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.wfuserService.get(#wfuser_id),'ibzwf-WFUser-Remove')")
-    @ApiOperation(value = "删除用户", tags = {"用户" },  notes = "删除用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{wfuser_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("wfuser_id") String wfuser_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfuserService.remove(wfuser_id));
-    }
-
-    @PreAuthorize("hasPermission(this.wfuserService.getWfuserByIds(#ids),'ibzwf-WFUser-Remove')")
-    @ApiOperation(value = "批量删除用户", tags = {"用户" },  notes = "批量删除用户")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfuserService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PostAuthorize("hasPermission(this.wfuserMapping.toDomain(returnObject.body),'ibzwf-WFUser-Get')")
-    @ApiOperation(value = "获取用户", tags = {"用户" },  notes = "获取用户")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfusers/{wfuser_id}")
-    public ResponseEntity<WFUserDTO> get(@PathVariable("wfuser_id") String wfuser_id) {
-        WFUser domain = wfuserService.get(wfuser_id);
-        WFUserDTO dto = wfuserMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查用户", tags = {"用户" },  notes = "检查用户")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFUserDTO wfuserdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfuserService.checkKey(wfuserMapping.toDomain(wfuserdto)));
     }
 
     @ApiOperation(value = "获取用户草稿", tags = {"用户" },  notes = "获取用户草稿")
@@ -113,12 +119,6 @@ public class WFUserResource {
     public ResponseEntity<WFUserDTO> getDraft(WFUserDTO dto) {
         WFUser domain = wfuserMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(wfuserMapping.toDto(wfuserService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查用户", tags = {"用户" },  notes = "检查用户")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfusers/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFUserDTO wfuserdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfuserService.checkKey(wfuserMapping.toDomain(wfuserdto)));
     }
 
     @PreAuthorize("hasPermission(this.wfuserMapping.toDomain(#wfuserdto),'ibzwf-WFUser-Save')")

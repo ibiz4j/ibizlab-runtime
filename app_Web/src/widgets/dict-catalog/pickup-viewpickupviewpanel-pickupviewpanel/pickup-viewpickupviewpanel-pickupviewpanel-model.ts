@@ -36,6 +36,9 @@ export default class PickupViewpickupviewpanelModel {
       {
         name: 'updatedate',
       },
+      {
+        name: 'ext_params',
+      },
     ]
   }
 

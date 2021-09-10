@@ -65,6 +65,30 @@ public class MsgOpenAccessResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Get-all')")
+    @ApiOperation(value = "获取接入开放平台", tags = {"接入开放平台" },  notes = "获取接入开放平台")
+	@RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/{msgopenaccess_id}")
+    public ResponseEntity<MsgOpenAccessDTO> get(@PathVariable("msgopenaccess_id") String msgopenaccess_id) {
+        MsgOpenAccess domain = msgopenaccessService.get(msgopenaccess_id);
+        MsgOpenAccessDTO dto = msgopenaccessMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Remove-all')")
+    @ApiOperation(value = "删除接入开放平台", tags = {"接入开放平台" },  notes = "删除接入开放平台")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/msgopenaccesses/{msgopenaccess_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("msgopenaccess_id") String msgopenaccess_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(msgopenaccessService.remove(msgopenaccess_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Remove-all')")
+    @ApiOperation(value = "批量删除接入开放平台", tags = {"接入开放平台" },  notes = "批量删除接入开放平台")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/msgopenaccesses/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        msgopenaccessService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Update-all')")
     @ApiOperation(value = "更新接入开放平台", tags = {"接入开放平台" },  notes = "更新接入开放平台")
 	@RequestMapping(method = RequestMethod.PUT, value = "/msgopenaccesses/{msgopenaccess_id}")
@@ -84,28 +108,10 @@ public class MsgOpenAccessResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Remove-all')")
-    @ApiOperation(value = "删除接入开放平台", tags = {"接入开放平台" },  notes = "删除接入开放平台")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/msgopenaccesses/{msgopenaccess_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("msgopenaccess_id") String msgopenaccess_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(msgopenaccessService.remove(msgopenaccess_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Remove-all')")
-    @ApiOperation(value = "批量删除接入开放平台", tags = {"接入开放平台" },  notes = "批量删除接入开放平台")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/msgopenaccesses/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        msgopenaccessService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Get-all')")
-    @ApiOperation(value = "获取接入开放平台", tags = {"接入开放平台" },  notes = "获取接入开放平台")
-	@RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/{msgopenaccess_id}")
-    public ResponseEntity<MsgOpenAccessDTO> get(@PathVariable("msgopenaccess_id") String msgopenaccess_id) {
-        MsgOpenAccess domain = msgopenaccessService.get(msgopenaccess_id);
-        MsgOpenAccessDTO dto = msgopenaccessMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查接入开放平台", tags = {"接入开放平台" },  notes = "检查接入开放平台")
+	@RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody MsgOpenAccessDTO msgopenaccessdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(msgopenaccessService.checkKey(msgopenaccessMapping.toDomain(msgopenaccessdto)));
     }
 
     @ApiOperation(value = "获取接入开放平台草稿", tags = {"接入开放平台" },  notes = "获取接入开放平台草稿")
@@ -113,12 +119,6 @@ public class MsgOpenAccessResource {
     public ResponseEntity<MsgOpenAccessDTO> getDraft(MsgOpenAccessDTO dto) {
         MsgOpenAccess domain = msgopenaccessMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(msgopenaccessMapping.toDto(msgopenaccessService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查接入开放平台", tags = {"接入开放平台" },  notes = "检查接入开放平台")
-	@RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody MsgOpenAccessDTO msgopenaccessdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(msgopenaccessService.checkKey(msgopenaccessMapping.toDomain(msgopenaccessdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibznotify-MsgOpenAccess-Save-all')")

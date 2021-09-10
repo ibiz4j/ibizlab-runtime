@@ -65,6 +65,30 @@ public class SDFileResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PostAuthorize("hasPermission(this.sdfileMapping.toDomain(returnObject.body),'ibzdisk-SDFile-Get')")
+    @ApiOperation(value = "获取文件", tags = {"文件" },  notes = "获取文件")
+	@RequestMapping(method = RequestMethod.GET, value = "/sdfiles/{sdfile_id}")
+    public ResponseEntity<SDFileDTO> get(@PathVariable("sdfile_id") String sdfile_id) {
+        SDFile domain = sdfileService.get(sdfile_id);
+        SDFileDTO dto = sdfileMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.sdfileService.get(#sdfile_id),'ibzdisk-SDFile-Remove')")
+    @ApiOperation(value = "删除文件", tags = {"文件" },  notes = "删除文件")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sdfiles/{sdfile_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("sdfile_id") String sdfile_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sdfileService.remove(sdfile_id));
+    }
+
+    @PreAuthorize("hasPermission(this.sdfileService.getSdfileByIds(#ids),'ibzdisk-SDFile-Remove')")
+    @ApiOperation(value = "批量删除文件", tags = {"文件" },  notes = "批量删除文件")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sdfiles/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sdfileService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @VersionCheck(entity = "sdfile" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.sdfileService.get(#sdfile_id),'ibzdisk-SDFile-Update')")
     @ApiOperation(value = "更新文件", tags = {"文件" },  notes = "更新文件")
@@ -85,28 +109,10 @@ public class SDFileResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sdfileService.get(#sdfile_id),'ibzdisk-SDFile-Remove')")
-    @ApiOperation(value = "删除文件", tags = {"文件" },  notes = "删除文件")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sdfiles/{sdfile_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("sdfile_id") String sdfile_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sdfileService.remove(sdfile_id));
-    }
-
-    @PreAuthorize("hasPermission(this.sdfileService.getSdfileByIds(#ids),'ibzdisk-SDFile-Remove')")
-    @ApiOperation(value = "批量删除文件", tags = {"文件" },  notes = "批量删除文件")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sdfiles/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sdfileService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PostAuthorize("hasPermission(this.sdfileMapping.toDomain(returnObject.body),'ibzdisk-SDFile-Get')")
-    @ApiOperation(value = "获取文件", tags = {"文件" },  notes = "获取文件")
-	@RequestMapping(method = RequestMethod.GET, value = "/sdfiles/{sdfile_id}")
-    public ResponseEntity<SDFileDTO> get(@PathVariable("sdfile_id") String sdfile_id) {
-        SDFile domain = sdfileService.get(sdfile_id);
-        SDFileDTO dto = sdfileMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查文件", tags = {"文件" },  notes = "检查文件")
+	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SDFileDTO sdfiledto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sdfileService.checkKey(sdfileMapping.toDomain(sdfiledto)));
     }
 
     @ApiOperation(value = "获取文件草稿", tags = {"文件" },  notes = "获取文件草稿")
@@ -114,12 +120,6 @@ public class SDFileResource {
     public ResponseEntity<SDFileDTO> getDraft(SDFileDTO dto) {
         SDFile domain = sdfileMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(sdfileMapping.toDto(sdfileService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查文件", tags = {"文件" },  notes = "检查文件")
-	@RequestMapping(method = RequestMethod.POST, value = "/sdfiles/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SDFileDTO sdfiledto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sdfileService.checkKey(sdfileMapping.toDomain(sdfiledto)));
     }
 
     @PreAuthorize("hasPermission(this.sdfileMapping.toDomain(#sdfiledto),'ibzdisk-SDFile-Save')")

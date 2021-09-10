@@ -99,6 +99,14 @@ public class DictCatalog extends EntityClient implements Serializable {
     @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
 
+    /**
+     * 扩展参数
+     */
+    @JSONField(name = "ext_params")
+    @JsonProperty("ext_params")
+    @ApiModelProperty("扩展参数")
+    private String extParams;
+
 
 
 
@@ -133,6 +141,14 @@ public class DictCatalog extends EntityClient implements Serializable {
     public void setMemo(String memo) {
         this.memo = memo ;
         this.modify("memo",memo);
+    }
+
+    /**
+     * 设置 [扩展参数]
+     */
+    public void setExtParams(String extParams) {
+        this.extParams = extParams ;
+        this.modify("extparams",extParams);
     }
 
     /**

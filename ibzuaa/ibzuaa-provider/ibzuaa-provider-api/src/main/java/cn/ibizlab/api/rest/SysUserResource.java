@@ -65,23 +65,13 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzuaa-SysUser-Update')")
-    @ApiOperation(value = "更新系统用户", tags = {"系统用户" },  notes = "更新系统用户")
-	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}")
-    public ResponseEntity<SysUserDTO> update(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserDTO sysuserdto) {
-		SysUser domain  = sysuserMapping.toDomain(sysuserdto);
-        domain .setUserid(sysuser_id);
-		sysuserService.update(domain );
-		SysUserDTO dto = sysuserMapping.toDto(domain);
+    @PostAuthorize("hasPermission(this.sysuserMapping.toDomain(returnObject.body),'ibzuaa-SysUser-Get')")
+    @ApiOperation(value = "获取系统用户", tags = {"系统用户" },  notes = "获取系统用户")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}")
+    public ResponseEntity<SysUserDTO> get(@PathVariable("sysuser_id") String sysuser_id) {
+        SysUser domain = sysuserService.get(sysuser_id);
+        SysUserDTO dto = sysuserMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasPermission(this.sysuserService.getSysuserByEntities(this.sysuserMapping.toDomain(#sysuserdtos)),'ibzuaa-SysUser-Update')")
-    @ApiOperation(value = "批量更新系统用户", tags = {"系统用户" },  notes = "批量更新系统用户")
-	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/batch")
-    public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
-        sysuserService.updateBatch(sysuserMapping.toDomain(sysuserdtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzuaa-SysUser-Remove')")
@@ -99,20 +89,23 @@ public class SysUserResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PostAuthorize("hasPermission(this.sysuserMapping.toDomain(returnObject.body),'ibzuaa-SysUser-Get')")
-    @ApiOperation(value = "获取系统用户", tags = {"系统用户" },  notes = "获取系统用户")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/{sysuser_id}")
-    public ResponseEntity<SysUserDTO> get(@PathVariable("sysuser_id") String sysuser_id) {
-        SysUser domain = sysuserService.get(sysuser_id);
-        SysUserDTO dto = sysuserMapping.toDto(domain);
+    @PreAuthorize("hasPermission(this.sysuserService.get(#sysuser_id),'ibzuaa-SysUser-Update')")
+    @ApiOperation(value = "更新系统用户", tags = {"系统用户" },  notes = "更新系统用户")
+	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/{sysuser_id}")
+    public ResponseEntity<SysUserDTO> update(@PathVariable("sysuser_id") String sysuser_id, @RequestBody SysUserDTO sysuserdto) {
+		SysUser domain  = sysuserMapping.toDomain(sysuserdto);
+        domain .setUserid(sysuser_id);
+		sysuserService.update(domain );
+		SysUserDTO dto = sysuserMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "获取系统用户草稿", tags = {"系统用户" },  notes = "获取系统用户草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/getdraft")
-    public ResponseEntity<SysUserDTO> getDraft(SysUserDTO dto) {
-        SysUser domain = sysuserMapping.toDomain(dto);
-        return ResponseEntity.status(HttpStatus.OK).body(sysuserMapping.toDto(sysuserService.getDraft(domain)));
+    @PreAuthorize("hasPermission(this.sysuserService.getSysuserByEntities(this.sysuserMapping.toDomain(#sysuserdtos)),'ibzuaa-SysUser-Update')")
+    @ApiOperation(value = "批量更新系统用户", tags = {"系统用户" },  notes = "批量更新系统用户")
+	@RequestMapping(method = RequestMethod.PUT, value = "/sysusers/batch")
+    public ResponseEntity<Boolean> updateBatch(@RequestBody List<SysUserDTO> sysuserdtos) {
+        sysuserService.updateBatch(sysuserMapping.toDomain(sysuserdtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @ApiOperation(value = "检查系统用户", tags = {"系统用户" },  notes = "检查系统用户")
@@ -138,6 +131,13 @@ public class SysUserResource {
         List<SysUser> domains = sysuserMapping.toDomain(sysuserdtos);
         boolean result = sysuserService.deleteSysUserBatch(domains);
         return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @ApiOperation(value = "获取系统用户草稿", tags = {"系统用户" },  notes = "获取系统用户草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysusers/getdraft")
+    public ResponseEntity<SysUserDTO> getDraft(SysUserDTO dto) {
+        SysUser domain = sysuserMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(sysuserMapping.toDto(sysuserService.getDraft(domain)));
     }
 
     @ApiOperation(value = "保存系统用户", tags = {"系统用户" },  notes = "保存系统用户")

@@ -184,8 +184,8 @@ public class JobsLogServiceImpl extends ServiceImpl<JobsLogMapper, JobsLog> impl
      */
     @Override
     public Page<JobsLog> searchDefault(JobsLogSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<JobsLog> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<JobsLog>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<JobsLog> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<JobsLog>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

@@ -31,7 +31,7 @@ public interface MsgTemplateMapper extends BaseMapper<MsgTemplate> {
     @CacheEvict(value ="msgtemplate", key = "'row:'+#p0.tid")
     int updateById(@Param(Constants.ENTITY) MsgTemplate entity);
     @Override
-    @CacheEvict(value ="msgtemplate", key = "'row:'+#p0.tid")
+    @CacheEvict(value ="msgtemplate", key = "'row:'+#p0.tid" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) MsgTemplate entity, @Param("ew") Wrapper<MsgTemplate> updateWrapper);
     @Override
     @CacheEvict(value ="msgtemplate", key = "'row:'+#p0")

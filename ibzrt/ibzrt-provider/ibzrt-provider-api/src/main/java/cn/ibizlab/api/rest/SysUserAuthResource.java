@@ -65,6 +65,30 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Get-all')")
+    @ApiOperation(value = "获取账号绑定", tags = {"账号绑定" },  notes = "获取账号绑定")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/{sysuserauth_id}")
+    public ResponseEntity<SysUserAuthDTO> get(@PathVariable("sysuserauth_id") String sysuserauth_id) {
+        SysUserAuth domain = sysuserauthService.get(sysuserauth_id);
+        SysUserAuthDTO dto = sysuserauthMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Remove-all')")
+    @ApiOperation(value = "删除账号绑定", tags = {"账号绑定" },  notes = "删除账号绑定")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserauths/{sysuserauth_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("sysuserauth_id") String sysuserauth_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.remove(sysuserauth_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Remove-all')")
+    @ApiOperation(value = "批量删除账号绑定", tags = {"账号绑定" },  notes = "批量删除账号绑定")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserauths/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sysuserauthService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Update-all')")
     @ApiOperation(value = "更新账号绑定", tags = {"账号绑定" },  notes = "更新账号绑定")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysuserauths/{sysuserauth_id}")
@@ -84,28 +108,10 @@ public class SysUserAuthResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Remove-all')")
-    @ApiOperation(value = "删除账号绑定", tags = {"账号绑定" },  notes = "删除账号绑定")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserauths/{sysuserauth_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("sysuserauth_id") String sysuserauth_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.remove(sysuserauth_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Remove-all')")
-    @ApiOperation(value = "批量删除账号绑定", tags = {"账号绑定" },  notes = "批量删除账号绑定")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysuserauths/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sysuserauthService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Get-all')")
-    @ApiOperation(value = "获取账号绑定", tags = {"账号绑定" },  notes = "获取账号绑定")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/{sysuserauth_id}")
-    public ResponseEntity<SysUserAuthDTO> get(@PathVariable("sysuserauth_id") String sysuserauth_id) {
-        SysUserAuth domain = sysuserauthService.get(sysuserauth_id);
-        SysUserAuthDTO dto = sysuserauthMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查账号绑定", tags = {"账号绑定" },  notes = "检查账号绑定")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysUserAuthDTO sysuserauthdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.checkKey(sysuserauthMapping.toDomain(sysuserauthdto)));
     }
 
     @ApiOperation(value = "获取账号绑定草稿", tags = {"账号绑定" },  notes = "获取账号绑定草稿")
@@ -113,12 +119,6 @@ public class SysUserAuthResource {
     public ResponseEntity<SysUserAuthDTO> getDraft(SysUserAuthDTO dto) {
         SysUserAuth domain = sysuserauthMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(sysuserauthMapping.toDto(sysuserauthService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查账号绑定", tags = {"账号绑定" },  notes = "检查账号绑定")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysUserAuthDTO sysuserauthdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysuserauthService.checkKey(sysuserauthMapping.toDomain(sysuserauthdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysUserAuth-Save-all')")

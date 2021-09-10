@@ -31,7 +31,7 @@ public interface SysOpenAccessMapper extends BaseMapper<SysOpenAccess> {
     @CacheEvict(value ="sysopenaccess", key = "'row:'+#p0.id")
     int updateById(@Param(Constants.ENTITY) SysOpenAccess entity);
     @Override
-    @CacheEvict(value ="sysopenaccess", key = "'row:'+#p0.id")
+    @CacheEvict(value ="sysopenaccess", key = "'row:'+#p0.id" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) SysOpenAccess entity, @Param("ew") Wrapper<SysOpenAccess> updateWrapper);
     @Override
     @CacheEvict(value ="sysopenaccess", key = "'row:'+#p0")

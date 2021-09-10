@@ -65,6 +65,30 @@ public class JobsRegistryResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Get-all')")
+    @ApiOperation(value = "获取任务注册信息", tags = {"任务注册信息" },  notes = "获取任务注册信息")
+	@RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/{jobsregistry_id}")
+    public ResponseEntity<JobsRegistryDTO> get(@PathVariable("jobsregistry_id") String jobsregistry_id) {
+        JobsRegistry domain = jobsregistryService.get(jobsregistry_id);
+        JobsRegistryDTO dto = jobsregistryMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Remove-all')")
+    @ApiOperation(value = "删除任务注册信息", tags = {"任务注册信息" },  notes = "删除任务注册信息")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/{jobsregistry_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("jobsregistry_id") String jobsregistry_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(jobsregistryService.remove(jobsregistry_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Remove-all')")
+    @ApiOperation(value = "批量删除任务注册信息", tags = {"任务注册信息" },  notes = "批量删除任务注册信息")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        jobsregistryService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Update-all')")
     @ApiOperation(value = "更新任务注册信息", tags = {"任务注册信息" },  notes = "更新任务注册信息")
 	@RequestMapping(method = RequestMethod.PUT, value = "/jobsregistries/{jobsregistry_id}")
@@ -84,28 +108,10 @@ public class JobsRegistryResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Remove-all')")
-    @ApiOperation(value = "删除任务注册信息", tags = {"任务注册信息" },  notes = "删除任务注册信息")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/{jobsregistry_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("jobsregistry_id") String jobsregistry_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(jobsregistryService.remove(jobsregistry_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Remove-all')")
-    @ApiOperation(value = "批量删除任务注册信息", tags = {"任务注册信息" },  notes = "批量删除任务注册信息")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        jobsregistryService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Get-all')")
-    @ApiOperation(value = "获取任务注册信息", tags = {"任务注册信息" },  notes = "获取任务注册信息")
-	@RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/{jobsregistry_id}")
-    public ResponseEntity<JobsRegistryDTO> get(@PathVariable("jobsregistry_id") String jobsregistry_id) {
-        JobsRegistry domain = jobsregistryService.get(jobsregistry_id);
-        JobsRegistryDTO dto = jobsregistryMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查任务注册信息", tags = {"任务注册信息" },  notes = "检查任务注册信息")
+	@RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody JobsRegistryDTO jobsregistrydto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(jobsregistryService.checkKey(jobsregistryMapping.toDomain(jobsregistrydto)));
     }
 
     @ApiOperation(value = "获取任务注册信息草稿", tags = {"任务注册信息" },  notes = "获取任务注册信息草稿")
@@ -113,12 +119,6 @@ public class JobsRegistryResource {
     public ResponseEntity<JobsRegistryDTO> getDraft(JobsRegistryDTO dto) {
         JobsRegistry domain = jobsregistryMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(jobsregistryMapping.toDto(jobsregistryService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查任务注册信息", tags = {"任务注册信息" },  notes = "检查任务注册信息")
-	@RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody JobsRegistryDTO jobsregistrydto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(jobsregistryService.checkKey(jobsregistryMapping.toDomain(jobsregistrydto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibztask-JobsRegistry-Save-all')")

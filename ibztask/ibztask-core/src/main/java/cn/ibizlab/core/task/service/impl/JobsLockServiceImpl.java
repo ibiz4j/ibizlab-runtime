@@ -184,8 +184,8 @@ public class JobsLockServiceImpl extends ServiceImpl<JobsLockMapper, JobsLock> i
      */
     @Override
     public Page<JobsLock> searchDefault(JobsLockSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<JobsLock> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<JobsLock>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<JobsLock> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<JobsLock>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

@@ -203,8 +203,8 @@ public class DictOptionServiceImpl extends ServiceImpl<DictOptionMapper, DictOpt
      */
     @Override
     public Page<DictOption> searchDefault(DictOptionSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<DictOption> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<DictOption>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<DictOption> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<DictOption>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

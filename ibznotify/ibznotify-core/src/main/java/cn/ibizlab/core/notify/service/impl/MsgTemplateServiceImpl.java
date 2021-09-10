@@ -203,8 +203,8 @@ public class MsgTemplateServiceImpl extends ServiceImpl<MsgTemplateMapper, MsgTe
      */
     @Override
     public Page<MsgTemplate> searchDefault(MsgTemplateSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgTemplate> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<MsgTemplate>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<MsgTemplate> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<MsgTemplate>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

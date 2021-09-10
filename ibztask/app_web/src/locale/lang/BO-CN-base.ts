@@ -33,6 +33,8 @@ function getAppLocale(){
                 nomore:"དེ་ལས་མང་བ་མི་འདུག",
                 other:"གཞན་དག",
                 valueNotEmpty:"སྟོང་མི་ཆོག",
+                createFailed:"གསར་འཛུགས་ཕམ་པ།",
+                isExist:"གནས་པ་",
             },
             local:{
                 new: "གསར་འཛུགས།",

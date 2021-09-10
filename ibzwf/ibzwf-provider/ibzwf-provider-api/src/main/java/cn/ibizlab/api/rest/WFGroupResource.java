@@ -65,6 +65,30 @@ public class WFGroupResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Get-all')")
+    @ApiOperation(value = "获取角色/用户组", tags = {"角色/用户组" },  notes = "获取角色/用户组")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}")
+    public ResponseEntity<WFGroupDTO> get(@PathVariable("wfgroup_id") String wfgroup_id) {
+        WFGroup domain = wfgroupService.get(wfgroup_id);
+        WFGroupDTO dto = wfgroupMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Remove-all')")
+    @ApiOperation(value = "删除角色/用户组", tags = {"角色/用户组" },  notes = "删除角色/用户组")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("wfgroup_id") String wfgroup_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.remove(wfgroup_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Remove-all')")
+    @ApiOperation(value = "批量删除角色/用户组", tags = {"角色/用户组" },  notes = "批量删除角色/用户组")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfgroupService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Update-all')")
     @ApiOperation(value = "更新角色/用户组", tags = {"角色/用户组" },  notes = "更新角色/用户组")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/{wfgroup_id}")
@@ -84,28 +108,10 @@ public class WFGroupResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Remove-all')")
-    @ApiOperation(value = "删除角色/用户组", tags = {"角色/用户组" },  notes = "删除角色/用户组")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{wfgroup_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("wfgroup_id") String wfgroup_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfgroupService.remove(wfgroup_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Remove-all')")
-    @ApiOperation(value = "批量删除角色/用户组", tags = {"角色/用户组" },  notes = "批量删除角色/用户组")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfgroupService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Get-all')")
-    @ApiOperation(value = "获取角色/用户组", tags = {"角色/用户组" },  notes = "获取角色/用户组")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{wfgroup_id}")
-    public ResponseEntity<WFGroupDTO> get(@PathVariable("wfgroup_id") String wfgroup_id) {
-        WFGroup domain = wfgroupService.get(wfgroup_id);
-        WFGroupDTO dto = wfgroupMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查角色/用户组", tags = {"角色/用户组" },  notes = "检查角色/用户组")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFGroupDTO wfgroupdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfgroupService.checkKey(wfgroupMapping.toDomain(wfgroupdto)));
     }
 
     @ApiOperation(value = "获取角色/用户组草稿", tags = {"角色/用户组" },  notes = "获取角色/用户组草稿")
@@ -113,12 +119,6 @@ public class WFGroupResource {
     public ResponseEntity<WFGroupDTO> getDraft(WFGroupDTO dto) {
         WFGroup domain = wfgroupMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(wfgroupMapping.toDto(wfgroupService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查角色/用户组", tags = {"角色/用户组" },  notes = "检查角色/用户组")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfgroups/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFGroupDTO wfgroupdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfgroupService.checkKey(wfgroupMapping.toDomain(wfgroupdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzwf-WFGroup-Save-all')")

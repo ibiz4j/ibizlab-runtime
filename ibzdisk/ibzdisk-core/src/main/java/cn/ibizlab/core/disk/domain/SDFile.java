@@ -132,7 +132,7 @@ public class SDFile extends EntityMP implements Serializable {
     /**
      * 创建人
      */
-    @DEField(preType = DEPredefinedFieldType.CREATEMAN)
+    @DEField(name = "createman", preType = DEPredefinedFieldType.CREATEMAN)
     @TableField(value = "createman", fill = FieldFill.INSERT)
     @JSONField(name = "createman")
     @JsonProperty("createman")

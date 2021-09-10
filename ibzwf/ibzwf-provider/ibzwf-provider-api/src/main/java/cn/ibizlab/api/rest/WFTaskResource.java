@@ -63,6 +63,27 @@ public class WFTaskResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @ApiOperation(value = "获取工作流任务", tags = {"工作流任务" },  notes = "获取工作流任务")
+	@RequestMapping(method = RequestMethod.GET, value = "/wftasks/{wftask_id}")
+    public ResponseEntity<WFTaskDTO> get(@PathVariable("wftask_id") String wftask_id) {
+        WFTask domain = wftaskService.get(wftask_id);
+        WFTaskDTO dto = wftaskMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "删除工作流任务", tags = {"工作流任务" },  notes = "删除工作流任务")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wftasks/{wftask_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("wftask_id") String wftask_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wftaskService.remove(wftask_id));
+    }
+
+    @ApiOperation(value = "批量删除工作流任务", tags = {"工作流任务" },  notes = "批量删除工作流任务")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wftasks/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wftaskService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @ApiOperation(value = "更新工作流任务", tags = {"工作流任务" },  notes = "更新工作流任务")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wftasks/{wftask_id}")
     public ResponseEntity<WFTaskDTO> update(@PathVariable("wftask_id") String wftask_id, @RequestBody WFTaskDTO wftaskdto) {
@@ -80,25 +101,10 @@ public class WFTaskResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "删除工作流任务", tags = {"工作流任务" },  notes = "删除工作流任务")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wftasks/{wftask_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("wftask_id") String wftask_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wftaskService.remove(wftask_id));
-    }
-
-    @ApiOperation(value = "批量删除工作流任务", tags = {"工作流任务" },  notes = "批量删除工作流任务")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wftasks/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wftaskService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取工作流任务", tags = {"工作流任务" },  notes = "获取工作流任务")
-	@RequestMapping(method = RequestMethod.GET, value = "/wftasks/{wftask_id}")
-    public ResponseEntity<WFTaskDTO> get(@PathVariable("wftask_id") String wftask_id) {
-        WFTask domain = wftaskService.get(wftask_id);
-        WFTaskDTO dto = wftaskMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查工作流任务", tags = {"工作流任务" },  notes = "检查工作流任务")
+	@RequestMapping(method = RequestMethod.POST, value = "/wftasks/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFTaskDTO wftaskdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wftaskService.checkKey(wftaskMapping.toDomain(wftaskdto)));
     }
 
     @ApiOperation(value = "获取工作流任务草稿", tags = {"工作流任务" },  notes = "获取工作流任务草稿")
@@ -106,12 +112,6 @@ public class WFTaskResource {
     public ResponseEntity<WFTaskDTO> getDraft(WFTaskDTO dto) {
         WFTask domain = wftaskMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(wftaskMapping.toDto(wftaskService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查工作流任务", tags = {"工作流任务" },  notes = "检查工作流任务")
-	@RequestMapping(method = RequestMethod.POST, value = "/wftasks/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFTaskDTO wftaskdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wftaskService.checkKey(wftaskMapping.toDomain(wftaskdto)));
     }
 
     @ApiOperation(value = "保存工作流任务", tags = {"工作流任务" },  notes = "保存工作流任务")
@@ -127,6 +127,23 @@ public class WFTaskResource {
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<WFTaskDTO> wftaskdtos) {
         wftaskService.saveBatch(wftaskMapping.toDomain(wftaskdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
+    @ApiOperation(value = "用户自定义", tags = {"工作流任务" },  notes = "用户自定义")
+	@RequestMapping(method = RequestMethod.POST, value = "/wftasks/{wftask_id}/usercustom")
+    public ResponseEntity<WFTaskDTO> userCustom(@PathVariable("wftask_id") String wftask_id, @RequestBody WFTaskDTO wftaskdto) {
+        WFTask domain = wftaskMapping.toDomain(wftaskdto);
+        domain.setId(wftask_id);
+        domain = wftaskService.userCustom(domain);
+        wftaskdto = wftaskMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(wftaskdto);
+    }
+    @ApiOperation(value = "批量处理[用户自定义]", tags = {"工作流任务" },  notes = "批量处理[用户自定义]")
+	@RequestMapping(method = RequestMethod.POST, value = "/wftasks/usercustombatch")
+    public ResponseEntity<Boolean> userCustomBatch(@RequestBody List<WFTaskDTO> wftaskdtos) {
+        List<WFTask> domains = wftaskMapping.toDomain(wftaskdtos);
+        boolean result = wftaskService.userCustomBatch(domains);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 	@ApiOperation(value = "获取DEFAULT", tags = {"工作流任务" } ,notes = "获取DEFAULT")
@@ -145,6 +162,86 @@ public class WFTaskResource {
     @RequestMapping(method= RequestMethod.POST , value="/wftasks/searchdefault")
 	public ResponseEntity<Page<WFTaskDTO>> searchDefault(@RequestBody WFTaskSearchContext context) {
         Page<WFTask> domains = wftaskService.searchDefault(context) ;
+	    return ResponseEntity.status(HttpStatus.OK)
+                .body(new PageImpl(wftaskMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
+	}
+
+	@ApiOperation(value = "获取已办任务", tags = {"工作流任务" } ,notes = "获取已办任务")
+    @RequestMapping(method= RequestMethod.GET , value="/wftasks/fetchdonetask")
+	public ResponseEntity<List<WFTaskDTO>> fetchDoneTask(WFTaskSearchContext context) {
+        Page<WFTask> domains = wftaskService.searchDoneTask(context) ;
+        List<WFTaskDTO> list = wftaskMapping.toDto(domains.getContent());
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+                .header("x-total", String.valueOf(domains.getTotalElements()))
+                .body(list);
+	}
+
+	@ApiOperation(value = "查询已办任务", tags = {"工作流任务" } ,notes = "查询已办任务")
+    @RequestMapping(method= RequestMethod.POST , value="/wftasks/searchdonetask")
+	public ResponseEntity<Page<WFTaskDTO>> searchDoneTask(@RequestBody WFTaskSearchContext context) {
+        Page<WFTask> domains = wftaskService.searchDoneTask(context) ;
+	    return ResponseEntity.status(HttpStatus.OK)
+                .body(new PageImpl(wftaskMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
+	}
+
+	@ApiOperation(value = "获取办结任务", tags = {"工作流任务" } ,notes = "获取办结任务")
+    @RequestMapping(method= RequestMethod.GET , value="/wftasks/fetchfinishtask")
+	public ResponseEntity<List<WFTaskDTO>> fetchFinishTask(WFTaskSearchContext context) {
+        Page<WFTask> domains = wftaskService.searchFinishTask(context) ;
+        List<WFTaskDTO> list = wftaskMapping.toDto(domains.getContent());
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+                .header("x-total", String.valueOf(domains.getTotalElements()))
+                .body(list);
+	}
+
+	@ApiOperation(value = "查询办结任务", tags = {"工作流任务" } ,notes = "查询办结任务")
+    @RequestMapping(method= RequestMethod.POST , value="/wftasks/searchfinishtask")
+	public ResponseEntity<Page<WFTaskDTO>> searchFinishTask(@RequestBody WFTaskSearchContext context) {
+        Page<WFTask> domains = wftaskService.searchFinishTask(context) ;
+	    return ResponseEntity.status(HttpStatus.OK)
+                .body(new PageImpl(wftaskMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
+	}
+
+	@ApiOperation(value = "获取待办任务", tags = {"工作流任务" } ,notes = "获取待办任务")
+    @RequestMapping(method= RequestMethod.GET , value="/wftasks/fetchtodotask")
+	public ResponseEntity<List<WFTaskDTO>> fetchTodoTask(WFTaskSearchContext context) {
+        Page<WFTask> domains = wftaskService.searchTodoTask(context) ;
+        List<WFTaskDTO> list = wftaskMapping.toDto(domains.getContent());
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+                .header("x-total", String.valueOf(domains.getTotalElements()))
+                .body(list);
+	}
+
+	@ApiOperation(value = "查询待办任务", tags = {"工作流任务" } ,notes = "查询待办任务")
+    @RequestMapping(method= RequestMethod.POST , value="/wftasks/searchtodotask")
+	public ResponseEntity<Page<WFTaskDTO>> searchTodoTask(@RequestBody WFTaskSearchContext context) {
+        Page<WFTask> domains = wftaskService.searchTodoTask(context) ;
+	    return ResponseEntity.status(HttpStatus.OK)
+                .body(new PageImpl(wftaskMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
+	}
+
+	@ApiOperation(value = "获取待阅任务", tags = {"工作流任务" } ,notes = "获取待阅任务")
+    @RequestMapping(method= RequestMethod.GET , value="/wftasks/fetchtoreadtask")
+	public ResponseEntity<List<WFTaskDTO>> fetchToreadTask(WFTaskSearchContext context) {
+        Page<WFTask> domains = wftaskService.searchToreadTask(context) ;
+        List<WFTaskDTO> list = wftaskMapping.toDto(domains.getContent());
+        return ResponseEntity.status(HttpStatus.OK)
+                .header("x-page", String.valueOf(context.getPageable().getPageNumber()))
+                .header("x-per-page", String.valueOf(context.getPageable().getPageSize()))
+                .header("x-total", String.valueOf(domains.getTotalElements()))
+                .body(list);
+	}
+
+	@ApiOperation(value = "查询待阅任务", tags = {"工作流任务" } ,notes = "查询待阅任务")
+    @RequestMapping(method= RequestMethod.POST , value="/wftasks/searchtoreadtask")
+	public ResponseEntity<Page<WFTaskDTO>> searchToreadTask(@RequestBody WFTaskSearchContext context) {
+        Page<WFTask> domains = wftaskService.searchToreadTask(context) ;
 	    return ResponseEntity.status(HttpStatus.OK)
                 .body(new PageImpl(wftaskMapping.toDto(domains.getContent()), context.getPageable(), domains.getTotalElements()));
 	}

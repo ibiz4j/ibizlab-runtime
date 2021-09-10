@@ -843,7 +843,7 @@ export default class SYS_USERMPickupViewBase extends Vue {
             }
             if(model.datas.length>0){
                 model.datas.forEach((data:any,index:any)=>{
-                    Object.assign(data,{srfmajortext: data['personname']});
+                    Object.assign(data,{srfmajortext: data.hasOwnProperty('srfmajortext') ? data['srfmajortext'] : data['personname']});
                 })
             }
             model.datas.forEach((item: any) => {

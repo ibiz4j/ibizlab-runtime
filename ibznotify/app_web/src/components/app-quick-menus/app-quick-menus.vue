@@ -8,7 +8,7 @@
             <img :src="item.iconcls" v-else-if="!Object.is(item.iconcls, '')" />
             <i class="fa fa-cogs" v-else></i>
           </span>
-          <span>{{$t(`app.menus.${ctrlName}.${item.name}`)}}</span>
+          <span>{{$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)}}</span>
           <span class="line"></span>
         </p>
         <p style=" display: 'flex' ">
@@ -37,7 +37,7 @@
             <img :src="item.iconcls" v-else-if="!Object.is(item.iconcls, '')" />
             <i class="fa fa-cogs" v-else></i>
           </span>
-          <h4>{{$t(`app.menus.${ctrlName}.${item.name}`)}}</h4>
+          <h4>{{$t(`app.menus.${ctrlName}.${item.name.toLowerCase()}`)}}</h4>
         </div>
       </card>
     </template>

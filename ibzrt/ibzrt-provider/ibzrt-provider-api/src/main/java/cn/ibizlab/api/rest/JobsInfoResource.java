@@ -65,23 +65,13 @@ public class JobsInfoResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Update-all')")
-    @ApiOperation(value = "更新任务信息", tags = {"任务信息" },  notes = "更新任务信息")
-	@RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/{jobsinfo_id}")
-    public ResponseEntity<JobsInfoDTO> update(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
-		JobsInfo domain  = jobsinfoMapping.toDomain(jobsinfodto);
-        domain .setId(jobsinfo_id);
-		jobsinfoService.update(domain );
-		JobsInfoDTO dto = jobsinfoMapping.toDto(domain);
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Get-all')")
+    @ApiOperation(value = "获取任务信息", tags = {"任务信息" },  notes = "获取任务信息")
+	@RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/{jobsinfo_id}")
+    public ResponseEntity<JobsInfoDTO> get(@PathVariable("jobsinfo_id") String jobsinfo_id) {
+        JobsInfo domain = jobsinfoService.get(jobsinfo_id);
+        JobsInfoDTO dto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Update-all')")
-    @ApiOperation(value = "批量更新任务信息", tags = {"任务信息" },  notes = "批量更新任务信息")
-	@RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/batch")
-    public ResponseEntity<Boolean> updateBatch(@RequestBody List<JobsInfoDTO> jobsinfodtos) {
-        jobsinfoService.updateBatch(jobsinfoMapping.toDomain(jobsinfodtos));
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Remove-all')")
@@ -99,20 +89,23 @@ public class JobsInfoResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Get-all')")
-    @ApiOperation(value = "获取任务信息", tags = {"任务信息" },  notes = "获取任务信息")
-	@RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/{jobsinfo_id}")
-    public ResponseEntity<JobsInfoDTO> get(@PathVariable("jobsinfo_id") String jobsinfo_id) {
-        JobsInfo domain = jobsinfoService.get(jobsinfo_id);
-        JobsInfoDTO dto = jobsinfoMapping.toDto(domain);
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Update-all')")
+    @ApiOperation(value = "更新任务信息", tags = {"任务信息" },  notes = "更新任务信息")
+	@RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/{jobsinfo_id}")
+    public ResponseEntity<JobsInfoDTO> update(@PathVariable("jobsinfo_id") String jobsinfo_id, @RequestBody JobsInfoDTO jobsinfodto) {
+		JobsInfo domain  = jobsinfoMapping.toDomain(jobsinfodto);
+        domain .setId(jobsinfo_id);
+		jobsinfoService.update(domain );
+		JobsInfoDTO dto = jobsinfoMapping.toDto(domain);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @ApiOperation(value = "获取任务信息草稿", tags = {"任务信息" },  notes = "获取任务信息草稿")
-	@RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/getdraft")
-    public ResponseEntity<JobsInfoDTO> getDraft(JobsInfoDTO dto) {
-        JobsInfo domain = jobsinfoMapping.toDomain(dto);
-        return ResponseEntity.status(HttpStatus.OK).body(jobsinfoMapping.toDto(jobsinfoService.getDraft(domain)));
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Update-all')")
+    @ApiOperation(value = "批量更新任务信息", tags = {"任务信息" },  notes = "批量更新任务信息")
+	@RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/batch")
+    public ResponseEntity<Boolean> updateBatch(@RequestBody List<JobsInfoDTO> jobsinfodtos) {
+        jobsinfoService.updateBatch(jobsinfoMapping.toDomain(jobsinfodtos));
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
     @ApiOperation(value = "检查任务信息", tags = {"任务信息" },  notes = "检查任务信息")
@@ -138,6 +131,13 @@ public class JobsInfoResource {
         List<JobsInfo> domains = jobsinfoMapping.toDomain(jobsinfodtos);
         boolean result = jobsinfoService.executeBatch(domains);
         return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @ApiOperation(value = "获取任务信息草稿", tags = {"任务信息" },  notes = "获取任务信息草稿")
+	@RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/getdraft")
+    public ResponseEntity<JobsInfoDTO> getDraft(JobsInfoDTO dto) {
+        JobsInfo domain = jobsinfoMapping.toDomain(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(jobsinfoMapping.toDto(jobsinfoService.getDraft(domain)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-JobsInfo-Save-all')")

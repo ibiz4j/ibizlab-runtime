@@ -64,4 +64,14 @@ public class IBZConfigService extends ServiceImpl<IBZConfigMapper, IBZConfig> im
         this.remove(Wrappers.query(IBZConfig.builder().systemId(systemId).cfgType(cfgType).targetType(targetType).userId(userId).build()));
     }
 
+    @Cacheable(value="ibzrt_shareconfigs",key = "'cfgid:'+#p0")
+    public JSONObject saveShareConfig(String id, String cfgType,String targetType,String userId){
+        return this.getConfig(cfgType, targetType, userId);
+    }
+
+    @Cacheable(value="ibzrt_shareconfigs",key = "'cfgid:'+#p0")
+    public JSONObject getShareConfig(String id){
+        return null;
+    }
+
 }

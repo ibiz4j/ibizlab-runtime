@@ -184,8 +184,8 @@ public class WFProcessDefinitionServiceImpl extends ServiceImpl<WFProcessDefinit
      */
     @Override
     public Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFProcessDefinition> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<WFProcessDefinition>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFProcessDefinition> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<WFProcessDefinition>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

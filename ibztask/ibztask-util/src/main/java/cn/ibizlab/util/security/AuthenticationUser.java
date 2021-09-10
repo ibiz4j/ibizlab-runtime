@@ -260,7 +260,6 @@ public class AuthenticationUser implements UserDetails
 		{
 			sessionParams = getUserSessionParam();
 			sessionParams.put("srfsystemid",this.getSrfsystemid());
-			sessionParams.put("srfdynainstid",this.getSrfdynainstid());
 			sessionParams.put("srfpersonid", this.getUserid());
 			sessionParams.put("srfpersonname", this.getPersonname());
 			sessionParams.put("srforgsectorid", this.getMdeptid());

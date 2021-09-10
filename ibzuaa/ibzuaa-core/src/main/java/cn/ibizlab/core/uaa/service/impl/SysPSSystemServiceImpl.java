@@ -216,8 +216,8 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
      */
     @Override
     public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPSSystem> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysPSSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPSSystem> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysPSSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
     /**
@@ -225,8 +225,8 @@ public class SysPSSystemServiceImpl extends ServiceImpl<SysPSSystemMapper, SysPS
      */
     @Override
     public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPSSystem> pages=baseMapper.searchPick(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysPSSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysPSSystem> pages=baseMapper.searchPick(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysPSSystem>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

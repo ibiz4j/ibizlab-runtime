@@ -65,6 +65,30 @@ public class MetaDynamicModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-MetaDynamicModel-Get-all')")
+    @ApiOperation(value = "获取动态模型", tags = {"动态模型" },  notes = "获取动态模型")
+	@RequestMapping(method = RequestMethod.GET, value = "/metadynamicmodels/{metadynamicmodel_id}")
+    public ResponseEntity<MetaDynamicModelDTO> get(@PathVariable("metadynamicmodel_id") String metadynamicmodel_id) {
+        MetaDynamicModel domain = metadynamicmodelService.get(metadynamicmodel_id);
+        MetaDynamicModelDTO dto = metadynamicmodelMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-MetaDynamicModel-Remove-all')")
+    @ApiOperation(value = "删除动态模型", tags = {"动态模型" },  notes = "删除动态模型")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/metadynamicmodels/{metadynamicmodel_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("metadynamicmodel_id") String metadynamicmodel_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(metadynamicmodelService.remove(metadynamicmodel_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-MetaDynamicModel-Remove-all')")
+    @ApiOperation(value = "批量删除动态模型", tags = {"动态模型" },  notes = "批量删除动态模型")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/metadynamicmodels/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        metadynamicmodelService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-MetaDynamicModel-Update-all')")
     @ApiOperation(value = "更新动态模型", tags = {"动态模型" },  notes = "更新动态模型")
 	@RequestMapping(method = RequestMethod.PUT, value = "/metadynamicmodels/{metadynamicmodel_id}")
@@ -84,28 +108,10 @@ public class MetaDynamicModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-MetaDynamicModel-Remove-all')")
-    @ApiOperation(value = "删除动态模型", tags = {"动态模型" },  notes = "删除动态模型")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/metadynamicmodels/{metadynamicmodel_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("metadynamicmodel_id") String metadynamicmodel_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(metadynamicmodelService.remove(metadynamicmodel_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-MetaDynamicModel-Remove-all')")
-    @ApiOperation(value = "批量删除动态模型", tags = {"动态模型" },  notes = "批量删除动态模型")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/metadynamicmodels/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        metadynamicmodelService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-MetaDynamicModel-Get-all')")
-    @ApiOperation(value = "获取动态模型", tags = {"动态模型" },  notes = "获取动态模型")
-	@RequestMapping(method = RequestMethod.GET, value = "/metadynamicmodels/{metadynamicmodel_id}")
-    public ResponseEntity<MetaDynamicModelDTO> get(@PathVariable("metadynamicmodel_id") String metadynamicmodel_id) {
-        MetaDynamicModel domain = metadynamicmodelService.get(metadynamicmodel_id);
-        MetaDynamicModelDTO dto = metadynamicmodelMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查动态模型", tags = {"动态模型" },  notes = "检查动态模型")
+	@RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody MetaDynamicModelDTO metadynamicmodeldto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(metadynamicmodelService.checkKey(metadynamicmodelMapping.toDomain(metadynamicmodeldto)));
     }
 
     @ApiOperation(value = "获取动态模型草稿", tags = {"动态模型" },  notes = "获取动态模型草稿")
@@ -113,12 +119,6 @@ public class MetaDynamicModelResource {
     public ResponseEntity<MetaDynamicModelDTO> getDraft(MetaDynamicModelDTO dto) {
         MetaDynamicModel domain = metadynamicmodelMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(metadynamicmodelMapping.toDto(metadynamicmodelService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查动态模型", tags = {"动态模型" },  notes = "检查动态模型")
-	@RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody MetaDynamicModelDTO metadynamicmodeldto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(metadynamicmodelService.checkKey(metadynamicmodelMapping.toDomain(metadynamicmodeldto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzdisk-MetaDynamicModel-Init-all')")

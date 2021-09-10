@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
+import cn.ibizlab.util.cache.cache.CusCaffeineCache;
 import cn.ibizlab.util.cache.cache.CusRedisCache;
 import cn.ibizlab.util.cache.cache.LayeringCache;
 
@@ -80,7 +81,7 @@ public class LayeringCacheManager implements CacheManager {
      * @return
      */
     protected Cache createCache(String cacheName) {
-        return new LayeringCache(cacheName,new CaffeineCache(cacheName, this.cacheBuilder.build(), true),new CusRedisCache(cacheName, redisCacheWriter, redisConfiguration),redisTemplate);
+        return new LayeringCache(cacheName,new CusCaffeineCache(cacheName, this.cacheBuilder.build(), true),new CusRedisCache(cacheName, redisCacheWriter, redisConfiguration),redisTemplate);
     }
 
     /**

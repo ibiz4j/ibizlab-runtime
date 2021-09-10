@@ -31,7 +31,7 @@ public interface SysDepartmentMapper extends BaseMapper<SysDepartment> {
     @CacheEvict(value ="sysdepartment", key = "'row:'+#p0.deptid")
     int updateById(@Param(Constants.ENTITY) SysDepartment entity);
     @Override
-    @CacheEvict(value ="sysdepartment", key = "'row:'+#p0.deptid")
+    @CacheEvict(value ="sysdepartment", key = "'row:'+#p0.deptid" ,condition ="#p0 != null")
     int update(@Param(Constants.ENTITY) SysDepartment entity, @Param("ew") Wrapper<SysDepartment> updateWrapper);
     @Override
     @CacheEvict(value ="sysdepartment", key = "'row:'+#p0")

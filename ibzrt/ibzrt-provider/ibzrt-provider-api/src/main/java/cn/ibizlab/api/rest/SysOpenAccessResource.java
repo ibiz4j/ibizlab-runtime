@@ -65,6 +65,30 @@ public class SysOpenAccessResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysOpenAccess-Get-all')")
+    @ApiOperation(value = "获取第三方认证平台", tags = {"第三方认证平台" },  notes = "获取第三方认证平台")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/{sysopenaccess_id}")
+    public ResponseEntity<SysOpenAccessDTO> get(@PathVariable("sysopenaccess_id") String sysopenaccess_id) {
+        SysOpenAccess domain = sysopenaccessService.get(sysopenaccess_id);
+        SysOpenAccessDTO dto = sysopenaccessMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysOpenAccess-Remove-all')")
+    @ApiOperation(value = "删除第三方认证平台", tags = {"第三方认证平台" },  notes = "删除第三方认证平台")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysopenaccesses/{sysopenaccess_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("sysopenaccess_id") String sysopenaccess_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sysopenaccessService.remove(sysopenaccess_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysOpenAccess-Remove-all')")
+    @ApiOperation(value = "批量删除第三方认证平台", tags = {"第三方认证平台" },  notes = "批量删除第三方认证平台")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysopenaccesses/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sysopenaccessService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysOpenAccess-Update-all')")
     @ApiOperation(value = "更新第三方认证平台", tags = {"第三方认证平台" },  notes = "更新第三方认证平台")
 	@RequestMapping(method = RequestMethod.PUT, value = "/sysopenaccesses/{sysopenaccess_id}")
@@ -84,28 +108,10 @@ public class SysOpenAccessResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysOpenAccess-Remove-all')")
-    @ApiOperation(value = "删除第三方认证平台", tags = {"第三方认证平台" },  notes = "删除第三方认证平台")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysopenaccesses/{sysopenaccess_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("sysopenaccess_id") String sysopenaccess_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sysopenaccessService.remove(sysopenaccess_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysOpenAccess-Remove-all')")
-    @ApiOperation(value = "批量删除第三方认证平台", tags = {"第三方认证平台" },  notes = "批量删除第三方认证平台")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysopenaccesses/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sysopenaccessService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysOpenAccess-Get-all')")
-    @ApiOperation(value = "获取第三方认证平台", tags = {"第三方认证平台" },  notes = "获取第三方认证平台")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/{sysopenaccess_id}")
-    public ResponseEntity<SysOpenAccessDTO> get(@PathVariable("sysopenaccess_id") String sysopenaccess_id) {
-        SysOpenAccess domain = sysopenaccessService.get(sysopenaccess_id);
-        SysOpenAccessDTO dto = sysopenaccessMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查第三方认证平台", tags = {"第三方认证平台" },  notes = "检查第三方认证平台")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysOpenAccessDTO sysopenaccessdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysopenaccessService.checkKey(sysopenaccessMapping.toDomain(sysopenaccessdto)));
     }
 
     @ApiOperation(value = "获取第三方认证平台草稿", tags = {"第三方认证平台" },  notes = "获取第三方认证平台草稿")
@@ -113,12 +119,6 @@ public class SysOpenAccessResource {
     public ResponseEntity<SysOpenAccessDTO> getDraft(SysOpenAccessDTO dto) {
         SysOpenAccess domain = sysopenaccessMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(sysopenaccessMapping.toDto(sysopenaccessService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查第三方认证平台", tags = {"第三方认证平台" },  notes = "检查第三方认证平台")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysOpenAccessDTO sysopenaccessdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysopenaccessService.checkKey(sysopenaccessMapping.toDomain(sysopenaccessdto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzrt-SysOpenAccess-Save-all')")

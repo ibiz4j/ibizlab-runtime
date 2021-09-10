@@ -74,7 +74,7 @@ public class SysDepartment extends EntityMP implements Serializable {
     /**
      * 单位
      */
-    @DEField(preType = DEPredefinedFieldType.ORGID)
+    @DEField(name = "orgid", preType = DEPredefinedFieldType.ORGID)
     @TableField(value = "orgid")
     @JSONField(name = "orgid")
     @JsonProperty("orgid")

@@ -203,8 +203,8 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
      */
     @Override
     public Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysUserAuth> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysUserAuth>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysUserAuth> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysUserAuth>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

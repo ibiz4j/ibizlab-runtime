@@ -55,5 +55,17 @@ public enum DEPredefinedFieldType {
     /**
      * 不处理
      */
-    NONE
+    NONE,
+    /**
+     * 动态父类型
+     */
+    PARENTTYPE,
+    /**
+     * 动态父标识
+     */
+    PARENTID,
+    /**
+     * 动态父名称
+     */
+    PARENTNAME
 }

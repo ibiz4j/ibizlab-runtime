@@ -63,6 +63,27 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @ApiOperation(value = "获取流程模型", tags = {"流程模型" },  notes = "获取流程模型")
+	@RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{wfremodel_id}")
+    public ResponseEntity<WFREModelDTO> get(@PathVariable("wfremodel_id") String wfremodel_id) {
+        WFREModel domain = wfremodelService.get(wfremodel_id);
+        WFREModelDTO dto = wfremodelMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @ApiOperation(value = "删除流程模型", tags = {"流程模型" },  notes = "删除流程模型")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/{wfremodel_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("wfremodel_id") String wfremodel_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(wfremodelService.remove(wfremodel_id));
+    }
+
+    @ApiOperation(value = "批量删除流程模型", tags = {"流程模型" },  notes = "批量删除流程模型")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        wfremodelService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @ApiOperation(value = "更新流程模型", tags = {"流程模型" },  notes = "更新流程模型")
 	@RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/{wfremodel_id}")
     public ResponseEntity<WFREModelDTO> update(@PathVariable("wfremodel_id") String wfremodel_id, @RequestBody WFREModelDTO wfremodeldto) {
@@ -80,25 +101,10 @@ public class WFREModelResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @ApiOperation(value = "删除流程模型", tags = {"流程模型" },  notes = "删除流程模型")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/{wfremodel_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("wfremodel_id") String wfremodel_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(wfremodelService.remove(wfremodel_id));
-    }
-
-    @ApiOperation(value = "批量删除流程模型", tags = {"流程模型" },  notes = "批量删除流程模型")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        wfremodelService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @ApiOperation(value = "获取流程模型", tags = {"流程模型" },  notes = "获取流程模型")
-	@RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{wfremodel_id}")
-    public ResponseEntity<WFREModelDTO> get(@PathVariable("wfremodel_id") String wfremodel_id) {
-        WFREModel domain = wfremodelService.get(wfremodel_id);
-        WFREModelDTO dto = wfremodelMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查流程模型", tags = {"流程模型" },  notes = "检查流程模型")
+	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody WFREModelDTO wfremodeldto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(wfremodelService.checkKey(wfremodelMapping.toDomain(wfremodeldto)));
     }
 
     @ApiOperation(value = "获取流程模型草稿", tags = {"流程模型" },  notes = "获取流程模型草稿")
@@ -106,12 +112,6 @@ public class WFREModelResource {
     public ResponseEntity<WFREModelDTO> getDraft(WFREModelDTO dto) {
         WFREModel domain = wfremodelMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(wfremodelMapping.toDto(wfremodelService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查流程模型", tags = {"流程模型" },  notes = "检查流程模型")
-	@RequestMapping(method = RequestMethod.POST, value = "/wfremodels/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody WFREModelDTO wfremodeldto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(wfremodelService.checkKey(wfremodelMapping.toDomain(wfremodeldto)));
     }
 
     @ApiOperation(value = "保存流程模型", tags = {"流程模型" },  notes = "保存流程模型")

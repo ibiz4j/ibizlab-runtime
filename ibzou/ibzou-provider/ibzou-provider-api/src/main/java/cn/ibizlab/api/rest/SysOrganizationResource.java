@@ -65,6 +65,30 @@ public class SysOrganizationResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PostAuthorize("hasPermission(this.sysorganizationMapping.toDomain(returnObject.body),'ibzou-SysOrganization-Get')")
+    @ApiOperation(value = "获取单位机构", tags = {"单位机构" },  notes = "获取单位机构")
+	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}")
+    public ResponseEntity<SysOrganizationDTO> get(@PathVariable("sysorganization_id") String sysorganization_id) {
+        SysOrganization domain = sysorganizationService.get(sysorganization_id);
+        SysOrganizationDTO dto = sysorganizationMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasPermission(this.sysorganizationService.get(#sysorganization_id),'ibzou-SysOrganization-Remove')")
+    @ApiOperation(value = "删除单位机构", tags = {"单位机构" },  notes = "删除单位机构")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("sysorganization_id") String sysorganization_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(sysorganizationService.remove(sysorganization_id));
+    }
+
+    @PreAuthorize("hasPermission(this.sysorganizationService.getSysorganizationByIds(#ids),'ibzou-SysOrganization-Remove')")
+    @ApiOperation(value = "批量删除单位机构", tags = {"单位机构" },  notes = "批量删除单位机构")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        sysorganizationService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @VersionCheck(entity = "sysorganization" , versionfield = "updatedate")
     @PreAuthorize("hasPermission(this.sysorganizationService.get(#sysorganization_id),'ibzou-SysOrganization-Update')")
     @ApiOperation(value = "更新单位机构", tags = {"单位机构" },  notes = "更新单位机构")
@@ -85,28 +109,10 @@ public class SysOrganizationResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasPermission(this.sysorganizationService.get(#sysorganization_id),'ibzou-SysOrganization-Remove')")
-    @ApiOperation(value = "删除单位机构", tags = {"单位机构" },  notes = "删除单位机构")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/{sysorganization_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("sysorganization_id") String sysorganization_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(sysorganizationService.remove(sysorganization_id));
-    }
-
-    @PreAuthorize("hasPermission(this.sysorganizationService.getSysorganizationByIds(#ids),'ibzou-SysOrganization-Remove')")
-    @ApiOperation(value = "批量删除单位机构", tags = {"单位机构" },  notes = "批量删除单位机构")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/sysorganizations/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        sysorganizationService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PostAuthorize("hasPermission(this.sysorganizationMapping.toDomain(returnObject.body),'ibzou-SysOrganization-Get')")
-    @ApiOperation(value = "获取单位机构", tags = {"单位机构" },  notes = "获取单位机构")
-	@RequestMapping(method = RequestMethod.GET, value = "/sysorganizations/{sysorganization_id}")
-    public ResponseEntity<SysOrganizationDTO> get(@PathVariable("sysorganization_id") String sysorganization_id) {
-        SysOrganization domain = sysorganizationService.get(sysorganization_id);
-        SysOrganizationDTO dto = sysorganizationMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查单位机构", tags = {"单位机构" },  notes = "检查单位机构")
+	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody SysOrganizationDTO sysorganizationdto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(sysorganizationService.checkKey(sysorganizationMapping.toDomain(sysorganizationdto)));
     }
 
     @ApiOperation(value = "获取单位机构草稿", tags = {"单位机构" },  notes = "获取单位机构草稿")
@@ -114,12 +120,6 @@ public class SysOrganizationResource {
     public ResponseEntity<SysOrganizationDTO> getDraft(SysOrganizationDTO dto) {
         SysOrganization domain = sysorganizationMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(sysorganizationMapping.toDto(sysorganizationService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查单位机构", tags = {"单位机构" },  notes = "检查单位机构")
-	@RequestMapping(method = RequestMethod.POST, value = "/sysorganizations/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody SysOrganizationDTO sysorganizationdto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(sysorganizationService.checkKey(sysorganizationMapping.toDomain(sysorganizationdto)));
     }
 
     @ApiOperation(value = "保存单位机构", tags = {"单位机构" },  notes = "保存单位机构")

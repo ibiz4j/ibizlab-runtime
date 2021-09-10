@@ -7,34 +7,6 @@ logging:
 #zuul网关路由设置
 zuul:
   routes:
-    wf_task:
-      path: /wftasks/**
-      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
-    wf_group_member:
-      path: /wfmembers/**
-      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
-    wf_user:
-      path: /wfusers/**
-      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
-    wf_group:
-      path: /wfgroups/**
-      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
-    wf_model:
-      path: /wfremodels/**
-      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
-    wf_pssystem:
-      path: /wfsystems/**
-      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
-    wf_definition:
-      path: /wfprocessdefinitions/**
-      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
-      stripPrefix: false
     loginv7:
       path: /v7/login
       serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
@@ -90,6 +62,34 @@ zuul:
     sysauthlog:
       path: /sysauthlogs
       serviceId: ${ibiz.ref.service.uaa:ibzuaa-api}
+      stripPrefix: false
+    wf_task:
+      path: /wftasks/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_group_member:
+      path: /wfmembers/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_user:
+      path: /wfusers/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_group:
+      path: /wfgroups/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_model:
+      path: /wfremodels/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_pssystem:
+      path: /wfsystems/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_definition:
+      path: /wfprocessdefinitions/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
   sensitive-headers:
     - Cookie,Set-Cookie,Authorization

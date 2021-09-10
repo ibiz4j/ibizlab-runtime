@@ -67,6 +67,11 @@ public class SearchContextBase implements ISearchContext{
      * 工作流流程标识
      */
     public String processDefinitionKey;
+    /**
+     * 工作流标识
+     */
+    @JsonProperty("srfwf")
+    public String srfWF;
 
     /**
      * 获取工作流步骤标识

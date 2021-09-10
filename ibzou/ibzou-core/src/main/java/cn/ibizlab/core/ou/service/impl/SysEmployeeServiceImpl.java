@@ -269,8 +269,8 @@ public class SysEmployeeServiceImpl extends ServiceImpl<SysEmployeeMapper, SysEm
      */
     @Override
     public Page<SysEmployee> searchDefault(SysEmployeeSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysEmployee> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<SysEmployee>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<SysEmployee> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<SysEmployee>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 
