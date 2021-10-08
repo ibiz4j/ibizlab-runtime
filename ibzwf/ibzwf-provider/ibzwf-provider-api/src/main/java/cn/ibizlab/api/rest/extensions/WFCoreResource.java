@@ -118,7 +118,7 @@ public class WFCoreResource
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/process-definitions")
 	public ResponseEntity<List<WFProcessDefinition>> getworkflow(@PathVariable("system") String system,@PathVariable("appname") String appname,
 																 @PathVariable("entity") String entity) {
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getWorkflow(system,appname,entity));
 	}
 
 	@ApiOperation(value = "getStepByEntity", tags = {"WFProcessNode" },  notes = "根据系统实体查找当前适配的工作流模型步骤")
@@ -246,6 +246,13 @@ public class WFCoreResource
 		if(StringUtils.isEmpty(taskDefinitionKey)||"null".equals(taskDefinitionKey)||"alls".equals(taskDefinitionKey))
 			taskDefinitionKey="";
 		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.getBusinessKeys(system,"",entity,processDefinitionKey,taskDefinitionKey,userId));
+	}
+
+	@ApiOperation(value = "getBusinessKeys", tags = {"String" } ,notes = "查询我的待办主键清单（含流程参数）")
+	@RequestMapping(method= RequestMethod.GET , value="/{system}-app-{appname}/{entity}/mytasks")
+	public ResponseEntity<Map<String,Map<String,Object>>> getbusinesskeys(@PathVariable("system") String system,@PathVariable("entity") String entity,WFTaskSearchContext context) {
+		context.setN_definitionkey_leftlike(String.format("%s-%s",system,entity));
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.searchMyTask2(context));
 	}
 
 	@ApiOperation(value = "获取我的系统待办", tags = {"工作流任务" } ,notes = "获取我的系统待办")

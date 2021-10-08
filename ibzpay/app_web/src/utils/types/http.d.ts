@@ -17,7 +17,7 @@ export declare interface Http {
      * @returns {Promise<any>}
      * @memberof Http
      */
-    post(url: string, params: any, isloading?: boolean, serialnumber?: number): Promise<any>;
+    post(url: string, params?: any, isloading?: boolean, serialnumber?: number): Promise<any>;
     /**
      * 获取
      *
@@ -27,7 +27,7 @@ export declare interface Http {
      * @returns {Promise<any>}
      * @memberof Http
      */
-    get(url: string, isloading?: boolean, serialnumber?: number): Promise<any>;
+    get(url: string, params?: any, isloading?: boolean, serialnumber?: number): Promise<any>;
     /**
      * 删除
      *

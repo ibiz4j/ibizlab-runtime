@@ -65,6 +65,30 @@ public class PayTradeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Get-all')")
+    @ApiOperation(value = "获取支付交易", tags = {"支付交易" },  notes = "获取支付交易")
+	@RequestMapping(method = RequestMethod.GET, value = "/paytrades/{paytrade_id}")
+    public ResponseEntity<PayTradeDTO> get(@PathVariable("paytrade_id") String paytrade_id) {
+        PayTrade domain = paytradeService.get(paytrade_id);
+        PayTradeDTO dto = paytradeMapping.toDto(domain);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Remove-all')")
+    @ApiOperation(value = "删除支付交易", tags = {"支付交易" },  notes = "删除支付交易")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/paytrades/{paytrade_id}")
+    public ResponseEntity<Boolean> remove(@PathVariable("paytrade_id") String paytrade_id) {
+         return ResponseEntity.status(HttpStatus.OK).body(paytradeService.remove(paytrade_id));
+    }
+
+    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Remove-all')")
+    @ApiOperation(value = "批量删除支付交易", tags = {"支付交易" },  notes = "批量删除支付交易")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/paytrades/batch")
+    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
+        paytradeService.removeBatch(ids);
+        return  ResponseEntity.status(HttpStatus.OK).body(true);
+    }
+
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Update-all')")
     @ApiOperation(value = "更新支付交易", tags = {"支付交易" },  notes = "更新支付交易")
 	@RequestMapping(method = RequestMethod.PUT, value = "/paytrades/{paytrade_id}")
@@ -84,28 +108,10 @@ public class PayTradeResource {
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Remove-all')")
-    @ApiOperation(value = "删除支付交易", tags = {"支付交易" },  notes = "删除支付交易")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/paytrades/{paytrade_id}")
-    public ResponseEntity<Boolean> remove(@PathVariable("paytrade_id") String paytrade_id) {
-         return ResponseEntity.status(HttpStatus.OK).body(paytradeService.remove(paytrade_id));
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Remove-all')")
-    @ApiOperation(value = "批量删除支付交易", tags = {"支付交易" },  notes = "批量删除支付交易")
-	@RequestMapping(method = RequestMethod.DELETE, value = "/paytrades/batch")
-    public ResponseEntity<Boolean> removeBatch(@RequestBody List<String> ids) {
-        paytradeService.removeBatch(ids);
-        return  ResponseEntity.status(HttpStatus.OK).body(true);
-    }
-
-    @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Get-all')")
-    @ApiOperation(value = "获取支付交易", tags = {"支付交易" },  notes = "获取支付交易")
-	@RequestMapping(method = RequestMethod.GET, value = "/paytrades/{paytrade_id}")
-    public ResponseEntity<PayTradeDTO> get(@PathVariable("paytrade_id") String paytrade_id) {
-        PayTrade domain = paytradeService.get(paytrade_id);
-        PayTradeDTO dto = paytradeMapping.toDto(domain);
-        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    @ApiOperation(value = "检查支付交易", tags = {"支付交易" },  notes = "检查支付交易")
+	@RequestMapping(method = RequestMethod.POST, value = "/paytrades/checkkey")
+    public ResponseEntity<Boolean> checkKey(@RequestBody PayTradeDTO paytradedto) {
+        return  ResponseEntity.status(HttpStatus.OK).body(paytradeService.checkKey(paytradeMapping.toDomain(paytradedto)));
     }
 
     @ApiOperation(value = "获取支付交易草稿", tags = {"支付交易" },  notes = "获取支付交易草稿")
@@ -113,12 +119,6 @@ public class PayTradeResource {
     public ResponseEntity<PayTradeDTO> getDraft(PayTradeDTO dto) {
         PayTrade domain = paytradeMapping.toDomain(dto);
         return ResponseEntity.status(HttpStatus.OK).body(paytradeMapping.toDto(paytradeService.getDraft(domain)));
-    }
-
-    @ApiOperation(value = "检查支付交易", tags = {"支付交易" },  notes = "检查支付交易")
-	@RequestMapping(method = RequestMethod.POST, value = "/paytrades/checkkey")
-    public ResponseEntity<Boolean> checkKey(@RequestBody PayTradeDTO paytradedto) {
-        return  ResponseEntity.status(HttpStatus.OK).body(paytradeService.checkKey(paytradeMapping.toDomain(paytradedto)));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_SUPERADMIN','ibzpay-PayTrade-Save-all')")

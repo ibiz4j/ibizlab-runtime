@@ -203,8 +203,8 @@ public class PayTradeServiceImpl extends ServiceImpl<PayTradeMapper, PayTrade> i
      */
     @Override
     public Page<PayTrade> searchDefault(PayTradeSearchContext context) {
-        com.baomidou.mybatisplus.extension.plugins.pagination.Page<PayTrade> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
-        return new PageImpl<PayTrade>(pages.getRecords(), context.getPageable(), pages.getTotal());
+            com.baomidou.mybatisplus.extension.plugins.pagination.Page<PayTrade> pages=baseMapper.searchDefault(context.getPages(),context,context.getSelectCond());
+            return new PageImpl<PayTrade>(pages.getRecords(), context.getPageable(), pages.getTotal());
     }
 
 

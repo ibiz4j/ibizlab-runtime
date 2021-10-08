@@ -39,7 +39,7 @@ export default class PayOpenAccessServiceBase extends EntityService {
 // 实体接口
 
     /**
-     * Select接口方法
+     * CheckKey接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -47,9 +47,8 @@ export default class PayOpenAccessServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof PayOpenAccessServiceBase
      */
-    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().get(`/payopenaccesses/${context.payopenaccess}/select`,isloading);
-            
+    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().post(`/payopenaccesses/${context.payopenaccess}/checkkey`,data,isloading);
             return res;
     }
 
@@ -75,37 +74,6 @@ export default class PayOpenAccessServiceBase extends EntityService {
         let res:any = await Http.getInstance().post(`/payopenaccesses`,data,isloading);
         
         return res;
-    }
-
-    /**
-     * Update接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof PayOpenAccessServiceBase
-     */
-    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-        let masterData:any = {};
-        Object.assign(data,masterData);
-            let res:any = await  Http.getInstance().put(`/payopenaccesses/${context.payopenaccess}`,data,isloading);
-            
-            return res;
-    }
-
-    /**
-     * Remove接口方法
-     *
-     * @param {*} [context={}]
-     * @param {*} [data={}]
-     * @param {boolean} [isloading]
-     * @returns {Promise<any>}
-     * @memberof PayOpenAccessServiceBase
-     */
-    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().delete(`/payopenaccesses/${context.payopenaccess}`,isloading);
-            return res;
     }
 
     /**
@@ -140,7 +108,7 @@ export default class PayOpenAccessServiceBase extends EntityService {
     }
 
     /**
-     * CheckKey接口方法
+     * Remove接口方法
      *
      * @param {*} [context={}]
      * @param {*} [data={}]
@@ -148,8 +116,8 @@ export default class PayOpenAccessServiceBase extends EntityService {
      * @returns {Promise<any>}
      * @memberof PayOpenAccessServiceBase
      */
-    public async CheckKey(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
-            let res:any = Http.getInstance().post(`/payopenaccesses/${context.payopenaccess}/checkkey`,data,isloading);
+    public async Remove(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().delete(`/payopenaccesses/${context.payopenaccess}`,isloading);
             return res;
     }
 
@@ -166,6 +134,23 @@ export default class PayOpenAccessServiceBase extends EntityService {
         let masterData:any = {};
         Object.assign(data,masterData);
             let res:any = await  Http.getInstance().post(`/payopenaccesses/${context.payopenaccess}/save`,data,isloading);
+            
+            return res;
+    }
+
+    /**
+     * Update接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof PayOpenAccessServiceBase
+     */
+    public async Update(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+        let masterData:any = {};
+        Object.assign(data,masterData);
+            let res:any = await  Http.getInstance().put(`/payopenaccesses/${context.payopenaccess}`,data,isloading);
             
             return res;
     }
@@ -197,5 +182,20 @@ export default class PayOpenAccessServiceBase extends EntityService {
     public async searchDefault(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
         let tempData:any = JSON.parse(JSON.stringify(data));
         return await Http.getInstance().post(`/payopenaccesses/searchdefault`,tempData,isloading);
+    }
+
+    /**
+     * Select接口方法
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @returns {Promise<any>}
+     * @memberof PayOpenAccessServiceBase
+     */
+    public async Select(context: any = {},data: any = {}, isloading?: boolean): Promise<any> {
+            let res:any = Http.getInstance().get(`/payopenaccesses/${context.payopenaccess}/select`,isloading);
+            
+            return res;
     }
 }

@@ -2103,4 +2103,32 @@ public class WFCoreService
 		}
 		return true;
 	}
+
+	/**
+	 *  查询个人实体待办：使用表格查询模式，返回的待办数据中包含工作流信息，后续通过该信息跳转至对应审批页
+	 * @param context
+	 * @return
+	 */
+	public Map<String, Map<String, Object>> searchMyTask2(WFTaskSearchContext context) {
+		Map<String, Map<String, Object>> businessKeys = new HashMap<>();
+		context.setSort("createtime,desc");
+		com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFTask> tasks=wfCoreMapper.searchMyTask(context.getPages(),context,context.getSelectCond());
+		if (!ObjectUtils.isEmpty(tasks)) {
+			for (WFTask task : tasks.getRecords()) {
+				Object key = task.getProcessinstancebusinesskey();
+				if (key != null) {
+					String str = key.toString();
+					if (str.indexOf(":k-") > 0) {
+						str = str.split(":k-")[1];
+					}
+					Map<String, Object> params = new HashMap();
+					params.put("srfprocessdefinitionkey", task.getProcessdefinitionkey());
+					params.put("srftaskdefinitionkey", task.getTaskdefinitionkey());
+					params.put("srftaskid", task.getId());
+					businessKeys.put(str, params);
+				}
+			}
+		}
+		return businessKeys;
+	}
 }
