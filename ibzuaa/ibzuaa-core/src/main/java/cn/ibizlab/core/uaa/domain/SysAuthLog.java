@@ -74,7 +74,8 @@ public class SysAuthLog extends EntityMP implements Serializable {
     /**
      * 域
      */
-    @TableField(value = "domain")
+    @DEField(name = "domains")
+    @TableField(value = "domains")
     @JSONField(name = "domain")
     @JsonProperty("domain")
     @ApiModelProperty("域")
@@ -145,7 +146,7 @@ public class SysAuthLog extends EntityMP implements Serializable {
      */
     public void setDomain(String domain) {
         this.domain = domain;
-        this.modify("domain", domain);
+        this.modify("domains", domain);
     }
 
     /**

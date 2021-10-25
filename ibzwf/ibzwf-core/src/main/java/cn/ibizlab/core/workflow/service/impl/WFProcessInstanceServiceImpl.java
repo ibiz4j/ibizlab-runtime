@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFProcessInstanceService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 /**
@@ -105,6 +106,8 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     public Page<WFProcessInstance> searchDefault(WFProcessInstanceSearchContext context) {
         return new PageImpl<WFProcessInstance>(new ArrayList(),context.getPageable(),0);
     }
+
+
 
 }
 

@@ -31,6 +31,7 @@ import cn.ibizlab.core.ou.service.ISysOrganizationService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.ou.client.SysOrganizationFeignClient;
@@ -168,6 +169,8 @@ public class SysOrganizationServiceImpl implements ISysOrganizationService {
         Page<SysOrganization> sysOrganizations=sysOrganizationFeignClient.searchDefault(context);
         return sysOrganizations;
     }
+
+
 
 }
 

@@ -31,6 +31,7 @@ import cn.ibizlab.core.pay.service.IPayTradeService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.pay.client.PayTradeFeignClient;
@@ -162,6 +163,8 @@ public class PayTradeServiceImpl implements IPayTradeService {
         Page<PayTrade> payTrades=payTradeFeignClient.searchDefault(context);
         return payTrades;
     }
+
+
 
 }
 

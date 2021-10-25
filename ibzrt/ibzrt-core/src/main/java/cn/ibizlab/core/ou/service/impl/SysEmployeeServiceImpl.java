@@ -31,6 +31,7 @@ import cn.ibizlab.core.ou.service.ISysEmployeeService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.ou.client.SysEmployeeFeignClient;
@@ -230,6 +231,8 @@ public class SysEmployeeServiceImpl implements ISysEmployeeService {
         Page<SysEmployee> sysEmployees=sysEmployeeFeignClient.searchDefault(context);
         return sysEmployees;
     }
+
+
 
 }
 

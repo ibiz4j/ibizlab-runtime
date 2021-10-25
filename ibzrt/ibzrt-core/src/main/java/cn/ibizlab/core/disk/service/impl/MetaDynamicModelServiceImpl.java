@@ -31,6 +31,7 @@ import cn.ibizlab.core.disk.service.IMetaDynamicModelService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.disk.client.MetaDynamicModelFeignClient;
@@ -203,6 +204,8 @@ public class MetaDynamicModelServiceImpl implements IMetaDynamicModelService {
         Page<MetaDynamicModel> metaDynamicModels=metaDynamicModelFeignClient.searchDynaInst(context);
         return metaDynamicModels;
     }
+
+
 
 }
 

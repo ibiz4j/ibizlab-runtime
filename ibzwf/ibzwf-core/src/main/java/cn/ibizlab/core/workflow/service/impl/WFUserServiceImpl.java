@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFUserService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -38,7 +39,6 @@ import cn.ibizlab.core.workflow.mapper.WFUserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
 
 /**
@@ -242,6 +242,8 @@ public class WFUserServiceImpl extends ServiceImpl<WFUserMapper, WFUser> impleme
             return entities;
         }
     }
+
+
 
 
     public IWFUserService getProxyService() {

@@ -31,6 +31,7 @@ import cn.ibizlab.core.notify.service.IMsgOpenAccessService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.notify.client.MsgOpenAccessFeignClient;
@@ -144,6 +145,8 @@ public class MsgOpenAccessServiceImpl implements IMsgOpenAccessService {
         Page<MsgOpenAccess> msgOpenAccesss=msgOpenAccessFeignClient.searchDefault(context);
         return msgOpenAccesss;
     }
+
+
 
 }
 

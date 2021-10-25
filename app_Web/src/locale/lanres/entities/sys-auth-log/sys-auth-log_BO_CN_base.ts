@@ -28,7 +28,7 @@ function getLocaleResourceBase(){
 				ipaddr: commonLogic.appcommonhandle("IP地址",null),
 				macaddr: commonLogic.appcommonhandle("MAC地址",null),
 				useragent: commonLogic.appcommonhandle("客户端",null),
-				domain: commonLogic.appcommonhandle("域",null),
+				domains: commonLogic.appcommonhandle("域",null),
 			},
 			nodata:commonLogic.appcommonhandle("",null),
 			uiactions: {
@@ -42,7 +42,7 @@ function getLocaleResourceBase(){
 				n_authcode_eq: commonLogic.appcommonhandle("认证结果(等于(=))",null), 
 				n_authtime_gtandeq: commonLogic.appcommonhandle("认证时间(大于等于(>=))",null), 
 				n_authtime_ltandeq: commonLogic.appcommonhandle("认证时间(小于等于(<=))",null), 
-				n_domain_like: commonLogic.appcommonhandle("域(文本包含(%))",null), 
+				n_domains_like: commonLogic.appcommonhandle("域(%)",null), 
 			},
 			uiactions: {
 			},

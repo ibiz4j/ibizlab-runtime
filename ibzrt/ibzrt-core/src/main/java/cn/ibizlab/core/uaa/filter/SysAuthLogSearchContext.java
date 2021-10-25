@@ -29,7 +29,7 @@ public class SysAuthLogSearchContext extends SearchContextBase {
 
 	private String n_personname_like;//[用户名称]
 
-	private String n_domain_like;//[域]
+	private String n_domains_like;//[域]
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     @JSONField(format="yyyy-MM-dd HH:mm:ss")

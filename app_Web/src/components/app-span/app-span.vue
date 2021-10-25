@@ -229,9 +229,9 @@ export default class AppSpan extends Vue {
     public dateFormat(){
         if(this.valueFormat){
             if(this.valueFormat.indexOf('%1$t') !== -1){
-                this.text= moment(this.data).format("YYYY-MM-DD HH:mm:ss");
+                this.text= moment(this.value).format("YYYY-MM-DD HH:mm:ss");
             }else if(this.valueFormat.indexOf('%1$s') == -1){
-                this.text= moment(this.data).format(this.valueFormat);
+                this.text= moment(this.value).format(this.valueFormat);
             }else{
                 this.text= this.value;
             }

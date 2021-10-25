@@ -67,13 +67,13 @@
           </app-form-item>
           
           </i-col>
-          <i-col v-show="detailsModel.n_domain_like.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
-              <app-form-item name='n_domain_like' :itemRules="this.rules.n_domain_like" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_domain_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_domain_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
+          <i-col v-show="detailsModel.n_domains_like.visible" :style="{}"  :md="{ span: 12, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
+              <app-form-item name='n_domains_like' :itemRules="this.rules.n_domains_like" class='' :caption="$t('entities.sysauthlog.default_searchform.details.n_domains_like')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.n_domains_like.error" :isEmptyCaption="false" labelPos="LEFT"> 
               <input-box 
-              v-model="data.n_domain_like"  
+              v-model="data.n_domains_like"  
               @enter="onEnter($event)"  
                 
-              :disabled="detailsModel.n_domain_like.disabled" 
+              :disabled="detailsModel.n_domains_like.disabled" 
               type='text' 
               style="">
           </input-box>
@@ -343,7 +343,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
         n_authcode_eq: null,
         n_authtime_gtandeq: null,
         n_authtime_ltandeq: null,
-        n_domain_like: null,
+        n_domains_like: null,
     };
 
     /**
@@ -365,7 +365,7 @@ export default class DefaultBase extends Vue implements ControlInterface {
 , 
         n_authtime_ltandeq: new FormItemModel({ caption: '认证时间(小于等于(<=))', detailType: 'FORMITEM', name: 'n_authtime_ltandeq', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
 , 
-        n_domain_like: new FormItemModel({ caption: '域(文本包含(%))', detailType: 'FORMITEM', name: 'n_domain_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
+        n_domains_like: new FormItemModel({ caption: '域(%)', detailType: 'FORMITEM', name: 'n_domains_like', visible: true, isShowCaption: true, form: this,required:false, disabled: false, enableCond: 3 })
 , 
     };
     
@@ -406,11 +406,11 @@ export default class DefaultBase extends Vue implements ControlInterface {
             { required: this.detailsModel.n_authtime_ltandeq.required, type: 'string', message: '认证时间(小于等于(<=)) 值不能为空', trigger: 'change' },
             { required: this.detailsModel.n_authtime_ltandeq.required, type: 'string', message: '认证时间(小于等于(<=)) 值不能为空', trigger: 'blur' },
         ],
-        n_domain_like: [
-            { type: 'string', message: '域(文本包含(%)) 值必须为字符串类型', trigger: 'change' },
-            { type: 'string', message: '域(文本包含(%)) 值必须为字符串类型', trigger: 'blur' },
-            { required: this.detailsModel.n_domain_like.required, type: 'string', message: '域(文本包含(%)) 值不能为空', trigger: 'change' },
-            { required: this.detailsModel.n_domain_like.required, type: 'string', message: '域(文本包含(%)) 值不能为空', trigger: 'blur' },
+        n_domains_like: [
+            { type: 'string', message: '域(%) 值必须为字符串类型', trigger: 'change' },
+            { type: 'string', message: '域(%) 值必须为字符串类型', trigger: 'blur' },
+            { required: this.detailsModel.n_domains_like.required, type: 'string', message: '域(%) 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.n_domains_like.required, type: 'string', message: '域(%) 值不能为空', trigger: 'blur' },
         ],
     }
 
@@ -475,15 +475,15 @@ export default class DefaultBase extends Vue implements ControlInterface {
     }
 
     /**
-     * 监控表单属性 n_domain_like 值
+     * 监控表单属性 n_domains_like 值
      *
      * @param {*} newVal
      * @param {*} oldVal
      * @memberof DefaultBase
      */
-    @Watch('data.n_domain_like')
-    onN_domain_likeChange(newVal: any, oldVal: any) {
-        this.formDataChange({ name: 'n_domain_like', newVal: newVal, oldVal: oldVal });
+    @Watch('data.n_domains_like')
+    onN_domains_likeChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'n_domains_like', newVal: newVal, oldVal: oldVal });
     }
 
 

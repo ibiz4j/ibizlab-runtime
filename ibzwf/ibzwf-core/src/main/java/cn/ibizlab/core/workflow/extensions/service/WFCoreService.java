@@ -21,11 +21,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.BpmnAutoLayout;
 import org.flowable.bpmn.converter.BpmnXMLConverter;
-import org.flowable.bpmn.model.*;
 import org.flowable.bpmn.model.Process;
+import org.flowable.bpmn.model.*;
 import org.flowable.common.engine.api.history.HistoricData;
 import org.flowable.common.engine.api.identity.AuthenticationContext;
-import org.flowable.common.engine.api.query.QueryProperty;
 import org.flowable.common.engine.impl.identity.Authentication;
 import org.flowable.common.engine.impl.identity.UserIdAuthenticationContext;
 import org.flowable.editor.language.json.converter.BpmnJsonConverter;
@@ -39,15 +38,12 @@ import org.flowable.engine.repository.DeploymentBuilder;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.engine.task.Comment;
 import org.flowable.identitylink.api.IdentityLink;
-import org.flowable.idm.api.User;
 import org.flowable.task.api.DelegationState;
 import org.flowable.task.api.Task;
 import org.flowable.task.api.TaskQuery;
 import org.flowable.task.api.history.HistoricTaskInstance;
-import org.flowable.task.service.impl.TaskQueryProperty;
 import org.flowable.task.service.impl.persistence.entity.HistoricTaskInstanceEntity;
 import org.flowable.task.service.impl.persistence.entity.TaskEntity;
-import org.flowable.task.service.impl.persistence.entity.TaskEntityImpl;
 import org.flowable.ui.common.security.SecurityUtils;
 import org.flowable.ui.modeler.domain.AbstractModel;
 import org.flowable.ui.modeler.domain.AppModelDefinition;
@@ -85,7 +81,6 @@ import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 @Service("wfCoreService")
@@ -2110,9 +2105,27 @@ public class WFCoreService
 	 * @return
 	 */
 	public Map<String, Map<String, Object>> searchMyTask2(WFTaskSearchContext context) {
+		com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFTask> tasks = null;
 		Map<String, Map<String, Object>> businessKeys = new HashMap<>();
 		context.setSort("createtime,desc");
-		com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFTask> tasks=wfCoreMapper.searchMyTask(context.getPages(),context,context.getSelectCond());
+
+		String strTaskType = context.getSrfWF();
+		if (strTaskType == null) {
+			tasks = wfCoreMapper.searchMyTask(context.getPages(),context,context.getSelectCond());
+		} else {
+			 if (TaskType.TODO.name().equalsIgnoreCase(strTaskType)) {
+				tasks = wfCoreMapper.searchMyTask(context.getPages(), context, context.getSelectCond());
+			 } else if (TaskType.DONE.name().equalsIgnoreCase(strTaskType)) {
+				tasks = wfCoreMapper.searchDoneTask(context.getPages(), context, context.getSelectCond());
+			 } else if (TaskType.FINISH.name().equalsIgnoreCase(strTaskType)) {
+				tasks = wfCoreMapper.searchFinishTask(context.getPages(), context, context.getSelectCond());
+			 } else if (TaskType.ALL.name().equalsIgnoreCase(strTaskType)) {
+				 tasks = wfCoreMapper.searchMyAllTask(context.getPages(), context, context.getSelectCond());
+			 } else {
+				 throw new BadRequestAlertException(String.format("未能识别的待办类型[%s]", strTaskType), "", "");
+			 }
+		}
+
 		if (!ObjectUtils.isEmpty(tasks)) {
 			for (WFTask task : tasks.getRecords()) {
 				Object key = task.getProcessinstancebusinesskey();

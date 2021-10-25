@@ -49,7 +49,7 @@
     "nullable":0,
     "physical_field":1,
     "data_type":"VARCHAR",
-    "data_length":100,
+    "data_length":300,
     "key_field":0,
     "show_order":3,
     "major_field":1
@@ -207,7 +207,7 @@
     "nullable":0,
     "physical_field":1,
     "data_type":"VARCHAR",
-    "data_length":100,
+    "data_length":300,
     "key_field":0,
     "show_order":3,
     "major_field":0
@@ -236,7 +236,7 @@
     "nullable":0,
     "physical_field":1,
     "data_type":"VARCHAR",
-    "data_length":100,
+    "data_length":300,
     "key_field":0,
     "show_order":5,
     "major_field":1

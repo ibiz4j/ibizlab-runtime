@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysRoleService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -38,7 +39,6 @@ import cn.ibizlab.core.uaa.mapper.SysRoleMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
 
 /**
@@ -308,6 +308,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             return entities;
         }
     }
+
+
 
 
     public ISysRoleService getProxyService() {

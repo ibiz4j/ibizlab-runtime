@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysAppService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 /**
@@ -120,6 +121,8 @@ public class SysAppServiceImpl implements ISysAppService {
     public Page<SysApp> searchDefault(SysAppSearchContext context) {
         return new PageImpl<SysApp>(new ArrayList(),context.getPageable(),0);
     }
+
+
 
 }
 

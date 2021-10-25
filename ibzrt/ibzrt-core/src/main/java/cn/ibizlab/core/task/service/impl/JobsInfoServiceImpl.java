@@ -31,6 +31,7 @@ import cn.ibizlab.core.task.service.IJobsInfoService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.task.client.JobsInfoFeignClient;
@@ -170,6 +171,8 @@ public class JobsInfoServiceImpl implements IJobsInfoService {
         Page<JobsInfo> jobsInfos=jobsInfoFeignClient.searchDefault(context);
         return jobsInfos;
     }
+
+
 
 }
 

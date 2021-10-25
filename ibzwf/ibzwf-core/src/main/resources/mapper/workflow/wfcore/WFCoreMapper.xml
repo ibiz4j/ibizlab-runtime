@@ -33,7 +33,7 @@
         INNER JOIN act_re_procdef arp ON RES.PROC_DEF_ID_ = arp.ID_
         WHERE
         RES.ASSIGNEE_ = #{srf.sessioncontext.srfuserid}  or  ( RES.ASSIGNEE_ IS NULL  AND
-        EXISTS ( SELECT LINK.ID_ FROM ACT_RU_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND LINK.USER_ID_ = #{srf.sessioncontext.srfuserid})  )
+        EXISTS ( SELECT LINK1.ID_ FROM ACT_RU_IDENTITYLINK LINK1 WHERE LINK1.TASK_ID_ = RES.ID_ AND LINK1.USER_ID_ = #{srf.sessioncontext.srfuserid})  )
         ) t1
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
@@ -43,10 +43,10 @@
         select distinct t1.TaskId as Id,USER_ID_ as UserId, t1.DefinitionId as ProcessDefinitionId, t1.DefinitionName as ProcessDefinitionName, t1.DefinitionKey as ProcessDefinitionKey, t1.InstanceId as
         ProcessInstanceId,
         t1.TaskName as Name, t1.TaskDefinitionKey, t1.BusinessKey as ProcessInstanceBusinessKey, t1.Description, t1.CreateTime from (
-        select  res.ID_ as TaskId,link.USER_ID_,res.PROC_DEF_ID_ as DefinitionId,arp.NAME_ as DefinitionName,arp.KEY_ as DefinitionKey,
+        select  res.ID_ as TaskId,link1.USER_ID_,res.PROC_DEF_ID_ as DefinitionId,arp.NAME_ as DefinitionName,arp.KEY_ as DefinitionKey,
         res.PROC_INST_ID_ as  InstanceId,res.NAME_ as TaskName,res.TASK_DEF_KEY_ as TaskDefinitionKey,res.CATEGORY_ as BusinessKey,
         res.DESCRIPTION_ as Description,res.CREATE_TIME_ as CreateTime
-        from ACT_RU_TASK RES inner join act_re_procdef arp on RES.PROC_DEF_ID_ = arp.ID_ left join ACT_RU_IDENTITYLINK link on res.ID_ = LINK.TASK_ID_
+        from ACT_RU_TASK RES inner join act_re_procdef arp on RES.PROC_DEF_ID_ = arp.ID_ left join ACT_RU_IDENTITYLINK link1 on res.ID_ = LINK1.TASK_ID_
         ) t1
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
@@ -63,9 +63,9 @@
         res.DESCRIPTION_ as Description,res.CREATE_TIME_ as CreateTime
         from ACT_RU_TASK RES
         inner join act_re_procdef arp on RES.PROC_DEF_ID_ = arp.ID_
-        where exists (select LINK.ID_
-        from ACT_RU_IDENTITYLINK LINK
-        where LINK.TASK_ID_ = RES.ID_ and LINK.USER_ID_ = #{srf.sessioncontext.srfuserid})
+        where exists (select LINK1.ID_
+        from ACT_RU_IDENTITYLINK LINK1
+        where LINK1.TASK_ID_ = RES.ID_ and LINK1.USER_ID_ = #{srf.sessioncontext.srfuserid})
         ) t1
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
@@ -96,7 +96,7 @@
         res.DESCRIPTION_ as Description,res.CREATE_TIME_ as CreateTime
         from ACT_RU_TASK RES inner join act_re_procdef arp on RES.PROC_DEF_ID_ = arp.ID_
         where
-        exists (select LINK.ID_ from  ACT_RU_IDENTITYLINK LINK where LINK.TASK_ID_ = RES.ID_  and LINK.USER_ID_ = #{srf.sessioncontext.srfuserid} and (LINK.SCOPE_TYPE_ IS NULL OR  (LINK.SCOPE_TYPE_  IS NOT NULL AND LINK.SCOPE_TYPE_ <>'READ') ) )
+        exists (select LINK1.ID_ from  ACT_RU_IDENTITYLINK LINK1 where LINK1.TASK_ID_ = RES.ID_  and LINK1.USER_ID_ = #{srf.sessioncontext.srfuserid} and (LINK1.SCOPE_TYPE_ IS NULL OR  (LINK1.SCOPE_TYPE_  IS NOT NULL AND LINK1.SCOPE_TYPE_ <>'READ') ) )
         ) t1
          ]]>
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
@@ -137,7 +137,7 @@
                     RES.END_TIME_ IS NOT NULL
                     AND HPI.END_TIME_ IS NULL
                     AND RES.ASSIGNEE_ IS NULL
-                AND EXISTS ( SELECT LINK.ID_ FROM ACT_HI_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND ( LINK.USER_ID_ = #{srf.sessioncontext.srfuserid} ) )
+                AND EXISTS ( SELECT LINK1.ID_ FROM ACT_HI_IDENTITYLINK LINK1 WHERE LINK1.TASK_ID_ = RES.ID_ AND ( LINK1.USER_ID_ = #{srf.sessioncontext.srfuserid} ) )
                 ) t1
          ]]>
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
@@ -179,7 +179,7 @@
                     RES.END_TIME_ IS NOT NULL
                     AND HPI.END_TIME_ IS NOT NULL
                     AND RES.ASSIGNEE_ IS NULL
-                AND EXISTS ( SELECT LINK.ID_ FROM ACT_HI_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND ( LINK.USER_ID_ = #{srf.sessioncontext.srfuserid} ) )
+                AND EXISTS ( SELECT LINK1.ID_ FROM ACT_HI_IDENTITYLINK LINK1 WHERE LINK1.TASK_ID_ = RES.ID_ AND ( LINK1.USER_ID_ = #{srf.sessioncontext.srfuserid} ) )
                 ) t1
          ]]>
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
@@ -225,7 +225,7 @@
                         OR RES.ASSIGNEE_ = #{srf.sessioncontext.srfuserid}
                    OR (
                         RES.ASSIGNEE_ IS NULL
-                        AND EXISTS ( SELECT LINK.ID_ FROM ACT_RU_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND LINK.USER_ID_ = #{srf.sessioncontext.srfuserid}  )
+                        AND EXISTS ( SELECT LINK1.ID_ FROM ACT_RU_IDENTITYLINK LINK1 WHERE LINK1.TASK_ID_ = RES.ID_ AND LINK1.USER_ID_ = #{srf.sessioncontext.srfuserid}  )
                     )
             ) t1
         ]]>
@@ -269,7 +269,7 @@
                     (RES.END_TIME_ IS NOT NULL
                     AND HPI.END_TIME_ IS NULL
                     AND RES.ASSIGNEE_ IS NULL
-                AND EXISTS ( SELECT LINK.ID_ FROM ACT_HI_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND ( LINK.USER_ID_ = #{srf.sessioncontext.srfuserid}   ) )
+                AND EXISTS ( SELECT LINK1.ID_ FROM ACT_HI_IDENTITYLINK LINK1 WHERE LINK1.TASK_ID_ = RES.ID_ AND ( LINK1.USER_ID_ = #{srf.sessioncontext.srfuserid}   ) )
                 ) OR HPI.START_USER_ID_ = #{srf.sessioncontext.srfuserid} ) t1
          ]]>
         <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
@@ -313,7 +313,7 @@
                     (RES.END_TIME_ IS NOT NULL
                     AND HPI.END_TIME_ IS NOT NULL
                     AND RES.ASSIGNEE_ IS NULL
-                AND EXISTS ( SELECT LINK.ID_ FROM ACT_HI_IDENTITYLINK LINK WHERE LINK.TASK_ID_ = RES.ID_ AND ( LINK.USER_ID_ = #{srf.sessioncontext.srfuserid}  ) )
+                AND EXISTS ( SELECT LINK1.ID_ FROM ACT_HI_IDENTITYLINK LINK1 WHERE LINK1.TASK_ID_ = RES.ID_ AND ( LINK1.USER_ID_ = #{srf.sessioncontext.srfuserid}  ) )
                  ) OR (HPI.START_USER_ID_ = #{srf.sessioncontext.srfuserid} )
                 AND RES.END_TIME_ IS NOT NULL
                 AND HPI.END_TIME_ IS NOT NULL

@@ -60,7 +60,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JSONField(name = "catalog_name")
     @JsonProperty("catalog_name")
     @NotBlank(message = "[目录]不允许为空!")
-    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @Size(min = 0, max = 300, message = "内容长度必须小于等于[300]")
     @ApiModelProperty("目录")
     private String catalogName;
 
@@ -82,7 +82,7 @@ public class DictOptionDTO extends DTOBase implements Serializable {
     @JSONField(name = "label")
     @JsonProperty("label")
     @NotBlank(message = "[名称]不允许为空!")
-    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @Size(min = 0, max = 300, message = "内容长度必须小于等于[300]")
     @ApiModelProperty("名称")
     private String label;
 

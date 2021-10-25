@@ -76,6 +76,11 @@ export default class MainModel {
         dataType: 'TEXT',
       },
       {
+        name: 'extparams',
+        prop: 'ext_params',
+        dataType: 'LONGTEXT',
+      },
+      {
         name: 'cid',
         prop: 'id',
         dataType: 'TEXT',

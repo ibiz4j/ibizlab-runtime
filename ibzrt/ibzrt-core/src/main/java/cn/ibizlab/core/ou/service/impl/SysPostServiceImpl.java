@@ -31,6 +31,7 @@ import cn.ibizlab.core.ou.service.ISysPostService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.ou.client.SysPostFeignClient;
@@ -144,6 +145,8 @@ public class SysPostServiceImpl implements ISysPostService {
         Page<SysPost> sysPosts=sysPostFeignClient.searchDefault(context);
         return sysPosts;
     }
+
+
 
 }
 

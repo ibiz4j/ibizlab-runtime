@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysAuthLogService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.uaa.client.SysAuthLogFeignClient;
@@ -144,6 +145,8 @@ public class SysAuthLogServiceImpl implements ISysAuthLogService {
         Page<SysAuthLog> sysAuthLogs=sysAuthLogFeignClient.searchDefault(context);
         return sysAuthLogs;
     }
+
+
 
 }
 

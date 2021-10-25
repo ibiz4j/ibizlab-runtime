@@ -31,6 +31,7 @@ import cn.ibizlab.core.ou.service.ISysTeamMemberService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.ou.client.SysTeamMemberFeignClient;
@@ -198,6 +199,8 @@ public class SysTeamMemberServiceImpl implements ISysTeamMemberService {
         Page<SysTeamMember> sysTeamMembers=sysTeamMemberFeignClient.searchDefault(context);
         return sysTeamMembers;
     }
+
+
 
 }
 

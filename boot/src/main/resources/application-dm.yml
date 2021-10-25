@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: dm.jdbc.driver.DmDriver
+    url: jdbc:dm://172.16.102.5:5238?&clobAsString=true&comOra=true
+    isSyncDBSchema: true
+    defaultSchema: a_A_5d9d78509
+    username: a_A_5d9d78509
+    password: ''

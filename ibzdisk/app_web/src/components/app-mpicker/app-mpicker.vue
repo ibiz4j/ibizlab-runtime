@@ -159,7 +159,7 @@ export default class AppMpicker extends Vue {
                   }
               });
             } catch (error) {
-              if(error.name === 'SyntaxError'){
+              if((error as any).name === 'SyntaxError'){
                 let srfkeys:any = newVal.split(',');
                 let srfmajortexts:any = null;
                 if(this.valueitem && this.activeData[this.valueitem]){

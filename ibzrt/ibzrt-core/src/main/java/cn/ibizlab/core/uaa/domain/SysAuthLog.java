@@ -64,6 +64,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
     /**
      * 域
      */
+    @DEField(name = "domains")
     @JSONField(name = "domain")
     @JsonProperty("domain")
     @ApiModelProperty("域")
@@ -136,7 +137,7 @@ public class SysAuthLog extends EntityClient implements Serializable {
      */
     public void setDomain(String domain) {
         this.domain = domain ;
-        this.modify("domain",domain);
+        this.modify("domains",domain);
     }
 
     /**

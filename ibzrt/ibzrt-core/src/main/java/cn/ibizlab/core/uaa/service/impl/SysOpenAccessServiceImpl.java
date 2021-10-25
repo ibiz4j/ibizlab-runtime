@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysOpenAccessService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.uaa.client.SysOpenAccessFeignClient;
@@ -144,6 +145,8 @@ public class SysOpenAccessServiceImpl implements ISysOpenAccessService {
         Page<SysOpenAccess> sysOpenAccesss=sysOpenAccessFeignClient.searchDefault(context);
         return sysOpenAccesss;
     }
+
+
 
 }
 

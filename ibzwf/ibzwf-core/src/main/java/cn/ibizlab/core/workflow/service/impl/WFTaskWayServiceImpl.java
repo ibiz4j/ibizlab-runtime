@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFTaskWayService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 /**
@@ -105,6 +106,8 @@ public class WFTaskWayServiceImpl implements IWFTaskWayService {
     public Page<WFTaskWay> searchDefault(WFTaskWaySearchContext context) {
         return new PageImpl<WFTaskWay>(new ArrayList(),context.getPageable(),0);
     }
+
+
 
 }
 

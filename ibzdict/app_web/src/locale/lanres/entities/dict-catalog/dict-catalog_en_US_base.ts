@@ -36,6 +36,7 @@ function getLocaleResourceBase(){
 				group1: commonLogic.appcommonhandle("字典基本信息",null), 
 				druipart1: commonLogic.appcommonhandle("字典项",null), 
 				formpage1: commonLogic.appcommonhandle("基本信息",null), 
+				formpage2: commonLogic.appcommonhandle("扩展",null), 
 				srfupdatedate: commonLogic.appcommonhandle("最后修改时间",null), 
 				srforikey: commonLogic.appcommonhandle("",null), 
 				srfkey: commonLogic.appcommonhandle("标识",null), 
@@ -48,6 +49,7 @@ function getLocaleResourceBase(){
 				cname: commonLogic.appcommonhandle("名称",null), 
 				cgroup: commonLogic.appcommonhandle("分组",null), 
 				memo: commonLogic.appcommonhandle("备注",null), 
+				extparams: commonLogic.appcommonhandle("扩展参数",null), 
 				cid: commonLogic.appcommonhandle("标识",null), 
 			},
 			uiactions: {

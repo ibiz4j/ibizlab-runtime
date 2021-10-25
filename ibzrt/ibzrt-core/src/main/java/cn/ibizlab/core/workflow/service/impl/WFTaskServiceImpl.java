@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFTaskService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.workflow.client.WFTaskFeignClient;
@@ -144,6 +145,8 @@ public class WFTaskServiceImpl implements IWFTaskService {
         Page<WFTask> wFTasks=wFTaskFeignClient.searchDefault(context);
         return wFTasks;
     }
+
+
 
 }
 

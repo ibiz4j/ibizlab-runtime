@@ -152,7 +152,7 @@ public class JobsInfoDTO extends DTOBase implements Serializable {
      */
     @JSONField(name = "remark")
     @JsonProperty("remark")
-    @Size(min = 0, max = 30, message = "内容长度必须小于等于[30]")
+    @Size(min = 0, max = 300, message = "内容长度必须小于等于[300]")
     @ApiModelProperty("备注")
     private String remark;
 

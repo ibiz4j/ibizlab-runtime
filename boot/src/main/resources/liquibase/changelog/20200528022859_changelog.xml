@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="sq3536 (generated)" id="1590632951241-1">
+        <preConditions onFail="MARK_RAN"  >
+            <not>
+                <tableExists tableName="IBZAUTHLOG" />
+            </not>
+        </preConditions>
+        <createTable tableName="IBZAUTHLOG">
+            <column name="LOGID" type="VARCHAR(100)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SYS_AUTHLOG_LOGID"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR(100)"/>
+            <column name="PERSONNAME" type="VARCHAR(100)"/>
+            <column name="AUTHTIME" type="TIMESTAMP"/>
+            <column name="IPADDR" type="VARCHAR(100)"/>
+            <column name="MACADDR" type="VARCHAR(100)"/>
+            <column name="USERAGENT" type="VARCHAR(100)"/>
+            <column name="AUTHCODE" type="VARCHAR(15)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="mac (generated)" id="1590632951241-2">
+        <preConditions onFail="MARK_RAN"  >
+            <not >
+                <columnExists tableName="IBZAUTHLOG" columnName="DOMAINS" />
+            </not>
+        </preConditions>
+        <addColumn tableName="IBZAUTHLOG">
+            <column name="DOMAINS" type="VARCHAR(100 BYTE)"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

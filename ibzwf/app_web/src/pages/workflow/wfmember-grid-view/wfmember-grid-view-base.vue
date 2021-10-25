@@ -1346,6 +1346,18 @@ export default class WFMemberGridViewBase extends Vue {
             { pathName: 'editview', parameterName: 'editview' },
         ];
         const _this: any = this;
+        if (fullargs && fullargs.length > 0) {
+            const _args = fullargs[0];
+            if (_args['srfprocessdefinitionkey'] && _args['srftaskdefinitionkey']) {
+                Object.assign(data, {
+                    processDefinitionKey: _args['srfprocessdefinitionkey'],
+                    taskDefinitionKey: _args['srftaskdefinitionkey']
+                });
+                if (_args['srftaskid']) {
+                    Object.assign(data, { 'srftaskid': _args['srftaskid'] });
+                }
+            }
+        }
         if(fullargs && fullargs.copymode){
             Object.assign(data,{copymode:true});
         }

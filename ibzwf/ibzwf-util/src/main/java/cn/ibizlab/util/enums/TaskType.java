@@ -9,6 +9,10 @@ public enum TaskType {
      */
     WORK,
     /**
+     * 待办
+     */
+    TODO,
+    /**
      * 待阅
      */
     READ,
@@ -23,5 +27,13 @@ public enum TaskType {
     /**
      * 全部
      */
-    ALL;
+    ALL,
+    /**
+     * 抄送
+     */
+    CC,
+    /**
+     * 抄送已读
+     */
+    HAVEREAD;
 }

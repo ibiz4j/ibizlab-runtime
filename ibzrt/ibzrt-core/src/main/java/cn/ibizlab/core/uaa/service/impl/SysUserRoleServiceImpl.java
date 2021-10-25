@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysUserRoleService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.uaa.client.SysUserRoleFeignClient;
@@ -184,6 +185,8 @@ public class SysUserRoleServiceImpl implements ISysUserRoleService {
         Page<SysUserRole> sysUserRoles=sysUserRoleFeignClient.searchDefault(context);
         return sysUserRoles;
     }
+
+
 
 }
 

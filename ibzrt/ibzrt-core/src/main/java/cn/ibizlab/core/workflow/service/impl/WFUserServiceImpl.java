@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFUserService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.workflow.client.WFUserFeignClient;
@@ -144,6 +145,8 @@ public class WFUserServiceImpl implements IWFUserService {
         Page<WFUser> wFUsers=wFUserFeignClient.searchDefault(context);
         return wFUsers;
     }
+
+
 
 }
 

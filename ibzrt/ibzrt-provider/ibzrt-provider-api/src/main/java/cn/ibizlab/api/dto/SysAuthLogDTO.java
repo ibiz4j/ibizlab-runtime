@@ -63,7 +63,7 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     private String personname;
 
     /**
-     * 属性 [DOMAIN]
+     * 属性 [DOMAINS]
      *
      */
     @JSONField(name = "domain")
@@ -140,11 +140,11 @@ public class SysAuthLogDTO extends DTOBase implements Serializable {
     }
 
     /**
-     * 设置 [DOMAIN]
+     * 设置 [DOMAINS]
      */
     public void setDomain(String  domain){
         this.domain = domain ;
-        this.modify("domain",domain);
+        this.modify("domains",domain);
     }
 
     /**

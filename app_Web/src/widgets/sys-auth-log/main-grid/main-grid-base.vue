@@ -108,15 +108,15 @@
                     </template>
                 </el-table-column>
             </template>
-            <template v-if="getColumnState('domain')">
-                <el-table-column show-overflow-tooltip :prop="'domain'" :label="$t('entities.sysauthlog.main_grid.columns.domain')" :width="100"  :align="'left'" :sortable="'custom'">
+            <template v-if="getColumnState('domains')">
+                <el-table-column show-overflow-tooltip :prop="'domains'" :label="$t('entities.sysauthlog.main_grid.columns.domains')" :width="100"  :align="'left'" :sortable="'custom'">
                     <template v-slot:header="{column}">
                       <span class="column-header ">
-                        {{$t('entities.sysauthlog.main_grid.columns.domain')}}
+                        {{$t('entities.sysauthlog.main_grid.columns.domains')}}
                       </span>
                     </template>
                     <template v-slot="{row,column,$index}">
-                        <span>{{row.domain}}</span>
+                        <span>{{row.domains}}</span>
                     </template>
                 </el-table-column>
             </template>
@@ -741,9 +741,9 @@ export default class MainBase extends Vue implements ControlInterface {
             enableCond: 3 ,
         },
         {
-            name: 'domain',
+            name: 'domains',
             label: '域',
-            langtag: 'entities.sysauthlog.main_grid.columns.domain',
+            langtag: 'entities.sysauthlog.main_grid.columns.domains',
             show: true,
             unit: 'PX',
             isEnableRowEdit: false,
@@ -1456,7 +1456,7 @@ export default class MainBase extends Vue implements ControlInterface {
     * @memberof MainBase
     */
     public arraySpanMethod({row, column, rowIndex, columnIndex} : any) {
-        let allColumns:Array<any> = ['username','personname','authtime','authcode','ipaddr','macaddr','useragent','domain'];
+        let allColumns:Array<any> = ['username','personname','authtime','authcode','ipaddr','macaddr','useragent','domains'];
         if(row && row.children) {
             if(columnIndex == (this.isSingleSelect ? 0:1)) {
                 return [1, allColumns.length+1];
@@ -1543,7 +1543,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 ipaddr:'',
                 macaddr:'',
                 useragent:'',
-                domain:'',
+                domains:'',
                 children: children
             }
             groupTree.push(tree);
@@ -1577,7 +1577,7 @@ export default class MainBase extends Vue implements ControlInterface {
             ipaddr:'',
             macaddr:'',
             useragent:'',
-            domain:'',
+            domains:'',
             children: child
         }
         if(child && child.length > 0){
@@ -1631,7 +1631,7 @@ export default class MainBase extends Vue implements ControlInterface {
                 ipaddr:'',
                 macaddr:'',
                 useragent:'',
-                domain:'',
+                domains:'',
                 children: children,
             }
             groupTree.push(tree);

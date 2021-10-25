@@ -31,6 +31,7 @@ import cn.ibizlab.core.task.service.IJobsLockService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.task.client.JobsLockFeignClient;
@@ -144,6 +145,8 @@ public class JobsLockServiceImpl implements IJobsLockService {
         Page<JobsLock> jobsLocks=jobsLockFeignClient.searchDefault(context);
         return jobsLocks;
     }
+
+
 
 }
 

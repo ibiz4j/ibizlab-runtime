@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysPSSystemService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.uaa.client.SysPSSystemFeignClient;
@@ -153,6 +154,8 @@ public class SysPSSystemServiceImpl implements ISysPSSystemService {
         Page<SysPSSystem> sysPSSystems=sysPSSystemFeignClient.searchPick(context);
         return sysPSSystems;
     }
+
+
 
 }
 

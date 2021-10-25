@@ -903,6 +903,23 @@ export default class EntityService {
     }
 
     /**
+     * 获取标准工作流版本信息
+     *
+     * @param {*} [context={}]
+     * @param {*} [data={}]
+     * @param {boolean} [isloading]
+     * @param {*} [localdata]
+     * @returns {Promise<any>}
+     * @memberof EntityService
+     */
+    public async getStandWorkflow(context: any = {}, data: any = {}, isloading?: boolean): Promise<any> {
+        return Http.getInstance().get(
+            `/wfcore/${this.SYSTEMNAME}-app-${this.APPNAME}/${this.APPDENAME}/process-definitions`,
+            isloading,
+        );
+    }
+
+    /**
      * WFGetProxyData接口方法
      *
      * @param {*} [context={}]

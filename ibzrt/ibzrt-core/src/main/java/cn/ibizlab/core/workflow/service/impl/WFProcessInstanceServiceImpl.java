@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFProcessInstanceService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.workflow.client.WFProcessInstanceFeignClient;
@@ -144,6 +145,8 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
         Page<WFProcessInstance> wFProcessInstances=wFProcessInstanceFeignClient.searchDefault(context);
         return wFProcessInstances;
     }
+
+
 
 }
 

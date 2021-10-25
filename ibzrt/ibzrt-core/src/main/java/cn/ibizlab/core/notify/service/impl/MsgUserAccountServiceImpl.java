@@ -31,6 +31,7 @@ import cn.ibizlab.core.notify.service.IMsgUserAccountService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.notify.client.MsgUserAccountFeignClient;
@@ -144,6 +145,8 @@ public class MsgUserAccountServiceImpl implements IMsgUserAccountService {
         Page<MsgUserAccount> msgUserAccounts=msgUserAccountFeignClient.searchDefault(context);
         return msgUserAccounts;
     }
+
+
 
 }
 

@@ -51,7 +51,7 @@ export default class DefaultModel {
         dataType: 'DATETIME',
       },
       {
-        name: 'n_domain_like',
+        name: 'n_domains_like',
         prop: 'domain',
         dataType: 'TEXT',
       },

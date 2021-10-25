@@ -41,7 +41,7 @@ export default class TabExpViewEngine extends ViewEngine {
             if (!Object.is(_item.type, 'TABEXPPANEL')) {
                 return;
             }
-            if(this.view.context && this.view.context[(this.keyPSDEField as string)]){
+            if(this.view.context && !this.view.context[(this.keyPSDEField as string)]){
                 return;
             }
             this.setViewState2({ tag: _item.name, action: 'load', viewdata: this.view.context });

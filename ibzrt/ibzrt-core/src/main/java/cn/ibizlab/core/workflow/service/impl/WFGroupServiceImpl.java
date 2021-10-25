@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFGroupService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.workflow.client.WFGroupFeignClient;
@@ -144,6 +145,8 @@ public class WFGroupServiceImpl implements IWFGroupService {
         Page<WFGroup> wFGroups=wFGroupFeignClient.searchDefault(context);
         return wFGroups;
     }
+
+
 
 }
 

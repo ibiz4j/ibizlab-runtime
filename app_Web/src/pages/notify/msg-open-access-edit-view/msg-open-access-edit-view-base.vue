@@ -942,25 +942,122 @@ export default class MsgOpenAccessEditViewBase extends Vue {
      * @memberof MsgOpenAccessEditViewBase
      */
     public SaveAndStart(args: any[],contextJO?:any, params?: any, $event?: any, xData?: any,actionContext?:any,srfParentDeName?:string) {
-        const _this: any = this;
+        const that: any = this;
         if (!xData || !(xData.wfstart instanceof Function)) {
             return;
         }
-        xData.wfstart(args).then((response: any) => {
-            if (!response || response.status !== 200) {
+        let validateStatus: boolean = true;
+        if (xData.formValidateStatus && xData.formValidateStatus instanceof Function) {
+            validateStatus = xData.formValidateStatus();
+        }
+        if (!validateStatus) {
+            if(xData.errorMessages && xData.errorMessages.length > 0) {
+                let descMessage: string = '';
+                xData.errorMessages.forEach((message: any) => {
+                    descMessage = descMessage + '<p>' + message.error + '<p>';
+                })
+                xData.$Notice.error({ title: (xData.$t('app.commonWords.wrong') as string), desc: descMessage });
+            } else {
+                xData.$Notice.error({ title: (xData.$t('app.commonWords.wrong') as string), desc: (xData.$t('app.formpage.valuecheckex') as string) });
+            }
+            return;
+        }
+        const startWorkFlow: Function = (param: any, localdata: any) => {
+            xData.wfstart(args).then((response: any) => {
+                if (!response || response.status !== 200) {
+                    return;
+                }
+                const { data: _data } = response;
+                that.closeView(_data);
+            });
+        }
+        const openStartView: Function = async (item: any, localdata: any) => {
+            if (item['wfversion']) {
+                const targetView: any = that.viewRefData ? that.viewRefData[`WFSTART@${item['wfversion']}`] : null;
+                if (targetView) {
+                    const tempContext = Util.deepCopy(that.context);
+                    const tempViewParams = { actionView: `WFSTART@${item['wfversion']}`, actionForm: item['process-form'] };
+                    const container: Subject<any> = that.$appmodal.openModal(targetView, tempContext, tempViewParams);
+                    container.subscribe((result: any) => {
+                        if (!result || !Object.is(result.ret, 'OK')) {
+                            return;
+                        }
+                        const tempSubmitData: any = Util.deepCopy(args[0]);
+                        if (result.datas && result.datas[0]) {
+                            const resultData: any = result.datas[0];
+                            if (Object.keys(resultData).length > 0) {
+                                let tempData: any = {};
+                                Object.keys(resultData).forEach((key: any) => {
+                                    if (resultData[key] || (resultData[key] === 0) || (resultData[key] === false)) {
+                                        tempData[key] = resultData[key];
+                                    }
+                                })
+                                Object.assign(tempSubmitData, tempData);
+                            }
+                        }
+                        startWorkFlow([tempSubmitData], localdata);
+                    })
+                } else {
+                    startWorkFlow(args, localdata);
+                }
+            } else {
+                startWorkFlow(args, localdata);
+            }
+        }
+        let localData: any;
+        const localContext = Util.deepCopy(that.context);
+        const requestResult: Promise<any> = that.appEntityService.getStandWorkflow(localContext);
+        requestResult.then((response: any) => {
+            const { data: targetData, status } = response;
+            if (status !== 200 || targetData.length === 0) {
                 return;
             }
-            const { data: _data } = response;
-            if(window.parent){
-                window.parent.postMessage({ ..._data },'*');
+            if (targetData && targetData.length > 1) {
+                const h = that.$createElement;
+                targetData.forEach((element: any) => {
+                    Object.assign(element, { value: element.definitionkey, label: element.definitionname });
+                })
+                that.$msgbox({
+                    title: '请选择流程版本',
+                    message: h('i-select', {
+                        key: Util.createUUID(),
+                        props: {
+                            value: localData,
+                            placeholder: "请选择流程版本...",
+                            transfer: true,
+                            transferClassName: "start-workflow-select-wraper"
+                        },
+                        on: {
+                            'on-change': ($event: any) => {
+                                localData = { processDefinitionKey: $event };
+                            }
+                        }
+                    }, targetData.map((item: any) => {
+                        return h('i-option', {
+                            key: item.value,
+                            props: {
+                                value: item.value,
+                                label: item.label
+                            }
+                        })
+                    })),
+                    showCancelButton: true,
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消'
+                }).then((action: string) => {
+                    if (Object.is(action, 'confirm') && localData && Object.keys(localData).length > 0) {
+                        let targetItem: any = targetData.find((item: any) => {
+                            return item.definitionkey === localData.processDefinitionKey;
+                        })
+                        openStartView(targetItem, localData);
+                    }
+                })
+            } else {
+                localData = { processDefinitionKey: targetData[0]['definitionkey'] }
+                targetData[0]['process-view'] = "WFSTART@1";
+                openStartView(targetData[0], localData);
             }
-            if (_this.viewdata) {
-                _this.$emit('viewdataschange', [{ ..._data }]);
-                _this.$emit('close');
-            }else if (this.$tabPageExp) {
-                this.$tabPageExp.onClose(this.$route.fullPath);
-            }
-        });
+        })
     }
     /**
      * 当前流程步骤

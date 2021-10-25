@@ -36,7 +36,11 @@ spring:
     conf: classpath:liquibase/master.xml
     dynamic:
       druid: #以下是全局默认值，可以全局更改
-        filters: stat,wall,log4j2
+        filters: stat,log4j2
+        filter:
+          wall:
+            config:
+              multi-statement-allow: true
         #配置初始化大小/最小/最大
         initial-size: 1
         min-idle: 1
@@ -106,6 +110,8 @@ logging:
     cn.ibizlab.core.task: info
     cn.ibizlab: debug
     org.springframework.boot.autoconfigure: ERROR
+    org.springframework.boot.web.embedded.jetty: ERROR
+    org.eclipse.jetty: ERROR
 
 #zuul网关超时设置
 ribbon:

@@ -31,6 +31,7 @@ import cn.ibizlab.core.task.service.IJobsInfoService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -38,7 +39,6 @@ import cn.ibizlab.core.task.mapper.JobsInfoMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
 
 /**
@@ -250,6 +250,8 @@ public class JobsInfoServiceImpl extends ServiceImpl<JobsInfoMapper, JobsInfo> i
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
+
 
 
 

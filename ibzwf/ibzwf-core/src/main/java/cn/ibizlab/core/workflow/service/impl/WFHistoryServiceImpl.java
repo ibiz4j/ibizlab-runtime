@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFHistoryService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 /**
@@ -105,6 +106,8 @@ public class WFHistoryServiceImpl implements IWFHistoryService {
     public Page<WFHistory> searchDefault(WFHistorySearchContext context) {
         return new PageImpl<WFHistory>(new ArrayList(),context.getPageable(),0);
     }
+
+
 
 }
 

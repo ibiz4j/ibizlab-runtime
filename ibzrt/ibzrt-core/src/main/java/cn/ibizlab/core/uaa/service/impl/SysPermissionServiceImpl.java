@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysPermissionService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.uaa.client.SysPermissionFeignClient;
@@ -144,6 +145,8 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
         Page<SysPermission> sysPermissions=sysPermissionFeignClient.searchDefault(context);
         return sysPermissions;
     }
+
+
 
 }
 

@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysUserService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.uaa.client.SysUserFeignClient;
@@ -144,6 +145,8 @@ public class SysUserServiceImpl implements ISysUserService {
         Page<SysUser> sysUsers=sysUserFeignClient.searchDefault(context);
         return sysUsers;
     }
+
+
 
 }
 

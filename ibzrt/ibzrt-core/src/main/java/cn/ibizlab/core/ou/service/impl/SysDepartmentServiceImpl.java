@@ -31,6 +31,7 @@ import cn.ibizlab.core.ou.service.ISysDepartmentService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.ou.client.SysDepartmentFeignClient;
@@ -224,6 +225,8 @@ public class SysDepartmentServiceImpl implements ISysDepartmentService {
         Page<SysDepartment> sysDepartments=sysDepartmentFeignClient.searchDefault(context);
         return sysDepartments;
     }
+
+
 
 }
 

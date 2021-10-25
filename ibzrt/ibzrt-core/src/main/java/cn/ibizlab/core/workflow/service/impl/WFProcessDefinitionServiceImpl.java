@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFProcessDefinitionService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.workflow.client.WFProcessDefinitionFeignClient;
@@ -144,6 +145,8 @@ public class WFProcessDefinitionServiceImpl implements IWFProcessDefinitionServi
         Page<WFProcessDefinition> wFProcessDefinitions=wFProcessDefinitionFeignClient.searchDefault(context);
         return wFProcessDefinitions;
     }
+
+
 
 }
 

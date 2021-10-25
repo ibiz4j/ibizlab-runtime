@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFSystemService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -38,7 +39,6 @@ import cn.ibizlab.core.workflow.mapper.WFSystemMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
 
 /**
@@ -217,6 +217,8 @@ public class WFSystemServiceImpl extends ServiceImpl<WFSystemMapper, WFSystem> i
         log.warn("暂未支持的SQL语法");
         return true;
     }
+
+
 
 
 

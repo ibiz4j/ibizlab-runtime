@@ -31,6 +31,7 @@ import cn.ibizlab.core.task.service.IJobsRegistryService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.task.client.JobsRegistryFeignClient;
@@ -144,6 +145,8 @@ public class JobsRegistryServiceImpl implements IJobsRegistryService {
         Page<JobsRegistry> jobsRegistrys=jobsRegistryFeignClient.searchDefault(context);
         return jobsRegistrys;
     }
+
+
 
 }
 

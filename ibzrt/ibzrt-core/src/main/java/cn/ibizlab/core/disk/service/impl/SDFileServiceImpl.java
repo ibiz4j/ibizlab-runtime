@@ -31,6 +31,7 @@ import cn.ibizlab.core.disk.service.ISDFileService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.disk.client.SDFileFeignClient;
@@ -144,6 +145,8 @@ public class SDFileServiceImpl implements ISDFileService {
         Page<SDFile> sDFiles=sDFileFeignClient.searchDefault(context);
         return sDFiles;
     }
+
+
 
 }
 

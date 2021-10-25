@@ -60,7 +60,7 @@ public class DictCatalogDTO extends DTOBase implements Serializable {
     @JSONField(name = "name")
     @JsonProperty("name")
     @NotBlank(message = "[名称]不允许为空!")
-    @Size(min = 0, max = 100, message = "内容长度必须小于等于[100]")
+    @Size(min = 0, max = 300, message = "内容长度必须小于等于[300]")
     @ApiModelProperty("名称")
     private String name;
 

@@ -31,6 +31,7 @@ import cn.ibizlab.core.notify.service.IMsgBodyService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.notify.client.MsgBodyFeignClient;
@@ -144,6 +145,8 @@ public class MsgBodyServiceImpl implements IMsgBodyService {
         Page<MsgBody> msgBodys=msgBodyFeignClient.searchDefault(context);
         return msgBodys;
     }
+
+
 
 }
 

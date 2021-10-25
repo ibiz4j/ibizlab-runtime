@@ -31,6 +31,7 @@ import cn.ibizlab.core.notify.service.IMsgTemplateService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.notify.client.MsgTemplateFeignClient;
@@ -162,6 +163,8 @@ public class MsgTemplateServiceImpl implements IMsgTemplateService {
         Page<MsgTemplate> msgTemplates=msgTemplateFeignClient.searchDefault(context);
         return msgTemplates;
     }
+
+
 
 }
 

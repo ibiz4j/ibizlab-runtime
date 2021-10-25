@@ -1,7 +1,8 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
-    <changeSet author="mac (generated)" id="1608806718748-1">
+    <changeSet author="mac (generated)" id="1608806718748-2">
         <preConditions onFail="MARK_RAN"  >
+            <dbms type="mysql,h2,postgresql"></dbms>
             <not>
                 <indexExists tableName="IBZUSER_ROLE" columnNames="SYS_USERID" />
             </not>
@@ -10,14 +11,26 @@
             <column name="SYS_USERID"></column>
         </createIndex>
     </changeSet>
-    <changeSet author="mac (generated)" id="1608806718749-1">
+    <changeSet author="mac (generated)" id="1608806718749-3">
         <preConditions onFail="MARK_RAN"  >
+            <dbms type="mysql,h2,postgresql"></dbms>
             <not>
                 <indexExists tableName="IBZROLE_PERMISSION" columnNames="SYS_ROLEID" />
             </not>
         </preConditions>
         <createIndex tableName="IBZROLE_PERMISSION" indexName="IDX_SYSROLE_PERM_ROLEID">
             <column name="SYS_ROLEID"></column>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mac (generated)" id="1608806718749-4">
+        <preConditions onFail="MARK_RAN"  >
+            <dbms type="mysql,h2,postgresql"></dbms>
+            <not>
+                <indexExists tableName="IBZROLE_PERMISSION" indexName="DER1N_SYS_ROLE_PERMISSION_SYS_" />
+            </not>
+        </preConditions>
+        <createIndex tableName="IBZROLE_PERMISSION" indexName="DER1N_SYS_ROLE_PERMISSION_SYS_">
+            <column name="SYS_PERMISSIONID"></column>
         </createIndex>
     </changeSet>
 </databaseChangeLog>

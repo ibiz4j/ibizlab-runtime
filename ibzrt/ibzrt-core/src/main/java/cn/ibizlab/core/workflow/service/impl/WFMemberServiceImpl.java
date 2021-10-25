@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFMemberService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.workflow.client.WFMemberFeignClient;
@@ -212,6 +213,8 @@ public class WFMemberServiceImpl implements IWFMemberService {
         Page<WFMember> wFMembers=wFMemberFeignClient.searchDefault(context);
         return wFMembers;
     }
+
+
 
 }
 

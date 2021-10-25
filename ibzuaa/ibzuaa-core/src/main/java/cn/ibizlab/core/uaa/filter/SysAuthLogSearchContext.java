@@ -41,11 +41,11 @@ public class SysAuthLogSearchContext extends QueryWrapperContext<SysAuthLog> {
             this.getSearchCond().like("personname", n_personname_like);
         }
     }
-	private String n_domain_like;//[域]
-	public void setN_domain_like(String n_domain_like) {
-        this.n_domain_like = n_domain_like;
-        if(!ObjectUtils.isEmpty(this.n_domain_like)){
-            this.getSearchCond().like("domain", n_domain_like);
+	private String n_domains_like;//[域]
+	public void setN_domains_like(String n_domains_like) {
+        this.n_domains_like = n_domains_like;
+        if(!ObjectUtils.isEmpty(this.n_domains_like)){
+            this.getSearchCond().like("domains", n_domains_like);
         }
     }
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")

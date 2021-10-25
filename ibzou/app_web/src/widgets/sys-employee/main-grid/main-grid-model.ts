@@ -168,6 +168,22 @@ export default class MainModel {
           prop: 'srffrontuf',
           dataType: 'TEXT',
         },
+        // 预置工作流数据字段
+        {
+          name: 'srfprocessdefinitionkey',
+          prop: 'srfprocessdefinitionkey',
+          dataType: 'TEXT'
+        },
+        {
+          name: 'srftaskdefinitionkey',
+          prop: 'srftaskdefinitionkey',
+          dataType: 'TEXT'
+        },
+        {
+          name: 'srftaskid',
+          prop: 'srftaskid',
+          dataType: 'TEXT'
+        }
       ]
     }
   }

@@ -31,6 +31,7 @@ import cn.ibizlab.core.workflow.service.IWFSystemService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.workflow.client.WFSystemFeignClient;
@@ -144,6 +145,8 @@ public class WFSystemServiceImpl implements IWFSystemService {
         Page<WFSystem> wFSystems=wFSystemFeignClient.searchDefault(context);
         return wFSystems;
     }
+
+
 
 }
 

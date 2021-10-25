@@ -76,7 +76,7 @@ export class ViewTool {
      * @memberof ViewTool
      */
     public static getIndexRoutePath(route: Route): string {
-        const { parameters: _parameters }: { parameters: any[] } = route.meta;
+        const { parameters: _parameters }: { parameters: any[] } = route.meta as any;
         const { pathName: _pathName, parameterName: _parameterName }: { pathName: string, parameterName: string } = _parameters[0];
         const param = route.params[_parameterName];
         if (param && !Object.is(param, '')) {

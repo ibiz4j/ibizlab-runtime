@@ -2,7 +2,17 @@
     <i-form :model="this.data" class='app-form' ref='form'  id='dictcatalog_main' style="" @on-validate="formItemValidate">
     <input style="display:none;" />
     <row >
-            <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <tabs :animated="false" name='main' :value="detailsModel.form.activiedPage" 
+        @on-click="detailsModel.form.clickPage($event)">
+            <tab-pane v-show="detailsModel.formpage1.visible" name='formpage1' :index="0" tab='main' class=''  
+                :label="(h) =>{
+                    return h('span',{
+                        class:'caption'
+                    },[
+                    $t('entities.dictcatalog.main_form.details.formpage1')
+                    ])
+                }">
+                    <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.dictcatalog.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
         <i-col v-show="detailsModel.ccode.visible" :style="{}"  :sm="{ span: 24, offset: 0 }" :md="{ span: 8, offset: 0 }" :lg="{ span: 8, offset: 0 }" :xl="{ span: 8, offset: 0 }">
@@ -95,6 +105,26 @@
 </i-col>
 
 
+            </tab-pane> 
+            <tab-pane v-show="detailsModel.formpage2.visible" name='formpage2' :index="1" tab='main' class=''  
+                :label="(h) =>{
+                    return h('span',{
+                        class:'caption'
+                    },[
+                    $t('entities.dictcatalog.main_form.details.formpage2')
+                    ])
+                }">
+                    <i-col v-show="detailsModel.extparams.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='extparams' :itemRules="this.rules().extparams" class='' :caption="$t('entities.dictcatalog.main_form.details.extparams')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.extparams.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box v-model="data.extparams" :textareaId="this.$util.createUUID()"  :disabled="detailsModel.extparams.disabled" type='textarea' textareaStyle="height:200px;" ></input-box>
+
+</app-form-item>
+
+</i-col>
+
+
+            </tab-pane> 
+    </tabs>
     </row>
 </i-form>
 </template>
@@ -501,6 +531,7 @@ export default class MainBase extends Vue implements ControlInterface {
         cname: null,
         cgroup: null,
         memo: null,
+        extparams: null,
         cid: null,
         dictcatalog:null,
     };
@@ -568,6 +599,10 @@ export default class MainBase extends Vue implements ControlInterface {
         memo: [
             { required: this.detailsModel.memo.required, type: 'string', message: '备注 值不能为空', trigger: 'change' },
             { required: this.detailsModel.memo.required, type: 'string', message: '备注 值不能为空', trigger: 'blur' },
+        ],
+        extparams: [
+            { required: this.detailsModel.extparams.required, type: 'string', message: '扩展参数 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.extparams.required, type: 'string', message: '扩展参数 值不能为空', trigger: 'blur' },
         ],
         }
     }
@@ -682,6 +717,8 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         formpage1: new FormPageModel({ caption: '基本信息', detailType: 'FORMPAGE', name: 'formpage1', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
 , 
+        formpage2: new FormPageModel({ caption: '扩展', detailType: 'FORMPAGE', name: 'formpage2', visible: true, isShowCaption: true, form: this, isControlledContent: false  })
+, 
         srfupdatedate: new FormItemModel({ caption: '最后修改时间', detailType: 'FORMITEM', name: 'srfupdatedate', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
         srforikey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srforikey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
@@ -706,8 +743,11 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         memo: new FormItemModel({ caption: '备注', detailType: 'FORMITEM', name: 'memo', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
+        extparams: new FormItemModel({ caption: '扩展参数', detailType: 'FORMITEM', name: 'extparams', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
+, 
         cid: new FormItemModel({ caption: '标识', detailType: 'FORMITEM', name: 'cid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
+        form: new FormTabPanelModel({ caption: 'form', detailType: 'TABPANEL', name: 'form', visible: true, isShowCaption: true, form: this, tabPages: [{ name: 'formpage1', index: 0, visible: true }, { name: 'formpage2', index: 1, visible: true }] }),
     };
 
     /**
@@ -855,6 +895,18 @@ export default class MainBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 extparams 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.extparams')
+    onExtparamsChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'extparams', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 cid 值
      *
      * @param {*} newVal
@@ -920,6 +972,8 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
+
+
 
 
 

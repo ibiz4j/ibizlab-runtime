@@ -209,7 +209,7 @@
     "major_field":0
     },
     {
-    "fieldname":"DOMAIN" ,
+    "fieldname":"DOMAINS" ,
     "codename":"Domain",
     "field_logic_name":"域",
     "entity_name":"SYS_AUTHLOG",

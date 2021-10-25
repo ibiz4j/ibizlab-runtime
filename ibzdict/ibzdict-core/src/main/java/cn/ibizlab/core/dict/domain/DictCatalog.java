@@ -19,10 +19,13 @@ import cn.ibizlab.util.annotation.DEField;
 import cn.ibizlab.util.enums.DEPredefinedFieldType;
 import cn.ibizlab.util.enums.DEFieldDefaultValueType;
 import cn.ibizlab.util.helper.DataObject;
+import cn.ibizlab.util.enums.DupCheck;
 import java.io.Serializable;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import cn.ibizlab.util.annotation.Audit;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,7 +40,8 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 @Setter
 @NoArgsConstructor
 @JsonIgnoreProperties(value = "handler")
-@TableName(value = "IBZDICTCATALOG",resultMap = "DictCatalogResultMap")
+@TableName(value = "IBZDICTCATALOG", resultMap = "DictCatalogResultMap")
+@ApiModel("字典")
 public class DictCatalog extends EntityMP implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,10 +49,11 @@ public class DictCatalog extends EntityMP implements Serializable {
     /**
      * 标识
      */
-    @DEField(defaultValue = "code" , defaultValueType = DEFieldDefaultValueType.PARAM , isKeyField=true)
-    @TableId(value= "cid",type=IdType.ASSIGN_UUID)
+    @DEField(defaultValue = "code", defaultValueType = DEFieldDefaultValueType.PARAM, isKeyField = true)
+    @TableId(value = "cid", type = IdType.ASSIGN_UUID)
     @JSONField(name = "id")
     @JsonProperty("id")
+    @ApiModelProperty("标识")
     private String id;
     /**
      * 代码
@@ -57,6 +62,7 @@ public class DictCatalog extends EntityMP implements Serializable {
     @TableField(value = "ccode")
     @JSONField(name = "code")
     @JsonProperty("code")
+    @ApiModelProperty("代码")
     private String code;
     /**
      * 名称
@@ -65,6 +71,7 @@ public class DictCatalog extends EntityMP implements Serializable {
     @TableField(value = "cname")
     @JSONField(name = "name")
     @JsonProperty("name")
+    @ApiModelProperty("名称")
     private String name;
     /**
      * 分组
@@ -73,6 +80,7 @@ public class DictCatalog extends EntityMP implements Serializable {
     @TableField(value = "cgroup")
     @JSONField(name = "group")
     @JsonProperty("group")
+    @ApiModelProperty("分组")
     private String group;
     /**
      * 备注
@@ -80,25 +88,46 @@ public class DictCatalog extends EntityMP implements Serializable {
     @TableField(value = "memo")
     @JSONField(name = "memo")
     @JsonProperty("memo")
+    @ApiModelProperty("备注")
     private String memo;
     /**
      * 是否有效
      */
-    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1" , logicdelval="0")
-    @TableLogic(value= "1",delval="0")
+    @DEField(preType = DEPredefinedFieldType.LOGICVALID, logicval = "1", logicdelval = "0")
+    @TableLogic(value = "1", delval = "0")
     @TableField(value = "enable")
     @JSONField(name = "enable")
     @JsonProperty("enable")
+    @ApiModelProperty("是否有效")
     private Integer enable;
     /**
      * 最后修改时间
      */
     @DEField(preType = DEPredefinedFieldType.UPDATEDATE)
     @TableField(value = "updatedate")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", locale = "zh" , timezone="GMT+8")
-    @JSONField(name = "updatedate" , format="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "updatedate", format = "yyyy-MM-dd HH:mm:ss")
     @JsonProperty("updatedate")
+    @ApiModelProperty("最后修改时间")
     private Timestamp updatedate;
+    /**
+     * 创建时间
+     */
+    @DEField(preType = DEPredefinedFieldType.CREATEDATE)
+    @TableField(value = "createdate", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    @JSONField(name = "createdate", format = "yyyy-MM-dd HH:mm:ss")
+    @JsonProperty("createdate")
+    @ApiModelProperty("创建时间")
+    private Timestamp createdate;
+    /**
+     * 扩展参数
+     */
+    @TableField(value = "extparams")
+    @JSONField(name = "ext_params")
+    @JsonProperty("ext_params")
+    @ApiModelProperty("扩展参数")
+    private String extParams;
 
     @JsonIgnore
     @JSONField(serialize = false)
@@ -109,33 +138,41 @@ public class DictCatalog extends EntityMP implements Serializable {
     /**
      * 设置 [代码]
      */
-    public void setCode(String code){
-        this.code = code ;
-        this.modify("ccode",code);
+    public void setCode(String code) {
+        this.code = code;
+        this.modify("ccode", code);
     }
 
     /**
      * 设置 [名称]
      */
-    public void setName(String name){
-        this.name = name ;
-        this.modify("cname",name);
+    public void setName(String name) {
+        this.name = name;
+        this.modify("cname", name);
     }
 
     /**
      * 设置 [分组]
      */
-    public void setGroup(String group){
-        this.group = group ;
-        this.modify("cgroup",group);
+    public void setGroup(String group) {
+        this.group = group;
+        this.modify("cgroup", group);
     }
 
     /**
      * 设置 [备注]
      */
-    public void setMemo(String memo){
-        this.memo = memo ;
-        this.modify("memo",memo);
+    public void setMemo(String memo) {
+        this.memo = memo;
+        this.modify("memo", memo);
+    }
+
+    /**
+     * 设置 [扩展参数]
+     */
+    public void setExtParams(String extParams) {
+        this.extParams = extParams;
+        this.modify("extparams", extParams);
     }
 
 
@@ -149,7 +186,7 @@ public class DictCatalog extends EntityMP implements Serializable {
     @Override
     public <T> T copyTo(T targetEntity, boolean bIncEmpty) {
         this.reset("cid");
-        return super.copyTo(targetEntity,bIncEmpty);
+        return super.copyTo(targetEntity, bIncEmpty);
     }
 }
 

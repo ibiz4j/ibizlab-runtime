@@ -31,6 +31,7 @@ import cn.ibizlab.core.uaa.service.ISysRolePermissionService;
 
 import cn.ibizlab.util.helper.CachedBeanCopier;
 import cn.ibizlab.util.helper.DEFieldCacheMap;
+import com.alibaba.fastjson.JSONObject;
 
 
 import cn.ibizlab.core.uaa.client.SysRolePermissionFeignClient;
@@ -188,6 +189,8 @@ public class SysRolePermissionServiceImpl implements ISysRolePermissionService {
         Page<SysRolePermission> sysRolePermissions=sysRolePermissionFeignClient.searchDefault(context);
         return sysRolePermissions;
     }
+
+
 
 }
 
