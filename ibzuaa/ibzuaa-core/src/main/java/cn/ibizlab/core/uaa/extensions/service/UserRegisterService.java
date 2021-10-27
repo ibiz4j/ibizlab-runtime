@@ -5,6 +5,7 @@ import cn.ibizlab.core.uaa.domain.SysUserAuth;
 import cn.ibizlab.core.uaa.service.ISysUserAuthService;
 import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
+import cn.ibizlab.util.helper.Sm3Util;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,8 @@ public class UserRegisterService {
                     password = DigestUtils.md5DigestAsHex(password.getBytes());
                 else if(pwencrymode==2)
                     password = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", username, password).getBytes());
+                else if(pwencrymode==3&&password.length()!=64)
+                    password = Sm3Util.encrypt(password).toUpperCase();
                 if(!password.equals(existedUser.getPassword()))
                     throw new BadRequestAlertException("绑定到已有账号失败，请输入正确的密码", "UserRegisterResource", "");
 
@@ -90,6 +93,9 @@ public class UserRegisterService {
                 password = DigestUtils.md5DigestAsHex(password.getBytes());
             else if(pwencrymode==2)
                 password = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", username, password).getBytes());
+            else if(pwencrymode==3&&password.length()!=64)
+                password = Sm3Util.encrypt(password).toUpperCase();
+
             account.setPassword(password);
             account.setUserid(username);
             sysUserService.save(account);

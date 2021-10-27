@@ -7,6 +7,7 @@ import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.util.domain.Token;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.Sm3Util;
 import cn.ibizlab.util.security.*;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import com.alibaba.fastjson.JSONObject;
@@ -100,6 +101,8 @@ public class ClientAuthenticationResource
             oldpwd = DigestUtils.md5DigestAsHex(oldpwd.getBytes());
         else if(pwencrymode==2)
             oldpwd = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", authenticationUser.getUsername(), oldpwd).getBytes());
+        else if(pwencrymode==3&&oldpwd.length()!=64)
+            oldpwd = Sm3Util.encrypt(oldpwd).toUpperCase();
         if(!sysUser.getPassword().equals( oldpwd )){
             throw new BadRequestAlertException("用户名密码错误","IBZUSER",authenticationUser.getUsername());
         }
@@ -108,6 +111,8 @@ public class ClientAuthenticationResource
             newpwd = DigestUtils.md5DigestAsHex(newpwd.getBytes());
         else if(pwencrymode==2)
             newpwd = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", authenticationUser.getUsername(), newpwd).getBytes());
+        else if(pwencrymode==3&&newpwd.length()!=64)
+            newpwd = Sm3Util.encrypt(newpwd).toUpperCase();
         // 修改密码
 
         sysUser.setPassword(newpwd);

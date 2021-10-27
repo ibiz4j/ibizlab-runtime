@@ -12,6 +12,7 @@ import cn.ibizlab.core.ou.service.ISysEmployeeService;
 import cn.ibizlab.core.ou.service.ISysOrganizationService;
 import cn.ibizlab.util.domain.IBZUSER;
 import cn.ibizlab.util.errors.BadRequestAlertException;
+import cn.ibizlab.util.helper.Sm3Util;
 import cn.ibizlab.util.service.IBZUSERService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.aspectj.lang.JoinPoint;
@@ -265,6 +266,8 @@ public class SysEmp2UserAspect
                 password = DigestUtils.md5DigestAsHex(password.getBytes());
             else if(pwencrymode==2)
                 password = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", userName, password).getBytes());
+            else if(pwencrymode==3&&password.length()!=64)
+                password = Sm3Util.encrypt(password).toUpperCase();
             emp.setPassword(password);
         }
     }
@@ -421,6 +424,8 @@ public class SysEmp2UserAspect
                     password = DigestUtils.md5DigestAsHex(password.getBytes());
                 else if(pwencrymode==2)
                     password = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", oldEmp.getUsername(), password).getBytes());
+                else if(pwencrymode==3&&password.length()!=64)
+                    password = Sm3Util.encrypt(password).toUpperCase();
                 emp.setPassword(password);
                 this.iibzEmployeeService.update(emp);
             }

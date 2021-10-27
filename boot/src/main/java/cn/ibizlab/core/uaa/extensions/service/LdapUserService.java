@@ -9,6 +9,7 @@ import cn.ibizlab.core.uaa.service.ISysUserService;
 import cn.ibizlab.core.uaa.service.impl.SysUserServiceImpl;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.helper.CachedBeanCopier;
+import cn.ibizlab.util.helper.Sm3Util;
 import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.AuthenticationUserService;
 import com.alibaba.fastjson.JSONObject;
@@ -92,6 +93,8 @@ public class LdapUserService   implements  AuthenticationUserService {
                 password = DigestUtils.md5DigestAsHex(password.getBytes());
             else if (pwencrymode == 2)
                 password = DigestUtils.md5DigestAsHex(String.format("%1$s||%2$s", username, password).getBytes());
+            else if(pwencrymode==3&&password.length()!=64)
+                password = Sm3Util.encrypt(password).toUpperCase();
             if (!user.getPassword().equals(password)) {
                 throw new BadRequestAlertException("用户名密码错误", "IBZUSER", username);
             }
