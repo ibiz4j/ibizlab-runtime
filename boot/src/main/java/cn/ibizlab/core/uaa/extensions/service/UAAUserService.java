@@ -59,7 +59,7 @@ public class UAAUserService implements   AuthenticationUserService {
 			conds.eq("domains",domains);
 		SysUser user = sysUserService.getOne(conds);
 		if (user == null) {
-			throw new UsernameNotFoundException("用户" + username + "未找到");
+			throw new BadRequestAlertException("用户名密码错误","IBZUSER",username);
 		}
 		else {
 			user.setUsername(username);
