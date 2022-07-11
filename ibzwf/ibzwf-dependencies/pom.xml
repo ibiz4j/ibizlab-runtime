@@ -60,7 +60,7 @@
         <liquibase.version>3.9.0</liquibase.version>
 
         <!--H2内存数据库-->
-        <h2.version>1.4.200</h2.version>
+        <h2.version>2.1.210</h2.version>
 
         <!--caffeine缓存-->
         <caffeine-cache.version>2.6.0</caffeine-cache.version>
