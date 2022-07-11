@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFUserFallback implements WFUserFeignClient {
 
-    public Page<WFUser> select() {
-        return null;
-    }
-
     public WFUser create(WFUser wfuser) {
         return null;
     }
     public Boolean createBatch(List<WFUser> wfusers) {
+        return false;
+    }
+
+    public WFUser get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFUserFallback implements WFUserFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFUser wfuser) {
         return false;
     }
 
-    public WFUser get(String id) {
+
+    public Page<WFUser> searchDefault(WFUserSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFUserFallback implements WFUserFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(WFUser wfuser) {
-        return false;
-    }
 
 
     public Object saveEntity(WFUser wfuser) {
@@ -72,9 +73,8 @@ public class WFUserFallback implements WFUserFeignClient {
         return false;
     }
 
-    public Page<WFUser> searchDefault(WFUserSearchContext context) {
+    public Page<WFUser> select() {
         return null;
     }
-
 
 }

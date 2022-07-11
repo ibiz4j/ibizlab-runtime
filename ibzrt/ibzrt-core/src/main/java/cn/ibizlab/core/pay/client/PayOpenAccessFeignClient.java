@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzpay-api:ibzpay-api}", contextId = "PayOpenAccess", fallback = PayOpenAccessFallback.class)
 public interface PayOpenAccessFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/select")
-    Page<PayOpenAccess> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses")
     PayOpenAccess create(@RequestBody PayOpenAccess payopenaccess);
 
@@ -30,11 +26,8 @@ public interface PayOpenAccessFeignClient {
     Boolean createBatch(@RequestBody List<PayOpenAccess> payopenaccesses);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/payopenaccesses/{id}")
-    PayOpenAccess update(@PathVariable("id") String id,@RequestBody PayOpenAccess payopenaccess);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/payopenaccesses/batch")
-    Boolean updateBatch(@RequestBody List<PayOpenAccess> payopenaccesses);
+    @RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/{id}")
+    PayOpenAccess get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/payopenaccesses/{id}")
@@ -44,16 +37,24 @@ public interface PayOpenAccessFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/{id}")
-    PayOpenAccess get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/payopenaccesses/{id}")
+    PayOpenAccess update(@PathVariable("id") String id,@RequestBody PayOpenAccess payopenaccess);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/getdraft")
-    PayOpenAccess getDraft(PayOpenAccess entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/payopenaccesses/batch")
+    Boolean updateBatch(@RequestBody List<PayOpenAccess> payopenaccesses);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/checkkey")
     Boolean checkKey(@RequestBody PayOpenAccess payopenaccess);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/searchdefault")
+    Page<PayOpenAccess> searchDefault(@RequestBody PayOpenAccessSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/getdraft")
+    PayOpenAccess getDraft(PayOpenAccess entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/save")
@@ -65,9 +66,8 @@ public interface PayOpenAccessFeignClient {
     Boolean saveBatch(@RequestBody List<PayOpenAccess> payopenaccesses);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/payopenaccesses/searchdefault")
-    Page<PayOpenAccess> searchDefault(@RequestBody PayOpenAccessSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/payopenaccesses/select")
+    Page<PayOpenAccess> select();
 
 
 }

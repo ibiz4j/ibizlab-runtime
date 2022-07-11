@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class JobsLogFallback implements JobsLogFeignClient {
 
-    public Page<JobsLog> select() {
-        return null;
-    }
-
     public JobsLog create(JobsLog jobslog) {
         return null;
     }
     public Boolean createBatch(List<JobsLog> jobslogs) {
+        return false;
+    }
+
+    public JobsLog get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class JobsLogFallback implements JobsLogFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(JobsLog jobslog) {
         return false;
     }
 
-    public JobsLog get(String id) {
+
+    public Page<JobsLog> searchDefault(JobsLogSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class JobsLogFallback implements JobsLogFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(JobsLog jobslog) {
-        return false;
-    }
 
 
     public Object saveEntity(JobsLog jobslog) {
@@ -72,9 +73,8 @@ public class JobsLogFallback implements JobsLogFeignClient {
         return false;
     }
 
-    public Page<JobsLog> searchDefault(JobsLogSearchContext context) {
+    public Page<JobsLog> select() {
         return null;
     }
-
 
 }

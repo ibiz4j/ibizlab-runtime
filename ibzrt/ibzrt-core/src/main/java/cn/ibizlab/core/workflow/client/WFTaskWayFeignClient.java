@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFTaskWay", fallback = WFTaskWayFallback.class)
 public interface WFTaskWayFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/select")
-    Page<WFTaskWay> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wftaskways")
     WFTaskWay create(@RequestBody WFTaskWay wftaskway);
 
@@ -30,11 +26,8 @@ public interface WFTaskWayFeignClient {
     Boolean createBatch(@RequestBody List<WFTaskWay> wftaskways);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wftaskways/{sequenceflowid}")
-    WFTaskWay update(@PathVariable("sequenceflowid") String sequenceflowid,@RequestBody WFTaskWay wftaskway);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wftaskways/batch")
-    Boolean updateBatch(@RequestBody List<WFTaskWay> wftaskways);
+    @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/{sequenceflowid}")
+    WFTaskWay get(@PathVariable("sequenceflowid") String sequenceflowid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wftaskways/{sequenceflowid}")
@@ -44,16 +37,24 @@ public interface WFTaskWayFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/{sequenceflowid}")
-    WFTaskWay get(@PathVariable("sequenceflowid") String sequenceflowid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wftaskways/{sequenceflowid}")
+    WFTaskWay update(@PathVariable("sequenceflowid") String sequenceflowid,@RequestBody WFTaskWay wftaskway);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/getdraft")
-    WFTaskWay getDraft(WFTaskWay entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wftaskways/batch")
+    Boolean updateBatch(@RequestBody List<WFTaskWay> wftaskways);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/checkkey")
     Boolean checkKey(@RequestBody WFTaskWay wftaskway);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/searchdefault")
+    Page<WFTaskWay> searchDefault(@RequestBody WFTaskWaySearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/getdraft")
+    WFTaskWay getDraft(WFTaskWay entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/save")
@@ -65,9 +66,8 @@ public interface WFTaskWayFeignClient {
     Boolean saveBatch(@RequestBody List<WFTaskWay> wftaskways);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wftaskways/searchdefault")
-    Page<WFTaskWay> searchDefault(@RequestBody WFTaskWaySearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/wftaskways/select")
+    Page<WFTaskWay> select();
 
 
 }

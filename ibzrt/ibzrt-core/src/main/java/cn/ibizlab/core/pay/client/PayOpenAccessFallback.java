@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class PayOpenAccessFallback implements PayOpenAccessFeignClient {
 
-    public Page<PayOpenAccess> select() {
-        return null;
-    }
-
     public PayOpenAccess create(PayOpenAccess payopenaccess) {
         return null;
     }
     public Boolean createBatch(List<PayOpenAccess> payopenaccesses) {
+        return false;
+    }
+
+    public PayOpenAccess get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class PayOpenAccessFallback implements PayOpenAccessFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(PayOpenAccess payopenaccess) {
         return false;
     }
 
-    public PayOpenAccess get(String id) {
+
+    public Page<PayOpenAccess> searchDefault(PayOpenAccessSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class PayOpenAccessFallback implements PayOpenAccessFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(PayOpenAccess payopenaccess) {
-        return false;
-    }
 
 
     public Object saveEntity(PayOpenAccess payopenaccess) {
@@ -72,9 +73,8 @@ public class PayOpenAccessFallback implements PayOpenAccessFeignClient {
         return false;
     }
 
-    public Page<PayOpenAccess> searchDefault(PayOpenAccessSearchContext context) {
+    public Page<PayOpenAccess> select() {
         return null;
     }
-
 
 }

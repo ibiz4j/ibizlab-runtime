@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysUserRole", fallback = SysUserRoleFallback.class)
 public interface SysUserRoleFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/select")
-    Page<SysUserRole> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles")
     SysUserRole create(@RequestBody SysUserRole sysuserrole);
 
@@ -30,11 +26,8 @@ public interface SysUserRoleFeignClient {
     Boolean createBatch(@RequestBody List<SysUserRole> sysuserroles);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/{userroleid}")
-    SysUserRole update(@PathVariable("userroleid") String userroleid,@RequestBody SysUserRole sysuserrole);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/batch")
-    Boolean updateBatch(@RequestBody List<SysUserRole> sysuserroles);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/{userroleid}")
+    SysUserRole get(@PathVariable("userroleid") String userroleid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysuserroles/{userroleid}")
@@ -44,16 +37,24 @@ public interface SysUserRoleFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/{userroleid}")
-    SysUserRole get(@PathVariable("userroleid") String userroleid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/{userroleid}")
+    SysUserRole update(@PathVariable("userroleid") String userroleid,@RequestBody SysUserRole sysuserrole);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/getdraft")
-    SysUserRole getDraft(SysUserRole entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysuserroles/batch")
+    Boolean updateBatch(@RequestBody List<SysUserRole> sysuserroles);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/checkkey")
     Boolean checkKey(@RequestBody SysUserRole sysuserrole);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/searchdefault")
+    Page<SysUserRole> searchDefault(@RequestBody SysUserRoleSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/getdraft")
+    SysUserRole getDraft(SysUserRole entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/save")
@@ -65,9 +66,8 @@ public interface SysUserRoleFeignClient {
     Boolean saveBatch(@RequestBody List<SysUserRole> sysuserroles);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysuserroles/searchdefault")
-    Page<SysUserRole> searchDefault(@RequestBody SysUserRoleSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysuserroles/select")
+    Page<SysUserRole> select();
 
 
 }

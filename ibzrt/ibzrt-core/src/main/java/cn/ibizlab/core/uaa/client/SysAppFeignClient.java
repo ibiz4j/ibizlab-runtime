@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysApp", fallback = SysAppFallback.class)
 public interface SysAppFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysapps/select")
-    Page<SysApp> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sysapps")
     SysApp create(@RequestBody SysApp sysapp);
 
@@ -30,11 +26,8 @@ public interface SysAppFeignClient {
     Boolean createBatch(@RequestBody List<SysApp> sysapps);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysapps/{id}")
-    SysApp update(@PathVariable("id") String id,@RequestBody SysApp sysapp);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysapps/batch")
-    Boolean updateBatch(@RequestBody List<SysApp> sysapps);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysapps/{id}")
+    SysApp get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysapps/{id}")
@@ -44,16 +37,24 @@ public interface SysAppFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysapps/{id}")
-    SysApp get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysapps/{id}")
+    SysApp update(@PathVariable("id") String id,@RequestBody SysApp sysapp);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysapps/getdraft")
-    SysApp getDraft(SysApp entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysapps/batch")
+    Boolean updateBatch(@RequestBody List<SysApp> sysapps);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysapps/checkkey")
     Boolean checkKey(@RequestBody SysApp sysapp);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysapps/searchdefault")
+    Page<SysApp> searchDefault(@RequestBody SysAppSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysapps/getdraft")
+    SysApp getDraft(SysApp entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysapps/save")
@@ -65,9 +66,8 @@ public interface SysAppFeignClient {
     Boolean saveBatch(@RequestBody List<SysApp> sysapps);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysapps/searchdefault")
-    Page<SysApp> searchDefault(@RequestBody SysAppSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysapps/select")
+    Page<SysApp> select();
 
 
 }

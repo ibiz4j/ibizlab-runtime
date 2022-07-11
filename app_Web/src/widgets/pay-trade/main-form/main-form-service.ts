@@ -1,5 +1,6 @@
 import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
+import UtilService from '@/utilservice/util-service';
 import PayTradeService from '@/service/pay-trade/pay-trade-service';
 import MainModel from './main-form-model';
 import PayOpenAccessService from '@/service/pay-open-access/pay-open-access-service';
@@ -30,6 +31,15 @@ export default class MainService extends ControlService {
     public setTempMode(){
         this.isTempMode = false;
     }
+
+    /**
+     * 工具服务对象
+     *
+     * @protected
+     * @type {UtilService}
+     * @memberof MainService
+     */
+    protected utilService: UtilService = new UtilService();
 
     /**
      * Creates an instance of MainService.

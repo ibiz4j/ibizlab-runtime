@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysPSSystemFallback implements SysPSSystemFeignClient {
 
-    public Page<SysPSSystem> select() {
-        return null;
-    }
-
     public SysPSSystem create(SysPSSystem syspssystem) {
         return null;
     }
     public Boolean createBatch(List<SysPSSystem> syspssystems) {
+        return false;
+    }
+
+    public SysPSSystem get(String pssystemid) {
+        return null;
+    }
+
+
+    public Boolean remove(String pssystemid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,17 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient {
     }
 
 
-    public Boolean remove(String pssystemid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysPSSystem syspssystem) {
         return false;
     }
 
-    public SysPSSystem get(String pssystemid) {
+
+    public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) {
+        return null;
+    }
+
+
+    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
         return null;
     }
 
@@ -54,11 +65,6 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysPSSystem syspssystem) {
-        return false;
-    }
 
 
     public Object saveEntity(SysPSSystem syspssystem) {
@@ -72,14 +78,8 @@ public class SysPSSystemFallback implements SysPSSystemFeignClient {
         return false;
     }
 
-    public Page<SysPSSystem> searchDefault(SysPSSystemSearchContext context) {
+    public Page<SysPSSystem> select() {
         return null;
     }
-
-
-    public Page<SysPSSystem> searchPick(SysPSSystemSearchContext context) {
-        return null;
-    }
-
 
 }

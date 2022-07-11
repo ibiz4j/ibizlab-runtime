@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysUserAuth", fallback = SysUserAuthFallback.class)
 public interface SysUserAuthFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/select")
-    Page<SysUserAuth> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sysuserauths")
     SysUserAuth create(@RequestBody SysUserAuth sysuserauth);
 
@@ -30,11 +26,8 @@ public interface SysUserAuthFeignClient {
     Boolean createBatch(@RequestBody List<SysUserAuth> sysuserauths);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysuserauths/{id}")
-    SysUserAuth update(@PathVariable("id") String id,@RequestBody SysUserAuth sysuserauth);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysuserauths/batch")
-    Boolean updateBatch(@RequestBody List<SysUserAuth> sysuserauths);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/{id}")
+    SysUserAuth get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysuserauths/{id}")
@@ -44,16 +37,24 @@ public interface SysUserAuthFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/{id}")
-    SysUserAuth get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysuserauths/{id}")
+    SysUserAuth update(@PathVariable("id") String id,@RequestBody SysUserAuth sysuserauth);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/getdraft")
-    SysUserAuth getDraft(SysUserAuth entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysuserauths/batch")
+    Boolean updateBatch(@RequestBody List<SysUserAuth> sysuserauths);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/checkkey")
     Boolean checkKey(@RequestBody SysUserAuth sysuserauth);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/searchdefault")
+    Page<SysUserAuth> searchDefault(@RequestBody SysUserAuthSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/getdraft")
+    SysUserAuth getDraft(SysUserAuth entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/save")
@@ -65,9 +66,8 @@ public interface SysUserAuthFeignClient {
     Boolean saveBatch(@RequestBody List<SysUserAuth> sysuserauths);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysuserauths/searchdefault")
-    Page<SysUserAuth> searchDefault(@RequestBody SysUserAuthSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysuserauths/select")
+    Page<SysUserAuth> select();
 
 
 }

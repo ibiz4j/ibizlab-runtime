@@ -5,22 +5,22 @@
             <tns:import name="java.util.Map" />
             <tns:import name="org.springframework.util.StringUtils"/>
             <tns:import name="cn.ibizlab.util.helper.RuleUtils"/>
-            <tns:metaData express="" name="sysemployeesavedeptmemberdefault" type="entity"/>
             <tns:metaData express="new cn.ibizlab.core.ou.domain.SysDeptMember()" name="sysemployeesavedeptmembermember" type="refentity"/>
+            <tns:metaData express="" name="sysemployeesavedeptmemberdefault" type="entity"/>
             <tns:metaData express="T(cn.ibizlab.util.security.SpringContextHolder).getBean(T(cn.ibizlab.core.ou.service.ISysDeptMemberService))" name="sysdeptmemberservice" type="service"/>
             <tns:metaData express="T(cn.ibizlab.util.security.SpringContextHolder).getBean(T(cn.ibizlab.core.ou.service.ISysEmployeeService))" name="iBzSysSysemployeeDefaultService" type="service"/>
             <tns:metaData express="T(cn.ibizlab.util.security.AuthenticationUser).getAuthenticationUser()" name="curuser" type="session"/>
-        <tns:global identifier="sysemployeesavedeptmemberdefault" type="cn.ibizlab.core.ou.domain.SysEmployee" />
         <tns:global identifier="sysemployeesavedeptmembermember" type="cn.ibizlab.core.ou.domain.SysDeptMember" />
+        <tns:global identifier="sysemployeesavedeptmemberdefault" type="cn.ibizlab.core.ou.domain.SysEmployee" />
         </extensionElements>
      <startEvent id="begin" isInterrupting="true"/>
      <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysemployeesavedeptmemberdeaction1" id="deaction1" implementation="http://www.jboss.org/drools/rule" name="保存成员"/>
      <endEvent id="deaction1_end" name="end"/>
      <sequenceFlow id="deaction1_end_line" sourceRef="deaction1" targetRef="deaction1_end"/>
      <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysemployeesavedeptmemberprepareparam1" id="prepareparam1" implementation="http://www.jboss.org/drools/rule" name="准备成员"/>
-     <sequenceFlow id="prepareparam1_deaction1" sourceRef="prepareparam1" targetRef="deaction1">
-     </sequenceFlow>
      <sequenceFlow id="begin_prepareparam1" sourceRef="begin" targetRef="prepareparam1">
+     </sequenceFlow>
+     <sequenceFlow id="prepareparam1_deaction1" sourceRef="prepareparam1" targetRef="deaction1">
      </sequenceFlow>
     </process>
 </definitions>

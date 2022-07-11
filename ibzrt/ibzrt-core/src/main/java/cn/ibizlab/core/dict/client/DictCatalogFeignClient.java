@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzdict-api:ibzdict-api}", contextId = "DictCatalog", fallback = DictCatalogFallback.class)
 public interface DictCatalogFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/select")
-    Page<DictCatalog> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs")
     DictCatalog create(@RequestBody DictCatalog dictcatalog);
 
@@ -30,11 +26,8 @@ public interface DictCatalogFeignClient {
     Boolean createBatch(@RequestBody List<DictCatalog> dictcatalogs);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/{id}")
-    DictCatalog update(@PathVariable("id") String id,@RequestBody DictCatalog dictcatalog);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/batch")
-    Boolean updateBatch(@RequestBody List<DictCatalog> dictcatalogs);
+    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{id}")
+    DictCatalog get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/dictcatalogs/{id}")
@@ -44,16 +37,24 @@ public interface DictCatalogFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/{id}")
-    DictCatalog get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/{id}")
+    DictCatalog update(@PathVariable("id") String id,@RequestBody DictCatalog dictcatalog);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/getdraft")
-    DictCatalog getDraft(DictCatalog entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/dictcatalogs/batch")
+    Boolean updateBatch(@RequestBody List<DictCatalog> dictcatalogs);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/checkkey")
     Boolean checkKey(@RequestBody DictCatalog dictcatalog);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/searchdefault")
+    Page<DictCatalog> searchDefault(@RequestBody DictCatalogSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/getdraft")
+    DictCatalog getDraft(DictCatalog entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/save")
@@ -65,9 +66,8 @@ public interface DictCatalogFeignClient {
     Boolean saveBatch(@RequestBody List<DictCatalog> dictcatalogs);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/dictcatalogs/searchdefault")
-    Page<DictCatalog> searchDefault(@RequestBody DictCatalogSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/dictcatalogs/select")
+    Page<DictCatalog> select();
 
 
 }

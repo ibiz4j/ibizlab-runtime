@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzdisk-api:ibzdisk-api}", contextId = "MetaDynamicModel", fallback = MetaDynamicModelFallback.class)
 public interface MetaDynamicModelFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/metadynamicmodels/select")
-    Page<MetaDynamicModel> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels")
     MetaDynamicModel create(@RequestBody MetaDynamicModel metadynamicmodel);
 
@@ -30,11 +26,8 @@ public interface MetaDynamicModelFeignClient {
     Boolean createBatch(@RequestBody List<MetaDynamicModel> metadynamicmodels);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/metadynamicmodels/{configid}")
-    MetaDynamicModel update(@PathVariable("configid") String configid,@RequestBody MetaDynamicModel metadynamicmodel);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/metadynamicmodels/batch")
-    Boolean updateBatch(@RequestBody List<MetaDynamicModel> metadynamicmodels);
+    @RequestMapping(method = RequestMethod.GET, value = "/metadynamicmodels/{configid}")
+    MetaDynamicModel get(@PathVariable("configid") String configid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/metadynamicmodels/{configid}")
@@ -44,16 +37,29 @@ public interface MetaDynamicModelFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/metadynamicmodels/{configid}")
-    MetaDynamicModel get(@PathVariable("configid") String configid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/metadynamicmodels/{configid}")
+    MetaDynamicModel update(@PathVariable("configid") String configid,@RequestBody MetaDynamicModel metadynamicmodel);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/metadynamicmodels/getdraft")
-    MetaDynamicModel getDraft(MetaDynamicModel entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/metadynamicmodels/batch")
+    Boolean updateBatch(@RequestBody List<MetaDynamicModel> metadynamicmodels);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels/checkkey")
     Boolean checkKey(@RequestBody MetaDynamicModel metadynamicmodel);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels/searchdefault")
+    Page<MetaDynamicModel> searchDefault(@RequestBody MetaDynamicModelSearchContext context);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels/searchdynainst")
+    Page<MetaDynamicModel> searchDynaInst(@RequestBody MetaDynamicModelSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/metadynamicmodels/getdraft")
+    MetaDynamicModel getDraft(MetaDynamicModel entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels/{configid}/init")
@@ -73,14 +79,8 @@ public interface MetaDynamicModelFeignClient {
     Boolean saveBatch(@RequestBody List<MetaDynamicModel> metadynamicmodels);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels/searchdefault")
-    Page<MetaDynamicModel> searchDefault(@RequestBody MetaDynamicModelSearchContext context);
-
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/metadynamicmodels/searchdynainst")
-    Page<MetaDynamicModel> searchDynaInst(@RequestBody MetaDynamicModelSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/metadynamicmodels/select")
+    Page<MetaDynamicModel> select();
 
 
 }

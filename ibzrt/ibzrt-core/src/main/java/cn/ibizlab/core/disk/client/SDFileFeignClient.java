@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzdisk-api:ibzdisk-api}", contextId = "SDFile", fallback = SDFileFallback.class)
 public interface SDFileFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sdfiles/select")
-    Page<SDFile> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles")
     SDFile create(@RequestBody SDFile sdfile);
 
@@ -30,11 +26,8 @@ public interface SDFileFeignClient {
     Boolean createBatch(@RequestBody List<SDFile> sdfiles);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/{id}")
-    SDFile update(@PathVariable("id") String id,@RequestBody SDFile sdfile);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/batch")
-    Boolean updateBatch(@RequestBody List<SDFile> sdfiles);
+    @RequestMapping(method = RequestMethod.GET, value = "/sdfiles/{id}")
+    SDFile get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sdfiles/{id}")
@@ -44,16 +37,24 @@ public interface SDFileFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sdfiles/{id}")
-    SDFile get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/{id}")
+    SDFile update(@PathVariable("id") String id,@RequestBody SDFile sdfile);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sdfiles/getdraft")
-    SDFile getDraft(SDFile entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sdfiles/batch")
+    Boolean updateBatch(@RequestBody List<SDFile> sdfiles);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/checkkey")
     Boolean checkKey(@RequestBody SDFile sdfile);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/searchdefault")
+    Page<SDFile> searchDefault(@RequestBody SDFileSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sdfiles/getdraft")
+    SDFile getDraft(SDFile entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/save")
@@ -65,9 +66,8 @@ public interface SDFileFeignClient {
     Boolean saveBatch(@RequestBody List<SDFile> sdfiles);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sdfiles/searchdefault")
-    Page<SDFile> searchDefault(@RequestBody SDFileSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sdfiles/select")
+    Page<SDFile> select();
 
 
 }

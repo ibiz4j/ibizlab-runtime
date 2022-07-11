@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFREModelFallback implements WFREModelFeignClient {
 
-    public Page<WFREModel> select() {
-        return null;
-    }
-
     public WFREModel create(WFREModel wfremodel) {
         return null;
     }
     public Boolean createBatch(List<WFREModel> wfremodels) {
+        return false;
+    }
+
+    public WFREModel get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFREModelFallback implements WFREModelFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFREModel wfremodel) {
         return false;
     }
 
-    public WFREModel get(String id) {
+
+    public Page<WFREModel> searchDefault(WFREModelSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFREModelFallback implements WFREModelFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(WFREModel wfremodel) {
-        return false;
-    }
 
 
     public Object saveEntity(WFREModel wfremodel) {
@@ -72,9 +73,8 @@ public class WFREModelFallback implements WFREModelFeignClient {
         return false;
     }
 
-    public Page<WFREModel> searchDefault(WFREModelSearchContext context) {
+    public Page<WFREModel> select() {
         return null;
     }
-
 
 }

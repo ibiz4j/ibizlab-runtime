@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzpay-api:ibzpay-api}", contextId = "PayTrade", fallback = PayTradeFallback.class)
 public interface PayTradeFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/paytrades/select")
-    Page<PayTrade> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/paytrades")
     PayTrade create(@RequestBody PayTrade paytrade);
 
@@ -30,11 +26,8 @@ public interface PayTradeFeignClient {
     Boolean createBatch(@RequestBody List<PayTrade> paytrades);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/paytrades/{trade_id}")
-    PayTrade update(@PathVariable("trade_id") String trade_id,@RequestBody PayTrade paytrade);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/paytrades/batch")
-    Boolean updateBatch(@RequestBody List<PayTrade> paytrades);
+    @RequestMapping(method = RequestMethod.GET, value = "/paytrades/{trade_id}")
+    PayTrade get(@PathVariable("trade_id") String trade_id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/paytrades/{trade_id}")
@@ -44,16 +37,24 @@ public interface PayTradeFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/paytrades/{trade_id}")
-    PayTrade get(@PathVariable("trade_id") String trade_id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/paytrades/{trade_id}")
+    PayTrade update(@PathVariable("trade_id") String trade_id,@RequestBody PayTrade paytrade);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/paytrades/getdraft")
-    PayTrade getDraft(PayTrade entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/paytrades/batch")
+    Boolean updateBatch(@RequestBody List<PayTrade> paytrades);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/paytrades/checkkey")
     Boolean checkKey(@RequestBody PayTrade paytrade);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/paytrades/searchdefault")
+    Page<PayTrade> searchDefault(@RequestBody PayTradeSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/paytrades/getdraft")
+    PayTrade getDraft(PayTrade entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/paytrades/save")
@@ -65,9 +66,8 @@ public interface PayTradeFeignClient {
     Boolean saveBatch(@RequestBody List<PayTrade> paytrades);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/paytrades/searchdefault")
-    Page<PayTrade> searchDefault(@RequestBody PayTradeSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/paytrades/select")
+    Page<PayTrade> select();
 
 
 }

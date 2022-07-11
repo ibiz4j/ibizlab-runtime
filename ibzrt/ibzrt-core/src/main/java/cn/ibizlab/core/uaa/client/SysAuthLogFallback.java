@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysAuthLogFallback implements SysAuthLogFeignClient {
 
-    public Page<SysAuthLog> select() {
-        return null;
-    }
-
     public SysAuthLog create(SysAuthLog sysauthlog) {
         return null;
     }
     public Boolean createBatch(List<SysAuthLog> sysauthlogs) {
+        return false;
+    }
+
+    public SysAuthLog get(String logid) {
+        return null;
+    }
+
+
+    public Boolean remove(String logid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysAuthLogFallback implements SysAuthLogFeignClient {
     }
 
 
-    public Boolean remove(String logid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysAuthLog sysauthlog) {
         return false;
     }
 
-    public SysAuthLog get(String logid) {
+
+    public Page<SysAuthLog> searchDefault(SysAuthLogSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysAuthLogFallback implements SysAuthLogFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysAuthLog sysauthlog) {
-        return false;
-    }
 
 
     public Object saveEntity(SysAuthLog sysauthlog) {
@@ -72,9 +73,8 @@ public class SysAuthLogFallback implements SysAuthLogFeignClient {
         return false;
     }
 
-    public Page<SysAuthLog> searchDefault(SysAuthLogSearchContext context) {
+    public Page<SysAuthLog> select() {
         return null;
     }
-
 
 }

@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFUser", fallback = WFUserFallback.class)
 public interface WFUserFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/select")
-    Page<WFUser> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers")
     WFUser create(@RequestBody WFUser wfuser);
 
@@ -30,11 +26,8 @@ public interface WFUserFeignClient {
     Boolean createBatch(@RequestBody List<WFUser> wfusers);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfusers/{id}")
-    WFUser update(@PathVariable("id") String id,@RequestBody WFUser wfuser);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfusers/batch")
-    Boolean updateBatch(@RequestBody List<WFUser> wfusers);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/{id}")
+    WFUser get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfusers/{id}")
@@ -44,16 +37,24 @@ public interface WFUserFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/{id}")
-    WFUser get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfusers/{id}")
+    WFUser update(@PathVariable("id") String id,@RequestBody WFUser wfuser);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
-    WFUser getDraft(WFUser entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfusers/batch")
+    Boolean updateBatch(@RequestBody List<WFUser> wfusers);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers/checkkey")
     Boolean checkKey(@RequestBody WFUser wfuser);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfusers/searchdefault")
+    Page<WFUser> searchDefault(@RequestBody WFUserSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/getdraft")
+    WFUser getDraft(WFUser entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfusers/save")
@@ -65,9 +66,8 @@ public interface WFUserFeignClient {
     Boolean saveBatch(@RequestBody List<WFUser> wfusers);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfusers/searchdefault")
-    Page<WFUser> searchDefault(@RequestBody WFUserSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfusers/select")
+    Page<WFUser> select();
 
 
 }

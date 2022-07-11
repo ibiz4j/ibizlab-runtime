@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFSystemFallback implements WFSystemFeignClient {
 
-    public Page<WFSystem> select() {
-        return null;
-    }
-
     public WFSystem create(WFSystem wfsystem) {
         return null;
     }
     public Boolean createBatch(List<WFSystem> wfsystems) {
+        return false;
+    }
+
+    public WFSystem get(String pssystemid) {
+        return null;
+    }
+
+
+    public Boolean remove(String pssystemid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFSystemFallback implements WFSystemFeignClient {
     }
 
 
-    public Boolean remove(String pssystemid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFSystem wfsystem) {
         return false;
     }
 
-    public WFSystem get(String pssystemid) {
+
+    public Page<WFSystem> searchDefault(WFSystemSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFSystemFallback implements WFSystemFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(WFSystem wfsystem) {
-        return false;
-    }
 
 
     public Object saveEntity(WFSystem wfsystem) {
@@ -72,9 +73,8 @@ public class WFSystemFallback implements WFSystemFeignClient {
         return false;
     }
 
-    public Page<WFSystem> searchDefault(WFSystemSearchContext context) {
+    public Page<WFSystem> select() {
         return null;
     }
-
 
 }

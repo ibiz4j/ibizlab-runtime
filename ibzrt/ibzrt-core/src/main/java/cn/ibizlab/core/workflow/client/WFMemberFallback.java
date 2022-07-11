@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFMemberFallback implements WFMemberFeignClient {
 
-    public Page<WFMember> select() {
-        return null;
-    }
-
     public WFMember create(WFMember wfmember) {
         return null;
     }
     public Boolean createBatch(List<WFMember> wfmembers) {
+        return false;
+    }
+
+    public WFMember get(String memberid) {
+        return null;
+    }
+
+
+    public Boolean remove(String memberid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFMemberFallback implements WFMemberFeignClient {
     }
 
 
-    public Boolean remove(String memberid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFMember wfmember) {
         return false;
     }
 
-    public WFMember get(String memberid) {
+
+    public Page<WFMember> searchDefault(WFMemberSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFMemberFallback implements WFMemberFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(WFMember wfmember) {
-        return false;
-    }
 
 
     public Object saveEntity(WFMember wfmember) {
@@ -72,9 +73,8 @@ public class WFMemberFallback implements WFMemberFeignClient {
         return false;
     }
 
-    public Page<WFMember> searchDefault(WFMemberSearchContext context) {
+    public Page<WFMember> select() {
         return null;
     }
-
 
 }

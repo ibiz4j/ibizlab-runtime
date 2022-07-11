@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysDepartmentFallback implements SysDepartmentFeignClient {
 
-    public Page<SysDepartment> select() {
-        return null;
-    }
-
     public SysDepartment create(SysDepartment sysdepartment) {
         return null;
     }
     public Boolean createBatch(List<SysDepartment> sysdepartments) {
+        return false;
+    }
+
+    public SysDepartment get(String deptid) {
+        return null;
+    }
+
+
+    public Boolean remove(String deptid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysDepartmentFallback implements SysDepartmentFeignClient {
     }
 
 
-    public Boolean remove(String deptid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysDepartment sysdepartment) {
         return false;
     }
 
-    public SysDepartment get(String deptid) {
+
+    public Page<SysDepartment> searchDefault(SysDepartmentSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysDepartmentFallback implements SysDepartmentFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysDepartment sysdepartment) {
-        return false;
-    }
 
 
     public Object saveEntity(SysDepartment sysdepartment) {
@@ -72,9 +73,8 @@ public class SysDepartmentFallback implements SysDepartmentFeignClient {
         return false;
     }
 
-    public Page<SysDepartment> searchDefault(SysDepartmentSearchContext context) {
+    public Page<SysDepartment> select() {
         return null;
     }
-
 
 }

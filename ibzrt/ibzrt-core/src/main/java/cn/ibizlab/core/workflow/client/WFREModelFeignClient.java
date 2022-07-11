@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFREModel", fallback = WFREModelFallback.class)
 public interface WFREModelFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/select")
-    Page<WFREModel> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfremodels")
     WFREModel create(@RequestBody WFREModel wfremodel);
 
@@ -30,11 +26,8 @@ public interface WFREModelFeignClient {
     Boolean createBatch(@RequestBody List<WFREModel> wfremodels);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/{id}")
-    WFREModel update(@PathVariable("id") String id,@RequestBody WFREModel wfremodel);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/batch")
-    Boolean updateBatch(@RequestBody List<WFREModel> wfremodels);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{id}")
+    WFREModel get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfremodels/{id}")
@@ -44,16 +37,24 @@ public interface WFREModelFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/{id}")
-    WFREModel get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/{id}")
+    WFREModel update(@PathVariable("id") String id,@RequestBody WFREModel wfremodel);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/getdraft")
-    WFREModel getDraft(WFREModel entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfremodels/batch")
+    Boolean updateBatch(@RequestBody List<WFREModel> wfremodels);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/checkkey")
     Boolean checkKey(@RequestBody WFREModel wfremodel);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/searchdefault")
+    Page<WFREModel> searchDefault(@RequestBody WFREModelSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/getdraft")
+    WFREModel getDraft(WFREModel entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/save")
@@ -65,9 +66,8 @@ public interface WFREModelFeignClient {
     Boolean saveBatch(@RequestBody List<WFREModel> wfremodels);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfremodels/searchdefault")
-    Page<WFREModel> searchDefault(@RequestBody WFREModelSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfremodels/select")
+    Page<WFREModel> select();
 
 
 }

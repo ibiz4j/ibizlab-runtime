@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SDFileFallback implements SDFileFeignClient {
 
-    public Page<SDFile> select() {
-        return null;
-    }
-
     public SDFile create(SDFile sdfile) {
         return null;
     }
     public Boolean createBatch(List<SDFile> sdfiles) {
+        return false;
+    }
+
+    public SDFile get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SDFileFallback implements SDFileFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SDFile sdfile) {
         return false;
     }
 
-    public SDFile get(String id) {
+
+    public Page<SDFile> searchDefault(SDFileSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SDFileFallback implements SDFileFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SDFile sdfile) {
-        return false;
-    }
 
 
     public Object saveEntity(SDFile sdfile) {
@@ -72,9 +73,8 @@ public class SDFileFallback implements SDFileFeignClient {
         return false;
     }
 
-    public Page<SDFile> searchDefault(SDFileSearchContext context) {
+    public Page<SDFile> select() {
         return null;
     }
-
 
 }

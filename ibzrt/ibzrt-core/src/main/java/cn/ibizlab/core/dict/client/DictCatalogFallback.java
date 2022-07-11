@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class DictCatalogFallback implements DictCatalogFeignClient {
 
-    public Page<DictCatalog> select() {
-        return null;
-    }
-
     public DictCatalog create(DictCatalog dictcatalog) {
         return null;
     }
     public Boolean createBatch(List<DictCatalog> dictcatalogs) {
+        return false;
+    }
+
+    public DictCatalog get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class DictCatalogFallback implements DictCatalogFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(DictCatalog dictcatalog) {
         return false;
     }
 
-    public DictCatalog get(String id) {
+
+    public Page<DictCatalog> searchDefault(DictCatalogSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class DictCatalogFallback implements DictCatalogFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(DictCatalog dictcatalog) {
-        return false;
-    }
 
 
     public Object saveEntity(DictCatalog dictcatalog) {
@@ -72,9 +73,8 @@ public class DictCatalogFallback implements DictCatalogFeignClient {
         return false;
     }
 
-    public Page<DictCatalog> searchDefault(DictCatalogSearchContext context) {
+    public Page<DictCatalog> select() {
         return null;
     }
-
 
 }

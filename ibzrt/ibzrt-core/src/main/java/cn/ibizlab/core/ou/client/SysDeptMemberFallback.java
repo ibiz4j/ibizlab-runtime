@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysDeptMemberFallback implements SysDeptMemberFeignClient {
 
-    public Page<SysDeptMember> select() {
-        return null;
-    }
-
     public SysDeptMember create(SysDeptMember sysdeptmember) {
         return null;
     }
     public Boolean createBatch(List<SysDeptMember> sysdeptmembers) {
+        return false;
+    }
+
+    public SysDeptMember get(String memberid) {
+        return null;
+    }
+
+
+    public Boolean remove(String memberid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysDeptMemberFallback implements SysDeptMemberFeignClient {
     }
 
 
-    public Boolean remove(String memberid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysDeptMember sysdeptmember) {
         return false;
     }
 
-    public SysDeptMember get(String memberid) {
+
+    public Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysDeptMemberFallback implements SysDeptMemberFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysDeptMember sysdeptmember) {
-        return false;
-    }
 
 
     public Object saveEntity(SysDeptMember sysdeptmember) {
@@ -72,9 +73,8 @@ public class SysDeptMemberFallback implements SysDeptMemberFeignClient {
         return false;
     }
 
-    public Page<SysDeptMember> searchDefault(SysDeptMemberSearchContext context) {
+    public Page<SysDeptMember> select() {
         return null;
     }
-
 
 }

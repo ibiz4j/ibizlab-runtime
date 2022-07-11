@@ -5,8 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.StringUtils;
 import org.springframework.util.ObjectUtils;
 import cn.ibizlab.util.errors.BadRequestAlertException;
-global cn.ibizlab.core.ou.domain.SysEmployee sysemployeesavedeptmemberdefault;
 global cn.ibizlab.core.ou.domain.SysDeptMember sysemployeesavedeptmembermember;
+global cn.ibizlab.core.ou.domain.SysEmployee sysemployeesavedeptmemberdefault;
 global cn.ibizlab.core.ou.service.ISysDeptMemberService sysdeptmemberservice;
 global cn.ibizlab.core.ou.service.ISysEmployeeService iBzSysSysemployeeDefaultService;
 global cn.ibizlab.util.security.AuthenticationUser curuser;
@@ -27,8 +27,8 @@ ruleflow-group "sysemployeesavedeptmemberdeaction1"
     when
     then
     sysdeptmemberservice.save(sysemployeesavedeptmembermember);
-    update(sysemployeesavedeptmemberdefault);//更新fact中变量值
     update(sysemployeesavedeptmembermember);//更新fact中变量值
+    update(sysemployeesavedeptmemberdefault);//更新fact中变量值
     end
 
 //逻辑处理节点[准备成员]
@@ -38,7 +38,7 @@ ruleflow-group "sysemployeesavedeptmemberprepareparam1"
     then
     sysemployeesavedeptmembermember.set("deptid",sysemployeesavedeptmemberdefault.get("mdeptid"));
     sysemployeesavedeptmembermember.set("userid",sysemployeesavedeptmemberdefault.get("userid"));
-    update(sysemployeesavedeptmemberdefault);//更新fact中变量值
     update(sysemployeesavedeptmembermember);//更新fact中变量值
+    update(sysemployeesavedeptmemberdefault);//更新fact中变量值
     end
 

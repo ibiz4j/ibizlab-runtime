@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzdict-api:ibzdict-api}", contextId = "DictOption", fallback = DictOptionFallback.class)
 public interface DictOptionFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/select")
-    Page<DictOption> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/dictoptions")
     DictOption create(@RequestBody DictOption dictoption);
 
@@ -30,11 +26,8 @@ public interface DictOptionFeignClient {
     Boolean createBatch(@RequestBody List<DictOption> dictoptions);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/dictoptions/{value_key}")
-    DictOption update(@PathVariable("value_key") String value_key,@RequestBody DictOption dictoption);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/dictoptions/batch")
-    Boolean updateBatch(@RequestBody List<DictOption> dictoptions);
+    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/{value_key}")
+    DictOption get(@PathVariable("value_key") String value_key);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/dictoptions/{value_key}")
@@ -44,16 +37,24 @@ public interface DictOptionFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/{value_key}")
-    DictOption get(@PathVariable("value_key") String value_key);
+    @RequestMapping(method = RequestMethod.PUT, value = "/dictoptions/{value_key}")
+    DictOption update(@PathVariable("value_key") String value_key,@RequestBody DictOption dictoption);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
-    DictOption getDraft(DictOption entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/dictoptions/batch")
+    Boolean updateBatch(@RequestBody List<DictOption> dictoptions);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/checkkey")
     Boolean checkKey(@RequestBody DictOption dictoption);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/searchdefault")
+    Page<DictOption> searchDefault(@RequestBody DictOptionSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/getdraft")
+    DictOption getDraft(DictOption entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/save")
@@ -65,9 +66,8 @@ public interface DictOptionFeignClient {
     Boolean saveBatch(@RequestBody List<DictOption> dictoptions);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/dictoptions/searchdefault")
-    Page<DictOption> searchDefault(@RequestBody DictOptionSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/dictoptions/select")
+    Page<DictOption> select();
 
 
 }

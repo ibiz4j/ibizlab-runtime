@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibznotify-api:ibznotify-api}", contextId = "MsgOpenAccess", fallback = MsgOpenAccessFallback.class)
 public interface MsgOpenAccessFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/select")
-    Page<MsgOpenAccess> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses")
     MsgOpenAccess create(@RequestBody MsgOpenAccess msgopenaccess);
 
@@ -30,11 +26,8 @@ public interface MsgOpenAccessFeignClient {
     Boolean createBatch(@RequestBody List<MsgOpenAccess> msgopenaccesses);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/msgopenaccesses/{id}")
-    MsgOpenAccess update(@PathVariable("id") String id,@RequestBody MsgOpenAccess msgopenaccess);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/msgopenaccesses/batch")
-    Boolean updateBatch(@RequestBody List<MsgOpenAccess> msgopenaccesses);
+    @RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/{id}")
+    MsgOpenAccess get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/msgopenaccesses/{id}")
@@ -44,16 +37,24 @@ public interface MsgOpenAccessFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/{id}")
-    MsgOpenAccess get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/msgopenaccesses/{id}")
+    MsgOpenAccess update(@PathVariable("id") String id,@RequestBody MsgOpenAccess msgopenaccess);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/getdraft")
-    MsgOpenAccess getDraft(MsgOpenAccess entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/msgopenaccesses/batch")
+    Boolean updateBatch(@RequestBody List<MsgOpenAccess> msgopenaccesses);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/checkkey")
     Boolean checkKey(@RequestBody MsgOpenAccess msgopenaccess);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/searchdefault")
+    Page<MsgOpenAccess> searchDefault(@RequestBody MsgOpenAccessSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/getdraft")
+    MsgOpenAccess getDraft(MsgOpenAccess entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/save")
@@ -65,9 +66,8 @@ public interface MsgOpenAccessFeignClient {
     Boolean saveBatch(@RequestBody List<MsgOpenAccess> msgopenaccesses);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/msgopenaccesses/searchdefault")
-    Page<MsgOpenAccess> searchDefault(@RequestBody MsgOpenAccessSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/msgopenaccesses/select")
+    Page<MsgOpenAccess> select();
 
 
 }

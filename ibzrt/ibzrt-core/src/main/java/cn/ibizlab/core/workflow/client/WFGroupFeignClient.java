@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFGroup", fallback = WFGroupFallback.class)
 public interface WFGroupFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/select")
-    Page<WFGroup> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfgroups")
     WFGroup create(@RequestBody WFGroup wfgroup);
 
@@ -30,11 +26,8 @@ public interface WFGroupFeignClient {
     Boolean createBatch(@RequestBody List<WFGroup> wfgroups);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/{id}")
-    WFGroup update(@PathVariable("id") String id,@RequestBody WFGroup wfgroup);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/batch")
-    Boolean updateBatch(@RequestBody List<WFGroup> wfgroups);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{id}")
+    WFGroup get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfgroups/{id}")
@@ -44,16 +37,24 @@ public interface WFGroupFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/{id}")
-    WFGroup get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/{id}")
+    WFGroup update(@PathVariable("id") String id,@RequestBody WFGroup wfgroup);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/getdraft")
-    WFGroup getDraft(WFGroup entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfgroups/batch")
+    Boolean updateBatch(@RequestBody List<WFGroup> wfgroups);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/checkkey")
     Boolean checkKey(@RequestBody WFGroup wfgroup);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/searchdefault")
+    Page<WFGroup> searchDefault(@RequestBody WFGroupSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/getdraft")
+    WFGroup getDraft(WFGroup entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/save")
@@ -65,9 +66,8 @@ public interface WFGroupFeignClient {
     Boolean saveBatch(@RequestBody List<WFGroup> wfgroups);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfgroups/searchdefault")
-    Page<WFGroup> searchDefault(@RequestBody WFGroupSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfgroups/select")
+    Page<WFGroup> select();
 
 
 }

@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFMember", fallback = WFMemberFallback.class)
 public interface WFMemberFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/select")
-    Page<WFMember> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfmembers")
     WFMember create(@RequestBody WFMember wfmember);
 
@@ -30,11 +26,8 @@ public interface WFMemberFeignClient {
     Boolean createBatch(@RequestBody List<WFMember> wfmembers);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfmembers/{memberid}")
-    WFMember update(@PathVariable("memberid") String memberid,@RequestBody WFMember wfmember);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfmembers/batch")
-    Boolean updateBatch(@RequestBody List<WFMember> wfmembers);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/{memberid}")
+    WFMember get(@PathVariable("memberid") String memberid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfmembers/{memberid}")
@@ -44,16 +37,24 @@ public interface WFMemberFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/{memberid}")
-    WFMember get(@PathVariable("memberid") String memberid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfmembers/{memberid}")
+    WFMember update(@PathVariable("memberid") String memberid,@RequestBody WFMember wfmember);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/getdraft")
-    WFMember getDraft(WFMember entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfmembers/batch")
+    Boolean updateBatch(@RequestBody List<WFMember> wfmembers);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/checkkey")
     Boolean checkKey(@RequestBody WFMember wfmember);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/searchdefault")
+    Page<WFMember> searchDefault(@RequestBody WFMemberSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/getdraft")
+    WFMember getDraft(WFMember entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/save")
@@ -65,9 +66,8 @@ public interface WFMemberFeignClient {
     Boolean saveBatch(@RequestBody List<WFMember> wfmembers);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfmembers/searchdefault")
-    Page<WFMember> searchDefault(@RequestBody WFMemberSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfmembers/select")
+    Page<WFMember> select();
 
 
 }

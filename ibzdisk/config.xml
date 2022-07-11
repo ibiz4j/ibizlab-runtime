@@ -37,6 +37,12 @@
 	  git clone -b master $para2 ibzdisk/
       export NODE_OPTIONS=--max-old-space-size=4096
       cd ibzdisk/
+      mvn clean package -Papi
+      mvn install -Papi
+      cd ibzdisk-provider/ibzdisk-provider-api
+      mvn -Papi docker:build
+      mvn -Papi docker:push
+      docker -H $para1 stack deploy --compose-file=src/main/docker/ibzdisk-provider-api.yaml ibzlab-rt --with-registry-auth      
       </command>
     </hudson.tasks.Shell>
   </builders>

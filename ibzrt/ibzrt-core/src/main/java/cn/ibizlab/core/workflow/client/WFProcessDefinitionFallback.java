@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClient {
 
-    public Page<WFProcessDefinition> select() {
-        return null;
-    }
-
     public WFProcessDefinition create(WFProcessDefinition wfprocessdefinition) {
         return null;
     }
     public Boolean createBatch(List<WFProcessDefinition> wfprocessdefinitions) {
+        return false;
+    }
+
+    public WFProcessDefinition get(String definitionkey) {
+        return null;
+    }
+
+
+    public Boolean remove(String definitionkey) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClie
     }
 
 
-    public Boolean remove(String definitionkey) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFProcessDefinition wfprocessdefinition) {
         return false;
     }
 
-    public WFProcessDefinition get(String definitionkey) {
+
+    public Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClie
         return null;
     }
 
-
-
-    public Boolean checkKey(WFProcessDefinition wfprocessdefinition) {
-        return false;
-    }
 
 
     public Object saveEntity(WFProcessDefinition wfprocessdefinition) {
@@ -72,9 +73,8 @@ public class WFProcessDefinitionFallback implements WFProcessDefinitionFeignClie
         return false;
     }
 
-    public Page<WFProcessDefinition> searchDefault(WFProcessDefinitionSearchContext context) {
+    public Page<WFProcessDefinition> select() {
         return null;
     }
-
 
 }

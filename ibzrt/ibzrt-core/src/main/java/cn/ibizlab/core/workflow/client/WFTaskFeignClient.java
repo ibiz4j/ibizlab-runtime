@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFTask", fallback = WFTaskFallback.class)
 public interface WFTaskFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wftasks/select")
-    Page<WFTask> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wftasks")
     WFTask create(@RequestBody WFTask wftask);
 
@@ -30,11 +26,8 @@ public interface WFTaskFeignClient {
     Boolean createBatch(@RequestBody List<WFTask> wftasks);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wftasks/{id}")
-    WFTask update(@PathVariable("id") String id,@RequestBody WFTask wftask);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wftasks/batch")
-    Boolean updateBatch(@RequestBody List<WFTask> wftasks);
+    @RequestMapping(method = RequestMethod.GET, value = "/wftasks/{id}")
+    WFTask get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wftasks/{id}")
@@ -44,16 +37,24 @@ public interface WFTaskFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wftasks/{id}")
-    WFTask get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wftasks/{id}")
+    WFTask update(@PathVariable("id") String id,@RequestBody WFTask wftask);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wftasks/getdraft")
-    WFTask getDraft(WFTask entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wftasks/batch")
+    Boolean updateBatch(@RequestBody List<WFTask> wftasks);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wftasks/checkkey")
     Boolean checkKey(@RequestBody WFTask wftask);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wftasks/searchdefault")
+    Page<WFTask> searchDefault(@RequestBody WFTaskSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wftasks/getdraft")
+    WFTask getDraft(WFTask entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wftasks/save")
@@ -65,9 +66,8 @@ public interface WFTaskFeignClient {
     Boolean saveBatch(@RequestBody List<WFTask> wftasks);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wftasks/searchdefault")
-    Page<WFTask> searchDefault(@RequestBody WFTaskSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/wftasks/select")
+    Page<WFTask> select();
 
 
 }

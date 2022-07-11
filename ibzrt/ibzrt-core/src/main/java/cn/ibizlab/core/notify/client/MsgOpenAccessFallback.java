@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class MsgOpenAccessFallback implements MsgOpenAccessFeignClient {
 
-    public Page<MsgOpenAccess> select() {
-        return null;
-    }
-
     public MsgOpenAccess create(MsgOpenAccess msgopenaccess) {
         return null;
     }
     public Boolean createBatch(List<MsgOpenAccess> msgopenaccesses) {
+        return false;
+    }
+
+    public MsgOpenAccess get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class MsgOpenAccessFallback implements MsgOpenAccessFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(MsgOpenAccess msgopenaccess) {
         return false;
     }
 
-    public MsgOpenAccess get(String id) {
+
+    public Page<MsgOpenAccess> searchDefault(MsgOpenAccessSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class MsgOpenAccessFallback implements MsgOpenAccessFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(MsgOpenAccess msgopenaccess) {
-        return false;
-    }
 
 
     public Object saveEntity(MsgOpenAccess msgopenaccess) {
@@ -72,9 +73,8 @@ public class MsgOpenAccessFallback implements MsgOpenAccessFeignClient {
         return false;
     }
 
-    public Page<MsgOpenAccess> searchDefault(MsgOpenAccessSearchContext context) {
+    public Page<MsgOpenAccess> select() {
         return null;
     }
-
 
 }

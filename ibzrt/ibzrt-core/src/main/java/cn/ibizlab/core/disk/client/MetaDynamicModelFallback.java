@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class MetaDynamicModelFallback implements MetaDynamicModelFeignClient {
 
-    public Page<MetaDynamicModel> select() {
-        return null;
-    }
-
     public MetaDynamicModel create(MetaDynamicModel metadynamicmodel) {
         return null;
     }
     public Boolean createBatch(List<MetaDynamicModel> metadynamicmodels) {
+        return false;
+    }
+
+    public MetaDynamicModel get(String configid) {
+        return null;
+    }
+
+
+    public Boolean remove(String configid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,17 @@ public class MetaDynamicModelFallback implements MetaDynamicModelFeignClient {
     }
 
 
-    public Boolean remove(String configid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(MetaDynamicModel metadynamicmodel) {
         return false;
     }
 
-    public MetaDynamicModel get(String configid) {
+
+    public Page<MetaDynamicModel> searchDefault(MetaDynamicModelSearchContext context) {
+        return null;
+    }
+
+
+    public Page<MetaDynamicModel> searchDynaInst(MetaDynamicModelSearchContext context) {
         return null;
     }
 
@@ -54,11 +65,6 @@ public class MetaDynamicModelFallback implements MetaDynamicModelFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(MetaDynamicModel metadynamicmodel) {
-        return false;
-    }
 
 
     public MetaDynamicModel init( String configid, MetaDynamicModel metadynamicmodel) {
@@ -80,14 +86,8 @@ public class MetaDynamicModelFallback implements MetaDynamicModelFeignClient {
         return false;
     }
 
-    public Page<MetaDynamicModel> searchDefault(MetaDynamicModelSearchContext context) {
+    public Page<MetaDynamicModel> select() {
         return null;
     }
-
-
-    public Page<MetaDynamicModel> searchDynaInst(MetaDynamicModelSearchContext context) {
-        return null;
-    }
-
 
 }

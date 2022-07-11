@@ -8,6 +8,7 @@ import cn.ibizlab.core.disk.extensions.vo.FileItem;
 import cn.ibizlab.core.disk.service.ISDFileService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,14 @@ public class DiskCoreResource
 						 @RequestHeader(value = "authcode",required = false) String authcode,
 						 @RequestParam(value = "authcode",required = false) String checkcode,HttpServletRequest request,HttpServletResponse response){
 		File file = diskCoreService.getFile(folder,id, StringUtils.isEmpty(authcode)?checkcode:authcode);
+		response.setHeader("Content-Disposition", "attachment;filename="+getFileName(request.getHeader("User-Agent"),file.getName()));
+		this.sendRespose(response, file);
+	}
+
+	@PostMapping(value = "net-disk/download/")
+	@ResponseStatus(HttpStatus.OK)
+	public void download(@RequestBody List<JsonNode> list, HttpServletRequest request, HttpServletResponse response){
+		File file= diskCoreService.getFile(null, list);
 		response.setHeader("Content-Disposition", "attachment;filename="+getFileName(request.getHeader("User-Agent"),file.getName()));
 		this.sendRespose(response, file);
 	}

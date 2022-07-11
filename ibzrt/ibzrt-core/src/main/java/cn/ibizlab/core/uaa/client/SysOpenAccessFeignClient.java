@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysOpenAccess", fallback = SysOpenAccessFallback.class)
 public interface SysOpenAccessFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/select")
-    Page<SysOpenAccess> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses")
     SysOpenAccess create(@RequestBody SysOpenAccess sysopenaccess);
 
@@ -30,11 +26,8 @@ public interface SysOpenAccessFeignClient {
     Boolean createBatch(@RequestBody List<SysOpenAccess> sysopenaccesses);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysopenaccesses/{id}")
-    SysOpenAccess update(@PathVariable("id") String id,@RequestBody SysOpenAccess sysopenaccess);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysopenaccesses/batch")
-    Boolean updateBatch(@RequestBody List<SysOpenAccess> sysopenaccesses);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/{id}")
+    SysOpenAccess get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysopenaccesses/{id}")
@@ -44,16 +37,24 @@ public interface SysOpenAccessFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/{id}")
-    SysOpenAccess get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysopenaccesses/{id}")
+    SysOpenAccess update(@PathVariable("id") String id,@RequestBody SysOpenAccess sysopenaccess);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/getdraft")
-    SysOpenAccess getDraft(SysOpenAccess entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysopenaccesses/batch")
+    Boolean updateBatch(@RequestBody List<SysOpenAccess> sysopenaccesses);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/checkkey")
     Boolean checkKey(@RequestBody SysOpenAccess sysopenaccess);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/searchdefault")
+    Page<SysOpenAccess> searchDefault(@RequestBody SysOpenAccessSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/getdraft")
+    SysOpenAccess getDraft(SysOpenAccess entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/save")
@@ -65,9 +66,8 @@ public interface SysOpenAccessFeignClient {
     Boolean saveBatch(@RequestBody List<SysOpenAccess> sysopenaccesses);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysopenaccesses/searchdefault")
-    Page<SysOpenAccess> searchDefault(@RequestBody SysOpenAccessSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysopenaccesses/select")
+    Page<SysOpenAccess> select();
 
 
 }

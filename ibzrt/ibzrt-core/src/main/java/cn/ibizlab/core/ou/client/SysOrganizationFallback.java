@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysOrganizationFallback implements SysOrganizationFeignClient {
 
-    public Page<SysOrganization> select() {
-        return null;
-    }
-
     public SysOrganization create(SysOrganization sysorganization) {
         return null;
     }
     public Boolean createBatch(List<SysOrganization> sysorganizations) {
+        return false;
+    }
+
+    public SysOrganization get(String orgid) {
+        return null;
+    }
+
+
+    public Boolean remove(String orgid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysOrganizationFallback implements SysOrganizationFeignClient {
     }
 
 
-    public Boolean remove(String orgid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysOrganization sysorganization) {
         return false;
     }
 
-    public SysOrganization get(String orgid) {
+
+    public Page<SysOrganization> searchDefault(SysOrganizationSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysOrganizationFallback implements SysOrganizationFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysOrganization sysorganization) {
-        return false;
-    }
 
 
     public Object saveEntity(SysOrganization sysorganization) {
@@ -72,9 +73,8 @@ public class SysOrganizationFallback implements SysOrganizationFeignClient {
         return false;
     }
 
-    public Page<SysOrganization> searchDefault(SysOrganizationSearchContext context) {
+    public Page<SysOrganization> select() {
         return null;
     }
-
 
 }

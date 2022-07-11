@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysPermissionFallback implements SysPermissionFeignClient {
 
-    public Page<SysPermission> select() {
-        return null;
-    }
-
     public SysPermission create(SysPermission syspermission) {
         return null;
     }
     public Boolean createBatch(List<SysPermission> syspermissions) {
+        return false;
+    }
+
+    public SysPermission get(String permissionid) {
+        return null;
+    }
+
+
+    public Boolean remove(String permissionid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysPermissionFallback implements SysPermissionFeignClient {
     }
 
 
-    public Boolean remove(String permissionid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysPermission syspermission) {
         return false;
     }
 
-    public SysPermission get(String permissionid) {
+
+    public Page<SysPermission> searchDefault(SysPermissionSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysPermissionFallback implements SysPermissionFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysPermission syspermission) {
-        return false;
-    }
 
 
     public Object saveEntity(SysPermission syspermission) {
@@ -72,9 +73,8 @@ public class SysPermissionFallback implements SysPermissionFeignClient {
         return false;
     }
 
-    public Page<SysPermission> searchDefault(SysPermissionSearchContext context) {
+    public Page<SysPermission> select() {
         return null;
     }
-
 
 }

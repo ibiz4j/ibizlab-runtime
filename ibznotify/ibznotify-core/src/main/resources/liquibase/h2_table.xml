@@ -4,7 +4,7 @@
 
 
     <!--输出实体[MSG_BODY]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-msg_body-20-1">
+    <changeSet author="a_A_5d9d78509" id="tab-msg_body-26-1">
         <createTable tableName="IBZMSGBODY">
                 <column name="ISERROR" remarks="" type="INT">
                 </column>

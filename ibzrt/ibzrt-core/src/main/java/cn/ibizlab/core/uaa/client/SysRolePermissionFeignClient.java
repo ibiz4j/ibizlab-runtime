@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysRolePermission", fallback = SysRolePermissionFallback.class)
 public interface SysRolePermissionFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/select")
-    Page<SysRolePermission> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions")
     SysRolePermission create(@RequestBody SysRolePermission sysrolepermission);
 
@@ -30,11 +26,8 @@ public interface SysRolePermissionFeignClient {
     Boolean createBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/{rolepermissionid}")
-    SysRolePermission update(@PathVariable("rolepermissionid") String rolepermissionid,@RequestBody SysRolePermission sysrolepermission);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/batch")
-    Boolean updateBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/{rolepermissionid}")
+    SysRolePermission get(@PathVariable("rolepermissionid") String rolepermissionid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysrolepermissions/{rolepermissionid}")
@@ -44,16 +37,24 @@ public interface SysRolePermissionFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/{rolepermissionid}")
-    SysRolePermission get(@PathVariable("rolepermissionid") String rolepermissionid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/{rolepermissionid}")
+    SysRolePermission update(@PathVariable("rolepermissionid") String rolepermissionid,@RequestBody SysRolePermission sysrolepermission);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/getdraft")
-    SysRolePermission getDraft(SysRolePermission entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysrolepermissions/batch")
+    Boolean updateBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/checkkey")
     Boolean checkKey(@RequestBody SysRolePermission sysrolepermission);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/searchdefault")
+    Page<SysRolePermission> searchDefault(@RequestBody SysRolePermissionSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/getdraft")
+    SysRolePermission getDraft(SysRolePermission entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/save")
@@ -65,9 +66,8 @@ public interface SysRolePermissionFeignClient {
     Boolean saveBatch(@RequestBody List<SysRolePermission> sysrolepermissions);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysrolepermissions/searchdefault")
-    Page<SysRolePermission> searchDefault(@RequestBody SysRolePermissionSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysrolepermissions/select")
+    Page<SysRolePermission> select();
 
 
 }

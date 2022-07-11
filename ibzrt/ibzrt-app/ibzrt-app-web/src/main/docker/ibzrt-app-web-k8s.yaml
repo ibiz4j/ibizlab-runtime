@@ -22,7 +22,34 @@ spec:
         image: registry.cn-shanghai.aliyuncs.com/ibizsys/ibzrt-app-web:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 30000
+        env:
+        - name: SPRING_CLOUD_NACOS_DISCOVERY_IP
+          value: "172.16.180.237"      
+        - name: SERVER_PORT
+          value: "30000"
+        - name: SPRING_CLOUD_NACOS_DISCOVERY_SERVER-ADDR
+          value: "172.16.100.243:8848"
+        - name: SPRING_REDIS_HOST
+          value: "172.16.100.243"
+        - name: SPRING_REDIS_PORT
+          value: "6379"
+        - name: SPRING_REDIS_DATABASE
+          value: "0"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "a_A_5d9d78509"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "@6dEfb3@"
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://172.16.180.232:3306/a_A_5d9d78509?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useOldAliasMetadataBehavior=true&allowMultiQueries=true"
+        - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
+          value: "com.mysql.jdbc.Driver"
+        - name: SPRING_DATASOURCE_DEFAULTSCHEMA
+          value: "a_A_5d9d78509"
+        - name: NACOS
+          value: "172.16.100.243:8848"      
+        - name: SPRING_CLOUD_NACOS_DISCOVERY_GROUP
+          value: "ibizdev"      
         volumeMounts:
         - name: data
           mountPath: /app/file
@@ -42,9 +69,9 @@ spec:
   type: NodePort
   ports:
   - name: http
-    port: 8080
-    targetPort: 8080
-    nodePort: 8080
+    port: 30000
+    targetPort: 30000
+    nodePort: 30000
     protocol: TCP
   selector:
     app: ibzrt-app-web

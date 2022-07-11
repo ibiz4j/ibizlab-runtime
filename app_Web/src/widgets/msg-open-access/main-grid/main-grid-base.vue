@@ -93,6 +93,8 @@
                             </template>
                         </div>
                     </poptip>
+                    <i-button class="config-button" @click="saveDynaConfig">{{$t('app.gridpage.saveconfig')}}</i-button>
+                    <i-button class="config-button" @click="resetDynaConfig">{{$t('app.gridpage.resetconfig')}}</i-button>
                 </span>
                 <span class="page-button"><i-button icon="md-refresh" :title="$t('app.gridpage.refresh')" @click="pageRefresh()"></i-button></span>&nbsp;
                 <span>
@@ -666,6 +668,14 @@ export default class MainBase extends Vue implements ControlInterface {
             enableCond: 3 ,
         },
     ]
+
+    /**
+     * 重置表格列模型缓存
+     *
+     * @type {any[]}
+     * @memberof MainBase
+     */
+    public resetColModel: any[] = [];
 
     /**
      * 表格模型集合
@@ -1834,16 +1844,43 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public setColState() {
-		const _data: any = localStorage.getItem('msg_open_access_main_grid');
-		if (_data) {
-			let columns = JSON.parse(_data);
-			columns.forEach((col: any) => {
-				let column = this.allColumns.find((item) => Object.is(col.name, item.name));
-				if (column) {
-					Object.assign(column, col);
-				}
-			});
-		}
+        this.resetColModel = Util.deepCopy(this.allColumns);
+        const viewParams: any = Util.deepCopy(this.viewparams);
+        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzrt_web_msgopenaccessgridview_grid_main'});
+        const post = this.service.loadModel('grid_dynaconfig', this.context, viewParams);
+        post.then((response: any) => {
+            if(response.status == 200 && response.data) {
+                const columns = response.data;
+                columns.forEach((col: any) => {
+                    let column = this.allColumns.find((item) => Object.is(col.name, item.name));
+                    if (column) {
+                        Object.assign(column, col);
+                    }
+                });
+            } else {
+                this.getColStorage();
+            }
+        }).catch(() => {
+            this.getColStorage();
+        });
+    }
+
+    /**
+     * 获取列缓存
+     *
+     * @memberof MainBase
+     */
+    public getColStorage() {
+        const _data: any = localStorage.getItem('msg_open_access_main_grid');
+        if (_data) {
+            let columns = JSON.parse(_data);
+            columns.forEach((col: any) => {
+                let column = this.allColumns.find((item) => Object.is(col.name, item.name));
+                if (column) {
+                    Object.assign(column, col);
+                }
+            });
+        }
     }
 
     /**
@@ -1867,6 +1904,36 @@ export default class MainBase extends Vue implements ControlInterface {
             Object.is(name, col.name)
         );
         return column.show ? true : false;
+    }
+
+    /**
+     * 保存动态表格配置
+     *
+     * @memberof MainBase
+     */
+    public saveDynaConfig() {
+        const viewParams: any = Util.deepCopy(this.viewparams);
+        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzrt_web_msgopenaccessgridview_grid_main', model: this.allColumns});
+        const post = this.service.saveModel('grid_dynaconfig', this.context, viewParams);
+        post.then((response: any) => {
+            if (response.status == 200) {
+                this.$Message.success(this.$t('app.gridpage.message.saveconfigsuccess'));
+            } else {
+                this.$Message.error(this.$t('app.gridpage.message.saveconfigerror'));
+            }
+        }).catch(() => {
+            this.$Message.error(this.$t('app.gridpage.message.saveconfigerror'));
+        });
+    }
+
+    /**
+     * 重置动态表格配置
+     *
+     * @memberof MainBase
+     */
+    public resetDynaConfig() {
+        this.allColumns = Util.deepCopy(this.resetColModel);
+        localStorage.setItem('dynaconfig_main_grid', JSON.stringify(this.allColumns));
     }
 
     /**

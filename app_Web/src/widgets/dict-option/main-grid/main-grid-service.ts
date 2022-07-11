@@ -1,5 +1,6 @@
 import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
+import UtilService from '@/utilservice/util-service';
 import DictOptionService from '@/service/dict-option/dict-option-service';
 import MainModel from './main-grid-model';
 import DictCatalogService from '@/service/dict-catalog/dict-catalog-service';
@@ -32,6 +33,15 @@ export default class MainService extends ControlService {
     }
 
     /**
+     * 工具服务对象
+     *
+     * @protected
+     * @type {UtilService}
+     * @memberof MainService
+     */
+    protected utilService: UtilService = new UtilService();
+
+    /**
      * Creates an instance of MainService.
      * 
      * @param {*} [opts={}]
@@ -40,6 +50,50 @@ export default class MainService extends ControlService {
     constructor(opts: any = {}) {
         super(opts);
         this.model = new MainModel();
+    }
+
+    /**
+    * 加载数据模型
+    *
+    * @param {string} serviceName
+    * @param {*} context
+    * @param {*} viewparams
+    * @memberof MainService
+    */
+    public loadModel(serviceName: string, context: any, viewparams: any) {
+      return new Promise((resolve: any, reject: any) => {
+          this.utilService.getService(serviceName).then((service: any) => {
+              service.loadModelData(JSON.stringify(context), viewparams).then((response: any) => {
+                  resolve(response);
+              }).catch((response: any) => {
+                  reject(response);
+              });
+          }).catch((response: any) => {
+              reject(response);
+          });
+      });
+    }
+
+    /**
+    * 保存数据模型
+    *
+    * @param {string} serviceName
+    * @param {*} context
+    * @param {*} viewparams
+    * @memberof MainService
+    */
+     public saveModel(serviceName: string, context: any, viewparams: any) {
+      return new Promise((resolve: any, reject: any) => {
+          this.utilService.getService(serviceName).then((service: any) => {
+              service.saveModelData(JSON.stringify(context),'', viewparams).then((response: any) => {
+                  resolve(response);
+              }).catch((response: any) => {
+                  reject(response);
+              });
+          }).catch((response: any) => {
+              reject(response);
+          });
+      });
     }
 
     /**

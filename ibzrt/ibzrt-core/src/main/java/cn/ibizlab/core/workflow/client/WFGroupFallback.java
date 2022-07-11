@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFGroupFallback implements WFGroupFeignClient {
 
-    public Page<WFGroup> select() {
-        return null;
-    }
-
     public WFGroup create(WFGroup wfgroup) {
         return null;
     }
     public Boolean createBatch(List<WFGroup> wfgroups) {
+        return false;
+    }
+
+    public WFGroup get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFGroupFallback implements WFGroupFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFGroup wfgroup) {
         return false;
     }
 
-    public WFGroup get(String id) {
+
+    public Page<WFGroup> searchDefault(WFGroupSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFGroupFallback implements WFGroupFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(WFGroup wfgroup) {
-        return false;
-    }
 
 
     public Object saveEntity(WFGroup wfgroup) {
@@ -72,9 +73,8 @@ public class WFGroupFallback implements WFGroupFeignClient {
         return false;
     }
 
-    public Page<WFGroup> searchDefault(WFGroupSearchContext context) {
+    public Page<WFGroup> select() {
         return null;
     }
-
 
 }

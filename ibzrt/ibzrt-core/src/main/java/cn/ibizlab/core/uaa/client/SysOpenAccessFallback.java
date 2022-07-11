@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysOpenAccessFallback implements SysOpenAccessFeignClient {
 
-    public Page<SysOpenAccess> select() {
-        return null;
-    }
-
     public SysOpenAccess create(SysOpenAccess sysopenaccess) {
         return null;
     }
     public Boolean createBatch(List<SysOpenAccess> sysopenaccesses) {
+        return false;
+    }
+
+    public SysOpenAccess get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysOpenAccessFallback implements SysOpenAccessFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysOpenAccess sysopenaccess) {
         return false;
     }
 
-    public SysOpenAccess get(String id) {
+
+    public Page<SysOpenAccess> searchDefault(SysOpenAccessSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysOpenAccessFallback implements SysOpenAccessFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysOpenAccess sysopenaccess) {
-        return false;
-    }
 
 
     public Object saveEntity(SysOpenAccess sysopenaccess) {
@@ -72,9 +73,8 @@ public class SysOpenAccessFallback implements SysOpenAccessFeignClient {
         return false;
     }
 
-    public Page<SysOpenAccess> searchDefault(SysOpenAccessSearchContext context) {
+    public Page<SysOpenAccess> select() {
         return null;
     }
-
 
 }

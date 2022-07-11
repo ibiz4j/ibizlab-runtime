@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysPostFallback implements SysPostFeignClient {
 
-    public Page<SysPost> select() {
-        return null;
-    }
-
     public SysPost create(SysPost syspost) {
         return null;
     }
     public Boolean createBatch(List<SysPost> sysposts) {
+        return false;
+    }
+
+    public SysPost get(String postid) {
+        return null;
+    }
+
+
+    public Boolean remove(String postid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysPostFallback implements SysPostFeignClient {
     }
 
 
-    public Boolean remove(String postid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysPost syspost) {
         return false;
     }
 
-    public SysPost get(String postid) {
+
+    public Page<SysPost> searchDefault(SysPostSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysPostFallback implements SysPostFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysPost syspost) {
-        return false;
-    }
 
 
     public Object saveEntity(SysPost syspost) {
@@ -72,9 +73,8 @@ public class SysPostFallback implements SysPostFeignClient {
         return false;
     }
 
-    public Page<SysPost> searchDefault(SysPostSearchContext context) {
+    public Page<SysPost> select() {
         return null;
     }
-
 
 }

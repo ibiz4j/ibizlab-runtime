@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysPermission", fallback = SysPermissionFallback.class)
 public interface SysPermissionFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/select")
-    Page<SysPermission> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/syspermissions")
     SysPermission create(@RequestBody SysPermission syspermission);
 
@@ -30,11 +26,8 @@ public interface SysPermissionFeignClient {
     Boolean createBatch(@RequestBody List<SysPermission> syspermissions);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/{permissionid}")
-    SysPermission update(@PathVariable("permissionid") String permissionid,@RequestBody SysPermission syspermission);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/batch")
-    Boolean updateBatch(@RequestBody List<SysPermission> syspermissions);
+    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{permissionid}")
+    SysPermission get(@PathVariable("permissionid") String permissionid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/syspermissions/{permissionid}")
@@ -44,16 +37,24 @@ public interface SysPermissionFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/{permissionid}")
-    SysPermission get(@PathVariable("permissionid") String permissionid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/{permissionid}")
+    SysPermission update(@PathVariable("permissionid") String permissionid,@RequestBody SysPermission syspermission);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/getdraft")
-    SysPermission getDraft(SysPermission entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/syspermissions/batch")
+    Boolean updateBatch(@RequestBody List<SysPermission> syspermissions);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/checkkey")
     Boolean checkKey(@RequestBody SysPermission syspermission);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/searchdefault")
+    Page<SysPermission> searchDefault(@RequestBody SysPermissionSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/getdraft")
+    SysPermission getDraft(SysPermission entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/save")
@@ -65,9 +66,8 @@ public interface SysPermissionFeignClient {
     Boolean saveBatch(@RequestBody List<SysPermission> syspermissions);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/syspermissions/searchdefault")
-    Page<SysPermission> searchDefault(@RequestBody SysPermissionSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/syspermissions/select")
+    Page<SysPermission> select();
 
 
 }

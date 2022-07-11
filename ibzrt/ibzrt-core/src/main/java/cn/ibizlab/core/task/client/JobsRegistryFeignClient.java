@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibztask-api:ibztask-api}", contextId = "JobsRegistry", fallback = JobsRegistryFallback.class)
 public interface JobsRegistryFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/select")
-    Page<JobsRegistry> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries")
     JobsRegistry create(@RequestBody JobsRegistry jobsregistry);
 
@@ -30,11 +26,8 @@ public interface JobsRegistryFeignClient {
     Boolean createBatch(@RequestBody List<JobsRegistry> jobsregistries);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/jobsregistries/{id}")
-    JobsRegistry update(@PathVariable("id") String id,@RequestBody JobsRegistry jobsregistry);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/jobsregistries/batch")
-    Boolean updateBatch(@RequestBody List<JobsRegistry> jobsregistries);
+    @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/{id}")
+    JobsRegistry get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/jobsregistries/{id}")
@@ -44,16 +37,24 @@ public interface JobsRegistryFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/{id}")
-    JobsRegistry get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/jobsregistries/{id}")
+    JobsRegistry update(@PathVariable("id") String id,@RequestBody JobsRegistry jobsregistry);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/getdraft")
-    JobsRegistry getDraft(JobsRegistry entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/jobsregistries/batch")
+    Boolean updateBatch(@RequestBody List<JobsRegistry> jobsregistries);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/checkkey")
     Boolean checkKey(@RequestBody JobsRegistry jobsregistry);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/searchdefault")
+    Page<JobsRegistry> searchDefault(@RequestBody JobsRegistrySearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/getdraft")
+    JobsRegistry getDraft(JobsRegistry entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/save")
@@ -65,9 +66,8 @@ public interface JobsRegistryFeignClient {
     Boolean saveBatch(@RequestBody List<JobsRegistry> jobsregistries);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsregistries/searchdefault")
-    Page<JobsRegistry> searchDefault(@RequestBody JobsRegistrySearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/jobsregistries/select")
+    Page<JobsRegistry> select();
 
 
 }

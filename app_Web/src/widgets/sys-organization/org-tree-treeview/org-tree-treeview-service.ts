@@ -1,5 +1,6 @@
 import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
+import UtilService from '@/utilservice/util-service';
 import SysOrganizationService from '@/service/sys-organization/sys-organization-service';
 import OrgTreeModel from './org-tree-treeview-model';
 import CodeListService from "@/codelist/codelist-service";
@@ -31,6 +32,15 @@ export default class OrgTreeService extends ControlService {
     public setTempMode(){
         this.isTempMode = false;
     }
+
+    /**
+     * 工具服务对象
+     *
+     * @protected
+     * @type {UtilService}
+     * @memberof OrgTreeService
+     */
+    protected utilService: UtilService = new UtilService();
 
     /**
      * Creates an instance of OrgTreeService.

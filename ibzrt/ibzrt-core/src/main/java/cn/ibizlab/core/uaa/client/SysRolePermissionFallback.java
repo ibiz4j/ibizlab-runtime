@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysRolePermissionFallback implements SysRolePermissionFeignClient {
 
-    public Page<SysRolePermission> select() {
-        return null;
-    }
-
     public SysRolePermission create(SysRolePermission sysrolepermission) {
         return null;
     }
     public Boolean createBatch(List<SysRolePermission> sysrolepermissions) {
+        return false;
+    }
+
+    public SysRolePermission get(String rolepermissionid) {
+        return null;
+    }
+
+
+    public Boolean remove(String rolepermissionid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysRolePermissionFallback implements SysRolePermissionFeignClient {
     }
 
 
-    public Boolean remove(String rolepermissionid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysRolePermission sysrolepermission) {
         return false;
     }
 
-    public SysRolePermission get(String rolepermissionid) {
+
+    public Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysRolePermissionFallback implements SysRolePermissionFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysRolePermission sysrolepermission) {
-        return false;
-    }
 
 
     public Object saveEntity(SysRolePermission sysrolepermission) {
@@ -72,9 +73,8 @@ public class SysRolePermissionFallback implements SysRolePermissionFeignClient {
         return false;
     }
 
-    public Page<SysRolePermission> searchDefault(SysRolePermissionSearchContext context) {
+    public Page<SysRolePermission> select() {
         return null;
     }
-
 
 }

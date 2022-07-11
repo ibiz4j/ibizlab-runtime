@@ -7,10 +7,10 @@
                 :viewparams="viewparams" 
                 :context="context" 
                 :showBusyIndicator="true"
-                updateAction='Update' 
-                removeAction='Remove' 
                 loadAction='Get' 
                 createAction='Create' 
+                updateAction='Update' 
+                removeAction='Remove' 
                 :isSelectFirstDefault="true"
                 :isBranchAvailable="true"
                 name="treeexpbar_tree"  

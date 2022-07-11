@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFTaskFallback implements WFTaskFeignClient {
 
-    public Page<WFTask> select() {
-        return null;
-    }
-
     public WFTask create(WFTask wftask) {
         return null;
     }
     public Boolean createBatch(List<WFTask> wftasks) {
+        return false;
+    }
+
+    public WFTask get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFTaskFallback implements WFTaskFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFTask wftask) {
         return false;
     }
 
-    public WFTask get(String id) {
+
+    public Page<WFTask> searchDefault(WFTaskSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFTaskFallback implements WFTaskFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(WFTask wftask) {
-        return false;
-    }
 
 
     public Object saveEntity(WFTask wftask) {
@@ -72,9 +73,8 @@ public class WFTaskFallback implements WFTaskFeignClient {
         return false;
     }
 
-    public Page<WFTask> searchDefault(WFTaskSearchContext context) {
+    public Page<WFTask> select() {
         return null;
     }
-
 
 }

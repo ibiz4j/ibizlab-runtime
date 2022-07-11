@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFSystem", fallback = WFSystemFallback.class)
 public interface WFSystemFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfsystems/select")
-    Page<WFSystem> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfsystems")
     WFSystem create(@RequestBody WFSystem wfsystem);
 
@@ -30,11 +26,8 @@ public interface WFSystemFeignClient {
     Boolean createBatch(@RequestBody List<WFSystem> wfsystems);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{pssystemid}")
-    WFSystem update(@PathVariable("pssystemid") String pssystemid,@RequestBody WFSystem wfsystem);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/batch")
-    Boolean updateBatch(@RequestBody List<WFSystem> wfsystems);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfsystems/{pssystemid}")
+    WFSystem get(@PathVariable("pssystemid") String pssystemid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfsystems/{pssystemid}")
@@ -44,16 +37,24 @@ public interface WFSystemFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfsystems/{pssystemid}")
-    WFSystem get(@PathVariable("pssystemid") String pssystemid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/{pssystemid}")
+    WFSystem update(@PathVariable("pssystemid") String pssystemid,@RequestBody WFSystem wfsystem);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfsystems/getdraft")
-    WFSystem getDraft(WFSystem entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfsystems/batch")
+    Boolean updateBatch(@RequestBody List<WFSystem> wfsystems);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/checkkey")
     Boolean checkKey(@RequestBody WFSystem wfsystem);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/searchdefault")
+    Page<WFSystem> searchDefault(@RequestBody WFSystemSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfsystems/getdraft")
+    WFSystem getDraft(WFSystem entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/save")
@@ -65,9 +66,8 @@ public interface WFSystemFeignClient {
     Boolean saveBatch(@RequestBody List<WFSystem> wfsystems);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfsystems/searchdefault")
-    Page<WFSystem> searchDefault(@RequestBody WFSystemSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfsystems/select")
+    Page<WFSystem> select();
 
 
 }

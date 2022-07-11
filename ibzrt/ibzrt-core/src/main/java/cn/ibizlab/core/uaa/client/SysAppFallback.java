@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysAppFallback implements SysAppFeignClient {
 
-    public Page<SysApp> select() {
-        return null;
-    }
-
     public SysApp create(SysApp sysapp) {
         return null;
     }
     public Boolean createBatch(List<SysApp> sysapps) {
+        return false;
+    }
+
+    public SysApp get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysAppFallback implements SysAppFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysApp sysapp) {
         return false;
     }
 
-    public SysApp get(String id) {
+
+    public Page<SysApp> searchDefault(SysAppSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysAppFallback implements SysAppFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysApp sysapp) {
-        return false;
-    }
 
 
     public Object saveEntity(SysApp sysapp) {
@@ -72,9 +73,8 @@ public class SysAppFallback implements SysAppFeignClient {
         return false;
     }
 
-    public Page<SysApp> searchDefault(SysAppSearchContext context) {
+    public Page<SysApp> select() {
         return null;
     }
-
 
 }

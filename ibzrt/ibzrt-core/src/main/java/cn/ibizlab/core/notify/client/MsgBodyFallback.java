@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class MsgBodyFallback implements MsgBodyFeignClient {
 
-    public Page<MsgBody> select() {
-        return null;
-    }
-
     public MsgBody create(MsgBody msgbody) {
         return null;
     }
     public Boolean createBatch(List<MsgBody> msgbodies) {
+        return false;
+    }
+
+    public MsgBody get(String msg_id) {
+        return null;
+    }
+
+
+    public Boolean remove(String msg_id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class MsgBodyFallback implements MsgBodyFeignClient {
     }
 
 
-    public Boolean remove(String msg_id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(MsgBody msgbody) {
         return false;
     }
 
-    public MsgBody get(String msg_id) {
+
+    public Page<MsgBody> searchDefault(MsgBodySearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class MsgBodyFallback implements MsgBodyFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(MsgBody msgbody) {
-        return false;
-    }
 
 
     public Object saveEntity(MsgBody msgbody) {
@@ -72,9 +73,8 @@ public class MsgBodyFallback implements MsgBodyFeignClient {
         return false;
     }
 
-    public Page<MsgBody> searchDefault(MsgBodySearchContext context) {
+    public Page<MsgBody> select() {
         return null;
     }
-
 
 }

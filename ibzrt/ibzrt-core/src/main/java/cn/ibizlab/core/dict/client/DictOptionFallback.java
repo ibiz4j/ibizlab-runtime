@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class DictOptionFallback implements DictOptionFeignClient {
 
-    public Page<DictOption> select() {
-        return null;
-    }
-
     public DictOption create(DictOption dictoption) {
         return null;
     }
     public Boolean createBatch(List<DictOption> dictoptions) {
+        return false;
+    }
+
+    public DictOption get(String value_key) {
+        return null;
+    }
+
+
+    public Boolean remove(String value_key) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class DictOptionFallback implements DictOptionFeignClient {
     }
 
 
-    public Boolean remove(String value_key) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(DictOption dictoption) {
         return false;
     }
 
-    public DictOption get(String value_key) {
+
+    public Page<DictOption> searchDefault(DictOptionSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class DictOptionFallback implements DictOptionFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(DictOption dictoption) {
-        return false;
-    }
 
 
     public Object saveEntity(DictOption dictoption) {
@@ -72,9 +73,8 @@ public class DictOptionFallback implements DictOptionFeignClient {
         return false;
     }
 
-    public Page<DictOption> searchDefault(DictOptionSearchContext context) {
+    public Page<DictOption> select() {
         return null;
     }
-
 
 }

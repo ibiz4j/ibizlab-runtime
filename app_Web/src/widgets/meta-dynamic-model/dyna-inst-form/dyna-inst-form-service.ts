@@ -1,5 +1,6 @@
 import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
+import UtilService from '@/utilservice/util-service';
 import MetaDynamicModelService from '@/service/meta-dynamic-model/meta-dynamic-model-service';
 import DynaInstModel from './dyna-inst-form-model';
 
@@ -29,6 +30,15 @@ export default class DynaInstService extends ControlService {
     public setTempMode(){
         this.isTempMode = false;
     }
+
+    /**
+     * 工具服务对象
+     *
+     * @protected
+     * @type {UtilService}
+     * @memberof DynaInstService
+     */
+    protected utilService: UtilService = new UtilService();
 
     /**
      * Creates an instance of DynaInstService.

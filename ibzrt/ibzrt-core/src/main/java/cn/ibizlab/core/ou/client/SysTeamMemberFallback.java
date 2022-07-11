@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysTeamMemberFallback implements SysTeamMemberFeignClient {
 
-    public Page<SysTeamMember> select() {
-        return null;
-    }
-
     public SysTeamMember create(SysTeamMember systeammember) {
         return null;
     }
     public Boolean createBatch(List<SysTeamMember> systeammembers) {
+        return false;
+    }
+
+    public SysTeamMember get(String teammemberid) {
+        return null;
+    }
+
+
+    public Boolean remove(String teammemberid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysTeamMemberFallback implements SysTeamMemberFeignClient {
     }
 
 
-    public Boolean remove(String teammemberid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysTeamMember systeammember) {
         return false;
     }
 
-    public SysTeamMember get(String teammemberid) {
+
+    public Page<SysTeamMember> searchDefault(SysTeamMemberSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysTeamMemberFallback implements SysTeamMemberFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysTeamMember systeammember) {
-        return false;
-    }
 
 
     public Object saveEntity(SysTeamMember systeammember) {
@@ -72,9 +73,8 @@ public class SysTeamMemberFallback implements SysTeamMemberFeignClient {
         return false;
     }
 
-    public Page<SysTeamMember> searchDefault(SysTeamMemberSearchContext context) {
+    public Page<SysTeamMember> select() {
         return null;
     }
-
 
 }

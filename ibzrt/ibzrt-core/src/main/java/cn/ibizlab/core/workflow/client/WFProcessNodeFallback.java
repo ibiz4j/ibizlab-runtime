@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFProcessNodeFallback implements WFProcessNodeFeignClient {
 
-    public Page<WFProcessNode> select() {
-        return null;
-    }
-
     public WFProcessNode create(WFProcessNode wfprocessnode) {
         return null;
     }
     public Boolean createBatch(List<WFProcessNode> wfprocessnodes) {
+        return false;
+    }
+
+    public WFProcessNode get(String usertaskid) {
+        return null;
+    }
+
+
+    public Boolean remove(String usertaskid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFProcessNodeFallback implements WFProcessNodeFeignClient {
     }
 
 
-    public Boolean remove(String usertaskid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFProcessNode wfprocessnode) {
         return false;
     }
 
-    public WFProcessNode get(String usertaskid) {
+
+    public Page<WFProcessNode> searchDefault(WFProcessNodeSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFProcessNodeFallback implements WFProcessNodeFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(WFProcessNode wfprocessnode) {
-        return false;
-    }
 
 
     public Object saveEntity(WFProcessNode wfprocessnode) {
@@ -72,9 +73,8 @@ public class WFProcessNodeFallback implements WFProcessNodeFeignClient {
         return false;
     }
 
-    public Page<WFProcessNode> searchDefault(WFProcessNodeSearchContext context) {
+    public Page<WFProcessNode> select() {
         return null;
     }
-
 
 }

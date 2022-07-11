@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class MsgUserAccountFallback implements MsgUserAccountFeignClient {
 
-    public Page<MsgUserAccount> select() {
-        return null;
-    }
-
     public MsgUserAccount create(MsgUserAccount msguseraccount) {
         return null;
     }
     public Boolean createBatch(List<MsgUserAccount> msguseraccounts) {
+        return false;
+    }
+
+    public MsgUserAccount get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class MsgUserAccountFallback implements MsgUserAccountFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(MsgUserAccount msguseraccount) {
         return false;
     }
 
-    public MsgUserAccount get(String id) {
+
+    public Page<MsgUserAccount> searchDefault(MsgUserAccountSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class MsgUserAccountFallback implements MsgUserAccountFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(MsgUserAccount msguseraccount) {
-        return false;
-    }
 
 
     public Object saveEntity(MsgUserAccount msguseraccount) {
@@ -72,9 +73,8 @@ public class MsgUserAccountFallback implements MsgUserAccountFeignClient {
         return false;
     }
 
-    public Page<MsgUserAccount> searchDefault(MsgUserAccountSearchContext context) {
+    public Page<MsgUserAccount> select() {
         return null;
     }
-
 
 }

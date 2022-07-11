@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzwf-api:ibzwf-api}", contextId = "WFProcessDefinition", fallback = WFProcessDefinitionFallback.class)
 public interface WFProcessDefinitionFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/select")
-    Page<WFProcessDefinition> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions")
     WFProcessDefinition create(@RequestBody WFProcessDefinition wfprocessdefinition);
 
@@ -30,11 +26,8 @@ public interface WFProcessDefinitionFeignClient {
     Boolean createBatch(@RequestBody List<WFProcessDefinition> wfprocessdefinitions);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessdefinitions/{definitionkey}")
-    WFProcessDefinition update(@PathVariable("definitionkey") String definitionkey,@RequestBody WFProcessDefinition wfprocessdefinition);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessdefinitions/batch")
-    Boolean updateBatch(@RequestBody List<WFProcessDefinition> wfprocessdefinitions);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/{definitionkey}")
+    WFProcessDefinition get(@PathVariable("definitionkey") String definitionkey);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/wfprocessdefinitions/{definitionkey}")
@@ -44,16 +37,24 @@ public interface WFProcessDefinitionFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/{definitionkey}")
-    WFProcessDefinition get(@PathVariable("definitionkey") String definitionkey);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessdefinitions/{definitionkey}")
+    WFProcessDefinition update(@PathVariable("definitionkey") String definitionkey,@RequestBody WFProcessDefinition wfprocessdefinition);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/getdraft")
-    WFProcessDefinition getDraft(WFProcessDefinition entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/wfprocessdefinitions/batch")
+    Boolean updateBatch(@RequestBody List<WFProcessDefinition> wfprocessdefinitions);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/checkkey")
     Boolean checkKey(@RequestBody WFProcessDefinition wfprocessdefinition);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/searchdefault")
+    Page<WFProcessDefinition> searchDefault(@RequestBody WFProcessDefinitionSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/getdraft")
+    WFProcessDefinition getDraft(WFProcessDefinition entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/save")
@@ -65,9 +66,8 @@ public interface WFProcessDefinitionFeignClient {
     Boolean saveBatch(@RequestBody List<WFProcessDefinition> wfprocessdefinitions);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/wfprocessdefinitions/searchdefault")
-    Page<WFProcessDefinition> searchDefault(@RequestBody WFProcessDefinitionSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/wfprocessdefinitions/select")
+    Page<WFProcessDefinition> select();
 
 
 }

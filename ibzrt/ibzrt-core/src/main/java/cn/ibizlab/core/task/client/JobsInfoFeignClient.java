@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibztask-api:ibztask-api}", contextId = "JobsInfo", fallback = JobsInfoFallback.class)
 public interface JobsInfoFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/select")
-    Page<JobsInfo> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos")
     JobsInfo create(@RequestBody JobsInfo jobsinfo);
 
@@ -30,11 +26,8 @@ public interface JobsInfoFeignClient {
     Boolean createBatch(@RequestBody List<JobsInfo> jobsinfos);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/{id}")
-    JobsInfo update(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/batch")
-    Boolean updateBatch(@RequestBody List<JobsInfo> jobsinfos);
+    @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/{id}")
+    JobsInfo get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/jobsinfos/{id}")
@@ -44,12 +37,11 @@ public interface JobsInfoFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/{id}")
-    JobsInfo get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/{id}")
+    JobsInfo update(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/getdraft")
-    JobsInfo getDraft(JobsInfo entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/jobsinfos/batch")
+    Boolean updateBatch(@RequestBody List<JobsInfo> jobsinfos);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/checkkey")
@@ -58,6 +50,15 @@ public interface JobsInfoFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/execute")
     JobsInfo execute(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/searchdefault")
+    Page<JobsInfo> searchDefault(@RequestBody JobsInfoSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/getdraft")
+    JobsInfo getDraft(JobsInfo entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/save")
@@ -69,17 +70,16 @@ public interface JobsInfoFeignClient {
     Boolean saveBatch(@RequestBody List<JobsInfo> jobsinfos);
 
 
+    @RequestMapping(method = RequestMethod.GET, value = "/jobsinfos/select")
+    Page<JobsInfo> select();
+
+
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/start")
     JobsInfo start(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/{id}/stop")
     JobsInfo stop(@PathVariable("id") String id,@RequestBody JobsInfo jobsinfo);
-
-
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobsinfos/searchdefault")
-    Page<JobsInfo> searchDefault(@RequestBody JobsInfoSearchContext context);
 
 
 }

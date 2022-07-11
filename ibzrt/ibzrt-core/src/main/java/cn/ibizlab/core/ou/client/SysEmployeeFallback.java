@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysEmployeeFallback implements SysEmployeeFeignClient {
 
-    public Page<SysEmployee> select() {
-        return null;
-    }
-
     public SysEmployee create(SysEmployee sysemployee) {
         return null;
     }
     public Boolean createBatch(List<SysEmployee> sysemployees) {
+        return false;
+    }
+
+    public SysEmployee get(String userid) {
+        return null;
+    }
+
+
+    public Boolean remove(String userid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysEmployeeFallback implements SysEmployeeFeignClient {
     }
 
 
-    public Boolean remove(String userid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysEmployee sysemployee) {
         return false;
     }
 
-    public SysEmployee get(String userid) {
+
+    public Page<SysEmployee> searchDefault(SysEmployeeSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysEmployeeFallback implements SysEmployeeFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysEmployee sysemployee) {
-        return false;
-    }
 
 
     public SysEmployee initPwd( String userid, SysEmployee sysemployee) {
@@ -76,9 +77,8 @@ public class SysEmployeeFallback implements SysEmployeeFeignClient {
         return false;
     }
 
-    public Page<SysEmployee> searchDefault(SysEmployeeSearchContext context) {
+    public Page<SysEmployee> select() {
         return null;
     }
-
 
 }

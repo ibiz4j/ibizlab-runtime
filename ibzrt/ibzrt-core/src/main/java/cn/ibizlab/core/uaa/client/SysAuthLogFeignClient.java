@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysAuthLog", fallback = SysAuthLogFallback.class)
 public interface SysAuthLogFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/select")
-    Page<SysAuthLog> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs")
     SysAuthLog create(@RequestBody SysAuthLog sysauthlog);
 
@@ -30,11 +26,8 @@ public interface SysAuthLogFeignClient {
     Boolean createBatch(@RequestBody List<SysAuthLog> sysauthlogs);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysauthlogs/{logid}")
-    SysAuthLog update(@PathVariable("logid") String logid,@RequestBody SysAuthLog sysauthlog);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysauthlogs/batch")
-    Boolean updateBatch(@RequestBody List<SysAuthLog> sysauthlogs);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/{logid}")
+    SysAuthLog get(@PathVariable("logid") String logid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysauthlogs/{logid}")
@@ -44,16 +37,24 @@ public interface SysAuthLogFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/{logid}")
-    SysAuthLog get(@PathVariable("logid") String logid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysauthlogs/{logid}")
+    SysAuthLog update(@PathVariable("logid") String logid,@RequestBody SysAuthLog sysauthlog);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/getdraft")
-    SysAuthLog getDraft(SysAuthLog entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysauthlogs/batch")
+    Boolean updateBatch(@RequestBody List<SysAuthLog> sysauthlogs);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/checkkey")
     Boolean checkKey(@RequestBody SysAuthLog sysauthlog);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/searchdefault")
+    Page<SysAuthLog> searchDefault(@RequestBody SysAuthLogSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/getdraft")
+    SysAuthLog getDraft(SysAuthLog entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/save")
@@ -65,9 +66,8 @@ public interface SysAuthLogFeignClient {
     Boolean saveBatch(@RequestBody List<SysAuthLog> sysauthlogs);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysauthlogs/searchdefault")
-    Page<SysAuthLog> searchDefault(@RequestBody SysAuthLogSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysauthlogs/select")
+    Page<SysAuthLog> select();
 
 
 }

@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibznotify-api:ibznotify-api}", contextId = "MsgTemplate", fallback = MsgTemplateFallback.class)
 public interface MsgTemplateFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/select")
-    Page<MsgTemplate> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/msgtemplates")
     MsgTemplate create(@RequestBody MsgTemplate msgtemplate);
 
@@ -30,11 +26,8 @@ public interface MsgTemplateFeignClient {
     Boolean createBatch(@RequestBody List<MsgTemplate> msgtemplates);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/msgtemplates/{tid}")
-    MsgTemplate update(@PathVariable("tid") String tid,@RequestBody MsgTemplate msgtemplate);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/msgtemplates/batch")
-    Boolean updateBatch(@RequestBody List<MsgTemplate> msgtemplates);
+    @RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/{tid}")
+    MsgTemplate get(@PathVariable("tid") String tid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/msgtemplates/{tid}")
@@ -44,16 +37,24 @@ public interface MsgTemplateFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/{tid}")
-    MsgTemplate get(@PathVariable("tid") String tid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/msgtemplates/{tid}")
+    MsgTemplate update(@PathVariable("tid") String tid,@RequestBody MsgTemplate msgtemplate);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/getdraft")
-    MsgTemplate getDraft(MsgTemplate entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/msgtemplates/batch")
+    Boolean updateBatch(@RequestBody List<MsgTemplate> msgtemplates);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/checkkey")
     Boolean checkKey(@RequestBody MsgTemplate msgtemplate);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/searchdefault")
+    Page<MsgTemplate> searchDefault(@RequestBody MsgTemplateSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/getdraft")
+    MsgTemplate getDraft(MsgTemplate entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/save")
@@ -65,9 +66,8 @@ public interface MsgTemplateFeignClient {
     Boolean saveBatch(@RequestBody List<MsgTemplate> msgtemplates);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/msgtemplates/searchdefault")
-    Page<MsgTemplate> searchDefault(@RequestBody MsgTemplateSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/msgtemplates/select")
+    Page<MsgTemplate> select();
 
 
 }

@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class PayTradeFallback implements PayTradeFeignClient {
 
-    public Page<PayTrade> select() {
-        return null;
-    }
-
     public PayTrade create(PayTrade paytrade) {
         return null;
     }
     public Boolean createBatch(List<PayTrade> paytrades) {
+        return false;
+    }
+
+    public PayTrade get(String trade_id) {
+        return null;
+    }
+
+
+    public Boolean remove(String trade_id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class PayTradeFallback implements PayTradeFeignClient {
     }
 
 
-    public Boolean remove(String trade_id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(PayTrade paytrade) {
         return false;
     }
 
-    public PayTrade get(String trade_id) {
+
+    public Page<PayTrade> searchDefault(PayTradeSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class PayTradeFallback implements PayTradeFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(PayTrade paytrade) {
-        return false;
-    }
 
 
     public Object saveEntity(PayTrade paytrade) {
@@ -72,9 +73,8 @@ public class PayTradeFallback implements PayTradeFeignClient {
         return false;
     }
 
-    public Page<PayTrade> searchDefault(PayTradeSearchContext context) {
+    public Page<PayTrade> select() {
         return null;
     }
-
 
 }

@@ -1,5 +1,5 @@
 
-FROM adoptopenjdk/openjdk8:jdk8u242-b08-centos
+FROM image.ibizlab.cn/library/openjdk:8-jre-alpine
 
 ENV TZ=Asia/Shanghai \
     SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
@@ -10,6 +10,6 @@ CMD echo "The application will start in ${IBIZ_SLEEP}s..." && \
     sleep ${IBIZ_SLEEP} && \
     java ${JAVA_OPTS} -Duser.timezone=$TZ -Djava.security.egd=file:/dev/./urandom -jar /ibzdisk-provider-api.jar
 
-EXPOSE 8081
+EXPOSE 40006
 
 ADD ibzdisk-provider-api.jar /ibzdisk-provider-api.jar

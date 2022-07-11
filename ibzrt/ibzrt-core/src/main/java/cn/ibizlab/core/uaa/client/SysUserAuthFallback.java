@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class SysUserAuthFallback implements SysUserAuthFeignClient {
 
-    public Page<SysUserAuth> select() {
-        return null;
-    }
-
     public SysUserAuth create(SysUserAuth sysuserauth) {
         return null;
     }
     public Boolean createBatch(List<SysUserAuth> sysuserauths) {
+        return false;
+    }
+
+    public SysUserAuth get(String id) {
+        return null;
+    }
+
+
+    public Boolean remove(String id) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class SysUserAuthFallback implements SysUserAuthFeignClient {
     }
 
 
-    public Boolean remove(String id) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(SysUserAuth sysuserauth) {
         return false;
     }
 
-    public SysUserAuth get(String id) {
+
+    public Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class SysUserAuthFallback implements SysUserAuthFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(SysUserAuth sysuserauth) {
-        return false;
-    }
 
 
     public Object saveEntity(SysUserAuth sysuserauth) {
@@ -72,9 +73,8 @@ public class SysUserAuthFallback implements SysUserAuthFeignClient {
         return false;
     }
 
-    public Page<SysUserAuth> searchDefault(SysUserAuthSearchContext context) {
+    public Page<SysUserAuth> select() {
         return null;
     }
-
 
 }

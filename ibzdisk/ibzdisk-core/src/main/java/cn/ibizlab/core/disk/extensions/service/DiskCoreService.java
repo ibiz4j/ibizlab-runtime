@@ -5,8 +5,11 @@ import cn.ibizlab.core.disk.service.ISDFileService;
 import cn.ibizlab.core.disk.extensions.vo.FileItem;
 import cn.ibizlab.util.errors.BadRequestAlertException;
 import cn.ibizlab.util.errors.InternalServerErrorException;
+import cn.ibizlab.util.helper.ZipUtils;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,13 +18,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.zip.ZipOutputStream;
 
 @Primary
 @Slf4j
@@ -156,6 +158,50 @@ public class DiskCoreService {
                 return file;
         }
         throw new InternalServerErrorException("文件未找到");
+    }
+
+    /**
+     * 批量下载文件 [{ "id":"fileid1"},{"id":"fileid2"}]
+     * @param strCat
+     * @param list
+     * @return
+     */
+    public File getFile(String strCat, List<JsonNode> list) {
+
+        if (ObjectUtils.isEmpty(list)) {
+            throw new InternalServerErrorException("未传入文件清单");
+        }
+
+        List<File> fileList = new ArrayList<File>();
+        for (JsonNode item : list) {
+
+            if (item instanceof ObjectNode) {
+                ObjectNode map = (ObjectNode) item;
+                item = map.get("id");
+            }
+            fileList.add(this.getFile(strCat, item.asText()));
+        }
+
+        try {
+            File tempFile = File.createTempFile("oss", ".zip");
+            try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(tempFile))) {
+                for (File file : fileList) {
+                    if (file.getParentFile() == null || file.getParentFile().getParentFile() == null) {
+                        throw new Exception("文件路径不正确");
+                    }
+                    int nFolderLength = file.getParentFile().getParentFile().getAbsolutePath().length() + 1;
+                    long nTime = System.currentTimeMillis();
+                    ZipUtils.zip(file, zipOutputStream, nFolderLength);
+                    log.debug(String.format("压缩文件[%1$s]耗时[%2$s]ms", file.getAbsolutePath(), System.currentTimeMillis() - nTime));
+                }
+                zipOutputStream.flush();
+                zipOutputStream.close();
+            }
+            return tempFile;
+        } catch (Throwable ex) {
+            throw new InternalServerErrorException(String.format("生成压缩文件发生异常，%1$s", ex.getMessage()));
+        }
+
     }
 
     public File getFileById(String fileId) {

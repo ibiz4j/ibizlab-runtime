@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibztask-api:ibztask-api}", contextId = "JobsLock", fallback = JobsLockFallback.class)
 public interface JobsLockFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/select")
-    Page<JobsLock> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/jobslocks")
     JobsLock create(@RequestBody JobsLock jobslock);
 
@@ -30,11 +26,8 @@ public interface JobsLockFeignClient {
     Boolean createBatch(@RequestBody List<JobsLock> jobslocks);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/{id}")
-    JobsLock update(@PathVariable("id") String id,@RequestBody JobsLock jobslock);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/batch")
-    Boolean updateBatch(@RequestBody List<JobsLock> jobslocks);
+    @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/{id}")
+    JobsLock get(@PathVariable("id") String id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/jobslocks/{id}")
@@ -44,16 +37,24 @@ public interface JobsLockFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/{id}")
-    JobsLock get(@PathVariable("id") String id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/{id}")
+    JobsLock update(@PathVariable("id") String id,@RequestBody JobsLock jobslock);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/getdraft")
-    JobsLock getDraft(JobsLock entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/jobslocks/batch")
+    Boolean updateBatch(@RequestBody List<JobsLock> jobslocks);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/checkkey")
     Boolean checkKey(@RequestBody JobsLock jobslock);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/searchdefault")
+    Page<JobsLock> searchDefault(@RequestBody JobsLockSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/getdraft")
+    JobsLock getDraft(JobsLock entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/save")
@@ -65,9 +66,8 @@ public interface JobsLockFeignClient {
     Boolean saveBatch(@RequestBody List<JobsLock> jobslocks);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/jobslocks/searchdefault")
-    Page<JobsLock> searchDefault(@RequestBody JobsLockSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/jobslocks/select")
+    Page<JobsLock> select();
 
 
 }

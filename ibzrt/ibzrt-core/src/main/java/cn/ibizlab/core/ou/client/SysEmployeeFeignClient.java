@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzou-api:ibzou-api}", contextId = "SysEmployee", fallback = SysEmployeeFallback.class)
 public interface SysEmployeeFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/select")
-    Page<SysEmployee> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sysemployees")
     SysEmployee create(@RequestBody SysEmployee sysemployee);
 
@@ -30,11 +26,8 @@ public interface SysEmployeeFeignClient {
     Boolean createBatch(@RequestBody List<SysEmployee> sysemployees);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysemployees/{userid}")
-    SysEmployee update(@PathVariable("userid") String userid,@RequestBody SysEmployee sysemployee);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysemployees/batch")
-    Boolean updateBatch(@RequestBody List<SysEmployee> sysemployees);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/{userid}")
+    SysEmployee get(@PathVariable("userid") String userid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysemployees/{userid}")
@@ -44,16 +37,24 @@ public interface SysEmployeeFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/{userid}")
-    SysEmployee get(@PathVariable("userid") String userid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysemployees/{userid}")
+    SysEmployee update(@PathVariable("userid") String userid,@RequestBody SysEmployee sysemployee);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/getdraft")
-    SysEmployee getDraft(SysEmployee entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysemployees/batch")
+    Boolean updateBatch(@RequestBody List<SysEmployee> sysemployees);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysemployees/checkkey")
     Boolean checkKey(@RequestBody SysEmployee sysemployee);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysemployees/searchdefault")
+    Page<SysEmployee> searchDefault(@RequestBody SysEmployeeSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/getdraft")
+    SysEmployee getDraft(SysEmployee entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysemployees/{userid}/initpwd")
@@ -69,9 +70,8 @@ public interface SysEmployeeFeignClient {
     Boolean saveBatch(@RequestBody List<SysEmployee> sysemployees);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysemployees/searchdefault")
-    Page<SysEmployee> searchDefault(@RequestBody SysEmployeeSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysemployees/select")
+    Page<SysEmployee> select();
 
 
 }

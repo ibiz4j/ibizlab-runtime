@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibznotify-api:ibznotify-api}", contextId = "MsgBody", fallback = MsgBodyFallback.class)
 public interface MsgBodyFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/msgbodies/select")
-    Page<MsgBody> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/msgbodies")
     MsgBody create(@RequestBody MsgBody msgbody);
 
@@ -30,11 +26,8 @@ public interface MsgBodyFeignClient {
     Boolean createBatch(@RequestBody List<MsgBody> msgbodies);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/msgbodies/{msg_id}")
-    MsgBody update(@PathVariable("msg_id") String msg_id,@RequestBody MsgBody msgbody);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/msgbodies/batch")
-    Boolean updateBatch(@RequestBody List<MsgBody> msgbodies);
+    @RequestMapping(method = RequestMethod.GET, value = "/msgbodies/{msg_id}")
+    MsgBody get(@PathVariable("msg_id") String msg_id);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/msgbodies/{msg_id}")
@@ -44,16 +37,24 @@ public interface MsgBodyFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/msgbodies/{msg_id}")
-    MsgBody get(@PathVariable("msg_id") String msg_id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/msgbodies/{msg_id}")
+    MsgBody update(@PathVariable("msg_id") String msg_id,@RequestBody MsgBody msgbody);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/msgbodies/getdraft")
-    MsgBody getDraft(MsgBody entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/msgbodies/batch")
+    Boolean updateBatch(@RequestBody List<MsgBody> msgbodies);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgbodies/checkkey")
     Boolean checkKey(@RequestBody MsgBody msgbody);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/msgbodies/searchdefault")
+    Page<MsgBody> searchDefault(@RequestBody MsgBodySearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/msgbodies/getdraft")
+    MsgBody getDraft(MsgBody entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/msgbodies/save")
@@ -65,9 +66,8 @@ public interface MsgBodyFeignClient {
     Boolean saveBatch(@RequestBody List<MsgBody> msgbodies);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/msgbodies/searchdefault")
-    Page<MsgBody> searchDefault(@RequestBody MsgBodySearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/msgbodies/select")
+    Page<MsgBody> select();
 
 
 }

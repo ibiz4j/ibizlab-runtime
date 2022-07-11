@@ -1,5 +1,5 @@
 
-FROM adoptopenjdk/openjdk8:jdk8u242-b08-centos
+FROM image.ibizlab.cn/library/openjdk:8-jre-alpine
 
 ENV TZ=Asia/Shanghai \
     SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \

@@ -19,14 +19,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class WFTaskWayFallback implements WFTaskWayFeignClient {
 
-    public Page<WFTaskWay> select() {
-        return null;
-    }
-
     public WFTaskWay create(WFTaskWay wftaskway) {
         return null;
     }
     public Boolean createBatch(List<WFTaskWay> wftaskways) {
+        return false;
+    }
+
+    public WFTaskWay get(String sequenceflowid) {
+        return null;
+    }
+
+
+    public Boolean remove(String sequenceflowid) {
+        return false;
+    }
+    public Boolean removeBatch(Collection<String> idList) {
         return false;
     }
 
@@ -38,14 +46,12 @@ public class WFTaskWayFallback implements WFTaskWayFeignClient {
     }
 
 
-    public Boolean remove(String sequenceflowid) {
-        return false;
-    }
-    public Boolean removeBatch(Collection<String> idList) {
+    public Boolean checkKey(WFTaskWay wftaskway) {
         return false;
     }
 
-    public WFTaskWay get(String sequenceflowid) {
+
+    public Page<WFTaskWay> searchDefault(WFTaskWaySearchContext context) {
         return null;
     }
 
@@ -54,11 +60,6 @@ public class WFTaskWayFallback implements WFTaskWayFeignClient {
         return null;
     }
 
-
-
-    public Boolean checkKey(WFTaskWay wftaskway) {
-        return false;
-    }
 
 
     public Object saveEntity(WFTaskWay wftaskway) {
@@ -72,9 +73,8 @@ public class WFTaskWayFallback implements WFTaskWayFeignClient {
         return false;
     }
 
-    public Page<WFTaskWay> searchDefault(WFTaskWaySearchContext context) {
+    public Page<WFTaskWay> select() {
         return null;
     }
-
 
 }

@@ -19,10 +19,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 @FeignClient(value = "${ibiz.ref.service.ibzuaa-api:ibzuaa-api}", contextId = "SysRole", fallback = SysRoleFallback.class)
 public interface SysRoleFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/select")
-    Page<SysRole> select();
-
-
     @RequestMapping(method = RequestMethod.POST, value = "/sysroles")
     SysRole create(@RequestBody SysRole sysrole);
 
@@ -30,11 +26,8 @@ public interface SysRoleFeignClient {
     Boolean createBatch(@RequestBody List<SysRole> sysroles);
 
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{roleid}")
-    SysRole update(@PathVariable("roleid") String roleid,@RequestBody SysRole sysrole);
-
-    @RequestMapping(method = RequestMethod.PUT, value = "/sysroles/batch")
-    Boolean updateBatch(@RequestBody List<SysRole> sysroles);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{roleid}")
+    SysRole get(@PathVariable("roleid") String roleid);
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sysroles/{roleid}")
@@ -44,16 +37,24 @@ public interface SysRoleFeignClient {
     Boolean removeBatch(@RequestBody Collection<String> idList);
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/{roleid}")
-    SysRole get(@PathVariable("roleid") String roleid);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysroles/{roleid}")
+    SysRole update(@PathVariable("roleid") String roleid,@RequestBody SysRole sysrole);
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/getdraft")
-    SysRole getDraft(SysRole entity);
+    @RequestMapping(method = RequestMethod.PUT, value = "/sysroles/batch")
+    Boolean updateBatch(@RequestBody List<SysRole> sysroles);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysroles/checkkey")
     Boolean checkKey(@RequestBody SysRole sysrole);
+
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sysroles/searchdefault")
+    Page<SysRole> searchDefault(@RequestBody SysRoleSearchContext context);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/getdraft")
+    SysRole getDraft(SysRole entity);
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/sysroles/save")
@@ -65,9 +66,8 @@ public interface SysRoleFeignClient {
     Boolean saveBatch(@RequestBody List<SysRole> sysroles);
 
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/sysroles/searchdefault")
-    Page<SysRole> searchDefault(@RequestBody SysRoleSearchContext context);
+    @RequestMapping(method = RequestMethod.GET, value = "/sysroles/select")
+    Page<SysRole> select();
 
 
 }
