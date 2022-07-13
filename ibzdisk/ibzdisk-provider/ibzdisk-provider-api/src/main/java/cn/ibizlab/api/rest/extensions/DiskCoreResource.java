@@ -102,7 +102,7 @@ public class DiskCoreResource
 		this.sendRespose(response, file);
 	}
 
-	@PostMapping(value = "net-disk/download/")
+	@PostMapping(value = "net-disk/download")
 	@ResponseStatus(HttpStatus.OK)
 	public void download(@RequestBody List<JsonNode> list, HttpServletRequest request, HttpServletResponse response){
 		File file= diskCoreService.getFile(null, list);
