@@ -44,7 +44,7 @@
         <mybatis-plus-dynamic-datasource.version>3.0.0</mybatis-plus-dynamic-datasource.version>
 
         <!--  Liquibase -->
-        <liquibase.version>4.2.2</liquibase.version>
+        <liquibase.version>4.8.0</liquibase.version>
 
         <!--  Swagger2 -->
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
