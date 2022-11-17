@@ -86,7 +86,7 @@
         <log4j2.version>2.16.0</log4j2.version>
 
         <oracle.version>19.8.0.0</oracle.version>
-        <postgresql.version>42.2.6</postgresql.version>
+        <postgresql.version>42.4.1</postgresql.version>
         <flowable-modeler.version>6.4.2</flowable-modeler.version>
 
         <alibaba-fastjson.version>1.2.57_noneautotype</alibaba-fastjson.version>
