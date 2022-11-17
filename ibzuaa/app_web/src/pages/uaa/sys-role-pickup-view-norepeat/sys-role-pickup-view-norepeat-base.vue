@@ -17,8 +17,8 @@
                 name="pickupviewpanel"  
                 ref='pickupviewpanel' 
                 @selectionchange="pickupviewpanel_selectionchange($event)"  
-                @activated="pickupviewpanel_activated($event)"  
                 @load="pickupviewpanel_load($event)"  
+                @activated="pickupviewpanel_activated($event)"  
                 @closeview="closeView($event)">
             </view_pickupviewpanel>
             <card v-if="isShowButton" :dis-hover="true" :bordered="false" class="footer">
@@ -576,18 +576,6 @@ export default class SysRolePickupView_norepeatBase extends Vue {
 
 
     /**
-     * pickupviewpanel 部件 activated 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysRolePickupView_norepeatBase
-     */
-    public pickupviewpanel_activated($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('pickupviewpanel', 'activated', $event);
-    }
-
-
-    /**
      * pickupviewpanel 部件 load 事件
      *
      * @param {*} [args={}]
@@ -596,6 +584,18 @@ export default class SysRolePickupView_norepeatBase extends Vue {
      */
     public pickupviewpanel_load($event: any, $event2?: any) {
         this.engine.onCtrlEvent('pickupviewpanel', 'load', $event);
+    }
+
+
+    /**
+     * pickupviewpanel 部件 activated 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysRolePickupView_norepeatBase
+     */
+    public pickupviewpanel_activated($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('pickupviewpanel', 'activated', $event);
     }
 
 
@@ -659,6 +659,7 @@ export default class SysRolePickupView_norepeatBase extends Vue {
         if(this.portletStateEvent){
             this.portletStateEvent.unsubscribe();
         }
+        this.viewState.complete();        
     }
     /**
      * 选中数据的字符串

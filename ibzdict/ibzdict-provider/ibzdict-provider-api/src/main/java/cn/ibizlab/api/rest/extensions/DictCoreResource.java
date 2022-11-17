@@ -56,7 +56,7 @@ public class DictCoreResource {
     @Lazy
     private DictCoreService dictCoreService;
 
-    @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/catalogs/{code}")
+    @RequestMapping(method = {RequestMethod.GET}, value = {"/dictionaries/catalogs/{code}","/dictionarys/catalogs/{code}"})
     public ResponseEntity<Catalog> getCatalogs(@PathVariable("code") String code,DictOptionSearchContext context) {
         Catalog catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
@@ -66,7 +66,7 @@ public class DictCoreResource {
         return ResponseEntity.status(HttpStatus.OK).body(catalog);
     }
 
-    @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/catalogs/{code}/options")
+    @RequestMapping(method = {RequestMethod.GET}, value = {"/dictionaries/catalogs/{code}/options","/dictionarys/catalogs/{code}/options"})
     public ResponseEntity<List<Option>> getOptions(@PathVariable("code") String code, DictOptionSearchContext context) {
         Catalog catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
@@ -78,7 +78,7 @@ public class DictCoreResource {
 
 
 
-    @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/codelist/{code}")
+    @RequestMapping(method = {RequestMethod.GET}, value = {"/dictionaries/codelist/{code}","/dictionarys/codelist/{code}"})
     public ResponseEntity<CodeList> getCodeList(@PathVariable("code") String code,DictOptionSearchContext context) {
         CodeList catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
@@ -89,7 +89,7 @@ public class DictCoreResource {
     }
 
 
-    @RequestMapping(method = {RequestMethod.GET}, value = "/dictionarys/codelist/{code}/items")
+    @RequestMapping(method = {RequestMethod.GET}, value = {"/dictionaries/codelist/{code}/items","/dictionarys/codelist/{code}/items"})
     public ResponseEntity<List<CodeItem>> getCodeItems(@PathVariable("code") String code, DictOptionSearchContext context) {
         CodeList catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
@@ -100,7 +100,7 @@ public class DictCoreResource {
     }
 
 
-    @RequestMapping(method = {RequestMethod.POST}, value = "/dictionarys/catalogs/{code}")
+    @RequestMapping(method = {RequestMethod.POST}, value = {"/dictionaries/catalogs/{code}","/dictionarys/catalogs/{code}"})
     public ResponseEntity<Catalog> catalogs(@PathVariable("code") String code, @RequestBody(required = false) DictOptionSearchContext context) {
         Catalog catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
@@ -110,7 +110,7 @@ public class DictCoreResource {
         return ResponseEntity.status(HttpStatus.OK).body(catalog);
     }
 
-    @RequestMapping(method = {RequestMethod.POST}, value = "/dictionarys/catalogs/{code}/options")
+    @RequestMapping(method = {RequestMethod.POST}, value = {"/dictionaries/catalogs/{code}/options","/dictionarys/catalogs/{code}/options"})
     public ResponseEntity<List<Option>> options(@PathVariable("code") String code,@RequestBody(required = false) DictOptionSearchContext context) {
         Catalog catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
@@ -122,7 +122,7 @@ public class DictCoreResource {
 
 
 
-    @RequestMapping(method = {RequestMethod.POST}, value = "/dictionarys/codelist/{code}")
+    @RequestMapping(method = {RequestMethod.POST}, value = {"/dictionaries/codelist/{code}","/dictionarys/codelist/{code}"})
     public ResponseEntity<CodeList> codeList(@PathVariable("code") String code,@RequestBody(required = false) DictOptionSearchContext context) {
         CodeList catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
@@ -133,7 +133,7 @@ public class DictCoreResource {
     }
 
 
-    @RequestMapping(method = {RequestMethod.POST}, value = "/dictionarys/codelist/{code}/items")
+    @RequestMapping(method = {RequestMethod.POST}, value = {"/dictionaries/codelist/{code}/items","/dictionarys/codelist/{code}/items"})
     public ResponseEntity<List<CodeItem>> codeItems(@PathVariable("code") String code, @RequestBody(required = false) DictOptionSearchContext context) {
         CodeList catalog = null;
         if(context==null||StringUtils.isEmpty(context.getSelectCond().getSqlSegment()))
@@ -144,18 +144,18 @@ public class DictCoreResource {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/catalogs")
+    @RequestMapping(method = RequestMethod.POST, value = {"/dictionaries/catalogs","/dictionarys/catalogs"})
     public ResponseEntity<Boolean> save(@RequestBody DictCatalogDTO dictcatalogdto) {
         return ResponseEntity.status(HttpStatus.OK).body(dictcatalogService.save(dictcatalogMapping.toDomain(dictcatalogdto)));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/catalogs/savebatch")
+    @RequestMapping(method = RequestMethod.POST, value = {"/dictionaries/catalogs/savebatch","/dictionarys/catalogs/savebatch"})
     public ResponseEntity<Boolean> saveBatch(@RequestBody List<DictCatalogDTO> dictcatalogdtos) {
         dictcatalogService.saveBatch(dictcatalogMapping.toDomain(dictcatalogdtos));
         return  ResponseEntity.status(HttpStatus.OK).body(true);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/dictionarys/catalogs/sync")
+    @RequestMapping(method = RequestMethod.POST, value = {"/dictionaries/catalogs/sync","/dictionarys/catalogs/sync"})
     public ResponseEntity<Boolean> syncRuntimeDict(@RequestBody List<DictCatalog> catalogs){
         dictCoreService.syncRuntimeDict(catalogs);
         return  ResponseEntity.status(HttpStatus.OK).body(true);

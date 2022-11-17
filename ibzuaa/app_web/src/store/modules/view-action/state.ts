@@ -98,9 +98,9 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'a1f8d44a9d7be49687062c63434b0f3f',
-                '86bd4f6d4f771870e10b9717046a1b14',
                 'a93a129850b81c3c921aa1911ec9eb8c',
+                '86bd4f6d4f771870e10b9717046a1b14',
+                'a1f8d44a9d7be49687062c63434b0f3f',
             ],
         },
         {
@@ -208,10 +208,10 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '1ef170b14b7a70f4609a9f13692d1414',
                 '1ea24a0d62ab391e6dbff850a804d9b2',
-                '255944d6d1a575d0eda2b68bc19314f3',
                 '13c174556f45e9b10b66dc51834a6ab5',
+                '255944d6d1a575d0eda2b68bc19314f3',
+                '1ef170b14b7a70f4609a9f13692d1414',
                 '29ebd67c0eba9fb1464bcd1397112f6f',
             ],
         },
@@ -242,9 +242,9 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '1f8cf7e78d6d88588d1d568d1866cc77',
-                'a1f8d44a9d7be49687062c63434b0f3f',
                 'edde313015e1db7c366028307d88d20c',
+                'a1f8d44a9d7be49687062c63434b0f3f',
+                '1f8cf7e78d6d88588d1d568d1866cc77',
             ],
         },
         {
@@ -263,9 +263,9 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '6736591aca71edc23df760e278378566',
                 'ba8e31e716b14bba81cdf1281fc76197',
                 '983f3ae1533a5cd62619dedb79bb4b28',
+                '6736591aca71edc23df760e278378566',
             ],
         },
         {
@@ -322,9 +322,9 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '6736591aca71edc23df760e278378566',
                 'ba8e31e716b14bba81cdf1281fc76197',
                 '983f3ae1533a5cd62619dedb79bb4b28',
+                '6736591aca71edc23df760e278378566',
             ],
         },
         {

@@ -42,6 +42,8 @@ export class UIServiceRegister {
                 this.allUIService.set('wftask', () => import('@/uiservice/wftask/wftask-ui-service'));
         this.allUIService.set('wfmember', () => import('@/uiservice/wfmember/wfmember-ui-service'));
         this.allUIService.set('wfuser', () => import('@/uiservice/wfuser/wfuser-ui-service'));
+        this.allUIService.set('wfprocessinstance', () => import('@/uiservice/wfprocess-instance/wfprocess-instance-ui-service'));
+        this.allUIService.set('wfprocessnode', () => import('@/uiservice/wfprocess-node/wfprocess-node-ui-service'));
         this.allUIService.set('wfgroup', () => import('@/uiservice/wfgroup/wfgroup-ui-service'));
         this.allUIService.set('wfremodel', () => import('@/uiservice/wfremodel/wfremodel-ui-service'));
         this.allUIService.set('wfsystem', () => import('@/uiservice/wfsystem/wfsystem-ui-service'));

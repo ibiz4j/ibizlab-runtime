@@ -37,6 +37,7 @@ function getLocaleResourceBase(){
 				srfuf: commonLogic.appcommonhandle("",null), 
 				srfdeid: commonLogic.appcommonhandle("",null), 
 				srfsourcekey: commonLogic.appcommonhandle("",null), 
+				accessid: commonLogic.appcommonhandle("标识",null), 
 				accessname: commonLogic.appcommonhandle("开放平台",null), 
 				open_type: commonLogic.appcommonhandle("开放平台类型",null), 
 				access_key: commonLogic.appcommonhandle("AccessKey(AppId)",null), 
@@ -48,7 +49,6 @@ function getLocaleResourceBase(){
 				notify_url: commonLogic.appcommonhandle("NotifyUrl",null), 
 				agent_id: commonLogic.appcommonhandle("AGENT_ID",null), 
 				disabled: commonLogic.appcommonhandle("是否禁用",null), 
-				accessid: commonLogic.appcommonhandle("开放平台接入标识",null), 
 			},
 			uiactions: {
 			},

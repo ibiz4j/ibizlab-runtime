@@ -33,8 +33,13 @@ public interface IWFProcessInstanceService {
     WFProcessInstance get(String key);
     WFProcessInstance getDraft(WFProcessInstance et);
     boolean checkKey(WFProcessInstance et);
+    WFProcessInstance jump(WFProcessInstance et);
+    boolean jumpBatch(List<WFProcessInstance> etList);
+    WFProcessInstance restart(WFProcessInstance et);
+    boolean restartBatch(List<WFProcessInstance> etList);
     boolean save(WFProcessInstance et);
     void saveBatch(List<WFProcessInstance> list);
+    Page<WFProcessInstance> searchActiveProcessInstance(WFProcessInstanceSearchContext context);
     Page<WFProcessInstance> searchDefault(WFProcessInstanceSearchContext context);
 
 }

@@ -79,6 +79,8 @@
                             </template>
                         </div>
                     </poptip>
+                    <i-button class="config-button" @click="saveDynaConfig">{{$t('app.gridpage.saveconfig')}}</i-button>
+                    <i-button class="config-button" @click="resetDynaConfig">{{$t('app.gridpage.resetconfig')}}</i-button>
                 </span>
                 <span class="page-button"><i-button icon="md-refresh" :title="$t('app.gridpage.refresh')" @click="pageRefresh()"></i-button></span>&nbsp;
                 <span>
@@ -304,20 +306,6 @@ export default class MainBase extends Vue implements ControlInterface {
         return this.selections[0];
     }
 
-    /**
-     * 打开新建数据视图
-     *
-     * @type {any}
-     * @memberof MainBase
-     */
-    @Prop() public newdata: any;
-    /**
-     * 打开编辑数据视图
-     *
-     * @type {any}
-     * @memberof MainBase
-     */
-    @Prop() public opendata: any;
     
     /**
     * 是否嵌入关系界面
@@ -645,6 +633,14 @@ export default class MainBase extends Vue implements ControlInterface {
     ]
 
     /**
+     * 重置表格列模型缓存
+     *
+     * @type {any[]}
+     * @memberof MainBase
+     */
+    public resetColModel: any[] = [];
+
+    /**
      * 表格模型集合
      *
      * @type {*}
@@ -814,7 +810,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}, pageReset: boolean = false): void {
         if(!this.fetchAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupPickupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
             return;
         }
         if(pageReset){
@@ -909,7 +905,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async remove(datas: any[]): Promise<any> {
         if(!this.removeAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupGridView'+(this.$t('app.gridpage.notConfig.removeAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupPickupGridView'+(this.$t('app.gridpage.notConfig.removeAction') as string) });
             return;
         }
         let _datas:any[] = [];
@@ -1015,7 +1011,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public addBatch(arg: any = {}): void {
         if(!this.fetchAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupPickupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
             return;
         }
         if(!arg){
@@ -1800,16 +1796,43 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public setColState() {
-		const _data: any = localStorage.getItem('wf_group_main_grid');
-		if (_data) {
-			let columns = JSON.parse(_data);
-			columns.forEach((col: any) => {
-				let column = this.allColumns.find((item) => Object.is(col.name, item.name));
-				if (column) {
-					Object.assign(column, col);
-				}
-			});
-		}
+        this.resetColModel = Util.deepCopy(this.allColumns);
+        const viewParams: any = Util.deepCopy(this.viewparams);
+        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzwf_web_wfgrouppickupgridview_grid_main'});
+        const post = this.service.loadModel('grid_dynaconfig', this.context, viewParams);
+        post.then((response: any) => {
+            if(response.status == 200 && response.data) {
+                const columns = response.data;
+                columns.forEach((col: any) => {
+                    let column = this.allColumns.find((item) => Object.is(col.name, item.name));
+                    if (column) {
+                        Object.assign(column, col);
+                    }
+                });
+            } else {
+                this.getColStorage();
+            }
+        }).catch(() => {
+            this.getColStorage();
+        });
+    }
+
+    /**
+     * 获取列缓存
+     *
+     * @memberof MainBase
+     */
+    public getColStorage() {
+        const _data: any = localStorage.getItem('wf_group_main_grid');
+        if (_data) {
+            let columns = JSON.parse(_data);
+            columns.forEach((col: any) => {
+                let column = this.allColumns.find((item) => Object.is(col.name, item.name));
+                if (column) {
+                    Object.assign(column, col);
+                }
+            });
+        }
     }
 
     /**
@@ -1833,6 +1856,36 @@ export default class MainBase extends Vue implements ControlInterface {
             Object.is(name, col.name)
         );
         return column.show ? true : false;
+    }
+
+    /**
+     * 保存动态表格配置
+     *
+     * @memberof MainBase
+     */
+    public saveDynaConfig() {
+        const viewParams: any = Util.deepCopy(this.viewparams);
+        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzwf_web_wfgrouppickupgridview_grid_main', model: this.allColumns});
+        const post = this.service.saveModel('grid_dynaconfig', this.context, viewParams);
+        post.then((response: any) => {
+            if (response.status == 200) {
+                this.$Message.success(this.$t('app.gridpage.message.saveconfigsuccess'));
+            } else {
+                this.$Message.error(this.$t('app.gridpage.message.saveconfigerror'));
+            }
+        }).catch(() => {
+            this.$Message.error(this.$t('app.gridpage.message.saveconfigerror'));
+        });
+    }
+
+    /**
+     * 重置动态表格配置
+     *
+     * @memberof MainBase
+     */
+    public resetDynaConfig() {
+        this.allColumns = Util.deepCopy(this.resetColModel);
+        localStorage.setItem('dynaconfig_main_grid', JSON.stringify(this.allColumns));
     }
 
     /**
@@ -1883,7 +1936,7 @@ export default class MainBase extends Vue implements ControlInterface {
             try {
                 if(Object.is(item.rowDataState, 'create')){
                     if(!this.createAction){
-                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupGridView'+(this.$t('app.gridpage.notConfig.createAction') as string) });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupPickupGridView'+(this.$t('app.gridpage.notConfig.createAction') as string) });
                     }else{
                       Object.assign(item,{viewparams:this.viewparams});
                       let response = await this.service.add(this.createAction, JSON.parse(JSON.stringify(this.context)),item, this.showBusyIndicator);
@@ -1891,7 +1944,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     }
                 }else if(Object.is(item.rowDataState, 'update')){
                     if(!this.updateAction){
-                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupGridView'+(this.$t('app.gridpage.notConfig.updateAction') as string) });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupPickupGridView'+(this.$t('app.gridpage.notConfig.updateAction') as string) });
                     }else{
                         Object.assign(item,{viewparams:this.viewparams});
                         if(item.wfgroup){
@@ -1964,7 +2017,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public newRow(args: any[], params?: any, $event?: any, xData?: any): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupGridView'+(this.$t('app.gridpage.notConfig.loaddraftAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFGroupPickupGridView'+(this.$t('app.gridpage.notConfig.loaddraftAction') as string) });
             return;
         }
         let _this = this;

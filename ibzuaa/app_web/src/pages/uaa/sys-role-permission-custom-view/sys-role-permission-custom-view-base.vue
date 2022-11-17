@@ -576,6 +576,7 @@ export default class SysRolePermissionCustomViewBase extends Vue {
         if(this.portletStateEvent){
             this.portletStateEvent.unsubscribe();
         }
+        this.viewState.complete();        
     }
 
 }

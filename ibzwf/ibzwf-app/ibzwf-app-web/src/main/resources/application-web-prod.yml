@@ -75,6 +75,14 @@ zuul:
       path: /wfusers/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
       stripPrefix: false
+    wf_instance:
+      path: /wfprocessinstances/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
+    wf_definition_node:
+      path: /wfprocessnodes/**
+      serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}
+      stripPrefix: false
     wf_group:
       path: /wfgroups/**
       serviceId: ${ibiz.ref.service.ibzwf-api:ibzwf-api}

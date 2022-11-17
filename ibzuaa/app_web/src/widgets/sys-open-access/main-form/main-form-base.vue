@@ -5,7 +5,21 @@
             <i-col v-show="detailsModel.group1.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-group :uiService="appUIService" :data="transformData(data)" :manageContainerStatus="detailsModel.group1.manageContainerStatus"  :isManageContainer="detailsModel.group1.isManageContainer" @managecontainerclick="manageContainerClick('group1')" layoutType="TABLE_24COL" titleStyle="" class='' :uiActionGroup="detailsModel.group1.uiActionGroup" @groupuiactionclick="groupUIActionClick($event)" :caption="$t('entities.sysopenaccess.main_form.details.group1')" :isShowCaption="false" uiStyle="DEFAULT" :titleBarCloseMode="0" :isInfoGroupMode="false" >    
     <row>
-        <i-col v-show="detailsModel.accessname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+        <i-col v-show="detailsModel.accessid.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
+    <app-form-item name='accessid' :itemRules="this.rules().accessid" class='' :caption="$t('entities.sysopenaccess.main_form.details.accessid')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.accessid.error" :isEmptyCaption="false" labelPos="LEFT">
+    <input-box 
+    v-model="data.accessid"  
+    @enter="onEnter($event)"  
+     unit=""  
+    :disabled="detailsModel.accessid.disabled" 
+    type='text' 
+    style="">
+</input-box>
+
+</app-form-item>
+
+</i-col>
+<i-col v-show="detailsModel.accessname.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='accessname' :itemRules="this.rules().accessname" class='' :caption="$t('entities.sysopenaccess.main_form.details.accessname')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.accessname.error" :isEmptyCaption="false" labelPos="LEFT">
     <input-box 
     v-model="data.accessname"  
@@ -331,7 +345,7 @@ export default class MainBase extends Vue implements ControlInterface {
      * @type {string}
      * @memberof MainBase
      */
-    public formKeyItemName: string = '';
+    public formKeyItemName: string = 'accessid';
 
     /**
      * 是否自动加载
@@ -567,6 +581,7 @@ export default class MainBase extends Vue implements ControlInterface {
         srfuf: null,
         srfdeid: null,
         srfsourcekey: null,
+        accessid: null,
         accessname: null,
         open_type: null,
         access_key: null,
@@ -578,7 +593,6 @@ export default class MainBase extends Vue implements ControlInterface {
         notify_url: null,
         agent_id: null,
         disabled: null,
-        accessid: null,
         sysopenaccess:null,
     };
 
@@ -630,6 +644,10 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public rules() :any {
     return {
+        accessid: [
+            { required: this.detailsModel.accessid.required, type: 'string', message: '标识 值不能为空', trigger: 'change' },
+            { required: this.detailsModel.accessid.required, type: 'string', message: '标识 值不能为空', trigger: 'blur' },
+        ],
         accessname: [
             { required: this.detailsModel.accessname.required, type: 'string', message: '开放平台 值不能为空', trigger: 'change' },
             { required: this.detailsModel.accessname.required, type: 'string', message: '开放平台 值不能为空', trigger: 'blur' },
@@ -799,6 +817,8 @@ export default class MainBase extends Vue implements ControlInterface {
 , 
         srfsourcekey: new FormItemModel({ caption: '', detailType: 'FORMITEM', name: 'srfsourcekey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
+        accessid: new FormItemModel({ caption: '标识', detailType: 'FORMITEM', name: 'accessid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 1 })
+, 
         accessname: new FormItemModel({ caption: '开放平台', detailType: 'FORMITEM', name: 'accessname', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
         open_type: new FormItemModel({ caption: '开放平台类型', detailType: 'FORMITEM', name: 'open_type', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
@@ -820,8 +840,6 @@ export default class MainBase extends Vue implements ControlInterface {
         agent_id: new FormItemModel({ caption: 'AGENT_ID', detailType: 'FORMITEM', name: 'agent_id', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
         disabled: new FormItemModel({ caption: '是否禁用', detailType: 'FORMITEM', name: 'disabled', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
-, 
-        accessid: new FormItemModel({ caption: '开放平台接入标识', detailType: 'FORMITEM', name: 'accessid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
     };
 
@@ -907,6 +925,18 @@ export default class MainBase extends Vue implements ControlInterface {
     @Watch('data.srfsourcekey')
     onSrfsourcekeyChange(newVal: any, oldVal: any) {
         this.formDataChange({ name: 'srfsourcekey', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
+     * 监控表单属性 accessid 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof MainBase
+     */
+    @Watch('data.accessid')
+    onAccessidChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'accessid', newVal: newVal, oldVal: oldVal });
     }
 
     /**
@@ -1039,18 +1069,6 @@ export default class MainBase extends Vue implements ControlInterface {
     @Watch('data.disabled')
     onDisabledChange(newVal: any, oldVal: any) {
         this.formDataChange({ name: 'disabled', newVal: newVal, oldVal: oldVal });
-    }
-
-    /**
-     * 监控表单属性 accessid 值
-     *
-     * @param {*} newVal
-     * @param {*} oldVal
-     * @memberof MainBase
-     */
-    @Watch('data.accessid')
-    onAccessidChange(newVal: any, oldVal: any) {
-        this.formDataChange({ name: 'accessid', newVal: newVal, oldVal: oldVal });
     }
 
 
@@ -1478,6 +1496,7 @@ export default class MainBase extends Vue implements ControlInterface {
         if(this.appStateEvent){
             this.appStateEvent.unsubscribe();
         }
+        this.formState.complete();        
     }
 
     /**
@@ -1592,6 +1611,7 @@ export default class MainBase extends Vue implements ControlInterface {
             const data = response.data;
             this.resetDraftFormStates();
             this.onFormLoad(data,'loadDraft');
+            this.data.accessid = null;
             data.sysopenaccess = null;
             this.$emit('load', data);
             this.$nextTick(() => {

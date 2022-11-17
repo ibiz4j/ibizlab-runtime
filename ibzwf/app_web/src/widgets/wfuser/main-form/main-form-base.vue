@@ -1172,6 +1172,7 @@ export default class MainBase extends Vue implements ControlInterface {
         if(this.appStateEvent){
             this.appStateEvent.unsubscribe();
         }
+        this.formState.complete();        
     }
 
     /**

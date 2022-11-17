@@ -27,6 +27,16 @@ export default class MainModel {
     }else{
 		  return [
         {
+          name: 'userid',
+          prop: 'id',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'personname',
+          prop: 'displayname',
+          dataType: 'TEXT',
+        },
+        {
           name: 'username',
           prop: 'firstname',
           dataType: 'TEXT',
@@ -37,28 +47,8 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'userid',
-          prop: 'id',
-          dataType: 'TEXT',
-        },
-        {
           name: 'mdeptname',
           prop: 'mdeptname',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'personname',
-          prop: 'displayname',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'srfmajortext',
-          prop: 'displayname',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'srfdataaccaction',
-          prop: 'id',
           dataType: 'TEXT',
         },
         {
@@ -66,6 +56,16 @@ export default class MainModel {
           prop: 'id',
           dataType: 'TEXT',
           isEditable:true
+        },
+        {
+          name: 'srfdataaccaction',
+          prop: 'id',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'srfmajortext',
+          prop: 'displayname',
+          dataType: 'TEXT',
         },
         {
           name: 'wfuser',

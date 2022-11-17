@@ -27,18 +27,53 @@ export default class MainModel {
     }else{
 		  return [
         {
+          name: 'definitionname',
+          prop: 'processdefinitionname',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'taskname',
+          prop: 'name',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'description',
+          prop: 'description',
+          dataType: 'LONGTEXT_1000',
+        },
+        {
+          name: 'createtime',
+          prop: 'createtime',
+          dataType: 'DATETIME',
+        },
+        {
+          name: 'businesskey',
+          prop: 'processinstancebusinesskey',
+          dataType: 'TEXT',
+        },
+        {
           name: 'definitionid',
           prop: 'processdefinitionid',
           dataType: 'TEXT',
         },
         {
-          name: 'taskid',
-          prop: 'id',
+          name: 'definitionkey',
+          prop: 'processdefinitionkey',
           dataType: 'TEXT',
         },
         {
-          name: 'srfmajortext',
-          prop: 'name',
+          name: 'instanceid',
+          prop: 'processinstanceid',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'taskdefinitionkey',
+          prop: 'taskdefinitionkey',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'taskid',
+          prop: 'id',
           dataType: 'TEXT',
         },
         {
@@ -53,43 +88,8 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'createtime',
-          prop: 'createtime',
-          dataType: 'DATETIME',
-        },
-        {
-          name: 'businesskey',
-          prop: 'processinstancebusinesskey',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'definitionname',
-          prop: 'processdefinitionname',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'description',
-          prop: 'description',
-          dataType: 'LONGTEXT_1000',
-        },
-        {
-          name: 'taskdefinitionkey',
-          prop: 'taskdefinitionkey',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'definitionkey',
-          prop: 'processdefinitionkey',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'taskname',
+          name: 'srfmajortext',
           prop: 'name',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'instanceid',
-          prop: 'processinstanceid',
           dataType: 'TEXT',
         },
         {

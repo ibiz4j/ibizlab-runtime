@@ -12,6 +12,7 @@
     <artifactId>ibzwf-app-web</artifactId>
     <name>Ibzwf Gateway web</name>
     <description>Ibzwf web</description>
+    <packaging>${project.packaging}</packaging>
 
     <dependencies>
 		<dependency>
@@ -22,6 +23,7 @@
     </dependencies>
 
     <properties>
+        <project.packaging>jar</project.packaging>
         <docker.image.prefix>registry.cn-shanghai.aliyuncs.com/ibizsys</docker.image.prefix>
     </properties>
 
@@ -141,6 +143,125 @@
                             </resources>
                             </configuration>
                     </plugin>                       
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>web-war</id>
+            <properties>
+                <project.packaging>war</project.packaging>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${basedir}/src/main/webapp</directory>
+                        <!--注意此次必须要放在此目录下才能被访问到 -->
+                        <targetPath>META-INF/resources</targetPath>
+                        <includes>
+                            <include>**/**</include>
+                        </includes>
+                    </resource>
+                    <resource>
+                        <directory>${basedir}/src/main/resources</directory>
+                        <includes>
+                            <include>**/**</include>
+                        </includes>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>exec-yarn-run-install</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>yarn</executable>
+                                    <workingDirectory>../../app_web</workingDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>exec-yarn-run-build</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>yarn</executable>
+                                    <arguments>
+                                        <argument>build</argument>
+                                    </arguments>
+                                    <workingDirectory>../../app_web</workingDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>      
+                                <id>prepare</id>                                                           
+                                <configuration>
+                                    <executable>cp</executable>
+                                    <arguments>
+                                        <argument>../../${project.artifactId}.war</argument>
+                                        <argument>${project.basedir}/src/main/dockerwar/</argument>
+                                    </arguments>
+                                </configuration> 
+                            </execution> 
+                            <execution>    
+                                <id>buildpush</id>                                                                         
+                                <configuration>
+                                    <executable>docker</executable>
+                                    <arguments>
+                                        <argument>buildx</argument>
+                                        <argument>build</argument>
+                                        <argument>--platform</argument>
+                                        <argument>linux/arm64</argument>
+                                        <argument>-t</argument>
+                                        <argument>${docker.image.prefix}/${project.artifactId}:latest</argument>
+                                        <argument>${project.basedir}/src/main/dockerwar</argument>
+                                        <argument>--push</argument>
+                                    </arguments>                                    
+                                </configuration>
+                            </execution>    
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <finalName>ibzwf-app-web</finalName>
+                            <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                            <mainClass>cn.ibizlab.web.webApplication</mainClass>
+                            <outputDirectory>../../</outputDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>repackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                            <groupId>com.spotify</groupId>
+                            <artifactId>docker-maven-plugin</artifactId>
+                            <version>0.4.13</version>
+                            <configuration>
+                            <serverId>ibiz-dev</serverId>
+                            <imageName>${docker.image.prefix}/${project.artifactId}:latest</imageName>
+                            <dockerDirectory>${project.basedir}/src/main/dockerwar</dockerDirectory>
+                            <resources>
+                                <resource>
+                                    <targetPath>/</targetPath>
+                                    <directory>../../</directory>
+                                    <include>${project.artifactId}.war</include>
+                                </resource>
+                            </resources>
+                            </configuration>
+                    </plugin>                                       
                 </plugins>
             </build>
         </profile>

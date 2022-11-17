@@ -146,7 +146,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/ibzorganizations/**/suborg/picker").permitAll()
                        .antMatchers("/sysorganizations/**/suborg/picker").permitAll()
                        .antMatchers("/dictionarys/**").permitAll()
-
+                       .antMatchers("/dictionaries/**").permitAll()
                        .antMatchers("/sysemployees/**/oumaps").permitAll()
 
                        //开放支付接口
@@ -154,6 +154,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                        .antMatchers("/notify/**").permitAll()
 
                        .antMatchers("/net-disk/download/**").permitAll()
+                       .antMatchers("/net-disk/download2/**").permitAll()
                        .antMatchers("/net-disk/**view/**").permitAll()
                        .antMatchers("/net-disk/**/*.json").permitAll()
                        .antMatchers("/jobs-api").permitAll()

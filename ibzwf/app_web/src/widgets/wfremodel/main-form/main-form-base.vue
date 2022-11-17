@@ -7,7 +7,21 @@
     <row>
         <i-col v-show="detailsModel.bpmnfile.visible" :style="{}"  :lg="{ span: 24, offset: 0 }">
     <app-form-item name='bpmnfile' :itemRules="this.rules().bpmnfile" class='' :caption="$t('entities.wfremodel.main_form.details.bpmnfile')" uiStyle="DEFAULT" :labelWidth="130" :isShowCaption="true" :error="detailsModel.bpmnfile.error" :isEmptyCaption="false" labelPos="LEFT">
-    <app-file-upload :formState="formState" :ignorefieldvaluechange="ignorefieldvaluechange" @formitemvaluechange="onFormItemValueChange" :data="JSON.stringify(this.data)" name='bpmnfile' :value="data.bpmnfile" :disabled="detailsModel.bpmnfile.disabled" :uploadparams='{}' :exportparams='{}'  style="overflow: auto;"></app-file-upload>
+    <app-file-upload
+  :limit="9999"
+  :accept="'*'"
+  :formState="formState"
+  :ignorefieldvaluechange="ignorefieldvaluechange"
+  @formitemvaluechange="onFormItemValueChange"
+  :data="JSON.stringify(this.data)"
+  name='bpmnfile'
+  :value="data.bpmnfile"
+  :disabled="detailsModel.bpmnfile.disabled"
+  :uploadparams='{}'
+  :exportparams='{}'
+  :multiple='true'
+  style="overflow: auto;">
+</app-file-upload>
 
 </app-form-item>
 
@@ -1131,6 +1145,7 @@ export default class MainBase extends Vue implements ControlInterface {
         if(this.appStateEvent){
             this.appStateEvent.unsubscribe();
         }
+        this.formState.complete();        
     }
 
     /**

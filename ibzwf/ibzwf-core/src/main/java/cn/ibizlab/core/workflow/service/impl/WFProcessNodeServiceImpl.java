@@ -107,6 +107,14 @@ public class WFProcessNodeServiceImpl implements IWFProcessNodeService {
         return new PageImpl<WFProcessNode>(new ArrayList(),context.getPageable(),0);
     }
 
+    /**
+     * 查询集合 查询当前实例流程节点
+     */
+    @Override
+    public Page<WFProcessNode> searchProcessNode(WFProcessNodeSearchContext context) {
+        return new PageImpl<WFProcessNode>(new ArrayList(),context.getPageable(),0);
+    }
+
 
 
 }

@@ -566,6 +566,7 @@ export default class SYS_PERMISSIONRedirectViewBase extends Vue {
         if(this.portletStateEvent){
             this.portletStateEvent.unsubscribe();
         }
+        this.viewState.complete();        
     }
         /**
      * 初始化视图

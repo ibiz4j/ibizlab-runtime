@@ -32,14 +32,9 @@ export default class MainModel {
           dataType: 'GUID',
         },
         {
-          name: 'srfmajortext',
+          name: 'sys_permissionname',
           prop: 'permissionname',
           dataType: 'TEXT',
-        },
-        {
-          name: 'srfdataaccaction',
-          prop: 'permissionid',
-          dataType: 'GUID',
         },
         {
           name: 'srfkey',
@@ -48,7 +43,12 @@ export default class MainModel {
           isEditable:true
         },
         {
-          name: 'sys_permissionname',
+          name: 'srfdataaccaction',
+          prop: 'permissionid',
+          dataType: 'GUID',
+        },
+        {
+          name: 'srfmajortext',
           prop: 'permissionname',
           dataType: 'TEXT',
         },

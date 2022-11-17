@@ -323,4 +323,26 @@
         <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
 
     </select>
+
+
+
+    <select id="searchActiveInstance" parameterType="cn.ibizlab.core.workflow.filter.WFProcessInstanceSearchContext"  resultType="cn.ibizlab.core.workflow.domain.WFProcessInstance">
+            SELECT * FROM (
+                SELECT
+                PROCINST.PROC_INST_ID_  AS id,
+                PROCINST.BUSINESS_KEY_  AS businessKey,
+                PROCINST.START_TIME_ AS startTime,
+                PROCINST.START_USER_ID_ AS startUserId,
+                PROCDEF.NAME_ AS processDefinitionName,
+                PROCDEF.KEY_ AS processDefinitionKey,
+                PROCDEF.ID_ AS processDefinitionId
+                FROM ACT_HI_PROCINST PROCINST INNER JOIN ACT_RE_PROCDEF PROCDEF
+                                ON  PROCINST.PROC_DEF_ID_  = PROCDEF.ID_  WHERE END_TIME_  IS NULL  ORDER BY PROCINST.START_TIME_ DESC
+            ) t1
+
+                    <where><if test="ew!=null and ew.sqlSegment!=null and !ew.emptyOfWhere">${ew.sqlSegment}</if></where>
+                    <if test="ew!=null and ew.sqlSegment!=null and ew.emptyOfWhere">${ew.sqlSegment}</if>
+    </select>
+
+
 </mapper>

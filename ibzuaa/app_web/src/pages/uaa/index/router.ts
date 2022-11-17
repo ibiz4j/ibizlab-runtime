@@ -36,48 +36,6 @@ const router = new Router({
             component: () => import('@pages/uaa/index/index.vue'),
             children: [
                 {
-                    path: 'sysusers/:sysuser?/editview/:editview?',
-                    meta: {
-                        caption: 'entities.sysuser.views.editview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysusers', parameterName: 'sysuser' },
-                            { pathName: 'editview', parameterName: 'editview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-user-edit-view/sys-user-edit-view.vue'),
-                },
-                {
-                    path: 'sysroles/:sysrole?/mpickupview/:mpickupview?',
-                    meta: {
-                        caption: 'entities.sysrole.views.mpickupview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysroles', parameterName: 'sysrole' },
-                            { pathName: 'mpickupview', parameterName: 'mpickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-rolempickup-view/sys-rolempickup-view.vue'),
-                },
-                {
-                    path: 'sysroles/:sysrole?/editview/:editview?',
-                    meta: {
-                        caption: 'entities.sysrole.views.editview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysroles', parameterName: 'sysrole' },
-                            { pathName: 'editview', parameterName: 'editview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-role-edit-view/sys-role-edit-view.vue'),
-                },
-                {
                     path: 'sysusers/:sysuser?/gridview/:gridview?',
                     meta: {
                         caption: 'entities.sysuser.views.gridview.caption',
@@ -90,6 +48,20 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/uaa/sys-user-grid-view/sys-user-grid-view.vue'),
+                },
+                {
+                    path: 'sysroles/:sysrole?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.sysrole.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-role-grid-view/sys-role-grid-view.vue'),
                 },
                 {
                     path: 'sysauthlogs/:sysauthlog?/gridview/:gridview?',
@@ -106,18 +78,18 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-auth-log-grid-view/sys-auth-log-grid-view.vue'),
                 },
                 {
-                    path: 'sysusers/:sysuser?/pickupview/:pickupview?',
+                    path: 'sysapps/:sysapp?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.sysuser.views.pickupview.caption',
+                        caption: 'entities.sysapp.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysusers', parameterName: 'sysuser' },
-                            { pathName: 'pickupview', parameterName: 'pickupview' },
+                            { pathName: 'sysapps', parameterName: 'sysapp' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-userpickup-view/sys-userpickup-view.vue'),
+                    component: () => import('@pages/uaa/sys-app-grid-view/sys-app-grid-view.vue'),
                 },
                 {
                     path: 'sysopenaccesses/:sysopenaccess?/gridview/:gridview?',
@@ -134,120 +106,46 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-open-access-grid-view/sys-open-access-grid-view.vue'),
                 },
                 {
-                    path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
+                    path: 'sysusers/:sysuser?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
+                        caption: 'entities.sysuser.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysusers', parameterName: 'sysuser' },
-                            { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
                             { pathName: 'editview', parameterName: 'editview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
+                    component: () => import('@pages/uaa/sys-user-edit-view/sys-user-edit-view.vue'),
                 },
                 {
-                    path: 'sysroles/:sysrole?/sysuserroles/:sysuserrole?/editview/:editview?',
+                    path: 'sysroles/:sysrole?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
+                        caption: 'entities.sysrole.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysroles', parameterName: 'sysrole' },
-                            { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
                             { pathName: 'editview', parameterName: 'editview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
+                    component: () => import('@pages/uaa/sys-role-edit-view/sys-role-edit-view.vue'),
                 },
                 {
-                    path: 'sysuserroles/:sysuserrole?/editview/:editview?',
+                    path: 'sysapps/:sysapp?/editview/:editview?',
                     meta: {
-                        caption: 'entities.sysuserrole.views.editview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
-                            { pathName: 'editview', parameterName: 'editview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
-                },
-                {
-                    path: 'sysroles/:sysrole?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
-                    meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysroles', parameterName: 'sysrole' },
-                            { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
-                            { pathName: 'customview', parameterName: 'customview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
-                },
-                {
-                    path: 'syspermissions/:syspermission?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
-                    meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'syspermissions', parameterName: 'syspermission' },
-                            { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
-                            { pathName: 'customview', parameterName: 'customview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
-                },
-                {
-                    path: 'sysrolepermissions/:sysrolepermission?/customview/:customview?',
-                    meta: {
-                        caption: 'entities.sysrolepermission.views.customview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
-                            { pathName: 'customview', parameterName: 'customview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
-                },
-                {
-                    path: 'sysapps/:sysapp?/gridview/:gridview?',
-                    meta: {
-                        caption: 'entities.sysapp.views.gridview.caption',
+                        caption: 'entities.sysapp.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
                             { pathName: 'sysapps', parameterName: 'sysapp' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
+                            { pathName: 'editview', parameterName: 'editview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-app-grid-view/sys-app-grid-view.vue'),
-                },
-                {
-                    path: 'sysusers/:sysuser?/mpickupview/:mpickupview?',
-                    meta: {
-                        caption: 'entities.sysuser.views.mpickupview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysusers', parameterName: 'sysuser' },
-                            { pathName: 'mpickupview', parameterName: 'mpickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-usermpickup-view/sys-usermpickup-view.vue'),
+                    component: () => import('@pages/uaa/sys-app-edit-view/sys-app-edit-view.vue'),
                 },
                 {
                     path: 'sysopenaccesses/:sysopenaccess?/editview/:editview?',
@@ -308,20 +206,6 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-user-rolegrid-view/sys-user-rolegrid-view.vue'),
                 },
                 {
-                    path: 'sysroles/:sysrole?/pickupgridview_norepeat/:pickupgridview_norepeat?',
-                    meta: {
-                        caption: 'entities.sysrole.views.pickupgridview_norepeat.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysroles', parameterName: 'sysrole' },
-                            { pathName: 'pickupgridview_norepeat', parameterName: 'pickupgridview_norepeat' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-role-pickup-grid-view-norepeat/sys-role-pickup-grid-view-norepeat.vue'),
-                },
-                {
                     path: 'sysroles/:sysrole?/pickupview_norepeat/:pickupview_norepeat?',
                     meta: {
                         caption: 'entities.sysrole.views.pickupview_norepeat.caption',
@@ -334,6 +218,136 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/uaa/sys-role-pickup-view-norepeat/sys-role-pickup-view-norepeat.vue'),
+                },
+                {
+                    path: 'sysroles/:sysrole?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
+                    meta: {
+                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
+                            { pathName: 'customview', parameterName: 'customview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
+                },
+                {
+                    path: 'syspermissions/:syspermission?/sysrolepermissions/:sysrolepermission?/customview/:customview?',
+                    meta: {
+                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'syspermissions', parameterName: 'syspermission' },
+                            { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
+                            { pathName: 'customview', parameterName: 'customview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
+                },
+                {
+                    path: 'sysrolepermissions/:sysrolepermission?/customview/:customview?',
+                    meta: {
+                        caption: 'entities.sysrolepermission.views.customview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysrolepermissions', parameterName: 'sysrolepermission' },
+                            { pathName: 'customview', parameterName: 'customview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-role-permission-custom-view/sys-role-permission-custom-view.vue'),
+                },
+                {
+                    path: 'sysusers/:sysuser?/sysuserroles/:sysuserrole?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysuserrole.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysusers', parameterName: 'sysuser' },
+                            { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
+                },
+                {
+                    path: 'sysroles/:sysrole?/sysuserroles/:sysuserrole?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysuserrole.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
+                },
+                {
+                    path: 'sysuserroles/:sysuserrole?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.sysuserrole.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysuserroles', parameterName: 'sysuserrole' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-user-role-edit-view/sys-user-role-edit-view.vue'),
+                },
+                {
+                    path: 'sysroles/:sysrole?/mpickupview/:mpickupview?',
+                    meta: {
+                        caption: 'entities.sysrole.views.mpickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'mpickupview', parameterName: 'mpickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-rolempickup-view/sys-rolempickup-view.vue'),
+                },
+                {
+                    path: 'sysusers/:sysuser?/mpickupview/:mpickupview?',
+                    meta: {
+                        caption: 'entities.sysuser.views.mpickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysusers', parameterName: 'sysuser' },
+                            { pathName: 'mpickupview', parameterName: 'mpickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-usermpickup-view/sys-usermpickup-view.vue'),
+                },
+                {
+                    path: 'sysroles/:sysrole?/pickupgridview_norepeat/:pickupgridview_norepeat?',
+                    meta: {
+                        caption: 'entities.sysrole.views.pickupgridview_norepeat.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'index', parameterName: 'index' },
+                            { pathName: 'sysroles', parameterName: 'sysrole' },
+                            { pathName: 'pickupgridview_norepeat', parameterName: 'pickupgridview_norepeat' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/uaa/sys-role-pickup-grid-view-norepeat/sys-role-pickup-grid-view-norepeat.vue'),
                 },
                 {
                     path: 'sysroles/:sysrole?/pickupview/:pickupview?',
@@ -350,32 +364,18 @@ const router = new Router({
                     component: () => import('@pages/uaa/sys-rolepickup-view/sys-rolepickup-view.vue'),
                 },
                 {
-                    path: 'sysroles/:sysrole?/gridview/:gridview?',
+                    path: 'sysusers/:sysuser?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.sysrole.views.gridview.caption',
+                        caption: 'entities.sysuser.views.pickupview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysroles', parameterName: 'sysrole' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
+                            { pathName: 'sysusers', parameterName: 'sysuser' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/uaa/sys-role-grid-view/sys-role-grid-view.vue'),
-                },
-                {
-                    path: 'sysapps/:sysapp?/editview/:editview?',
-                    meta: {
-                        caption: 'entities.sysapp.views.editview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'index', parameterName: 'index' },
-                            { pathName: 'sysapps', parameterName: 'sysapp' },
-                            { pathName: 'editview', parameterName: 'editview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/uaa/sys-app-edit-view/sys-app-edit-view.vue'),
+                    component: () => import('@pages/uaa/sys-userpickup-view/sys-userpickup-view.vue'),
                 },
                 {
                     path: 'sysroles/:sysrole?/pickupgridview/:pickupgridview?',

@@ -27,8 +27,8 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'app',
-          prop: 'app',
+          name: 'id',
+          prop: 'id',
           dataType: 'TEXT',
         },
         {
@@ -37,9 +37,19 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'status',
-          prop: 'status',
-          dataType: 'NSCODELIST',
+          name: 'app',
+          prop: 'app',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'handler',
+          prop: 'handler',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'cron',
+          prop: 'cron',
+          dataType: 'TEXT',
         },
         {
           name: 'last_time',
@@ -47,9 +57,24 @@ export default class MainModel {
           dataType: 'BIGINT',
         },
         {
-          name: 'srfmajortext',
-          prop: 'handler',
-          dataType: 'TEXT',
+          name: 'next_time',
+          prop: 'next_time',
+          dataType: 'BIGINT',
+        },
+        {
+          name: 'status',
+          prop: 'status',
+          dataType: 'NSCODELIST',
+        },
+        {
+          name: 'timeout',
+          prop: 'timeout',
+          dataType: 'INT',
+        },
+        {
+          name: 'update_time',
+          prop: 'update_time',
+          dataType: 'DATETIME',
         },
         {
           name: 'srfkey',
@@ -63,32 +88,7 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'id',
-          prop: 'id',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'cron',
-          prop: 'cron',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'next_time',
-          prop: 'next_time',
-          dataType: 'BIGINT',
-        },
-        {
-          name: 'update_time',
-          prop: 'update_time',
-          dataType: 'DATETIME',
-        },
-        {
-          name: 'timeout',
-          prop: 'timeout',
-          dataType: 'INT',
-        },
-        {
-          name: 'handler',
+          name: 'srfmajortext',
           prop: 'handler',
           dataType: 'TEXT',
         },

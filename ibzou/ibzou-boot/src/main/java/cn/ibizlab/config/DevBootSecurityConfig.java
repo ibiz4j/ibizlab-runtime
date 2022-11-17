@@ -116,6 +116,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                    .antMatchers("/"+previewpath+"/**").permitAll()
                    .antMatchers("/ibzou/org/**").permitAll()
                    .antMatchers("/ibzemployees/**/oumaps").permitAll()
+                   .antMatchers("/dictionaries/**").permitAll()
                    .antMatchers("/dictionarys/**").permitAll()
                    .antMatchers("/sysemployees/**/oumaps").permitAll()
                    .anyRequest().authenticated()

@@ -91,6 +91,15 @@ public class WFProcessNode extends EntityBase implements Serializable {
     @ApiModelProperty("数量")
     private Integer cnt;
 
+    /**
+     * DefinitionId
+     */
+    @DEField(name = "definitionid")
+    @JSONField(name = "processDefinitionId")
+    @JsonProperty("processDefinitionId")
+    @ApiModelProperty("DefinitionId")
+    private String processdefinitionid;
+
 
 
 

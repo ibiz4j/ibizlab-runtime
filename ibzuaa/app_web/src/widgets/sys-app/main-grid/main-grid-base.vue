@@ -37,7 +37,7 @@
               v-model="row[column.property]" 
               style=""
               type="text"
-              
+              unit=""
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
@@ -65,7 +65,7 @@
               v-model="row[column.property]" 
               style=""
               type="text"
-              
+              unit=""
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
@@ -93,7 +93,7 @@
               v-model="row[column.property]" 
               style=""
               type="text"
-              
+              unit=""
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
@@ -121,7 +121,7 @@
               v-model="row[column.property]" 
               style=""
               type="text"
-              
+              unit=""
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
@@ -183,7 +183,7 @@
               v-model="row[column.property]" 
               style=""
               type="text"
-              
+              unit=""
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
@@ -211,7 +211,7 @@
               v-model="row[column.property]" 
               style=""
               type="text"
-              
+              unit=""
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
@@ -239,7 +239,7 @@
               v-model="row[column.property]" 
               style=""
               type="text"
-              
+              unit=""
               
               @change="($event)=>{gridEditItemChange(row, column.property, $event, $index)}">
             </input-box>
@@ -880,6 +880,14 @@ export default class MainBase extends Vue implements ControlInterface {
     ]
 
     /**
+     * 重置表格列模型缓存
+     *
+     * @type {any[]}
+     * @memberof MainBase
+     */
+    public resetColModel: any[] = [];
+
+    /**
      * 表格模型集合
      *
      * @type {*}
@@ -963,16 +971,16 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public getGridRowModel(){
         return {
-          icon: new FormItemModel(),
-          visabled: new FormItemModel(),
-          appname: new FormItemModel(),
-          appid: new FormItemModel(),
           pssystemid: new FormItemModel(),
-          addr: new FormItemModel(),
-          apptype: new FormItemModel(),
-          srfkey: new FormItemModel(),
-          fullname: new FormItemModel(),
+          appid: new FormItemModel(),
+          appname: new FormItemModel(),
           appgroup: new FormItemModel(),
+          apptype: new FormItemModel(),
+          fullname: new FormItemModel(),
+          icon: new FormItemModel(),
+          addr: new FormItemModel(),
+          visabled: new FormItemModel(),
+          srfkey: new FormItemModel(),
         }
     }
 
@@ -995,45 +1003,45 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public rules(){
         return {
-            icon: [
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.icon')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.icon')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
-            ],
-            visabled: [
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.visabled')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.visabled')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
-            ],
-            appname: [
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            pssystemid: [
+                { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.pssystemid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.pssystemid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
             ],
             appid: [
                 { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
                 { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
             ],
-            pssystemid: [
-                { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.pssystemid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
-                { required: true, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.pssystemid')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            appname: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
             ],
-            addr: [
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.addr')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.addr')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            appgroup: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appgroup')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appgroup')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
             ],
             apptype: [
                 { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.apptype')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
                 { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.apptype')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
             ],
-            srfkey: [
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.srfkey')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.srfkey')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
-            ],
             fullname: [
                 { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.fullname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
                 { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.fullname')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
             ],
-            appgroup: [
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appgroup')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
-                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.appgroup')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            icon: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.icon')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.icon')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            addr: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.addr')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.addr')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            visabled: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.visabled')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.visabled')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
+            ],
+            srfkey: [
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.srfkey')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'change' },
+                { required: false, validator: (rule:any, value:any, callback:any) => { return (rule.required && (value === null || value === undefined || value === "")) ? false : true;}, message: `${this.$t('entities.sysapp.main_grid.columns.srfkey')}${this.$t('app.commonWords.valueNotEmpty')}`, trigger: 'blur' },
             ],
         }
     }
@@ -2114,16 +2122,43 @@ export default class MainBase extends Vue implements ControlInterface {
      * @memberof MainBase
      */
     public setColState() {
-		const _data: any = localStorage.getItem('sys_app_main_grid');
-		if (_data) {
-			let columns = JSON.parse(_data);
-			columns.forEach((col: any) => {
-				let column = this.allColumns.find((item) => Object.is(col.name, item.name));
-				if (column) {
-					Object.assign(column, col);
-				}
-			});
-		}
+        this.resetColModel = Util.deepCopy(this.allColumns);
+        const viewParams: any = Util.deepCopy(this.viewparams);
+        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzuaa_web_sysappgridview_grid_main'});
+        const post = this.service.loadModel('grid_dynaconfig', this.context, viewParams);
+        post.then((response: any) => {
+            if(response.status == 200 && response.data) {
+                const columns = response.data;
+                columns.forEach((col: any) => {
+                    let column = this.allColumns.find((item) => Object.is(col.name, item.name));
+                    if (column) {
+                        Object.assign(column, col);
+                    }
+                });
+            } else {
+                this.getColStorage();
+            }
+        }).catch(() => {
+            this.getColStorage();
+        });
+    }
+
+    /**
+     * 获取列缓存
+     *
+     * @memberof MainBase
+     */
+    public getColStorage() {
+        const _data: any = localStorage.getItem('sys_app_main_grid');
+        if (_data) {
+            let columns = JSON.parse(_data);
+            columns.forEach((col: any) => {
+                let column = this.allColumns.find((item) => Object.is(col.name, item.name));
+                if (column) {
+                    Object.assign(column, col);
+                }
+            });
+        }
     }
 
     /**
@@ -2147,6 +2182,36 @@ export default class MainBase extends Vue implements ControlInterface {
             Object.is(name, col.name)
         );
         return column.show ? true : false;
+    }
+
+    /**
+     * 保存动态表格配置
+     *
+     * @memberof MainBase
+     */
+    public saveDynaConfig() {
+        const viewParams: any = Util.deepCopy(this.viewparams);
+        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzuaa_web_sysappgridview_grid_main', model: this.allColumns});
+        const post = this.service.saveModel('grid_dynaconfig', this.context, viewParams);
+        post.then((response: any) => {
+            if (response.status == 200) {
+                this.$Message.success(this.$t('app.gridpage.message.saveconfigsuccess'));
+            } else {
+                this.$Message.error(this.$t('app.gridpage.message.saveconfigerror'));
+            }
+        }).catch(() => {
+            this.$Message.error(this.$t('app.gridpage.message.saveconfigerror'));
+        });
+    }
+
+    /**
+     * 重置动态表格配置
+     *
+     * @memberof MainBase
+     */
+    public resetDynaConfig() {
+        this.allColumns = Util.deepCopy(this.resetColModel);
+        localStorage.setItem('dynaconfig_main_grid', JSON.stringify(this.allColumns));
     }
 
     /**

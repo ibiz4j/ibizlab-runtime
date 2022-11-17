@@ -5,19 +5,18 @@ import cn.ibizlab.core.workflow.extensions.domain.FlowUser;
 import cn.ibizlab.core.workflow.extensions.service.WFCoreService;
 import cn.ibizlab.core.workflow.extensions.service.WFModelService;
 import cn.ibizlab.util.errors.BadRequestAlertException;
+import cn.ibizlab.util.security.AuthenticationUser;
 import cn.ibizlab.util.service.RemoteService;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.bpmn.model.FormProperty;
 import org.flowable.bpmn.model.UserTask;
-import org.flowable.common.engine.api.delegate.event.AbstractFlowableEventListener;
-import org.flowable.common.engine.api.delegate.event.FlowableEngineEventType;
-import org.flowable.common.engine.api.delegate.event.FlowableEvent;
-import org.flowable.common.engine.api.delegate.event.FlowableEventType;
+import org.flowable.common.engine.api.delegate.event.*;
 import org.flowable.common.engine.impl.event.FlowableEntityEventImpl;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.delegate.DelegateExecution;
+import org.flowable.engine.delegate.event.FlowableProcessEngineEvent;
 import org.flowable.engine.delegate.event.impl.FlowableActivityEventImpl;
 import org.flowable.engine.delegate.event.impl.FlowableEntityWithVariablesEventImpl;
 import org.flowable.engine.delegate.event.impl.FlowableMultiInstanceActivityEventImpl;
@@ -25,9 +24,11 @@ import org.flowable.engine.delegate.event.impl.FlowableProcessStartedEventImpl;
 import org.flowable.engine.impl.persistence.entity.ExecutionEntityImpl;
 import org.flowable.identitylink.api.IdentityLinkType;
 import org.flowable.identitylink.service.impl.persistence.entity.IdentityLinkEntity;
+import org.flowable.job.service.impl.persistence.entity.JobEntity;
 import org.flowable.task.api.Task;
 import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 import org.flowable.task.service.impl.persistence.entity.TaskEntityImpl;
+import org.flowable.ui.common.service.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.expression.MapAccessor;
@@ -45,7 +46,6 @@ import java.util.*;
 @Slf4j
 @Component
 public class ProcessInstanceListener extends AbstractFlowableEventListener {
-
 
     @Autowired
     @Lazy
@@ -138,7 +138,7 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                 }
             }
         }
-        else if (evt instanceof org.flowable.engine.delegate.event.impl.FlowableMultiInstanceActivityEventImpl){
+        else if (evt instanceof FlowableMultiInstanceActivityEventImpl){
             try {
                 FlowableMultiInstanceActivityEventImpl event = (FlowableMultiInstanceActivityEventImpl) evt;
                 // 多实例（会签）
@@ -319,7 +319,6 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                     String token=curUser.getToken();
                     remoteService.getClient(cloudServiceid).put(entity + "/" + businessKey, token,callbackArg);
                 }
-                System.out.println("流程结束");
             }
 
         }
@@ -395,12 +394,57 @@ public class ProcessInstanceListener extends AbstractFlowableEventListener {
                 }
             }
         }
+        //超时处理
+        else if (evt instanceof FlowableEngineEntityEvent && FlowableEngineEventType.TIMER_FIRED == evt.getType()) {
+
+            FlowableEngineEntityEvent event = (FlowableEngineEntityEvent) evt;
+            if(event.getEntity() == null || !(event.getEntity() instanceof JobEntity)){
+                throw new BadRequestException("执行工作流超时发生错误，超时作业参数格式不正确");
+            }
+
+            JobEntity jobEntity = (JobEntity) event.getEntity();
+            String strTenantId = jobEntity.getTenantId();
+            if(StringUtils.isEmpty(strTenantId)){
+                throw new BadRequestException(String.format("执行超时作业[%s]发生异常，超时作业未配置租户标识",jobEntity.getId()));
+            }
+
+            DelegateExecution delegateExecution = getDelegateExecution(event, false);
+            Object systemId = delegateExecution.getVariable("system");
+            if(ObjectUtils.isEmpty(systemId)){
+                throw new BadRequestException("执行超时作业[%s]发生异常，未能从流程实例变量中获取系统标识",jobEntity.getId());
+            }
+
+            //构造超时用户身份
+            AuthenticationUser user = AuthenticationUser.setAuthenticationUser("SYSTEM","内置用户");
+            user.setSrfsystemid(systemId.toString());
+            user.setSrfdcid(strTenantId);
+
+        }
+    }
+
+    /**
+     * 获取流程执行器
+     * @param evt
+     * @param bTryMode
+     * @return
+     */
+    protected DelegateExecution getDelegateExecution(FlowableEvent evt, boolean bTryMode) {
+        DelegateExecution delegateExecution = null;
+        if (evt instanceof FlowableProcessEngineEvent) {
+            delegateExecution = ((FlowableProcessEngineEvent) evt).getExecution();
+            if (delegateExecution != null) {
+                return delegateExecution;
+            }
+        }
+        if(bTryMode) {
+            return null;
+        }
+        throw new BadRequestException(String.format("上下文执行对象无效"));
     }
 
     @Override
     public boolean isFailOnException() {
         return true;
     }
-
 
 }

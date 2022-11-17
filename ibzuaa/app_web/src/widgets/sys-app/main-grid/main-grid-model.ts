@@ -27,21 +27,9 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'icon',
-          prop: 'icon',
-          dataType: 'TEXT',
-          isEditable:true
-        },
-        {
-          name: 'visabled',
-          prop: 'visabled',
-          dataType: 'YESNO',
-          isEditable:true
-        },
-        {
-          name: 'appname',
-          prop: 'label',
-          dataType: 'TEXT',
+          name: 'pssystemid',
+          prop: 'systemid',
+          dataType: 'PICKUP',
           isEditable:true
         },
         {
@@ -51,14 +39,14 @@ export default class MainModel {
           isEditable:true
         },
         {
-          name: 'pssystemid',
-          prop: 'systemid',
-          dataType: 'PICKUP',
+          name: 'appname',
+          prop: 'label',
+          dataType: 'TEXT',
           isEditable:true
         },
         {
-          name: 'addr',
-          prop: 'addr',
+          name: 'appgroup',
+          prop: 'group',
           dataType: 'TEXT',
           isEditable:true
         },
@@ -69,14 +57,28 @@ export default class MainModel {
           isEditable:true
         },
         {
-          name: 'srfmajortext',
-          prop: 'label',
+          name: 'fullname',
+          prop: 'fullname',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
-          name: 'srfdataaccaction',
-          prop: 'id',
+          name: 'icon',
+          prop: 'icon',
           dataType: 'TEXT',
+          isEditable:true
+        },
+        {
+          name: 'addr',
+          prop: 'addr',
+          dataType: 'TEXT',
+          isEditable:true
+        },
+        {
+          name: 'visabled',
+          prop: 'visabled',
+          dataType: 'YESNO',
+          isEditable:true
         },
         {
           name: 'srfkey',
@@ -85,16 +87,14 @@ export default class MainModel {
           isEditable:true
         },
         {
-          name: 'fullname',
-          prop: 'fullname',
+          name: 'srfdataaccaction',
+          prop: 'id',
           dataType: 'TEXT',
-          isEditable:true
         },
         {
-          name: 'appgroup',
-          prop: 'group',
+          name: 'srfmajortext',
+          prop: 'label',
           dataType: 'TEXT',
-          isEditable:true
         },
         {
           name: 'sysapp',

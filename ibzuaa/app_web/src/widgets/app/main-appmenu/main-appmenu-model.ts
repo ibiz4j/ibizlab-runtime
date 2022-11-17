@@ -120,18 +120,6 @@ export default class MainModel {
 	 */
 	public funcs: any[] = [
         {
-            appfunctag: 'Auto12',
-            appfuncyype: 'APPVIEW',
-            openmode: '',
-            codename: 'sysappgridview',
-            deResParameters: [],
-            routepath: '/index/:index?/sysapps/:sysapp?/gridview/:gridview?',
-            parameters: [
-                { pathName: 'sysapps', parameterName: 'sysapp' },
-                { pathName: 'gridview', parameterName: 'gridview' },
-            ],
-        },
-        {
             appfunctag: 'Auto5',
             appfuncyype: 'APPVIEW',
             openmode: '',
@@ -140,6 +128,18 @@ export default class MainModel {
             routepath: '/index/:index?/sysusers/:sysuser?/gridview/:gridview?',
             parameters: [
                 { pathName: 'sysusers', parameterName: 'sysuser' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
+        {
+            appfunctag: 'Auto10',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'sysrolegridview',
+            deResParameters: [],
+            routepath: '/index/:index?/sysroles/:sysrole?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'sysroles', parameterName: 'sysrole' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },
@@ -156,14 +156,14 @@ export default class MainModel {
             ],
         },
         {
-            appfunctag: 'Auto10',
+            appfunctag: 'Auto12',
             appfuncyype: 'APPVIEW',
             openmode: '',
-            codename: 'sysrolegridview',
+            codename: 'sysappgridview',
             deResParameters: [],
-            routepath: '/index/:index?/sysroles/:sysrole?/gridview/:gridview?',
+            routepath: '/index/:index?/sysapps/:sysapp?/gridview/:gridview?',
             parameters: [
-                { pathName: 'sysroles', parameterName: 'sysrole' },
+                { pathName: 'sysapps', parameterName: 'sysapp' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },

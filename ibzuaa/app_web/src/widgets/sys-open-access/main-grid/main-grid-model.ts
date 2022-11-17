@@ -27,26 +27,6 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'accessname',
-          prop: 'name',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'redirect_uri',
-          prop: 'redirect_uri',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'region_id',
-          prop: 'region_id',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'access_key',
-          prop: 'access_key',
-          dataType: 'TEXT',
-        },
-        {
           name: 'accessid',
           prop: 'id',
           dataType: 'TEXT',
@@ -57,13 +37,28 @@ export default class MainModel {
           dataType: 'SSCODELIST',
         },
         {
-          name: 'srfmajortext',
+          name: 'accessname',
           prop: 'name',
           dataType: 'TEXT',
         },
         {
-          name: 'srfdataaccaction',
-          prop: 'id',
+          name: 'access_key',
+          prop: 'access_key',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'disabled',
+          prop: 'disabled',
+          dataType: 'YESNO',
+        },
+        {
+          name: 'region_id',
+          prop: 'region_id',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'redirect_uri',
+          prop: 'redirect_uri',
           dataType: 'TEXT',
         },
         {
@@ -73,9 +68,14 @@ export default class MainModel {
           isEditable:true
         },
         {
-          name: 'disabled',
-          prop: 'disabled',
-          dataType: 'YESNO',
+          name: 'srfdataaccaction',
+          prop: 'id',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'srfmajortext',
+          prop: 'name',
+          dataType: 'TEXT',
         },
         {
           name: 'sysopenaccess',

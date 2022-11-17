@@ -36,46 +36,18 @@ const router = new Router({
             component: () => import('@pages/workflow/wfindex-view/wfindex-view.vue'),
             children: [
                 {
-                    path: 'wfprocessdefinitions/:wfprocessdefinition?/editview/:editview?',
+                    path: 'wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfprocessdefinition.views.editview.caption',
+                        caption: 'entities.wfprocessdefinition.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
-                            { pathName: 'editview', parameterName: 'editview' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/workflow/wfprocess-definition-edit-view/wfprocess-definition-edit-view.vue'),
-                },
-                {
-                    path: 'wfusers/:wfuser?/pickupgridview/:pickupgridview?',
-                    meta: {
-                        caption: 'entities.wfuser.views.pickupgridview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
-                            { pathName: 'wfusers', parameterName: 'wfuser' },
-                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/workflow/wfuser-pickup-grid-view/wfuser-pickup-grid-view.vue'),
-                },
-                {
-                    path: 'wfgroups/:wfgroup?/pickupview/:pickupview?',
-                    meta: {
-                        caption: 'entities.wfgroup.views.pickupview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
-                            { pathName: 'wfgroups', parameterName: 'wfgroup' },
-                            { pathName: 'pickupview', parameterName: 'pickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/workflow/wfgroup-pickup-view/wfgroup-pickup-view.vue'),
+                    component: () => import('@pages/workflow/wfprocess-definition-grid-view/wfprocess-definition-grid-view.vue'),
                 },
                 {
                     path: 'wfremodels/:wfremodel?/editview/:editview?',
@@ -92,18 +64,18 @@ const router = new Router({
                     component: () => import('@pages/workflow/wfremodel-edit-view/wfremodel-edit-view.vue'),
                 },
                 {
-                    path: 'wfgroups/:wfgroup?/pickupgridview/:pickupgridview?',
+                    path: 'wfgroups/:wfgroup?/gridview/:gridview?',
                     meta: {
-                        caption: 'entities.wfgroup.views.pickupgridview.caption',
+                        caption: 'entities.wfgroup.views.gridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
-                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/workflow/wfgroup-pickup-grid-view/wfgroup-pickup-grid-view.vue'),
+                    component: () => import('@pages/workflow/wfgroup-grid-view/wfgroup-grid-view.vue'),
                 },
                 {
                     path: 'wftasks/:wftask?/gridview/:gridview?',
@@ -120,32 +92,32 @@ const router = new Router({
                     component: () => import('@pages/workflow/wftask-grid-view/wftask-grid-view.vue'),
                 },
                 {
-                    path: 'wftasks/:wftask?/editview/:editview?',
+                    path: 'wfprocessinstances/:wfprocessinstance?/activeinstancegridview/:activeinstancegridview?',
                     meta: {
-                        caption: 'entities.wftask.views.editview.caption',
+                        caption: 'entities.wfprocessinstance.views.activeinstancegridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
-                            { pathName: 'wftasks', parameterName: 'wftask' },
+                            { pathName: 'wfprocessinstances', parameterName: 'wfprocessinstance' },
+                            { pathName: 'activeinstancegridview', parameterName: 'activeinstancegridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfprocess-instance-active-instance-grid-view/wfprocess-instance-active-instance-grid-view.vue'),
+                },
+                {
+                    path: 'wfprocessdefinitions/:wfprocessdefinition?/editview/:editview?',
+                    meta: {
+                        caption: 'entities.wfprocessdefinition.views.editview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
                             { pathName: 'editview', parameterName: 'editview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/workflow/wftask-edit-view/wftask-edit-view.vue'),
-                },
-                {
-                    path: 'wfusers/:wfuser?/mpickupview/:mpickupview?',
-                    meta: {
-                        caption: 'entities.wfuser.views.mpickupview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
-                            { pathName: 'wfusers', parameterName: 'wfuser' },
-                            { pathName: 'mpickupview', parameterName: 'mpickupview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/workflow/wfuser-mpickup-view/wfuser-mpickup-view.vue'),
+                    component: () => import('@pages/workflow/wfprocess-definition-edit-view/wfprocess-definition-edit-view.vue'),
                 },
                 {
                     path: 'wfgroups/:wfgroup?/editview/:editview?',
@@ -162,18 +134,104 @@ const router = new Router({
                     component: () => import('@pages/workflow/wfgroup-edit-view/wfgroup-edit-view.vue'),
                 },
                 {
-                    path: 'wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
+                    path: 'wftasks/:wftask?/editview/:editview?',
                     meta: {
-                        caption: 'entities.wfprocessdefinition.views.gridview.caption',
+                        caption: 'entities.wftask.views.editview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
-                            { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
+                            { pathName: 'wftasks', parameterName: 'wftask' },
+                            { pathName: 'editview', parameterName: 'editview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wftask-edit-view/wftask-edit-view.vue'),
+                },
+                {
+                    path: 'wfprocessinstances/:wfprocessinstance?/activeinstanceoptionview/:activeinstanceoptionview?',
+                    meta: {
+                        caption: 'entities.wfprocessinstance.views.activeinstanceoptionview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfprocessinstances', parameterName: 'wfprocessinstance' },
+                            { pathName: 'activeinstanceoptionview', parameterName: 'activeinstanceoptionview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfprocess-instance-active-instance-option-view/wfprocess-instance-active-instance-option-view.vue'),
+                },
+                {
+                    path: 'wfusers/:wfuser?/wfmembers/:wfmember?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.wfmember.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfusers', parameterName: 'wfuser' },
+                            { pathName: 'wfmembers', parameterName: 'wfmember' },
                             { pathName: 'gridview', parameterName: 'gridview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/workflow/wfprocess-definition-grid-view/wfprocess-definition-grid-view.vue'),
+                    component: () => import('@pages/workflow/wfmember-grid-view/wfmember-grid-view.vue'),
+                },
+                {
+                    path: 'wfgroups/:wfgroup?/wfmembers/:wfmember?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.wfmember.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfgroups', parameterName: 'wfgroup' },
+                            { pathName: 'wfmembers', parameterName: 'wfmember' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfmember-grid-view/wfmember-grid-view.vue'),
+                },
+                {
+                    path: 'wfmembers/:wfmember?/gridview/:gridview?',
+                    meta: {
+                        caption: 'entities.wfmember.views.gridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfmembers', parameterName: 'wfmember' },
+                            { pathName: 'gridview', parameterName: 'gridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfmember-grid-view/wfmember-grid-view.vue'),
+                },
+                {
+                    path: 'wfprocessnodes/:wfprocessnode?/porcessnodepickupview/:porcessnodepickupview?',
+                    meta: {
+                        caption: 'entities.wfprocessnode.views.porcessnodepickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfprocessnodes', parameterName: 'wfprocessnode' },
+                            { pathName: 'porcessnodepickupview', parameterName: 'porcessnodepickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfprocess-node-porcess-node-pickup-view/wfprocess-node-porcess-node-pickup-view.vue'),
+                },
+                {
+                    path: 'wfusers/:wfuser?/mpickupview/:mpickupview?',
+                    meta: {
+                        caption: 'entities.wfuser.views.mpickupview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfusers', parameterName: 'wfuser' },
+                            { pathName: 'mpickupview', parameterName: 'mpickupview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfuser-mpickup-view/wfuser-mpickup-view.vue'),
                 },
                 {
                     path: 'wfusers/:wfuser?/wfmembers/:wfmember?/editview/:editview?',
@@ -220,20 +278,6 @@ const router = new Router({
                     component: () => import('@pages/workflow/wfmember-edit-view/wfmember-edit-view.vue'),
                 },
                 {
-                    path: 'wfgroups/:wfgroup?/gridview/:gridview?',
-                    meta: {
-                        caption: 'entities.wfgroup.views.gridview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
-                            { pathName: 'wfgroups', parameterName: 'wfgroup' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/workflow/wfgroup-grid-view/wfgroup-grid-view.vue'),
-                },
-                {
                     path: 'wfgroups/:wfgroup?/mpickupview/:mpickupview?',
                     meta: {
                         caption: 'entities.wfgroup.views.mpickupview.caption',
@@ -246,6 +290,34 @@ const router = new Router({
                         requireAuth: true,
                     },
                     component: () => import('@pages/workflow/wfgroup-mpickup-view/wfgroup-mpickup-view.vue'),
+                },
+                {
+                    path: 'wfprocessnodes/:wfprocessnode?/processnodepickupgridview/:processnodepickupgridview?',
+                    meta: {
+                        caption: 'entities.wfprocessnode.views.processnodepickupgridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfprocessnodes', parameterName: 'wfprocessnode' },
+                            { pathName: 'processnodepickupgridview', parameterName: 'processnodepickupgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfprocess-node-process-node-pickup-grid-view/wfprocess-node-process-node-pickup-grid-view.vue'),
+                },
+                {
+                    path: 'wfusers/:wfuser?/pickupgridview/:pickupgridview?',
+                    meta: {
+                        caption: 'entities.wfuser.views.pickupgridview.caption',
+                        info:'',
+                        parameters: [
+                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
+                            { pathName: 'wfusers', parameterName: 'wfuser' },
+                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
+                        ],
+                        requireAuth: true,
+                    },
+                    component: () => import('@pages/workflow/wfuser-pickup-grid-view/wfuser-pickup-grid-view.vue'),
                 },
                 {
                     path: 'wfusers/:wfuser?/pickupview/:pickupview?',
@@ -262,52 +334,49 @@ const router = new Router({
                     component: () => import('@pages/workflow/wfuser-pickup-view/wfuser-pickup-view.vue'),
                 },
                 {
-                    path: 'wfusers/:wfuser?/wfmembers/:wfmember?/gridview/:gridview?',
+                    path: 'wfgroups/:wfgroup?/pickupview/:pickupview?',
                     meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
-                        info:'',
-                        parameters: [
-                            { pathName: 'wfindexview', parameterName: 'wfindexview' },
-                            { pathName: 'wfusers', parameterName: 'wfuser' },
-                            { pathName: 'wfmembers', parameterName: 'wfmember' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
-                        ],
-                        requireAuth: true,
-                    },
-                    component: () => import('@pages/workflow/wfmember-grid-view/wfmember-grid-view.vue'),
-                },
-                {
-                    path: 'wfgroups/:wfgroup?/wfmembers/:wfmember?/gridview/:gridview?',
-                    meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
+                        caption: 'entities.wfgroup.views.pickupview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
                             { pathName: 'wfgroups', parameterName: 'wfgroup' },
-                            { pathName: 'wfmembers', parameterName: 'wfmember' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
+                            { pathName: 'pickupview', parameterName: 'pickupview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/workflow/wfmember-grid-view/wfmember-grid-view.vue'),
+                    component: () => import('@pages/workflow/wfgroup-pickup-view/wfgroup-pickup-view.vue'),
                 },
                 {
-                    path: 'wfmembers/:wfmember?/gridview/:gridview?',
+                    path: 'wfgroups/:wfgroup?/pickupgridview/:pickupgridview?',
                     meta: {
-                        caption: 'entities.wfmember.views.gridview.caption',
+                        caption: 'entities.wfgroup.views.pickupgridview.caption',
                         info:'',
                         parameters: [
                             { pathName: 'wfindexview', parameterName: 'wfindexview' },
-                            { pathName: 'wfmembers', parameterName: 'wfmember' },
-                            { pathName: 'gridview', parameterName: 'gridview' },
+                            { pathName: 'wfgroups', parameterName: 'wfgroup' },
+                            { pathName: 'pickupgridview', parameterName: 'pickupgridview' },
                         ],
                         requireAuth: true,
                     },
-                    component: () => import('@pages/workflow/wfmember-grid-view/wfmember-grid-view.vue'),
+                    component: () => import('@pages/workflow/wfgroup-pickup-grid-view/wfgroup-pickup-grid-view.vue'),
                 },
             ...indexRoutes,
             ],
         },
+    {
+        path: '/wfprocessinstances/:wfprocessinstance?/activeinstancegridview/:activeinstancegridview?',
+        meta: {
+            caption: 'entities.wfprocessinstance.views.activeinstancegridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'wfprocessinstances', parameterName: 'wfprocessinstance' },
+                { pathName: 'activeinstancegridview', parameterName: 'activeinstancegridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/workflow/wfprocess-instance-active-instance-grid-view/wfprocess-instance-active-instance-grid-view.vue'),
+    },
     {
         path: '/wfusers/:wfuser?/wfmembers/:wfmember?/gridview/:gridview?',
         meta: {
@@ -361,6 +430,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/workflow/wfgroup-pickup-grid-view/wfgroup-pickup-grid-view.vue'),
+    },
+    {
+        path: '/wfprocessnodes/:wfprocessnode?/processnodepickupgridview/:processnodepickupgridview?',
+        meta: {
+            caption: 'entities.wfprocessnode.views.processnodepickupgridview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'wfprocessnodes', parameterName: 'wfprocessnode' },
+                { pathName: 'processnodepickupgridview', parameterName: 'processnodepickupgridview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/workflow/wfprocess-node-process-node-pickup-grid-view/wfprocess-node-process-node-pickup-grid-view.vue'),
     },
     {
         path: '/wfprocessdefinitions/:wfprocessdefinition?/editview/:editview?',
@@ -469,6 +551,19 @@ const router = new Router({
         component: () => import('@pages/workflow/wfuser-mpickup-view/wfuser-mpickup-view.vue'),
     },
     {
+        path: '/wfprocessnodes/:wfprocessnode?/porcessnodepickupview/:porcessnodepickupview?',
+        meta: {
+            caption: 'entities.wfprocessnode.views.porcessnodepickupview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'wfprocessnodes', parameterName: 'wfprocessnode' },
+                { pathName: 'porcessnodepickupview', parameterName: 'porcessnodepickupview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/workflow/wfprocess-node-porcess-node-pickup-view/wfprocess-node-porcess-node-pickup-view.vue'),
+    },
+    {
         path: '/wfgroups/:wfgroup?/mpickupview/:mpickupview?',
         meta: {
             caption: 'entities.wfgroup.views.mpickupview.caption',
@@ -545,6 +640,19 @@ const router = new Router({
             requireAuth: true,
         },
         component: () => import('@pages/workflow/wftask-edit-view/wftask-edit-view.vue'),
+    },
+    {
+        path: '/wfprocessinstances/:wfprocessinstance?/activeinstanceoptionview/:activeinstanceoptionview?',
+        meta: {
+            caption: 'entities.wfprocessinstance.views.activeinstanceoptionview.caption',
+            info:'',
+            parameters: [
+                { pathName: 'wfprocessinstances', parameterName: 'wfprocessinstance' },
+                { pathName: 'activeinstanceoptionview', parameterName: 'activeinstanceoptionview' },
+            ],
+            requireAuth: true,
+        },
+        component: () => import('@pages/workflow/wfprocess-instance-active-instance-option-view/wfprocess-instance-active-instance-option-view.vue'),
     },
     {
         path: '/wfgroups/:wfgroup?/gridview/:gridview?',

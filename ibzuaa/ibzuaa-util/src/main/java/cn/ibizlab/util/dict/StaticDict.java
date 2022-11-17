@@ -2504,7 +2504,11 @@ public class StaticDict {
         ALIYUN("aliyun","阿里云"),
         WECHAT("wechat","微信开放平台"),
         QQ("qq","QQ互联"),
-        DINGTALK("dingtalk","钉钉开放平台");
+        DINGTALK("dingtalk","钉钉开放平台"),
+        LDAP("ldap","LDAP"),
+        AD("ad","AD"),
+        CAS("cas","CAS"),
+        CUSTOM("custom","自定义");
 
         private String value;
         private String text;

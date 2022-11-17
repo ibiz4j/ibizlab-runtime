@@ -42,6 +42,8 @@ function getAppLocale(){
             },
             gridpage: {
                 choicecolumns: "Choice columns",
+                saveconfig: "Save the current configuration",
+                resetconfig: "Restoring default Settings",
                 refresh: "refresh",
                 show: "Show",
                 records: "records",
@@ -55,6 +57,12 @@ function getAppLocale(){
                     createAction: "The view table createaction parameter is not configured",
                     updateAction: "The view table updateaction parameter is not configured",
                     loaddraftAction: "The view table loadtrafaction parameter is not configured",
+                },
+                message: {
+                  saveconfigsuccess: "Configuration saved successfully!",
+                  saveconfigerror: "Failed to save configuration!",
+                  resetconfigsuccess: "Reset configuration succeeded!",
+                  resetconfigerror: "Reset configuration failed!",
                 },
                 data: "Data",
                 delDataFail: "Failed to delete data",

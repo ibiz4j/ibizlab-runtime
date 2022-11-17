@@ -90,6 +90,25 @@ export default class WFIndexViewModel {
 	resourcetag: '',
 	authtag:'web-WFIndexView-menuitem4',
 },
+        {
+	id: '779874AB-C6E8-41D5-8F4C-4055097DF699',
+	name: 'menuitem5',
+	text: '流程实例',
+	type: 'MENUITEM',
+	counterid: '',
+	tooltip: '流程实例',
+	expanded: false,
+	separator: false,
+	hidden: false,
+	hidesidebar: false,
+	opendefault: false,
+	iconcls: '',
+	icon: '',
+	textcls: '',
+	appfunctag: 'AppFunc',
+	resourcetag: '',
+	authtag:'web-WFIndexView-menuitem5',
+},
     ];
 
 	/**
@@ -100,6 +119,18 @@ export default class WFIndexViewModel {
 	 * @memberof WFIndexViewModel
 	 */
 	public funcs: any[] = [
+        {
+            appfunctag: 'Auto1',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'wfprocessdefinitiongridview',
+            deResParameters: [],
+            routepath: '/wfindexview/:wfindexview?/wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
         {
             appfunctag: 'Auto3',
             appfuncyype: 'APPVIEW',
@@ -125,18 +156,6 @@ export default class WFIndexViewModel {
             ],
         },
         {
-            appfunctag: 'Auto1',
-            appfuncyype: 'APPVIEW',
-            openmode: '',
-            codename: 'wfprocessdefinitiongridview',
-            deResParameters: [],
-            routepath: '/wfindexview/:wfindexview?/wfprocessdefinitions/:wfprocessdefinition?/gridview/:gridview?',
-            parameters: [
-                { pathName: 'wfprocessdefinitions', parameterName: 'wfprocessdefinition' },
-                { pathName: 'gridview', parameterName: 'gridview' },
-            ],
-        },
-        {
             appfunctag: 'Auto4',
             appfuncyype: 'APPVIEW',
             openmode: '',
@@ -146,6 +165,18 @@ export default class WFIndexViewModel {
             parameters: [
                 { pathName: 'wftasks', parameterName: 'wftask' },
                 { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
+        {
+            appfunctag: 'AppFunc',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'wfprocessinstanceactiveinstancegridview',
+            deResParameters: [],
+            routepath: '/wfindexview/:wfindexview?/wfprocessinstances/:wfprocessinstance?/activeinstancegridview/:activeinstancegridview?',
+            parameters: [
+                { pathName: 'wfprocessinstances', parameterName: 'wfprocessinstance' },
+                { pathName: 'activeinstancegridview', parameterName: 'activeinstancegridview' },
             ],
         },
 	];

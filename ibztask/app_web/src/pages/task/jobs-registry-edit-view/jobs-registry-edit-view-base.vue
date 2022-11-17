@@ -45,9 +45,9 @@
             style='' 
             name="form"  
             ref='form' 
+            @load="form_load($event)"  
             @save="form_save($event)"  
             @remove="form_remove($event)"  
-            @load="form_load($event)"  
             @closeview="closeView($event)">
         </view_form>
         </div>
@@ -617,6 +617,18 @@ export default class JobsRegistryEditViewBase extends Vue {
 
 
     /**
+     * form 部件 load 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof JobsRegistryEditViewBase
+     */
+    public form_load($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('form', 'load', $event);
+    }
+
+
+    /**
      * form 部件 save 事件
      *
      * @param {*} [args={}]
@@ -637,18 +649,6 @@ export default class JobsRegistryEditViewBase extends Vue {
      */
     public form_remove($event: any, $event2?: any) {
         this.engine.onCtrlEvent('form', 'remove', $event);
-    }
-
-
-    /**
-     * form 部件 load 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof JobsRegistryEditViewBase
-     */
-    public form_load($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('form', 'load', $event);
     }
 
 
@@ -812,6 +812,7 @@ export default class JobsRegistryEditViewBase extends Vue {
         if(this.portletStateEvent){
             this.portletStateEvent.unsubscribe();
         }
+        this.viewState.complete();        
     }
 
 

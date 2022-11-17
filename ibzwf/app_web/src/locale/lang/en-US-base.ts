@@ -1,6 +1,8 @@
 import wftask_en_US from '@locale/lanres/entities/wftask/wftask_en_US';
 import wfmember_en_US from '@locale/lanres/entities/wfmember/wfmember_en_US';
 import wfuser_en_US from '@locale/lanres/entities/wfuser/wfuser_en_US';
+import wfprocessinstance_en_US from '@locale/lanres/entities/wfprocess-instance/wfprocess-instance_en_US';
+import wfprocessnode_en_US from '@locale/lanres/entities/wfprocess-node/wfprocess-node_en_US';
 import wfgroup_en_US from '@locale/lanres/entities/wfgroup/wfgroup_en_US';
 import wfremodel_en_US from '@locale/lanres/entities/wfremodel/wfremodel_en_US';
 import wfsystem_en_US from '@locale/lanres/entities/wfsystem/wfsystem_en_US';
@@ -45,6 +47,8 @@ function getAppLocale(){
             },
             gridpage: {
                 choicecolumns: "Choice columns",
+                saveconfig: "Save the current configuration",
+                resetconfig: "Restoring default Settings",
                 refresh: "refresh",
                 show: "Show",
                 records: "records",
@@ -58,6 +62,12 @@ function getAppLocale(){
                     createAction: "The view table createaction parameter is not configured",
                     updateAction: "The view table updateaction parameter is not configured",
                     loaddraftAction: "The view table loadtrafaction parameter is not configured",
+                },
+                message: {
+                  saveconfigsuccess: "Configuration saved successfully!",
+                  saveconfigerror: "Failed to save configuration!",
+                  resetconfigsuccess: "Reset configuration succeeded!",
+                  resetconfigerror: "Reset configuration failed!",
                 },
                 data: "Data",
                 delDataFail: "Failed to delete data",
@@ -139,6 +149,7 @@ function getAppLocale(){
                     menuitem3: commonLogic.appcommonhandle("发布新流程",null),
                     menuitem2: commonLogic.appcommonhandle("用户组",null),
                     menuitem4: commonLogic.appcommonhandle("我的待办",null),
+                    menuitem5: commonLogic.appcommonhandle("流程实例",null),
                 },
             },
             formpage:{
@@ -237,6 +248,8 @@ function getAppLocale(){
             wftask: wftask_en_US(),
             wfmember: wfmember_en_US(),
             wfuser: wfuser_en_US(),
+            wfprocessinstance: wfprocessinstance_en_US(),
+            wfprocessnode: wfprocessnode_en_US(),
             wfgroup: wfgroup_en_US(),
             wfremodel: wfremodel_en_US(),
             wfsystem: wfsystem_en_US(),

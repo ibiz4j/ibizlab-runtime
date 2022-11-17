@@ -27,9 +27,9 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'memo',
-          prop: 'memo',
-          dataType: 'TEXT',
+          name: 'sys_roleid',
+          prop: 'roleid',
+          dataType: 'GUID',
         },
         {
           name: 'sys_rolename',
@@ -37,14 +37,14 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'sys_roleid',
-          prop: 'roleid',
-          dataType: 'GUID',
+          name: 'prolename',
+          prop: 'prolename',
+          dataType: 'PICKUPTEXT',
         },
         {
-          name: 'proleid',
-          prop: 'proleid',
-          dataType: 'PICKUP',
+          name: 'memo',
+          prop: 'memo',
+          dataType: 'TEXT',
         },
         {
           name: 'updatedate',
@@ -52,14 +52,15 @@ export default class MainModel {
           dataType: 'DATETIME',
         },
         {
-          name: 'prolename',
-          prop: 'prolename',
-          dataType: 'PICKUPTEXT',
+          name: 'proleid',
+          prop: 'proleid',
+          dataType: 'PICKUP',
         },
         {
-          name: 'srfmajortext',
-          prop: 'rolename',
-          dataType: 'TEXT',
+          name: 'srfkey',
+          prop: 'roleid',
+          dataType: 'GUID',
+          isEditable:true
         },
         {
           name: 'srfdataaccaction',
@@ -67,10 +68,9 @@ export default class MainModel {
           dataType: 'GUID',
         },
         {
-          name: 'srfkey',
-          prop: 'roleid',
-          dataType: 'GUID',
-          isEditable:true
+          name: 'srfmajortext',
+          prop: 'rolename',
+          dataType: 'TEXT',
         },
         {
           name: 'sysrole',

@@ -1,4 +1,4 @@
-FROM registry.cn-shanghai.aliyuncs.com/ibizops/tongweb:arm-7.0
+FROM registry.cn-shanghai.aliyuncs.com/ibizops/tongweb:arm-7.0-withSSL
 
 ENV TZ Asia/Shanghai
 ENV LANG C.UTF-8

@@ -11,10 +11,10 @@
             <tns:metaData express="T(cn.ibizlab.util.security.AuthenticationUser).getAuthenticationUser()" name="curuser" type="session"/>
         <tns:global identifier="sysuserdeletesysuserdefault" type="cn.ibizlab.core.uaa.domain.SysUser" />
         </extensionElements>
+     <startEvent id="begin" isInterrupting="true"/>
      <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysuserdeletesysuserdeaction1" id="deaction1" implementation="http://www.jboss.org/drools/rule" name="同步删除用户"/>
      <endEvent id="deaction1_end" name="end"/>
      <sequenceFlow id="deaction1_end_line" sourceRef="deaction1" targetRef="deaction1_end"/>
-     <startEvent id="begin" isInterrupting="true"/>
      <sequenceFlow id="begin_deaction1" sourceRef="begin" targetRef="deaction1">
      </sequenceFlow>
     </process>

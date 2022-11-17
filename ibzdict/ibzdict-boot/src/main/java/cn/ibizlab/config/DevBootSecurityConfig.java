@@ -114,6 +114,7 @@ public class DevBootSecurityConfig extends WebSecurityConfigurerAdapter {
                    .antMatchers("/"+downloadpath+"/**").permitAll()
                    .antMatchers("/"+uploadpath).permitAll()
                    .antMatchers("/"+previewpath+"/**").permitAll()
+                       .antMatchers("/dictionaries/**").permitAll()
                        .antMatchers("/dictionarys/**").permitAll()
                 .anyRequest().authenticated()
                 // 防止iframe 造成跨域

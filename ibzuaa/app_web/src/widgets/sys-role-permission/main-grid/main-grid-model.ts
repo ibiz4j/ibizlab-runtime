@@ -32,29 +32,14 @@ export default class MainModel {
           dataType: 'PICKUPTEXT',
         },
         {
-          name: 'sys_permissionid',
-          prop: 'permissionid',
-          dataType: 'PICKUP',
-        },
-        {
-          name: 'sys_roleid',
-          prop: 'roleid',
-          dataType: 'PICKUP',
+          name: 'sys_permissionname',
+          prop: 'permissionname',
+          dataType: 'PICKUPTEXT',
         },
         {
           name: 'updatedate',
           prop: 'updatedate',
           dataType: 'DATETIME',
-        },
-        {
-          name: 'srfmajortext',
-          prop: 'permissionid',
-          dataType: 'PICKUP',
-        },
-        {
-          name: 'srfdataaccaction',
-          prop: 'rolepermissionid',
-          dataType: 'GUID',
         },
         {
           name: 'srfkey',
@@ -63,9 +48,24 @@ export default class MainModel {
           isEditable:true
         },
         {
-          name: 'sys_permissionname',
-          prop: 'permissionname',
-          dataType: 'PICKUPTEXT',
+          name: 'srfdataaccaction',
+          prop: 'rolepermissionid',
+          dataType: 'GUID',
+        },
+        {
+          name: 'sys_roleid',
+          prop: 'roleid',
+          dataType: 'PICKUP',
+        },
+        {
+          name: 'sys_permissionid',
+          prop: 'permissionid',
+          dataType: 'PICKUP',
+        },
+        {
+          name: 'srfmajortext',
+          prop: 'permissionid',
+          dataType: 'PICKUP',
         },
         {
           name: 'sysrolepermission',

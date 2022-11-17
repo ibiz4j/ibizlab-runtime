@@ -32,6 +32,16 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
+          name: 'job_id',
+          prop: 'job_id',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'handler',
+          prop: 'handler',
+          dataType: 'TEXT',
+        },
+        {
           name: 'address',
           prop: 'address',
           dataType: 'TEXT',
@@ -42,24 +52,19 @@ export default class MainModel {
           dataType: 'INT',
         },
         {
-          name: 'create_time',
-          prop: 'create_time',
-          dataType: 'DATETIME',
-        },
-        {
           name: 'trigger_type',
           prop: 'trigger_type',
           dataType: 'TEXT',
         },
         {
-          name: 'srfmajortext',
-          prop: 'handler',
-          dataType: 'TEXT',
+          name: 'fail_retry_count',
+          prop: 'fail_retry_count',
+          dataType: 'INT',
         },
         {
-          name: 'srfdataaccaction',
-          prop: 'id',
-          dataType: 'TEXT',
+          name: 'create_time',
+          prop: 'create_time',
+          dataType: 'DATETIME',
         },
         {
           name: 'srfkey',
@@ -68,18 +73,13 @@ export default class MainModel {
           isEditable:true
         },
         {
-          name: 'fail_retry_count',
-          prop: 'fail_retry_count',
-          dataType: 'INT',
-        },
-        {
-          name: 'handler',
-          prop: 'handler',
+          name: 'srfdataaccaction',
+          prop: 'id',
           dataType: 'TEXT',
         },
         {
-          name: 'job_id',
-          prop: 'job_id',
+          name: 'srfmajortext',
+          prop: 'handler',
           dataType: 'TEXT',
         },
         {

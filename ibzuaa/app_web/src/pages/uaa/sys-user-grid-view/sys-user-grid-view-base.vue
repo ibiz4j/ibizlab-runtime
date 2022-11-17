@@ -68,9 +68,9 @@
             
                 name="searchform"  
                 ref='searchform' 
-                @save="searchform_save($event)"  
                 @search="searchform_search($event)"  
                 @load="searchform_load($event)"  
+                @save="searchform_save($event)"  
                 @closeview="closeView($event)">
             </view_searchform>
                     <div class='view-body-messages'>
@@ -95,11 +95,11 @@
                 :opendata="opendata"
                 name="grid"  
                 ref='grid' 
-                @selectionchange="grid_selectionchange($event)"  
-                @beforeload="grid_beforeload($event)"  
                 @rowdblclick="grid_rowdblclick($event)"  
+                @selectionchange="grid_selectionchange($event)"  
                 @remove="grid_remove($event)"  
                 @load="grid_load($event)"  
+                @beforeload="grid_beforeload($event)"  
                 @closeview="closeView($event)">
             </view_grid>
         </div>
@@ -279,9 +279,9 @@ export default class SysUserGridViewBase extends Vue {
      * @memberof SysUserGridViewBase
      */
     public containerModel: any = {
-        view_toolbar: { name: 'toolbar', type: 'TOOLBAR' },
         view_grid: { name: 'grid', type: 'GRID' },
         view_searchform: { name: 'searchform', type: 'SEARCHFORM' },
+        view_toolbar: { name: 'toolbar', type: 'TOOLBAR' },
     };
 
     /**
@@ -686,6 +686,102 @@ export default class SysUserGridViewBase extends Vue {
 
 
     /**
+     * grid 部件 rowdblclick 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserGridViewBase
+     */
+    public grid_rowdblclick($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('grid', 'rowdblclick', $event);
+    }
+
+
+    /**
+     * grid 部件 selectionchange 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserGridViewBase
+     */
+    public grid_selectionchange($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('grid', 'selectionchange', $event);
+    }
+
+
+    /**
+     * grid 部件 remove 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserGridViewBase
+     */
+    public grid_remove($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('grid', 'remove', $event);
+    }
+
+
+    /**
+     * grid 部件 load 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserGridViewBase
+     */
+    public grid_load($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('grid', 'load', $event);
+    }
+
+
+    /**
+     * grid 部件 beforeload 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserGridViewBase
+     */
+    public grid_beforeload($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('grid', 'beforeload', $event);
+    }
+
+
+    /**
+     * searchform 部件 search 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserGridViewBase
+     */
+    public searchform_search($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('searchform', 'search', $event);
+    }
+
+
+    /**
+     * searchform 部件 load 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserGridViewBase
+     */
+    public searchform_load($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('searchform', 'load', $event);
+    }
+
+
+    /**
+     * searchform 部件 save 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserGridViewBase
+     */
+    public searchform_save($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('searchform', 'save', $event);
+    }
+
+
+    /**
      * toolbar 部件 click 事件
      *
      * @param {*} [args={}]
@@ -726,102 +822,6 @@ export default class SysUserGridViewBase extends Vue {
         if (Object.is($event.tag, 'tbitem19')) {
             this.toolbar_tbitem19_click(null, '', $event2);
         }
-    }
-
-
-    /**
-     * grid 部件 selectionchange 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserGridViewBase
-     */
-    public grid_selectionchange($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('grid', 'selectionchange', $event);
-    }
-
-
-    /**
-     * grid 部件 beforeload 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserGridViewBase
-     */
-    public grid_beforeload($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('grid', 'beforeload', $event);
-    }
-
-
-    /**
-     * grid 部件 rowdblclick 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserGridViewBase
-     */
-    public grid_rowdblclick($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('grid', 'rowdblclick', $event);
-    }
-
-
-    /**
-     * grid 部件 remove 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserGridViewBase
-     */
-    public grid_remove($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('grid', 'remove', $event);
-    }
-
-
-    /**
-     * grid 部件 load 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserGridViewBase
-     */
-    public grid_load($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('grid', 'load', $event);
-    }
-
-
-    /**
-     * searchform 部件 save 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserGridViewBase
-     */
-    public searchform_save($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('searchform', 'save', $event);
-    }
-
-
-    /**
-     * searchform 部件 search 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserGridViewBase
-     */
-    public searchform_search($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('searchform', 'search', $event);
-    }
-
-
-    /**
-     * searchform 部件 load 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserGridViewBase
-     */
-    public searchform_load($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('searchform', 'load', $event);
     }
 
 
@@ -1513,6 +1513,7 @@ export default class SysUserGridViewBase extends Vue {
         if(this.portletStateEvent){
             this.portletStateEvent.unsubscribe();
         }
+        this.viewState.complete();        
     }
 
     /**

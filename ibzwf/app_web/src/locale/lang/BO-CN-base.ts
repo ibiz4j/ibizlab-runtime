@@ -1,6 +1,8 @@
 import wftask_BO_CN from '@locale/lanres/entities/wftask/wftask_BO_CN';
 import wfmember_BO_CN from '@locale/lanres/entities/wfmember/wfmember_BO_CN';
 import wfuser_BO_CN from '@locale/lanres/entities/wfuser/wfuser_BO_CN';
+import wfprocessinstance_BO_CN from '@locale/lanres/entities/wfprocess-instance/wfprocess-instance_BO_CN';
+import wfprocessnode_BO_CN from '@locale/lanres/entities/wfprocess-node/wfprocess-node_BO_CN';
 import wfgroup_BO_CN from '@locale/lanres/entities/wfgroup/wfgroup_BO_CN';
 import wfremodel_BO_CN from '@locale/lanres/entities/wfremodel/wfremodel_BO_CN';
 import wfsystem_BO_CN from '@locale/lanres/entities/wfsystem/wfsystem_BO_CN';
@@ -139,6 +141,7 @@ function getAppLocale(){
                     menuitem3: commonLogic.appcommonhandle("发布新流程",null),
                     menuitem2: commonLogic.appcommonhandle("用户组",null),
                     menuitem4: commonLogic.appcommonhandle("我的待办",null),
+                    menuitem5: commonLogic.appcommonhandle("流程实例",null),
                 },
             },
             formpage:{
@@ -236,6 +239,8 @@ function getAppLocale(){
             wftask: wftask_BO_CN(),
             wfmember: wfmember_BO_CN(),
             wfuser: wfuser_BO_CN(),
+            wfprocessinstance: wfprocessinstance_BO_CN(),
+            wfprocessnode: wfprocessnode_BO_CN(),
             wfgroup: wfgroup_BO_CN(),
             wfremodel: wfremodel_BO_CN(),
             wfsystem: wfsystem_BO_CN(),

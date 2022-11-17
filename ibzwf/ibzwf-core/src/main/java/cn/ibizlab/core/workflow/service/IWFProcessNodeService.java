@@ -36,6 +36,7 @@ public interface IWFProcessNodeService {
     boolean save(WFProcessNode et);
     void saveBatch(List<WFProcessNode> list);
     Page<WFProcessNode> searchDefault(WFProcessNodeSearchContext context);
+    Page<WFProcessNode> searchProcessNode(WFProcessNodeSearchContext context);
 
 }
 

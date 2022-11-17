@@ -37,19 +37,20 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'status',
-          prop: 'status',
-          dataType: 'NSCODELIST',
-        },
-        {
           name: 'address',
           prop: 'address',
           dataType: 'TEXT',
         },
         {
-          name: 'srfmajortext',
-          prop: 'app',
+          name: 'status',
+          prop: 'status',
+          dataType: 'NSCODELIST',
+        },
+        {
+          name: 'srfkey',
+          prop: 'id',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'srfdataaccaction',
@@ -57,10 +58,9 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'srfkey',
-          prop: 'id',
+          name: 'srfmajortext',
+          prop: 'app',
           dataType: 'TEXT',
-          isEditable:true
         },
         {
           name: 'jobsregistry',

@@ -6,7 +6,7 @@
 
 
     <!--输出实体[SYS_AUTHLOG]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_authlog-13-1">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_authlog-15-1">
         <createTable tableName="IBZAUTHLOG">
                 <column name="LOGID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_AUTHLOG_LOGID"/>
@@ -32,7 +32,7 @@
 
 
     <!--输出实体[SYS_OPEN_ACCESS]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-sys_open_access-37-2">
+    <changeSet author="a_A_5d9d78509" id="tab-sys_open_access-38-2">
         <createTable tableName="IBZOPENACCESS">
                 <column name="ACCESSID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_SYS_OPEN_ACCESS_ACCESSID"/>

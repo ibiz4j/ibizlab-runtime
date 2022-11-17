@@ -1,5 +1,6 @@
 import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
+import UtilService from '@/utilservice/util-service';
 import SysPermissionService from '@/service/sys-permission/sys-permission-service';
 import DefaultModel from './default-searchform-model';
 
@@ -29,6 +30,15 @@ export default class DefaultService extends ControlService {
     public setTempMode(){
         this.isTempMode = false;
     }
+
+    /**
+     * 工具服务对象
+     *
+     * @protected
+     * @type {UtilService}
+     * @memberof DefaultService
+     */
+    protected utilService: UtilService = new UtilService();
 
     /**
      * Creates an instance of DefaultService.

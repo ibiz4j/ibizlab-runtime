@@ -7,7 +7,15 @@ import Mock from 'mockjs'
 mock.onGet('./assets/json/view-config.json').reply((config: any) => {
     let status = MockAdapter.mockStatus(config);
     return [status,{
-                "wfindexview": {
+                "wfprocessinstanceactiveinstancegridview": {
+            "title": "流程中实例表格视图",
+            "caption": "流程实例",
+            "viewtype": "DEGRIDVIEW",
+            "viewmodule": "workflow",
+            "viewname": "WFProcessInstanceActiveInstanceGridView",
+            "viewtag": "0848b7f2d687480940498fd8e2c39f56"
+        },
+        "wfindexview": {
             "title": "workflow",
             "caption": "ibizlab",
             "viewtype": "APPINDEXVIEW",
@@ -31,6 +39,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "WFGroupPickupGridView",
             "viewtag": "17ccd6d8d2bb7cf30158253da129ec1b"
         },
+        "wfprocessnodeprocessnodepickupgridview": {
+            "title": "流程定义节点选择表格视图",
+            "caption": "流程定义节点",
+            "viewtype": "DEPICKUPGRIDVIEW",
+            "viewmodule": "workflow",
+            "viewname": "WFProcessNodeProcessNodePickupGridView",
+            "viewtag": "1f9254bad5514e07a0fe9195d42daefa"
+        },
         "wfprocessdefinitioneditview": {
             "title": "流程定义查看",
             "caption": "流程定义查看",
@@ -46,6 +62,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "workflow",
             "viewname": "WFREModelEditView",
             "viewtag": "5856bfb8b576cc2ee743801b23e58299"
+        },
+        "wfprocessnodepickupview": {
+            "title": "流程定义节点数据选择视图",
+            "caption": "流程定义节点",
+            "viewtype": "DEPICKUPVIEW",
+            "viewmodule": "workflow",
+            "viewname": "WFProcessNodePickupView",
+            "viewtag": "598d910e2d38250d2cdd0f9ad61100ca"
         },
         "wfuserpickupview": {
             "title": "用户数据选择视图",
@@ -78,6 +102,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "workflow",
             "viewname": "WFUserMPickupView",
             "viewtag": "84e5a5b589b434dfdc60a3d0ad087d37"
+        },
+        "wfprocessnodeporcessnodepickupview": {
+            "title": "流程定义节点数据选择视图",
+            "caption": "流程定义节点",
+            "viewtype": "DEPICKUPVIEW",
+            "viewmodule": "workflow",
+            "viewname": "WFProcessNodePorcessNodePickupView",
+            "viewtag": "8668e70613999260896dd9f3bde96204"
         },
         "wfgroupmpickupview": {
             "title": "角色/用户组数据多项选择视图",
@@ -127,6 +159,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewname": "WFUserGridView",
             "viewtag": "cf0fdabd8378e07ca72ac167b1406756"
         },
+        "wfprocessnodepickupgridview": {
+            "title": "流程定义节点选择表格视图",
+            "caption": "流程定义节点",
+            "viewtype": "DEPICKUPGRIDVIEW",
+            "viewmodule": "workflow",
+            "viewname": "WFProcessNodePickupGridView",
+            "viewtag": "d7789706dc5ffcdab06b7088b8bfc3eb"
+        },
         "wftaskeditview": {
             "title": "工作流任务编辑视图",
             "caption": "工作流任务",
@@ -134,6 +174,14 @@ mock.onGet('./assets/json/view-config.json').reply((config: any) => {
             "viewmodule": "workflow",
             "viewname": "WFTaskEditView",
             "viewtag": "e3020680a441ab58a29db6fe2434f08b"
+        },
+        "wfprocessinstanceactiveinstanceoptionview": {
+            "title": "流程跳转设置",
+            "caption": "流程实例",
+            "viewtype": "DEOPTVIEW",
+            "viewmodule": "workflow",
+            "viewname": "WFProcessInstanceActiveInstanceOptionView",
+            "viewtag": "e8bb7dc695c3c5c2e2367b4755c8ee23"
         },
         "wfgroupgridview": {
             "title": "角色/用户组表格视图",

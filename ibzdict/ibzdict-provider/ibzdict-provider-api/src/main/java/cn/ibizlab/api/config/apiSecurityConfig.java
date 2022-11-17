@@ -123,6 +123,7 @@ public class apiSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/"+downloadpath+"/**").permitAll()
                 .antMatchers("/"+uploadpath).permitAll()
                 .antMatchers("/"+previewpath+"/**").permitAll()
+               .antMatchers("/dictionaries/**").permitAll()
                .antMatchers("/dictionarys/**").permitAll();
 
         if (StringUtils.isNotBlank(excludesPattern)) {

@@ -16,9 +16,9 @@
             
                 name="searchform"  
                 ref='searchform' 
-                @save="searchform_save($event)"  
                 @search="searchform_search($event)"  
                 @load="searchform_load($event)"  
+                @save="searchform_save($event)"  
                 @closeview="closeView($event)">
             </view_searchform>
                     <div class='view-body-messages'>                    </div>            <view_grid 
@@ -36,10 +36,10 @@
                 fetchAction="FetchDefault"
                 name="grid"  
                 ref='grid' 
-                @selectionchange="grid_selectionchange($event)"  
-                @beforeload="grid_beforeload($event)"  
                 @rowdblclick="grid_rowdblclick($event)"  
+                @selectionchange="grid_selectionchange($event)"  
                 @load="grid_load($event)"  
+                @beforeload="grid_beforeload($event)"  
                 @closeview="closeView($event)">
             </view_grid>
         </div>
@@ -578,30 +578,6 @@ export default class WFGroupPickupGridViewBase extends Vue {
 
 
     /**
-     * grid 部件 selectionchange 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof WFGroupPickupGridViewBase
-     */
-    public grid_selectionchange($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('grid', 'selectionchange', $event);
-    }
-
-
-    /**
-     * grid 部件 beforeload 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof WFGroupPickupGridViewBase
-     */
-    public grid_beforeload($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('grid', 'beforeload', $event);
-    }
-
-
-    /**
      * grid 部件 rowdblclick 事件
      *
      * @param {*} [args={}]
@@ -610,6 +586,18 @@ export default class WFGroupPickupGridViewBase extends Vue {
      */
     public grid_rowdblclick($event: any, $event2?: any) {
         this.engine.onCtrlEvent('grid', 'rowdblclick', $event);
+    }
+
+
+    /**
+     * grid 部件 selectionchange 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof WFGroupPickupGridViewBase
+     */
+    public grid_selectionchange($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('grid', 'selectionchange', $event);
     }
 
 
@@ -626,14 +614,14 @@ export default class WFGroupPickupGridViewBase extends Vue {
 
 
     /**
-     * searchform 部件 save 事件
+     * grid 部件 beforeload 事件
      *
      * @param {*} [args={}]
      * @param {*} $event
      * @memberof WFGroupPickupGridViewBase
      */
-    public searchform_save($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('searchform', 'save', $event);
+    public grid_beforeload($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('grid', 'beforeload', $event);
     }
 
 
@@ -658,6 +646,18 @@ export default class WFGroupPickupGridViewBase extends Vue {
      */
     public searchform_load($event: any, $event2?: any) {
         this.engine.onCtrlEvent('searchform', 'load', $event);
+    }
+
+
+    /**
+     * searchform 部件 save 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof WFGroupPickupGridViewBase
+     */
+    public searchform_save($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('searchform', 'save', $event);
     }
 
 
@@ -721,6 +721,7 @@ export default class WFGroupPickupGridViewBase extends Vue {
         if(this.portletStateEvent){
             this.portletStateEvent.unsubscribe();
         }
+        this.viewState.complete();        
     }
     /**
      * 选中数据字符串

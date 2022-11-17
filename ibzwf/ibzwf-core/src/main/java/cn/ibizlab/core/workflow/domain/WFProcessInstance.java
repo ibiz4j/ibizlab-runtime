@@ -117,6 +117,31 @@ public class WFProcessInstance extends EntityBase implements Serializable {
     @ApiModelProperty("发起人")
     private String startusername;
 
+    /**
+     * DefinitionId
+     */
+    @DEField(name = "definitionid")
+    @JSONField(name = "processDefinitionId")
+    @JsonProperty("processDefinitionId")
+    @ApiModelProperty("DefinitionId")
+    private String processdefinitionid;
+
+    /**
+     * 步骤用户
+     */
+    @JSONField(name = "wfusers")
+    @JsonProperty("wfusers")
+    @ApiModelProperty("步骤用户")
+    private String wfusers;
+
+    /**
+     * 步骤标记
+     */
+    @JSONField(name = "taskDefinitionKey")
+    @JsonProperty("taskDefinitionKey")
+    @ApiModelProperty("步骤标记")
+    private String taskdefinitionkey;
+
 
 
 

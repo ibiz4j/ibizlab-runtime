@@ -82,6 +82,18 @@ export default class TaskIndexViewModel {
 	 */
 	public funcs: any[] = [
         {
+            appfunctag: 'Auto1',
+            appfuncyype: 'APPVIEW',
+            openmode: '',
+            codename: 'jobsregistrygridview',
+            deResParameters: [],
+            routepath: '/taskindexview/:taskindexview?/jobsregistries/:jobsregistry?/gridview/:gridview?',
+            parameters: [
+                { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
+                { pathName: 'gridview', parameterName: 'gridview' },
+            ],
+        },
+        {
             appfunctag: 'Auto3',
             appfuncyype: 'APPVIEW',
             openmode: '',
@@ -102,18 +114,6 @@ export default class TaskIndexViewModel {
             routepath: '/taskindexview/:taskindexview?/jobslogs/:jobslog?/gridview/:gridview?',
             parameters: [
                 { pathName: 'jobslogs', parameterName: 'jobslog' },
-                { pathName: 'gridview', parameterName: 'gridview' },
-            ],
-        },
-        {
-            appfunctag: 'Auto1',
-            appfuncyype: 'APPVIEW',
-            openmode: '',
-            codename: 'jobsregistrygridview',
-            deResParameters: [],
-            routepath: '/taskindexview/:taskindexview?/jobsregistries/:jobsregistry?/gridview/:gridview?',
-            parameters: [
-                { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
                 { pathName: 'gridview', parameterName: 'gridview' },
             ],
         },

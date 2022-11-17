@@ -27,8 +27,8 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'groupscope',
-          prop: 'groupscope',
+          name: 'groupid',
+          prop: 'id',
           dataType: 'TEXT',
         },
         {
@@ -37,18 +37,8 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'groupid',
-          prop: 'id',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'srfmajortext',
-          prop: 'name',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'srfdataaccaction',
-          prop: 'id',
+          name: 'groupscope',
+          prop: 'groupscope',
           dataType: 'TEXT',
         },
         {
@@ -56,6 +46,16 @@ export default class MainModel {
           prop: 'id',
           dataType: 'TEXT',
           isEditable:true
+        },
+        {
+          name: 'srfdataaccaction',
+          prop: 'id',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'srfmajortext',
+          prop: 'name',
+          dataType: 'TEXT',
         },
         {
           name: 'wfgroup',

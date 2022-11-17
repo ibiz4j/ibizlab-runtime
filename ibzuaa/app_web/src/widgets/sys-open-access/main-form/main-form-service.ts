@@ -1,5 +1,6 @@
 import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
+import UtilService from '@/utilservice/util-service';
 import SysOpenAccessService from '@/service/sys-open-access/sys-open-access-service';
 import MainModel from './main-form-model';
 
@@ -29,6 +30,15 @@ export default class MainService extends ControlService {
     public setTempMode(){
         this.isTempMode = false;
     }
+
+    /**
+     * 工具服务对象
+     *
+     * @protected
+     * @type {UtilService}
+     * @memberof MainService
+     */
+    protected utilService: UtilService = new UtilService();
 
     /**
      * Creates an instance of MainService.
@@ -172,6 +182,7 @@ export default class MainService extends ControlService {
     @Errorlog
     public add(action: string, context: any = {},data: any = {}, isloading?: boolean,isWorkflow?:boolean): Promise<any> {
         const {data:Data,context:Context} = this.handleRequestData(action,context,data);
+        Object.assign(Data,{id: data.accessid, srffrontuf: '1'});
         return new Promise((resolve: any, reject: any) => {
             let result: Promise<any>;
             const _appEntityService: any = this.appEntityService;

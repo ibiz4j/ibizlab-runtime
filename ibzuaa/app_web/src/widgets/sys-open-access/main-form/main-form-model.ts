@@ -51,6 +51,11 @@ export default class MainModel {
         name: 'srfsourcekey',
       },
       {
+        name: 'accessid',
+        prop: 'id',
+        dataType: 'TEXT',
+      },
+      {
         name: 'accessname',
         prop: 'name',
         dataType: 'TEXT',
@@ -104,11 +109,6 @@ export default class MainModel {
         name: 'disabled',
         prop: 'disabled',
         dataType: 'YESNO',
-      },
-      {
-        name: 'accessid',
-        prop: 'id',
-        dataType: 'TEXT',
       },
       {
         name: 'sysopenaccess',

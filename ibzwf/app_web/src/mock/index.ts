@@ -10,6 +10,8 @@ import './upload/upload';
 import './entity/wftasks/wftasks';
 import './entity/wfmembers/wfmembers';
 import './entity/wfusers/wfusers';
+import './entity/wfprocess-instances/wfprocess-instances';
+import './entity/wfprocess-nodes/wfprocess-nodes';
 import './entity/wfgroups/wfgroups';
 import './entity/wfremodels/wfremodels';
 import './entity/wfsystems/wfsystems';

@@ -6,7 +6,7 @@
     "entity_name":"SYS_APP",
     "logic_name":"应用",
     "code_name":"SysApp",
-    "table_name":"IBZAPP",
+    "table_name":"",
     "system_id":"ibzuaa",
     "system_name":"ibzuaa",
     "module_id":"uaa",

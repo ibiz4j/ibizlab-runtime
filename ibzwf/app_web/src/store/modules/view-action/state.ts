@@ -4,16 +4,27 @@
 export const viewstate: any = {
     appviews: [
         {
+            viewtag: '0848b7f2d687480940498fd8e2c39f56',
+            viewmodule: 'workflow',
+            viewname: 'WFProcessInstanceActiveInstanceGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'e8bb7dc695c3c5c2e2367b4755c8ee23',
+            ],
+        },
+        {
             viewtag: '096fd4090f21e0fa0f4a303ed9041bff',
             viewmodule: 'workflow',
             viewname: 'WFIndexView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '5856bfb8b576cc2ee743801b23e58299',
-                '66f4bcca719e75fa9645380cc81bc3e2',
-                'f498dfb24e88df7c70a5c09ecb587647',
                 'bfa86be8c02420f87d5cf4ff9a768948',
+                '5856bfb8b576cc2ee743801b23e58299',
+                'f498dfb24e88df7c70a5c09ecb587647',
+                '66f4bcca719e75fa9645380cc81bc3e2',
+                '0848b7f2d687480940498fd8e2c39f56',
             ],
         },
         {
@@ -23,15 +34,24 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                '84e5a5b589b434dfdc60a3d0ad087d37',
                 '6e1b35989dd6470b5c890369ab87b545',
                 '90a777962337daaf4cffd846eecb1f0f',
+                '84e5a5b589b434dfdc60a3d0ad087d37',
             ],
         },
         {
             viewtag: '17ccd6d8d2bb7cf30158253da129ec1b',
             viewmodule: 'workflow',
             viewname: 'WFGroupPickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
+            viewtag: '1f9254bad5514e07a0fe9195d42daefa',
+            viewmodule: 'workflow',
+            viewname: 'WFProcessNodeProcessNodePickupGridView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
@@ -53,6 +73,16 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
+            ],
+        },
+        {
+            viewtag: '598d910e2d38250d2cdd0f9ad61100ca',
+            viewmodule: 'workflow',
+            viewname: 'WFProcessNodePickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                'd7789706dc5ffcdab06b7088b8bfc3eb',
             ],
         },
         {
@@ -82,8 +112,8 @@ export const viewstate: any = {
             viewaction: '',
             viewdatachange: false,
             refviews: [
-                'b05c9353d499f973106e6ed4dde58074',
                 '61c5bff70bcf56e1dc0bb0900df9c98c',
+                'b05c9353d499f973106e6ed4dde58074',
             ],
         },
         {
@@ -94,6 +124,16 @@ export const viewstate: any = {
             viewdatachange: false,
             refviews: [
                 'c9c73c8d2e61bd29a304622f3d39b522',
+            ],
+        },
+        {
+            viewtag: '8668e70613999260896dd9f3bde96204',
+            viewmodule: 'workflow',
+            viewname: 'WFProcessNodePorcessNodePickupView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '1f9254bad5514e07a0fe9195d42daefa',
             ],
         },
         {
@@ -156,12 +196,32 @@ export const viewstate: any = {
             ],
         },
         {
+            viewtag: 'd7789706dc5ffcdab06b7088b8bfc3eb',
+            viewmodule: 'workflow',
+            viewname: 'WFProcessNodePickupGridView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+            ],
+        },
+        {
             viewtag: 'e3020680a441ab58a29db6fe2434f08b',
             viewmodule: 'workflow',
             viewname: 'WFTaskEditView',
             viewaction: '',
             viewdatachange: false,
             refviews: [
+            ],
+        },
+        {
+            viewtag: 'e8bb7dc695c3c5c2e2367b4755c8ee23',
+            viewmodule: 'workflow',
+            viewname: 'WFProcessInstanceActiveInstanceOptionView',
+            viewaction: '',
+            viewdatachange: false,
+            refviews: [
+                '8668e70613999260896dd9f3bde96204',
+                '84e5a5b589b434dfdc60a3d0ad087d37',
             ],
         },
         {

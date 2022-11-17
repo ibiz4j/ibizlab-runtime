@@ -595,14 +595,14 @@ export default class TaskIndexViewBase extends Vue implements ControlInterface {
                 navDataService.removeNavData(this.viewtag);
             }
             switch (item.appfunctag) {
+                case 'Auto1': 
+                    this.clickAuto1(item);
+                    return;
                 case 'Auto3': 
                     this.clickAuto3(item);
                     return;
                 case 'Auto2': 
                     this.clickAuto2(item);
-                    return;
-                case 'Auto1': 
-                    this.clickAuto1(item);
                     return;
                 default:
                     console.warn('未指定应用功能');
@@ -610,6 +610,29 @@ export default class TaskIndexViewBase extends Vue implements ControlInterface {
         }
     }
 
+    
+    /**
+     * 任务注册
+     *
+     * @param {*} [item={}]
+     * @memberof TaskIndexView
+     */
+    public clickAuto1(item: any = {}) {
+        const viewparam: any = {};
+        Object.assign(viewparam, {});
+        const deResParameters: any[] = [];
+        const parameters: any[] = [
+            { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
+            { pathName: 'gridview', parameterName: 'gridview' },
+        ];
+        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
+        if(Object.is(this.$route.fullPath,path)){
+            return;
+        }
+        this.$nextTick(function(){
+            this.$router.push(path);
+        })
+    }
     
     /**
      * 任务
@@ -646,29 +669,6 @@ export default class TaskIndexViewBase extends Vue implements ControlInterface {
         const deResParameters: any[] = [];
         const parameters: any[] = [
             { pathName: 'jobslogs', parameterName: 'jobslog' },
-            { pathName: 'gridview', parameterName: 'gridview' },
-        ];
-        const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);
-        if(Object.is(this.$route.fullPath,path)){
-            return;
-        }
-        this.$nextTick(function(){
-            this.$router.push(path);
-        })
-    }
-    
-    /**
-     * 任务注册
-     *
-     * @param {*} [item={}]
-     * @memberof TaskIndexView
-     */
-    public clickAuto1(item: any = {}) {
-        const viewparam: any = {};
-        Object.assign(viewparam, {});
-        const deResParameters: any[] = [];
-        const parameters: any[] = [
-            { pathName: 'jobsregistries', parameterName: 'jobsregistry' },
             { pathName: 'gridview', parameterName: 'gridview' },
         ];
         const path: string = this.$viewTool.buildUpRoutePath(this.$route, {}, deResParameters, parameters, [], viewparam);

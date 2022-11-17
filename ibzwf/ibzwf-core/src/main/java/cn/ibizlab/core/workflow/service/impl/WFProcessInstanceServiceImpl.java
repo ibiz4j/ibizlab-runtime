@@ -86,6 +86,38 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
     }
     @Override
     @Transactional
+    public WFProcessInstance jump(WFProcessInstance et) {
+        //自定义代码
+        return et;
+    }
+
+    @Override
+    @Transactional
+    public boolean jumpBatch(List<WFProcessInstance> etList) {
+        for(WFProcessInstance et : etList) {
+            jump(et);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public WFProcessInstance restart(WFProcessInstance et) {
+        //自定义代码
+        return et;
+    }
+
+    @Override
+    @Transactional
+    public boolean restartBatch(List<WFProcessInstance> etList) {
+        for(WFProcessInstance et : etList) {
+            restart(et);
+        }
+        return true;
+    }
+
+    @Override
+    @Transactional
     public boolean save(WFProcessInstance et) {
         //代码实现
         return true;
@@ -98,6 +130,14 @@ public class WFProcessInstanceServiceImpl implements IWFProcessInstanceService {
 
 
 
+
+    /**
+     * 查询集合 流程中实例
+     */
+    @Override
+    public Page<WFProcessInstance> searchActiveProcessInstance(WFProcessInstanceSearchContext context) {
+        return new PageImpl<WFProcessInstance>(new ArrayList(),context.getPageable(),0);
+    }
 
     /**
      * 查询集合 DEFAULT

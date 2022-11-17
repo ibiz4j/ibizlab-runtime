@@ -27,8 +27,8 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'loginname',
-          prop: 'loginname',
+          name: 'userid',
+          prop: 'userid',
           dataType: 'TEXT',
         },
         {
@@ -37,13 +37,18 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'orgname',
-          prop: 'orgname',
+          name: 'personname',
+          prop: 'personname',
           dataType: 'TEXT',
         },
         {
-          name: 'userid',
-          prop: 'userid',
+          name: 'loginname',
+          prop: 'loginname',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'orgname',
+          prop: 'orgname',
           dataType: 'TEXT',
         },
         {
@@ -52,14 +57,10 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'personname',
-          prop: 'personname',
+          name: 'srfkey',
+          prop: 'userid',
           dataType: 'TEXT',
-        },
-        {
-          name: 'srfmajortext',
-          prop: 'personname',
-          dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'srfdataaccaction',
@@ -67,10 +68,9 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'srfkey',
-          prop: 'userid',
+          name: 'srfmajortext',
+          prop: 'personname',
           dataType: 'TEXT',
-          isEditable:true
         },
         {
           name: 'sysuser',

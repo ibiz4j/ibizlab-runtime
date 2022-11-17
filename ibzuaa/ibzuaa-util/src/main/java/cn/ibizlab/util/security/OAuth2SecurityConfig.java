@@ -31,7 +31,7 @@ import java.util.Enumeration;
 @ConditionalOnProperty(name = "ibiz.oauth2.enable", havingValue = "true")
 public class OAuth2SecurityConfig extends ResourceServerConfigurerAdapter {
 
-    @Value("${ibiz.oauth2.header:accesstoken}")
+    @Value("${ibiz.oauth2.header:Access-Token}")
     private String authorization;
 
     @Value("${ibiz.oauth2.signkey:oauth2}")

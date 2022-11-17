@@ -27,38 +27,8 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'macaddr',
-          prop: 'macaddr',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'authtime',
-          prop: 'authtime',
-          dataType: 'DATETIME',
-        },
-        {
           name: 'username',
           prop: 'username',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'useragent',
-          prop: 'useragent',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'ipaddr',
-          prop: 'ipaddr',
-          dataType: 'TEXT',
-        },
-        {
-          name: 'authcode',
-          prop: 'authcode',
-          dataType: 'SSCODELIST',
-        },
-        {
-          name: 'domains',
-          prop: 'domain',
           dataType: 'TEXT',
         },
         {
@@ -67,13 +37,33 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'srfmajortext',
-          prop: 'username',
+          name: 'authtime',
+          prop: 'authtime',
+          dataType: 'DATETIME',
+        },
+        {
+          name: 'authcode',
+          prop: 'authcode',
+          dataType: 'SSCODELIST',
+        },
+        {
+          name: 'ipaddr',
+          prop: 'ipaddr',
           dataType: 'TEXT',
         },
         {
-          name: 'srfdataaccaction',
-          prop: 'logid',
+          name: 'macaddr',
+          prop: 'macaddr',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'useragent',
+          prop: 'useragent',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'domains',
+          prop: 'domain',
           dataType: 'TEXT',
         },
         {
@@ -81,6 +71,16 @@ export default class MainModel {
           prop: 'logid',
           dataType: 'TEXT',
           isEditable:true
+        },
+        {
+          name: 'srfdataaccaction',
+          prop: 'logid',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'srfmajortext',
+          prop: 'username',
+          dataType: 'TEXT',
         },
         {
           name: 'sysauthlog',

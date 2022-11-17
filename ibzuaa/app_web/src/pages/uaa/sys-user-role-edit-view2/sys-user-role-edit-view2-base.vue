@@ -52,8 +52,8 @@
             :viewparams="viewparams" 
             :context="context"
             :formData="formData"
-            @selectionchange="drbar_selectionchange($event)"
             @load="drbar_load($event)"
+            @selectionchange="drbar_selectionchange($event)"
             @closeview="closeView($event)">
             <view_form 
             :viewState="viewState"  
@@ -72,9 +72,9 @@
             style='' 
             name="form"  
             ref='form' 
+            @load="form_load($event)"  
             @save="form_save($event)"  
             @remove="form_remove($event)"  
-            @load="form_load($event)"  
             @closeview="closeView($event)">
         </view_form>
         </view_drbar>
@@ -667,6 +667,18 @@ export default class SysUserRoleEditView2Base extends Vue {
 
 
     /**
+     * form 部件 load 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof SysUserRoleEditView2Base
+     */
+    public form_load($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('form', 'load', $event);
+    }
+
+
+    /**
      * form 部件 save 事件
      *
      * @param {*} [args={}]
@@ -691,14 +703,14 @@ export default class SysUserRoleEditView2Base extends Vue {
 
 
     /**
-     * form 部件 load 事件
+     * drbar 部件 load 事件
      *
      * @param {*} [args={}]
      * @param {*} $event
      * @memberof SysUserRoleEditView2Base
      */
-    public form_load($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('form', 'load', $event);
+    public drbar_load($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('drbar', 'load', $event);
     }
 
 
@@ -711,18 +723,6 @@ export default class SysUserRoleEditView2Base extends Vue {
      */
     public drbar_selectionchange($event: any, $event2?: any) {
         this.engine.onCtrlEvent('drbar', 'selectionchange', $event);
-    }
-
-
-    /**
-     * drbar 部件 load 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof SysUserRoleEditView2Base
-     */
-    public drbar_load($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('drbar', 'load', $event);
     }
 
 
@@ -1266,6 +1266,7 @@ export default class SysUserRoleEditView2Base extends Vue {
         if(this.portletStateEvent){
             this.portletStateEvent.unsubscribe();
         }
+        this.viewState.complete();        
     }
 
     /**

@@ -27,24 +27,14 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'orgname',
-          prop: 'orgname',
-          dataType: 'PICKUPDATA',
-        },
-        {
-          name: 'userid',
-          prop: 'userid',
-          dataType: 'PICKUP',
-        },
-        {
-          name: 'groupname',
-          prop: 'groupname',
+          name: 'personname',
+          prop: 'personname',
           dataType: 'PICKUPTEXT',
         },
         {
-          name: 'groupid',
-          prop: 'groupid',
-          dataType: 'PICKUP',
+          name: 'orgname',
+          prop: 'orgname',
+          dataType: 'PICKUPDATA',
         },
         {
           name: 'mdeptname',
@@ -52,14 +42,15 @@ export default class MainModel {
           dataType: 'PICKUPDATA',
         },
         {
-          name: 'personname',
-          prop: 'personname',
+          name: 'groupname',
+          prop: 'groupname',
           dataType: 'PICKUPTEXT',
         },
         {
-          name: 'srfmajortext',
-          prop: 'membername',
+          name: 'srfkey',
+          prop: 'memberid',
           dataType: 'TEXT',
+          isEditable:true
         },
         {
           name: 'srfdataaccaction',
@@ -67,10 +58,19 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'srfkey',
-          prop: 'memberid',
+          name: 'groupid',
+          prop: 'groupid',
+          dataType: 'PICKUP',
+        },
+        {
+          name: 'userid',
+          prop: 'userid',
+          dataType: 'PICKUP',
+        },
+        {
+          name: 'srfmajortext',
+          prop: 'membername',
           dataType: 'TEXT',
-          isEditable:true
         },
         {
           name: 'wfmember',

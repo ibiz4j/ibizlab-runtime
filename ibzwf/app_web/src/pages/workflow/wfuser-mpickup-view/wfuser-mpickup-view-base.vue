@@ -19,8 +19,8 @@
         name="pickupviewpanel"  
         ref='pickupviewpanel' 
         @selectionchange="pickupviewpanel_selectionchange($event)"  
-        @activated="pickupviewpanel_activated($event)"  
         @load="pickupviewpanel_load($event)"  
+        @activated="pickupviewpanel_activated($event)"  
         @closeview="closeView($event)">
     </view_pickupviewpanel>
                 </div>
@@ -611,18 +611,6 @@ export default class WFUserMPickupViewBase extends Vue {
 
 
     /**
-     * pickupviewpanel 部件 activated 事件
-     *
-     * @param {*} [args={}]
-     * @param {*} $event
-     * @memberof WFUserMPickupViewBase
-     */
-    public pickupviewpanel_activated($event: any, $event2?: any) {
-        this.engine.onCtrlEvent('pickupviewpanel', 'activated', $event);
-    }
-
-
-    /**
      * pickupviewpanel 部件 load 事件
      *
      * @param {*} [args={}]
@@ -631,6 +619,18 @@ export default class WFUserMPickupViewBase extends Vue {
      */
     public pickupviewpanel_load($event: any, $event2?: any) {
         this.engine.onCtrlEvent('pickupviewpanel', 'load', $event);
+    }
+
+
+    /**
+     * pickupviewpanel 部件 activated 事件
+     *
+     * @param {*} [args={}]
+     * @param {*} $event
+     * @memberof WFUserMPickupViewBase
+     */
+    public pickupviewpanel_activated($event: any, $event2?: any) {
+        this.engine.onCtrlEvent('pickupviewpanel', 'activated', $event);
     }
 
 
@@ -694,6 +694,7 @@ export default class WFUserMPickupViewBase extends Vue {
         if(this.portletStateEvent){
             this.portletStateEvent.unsubscribe();
         }
+        this.viewState.complete();        
     }
     /**
      * 是否显示按钮

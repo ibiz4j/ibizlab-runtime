@@ -1,5 +1,6 @@
 import { Http,Util,Errorlog } from '@/utils';
 import ControlService from '@/widgets/control-service';
+import UtilService from '@/utilservice/util-service';
 import TaskIndexViewModel from './task-index-view-appmenu-model';
 
 
@@ -20,6 +21,15 @@ export default class TaskIndexViewService extends ControlService {
     public setTempMode(){
         this.isTempMode = false;
     }
+
+    /**
+     * 工具服务对象
+     *
+     * @protected
+     * @type {UtilService}
+     * @memberof TaskIndexViewService
+     */
+    protected utilService: UtilService = new UtilService();
 
     /**
      * Creates an instance of TaskIndexViewService.

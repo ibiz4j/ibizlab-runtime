@@ -27,18 +27,13 @@ export default class MainModel {
     }else{
 		  return [
         {
-          name: 'definitionname',
-          prop: 'definitionname',
+          name: 'definitionkey',
+          prop: 'definitionkey',
           dataType: 'TEXT',
         },
         {
-          name: 'modelenable',
-          prop: 'modelenable',
-          dataType: 'YESNO',
-        },
-        {
-          name: 'definitionkey',
-          prop: 'definitionkey',
+          name: 'definitionname',
+          prop: 'definitionname',
           dataType: 'TEXT',
         },
         {
@@ -47,14 +42,14 @@ export default class MainModel {
           dataType: 'TEXT',
         },
         {
-          name: 'srfmajortext',
-          prop: 'definitionname',
-          dataType: 'TEXT',
+          name: 'modelversion',
+          prop: 'modelversion',
+          dataType: 'INT',
         },
         {
-          name: 'srfdataaccaction',
-          prop: 'definitionkey',
-          dataType: 'TEXT',
+          name: 'modelenable',
+          prop: 'modelenable',
+          dataType: 'YESNO',
         },
         {
           name: 'srfkey',
@@ -63,9 +58,14 @@ export default class MainModel {
           isEditable:true
         },
         {
-          name: 'modelversion',
-          prop: 'modelversion',
-          dataType: 'INT',
+          name: 'srfdataaccaction',
+          prop: 'definitionkey',
+          dataType: 'TEXT',
+        },
+        {
+          name: 'srfmajortext',
+          prop: 'definitionname',
+          dataType: 'TEXT',
         },
         {
           name: 'wfprocessdefinition',

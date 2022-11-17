@@ -11,14 +11,14 @@
             <tns:metaData express="T(cn.ibizlab.util.security.AuthenticationUser).getAuthenticationUser()" name="curuser" type="session"/>
         <tns:global identifier="sysusersavesysuserdefault" type="cn.ibizlab.core.uaa.domain.SysUser" />
         </extensionElements>
-     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysusersavesysuserprepareparam1" id="prepareparam1" implementation="http://www.jboss.org/drools/rule" name="设置用户为管理员"/>
+     <startEvent id="begin" isInterrupting="true"/>
      <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysusersavesysuserdeaction1" id="deaction1" implementation="http://www.jboss.org/drools/rule" name="保存用户"/>
      <endEvent id="deaction1_end" name="end"/>
      <sequenceFlow id="deaction1_end_line" sourceRef="deaction1" targetRef="deaction1_end"/>
-     <startEvent id="begin" isInterrupting="true"/>
      <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysusersavesysuserdeaction2" id="deaction2" implementation="http://www.jboss.org/drools/rule" name="保存用户"/>
      <endEvent id="deaction2_end" name="end"/>
      <sequenceFlow id="deaction2_end_line" sourceRef="deaction2" targetRef="deaction2_end"/>
+     <businessRuleTask activiti:exclusive="true" g:ruleFlowGroup="sysusersavesysuserprepareparam1" id="prepareparam1" implementation="http://www.jboss.org/drools/rule" name="设置用户为管理员"/>
      <sequenceFlow id="gateway-begin_prepareparam1" sourceRef="gateway-begin" targetRef="prepareparam1">
             <conditionExpression  language="http://www.jboss.org/drools/rule" ><![CDATA[
             $sysusersavesysuserdefault:SysUser();

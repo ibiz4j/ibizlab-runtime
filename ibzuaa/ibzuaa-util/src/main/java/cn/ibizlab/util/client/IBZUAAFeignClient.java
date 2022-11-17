@@ -27,6 +27,13 @@ public interface IBZUAAFeignClient
 	@PostMapping(value = "/uaa/login")
 	AuthenticationUser login(@RequestBody AuthorizationLogin authorizationLogin);
 
+    /**
+	 * oauth2认证
+	 * @param 校验信息
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, value = "/oauth/token")
+	Object getToken(@RequestBody MultiValueMap<String,String> map);
 
 	@PostMapping(value = "/uaa/loginbyusername")
 	AuthenticationUser loginByUsername(@RequestBody String username);

@@ -1,7 +1,9 @@
 package cn.ibizlab.core.workflow.mapper;
 
+import cn.ibizlab.core.workflow.domain.WFProcessInstance;
 import cn.ibizlab.core.workflow.domain.WFProcessNode;
 import cn.ibizlab.core.workflow.domain.WFTask;
+import cn.ibizlab.core.workflow.filter.WFProcessInstanceSearchContext;
 import cn.ibizlab.core.workflow.filter.WFTaskSearchContext;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -35,4 +37,7 @@ public interface WFCoreMapper {
     Page<WFTask> searchDoneTask(IPage page, @Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
 
     Page<WFTask> searchFinishTask(IPage page, @Param("srf") WFTaskSearchContext context, @Param("ew") Wrapper<WFTask> wrapper) ;
+
+    Page<WFProcessInstance> searchActiveInstance(IPage page, @Param("srf") WFProcessInstanceSearchContext context, @Param("ew") Wrapper<WFProcessInstance> wrapper) ;
+
 }

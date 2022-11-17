@@ -25,6 +25,10 @@ public class IBZUAAFallback implements IBZUAAFeignClient {
     }
 
     @Override
+    public Object getToken(MultiValueMap<String, String> map){
+        return null;
+    }
+    @Override
     public String getPublicKey() {
         return null;
     }

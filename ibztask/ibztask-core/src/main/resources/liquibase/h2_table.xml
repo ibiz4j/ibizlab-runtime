@@ -4,7 +4,7 @@
 
 
     <!--输出实体[JOBS_INFO]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-jobs_info-6-1">
+    <changeSet author="root" id="tab-jobs_info-6-1">
         <createTable tableName="JOBS_INFO">
                 <column name="ID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_JOBS_INFO_ID"/>
@@ -42,7 +42,7 @@
 
 
     <!--输出实体[JOBS_LOCK]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-jobs_lock-1-2">
+    <changeSet author="root" id="tab-jobs_lock-1-2">
         <createTable tableName="JOBS_LOCK">
                 <column name="ID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_JOBS_LOCK_ID"/>
@@ -58,7 +58,7 @@
 
 
     <!--输出实体[JOBS_LOG]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-jobs_log-1-3">
+    <changeSet author="root" id="tab-jobs_log-1-3">
         <createTable tableName="JOBS_LOG">
                 <column name="ID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_JOBS_LOG_ID"/>
@@ -86,7 +86,7 @@
 
 
     <!--输出实体[JOBS_REGISTRY]数据结构 -->
-    <changeSet author="a_A_5d9d78509" id="tab-jobs_registry-1-4">
+    <changeSet author="root" id="tab-jobs_registry-1-4">
         <createTable tableName="JOBS_REGISTRY">
                 <column name="ID" remarks="" type="VARCHAR(100)">
                     <constraints primaryKey="true" primaryKeyName="PK_JOBS_REGISTRY_ID"/>

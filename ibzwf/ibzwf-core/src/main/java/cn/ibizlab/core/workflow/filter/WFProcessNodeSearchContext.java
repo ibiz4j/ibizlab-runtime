@@ -29,7 +29,11 @@ public class WFProcessNodeSearchContext extends SearchContextBase {
 
 	private String n_nodename_like;//[节点名称]
 
+	private String n_definitionkey_eq;//[DefinitionKey]
+
 	private String n_definitionkey_leftlike;//[DefinitionKey]
+
+	private String n_definitionid_eq;//[DefinitionId]
 
 }
 

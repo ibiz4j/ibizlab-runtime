@@ -1,6 +1,8 @@
 import wftask_zh_CN from '@locale/lanres/entities/wftask/wftask_zh_CN';
 import wfmember_zh_CN from '@locale/lanres/entities/wfmember/wfmember_zh_CN';
 import wfuser_zh_CN from '@locale/lanres/entities/wfuser/wfuser_zh_CN';
+import wfprocessinstance_zh_CN from '@locale/lanres/entities/wfprocess-instance/wfprocess-instance_zh_CN';
+import wfprocessnode_zh_CN from '@locale/lanres/entities/wfprocess-node/wfprocess-node_zh_CN';
 import wfgroup_zh_CN from '@locale/lanres/entities/wfgroup/wfgroup_zh_CN';
 import wfremodel_zh_CN from '@locale/lanres/entities/wfremodel/wfremodel_zh_CN';
 import wfsystem_zh_CN from '@locale/lanres/entities/wfsystem/wfsystem_zh_CN';
@@ -45,6 +47,8 @@ function getAppLocale(){
             },
             gridpage: {
                 choicecolumns: "选择列",
+                saveconfig: "保存当前配置",
+                resetconfig: "恢复默认配置",
                 refresh: "刷新",
                 show: "显示",
                 records: "条",
@@ -58,6 +62,12 @@ function getAppLocale(){
                     createAction: "视图表格createAction参数未配置",
                     updateAction: "视图表格updateAction参数未配置",
                     loaddraftAction: "视图表格loaddraftAction参数未配置",
+                },
+                message: {
+                  saveconfigsuccess: "保存配置成功！",
+                  saveconfigerror: "保存配置失败！",
+                  resetconfigsuccess: "重置配置成功！",
+                  resetconfigerror: "重置配置失败！",
                 },
                 data: "数据",
                 delDataFail: "删除数据失败",
@@ -139,6 +149,7 @@ function getAppLocale(){
                     menuitem3: commonLogic.appcommonhandle("发布新流程",null),
                     menuitem2: commonLogic.appcommonhandle("用户组",null),
                     menuitem4: commonLogic.appcommonhandle("我的待办",null),
+                    menuitem5: commonLogic.appcommonhandle("流程实例",null),
                 },
             },
             formpage:{
@@ -236,6 +247,8 @@ function getAppLocale(){
             wftask: wftask_zh_CN(),
             wfmember: wfmember_zh_CN(),
             wfuser: wfuser_zh_CN(),
+            wfprocessinstance: wfprocessinstance_zh_CN(),
+            wfprocessnode: wfprocessnode_zh_CN(),
             wfgroup: wfgroup_zh_CN(),
             wfremodel: wfremodel_zh_CN(),
             wfsystem: wfsystem_zh_CN(),

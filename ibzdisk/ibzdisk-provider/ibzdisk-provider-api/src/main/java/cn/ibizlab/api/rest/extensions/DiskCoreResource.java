@@ -110,6 +110,14 @@ public class DiskCoreResource
 		this.sendRespose(response, file);
 	}
 
+	@PostMapping(value = "net-disk/download2")
+	@ResponseStatus(HttpStatus.OK)
+	public void download2(@RequestBody List<JsonNode> list, HttpServletRequest request, HttpServletResponse response){
+		File file= diskCoreService.getFile2(null, list);
+		response.setHeader("Content-Disposition", "attachment;filename="+getFileName(request.getHeader("User-Agent"),file.getName()));
+		this.sendRespose(response, file);
+	}
+
 	@GetMapping(value = {"net-disk/openview/{folder}/{id}/{name}.{ext}","net-disk/files/{folder}/{id}/{name}.{ext}"})
 	@ResponseStatus(HttpStatus.OK)
 	public void open(@PathVariable("folder") String folder, @PathVariable("id") String id,

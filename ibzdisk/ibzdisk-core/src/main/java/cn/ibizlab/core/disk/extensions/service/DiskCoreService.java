@@ -28,10 +28,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Wrapper;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.zip.ZipOutputStream;
 
 @Primary
@@ -192,6 +189,50 @@ public class DiskCoreService {
                     int nFolderLength = file.getParentFile().getParentFile().getAbsolutePath().length() + 1;
                     long nTime = System.currentTimeMillis();
                     ZipUtils.zip(file, zipOutputStream, nFolderLength);
+                    log.debug(String.format("压缩文件[%1$s]耗时[%2$s]ms", file.getAbsolutePath(), System.currentTimeMillis() - nTime));
+                }
+                zipOutputStream.flush();
+                zipOutputStream.close();
+            }
+            return tempFile;
+        } catch (Throwable ex) {
+            throw new InternalServerErrorException(String.format("生成压缩文件发生异常，%1$s", ex.getMessage()));
+        }
+
+    }
+
+    /**
+     * 批量压缩文件，压缩包内所有文件平铺展示，子目录文件重名时，通过序号区分（如：文件名.txt; 件名(1).txt )
+     * @param strCat
+     * @param list
+     * @return
+     */
+    public File getFile2(String strCat, List<JsonNode> list) {
+
+        if (ObjectUtils.isEmpty(list)) {
+            throw new InternalServerErrorException("未传入文件清单");
+        }
+
+        List<File> fileList = new ArrayList<>();
+        for (JsonNode item : list) {
+
+            if (item instanceof ObjectNode) {
+                ObjectNode map = (ObjectNode) item;
+                item = map.get("id");
+            }
+            fileList.add(this.getFile(strCat, item.asText()));
+        }
+
+        try {
+            Map<String ,List<File>> zipFileMap = new HashMap<>(); //压缩文件集合
+            File tempFile = File.createTempFile("oss", ".zip");
+            try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(tempFile))) {
+                for (File file : fileList) {
+                    if (file.getParentFile() == null || file.getParentFile().getParentFile() == null) {
+                        throw new Exception("文件路径不正确");
+                    }
+                    long nTime = System.currentTimeMillis();
+                    ZipUtils.zip2(file, zipOutputStream, zipFileMap);
                     log.debug(String.format("压缩文件[%1$s]耗时[%2$s]ms", file.getAbsolutePath(), System.currentTimeMillis() - nTime));
                 }
                 zipOutputStream.flush();

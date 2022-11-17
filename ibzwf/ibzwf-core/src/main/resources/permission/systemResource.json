@@ -1,5 +1,6 @@
     {
     "systemid":"ibzwf",
+    "systemname":"ibzwf",
     "unires":[
     ],
     "entities":[
@@ -24,6 +25,22 @@
     "delogicname":"流程定义",
     "sysmoudle":{"id":"WORKFLOW","name":"workflow"},
     "dedataset":[{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+    }
+    ,    {
+    "dename":"WFProcessInstance",
+    "delogicname":"流程实例",
+    "sysmoudle":{"id":"WORKFLOW","name":"workflow"},
+    "dedataset":[{"id":"ActiveProcessInstance" , "name":"流程中实例"},{"id":"Default" , "name":"DEFAULT"}],
+    "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Jump" , "name":"流程跳转" , "type":"USERCUSTOM" },{"id":"Restart" , "name":"重启流程" , "type":"USERCUSTOM" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
+    "datascope":[{"id":"all","name":"全部数据"}]
+    }
+    ,    {
+    "dename":"WFProcessNode",
+    "delogicname":"流程定义节点",
+    "sysmoudle":{"id":"WORKFLOW","name":"workflow"},
+    "dedataset":[{"id":"Default" , "name":"DEFAULT"},{"id":"ProcessNode" , "name":"查询当前实例流程节点"}],
     "deaction":[{"id":"Create" , "name":"Create" , "type":"BUILTIN" },{"id":"Update" , "name":"Update" , "type":"BUILTIN" },{"id":"Remove" , "name":"Remove" , "type":"BUILTIN" },{"id":"Get" , "name":"Get" , "type":"BUILTIN" },{"id":"GetDraft" , "name":"GetDraft" , "type":"BUILTIN" },{"id":"CheckKey" , "name":"CheckKey" , "type":"BUILTIN" },{"id":"Save" , "name":"Save" , "type":"BUILTIN" }],
     "datascope":[{"id":"all","name":"全部数据"}]
     }
@@ -65,7 +82,7 @@
             {
                "appid":"web",
                "appname":"统一工作流",
-               "appmenu":[{"menuid":"WFIndexView", "menuname":"WFIndexView", "menuitem":[{ "id":"menuitem1" , "name":"流程定义" },{ "id":"menuitem3" , "name":"发布新流程" },{ "id":"menuitem2" , "name":"用户组" },{ "id":"menuitem4" , "name":"我的待办" }] }]
+               "appmenu":[{"menuid":"WFIndexView", "menuname":"WFIndexView", "menuitem":[{ "id":"menuitem1" , "name":"流程定义" },{ "id":"menuitem3" , "name":"发布新流程" },{ "id":"menuitem2" , "name":"用户组" },{ "id":"menuitem4" , "name":"我的待办" },{ "id":"menuitem5" , "name":"流程实例" }] }]
             }
             ]
     }

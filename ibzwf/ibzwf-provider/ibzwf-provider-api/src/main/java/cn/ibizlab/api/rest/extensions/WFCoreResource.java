@@ -297,12 +297,33 @@ public class WFCoreResource
 		if(StringUtils.isEmpty(path))
 			throw new BadRequestAlertException("未找到待办任务处理页","","");
 
-		return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header(HttpHeaders.LOCATION, path).build();
+		return ResponseEntity.status(HttpStatus.OK).body(path);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/deploybpmn")
 	public ResponseEntity<Boolean> deployBpmnFile(@RequestBody List<Map<String,Object>> bpmnfiles){
 		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.wfdeploybpmns(bpmnfiles));
+	}
+
+	@ApiOperation(value = "withDraw", tags = {"withDraw" },  notes = "根据实例将流程撤回前一步")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/withdraw")
+	public ResponseEntity<Boolean> withDraw(@PathVariable("taskId") String taskId ,@RequestBody WFTaskWay taskWay){
+		return ResponseEntity.ok(wfCoreService.withDraw(taskId , taskWay));
+	}
+
+	@ApiOperation(value = "dataAccessMode", tags = {"流程跳转" },  notes = "流程跳转")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-{entity}/{businessKey}/process-instances/{processInstanceId}/jump")
+	public ResponseEntity<Boolean> jump(@PathVariable("processInstanceId") String processInstanceId, @RequestBody WFProcessInstance instance) {
+		instance.setId(processInstanceId);
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.jump(instance));
+	}
+
+	@ApiOperation(value = "restartwf", tags = {"重启流程" },  notes = "重启流程")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-{entity}/{businessKey}/process-instances/{processInstanceId}/restart")
+	public ResponseEntity<Boolean> restart(@PathVariable("system") String system, @PathVariable("entity") String entity, @PathVariable("businessKey") String businessKey,
+										   @PathVariable("processInstanceId") String processInstanceId, @RequestBody WFProcessInstance instance) {
+		instance.setId(processInstanceId);
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.restart(system,entity,businessKey,instance));
 	}
 
 	@ApiOperation(value = "前加签任务", tags = {"工作流前加签任务" } ,notes = "前加签任务")
@@ -314,14 +335,21 @@ public class WFCoreResource
 		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.beforeSign(system,appname,entity,businessKey,taskId,taskWay));
 	}
 
-	@ApiOperation(value = "后加签任务", tags = {"工作流后加签任务" },  notes = "前加签任务")
+	@ApiOperation(value = "转办任务", tags = {"工作流转办任务" },  notes = "转办任务")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/transfer")
-	public ResponseEntity<Boolean> afterSign(@PathVariable("system") String system,@PathVariable("appname") String appname,
-											 @PathVariable("entity") String entity,
-											 @PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
-											 @RequestBody WFTaskWay taskWay) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.afterSign(system,appname,entity,businessKey,taskId,taskWay));
+	public ResponseEntity<Boolean> reassign(@PathVariable("system") String system,@PathVariable("appname") String appname,
+											@PathVariable("entity") String entity,
+											@PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
+											@RequestBody WFTaskWay taskWay) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.reassign(system,appname,entity,businessKey,taskId,taskWay));
 	}
+
+	@ApiOperation(value = "将文件抄送给选定人员", tags = {"将文件抄送给选定人员" } ,notes = "将文件抄送给选定人员")
+	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/sendcopy")
+	public ResponseEntity<Boolean> sendCopy(@PathVariable("taskId") String taskId,@RequestBody WFTaskWay taskWay) {
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.sendCopy(taskId,taskWay));
+	}
+
 
 	/**
 	 * 将流程表单设置到响应头中
