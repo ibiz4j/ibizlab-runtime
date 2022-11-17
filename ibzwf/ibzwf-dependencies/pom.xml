@@ -89,7 +89,7 @@
         <postgresql.version>42.2.6</postgresql.version>
         <flowable-modeler.version>6.4.2</flowable-modeler.version>
 
-        <alibaba-fastjson.version>1.2.57_noneautotype</alibaba-fastjson.version>
+        <alibaba-fastjson.version>1.2.83</alibaba-fastjson.version>
     </properties>
 
     <dependencyManagement>
