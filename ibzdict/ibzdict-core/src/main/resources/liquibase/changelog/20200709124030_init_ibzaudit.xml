@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
-    <changeSet author="Think (generated)" id="1566027230162-1">
+    <changeSet author="Think (generated)" id="1566027230162-2">
         <preConditions onFail="MARK_RAN"  >
             <not>
                 <tableExists tableName="IBZDATAAUDIT" />
@@ -13,7 +13,7 @@
             <column name="OPPERSONID" remarks="操作人标识" type="VARCHAR2(100 BYTE)"/>
             <column name="OPPERSONNAME" remarks="操作人名称" type="VARCHAR2(100 BYTE)"/>
             <column name="AUDITTYPE" remarks="审计行为类型" type="VARCHAR2(60 BYTE)"/>
-            <column name="OPTIME" remarks="操作时间" type="date"/>
+            <column name="OPTIME" remarks="操作时间" type="datetime"/>
             <column name="IPADDRESS" remarks="访问地址" type="VARCHAR2(100 BYTE)"/>
             <column name="AUDITOBJECTDATA" remarks="审计对象（表数据）" type="VARCHAR2(100 BYTE)"/>
             <column name="AUDITOBJECT" remarks="审计对象（表）" type="VARCHAR2(100 BYTE)"/>
