@@ -158,7 +158,7 @@ public class WFCoreResource
 
 	@ApiOperation(value = "getWayByTaskId", tags = {"WFTaskWay" },  notes = "根据业务主键和当前步骤获取操作路径")
 	@RequestMapping(method = RequestMethod.GET, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/ways")
-	public ResponseEntity<List<WFTaskWay>> gettasklink(@PathVariable("system") String system,@PathVariable("appname") String appname,
+	public ResponseEntity<List<WFTaskWay>> getTasklink(@PathVariable("system") String system,@PathVariable("appname") String appname,
 													   @PathVariable("entity") String entity,
 													   @PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId) {
 		List<WFTaskWay> taskWays=wfCoreService.getTaskLink(system,appname,entity,businessKey,taskId);
@@ -188,8 +188,11 @@ public class WFCoreResource
 
 	@ApiOperation(value = "sendback", tags = {"sendback" },  notes = "流程步骤回退")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/sendback")
-	public ResponseEntity<Boolean> sendback(@PathVariable("taskId") String taskId){
-		return ResponseEntity.ok(wfCoreService.sendBack(taskId));
+	public ResponseEntity<Boolean> sendback(@PathVariable("system") String system,@PathVariable("appname") String appname,
+											@PathVariable("entity") String entity,
+											@PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
+											@RequestBody WFTaskWay taskWay){
+		return ResponseEntity.ok(wfCoreService.sendBack(system,appname,entity,businessKey,taskId,taskWay));
 	}
 
 //	@ApiOperation(value = "delegatetask", tags = {"delegatetask" },  notes = "委派任务")
@@ -307,21 +310,30 @@ public class WFCoreResource
 
 	@ApiOperation(value = "withDraw", tags = {"withDraw" },  notes = "根据实例将流程撤回前一步")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/withdraw")
-	public ResponseEntity<Boolean> withDraw(@PathVariable("taskId") String taskId ,@RequestBody WFTaskWay taskWay){
-		return ResponseEntity.ok(wfCoreService.withDraw(taskId , taskWay));
+	public ResponseEntity<Boolean> withDraw(@PathVariable("system") String system,@PathVariable("appname") String appname,
+											@PathVariable("entity") String entity,
+											@PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
+											@RequestBody WFTaskWay taskWay){
+		taskWay.setTaskid(taskId);
+		return ResponseEntity.ok(wfCoreService.withDraw(system,appname,entity,businessKey,taskWay));
 	}
 
 	@ApiOperation(value = "dataAccessMode", tags = {"流程跳转" },  notes = "流程跳转")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-{entity}/{businessKey}/process-instances/{processInstanceId}/jump")
-	public ResponseEntity<Boolean> jump(@PathVariable("processInstanceId") String processInstanceId, @RequestBody WFProcessInstance instance) {
+	public ResponseEntity<Boolean> jump(@PathVariable("system") String system,
+										@PathVariable("entity") String entity,
+										@PathVariable("businessKey") String businessKey,@PathVariable("processInstanceId") String processInstanceId,
+										@RequestBody WFProcessInstance instance) {
 		instance.setId(processInstanceId);
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.jump(instance));
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.jump(system,entity,businessKey,instance));
 	}
 
 	@ApiOperation(value = "restartwf", tags = {"重启流程" },  notes = "重启流程")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-{entity}/{businessKey}/process-instances/{processInstanceId}/restart")
-	public ResponseEntity<Boolean> restart(@PathVariable("system") String system, @PathVariable("entity") String entity, @PathVariable("businessKey") String businessKey,
-										   @PathVariable("processInstanceId") String processInstanceId, @RequestBody WFProcessInstance instance) {
+	public ResponseEntity<Boolean> restart(@PathVariable("system") String system,
+										   @PathVariable("entity") String entity,
+										   @PathVariable("businessKey") String businessKey, @PathVariable("processInstanceId") String processInstanceId,
+										   @RequestBody WFProcessInstance instance) {
 		instance.setId(processInstanceId);
 		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.restart(system,entity,businessKey,instance));
 	}
@@ -332,7 +344,8 @@ public class WFCoreResource
 											  @PathVariable("entity") String entity,
 											  @PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
 											  @RequestBody WFTaskWay taskWay) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.beforeSign(system,appname,entity,businessKey,taskId,taskWay));
+		taskWay.setTaskid(taskId);
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.beforeSign(system,appname,entity,businessKey,taskWay));
 	}
 
 	@ApiOperation(value = "转办任务", tags = {"工作流转办任务" },  notes = "转办任务")
@@ -341,13 +354,18 @@ public class WFCoreResource
 											@PathVariable("entity") String entity,
 											@PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
 											@RequestBody WFTaskWay taskWay) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.reassign(system,appname,entity,businessKey,taskId,taskWay));
+		taskWay.setTaskid(taskId);
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.reassign(system,appname,entity,businessKey,taskWay));
 	}
 
 	@ApiOperation(value = "将文件抄送给选定人员", tags = {"将文件抄送给选定人员" } ,notes = "将文件抄送给选定人员")
 	@RequestMapping(method = RequestMethod.POST, value = "/{system}-app-{appname}/{entity}/{businessKey}/tasks/{taskId}/sendcopy")
-	public ResponseEntity<Boolean> sendCopy(@PathVariable("taskId") String taskId,@RequestBody WFTaskWay taskWay) {
-		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.sendCopy(taskId,taskWay));
+	public ResponseEntity<Boolean> sendCopy(@PathVariable("system") String system,@PathVariable("appname") String appname,
+											@PathVariable("entity") String entity,
+											@PathVariable("businessKey") String businessKey,@PathVariable("taskId") String taskId,
+											@RequestBody WFTaskWay taskWay) {
+		taskWay.setTaskid(taskId);
+		return ResponseEntity.status(HttpStatus.OK).body(wfCoreService.sendCopy(system,appname,entity,businessKey,taskWay));
 	}
 
 

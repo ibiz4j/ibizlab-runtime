@@ -75,6 +75,11 @@ export default class JumpModel {
         dataType: 'TEXT',
       },
       {
+        name: 'businesskey',
+        prop: 'businesskey',
+        dataType: 'TEXT',
+      },
+      {
         name: 'instanceid',
         prop: 'id',
         dataType: 'TEXT',

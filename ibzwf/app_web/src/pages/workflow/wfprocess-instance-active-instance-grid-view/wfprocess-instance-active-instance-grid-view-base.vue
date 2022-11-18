@@ -9,7 +9,7 @@
             </div>
         <div class='content-container'>
             <div style='margin-bottom: 6px;'>
-                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;padding-left: 24px' placeholder="实例名称" />
+                <i-input v-show="!isExpandSearchForm" v-model="query" search enter-button @on-search="onSearch($event)" class='quick-search-input' style='max-width: 400px;padding-left: 24px' placeholder="实例名称，流程定义名称，业务键值，发起人" />
                 <div class='pull-right'>
                     <div class='toolbar-container'>
                         <tooltip :transfer="true" :max-width="600">

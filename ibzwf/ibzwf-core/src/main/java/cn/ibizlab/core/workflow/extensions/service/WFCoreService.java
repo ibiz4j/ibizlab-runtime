@@ -35,6 +35,8 @@ import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.history.ProcessInstanceHistoryLog;
+import org.flowable.engine.impl.persistence.entity.CommentEntity;
+import org.flowable.engine.impl.persistence.entity.CommentEntityImpl;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.repository.DeploymentBuilder;
 import org.flowable.engine.repository.ProcessDefinition;
@@ -365,10 +367,24 @@ public class WFCoreService
 		return new PageImpl<WFTask>(pages.getRecords(), context.getPageable(), pages.getTotal());
 	}
 
-
+	/**
+	 * 查询已激活的流程实例（流程实例）
+	 * @param context
+	 * @return
+	 */
 	public Page<WFProcessInstance> searchActiveInstance(WFProcessInstanceSearchContext context){
+
+		//构造快速搜索查询条件
+		QueryWrapper<WFProcessInstance> queryWrapper = new QueryWrapper();
+		String strQuery = context.getQuery();
+		if(!StringUtils.isEmpty(strQuery)){
+			if(!StringUtils.isEmpty(strQuery)){
+				queryWrapper.and(wrapper -> wrapper.like("processDefinitionName", strQuery).or().like("businessKey", strQuery).or().like("startUserId", strQuery));
+			}
+		}
+
 		com.baomidou.mybatisplus.extension.plugins.pagination.Page page = new com.baomidou.mybatisplus.extension.plugins.pagination.Page(context.getPageable().getPageNumber()+1,context.getPageable().getPageSize());
-		com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFProcessInstance> pages = wfCoreMapper.searchActiveInstance(page,context,new QueryWrapper<>());
+		com.baomidou.mybatisplus.extension.plugins.pagination.Page<WFProcessInstance> pages = wfCoreMapper.searchActiveInstance(page,context,queryWrapper);
 		return new PageImpl<WFProcessInstance>(pages.getRecords(), context.getPageable(), pages.getTotal());
 	}
 
@@ -781,7 +797,7 @@ public class WFCoreService
 
 			if(userTaskParams.containsKey(webFormName)){
 				way.set("sequenceFlowFormName",userTaskParams.get(webFormName));
-				way.setSequenceflowname(webFormName);
+				way.setSequenceflowname(userTaskParams.get(webFormName));
 			}
 
 			if(userTaskParams.containsKey(mobFormId))
@@ -789,7 +805,7 @@ public class WFCoreService
 
 			if(userTaskParams.containsKey(mobFormName)) {
 				way.set("sequenceFlowMobFormName", userTaskParams.get(mobFormName));
-				way.setSequenceflowname(mobFormName);
+				way.setSequenceflowname(userTaskParams.get(mobFormName));
 			}
 		}
 	}
@@ -913,7 +929,7 @@ public class WFCoreService
 		if (curTask != null && DelegationState.PENDING == curTask.getDelegationState()) {
 			if(userId.equals(curTask.getAssignee())){
 				taskService.resolveTask(taskId);
-				//saveTask(curTask);
+				createHistoryRecord(ProcFunction.FINISH,curTask,activedata);
 			}
 			else{
 				throw new BadRequestAlertException("当前任务正在加签中","","");
@@ -968,6 +984,8 @@ public class WFCoreService
 			}
 		}
 
+		List<WFHistory> historyTasks = new ArrayList<>();
+		List<WFUser> waitTasks = new ArrayList<>();
 
 		List<Comment> comments = new ArrayList<>();
 		Map<String,HistoricTaskInstanceEntity> tasks=new LinkedHashMap<>();
@@ -999,6 +1017,17 @@ public class WFCoreService
 			for (HistoricData data :historicData){
 				if (data instanceof HistoricActivityInstance){
 					HistoricActivityInstance hai= (HistoricActivityInstance) data;
+					//启动流程记录
+					if(hai.getActivityType().equals("startEvent")){
+						CommentEntity comment = new CommentEntityImpl();
+						comment.setId(hai.getId());
+						comment.setType("启动流程");
+						comment.setFullMessage(hai.getActivityName());
+						comment.setTime(hai.getTime());
+						comment.setUserId(processInstanceHistoryLog.getStartUserId());
+						comments.add(comment);
+						continue;
+					}
 					if(!hai.getActivityType().equals("userTask"))
 						continue;
 					if(!nodes.containsKey(hai.getActivityId()))
@@ -1042,6 +1071,10 @@ public class WFCoreService
 					user.setId(idlink.getUserId());
 					wfUserMap.put(idlink.getUserId(),user);
 					((ArrayList)nodes.get(tasks.get(taskid).getTaskDefinitionKey()).get("identityLinks")).add(user);
+
+					user.set("userTaskId",tasks.get(taskid).getTaskDefinitionKey());
+					user.set("userTaskName",tasks.get(taskid).getName());
+					waitTasks.add(user);
 				}
 			}
 		}
@@ -1053,6 +1086,20 @@ public class WFCoreService
 
 		for(Comment comment:comments)
 		{
+			if(!StringUtils.isEmpty(comment.getType()) && "启动流程".equals(comment.getType())){
+				String userId = comment.getUserId();
+				String userName = !StringUtils.isEmpty(userId) ? wfUserMap.get(comment.getUserId()).getDisplayname() : "未知用户";
+				WFHistory history = new WFHistory();
+				history.setId(comment.getId());
+				history.setAuthor(userId);
+				history.setAuthorname(userName);
+				history.setTime(new Timestamp(comment.getTime().getTime()));
+				history.setType(comment.getType());
+				history.set("userTaskId",comment.getId());
+				history.set("userTaskName",comment.getFullMessage());
+				historyTasks.add(history);
+				continue;
+			}
 			if(tasks.containsKey(comment.getTaskId())&&(nodes.containsKey(tasks.get(comment.getTaskId()).getTaskDefinitionKey()))) {
 				if(wfUserMap.containsKey(comment.getUserId())) {
 					WFHistory history = new WFHistory();
@@ -1066,16 +1113,26 @@ public class WFCoreService
 					//history.setProcessinstanceid(comment.getProcessInstanceId());
 					//history.setProcessinstancebusinesskey(businessKey);
 					((ArrayList) nodes.get(tasks.get(comment.getTaskId()).getTaskDefinitionKey()).get("comments")).add(history);
+					history.set("userTaskId",tasks.get(comment.getTaskId()).getTaskDefinitionKey());
+					history.set("userTaskName",tasks.get(comment.getTaskId()).getName());
+					historyTasks.add(history);
 				}
 			}
 		}
-		if(!StringUtils.isEmpty(processInstanceId)){
-			wfProcessInstance.set("userTasks",filterTaskMap(nodes,processInstanceId));
-		}else {
-			for (String id : processInstanceIds) {
-				wfProcessInstance.set("userTasks",filterTaskMap(nodes,id));
-			}
+
+		//过滤空节点
+		Map <String , WFProcessNode> nodes2 = new LinkedHashMap<>();
+		for(Map.Entry<String , WFProcessNode> entry : nodes.entrySet()){
+			String nodeId = entry.getKey();
+			WFProcessNode processNode = entry.getValue();
+			if(!ObjectUtils.isEmpty(processNode.get("identityLinks")) || !ObjectUtils.isEmpty(processNode.get("comments")))
+				nodes2.put(nodeId,processNode);
 		}
+
+		wfProcessInstance.set("userTasks",nodes2.values());
+		wfProcessInstance.set("historyTasks",historyTasks);
+		wfProcessInstance.set("waitTasks",waitTasks);
+
 		if(!StringUtils.isEmpty(wfProcessInstance.getStartuserid()))
 		{
 			wfProcessInstance.setStartusername(wfUserMap.get(wfProcessInstance.getStartuserid()).getDisplayname());
@@ -1720,8 +1777,9 @@ public class WFCoreService
 	 * @param taskId
 	 * @param taskWay
 	 */
-	public boolean beforeSign(String system, String appname,
-							  String entity, String businessKey, String taskId, WFTaskWay taskWay) {
+	public boolean beforeSign(String system, String appname, String entity, String businessKey, WFTaskWay taskWay) {
+
+		String taskId = taskWay.getTaskid();
 		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
 		if (StringUtils.isEmpty(userId))
 			throw new BadRequestAlertException("未传入当前用户", entity, businessKey);
@@ -1740,8 +1798,12 @@ public class WFCoreService
 			throw new BadRequestAlertException(String.format("未能获取到[%s]运行任务", curTask.getId()), "", "");
 		}
 		if (DelegationState.PENDING != curTask.getDelegationState()) {
+
 			taskService.delegateTask(taskId, String.valueOf(signUser));
-			//saveTask(curTask);
+			//记录辅助功能操作记录
+			activedata.put("sequenceflowname", taskWay.getSequenceflowname());
+			createHistoryRecord(ProcFunction.ADDSTEPBEFORE,curTask , activedata);
+
 		} else {
 			throw new BadRequestAlertException(String.format("任务正在加签中，无法进行二次加签", curTask.getId()), "", "");
 		}
@@ -1749,16 +1811,17 @@ public class WFCoreService
 	}
 
 	/**
-	 * 后加签 （转办）
+	 * 转办
 	 * @param system
 	 * @param appname
 	 * @param entity
 	 * @param businessKey
-	 * @param taskId
 	 * @param taskWay
+	 * @return
 	 */
-	public boolean reassign(String system,String appname,
-							 String entity,String businessKey,String taskId,WFTaskWay taskWay){
+	public boolean reassign(String system,String appname, String entity,String businessKey,WFTaskWay taskWay){
+
+		String taskId = taskWay.getTaskid();
 		String userId=AuthenticationUser.getAuthenticationUser().getUserid();
 		if (StringUtils.isEmpty(userId))
 			throw new BadRequestAlertException("未传入当前用户", entity, businessKey);
@@ -1780,8 +1843,37 @@ public class WFCoreService
 		taskService.deleteUserIdentityLink(curTask.getId(),userId,"candidate");
 		taskService.addUserIdentityLink(curTask.getId(), (String) signUser,"candidate");
 
-		//saveTask(curTask);
+		//记录辅助功能操作记录
+		activedata.put("sequenceflowname", taskWay.getSequenceflowname());
+		createHistoryRecord(ProcFunction.REASSIGN,curTask,activedata);
+
 		return true;
+	}
+
+
+	/**
+	 * 存储辅助功能操作记录
+	 * @param procFunction
+	 * @param task
+	 * @param activeData
+	 */
+	protected void createHistoryRecord(ProcFunction procFunction, Task task , Map activeData) {
+
+		//用户身份
+		if(StringUtils.isEmpty(Authentication.getAuthenticatedUserId())){
+			String userId=AuthenticationUser.getAuthenticationUser().getUserid();
+			Authentication.setAuthenticatedUserId(userId);
+			Authentication.setAuthenticationContext(createAuthenticationContext());
+		}
+
+		//优先使用界面的交互连接名称与审批意见
+		String strSequenceFlowName = getStringValue(activeData.get("sequenceflowname"));
+		String srfwfmemo = getStringValue(activeData.get("wfmemo"));
+		String strType = !StringUtils.isEmpty(strSequenceFlowName) ? strSequenceFlowName: procFunction.text;
+		String strMessage = !StringUtils.isEmpty(srfwfmemo)? srfwfmemo : "";
+
+		//转办记录
+		taskService.addComment(task.getId(),task.getProcessInstanceId(),strType,strMessage);
 	}
 
 	private  ByteArrayOutputStream getBpmnFile(InputStream input) {
@@ -2220,31 +2312,45 @@ public class WFCoreService
 	 * @param taskId 当前需要回退的节点
 	 * @return 回退上一个节点
 	 */
-	public boolean sendBack(String taskId) {
+	public boolean sendBack(String system,String appname,
+							String entity,String businessKey,String taskId,WFTaskWay taskWay) {
+
 		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
 		String taskDefinitionKey = task.getTaskDefinitionKey();
 		if (taskDefinitionKey == null) {
-			log.debug("taskDefinitionKey不存在");
-			return false;
+			throw new BadRequestException("taskDefinitionKey不存在");
 		}
 		String processInstanceId = task.getProcessInstanceId();
 		if (processInstanceId == null) {
-			log.debug("processInstanceId不存在");
-			return false;
+			throw new BadRequestException("processInstanceId不存在");
 		}
 		List<HistoricTaskInstance> history = historyService.createHistoricTaskInstanceQuery()
 				.processInstanceId(processInstanceId)
 				.orderByHistoricTaskInstanceEndTime()
 				.desc()
 				.list();
-		if(history.size() > 0){
-			HistoricTaskInstance sourceRef = history.get(0);
-			// 执行回退
-			runtimeService.createChangeActivityStateBuilder()
-					.processInstanceId(processInstanceId)
-					.moveActivityIdTo(taskDefinitionKey, sourceRef.getTaskDefinitionKey())
-					.changeState();
+
+		if(ObjectUtils.isEmpty(history)){
+			throw new BadRequestException(String.format("未找到实例[%1$s]历史任务",processInstanceId));
 		}
+
+		Map activedata;
+		if(taskWay.get("activedata")!=null && taskWay.get("activedata") instanceof Map)
+			activedata=(Map)taskWay.get("activedata");
+		else
+			activedata=new LinkedHashMap();
+
+		//记录辅助功能操作记录
+		activedata.put("sequenceflowname", taskWay.getSequenceflowname());
+		createHistoryRecord(ProcFunction.SENDBACK,task , activedata);
+
+		HistoricTaskInstance sourceRef = history.get(0);
+		// 执行回退
+		runtimeService.createChangeActivityStateBuilder()
+				.processInstanceId(processInstanceId)
+				.moveActivityIdTo(taskDefinitionKey, sourceRef.getTaskDefinitionKey())
+				.changeState();
+
 		return true;
 	}
 
@@ -2296,12 +2402,17 @@ public class WFCoreService
 
 	/**
 	 * 流程撤回
-	 * @param taskId
+	 * @param system
+	 * @param appname
+	 * @param entity
+	 * @param businessKey
 	 * @param taskWay
 	 * @return
 	 */
-	public boolean withDraw(String taskId , WFTaskWay taskWay) {
+	public boolean withDraw(String system,String appname,
+							String entity,String businessKey,WFTaskWay taskWay) {
 
+		String taskId  = taskWay.getTaskid();
 		String processInstanceId = taskWay.getProcessinstanceid();
 		String taskDefinitionKey = taskWay.getTaskdefinitionkey();
 
@@ -2347,7 +2458,7 @@ public class WFCoreService
 	 * @param instance
 	 * @return
 	 */
-	public boolean jump(WFProcessInstance instance) {
+	public boolean jump(String system, String entity, String businessKey , WFProcessInstance instance) {
 
 		String processDefinitionId = instance.getProcessdefinitionid();
 		if(ObjectUtils.isEmpty(processDefinitionId)){
@@ -2450,8 +2561,16 @@ public class WFCoreService
 		return true;
 	}
 
-	public boolean sendCopy(String taskId, WFTaskWay taskWay) {
+	public boolean sendCopy(String system,String appname, String entity,String businessKey,WFTaskWay taskWay) {
 		throw new BadRequestException("暂未实现");
+	}
+
+
+	protected String getStringValue(Object value){
+		if(ObjectUtils.isEmpty(value)){
+			return null;
+		}
+		return value.toString();
 	}
 
 }

@@ -31,9 +31,6 @@ public class WFProcessInstanceExService extends WFProcessInstanceServiceImpl {
     @Autowired
     WFCoreService wfCoreService;
 
-    @Autowired
-    private RuntimeService runtimeService;
-
     /**
      * [Jump:流程跳转] 行为扩展
      * @param et
@@ -48,6 +45,30 @@ public class WFProcessInstanceExService extends WFProcessInstanceServiceImpl {
             throw new BadRequestException("未传入流程步骤用户");
         }
 
+        String strSystemId = null;
+        String strEntityId = null;
+        String strBusinessKey = null;
+
+        String strProcessInstanceBusinessKey = et.getBusinesskey();
+        if(StringUtils.isEmpty(strProcessInstanceBusinessKey)){
+            throw new BadRequestException("未传入业务标识");
+        }
+
+        if(strProcessInstanceBusinessKey.contains(":")){
+            String [] arrays = strProcessInstanceBusinessKey.split(":");
+            if(arrays.length == 3){
+                strSystemId = arrays[0];
+                strEntityId = arrays[1];
+                strBusinessKey = arrays[2];
+                if(strBusinessKey.indexOf(":k-")>0)
+                    strBusinessKey = strBusinessKey.split(":k-")[1];
+            }
+        }
+
+        if(StringUtils.isEmpty(strSystemId) || StringUtils.isEmpty(strEntityId) || StringUtils.isEmpty(strBusinessKey)){
+            throw new BadRequestException("未传入流程参数失败");
+        }
+
         //参数格式转换
         Set <String> userSets = new LinkedHashSet();
         JSONArray.parseArray(users.toString()).forEach(item -> {
@@ -59,7 +80,7 @@ public class WFProcessInstanceExService extends WFProcessInstanceServiceImpl {
         });
 
         et.set("wfusers",String.join(",",userSets));
-        wfCoreService.jump(et);
+        wfCoreService.jump(strSystemId,strEntityId,strBusinessKey,et);
 
         return et;
     }

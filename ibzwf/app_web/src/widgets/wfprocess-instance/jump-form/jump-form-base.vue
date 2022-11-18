@@ -467,6 +467,7 @@ export default class JumpBase extends Vue implements ControlInterface {
         taskdefinitionkey: null,
         definitionkey: null,
         definitionid: null,
+        businesskey: null,
         instanceid: null,
         wfprocessinstance:null,
     };
@@ -662,6 +663,8 @@ export default class JumpBase extends Vue implements ControlInterface {
 , 
         definitionid: new FormItemModel({ caption: 'DefinitionId', detailType: 'FORMITEM', name: 'definitionid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
+        businesskey: new FormItemModel({ caption: '业务键值', detailType: 'FORMITEM', name: 'businesskey', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
+, 
         instanceid: new FormItemModel({ caption: '实例标识', detailType: 'FORMITEM', name: 'instanceid', visible: true, isShowCaption: true, form: this, isControlledContent: false , required:false, disabled: false, enableCond: 3 })
 , 
     };
@@ -811,6 +814,18 @@ export default class JumpBase extends Vue implements ControlInterface {
     }
 
     /**
+     * 监控表单属性 businesskey 值
+     *
+     * @param {*} newVal
+     * @param {*} oldVal
+     * @memberof JumpBase
+     */
+    @Watch('data.businesskey')
+    onBusinesskeyChange(newVal: any, oldVal: any) {
+        this.formDataChange({ name: 'businesskey', newVal: newVal, oldVal: oldVal });
+    }
+
+    /**
      * 监控表单属性 instanceid 值
      *
      * @param {*} newVal
@@ -876,6 +891,7 @@ export default class JumpBase extends Vue implements ControlInterface {
      */
     public async formLogic({ name, newVal, oldVal }: { name: string, newVal: any, oldVal: any }){
                 
+
 
 
 
@@ -1982,6 +1998,9 @@ export default class JumpBase extends Vue implements ControlInterface {
         if (this.data.hasOwnProperty('definitionid')) {
             this.data['definitionid'] = this.context['processdefinitionid'];
         }
+        if (this.data.hasOwnProperty('businesskey')) {
+            this.data['businesskey'] = this.context['businesskey'];
+        }
     }
 
     /**
@@ -1994,6 +2013,9 @@ export default class JumpBase extends Vue implements ControlInterface {
         }
         if (this.data.hasOwnProperty('definitionid') && !this.data.definitionid) {
             this.data['definitionid'] = this.context['processdefinitionid'];
+        }
+        if (this.data.hasOwnProperty('businesskey') && !this.data.businesskey) {
+            this.data['businesskey'] = this.context['businesskey'];
         }
     }
 

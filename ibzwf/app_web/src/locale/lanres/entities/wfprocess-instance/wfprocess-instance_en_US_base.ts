@@ -42,6 +42,7 @@ function getLocaleResourceBase(){
 				taskdefinitionkey: commonLogic.appcommonhandle("流程步骤标识",null), 
 				definitionkey: commonLogic.appcommonhandle("流程定义标识",null), 
 				definitionid: commonLogic.appcommonhandle("DefinitionId",null), 
+				businesskey: commonLogic.appcommonhandle("业务键值",null), 
 				instanceid: commonLogic.appcommonhandle("实例标识",null), 
 			},
 			uiactions: {

@@ -789,7 +789,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public load(opt: any = {}, pageReset: boolean = false): void {
         if(!this.fetchAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodeProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
             return;
         }
         if(pageReset){
@@ -884,7 +884,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public async remove(datas: any[]): Promise<any> {
         if(!this.removeAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.removeAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodeProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.removeAction') as string) });
             return;
         }
         let _datas:any[] = [];
@@ -990,7 +990,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public addBatch(arg: any = {}): void {
         if(!this.fetchAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodeProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.fetchAction') as string) });
             return;
         }
         if(!arg){
@@ -1774,7 +1774,7 @@ export default class MainBase extends Vue implements ControlInterface {
     public setColState() {
         this.resetColModel = Util.deepCopy(this.allColumns);
         const viewParams: any = Util.deepCopy(this.viewparams);
-        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzwf_web_wfprocessnodepickupgridview_grid_main'});
+        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzwf_web_wfprocessnodeprocessnodepickupgridview_grid_main'});
         const post = this.service.loadModel('grid_dynaconfig', this.context, viewParams);
         post.then((response: any) => {
             if(response.status == 200 && response.data) {
@@ -1841,7 +1841,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public saveDynaConfig() {
         const viewParams: any = Util.deepCopy(this.viewparams);
-        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzwf_web_wfprocessnodepickupgridview_grid_main', model: this.allColumns});
+        Object.assign(viewParams,{utilServiceName: 'grid_dynaconfig', modelid: 'ibzwf_web_wfprocessnodeprocessnodepickupgridview_grid_main', model: this.allColumns});
         const post = this.service.saveModel('grid_dynaconfig', this.context, viewParams);
         post.then((response: any) => {
             if (response.status == 200) {
@@ -1912,7 +1912,7 @@ export default class MainBase extends Vue implements ControlInterface {
             try {
                 if(Object.is(item.rowDataState, 'create')){
                     if(!this.createAction){
-                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.createAction') as string) });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodeProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.createAction') as string) });
                     }else{
                       Object.assign(item,{viewparams:this.viewparams});
                       let response = await this.service.add(this.createAction, JSON.parse(JSON.stringify(this.context)),item, this.showBusyIndicator);
@@ -1920,7 +1920,7 @@ export default class MainBase extends Vue implements ControlInterface {
                     }
                 }else if(Object.is(item.rowDataState, 'update')){
                     if(!this.updateAction){
-                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.updateAction') as string) });
+                        this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodeProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.updateAction') as string) });
                     }else{
                         Object.assign(item,{viewparams:this.viewparams});
                         if(item.wfprocessnode){
@@ -1993,7 +1993,7 @@ export default class MainBase extends Vue implements ControlInterface {
      */
     public newRow(args: any[], params?: any, $event?: any, xData?: any): void {
         if(!this.loaddraftAction){
-            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.loaddraftAction') as string) });
+            this.$Notice.error({ title: (this.$t('app.commonWords.wrong') as string), desc: 'WFProcessNodeProcessNodePickupGridView'+(this.$t('app.gridpage.notConfig.loaddraftAction') as string) });
             return;
         }
         let _this = this;
