@@ -37,8 +37,8 @@ public interface IBZUAAFeignClient
 	String getPublicKey();
 
 
-	@Cacheable( value="ibzuaa_switcher",key = "'id:'+#p0+'||'+#p1")
+	@Cacheable( value="ibzuaa_switcher",key = "'id:'+#p0")
 	@GetMapping(value = "/uaa/access-center/app-switcher/{id}")
-	JSONObject getAppSwitcher(@PathVariable("id") String id, String userId);
+	JSONObject getAppSwitcher(@PathVariable("id") String id);
 
 }

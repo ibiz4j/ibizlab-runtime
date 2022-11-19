@@ -483,7 +483,7 @@ public class WFCoreService
 
 	public String getTaskUrl(String type,String processDefinitionKey,String processInstanceId,String businessKey,String taskDefinitionKey)
 	{
-		JSONObject app = ibzuaaFeignClient.getAppSwitcher("default",AuthenticationUser.getAuthenticationUser().getUserid());
+		JSONObject app = ibzuaaFeignClient.getAppSwitcher("default");
 
 		String[] arr = processDefinitionKey.split("-");
 		String systemId = arr[0];

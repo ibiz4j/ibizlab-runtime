@@ -30,7 +30,7 @@ public class IBZUAAFallback implements IBZUAAFeignClient {
     }
 
     @Override
-    public JSONObject getAppSwitcher(String id, String userId) {
+    public JSONObject getAppSwitcher(String id) {
         return null;
     }
 }
