@@ -483,12 +483,15 @@ public class WFCoreService
 
 	public String getTaskUrl(String type,String processDefinitionKey,String processInstanceId,String businessKey,String taskDefinitionKey)
 	{
-		JSONObject app = ibzuaaFeignClient.getAppSwitcher("default");
-
 		String[] arr = processDefinitionKey.split("-");
 		String systemId = arr[0];
 		String entity = arr[1];
 
+		JSONObject app = null;
+		try {
+			app=ibzuaaFeignClient.getAppSwitcher("default");
+		}
+		catch (Exception ex){}
 		if(app!=null && app.containsKey("model"))
 		{
 			List<Map> array = app.getObject("model",ArrayList.class);
@@ -532,7 +535,7 @@ public class WFCoreService
 
 
 		}
-		return "";
+		return String.format("/#/appwfdataredirectview?srfappde=%1$s;srfappkey=%2$s;userTaskId=%3$s",entity,businessKey,taskDefinitionKey);
 	}
 
 	public Map<String, Map<String,Object>> getDynaBusinessKeys(String system, String appname, String entity,  String instTag , String instTag2, String userId , TaskType type) {
