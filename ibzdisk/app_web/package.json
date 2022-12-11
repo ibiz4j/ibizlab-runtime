@@ -33,7 +33,7 @@
     "interactjs": "^1.9.4",
     "moment": "^2.24.0",
     "path-to-regexp": "^6.1.0",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "rxjs": "^6.5.4",
     "tinymce": "4.8.5",
     "view-design": "4.2.0",
