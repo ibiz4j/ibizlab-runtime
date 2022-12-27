@@ -1,5 +1,6 @@
 package cn.ibizlab.devsimul;
 
+import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
@@ -51,6 +52,8 @@ public class DevNamingRegister implements ApplicationRunner {
     @Value("${spring.cloud.nacos.discovery.group:DEFAULT_GROUP}")
     private String group;
 
+    @Value("${spring.cloud.nacos.discovery.namespace:}")
+    private String namespace;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -58,6 +61,8 @@ public class DevNamingRegister implements ApplicationRunner {
             Thread.sleep(10000);
             Properties properties = new Properties();
             properties.setProperty("serverAddr", serverAddr);
+            if(StringUtils.hasLength(namespace))
+                properties.setProperty(PropertyKeyConst.NAMESPACE, namespace);
 
             NamingService naming = NamingFactory.createNamingService(properties);
 

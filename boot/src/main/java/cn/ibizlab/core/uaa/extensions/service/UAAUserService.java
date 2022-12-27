@@ -1,8 +1,13 @@
 package cn.ibizlab.core.uaa.extensions.service;
 
+import cn.ibizlab.core.ou.domain.SysDeptMember;
+import cn.ibizlab.core.ou.domain.SysTeamMember;
 import cn.ibizlab.core.ou.extensions.domain.DeptMap;
 import cn.ibizlab.core.ou.extensions.domain.OrgMap;
 import cn.ibizlab.core.ou.extensions.service.OUCoreService;
+import cn.ibizlab.core.ou.extensions.service.OUModelService;
+import cn.ibizlab.core.ou.service.ISysDeptMemberService;
+import cn.ibizlab.core.ou.service.ISysTeamMemberService;
 import cn.ibizlab.core.uaa.domain.SysUser;
 import cn.ibizlab.core.uaa.extensions.service.UAACoreService;
 import cn.ibizlab.core.uaa.mapper.SysUserMapper;
@@ -25,10 +30,12 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Primary
 @Service("UAAUserService")
@@ -37,6 +44,21 @@ public class UAAUserService implements   AuthenticationUserService {
 
 	@Autowired
 	private ISysUserService sysUserService;
+
+	@Autowired
+	private UAACoreService uaaCoreService;
+
+	@Autowired
+	private OUCoreService ouCoreService;
+
+	@Autowired
+	private OUModelService ouModelService;
+
+	@Autowired
+	ISysDeptMemberService sysDeptMemberService;
+
+	@Autowired
+	ISysTeamMemberService sysTeamMemberService;
 
 	@Value("${ibiz.auth.pwencrymode:0}")
 	private int pwencrymode;
@@ -105,12 +127,6 @@ public class UAAUserService implements   AuthenticationUserService {
 		return userdatail;
 	}
 
-
-	@Autowired
-	@Lazy
-	private UAACoreService uaaCoreService;
-
-
 	/**
 	 * 设置用户权限
 	 * 由于GrantedAuthority缺少无参构造，导致无法序列化，暂时通过PermissionList中转
@@ -128,15 +144,12 @@ public class UAAUserService implements   AuthenticationUserService {
 		user.setPermissionList(permission);
 	}
 
-	@Autowired
-	@Lazy
-	private OUCoreService ouCoreService;
-
 	/**
 	 * 设置用户组织相关信息
 	 * @param user
 	 */
 	private void setUserOrgInfo(AuthenticationUser user) {
+
 		String orgid="nullorgid";
 		if(!StringUtils.isEmpty(user.getOrgid()))
 			orgid=user.getOrgid();
@@ -149,10 +162,83 @@ public class UAAUserService implements   AuthenticationUserService {
 		map.put("suborg",storemap.getSub());
 		map.put("fatherorg",storemap.getFather());
 
-		DeptMap storedeptmap=ouCoreService.getDeptModel(deptid);
-		map.put("parentdept",storedeptmap.getParent());
-		map.put("subdept",storedeptmap.getSub());
-		map.put("fatherdept",storedeptmap.getFather());
+		Set <String> userDepts = null;
+		Set <String> userDepts2 = null;
+		Set <String> userTeams = null;
+
+		if(!StringUtils.isEmpty(user.getUserid())){
+			List<SysDeptMember> deptMembers = sysDeptMemberService.list(new QueryWrapper<SysDeptMember>().eq("userid",user.getUserid()));
+			//设置用户归属部门（含主部门）
+			if(!ObjectUtils.isEmpty(deptMembers)){
+				userDepts = deptMembers.stream().filter(deptMember -> !ObjectUtils.isEmpty(deptMember.getDeptid()))
+												  .map(deptMember -> deptMember.getDeptid())
+												  .collect(Collectors.toSet());
+				//用户兼职部门
+				if(!ObjectUtils.isEmpty(user.getMdeptid()) && !ObjectUtils.isEmpty(userDepts)){
+					userDepts2 = userDepts.stream().filter(userDeptId -> !userDeptId.equals(user.getMdeptid())).collect(Collectors.toSet());
+				}
+			}
+
+			//查询用户组信息
+			List<SysTeamMember> sysTeamMembers= sysTeamMemberService.list(new QueryWrapper<SysTeamMember>().eq("userid",user.getUserid()));
+			if(!ObjectUtils.isEmpty(sysTeamMembers)){
+				userTeams = sysTeamMembers.stream().filter(sysTeamMember -> !ObjectUtils.isEmpty(sysTeamMember.getTeamid()))
+													 .map(sysTeamMember -> sysTeamMember.getTeamid()).collect(Collectors.toSet());
+			}
+		}
+
+		//用户仅包含主部门，无兼职部门
+		if(ObjectUtils.isEmpty(userDepts2)){
+			DeptMap storedeptmap=ouCoreService.getDeptModel(deptid);
+			map.put("parentdept",storedeptmap.getParent());
+			map.put("subdept",storedeptmap.getSub());
+			map.put("fatherdept",storedeptmap.getFather());
+		}
+		else{
+			//存在兼职部门
+			Map<String, DeptMap> deptStore = ouModelService.getDeptModel(ouModelService.getOrgModel());
+
+			Set <String> parents = null;
+			Set <String> subDepts = null;
+			Set <String> fatherDepts = null;
+
+			//计算兼职部门的上下级部门
+			if(!ObjectUtils.isEmpty(deptStore)){
+				for(Map.Entry<String, DeptMap> entry : deptStore.entrySet()){
+
+					String deptId = entry.getKey();
+					DeptMap deptMap = entry.getValue();
+
+					if(userDepts.contains(deptId) && deptMap != null){
+						if(!ObjectUtils.isEmpty(deptMap.getParent())){
+							if(parents == null)
+								parents = new HashSet<>();
+
+							parents.addAll(deptMap.getParent());
+						}
+
+						if(!ObjectUtils.isEmpty(deptMap.getSub())){
+							if(subDepts == null)
+								subDepts = new HashSet<>();
+							subDepts.addAll(deptMap.getSub());
+						}
+
+						if(!ObjectUtils.isEmpty(deptMap.getFather())){
+							if(fatherDepts == null)
+								fatherDepts = new HashSet<>();
+
+							fatherDepts.addAll(deptMap.getFather());
+						}
+					}
+				}
+			}
+			map.put("parentdept",parents);
+			map.put("subdept",subDepts);
+			map.put("fatherdept",fatherDepts);
+		}
+
+		map.put("curdept",userDepts);
+		map.put("curteam",userTeams);
 		user.setOrgInfo(map);
 	}
 }

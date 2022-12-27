@@ -12,4 +12,4 @@ EXPOSE 10086
 
 ADD ibizlab-runtime.jar /ibizlab-runtime.jar
 
-#docker buildx build --platform linux/arm64,linux/amd64 -t ibiz4j/ibizlab-runtime:1.0.49 -t ibiz4j/ibizlab-runtime:latest --push .
+#docker buildx build --platform linux/arm64,linux/amd64 -t ibiz4j/ibizlab-runtime:1.0.51 -t ibiz4j/ibizlab-runtime:latest --push .
